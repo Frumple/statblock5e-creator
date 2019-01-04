@@ -1,5 +1,23 @@
 <style>
-  ::slotted(h1) {
+  h1 {
+    margin: 0px;
+  }
+
+  .container {
+    display: flex;
+    justify-content: space-between;
+  }
+
+  .container_selectable:hover {
+    background: #BBFFFF;
+    cursor: pointer;
+  }
+
+  .container_hidden {
+    display: none;
+  }
+
+  .container__title-text {
     font-family: 'Libre Baskerville', 'Lora', 'Calisto MT',
                  'Bookman Old Style', Bookman, 'Goudy Old Style',
                  Garamond, 'Hoefler Text', 'Bitstream Charter',
@@ -12,11 +30,52 @@
     font-variant: small-caps;
   }
 
-  ::slotted(h2) {
+  .container__title-input {
+     width: 100%;
+  }
+
+  .container__action {
+    display: flex;
+    align-items: center;
+    padding-left: 10px;
+    padding-right: 10px;
+    font-size: 12px;
+    text-decoration: underline;    
+  }
+
+  .container__action-save:hover {
+    background: #BBFF70;
+    cursor: pointer;
+  }
+
+  .container__action_hidden {
+    display: none;
+  }
+
+  h2 {
     font-weight: normal;
     font-style: italic;
     font-size: 12px;
     margin: 0;
   }
+
+  input[type="text"] {
+    background: white;
+    border-width: 2px;
+    border-style: inset;
+    border-color: initial;
+    border-image: initial;
+  }
 </style>
-<slot></slot>
+
+<h1>
+  <span id="title-show" class="container container_selectable">
+    <span id="title-text" class="container__title-text">Creature Name</span>
+    <span id="title-hover" class="container__action container__action_hidden">Edit</span>
+  </span>
+  <span id="title-edit" class="container container_hidden">
+    <input id="title-input" class="container__title-text container__title-input" type="text" name="title" value="Creature Name"></input>
+    <span id="title-save" class="container__action container__action-save" name="titleSave">Save</span>
+  </span>
+</h1>
+<h2>Medium construct, unaligned</h2>
