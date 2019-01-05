@@ -3,6 +3,18 @@
     margin: 0px;
   }
 
+  h2 {
+    margin: 0px;
+  }
+  
+  input[type="text"] {
+    background: white;
+    border-width: 2px;
+    border-style: inset;
+    border-color: initial;
+    border-image: initial;
+  }
+
   .container {
     display: flex;
     justify-content: space-between;
@@ -23,24 +35,36 @@
                  Garamond, 'Hoefler Text', 'Bitstream Charter',
                  Georgia, serif;
     color: #7A200D;
-    font-weight: 700;
-    margin: 0px;
     font-size: 23px;
-    letter-spacing: 1px;
+    font-weight: 700;
     font-variant: small-caps;
+    margin: 0px;
+    letter-spacing: 1px;
   }
 
   .container__title-input {
      width: 100%;
+     margin-right: 10px;
+     height: 23px;
+  }
+
+  .container__subtitle-text {
+    font-weight: normal;
+    font-style: italic;
+    font-size: 12px;
+    margin: 0px;
   }
 
   .container__action {
+    all: initial;
     display: flex;
     align-items: center;
     padding-left: 10px;
     padding-right: 10px;
+    font-family: monospace;
     font-size: 12px;
-    text-decoration: underline;    
+    font-weight: bold;
+    text-decoration: underline;
   }
 
   .container__action-save:hover {
@@ -51,31 +75,65 @@
   .container__action_hidden {
     display: none;
   }
-
-  h2 {
-    font-weight: normal;
-    font-style: italic;
-    font-size: 12px;
-    margin: 0;
-  }
-
-  input[type="text"] {
-    background: white;
-    border-width: 2px;
-    border-style: inset;
-    border-color: initial;
-    border-image: initial;
-  }
 </style>
 
 <h1>
   <span id="title-show" class="container container_selectable">
-    <span id="title-text" class="container__title-text">Creature Name</span>
+    <span id="title-text" class="container__title-text">[Creature Name]</span>
     <span id="title-hover" class="container__action container__action_hidden">Edit</span>
   </span>
   <span id="title-edit" class="container container_hidden">
-    <input id="title-input" class="container__title-text container__title-input" type="text" name="title" value="Creature Name"></input>
+    <input id="title-input" class="container__title-text container__title-input" type="text" name="title" value="" />
     <span id="title-save" class="container__action container__action-save" name="titleSave">Save</span>
   </span>
 </h1>
-<h2>Medium construct, unaligned</h2>
+<h2>
+  <span id="subtitle-show" class="container container_selectable">
+    <span id="subtitle-text" class="container__subtitle-text">Medium [creature type], unaligned</span>
+    <span id="subtitle-hover" class="container__action container__action_hidden">Edit</span>
+  </span>
+  <span id="subtitle-edit" class="container container_hidden">
+    <select id="size-input" class="container__subtitle-text container__size-input">
+      <option value="Fine">Fine</option>
+      <option value="Diminuitive">Diminuitive</option>
+      <option value="Tiny">Tiny</option>
+      <option value="Small">Small</option>
+      <option value="Medium" selected>Medium</option>
+      <option value="Large">Large</option>
+      <option value="Huge">Huge</option>
+      <option value="Gargantuan">Gargantuan</option>
+      <option value="Colossal">Colossal</option>
+      <option value="Colossal+">Colossal+</option>
+    </select>
+    <input id="type-input" class="container__subtitle-text container__type-input" list="type-list" value="" />
+    <datalist id="type-list">
+      <option value="aberration" />
+      <option value="beast" />
+      <option value="celestial" />
+      <option value="construct" />
+      <option value="dragon" />
+      <option value="elemental" />
+      <option value="fey" />
+      <option value="fiend" />
+      <option value="giant" />
+      <option value="humanoid" />
+      <option value="monstrosity" />
+      <option value="ooze" />
+      <option value="plant" />
+      <option value="undead" />
+    </datalist>
+    <select id="alignment-input" class="container__subtitle-text container__alignment-input">
+      <option value="unaligned">unaligned</option>
+      <option value="lawful good">lawful good</option>
+      <option value="neutral good">neutral good</option>
+      <option value="chaotic good">chaotic good</option>
+      <option value="lawful neutral">lawful neutral</option>
+      <option value="neutral">neutral</option>
+      <option value="chaotic neutral">chaotic neutral</option>
+      <option value="lawful evil">lawful evil</option>
+      <option value="neutral evil">neutral evil</option>
+      <option value="chaotic evil">chaotic evil</option>
+    </select>
+    <span id="subtitle-save" class="container__action container__action-save" name="subtitleSave">Save</span>
+  </span>
+</h2>

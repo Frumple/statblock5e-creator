@@ -11,20 +11,52 @@ class TitleElements {
   }
 }
 
+class SubtitleElements {
+  constructor(shadowRoot) {
+    this.show = shadowRoot.getElementById('subtitle-show');
+    this.text = shadowRoot.getElementById('subtitle-text');
+    this.hover = shadowRoot.getElementById('subtitle-hover');
+    this.edit = shadowRoot.getElementById('subtitle-edit');
+    this.sizeInput = shadowRoot.getElementById('size-input');
+    this.typeInput = shadowRoot.getElementById('type-input');
+    this.alignmentInput = shadowRoot.getElementById('alignment-input');
+    this.save = shadowRoot.getElementById('subtitle-save');
+  }
+}
+
 function capitalizeFirstLetter(string) {
   return string.charAt(0).toUpperCase() + string.slice(1);
 }
 
 function saveTitle(titleElements) {
-  let newTitle = titleElements.input.value;
-  if (newTitle === "") {
-    newTitle = "Creature Name";
-    titleElements.input.value = newTitle;
+  let title = titleElements.input.value;
+  if (title === "") {
+    titleElements.text.textContent = "[Creature Name]";
+  } else {
+    title = capitalizeFirstLetter(title);
+    titleElements.input.value = title;
+    titleElements.text.textContent = title;
   }
 
-  titleElements.text.textContent = capitalizeFirstLetter(newTitle)
   titleElements.show.classList.remove('container_hidden');
   titleElements.edit.classList.add('container_hidden');
+}
+
+function saveSubtitle(subtitleElements) {
+  let size = subtitleElements.sizeInput.value;
+  let type = subtitleElements.typeInput.value;
+  let alignment = subtitleElements.alignmentInput.value;
+
+  if (type === "") {
+    type = "[creature type]";
+  }
+
+  let subtitle = size + " " + type + ", " + alignment;
+
+  subtitleElements.text.textContent = subtitle;
+
+  subtitleElements.show.classList.remove('container_hidden');
+  subtitleElements.edit.classList.add('container_hidden');
 }
 
 async function fetchTemplate() {
@@ -42,6 +74,9 @@ async function init() {
 
   const shadowRoot = document.getElementById('creature-heading').shadowRoot;
   const titleElements = new TitleElements(shadowRoot);
+  const subtitleElements = new SubtitleElements(shadowRoot);
+
+  // TODO: Refactor and combine event methods
 
   titleElements.show.addEventListener('mouseenter', () => {
     titleElements.hover.classList.remove('container__action_hidden');
@@ -67,6 +102,23 @@ async function init() {
   titleElements.save.addEventListener('click', () => {
     saveTitle(titleElements);
   });
+
+  subtitleElements.show.addEventListener('mouseenter', () => {
+    subtitleElements.hover.classList.remove('container__action_hidden');
+  });
+
+  subtitleElements.show.addEventListener('mouseleave', () => {
+    subtitleElements.hover.classList.add('container__action_hidden');
+  });
+
+  subtitleElements.show.addEventListener('click', () => {
+    subtitleElements.show.classList.add('container_hidden');
+    subtitleElements.edit.classList.remove('container_hidden');
+  })
+
+  subtitleElements.save.addEventListener('click', () => {
+    saveSubtitle(subtitleElements);
+  })
 }
 
 init();
