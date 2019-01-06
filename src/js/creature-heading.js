@@ -1,26 +1,33 @@
 import {createCustomElement} from '/src/js/helpers/create-custom-element.js';
 
-class TitleElements {
+class ShowElements {
   constructor(shadowRoot) {
-    this.show = shadowRoot.getElementById('title-show');
-    this.text = shadowRoot.getElementById('title-text');
-    this.hover = shadowRoot.getElementById('title-hover');
-    this.edit = shadowRoot.getElementById('title-edit');
-    this.input = shadowRoot.getElementById('title-input');
-    this.save = shadowRoot.getElementById('title-save');
+    this.container = shadowRoot.getElementById('show-container');
+    this.title = shadowRoot.getElementById('title-text');
+    this.subtitle = shadowRoot.getElementById('subtitle-text');
+    this.edit = shadowRoot.getElementById('edit-action');
   }
 }
 
-class SubtitleElements {
+class EditElements {
   constructor(shadowRoot) {
-    this.show = shadowRoot.getElementById('subtitle-show');
-    this.text = shadowRoot.getElementById('subtitle-text');
-    this.hover = shadowRoot.getElementById('subtitle-hover');
-    this.edit = shadowRoot.getElementById('subtitle-edit');
-    this.sizeInput = shadowRoot.getElementById('size-input');
-    this.typeInput = shadowRoot.getElementById('type-input');
-    this.alignmentInput = shadowRoot.getElementById('alignment-input');
-    this.save = shadowRoot.getElementById('subtitle-save');
+    this.container = shadowRoot.getElementById('edit-container');
+    this.title = shadowRoot.getElementById('title-input');
+    this.size = shadowRoot.getElementById('size-input');
+    this.type = shadowRoot.getElementById('type-input');
+    this.alignment = shadowRoot.getElementById('alignment-input');
+    this.save = shadowRoot.getElementById('save-action');
+  }
+}
+
+function switchMode(showElements, editElements, editMode) {
+  if (editMode) {
+    showElements.container.classList.add('container_hidden');
+    editElements.container.classList.remove('container_hidden');
+    editElements.title.select();
+  } else {
+    editElements.container.classList.add('container_hidden');
+    showElements.container.classList.remove('container_hidden');
   }
 }
 
@@ -28,35 +35,28 @@ function capitalizeFirstLetter(string) {
   return string.charAt(0).toUpperCase() + string.slice(1);
 }
 
-function saveTitle(titleElements) {
-  let title = titleElements.input.value;
-  if (title === "") {
-    titleElements.text.textContent = "[Creature Name]";
+function save(showElements, editElements) {
+  let title = editElements.title.value;
+  if(title === "") {
+    showElements.title.textContent = "[Creature Name]";
   } else {
     title = capitalizeFirstLetter(title);
-    titleElements.input.value = title;
-    titleElements.text.textContent = title;
+    editElements.title.value = title;
+    showElements.title.textContent = title;
   }
 
-  titleElements.show.classList.remove('container_hidden');
-  titleElements.edit.classList.add('container_hidden');
-}
-
-function saveSubtitle(subtitleElements) {
-  let size = subtitleElements.sizeInput.value;
-  let type = subtitleElements.typeInput.value;
-  let alignment = subtitleElements.alignmentInput.value;
+  let size = editElements.size.value;
+  let type = editElements.type.value;
+  let alignment = editElements.alignment.value;
 
   if (type === "") {
     type = "[creature type]";
   }
 
   let subtitle = size + " " + type + ", " + alignment;
+  showElements.subtitle.textContent = subtitle;
 
-  subtitleElements.text.textContent = subtitle;
-
-  subtitleElements.show.classList.remove('container_hidden');
-  subtitleElements.edit.classList.add('container_hidden');
+  switchMode(showElements, editElements, false);
 }
 
 async function fetchTemplate() {
@@ -73,52 +73,31 @@ async function init() {
   await fetchTemplate();
 
   const shadowRoot = document.getElementById('creature-heading').shadowRoot;
-  const titleElements = new TitleElements(shadowRoot);
-  const subtitleElements = new SubtitleElements(shadowRoot);
+  const showElements = new ShowElements(shadowRoot);
+  const editElements = new EditElements(shadowRoot);
 
-  // TODO: Refactor and combine event methods
-
-  titleElements.show.addEventListener('mouseenter', () => {
-    titleElements.hover.classList.remove('container__action_hidden');
+  showElements.container.addEventListener('mouseenter', () => {
+    showElements.edit.classList.remove('container__action_hidden');
   });
 
-  titleElements.show.addEventListener('mouseleave', () => {
-    titleElements.hover.classList.add('container__action_hidden');
+  showElements.container.addEventListener('mouseleave', () => {
+    showElements.edit.classList.add('container__action_hidden');
   });
 
-  titleElements.show.addEventListener('click', () => {
-    titleElements.show.classList.add('container_hidden');
-    titleElements.edit.classList.remove('container_hidden');
-    titleElements.input.select();
+  showElements.container.addEventListener('click', () => {
+    switchMode(showElements, editElements, true);
   });
 
-  titleElements.input.addEventListener('keydown', (event) => {
+  editElements.title.addEventListener('keydown', (event) => {
     if (event.key === "Enter") {
       event.preventDefault();
-      saveTitle(titleElements);
+      save(showElements, editElements);
     }
   });
 
-  titleElements.save.addEventListener('click', () => {
-    saveTitle(titleElements);
+  editElements.save.addEventListener('click', () => {
+    save(showElements, editElements);
   });
-
-  subtitleElements.show.addEventListener('mouseenter', () => {
-    subtitleElements.hover.classList.remove('container__action_hidden');
-  });
-
-  subtitleElements.show.addEventListener('mouseleave', () => {
-    subtitleElements.hover.classList.add('container__action_hidden');
-  });
-
-  subtitleElements.show.addEventListener('click', () => {
-    subtitleElements.show.classList.add('container_hidden');
-    subtitleElements.edit.classList.remove('container_hidden');
-  })
-
-  subtitleElements.save.addEventListener('click', () => {
-    saveSubtitle(subtitleElements);
-  })
 }
 
 init();
