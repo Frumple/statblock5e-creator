@@ -7,12 +7,9 @@
     margin: 0px;
   }
 
-  input[type="text"] {
-    background: white;
-    border-width: 2px;
-    border-style: inset;
-    border-color: initial;
-    border-image: initial;
+  .error {
+    border-color: red;
+    border-style: double;
   }
 
   .container {
@@ -22,6 +19,7 @@
 
   .container_selectable:hover {
     background: #FFCCCC;
+    transition: background 500ms;
     cursor: pointer;
   }
 
@@ -75,6 +73,7 @@
     font-size: 14px;
     font-weight: bold;
     text-decoration: underline;
+    cursor: pointer;
   }
 
   .container__action_hidden {
@@ -82,8 +81,8 @@
   }
 
   .container__action-save:hover {
-    background: #BBFF70;
-    cursor: pointer;
+    background: #90FF70;
+    transition: background 500ms;
   }
 </style>
 
@@ -140,5 +139,5 @@
       <option value="chaotic evil">chaotic evil</option>
     </select>
   </span>
-  <span id="save-action" class="container__action container__action-save" name="titleSave">Save</span>
+  <button id="save-action" class="container__action container__action-save" name="titleSave">Save</button>
 </div>

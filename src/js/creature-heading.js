@@ -1,5 +1,27 @@
 import {createCustomElement} from '/src/js/helpers/create-custom-element.js';
 
+class ErrorValidation {
+  constructor() {
+    this.errorElements = [];
+  }
+
+  addError(element) {
+    this.errorElements.push(element);
+    element.classList.add('error');
+  }
+
+  clearErrors() {
+    while (this.errorElements.length > 0) {
+      let element = this.errorElements.pop();
+      element.classList.remove('error');
+    }
+  }
+
+  hasErrors() {
+    return this.errorElements.length > 0;
+  }
+}
+
 class ShowElements {
   constructor(shadowRoot) {
     this.container = shadowRoot.getElementById('show-container');
@@ -35,23 +57,29 @@ function capitalizeFirstLetter(string) {
   return string.charAt(0).toUpperCase() + string.slice(1);
 }
 
-function save(showElements, editElements) {
+function save(errorValidation, showElements, editElements) {
   let title = editElements.title.value;
-  if(title === "") {
-    showElements.title.textContent = "[Creature Name]";
-  } else {
-    title = capitalizeFirstLetter(title);
-    editElements.title.value = title;
-    showElements.title.textContent = title;
-  }
-
   let size = editElements.size.value;
   let type = editElements.type.value;
   let alignment = editElements.alignment.value;
 
-  if (type === "") {
-    type = "[creature type]";
+  errorValidation.clearErrors();
+
+  if (title === "") {
+    errorValidation.addError(editElements.title);
   }
+
+  if (type === "") {
+    errorValidation.addError(editElements.type)
+  }
+
+  if (errorValidation.hasErrors()) {
+    return;
+  }
+
+  title = capitalizeFirstLetter(title);
+  editElements.title.value = title;
+  showElements.title.textContent = title;
 
   let subtitle = size + " " + type + ", " + alignment;
   showElements.subtitle.textContent = subtitle;
@@ -72,6 +100,8 @@ async function fetchTemplate() {
 async function init() {
   await fetchTemplate();
 
+  const errorValidation = new ErrorValidation();
+
   const shadowRoot = document.getElementById('creature-heading').shadowRoot;
   const showElements = new ShowElements(shadowRoot);
   const editElements = new EditElements(shadowRoot);
@@ -91,12 +121,12 @@ async function init() {
   editElements.title.addEventListener('keydown', (event) => {
     if (event.key === "Enter") {
       event.preventDefault();
-      save(showElements, editElements);
+      save(errorValidation, showElements, editElements);
     }
   });
 
   editElements.save.addEventListener('click', () => {
-    save(showElements, editElements);
+    save(errorValidation, showElements, editElements);
   });
 }
 
