@@ -1,0 +1,48 @@
+.error {
+  border-color: red;
+  border-style: double;
+}
+
+.container {
+  display: flex;
+  justify-content: space-between;
+}
+
+.container_selectable:hover {
+  background: #FFCCCC;
+  transition: background 500ms;
+  cursor: pointer;
+}
+
+.container_hidden {
+  display: none;
+}
+
+.container__content {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  margin-right: 10px;
+}
+
+.container__action {
+  all: initial;
+  display: flex;
+  align-items: center;
+  padding-left: 10px;
+  padding-right: 10px;
+  font-family: monospace;
+  font-size: 14px;
+  font-weight: bold;
+  text-decoration: underline;
+  cursor: pointer;
+}
+
+.container__action_hidden {
+  display: none;
+}
+
+.container__save-action:hover {
+  background: #90FF70;
+  transition: background 500ms;
+}

@@ -1,3 +1,5 @@
+<link href='src/css/styles.css' rel='stylesheet' type='text/css'>
+
 <style>
   h1 {
     margin: 0px;
@@ -5,33 +7,6 @@
 
   h2 {
     margin: 0px;
-  }
-
-  .error {
-    border-color: red;
-    border-style: double;
-  }
-
-  .container {
-    display: flex;
-    justify-content: space-between;
-  }
-
-  .container_selectable:hover {
-    background: #FFCCCC;
-    transition: background 500ms;
-    cursor: pointer;
-  }
-
-  .container_hidden {
-    display: none;
-  }
-
-  .container__subcontainer {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: space-between;
-    margin-right: 10px;
   }
 
   .container__title-text {
@@ -62,28 +37,6 @@
   .container__type-input {
     width: 120px;
   }
-
-  .container__action {
-    all: initial;
-    display: flex;
-    align-items: center;
-    padding-left: 10px;
-    padding-right: 10px;
-    font-family: monospace;
-    font-size: 14px;
-    font-weight: bold;
-    text-decoration: underline;
-    cursor: pointer;
-  }
-
-  .container__action_hidden {
-    display: none;
-  }
-
-  .container__action-save:hover {
-    background: #90FF70;
-    transition: background 500ms;
-  }
 </style>
 
 <div id="show-container" class="container container_selectable">
@@ -95,7 +48,7 @@
 </div>
 
 <div id="edit-container" class="container container_hidden">
-  <span class="container__subcontainer">
+  <span class="container__content">
     <input id="title-input" class="container__title-text container__title-input" type="text" name="title" value="" />
     <select id="size-input" class="container__subtitle-text container__size-input">
       <option value="Fine">Fine</option>
@@ -139,5 +92,5 @@
       <option value="chaotic evil">chaotic evil</option>
     </select>
   </span>
-  <button id="save-action" class="container__action container__action-save" name="titleSave">Save</button>
+  <button id="save-action" class="container__action container__save-action" name="titleSave">Save</button>
 </div>
