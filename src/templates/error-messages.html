@@ -1,0 +1,30 @@
+<style>
+  .error-messages {
+    position: absolute;
+    left: 440px;
+    width: fit-content;
+    background: #EEEEEE;
+    color: red;
+    border: 1px solid #867453;
+    box-shadow: 3px 3px 1.5em #867453;
+    font-weight: bold;
+    padding: 5px;
+    margin: 0px;
+    z-index: 1;
+  }
+
+  .error-messages_hidden {
+    display: none;
+  }
+
+  .error-messages__list {
+    list-style-type: none;
+    padding-left: 0px;
+    margin: 0px;
+  }
+</style>
+
+<div id="error-messages" class="error-messages error-messages_hidden">
+  <ul id="error-messages-list" class="error-messages__list">
+  </ul>
+</div>
