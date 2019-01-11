@@ -3,46 +3,58 @@
   border-style: double;
 }
 
-.container {
+.section {
   display: flex;
   justify-content: space-between;
 }
 
-.container_selectable:hover {
+.section_selectable:hover {
   background: #FFCCCC;
   transition: background 500ms;
   cursor: pointer;
 }
 
-.container_hidden {
+.section_hidden {
   display: none;
 }
 
-.container__content {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: space-between;
-  margin-right: 10px;
+.section__content {
+  display: block;
 }
 
-.container__action {
+.section__content-line {
+  display: flex;
+  justify-content: space-between;
+}
+
+.section__content-block {
+  display: block;
+}
+
+.section__action {
   all: initial;
   display: flex;
   align-items: center;
   padding-left: 10px;
   padding-right: 10px;
-  font-family: monospace;
+  font-family: inherit;
   font-size: 14px;
   font-weight: bold;
   text-decoration: underline;
   cursor: pointer;
 }
 
-.container__action_hidden {
+.section__action_hidden {
   display: none;
 }
 
-.container__save-action:hover {
+.section__save-action {
+  border: 1px solid silver;
+  max-height: 50px;
+  margin-left: 10px;
+}
+
+.section__save-action:hover {
   background: #90FF70;
   transition: background 500ms;
 }

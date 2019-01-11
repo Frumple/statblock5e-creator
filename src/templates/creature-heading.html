@@ -1,15 +1,15 @@
-<link href='src/css/styles.css' rel='stylesheet' type='text/css'>
+<link href='src/css/default.css' rel='stylesheet' type='text/css'>
 
 <style>
   h1 {
-    margin: 0px;
+    margin: 0;
   }
 
   h2 {
-    margin: 0px;
+    margin: 0;
   }
 
-  .container__title-text {
+  .section__title-text {
     font-family: 'Libre Baskerville', 'Lora', 'Calisto MT',
                  'Bookman Old Style', Bookman, 'Goudy Old Style',
                  Garamond, 'Hoefler Text', 'Bitstream Charter',
@@ -20,79 +20,87 @@
     font-variant: small-caps;
     letter-spacing: 1px;
     width: 100%;
-    margin: 0px;
+    margin: 0;
   }
 
-  .container__title-input {
-     height: 23px;
+  .section__title-input {
+    height: 23px;
   }
 
-  .container__subtitle-text {
+  .section__subtitle-text {
     font-weight: normal;
     font-style: italic;
     font-size: 12px;
-    margin: 0px;
+    margin: 0;
   }
 
-  .container__type-input {
-    width: 120px;
+  .section__type-input {
+    width: 100%;
   }
 </style>
 
 <error-messages></error-messages>
 
-<div id="show-container" class="container container_selectable">
-  <span class="container__subcontainer">
-    <h1 id="title-text" class="container__title-text">[Creature Name]</h1>
-    <h2 id="subtitle-text" class="container__subtitle-text">Medium [creature type], unaligned</h2>
-  </span>
-  <span id="edit-action" class="container__action container__action_hidden">Edit</span>
+<div id="show-section" class="section section_selectable">
+  <div class="section__content">
+    <div class="section__content-line">
+      <h1 id="title-text" class="section__title-text">Commoner</h1>
+    </div>
+    <div class="section__content-line">
+      <h2 id="subtitle-text" class="section__subtitle-text">Medium humanoid, unaligned</h2>
+    </div>
+  </div>
+  <button id="edit-action" class="section__action section__action_hidden">Edit</button>
 </div>
 
-<div id="edit-container" class="container container_hidden">
-  <span class="container__content">
-    <input id="title-input" class="container__title-text container__title-input" type="text" name="title" value="" />
-    <select id="size-input" class="container__subtitle-text container__size-input">
-      <option value="Fine">Fine</option>
-      <option value="Diminuitive">Diminuitive</option>
-      <option value="Tiny">Tiny</option>
-      <option value="Small">Small</option>
-      <option value="Medium" selected>Medium</option>
-      <option value="Large">Large</option>
-      <option value="Huge">Huge</option>
-      <option value="Gargantuan">Gargantuan</option>
-      <option value="Colossal">Colossal</option>
-      <option value="Colossal+">Colossal+</option>
-    </select>
-    <input id="type-input" class="container__subtitle-text container__type-input" list="type-list" value="" />
-    <datalist id="type-list">
-      <option value="aberration" />
-      <option value="beast" />
-      <option value="celestial" />
-      <option value="construct" />
-      <option value="dragon" />
-      <option value="elemental" />
-      <option value="fey" />
-      <option value="fiend" />
-      <option value="giant" />
-      <option value="humanoid" />
-      <option value="monstrosity" />
-      <option value="ooze" />
-      <option value="plant" />
-      <option value="undead" />
-    </datalist>
-    <select id="alignment-input" class="container__subtitle-text container__alignment-input">
-      <option value="unaligned">unaligned</option>
-      <option value="lawful good">lawful good</option>
-      <option value="neutral good">neutral good</option>
-      <option value="chaotic good">chaotic good</option>
-      <option value="lawful neutral">lawful neutral</option>
-      <option value="neutral">neutral</option>
-      <option value="chaotic neutral">chaotic neutral</option>
-      <option value="lawful evil">lawful evil</option>
-      <option value="neutral evil">neutral evil</option>
-      <option value="chaotic evil">chaotic evil</option>
-    </select>
-  </span>
-  <button id="save-action" class="container__action container__save-action" name="titleSave">Save</button>
+<div id="edit-section" class="section section_hidden">
+  <div class="section__content">
+    <div class="section__content-line">
+      <input id="title-input" class="section__title-text section__title-input" type="text" name="title" value="Commoner" />
+    </div>
+    <div class="section__content-line">
+      <select id="size-input" class="section__subtitle-text section__size-input">
+        <option value="Fine">Fine</option>
+        <option value="Diminuitive">Diminuitive</option>
+        <option value="Tiny">Tiny</option>
+        <option value="Small">Small</option>
+        <option value="Medium" selected>Medium</option>
+        <option value="Large">Large</option>
+        <option value="Huge">Huge</option>
+        <option value="Gargantuan">Gargantuan</option>
+        <option value="Colossal">Colossal</option>
+        <option value="Colossal+">Colossal+</option>
+      </select>
+      <input id="type-input" class="section__subtitle-text section__type-input" list="type-list" value="humanoid" />
+      <datalist id="type-list">
+        <option value="aberration" />
+        <option value="beast" />
+        <option value="celestial" />
+        <option value="construct" />
+        <option value="dragon" />
+        <option value="elemental" />
+        <option value="fey" />
+        <option value="fiend" />
+        <option value="giant" />
+        <option value="humanoid" />
+        <option value="monstrosity" />
+        <option value="ooze" />
+        <option value="plant" />
+        <option value="undead" />
+      </datalist>
+      <select id="alignment-input" class="section__subtitle-text section__alignment-input">
+        <option value="unaligned">unaligned</option>
+        <option value="lawful good">lawful good</option>
+        <option value="neutral good">neutral good</option>
+        <option value="chaotic good">chaotic good</option>
+        <option value="lawful neutral">lawful neutral</option>
+        <option value="neutral">neutral</option>
+        <option value="chaotic neutral">chaotic neutral</option>
+        <option value="lawful evil">lawful evil</option>
+        <option value="neutral evil">neutral evil</option>
+        <option value="chaotic evil">chaotic evil</option>
+      </select>
+    </div>
+  </div>
+  <button id="save-action" class="section__action section__save-action" name="creatureHeadingSave">Save</button>
 </div>

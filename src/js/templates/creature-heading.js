@@ -3,7 +3,7 @@ import { Errors } from '/src/js/templates/error-messages.js';
 
 class ShowElements {
   constructor(shadowRoot) {
-    this.container = shadowRoot.getElementById('show-container');
+    this.section = shadowRoot.getElementById('show-section');
     this.title = shadowRoot.getElementById('title-text');
     this.subtitle = shadowRoot.getElementById('subtitle-text');
     this.edit = shadowRoot.getElementById('edit-action');
@@ -12,7 +12,7 @@ class ShowElements {
 
 class EditElements {
   constructor(shadowRoot) {
-    this.container = shadowRoot.getElementById('edit-container');
+    this.section = shadowRoot.getElementById('edit-section');
     this.title = shadowRoot.getElementById('title-input');
     this.size = shadowRoot.getElementById('size-input');
     this.type = shadowRoot.getElementById('type-input');
@@ -33,15 +33,15 @@ export function init(element) {
   const showElements = new ShowElements(shadowRoot);
   const editElements = new EditElements(shadowRoot);
 
-  showElements.container.addEventListener('mouseenter', () => {
-    showElements.edit.classList.remove('container__action_hidden');
+  showElements.section.addEventListener('mouseenter', () => {
+    showElements.edit.classList.remove('section__action_hidden');
   });
 
-  showElements.container.addEventListener('mouseleave', () => {
-    showElements.edit.classList.add('container__action_hidden');
+  showElements.section.addEventListener('mouseleave', () => {
+    showElements.edit.classList.add('section__action_hidden');
   });
 
-  showElements.container.addEventListener('click', () => {
+  showElements.section.addEventListener('click', () => {
     switchMode(showElements, editElements, true);
   });
 
@@ -58,15 +58,15 @@ export function init(element) {
 }
 
 function switchMode(showElements, editElements, editMode) {
-  const hiddenClass = 'container_hidden';
+  const hiddenClass = 'section_hidden';
 
   if (editMode) {
-    showElements.container.classList.add(hiddenClass);
-    editElements.container.classList.remove(hiddenClass);
+    showElements.section.classList.add(hiddenClass);
+    editElements.section.classList.remove(hiddenClass);
     editElements.title.select();
   } else {
-    editElements.container.classList.add(hiddenClass);
-    showElements.container.classList.remove(hiddenClass);
+    editElements.section.classList.add(hiddenClass);
+    showElements.section.classList.remove(hiddenClass);
   }
 }
 

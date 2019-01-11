@@ -1,4 +1,5 @@
 import * as abilitiesBlock from '/src/js/templates/abilities-block.js';
+import * as basicStats from '/src/js/templates/basic-stats.js';
 import * as creatureHeading from '/src/js/templates/creature-heading.js';
 import * as errorMessages from '/src/js/templates/error-messages.js';
 import * as propertyBlock from '/src/js/templates/property-block.js';
@@ -9,6 +10,7 @@ import * as topStats from '/src/js/templates/top-stats.js';
 
 async function init() {
   await abilitiesBlock.defineCustomElement();
+  await basicStats.defineCustomElement();
   await creatureHeading.defineCustomElement();
   await errorMessages.defineCustomElement();
   await propertyBlock.defineCustomElement();
@@ -18,6 +20,8 @@ async function init() {
   await topStats.defineCustomElement();
 
   creatureHeading.init( document.getElementById('creature-heading') );
+  basicStats.init( document.getElementById('basic-stats') );
+
 }
 
 init();
