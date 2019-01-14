@@ -1,6 +1,27 @@
+h4 {
+  font-weight: bold;
+  margin: 0;
+}
+
+p {
+  margin: 0;
+}
+
+input[type="number"] {
+  width: 40px;
+}
+
+input[type="text"] {
+  width: 100%;
+}
+
 .error-highlight {
   border-color: red;
   border-style: double;
+}
+
+.hidden {
+  display: none;
 }
 
 .section {
@@ -18,19 +39,6 @@
   display: none;
 }
 
-.section__content {
-  display: block;
-}
-
-.section__content-line {
-  display: flex;
-  justify-content: space-between;
-}
-
-.section__content-block {
-  display: block;
-}
-
 .section__action {
   all: initial;
   display: flex;
@@ -38,7 +46,7 @@
   padding-left: 10px;
   padding-right: 10px;
   font-family: inherit;
-  font-size: 14px;
+  font-size: 13.5px;
   font-weight: bold;
   text-decoration: underline;
   cursor: pointer;
@@ -50,7 +58,6 @@
 
 .section__save-action {
   border: 1px solid silver;
-  max-height: 50px;
   margin-left: 10px;
 }
 
