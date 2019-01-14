@@ -1,7 +1,13 @@
 import defineCustomElementFromTemplate from '/src/js/helpers/define-custom-element.js';
 import * as sectionModule from '/src/js/helpers/section.js';
 
-class SpeedSection extends sectionModule.Section {
+export async function defineCustomElement() {
+  await defineCustomElementFromTemplate(
+    'speed-section',
+    'src/templates/speed-section.html');
+}
+
+export class SpeedSection extends sectionModule.Section {
   constructor(shadowRoot) {
     super(shadowRoot,
           new SpeedShowElements(shadowRoot),
@@ -92,14 +98,4 @@ class SpeedEditElements extends sectionModule.EditElements {
     this.use_custom = shadowRoot.getElementById('speed-use-custom-input');
     this.custom_text = shadowRoot.getElementById('speed-custom-input');
   }
-}
-
-export async function defineCustomElement() {
-  await defineCustomElementFromTemplate(
-    'speed-section',
-    'src/templates/speed-section.html');
-}
-
-export function init(element) {
-  new SpeedSection(element.shadowRoot);
 }

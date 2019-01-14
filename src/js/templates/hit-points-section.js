@@ -1,7 +1,7 @@
 import defineCustomElementFromTemplate from '/src/js/helpers/define-custom-element.js';
 import * as sectionModule from '/src/js/helpers/section.js';
 
-class HitPointsSection extends sectionModule.Section {
+export class HitPointsSection extends sectionModule.Section {
   constructor(shadowRoot) {
     super(shadowRoot,
           new HitPointsShowElements(shadowRoot),
@@ -105,8 +105,4 @@ export async function defineCustomElement() {
   await defineCustomElementFromTemplate(
     'hit-points-section',
     'src/templates/hit-points-section.html');
-}
-
-export function init(element) {
-  new HitPointsSection(element.shadowRoot);
 }

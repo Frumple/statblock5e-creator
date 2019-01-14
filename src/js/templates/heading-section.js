@@ -1,7 +1,7 @@
 import defineCustomElementFromTemplate from '/src/js/helpers/define-custom-element.js';
 import * as sectionModule from '/src/js/helpers/section.js';
 
-class HeadingSection extends sectionModule.Section {
+export class HeadingSection extends sectionModule.Section {
   constructor(shadowRoot) {
     super(shadowRoot,
           new HeadingShowElements(shadowRoot),
@@ -76,8 +76,4 @@ export async function defineCustomElement() {
   await defineCustomElementFromTemplate(
     'heading-section',
     'src/templates/heading-section.html');
-}
-
-export function init(element) {
-  new HeadingSection(element.shadowRoot);
 }

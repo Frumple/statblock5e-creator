@@ -1,34 +1,34 @@
-import * as statBlock from '/src/js/templates/stat-block.js';
-import * as headingSection from '/src/js/templates/heading-section.js';
-import * as topStats from '/src/js/templates/top-stats.js';
-import * as armorClassSection from '/src/js/templates/armor-class-section.js';
-import * as hitPointsSection from '/src/js/templates/hit-points-section.js';
-import * as speedSection from '/src/js/templates/speed-section.js';
-import * as abilitiesBlock from '/src/js/templates/abilities-block.js';
+import * as statBlockModule from '/src/js/templates/stat-block.js';
+import * as headingSectionModule from '/src/js/templates/heading-section.js';
+import * as topStatsModule from '/src/js/templates/top-stats.js';
+import * as armorClassSectionModule from '/src/js/templates/armor-class-section.js';
+import * as hitPointsSectionModule from '/src/js/templates/hit-points-section.js';
+import * as speedSectionModule from '/src/js/templates/speed-section.js';
+import * as abilitiesBlockModule from '/src/js/templates/abilities-block.js';
 
-import * as errorMessages from '/src/js/templates/error-messages.js';
-import * as propertyBlock from '/src/js/templates/property-block.js';
-import * as propertyLine from '/src/js/templates/property-line.js';
-import * as taperedRule from '/src/js/templates/tapered-rule.js';
+import * as errorMessagesModule from '/src/js/templates/error-messages.js';
+import * as propertyBlockModule from '/src/js/templates/property-block.js';
+import * as propertyLineModule from '/src/js/templates/property-line.js';
+import * as taperedRuleModule from '/src/js/templates/tapered-rule.js';
 
 async function init() {
-  await statBlock.defineCustomElement();
-  await headingSection.defineCustomElement();
-  await topStats.defineCustomElement();
-  await armorClassSection.defineCustomElement();
-  await hitPointsSection.defineCustomElement();
-  await speedSection.defineCustomElement();
-  await abilitiesBlock.defineCustomElement();
+  await statBlockModule.defineCustomElement();
+  await headingSectionModule.defineCustomElement();
+  await topStatsModule.defineCustomElement();
+  await armorClassSectionModule.defineCustomElement();
+  await hitPointsSectionModule.defineCustomElement();
+  await speedSectionModule.defineCustomElement();
+  await abilitiesBlockModule.defineCustomElement();
 
-  await errorMessages.defineCustomElement();
-  await propertyBlock.defineCustomElement();
-  await propertyLine.defineCustomElement();
-  await taperedRule.defineCustomElement();
+  await errorMessagesModule.defineCustomElement();
+  await propertyBlockModule.defineCustomElement();
+  await propertyLineModule.defineCustomElement();
+  await taperedRuleModule.defineCustomElement();
 
-  headingSection.init( document.querySelector('heading-section') );
-  armorClassSection.init( document.querySelector('armor-class-section') );
-  hitPointsSection.init( document.querySelector('hit-points-section') );
-  speedSection.init( document.querySelector('speed-section') );
+  let headingSection = new headingSectionModule.HeadingSection( document.querySelector('heading-section').shadowRoot );
+  let armorClassSection = new armorClassSectionModule.ArmorClassSection( document.querySelector('armor-class-section').shadowRoot );
+  let hitPointsSection = new hitPointsSectionModule.HitPointsSection( document.querySelector('hit-points-section').shadowRoot );
+  let speedSection = new speedSectionModule.SpeedSection( document.querySelector('speed-section').shadowRoot );
 }
 
 init();

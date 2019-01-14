@@ -1,7 +1,7 @@
 import defineCustomElementFromTemplate from '/src/js/helpers/define-custom-element.js';
 import * as sectionModule from '/src/js/helpers/section.js';
 
-class ArmorClassSection extends sectionModule.Section {
+export class ArmorClassSection extends sectionModule.Section {
   constructor(shadowRoot) {
     super(shadowRoot,
           new ArmorClassShowElements(shadowRoot),
@@ -61,8 +61,4 @@ export async function defineCustomElement() {
   await defineCustomElementFromTemplate(
     'armor-class-section',
     'src/templates/armor-class-section.html');
-}
-
-export function init(element) {
-  new ArmorClassSection(element.shadowRoot);
 }
