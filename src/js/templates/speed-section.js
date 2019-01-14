@@ -1,4 +1,5 @@
 import defineCustomElementFromTemplate from '/src/js/helpers/define-custom-element.js';
+import EnableDisableElementsCheckbox from '/src/js/helpers/enable-disable-elements-checkbox.js';
 import * as sectionModule from '/src/js/helpers/section.js';
 
 export async function defineCustomElement() {
@@ -13,25 +14,14 @@ export class SpeedSection extends sectionModule.Section {
           new SpeedShowElements(shadowRoot),
           new SpeedEditElements(shadowRoot));
 
-    this.editElements.use_custom.addEventListener('input', () => {
-      if (this.editElements.use_custom.checked) {
-        this.editElements.walk.setAttribute('disabled', '');
-        this.editElements.burrow.setAttribute('disabled', '');
-        this.editElements.climb.setAttribute('disabled', '');
-        this.editElements.fly.setAttribute('disabled', '');
-        this.editElements.hover.setAttribute('disabled', '');
-        this.editElements.swim.setAttribute('disabled', '');
-        this.editElements.custom_text.removeAttribute('disabled');
-      } else {
-        this.editElements.walk.removeAttribute('disabled');
-        this.editElements.burrow.removeAttribute('disabled');
-        this.editElements.climb.removeAttribute('disabled');
-        this.editElements.fly.removeAttribute('disabled');
-        this.editElements.hover.removeAttribute('disabled');
-        this.editElements.swim.removeAttribute('disabled');
-        this.editElements.custom_text.setAttribute('disabled', '');
-      }
-    });
+    let checkbox = new EnableDisableElementsCheckbox(this.editElements.use_custom);
+    checkbox.disableElementWhenChecked(this.editElements.walk);
+    checkbox.disableElementWhenChecked(this.editElements.burrow);
+    checkbox.disableElementWhenChecked(this.editElements.climb);
+    checkbox.disableElementWhenChecked(this.editElements.fly);
+    checkbox.disableElementWhenChecked(this.editElements.hover);
+    checkbox.disableElementWhenChecked(this.editElements.swim);
+    checkbox.enableElementWhenChecked(this.editElements.custom_text);
   }
 
   save() {

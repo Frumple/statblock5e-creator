@@ -1,4 +1,5 @@
 import defineCustomElementFromTemplate from '/src/js/helpers/define-custom-element.js';
+import EnableDisableElementsCheckbox from '/src/js/helpers/enable-disable-elements-checkbox.js';
 import * as sectionModule from '/src/js/helpers/section.js';
 
 export class ArmorClassSection extends sectionModule.Section {
@@ -7,17 +8,10 @@ export class ArmorClassSection extends sectionModule.Section {
           new ArmorClassShowElements(shadowRoot),
           new ArmorClassEditElements(shadowRoot));
 
-    this.editElements.use_custom.addEventListener('input', () => {
-      if (this.editElements.use_custom.checked) {
-        this.editElements.armor_class.setAttribute('disabled', '');
-        this.editElements.armor_type.setAttribute('disabled', '');
-        this.editElements.custom_text.removeAttribute('disabled');
-      } else {
-        this.editElements.armor_class.removeAttribute('disabled');
-        this.editElements.armor_type.removeAttribute('disabled');
-        this.editElements.custom_text.setAttribute('disabled', '');
-      }
-    });
+    let checkbox = new EnableDisableElementsCheckbox(this.editElements.use_custom);
+    checkbox.disableElementWhenChecked(this.editElements.armor_class);
+    checkbox.disableElementWhenChecked(this.editElements.armor_type);
+    checkbox.enableElementWhenChecked(this.editElements.custom_text);
   }
 
   save() {

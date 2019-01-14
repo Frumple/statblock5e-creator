@@ -1,4 +1,5 @@
 import defineCustomElementFromTemplate from '/src/js/helpers/define-custom-element.js';
+import EnableDisableElementsCheckbox from '/src/js/helpers/enable-disable-elements-checkbox.js';
 import * as sectionModule from '/src/js/helpers/section.js';
 
 export class HitPointsSection extends sectionModule.Section {
@@ -7,17 +8,13 @@ export class HitPointsSection extends sectionModule.Section {
           new HitPointsShowElements(shadowRoot),
           new HitPointsEditElements(shadowRoot));
 
+    let checkbox = new EnableDisableElementsCheckbox(this.editElements.use_hit_die);
+    checkbox.disableElementWhenChecked(this.editElements.hit_points);
+    checkbox.enableElementWhenChecked(this.editElements.hit_die_quantity);
+    checkbox.enableElementWhenChecked(this.editElements.hit_die_size);
+
     this.editElements.use_hit_die.addEventListener('input', () => {
-      if (this.editElements.use_hit_die.checked) {
-        this.editElements.hit_points.setAttribute('disabled', '');
-        this.editElements.hit_die_quantity.removeAttribute('disabled');
-        this.editElements.hit_die_size.removeAttribute('disabled');
-        this.calculateHitPointsFromHitDie();
-      } else {
-        this.editElements.hit_points.removeAttribute('disabled');
-        this.editElements.hit_die_quantity.setAttribute('disabled', '');
-        this.editElements.hit_die_size.setAttribute('disabled', '');
-      }
+      this.calculateHitPointsFromHitDie();
     });
 
     this.editElements.hit_die_quantity.addEventListener('input', () => {
@@ -36,15 +33,19 @@ export class HitPointsSection extends sectionModule.Section {
   }
 
   calculateHitPointsFromHitDie() {
-    let hitDieQuantity = this.editElements.hit_die_quantity.value;
-    let hitDieSize = this.editElements.hit_die_size.value;
-    let constitutionHitPointsModifier = parseInt(this.editElements.constitution_hit_points_modifier.textContent);
+    let useHitDie = this.editElements.use_hit_die.checked;
 
-    let hitDieAverage = (hitDieSize / 2) + 0.5;
-    let hitPoints = Math.floor(hitDieQuantity * hitDieAverage) + constitutionHitPointsModifier;
-    hitPoints = Math.max(0, hitPoints);
+    if(useHitDie) {
+      let hitDieQuantity = this.editElements.hit_die_quantity.value;
+      let hitDieSize = this.editElements.hit_die_size.value;
+      let constitutionHitPointsModifier = parseInt(this.editElements.constitution_hit_points_modifier.textContent);
 
-    this.editElements.hit_points.value = hitPoints;
+      let hitDieAverage = (hitDieSize / 2) + 0.5;
+      let hitPoints = Math.floor(hitDieQuantity * hitDieAverage) + constitutionHitPointsModifier;
+      hitPoints = Math.max(0, hitPoints);
+
+      this.editElements.hit_points.value = hitPoints;
+    }
   }
 
   update() {
