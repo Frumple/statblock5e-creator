@@ -1,7 +1,7 @@
 <link href='src/css/default.css' rel='stylesheet' type='text/css'>
 
 <style>
-  .section__hit-points-edit-container {
+  .hit-points-edit-section {
     display: grid;
     grid-template-columns: 90px auto auto auto auto 50px;
     grid-template-rows: auto 5px auto 5px auto auto;
@@ -9,50 +9,50 @@
     align-items: center;
   }
 
-  .section__hit-points-label {
+  .hit-points-edit-section__hit-points-label {
     grid-area: 1 / 1;
   }
 
-  .section__hit-points-input {
+  .hit-points-edit-section__hit-points-input {
     grid-area: 1 / 2;
   }
 
-  .section__use-hit-die-input {
+  .hit-points-edit-section__use-hit-die-input {
     grid-area: 3 / 1;
     justify-self: end;
   }
 
-  .section__use-hit-die-label {
+  .hit-points-edit-section__use-hit-die-label {
     grid-area: 3 / 2 / 4 / 7;
   }
 
-  .section__hit-die-quantity-label {
+  .hit-points-edit-section__hit-die-quantity-label {
     grid-area: 5 / 2 / 6 / 4;
     justify-self: center;
   }
 
-  .section__hit-die-size-label {
+  .hit-points-edit-section__hit-die-size-label {
     grid-area: 5 / 4 / 6 / 6;
     justify-self: center;
   }
 
-  .section__hit_die-leading-text {
+  .hit-points-edit-section__hit_die-leading-text {
     grid-area: 6 / 1;
     justify-self: end;
   }
 
-  .section__hit-die-quantity-input {
+  .hit-points-edit-section__hit-die-quantity-input {
     grid-area: 6 / 2 / 7 / 4;
     justify-self: center;
   }
 
-  .section__hit-die-size-input {
+  .hit-points-edit-section__hit-die-size-input {
     grid-area: 6 / 4 / 7 / 6;
     justify-self: center;
     width: fit-content;
   }
 
-  .section__hit-die-trailing-text {
+  .hit-points-edit-section__hit-die-trailing-text {
     grid-area: 6 / 6 / 7 / 7;
   }
 </style>
@@ -60,7 +60,7 @@
 <error-messages></error-messages>
 
 <div id="show-section" class="section section_selectable">
-  <div class="section__hit-points-show-container">
+  <div class="hit-points-show-section">
     <property-line>
       <h4 id="hit-points-label">Hit Points</h4>
       <p id="hit-points-text">4 (1d8)</p>
@@ -70,16 +70,16 @@
 </div>
 
 <div id="edit-section" class="section section_hidden">
-  <div class="section__hit-points-edit-container">
-    <h4 id="hit-points-label" class="section__hit-points-label">Hit Points:</h4>
-    <input id="hit-points-input" class="section__hit-points-input" type="number" name="hit-points" value="4" min="1" disabled />
-    <label id="use-hit-die-label" class="section__use-hit-die-label" for="use-hit-die-input">Calculate using Hit Die?</label>
-    <input id="use-hit-die-input" class="section__use-hit-die-input" type="checkbox" name="use-hit-die" checked />
-    <p id="hit-die-leading-text" class="section__hit_die-leading-text">(</p>
-    <label id="hit-die-quantity-label" class="section__hit-die-quantity-label" for="hit-die-quantity-input"># of Hit Die:</label>
-    <input id="hit-die-quantity-input" class="section__hit-die-quantity-input" type="number" name="hit-die-quantity" value="1" min="1" />
-    <label id="hit-die-size-label" class="section__hit-die-size-label" for="hit-die-size-input">Size of Hit Die:</label>
-    <select id="hit-die-size-input" class="section__hit-die-size-input" type="number" name="hit-die-size">
+  <div class="hit-points-edit-section">
+    <label id="hit-points-label" class="hit-points-edit-section__hit-points-label section__header-label" for="hit-points-input">Hit Points:</label>
+    <input id="hit-points-input" class="hit-points-edit-section__hit-points-input" type="number" name="hit-points" value="4" min="0" disabled />
+    <label id="use-hit-die-label" class="hit-points-edit-section__use-hit-die-label" for="use-hit-die-input">Calculate using Hit Die?</label>
+    <input id="use-hit-die-input" class="hit-points-edit-section__use-hit-die-input" type="checkbox" name="use-hit-die" checked />
+    <label id="hit-die-leading-text" class="hit-points-edit-section__hit_die-leading-text">(</label>
+    <label id="hit-die-quantity-label" class="hit-points-edit-section__hit-die-quantity-label" for="hit-die-quantity-input"># of Hit Die:</label>
+    <input id="hit-die-quantity-input" class="hit-points-edit-section__hit-die-quantity-input" type="number" name="hit-die-quantity" value="1" min="1" />
+    <label id="hit-die-size-label" class="hit-points-edit-section__hit-die-size-label" for="hit-die-size-input">Size of Hit Die:</label>
+    <select id="hit-die-size-input" class="hit-points-edit-section__hit-die-size-input" type="number" name="hit-die-size">
       <option value="4">d4</option>
       <option value="6">d6</option>
       <option value="8" selected>d8</option>
@@ -87,9 +87,7 @@
       <option value="12">d12</option>
       <option value="20">d20</option>
     </select>
-    <p id="hit-die-trailing-text" class="section__hit-die-trailing-text">
-      <span id="constitution-hit-points-operator">+</span> <span id="constitution-hit-points-value">0</span> )
-    </p>
+    <label id="hit-die-trailing-text" class="hit-points-edit-section__hit-die-trailing-text">+ 0 )</label>
   </div>
   <span id="constitution-hit-points-modifier" class="hidden">0</span>
   <button id="save-action" class="section__action section__save-action" name="armor-class-save">Save</button>

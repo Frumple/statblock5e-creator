@@ -42,6 +42,7 @@ class HitPointsSection extends sectionModule.Section {
 
     let hitDieAverage = (hitDieSize / 2) + 0.5;
     let hitPoints = Math.floor(hitDieQuantity * hitDieAverage) + constitutionHitPointsModifier;
+    hitPoints = Math.max(0, hitPoints);
 
     this.editElements.hit_points.value = hitPoints;
   }
@@ -65,19 +66,17 @@ class HitPointsSection extends sectionModule.Section {
     }
     this.showElements.text.textContent = text;
 
-    let operatorElement = this.editElements.constitution_hit_points_operator;
-    let valueElement = this.editElements.constitution_hit_points_value;
+    let trailingText = this.editElements.hit_die_trailing_text;
 
     if (constitutionHitPointsModifier >= 0) {
-      operatorElement.textContent = '+';
-      valueElement.textContent = constitutionHitPointsModifier;
+      trailingText.textContent = '+ ' + constitutionHitPointsModifier + ' )';
     } else {
-      operatorElement.textContent = '-';
-      valueElement.textContent = Math.abs(constitutionHitPointsModifier);
+      trailingText.textContent = '- ' + Math.abs(constitutionHitPointsModifier) + ' )';
     }
   }
 
   save() {
+    this.calculateHitPointsFromHitDie();
     this.update();
     this.switchToShowMode();
   }
@@ -97,9 +96,8 @@ class HitPointsEditElements extends sectionModule.EditElements {
     this.use_hit_die = shadowRoot.getElementById('use-hit-die-input');
     this.hit_die_quantity = shadowRoot.getElementById('hit-die-quantity-input');
     this.hit_die_size = shadowRoot.getElementById('hit-die-size-input');
+    this.hit_die_trailing_text = shadowRoot.getElementById('hit-die-trailing-text');
     this.constitution_hit_points_modifier = shadowRoot.getElementById('constitution-hit-points-modifier');
-    this.constitution_hit_points_operator = shadowRoot.getElementById('constitution-hit-points-operator');
-    this.constitution_hit_points_value = shadowRoot.getElementById('constitution-hit-points-value');
   }
 }
 
