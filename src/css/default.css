@@ -11,8 +11,16 @@ input[type="text"] {
   border-style: double;
 }
 
-.hidden {
+.section-divider {
   display: none;
+}
+
+.section-divider_visible-for-previous {
+  display: block;
+}
+
+.section-divider_visible-for-next {
+  display: block;
 }
 
 .section {
