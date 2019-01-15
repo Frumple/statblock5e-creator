@@ -2,11 +2,17 @@ import defineCustomElementFromTemplate from '/src/js/helpers/define-custom-eleme
 import EnableDisableElementsCheckbox from '/src/js/helpers/enable-disable-elements-checkbox.js';
 import * as sectionModule from '/src/js/helpers/section.js';
 
-export class HitPointsSection extends sectionModule.Section {
-  constructor(shadowRoot) {
-    super(shadowRoot,
-          new HitPointsShowElements(shadowRoot),
-          new HitPointsEditElements(shadowRoot));
+export default class HitPointsSection extends sectionModule.Section {
+  static async defineCustomElement() {
+    await defineCustomElementFromTemplate(
+      'hit-points-section',
+      'src/templates/hit-points-section.html');
+  }
+
+  constructor(element) {
+    super(element,
+          new HitPointsShowElements(element.shadowRoot),
+          new HitPointsEditElements(element.shadowRoot));
 
     let checkbox = new EnableDisableElementsCheckbox(this.editElements.use_hit_die);
     checkbox.disableElementWhenChecked(this.editElements.hit_points);
@@ -100,10 +106,4 @@ class HitPointsEditElements extends sectionModule.EditElements {
     this.hit_die_trailing_text = shadowRoot.getElementById('hit-die-trailing-text');
     this.constitution_hit_points_modifier = shadowRoot.getElementById('constitution-hit-points-modifier');
   }
-}
-
-export async function defineCustomElement() {
-  await defineCustomElementFromTemplate(
-    'hit-points-section',
-    'src/templates/hit-points-section.html');
 }

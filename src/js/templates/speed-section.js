@@ -2,17 +2,17 @@ import defineCustomElementFromTemplate from '/src/js/helpers/define-custom-eleme
 import EnableDisableElementsCheckbox from '/src/js/helpers/enable-disable-elements-checkbox.js';
 import * as sectionModule from '/src/js/helpers/section.js';
 
-export async function defineCustomElement() {
-  await defineCustomElementFromTemplate(
-    'speed-section',
-    'src/templates/speed-section.html');
-}
+export default class SpeedSection extends sectionModule.Section {
+  static async defineCustomElement() {
+    await defineCustomElementFromTemplate(
+      'speed-section',
+      'src/templates/speed-section.html');
+  }
 
-export class SpeedSection extends sectionModule.Section {
-  constructor(shadowRoot) {
-    super(shadowRoot,
-          new SpeedShowElements(shadowRoot),
-          new SpeedEditElements(shadowRoot));
+  constructor(element) {
+    super(element,
+          new SpeedShowElements(element.shadowRoot),
+          new SpeedEditElements(element.shadowRoot));
 
     let checkbox = new EnableDisableElementsCheckbox(this.editElements.use_custom);
     checkbox.disableElementWhenChecked(this.editElements.walk);

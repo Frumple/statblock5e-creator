@@ -2,11 +2,17 @@ import defineCustomElementFromTemplate from '/src/js/helpers/define-custom-eleme
 import EnableDisableElementsCheckbox from '/src/js/helpers/enable-disable-elements-checkbox.js';
 import * as sectionModule from '/src/js/helpers/section.js';
 
-export class ArmorClassSection extends sectionModule.Section {
-  constructor(shadowRoot) {
-    super(shadowRoot,
-          new ArmorClassShowElements(shadowRoot),
-          new ArmorClassEditElements(shadowRoot));
+export default class ArmorClassSection extends sectionModule.Section {
+  static async defineCustomElement() {
+    await defineCustomElementFromTemplate(
+      'armor-class-section',
+      'src/templates/armor-class-section.html');
+  }
+
+  constructor(element) {
+    super(element,
+          new ArmorClassShowElements(element.shadowRoot),
+          new ArmorClassEditElements(element.shadowRoot));
 
     let checkbox = new EnableDisableElementsCheckbox(this.editElements.use_custom);
     checkbox.disableElementWhenChecked(this.editElements.armor_class);
@@ -49,10 +55,4 @@ class ArmorClassEditElements extends sectionModule.EditElements {
     this.use_custom = shadowRoot.getElementById('use-custom-input');
     this.custom_text = shadowRoot.getElementById('custom-input');
   }
-}
-
-export async function defineCustomElement() {
-  await defineCustomElementFromTemplate(
-    'armor-class-section',
-    'src/templates/armor-class-section.html');
 }

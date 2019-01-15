@@ -1,8 +1,16 @@
-import { Errors } from '/src/js/templates/error-messages.js';
+import ErrorMessages from '/src/js/templates/error-messages.js';
 
 export class Section {
-  constructor(shadowRoot, showElements, editElements) {
-    this.errors = new Errors( shadowRoot.querySelector('error-messages') );
+  static async defineCustomElement() {
+    throw new Error(
+      'The class "' + this.name + '" must implement the defineCustomElement() static method.');
+  }
+
+  constructor(element, showElements, editElements) {
+    this.element = element;
+    this.shadowRoot = element.shadowRoot;
+
+    this.error_messages = new ErrorMessages( this.shadowRoot.querySelector('error-messages') );
     this.showElements = showElements;
     this.editElements = editElements;
 
@@ -36,9 +44,8 @@ export class Section {
   }
 
   save() {
-    const className = this.constructor.name;
     throw new Error(
-      'The class "' + className + '" does not implement the save() method.');
+      'The class "' + this.name + '" must implement the save() method.');
   }
 }
 

@@ -1,7 +1,9 @@
 import defineCustomElementFromTemplate from '/src/js/helpers/define-custom-element.js';
 
-export async function defineCustomElement() {
-  await defineCustomElementFromTemplate(
-    'tapered-rule',
-    'src/templates/tapered-rule.html');
+export default class TaperedRule {
+  static async defineCustomElement() {
+    await defineCustomElementFromTemplate(
+      'tapered-rule',
+      'src/templates/tapered-rule.html');
+  }
 }

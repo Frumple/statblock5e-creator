@@ -1,11 +1,17 @@
 import defineCustomElementFromTemplate from '/src/js/helpers/define-custom-element.js';
 import * as sectionModule from '/src/js/helpers/section.js';
 
-export class HeadingSection extends sectionModule.Section {
-  constructor(shadowRoot) {
-    super(shadowRoot,
-          new HeadingShowElements(shadowRoot),
-          new HeadingEditElements(shadowRoot));
+export default class HeadingSection extends sectionModule.Section {
+  static async defineCustomElement() {
+    await defineCustomElementFromTemplate(
+      'heading-section',
+      'src/templates/heading-section.html');
+  }
+
+  constructor(element) {
+    super(element,
+          new HeadingShowElements(element.shadowRoot),
+          new HeadingEditElements(element.shadowRoot));
 
     this.showElements.section.addEventListener('click', () => {
       this.editElements.title.select();
@@ -25,17 +31,17 @@ export class HeadingSection extends sectionModule.Section {
     let type = this.editElements.type.value;
     let alignment = this.editElements.alignment.value;
 
-    this.errors.clear();
+    this.error_messages.clear();
 
     if (title === "") {
-      this.errors.add(this.editElements.title, 'Creature name cannot be blank.');
+      this.error_messages.add(this.editElements.title, 'Creature name cannot be blank.');
     }
 
     if (type === "") {
-      this.errors.add(this.editElements.type, 'Creature type cannot be blank.');
+      this.error_messages.add(this.editElements.type, 'Creature type cannot be blank.');
     }
 
-    if (this.errors.any()) {
+    if (this.error_messages.any()) {
       return;
     }
 
@@ -70,10 +76,4 @@ class HeadingEditElements extends sectionModule.EditElements {
     this.type = shadowRoot.getElementById('type-input');
     this.alignment = shadowRoot.getElementById('alignment-input');
   }
-}
-
-export async function defineCustomElement() {
-  await defineCustomElementFromTemplate(
-    'heading-section',
-    'src/templates/heading-section.html');
 }
