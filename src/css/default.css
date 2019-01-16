@@ -19,7 +19,7 @@ input[type="text"] {
   display: block;
   height: 0;
   opacity: 0;
-  transition: opacity var(--section-transition-duration) ease-out 0ms, height 0ms linear var(--section-transition-duration);
+  transition: opacity var(--section-transition-duration) ease-in 0ms, height 0ms linear var(--section-transition-duration);
 }
 
 .section-divider_visible-for-previous,
@@ -46,7 +46,7 @@ input[type="text"] {
 .section_hidden {
   height: 0;
   opacity: 0;
-  transition: opacity var(--section-transition-duration) ease-out 0ms, height 0ms linear var(--section-transition-duration);
+  transition: opacity var(--section-transition-duration) ease-in 0ms, height 0ms linear var(--section-transition-duration);
 }
 
 .section__header-label {
