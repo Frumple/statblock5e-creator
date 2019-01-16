@@ -9,6 +9,7 @@ import AbilityScoresSection from '/src/js/templates/ability-scores-section.js';
 import ErrorMessages from '/src/js/templates/error-messages.js';
 import PropertyBlock from '/src/js/templates/property-block.js';
 import PropertyLine from '/src/js/templates/property-line.js';
+import SectionDivider from '/src/js/templates/section-divider.js';
 import TaperedRule from '/src/js/templates/tapered-rule.js';
 
 async function init() {
@@ -23,6 +24,7 @@ async function init() {
   await ErrorMessages.defineCustomElement();
   await PropertyBlock.defineCustomElement();
   await PropertyLine.defineCustomElement();
+  await SectionDivider.defineCustomElement();
   await TaperedRule.defineCustomElement();
 
   let statBlock = new StatBlock( document.querySelector('stat-block') );

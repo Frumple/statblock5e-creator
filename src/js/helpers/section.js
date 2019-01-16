@@ -54,7 +54,7 @@ export class Section {
 
   static toggleSectionDivider(sibling, isNext, isVisible) {
     if (sibling) {
-      if (sibling.tagName === 'HR') {
+      if (sibling.tagName === 'SECTION-DIVIDER') {
         let className = isNext ?
           'section-divider_visible-for-next' :
           'section-divider_visible-for-previous';
