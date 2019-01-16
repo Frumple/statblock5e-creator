@@ -1,9 +1,9 @@
 import defineCustomElementFromTemplate from '/src/js/helpers/define-custom-element.js';
 
-export default class SectionDivider {
+export default class PropertyBlock {
   static async defineCustomElement() {
     await defineCustomElementFromTemplate(
-      'section-divider',
-      'src/templates/section-divider.html');
+      'property-block',
+      'src/templates/elements/property-block.html');
   }
 }

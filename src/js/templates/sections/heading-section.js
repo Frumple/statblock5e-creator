@@ -5,7 +5,7 @@ export default class HeadingSection extends sectionModule.Section {
   static async defineCustomElement() {
     await defineCustomElementFromTemplate(
       'heading-section',
-      'src/templates/heading-section.html');
+      'src/templates/sections/heading-section.html');
   }
 
   constructor(element) {

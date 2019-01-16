@@ -4,7 +4,7 @@ export default class AbilityScoresSection {
   static async defineCustomElement() {
     await defineCustomElementFromTemplate(
       'abilities-block',
-      'src/templates/ability-scores-section.html',
+      'src/templates/sections/ability-scores-section.html',
       AbilityScoresSection.elementClass);
   }
 

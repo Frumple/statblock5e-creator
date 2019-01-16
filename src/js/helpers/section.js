@@ -1,4 +1,4 @@
-import ErrorMessages from '/src/js/templates/error-messages.js';
+import ErrorMessages from '/src/js/templates/elements/error-messages.js';
 
 export class Section {
   static async defineCustomElement() {

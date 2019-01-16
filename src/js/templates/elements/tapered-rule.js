@@ -1,9 +1,9 @@
 import defineCustomElementFromTemplate from '/src/js/helpers/define-custom-element.js';
 
-export default class PropertyLine {
+export default class TaperedRule {
   static async defineCustomElement() {
     await defineCustomElementFromTemplate(
-      'property-line',
-      'src/templates/property-line.html');
+      'tapered-rule',
+      'src/templates/elements/tapered-rule.html');
   }
 }

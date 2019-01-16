@@ -6,7 +6,7 @@ export default class ArmorClassSection extends sectionModule.Section {
   static async defineCustomElement() {
     await defineCustomElementFromTemplate(
       'armor-class-section',
-      'src/templates/armor-class-section.html');
+      'src/templates/sections/armor-class-section.html');
   }
 
   constructor(element) {

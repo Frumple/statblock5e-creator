@@ -1,9 +1,9 @@
 import defineCustomElementFromTemplate from '/src/js/helpers/define-custom-element.js';
 
-export default class PropertyBlock {
+export default class PropertyLine {
   static async defineCustomElement() {
     await defineCustomElementFromTemplate(
-      'property-block',
-      'src/templates/property-block.html');
+      'property-line',
+      'src/templates/elements/property-line.html');
   }
 }

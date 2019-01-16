@@ -1,21 +1,23 @@
 import StatBlock from '/src/js/templates/stat-block.js';
-import HeadingSection from '/src/js/templates/heading-section.js';
 import TopStats from '/src/js/templates/top-stats.js';
-import ArmorClassSection from '/src/js/templates/armor-class-section.js';
-import HitPointsSection from '/src/js/templates/hit-points-section.js';
-import SpeedSection from '/src/js/templates/speed-section.js';
-import AbilityScoresSection from '/src/js/templates/ability-scores-section.js';
 
-import ErrorMessages from '/src/js/templates/error-messages.js';
-import PropertyBlock from '/src/js/templates/property-block.js';
-import PropertyLine from '/src/js/templates/property-line.js';
-import SectionDivider from '/src/js/templates/section-divider.js';
-import TaperedRule from '/src/js/templates/tapered-rule.js';
+import HeadingSection from '/src/js/templates/sections/heading-section.js';
+import ArmorClassSection from '/src/js/templates/sections/armor-class-section.js';
+import HitPointsSection from '/src/js/templates/sections/hit-points-section.js';
+import SpeedSection from '/src/js/templates/sections/speed-section.js';
+import AbilityScoresSection from '/src/js/templates/sections/ability-scores-section.js';
+
+import ErrorMessages from '/src/js/templates/elements/error-messages.js';
+import PropertyBlock from '/src/js/templates/elements/property-block.js';
+import PropertyLine from '/src/js/templates/elements/property-line.js';
+import SectionDivider from '/src/js/templates/elements/section-divider.js';
+import TaperedRule from '/src/js/templates/elements/tapered-rule.js';
 
 async function init() {
   await StatBlock.defineCustomElement();
-  await HeadingSection.defineCustomElement();
   await TopStats.defineCustomElement();
+
+  await HeadingSection.defineCustomElement();
   await ArmorClassSection.defineCustomElement();
   await HitPointsSection.defineCustomElement();
   await SpeedSection.defineCustomElement();

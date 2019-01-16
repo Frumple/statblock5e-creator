@@ -1,9 +1,9 @@
 import defineCustomElementFromTemplate from '/src/js/helpers/define-custom-element.js';
 
-export default class TaperedRule {
+export default class SectionDivider {
   static async defineCustomElement() {
     await defineCustomElementFromTemplate(
-      'tapered-rule',
-      'src/templates/tapered-rule.html');
+      'section-divider',
+      'src/templates/elements/section-divider.html');
   }
 }
