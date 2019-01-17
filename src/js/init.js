@@ -1,17 +1,17 @@
-import StatBlock from '/src/js/templates/stat-block.js';
-import TopStats from '/src/js/templates/top-stats.js';
+import StatBlock from '/src/js/components/stat-block.js';
+import TopStats from '/src/js/components/top-stats.js';
 
-import HeadingSection from '/src/js/templates/sections/heading-section.js';
-import ArmorClassSection from '/src/js/templates/sections/armor-class-section.js';
-import HitPointsSection from '/src/js/templates/sections/hit-points-section.js';
-import SpeedSection from '/src/js/templates/sections/speed-section.js';
-import AbilityScoresSection from '/src/js/templates/sections/ability-scores-section.js';
+import HeadingSection from '/src/js/components/sections/heading-section.js';
+import ArmorClassSection from '/src/js/components/sections/armor-class-section.js';
+import HitPointsSection from '/src/js/components/sections/hit-points-section.js';
+import SpeedSection from '/src/js/components/sections/speed-section.js';
+import AbilityScoresSection from '/src/js/components/sections/ability-scores-section.js';
 
-import ErrorMessages from '/src/js/templates/elements/error-messages.js';
-import PropertyBlock from '/src/js/templates/elements/property-block.js';
-import PropertyLine from '/src/js/templates/elements/property-line.js';
-import SectionDivider from '/src/js/templates/elements/section-divider.js';
-import TaperedRule from '/src/js/templates/elements/tapered-rule.js';
+import ErrorMessages from '/src/js/components/elements/error-messages.js';
+import PropertyBlock from '/src/js/components/elements/property-block.js';
+import PropertyLine from '/src/js/components/elements/property-line.js';
+import SectionDivider from '/src/js/components/elements/section-divider.js';
+import TaperedRule from '/src/js/components/elements/tapered-rule.js';
 
 async function init() {
   await StatBlock.defineCustomElement();
@@ -30,7 +30,7 @@ async function init() {
   await TaperedRule.defineCustomElement();
 
   let statBlock = new StatBlock( document.querySelector('stat-block') );
-    let topStats = new TopStats( document.querySelector('top-stats') );
+  let topStats = new TopStats( document.querySelector('top-stats') );
 
   let headingSection = new HeadingSection( document.querySelector('heading-section') );
   let armorClassSection = new ArmorClassSection( document.querySelector('armor-class-section') );

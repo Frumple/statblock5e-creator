@@ -1,9 +1,9 @@
 import defineCustomElementFromTemplate from '/src/js/helpers/define-custom-element.js';
 
-export default class StatBlock {
+export default class SectionDivider {
   static async defineCustomElement() {
     await defineCustomElementFromTemplate(
-      'stat-block',
-      'src/templates/stat-block.html');
+      'section-divider',
+      'src/html/elements/section-divider.html');
   }
 }

@@ -8,7 +8,7 @@ export default class HitPointsSection extends sectionModule.Section {
   static async defineCustomElement() {
     await defineCustomElementFromTemplate(
       'hit-points-section',
-      'src/templates/sections/hit-points-section.html');
+      'src/html/sections/hit-points-section.html');
   }
 
   constructor(element) {

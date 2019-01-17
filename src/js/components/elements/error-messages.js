@@ -4,7 +4,7 @@ export default class ErrorMessages {
   static async defineCustomElement() {
     await defineCustomElementFromTemplate(
       'error-messages',
-      'src/templates/elements/error-messages.html');
+      'src/html/elements/error-messages.html');
   }
 
   constructor(element) {

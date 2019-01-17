@@ -8,7 +8,7 @@ export default class AbilityScoresSection extends sectionModule.Section {
   static async defineCustomElement() {
     await defineCustomElementFromTemplate(
       'ability-scores-section',
-      'src/templates/sections/ability-scores-section.html');
+      'src/html/sections/ability-scores-section.html');
   }
 
   constructor(element) {

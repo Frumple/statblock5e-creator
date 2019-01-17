@@ -1,9 +1,9 @@
 import defineCustomElementFromTemplate from '/src/js/helpers/define-custom-element.js';
 
-export default class PropertyBlock {
+export default class TopStats {
   static async defineCustomElement() {
     await defineCustomElementFromTemplate(
-      'property-block',
-      'src/templates/elements/property-block.html');
+      'top-stats',
+      'src/html/top-stats.html');
   }
 }

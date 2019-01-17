@@ -6,7 +6,7 @@ export default class SpeedSection extends sectionModule.Section {
   static async defineCustomElement() {
     await defineCustomElementFromTemplate(
       'speed-section',
-      'src/templates/sections/speed-section.html');
+      'src/html/sections/speed-section.html');
   }
 
   constructor(element) {
