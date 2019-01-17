@@ -3,7 +3,7 @@ import ErrorMessages from '/src/js/templates/elements/error-messages.js';
 export class Section {
   static async defineCustomElement() {
     throw new Error(
-      'The class "' + this.name + '" must implement the defineCustomElement() static method.');
+      `The class '${this.name}' must implement the defineCustomElement() static method.`);
   }
 
   constructor(element, showElements, editElements) {
@@ -70,7 +70,7 @@ export class Section {
 
   save() {
     throw new Error(
-      'The class "' + this.name + '" must implement the save() method.');
+      `The class '${this.name}' must implement the save() method.`);
   }
 }
 

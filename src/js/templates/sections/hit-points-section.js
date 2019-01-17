@@ -1,6 +1,8 @@
 import defineCustomElementFromTemplate from '/src/js/helpers/define-custom-element.js';
 import EnableDisableElementsCheckbox from '/src/js/helpers/enable-disable-elements-checkbox.js';
 import * as sectionModule from '/src/js/helpers/section.js';
+import { getModifierOperator } from '/src/js/helpers/string-format.js';
+import { getModifierValue } from '/src/js/helpers/string-format.js';
 
 export default class HitPointsSection extends sectionModule.Section {
   static async defineCustomElement() {
@@ -55,31 +57,40 @@ export default class HitPointsSection extends sectionModule.Section {
   }
 
   update() {
+    let constitutionHitPointsModifier = parseInt(this.editElements.constitution_hit_points_modifier.textContent);
+
+    this.updateShowSection(constitutionHitPointsModifier);
+    this.updateEditSection(constitutionHitPointsModifier);
+  }
+
+  updateShowSection(constitutionHitPointsModifier) {
     let hitPoints = this.editElements.hit_points.value;
     let useHitDie = this.editElements.use_hit_die.checked;
     let hitDieQuantity = this.editElements.hit_die_quantity.value;
     let hitDieSize = this.editElements.hit_die_size.value;
-    let constitutionHitPointsModifier = parseInt(this.editElements.constitution_hit_points_modifier.textContent);
 
-    let text = hitPoints;
+    let text = '';
     if (useHitDie) {
-      text += ' (' + hitDieQuantity + 'd' + hitDieSize;
-      if (constitutionHitPointsModifier > 0) {
-        text += ' + ' + constitutionHitPointsModifier;
-      } else if (constitutionHitPointsModifier < 0) {
-        text += ' - ' + Math.abs(constitutionHitPointsModifier);
+      if (constitutionHitPointsModifier != 0) {
+        let modifier_operator = getModifierOperator(constitutionHitPointsModifier);
+        let modifier_value = getModifierValue(constitutionHitPointsModifier);
+        text = `${hitPoints} (${hitDieQuantity}d${hitDieSize} ${modifier_operator} ${modifier_value})`;
+      } else {
+        text = `${hitPoints} (${hitDieQuantity}d${hitDieSize})`;
       }
-      text += ')';
-    }
-    this.showElements.text.textContent = text;
-
-    let trailingText = this.editElements.hit_die_trailing_text;
-
-    if (constitutionHitPointsModifier >= 0) {
-      trailingText.textContent = '+ ' + constitutionHitPointsModifier + ' )';
     } else {
-      trailingText.textContent = '- ' + Math.abs(constitutionHitPointsModifier) + ' )';
+      text = hitPoints;
     }
+
+    this.showElements.text.textContent = text;
+  }
+
+  updateEditSection(constitutionHitPointsModifier) {
+    let constitutionHitPointsOperatorElement = this.editElements.constitution_hit_points_operator;
+    let constitutionHitPointsValueElement = this.editElements.constitution_hit_points_value;
+
+    constitutionHitPointsOperatorElement.textContent = getModifierOperator(constitutionHitPointsModifier);
+    constitutionHitPointsValueElement.textContent = getModifierValue(constitutionHitPointsModifier);
   }
 
   save() {
@@ -103,7 +114,8 @@ class HitPointsEditElements extends sectionModule.EditElements {
     this.use_hit_die = shadowRoot.getElementById('use-hit-die-input');
     this.hit_die_quantity = shadowRoot.getElementById('hit-die-quantity-input');
     this.hit_die_size = shadowRoot.getElementById('hit-die-size-input');
-    this.hit_die_trailing_text = shadowRoot.getElementById('hit-die-trailing-text');
+    this.constitution_hit_points_operator = shadowRoot.getElementById('constitution-hit-points-operator');
+    this.constitution_hit_points_value = shadowRoot.getElementById('constitution-hit-points-value');
     this.constitution_hit_points_modifier = shadowRoot.getElementById('constitution-hit-points-modifier');
   }
 }

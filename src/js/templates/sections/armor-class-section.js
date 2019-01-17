@@ -30,9 +30,10 @@ export default class ArmorClassSection extends sectionModule.Section {
     if (useCustom) {
       text = customText;
     } else {
-      text = armorClass;
       if (armorType) {
-        text += ' (' + armorType + ')';
+        text = `${armorClass} (${armorType})`;
+      } else {
+        text = armorClass;
       }
     }
     this.showElements.text.textContent = text;

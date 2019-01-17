@@ -1,6 +1,8 @@
 import defineCustomElementFromTemplate from '/src/js/helpers/define-custom-element.js';
 import AbilityScoreNames from '/src/js/helpers/ability-score-names.js';
 import * as sectionModule from '/src/js/helpers/section.js';
+import { getModifierOperator } from '/src/js/helpers/string-format.js';
+import { getModifierValue } from '/src/js/helpers/string-format.js';
 
 export default class AbilityScoresSection extends sectionModule.Section {
   static async defineCustomElement() {
@@ -55,13 +57,10 @@ export default class AbilityScoresSection extends sectionModule.Section {
       return '';
     }
 
-    if (abilityModifier >= 0) {
-      return `+${abilityModifier}`;
-    }
-    // This is an en dash, NOT a "normal" dash. The minus sign needs to be more
-    // visible.
-    return `–${Math.abs(abilityModifier)}`;
+    let operator = getModifierOperator(abilityModifier);
+    let value = getModifierValue(abilityModifier);
 
+    return `${operator}${value}`;
   }
 
   static calculateAbilityModifier(abilityScore) {
@@ -82,9 +81,6 @@ export default class AbilityScoresSection extends sectionModule.Section {
     let modifierEditElement = this.editElements.modifier[ abilityScoreName ];
     let scoreShowElement = this.showElements.score[ abilityScoreName ];
     let modifierShowElement = this.showElements.modifier[ abilityScoreName ];
-
-    console.log(scoreEditElement.value);
-    console.log(modifierEditElement.textContent);
 
     scoreShowElement.textContent = scoreEditElement.value.toString();
     modifierShowElement.textContent = modifierEditElement.textContent;

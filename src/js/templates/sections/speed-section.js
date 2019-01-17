@@ -34,33 +34,32 @@ export default class SpeedSection extends sectionModule.Section {
     let useCustom = this.editElements.use_custom.checked;
     let customText = this.editElements.custom_text.value;
 
-    let text = "";
+    let text = '';
 
     if (useCustom) {
       text = customText;
     } else {
-      const comma = ', ';
-      const unit = ' ft.';
+      const unit = 'ft.';
 
       if (!walkSpeed) {
         walkSpeed = 0;
       }
-      text += walkSpeed + unit;
+      text += `${walkSpeed} ${unit}`;
 
       if (burrowSpeed) {
-        text += comma + 'burrow ' + burrowSpeed + unit;
+        text += `, burrow ${burrowSpeed} ${unit}`;
       }
       if (climbSpeed) {
-        text += comma + 'climb ' + climbSpeed + unit;
+        text += `, climb ${climbSpeed} ${unit}`;
       }
       if (flySpeed) {
-        text += comma + 'fly ' + flySpeed + unit;
+        text += `, fly ${flySpeed} ${unit}`;
         if (hover) {
           text += ' (hover)';
         }
       }
       if (swimSpeed) {
-        text += comma + 'swim ' + swimSpeed + unit;
+        text += `, swim ${swimSpeed} ${unit}`;
       }
     }
 
