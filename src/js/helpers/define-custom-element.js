@@ -1,18 +1,20 @@
 export default async function defineCustomElementFromTemplate(
   name,
   templatePath,
-  elementClass = null) {
+  elementClass = null,
+  options = null) {
 
   await fetch(templatePath)
     .then(stream => stream.text())
     .then(htmlContent =>
-      defineCustomElementFromHtmlContent(name, htmlContent, elementClass));
+      defineCustomElementFromHtmlContent(name, htmlContent, elementClass, options));
 }
 
 function defineCustomElementFromHtmlContent(
   name,
   htmlContent,
-  elementClass = null) {
+  elementClass = null,
+  options = null) {
 
   let contentNode =
     document.createRange().createContextualFragment(htmlContent);
@@ -28,6 +30,6 @@ function defineCustomElementFromHtmlContent(
       }
     )
   } else {
-    customElements.define(name, elementClass(contentNode));
+    customElements.define(name, elementClass(contentNode), options);
   }
 }

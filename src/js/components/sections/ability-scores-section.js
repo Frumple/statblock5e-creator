@@ -45,7 +45,7 @@ export default class AbilityScoresSection extends sectionModule.Section {
     let scoreElement = this.editElements.score[ abilityScoreName ];
     let modifierElement = this.editElements.modifier[ abilityScoreName ];
 
-    let score = parseInt(scoreElement.value);
+    let score = parseInt(scoreElement.value, 10);
     let modifier = AbilityScoresSection.calculateAbilityModifier(score);
     let formattedModifier = AbilityScoresSection.formatAbilityModifier(modifier);
 
@@ -54,13 +54,13 @@ export default class AbilityScoresSection extends sectionModule.Section {
 
   static formatAbilityModifier(abilityModifier) {
     if (isNaN(abilityModifier)) {
-      return '';
+      return '()';
     }
 
     let operator = getModifierOperator(abilityModifier);
     let value = getModifierValue(abilityModifier);
 
-    return `${operator}${value}`;
+    return `(${operator}${value})`;
   }
 
   static calculateAbilityModifier(abilityScore) {

@@ -57,7 +57,7 @@
 <div id="edit-section" class="section section_hidden">
   <div class="armor-class-edit-section">
     <label id="armor-class-label" class="armor-class-section__armor-class-label section__header-label" for="armor-class-input">Armor Class:</label>
-    <input id="armor-class-input" class="armor-class-edit-section__armor-class-input" type="number" name="armor-class" value="10" min="0" />
+    <input id="armor-class-input" class="armor-class-edit-section__armor-class-input" is="numeric-input" type="number" name="armor-class" value="10" min="0" max="999" />
     <label id="armor-type-label" class="armor-class-edit-section__armor-type-label" for="armor-type-input">Armor Type:</label>
     <input id="armor-type-input" class="armor-class-edit-section__armor-type-input" type="text" name="armor-type" list="armor-type-list" />
     <datalist id="armor-type-list">

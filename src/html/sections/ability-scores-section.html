@@ -49,7 +49,17 @@
     grid-area: 1 / 6;
   }
 
-  .ability-scores-section__score-values {
+  .ability-scores-show-section__score-values {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+
+  .ability-scores-show-section__score-show {
+    margin-right: 0.33em;
+  }
+
+  .ability-scores-edit-section__score-values {
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
@@ -101,68 +111,68 @@
     <label class="ability-scores-section__score-label ability-scores-section__intelligence-label">INT</label>
     <label class="ability-scores-section__score-label ability-scores-section__wisdom-label">WIS</label>
     <label class="ability-scores-section__score-label ability-scores-section__charisma-label">CHA</label>
-    <span class="ability-scores-section__strength-values">
-      <span id="strength-score-show">10</span>
-      (<span id="strength-modifier-show">+0</span>)
-    </span>
-    <span class="ability-scores-section__dexterity-values">
-      <span id="dexterity-score-show">10</span>
-      (<span id="dexterity-modifier-show">+0</span>)
-    </span>
-    <span class="ability-scores-section__constitution-values">
-      <span id="constitution-score-show">10</span>
-      (<span id="constitution-modifier-show">+0</span>)
-    </span>
-    <span class="ability-scores-section__intelligence-values">
-      <span id="intelligence-score-show">10</span>
-      (<span id="intelligence-modifier-show">+0</span>)
-    </span>
-    <span class="ability-scores-section__wisdom-values">
-      <span id="wisdom-score-show">10</span>
-      (<span id="wisdom-modifier-show">+0</span>)
-    </span>
-    <span class="ability-scores-section__charisma-values">
-      <span id="charisma-score-show">10</span>
-      (<span id="charisma-modifier-show">+0</span>)
-    </span>
+    <label class="ability-scores-show-section__score-values ability-scores-section__strength-values">
+      <span id="strength-score-show" class="ability-scores-show-section__score-show">10</span>
+      <span id="strength-modifier-show">(+0)</span>
+    </label>
+    <label class="ability-scores-show-section__score-values ability-scores-section__dexterity-values">
+      <span id="dexterity-score-show" class="ability-scores-show-section__score-show">10</span>
+      <span id="dexterity-modifier-show">(+0)</span>
+    </label>
+    <label class="ability-scores-show-section__score-values ability-scores-section__constitution-values">
+      <span id="constitution-score-show" class="ability-scores-show-section__score-show">10</span>
+      <span id="constitution-modifier-show">(+0)</span>
+    </label>
+    <label class="ability-scores-show-section__score-values ability-scores-section__intelligence-values">
+      <span id="intelligence-score-show" class="ability-scores-show-section__score-show">10</span>
+      <span id="intelligence-modifier-show">(+0)</span>
+    </label>
+    <label class="ability-scores-show-section__score-values ability-scores-section__wisdom-values">
+      <span id="wisdom-score-show" class="ability-scores-show-section__score-show">10</span>
+      <span id="wisdom-modifier-show">(+0)</span>
+    </label>
+    <label class="ability-scores-show-section__score-values ability-scores-section__charisma-values">
+      <span id="charisma-score-show" class="ability-scores-show-section__score-show">10</span>
+      <span id="charisma-modifier-show">(+0)</span>
+    </label>
   </div>
   <button id="edit-action" class="section__action section__action_hidden">Edit</button>
 </div>
 
 <div id="edit-section" class="section section_hidden">
   <div class="ability-scores-edit-section">
-    <label class="ability-scores-section__score-label ability-scores-section__strength-label">STR</label>
-    <label class="ability-scores-section__score-label ability-scores-section__dexterity-label">DEX</label>
-    <label class="ability-scores-section__score-label ability-scores-section__constitution-label">CON</label>
-    <label class="ability-scores-section__score-label ability-scores-section__intelligence-label">INT</label>
-    <label class="ability-scores-section__score-label ability-scores-section__wisdom-label">WIS</label>
-    <label class="ability-scores-section__score-label ability-scores-section__charisma-label">CHA</label>
-    <span class="ability-scores-section__score-values ability-scores-section__strength-values">
-      <input id="strength-score-edit" name="strength-score" type="number" value="10" min="1" max="99"></input>
-      (<span id="strength-modifier-edit">+0</span>)
-    </span>
-    <span class="ability-scores-section__score-values ability-scores-section__dexterity-values">
-      <input id="dexterity-score-edit" name="dexterity-score" type="number" value="10" min="1" max="99"></input>
-      (<span id="dexterity-modifier-edit">+0</span>)
-    </span>
-    <span class="ability-scores-section__score-values ability-scores-section__constitution-values">
-      <input id="constitution-score-edit" name="constitution-score" type="number" value="10" min="1" max="99"></input>
-      (<span id="constitution-modifier-edit">+0</span>)
-    </span>
-    <span class="ability-scores-section__score-values ability-scores-section__intelligence-values">
-      <input id="intelligence-score-edit" name="intelligence-score" type="number" value="10" min="1" max="99"></input>
-      (<span id="intelligence-modifier-edit">+0</span>)
-    </span>
-    <span class="ability-scores-section__score-values ability-scores-section__wisdom-values">
-      <input id="wisdom-score-edit" name="wisdom-score" type="number" value="10" min="1" max="99"></input>
-      (<span id="wisdom-modifier-edit">+0</span>)
-    </span>
-    <span class="ability-scores-section__score-values ability-scores-section__charisma-values">
-      <input id="charisma-score-edit" name="charisma-score" type="number" value="10" min="1" max="99"></input>
-      (<span id="charisma-modifier-edit">+0</span>)
-    </span>
+    <label class="ability-scores-section__score-label ability-scores-section__strength-label" for="strength-score-edit">STR</label>
+    <label class="ability-scores-section__score-label ability-scores-section__dexterity-label" for="dexterity-score-edit">DEX</label>
+    <label class="ability-scores-section__score-label ability-scores-section__constitution-label" for="constitution-score-edit">CON</label>
+    <label class="ability-scores-section__score-label ability-scores-section__intelligence-label" for="intelligence-score-edit">INT</label>
+    <label class="ability-scores-section__score-label ability-scores-section__wisdom-label" for="wisdom-score-edit">WIS</label>
+    <label class="ability-scores-section__score-label ability-scores-section__charisma-label" for="charisma-score-edit">CHA</label>
+    <label class="ability-scores-edit-section__score-values ability-scores-section__strength-values">
+      <input id="strength-score-edit" name="strength-score" is="numeric-input" type="number" value="10" min="1" max="999"></input>
+      <span id="strength-modifier-edit">(+0)</span>
+    </label>
+    <label class="ability-scores-edit-section__score-values ability-scores-section__dexterity-values">
+      <input id="dexterity-score-edit" name="dexterity-score" is="numeric-input" type="number" value="10" min="1" max="999"></input>
+      <span id="dexterity-modifier-edit">(+0)</span>
+    </label>
+    <label class="ability-scores-edit-section__score-values ability-scores-section__constitution-values">
+      <input id="constitution-score-edit" name="constitution-score" is="numeric-input" type="number" value="10" min="1" max="999"></input>
+      <span id="constitution-modifier-edit">(+0)</span>
+    </label>
+    <label class="ability-scores-edit-section__score-values ability-scores-section__intelligence-values">
+      <input id="intelligence-score-edit" name="intelligence-score" is="numeric-input" type="number" value="10" min="1" max="999"></input>
+      <span id="intelligence-modifier-edit">(+0)</span>
+    </label>
+    <label class="ability-scores-edit-section__score-values ability-scores-section__wisdom-values">
+      <input id="wisdom-score-edit" name="wisdom-score" is="numeric-input" type="number" value="10" min="1" max="999"></input>
+      <span id="wisdom-modifier-edit">(+0)</span>
+    </label>
+    <label class="ability-scores-edit-section__score-values ability-scores-section__charisma-values">
+      <input id="charisma-score-edit" name="charisma-score" is="numeric-input" type="number" value="10" min="1" max="999"></input>
+      <span id="charisma-modifier-edit">(+0)</span>
+    </label>
     <label id="proficiency-bonus-label" class="ability-scores-section__proficiency-bonus-label" for="proficiency-bonus-input">Proficiency Bonus:</label>
-    <input id="proficiency-bonus-input" class="ability-scores-section__proficiency-bonus-input" name="proficiency-bonus" type="number" value="2"></input>
+    <input id="proficiency-bonus-input" class="ability-scores-section__proficiency-bonus-input" is="numeric-input" name="proficiency-bonus" type="number" value="2" min="-999" max="999"></input>
   </div>
   <button id="save-action" class="section__action section__save-action" name="ability-scores-save">Save</button>
 </div>

@@ -46,7 +46,7 @@ export default class HitPointsSection extends sectionModule.Section {
     if(useHitDie) {
       let hitDieQuantity = this.editElements.hit_die_quantity.value;
       let hitDieSize = this.editElements.hit_die_size.value;
-      let constitutionHitPointsModifier = parseInt(this.editElements.constitution_hit_points_modifier.textContent);
+      let constitutionHitPointsModifier = parseInt(this.editElements.constitution_hit_points_modifier.textContent, 10);
 
       let hitDieAverage = (hitDieSize / 2) + 0.5;
       let hitPoints = Math.floor(hitDieQuantity * hitDieAverage) + constitutionHitPointsModifier;
@@ -57,7 +57,7 @@ export default class HitPointsSection extends sectionModule.Section {
   }
 
   update() {
-    let constitutionHitPointsModifier = parseInt(this.editElements.constitution_hit_points_modifier.textContent);
+    let constitutionHitPointsModifier = parseInt(this.editElements.constitution_hit_points_modifier.textContent, 10);
 
     this.updateShowSection(constitutionHitPointsModifier);
     this.updateEditSection(constitutionHitPointsModifier);
