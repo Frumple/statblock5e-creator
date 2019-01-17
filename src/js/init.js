@@ -8,8 +8,8 @@ import SpeedSection from '/src/js/components/sections/speed-section.js';
 import AbilityScoresSection from '/src/js/components/sections/ability-scores-section.js';
 
 import ErrorMessages from '/src/js/components/elements/error-messages.js';
-import NumericInput from '/src/js/components/elements/numeric-input.js';
-import TextInput from '/src/js/components/elements/text-input.js';
+import NumericInput from '/src/js/components/extensions/number-input.js';
+import TextInput from '/src/js/components/extensions/text-input.js';
 import PropertyBlock from '/src/js/components/elements/property-block.js';
 import PropertyLine from '/src/js/components/elements/property-line.js';
 import SectionDivider from '/src/js/components/elements/section-divider.js';

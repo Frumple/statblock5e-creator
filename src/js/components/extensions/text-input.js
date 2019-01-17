@@ -4,7 +4,7 @@ export default class TextInput {
   static async defineCustomElement() {
     await defineCustomElementFromTemplate(
       'text-input',
-      'src/html/elements/text-input.html',
+      'src/html/extensions/text-input.html',
       TextInput.elementClass,
       { extends: 'input' });
   }

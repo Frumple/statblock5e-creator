@@ -3,8 +3,8 @@ import defineCustomElementFromTemplate from '/src/js/helpers/define-custom-eleme
 export default class NumericInput {
   static async defineCustomElement() {
     await defineCustomElementFromTemplate(
-      'numeric-input',
-      'src/html/elements/numeric-input.html',
+      'number-input',
+      'src/html/extensions/number-input.html',
       NumericInput.elementClass,
       { extends: 'input' });
   }
