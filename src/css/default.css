@@ -63,6 +63,7 @@ input[type="text"] {
   font-size: 13.5px;
   font-weight: bold;
   text-decoration: underline;
+  margin-left: 10px;
   cursor: pointer;
 }
 
@@ -71,8 +72,7 @@ input[type="text"] {
 }
 
 .section__save-action {
-  border: 1px solid silver;
-  margin-left: 10px;
+  border: 1px solid silver;  
 }
 
 .section__save-action:hover {

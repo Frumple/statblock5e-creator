@@ -1,31 +1,170 @@
+<link href='src/css/default.css' rel='stylesheet' type='text/css'>
+
 <style>
-  table {
+  .ability-scores-show-section {
+    display: grid;
+    grid-template-columns: auto auto auto auto auto auto;
+    grid-template-rows: auto auto;
+    grid-column-gap: 5px;
+    justify-items: center;
+    align-items: center;
     width: 100%;
-    border: 0px;
-    border-collapse: collapse;
   }
-  th, td {
-    width: 50px;
-    text-align: center;
+
+  .ability-scores-edit-section {
+    display: grid;
+    grid-template-columns: auto auto auto auto auto auto;
+    grid-template-rows: auto auto 5px auto;
+    grid-column-gap: 5px;
+    justify-items: center;
+    align-items: center;
+    width: 100%;
+  }
+
+  .ability-scores-section__score-label {
+    font-weight: bold;
+  }
+
+  .ability-scores-section__strength-label {
+    grid-area: 1 / 1;
+  }
+
+  .ability-scores-section__dexterity-label {
+    grid-area: 1 / 2;
+  }
+
+  .ability-scores-section__constitution-label {
+    grid-area: 1 / 3;
+  }
+
+  .ability-scores-section__intelligence-label {
+    grid-area: 1 / 4;
+  }
+
+  .ability-scores-section__wisdom-label {
+    grid-area: 1 / 5;
+  }
+
+  .ability-scores-section__charisma-label {
+    grid-area: 1 / 6;
+  }
+
+  .ability-scores-section__score-values {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    width: 40px;
+  }
+
+  .ability-scores-section__strength-values {
+    grid-area: 2 / 1;
+  }
+
+  .ability-scores-section__dexterity-values {
+    grid-area: 2 / 2;
+  }
+
+  .ability-scores-section__constitution-values {
+    grid-area: 2 / 3;
+  }
+
+  .ability-scores-section__intelligence-values {
+    grid-area: 2 / 4;
+  }
+
+  .ability-scores-section__wisdom-values {
+    grid-area: 2 / 5;
+  }
+
+  .ability-scores-section__charisma-values {
+    grid-area: 2 / 6;
+  }
+
+  .ability-scores-section__proficiency-bonus-label {
+    grid-area: 4 / 2 / 5 / 5;
+  }
+
+  .ability-scores-section__proficiency-bonus-input {
+    grid-area: 4 / 5;
   }
 </style>
+
 <tapered-rule></tapered-rule>
-<table>
-  <tr>
-    <th>STR</th>
-    <th>DEX</th>
-    <th>CON</th>
-    <th>INT</th>
-    <th>WIS</th>
-    <th>CHA</th>
-  </tr>
-  <tr>
-    <td id="str"></td>
-    <td id="dex"></td>
-    <td id="con"></td>
-    <td id="int"></td>
-    <td id="wis"></td>
-    <td id="cha"></td>
-  </tr>
-</table>
+
+<error-messages></error-messages>
+
+<div id="show-section" class="section section_selectable">
+  <div class="ability-scores-show-section">
+    <label class="ability-scores-section__score-label ability-scores-section__strength-label">STR</label>
+    <label class="ability-scores-section__score-label ability-scores-section__dexterity-label">DEX</label>
+    <label class="ability-scores-section__score-label ability-scores-section__constitution-label">CON</label>
+    <label class="ability-scores-section__score-label ability-scores-section__intelligence-label">INT</label>
+    <label class="ability-scores-section__score-label ability-scores-section__wisdom-label">WIS</label>
+    <label class="ability-scores-section__score-label ability-scores-section__charisma-label">CHA</label>
+    <span class="ability-scores-section__strength-values">
+      <span id="strength-score-show">10</span>
+      (<span id="strength-modifier-show">+0</span>)
+    </span>
+    <span class="ability-scores-section__dexterity-values">
+      <span id="dexterity-score-show">10</span>
+      (<span id="dexterity-modifier-show">+0</span>)
+    </span>
+    <span class="ability-scores-section__constitution-values">
+      <span id="constitution-score-show">10</span>
+      (<span id="constitution-modifier-show">+0</span>)
+    </span>
+    <span class="ability-scores-section__intelligence-values">
+      <span id="intelligence-score-show">10</span>
+      (<span id="intelligence-modifier-show">+0</span>)
+    </span>
+    <span class="ability-scores-section__wisdom-values">
+      <span id="wisdom-score-show">10</span>
+      (<span id="wisdom-modifier-show">+0</span>)
+    </span>
+    <span class="ability-scores-section__charisma-values">
+      <span id="charisma-score-show">10</span>
+      (<span id="charisma-modifier-show">+0</span>)
+    </span>
+  </div>
+  <button id="edit-action" class="section__action section__action_hidden">Edit</button>
+</div>
+
+<div id="edit-section" class="section section_hidden">
+  <div class="ability-scores-edit-section">
+    <label class="ability-scores-section__score-label ability-scores-section__strength-label">STR</label>
+    <label class="ability-scores-section__score-label ability-scores-section__dexterity-label">DEX</label>
+    <label class="ability-scores-section__score-label ability-scores-section__constitution-label">CON</label>
+    <label class="ability-scores-section__score-label ability-scores-section__intelligence-label">INT</label>
+    <label class="ability-scores-section__score-label ability-scores-section__wisdom-label">WIS</label>
+    <label class="ability-scores-section__score-label ability-scores-section__charisma-label">CHA</label>
+    <span class="ability-scores-section__score-values ability-scores-section__strength-values">
+      <input id="strength-score-edit" name="strength-score" type="number" value="10" min="1" max="99"></input>
+      (<span id="strength-modifier-edit">+0</span>)
+    </span>
+    <span class="ability-scores-section__score-values ability-scores-section__dexterity-values">
+      <input id="dexterity-score-edit" name="dexterity-score" type="number" value="10" min="1" max="99"></input>
+      (<span id="dexterity-modifier-edit">+0</span>)
+    </span>
+    <span class="ability-scores-section__score-values ability-scores-section__constitution-values">
+      <input id="constitution-score-edit" name="constitution-score" type="number" value="10" min="1" max="99"></input>
+      (<span id="constitution-modifier-edit">+0</span>)
+    </span>
+    <span class="ability-scores-section__score-values ability-scores-section__intelligence-values">
+      <input id="intelligence-score-edit" name="intelligence-score" type="number" value="10" min="1" max="99"></input>
+      (<span id="intelligence-modifier-edit">+0</span>)
+    </span>
+    <span class="ability-scores-section__score-values ability-scores-section__wisdom-values">
+      <input id="wisdom-score-edit" name="wisdom-score" type="number" value="10" min="1" max="99"></input>
+      (<span id="wisdom-modifier-edit">+0</span>)
+    </span>
+    <span class="ability-scores-section__score-values ability-scores-section__charisma-values">
+      <input id="charisma-score-edit" name="charisma-score" type="number" value="10" min="1" max="99"></input>
+      (<span id="charisma-modifier-edit">+0</span>)
+    </span>
+    <label id="proficiency-bonus-label" class="ability-scores-section__proficiency-bonus-label" for="proficiency-bonus-input">Proficiency Bonus:</label>
+    <input id="proficiency-bonus-input" class="ability-scores-section__proficiency-bonus-input" name="proficiency-bonus" type="number" value="2"></input>
+  </div>
+  <button id="save-action" class="section__action section__save-action" name="ability-scores-save">Save</button>
+</div>
+
 <tapered-rule></tapered-rule>

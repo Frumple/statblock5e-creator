@@ -30,11 +30,13 @@ async function init() {
   await TaperedRule.defineCustomElement();
 
   let statBlock = new StatBlock( document.querySelector('stat-block') );
+    let topStats = new TopStats( document.querySelector('top-stats') );
+
   let headingSection = new HeadingSection( document.querySelector('heading-section') );
-  let topStats = new TopStats( document.querySelector('top-stats') );
   let armorClassSection = new ArmorClassSection( document.querySelector('armor-class-section') );
   let hitPointsSection = new HitPointsSection( document.querySelector('hit-points-section') );
   let speedSection = new SpeedSection( document.querySelector('speed-section') );
+  let abilityScoresSection = new AbilityScoresSection( document.querySelector('ability-scores-section') );
 }
 
 init();
