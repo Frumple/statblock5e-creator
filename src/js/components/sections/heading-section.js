@@ -16,13 +16,6 @@ export default class HeadingSection extends sectionModule.Section {
     this.showElements.section.addEventListener('click', () => {
       this.editElements.title.select();
     });
-
-    this.editElements.title.addEventListener('keydown', (event) => {
-      if (event.key === "Enter") {
-        event.preventDefault();
-        this.save();
-      }
-    });
   }
 
   save() {

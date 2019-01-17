@@ -29,6 +29,10 @@ export class Section {
     this.editElements.save_action.addEventListener('click', () => {
       this.save();
     });
+
+    this.editElements.section.addEventListener('saveSection', () => {
+      this.save();
+    });
   }
 
   switchToShowMode() {

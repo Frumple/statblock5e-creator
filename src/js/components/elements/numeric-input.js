@@ -32,5 +32,14 @@ class NumericInputElement extends HTMLInputElement {
         }
       }
     });
+
+    this.addEventListener('keydown', (keyEvent) => {
+      if (keyEvent.key === "Enter") {
+        keyEvent.preventDefault();
+
+        let saveEvent = new Event('saveSection', { bubbles: true });
+        this.dispatchEvent(saveEvent);
+      }
+    });
   }
 }
