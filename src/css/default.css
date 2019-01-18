@@ -57,6 +57,7 @@ input[type="text"] {
   all: initial;
   display: flex;
   align-items: center;
+  width: 30px;
   padding-left: 10px;
   padding-right: 10px;
   font-family: inherit;
@@ -72,7 +73,7 @@ input[type="text"] {
 }
 
 .section__save-action {
-  border: 1px solid silver;  
+  border: 1px solid silver;
 }
 
 .section__save-action:hover {

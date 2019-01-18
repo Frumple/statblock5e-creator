@@ -1,17 +1,24 @@
 <style>
   :host {
-    display: flex;
-    width: 100%;
+    display: block;
     line-height: 1.4;
+    text-indent: -1em;
+    padding-left: 1em;
   }
 
   ::slotted(h4) {
+    display: inline;
     font-weight: bold;
     margin: 0;
   }
 
+  ::slotted(p:first-of-type) {
+    display: inline;
+    text-indent: 0;
+  }
+
   ::slotted(p) {
-    text-indent: 0.33em;
+    text-indent: 1em;
     margin: 0;
   }
 </style>
