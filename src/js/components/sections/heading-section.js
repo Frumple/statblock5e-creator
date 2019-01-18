@@ -19,18 +19,8 @@ export default class HeadingSection extends sectionModule.Section {
   }
 
   checkForErrors() {
-    let title = this.editElements.title.value;
-    let type = this.editElements.type.value;
-
-    if (title === "") {
-      this.error_messages.add(this.editElements.title,
-        'Creature Name cannot be blank.');
-    }
-
-    if (type === "") {
-      this.error_messages.add(this.editElements.type,
-        'Creature Type cannot be blank.');
-    }
+    this.editElements.title.validateForEmpty(this.error_messages);
+    this.editElements.type.validateForEmpty(this.error_messages);
   }
 
   update() {
