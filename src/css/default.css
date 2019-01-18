@@ -19,14 +19,20 @@ input[type="text"] {
   display: block;
   height: 0;
   opacity: 0;
-  transition: opacity var(--section-transition-duration) ease-in 0ms, height 0ms linear var(--section-transition-duration);
+  visibility: hidden;
+  transition: opacity var(--section-transition-duration) ease-in 0ms,
+              height 0ms linear var(--section-transition-duration),
+              visibility 0ms linear var(--section-transition-duration);
 }
 
 .section-divider_visible-for-previous,
 .section-divider_visible-for-next {
   height: 100%;
   opacity: 1;
-  transition: opacity var(--section-transition-duration) ease-out var(--section-transition-duration), height 0ms linear var(--section-transition-duration);
+  visibility: visible;
+  transition: opacity var(--section-transition-duration) ease-out var(--section-transition-duration),
+              height 0ms linear var(--section-transition-duration),
+              visibility 0ms linear var(--section-transition-duration);
 }
 
 .section {
@@ -35,7 +41,10 @@ input[type="text"] {
   overflow: hidden;
   height: 100%;
   opacity: 1;
-  transition: opacity var(--section-transition-duration) ease-out var(--section-transition-duration), height 0ms linear var(--section-transition-duration);
+  visibility: visible;
+  transition: opacity var(--section-transition-duration) ease-out var(--section-transition-duration),
+              height 0ms linear var(--section-transition-duration),
+              visibility 0ms linear var(--section-transition-duration);
 }
 
 .section_selectable:hover {
@@ -46,7 +55,10 @@ input[type="text"] {
 .section_hidden {
   height: 0;
   opacity: 0;
-  transition: opacity var(--section-transition-duration) ease-in 0ms, height 0ms linear var(--section-transition-duration);
+  visibility: hidden;
+  transition: opacity var(--section-transition-duration) ease-in 0ms,
+              height 0ms linear var(--section-transition-duration),
+              visibility 0ms linear var(--section-transition-duration);
 }
 
 .section__header-label {
