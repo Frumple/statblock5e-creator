@@ -26,6 +26,10 @@ export class Section {
       this.switchToEditMode();
     });
 
+    this.showElements.edit_action.addEventListener('click', () => {
+      this.switchToEditMode();
+    });
+
     this.editElements.save_action.addEventListener('click', () => {
       this.save();
     });
@@ -72,9 +76,24 @@ export class Section {
     }
   }
 
-  save() {
+  checkForErrors() {
     throw new Error(
-      `The class '${this.name}' must implement the save() method.`);
+      `The class '${this.name}' must implement the checkForErrors() method.`);
+  }
+
+  update() {
+    throw new Error(
+      `The class '${this.name}' must implement the update() method.`);
+  }
+
+  save() {
+    this.error_messages.clear();
+    this.checkForErrors();
+    if (this.error_messages.any()) {
+      return;
+    }
+    this.update();
+    this.switchToShowMode();
   }
 }
 

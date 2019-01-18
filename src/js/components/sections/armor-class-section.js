@@ -20,7 +20,11 @@ export default class ArmorClassSection extends sectionModule.Section {
     checkbox.enableElementWhenChecked(this.editElements.custom_text);
   }
 
-  save() {
+  checkForErrors() {
+    this.editElements.armor_class.validate(this.error_messages);
+  }
+
+  update() {
     let armorClass = this.editElements.armor_class.value;
     let armorType = this.editElements.armor_type.value;
     let useCustom = this.editElements.use_custom.checked;
@@ -37,7 +41,6 @@ export default class ArmorClassSection extends sectionModule.Section {
       }
     }
     this.showElements.text.textContent = text;
-    this.switchToShowMode();
   }
 }
 

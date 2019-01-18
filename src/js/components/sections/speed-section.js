@@ -24,7 +24,11 @@ export default class SpeedSection extends sectionModule.Section {
     checkbox.enableElementWhenChecked(this.editElements.custom_text);
   }
 
-  save() {
+  checkForErrors() {
+
+  }
+
+  update() {
     let walkSpeed = this.editElements.walk.value;
     let burrowSpeed = this.editElements.burrow.value;
     let climbSpeed = this.editElements.climb.value;
@@ -64,7 +68,6 @@ export default class SpeedSection extends sectionModule.Section {
     }
 
     this.showElements.text.textContent = text;
-    this.switchToShowMode();
   }
 }
 

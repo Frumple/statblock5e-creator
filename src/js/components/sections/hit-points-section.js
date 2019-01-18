@@ -56,6 +56,11 @@ export default class HitPointsSection extends sectionModule.Section {
     }
   }
 
+  checkForErrors() {
+    this.editElements.hit_points.validate(this.error_messages);
+    this.editElements.hit_die_quantity.validate(this.error_messages);
+  }
+
   update() {
     let constitutionHitPointsModifier = parseInt(this.editElements.constitution_hit_points_modifier.textContent, 10);
 
@@ -95,8 +100,7 @@ export default class HitPointsSection extends sectionModule.Section {
 
   save() {
     this.calculateHitPointsFromHitDie();
-    this.update();
-    this.switchToShowMode();
+    super.save();
   }
 }
 

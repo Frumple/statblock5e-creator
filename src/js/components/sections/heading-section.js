@@ -18,34 +18,33 @@ export default class HeadingSection extends sectionModule.Section {
     });
   }
 
-  save() {
+  checkForErrors() {
+    let title = this.editElements.title.value;
+    let type = this.editElements.type.value;
+
+    if (title === "") {
+      this.error_messages.add(this.editElements.title,
+        'Creature Name cannot be blank.');
+    }
+
+    if (type === "") {
+      this.error_messages.add(this.editElements.type,
+        'Creature Type cannot be blank.');
+    }
+  }
+
+  update() {
     let title = this.editElements.title.value;
     let size = this.editElements.size.value;
     let type = this.editElements.type.value;
     let alignment = this.editElements.alignment.value;
 
-    this.error_messages.clear();
-
-    if (title === "") {
-      this.error_messages.add(this.editElements.title, 'Creature name cannot be blank.');
-    }
-
-    if (type === "") {
-      this.error_messages.add(this.editElements.type, 'Creature type cannot be blank.');
-    }
-
-    if (this.error_messages.any()) {
-      return;
-    }
-
     title = HeadingSection.capitalizeFirstLetter(title);
     this.editElements.title.value = title;
     this.showElements.title.textContent = title;
 
-    let subtitle = size + " " + type + ", " + alignment;
+    let subtitle = `${size} ${type}, ${alignment}`;
     this.showElements.subtitle.textContent = subtitle;
-
-    this.switchToShowMode();
   }
 
   static capitalizeFirstLetter(string) {

@@ -42,4 +42,13 @@ class NumericInputElement extends HTMLInputElement {
       }
     });
   }
+
+  validate(error_messages) {
+    if (!this.value) {
+      let pretty_name = this.getAttribute('pretty-name');
+      let field_name = pretty_name ? pretty_name : this.name;
+      error_messages.add(this,
+        `${field_name} must be a valid integer.`);
+    }
+  }
 }

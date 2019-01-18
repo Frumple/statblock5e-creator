@@ -68,12 +68,17 @@ export default class AbilityScoresSection extends sectionModule.Section {
     return Math.floor((score - 10) / 2);
   }
 
-  save() {
+  checkForErrors() {
+    Object.entries(AbilityScoreNames).forEach( ([key, value]) => {
+      this.editElements.score[ value ].validate(this.error_messages);
+    });
+    this.editElements.proficiency_bonus.validate(this.error_messages);
+  }
+
+  update() {
     Object.entries(AbilityScoreNames).forEach( ([key, value]) => {
       this.saveAbilityScore(value);
     });
-
-    this.switchToShowMode();
   }
 
   saveAbilityScore(abilityScoreName) {
