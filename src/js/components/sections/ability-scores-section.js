@@ -1,8 +1,8 @@
 import defineCustomElementFromTemplate from '/src/js/helpers/define-custom-element.js';
 import AbilityScoreNames from '/src/js/helpers/ability-score-names.js';
-import * as sectionModule from '/src/js/helpers/section.js';
+import * as sectionModule from '/src/js/components/base/section.js';
 import { getModifierOperator } from '/src/js/helpers/string-format.js';
-import { getModifierValue } from '/src/js/helpers/string-format.js';
+import { getModifierNumber } from '/src/js/helpers/string-format.js';
 
 export default class AbilityScoresSection extends sectionModule.Section {
   static async defineCustomElement() {
@@ -17,38 +17,54 @@ export default class AbilityScoresSection extends sectionModule.Section {
           new AbilityScoresEditElements(element.shadowRoot));
 
     this.editElements.score[ AbilityScoreNames.STRENGTH ].addEventListener('input', () => {
-      this.updateEditModeModifier( AbilityScoreNames.STRENGTH );
+      this.onAbilityScoreChange( AbilityScoreNames.STRENGTH );
     });
 
     this.editElements.score[ AbilityScoreNames.DEXTERITY ].addEventListener('input', () => {
-      this.updateEditModeModifier( AbilityScoreNames.DEXTERITY );
+      this.onAbilityScoreChange( AbilityScoreNames.DEXTERITY );
     });
 
     this.editElements.score[ AbilityScoreNames.CONSTITUTION ].addEventListener('input', () => {
-      this.updateEditModeModifier( AbilityScoreNames.CONSTITUTION );
+      this.onAbilityScoreChange( AbilityScoreNames.CONSTITUTION );
     });
 
     this.editElements.score[ AbilityScoreNames.INTELLIGENCE ].addEventListener('input', () => {
-      this.updateEditModeModifier( AbilityScoreNames.INTELLIGENCE );
+      this.onAbilityScoreChange( AbilityScoreNames.INTELLIGENCE );
     });
 
     this.editElements.score[ AbilityScoreNames.WISDOM ].addEventListener('input', () => {
-      this.updateEditModeModifier( AbilityScoreNames.WISDOM );
+      this.onAbilityScoreChange( AbilityScoreNames.WISDOM );
     });
 
     this.editElements.score[ AbilityScoreNames.CHARISMA ].addEventListener('input', () => {
-      this.updateEditModeModifier( AbilityScoreNames.CHARISMA );
+      this.onAbilityScoreChange( AbilityScoreNames.CHARISMA );
     });
   }
 
-  updateEditModeModifier(abilityScoreName) {
-    let scoreElement = this.editElements.score[ abilityScoreName ];
-    let modifierElement = this.editElements.modifier[ abilityScoreName ];
-
+  onAbilityScoreChange(abilityScoreName) {
+    let scoreElement = this.editElements.score[abilityScoreName];
     let score = parseInt(scoreElement.value, 10);
     let modifier = AbilityScoresSection.calculateAbilityModifier(score);
-    let formattedModifier = AbilityScoresSection.formatAbilityModifier(modifier);
 
+    this.updateEditModeModifier(abilityScoreName, modifier);
+
+    if (score) {
+      let changeEvent = new CustomEvent('abilityScoreChanged', {
+        bubbles: true,
+        composed: true,
+        detail: {
+          abilityScoreName: abilityScoreName,
+          abilityScore: score,
+          abilityModifier: modifier
+        }
+      });
+      this.element.dispatchEvent(changeEvent);
+    }
+  }
+
+  updateEditModeModifier(abilityScoreName, abilityModifier) {
+    let modifierElement = this.editElements.modifier[ abilityScoreName ];
+    let formattedModifier = AbilityScoresSection.formatAbilityModifier(abilityModifier);
     modifierElement.textContent = formattedModifier;
   }
 
@@ -58,9 +74,9 @@ export default class AbilityScoresSection extends sectionModule.Section {
     }
 
     let operator = getModifierOperator(abilityModifier);
-    let value = getModifierValue(abilityModifier);
+    let number = getModifierNumber(abilityModifier);
 
-    return `(${operator}${value})`;
+    return `(${operator}${number})`;
   }
 
   static calculateAbilityModifier(abilityScore) {

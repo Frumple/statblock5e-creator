@@ -1,6 +1,7 @@
 import defineCustomElementFromTemplate from '/src/js/helpers/define-custom-element.js';
+import Component from '/src/js/components/base/component.js';
 
-export default class ErrorMessages {
+export default class ErrorMessages extends Component {
   static async defineCustomElement() {
     await defineCustomElementFromTemplate(
       'error-messages',
@@ -8,7 +9,8 @@ export default class ErrorMessages {
   }
 
   constructor(element) {
-    this.shadowRoot = element.shadowRoot;
+    super(element);
+
     this.containerElement = element.shadowRoot.getElementById('error-messages');
     this.listElement = element.shadowRoot.getElementById('error-messages-list');
 

@@ -7,7 +7,7 @@ export function getModifierOperator(modifier) {
   return '+';
 }
 
-export function getModifierValue(modifier) {
+export function getModifierNumber(modifier) {
   if (modifier < 0) {
     return Math.abs(modifier).toString();
   }

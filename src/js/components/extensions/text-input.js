@@ -22,7 +22,7 @@ class TextInputElement extends HTMLInputElement {
      if (keyEvent.key === "Enter") {
        keyEvent.preventDefault();
 
-       let saveEvent = new Event('saveSection', { bubbles: true });
+       let saveEvent = new Event('fieldEnterKeyDown', { bubbles: true });
        this.dispatchEvent(saveEvent);
      }
     });

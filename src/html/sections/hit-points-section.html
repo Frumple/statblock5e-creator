@@ -57,7 +57,8 @@
     grid-area: 6 / 6 / 7 / 7;
   }
 
-  .hit-points-edit-section__constitution-hit-points-modifier {
+  .hit-points-edit-section__constitution-hit-points,
+  .hit-points-edit-section__constitution-modifier {
     display: none;
   }
 </style>
@@ -77,7 +78,7 @@
 <div id="edit-section" class="section section_hidden">
   <div class="hit-points-edit-section">
     <label id="hit-points-label" class="hit-points-edit-section__hit-points-label section__header-label" for="hit-points-input">Hit Points:</label>
-    <input id="hit-points-input" class="hit-points-edit-section__hit-points-input" is="number-input" type="number" name="hit-points" pretty-name="Hit Points" value="4" min="0" max="99999" disabled />
+    <input id="hit-points-input" class="hit-points-edit-section__hit-points-input" is="number-input" type="number" name="hit-points" pretty-name="Hit Points" value="4" min="0" max="999999" disabled />
     <label id="use-hit-die-label" class="hit-points-edit-section__use-hit-die-label" for="use-hit-die-input">Calculate using Hit Die?</label>
     <input id="use-hit-die-input" class="hit-points-edit-section__use-hit-die-input" type="checkbox" name="use-hit-die" checked />
     <label id="hit-die-leading-text" class="hit-points-edit-section__hit_die-leading-text">(</label>
@@ -93,9 +94,10 @@
       <option value="20">d20</option>
     </select>
     <label id="hit-die-trailing-text" class="hit-points-edit-section__hit-die-trailing-text">
-      <span id="constitution-hit-points-operator">+</span> <span id="constitution-hit-points-value">0</span> )
+      <span id="constitution-hit-points-operator">+</span> <span id="constitution-hit-points-number">0</span> )
     </label>
   </div>
-  <span id="constitution-hit-points-modifier" class="hit-points-edit-section__constitution-hit-points-modifier">0</span>
+  <span id="constitution-modifier" class="hit-points-edit-section__constitution-modifier">0</span>
+  <span id="constitution-hit-points" class="hit-points-edit-section__constitution-hit-points">0</span>
   <button id="save-action" class="section__action section__save-action" name="armor-class-save">Save</button>
 </div>

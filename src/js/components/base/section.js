@@ -1,14 +1,9 @@
 import ErrorMessages from '/src/js/components/elements/error-messages.js';
+import Component from '/src/js/components/base/component.js';
 
-export class Section {
-  static async defineCustomElement() {
-    throw new Error(
-      `The class '${this.name}' must implement the defineCustomElement() static method.`);
-  }
-
+export class Section extends Component {
   constructor(element, showElements, editElements) {
-    this.element = element;
-    this.shadowRoot = element.shadowRoot;
+    super(element);
 
     this.error_messages = new ErrorMessages( this.shadowRoot.querySelector('error-messages') );
     this.showElements = showElements;
@@ -34,7 +29,7 @@ export class Section {
       this.save();
     });
 
-    this.editElements.section.addEventListener('saveSection', () => {
+    this.editElements.section.addEventListener('fieldEnterKeyDown', () => {
       this.save();
     });
   }
