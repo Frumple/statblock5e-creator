@@ -23,6 +23,12 @@ class TextInputElement extends HTMLInputElement {
     });
   }
 
+  validate(error_messages) {
+    if (this.required) {
+      this.validateForEmpty(error_messages);
+    }
+  }
+
   validateForEmpty(error_messages) {
     if(this.value === "") {
       let pretty_name = this.getAttribute('pretty-name');

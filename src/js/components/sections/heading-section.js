@@ -19,8 +19,8 @@ export default class HeadingSection extends sectionModule.Section {
   }
 
   checkForErrors() {
-    this.editElements.title.validateForEmpty(this.error_messages);
-    this.editElements.type.validateForEmpty(this.error_messages);
+    this.editElements.title.validate(this.error_messages);
+    this.editElements.type.validate(this.error_messages);
   }
 
   update() {

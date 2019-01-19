@@ -80,7 +80,7 @@
 
 <div id="edit-section" class="section section_hidden">
   <div class="heading-edit-section">
-    <input id="title-input" class="heading-edit-section__title-input heading-show-section__title-text" is="text-input" type="text" name="title" pretty-name="Creature Name" value="Commoner" />
+    <input id="title-input" class="heading-edit-section__title-input heading-show-section__title-text" is="text-input" type="text" name="title" pretty-name="Creature Name" value="Commoner" required />
     <label id="size-label" class="heading-edit-section__size-label heading-edit-section__label" for="size-input">Size:</label>
     <select id="size-input" class="heading-edit-section__size-input heading-show-section__subtitle-text">
       <option value="Fine">Fine</option>
@@ -95,7 +95,7 @@
       <option value="Colossal+">Colossal+</option>
     </select>
     <label id="type-label" class="heading-edit-section__type-label heading-edit-section__label" for="type-input">Type:</label>
-    <input id="type-input" class="heading-edit-section__type-input heading-show-section__subtitle-text" is="text-input" type="text" name="type" pretty-name="Creature Type" list="type-list" value="humanoid" />
+    <input id="type-input" class="heading-edit-section__type-input heading-show-section__subtitle-text" is="text-input" type="text" name="type" pretty-name="Creature Type" list="type-list" value="humanoid" required />
     <datalist id="type-list">
       <option value="aberration" />
       <option value="beast" />
