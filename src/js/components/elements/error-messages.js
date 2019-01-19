@@ -1,9 +1,9 @@
-import defineCustomElementFromTemplate from '/src/js/helpers/define-custom-element.js';
+import { defineCustomAutonomousElement } from '/src/js/helpers/define-custom-element.js';
 import Component from '/src/js/components/base/component.js';
 
 export default class ErrorMessages extends Component {
   static async defineCustomElement() {
-    await defineCustomElementFromTemplate(
+    await defineCustomAutonomousElement(
       'error-messages',
       'src/html/elements/error-messages.html');
   }

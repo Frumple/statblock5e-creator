@@ -1,4 +1,4 @@
-import defineCustomElementFromTemplate from '/src/js/helpers/define-custom-element.js';
+import { defineCustomAutonomousElement } from '/src/js/helpers/define-custom-element.js';
 import EnableDisableElementsCheckbox from '/src/js/components/elements/enable-disable-elements-checkbox.js';
 import * as sectionModule from '/src/js/components/base/section.js';
 import { getModifierOperator } from '/src/js/helpers/string-format.js';
@@ -6,7 +6,7 @@ import { getModifierNumber } from '/src/js/helpers/string-format.js';
 
 export default class HitPointsSection extends sectionModule.Section {
   static async defineCustomElement() {
-    await defineCustomElementFromTemplate(
+    await defineCustomAutonomousElement(
       'hit-points-section',
       'src/html/sections/hit-points-section.html');
   }

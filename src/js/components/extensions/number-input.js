@@ -1,20 +1,15 @@
-import defineCustomElementFromTemplate from '/src/js/helpers/define-custom-element.js';
+import { defineCustomBuiltinElement } from '/src/js/helpers/define-custom-element.js';
 
-export default class NumericInput {
+export default class NumberInput {
   static async defineCustomElement() {
-    await defineCustomElementFromTemplate(
+    defineCustomBuiltinElement(
       'number-input',
-      'src/html/extensions/number-input.html',
-      NumericInput.elementClass,
-      { extends: 'input' });
-  }
-
-  static elementClass(contentNode) {
-    return NumericInputElement;
+      NumberInputElement,
+      'input');
   }
 }
 
-class NumericInputElement extends HTMLInputElement {
+class NumberInputElement extends HTMLInputElement {
   constructor() {
     super();
 

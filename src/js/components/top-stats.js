@@ -1,4 +1,4 @@
-import defineCustomElementFromTemplate from '/src/js/helpers/define-custom-element.js';
+import { defineCustomAutonomousElement } from '/src/js/helpers/define-custom-element.js';
 import Component from '/src/js/components/base/component.js';
 
 import HeadingSection from '/src/js/components/sections/heading-section.js';
@@ -9,7 +9,7 @@ import AbilityScoresSection from '/src/js/components/sections/ability-scores-sec
 
 export default class TopStats extends Component {
   static async defineCustomElement() {
-    await defineCustomElementFromTemplate(
+    await defineCustomAutonomousElement(
       'top-stats',
       'src/html/top-stats.html');
   }

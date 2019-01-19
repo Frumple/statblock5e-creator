@@ -1,16 +1,11 @@
-import defineCustomElementFromTemplate from '/src/js/helpers/define-custom-element.js';
+import { defineCustomBuiltinElement } from '/src/js/helpers/define-custom-element.js';
 
 export default class TextInput {
   static async defineCustomElement() {
-    await defineCustomElementFromTemplate(
+    defineCustomBuiltinElement(
       'text-input',
-      'src/html/extensions/text-input.html',
-      TextInput.elementClass,
-      { extends: 'input' });
-  }
-
-  static elementClass(contentNode) {
-    return TextInputElement;
+      TextInputElement,
+      'input');
   }
 }
 

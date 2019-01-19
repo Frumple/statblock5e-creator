@@ -1,4 +1,4 @@
-import defineCustomElementFromTemplate from '/src/js/helpers/define-custom-element.js';
+import { defineCustomAutonomousElement } from '/src/js/helpers/define-custom-element.js';
 import AbilityScoreNames from '/src/js/helpers/ability-score-names.js';
 import * as sectionModule from '/src/js/components/base/section.js';
 import { getModifierOperator } from '/src/js/helpers/string-format.js';
@@ -6,7 +6,7 @@ import { getModifierNumber } from '/src/js/helpers/string-format.js';
 
 export default class AbilityScoresSection extends sectionModule.Section {
   static async defineCustomElement() {
-    await defineCustomElementFromTemplate(
+    await defineCustomAutonomousElement(
       'ability-scores-section',
       'src/html/sections/ability-scores-section.html');
   }
