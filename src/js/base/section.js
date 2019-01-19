@@ -1,5 +1,5 @@
-import ErrorMessages from '/src/js/components/elements/error-messages.js';
-import Component from '/src/js/components/base/component.js';
+import ErrorMessages from '/src/js/elements/error-messages.js';
+import Component from '/src/js/base/component.js';
 
 export class Section extends Component {
   constructor(element, showElements, editElements) {

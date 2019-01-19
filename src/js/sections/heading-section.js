@@ -1,5 +1,5 @@
 import { defineCustomAutonomousElement } from '/src/js/helpers/define-custom-element.js';
-import * as sectionModule from '/src/js/components/base/section.js';
+import * as sectionModule from '/src/js/base/section.js';
 
 export default class HeadingSection extends sectionModule.Section {
   static async defineCustomElement() {

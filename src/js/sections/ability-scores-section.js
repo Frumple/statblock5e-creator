@@ -1,6 +1,6 @@
 import { defineCustomAutonomousElement } from '/src/js/helpers/define-custom-element.js';
 import AbilityScoreNames from '/src/js/helpers/ability-score-names.js';
-import * as sectionModule from '/src/js/components/base/section.js';
+import * as sectionModule from '/src/js/base/section.js';
 import { getModifierOperator } from '/src/js/helpers/string-format.js';
 import { getModifierNumber } from '/src/js/helpers/string-format.js';
 

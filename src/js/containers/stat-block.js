@@ -1,13 +1,13 @@
 import { defineCustomAutonomousElement } from '/src/js/helpers/define-custom-element.js';
-import Component from '/src/js/components/base/component.js';
-import TopStats from '/src/js/components/top-stats.js';
+import Component from '/src/js/base/component.js';
+import TopStats from '/src/js/containers/top-stats.js';
 import AbilityScoreNames from '/src/js/helpers/ability-score-names.js';
 
 export default class StatBlock extends Component {
   static async defineCustomElement() {
     await defineCustomAutonomousElement(
       'stat-block',
-      'src/html/stat-block.html');
+      'src/html/containers/stat-block.html');
   }
 
   constructor(element) {

@@ -1,6 +1,6 @@
 import { defineCustomAutonomousElement } from '/src/js/helpers/define-custom-element.js';
-import EnableDisableElementsCheckbox from '/src/js/components/elements/enable-disable-elements-checkbox.js';
-import * as sectionModule from '/src/js/components/base/section.js';
+import EnableDisableElementsCheckbox from '/src/js/elements/enable-disable-elements-checkbox.js';
+import * as sectionModule from '/src/js/base/section.js';
 
 export default class ArmorClassSection extends sectionModule.Section {
   static async defineCustomElement() {
