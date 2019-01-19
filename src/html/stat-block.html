@@ -1,4 +1,14 @@
 <style>
+  :host {
+    display: flex;
+    justify-content: flex-start;
+  }
+
+  .container {
+    display: inline-block;
+    margin-left: 1em;
+  }
+
   .bar {
     height: 5px;
     background: #E69A28;
@@ -7,11 +17,7 @@
     z-index: 1;
   }
 
-  :host {
-    display: inline-block;
-  }
-
-  #content-wrap {
+  .content-wrap {
     font-family: 'Noto Sans', 'Myriad Pro', Calibri, Helvetica, Arial,
                   sans-serif;
     font-size: 13.5px;
@@ -49,7 +55,7 @@
             column-fill: auto;
   }
 
-  :host([data-two-column]) #content-wrap {
+  :host([data-two-column]) .content-wrap {
     /* One column is 400px and the gap between them is 40px. */
     width: 840px;
   }
@@ -80,8 +86,11 @@
     margin-bottom: 0;
   }
 </style>
-<div class="bar"></div>
-<div id="content-wrap">
-  <slot></slot>
+
+<div class="container">
+  <div class="bar"></div>
+  <div class="content-wrap">
+    <slot></slot>
+  </div>
+  <div class="bar"></div>
 </div>
-<div class="bar"></div>
