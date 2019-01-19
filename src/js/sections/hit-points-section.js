@@ -1,5 +1,4 @@
 import { defineCustomAutonomousElement } from '/src/js/helpers/define-custom-element.js';
-import EnableDisableElementsCheckbox from '/src/js/elements/enable-disable-elements-checkbox.js';
 import * as sectionModule from '/src/js/base/section.js';
 import { getModifierOperator } from '/src/js/helpers/string-format.js';
 import { getModifierNumber } from '/src/js/helpers/string-format.js';
@@ -16,10 +15,10 @@ export default class HitPointsSection extends sectionModule.Section {
           new HitPointsShowElements(element.shadowRoot),
           new HitPointsEditElements(element.shadowRoot));
 
-    let checkbox = new EnableDisableElementsCheckbox(this.editElements.use_hit_die);
-    checkbox.disableElementWhenChecked(this.editElements.hit_points);
-    checkbox.enableElementWhenChecked(this.editElements.hit_die_quantity);
-    checkbox.enableElementWhenChecked(this.editElements.hit_die_size);
+    let useHitDieCheckbox = this.editElements.use_hit_die;
+    useHitDieCheckbox.disableElementWhenChecked(this.editElements.hit_points);
+    useHitDieCheckbox.enableElementWhenChecked(this.editElements.hit_die_quantity);
+    useHitDieCheckbox.enableElementWhenChecked(this.editElements.hit_die_size);
 
     this.editElements.use_hit_die.addEventListener('input', () => {
       this.calculateHitPointsFromHitDie();

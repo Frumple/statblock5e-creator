@@ -1,5 +1,4 @@
 import { defineCustomAutonomousElement } from '/src/js/helpers/define-custom-element.js';
-import EnableDisableElementsCheckbox from '/src/js/elements/enable-disable-elements-checkbox.js';
 import * as sectionModule from '/src/js/base/section.js';
 
 export default class SpeedSection extends sectionModule.Section {
@@ -14,14 +13,14 @@ export default class SpeedSection extends sectionModule.Section {
           new SpeedShowElements(element.shadowRoot),
           new SpeedEditElements(element.shadowRoot));
 
-    let checkbox = new EnableDisableElementsCheckbox(this.editElements.use_custom);
-    checkbox.disableElementWhenChecked(this.editElements.walk);
-    checkbox.disableElementWhenChecked(this.editElements.burrow);
-    checkbox.disableElementWhenChecked(this.editElements.climb);
-    checkbox.disableElementWhenChecked(this.editElements.fly);
-    checkbox.disableElementWhenChecked(this.editElements.hover);
-    checkbox.disableElementWhenChecked(this.editElements.swim);
-    checkbox.enableElementWhenChecked(this.editElements.custom_text);
+    let useCustomCheckbox = this.editElements.use_custom;
+    useCustomCheckbox.disableElementWhenChecked(this.editElements.walk);
+    useCustomCheckbox.disableElementWhenChecked(this.editElements.burrow);
+    useCustomCheckbox.disableElementWhenChecked(this.editElements.climb);
+    useCustomCheckbox.disableElementWhenChecked(this.editElements.fly);
+    useCustomCheckbox.disableElementWhenChecked(this.editElements.hover);
+    useCustomCheckbox.disableElementWhenChecked(this.editElements.swim);
+    useCustomCheckbox.enableElementWhenChecked(this.editElements.custom_text);
   }
 
   checkForErrors() {

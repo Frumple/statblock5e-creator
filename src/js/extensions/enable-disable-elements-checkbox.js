@@ -1,11 +1,23 @@
+import { defineCustomBuiltinElement } from '/src/js/helpers/define-custom-element.js';
+
 export default class EnableDisableElementsCheckbox {
-  constructor(checkboxElement) {
-    this.checkboxElement = checkboxElement;
+  static async defineCustomElement() {
+    defineCustomBuiltinElement(
+      'enable-disable-elements-checkbox',
+      EnableDisableElementsCheckboxElement,
+      'input');
+  }
+}
+
+class EnableDisableElementsCheckboxElement extends HTMLInputElement {
+  constructor() {
+    super();
+
     this.enabledElements = [];
     this.disabledElements = [];
 
-    checkboxElement.addEventListener('input', () => {
-      if (checkboxElement.checked) {
+    this.addEventListener('input', () => {
+      if (this.checked) {
         this.enabledElements.forEach( (element) => {
           element.removeAttribute('disabled');
         });

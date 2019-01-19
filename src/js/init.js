@@ -9,6 +9,7 @@ import HitPointsSection from '/src/js/sections/hit-points-section.js';
 import SpeedSection from '/src/js/sections/speed-section.js';
 import AbilityScoresSection from '/src/js/sections/ability-scores-section.js';
 
+import EnableDisableElementsCheckbox from '/src/js/extensions/enable-disable-elements-checkbox.js';
 import NumericInput from '/src/js/extensions/number-input.js';
 import TextInput from '/src/js/extensions/text-input.js';
 
@@ -30,6 +31,7 @@ async function init() {
   await SpeedSection.defineCustomElement();
   await AbilityScoresSection.defineCustomElement();
 
+  await EnableDisableElementsCheckbox.defineCustomElement();
   await NumericInput.defineCustomElement();
   await TextInput.defineCustomElement();
 

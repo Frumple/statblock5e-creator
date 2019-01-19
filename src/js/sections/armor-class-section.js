@@ -1,5 +1,4 @@
 import { defineCustomAutonomousElement } from '/src/js/helpers/define-custom-element.js';
-import EnableDisableElementsCheckbox from '/src/js/elements/enable-disable-elements-checkbox.js';
 import * as sectionModule from '/src/js/base/section.js';
 
 export default class ArmorClassSection extends sectionModule.Section {
@@ -14,10 +13,10 @@ export default class ArmorClassSection extends sectionModule.Section {
           new ArmorClassShowElements(element.shadowRoot),
           new ArmorClassEditElements(element.shadowRoot));
 
-    let checkbox = new EnableDisableElementsCheckbox(this.editElements.use_custom);
-    checkbox.disableElementWhenChecked(this.editElements.armor_class);
-    checkbox.disableElementWhenChecked(this.editElements.armor_type);
-    checkbox.enableElementWhenChecked(this.editElements.custom_text);
+    let useCustomCheckbox = this.editElements.use_custom;
+    useCustomCheckbox.disableElementWhenChecked(this.editElements.armor_class);
+    useCustomCheckbox.disableElementWhenChecked(this.editElements.armor_type);
+    useCustomCheckbox.enableElementWhenChecked(this.editElements.custom_text);
   }
 
   checkForErrors() {
