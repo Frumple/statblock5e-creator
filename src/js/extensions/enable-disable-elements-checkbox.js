@@ -1,15 +1,12 @@
-import { defineCustomBuiltinElement } from '/src/js/helpers/define-custom-element.js';
+import CustomInputBuiltinElement from '/src/js/base/custom-input-builtin-element.js';
 
-export default class EnableDisableElementsCheckbox {
+export default class EnableDisableElementsCheckbox extends CustomInputBuiltinElement {
   static async defineCustomElement() {
-    defineCustomBuiltinElement(
+    super.defineCustomElement(
       'enable-disable-elements-checkbox',
-      EnableDisableElementsCheckboxElement,
-      'input');
+      EnableDisableElementsCheckbox);
   }
-}
 
-class EnableDisableElementsCheckboxElement extends HTMLInputElement {
   constructor() {
     super();
 

@@ -1,15 +1,12 @@
-import { defineCustomBuiltinElement } from '/src/js/helpers/define-custom-element.js';
+import CustomInputBuiltinElement from '/src/js/base/custom-input-builtin-element.js';
 
-export default class TextInput {
+export default class TextInput extends CustomInputBuiltinElement {
   static async defineCustomElement() {
-    defineCustomBuiltinElement(
+    super.defineCustomElement(
       'text-input',
-      TextInputElement,
-      'input');
+      TextInput);
   }
-}
 
-class TextInputElement extends HTMLInputElement {
   constructor() {
     super();
 

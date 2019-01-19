@@ -15,7 +15,3 @@ export async function defineCustomAutonomousElement(name, templatePath) {
     }
   )
 }
-
-export function defineCustomBuiltinElement(name, elementClass, extendsTag) {
-  customElements.define(name, elementClass, { extends: extendsTag });
-}

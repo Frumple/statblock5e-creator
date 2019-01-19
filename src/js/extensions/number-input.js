@@ -1,15 +1,12 @@
-import { defineCustomBuiltinElement } from '/src/js/helpers/define-custom-element.js';
+import CustomInputBuiltinElement from '/src/js/base/custom-input-builtin-element.js';
 
-export default class NumberInput {
+export default class NumberInput extends CustomInputBuiltinElement {
   static async defineCustomElement() {
-    defineCustomBuiltinElement(
+    super.defineCustomElement(
       'number-input',
-      NumberInputElement,
-      'input');
+      NumberInput);
   }
-}
 
-class NumberInputElement extends HTMLInputElement {
   constructor() {
     super();
 
