@@ -1,10 +1,8 @@
 import { defineCustomAutonomousElement } from '/src/js/helpers/define-custom-element.js';
-import Component from '/src/js/base/component.js';
 
-import HeadingSection from '/src/js/sections/heading-section.js';
-import ArmorClassSection from '/src/js/sections/armor-class-section.js';
-import HitPointsSection from '/src/js/sections/hit-points-section.js';
-import SpeedSection from '/src/js/sections/speed-section.js';
+import Component from '/src/js/base/component.js';
+import BasicStats from '/src/js/containers/basic-stats.js';
+import AdvancedStats from '/src/js/containers/advanced-stats.js';
 import AbilityScoresSection from '/src/js/sections/ability-scores-section.js';
 
 export default class TopStats extends Component {
@@ -17,10 +15,8 @@ export default class TopStats extends Component {
   constructor(element) {
     super(element);
 
-    this.headingSection = new HeadingSection( document.querySelector('heading-section') );
-    this.armorClassSection = new ArmorClassSection( document.querySelector('armor-class-section') );
-    this.hitPointsSection = new HitPointsSection( document.querySelector('hit-points-section') );
-    this.speedSection = new SpeedSection( document.querySelector('speed-section') );
+    this.basicStats = new BasicStats( document.querySelector('basic-stats') );
     this.abilityScoresSection = new AbilityScoresSection( document.querySelector('ability-scores-section') );
+    this.advanced = new AdvancedStats( document.querySelector('advanced-stats') );
   }
 }

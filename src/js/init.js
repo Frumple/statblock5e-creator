@@ -1,5 +1,7 @@
 import StatBlock from '/src/js/containers/stat-block.js';
 import TopStats from '/src/js/containers/top-stats.js';
+import BasicStats from '/src/js/containers/basic-stats.js';
+import AdvancedStats from '/src/js/containers/advanced-stats.js';
 
 import HeadingSection from '/src/js/sections/heading-section.js';
 import ArmorClassSection from '/src/js/sections/armor-class-section.js';
@@ -19,6 +21,8 @@ import TaperedRule from '/src/js/elements/tapered-rule.js';
 async function init() {
   await StatBlock.defineCustomElement();
   await TopStats.defineCustomElement();
+  await BasicStats.defineCustomElement();
+  await AdvancedStats.defineCustomElement();
 
   await HeadingSection.defineCustomElement();
   await ArmorClassSection.defineCustomElement();
