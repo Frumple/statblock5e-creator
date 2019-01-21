@@ -8,6 +8,7 @@ import ArmorClassSection from '/src/js/sections/armor-class-section.js';
 import HitPointsSection from '/src/js/sections/hit-points-section.js';
 import SpeedSection from '/src/js/sections/speed-section.js';
 import AbilityScoresSection from '/src/js/sections/ability-scores-section.js';
+import SavingThrowsSection from '/src/js/sections/saving-throws-section.js';
 
 import EnableDisableElementsCheckbox from '/src/js/extensions/enable-disable-elements-checkbox.js';
 import NumericInput from '/src/js/extensions/number-input.js';
@@ -37,6 +38,7 @@ async function defineCustomElements() {
   elementClasses.push(HitPointsSection);
   elementClasses.push(SpeedSection);
   elementClasses.push(AbilityScoresSection);
+  elementClasses.push(SavingThrowsSection);
 
   elementClasses.push(StatBlock);
   elementClasses.push(TopStats);
