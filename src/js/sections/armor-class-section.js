@@ -10,9 +10,11 @@ export default class ArmorClassSection extends sectionModule.Section {
           ArmorClassEditElements);
 
     let useCustomCheckbox = this.editElements.use_custom;
-    useCustomCheckbox.disableElementWhenChecked(this.editElements.armor_class);
-    useCustomCheckbox.disableElementWhenChecked(this.editElements.armor_type);
-    useCustomCheckbox.enableElementWhenChecked(this.editElements.custom_text);
+    useCustomCheckbox.disableElementsWhenChecked(
+      this.editElements.armor_class,
+      this.editElements.armor_type);
+    useCustomCheckbox.enableElementsWhenChecked(
+      this.editElements.custom_text);
   }
 
   checkForErrors() {

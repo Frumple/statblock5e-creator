@@ -28,11 +28,15 @@ export default class EnableDisableElementsCheckbox extends CustomBuiltinInputEle
     });
   }
 
-  enableElementWhenChecked(element) {
-    this.enabledElements.push(element);
+  enableElementsWhenChecked(...elements) {
+    elements.forEach( (element) => {
+      this.enabledElements.push(element);
+    });
   }
 
-  disableElementWhenChecked(element) {
-    this.disabledElements.push(element);
+  disableElementsWhenChecked(...elements) {
+    elements.forEach( (element) => {
+      this.disabledElements.push(element);
+    });
   }
 }

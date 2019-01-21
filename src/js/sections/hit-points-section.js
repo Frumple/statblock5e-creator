@@ -12,9 +12,11 @@ export default class HitPointsSection extends sectionModule.Section {
           HitPointsEditElements);
 
     let useHitDieCheckbox = this.editElements.use_hit_die;
-    useHitDieCheckbox.disableElementWhenChecked(this.editElements.hit_points);
-    useHitDieCheckbox.enableElementWhenChecked(this.editElements.hit_die_quantity);
-    useHitDieCheckbox.enableElementWhenChecked(this.editElements.hit_die_size);
+    useHitDieCheckbox.disableElementsWhenChecked(
+      this.editElements.hit_points);
+    useHitDieCheckbox.enableElementsWhenChecked(
+      this.editElements.hit_die_quantity,
+      this.editElements.hit_die_size);
 
     this.editElements.use_hit_die.addEventListener('input', () => {
       this.calculateHitPointsFromHitDie();
