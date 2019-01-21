@@ -2,7 +2,7 @@ let AbilityScoreNames = {
   STRENGTH : 'strength',
   DEXTERITY : 'dexterity',
   CONSTITUTION : 'constitution',
-  INTELLIGENCE : 'inteligence',
+  INTELLIGENCE : 'intelligence',
   WISDOM : 'wisdom',
   CHARISMA : 'charisma'
 };

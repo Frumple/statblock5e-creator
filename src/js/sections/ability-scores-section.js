@@ -12,28 +12,10 @@ export default class AbilityScoresSection extends sectionModule.Section {
           AbilityScoresShowElements,
           AbilityScoresEditElements);
 
-    this.editElements.score[ AbilityScoreNames.STRENGTH ].addEventListener('input', () => {
-      this.onAbilityScoreChange( AbilityScoreNames.STRENGTH );
-    });
-
-    this.editElements.score[ AbilityScoreNames.DEXTERITY ].addEventListener('input', () => {
-      this.onAbilityScoreChange( AbilityScoreNames.DEXTERITY );
-    });
-
-    this.editElements.score[ AbilityScoreNames.CONSTITUTION ].addEventListener('input', () => {
-      this.onAbilityScoreChange( AbilityScoreNames.CONSTITUTION );
-    });
-
-    this.editElements.score[ AbilityScoreNames.INTELLIGENCE ].addEventListener('input', () => {
-      this.onAbilityScoreChange( AbilityScoreNames.INTELLIGENCE );
-    });
-
-    this.editElements.score[ AbilityScoreNames.WISDOM ].addEventListener('input', () => {
-      this.onAbilityScoreChange( AbilityScoreNames.WISDOM );
-    });
-
-    this.editElements.score[ AbilityScoreNames.CHARISMA ].addEventListener('input', () => {
-      this.onAbilityScoreChange( AbilityScoreNames.CHARISMA );
+    Object.entries(AbilityScoreNames).forEach( ([key, abilityScoreName]) => {
+      this.editElements.score[abilityScoreName].addEventListener('input', () => {
+        this.onAbilityScoreChange(abilityScoreName);
+      });
     });
   }
 
@@ -81,15 +63,15 @@ export default class AbilityScoresSection extends sectionModule.Section {
   }
 
   checkForErrors() {
-    Object.entries(AbilityScoreNames).forEach( ([key, value]) => {
-      this.editElements.score[ value ].validate(this.error_messages);
+    Object.entries(AbilityScoreNames).forEach( ([key, abilityScoreName]) => {
+      this.editElements.score[abilityScoreName].validate(this.error_messages);
     });
     this.editElements.proficiency_bonus.validate(this.error_messages);
   }
 
   update() {
-    Object.entries(AbilityScoreNames).forEach( ([key, value]) => {
-      this.saveAbilityScore(value);
+    Object.entries(AbilityScoreNames).forEach( ([key, abilityScoreName]) => {
+      this.saveAbilityScore(abilityScoreName);
     });
   }
 
@@ -111,19 +93,10 @@ class AbilityScoresShowElements extends sectionModule.ShowElements {
     this.score = {};
     this.modifier = {};
 
-    this.score[ AbilityScoreNames.STRENGTH ] = shadowRoot.getElementById('strength-score-show');
-    this.score[ AbilityScoreNames.DEXTERITY ] = shadowRoot.getElementById('dexterity-score-show');
-    this.score[ AbilityScoreNames.CONSTITUTION ] = shadowRoot.getElementById('constitution-score-show');
-    this.score[ AbilityScoreNames.INTELLIGENCE ] = shadowRoot.getElementById('intelligence-score-show');
-    this.score[ AbilityScoreNames.WISDOM ] = shadowRoot.getElementById('wisdom-score-show');
-    this.score[ AbilityScoreNames.CHARISMA ] = shadowRoot.getElementById('charisma-score-show');
-
-    this.modifier[ AbilityScoreNames.STRENGTH ] = shadowRoot.getElementById('strength-modifier-show');
-    this.modifier[ AbilityScoreNames.DEXTERITY ]  = shadowRoot.getElementById('dexterity-modifier-show');
-    this.modifier[ AbilityScoreNames.CONSTITUTION ]  = shadowRoot.getElementById('constitution-modifier-show');
-    this.modifier[ AbilityScoreNames.INTELLIGENCE ]  = shadowRoot.getElementById('intelligence-modifier-show');
-    this.modifier[ AbilityScoreNames.WISDOM ]  = shadowRoot.getElementById('wisdom-modifier-show');
-    this.modifier[ AbilityScoreNames.CHARISMA ]  = shadowRoot.getElementById('charisma-modifier-show');
+    Object.entries(AbilityScoreNames).forEach( ([key, abilityScoreName]) => {
+      this.score[abilityScoreName] = shadowRoot.getElementById(`${abilityScoreName}-score-show`);
+      this.modifier[abilityScoreName] = shadowRoot.getElementById(`${abilityScoreName}-modifier-show`);
+    });
   }
 }
 
@@ -134,19 +107,10 @@ class AbilityScoresEditElements extends sectionModule.EditElements {
     this.score = {};
     this.modifier = {};
 
-    this.score[ AbilityScoreNames.STRENGTH ] = shadowRoot.getElementById('strength-score-edit');
-    this.score[ AbilityScoreNames.DEXTERITY ] = shadowRoot.getElementById('dexterity-score-edit');
-    this.score[ AbilityScoreNames.CONSTITUTION ] = shadowRoot.getElementById('constitution-score-edit');
-    this.score[ AbilityScoreNames.INTELLIGENCE ] = shadowRoot.getElementById('intelligence-score-edit');
-    this.score[ AbilityScoreNames.WISDOM ] = shadowRoot.getElementById('wisdom-score-edit');
-    this.score[ AbilityScoreNames.CHARISMA ] = shadowRoot.getElementById('charisma-score-edit');
-
-    this.modifier[ AbilityScoreNames.STRENGTH ] = shadowRoot.getElementById('strength-modifier-edit');
-    this.modifier[ AbilityScoreNames.DEXTERITY ] = shadowRoot.getElementById('dexterity-modifier-edit');
-    this.modifier[ AbilityScoreNames.CONSTITUTION ] = shadowRoot.getElementById('constitution-modifier-edit');
-    this.modifier[ AbilityScoreNames.INTELLIGENCE ] = shadowRoot.getElementById('intelligence-modifier-edit');
-    this.modifier[ AbilityScoreNames.WISDOM ] = shadowRoot.getElementById('wisdom-modifier-edit');
-    this.modifier[ AbilityScoreNames.CHARISMA ] = shadowRoot.getElementById('charisma-modifier-edit');
+    Object.entries(AbilityScoreNames).forEach( ([key, abilityScoreName]) => {
+      this.score[abilityScoreName] = shadowRoot.getElementById(`${abilityScoreName}-score-edit`);
+      this.modifier[abilityScoreName] = shadowRoot.getElementById(`${abilityScoreName}-modifier-edit`);
+    });
 
     this.proficiency_bonus = shadowRoot.getElementById('proficiency-bonus-input');
   }
