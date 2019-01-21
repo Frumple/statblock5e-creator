@@ -1,10 +1,10 @@
-import { defineCustomAutonomousElement } from '/src/js/helpers/define-custom-element.js';
-import Component from '/src/js/base/component.js';
+import CustomAutonomousElement from '/src/js/base/custom-autonomous-element.js';
 
-export default class SectionDivider extends Component {
-  static async defineCustomElement() {
-    await defineCustomAutonomousElement(
-      'section-divider',
-      'src/html/elements/section-divider.html');
+export default class SectionDivider extends CustomAutonomousElement {
+  static get elementName() { return 'section-divider'; }
+  static get templatePath() { return 'src/html/elements/section-divider.html'; }
+
+  constructor() {
+    super(SectionDivider.elementName);
   }
 }

@@ -1,18 +1,14 @@
-import { defineCustomAutonomousElement } from '/src/js/helpers/define-custom-element.js';
-import Component from '/src/js/base/component.js';
+import CustomAutonomousElement from '/src/js/base/custom-autonomous-element.js';
 
-export default class ErrorMessages extends Component {
-  static async defineCustomElement() {
-    await defineCustomAutonomousElement(
-      'error-messages',
-      'src/html/elements/error-messages.html');
-  }
+export default class ErrorMessages extends CustomAutonomousElement {
+  static get elementName() { return 'error-messages'; }
+  static get templatePath() { return 'src/html/elements/error-messages.html'; }
 
-  constructor(element) {
-    super(element);
+  constructor() {
+    super(ErrorMessages.elementName);
 
-    this.containerElement = element.shadowRoot.getElementById('error-messages');
-    this.listElement = element.shadowRoot.getElementById('error-messages-list');
+    this.containerElement = this.shadowRoot.getElementById('error-messages');
+    this.listElement = this.shadowRoot.getElementById('error-messages-list');
 
     this.errors = [];
   }

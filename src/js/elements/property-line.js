@@ -1,10 +1,10 @@
-import { defineCustomAutonomousElement } from '/src/js/helpers/define-custom-element.js';
-import Component from '/src/js/base/component.js';
+import CustomAutonomousElement from '/src/js/base/custom-autonomous-element.js';
 
-export default class PropertyLine extends Component {
-  static async defineCustomElement() {
-    await defineCustomAutonomousElement(
-      'property-line',
-      'src/html/elements/property-line.html');
+export default class PropertyLine extends CustomAutonomousElement {
+  static get elementName() { return 'property-line'; }
+  static get templatePath() { return 'src/html/elements/property-line.html'; }
+
+  constructor() {
+    super(PropertyLine.elementName);
   }
 }

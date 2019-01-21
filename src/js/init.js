@@ -20,17 +20,6 @@ import SectionDivider from '/src/js/elements/section-divider.js';
 import TaperedRule from '/src/js/elements/tapered-rule.js';
 
 async function init() {
-  await StatBlock.defineCustomElement();
-  await TopStats.defineCustomElement();
-  await BasicStats.defineCustomElement();
-  await AdvancedStats.defineCustomElement();
-
-  await HeadingSection.defineCustomElement();
-  await ArmorClassSection.defineCustomElement();
-  await HitPointsSection.defineCustomElement();
-  await SpeedSection.defineCustomElement();
-  await AbilityScoresSection.defineCustomElement();
-
   await EnableDisableElementsCheckbox.defineCustomElement();
   await NumericInput.defineCustomElement();
   await TextInput.defineCustomElement();
@@ -41,7 +30,16 @@ async function init() {
   await SectionDivider.defineCustomElement();
   await TaperedRule.defineCustomElement();
 
-  let statBlock = new StatBlock( document.querySelector('stat-block') );
+  await HeadingSection.defineCustomElement();
+  await ArmorClassSection.defineCustomElement();
+  await HitPointsSection.defineCustomElement();
+  await SpeedSection.defineCustomElement();
+  await AbilityScoresSection.defineCustomElement();
+
+  await StatBlock.defineCustomElement();
+  await TopStats.defineCustomElement();
+  await BasicStats.defineCustomElement();
+  await AdvancedStats.defineCustomElement();
 }
 
 init();

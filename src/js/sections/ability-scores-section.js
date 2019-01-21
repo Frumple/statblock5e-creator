@@ -1,20 +1,16 @@
-import { defineCustomAutonomousElement } from '/src/js/helpers/define-custom-element.js';
-import AbilityScoreNames from '/src/js/helpers/ability-score-names.js';
 import * as sectionModule from '/src/js/base/section.js';
+import AbilityScoreNames from '/src/js/helpers/ability-score-names.js';
 import { getModifierOperator } from '/src/js/helpers/string-format.js';
 import { getModifierNumber } from '/src/js/helpers/string-format.js';
 
 export default class AbilityScoresSection extends sectionModule.Section {
-  static async defineCustomElement() {
-    await defineCustomAutonomousElement(
-      'ability-scores-section',
-      'src/html/sections/ability-scores-section.html');
-  }
+  static get elementName() { return 'ability-scores-section'; }
+  static get templatePath() { return 'src/html/sections/ability-scores-section.html'; }
 
-  constructor(element) {
-    super(element,
-          new AbilityScoresShowElements(element.shadowRoot),
-          new AbilityScoresEditElements(element.shadowRoot));
+  constructor() {
+    super(AbilityScoresSection.elementName,
+          AbilityScoresShowElements,
+          AbilityScoresEditElements);
 
     this.editElements.score[ AbilityScoreNames.STRENGTH ].addEventListener('input', () => {
       this.onAbilityScoreChange( AbilityScoreNames.STRENGTH );
@@ -58,7 +54,7 @@ export default class AbilityScoresSection extends sectionModule.Section {
           abilityModifier: modifier
         }
       });
-      this.element.dispatchEvent(changeEvent);
+      this.dispatchEvent(changeEvent);
     }
   }
 

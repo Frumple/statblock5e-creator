@@ -1,19 +1,15 @@
-import { defineCustomAutonomousElement } from '/src/js/helpers/define-custom-element.js';
 import * as sectionModule from '/src/js/base/section.js';
 import { getModifierOperator } from '/src/js/helpers/string-format.js';
 import { getModifierNumber } from '/src/js/helpers/string-format.js';
 
 export default class HitPointsSection extends sectionModule.Section {
-  static async defineCustomElement() {
-    await defineCustomAutonomousElement(
-      'hit-points-section',
-      'src/html/sections/hit-points-section.html');
-  }
+  static get elementName() { return 'hit-points-section'; }
+  static get templatePath() { return 'src/html/sections/hit-points-section.html'; }
 
-  constructor(element) {
-    super(element,
-          new HitPointsShowElements(element.shadowRoot),
-          new HitPointsEditElements(element.shadowRoot));
+  constructor() {
+    super(HitPointsSection.elementName,
+          HitPointsShowElements,
+          HitPointsEditElements);
 
     let useHitDieCheckbox = this.editElements.use_hit_die;
     useHitDieCheckbox.disableElementWhenChecked(this.editElements.hit_points);

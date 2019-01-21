@@ -1,10 +1,10 @@
-import { defineCustomAutonomousElement } from '/src/js/helpers/define-custom-element.js';
-import Component from '/src/js/base/component.js';
+import CustomAutonomousElement from '/src/js/base/custom-autonomous-element.js';
 
-export default class TaperedRule extends Component {
-  static async defineCustomElement() {
-    await defineCustomAutonomousElement(
-      'tapered-rule',
-      'src/html/elements/tapered-rule.html');
+export default class TaperedRule extends CustomAutonomousElement {
+  static get elementName() { return 'tapered-rule'; }
+  static get templatePath() { return 'src/html/elements/tapered-rule.html'; }
+
+  constructor() {
+    super(TaperedRule.elementName);
   }
 }

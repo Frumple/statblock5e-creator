@@ -1,17 +1,13 @@
-import { defineCustomAutonomousElement } from '/src/js/helpers/define-custom-element.js';
 import * as sectionModule from '/src/js/base/section.js';
 
 export default class HeadingSection extends sectionModule.Section {
-  static async defineCustomElement() {
-    await defineCustomAutonomousElement(
-      'heading-section',
-      'src/html/sections/heading-section.html');
-  }
+  static get elementName() { return 'heading-section'; }
+  static get templatePath() { return 'src/html/sections/heading-section.html'; }
 
-  constructor(element) {
-    super(element,
-          new HeadingShowElements(element.shadowRoot),
-          new HeadingEditElements(element.shadowRoot));
+  constructor() {
+    super(HeadingSection.elementName,
+          HeadingShowElements,
+          HeadingEditElements);
 
     this.showElements.section.addEventListener('click', () => {
       this.editElements.title.select();

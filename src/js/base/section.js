@@ -1,13 +1,13 @@
+import CustomAutonomousElement from '/src/js/base/custom-autonomous-element.js';
 import ErrorMessages from '/src/js/elements/error-messages.js';
-import Component from '/src/js/base/component.js';
 
-export class Section extends Component {
-  constructor(element, showElements, editElements) {
-    super(element);
+export class Section extends CustomAutonomousElement {
+  constructor(elementName, showElementsClass, editElementsClass) {
+    super(elementName);
 
-    this.error_messages = new ErrorMessages( this.shadowRoot.querySelector('error-messages') );
-    this.showElements = showElements;
-    this.editElements = editElements;
+    this.showElements = new showElementsClass(this.shadowRoot);
+    this.editElements = new editElementsClass(this.shadowRoot);
+    this.error_messages = this.shadowRoot.querySelector('error-messages');
 
     this.showElements.section.addEventListener('mouseenter', () => {
       this.showElements.edit_action.classList.remove('section__action_hidden');
@@ -51,8 +51,8 @@ export class Section extends Component {
   }
 
   toggleAdjacentSectionDividers(isVisible) {
-    Section.toggleSectionDivider(this.element.previousElementSibling, true, isVisible);
-    Section.toggleSectionDivider(this.element.nextElementSibling, false, isVisible);
+    Section.toggleSectionDivider(this.previousElementSibling, true, isVisible);
+    Section.toggleSectionDivider(this.nextElementSibling, false, isVisible);
   }
 
   static toggleSectionDivider(sibling, isNext, isVisible) {

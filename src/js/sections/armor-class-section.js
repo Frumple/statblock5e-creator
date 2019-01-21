@@ -1,17 +1,13 @@
-import { defineCustomAutonomousElement } from '/src/js/helpers/define-custom-element.js';
 import * as sectionModule from '/src/js/base/section.js';
 
 export default class ArmorClassSection extends sectionModule.Section {
-  static async defineCustomElement() {
-    await defineCustomAutonomousElement(
-      'armor-class-section',
-      'src/html/sections/armor-class-section.html');
-  }
+  static get elementName() { return 'armor-class-section'; }
+  static get templatePath() { return 'src/html/sections/armor-class-section.html'; }
 
-  constructor(element) {
-    super(element,
-          new ArmorClassShowElements(element.shadowRoot),
-          new ArmorClassEditElements(element.shadowRoot));
+  constructor() {
+    super(ArmorClassSection.elementName,
+          ArmorClassShowElements,
+          ArmorClassEditElements);
 
     let useCustomCheckbox = this.editElements.use_custom;
     useCustomCheckbox.disableElementWhenChecked(this.editElements.armor_class);
