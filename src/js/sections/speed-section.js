@@ -76,13 +76,13 @@ class SpeedShowElements extends sectionModule.ShowElements {
 class SpeedEditElements extends sectionModule.EditElements {
   constructor(shadowRoot) {
     super(shadowRoot);
-    this.walk = shadowRoot.getElementById('speed-walk-input');
-    this.burrow = shadowRoot.getElementById('speed-burrow-input');
-    this.climb = shadowRoot.getElementById('speed-climb-input');
-    this.fly = shadowRoot.getElementById('speed-fly-input');
-    this.hover = shadowRoot.getElementById('speed-hover-input');
-    this.swim = shadowRoot.getElementById('speed-swim-input');
-    this.use_custom = shadowRoot.getElementById('speed-use-custom-input');
-    this.custom_text = shadowRoot.getElementById('speed-custom-input');
+    this.walk = shadowRoot.getElementById('walk-input');
+    this.burrow = shadowRoot.getElementById('burrow-input');
+    this.climb = shadowRoot.getElementById('climb-input');
+    this.fly = shadowRoot.getElementById('fly-input');
+    this.hover = shadowRoot.getElementById('hover-input');
+    this.swim = shadowRoot.getElementById('swim-input');
+    this.use_custom = shadowRoot.getElementById('use-custom-input');
+    this.custom_text = shadowRoot.getElementById('custom-input');
   }
 }
