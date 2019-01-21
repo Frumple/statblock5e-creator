@@ -1,0 +1,89 @@
+<link href='src/css/default.css' rel='stylesheet' type='text/css'>
+
+<style>
+  .challenge-rating-edit-section {
+    display: grid;
+    grid-template-columns: auto auto;
+    grid-template-rows: auto auto;
+    grid-column-gap: 5px;
+    align-items: center;
+    justify-items: center;
+    width: 100%;
+  }
+
+  .challenge-rating-edit-section__challenge-rating-label {
+    grid-area: 1 / 1;
+  }
+
+  .challenge-rating-edit-section__challenge-rating-input {
+    grid-area: 2 / 1;
+    width: 50px;
+  }
+
+  .challenge-rating-edit-section__experience-points-label {
+    grid-area: 1 / 2;
+  }
+
+  .challenge-rating-edit-section__experience-points-input {
+    grid-area: 2 / 2;
+    width: 70px;
+  }
+</style>
+
+<error-messages></error-messages>
+
+<div id="show-section" class="section section_selectable">
+  <div class="challenge-rating-show-section">
+    <property-line>
+      <h4 id="challenge-rating-label">Challenge</h4>
+      <p id="challenge-rating-text">0 (10 XP)</p>
+    </property-line>
+  </div>
+  <button id="edit-action" class="section__action section__action_hidden">Edit</button>
+</div>
+
+<div id="edit-section" class="section section_hidden">
+  <div class="challenge-rating-edit-section">
+    <label id="challenge-rating-label" class="challenge-rating-edit-section__challenge-rating-label section__header-label">Challenge Rating:</label>
+    <select id="challenge-rating-input" class="challenge-rating-edit-section__challenge-rating-input" name="challenge-rating" pretty-name="Challenge Rating">
+      <option value="0">0</option>
+      <option value="0.125">1/8</option>
+      <option value="0.25">1/4</option>
+      <option value="0.5">1/2</option>
+      <option value="1">1</option>
+      <option value="2">2</option>
+      <option value="3">3</option>
+      <option value="4">4</option>
+      <option value="5">5</option>
+      <option value="6">6</option>
+      <option value="7">7</option>
+      <option value="8">8</option>
+      <option value="9">9</option>
+      <option value="10">10</option>
+      <option value="11">11</option>
+      <option value="12">12</option>
+      <option value="13">13</option>
+      <option value="14">14</option>
+      <option value="15">15</option>
+      <option value="16">16</option>
+      <option value="17">17</option>
+      <option value="18">18</option>
+      <option value="19">19</option>
+      <option value="20">20</option>
+      <option value="21">21</option>
+      <option value="22">22</option>
+      <option value="23">23</option>
+      <option value="24">24</option>
+      <option value="25">25</option>
+      <option value="26">26</option>
+      <option value="27">27</option>
+      <option value="28">28</option>
+      <option value="29">29</option>
+      <option value="30">30</option>
+    </select>
+
+    <label id="experience-points-label" class="challenge-rating-edit-section__experience-points-label">Experience Points:</label>
+    <input id="experience-points-input" class="challenge-rating-edit-section__experience-points-input" is="integer-input" type="number" name="experience-points" pretty-name="Experience Points" min="0" max="999999" value="10" />
+  </div>
+  <button id="save-action" class="section__action section__save-action" name="challenge-rating-save"-save">Save</button>
+</div>

@@ -2,10 +2,6 @@
   --section-transition-duration: 250ms;
 }
 
-input[type="number"] {
-  width: 40px;
-}
-
 input[type="text"] {
   width: 100%;
 }
@@ -63,6 +59,10 @@ input[type="text"] {
 
 .section__header-label {
   font-weight: bold;
+}
+
+.section__small-number-input {
+  width: 40px;
 }
 
 .section__action {
