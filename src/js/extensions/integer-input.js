@@ -1,7 +1,7 @@
 import CustomBuiltinInputElement from '/src/js/base/custom-builtin-input-element.js';
 
-export default class NumberInput extends CustomBuiltinInputElement {
-  static get elementName() { return 'number-input'; }
+export default class IntegerInput extends CustomBuiltinInputElement {
+  static get elementName() { return 'integer-input'; }
 
   constructor() {
     super();

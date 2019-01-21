@@ -11,7 +11,7 @@ import AbilityScoresSection from '/src/js/sections/ability-scores-section.js';
 import SavingThrowsSection from '/src/js/sections/saving-throws-section.js';
 
 import EnableDisableElementsCheckbox from '/src/js/extensions/enable-disable-elements-checkbox.js';
-import NumericInput from '/src/js/extensions/number-input.js';
+import IntegerInput from '/src/js/extensions/integer-input.js';
 import TextInput from '/src/js/extensions/text-input.js';
 
 import ErrorMessages from '/src/js/elements/error-messages.js';
@@ -24,7 +24,7 @@ async function defineCustomElements() {
   let elementClasses = [];
 
   elementClasses.push(EnableDisableElementsCheckbox);
-  elementClasses.push(NumericInput);
+  elementClasses.push(IntegerInput);
   elementClasses.push(TextInput);
 
   elementClasses.push(ErrorMessages);
