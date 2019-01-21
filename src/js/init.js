@@ -19,27 +19,37 @@ import PropertyLine from '/src/js/elements/property-line.js';
 import SectionDivider from '/src/js/elements/section-divider.js';
 import TaperedRule from '/src/js/elements/tapered-rule.js';
 
+async function defineCustomElements() {
+  let elementClasses = [];
+
+  elementClasses.push(EnableDisableElementsCheckbox);
+  elementClasses.push(NumericInput);
+  elementClasses.push(TextInput);
+
+  elementClasses.push(ErrorMessages);
+  elementClasses.push(PropertyBlock);
+  elementClasses.push(PropertyLine);
+  elementClasses.push(SectionDivider);
+  elementClasses.push(TaperedRule);
+
+  elementClasses.push(HeadingSection);
+  elementClasses.push(ArmorClassSection);
+  elementClasses.push(HitPointsSection);
+  elementClasses.push(SpeedSection);
+  elementClasses.push(AbilityScoresSection);
+
+  elementClasses.push(StatBlock);
+  elementClasses.push(TopStats);
+  elementClasses.push(BasicStats);
+  elementClasses.push(AdvancedStats);
+
+  await elementClasses.forEach( (elementClass) => {
+    elementClass.define();
+  });
+}
+
 async function init() {
-  await EnableDisableElementsCheckbox.defineCustomElement();
-  await NumericInput.defineCustomElement();
-  await TextInput.defineCustomElement();
-
-  await ErrorMessages.defineCustomElement();
-  await PropertyBlock.defineCustomElement();
-  await PropertyLine.defineCustomElement();
-  await SectionDivider.defineCustomElement();
-  await TaperedRule.defineCustomElement();
-
-  await HeadingSection.defineCustomElement();
-  await ArmorClassSection.defineCustomElement();
-  await HitPointsSection.defineCustomElement();
-  await SpeedSection.defineCustomElement();
-  await AbilityScoresSection.defineCustomElement();
-
-  await StatBlock.defineCustomElement();
-  await TopStats.defineCustomElement();
-  await BasicStats.defineCustomElement();
-  await AdvancedStats.defineCustomElement();
+  await defineCustomElements();
 }
 
 init();

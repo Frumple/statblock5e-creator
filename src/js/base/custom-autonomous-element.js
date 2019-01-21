@@ -11,7 +11,7 @@ export default class CustomAutonomousElement extends HTMLElement {
       `The class '${this.name}' must implement the templatePath() getter.`);
   }
 
-  static async defineCustomElement() {
+  static async define() {
     await HtmlTemplates.addTemplate(this.elementName, this.templatePath);
     customElements.define(this.elementName, this);
   }
