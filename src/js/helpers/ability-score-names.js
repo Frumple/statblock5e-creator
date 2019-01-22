@@ -1,17 +1,17 @@
 class AbilityScoreNames {
   constructor () {
     this.names = {
-      STRENGTH : { name : 'strength', abbreviation : 'str' },
-      DEXTERITY : { name : 'dexterity', abbreviation: 'dex' },
-      CONSTITUTION : { name : 'constitution', abbreviation: 'con' },
-      INTELLIGENCE : { name : 'intelligence', abbreviation: 'int' },
-      WISDOM : { name : 'wisdom', abbreviation: 'wis' },
-      CHARISMA : { name : 'charisma', abbreviation: 'cha' },
+      'strength' : { abbreviation : 'str' },
+      'dexterity' : { abbreviation: 'dex' },
+      'constitution' : { abbreviation: 'con' },
+      'intelligence' : { abbreviation: 'int' },
+      'wisdom' : { abbreviation: 'wis' },
+      'charisma' : { abbreviation: 'cha' },
     };
     Object.freeze(this.names);
   }
 
-  forEachKey(callback) {
+  forEachName(callback) {
     Object.keys(this.names).forEach(callback);
   }
 

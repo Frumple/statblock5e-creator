@@ -12,9 +12,9 @@ export default class AbilityScoresSection extends sectionModule.Section {
           AbilityScoresShowElements,
           AbilityScoresEditElements);
 
-    AbilityScoreNames.forEachKey( (key) => {
-      this.editElements.score[key].addEventListener('input', () => {
-        this.onAbilityScoreChange(key);
+    AbilityScoreNames.forEachName( (name) => {
+      this.editElements.score[name].addEventListener('input', () => {
+        this.onAbilityScoreChange(name);
       });
     });
 
@@ -23,19 +23,19 @@ export default class AbilityScoresSection extends sectionModule.Section {
     });
   }
 
-  onAbilityScoreChange(abilityScoreKey) {
-    let scoreElement = this.editElements.score[abilityScoreKey];
+  onAbilityScoreChange(abilityScoreName) {
+    let scoreElement = this.editElements.score[abilityScoreName];
     let score = parseInt(scoreElement.value, 10);
     let modifier = AbilityScoresSection.calculateAbilityModifier(score);
 
-    this.updateEditModeModifier(abilityScoreKey, modifier);
+    this.updateEditModeModifier(abilityScoreName, modifier);
 
     if (! isNaN(score)) {
       let changeEvent = new CustomEvent('abilityScoreChanged', {
         bubbles: true,
         composed: true,
         detail: {
-          abilityScoreKey: abilityScoreKey,
+          abilityScoreName: abilityScoreName,
           abilityScore: score,
           abilityModifier: modifier
         }
@@ -60,8 +60,8 @@ export default class AbilityScoresSection extends sectionModule.Section {
     }
   }
 
-  updateEditModeModifier(abilityScoreKey, abilityModifier) {
-    let modifierElement = this.editElements.modifier[abilityScoreKey];
+  updateEditModeModifier(abilityScoreName, abilityModifier) {
+    let modifierElement = this.editElements.modifier[abilityScoreName];
     let formattedModifier = AbilityScoresSection.formatAbilityModifier(abilityModifier);
     modifierElement.textContent = formattedModifier;
   }
@@ -83,23 +83,23 @@ export default class AbilityScoresSection extends sectionModule.Section {
   }
 
   checkForErrors() {
-    AbilityScoreNames.forEachKey( (key) => {
-      this.editElements.score[key].validate(this.error_messages);
+    AbilityScoreNames.forEachName( (name) => {
+      this.editElements.score[name].validate(this.error_messages);
     });
     this.editElements.proficiency_bonus.validate(this.error_messages);
   }
 
   update() {
-    AbilityScoreNames.forEachKey( (key) => {
-      this.saveAbilityScore(key);
+    AbilityScoreNames.forEachName( (name) => {
+      this.saveAbilityScore(name);
     });
   }
 
-  saveAbilityScore(abilityScoreKey) {
-    let scoreEditElement = this.editElements.score[abilityScoreKey];
-    let modifierEditElement = this.editElements.modifier[abilityScoreKey];
-    let scoreShowElement = this.showElements.score[abilityScoreKey];
-    let modifierShowElement = this.showElements.modifier[abilityScoreKey];
+  saveAbilityScore(abilityScoreName) {
+    let scoreEditElement = this.editElements.score[abilityScoreName];
+    let modifierEditElement = this.editElements.modifier[abilityScoreName];
+    let scoreShowElement = this.showElements.score[abilityScoreName];
+    let modifierShowElement = this.showElements.modifier[abilityScoreName];
 
     scoreShowElement.textContent = scoreEditElement.value.toString();
     modifierShowElement.textContent = modifierEditElement.textContent;
@@ -113,9 +113,9 @@ class AbilityScoresShowElements extends sectionModule.ShowElements {
     this.score = {};
     this.modifier = {};
 
-    AbilityScoreNames.forEachEntry( ([key, value]) => {
-      this.score[key] = shadowRoot.getElementById(`${value.name}-score-show`);
-      this.modifier[key] = shadowRoot.getElementById(`${value.name}-modifier-show`);
+    AbilityScoreNames.forEachName( (name) => {
+      this.score[name] = shadowRoot.getElementById(`${name}-score-show`);
+      this.modifier[name] = shadowRoot.getElementById(`${name}-modifier-show`);
     });
   }
 }
@@ -127,9 +127,9 @@ class AbilityScoresEditElements extends sectionModule.EditElements {
     this.score = {};
     this.modifier = {};
 
-    AbilityScoreNames.forEachEntry( ([key, value]) => {
-      this.score[key] = shadowRoot.getElementById(`${value.name}-score-edit`);
-      this.modifier[key] = shadowRoot.getElementById(`${value.name}-modifier-edit`);
+    AbilityScoreNames.forEachName( (name) => {
+      this.score[name] = shadowRoot.getElementById(`${name}-score-edit`);
+      this.modifier[name] = shadowRoot.getElementById(`${name}-modifier-edit`);
     });
 
     this.proficiency_bonus = shadowRoot.getElementById('proficiency-bonus-input');
