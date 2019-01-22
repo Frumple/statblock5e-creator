@@ -1,4 +1,5 @@
 import * as sectionModule from '/src/js/base/section.js';
+import { capitalizeFirstLetter } from '/src/js/helpers/string-format.js';
 
 export default class HeadingSection extends sectionModule.Section {
   static get elementName() { return 'heading-section'; }
@@ -25,16 +26,12 @@ export default class HeadingSection extends sectionModule.Section {
     let type = this.editElements.type.value;
     let alignment = this.editElements.alignment.value;
 
-    title = HeadingSection.capitalizeFirstLetter(title);
+    title = capitalizeFirstLetter(title);
     this.editElements.title.value = title;
     this.showElements.title.textContent = title;
 
     let subtitle = `${size} ${type}, ${alignment}`;
     this.showElements.subtitle.textContent = subtitle;
-  }
-
-  static capitalizeFirstLetter(string) {
-    return string.charAt(0).toUpperCase() + string.slice(1);
   }
 }
 

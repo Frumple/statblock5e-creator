@@ -12,14 +12,14 @@ export default class StatBlock extends CustomAutonomousElement {
     this.topStats = document.querySelector('top-stats');
 
     this.addEventListener('abilityScoreChanged', (event) => {
-      let abilityScoreName = event.detail.abilityScoreName;
+      let abilityScoreKey = event.detail.abilityScoreKey;
       let abilityModifier = event.detail.abilityModifier;
 
-      if (abilityScoreName === AbilityScoreNames.CONSTITUTION) {
+      if (abilityScoreKey === 'CONSTITUTION') {
         this.topStats.basicStats.hitPointsSection.setConstitutionModifier(abilityModifier);
       }
 
-      this.topStats.advancedStats.savingThrowsSection.setAbilityModifier(abilityScoreName, abilityModifier);
+      this.topStats.advancedStats.savingThrowsSection.setAbilityModifier(abilityScoreKey, abilityModifier);
     });
 
     this.addEventListener('proficiencyBonusChanged', (event) => {
