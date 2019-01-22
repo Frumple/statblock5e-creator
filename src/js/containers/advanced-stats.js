@@ -6,5 +6,19 @@ export default class AdvancedStats extends CustomAutonomousElement {
 
   constructor() {
     super(AdvancedStats.elementName);
+
+    this.savingThrowsSection = document.querySelector('saving-throws-section');
+    this.challengeSection = document.querySelector('challenge-section');
+
+    this.addEventListener('mouseenter', () => {
+      this.savingThrowsSection.showElements.section.classList.remove('section_empty-hidden');
+    });
+
+    this.addEventListener('mouseleave', () => {
+      let section = this.savingThrowsSection.showElements.section;
+      if (section.classList.contains('section_empty')) {
+        section.classList.add('section_empty-hidden');
+      }      
+    });
   }
 }

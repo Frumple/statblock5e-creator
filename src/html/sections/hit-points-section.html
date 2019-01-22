@@ -56,11 +56,6 @@
   .hit-points-edit-section__hit-die-trailing-text {
     grid-area: 6 / 6 / 7 / 7;
   }
-
-  .hit-points-edit-section__constitution-hit-points,
-  .hit-points-edit-section__constitution-modifier {
-    display: none;
-  }
 </style>
 
 <error-messages></error-messages>
@@ -97,7 +92,7 @@
       <span id="constitution-hit-points-operator">+</span> <span id="constitution-hit-points-number">0</span> )
     </label>
   </div>
-  <span id="constitution-modifier" class="hit-points-edit-section__constitution-modifier">0</span>
-  <span id="constitution-hit-points" class="hit-points-edit-section__constitution-hit-points">0</span>
+  <span id="constitution-modifier" class="hidden-data">0</span>
+  <span id="constitution-hit-points" class="hidden-data">0</span>
   <button id="save-action" class="section__action section__save-action" name="armor-class-save">Save</button>
 </div>

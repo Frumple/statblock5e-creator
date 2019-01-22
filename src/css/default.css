@@ -11,6 +11,10 @@ input[type="text"] {
   border-style: double;
 }
 
+.hidden-data {
+  display: none;
+}
+
 .section-divider {
   display: block;
   height: 0;
@@ -48,7 +52,12 @@ input[type="text"] {
   cursor: pointer;
 }
 
-.section_hidden {
+.section_empty {
+  color: Gray;
+}
+
+.section_hidden,
+.section_empty-hidden {
   height: 0;
   opacity: 0;
   visibility: hidden;

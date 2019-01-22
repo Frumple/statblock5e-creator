@@ -17,6 +17,10 @@ export default class AbilityScoresSection extends sectionModule.Section {
         this.onAbilityScoreChange(abilityScoreName);
       });
     });
+
+    this.editElements.proficiency_bonus.addEventListener('input', () => {
+      this.onProficiencyBonusChange();
+    });
   }
 
   onAbilityScoreChange(abilityScoreName) {
@@ -26,7 +30,7 @@ export default class AbilityScoresSection extends sectionModule.Section {
 
     this.updateEditModeModifier(abilityScoreName, modifier);
 
-    if (score) {
+    if (! isNaN(score)) {
       let changeEvent = new CustomEvent('abilityScoreChanged', {
         bubbles: true,
         composed: true,
@@ -34,6 +38,22 @@ export default class AbilityScoresSection extends sectionModule.Section {
           abilityScoreName: abilityScoreName,
           abilityScore: score,
           abilityModifier: modifier
+        }
+      });
+      this.dispatchEvent(changeEvent);
+    }
+  }
+
+  onProficiencyBonusChange() {
+    let proficiencyBonusElement = this.editElements.proficiency_bonus;
+    let proficiencyBonus = parseInt(proficiencyBonusElement.value, 10);
+
+    if (! isNaN(proficiencyBonus)) {
+      let changeEvent = new CustomEvent('proficiencyBonusChanged', {
+        bubbles: true,
+        composed: true,
+        detail: {
+          proficiencyBonus: proficiencyBonus
         }
       });
       this.dispatchEvent(changeEvent);
