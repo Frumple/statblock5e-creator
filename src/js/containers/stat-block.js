@@ -20,12 +20,14 @@ export default class StatBlock extends CustomAutonomousElement {
       }
 
       this.topStats.advancedStats.savingThrowsSection.setAbilityModifier(abilityScoreName, abilityModifier);
+      this.topStats.advancedStats.skillsSection.setAbilityModifier(abilityScoreName, abilityModifier);
     });
 
     this.addEventListener('proficiencyBonusChanged', (event) => {
       let proficiencyBonus = event.detail.proficiencyBonus;
 
       this.topStats.advancedStats.savingThrowsSection.setProficiencyBonus(proficiencyBonus);
+      this.topStats.advancedStats.skillsSection.setProficiencyBonus(proficiencyBonus);
     });
   }
 }
