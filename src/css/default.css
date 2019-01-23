@@ -70,6 +70,10 @@ input[type="text"] {
   font-weight: bold;
 }
 
+.section__label_disabled {
+  color: Gray;
+}
+
 .section__small-number-input {
   width: 40px;
 }

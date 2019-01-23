@@ -19,6 +19,20 @@ export default class SavingThrowsSection extends sectionModule.Section {
         this.editElements.override[name]
       );
 
+      const labelDisabledClass = 'section__label_disabled';
+      let enableElement = this.editElements.enable[name];
+      let labelElement = this.editElements.label[name];
+      let modifierElement = this.editElements.savingThrowModifier[name];
+      enableElement.addEventListener('input', () => {
+        if (enableElement.checked) {
+          labelElement.classList.remove(labelDisabledClass);
+          modifierElement.classList.remove(labelDisabledClass);
+        } else {
+          labelElement.classList.add(labelDisabledClass);
+          modifierElement.classList.add(labelDisabledClass);
+        }
+      });
+
       let isProficientElement = this.editElements.proficient[name];
       isProficientElement.addEventListener('input', () => {
         this.calculateSavingThrowModifier(name);
@@ -126,6 +140,7 @@ class SavingThrowsEditElements extends sectionModule.EditElements {
     super(shadowRoot);
 
     this.enable = {};
+    this.label = {};
     this.savingThrowModifier = {};
     this.proficient = {};
     this.override = {};
@@ -133,6 +148,7 @@ class SavingThrowsEditElements extends sectionModule.EditElements {
 
     AbilityScoreNames.forEachName( (name) => {
       this.enable[name] = shadowRoot.getElementById(`${name}-enable`);
+      this.label[name] = shadowRoot.getElementById(`${name}-label`);
       this.savingThrowModifier[name] = shadowRoot.getElementById(`${name}-saving-throw-modifier`);
       this.proficient[name] = shadowRoot.getElementById(`${name}-proficient`);
       this.override[name] = shadowRoot.getElementById(`${name}-override`);
