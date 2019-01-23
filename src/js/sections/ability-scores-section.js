@@ -18,7 +18,7 @@ export default class AbilityScoresSection extends sectionModule.Section {
       });
     });
 
-    this.editElements.proficiency_bonus.addEventListener('input', () => {
+    this.editElements.proficiencyBonus.addEventListener('input', () => {
       this.onProficiencyBonusChange();
     });
   }
@@ -45,7 +45,7 @@ export default class AbilityScoresSection extends sectionModule.Section {
   }
 
   onProficiencyBonusChange() {
-    let proficiencyBonusElement = this.editElements.proficiency_bonus;
+    let proficiencyBonusElement = this.editElements.proficiencyBonus;
     let proficiencyBonus = parseInt(proficiencyBonusElement.value, 10);
 
     if (! isNaN(proficiencyBonus)) {
@@ -84,9 +84,9 @@ export default class AbilityScoresSection extends sectionModule.Section {
 
   checkForErrors() {
     AbilityScoreNames.forEachName( (name) => {
-      this.editElements.score[name].validate(this.error_messages);
+      this.editElements.score[name].validate(this.errorMessages);
     });
-    this.editElements.proficiency_bonus.validate(this.error_messages);
+    this.editElements.proficiencyBonus.validate(this.errorMessages);
   }
 
   update() {
@@ -132,6 +132,6 @@ class AbilityScoresEditElements extends sectionModule.EditElements {
       this.modifier[name] = shadowRoot.getElementById(`${name}-modifier-edit`);
     });
 
-    this.proficiency_bonus = shadowRoot.getElementById('proficiency-bonus-input');
+    this.proficiencyBonus = shadowRoot.getElementById('proficiency-bonus-input');
   }
 }

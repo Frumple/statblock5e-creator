@@ -32,20 +32,20 @@ export default class SavingThrowsSection extends sectionModule.Section {
           this.calculateSavingThrowModifier(name);
         } else {
           let formattedSavingThrow = SavingThrowsSection.formatSavingThrowModifier(overrideValue);
-          this.editElements.saving_throw_modifier[name].textContent = formattedSavingThrow;
+          this.editElements.savingThrowModifier[name].textContent = formattedSavingThrow;
         }
       });
     });
   }
 
   setAbilityModifier(abilityScoreName, abilityModifier) {
-    this.editElements.ability_modifier[abilityScoreName].textContent = abilityModifier;
+    this.editElements.abilityModifier[abilityScoreName].textContent = abilityModifier;
     this.calculateSavingThrowModifier(abilityScoreName);
     this.update();
   }
 
   setProficiencyBonus(proficiencyBonus) {
-    this.editElements.proficiency_bonus.textContent = proficiencyBonus;
+    this.editElements.proficiencyBonus.textContent = proficiencyBonus;
     AbilityScoreNames.forEachName( (name) => {
       this.calculateSavingThrowModifier(name);
     });
@@ -56,7 +56,7 @@ export default class SavingThrowsSection extends sectionModule.Section {
     let override = this.editElements.override[abilityScoreName].value;
 
     if (override === "") {
-      let abilityModifierElement = this.editElements.ability_modifier[abilityScoreName];
+      let abilityModifierElement = this.editElements.abilityModifier[abilityScoreName];
       let isProficientElement = this.editElements.proficient[abilityScoreName];
 
       let abilityModifier = parseInt(abilityModifierElement.textContent, 10);
@@ -64,14 +64,14 @@ export default class SavingThrowsSection extends sectionModule.Section {
 
       let savingThrowModifier = abilityModifier;
       if (isProficient) {
-        let proficiencyBonusElement = this.editElements.proficiency_bonus;
+        let proficiencyBonusElement = this.editElements.proficiencyBonus;
         let proficiencyBonus = parseInt(proficiencyBonusElement.textContent, 10);
 
         savingThrowModifier += proficiencyBonus;
       }
 
       let formattedSavingThrow = SavingThrowsSection.formatSavingThrowModifier(savingThrowModifier);
-      this.editElements.saving_throw_modifier[abilityScoreName].textContent = formattedSavingThrow;
+      this.editElements.savingThrowModifier[abilityScoreName].textContent = formattedSavingThrow;
     }
   }
 
@@ -91,7 +91,7 @@ export default class SavingThrowsSection extends sectionModule.Section {
 
     AbilityScoreNames.forEachEntry( ([name, value]) => {
       let isEnabled = this.editElements.enable[name].checked;
-      let savingThrowModifier = this.editElements.saving_throw_modifier[name].textContent;
+      let savingThrowModifier = this.editElements.savingThrowModifier[name].textContent;
 
       let abbreviation = capitalizeFirstLetter(value.abbreviation);
 
@@ -126,19 +126,19 @@ class SavingThrowsEditElements extends sectionModule.EditElements {
     super(shadowRoot);
 
     this.enable = {};
-    this.saving_throw_modifier = {};
+    this.savingThrowModifier = {};
     this.proficient = {};
     this.override = {};
-    this.ability_modifier = {};
+    this.abilityModifier = {};
 
     AbilityScoreNames.forEachName( (name) => {
       this.enable[name] = shadowRoot.getElementById(`${name}-enable`);
-      this.saving_throw_modifier[name] = shadowRoot.getElementById(`${name}-saving-throw-modifier`);
+      this.savingThrowModifier[name] = shadowRoot.getElementById(`${name}-saving-throw-modifier`);
       this.proficient[name] = shadowRoot.getElementById(`${name}-proficient`);
       this.override[name] = shadowRoot.getElementById(`${name}-override`);
-      this.ability_modifier[name] = shadowRoot.getElementById(`${name}-ability-modifier`);
+      this.abilityModifier[name] = shadowRoot.getElementById(`${name}-ability-modifier`);
     });
 
-    this.proficiency_bonus = shadowRoot.getElementById('proficiency-bonus');
+    this.proficiencyBonus = shadowRoot.getElementById('proficiency-bonus');
   }
 }

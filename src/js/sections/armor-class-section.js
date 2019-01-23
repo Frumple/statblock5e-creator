@@ -9,23 +9,23 @@ export default class ArmorClassSection extends sectionModule.Section {
           ArmorClassShowElements,
           ArmorClassEditElements);
 
-    let useCustomCheckbox = this.editElements.use_custom;
+    let useCustomCheckbox = this.editElements.useCustom;
     useCustomCheckbox.disableElementsWhenChecked(
-      this.editElements.armor_class,
-      this.editElements.armor_type);
+      this.editElements.armorClass,
+      this.editElements.armorType);
     useCustomCheckbox.enableElementsWhenChecked(
-      this.editElements.custom_text);
+      this.editElements.customText);
   }
 
   checkForErrors() {
-    this.editElements.armor_class.validate(this.error_messages);
+    this.editElements.armorClass.validate(this.errorMessages);
   }
 
   update() {
-    let armorClass = this.editElements.armor_class.value;
-    let armorType = this.editElements.armor_type.value;
-    let useCustom = this.editElements.use_custom.checked;
-    let customText = this.editElements.custom_text.value;
+    let armorClass = this.editElements.armorClass.value;
+    let armorType = this.editElements.armorType.value;
+    let useCustom = this.editElements.useCustom.checked;
+    let customText = this.editElements.customText.value;
 
     let text = '';
     if (useCustom) {
@@ -51,9 +51,9 @@ class ArmorClassShowElements extends sectionModule.ShowElements {
 class ArmorClassEditElements extends sectionModule.EditElements {
   constructor(shadowRoot) {
     super(shadowRoot);
-    this.armor_class = shadowRoot.getElementById('armor-class-input');
-    this.armor_type = shadowRoot.getElementById('armor-type-input');
-    this.use_custom = shadowRoot.getElementById('use-custom-input');
-    this.custom_text = shadowRoot.getElementById('custom-input');
+    this.armorClass = shadowRoot.getElementById('armor-class-input');
+    this.armorType = shadowRoot.getElementById('armor-type-input');
+    this.useCustom = shadowRoot.getElementById('use-custom-input');
+    this.customText = shadowRoot.getElementById('custom-input');
   }
 }

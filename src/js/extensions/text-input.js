@@ -16,17 +16,17 @@ export default class TextInput extends CustomBuiltinInputElement {
     });
   }
 
-  validate(error_messages) {
+  validate(errorMessages) {
     if (this.required) {
-      this.validateForEmpty(error_messages);
+      this.validateForEmpty(errorMessages);
     }
   }
 
-  validateForEmpty(error_messages) {
+  validateForEmpty(errorMessages) {
     if(this.value === "") {
       let pretty_name = this.getAttribute('pretty-name');
       let field_name = pretty_name ? pretty_name : this.name;
-      error_messages.add(this,
+      errorMessages.add(this,
         `${field_name} cannot be empty.`);
     }
   }

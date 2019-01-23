@@ -7,7 +7,7 @@ export class Section extends CustomAutonomousElement {
 
     this.showElements = new showElementsClass(this.shadowRoot);
     this.editElements = new editElementsClass(this.shadowRoot);
-    this.error_messages = this.shadowRoot.querySelector('error-messages');
+    this.errorMessages = this.shadowRoot.querySelector('error-messages');
 
     this.showElements.section.addEventListener('mouseenter', () => {
       this.showElements.edit_action.classList.remove('section__action_hidden');
@@ -82,9 +82,9 @@ export class Section extends CustomAutonomousElement {
   }
 
   save() {
-    this.error_messages.clear();
+    this.errorMessages.clear();
     this.checkForErrors();
-    if (this.error_messages.any()) {
+    if (this.errorMessages.any()) {
       return;
     }
     this.update();

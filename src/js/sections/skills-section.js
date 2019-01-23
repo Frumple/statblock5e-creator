@@ -32,14 +32,14 @@ export default class SkillsSection extends sectionModule.Section {
           this.calculateSkillModifier(name);
         } else {
           let formattedSkillModifier = SkillsSection.formatSkillModifier(overrideValue);
-          this.editElements.skill_modifier[name].textContent = formattedSkillModifier;
+          this.editElements.skiliModifier[name].textContent = formattedSkillModifier;
         }
       });
     });
   }
 
   setAbilityModifier(abilityScoreName, abilityModifier) {
-    this.editElements.ability_modifier[abilityScoreName].textContent = abilityModifier;
+    this.editElements.abilityModifier[abilityScoreName].textContent = abilityModifier;
     SkillNames.forEachEntry( ([name, value]) => {
       if (value.ability_score === abilityScoreName) {
         this.calculateSkillModifier(name);
@@ -49,7 +49,7 @@ export default class SkillsSection extends sectionModule.Section {
   }
 
   setProficiencyBonus(proficiencyBonus) {
-    this.editElements.proficiency_bonus.textContent = proficiencyBonus;
+    this.editElements.proficiencyBonus.textContent = proficiencyBonus;
     SkillNames.forEach( (name) => {
       this.calculateSkillModifier(name);
     });
@@ -61,7 +61,7 @@ export default class SkillsSection extends sectionModule.Section {
 
     if (override === "") {
       let abilityScoreName = SkillNames.getEntry(skillName).ability_score;
-      let abilityModifierElement = this.editElements.ability_modifier[abilityScoreName];
+      let abilityModifierElement = this.editElements.abilityModifier[abilityScoreName];
       let isProficientElement = this.editElements.proficient[skillName];
 
       let abilityModifier = parseInt(abilityModifierElement.textContent, 10);
@@ -69,14 +69,14 @@ export default class SkillsSection extends sectionModule.Section {
 
       let skillModifier = abilityModifier;
       if (isProficient) {
-        let proficiencyBonusElement = this.editElements.proficiency_bonus;
+        let proficiencyBonusElement = this.editElements.proficiencyBonus;
         let proficiencyBonus = parseInt(proficiencyBonusElement.textContent, 10);
 
         skillModifier += proficiencyBonus;
       }
 
       let formattedSkillModifier = SkillsSection.formatSkillModifier(skillModifier);
-      this.editElements.skill_modifier[skillName].textContent = formattedSkillModifier;
+      this.editElements.skiliModifier[skillName].textContent = formattedSkillModifier;
     }
   }
 
@@ -96,7 +96,7 @@ export default class SkillsSection extends sectionModule.Section {
 
     SkillNames.forEachEntry( ([name, value]) => {
       let isEnabled = this.editElements.enable[name].checked;
-      let skillModifier = this.editElements.skill_modifier[name].textContent;
+      let skillModifier = this.editElements.skiliModifier[name].textContent;
 
       if (isEnabled) {
         if (text === '') {
@@ -129,22 +129,22 @@ class SkillsEditElements extends sectionModule.EditElements {
     super(shadowRoot);
 
     this.enable = {};
-    this.skill_modifier = {};
+    this.skiliModifier = {};
     this.proficient = {};
     this.override = {};
-    this.ability_modifier = {};
+    this.abilityModifier = {};
 
     SkillNames.forEach( (name) => {
       this.enable[name] = shadowRoot.getElementById(`${name}-enable`);
-      this.skill_modifier[name] = shadowRoot.getElementById(`${name}-skill-modifier`);
+      this.skiliModifier[name] = shadowRoot.getElementById(`${name}-skill-modifier`);
       this.proficient[name] = shadowRoot.getElementById(`${name}-proficient`);
       this.override[name] = shadowRoot.getElementById(`${name}-override`);
     });
 
     AbilityScoreNames.forEachName( (name) => {
-      this.ability_modifier[name] = shadowRoot.getElementById(`${name}-ability-modifier`);
+      this.abilityModifier[name] = shadowRoot.getElementById(`${name}-ability-modifier`);
     });
 
-    this.proficiency_bonus = shadowRoot.getElementById('proficiency-bonus');
+    this.proficiencyBonus = shadowRoot.getElementById('proficiency-bonus');
   }
 }

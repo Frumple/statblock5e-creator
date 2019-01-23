@@ -9,7 +9,7 @@ export default class SpeedSection extends sectionModule.Section {
           SpeedShowElements,
           SpeedEditElements);
 
-    let useCustomCheckbox = this.editElements.use_custom;
+    let useCustomCheckbox = this.editElements.useCustom;
     useCustomCheckbox.disableElementsWhenChecked(
       this.editElements.walk,
       this.editElements.burrow,
@@ -18,7 +18,7 @@ export default class SpeedSection extends sectionModule.Section {
       this.editElements.hover,
       this.editElements.swim);
     useCustomCheckbox.enableElementsWhenChecked(
-      this.editElements.custom_text);
+      this.editElements.customText);
   }
 
   checkForErrors() {
@@ -32,8 +32,8 @@ export default class SpeedSection extends sectionModule.Section {
     let flySpeed = this.editElements.fly.value;
     let hover = this.editElements.hover.checked;
     let swimSpeed = this.editElements.swim.value;
-    let useCustom = this.editElements.use_custom.checked;
-    let customText = this.editElements.custom_text.value;
+    let useCustom = this.editElements.useCustom.checked;
+    let customText = this.editElements.customText.value;
 
     let text = '';
 
@@ -84,7 +84,7 @@ class SpeedEditElements extends sectionModule.EditElements {
     this.fly = shadowRoot.getElementById('fly-input');
     this.hover = shadowRoot.getElementById('hover-input');
     this.swim = shadowRoot.getElementById('swim-input');
-    this.use_custom = shadowRoot.getElementById('use-custom-input');
-    this.custom_text = shadowRoot.getElementById('custom-input');
+    this.useCustom = shadowRoot.getElementById('use-custom-input');
+    this.customText = shadowRoot.getElementById('custom-input');
   }
 }
