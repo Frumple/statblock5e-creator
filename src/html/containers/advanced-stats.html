@@ -3,25 +3,29 @@
 <style>
   .toggle-empty-attributes-container {
     display: flex;
-    flex-direction: column;
-    justify-content: center;
+    align-items: center;
+    position: absolute;
+    left: 430px;
+    background: #EEEEEE;
+    border: 1px solid #867453;
+    box-shadow: 3px 3px 1.5em #867453;
+    width: fit-content;
+    padding: 5px;
   }
 
-  .toggle-empty-attributes-container_hidden {
-    display: none;
-  }
-
-  .toggle-empty-attributes-container__button {
+  .toggle-empty-attributes-container__label {
     font-family: inherit;
     font-size: inherit;
     font-weight: bold;
-    white-space: nowrap;
-    cursor: pointer;
+    color: black;
+    white-space: pre-wrap;
+    margin-left: 5px;
   }
 </style>
 
-<div id="toggle-empty-attributes-container" class="toggle-empty-attributes-container toggle-empty-attributes-container_hidden">
-  <button id="toggle-empty-attributes-button" class="toggle-empty-attributes-container__button">Show Empty Attributes</button>
-  <section-divider></section-divider>
+<div id="toggle-empty-attributes-container" class="toggle-empty-attributes-container">
+  <input id="toggle-empty-attributes-checkbox" class="toggle-empty-attributes-container__checkbox" type="checkbox" />
+  <label id="toggle-empty-attributes-label" class="toggle-empty-attributes-container__label" for="toggle-empty-attributes-checkbox">Show Empty
+Attributes</label>
 </div>
 <slot></slot>

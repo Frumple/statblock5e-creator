@@ -12,7 +12,7 @@ export default class AdvancedStats extends CustomAutonomousElement {
     this.challengeSection = document.querySelector('challenge-section');
 
     this.toggleEmptyAttributesContainer = this.shadowRoot.getElementById('toggle-empty-attributes-container');
-    this.toggleEmptyAttributesButton = this.shadowRoot.getElementById('toggle-empty-attributes-button');
+    this.toggleEmptyAttributesCheckbox = this.shadowRoot.getElementById('toggle-empty-attributes-checkbox');
 
     this.addEventListener('mouseenter', () => {
       this.toggleEmptyAttributesContainer.classList.remove('toggle-empty-attributes-container_hidden');
@@ -22,36 +22,30 @@ export default class AdvancedStats extends CustomAutonomousElement {
       this.toggleEmptyAttributesContainer.classList.add('toggle-empty-attributes-container_hidden');
     });
 
-    this.toggleEmptyAttributesButton.addEventListener('click', () => {
+    this.toggleEmptyAttributesCheckbox.addEventListener('input', () => {
       this.toggleEmptyAttributes();
     });
   }
 
   toggleEmptyAttributes() {
-    let button = this.toggleEmptyAttributesButton;
+    let button = this.toggleEmptyAttributesCheckbox;
 
-    let hiddenSectionsWhenEmpty = [
+    let sectionsHiddenWhenEmpty = [
       this.savingThrowsSection,
       this.skillsSection
     ];
 
-    if('emptyAttributesVisible' in button.dataset) {
-      hiddenSectionsWhenEmpty.forEach( (section) => {
+    if(this.toggleEmptyAttributesCheckbox.checked) {
+      sectionsHiddenWhenEmpty.forEach( (section) => {
+        section.showElements.section.classList.remove('section_empty-hidden');
+      });
+    } else {
+      sectionsHiddenWhenEmpty.forEach( (section) => {
         let showSection = section.showElements.section;
         if (showSection.classList.contains('section_empty')) {
           showSection.classList.add('section_empty-hidden');
         }
       });
-
-      button.textContent = 'Show Empty Attributes';
-      delete button.dataset.emptyAttributesVisible;
-    } else {
-      hiddenSectionsWhenEmpty.forEach( (section) => {
-        section.showElements.section.classList.remove('section_empty-hidden');
-      });
-
-      button.textContent = 'Hide Empty Attributes';
-      button.dataset.emptyAttributesVisible = '';
     }
   }
 }
