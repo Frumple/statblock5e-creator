@@ -36,8 +36,11 @@ input[type="text"] {
 }
 
 .section {
-  display: flex;
-  justify-content: space-between;
+  display: grid;
+  grid-template-columns: auto 0fr;
+  grid-template-rows: auto;
+  grid-column-gap: 10px;
+  align-items: center;
   overflow: hidden;
   height: 100%;
   opacity: 1;
@@ -79,28 +82,15 @@ input[type="text"] {
 }
 
 .section__action {
-  all: initial;
-  display: flex;
-  align-items: center;
-  width: 30px;
-  padding-left: 10px;
-  padding-right: 10px;
+  height: 100%;
+  width: 50px;
+  justify-self: end;
   font-family: inherit;
-  font-size: 13.5px;
+  font-size: inherit;
   font-weight: bold;
-  text-decoration: underline;
-  margin-left: 10px;
   cursor: pointer;
 }
 
 .section__action_hidden {
   display: none;
-}
-
-.section__save-action {
-  border: 1px solid silver;
-}
-
-.section__save-action:hover {
-  background: #90FF70;
 }
