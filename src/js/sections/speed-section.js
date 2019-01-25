@@ -21,6 +21,10 @@ export default class SpeedSection extends sectionModule.Section {
       this.editElements.customText);
   }
 
+  get initialSelectedElement() {
+    return this.editElements.walk;
+  }
+
   checkForErrors() {
 
   }

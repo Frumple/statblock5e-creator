@@ -82,6 +82,10 @@ export default class AbilityScoresSection extends sectionModule.Section {
     return Math.floor((score - 10) / 2);
   }
 
+  get initialSelectedElement() {
+    return this.editElements.score.strength;
+  }
+
   checkForErrors() {
     AbilityScoreNames.forEachName( (name) => {
       this.editElements.score[name].validate(this.errorMessages);

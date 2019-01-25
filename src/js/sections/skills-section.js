@@ -101,6 +101,10 @@ export default class SkillsSection extends sectionModule.Section {
     return `${operator}${number}`;
   }
 
+  get initialSelectedElement() {
+    return this.editElements.enable.acrobatics;
+  }
+
   checkForErrors() {
 
   }

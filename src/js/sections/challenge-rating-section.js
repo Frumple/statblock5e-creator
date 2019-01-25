@@ -17,6 +17,10 @@ export default class ChallengeRatingSection extends sectionModule.Section {
     });
   }
 
+  get initialSelectedElement() {
+    return this.editElements.challengeRating;
+  }
+
   checkForErrors() {
     this.editElements.experiencePoints.validate(this.errorMessages);
   }

@@ -22,8 +22,18 @@ export class Section extends CustomAutonomousElement {
       this.mode = 'edit';
     });
 
-    this.showElements.edit_action.addEventListener('click', () => {
-      this.mode = 'edit';
+    this.showElements.section.addEventListener('transitionend', () => {
+      if (this.mode === 'edit') {
+        let element = this.initialSelectedElement;
+        let tagName = element.tagName;
+        let type = element.getAttribute('type');
+
+        if (tagName === 'INPUT' && (type === 'text' || type === 'number')) {
+          element.select();
+        } else {
+          element.focus();
+        }
+      }
     });
 
     this.editElements.save_action.addEventListener('click', () => {
@@ -80,14 +90,19 @@ export class Section extends CustomAutonomousElement {
     }
   }
 
+  get initialSelectedElement() {
+    throw new Error(
+      `The class '${this.constructor.name}' must implement the initialSelectedElement() getter.`);
+  }
+
   checkForErrors() {
     throw new Error(
-      `The class '${this.name}' must implement the checkForErrors() method.`);
+      `The class '${this.constructor.name}' must implement the checkForErrors() method.`);
   }
 
   update() {
     throw new Error(
-      `The class '${this.name}' must implement the update() method.`);
+      `The class '${this.constructor.name}' must implement the update() method.`);
   }
 
   save() {

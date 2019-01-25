@@ -17,6 +17,10 @@ export default class ArmorClassSection extends sectionModule.Section {
       this.editElements.customText);
   }
 
+  get initialSelectedElement() {
+    return this.editElements.armorClass;
+  }
+
   checkForErrors() {
     this.editElements.armorClass.validate(this.errorMessages);
   }

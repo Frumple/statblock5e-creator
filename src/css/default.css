@@ -49,15 +49,6 @@ input[type="text"] {
               visibility 0ms linear var(--section-transition-duration);
 }
 
-.section_selectable:hover {
-  background: #FFCCCC;
-  cursor: pointer;
-}
-
-.section_empty {
-  color: Gray;
-}
-
 .section_hidden {
   height: 0;
   opacity: 0;
@@ -65,6 +56,15 @@ input[type="text"] {
   transition: opacity var(--section-transition-duration) ease-in 0ms,
               height 0ms linear var(--section-transition-duration),
               visibility 0ms linear var(--section-transition-duration);
+}
+
+.section_selectable:hover {
+  background: #FFCCCC;
+  cursor: pointer;
+}
+
+.section_empty {
+  color: Gray;
 }
 
 .section__header-label {

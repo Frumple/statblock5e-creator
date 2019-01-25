@@ -9,10 +9,10 @@ export default class HeadingSection extends sectionModule.Section {
     super(HeadingSection.elementName,
           HeadingShowElements,
           HeadingEditElements);
+  }
 
-    this.showElements.section.addEventListener('click', () => {
-      this.editElements.title.select();
-    });
+  get initialSelectedElement() {
+    return this.editElements.title;
   }
 
   checkForErrors() {
