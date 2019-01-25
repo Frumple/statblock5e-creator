@@ -1,5 +1,6 @@
 import CustomAutonomousElement from '/src/js/base/custom-autonomous-element.js';
 import ErrorMessages from '/src/js/elements/error-messages.js';
+import GlobalOptions from '/src/js/helpers/global-options.js';
 
 export class Section extends CustomAutonomousElement {
   constructor(elementName, showElementsClass, editElementsClass) {
@@ -18,11 +19,11 @@ export class Section extends CustomAutonomousElement {
     });
 
     this.showElements.section.addEventListener('click', () => {
-      this.switchToEditMode();
+      this.mode = 'edit';
     });
 
     this.showElements.edit_action.addEventListener('click', () => {
-      this.switchToEditMode();
+      this.mode = 'edit';
     });
 
     this.editElements.save_action.addEventListener('click', () => {
@@ -34,40 +35,48 @@ export class Section extends CustomAutonomousElement {
     });
   }
 
-  switchToShowMode() {
+  get mode() {
+    return this.dataset.mode;
+  }
+
+  set mode(mode) {
     const hiddenClass = 'section_hidden';
-    this.editElements.section.classList.add(hiddenClass);
-    this.showElements.section.classList.remove(hiddenClass);
 
-    this.toggleAdjacentSectionDividers(false);
+    switch (mode) {
+      case 'hidden':
+        this.dataset.mode = 'hidden';
+        this.showElements.section.classList.add(hiddenClass);
+        this.editElements.section.classList.add(hiddenClass);
+        break;
+      case 'show':
+        this.dataset.mode = 'show';
+        this.showElements.section.classList.remove(hiddenClass);
+        this.editElements.section.classList.add(hiddenClass);
+        break;
+      case 'edit':
+        this.dataset.mode = 'edit';
+        this.showElements.section.classList.add(hiddenClass);
+        this.editElements.section.classList.remove(hiddenClass);
+        break;
+      default:
+      throw new Error(
+        `'${mode}' is not a valid section mode.`);
+    }
   }
 
-  switchToEditMode() {
-    const hiddenClass = 'section_hidden';
-    this.showElements.section.classList.add(hiddenClass);
-    this.editElements.section.classList.remove(hiddenClass);
-
-    this.toggleAdjacentSectionDividers(true);
+  get empty() {
+    return ('empty' in this.dataset);
   }
 
-  toggleAdjacentSectionDividers(isVisible) {
-    Section.toggleSectionDivider(this.previousElementSibling, true, isVisible);
-    Section.toggleSectionDivider(this.nextElementSibling, false, isVisible);
-  }
+  set empty(isEmpty) {
+    const emptyClass = 'section_empty';
 
-  static toggleSectionDivider(sibling, isNext, isVisible) {
-    if (sibling) {
-      if (sibling.tagName === 'SECTION-DIVIDER') {
-        let className = isNext ?
-          'section-divider_visible-for-next' :
-          'section-divider_visible-for-previous';
-
-        if (isVisible) {
-          sibling.classList.add(className);
-        } else {
-          sibling.classList.remove(className);
-        }
-      }
+    if (isEmpty) {
+      this.dataset.empty = '';
+      this.showElements.section.classList.add(emptyClass);
+    } else {
+      delete this.dataset.empty;
+      this.showElements.section.classList.remove(emptyClass);
     }
   }
 
@@ -88,7 +97,12 @@ export class Section extends CustomAutonomousElement {
       return;
     }
     this.update();
-    this.switchToShowMode();
+
+    if (this.empty && ! GlobalOptions.showEmptyAttributes) {
+      this.mode = 'hidden';
+    } else {
+      this.mode = 'show';
+    }
   }
 }
 

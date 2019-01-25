@@ -119,9 +119,9 @@ export default class SavingThrowsSection extends sectionModule.Section {
     });
 
     if (text === '') {
-      this.showElements.section.classList.add('section_empty');
+      this.empty = true;
     } else {
-      this.showElements.section.classList.remove('section_empty');
+      this.empty = false;
     }
 
     this.showElements.text.textContent = text;

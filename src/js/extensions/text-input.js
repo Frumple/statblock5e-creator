@@ -10,8 +10,8 @@ export default class TextInput extends CustomBuiltinInputElement {
      if (keyEvent.key === "Enter") {
        keyEvent.preventDefault();
 
-       let saveEvent = new Event('fieldEnterKeyDown', { bubbles: true });
-       this.dispatchEvent(saveEvent);
+       let fieldEnterKeyDownEvent = new Event('fieldEnterKeyDown', { bubbles: true });
+       this.dispatchEvent(fieldEnterKeyDownEvent);
      }
     });
   }

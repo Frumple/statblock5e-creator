@@ -1,4 +1,5 @@
 import CustomAutonomousElement from '/src/js/base/custom-autonomous-element.js';
+import GlobalOptions from '/src/js/helpers/global-options.js';
 
 export default class AdvancedStats extends CustomAutonomousElement {
   static get elementName() { return 'advanced-stats'; }
@@ -9,41 +10,34 @@ export default class AdvancedStats extends CustomAutonomousElement {
 
     this.savingThrowsSection = document.querySelector('saving-throws-section');
     this.skillsSection = document.querySelector('skills-section');
-    this.challengeSection = document.querySelector('challenge-section');
+    this.challengeRatingSection = document.querySelector('challenge-rating-section');
 
-    this.toggleEmptyAttributesContainer = this.shadowRoot.getElementById('toggle-empty-attributes-container');
-    this.toggleEmptyAttributesCheckbox = this.shadowRoot.getElementById('toggle-empty-attributes-checkbox');
-
-    this.addEventListener('mouseenter', () => {
-      this.toggleEmptyAttributesContainer.classList.remove('toggle-empty-attributes-container_hidden');
-    });
-
-    this.addEventListener('mouseleave', () => {
-      this.toggleEmptyAttributesContainer.classList.add('toggle-empty-attributes-container_hidden');
-    });
-
-    this.toggleEmptyAttributesCheckbox.addEventListener('input', () => {
-      this.toggleEmptyAttributes();
-    });
-  }
-
-  toggleEmptyAttributes() {
-    let button = this.toggleEmptyAttributesCheckbox;
-
-    let sectionsHiddenWhenEmpty = [
+    this.sectionsHiddenWhenEmpty = [
       this.savingThrowsSection,
       this.skillsSection
     ];
 
-    if(this.toggleEmptyAttributesCheckbox.checked) {
-      sectionsHiddenWhenEmpty.forEach( (section) => {
-        section.showElements.section.classList.remove('section_empty-hidden');
+    this.showEmptyAttributesContainer = this.shadowRoot.getElementById('show-empty-attributes-container');
+    this.showEmptyAttributesCheckbox = this.shadowRoot.getElementById('show-empty-attributes-checkbox');
+
+    this.showEmptyAttributesCheckbox.addEventListener('input', () => {
+      this.toggleEmptyAttributeVisibility();
+    });
+  }
+
+  toggleEmptyAttributeVisibility() {
+    if(this.showEmptyAttributesCheckbox.checked) {
+      this.sectionsHiddenWhenEmpty.forEach( (section) => {
+        GlobalOptions.showEmptyAttributes = true;
+        if (section.empty && section.mode === 'hidden') {
+          section.mode = 'show';
+        }
       });
     } else {
-      sectionsHiddenWhenEmpty.forEach( (section) => {
-        let showSection = section.showElements.section;
-        if (showSection.classList.contains('section_empty')) {
-          showSection.classList.add('section_empty-hidden');
+      this.sectionsHiddenWhenEmpty.forEach( (section) => {
+        GlobalOptions.showEmptyAttributes = false;
+        if (section.empty && section.mode === 'show') {
+          section.mode = 'hidden';
         }
       });
     }
