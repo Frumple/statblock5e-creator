@@ -1,6 +1,7 @@
-import CustomAutonomousElement from '/src/js/base/custom-autonomous-element.js';
+import DivisibleContainer from '/src/js/base/divisible-container.js';
+import GlobalOptions from '/src/js/helpers/global-options.js';
 
-export default class BasicStats extends CustomAutonomousElement {
+export default class BasicStats extends DivisibleContainer {
   static get elementName() { return 'basic-stats'; }
   static get templatePath() { return 'src/html/containers/basic-stats.html'; }
 
@@ -10,5 +11,11 @@ export default class BasicStats extends CustomAutonomousElement {
     this.armorClassSection = document.querySelector('armor-class-section');
     this.hitPointsSection = document.querySelector('hit-points-section');
     this.speedSection = document.querySelector('speed-section');
+
+    this.allSections = [
+      this.armorClassSection,
+      this.hitPointsSection,
+      this.speedSection
+    ];
   }
 }

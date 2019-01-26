@@ -20,6 +20,7 @@ export class Section extends CustomAutonomousElement {
 
     this.showElements.section.addEventListener('click', () => {
       this.mode = 'edit';
+      this.fireModeChangedEvent();
     });
 
     this.showElements.section.addEventListener('transitionend', () => {
@@ -118,6 +119,16 @@ export class Section extends CustomAutonomousElement {
     } else {
       this.mode = 'show';
     }
+
+    this.fireModeChangedEvent();
+  }
+
+  fireModeChangedEvent() {
+    let changeEvent = new CustomEvent('sectionModeChanged', {
+      bubbles: true,
+      composed: true
+    });
+    this.dispatchEvent(changeEvent);
   }
 }
 

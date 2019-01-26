@@ -1,7 +1,7 @@
-import CustomAutonomousElement from '/src/js/base/custom-autonomous-element.js';
+import DivisibleContainer from '/src/js/base/divisible-container.js';
 import GlobalOptions from '/src/js/helpers/global-options.js';
 
-export default class AdvancedStats extends CustomAutonomousElement {
+export default class AdvancedStats extends DivisibleContainer {
   static get elementName() { return 'advanced-stats'; }
   static get templatePath() { return 'src/html/containers/advanced-stats.html'; }
 
@@ -12,9 +12,10 @@ export default class AdvancedStats extends CustomAutonomousElement {
     this.skillsSection = document.querySelector('skills-section');
     this.challengeRatingSection = document.querySelector('challenge-rating-section');
 
-    this.sectionsHiddenWhenEmpty = [
+    this.allSections = [
       this.savingThrowsSection,
-      this.skillsSection
+      this.skillsSection,
+      this.challengeRatingSection
     ];
 
     this.showEmptyAttributesContainer = this.shadowRoot.getElementById('show-empty-attributes-container');
@@ -23,23 +24,5 @@ export default class AdvancedStats extends CustomAutonomousElement {
     this.showEmptyAttributesCheckbox.addEventListener('input', () => {
       this.toggleEmptyAttributeVisibility();
     });
-  }
-
-  toggleEmptyAttributeVisibility() {
-    if(this.showEmptyAttributesCheckbox.checked) {
-      this.sectionsHiddenWhenEmpty.forEach( (section) => {
-        GlobalOptions.showEmptyAttributes = true;
-        if (section.empty && section.mode === 'hidden') {
-          section.mode = 'show';
-        }
-      });
-    } else {
-      this.sectionsHiddenWhenEmpty.forEach( (section) => {
-        GlobalOptions.showEmptyAttributes = false;
-        if (section.empty && section.mode === 'show') {
-          section.mode = 'hidden';
-        }
-      });
-    }
   }
 }
