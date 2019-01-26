@@ -10,6 +10,7 @@ import SpeedSection from '/src/js/sections/speed-section.js';
 import AbilityScoresSection from '/src/js/sections/ability-scores-section.js';
 import SavingThrowsSection from '/src/js/sections/saving-throws-section.js';
 import SkillsSection from '/src/js/sections/skills-section.js';
+import LanguagesSection from '/src/js/sections/languages-section.js';
 import ChallengeRatingSection from '/src/js/sections/challenge-rating-section.js';
 
 import EnableDisableElementsCheckbox from '/src/js/extensions/enable-disable-elements-checkbox.js';
@@ -42,6 +43,7 @@ async function defineCustomElements() {
   elementClasses.push(AbilityScoresSection);
   elementClasses.push(SavingThrowsSection);
   elementClasses.push(SkillsSection);
+  elementClasses.push(LanguagesSection);
   elementClasses.push(ChallengeRatingSection);
 
   elementClasses.push(StatBlock);

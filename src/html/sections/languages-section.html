@@ -1,0 +1,140 @@
+<link href='src/css/default.css' rel='stylesheet' type='text/css'>
+
+<style>
+  .languages-edit-section {
+    display: grid;
+    grid-template-columns: 90px auto;
+    grid-template-rows: auto 5px auto;
+    grid-column-gap: 5px;
+    align-items: center;
+    width: 100%;
+  }
+
+  .languages-edit-section__header-label {
+    grid-area: 1 / 1;
+  }
+
+  .languages-edit-section__input-container {
+    grid-area: 1 / 2;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .languages-edit-section__input {
+
+  }
+
+  .languages-edit-section__add-button {
+    margin-left: 5px;
+  }
+
+  .languages-edit-section__list {
+    grid-area: 3 / 2;
+    margin: 0;
+    padding: 0;
+  }
+
+  .languages-edit-section__list-item {
+    list-style: none;
+    display: block;
+  }
+
+  .languages-edit-section__list-item-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border: 1px solid black;
+    padding: 5px;
+  }
+
+  .languages-edit-section__list-item-label {
+  }
+
+  .languages-edit-section__list-item-remove-button {
+  }
+
+</style>
+
+<error-messages></error-messages>
+
+<div id="show-section" class="section section_selectable">
+  <div class="languages-show-section">
+    <property-line>
+      <h4 id="languages-label">Languages</h4>
+      <p id="languages-text">Common</p>
+    </property-line>
+  </div>
+  <button id="edit-action" class="section__action section__action_hidden">Edit</button>
+</div>
+
+<div id="edit-section" class="section section_hidden">
+  <div class="languages-edit-section">
+    <label id="languages-label" class="languages-edit-section__header-label section__header-label">Languages:</label>
+    <div class="languages-edit-section__input-container">
+      <input id="languages-input" class="languages-edit-section__input" is="text-input" type="text" list="languages-list" />
+      <datalist id="languages-list">
+        <option value="Aarakocra" />
+        <option value="Abyssal" />
+        <option value="Aquan" />
+        <option value="Auran" />
+        <option value="Blink Dog" />
+        <option value="Bullywug" />
+        <option value="Celestial" />
+        <option value="Common" />
+        <option value="Deep Speech" />
+        <option value="Draconic" />
+        <option value="Druidic" />
+        <option value="Dwarvish" />
+        <option value="Elvish" />
+        <option value="Giant" />
+        <option value="Giant Eagle" />
+        <option value="Giant Elk" />
+        <option value="Giant Owl" />
+        <option value="Gith" />
+        <option value="Gnoll" />
+        <option value="Gnomish" />
+        <option value="Goblin" />
+        <option value="Grell" />
+        <option value="Grung" />
+        <option value="Halfling" />
+        <option value="Hook Horror" />
+        <option value="Ignan" />
+        <option value="Infernal" />
+        <option value="Kraul" />
+        <option value="Loxodon" />
+        <option value="Merfolk" />
+        <option value="Minotaur" />
+        <option value="Modron" />
+        <option value="Orc" />
+        <option value="Otyugh" />
+        <option value="Primordial" />
+        <option value="Sahuagin" />
+        <option value="Slaad" />
+        <option value="Sphinx" />
+        <option value="Sylvan" />
+        <option value="Terran" />
+        <option value="Thieves' Cant" />
+        <option value="Thri-kreen" />
+        <option value="Tlincalli" />
+        <option value="Troglodyte" />
+        <option value="Undercommon" />
+        <option value="Vedalkin" />
+        <option value="Vegepygmy" />
+        <option value="Winter Wolf" />
+        <option value="Worg" />
+        <option value="Yeti" />
+      </datalist>
+      <button id="languages-add-button" class="languages-edit-section__add-button">Add</button>
+    </div>
+    <ul class="languages-edit-section__list">
+      <li class="languages-edit-section__list-item">
+        <div class="languages-edit-section__list-item-container">
+          <label class="languages-edit-section__list-item-label">Common</label>
+          <button class="languages-edit-section__list-item-remove-button">Remove</button>
+        </div>
+      </li>
+    </ul>
+  </div>
+  <button id="save-action" class="section__action section__save-action" name="languages-save">Save</button>
+</div>
