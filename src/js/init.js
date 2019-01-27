@@ -1,12 +1,13 @@
+import AttributeDataList from '/src/js/extensions/attribute-datalist.js';
 import EnableDisableElementsCheckbox from '/src/js/extensions/enable-disable-elements-checkbox.js';
 import IntegerInput from '/src/js/extensions/integer-input.js';
 import TextInput from '/src/js/extensions/text-input.js';
 
+import AttributeList from '/src/js/elements/attribute-list.js';
+import AttributeListItem from '/src/js/elements/attribute-list-item.js';
 import ErrorMessages from '/src/js/elements/error-messages.js';
 import PropertyBlock from '/src/js/elements/property-block.js';
 import PropertyLine from '/src/js/elements/property-line.js';
-import AttributeList from '/src/js/elements/attribute-list.js';
-import AttributeListItem from '/src/js/elements/attribute-list-item.js';
 import SectionDivider from '/src/js/elements/section-divider.js';
 import TaperedRule from '/src/js/elements/tapered-rule.js';
 
@@ -28,12 +29,13 @@ import AdvancedStats from '/src/js/containers/advanced-stats.js';
 async function defineCustomElements() {
   let elementClasses = [];
 
+  elementClasses.push(AttributeDataList);
   elementClasses.push(EnableDisableElementsCheckbox);
   elementClasses.push(IntegerInput);
-  elementClasses.push(AttributeList);
-  elementClasses.push(AttributeListItem);
   elementClasses.push(TextInput);
 
+  elementClasses.push(AttributeList);
+  elementClasses.push(AttributeListItem);
   elementClasses.push(ErrorMessages);
   elementClasses.push(PropertyBlock);
   elementClasses.push(PropertyLine);

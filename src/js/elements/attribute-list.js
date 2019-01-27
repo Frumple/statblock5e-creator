@@ -14,6 +14,10 @@ export default class AttributeList extends CustomAutonomousElement {
     return elementArray.map(element => element.text);
   }
 
+  contains(text) {
+    return this.itemTextList.includes(text);
+  }
+
   addItem(text) {
     let listItemElement = document.createElement('attribute-list-item');
     let spanElement = document.createElement('span');

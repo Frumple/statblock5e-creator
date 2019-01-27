@@ -21,6 +21,18 @@ export default class AttributeListItem extends CustomAutonomousElement {
   }
 
   remove() {
+    let itemText = this.text;
+
+    let removeEvent = new CustomEvent('attributeListItemRemoved', {
+      bubbles: true,
+      composed: true,
+      detail: {
+        itemText: itemText
+      }
+    });
+    this.dispatchEvent(removeEvent);
+
     this.parentNode.removeChild(this);
+
   }
 }

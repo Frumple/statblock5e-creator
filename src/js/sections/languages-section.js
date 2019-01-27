@@ -21,19 +21,28 @@ export default class LanguagesSection extends sectionModule.Section {
     this.editElements.addButton.addEventListener('click', () => {
       this.addItem();
     });
+
+    this.addEventListener('attributeListItemRemoved', (event) => {
+      let itemText = event.detail.itemText;
+      this.editElements.datalist.setOptionEnabled(itemText, true);
+    });
   }
 
   addItem() {
+    let text = this.editElements.input.value;
+
     this.errorMessages.clear();
     if (this.editElements.input.value === '') {
       this.errorMessages.add(this.editElements.input, 'Cannot add a blank item.');
+    } else if(this.editElements.list.contains(text)) {
+      this.errorMessages.add(this.editElements.input, 'Cannot add a duplicate item.');
     }
     if (this.errorMessages.any()) {
       return;
     }
 
-    let text = this.editElements.input.value;
     this.editElements.list.addItem(text);
+    this.editElements.datalist.setOptionEnabled(text, false);
 
     this.editElements.input.value = '';
     this.editElements.input.select();
@@ -48,6 +57,8 @@ export default class LanguagesSection extends sectionModule.Section {
   }
 
   update() {
+    this.editElements.input.value = '';
+
     let text = '';
     let itemTextList = this.editElements.list.itemTextList;
     itemTextList.forEach( (itemText) => {
@@ -76,5 +87,6 @@ class LanguagesEditElements extends sectionModule.EditElements {
     this.input = shadowRoot.getElementById('languages-input');
     this.addButton = shadowRoot.getElementById('languages-add-button');
     this.list = shadowRoot.getElementById('languages-list');
+    this.datalist = shadowRoot.getElementById('languages-datalist');
   }
 }
