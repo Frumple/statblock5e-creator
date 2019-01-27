@@ -1,7 +1,14 @@
-import StatBlock from '/src/js/containers/stat-block.js';
-import TopStats from '/src/js/containers/top-stats.js';
-import BasicStats from '/src/js/containers/basic-stats.js';
-import AdvancedStats from '/src/js/containers/advanced-stats.js';
+import EnableDisableElementsCheckbox from '/src/js/extensions/enable-disable-elements-checkbox.js';
+import IntegerInput from '/src/js/extensions/integer-input.js';
+import TextInput from '/src/js/extensions/text-input.js';
+
+import ErrorMessages from '/src/js/elements/error-messages.js';
+import PropertyBlock from '/src/js/elements/property-block.js';
+import PropertyLine from '/src/js/elements/property-line.js';
+import AttributeList from '/src/js/elements/attribute-list.js';
+import AttributeListItem from '/src/js/elements/attribute-list-item.js';
+import SectionDivider from '/src/js/elements/section-divider.js';
+import TaperedRule from '/src/js/elements/tapered-rule.js';
 
 import HeadingSection from '/src/js/sections/heading-section.js';
 import ArmorClassSection from '/src/js/sections/armor-class-section.js';
@@ -13,21 +20,18 @@ import SkillsSection from '/src/js/sections/skills-section.js';
 import LanguagesSection from '/src/js/sections/languages-section.js';
 import ChallengeRatingSection from '/src/js/sections/challenge-rating-section.js';
 
-import EnableDisableElementsCheckbox from '/src/js/extensions/enable-disable-elements-checkbox.js';
-import IntegerInput from '/src/js/extensions/integer-input.js';
-import TextInput from '/src/js/extensions/text-input.js';
-
-import ErrorMessages from '/src/js/elements/error-messages.js';
-import PropertyBlock from '/src/js/elements/property-block.js';
-import PropertyLine from '/src/js/elements/property-line.js';
-import SectionDivider from '/src/js/elements/section-divider.js';
-import TaperedRule from '/src/js/elements/tapered-rule.js';
+import StatBlock from '/src/js/containers/stat-block.js';
+import TopStats from '/src/js/containers/top-stats.js';
+import BasicStats from '/src/js/containers/basic-stats.js';
+import AdvancedStats from '/src/js/containers/advanced-stats.js';
 
 async function defineCustomElements() {
   let elementClasses = [];
 
   elementClasses.push(EnableDisableElementsCheckbox);
   elementClasses.push(IntegerInput);
+  elementClasses.push(AttributeList);
+  elementClasses.push(AttributeListItem);
   elementClasses.push(TextInput);
 
   elementClasses.push(ErrorMessages);

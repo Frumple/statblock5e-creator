@@ -69,7 +69,7 @@ export default class SavingThrowsSection extends sectionModule.Section {
   calculateSavingThrowModifier(abilityScoreName) {
     let override = this.editElements.override[abilityScoreName].value;
 
-    if (override === "") {
+    if (override === '') {
       let abilityModifierElement = this.editElements.abilityModifier[abilityScoreName];
       let isProficientElement = this.editElements.proficient[abilityScoreName];
 

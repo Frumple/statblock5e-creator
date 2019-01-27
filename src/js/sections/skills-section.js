@@ -73,7 +73,7 @@ export default class SkillsSection extends sectionModule.Section {
   calculateSkillModifier(skillName) {
     let override = this.editElements.override[skillName].value;
 
-    if (override === "") {
+    if (override === '') {
       let abilityScoreName = SkillNames.getEntry(skillName).ability_score;
       let abilityModifierElement = this.editElements.abilityModifier[abilityScoreName];
       let isProficientElement = this.editElements.proficient[skillName];

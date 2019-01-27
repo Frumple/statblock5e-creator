@@ -7,7 +7,7 @@ export default class TextInput extends CustomBuiltinInputElement {
     super();
 
     this.addEventListener('keydown', (keyEvent) => {
-     if (keyEvent.key === "Enter") {
+     if (keyEvent.key === 'Enter') {
        keyEvent.preventDefault();
 
        let fieldEnterKeyDownEvent = new Event('fieldEnterKeyDown', { bubbles: true });
@@ -18,16 +18,16 @@ export default class TextInput extends CustomBuiltinInputElement {
 
   validate(errorMessages) {
     if (this.required) {
-      this.validateForEmpty(errorMessages);
+      this.validateForBlank(errorMessages);
     }
   }
 
-  validateForEmpty(errorMessages) {
-    if(this.value === "") {
+  validateForBlank(errorMessages) {
+    if(this.value === '') {
       let pretty_name = this.getAttribute('pretty-name');
       let field_name = pretty_name ? pretty_name : this.name;
       errorMessages.add(this,
-        `${field_name} cannot be empty.`);
+        `${field_name} cannot be blank.`);
     }
   }
 }

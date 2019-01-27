@@ -34,26 +34,6 @@
     margin: 0;
     padding: 0;
   }
-
-  .languages-edit-section__list-item {
-    list-style: none;
-    display: block;
-  }
-
-  .languages-edit-section__list-item-container {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    border: 1px solid black;
-    padding: 5px;
-  }
-
-  .languages-edit-section__list-item-label {
-  }
-
-  .languages-edit-section__list-item-remove-button {
-  }
-
 </style>
 
 <error-messages></error-messages>
@@ -72,8 +52,8 @@
   <div class="languages-edit-section">
     <label id="languages-label" class="languages-edit-section__header-label section__header-label">Languages:</label>
     <div class="languages-edit-section__input-container">
-      <input id="languages-input" class="languages-edit-section__input" is="text-input" type="text" list="languages-list" />
-      <datalist id="languages-list">
+      <input id="languages-input" class="languages-edit-section__input" type="text" list="languages-datalist" />
+      <datalist id="languages-datalist">
         <option value="Aarakocra" />
         <option value="Abyssal" />
         <option value="Aquan" />
@@ -81,7 +61,7 @@
         <option value="Blink Dog" />
         <option value="Bullywug" />
         <option value="Celestial" />
-        <option value="Common" />
+        <option value="Common" disabled />
         <option value="Deep Speech" />
         <option value="Draconic" />
         <option value="Druidic" />
@@ -127,14 +107,11 @@
       </datalist>
       <button id="languages-add-button" class="languages-edit-section__add-button">Add</button>
     </div>
-    <ul class="languages-edit-section__list">
-      <li class="languages-edit-section__list-item">
-        <div class="languages-edit-section__list-item-container">
-          <label class="languages-edit-section__list-item-label">Common</label>
-          <button class="languages-edit-section__list-item-remove-button">Remove</button>
-        </div>
-      </li>
-    </ul>
+    <attribute-list id="languages-list" class="languages-edit-section__list">
+      <attribute-list-item>
+        <span slot="text">Common</span>
+      </attribute-list-item>
+    </attribute-list>
   </div>
   <button id="save-action" class="section__action section__save-action" name="languages-save">Save</button>
 </div>

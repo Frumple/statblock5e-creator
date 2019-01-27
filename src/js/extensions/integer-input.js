@@ -32,7 +32,7 @@ export default class IntegerInput extends CustomBuiltinInputElement {
   }
 
   validate(errorMessages) {
-    if (this.value === "") {
+    if (this.value === '') {
       let pretty_name = this.getAttribute('pretty-name');
       let field_name = pretty_name ? pretty_name : this.name;
       errorMessages.add(this,

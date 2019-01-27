@@ -1,0 +1,21 @@
+<link href='src/css/default.css' rel='stylesheet' type='text/css'>
+
+<style>
+  :host {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border: 1px solid black;
+    padding: 5px;
+  }
+
+  .list-item__label {
+
+  }
+
+  .list-item__remove-button {
+
+  }
+</style>
+<label id="list-item-label" class="list-item__label"><slot name="text"></slot></label>
+<button id="list-item-remove-button" class="list-item__remove-button">Remove</button>
