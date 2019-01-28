@@ -22,6 +22,8 @@ export default class ArmorClassSection extends sectionModule.Section {
   }
 
   checkForErrors() {
+    this.editElements.armorType.trimWhitespace();
+
     this.editElements.armorClass.validate(this.errorMessages);
   }
 

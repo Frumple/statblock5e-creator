@@ -16,6 +16,10 @@ export default class TextInput extends CustomBuiltinInputElement {
     });
   }
 
+  trimWhitespace() {
+    this.value = this.value.trim();
+  }
+
   validate(errorMessages) {
     if (this.required) {
       this.validateForBlank(errorMessages);

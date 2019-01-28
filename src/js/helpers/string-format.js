@@ -4,8 +4,8 @@ export function capitalizeFirstLetter(string) {
 
 export function getModifierOperator(modifier) {
   if (modifier < 0) {
-    // This is an en dash, NOT a "normal dash".
-    // This makes the minus sign appear more pronounced on the statblock.
+    // This is an EN dash (U+2013).
+    // This stands out more than a normal minus sign.
     return '–';
   }
   return '+';

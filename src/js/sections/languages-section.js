@@ -29,10 +29,11 @@ export default class LanguagesSection extends sectionModule.Section {
   }
 
   addItem() {
-    let text = this.editElements.input.value;
+    let text = this.editElements.input.value.trim();
+    this.editElements.input.value = text;
 
     this.errorMessages.clear();
-    if (this.editElements.input.value === '') {
+    if (text === '') {
       this.errorMessages.add(this.editElements.input, 'Cannot add a blank item.');
     } else if(this.editElements.list.contains(text)) {
       this.errorMessages.add(this.editElements.input, 'Cannot add a duplicate item.');
@@ -68,6 +69,11 @@ export default class LanguagesSection extends sectionModule.Section {
         text += `, ${itemText}`;
       }
     });
+    if (text === '') {
+      // This is an EM dash (U+2014).
+      // This appears significantly wider than a normal dash.
+      text = '—';
+    }
 
     this.showElements.text.textContent = text;
   }

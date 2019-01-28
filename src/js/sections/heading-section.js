@@ -16,6 +16,9 @@ export default class HeadingSection extends sectionModule.Section {
   }
 
   checkForErrors() {
+    this.editElements.title.trimWhitespace();
+    this.editElements.type.trimWhitespace();
+    
     this.editElements.title.validate(this.errorMessages);
     this.editElements.type.validate(this.errorMessages);
   }
