@@ -3,8 +3,8 @@ import EnableDisableElementsCheckbox from '/src/js/extensions/enable-disable-ele
 import IntegerInput from '/src/js/extensions/integer-input.js';
 import TextInput from '/src/js/extensions/text-input.js';
 
-import AttributeList from '/src/js/elements/attribute-list.js';
 import AttributeListItem from '/src/js/elements/attribute-list-item.js';
+import AttributeList from '/src/js/elements/attribute-list.js';
 import ErrorMessages from '/src/js/elements/error-messages.js';
 import PropertyBlock from '/src/js/elements/property-block.js';
 import PropertyLine from '/src/js/elements/property-line.js';
@@ -35,8 +35,8 @@ async function defineCustomElements() {
   elementClasses.push(IntegerInput);
   elementClasses.push(TextInput);
 
-  elementClasses.push(AttributeList);
   elementClasses.push(AttributeListItem);
+  elementClasses.push(AttributeList);
   elementClasses.push(ErrorMessages);
   elementClasses.push(PropertyBlock);
   elementClasses.push(PropertyLine);
@@ -59,9 +59,9 @@ async function defineCustomElements() {
   elementClasses.push(BasicStats);
   elementClasses.push(AdvancedStats);
 
-  await elementClasses.forEach( (elementClass) => {
-    elementClass.define();
-  });
+  for (const elementClass of elementClasses) {
+    await elementClass.define();
+  }
 }
 
 async function init() {

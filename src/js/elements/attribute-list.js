@@ -6,6 +6,8 @@ export default class AttributeList extends CustomAutonomousElement {
 
   constructor() {
     super(AttributeList.elementName);
+
+    this.draggedItem = null;
   }
 
   get itemTextList() {
@@ -20,11 +22,7 @@ export default class AttributeList extends CustomAutonomousElement {
 
   addItem(text) {
     let listItemElement = document.createElement('attribute-list-item');
-    let spanElement = document.createElement('span');
-    spanElement.setAttribute('slot', 'text');
-    spanElement.textContent = text;
-
-    listItemElement.appendChild(spanElement);
+    listItemElement.text = text;
     this.appendChild(listItemElement);
   }
 }

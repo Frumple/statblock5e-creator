@@ -7,17 +7,40 @@ export default class AttributeListItem extends CustomAutonomousElement {
   constructor() {
     super(AttributeListItem.elementName);
 
+    this.domInitialized = false;
+
     this.label = this.shadowRoot.getElementById('list-item-label');
     this.removeButton = this.shadowRoot.getElementById('list-item-remove-button');
 
     this.removeButton.addEventListener('click', () => {
       this.remove();
     });
+
+    this.addEventListener('dragstart', (event) => {
+      console.log(event);
+
+      event.dataTransfer.dropEffect = 'move';
+      event.dataTransfer.setDragImage(event.target, 0, 0);
+    });
+  }
+
+  connectedCallback() {
+    if (this.isConnected) {
+      if (! this.domInitialized) {
+        this.style.cssText = 'user-select: none; -webkit-user-drag: element;';
+        this.setAttribute('draggable', '');
+
+        this.domInitialized = true;
+      }
+    }
+  }
+
+  set text(text) {
+    this.label.textContent = text;
   }
 
   get text() {
-    let textSlot = this.querySelector('[slot="text"]');
-    return textSlot.textContent;
+    return this.label.textContent;
   }
 
   remove() {
@@ -33,6 +56,5 @@ export default class AttributeListItem extends CustomAutonomousElement {
     this.dispatchEvent(removeEvent);
 
     this.parentNode.removeChild(this);
-
   }
 }

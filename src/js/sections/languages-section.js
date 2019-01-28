@@ -10,16 +10,18 @@ export default class LanguagesSection extends sectionModule.Section {
           LanguagesShowElements,
           LanguagesEditElements);
 
+    this.listInitialized = false;
+
     this.editElements.input.addEventListener('keydown', (keyEvent) => {
       if (keyEvent.key === 'Enter') {
         keyEvent.preventDefault();
 
-        this.addItem();
+        this.addItemFromInput();
       }
     });
 
     this.editElements.addButton.addEventListener('click', () => {
-      this.addItem();
+      this.addItemFromInput();
     });
 
     this.addEventListener('attributeListItemRemoved', (event) => {
@@ -28,7 +30,16 @@ export default class LanguagesSection extends sectionModule.Section {
     });
   }
 
-  addItem() {
+  connectedCallback() {
+    if (this.isConnected) {
+      if (! this.listInitialized) {
+        this.addItem('Common');
+        this.listInitialized = true;
+      }
+    }
+  }
+
+  addItemFromInput() {
     let text = this.editElements.input.value.trim();
     this.editElements.input.value = text;
 
@@ -42,11 +53,15 @@ export default class LanguagesSection extends sectionModule.Section {
       return;
     }
 
-    this.editElements.list.addItem(text);
-    this.editElements.datalist.setOptionEnabled(text, false);
+    this.addItem(text);
 
     this.editElements.input.value = '';
     this.editElements.input.select();
+  }
+
+  addItem(text) {
+    this.editElements.list.addItem(text);
+    this.editElements.datalist.setOptionEnabled(text, false);
   }
 
   get initialSelectedEditElement() {
