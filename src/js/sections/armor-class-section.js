@@ -37,6 +37,7 @@ export default class ArmorClassSection extends sectionModule.Section {
   update() {
     let armorClass = this.editElements.armorClass.value;
     let armorType = this.editElements.armorType.value;
+    let shield = this.editElements.shield.checked;
     let useCustom = this.editElements.useCustom.checked;
     let customText = this.editElements.customText.value;
 
@@ -45,9 +46,17 @@ export default class ArmorClassSection extends sectionModule.Section {
       text = customText;
     } else {
       if (armorType) {
-        text = `${armorClass} (${armorType})`;
+        if (shield) {
+          text = `${armorClass} (${armorType}, shield)`;
+        } else {
+          text = `${armorClass} (${armorType})`;
+        }
       } else {
-        text = armorClass;
+        if (shield) {
+          text = `${armorClass} (shield)`;
+        } else {
+          text = armorClass;
+        }
       }
     }
     this.showElements.text.textContent = text;
@@ -66,6 +75,7 @@ class ArmorClassEditElements extends sectionModule.EditElements {
     super(shadowRoot);
     this.armorClass = shadowRoot.getElementById('armor-class-input');
     this.armorType = shadowRoot.getElementById('armor-type-input');
+    this.shield = shadowRoot.getElementById('shield-input');
     this.useCustom = shadowRoot.getElementById('use-custom-input');
     this.customText = shadowRoot.getElementById('custom-input');
   }

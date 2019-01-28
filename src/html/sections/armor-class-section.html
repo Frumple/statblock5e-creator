@@ -7,7 +7,7 @@
 
   .armor-class-edit-section {
     display: grid;
-    grid-template-columns: 90px auto;
+    grid-template-columns: 90px auto 25px 50px;
     grid-template-rows: auto 5px auto 5px auto auto;
     grid-column-gap: 5px;
     align-items: center;
@@ -19,13 +19,18 @@
 
   .armor-class-edit-section__armor-type-label { grid-area: 3 / 1; }
   .armor-class-edit-section__armor-type-input { grid-area: 3 / 2; }
+  .armor-class-edit-section__shield-input {
+    grid-area: 3 / 3;
+    justify-self: end;
+  }
+  .armor-class-edit-section__shield-label { grid-area: 3 / 4; }
 
   .armor-class-edit-section__use-custom-input {
     grid-area: 5 / 1;
     justify-self: end;
   }
-  .armor-class-edit-section__use-custom-label { grid-area: 5 / 2; }
-  .armor-class-edit-section__custom-input { grid-area: 6 / 2; }
+  .armor-class-edit-section__use-custom-label { grid-area: 5 / 2 / 6 / 5; }
+  .armor-class-edit-section__custom-input { grid-area: 6 / 2 / 7 / 5; }
 </style>
 
 <error-messages></error-messages>
@@ -48,36 +53,23 @@
     <input id="armor-type-input" class="armor-class-edit-section__armor-type-input" is="text-input" type="text" name="armor-type" list="armor-type-list" />
     <datalist id="armor-type-list">
       <option value="armor scraps" />
-      <option value="armor scraps, shield" />
       <option value="breastplate" />
-      <option value="breastplate, shield" />
       <option value="chain mail" />
-      <option value="chain mail, shield" />
       <option value="chain shirt" />
-      <option value="chain shirt, shield" />
       <option value="half plate" />
-      <option value="half plate, shield" />
       <option value="hide armor" />
-      <option value="hide armor, shield" />
       <option value="leather armor" />
-      <option value="leather armor, shield" />
       <option value="natural armor" />
-      <option value="natural armor, shield" />
       <option value="padded armor" />
-      <option value="padded armor, shield" />
       <option value="patchwork armor" />
-      <option value="patchwork armor, shield" />
       <option value="plate" />
-      <option value="plate, shield" />
       <option value="ring mail" />
-      <option value="ring mail, shield" />
       <option value="scale mail" />
-      <option value="scale mail, shield" />
       <option value="splint" />
-      <option value="splint, shield" />
       <option value="studded leather" />
-      <option value="studded leather, shield" />
     </datalist>
+    <input id="shield-input" class="armor-class-edit-section__shield-input" type="checkbox" name="armor-class-shield" />
+    <label id="shield-label" class="armor-class-edit-section__shield-label" for="shield-input">shield</label>
     <input id="use-custom-input" class="armor-class-edit-section__use-custom-input" is="enable-disable-elements-checkbox" type="checkbox" name="armor-class-use-custom" />
     <label id="custom-label" class="armor-class-edit-section__use-custom-label" for="use-custom-input">Override with custom text:</label>
     <input id="custom-input" class="armor-class-edit-section__custom-input" is="text-input" type="text" name="armor-class-custom" pretty-name="Armor Class Custom Text" required disabled />
