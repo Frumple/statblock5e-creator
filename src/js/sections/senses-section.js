@@ -19,6 +19,44 @@ export default class SensesSection extends sectionModule.Section {
       this.editElements.customText);
   }
 
+  setWisdomModifier(wisdomModifier) {
+    this.editElements.wisdomModifier.textContent = wisdomModifier;
+    this.calculatePassivePerception();
+    this.update();
+  }
+
+  setProficiencyBonus(proficiencyBonus) {
+    this.editElements.proficiencyBonus.textContent = proficiencyBonus;
+    this.calculatePassivePerception();
+    this.update();
+  }
+
+  setPerceptionSkill(isProficient, overrideModifier) {
+    this.editElements.perceptionProficient.textContent = isProficient;
+    this.editElements.perceptionModifierOverride.textContent = overrideModifier;
+    this.calculatePassivePerception();
+    this.update();
+  }
+
+  calculatePassivePerception() {
+    let wisdomModifier = parseInt(this.editElements.wisdomModifier.textContent, 10);
+    let proficiencyBonus = parseInt(this.editElements.proficiencyBonus.textContent, 10);
+    let perceptionProficient = (this.editElements.perceptionProficient.textContent === 'true');
+    let override = parseInt(this.editElements.perceptionModifierOverride.textContent, 10);
+
+    let passivePerception = 10;
+    if (override) {
+      passivePerception += override;
+    } else {
+      passivePerception += wisdomModifier;
+      if (perceptionProficient) {
+        passivePerception += proficiencyBonus;
+      }
+    }
+
+    this.editElements.passivePerception.textContent = passivePerception;
+  }
+
   get initialSelectedElement() {
     return this.editElements.blindsight;
   }
@@ -86,5 +124,10 @@ class SensesEditElements extends sectionModule.EditElements {
     this.passivePerception = shadowRoot.getElementById('passive-perception-value');
     this.useCustom = shadowRoot.getElementById('use-custom-input');
     this.customText = shadowRoot.getElementById('custom-input');
+
+    this.wisdomModifier = shadowRoot.getElementById('wisdom-modifier');
+    this.proficiencyBonus = shadowRoot.getElementById('proficiency-bonus');
+    this.perceptionProficient = shadowRoot.getElementById('perception-proficient');
+    this.perceptionModifierOverride = shadowRoot.getElementById('perception-modifier-override');
   }
 }

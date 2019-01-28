@@ -23,23 +23,37 @@ export default class SkillsSection extends sectionModule.Section {
       let enableElement = this.editElements.enable[name];
       let labelElement = this.editElements.label[name];
       let modifierElement = this.editElements.skillModifier[name];
+      let isProficientElement = this.editElements.proficient[name];
+      let overrideElement = this.editElements.override[name];
+
       enableElement.addEventListener('input', () => {
         if (enableElement.checked) {
+          let isProficient = isProficientElement.checked;
+          let overrideValue = parseInt(overrideElement.value, 10);
+
           labelElement.classList.remove(labelDisabledClass);
           modifierElement.classList.remove(labelDisabledClass);
+
+          this.fireSkillChangedEvent(name, isProficient, overrideValue);
         } else {
           labelElement.classList.add(labelDisabledClass);
           modifierElement.classList.add(labelDisabledClass);
+
+          this.fireSkillChangedEvent(name, false, NaN);
         }
       });
 
-      let isProficientElement = this.editElements.proficient[name];
       isProficientElement.addEventListener('input', () => {
+        let isProficient = isProficientElement.checked;
+        let overrideValue = parseInt(overrideElement.value, 10);
+
         this.calculateSkillModifier(name);
+
+        this.fireSkillChangedEvent(name, isProficient, overrideValue);
       });
 
-      let overrideElement = this.editElements.override[name];
       overrideElement.addEventListener('input', () => {
+        let isProficient = isProficientElement.checked;
         let overrideValue = parseInt(overrideElement.value, 10);
 
         if(isNaN(overrideValue)) {
@@ -48,8 +62,23 @@ export default class SkillsSection extends sectionModule.Section {
           let formattedSkillModifier = SkillsSection.formatSkillModifier(overrideValue);
           this.editElements.skillModifier[name].textContent = formattedSkillModifier;
         }
+
+        this.fireSkillChangedEvent(name, isProficient, overrideValue);
       });
     });
+  }
+
+  fireSkillChangedEvent(skillName, isProficient, overrideModifier) {
+    let changeEvent = new CustomEvent('skillChanged', {
+      bubbles: true,
+      composed: true,
+      detail: {
+        skillName: skillName,
+        isProficient: isProficient,
+        overrideModifier: overrideModifier
+      }
+    });
+    this.dispatchEvent(changeEvent);
   }
 
   setAbilityModifier(abilityScoreName, abilityModifier) {
