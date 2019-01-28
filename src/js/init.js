@@ -18,6 +18,7 @@ import SpeedSection from '/src/js/sections/speed-section.js';
 import AbilityScoresSection from '/src/js/sections/ability-scores-section.js';
 import SavingThrowsSection from '/src/js/sections/saving-throws-section.js';
 import SkillsSection from '/src/js/sections/skills-section.js';
+import SensesSection from '/src/js/sections/senses-section.js';
 import LanguagesSection from '/src/js/sections/languages-section.js';
 import ChallengeRatingSection from '/src/js/sections/challenge-rating-section.js';
 
@@ -49,6 +50,7 @@ async function defineCustomElements() {
   elementClasses.push(AbilityScoresSection);
   elementClasses.push(SavingThrowsSection);
   elementClasses.push(SkillsSection);
+  elementClasses.push(SensesSection);
   elementClasses.push(LanguagesSection);
   elementClasses.push(ChallengeRatingSection);
 

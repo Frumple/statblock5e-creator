@@ -25,29 +25,12 @@
     font-weight: bold;
   }
 
-  .ability-scores-section__strength-label {
-    grid-area: 1 / 1;
-  }
-
-  .ability-scores-section__dexterity-label {
-    grid-area: 1 / 2;
-  }
-
-  .ability-scores-section__constitution-label {
-    grid-area: 1 / 3;
-  }
-
-  .ability-scores-section__intelligence-label {
-    grid-area: 1 / 4;
-  }
-
-  .ability-scores-section__wisdom-label {
-    grid-area: 1 / 5;
-  }
-
-  .ability-scores-section__charisma-label {
-    grid-area: 1 / 6;
-  }
+  .ability-scores-section__strength-label { grid-area: 1 / 1; }
+  .ability-scores-section__dexterity-label { grid-area: 1 / 2; }
+  .ability-scores-section__constitution-label { grid-area: 1 / 3; }
+  .ability-scores-section__intelligence-label { grid-area: 1 / 4; }
+  .ability-scores-section__wisdom-label { grid-area: 1 / 5; }
+  .ability-scores-section__charisma-label { grid-area: 1 / 6; }
 
   .ability-scores-show-section__score-values {
     display: flex;
@@ -66,37 +49,15 @@
     width: 40px;
   }
 
-  .ability-scores-section__strength-values {
-    grid-area: 2 / 1;
-  }
+  .ability-scores-section__strength-values { grid-area: 2 / 1; }
+  .ability-scores-section__dexterity-values { grid-area: 2 / 2; }
+  .ability-scores-section__constitution-values { grid-area: 2 / 3; }
+  .ability-scores-section__intelligence-values { grid-area: 2 / 4; }
+  .ability-scores-section__wisdom-values { grid-area: 2 / 5; }
+  .ability-scores-section__charisma-values { grid-area: 2 / 6; }
 
-  .ability-scores-section__dexterity-values {
-    grid-area: 2 / 2;
-  }
-
-  .ability-scores-section__constitution-values {
-    grid-area: 2 / 3;
-  }
-
-  .ability-scores-section__intelligence-values {
-    grid-area: 2 / 4;
-  }
-
-  .ability-scores-section__wisdom-values {
-    grid-area: 2 / 5;
-  }
-
-  .ability-scores-section__charisma-values {
-    grid-area: 2 / 6;
-  }
-
-  .ability-scores-section__proficiency-bonus-label {
-    grid-area: 4 / 2 / 5 / 5;
-  }
-
-  .ability-scores-section__proficiency-bonus-input {
-    grid-area: 4 / 5;
-  }
+  .ability-scores-section__proficiency-bonus-label { grid-area: 4 / 2 / 5 / 5; }
+  .ability-scores-section__proficiency-bonus-input { grid-area: 4 / 5; }
 </style>
 
 <tapered-rule></tapered-rule>
@@ -174,7 +135,7 @@
     <label id="proficiency-bonus-label" class="ability-scores-section__proficiency-bonus-label" for="proficiency-bonus-input">Proficiency Bonus:</label>
     <input id="proficiency-bonus-input" class="ability-scores-section__proficiency-bonus-input section__small-number-input" is="integer-input" name="proficiency-bonus" pretty-name="Proficiency Bonus" type="number" value="2" min="-999" max="999"></input>
   </div>
-  <button id="save-action" class="section__action section__save-action" name="ability-scores-save">Save</button>
+  <button id="save-action" class="section__action section__save-action">Save</button>
 </div>
 
 <tapered-rule></tapered-rule>

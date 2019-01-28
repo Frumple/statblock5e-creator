@@ -14,90 +14,36 @@
     width: 100%;
   }
 
-  .speed-edit-section__speed-label {
-    grid-area: 1 / 1;
-  }
+  .speed-edit-section__speed-label { grid-area: 1 / 1; }
 
-  .speed-edit-section__walk-label {
-    grid-area: 1 / 2;
-  }
+  .speed-edit-section__walk-label { grid-area: 1 / 2; }
+  .speed-edit-section__walk-input { grid-area: 1 / 3; }
+  .speed-edit-section__walk-unit { grid-area: 1 / 4; }
 
-  .speed-edit-section__walk-input {
-    grid-area: 1 / 3;
-  }
+  .speed-edit-section__burrow-label { grid-area: 2 / 2; }
+  .speed-edit-section__burrow-input { grid-area: 2 / 3; }
+  .speed-edit-section__burrow-unit { grid-area: 2 / 4; }
 
-  .speed-edit-section__walk-unit-text {
-    grid-area: 1 / 4;
-  }
+  .speed-edit-section__climb-label { grid-area: 3 / 2; }
+  .speed-edit-section__climb-input { grid-area: 3 / 3; }
+  .speed-edit-section__climb-unit { grid-area: 3 / 4; }
 
-  .speed-edit-section__burrow-label {
-    grid-area: 2 / 2;
-  }
+  .speed-edit-section__fly-label { grid-area: 4 / 2; }
+  .speed-edit-section__fly-input { grid-area: 4 / 3; }
+  .speed-edit-section__fly-unit { grid-area: 4 / 4; }
+  .speed-edit-section__hover-input { grid-area: 4 / 5; }
+  .speed-edit-section__hover-label { grid-area: 4 / 6; }
 
-  .speed-edit-section__burrow-input {
-    grid-area: 2 / 3;
-  }
-
-  .speed-edit-section__burrow-unit-text {
-    grid-area: 2 / 4;
-  }
-
-  .speed-edit-section__climb-label {
-    grid-area: 3 / 2;
-  }
-
-  .speed-edit-section__climb-input {
-    grid-area: 3 / 3;
-  }
-
-  .speed-edit-section__climb-unit-text {
-    grid-area: 3 / 4;
-  }
-
-  .speed-edit-section__fly-label {
-    grid-area: 4 / 2;
-  }
-
-  .speed-edit-section__fly-input {
-    grid-area: 4 / 3;
-  }
-
-  .speed-edit-section__fly-unit-text {
-    grid-area: 4 / 4;
-  }
-
-  .speed-edit-section__hover-input {
-    grid-area: 4 / 5;
-  }
-
-  .speed-edit-section__hover-label {
-    grid-area: 4 / 6;
-  }
-
-  .speed-edit-section__swim-label {
-    grid-area: 5 / 2;
-  }
-
-  .speed-edit-section__swim-input {
-    grid-area: 5 / 3;
-  }
-
-  .speed-edit-section__swim-unit-text {
-    grid-area: 5 / 4;
-  }
+  .speed-edit-section__swim-label { grid-area: 5 / 2; }
+  .speed-edit-section__swim-input { grid-area: 5 / 3; }
+  .speed-edit-section__swim-unit { grid-area: 5 / 4; }
 
   .speed-edit-section__use-custom-input {
     grid-area: 7 / 1;
     justify-self: end;
   }
-
-  .speed-edit-section__custom-label {
-    grid-area: 7 / 2 / 8 / 7;
-  }
-
-  .speed-edit-section__custom-input {
-    grid-area: 8 / 2 / 9 / 7;
-  }
+  .speed-edit-section__custom-label { grid-area: 7 / 2 / 8 / 7; }
+  .speed-edit-section__custom-input { grid-area: 8 / 2 / 9 / 7; }
 </style>
 
 <error-messages></error-messages>
@@ -118,29 +64,29 @@
 
     <label id="walk-label" class="speed-edit-section__walk-label" for="walk-input">walk</label>
     <input id="walk-input" class="speed-edit-section__walk-input section__small-number-input" is="integer-input" type="number" name="speed-walk" pretty-name="Walk Speed" value="30" min="0" max="999" />
-    <label class="speed-edit-section__walk-unit-text">ft.</label>
+    <label class="speed-edit-section__walk-unit">ft.</label>
 
     <label id="burrow-label" class="speed-edit-section__burrow-label" for="burrow-input">burrow</label>
     <input id="burrow-input" class="speed-edit-section__burrow-input section__small-number-input" is="integer-input" type="number" name="speed-burrow" pretty-name="Burrow Speed" min="0" max="999" />
-    <label class="speed-edit-section__burrow-unit-text">ft.</label>
+    <label class="speed-edit-section__burrow-unit">ft.</label>
 
     <label id="climb-label" class="speed-edit-section__climb-label" for="climb-input">climb</label>
     <input id="climb-input" class="speed-edit-section__climb-input section__small-number-input" is="integer-input" type="number" name="speed-climb" pretty-name="Climb Speed" min="0" max="999" />
-    <label class="speed-edit-section__climb-unit-text">ft.</label>
+    <label class="speed-edit-section__climb-unit">ft.</label>
 
     <label id="fly-label" class="speed-edit-section__fly-label" for="fly-input">fly</label>
     <input id="fly-input" class="speed-edit-section__fly-input section__small-number-input" is="integer-input" type="number" name="speed-fly" pretty-name="Fly Speed" min="0" max="999" />
-    <label class="speed-edit-section__fly-unit-text">ft.</label>
+    <label class="speed-edit-section__fly-unit">ft.</label>
     <input id="hover-input" class="speed-edit-section__hover-input" type="checkbox" name="speed-hover" />
     <label id="hover-label" class="speed-edit-section__hover-label" for="hover-input">(hover)</label>
 
     <label id="swim-label" class="speed-edit-section__swim-label" for="swim-input">swim</label>
     <input id="swim-input" class="speed-edit-section__swim-input section__small-number-input" is="integer-input" type="number" name="speed-swim" pretty-name="Swim Speed" min="0" max="999" />
-    <label class="speed-edit-section__swim-unit-text">ft.</label>
+    <label class="speed-edit-section__swim-unit">ft.</label>
 
     <input id="use-custom-input" class="speed-edit-section__use-custom-input" is="enable-disable-elements-checkbox" type="checkbox" name="speed-use-custom" />
     <label id="custom-label" class="speed-edit-section__custom-label" for="use-custom-input">Override with custom text:</label>
     <input id="custom-input" class="speed-edit-section__custom-input" is="text-input" type="text" name="speed-custom" disabled />
   </div>
-  <button id="save-action" class="section__action section__save-action" name="armor-class-save">Save</button>
+  <button id="save-action" class="section__action section__save-action">Save</button>
 </div>
