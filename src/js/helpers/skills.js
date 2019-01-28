@@ -1,24 +1,24 @@
 class Skills {
   constructor() {
     this.skills = {
-      'acrobatics' : { pretty_name : 'Acrobatics', ability_score : 'dexterity' },
-      'animal-handling' : { pretty_name : 'Animal Handling', ability_score : 'wisdom' },
-      'arcana' : { pretty_name : 'Arcana', ability_score : 'intelligence' },
-      'athletics' : { pretty_name : 'Athletics', ability_score : 'strength' },
-      'deception' : { pretty_name : 'Deception', ability_score : 'charisma' },
-      'history' : { pretty_name : 'History', ability_score : 'intelligence' },
-      'insight' : { pretty_name : 'Insight', ability_score : 'wisdom' },
-      'intimidation' : { pretty_name: 'Intimidation', ability_score : 'charisma' },
-      'investigation' : { pretty_name: 'Investigation', ability_score : 'intelligence' },
-      'medicine' : { pretty_name: 'Medicine', ability_score : 'wisdom' },
-      'nature' : { pretty_name: 'Nature', ability_score : 'intelligence' },
-      'perception' : { pretty_name: 'Perception', ability_score : 'wisdom' },
-      'performance' : { pretty_name: 'Performance', ability_score : 'charisma' },
-      'persuasion' : { pretty_name: 'Persuasion', ability_score : 'charisma' },
-      'religion' : { pretty_name: 'Religion', ability_score : 'intelligence' },
-      'sleight-of-hand' : { pretty_name: 'Sleight of Hand', ability_score : 'dexterity' },
-      'stealth' : { pretty_name: 'Stealth', ability_score : 'dexterity' },
-      'survival': { pretty_name: 'Survival', ability_score : 'wisdom' }
+      'acrobatics' : { prettyName : 'Acrobatics', ability : 'dexterity' },
+      'animal-handling' : { prettyName : 'Animal Handling', ability : 'wisdom' },
+      'arcana' : { prettyName : 'Arcana', ability : 'intelligence' },
+      'athletics' : { prettyName : 'Athletics', ability : 'strength' },
+      'deception' : { prettyName : 'Deception', ability : 'charisma' },
+      'history' : { prettyName : 'History', ability : 'intelligence' },
+      'insight' : { prettyName : 'Insight', ability : 'wisdom' },
+      'intimidation' : { prettyName: 'Intimidation', ability : 'charisma' },
+      'investigation' : { prettyName: 'Investigation', ability : 'intelligence' },
+      'medicine' : { prettyName: 'Medicine', ability : 'wisdom' },
+      'nature' : { prettyName: 'Nature', ability : 'intelligence' },
+      'perception' : { prettyName: 'Perception', ability : 'wisdom' },
+      'performance' : { prettyName: 'Performance', ability : 'charisma' },
+      'persuasion' : { prettyName: 'Persuasion', ability : 'charisma' },
+      'religion' : { prettyName: 'Religion', ability : 'intelligence' },
+      'sleight-of-hand' : { prettyName: 'Sleight of Hand', ability : 'dexterity' },
+      'stealth' : { prettyName: 'Stealth', ability : 'dexterity' },
+      'survival': { prettyName: 'Survival', ability : 'wisdom' }
     };
     Object.freeze(this.skills);
   }

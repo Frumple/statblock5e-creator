@@ -85,10 +85,10 @@ export default class SkillsSection extends sectionModule.Section {
     this.dispatchEvent(changeEvent);
   }
 
-  setAbilityModifier(abilityScoreName, abilityModifier) {
-    this.editElements.abilityModifier[abilityScoreName].textContent = abilityModifier;
+  setAbilityModifier(abilityName, abilityModifier) {
+    this.editElements.abilityModifier[abilityName].textContent = abilityModifier;
     for (const [key, value] of Skills.entries) {
-      if (value.ability_score === abilityScoreName) {
+      if (value.ability === abilityName) {
         this.calculateSkillModifier(key);
       }
     }
@@ -107,8 +107,8 @@ export default class SkillsSection extends sectionModule.Section {
     let override = this.editElements.override[key].value;
 
     if (override === '') {
-      let abilityScoreName = Skills.skills[key].ability_score;
-      let abilityModifierElement = this.editElements.abilityModifier[abilityScoreName];
+      let abilityName = Skills.skills[key].ability;
+      let abilityModifierElement = this.editElements.abilityModifier[abilityName];
       let isProficientElement = this.editElements.proficient[key];
 
       let abilityModifier = parseInt(abilityModifierElement.textContent, 10);
@@ -151,9 +151,9 @@ export default class SkillsSection extends sectionModule.Section {
 
       if (isEnabled) {
         if (text === '') {
-          text += `${value.pretty_name} ${skillModifier}`;
+          text += `${value.prettyName} ${skillModifier}`;
         } else {
-          text += `, ${value.pretty_name} ${skillModifier}`;
+          text += `, ${value.prettyName} ${skillModifier}`;
         }
       }
     }
