@@ -25,7 +25,7 @@ export class Section extends CustomAutonomousElement {
 
     this.showElements.section.addEventListener('transitionend', () => {
       if (this.mode === 'edit') {
-        let element = this.initialSelectedElement;
+        let element = this.initialSelectedEditElement;
         let tagName = element.tagName;
         let type = element.getAttribute('type');
 
@@ -91,9 +91,9 @@ export class Section extends CustomAutonomousElement {
     }
   }
 
-  get initialSelectedElement() {
+  get initialSelectedEditElement() {
     throw new Error(
-      `The class '${this.constructor.name}' must implement the initialSelectedElement() getter.`);
+      `The class '${this.constructor.name}' must implement the initialSelectedEditElement() getter.`);
   }
 
   checkForErrors() {

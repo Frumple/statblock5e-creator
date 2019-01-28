@@ -130,7 +130,7 @@ export default class SkillsSection extends sectionModule.Section {
     return `${operator}${number}`;
   }
 
-  get initialSelectedElement() {
+  get initialSelectedEditElement() {
     return this.editElements.enable.acrobatics;
   }
 

@@ -21,12 +21,19 @@ export default class SpeedSection extends sectionModule.Section {
       this.editElements.customText);
   }
 
-  get initialSelectedElement() {
+  get initialSelectedEditElement() {
+    if (this.editElements.useCustom.checked) {
+      return this.editElements.customText;
+    }
     return this.editElements.walk;
   }
 
   checkForErrors() {
+    this.editElements.customText.trimWhitespace();
 
+    if (this.editElements.useCustom.checked) {
+      this.editElements.customText.validate(this.errorMessages);
+    }
   }
 
   update() {

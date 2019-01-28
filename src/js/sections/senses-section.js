@@ -57,12 +57,19 @@ export default class SensesSection extends sectionModule.Section {
     this.editElements.passivePerception.textContent = passivePerception;
   }
 
-  get initialSelectedElement() {
+  get initialSelectedEditElement() {
+    if (this.editElements.useCustom.checked) {
+      return this.editElements.customText;
+    }
     return this.editElements.blindsight;
   }
 
   checkForErrors() {
+    this.editElements.customText.trimWhitespace();
 
+    if (this.editElements.useCustom.checked) {
+      this.editElements.customText.validate(this.errorMessages);
+    }
   }
 
   update() {

@@ -82,7 +82,7 @@ export default class AbilityScoresSection extends sectionModule.Section {
     return Math.floor((score - 10) / 2);
   }
 
-  get initialSelectedElement() {
+  get initialSelectedEditElement() {
     return this.editElements.score.strength;
   }
 

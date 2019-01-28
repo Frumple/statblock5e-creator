@@ -17,7 +17,7 @@ export default class ChallengeRatingSection extends sectionModule.Section {
     });
   }
 
-  get initialSelectedElement() {
+  get initialSelectedEditElement() {
     return this.editElements.challengeRating;
   }
 

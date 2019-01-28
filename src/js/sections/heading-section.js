@@ -11,7 +11,7 @@ export default class HeadingSection extends sectionModule.Section {
           HeadingEditElements);
   }
 
-  get initialSelectedElement() {
+  get initialSelectedEditElement() {
     return this.editElements.title;
   }
 

@@ -96,7 +96,7 @@ export default class SavingThrowsSection extends sectionModule.Section {
     return `${operator}${number}`;
   }
 
-  get initialSelectedElement() {
+  get initialSelectedEditElement() {
     return this.editElements.enable.strength;
   }
 

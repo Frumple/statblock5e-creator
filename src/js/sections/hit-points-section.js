@@ -61,7 +61,7 @@ export default class HitPointsSection extends sectionModule.Section {
     }
   }
 
-  get initialSelectedElement() {
+  get initialSelectedEditElement() {
     if (this.editElements.useHitDie.checked) {
       return this.editElements.hitDieQuantity;
     }

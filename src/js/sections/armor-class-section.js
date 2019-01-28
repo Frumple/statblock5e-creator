@@ -17,14 +17,21 @@ export default class ArmorClassSection extends sectionModule.Section {
       this.editElements.customText);
   }
 
-  get initialSelectedElement() {
+  get initialSelectedEditElement() {
+    if (this.editElements.useCustom.checked) {
+      return this.editElements.customText;
+    }
     return this.editElements.armorClass;
   }
 
   checkForErrors() {
     this.editElements.armorType.trimWhitespace();
+    this.editElements.customText.trimWhitespace();
 
     this.editElements.armorClass.validate(this.errorMessages);
+    if (this.editElements.useCustom.checked) {
+      this.editElements.customText.validate(this.errorMessages);
+    }
   }
 
   update() {

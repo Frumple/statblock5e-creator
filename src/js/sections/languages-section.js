@@ -49,7 +49,7 @@ export default class LanguagesSection extends sectionModule.Section {
     this.editElements.input.select();
   }
 
-  get initialSelectedElement() {
+  get initialSelectedEditElement() {
     return this.editElements.input;
   }
 
