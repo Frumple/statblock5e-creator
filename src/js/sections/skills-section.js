@@ -1,6 +1,6 @@
 import * as sectionModule from '/src/js/base/section.js';
-import AbilityScoreNames from '/src/js/helpers/ability-score-names.js';
-import SkillNames from '/src/js/helpers/skill-names.js';
+import Abilities from '/src/js/helpers/abilities.js';
+import Skills from '/src/js/helpers/skills.js';
 import { getModifierOperator } from '/src/js/helpers/string-format.js';
 import { getModifierNumber } from '/src/js/helpers/string-format.js';
 
@@ -13,58 +13,62 @@ export default class SkillsSection extends sectionModule.Section {
           SkillsShowElements,
           SkillsEditElements);
 
-    SkillNames.forEach( (name) => {
-      this.editElements.enable[name].enableElementsWhenChecked(
-        this.editElements.proficient[name],
-        this.editElements.override[name]
-      );
+    for (const key of Skills.keys) {
+      this.initializeSkillElements(key);
+    }
+  }
 
-      const labelDisabledClass = 'section__label_disabled';
-      let enableElement = this.editElements.enable[name];
-      let labelElement = this.editElements.label[name];
-      let modifierElement = this.editElements.skillModifier[name];
-      let isProficientElement = this.editElements.proficient[name];
-      let overrideElement = this.editElements.override[name];
+  initializeSkillElements(key) {
+    const labelDisabledClass = 'section__label_disabled';
+    let enableElement = this.editElements.enable[key];
+    let labelElement = this.editElements.label[key];
+    let modifierElement = this.editElements.skillModifier[key];
+    let isProficientElement = this.editElements.proficient[key];
+    let overrideElement = this.editElements.override[key];
 
-      enableElement.addEventListener('input', () => {
-        if (enableElement.checked) {
-          let isProficient = isProficientElement.checked;
-          let overrideValue = parseInt(overrideElement.value, 10);
+    enableElement.enableElementsWhenChecked(
+      isProficientElement,
+      overrideElement
+    );
 
-          labelElement.classList.remove(labelDisabledClass);
-          modifierElement.classList.remove(labelDisabledClass);
-
-          this.fireSkillChangedEvent(name, isProficient, overrideValue);
-        } else {
-          labelElement.classList.add(labelDisabledClass);
-          modifierElement.classList.add(labelDisabledClass);
-
-          this.fireSkillChangedEvent(name, false, NaN);
-        }
-      });
-
-      isProficientElement.addEventListener('input', () => {
+    enableElement.addEventListener('input', () => {
+      if (enableElement.checked) {
         let isProficient = isProficientElement.checked;
         let overrideValue = parseInt(overrideElement.value, 10);
 
-        this.calculateSkillModifier(name);
+        labelElement.classList.remove(labelDisabledClass);
+        modifierElement.classList.remove(labelDisabledClass);
 
-        this.fireSkillChangedEvent(name, isProficient, overrideValue);
-      });
+        this.fireSkillChangedEvent(key, isProficient, overrideValue);
+      } else {
+        labelElement.classList.add(labelDisabledClass);
+        modifierElement.classList.add(labelDisabledClass);
 
-      overrideElement.addEventListener('input', () => {
-        let isProficient = isProficientElement.checked;
-        let overrideValue = parseInt(overrideElement.value, 10);
+        this.fireSkillChangedEvent(key, false, NaN);
+      }
+    });
 
-        if(isNaN(overrideValue)) {
-          this.calculateSkillModifier(name);
-        } else {
-          let formattedSkillModifier = SkillsSection.formatSkillModifier(overrideValue);
-          this.editElements.skillModifier[name].textContent = formattedSkillModifier;
-        }
+    isProficientElement.addEventListener('input', () => {
+      let isProficient = isProficientElement.checked;
+      let overrideValue = parseInt(overrideElement.value, 10);
 
-        this.fireSkillChangedEvent(name, isProficient, overrideValue);
-      });
+      this.calculateSkillModifier(key);
+
+      this.fireSkillChangedEvent(key, isProficient, overrideValue);
+    });
+
+    overrideElement.addEventListener('input', () => {
+      let isProficient = isProficientElement.checked;
+      let overrideValue = parseInt(overrideElement.value, 10);
+
+      if(isNaN(overrideValue)) {
+        this.calculateSkillModifier(key);
+      } else {
+        let formattedSkillModifier = SkillsSection.formatSkillModifier(overrideValue);
+        this.editElements.skillModifier[key].textContent = formattedSkillModifier;
+      }
+
+      this.fireSkillChangedEvent(key, isProficient, overrideValue);
     });
   }
 
@@ -83,29 +87,29 @@ export default class SkillsSection extends sectionModule.Section {
 
   setAbilityModifier(abilityScoreName, abilityModifier) {
     this.editElements.abilityModifier[abilityScoreName].textContent = abilityModifier;
-    SkillNames.forEachEntry( ([name, value]) => {
+    for (const [key, value] of Skills.entries) {
       if (value.ability_score === abilityScoreName) {
-        this.calculateSkillModifier(name);
+        this.calculateSkillModifier(key);
       }
-    });
+    }
     this.update();
   }
 
   setProficiencyBonus(proficiencyBonus) {
     this.editElements.proficiencyBonus.textContent = proficiencyBonus;
-    SkillNames.forEach( (name) => {
-      this.calculateSkillModifier(name);
-    });
+    for (const key of Skills.keys) {
+      this.calculateSkillModifier(key);
+    }
     this.update();
   }
 
-  calculateSkillModifier(skillName) {
-    let override = this.editElements.override[skillName].value;
+  calculateSkillModifier(key) {
+    let override = this.editElements.override[key].value;
 
     if (override === '') {
-      let abilityScoreName = SkillNames.getEntry(skillName).ability_score;
+      let abilityScoreName = Skills.skills[key].ability_score;
       let abilityModifierElement = this.editElements.abilityModifier[abilityScoreName];
-      let isProficientElement = this.editElements.proficient[skillName];
+      let isProficientElement = this.editElements.proficient[key];
 
       let abilityModifier = parseInt(abilityModifierElement.textContent, 10);
       let isProficient = isProficientElement.checked;
@@ -119,7 +123,7 @@ export default class SkillsSection extends sectionModule.Section {
       }
 
       let formattedSkillModifier = SkillsSection.formatSkillModifier(skillModifier);
-      this.editElements.skillModifier[skillName].textContent = formattedSkillModifier;
+      this.editElements.skillModifier[key].textContent = formattedSkillModifier;
     }
   }
 
@@ -141,9 +145,9 @@ export default class SkillsSection extends sectionModule.Section {
   update() {
     let text = '';
 
-    SkillNames.forEachEntry( ([name, value]) => {
-      let isEnabled = this.editElements.enable[name].checked;
-      let skillModifier = this.editElements.skillModifier[name].textContent;
+    for (const [key, value] of Skills.entries) {
+      let isEnabled = this.editElements.enable[key].checked;
+      let skillModifier = this.editElements.skillModifier[key].textContent;
 
       if (isEnabled) {
         if (text === '') {
@@ -152,7 +156,7 @@ export default class SkillsSection extends sectionModule.Section {
           text += `, ${value.pretty_name} ${skillModifier}`;
         }
       }
-    });
+    }
 
     if (text === '') {
       this.empty = true;
@@ -182,17 +186,17 @@ class SkillsEditElements extends sectionModule.EditElements {
     this.override = {};
     this.abilityModifier = {};
 
-    SkillNames.forEach( (name) => {
-      this.enable[name] = shadowRoot.getElementById(`${name}-enable`);
-      this.label[name] = shadowRoot.getElementById(`${name}-label`);
-      this.skillModifier[name] = shadowRoot.getElementById(`${name}-skill-modifier`);
-      this.proficient[name] = shadowRoot.getElementById(`${name}-proficient`);
-      this.override[name] = shadowRoot.getElementById(`${name}-override`);
-    });
+    for (const key of Skills.keys) {
+      this.enable[key] = shadowRoot.getElementById(`${key}-enable`);
+      this.label[key] = shadowRoot.getElementById(`${key}-label`);
+      this.skillModifier[key] = shadowRoot.getElementById(`${key}-skill-modifier`);
+      this.proficient[key] = shadowRoot.getElementById(`${key}-proficient`);
+      this.override[key] = shadowRoot.getElementById(`${key}-override`);
+    }
 
-    AbilityScoreNames.forEachName( (name) => {
-      this.abilityModifier[name] = shadowRoot.getElementById(`${name}-ability-modifier`);
-    });
+    for (const key of Abilities.keys) {
+      this.abilityModifier[key] = shadowRoot.getElementById(`${key}-ability-modifier`);
+    }
 
     this.proficiencyBonus = shadowRoot.getElementById('proficiency-bonus');
   }

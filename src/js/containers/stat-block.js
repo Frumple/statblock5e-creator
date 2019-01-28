@@ -1,5 +1,4 @@
 import CustomAutonomousElement from '/src/js/base/custom-autonomous-element.js';
-import AbilityScoreNames from '/src/js/helpers/ability-score-names.js';
 
 export default class StatBlock extends CustomAutonomousElement {
   static get elementName() { return 'stat-block'; }

@@ -11,32 +11,28 @@ export default class EnableDisableElementsCheckbox extends CustomBuiltinInputEle
 
     this.addEventListener('input', () => {
       if (this.checked) {
-        this.enabledElements.forEach( (element) => {
+        for (const element of this.enabledElements) {
           element.removeAttribute('disabled');
-        });
-        this.disabledElements.forEach( (element) => {
+        }
+        for (const element of this.disabledElements) {
           element.setAttribute('disabled', '');
-        });
+        }
       } else {
-        this.enabledElements.forEach( (element) => {
+        for (const element of this.enabledElements) {
           element.setAttribute('disabled', '');
-        });
-        this.disabledElements.forEach( (element) => {
+        }
+        for (const element of this.disabledElements) {
           element.removeAttribute('disabled');
-        });
+        }
       }
     });
   }
 
   enableElementsWhenChecked(...elements) {
-    elements.forEach( (element) => {
-      this.enabledElements.push(element);
-    });
+    this.enabledElements = this.enabledElements.concat(elements);
   }
 
   disableElementsWhenChecked(...elements) {
-    elements.forEach( (element) => {
-      this.disabledElements.push(element);
-    });
+    this.disabledElements = this.disabledElements.concat(elements);
   }
 }

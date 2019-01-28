@@ -16,7 +16,7 @@ export default class DivisibleContainer extends CustomAutonomousElement {
   toggleEmptyAttributeVisibility() {
     GlobalOptions.showEmptyAttributes = this.showEmptyAttributesCheckbox.checked;
 
-    this.allSections.forEach( (section) => {
+    for (const section of this.allSections) {
       if (section.empty) {
         if (GlobalOptions.showEmptyAttributes) {
           if (section.mode === 'hidden') {
@@ -28,19 +28,19 @@ export default class DivisibleContainer extends CustomAutonomousElement {
           }
         }
       }
-    });
+    }
 
     this.updateSectionDividers();
   }
 
   updateSectionDividers() {
-    this.allDividers.forEach( (divider) => {
+    for (const divider of this.allDividers) {
       divider.hidden = true;
-    });
+    }
 
     let previousSection = null;
 
-    this.allSections.forEach( (currentSection) => {
+    for (const currentSection of this.allSections) {
       if (currentSection.mode !== 'hidden') {
         if (previousSection) {
           if (DivisibleContainer.shouldSectionDividerBeDisplayed(previousSection, currentSection)) {
@@ -51,7 +51,7 @@ export default class DivisibleContainer extends CustomAutonomousElement {
 
         previousSection = currentSection;
       }
-    });
+    }
   }
 
   static shouldSectionDividerBeDisplayed(sectionAbove, sectionBelow) {

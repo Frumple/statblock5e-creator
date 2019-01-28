@@ -1,6 +1,6 @@
-class SkillNames {
+class Skills {
   constructor() {
-    this.names = {
+    this.skills = {
       'acrobatics' : { pretty_name : 'Acrobatics', ability_score : 'dexterity' },
       'animal-handling' : { pretty_name : 'Animal Handling', ability_score : 'wisdom' },
       'arcana' : { pretty_name : 'Arcana', ability_score : 'intelligence' },
@@ -20,20 +20,16 @@ class SkillNames {
       'stealth' : { pretty_name: 'Stealth', ability_score : 'dexterity' },
       'survival': { pretty_name: 'Survival', ability_score : 'wisdom' }
     };
-    Object.freeze(this.names);
+    Object.freeze(this.skills);
   }
 
-  getEntry(name) {
-    return this.names[name];
+  get keys() {
+    return Object.keys(this.skills);
   }
 
-  forEach(callback) {
-    Object.keys(this.names).forEach(callback);
-  }
-
-  forEachEntry(callback) {
-    Object.entries(this.names).forEach(callback);
+  get entries() {
+    return Object.entries(this.skills);
   }
 }
 
-export default new SkillNames();
+export default new Skills();

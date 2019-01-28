@@ -1,5 +1,5 @@
 import * as sectionModule from '/src/js/base/section.js';
-import AbilityScoreNames from '/src/js/helpers/ability-score-names.js';
+import Abilities from '/src/js/helpers/abilities.js';
 import { getModifierOperator } from '/src/js/helpers/string-format.js';
 import { getModifierNumber } from '/src/js/helpers/string-format.js';
 
@@ -12,11 +12,11 @@ export default class AbilityScoresSection extends sectionModule.Section {
           AbilityScoresShowElements,
           AbilityScoresEditElements);
 
-    AbilityScoreNames.forEachName( (name) => {
-      this.editElements.score[name].addEventListener('input', () => {
-        this.onAbilityScoreChange(name);
+    for (const key of Abilities.keys) {
+      this.editElements.score[key].addEventListener('input', () => {
+        this.onAbilityScoreChange(key);
       });
-    });
+    }
 
     this.editElements.proficiencyBonus.addEventListener('input', () => {
       this.onProficiencyBonusChange();
@@ -87,16 +87,16 @@ export default class AbilityScoresSection extends sectionModule.Section {
   }
 
   checkForErrors() {
-    AbilityScoreNames.forEachName( (name) => {
-      this.editElements.score[name].validate(this.errorMessages);
-    });
+    for (const key of Abilities.keys) {
+      this.editElements.score[key].validate(this.errorMessages);
+    }
     this.editElements.proficiencyBonus.validate(this.errorMessages);
   }
 
   update() {
-    AbilityScoreNames.forEachName( (name) => {
-      this.saveAbilityScore(name);
-    });
+    for (const key of Abilities.keys) {
+      this.saveAbilityScore(key);
+    }
   }
 
   saveAbilityScore(abilityScoreName) {
@@ -117,10 +117,10 @@ class AbilityScoresShowElements extends sectionModule.ShowElements {
     this.score = {};
     this.modifier = {};
 
-    AbilityScoreNames.forEachName( (name) => {
-      this.score[name] = shadowRoot.getElementById(`${name}-score-show`);
-      this.modifier[name] = shadowRoot.getElementById(`${name}-modifier-show`);
-    });
+    for (const key of Abilities.keys) {
+      this.score[key] = shadowRoot.getElementById(`${key}-score-show`);
+      this.modifier[key] = shadowRoot.getElementById(`${key}-modifier-show`);
+    }
   }
 }
 
@@ -131,10 +131,10 @@ class AbilityScoresEditElements extends sectionModule.EditElements {
     this.score = {};
     this.modifier = {};
 
-    AbilityScoreNames.forEachName( (name) => {
-      this.score[name] = shadowRoot.getElementById(`${name}-score-edit`);
-      this.modifier[name] = shadowRoot.getElementById(`${name}-modifier-edit`);
-    });
+    for (const key of Abilities.keys) {
+      this.score[key] = shadowRoot.getElementById(`${key}-score-edit`);
+      this.modifier[key] = shadowRoot.getElementById(`${key}-modifier-edit`);
+    }
 
     this.proficiencyBonus = shadowRoot.getElementById('proficiency-bonus-input');
   }

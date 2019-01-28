@@ -1,5 +1,4 @@
 import * as sectionModule from '/src/js/base/section.js';
-import AbilityScoreNames from '/src/js/helpers/ability-score-names.js';
 
 export default class LanguagesSection extends sectionModule.Section {
   static get elementName() { return 'languages-section'; }
@@ -77,13 +76,13 @@ export default class LanguagesSection extends sectionModule.Section {
 
     let text = '';
     let itemTextList = this.editElements.list.itemTextList;
-    itemTextList.forEach( (itemText) => {
+    for (const itemText of itemTextList) {
       if (text === '') {
         text += itemText;
       } else {
         text += `, ${itemText}`;
       }
-    });
+    }
     if (text === '') {
       // This is an EM dash (U+2014).
       // This appears significantly wider than a normal dash.

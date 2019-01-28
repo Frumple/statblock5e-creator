@@ -1,4 +1,4 @@
-class AbilityScoreNames {
+class Abilities {
   constructor () {
     this.names = {
       'strength' : { abbreviation : 'str' },
@@ -11,13 +11,13 @@ class AbilityScoreNames {
     Object.freeze(this.names);
   }
 
-  forEachName(callback) {
-    Object.keys(this.names).forEach(callback);
+  get keys() {
+    return Object.keys(this.names);
   }
 
-  forEachEntry(callback) {
-    Object.entries(this.names).forEach(callback);
+  get entries() {
+    return Object.entries(this.names);
   }
 }
 
-export default new AbilityScoreNames();
+export default new Abilities();
