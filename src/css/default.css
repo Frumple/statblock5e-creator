@@ -1,16 +1,3 @@
-:root {
+:host {
   --section-transition-duration: 250ms;
-}
-
-input[type="text"] {
-  width: 100%;
-}
-
-.error-highlight {
-  border-color: red;
-  border-style: double;
-}
-
-.hidden-data {
-  display: none;
 }

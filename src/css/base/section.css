@@ -39,6 +39,10 @@
   color: Gray;
 }
 
+.section__text-input {
+  width: 100%;
+}
+
 .section__small-number-input {
   width: 40px;
 }
@@ -54,5 +58,14 @@
 }
 
 .section__action_hidden {
+  display: none;
+}
+
+.section__error-highlight {
+  border-color: red;
+  border-style: double;
+}
+
+.section__hidden-data {
   display: none;
 }
