@@ -1,0 +1,51 @@
+.heading-show-section {
+  min-width: 0;
+}
+
+.heading-show-section__title-text {
+  font-family: 'Libre Baskerville', 'Lora', 'Calisto MT',
+               'Bookman Old Style', Bookman, 'Goudy Old Style',
+               Garamond, 'Hoefler Text', 'Bitstream Charter',
+               Georgia, serif;
+  color: #7A200D;
+  font-size: 23px;
+  font-weight: 700;
+  font-variant: small-caps;
+  letter-spacing: 1px;
+  width: 100%;
+  margin: 0;
+}
+
+.heading-show-section__subtitle-text {
+  font-weight: normal;
+  font-style: italic;
+  font-size: 12px;
+  margin: 0;
+}
+
+.heading-edit-section {
+  display: grid;
+  grid-template-columns: auto auto auto;
+  grid-template-rows: auto 5px auto auto;
+  grid-column-gap: 5px;
+  align-items: center;
+  width: 100%;
+}
+
+.heading-edit-section__title-input {
+  grid-area: 1 / 1 / 2 / 4;
+  width: 100%;
+  height: 23px;
+}
+
+.heading-edit-section__label {
+  font-size: 12px;
+}
+
+.heading-edit-section__size-label { grid-area: 3 / 1; }
+.heading-edit-section__type-label { grid-area: 3 / 2; }
+.heading-edit-section__alignment-label { grid-area: 3 / 3; }
+
+.heading-edit-section__size-input { grid-area: 4 / 1; }
+.heading-edit-section__type-input { grid-area: 4 / 2; }
+.heading-edit-section__alignment-input { grid-area: 4 / 3; }

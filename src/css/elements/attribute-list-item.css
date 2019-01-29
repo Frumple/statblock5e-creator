@@ -1,0 +1,30 @@
+.list-item__container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border: 1px solid black;
+  padding: 5px;
+}
+
+.list-item__container:hover {
+  background: LightCyan;
+}
+
+.list-item__container_dragover-top {
+  border-top: solid 10px DodgerBlue;
+}
+
+.list-item__container_dragover-bottom {
+  border-bottom: solid 10px DodgerBlue;
+}
+
+.list-item__label {
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.list-item__remove-button {
+
+}

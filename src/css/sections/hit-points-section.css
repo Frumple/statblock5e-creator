@@ -1,0 +1,55 @@
+.hit-points-edit-section {
+  display: grid;
+  grid-template-columns: 90px auto auto auto auto 50px;
+  grid-template-rows: auto 5px auto 5px auto auto;
+  grid-column-gap: 5px;
+  align-items: center;
+  width: 100%;
+}
+
+.hit-points-edit-section__hit-points-label {
+  grid-area: 1 / 1;
+}
+
+.hit-points-edit-section__hit-points-input {
+  grid-area: 1 / 2;
+}
+
+.hit-points-edit-section__use-hit-die-input {
+  grid-area: 3 / 1;
+  justify-self: end;
+}
+
+.hit-points-edit-section__use-hit-die-label {
+  grid-area: 3 / 2 / 4 / 7;
+}
+
+.hit-points-edit-section__hit-die-quantity-label {
+  grid-area: 5 / 2 / 6 / 4;
+  justify-self: center;
+}
+
+.hit-points-edit-section__hit-die-size-label {
+  grid-area: 5 / 4 / 6 / 6;
+  justify-self: center;
+}
+
+.hit-points-edit-section__hit_die-leading-text {
+  grid-area: 6 / 1;
+  justify-self: end;
+}
+
+.hit-points-edit-section__hit-die-quantity-input {
+  grid-area: 6 / 2 / 7 / 4;
+  justify-self: center;
+}
+
+.hit-points-edit-section__hit-die-size-input {
+  grid-area: 6 / 4 / 7 / 6;
+  justify-self: center;
+  width: fit-content;
+}
+
+.hit-points-edit-section__hit-die-trailing-text {
+  grid-area: 6 / 6 / 7 / 7;
+}

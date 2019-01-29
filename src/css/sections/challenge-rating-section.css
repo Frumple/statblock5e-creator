@@ -1,0 +1,27 @@
+.challenge-rating-edit-section {
+  display: grid;
+  grid-template-columns: auto auto;
+  grid-template-rows: auto auto;
+  grid-column-gap: 5px;
+  align-items: center;
+  justify-items: center;
+  width: 100%;
+}
+
+.challenge-rating-edit-section__challenge-rating-label {
+  grid-area: 1 / 1;
+}
+
+.challenge-rating-edit-section__challenge-rating-input {
+  grid-area: 2 / 1;
+  width: 50px;
+}
+
+.challenge-rating-edit-section__experience-points-label {
+  grid-area: 1 / 2;
+}
+
+.challenge-rating-edit-section__experience-points-input {
+  grid-area: 2 / 2;
+  width: 70px;
+}

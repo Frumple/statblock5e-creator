@@ -1,0 +1,20 @@
+.show-empty-attributes-container {
+  display: flex;
+  align-items: center;
+  position: absolute;
+  left: 430px;
+  background: #EEEEEE;
+  border: 1px solid #867453;
+  box-shadow: 3px 3px 1.5em #867453;
+  width: fit-content;
+  padding: 5px;
+}
+
+.show-empty-attributes-container__label {
+  font-family: inherit;
+  font-size: inherit;
+  font-weight: bold;
+  color: black;
+  white-space: pre-wrap;
+  margin-left: 5px;
+}
