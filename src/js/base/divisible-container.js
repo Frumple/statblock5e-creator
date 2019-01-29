@@ -2,8 +2,8 @@ import CustomAutonomousElement from '/src/js/base/custom-autonomous-element.js';
 import GlobalOptions from '/src/js/helpers/global-options.js';
 
 export default class DivisibleContainer extends CustomAutonomousElement {
-  constructor(elementName) {
-    super(elementName);
+  constructor(templatePaths) {
+    super(templatePaths);
 
     this.allDividers = this.querySelectorAll('section-divider');
     this.allSections = [];

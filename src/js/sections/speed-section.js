@@ -2,10 +2,14 @@ import * as sectionModule from '/src/js/base/section.js';
 
 export default class SpeedSection extends sectionModule.Section {
   static get elementName() { return 'speed-section'; }
-  static get templatePath() { return 'src/html/sections/speed-section.html'; }
+  static get templatePaths() {
+    return super.templatePaths.set(
+      'speed-section',
+      'src/html/sections/speed-section.html');
+  }
 
   constructor() {
-    super(SpeedSection.elementName,
+    super(SpeedSection.templatePaths,
           SpeedShowElements,
           SpeedEditElements);
 

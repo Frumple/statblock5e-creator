@@ -6,10 +6,14 @@ import { getModifierNumber } from '/src/js/helpers/string-format.js';
 
 export default class SavingThrowsSection extends sectionModule.Section {
   static get elementName() { return 'saving-throws-section'; }
-  static get templatePath() { return 'src/html/sections/saving-throws-section.html'; }
+  static get templatePaths() {
+    return super.templatePaths.set(
+      'saving-throws-section',
+      'src/html/sections/saving-throws-section.html');
+  }
 
   constructor() {
-    super(SavingThrowsSection.elementName,
+    super(SavingThrowsSection.templatePaths,
           SavingThrowsShowElements,
           SavingThrowsEditElements);
 

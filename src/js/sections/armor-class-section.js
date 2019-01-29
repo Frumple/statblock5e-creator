@@ -2,10 +2,14 @@ import * as sectionModule from '/src/js/base/section.js';
 
 export default class ArmorClassSection extends sectionModule.Section {
   static get elementName() { return 'armor-class-section'; }
-  static get templatePath() { return 'src/html/sections/armor-class-section.html'; }
+  static get templatePaths() {
+    return super.templatePaths.set(
+      'armor-class-section',
+      'src/html/sections/armor-class-section.html');
+  }
 
   constructor() {
-    super(ArmorClassSection.elementName,
+    super(ArmorClassSection.templatePaths,
           ArmorClassShowElements,
           ArmorClassEditElements);
 

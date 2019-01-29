@@ -2,10 +2,14 @@ import * as sectionModule from '/src/js/base/section.js';
 
 export default class SensesSection extends sectionModule.Section {
   static get elementName() { return 'senses-section'; }
-  static get templatePath() { return 'src/html/sections/senses-section.html'; }
+  static get templatePaths() {
+    return super.templatePaths.set(
+      'senses-section',
+      'src/html/sections/senses-section.html');
+  }
 
   constructor() {
-    super(SensesSection.elementName,
+    super(SensesSection.templatePaths,
           SensesShowElements,
           SensesEditElements);
 

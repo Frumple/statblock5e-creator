@@ -6,10 +6,14 @@ import { getModifierNumber } from '/src/js/helpers/string-format.js';
 
 export default class SkillsSection extends sectionModule.Section {
   static get elementName() { return 'skills-section'; }
-  static get templatePath() { return 'src/html/sections/skills-section.html'; }
+  static get templatePaths() {
+    return super.templatePaths.set(
+      'skills-section',
+      'src/html/sections/skills-section.html');
+  }
 
   constructor() {
-    super(SkillsSection.elementName,
+    super(SkillsSection.templatePaths,
           SkillsShowElements,
           SkillsEditElements);
 

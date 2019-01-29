@@ -2,12 +2,16 @@ import CustomAutonomousElement from '/src/js/base/custom-autonomous-element.js';
 
 export default class SectionDivider extends CustomAutonomousElement {
   static get elementName() { return 'section-divider'; }
-  static get templatePath() { return 'src/html/elements/section-divider.html'; }
+  static get templatePaths() {
+    return super.templatePaths.set(
+      'section-divider',
+      'src/html/elements/section-divider.html');
+  }
 
   static get hiddenClassName() { return 'section-divider_hidden'; }
 
   constructor() {
-    super(SectionDivider.elementName);
+    super(SectionDivider.templatePaths);
     this.divider = this.shadowRoot.querySelector('.section-divider');
     this.hidden = true;
   }

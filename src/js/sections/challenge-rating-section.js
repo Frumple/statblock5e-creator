@@ -3,10 +3,14 @@ import ExperiencePointsByChallengeRating from '/src/js/helpers/experience-points
 
 export default class ChallengeRatingSection extends sectionModule.Section {
   static get elementName() { return 'challenge-rating-section'; }
-  static get templatePath() { return 'src/html/sections/challenge-rating-section.html'; }
+  static get templatePaths() {
+    return super.templatePaths.set(
+      'challenge-rating-section',
+      'src/html/sections/challenge-rating-section.html');
+  }
 
   constructor() {
-    super(ChallengeRatingSection.elementName,
+    super(ChallengeRatingSection.templatePaths,
           ChallengeRatingShowElements,
           ChallengeRatingEditElements);
 

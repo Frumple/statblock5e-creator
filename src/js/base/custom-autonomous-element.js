@@ -6,21 +6,28 @@ export default class CustomAutonomousElement extends HTMLElement {
       `The class '${this.name}' must implement the elementName() getter.`);
   }
 
-  static get templatePath() {
-    throw new Error(
-      `The class '${this.name}' must implement the templatePath() getter.`);
+  static get templatePaths() {
+    return new Map();
   }
 
   static async define() {
-    await HtmlTemplates.addTemplate(this.elementName, this.templatePath);
+    for (const [name, path] of this.templatePaths) {
+      if (! HtmlTemplates.hasTemplate(name)) {
+        await HtmlTemplates.addTemplate(name, path);
+      }
+    }
+
     customElements.define(this.elementName, this);
   }
 
-  constructor(elementName) {
+  constructor(templatePaths) {
     super();
 
-    let template = HtmlTemplates.getTemplate(elementName);
-    this.attachShadow({mode: 'open'})
-      .appendChild(template.cloneNode(true));
+    let shadowRoot = this.attachShadow({mode: 'open'});
+
+    for (const name of templatePaths.keys()) {
+      let template = HtmlTemplates.getTemplate(name);
+      shadowRoot.appendChild(template.cloneNode(true));
+    }
   }
 }

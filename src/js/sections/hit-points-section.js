@@ -4,10 +4,14 @@ import { getModifierNumber } from '/src/js/helpers/string-format.js';
 
 export default class HitPointsSection extends sectionModule.Section {
   static get elementName() { return 'hit-points-section'; }
-  static get templatePath() { return 'src/html/sections/hit-points-section.html'; }
+  static get templatePaths() {
+    return super.templatePaths.set(
+      'hit-points-section',
+      'src/html/sections/hit-points-section.html');
+  }
 
   constructor() {
-    super(HitPointsSection.elementName,
+    super(HitPointsSection.templatePaths,
           HitPointsShowElements,
           HitPointsEditElements);
 

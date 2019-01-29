@@ -2,10 +2,14 @@ import CustomAutonomousElement from '/src/js/base/custom-autonomous-element.js';
 
 export default class StatBlock extends CustomAutonomousElement {
   static get elementName() { return 'stat-block'; }
-  static get templatePath() { return 'src/html/containers/stat-block.html'; }
+  static get templatePaths() {
+    return super.templatePaths.set(
+      'stat-block',
+      'src/html/containers/stat-block.html');
+  }
 
   constructor() {
-    super(StatBlock.elementName);
+    super(StatBlock.templatePaths);
 
     this.headingSection = document.querySelector('heading-section');
     this.topStats = document.querySelector('top-stats');

@@ -2,10 +2,14 @@ import * as sectionModule from '/src/js/base/section.js';
 
 export default class LanguagesSection extends sectionModule.Section {
   static get elementName() { return 'languages-section'; }
-  static get templatePath() { return 'src/html/sections/languages-section.html'; }
+  static get templatePaths() {
+    return super.templatePaths.set(
+      'languages-section',
+      'src/html/sections/languages-section.html');
+  }
 
   constructor() {
-    super(LanguagesSection.elementName,
+    super(LanguagesSection.templatePaths,
           LanguagesShowElements,
           LanguagesEditElements);
 

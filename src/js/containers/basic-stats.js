@@ -3,10 +3,14 @@ import GlobalOptions from '/src/js/helpers/global-options.js';
 
 export default class BasicStats extends DivisibleContainer {
   static get elementName() { return 'basic-stats'; }
-  static get templatePath() { return 'src/html/containers/basic-stats.html'; }
+  static get templatePaths() {
+    return super.templatePaths.set(
+      'basic-stats',
+      'src/html/containers/basic-stats.html');
+  }
 
   constructor() {
-    super(BasicStats.elementName);
+    super(BasicStats.templatePaths);
 
     this.armorClassSection = document.querySelector('armor-class-section');
     this.hitPointsSection = document.querySelector('hit-points-section');

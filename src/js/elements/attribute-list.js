@@ -2,10 +2,14 @@ import CustomAutonomousElement from '/src/js/base/custom-autonomous-element.js';
 
 export default class AttributeList extends CustomAutonomousElement {
   static get elementName() { return 'attribute-list'; }
-  static get templatePath() { return 'src/html/elements/attribute-list.html'; }
+  static get templatePaths() {
+    return super.templatePaths.set(
+      'attribute-list',
+      'src/html/elements/attribute-list.html');
+  }
 
   constructor() {
-    super(AttributeList.elementName);
+    super(AttributeList.templatePaths);
 
     this.draggedItem = null;
   }

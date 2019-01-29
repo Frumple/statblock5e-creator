@@ -3,8 +3,14 @@ import ErrorMessages from '/src/js/elements/error-messages.js';
 import GlobalOptions from '/src/js/helpers/global-options.js';
 
 export class Section extends CustomAutonomousElement {
-  constructor(elementName, showElementsClass, editElementsClass) {
-    super(elementName);
+  static get templatePaths() {
+    return super.templatePaths.set(
+      'section',
+      'src/html/base/section.html');
+  }
+
+  constructor(templatePaths, showElementsClass, editElementsClass) {
+    super(templatePaths);
 
     this.showElements = new showElementsClass(this.shadowRoot);
     this.editElements = new editElementsClass(this.shadowRoot);

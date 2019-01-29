@@ -2,10 +2,14 @@ import CustomAutonomousElement from '/src/js/base/custom-autonomous-element.js';
 
 export default class ErrorMessages extends CustomAutonomousElement {
   static get elementName() { return 'error-messages'; }
-  static get templatePath() { return 'src/html/elements/error-messages.html'; }
+  static get templatePaths() {
+    return super.templatePaths.set(
+      'error-messages',
+      'src/html/elements/error-messages.html');
+  }
 
   constructor() {
-    super(ErrorMessages.elementName);
+    super(ErrorMessages.templatePaths);
 
     this.containerElement = this.shadowRoot.getElementById('error-messages');
     this.listElement = this.shadowRoot.getElementById('error-messages-list');

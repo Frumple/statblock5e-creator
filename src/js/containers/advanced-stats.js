@@ -3,10 +3,14 @@ import GlobalOptions from '/src/js/helpers/global-options.js';
 
 export default class AdvancedStats extends DivisibleContainer {
   static get elementName() { return 'advanced-stats'; }
-  static get templatePath() { return 'src/html/containers/advanced-stats.html'; }
+  static get templatePaths() {
+    return super.templatePaths.set(
+      'advanced-stats',
+      'src/html/containers/advanced-stats.html');
+  }
 
   constructor() {
-    super(AdvancedStats.elementName);
+    super(AdvancedStats.templatePaths);
 
     this.savingThrowsSection = document.querySelector('saving-throws-section');
     this.skillsSection = document.querySelector('skills-section');

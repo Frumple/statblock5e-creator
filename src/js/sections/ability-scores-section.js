@@ -5,10 +5,14 @@ import { getModifierNumber } from '/src/js/helpers/string-format.js';
 
 export default class AbilityScoresSection extends sectionModule.Section {
   static get elementName() { return 'ability-scores-section'; }
-  static get templatePath() { return 'src/html/sections/ability-scores-section.html'; }
+  static get templatePaths() {
+    return super.templatePaths.set(
+      'ability-scores-section',
+      'src/html/sections/ability-scores-section.html');
+  }
 
   constructor() {
-    super(AbilityScoresSection.elementName,
+    super(AbilityScoresSection.templatePaths,
           AbilityScoresShowElements,
           AbilityScoresEditElements);
 

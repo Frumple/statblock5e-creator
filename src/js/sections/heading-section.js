@@ -3,10 +3,14 @@ import { capitalizeFirstLetter } from '/src/js/helpers/string-format.js';
 
 export default class HeadingSection extends sectionModule.Section {
   static get elementName() { return 'heading-section'; }
-  static get templatePath() { return 'src/html/sections/heading-section.html'; }
+  static get templatePaths() {
+    return super.templatePaths.set(
+      'heading-section',
+      'src/html/sections/heading-section.html');
+  }
 
   constructor() {
-    super(HeadingSection.elementName,
+    super(HeadingSection.templatePaths,
           HeadingShowElements,
           HeadingEditElements);
   }
@@ -18,7 +22,7 @@ export default class HeadingSection extends sectionModule.Section {
   checkForErrors() {
     this.editElements.title.trimWhitespace();
     this.editElements.type.trimWhitespace();
-    
+
     this.editElements.title.validate(this.errorMessages);
     this.editElements.type.validate(this.errorMessages);
   }
