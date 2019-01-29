@@ -25,4 +25,11 @@ export default class AttributeList extends CustomAutonomousElement {
     listItemElement.text = text;
     this.appendChild(listItemElement);
   }
+
+  insertDraggedItemBefore(element) {
+    if (this.draggedItem !== null) {
+      this.insertBefore(this.draggedItem, element);
+      this.draggedItem = null;
+    }
+  }
 }
