@@ -5,7 +5,8 @@
 
 .container {
   display: inline-block;
-  margin-left: 1em;
+  margin-top: 20px;
+  margin-left: 20px;
 }
 
 .bar {
