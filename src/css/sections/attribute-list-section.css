@@ -1,0 +1,27 @@
+.attribute-list-edit-section {
+  display: grid;
+  grid-template-columns: 90px auto;
+  grid-template-rows: auto 5px auto;
+  grid-column-gap: 5px;
+  align-items: center;
+  width: 100%;
+}
+
+.attribute-list-edit-section__header-label {
+  grid-area: 1 / 1;
+}
+
+.attribute-list-edit-section__input-container {
+  grid-area: 1 / 2;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.attribute-list-edit-section__add-button {
+  margin-left: 5px;
+}
+
+.attribute-list-edit-section__list {
+  grid-area: 3 / 2;
+}
