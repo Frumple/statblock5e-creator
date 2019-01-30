@@ -17,8 +17,8 @@
 }
 
 .section-divider__line {
-  fill: #3C3C3C;
-  stroke: #3C3C3C;
+  fill: Gray;
+  stroke: Gray;
   margin-top: 0.6em;
   margin-bottom: 0.35em;
 }
