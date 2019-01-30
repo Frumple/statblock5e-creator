@@ -14,6 +14,10 @@ export default class AdvancedStats extends DivisibleContainer {
 
     this.savingThrowsSection = document.querySelector('saving-throws-section');
     this.skillsSection = document.querySelector('skills-section');
+    this.damageVulnerabilitiesSection = document.querySelector('damage-vulnerabilities-section');
+    this.damageResistancesSection = document.querySelector('damage-resistances-section');
+    this.damageImmunitiesSection = document.querySelector('damage-immunities-section');
+    this.conditionImmunitiesSection = document.querySelector('condition-immunities-section');
     this.sensesSection = document.querySelector('senses-section');
     this.languagesSection = document.querySelector('languages-section');
     this.challengeRatingSection = document.querySelector('challenge-rating-section');
@@ -21,6 +25,10 @@ export default class AdvancedStats extends DivisibleContainer {
     this.allSections = [
       this.savingThrowsSection,
       this.skillsSection,
+      this.damageVulnerabilitiesSection,
+      this.damageResistancesSection,
+      this.damageImmunitiesSection,
+      this.conditionImmunitiesSection,
       this.sensesSection,
       this.languagesSection,
       this.challengeRatingSection

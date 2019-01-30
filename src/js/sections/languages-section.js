@@ -26,15 +26,12 @@ export default class LanguagesSection extends AttributeListSection {
     }
   }
 
-  update() {
-    super.update();
-
-    let text = this.showElements.text.textContent;
+  postProcessText(text) {
     if (text === '') {
       // This is an EM dash (U+2014).
       // This appears significantly wider than a normal dash.
       text = '—';
     }
-    this.showElements.text.textContent = text;
+    return text;
   }
 }

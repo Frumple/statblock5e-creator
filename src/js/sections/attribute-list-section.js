@@ -63,7 +63,7 @@ export default class AttributeListSection extends sectionModule.Section {
   }
 
   checkForErrors() {
-
+    return;
   }
 
   update() {
@@ -79,7 +79,18 @@ export default class AttributeListSection extends sectionModule.Section {
       }
     }
 
+    text = this.postProcessText(text);
+
     this.showElements.text.textContent = text;
+  }
+
+  postProcessText(text) {
+    if (text === '') {
+      this.empty = true;
+    } else {
+      this.empty = false;
+    }
+    return text;
   }
 }
 

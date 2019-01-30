@@ -1,6 +1,6 @@
 .attribute-list-edit-section {
   display: grid;
-  grid-template-columns: 90px auto;
+  grid-template-columns: 110px auto;
   grid-template-rows: auto 5px auto;
   grid-column-gap: 5px;
   align-items: center;

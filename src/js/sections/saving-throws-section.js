@@ -20,6 +20,9 @@ export default class SavingThrowsSection extends sectionModule.Section {
     for (const key of Abilities.keys) {
       this.initializeSavingThrowElements(key);
     }
+
+    this.mode = 'hidden';
+    this.empty = true;
   }
 
   initializeSavingThrowElements(key) {

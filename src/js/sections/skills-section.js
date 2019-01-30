@@ -20,6 +20,9 @@ export default class SkillsSection extends sectionModule.Section {
     for (const key of Skills.keys) {
       this.initializeSkillElements(key);
     }
+
+    this.mode = 'hidden';
+    this.empty = true;
   }
 
   initializeSkillElements(key) {
