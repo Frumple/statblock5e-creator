@@ -1,0 +1,21 @@
+{
+  "name": "statblock5e",
+  "version": "1.0.0",
+  "description": "A Web Component statblock for D&D 5E\r ====================================",
+  "main": "index.js",
+  "dependencies": {},
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Frumple/statblock5e.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Frumple/statblock5e/issues"
+  },
+  "homepage": "https://github.com/Frumple/statblock5e#readme"
+}

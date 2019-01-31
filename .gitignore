@@ -1,1 +1,3 @@
-.jshintrc
+node_modules/
+.eslintrc.js
+*.code-workspace
