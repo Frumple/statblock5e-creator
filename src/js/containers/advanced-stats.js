@@ -1,5 +1,4 @@
 import DivisibleContainer from '/src/js/base/divisible-container.js';
-import GlobalOptions from '/src/js/helpers/global-options.js';
 
 export default class AdvancedStats extends DivisibleContainer {
   static get elementName() { return 'advanced-stats'; }

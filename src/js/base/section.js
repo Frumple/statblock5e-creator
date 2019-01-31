@@ -1,5 +1,4 @@
 import CustomAutonomousElement from '/src/js/base/custom-autonomous-element.js';
-import ErrorMessages from '/src/js/elements/error-messages.js';
 import GlobalOptions from '/src/js/helpers/global-options.js';
 
 export class Section extends CustomAutonomousElement {
@@ -60,24 +59,23 @@ export class Section extends CustomAutonomousElement {
     const hiddenClass = 'section_hidden';
 
     switch (mode) {
-      case 'hidden':
-        this.dataset.mode = 'hidden';
-        this.showElements.section.classList.add(hiddenClass);
-        this.editElements.section.classList.add(hiddenClass);
-        break;
-      case 'show':
-        this.dataset.mode = 'show';
-        this.showElements.section.classList.remove(hiddenClass);
-        this.editElements.section.classList.add(hiddenClass);
-        break;
-      case 'edit':
-        this.dataset.mode = 'edit';
-        this.showElements.section.classList.add(hiddenClass);
-        this.editElements.section.classList.remove(hiddenClass);
-        break;
-      default:
-      throw new Error(
-        `'${mode}' is not a valid section mode.`);
+    case 'hidden':
+      this.dataset.mode = 'hidden';
+      this.showElements.section.classList.add(hiddenClass);
+      this.editElements.section.classList.add(hiddenClass);
+      break;
+    case 'show':
+      this.dataset.mode = 'show';
+      this.showElements.section.classList.remove(hiddenClass);
+      this.editElements.section.classList.add(hiddenClass);
+      break;
+    case 'edit':
+      this.dataset.mode = 'edit';
+      this.showElements.section.classList.add(hiddenClass);
+      this.editElements.section.classList.remove(hiddenClass);
+      break;
+    default:
+      throw new Error(`'${mode}' is not a valid section mode.`);
     }
   }
 

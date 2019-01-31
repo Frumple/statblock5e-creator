@@ -41,7 +41,7 @@ export default class AttributeListItem extends CustomAutonomousElement {
       }
     });
 
-    this.addEventListener('dragleave', (event) => {
+    this.addEventListener('dragleave', () => {
       this.dragover = 'none';
     });
 
@@ -87,20 +87,20 @@ export default class AttributeListItem extends CustomAutonomousElement {
     const dragoverBottomClass = 'list-item__container_dragover-bottom';
 
     switch (state) {
-      case 'top':
-        this.dataset.dragover = 'top';
-        this.container.classList.add(dragoverTopClass);
-        this.container.classList.remove(dragoverBottomClass);
-        break;
-      case 'bottom':
-        this.dataset.dragover = 'bottom';
-        this.container.classList.remove(dragoverTopClass);
-        this.container.classList.add(dragoverBottomClass);
-        break;
-      default:
-        this.dataset.dragover = 'none';
-        this.container.classList.remove(dragoverTopClass);
-        this.container.classList.remove(dragoverBottomClass);
+    case 'top':
+      this.dataset.dragover = 'top';
+      this.container.classList.add(dragoverTopClass);
+      this.container.classList.remove(dragoverBottomClass);
+      break;
+    case 'bottom':
+      this.dataset.dragover = 'bottom';
+      this.container.classList.remove(dragoverTopClass);
+      this.container.classList.add(dragoverBottomClass);
+      break;
+    default:
+      this.dataset.dragover = 'none';
+      this.container.classList.remove(dragoverTopClass);
+      this.container.classList.remove(dragoverBottomClass);
     }
   }
 
