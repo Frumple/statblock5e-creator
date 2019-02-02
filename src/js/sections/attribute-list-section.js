@@ -66,7 +66,7 @@ export default class AttributeListSection extends sectionModule.Section {
     return;
   }
 
-  update() {
+  updateShowSection() {
     this.editElements.input.value = '';
 
     let text = '';

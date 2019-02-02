@@ -38,7 +38,7 @@ export default class ArmorClassSection extends sectionModule.Section {
     }
   }
 
-  update() {
+  updateShowSection() {
     let armorClass = this.editElements.armorClass.value;
     let armorType = this.editElements.armorType.value;
     let shield = this.editElements.shield.checked;

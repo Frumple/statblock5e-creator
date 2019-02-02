@@ -1,4 +1,5 @@
 import * as sectionModule from '/src/js/base/section.js';
+import Skills from '/src/js/stats/skills.js';
 
 export default class SensesSection extends sectionModule.Section {
   static get elementName() { return 'senses-section'; }
@@ -23,42 +24,11 @@ export default class SensesSection extends sectionModule.Section {
       this.editElements.customText);
   }
 
-  setWisdomModifier(wisdomModifier) {
-    this.editElements.wisdomModifier.textContent = wisdomModifier;
-    this.calculatePassivePerception();
-    this.update();
-  }
-
-  setProficiencyBonus(proficiencyBonus) {
-    this.editElements.proficiencyBonus.textContent = proficiencyBonus;
-    this.calculatePassivePerception();
-    this.update();
-  }
-
-  setPerceptionSkill(isProficient, overrideModifier) {
-    this.editElements.perceptionProficient.textContent = isProficient;
-    this.editElements.perceptionModifierOverride.textContent = overrideModifier;
-    this.calculatePassivePerception();
-    this.update();
-  }
-
-  calculatePassivePerception() {
-    let wisdomModifier = parseInt(this.editElements.wisdomModifier.textContent, 10);
-    let proficiencyBonus = parseInt(this.editElements.proficiencyBonus.textContent, 10);
-    let perceptionProficient = (this.editElements.perceptionProficient.textContent === 'true');
-    let override = parseInt(this.editElements.perceptionModifierOverride.textContent, 10);
-
-    let passivePerception = 10;
-    if (override) {
-      passivePerception += override;
-    } else {
-      passivePerception += wisdomModifier;
-      if (perceptionProficient) {
-        passivePerception += proficiencyBonus;
-      }
-    }
-
+  updatePassivePerception() {
+    let passivePerception = Skills.skills['perception'].calculatePassiveScore();
     this.editElements.passivePerception.textContent = passivePerception;
+
+    this.updateShowSection();
   }
 
   get initialSelectedEditElement() {
@@ -76,7 +46,7 @@ export default class SensesSection extends sectionModule.Section {
     }
   }
 
-  update() {
+  updateShowSection() {
     let blindsightRange = this.editElements.blindsight.value;
     let darkvisionRange = this.editElements.darkvision.value;
     let tremorsenseRange = this.editElements.tremorsense.value;
@@ -117,7 +87,6 @@ export default class SensesSection extends sectionModule.Section {
   }
 }
 
-
 class SensesShowElements extends sectionModule.ShowElements {
   constructor(shadowRoot) {
     super(shadowRoot);
@@ -135,10 +104,5 @@ class SensesEditElements extends sectionModule.EditElements {
     this.passivePerception = shadowRoot.getElementById('passive-perception-value');
     this.useCustom = shadowRoot.getElementById('use-custom-input');
     this.customText = shadowRoot.getElementById('custom-input');
-
-    this.wisdomModifier = shadowRoot.getElementById('wisdom-modifier');
-    this.proficiencyBonus = shadowRoot.getElementById('proficiency-bonus');
-    this.perceptionProficient = shadowRoot.getElementById('perception-proficient');
-    this.perceptionModifierOverride = shadowRoot.getElementById('perception-modifier-override');
   }
 }

@@ -27,7 +27,7 @@ export default class HeadingSection extends sectionModule.Section {
     this.editElements.type.validate(this.errorMessages);
   }
 
-  update() {
+  updateShowSection() {
     let title = this.editElements.title.value;
     let size = this.editElements.size.value;
     let type = this.editElements.type.value;

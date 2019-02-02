@@ -105,9 +105,9 @@ export class Section extends CustomAutonomousElement {
       `The class '${this.constructor.name}' must implement the checkForErrors() method.`);
   }
 
-  update() {
+  updateShowSection() {
     throw new Error(
-      `The class '${this.constructor.name}' must implement the update() method.`);
+      `The class '${this.constructor.name}' must implement the updateShowSection() method.`);
   }
 
   save() {
@@ -116,7 +116,7 @@ export class Section extends CustomAutonomousElement {
     if (this.errorMessages.any()) {
       return;
     }
-    this.update();
+    this.updateShowSection();
 
     if (this.empty && ! GlobalOptions.showEmptyAttributes) {
       this.mode = 'hidden';

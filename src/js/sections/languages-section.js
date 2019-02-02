@@ -20,7 +20,7 @@ export default class LanguagesSection extends AttributeListSection {
       if (! this.listInitialized) {
 
         this.addItem('Common');
-        this.update();
+        this.updateShowSection();
         this.listInitialized = true;
       }
     }

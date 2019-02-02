@@ -1,4 +1,5 @@
 import * as sectionModule from '/src/js/base/section.js';
+import HitPoints from '/src/js/stats/hit-points.js';
 import { getModifierOperator } from '/src/js/helpers/string-format.js';
 import { getModifierNumber } from '/src/js/helpers/string-format.js';
 
@@ -22,47 +23,51 @@ export default class HitPointsSection extends sectionModule.Section {
       this.editElements.hitDieQuantity,
       this.editElements.hitDieSize);
 
+    this.editElements.hitPoints.addEventListener('input', () => {
+      if (! this.editElements.useHitDie.checked) {
+        let hitPoints = parseInt(this.editElements.hitPoints.value, 10);
+
+        if (! isNaN(hitPoints)) {
+          HitPoints.hitPoints = hitPoints;
+        }
+
+        this.updateHitPoints();
+      }
+    });
+
     this.editElements.useHitDie.addEventListener('input', () => {
-      this.calculateHitPointsFromHitDie();
+      HitPoints.useHitDie = this.editElements.useHitDie.checked;
+      this.updateHitPoints();
     });
 
     this.editElements.hitDieQuantity.addEventListener('input', () => {
-      this.calculateHitPointsFromHitDie();
+      let hitDieQuantity = parseInt(this.editElements.hitDieQuantity.value, 10);
+
+      if (! isNaN(hitDieQuantity)) {
+        HitPoints.hitDieQuantity = hitDieQuantity;
+        this.updateHitPoints();
+      }
     });
 
     this.editElements.hitDieSize.addEventListener('input', () => {
-      this.calculateHitPointsFromHitDie();
+      let hitDieSize = parseInt(this.editElements.hitDieSize.value, 10);
+
+      if (! isNaN(hitDieSize)) {
+        HitPoints.hitDieSize = hitDieSize;
+        this.updateHitPoints();
+      }
     });
   }
 
-  setConstitutionModifier(constitutionModifier) {
-    this.editElements.constitutionModifier.textContent = constitutionModifier;
-    this.calculateHitPointsFromHitDie();
-    this.update();
-  }
+  updateHitPoints() {
+    let constitutionHitPoints = HitPoints.constitutionHitPoints;
+    let constitutionHitPointsOperator = getModifierOperator(constitutionHitPoints);
+    let constitutionHitPointsNumber = getModifierNumber(constitutionHitPoints);
 
-  calculateHitPointsFromHitDie() {
-    let useHitDie = this.editElements.useHitDie.checked;
-    let hitDieQuantity = parseInt(this.editElements.hitDieQuantity.value, 10);
-    let hitDieSize = parseInt(this.editElements.hitDieSize.value, 10);
-    let constitutionModifier = parseInt(this.editElements.constitutionModifier.textContent, 10);
+    this.editElements.trailingText.textContent = `${constitutionHitPointsOperator} ${constitutionHitPointsNumber} )`;
+    this.editElements.hitPoints.value = HitPoints.hitPoints;
 
-    if (isNaN(hitDieQuantity)) {
-      hitDieQuantity = 0;
-    }
-
-    let constitutionHitPoints = hitDieQuantity * constitutionModifier;
-    this.editElements.constitutionHitPoints.textContent = constitutionHitPoints;
-    this.editElements.constitutionHitPointsOperator.textContent = getModifierOperator(constitutionHitPoints);
-    this.editElements.constitutionHitPointsNumber.textContent = getModifierNumber(constitutionHitPoints);
-
-    if(useHitDie) {
-      let hitDieAverage = (hitDieSize / 2) + 0.5;
-      let hitPoints = Math.floor(hitDieQuantity * hitDieAverage) + constitutionHitPoints;
-      hitPoints = Math.max(0, hitPoints);
-
-      this.editElements.hitPoints.value = hitPoints;
-    }
+    this.updateShowSection();
   }
 
   get initialSelectedEditElement() {
@@ -77,19 +82,19 @@ export default class HitPointsSection extends sectionModule.Section {
     this.editElements.hitDieQuantity.validate(this.errorMessages);
   }
 
-  update() {
-    let hitPoints = parseInt(this.editElements.hitPoints.value, 10);
-    let useHitDie = this.editElements.useHitDie.checked;
-    let hitDieQuantity = parseInt(this.editElements.hitDieQuantity.value, 10);
-    let hitDieSize = parseInt(this.editElements.hitDieSize.value, 10);
-    let constitutionHitPoints = parseInt(this.editElements.constitutionHitPoints.textContent, 10);
-
+  updateShowSection() {
     let text = '';
-    if (useHitDie) {
+    let hitPoints = HitPoints.hitPoints;
+
+    if (HitPoints.useHitDie) {
+      let hitDieQuantity = HitPoints.hitDieQuantity;
+      let hitDieSize = HitPoints.hitDieSize;
+      let constitutionHitPoints = HitPoints.constitutionHitPoints;      
+
       if (constitutionHitPoints != 0) {
-        let modifier_operator = getModifierOperator(constitutionHitPoints);
-        let modifier_number = getModifierNumber(constitutionHitPoints);
-        text = `${hitPoints} (${hitDieQuantity}d${hitDieSize} ${modifier_operator} ${modifier_number})`;
+        let modifierOperator = getModifierOperator(constitutionHitPoints);
+        let modifierNumber = getModifierNumber(constitutionHitPoints);
+        text = `${hitPoints} (${hitDieQuantity}d${hitDieSize} ${modifierOperator} ${modifierNumber})`;
       } else {
         text = `${hitPoints} (${hitDieQuantity}d${hitDieSize})`;
       }
@@ -98,11 +103,6 @@ export default class HitPointsSection extends sectionModule.Section {
     }
 
     this.showElements.text.textContent = text;
-  }
-
-  save() {
-    this.calculateHitPointsFromHitDie();
-    super.save();
   }
 }
 
@@ -120,9 +120,6 @@ class HitPointsEditElements extends sectionModule.EditElements {
     this.useHitDie = shadowRoot.getElementById('use-hit-die-input');
     this.hitDieQuantity = shadowRoot.getElementById('hit-die-quantity-input');
     this.hitDieSize = shadowRoot.getElementById('hit-die-size-input');
-    this.constitutionModifier = shadowRoot.getElementById('constitution-modifier');
-    this.constitutionHitPoints = shadowRoot.getElementById('constitution-hit-points');
-    this.constitutionHitPointsOperator = shadowRoot.getElementById('constitution-hit-points-operator');
-    this.constitutionHitPointsNumber = shadowRoot.getElementById('constitution-hit-points-number');
+    this.trailingText = shadowRoot.getElementById('hit-die-trailing-text');
   }
 }

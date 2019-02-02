@@ -1,5 +1,6 @@
 import * as sectionModule from '/src/js/base/section.js';
-import Abilities from '/src/js/helpers/abilities.js';
+import Abilities from '/src/js/stats/abilities.js';
+import ProficiencyBonus from '/src/js/stats/proficiency-bonus.js';
 import { getModifierOperator } from '/src/js/helpers/string-format.js';
 import { getModifierNumber } from '/src/js/helpers/string-format.js';
 
@@ -27,19 +28,21 @@ export default class AbilityScoresSection extends sectionModule.Section {
     });
   }
 
-  onAbilityScoreChange(abilityScoreName) {
-    let scoreElement = this.editElements.score[abilityScoreName];
+  onAbilityScoreChange(key) {
+    let scoreElement = this.editElements.score[key];
     let score = parseInt(scoreElement.value, 10);
-    let modifier = AbilityScoresSection.calculateAbilityModifier(score);
-
-    this.updateEditModeModifier(abilityScoreName, modifier);
-
+    
     if (! isNaN(score)) {
+      Abilities.abilities[key].score = score;
+      let modifier = Abilities.abilities[key].calculateModifier();
+
+      this.updateEditSectionModifier(key, modifier);
+    
       let changeEvent = new CustomEvent('abilityScoreChanged', {
         bubbles: true,
         composed: true,
         detail: {
-          abilityScoreName: abilityScoreName,
+          abilityName: key,
           abilityScore: score,
           abilityModifier: modifier
         }
@@ -48,42 +51,28 @@ export default class AbilityScoresSection extends sectionModule.Section {
     }
   }
 
+  updateEditSectionModifier(key, modifier) {
+    let modifierElement = this.editElements.modifier[key];
+    let formattedModifier = AbilityScoresSection.formatAbilityModifier(modifier);
+    modifierElement.textContent = formattedModifier;
+  }  
+
   onProficiencyBonusChange() {
     let proficiencyBonusElement = this.editElements.proficiencyBonus;
-    let proficiencyBonus = parseInt(proficiencyBonusElement.value, 10);
+    let bonus = parseInt(proficiencyBonusElement.value, 10);
 
-    if (! isNaN(proficiencyBonus)) {
+    if (! isNaN(bonus)) {
+      ProficiencyBonus.value = bonus;
+    
       let changeEvent = new CustomEvent('proficiencyBonusChanged', {
         bubbles: true,
         composed: true,
         detail: {
-          proficiencyBonus: proficiencyBonus
+          proficiencyBonus: bonus
         }
       });
       this.dispatchEvent(changeEvent);
     }
-  }
-
-  updateEditModeModifier(abilityScoreName, abilityModifier) {
-    let modifierElement = this.editElements.modifier[abilityScoreName];
-    let formattedModifier = AbilityScoresSection.formatAbilityModifier(abilityModifier);
-    modifierElement.textContent = formattedModifier;
-  }
-
-  static formatAbilityModifier(abilityModifier) {
-    if (isNaN(abilityModifier)) {
-      return '()';
-    }
-
-    let operator = getModifierOperator(abilityModifier);
-    let number = getModifierNumber(abilityModifier);
-
-    return `(${operator}${number})`;
-  }
-
-  static calculateAbilityModifier(abilityScore) {
-    let score = parseInt(abilityScore, 10);
-    return Math.floor((score - 10) / 2);
   }
 
   get initialSelectedEditElement() {
@@ -97,20 +86,26 @@ export default class AbilityScoresSection extends sectionModule.Section {
     this.editElements.proficiencyBonus.validate(this.errorMessages);
   }
 
-  update() {
+  updateShowSection() {
     for (const key of Abilities.keys) {
-      this.saveAbilityScore(key);
+      this.updateShowSectionAbilities(key);
     }
   }
 
-  saveAbilityScore(abilityScoreName) {
-    let scoreEditElement = this.editElements.score[abilityScoreName];
-    let modifierEditElement = this.editElements.modifier[abilityScoreName];
-    let scoreShowElement = this.showElements.score[abilityScoreName];
-    let modifierShowElement = this.showElements.modifier[abilityScoreName];
+  updateShowSectionAbilities(key) {
+    let scoreShowElement = this.showElements.score[key];
+    let modifierShowElement = this.showElements.modifier[key];
+    let ability = Abilities.abilities[key];
 
-    scoreShowElement.textContent = scoreEditElement.value.toString();
-    modifierShowElement.textContent = modifierEditElement.textContent;
+    scoreShowElement.textContent = ability.score;
+    modifierShowElement.textContent = AbilityScoresSection.formatAbilityModifier(ability.calculateModifier());
+  }
+
+  static formatAbilityModifier(modifier) {
+    let operator = getModifierOperator(modifier);
+    let number = getModifierNumber(modifier);
+
+    return `(${operator}${number})`;
   }
 }
 

@@ -29,7 +29,7 @@ export default class ChallengeRatingSection extends sectionModule.Section {
     this.editElements.experiencePoints.validate(this.errorMessages);
   }
 
-  update() {
+  updateShowSection() {
     let challengeRatingElement = this.editElements.challengeRating;
 
     let challengeRating = challengeRatingElement.options[challengeRatingElement.selectedIndex].text;

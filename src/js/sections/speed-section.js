@@ -40,7 +40,7 @@ export default class SpeedSection extends sectionModule.Section {
     }
   }
 
-  update() {
+  updateShowSection() {
     let walkSpeed = this.editElements.walk.value;
     let burrowSpeed = this.editElements.burrow.value;
     let climbSpeed = this.editElements.climb.value;

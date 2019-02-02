@@ -15,35 +15,29 @@ export default class StatBlock extends CustomAutonomousElement {
     this.topStats = document.querySelector('top-stats');
 
     this.addEventListener('abilityScoreChanged', (event) => {
-      let abilityScoreName = event.detail.abilityScoreName;
-      let abilityModifier = event.detail.abilityModifier;
+      let abilityName = event.detail.abilityName;
 
-      if (abilityScoreName === 'constitution') {
-        this.topStats.basicStats.hitPointsSection.setConstitutionModifier(abilityModifier);
-      } else if (abilityScoreName === 'wisdom') {
-        this.topStats.advancedStats.sensesSection.setWisdomModifier(abilityModifier);
+      if (abilityName === 'constitution') {
+        this.topStats.basicStats.hitPointsSection.updateHitPoints();
+      } else if (abilityName === 'wisdom') {
+        this.topStats.advancedStats.sensesSection.updatePassivePerception();
       }
 
-      this.topStats.advancedStats.savingThrowsSection.setAbilityModifier(abilityScoreName, abilityModifier);
-      this.topStats.advancedStats.skillsSection.setAbilityModifier(abilityScoreName, abilityModifier);
+      this.topStats.advancedStats.savingThrowsSection.updateModifiers(abilityName);
+      this.topStats.advancedStats.skillsSection.updateModifiers(abilityName);
     });
 
-    this.addEventListener('proficiencyBonusChanged', (event) => {
-      let proficiencyBonus = event.detail.proficiencyBonus;
-
-      this.topStats.advancedStats.savingThrowsSection.setProficiencyBonus(proficiencyBonus);
-      this.topStats.advancedStats.skillsSection.setProficiencyBonus(proficiencyBonus);
-      this.topStats.advancedStats.sensesSection.setProficiencyBonus(proficiencyBonus);
+    this.addEventListener('proficiencyBonusChanged', () => {
+      this.topStats.advancedStats.savingThrowsSection.updateModifiers();
+      this.topStats.advancedStats.skillsSection.updateModifiers();
+      this.topStats.advancedStats.sensesSection.updatePassivePerception();
     });
 
     this.addEventListener('skillChanged', (event) => {
       let skillName = event.detail.skillName;
 
       if (skillName === 'perception') {
-        let isProficient = event.detail.isProficient;
-        let overrideModifier = event.detail.overrideModifier;
-
-        this.topStats.advancedStats.sensesSection.setPerceptionSkill(isProficient, overrideModifier);
+        this.topStats.advancedStats.sensesSection.updatePassivePerception();
       }
     });
   }
