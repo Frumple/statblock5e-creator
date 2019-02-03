@@ -9,8 +9,8 @@ class SavingThrows {
       'constitution' : new SavingThrow('constitution'),
       'intelligence' : new SavingThrow('intelligence'),
       'wisdom' : new SavingThrow('wisdom'),
-      'charisma' : new SavingThrow('charisma'),
-    }
+      'charisma' : new SavingThrow('charisma')
+    };
   }
 
   get keys() {
@@ -42,7 +42,7 @@ class SavingThrow {
         savingThrowModifier += ProficiencyBonus.value;
       }
     }
-    savingThrowModifier += Abilities.abilities[this.abilityName].calculateModifier();
+    savingThrowModifier += Abilities.abilities[this.abilityName].modifier;
 
     return savingThrowModifier;
   }

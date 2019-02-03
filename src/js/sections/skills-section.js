@@ -1,7 +1,6 @@
 import * as sectionModule from '/src/js/base/section.js';
 import Skills from '/src/js/stats/skills.js';
-import { getModifierOperator } from '/src/js/helpers/string-format.js';
-import { getModifierNumber } from '/src/js/helpers/string-format.js';
+import { formatModifier } from '/src/js/helpers/string-formatter.js';
 
 export default class SkillsSection extends sectionModule.Section {
   static get elementName() { return 'skills-section'; }
@@ -90,7 +89,7 @@ export default class SkillsSection extends sectionModule.Section {
 
   updateEditSectionModifier(key) {
     let skillModifier = Skills.skills[key].calculateModifier(false);
-    let formattedSkillModifier = SkillsSection.formatSkillModifier(skillModifier);
+    let formattedSkillModifier = formatModifier(skillModifier);
     this.editElements.skillModifier[key].textContent = formattedSkillModifier;
   }
 
@@ -106,7 +105,7 @@ export default class SkillsSection extends sectionModule.Section {
       let isEnabled = this.editElements.enable[key].checked;
       
       if (isEnabled) {
-        let skillModifier = SkillsSection.formatSkillModifier(skill.calculateModifier());
+        let skillModifier = formatModifier(skill.calculateModifier());
 
         if (text === '') {
           text += `${value.prettyName} ${skillModifier}`;
@@ -123,13 +122,6 @@ export default class SkillsSection extends sectionModule.Section {
     }
 
     this.showElements.text.textContent = text;
-  }
-
-  static formatSkillModifier(skillModifier) {
-    let operator = getModifierOperator(skillModifier);
-    let number = getModifierNumber(skillModifier);
-  
-    return `${operator}${number}`;
   }
 }
 

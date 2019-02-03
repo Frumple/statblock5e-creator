@@ -25,7 +25,7 @@ export default class SensesSection extends sectionModule.Section {
   }
 
   updatePassivePerception() {
-    let passivePerception = Skills.skills['perception'].calculatePassiveScore();
+    let passivePerception = Skills.skills['perception'].passiveScore;
     this.editElements.passivePerception.textContent = passivePerception;
 
     this.updateShowSection();

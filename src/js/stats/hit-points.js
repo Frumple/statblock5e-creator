@@ -13,7 +13,7 @@ class HitPoints {
   }
 
   get constitutionHitPoints() {
-    let constitutionModifier = Abilities.abilities['constitution'].calculateModifier();
+    let constitutionModifier = Abilities.abilities['constitution'].modifier;
     return this.hitDieQuantity * constitutionModifier;
   }
 

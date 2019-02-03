@@ -1,8 +1,7 @@
 import * as sectionModule from '/src/js/base/section.js';
 import Abilities from '/src/js/stats/abilities.js';
 import ProficiencyBonus from '/src/js/stats/proficiency-bonus.js';
-import { getModifierOperator } from '/src/js/helpers/string-format.js';
-import { getModifierNumber } from '/src/js/helpers/string-format.js';
+import { formatModifier } from '/src/js/helpers/string-formatter.js';
 
 export default class AbilityScoresSection extends sectionModule.Section {
   static get elementName() { return 'ability-scores-section'; }
@@ -34,7 +33,7 @@ export default class AbilityScoresSection extends sectionModule.Section {
     
     if (! isNaN(score)) {
       Abilities.abilities[key].score = score;
-      let modifier = Abilities.abilities[key].calculateModifier();
+      let modifier = Abilities.abilities[key].modifier;
 
       this.updateEditSectionModifier(key, modifier);
     
@@ -92,16 +91,16 @@ export default class AbilityScoresSection extends sectionModule.Section {
     let scoreShowElement = this.showElements.score[key];
     let modifierShowElement = this.showElements.modifier[key];
     let ability = Abilities.abilities[key];
+    let score = ability.score;
+    let modifier = ability.modifier;
 
-    scoreShowElement.textContent = ability.score;
-    modifierShowElement.textContent = AbilityScoresSection.formatAbilityModifier(ability.calculateModifier());
+    scoreShowElement.textContent = score;
+    modifierShowElement.textContent = AbilityScoresSection.formatAbilityModifier(modifier);
   }
 
   static formatAbilityModifier(modifier) {
-    let operator = getModifierOperator(modifier);
-    let number = getModifierNumber(modifier);
-
-    return `(${operator}${number})`;
+    let formattedModifier = formatModifier(modifier);
+    return `(${formattedModifier})`;
   }
 }
 

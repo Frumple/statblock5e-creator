@@ -26,7 +26,7 @@ class Ability {
     this.score = 10;
   }
 
-  calculateModifier() {
+  get modifier() {
     return Math.floor((this.score - 10) / 2);
   }
 }

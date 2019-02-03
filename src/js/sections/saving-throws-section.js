@@ -1,9 +1,8 @@
 import * as sectionModule from '/src/js/base/section.js';
 import Abilities from '/src/js/stats/abilities.js';
 import SavingThrows from '/src/js/stats/saving-throws.js';
-import { capitalizeFirstLetter } from '/src/js/helpers/string-format.js';
-import { getModifierOperator } from '/src/js/helpers/string-format.js';
-import { getModifierNumber } from '/src/js/helpers/string-format.js';
+import { capitalizeFirstLetter } from '/src/js/helpers/string-formatter.js';
+import { formatModifier } from '/src/js/helpers/string-formatter.js';
 
 export default class SavingThrowsSection extends sectionModule.Section {
   static get elementName() { return 'saving-throws-section'; }
@@ -77,7 +76,7 @@ export default class SavingThrowsSection extends sectionModule.Section {
 
   updateEditSectionModifier(key) {    
     let savingThrowModifier = SavingThrows.savingThrows[key].calculateModifier(false);
-    let formattedSavingThrowModifier = SavingThrowsSection.formatSavingThrowModifier(savingThrowModifier);
+    let formattedSavingThrowModifier = formatModifier(savingThrowModifier);
     this.editElements.savingThrowModifier[key].textContent = formattedSavingThrowModifier; 
   }
 
@@ -94,7 +93,7 @@ export default class SavingThrowsSection extends sectionModule.Section {
 
       if (isEnabled) {
         let abbreviation = capitalizeFirstLetter(value.abbreviation);
-        let savingThrowModifier = SavingThrowsSection.formatSavingThrowModifier(savingThrow.calculateModifier());
+        let savingThrowModifier = formatModifier(savingThrow.calculateModifier());
 
         if (text === '') {
           text += `${abbreviation} ${savingThrowModifier}`;
@@ -111,13 +110,6 @@ export default class SavingThrowsSection extends sectionModule.Section {
     }
 
     this.showElements.text.textContent = text;
-  }
-  
-  static formatSavingThrowModifier(savingThrowModifier) {
-    let operator = getModifierOperator(savingThrowModifier);
-    let number = getModifierNumber(savingThrowModifier);
-
-    return `${operator}${number}`;
   }
 }
 

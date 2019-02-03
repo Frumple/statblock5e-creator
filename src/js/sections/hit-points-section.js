@@ -1,7 +1,7 @@
 import * as sectionModule from '/src/js/base/section.js';
 import HitPoints from '/src/js/stats/hit-points.js';
-import { getModifierOperator } from '/src/js/helpers/string-format.js';
-import { getModifierNumber } from '/src/js/helpers/string-format.js';
+import { formatModifierOperator } from '/src/js/helpers/string-formatter.js';
+import { formatModifierNumber } from '/src/js/helpers/string-formatter.js';
 
 export default class HitPointsSection extends sectionModule.Section {
   static get elementName() { return 'hit-points-section'; }
@@ -61,8 +61,8 @@ export default class HitPointsSection extends sectionModule.Section {
 
   updateHitPoints() {
     let constitutionHitPoints = HitPoints.constitutionHitPoints;
-    let constitutionHitPointsOperator = getModifierOperator(constitutionHitPoints);
-    let constitutionHitPointsNumber = getModifierNumber(constitutionHitPoints);
+    let constitutionHitPointsOperator = formatModifierOperator(constitutionHitPoints);
+    let constitutionHitPointsNumber = formatModifierNumber(constitutionHitPoints);
 
     this.editElements.trailingText.textContent = `${constitutionHitPointsOperator} ${constitutionHitPointsNumber} )`;
     this.editElements.hitPoints.value = HitPoints.hitPoints;
@@ -85,8 +85,8 @@ export default class HitPointsSection extends sectionModule.Section {
       let constitutionHitPoints = HitPoints.constitutionHitPoints;      
 
       if (constitutionHitPoints != 0) {
-        let modifierOperator = getModifierOperator(constitutionHitPoints);
-        let modifierNumber = getModifierNumber(constitutionHitPoints);
+        let modifierOperator = formatModifierOperator(constitutionHitPoints);
+        let modifierNumber = formatModifierNumber(constitutionHitPoints);
         text = `${hitPoints} (${hitDieQuantity}d${hitDieSize} ${modifierOperator} ${modifierNumber})`;
       } else {
         text = `${hitPoints} (${hitDieQuantity}d${hitDieSize})`;

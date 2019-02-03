@@ -48,7 +48,7 @@ class Skill {
     return Abilities.abilities[this.abilityName];
   }
 
-  calculatePassiveScore() {
+  get passiveScore() {
     let passiveScore = 10;
 
     if (this.isEnabled) {
@@ -60,7 +60,7 @@ class Skill {
         passiveScore += ProficiencyBonus.value;
       }
     }
-    passiveScore += this.ability.calculateModifier();
+    passiveScore += this.ability.modifier;
 
     return passiveScore;
   }
@@ -77,7 +77,7 @@ class Skill {
         skillModifier += ProficiencyBonus.value;
       }
     }
-    skillModifier += this.ability.calculateModifier();
+    skillModifier += this.ability.modifier;
     
     return skillModifier;
   }

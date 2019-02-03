@@ -1,5 +1,5 @@
 import * as sectionModule from '/src/js/base/section.js';
-import { capitalizeFirstLetter } from '/src/js/helpers/string-format.js';
+import { capitalizeFirstLetter } from '/src/js/helpers/string-formatter.js';
 
 export default class HeadingSection extends sectionModule.Section {
   static get elementName() { return 'heading-section'; }
