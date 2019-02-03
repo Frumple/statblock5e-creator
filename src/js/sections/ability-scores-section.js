@@ -75,10 +75,6 @@ export default class AbilityScoresSection extends sectionModule.Section {
     }
   }
 
-  get initialSelectedEditElement() {
-    return this.editElements.score.strength;
-  }
-
   checkForErrors() {
     for (const key of Abilities.keys) {
       this.editElements.score[key].validate(this.errorMessages);
@@ -136,5 +132,9 @@ class AbilityScoresEditElements extends sectionModule.EditElements {
     }
 
     this.proficiencyBonus = shadowRoot.getElementById('proficiency-bonus-input');
+  }
+  
+  get initiallySelectedElement() {
+    return this.score.strength;
   }
 }

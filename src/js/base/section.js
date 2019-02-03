@@ -25,12 +25,12 @@ export class Section extends CustomAutonomousElement {
 
     this.showElements.section.addEventListener('click', () => {
       this.mode = 'edit';
-      this.fireModeChangedEvent();
+      this.dispatchModeChangedEvent();
     });
 
     this.showElements.section.addEventListener('transitionend', () => {
       if (this.mode === 'edit') {
-        let element = this.initialSelectedEditElement;
+        let element = this.editElements.initiallySelectedElement;
         let tagName = element.tagName;
         let type = element.getAttribute('type');
 
@@ -95,11 +95,6 @@ export class Section extends CustomAutonomousElement {
     }
   }
 
-  get initialSelectedEditElement() {
-    throw new Error(
-      `The class '${this.constructor.name}' must implement the initialSelectedEditElement() getter.`);
-  }
-
   checkForErrors() {
     throw new Error(
       `The class '${this.constructor.name}' must implement the checkForErrors() method.`);
@@ -124,10 +119,10 @@ export class Section extends CustomAutonomousElement {
       this.mode = 'show';
     }
 
-    this.fireModeChangedEvent();
+    this.dispatchModeChangedEvent();
   }
 
-  fireModeChangedEvent() {
+  dispatchModeChangedEvent() {
     let changeEvent = new CustomEvent('sectionModeChanged', {
       bubbles: true,
       composed: true
@@ -147,5 +142,10 @@ export class EditElements {
   constructor(shadowRoot) {
     this.section = shadowRoot.getElementById('edit-section');
     this.save_action = shadowRoot.getElementById('save-action');
+  }
+
+  get initiallySelectedElement() {
+    throw new Error(
+      `The class '${this.constructor.name}' must implement the initiallySelectedElement() getter.`);
   }
 }

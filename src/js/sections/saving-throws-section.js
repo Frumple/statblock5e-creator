@@ -81,10 +81,6 @@ export default class SavingThrowsSection extends sectionModule.Section {
     this.editElements.savingThrowModifier[key].textContent = formattedSavingThrowModifier; 
   }
 
-  get initialSelectedEditElement() {
-    return this.editElements.enable.strength;
-  }
-
   checkForErrors() {
 
   }
@@ -149,5 +145,9 @@ class SavingThrowsEditElements extends sectionModule.EditElements {
       this.proficient[key] = shadowRoot.getElementById(`${key}-proficient`);
       this.override[key] = shadowRoot.getElementById(`${key}-override`);
     }
+  }
+
+  get initiallySelectedElement() {
+    return this.enable.strength;
   }
 }

@@ -21,10 +21,6 @@ export default class ChallengeRatingSection extends sectionModule.Section {
     });
   }
 
-  get initialSelectedEditElement() {
-    return this.editElements.challengeRating;
-  }
-
   checkForErrors() {
     this.editElements.experiencePoints.validate(this.errorMessages);
   }
@@ -52,5 +48,9 @@ class ChallengeRatingEditElements extends sectionModule.EditElements {
     super(shadowRoot);
     this.challengeRating = shadowRoot.getElementById('challenge-rating-input');
     this.experiencePoints = shadowRoot.getElementById('experience-points-input');
+  }
+  
+  get initiallySelectedElement() {
+    return this.challengeRating;
   }
 }

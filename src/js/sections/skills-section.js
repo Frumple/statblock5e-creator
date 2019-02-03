@@ -94,10 +94,6 @@ export default class SkillsSection extends sectionModule.Section {
     this.editElements.skillModifier[key].textContent = formattedSkillModifier;
   }
 
-  get initialSelectedEditElement() {
-    return this.editElements.enable.acrobatics;
-  }
-
   checkForErrors() {
 
   }
@@ -161,5 +157,9 @@ class SkillsEditElements extends sectionModule.EditElements {
       this.proficient[key] = shadowRoot.getElementById(`${key}-proficient`);
       this.override[key] = shadowRoot.getElementById(`${key}-override`);
     }
+  }
+  
+  get initiallySelectedElement() {
+    return this.enable.acrobatics;
   }
 }

@@ -21,13 +21,6 @@ export default class ArmorClassSection extends sectionModule.Section {
       this.editElements.customText);
   }
 
-  get initialSelectedEditElement() {
-    if (this.editElements.useCustom.checked) {
-      return this.editElements.customText;
-    }
-    return this.editElements.armorClass;
-  }
-
   checkForErrors() {
     this.editElements.armorType.trimWhitespace();
     this.editElements.customText.trimWhitespace();
@@ -82,5 +75,12 @@ class ArmorClassEditElements extends sectionModule.EditElements {
     this.shield = shadowRoot.getElementById('shield-input');
     this.useCustom = shadowRoot.getElementById('use-custom-input');
     this.customText = shadowRoot.getElementById('custom-input');
+  }
+
+  get initiallySelectedElement() {
+    if (this.useCustom.checked) {
+      return this.customText;
+    }
+    return this.armorClass;
   }
 }

@@ -31,13 +31,6 @@ export default class SensesSection extends sectionModule.Section {
     this.updateShowSection();
   }
 
-  get initialSelectedEditElement() {
-    if (this.editElements.useCustom.checked) {
-      return this.editElements.customText;
-    }
-    return this.editElements.blindsight;
-  }
-
   checkForErrors() {
     this.editElements.customText.trimWhitespace();
 
@@ -104,5 +97,12 @@ class SensesEditElements extends sectionModule.EditElements {
     this.passivePerception = shadowRoot.getElementById('passive-perception-value');
     this.useCustom = shadowRoot.getElementById('use-custom-input');
     this.customText = shadowRoot.getElementById('custom-input');
+  }
+
+  get initiallySelectedElement() {
+    if (this.useCustom.checked) {
+      return this.customText;
+    }
+    return this.blindsight;
   }
 }

@@ -58,10 +58,6 @@ export default class AttributeListSection extends sectionModule.Section {
     this.editElements.datalist.setOptionEnabled(text, false);
   }
 
-  get initialSelectedEditElement() {
-    return this.editElements.input;
-  }
-
   checkForErrors() {
     return;
   }
@@ -111,5 +107,9 @@ class AttributeListEditElements extends sectionModule.EditElements {
     this.addButton = shadowRoot.getElementById('attribute-list-add-button');
     this.list = shadowRoot.getElementById('attribute-list');
     this.datalist = shadowRoot.getElementById('attribute-list-datalist');
+  }
+  
+  get initiallySelectedElement() {
+    return this.input;
   }
 }

@@ -15,10 +15,6 @@ export default class HeadingSection extends sectionModule.Section {
           HeadingEditElements);
   }
 
-  get initialSelectedEditElement() {
-    return this.editElements.title;
-  }
-
   checkForErrors() {
     this.editElements.title.trimWhitespace();
     this.editElements.type.trimWhitespace();
@@ -57,5 +53,9 @@ class HeadingEditElements extends sectionModule.EditElements {
     this.size = shadowRoot.getElementById('size-input');
     this.type = shadowRoot.getElementById('type-input');
     this.alignment = shadowRoot.getElementById('alignment-input');
+  }
+
+  get initiallySelectedElement() {
+    return this.title;
   }
 }

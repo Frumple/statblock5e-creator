@@ -70,13 +70,6 @@ export default class HitPointsSection extends sectionModule.Section {
     this.updateShowSection();
   }
 
-  get initialSelectedEditElement() {
-    if (this.editElements.useHitDie.checked) {
-      return this.editElements.hitDieQuantity;
-    }
-    return this.editElements.hitPoints;
-  }
-
   checkForErrors() {
     this.editElements.hitPoints.validate(this.errorMessages);
     this.editElements.hitDieQuantity.validate(this.errorMessages);
@@ -121,5 +114,12 @@ class HitPointsEditElements extends sectionModule.EditElements {
     this.hitDieQuantity = shadowRoot.getElementById('hit-die-quantity-input');
     this.hitDieSize = shadowRoot.getElementById('hit-die-size-input');
     this.trailingText = shadowRoot.getElementById('hit-die-trailing-text');
+  }
+
+  get initiallySelectedElement() {
+    if (this.useHitDie.checked) {
+      return this.hitDieQuantity;
+    }
+    return this.hitPoints;
   }
 }
