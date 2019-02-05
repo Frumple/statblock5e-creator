@@ -10,7 +10,7 @@
   <button id="edit-action" class="section__action section__action_hidden">Edit</button>
 </div>
 
-<div id="edit-section" class="section section_hidden">
+<form id="edit-section" class="section section_hidden">
   <div class="armor-class-edit-section">
     <label id="armor-class-label" class="armor-class-section__armor-class-label section__header-label" for="armor-class-input">Armor Class:</label>
     <input id="armor-class-input" class="armor-class-edit-section__armor-class-input section__small-number-input" is="integer-input" type="number" name="armor-class" pretty-name="Armor Class" value="10" min="0" max="999" />
@@ -40,4 +40,4 @@
     <input id="custom-input" class="armor-class-edit-section__custom-input section__text-input" is="text-input" type="text" name="armor-class-custom" pretty-name="Armor Class Custom Text" required disabled />
   </div>
   <button id="save-action" class="section__action section__save-action">Save</button>
-</div>
+</form>

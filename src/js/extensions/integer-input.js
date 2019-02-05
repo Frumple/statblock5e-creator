@@ -20,14 +20,5 @@ export default class IntegerInput extends CustomBuiltinInputElement {
         }
       }
     });
-
-    this.addEventListener('keydown', (keyEvent) => {
-      if (keyEvent.key === 'Enter') {
-        keyEvent.preventDefault();
-
-        let fieldEnterKeyDownEvent = new Event('fieldEnterKeyDown', { bubbles: true });
-        this.dispatchEvent(fieldEnterKeyDownEvent);
-      }
-    });
   }
 }

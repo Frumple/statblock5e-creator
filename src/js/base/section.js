@@ -46,7 +46,8 @@ export class Section extends CustomAutonomousElement {
       this.save();
     });
 
-    this.editElements.section.addEventListener('fieldEnterKeyDown', () => {
+    this.editElements.section.addEventListener('submit', (event) => {
+      event.preventDefault();
       this.save();
     });
   }

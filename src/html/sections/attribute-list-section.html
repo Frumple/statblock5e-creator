@@ -10,14 +10,14 @@
   <button id="edit-action" class="section__action section__action_hidden">Edit</button>
 </div>
 
-<div id="edit-section" class="section section_hidden">
+<form id="edit-section" class="section section_hidden">
   <div class="attribute-list-edit-section">
     <label id="attribute-list-label" class="attribute-list-edit-section__header-label section__header-label" for="attribute-list-input">:</label>
     <div class="attribute-list-edit-section__input-container">
       <input id="attribute-list-input" class="attribute-list-edit-section__input section__text-input" type="text" list="attribute-list-datalist" />
-      <button id="attribute-list-add-button" class="attribute-list-edit-section__add-button">Add</button>
+      <button id="attribute-list-add-button" class="attribute-list-edit-section__add-button" type="button">Add</button>
     </div>
     <attribute-list id="attribute-list" class="attribute-list-edit-section__list"></attribute-list>
   </div>
   <button id="save-action" class="section__action section__save-action">Save</button>
-</div>
+</form>
