@@ -27,7 +27,7 @@ export default class SpeedSection extends sectionModule.Section {
   }
 
   checkForErrors() {
-    this.editElements.customText.value.trim();
+    this.editElements.customText.value = this.editElements.customText.value.trim();
 
     if (this.editElements.useCustom.checked) {
       validateTextInput(this.editElements.customText, this.errorMessages);

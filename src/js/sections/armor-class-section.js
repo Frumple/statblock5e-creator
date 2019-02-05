@@ -24,8 +24,8 @@ export default class ArmorClassSection extends sectionModule.Section {
   }
 
   checkForErrors() {
-    this.editElements.armorType.value.trim();
-    this.editElements.customText.value.trim();
+    this.editElements.armorType.value = this.editElements.armorType.value.trim();
+    this.editElements.customText.value = this.editElements.customText.value.trim();
 
     validateIntegerInput(this.editElements.armorClass, this.errorMessages);
     if (this.editElements.useCustom.checked) {
