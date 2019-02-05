@@ -45,31 +45,31 @@
     <label class="ability-scores-section__score-label ability-scores-section__wisdom-label" for="wisdom-score-edit">WIS</label>
     <label class="ability-scores-section__score-label ability-scores-section__charisma-label" for="charisma-score-edit">CHA</label>
     <label class="ability-scores-edit-section__score-values ability-scores-section__strength-values">
-      <input id="strength-score-edit" class="section__small-number-input" name="strength-score" is="integer-input" type="number" name="strength-score" pretty-name="Strength Score" value="10" min="1" max="999"></input>
+      <input id="strength-score-edit" class="section__number-input section__small-number-input" name="strength-score" is="integer-input" type="number" name="strength-score" pretty-name="Strength Score" value="10" min="1" max="999" required></input>
       <span id="strength-modifier-edit">(+0)</span>
     </label>
     <label class="ability-scores-edit-section__score-values ability-scores-section__dexterity-values">
-      <input id="dexterity-score-edit" class="section__small-number-input" name="dexterity-score" is="integer-input" type="number" name="dexterity-score" pretty-name="Dexterity Score" value="10" min="1" max="999"></input>
+      <input id="dexterity-score-edit" class="section__number-input section__small-number-input" name="dexterity-score" is="integer-input" type="number" name="dexterity-score" pretty-name="Dexterity Score" value="10" min="1" max="999" required></input>
       <span id="dexterity-modifier-edit">(+0)</span>
     </label>
     <label class="ability-scores-edit-section__score-values ability-scores-section__constitution-values">
-      <input id="constitution-score-edit" class="section__small-number-input" name="constitution-score" is="integer-input" type="number" name="constitution-score" pretty-name="Constitution Score" value="10" min="1" max="999"></input>
+      <input id="constitution-score-edit" class="section__number-input section__small-number-input" name="constitution-score" is="integer-input" type="number" name="constitution-score" pretty-name="Constitution Score" value="10" min="1" max="999" required></input>
       <span id="constitution-modifier-edit">(+0)</span>
     </label>
     <label class="ability-scores-edit-section__score-values ability-scores-section__intelligence-values">
-      <input id="intelligence-score-edit" class="section__small-number-input" name="intelligence-score" is="integer-input" type="number" name="intelligence-score" pretty-name="Intelligence Score" value="10" min="1" max="999"></input>
+      <input id="intelligence-score-edit" class="section__number-input section__small-number-input" name="intelligence-score" is="integer-input" type="number" name="intelligence-score" pretty-name="Intelligence Score" value="10" min="1" max="999" required></input>
       <span id="intelligence-modifier-edit">(+0)</span>
     </label>
     <label class="ability-scores-edit-section__score-values ability-scores-section__wisdom-values">
-      <input id="wisdom-score-edit" class="section__small-number-input" name="wisdom-score" is="integer-input" type="number" name="wisdom-score" pretty-name="Wisdom Score" value="10" min="1" max="999"></input>
+      <input id="wisdom-score-edit" class="section__number-input section__small-number-input" name="wisdom-score" is="integer-input" type="number" name="wisdom-score" pretty-name="Wisdom Score" value="10" min="1" max="999" required></input>
       <span id="wisdom-modifier-edit">(+0)</span>
     </label>
     <label class="ability-scores-edit-section__score-values ability-scores-section__charisma-values">
-      <input id="charisma-score-edit" class="section__small-number-input" name="charisma-score" is="integer-input" type="number" name="charisma-score" pretty-name="Charisma Score" value="10" min="1" max="999"></input>
+      <input id="charisma-score-edit" class="section__number-input section__small-number-input" name="charisma-score" is="integer-input" type="number" name="charisma-score" pretty-name="Charisma Score" value="10" min="1" max="999" required></input>
       <span id="charisma-modifier-edit">(+0)</span>
     </label>
     <label id="proficiency-bonus-label" class="ability-scores-section__proficiency-bonus-label" for="proficiency-bonus-input">Proficiency Bonus:</label>
-    <input id="proficiency-bonus-input" class="ability-scores-section__proficiency-bonus-input section__small-number-input" is="integer-input" name="proficiency-bonus" pretty-name="Proficiency Bonus" type="number" value="2" min="-999" max="999"></input>
+    <input id="proficiency-bonus-input" class="ability-scores-section__proficiency-bonus-input section__number-input section__small-number-input" is="integer-input" name="proficiency-bonus" pretty-name="Proficiency Bonus" type="number" value="2" min="-999" max="999" required></input>
   </div>
   <button id="save-action" class="section__action section__save-action">Save</button>
 </form>

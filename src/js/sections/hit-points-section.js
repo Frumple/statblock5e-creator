@@ -30,9 +30,8 @@ export default class HitPointsSection extends sectionModule.Section {
 
         if (! isNaN(hitPoints)) {
           HitPoints.hitPoints = hitPoints;
+          this.updateHitPoints();
         }
-
-        this.updateHitPoints();
       }
     });
 
