@@ -1,5 +1,5 @@
-import CustomAutonomousElement from '/src/js/base/custom-autonomous-element.js';
-import GlobalOptions from '/src/js/helpers/global-options.js';
+import CustomAutonomousElement from '../base/custom-autonomous-element.js';
+import GlobalOptions from '../helpers/global-options.js';
 
 export class Section extends CustomAutonomousElement {
   static get templatePaths() {
@@ -16,11 +16,11 @@ export class Section extends CustomAutonomousElement {
     this.errorMessages = this.shadowRoot.querySelector('error-messages');
 
     this.showElements.section.addEventListener('mouseenter', () => {
-      this.showElements.edit_action.classList.remove('section__action_hidden');
+      this.showElements.editAction.classList.remove('section__action_hidden');
     });
 
     this.showElements.section.addEventListener('mouseleave', () => {
-      this.showElements.edit_action.classList.add('section__action_hidden');
+      this.showElements.editAction.classList.add('section__action_hidden');
     });
 
     this.showElements.section.addEventListener('click', () => {
@@ -42,7 +42,7 @@ export class Section extends CustomAutonomousElement {
       }
     });
 
-    this.editElements.save_action.addEventListener('click', () => {
+    this.editElements.saveAction.addEventListener('click', () => {
       this.save();
     });
 
@@ -134,14 +134,14 @@ export class Section extends CustomAutonomousElement {
 export class ShowElements {
   constructor(shadowRoot) {
     this.section = shadowRoot.getElementById('show-section');
-    this.edit_action = shadowRoot.getElementById('edit-action');
+    this.editAction = shadowRoot.getElementById('edit-action');
   }
 }
 
 export class EditElements {
   constructor(shadowRoot) {
     this.section = shadowRoot.getElementById('edit-section');
-    this.save_action = shadowRoot.getElementById('save-action');
+    this.saveAction = shadowRoot.getElementById('save-action');
   }
 
   get initiallySelectedElement() {

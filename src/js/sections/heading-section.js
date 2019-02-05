@@ -1,5 +1,6 @@
-import * as sectionModule from '/src/js/base/section.js';
-import { capitalizeFirstLetter } from '/src/js/helpers/string-formatter.js';
+import * as sectionModule from '../base/section.js';
+import { capitalizeFirstLetter } from '../helpers/string-formatter.js';
+import validateTextInput from '../helpers/text-input-validator.js';
 
 export default class HeadingSection extends sectionModule.Section {
   static get elementName() { return 'heading-section'; }
@@ -16,11 +17,11 @@ export default class HeadingSection extends sectionModule.Section {
   }
 
   checkForErrors() {
-    this.editElements.title.trimWhitespace();
-    this.editElements.type.trimWhitespace();
+    this.editElements.title.value.trim();
+    this.editElements.type.value.trim();
 
-    this.editElements.title.validate(this.errorMessages);
-    this.editElements.type.validate(this.errorMessages);
+    validateTextInput(this.editElements.title, this.errorMessages);
+    validateTextInput(this.editElements.type, this.errorMessages);
   }
 
   updateShowSection() {
@@ -30,10 +31,10 @@ export default class HeadingSection extends sectionModule.Section {
     let alignment = this.editElements.alignment.value;
 
     title = capitalizeFirstLetter(title);
+    let subtitle = `${size} ${type}, ${alignment}`;
+
     this.editElements.title.value = title;
     this.showElements.title.textContent = title;
-
-    let subtitle = `${size} ${type}, ${alignment}`;
     this.showElements.subtitle.textContent = subtitle;
   }
 }

@@ -1,8 +1,7 @@
 import * as sectionModule from '/src/js/base/section.js';
 import Abilities from '/src/js/stats/abilities.js';
 import SavingThrows from '/src/js/stats/saving-throws.js';
-import { capitalizeFirstLetter } from '/src/js/helpers/string-formatter.js';
-import { formatModifier } from '/src/js/helpers/string-formatter.js';
+import { capitalizeFirstLetter, formatModifier } from '/src/js/helpers/string-formatter.js';
 
 export default class SavingThrowsSection extends sectionModule.Section {
   static get elementName() { return 'saving-throws-section'; }

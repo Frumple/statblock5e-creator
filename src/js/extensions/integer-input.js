@@ -30,13 +30,4 @@ export default class IntegerInput extends CustomBuiltinInputElement {
       }
     });
   }
-
-  validate(errorMessages) {
-    if (this.value === '') {
-      let prettyName = this.getAttribute('pretty-name');
-      let field_name = prettyName ? prettyName : this.name;
-      errorMessages.add(this,
-        `${field_name} must be a valid integer.`);
-    }
-  }
 }

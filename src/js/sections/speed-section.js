@@ -1,4 +1,5 @@
 import * as sectionModule from '/src/js/base/section.js';
+import validateTextInput from '../helpers/text-input-validator.js';
 
 export default class SpeedSection extends sectionModule.Section {
   static get elementName() { return 'speed-section'; }
@@ -26,10 +27,10 @@ export default class SpeedSection extends sectionModule.Section {
   }
 
   checkForErrors() {
-    this.editElements.customText.trimWhitespace();
+    this.editElements.customText.value.trim();
 
     if (this.editElements.useCustom.checked) {
-      this.editElements.customText.validate(this.errorMessages);
+      validateTextInput(this.editElements.customText, this.errorMessages);
     }
   }
 

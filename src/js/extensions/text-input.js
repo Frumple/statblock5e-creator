@@ -15,23 +15,4 @@ export default class TextInput extends CustomBuiltinInputElement {
       }
     });
   }
-
-  trimWhitespace() {
-    this.value = this.value.trim();
-  }
-
-  validate(errorMessages) {
-    if (this.required) {
-      this.validateForBlank(errorMessages);
-    }
-  }
-
-  validateForBlank(errorMessages) {
-    if(this.value === '') {
-      let prettyName = this.getAttribute('pretty-name');
-      let field_name = prettyName ? prettyName : this.name;
-      errorMessages.add(this,
-        `${field_name} cannot be blank.`);
-    }
-  }
 }

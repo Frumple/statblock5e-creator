@@ -1,5 +1,6 @@
 import * as sectionModule from '/src/js/base/section.js';
 import ExperiencePointsByChallengeRating from '/src/js/helpers/experience-points-by-challenge-rating.js';
+import validateIntegerInput from '/src/js/helpers/integer-input-validator.js';
 
 export default class ChallengeRatingSection extends sectionModule.Section {
   static get elementName() { return 'challenge-rating-section'; }
@@ -22,7 +23,7 @@ export default class ChallengeRatingSection extends sectionModule.Section {
   }
 
   checkForErrors() {
-    this.editElements.experiencePoints.validate(this.errorMessages);
+    validateIntegerInput(this.editElements.experiencePoints, this.errorMessages);
   }
 
   updateShowSection() {

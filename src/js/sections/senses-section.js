@@ -1,4 +1,5 @@
 import * as sectionModule from '/src/js/base/section.js';
+import validateTextInput from '../helpers/text-input-validator.js';
 import Skills from '/src/js/stats/skills.js';
 
 export default class SensesSection extends sectionModule.Section {
@@ -32,10 +33,10 @@ export default class SensesSection extends sectionModule.Section {
   }
 
   checkForErrors() {
-    this.editElements.customText.trimWhitespace();
+    this.editElements.customText.value.trim();
 
     if (this.editElements.useCustom.checked) {
-      this.editElements.customText.validate(this.errorMessages);
+      validateTextInput(this.editElements.customText, this.errorMessages);
     }
   }
 

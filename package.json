@@ -4,9 +4,24 @@
   "description": "A Web Component statblock for D&D 5E\r ====================================",
   "main": "index.js",
   "dependencies": {},
-  "devDependencies": {},
+  "devDependencies": {
+    "@babel/cli": "^7.2.3",
+    "@babel/core": "^7.2.2",
+    "@babel/polyfill": "^7.2.5",
+    "babel-plugin-transform-es2015-modules-commonjs": "^6.26.2",
+    "jest": "^24.0.0",
+    "jest-dom": "^3.0.1"
+  },
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "jest"
+  },
+  "jest": {
+    "moduleNameMapper": {
+      "@/(.*)$": "<rootDir>/$1"
+    },
+    "setupFilesAfterEnv": [
+      "jest-dom/extend-expect"
+    ]
   },
   "repository": {
     "type": "git",
