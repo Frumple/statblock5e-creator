@@ -1,6 +1,6 @@
-import HeadingSection from './heading-section.js';
-import ErrorMessages from '../elements/error-messages.js';
-jest.mock('../elements/error-messages.js');
+import HeadingSection from '/src/js/sections/heading-section.js';
+import ErrorMessages from '/src/js/elements/error-messages.js';
+jest.mock('/src/js/elements/error-messages.js');
 
 const sectionHiddenClass = 'section_hidden';
 

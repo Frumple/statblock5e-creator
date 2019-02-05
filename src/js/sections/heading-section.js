@@ -1,6 +1,6 @@
-import * as sectionModule from '../base/section.js';
-import { capitalizeFirstLetter } from '../helpers/string-formatter.js';
-import validateTextInput from '../helpers/text-input-validator.js';
+import * as sectionModule from '/src/js/base/section.js';
+import { capitalizeFirstLetter } from '/src/js/helpers/string-formatter.js';
+import validateTextInput from '/src/js/helpers/text-input-validator.js';
 
 export default class HeadingSection extends sectionModule.Section {
   static get elementName() { return 'heading-section'; }

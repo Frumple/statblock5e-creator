@@ -1,5 +1,5 @@
-import HtmlTemplates from '../helpers/html-templates.js';
-import isRunningInNode from '../helpers/is-running-in-node.js';
+import HtmlTemplates from '/src/js/helpers/html-templates.js';
+import isRunningInNode from '/src/js/helpers/is-running-in-node.js';
 
 class CustomAutonomousElement extends HTMLElement {
   static get elementName() {

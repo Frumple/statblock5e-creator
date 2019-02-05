@@ -1,5 +1,5 @@
 import * as sectionModule from '/src/js/base/section.js';
-import validateTextInput from '../helpers/text-input-validator.js';
+import validateTextInput from '/src/js/helpers/text-input-validator.js';
 import validateIntegerInput from '/src/js/helpers/integer-input-validator.js';
 
 export default class ArmorClassSection extends sectionModule.Section {

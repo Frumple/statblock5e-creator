@@ -1,4 +1,4 @@
-import CustomAutonomousElement from '../base/custom-autonomous-element.js';
+import CustomAutonomousElement from '/src/js/base/custom-autonomous-element.js';
 
 export default class ErrorMessages extends CustomAutonomousElement {
   static get elementName() { return 'error-messages'; }

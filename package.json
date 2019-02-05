@@ -17,7 +17,7 @@
   },
   "jest": {
     "moduleNameMapper": {
-      "@/(.*)$": "<rootDir>/$1"
+      "^/(.*)$": "<rootDir>/$1"
     },
     "setupFilesAfterEnv": [
       "jest-dom/extend-expect"

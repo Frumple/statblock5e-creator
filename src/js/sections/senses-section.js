@@ -1,5 +1,5 @@
 import * as sectionModule from '/src/js/base/section.js';
-import validateTextInput from '../helpers/text-input-validator.js';
+import validateTextInput from '/src/js/helpers/text-input-validator.js';
 import Skills from '/src/js/stats/skills.js';
 
 export default class SensesSection extends sectionModule.Section {

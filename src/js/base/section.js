@@ -1,5 +1,5 @@
-import CustomAutonomousElement from '../base/custom-autonomous-element.js';
-import GlobalOptions from '../helpers/global-options.js';
+import CustomAutonomousElement from '/src/js/base/custom-autonomous-element.js';
+import GlobalOptions from '/src/js/helpers/global-options.js';
 
 export class Section extends CustomAutonomousElement {
   static get templatePaths() {
