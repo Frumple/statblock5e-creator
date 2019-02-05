@@ -2,11 +2,6 @@ import HeadingSection from './heading-section.js';
 import ErrorMessages from '../elements/error-messages.js';
 jest.mock('../elements/error-messages.js');
 
-// Importing jest-dom directly here due to bug in Jest setupFilesAfterEnv:
-// https://github.com/facebook/jest/issues/7719
-// TODO: Remove this when the fix for this bug is available.
-import 'jest-dom/extend-expect';
-
 const sectionHiddenClass = 'section_hidden';
 
 beforeAll(async() => {
