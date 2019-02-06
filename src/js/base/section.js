@@ -1,5 +1,6 @@
 import CustomAutonomousElement from '/src/js/base/custom-autonomous-element.js';
 import GlobalOptions from '/src/js/helpers/global-options.js';
+import { focusAndSelectElement } from '/src/js/helpers/element-helpers.js';
 
 export class Section extends CustomAutonomousElement {
   static get templatePaths() {
@@ -26,19 +27,12 @@ export class Section extends CustomAutonomousElement {
     this.showElements.section.addEventListener('click', () => {
       this.mode = 'edit';
       this.dispatchModeChangedEvent();
+      this.focusOnInitialEditSectionElement();
     });
 
     this.showElements.section.addEventListener('transitionend', () => {
       if (this.mode === 'edit') {
-        let element = this.editElements.initiallySelectedElement;
-        let tagName = element.tagName;
-        let type = element.getAttribute('type');
-
-        if (tagName === 'INPUT' && (type === 'text' || type === 'number')) {
-          element.select();
-        } else {
-          element.focus();
-        }
+        this.focusOnInitialEditSectionElement();
       }
     });
 
@@ -50,6 +44,15 @@ export class Section extends CustomAutonomousElement {
       event.preventDefault();
       this.save();
     });
+  }
+
+  connectedCallback() {
+    return;
+  }
+
+  forceConnect() {
+    this.isConnected = true;
+    this.connectedCallback();
   }
 
   get mode() {
@@ -94,6 +97,10 @@ export class Section extends CustomAutonomousElement {
       delete this.dataset.empty;
       this.showElements.section.classList.remove(emptyClass);
     }
+  }
+
+  focusOnInitialEditSectionElement() {
+    focusAndSelectElement(this.editElements.initiallySelectedElement);    
   }
 
   checkForErrors() {

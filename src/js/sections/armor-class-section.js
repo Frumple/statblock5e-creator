@@ -14,22 +14,31 @@ export default class ArmorClassSection extends sectionModule.Section {
     super(ArmorClassSection.templatePaths,
           ArmorClassShowElements,
           ArmorClassEditElements);
+    this.isInitialized = false;
+  }
 
-    let useCustomCheckbox = this.editElements.useCustom;
-    useCustomCheckbox.disableElementsWhenChecked(
-      this.editElements.armorClass,
-      this.editElements.armorType);
-    useCustomCheckbox.enableElementsWhenChecked(
-      this.editElements.customText);
+  connectedCallback() {
+    if (this.isConnected && ! this.isInitialized) {
+      let useCustomCheckbox = this.editElements.useCustom;
+      useCustomCheckbox.disableElementsWhenChecked(
+        this.editElements.armorClass,
+        this.editElements.armorType,
+        this.editElements.shield);
+      useCustomCheckbox.enableElementsWhenChecked(
+        this.editElements.customText);
+
+      this.isInitialized = true;
+    }
   }
 
   checkForErrors() {
     this.editElements.armorType.value = this.editElements.armorType.value.trim();
     this.editElements.customText.value = this.editElements.customText.value.trim();
 
-    validateIntegerInput(this.editElements.armorClass, this.errorMessages);
     if (this.editElements.useCustom.checked) {
       validateTextInput(this.editElements.customText, this.errorMessages);
+    } else {
+      validateIntegerInput(this.editElements.armorClass, this.errorMessages);
     }
   }
 
