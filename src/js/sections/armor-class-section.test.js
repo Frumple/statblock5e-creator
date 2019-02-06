@@ -3,7 +3,7 @@ import { EnableDisableElementsCheckboxInternal } from '/src/js/extensions/enable
 import ErrorMessages from '/src/js/elements/error-messages.js';
 jest.mock('/src/js/elements/error-messages.js');
 
-import * as ExpectHelpers from '/src/js/helpers/expect-helpers.js';
+import '/src/js/helpers/expect-matchers.js';
 
 let armorClassSection;
 
@@ -22,7 +22,7 @@ describe('when the show section is clicked', () => {
   it('should switch to edit mode and focus on initial element', () => {
     armorClassSection.showElements.section.click(); 
     
-    ExpectHelpers.expectSectionMode(armorClassSection, 'edit');
+    expect(armorClassSection).toBeInMode('edit');
     expect(armorClassSection.editElements.armorClass).toHaveFocus();
   });
 });
@@ -49,7 +49,7 @@ describe('when the custom text checkbox is checked', () => {
 
       armorClassSection.editElements.saveAction.click();
 
-      ExpectHelpers.expectSectionMode(armorClassSection, 'show');
+      expect(armorClassSection).toBeInMode('show');
       expect(armorClassSection.showElements.text).toHaveTextContent(customText);
     });
 
@@ -58,9 +58,8 @@ describe('when the custom text checkbox is checked', () => {
 
       armorClassSection.editElements.saveAction.click();
 
-      ExpectHelpers.expectSectionMode(armorClassSection, 'edit');
-      ExpectHelpers.expectSectionToHaveSingleError(
-        armorClassSection,
+      expect(armorClassSection).toBeInMode('edit');
+      expect(armorClassSection).toHaveSingleError(
         armorClassSection.editElements.customText,
         'Armor Class Custom Text cannot be blank.');
     });
@@ -71,9 +70,8 @@ describe('when the custom text checkbox is checked', () => {
 
       armorClassSection.editElements.saveAction.click();
 
-      ExpectHelpers.expectSectionMode(armorClassSection, 'edit');
-      ExpectHelpers.expectSectionToHaveSingleError(
-        armorClassSection,
+      expect(armorClassSection).toBeInMode('edit');
+      expect(armorClassSection).toHaveSingleError(
         armorClassSection.editElements.customText,
         'Armor Class Custom Text cannot be blank.');
     });
@@ -102,7 +100,7 @@ describe('when the custom text checkbox is unchecked', () => {
 
       armorClassSection.editElements.saveAction.click();
 
-      ExpectHelpers.expectSectionMode(armorClassSection, 'show');
+      expect(armorClassSection).toBeInMode('show');
       expect(armorClassSection.showElements.text).toHaveTextContent('7');
     });
 
@@ -112,7 +110,7 @@ describe('when the custom text checkbox is unchecked', () => {
 
       armorClassSection.editElements.saveAction.click();
 
-      ExpectHelpers.expectSectionMode(armorClassSection, 'show');
+      expect(armorClassSection).toBeInMode('show');
       expect(armorClassSection.showElements.text).toHaveTextContent('21 (natural armor)');
     });
 
@@ -122,7 +120,7 @@ describe('when the custom text checkbox is unchecked', () => {
 
       armorClassSection.editElements.saveAction.click();
 
-      ExpectHelpers.expectSectionMode(armorClassSection, 'show');
+      expect(armorClassSection).toBeInMode('show');
       expect(armorClassSection.showElements.text).toHaveTextContent('12 (shield)');
     });
 
@@ -133,7 +131,7 @@ describe('when the custom text checkbox is unchecked', () => {
 
       armorClassSection.editElements.saveAction.click();
 
-      ExpectHelpers.expectSectionMode(armorClassSection, 'show');
+      expect(armorClassSection).toBeInMode('show');
       expect(armorClassSection.showElements.text).toHaveTextContent('16 (chain shirt, shield)');
     });
 
@@ -142,9 +140,8 @@ describe('when the custom text checkbox is unchecked', () => {
 
       armorClassSection.editElements.saveAction.click();
 
-      ExpectHelpers.expectSectionMode(armorClassSection, 'edit');
-      ExpectHelpers.expectSectionToHaveSingleError(
-        armorClassSection,
+      expect(armorClassSection).toBeInMode('edit');
+      expect(armorClassSection).toHaveSingleError(
         armorClassSection.editElements.armorClass,
         'Armor Class must be a valid number.');
     });
@@ -155,9 +152,8 @@ describe('when the custom text checkbox is unchecked', () => {
 
       armorClassSection.editElements.saveAction.click();
 
-      ExpectHelpers.expectSectionMode(armorClassSection, 'edit');
-      ExpectHelpers.expectSectionToHaveSingleError(
-        armorClassSection,
+      expect(armorClassSection).toBeInMode('edit');
+      expect(armorClassSection).toHaveSingleError(
         armorClassSection.editElements.armorClass,
         'Armor Class must be a valid number.');
     });

@@ -2,7 +2,7 @@ import HeadingSection from '/src/js/sections/heading-section.js';
 import ErrorMessages from '/src/js/elements/error-messages.js';
 jest.mock('/src/js/elements/error-messages.js');
 
-import * as ExpectHelpers from '/src/js/helpers/expect-helpers.js';
+import '/src/js/helpers/expect-matchers.js';
 
 let headingSection;
 
@@ -19,7 +19,7 @@ describe('when the show section is clicked', () => {
   it('should switch to edit mode and focus on initial element', () => {
     headingSection.showElements.section.click(); 
     
-    ExpectHelpers.expectSectionMode(headingSection, 'edit');
+    expect(headingSection).toBeInMode('edit');
     expect(headingSection.editElements.title).toHaveFocus();
   });
 });
@@ -37,7 +37,7 @@ describe('when the save button is clicked', () => {
   
     headingSection.editElements.saveAction.click();
 
-    ExpectHelpers.expectSectionMode(headingSection, 'show');
+    expect(headingSection).toBeInMode('show');
     expect(headingSection.showElements.title).toHaveTextContent('Beholder');
     expect(headingSection.showElements.subtitle).toHaveTextContent('Large aberration, lawful evil');
   });
@@ -47,7 +47,7 @@ describe('when the save button is clicked', () => {
 
     headingSection.editElements.saveAction.click();
 
-    ExpectHelpers.expectSectionMode(headingSection, 'show');
+    expect(headingSection).toBeInMode('show');
     expect(headingSection.showElements.title).toHaveTextContent('Young red dragon');
   });
 
@@ -59,7 +59,7 @@ describe('when the save button is clicked', () => {
 
     headingSection.editElements.saveAction.click();
 
-    ExpectHelpers.expectSectionMode(headingSection, 'show');
+    expect(headingSection).toBeInMode('show');
     expect(headingSection.showElements.title).toHaveTextContent('Purple Worm');
     expect(headingSection.showElements.subtitle).toHaveTextContent('Gargantuan monstrosity, unaligned');
   });
@@ -69,9 +69,8 @@ describe('when the save button is clicked', () => {
 
     headingSection.editElements.saveAction.click();
 
-    ExpectHelpers.expectSectionMode(headingSection, 'edit');
-    ExpectHelpers.expectSectionToHaveSingleError(
-      headingSection,
+    expect(headingSection).toBeInMode('edit');
+    expect(headingSection).toHaveSingleError(
       headingSection.editElements.title,
       'Creature Name cannot be blank.');
   });
@@ -81,9 +80,8 @@ describe('when the save button is clicked', () => {
 
     headingSection.editElements.saveAction.click();
 
-    ExpectHelpers.expectSectionMode(headingSection, 'edit');
-    ExpectHelpers.expectSectionToHaveSingleError(
-      headingSection,
+    expect(headingSection).toBeInMode('edit');
+    expect(headingSection).toHaveSingleError(
       headingSection.editElements.type,
       'Creature Type cannot be blank.');
   });

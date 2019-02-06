@@ -12,6 +12,8 @@ export class Section extends CustomAutonomousElement {
   constructor(templatePaths, showElementsClass, editElementsClass) {
     super(templatePaths);
 
+    this.dataset.mode = 'show';
+
     this.showElements = new showElementsClass(this.shadowRoot);
     this.editElements = new editElementsClass(this.shadowRoot);
     this.errorMessages = this.shadowRoot.querySelector('error-messages');
