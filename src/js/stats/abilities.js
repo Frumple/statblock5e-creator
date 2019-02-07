@@ -11,6 +11,12 @@ class Abilities {
     Object.freeze(this.abilities);
   }
 
+  reset() {
+    for(const ability of Object.values(this.abilities)) {
+      ability.reset();
+    }
+  }
+
   get keys() {
     return Object.keys(this.abilities);
   }
@@ -23,6 +29,10 @@ class Abilities {
 class Ability {
   constructor(abbreviation) {
     this.abbreviation = abbreviation;
+    this.reset();
+  }
+
+  reset() {
     this.score = 10;
   }
 

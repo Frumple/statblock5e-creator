@@ -83,3 +83,25 @@ expect.extend({
     };
   }
 });
+
+expect.extend({
+  toHaveError(section, expectedFieldElement, expectedMessage) {
+    let matches = section.errorMessages.errors.filter(error => 
+      (error.fieldElement === expectedFieldElement &&
+       error.message === expectedMessage));
+
+    let message = '';
+    let pass = matches.length > 0;
+    
+    if (pass) {
+      message = `expected error with element '${expectedFieldElement}' and 'message ${expectedMessage}' to not be found, but was found`;
+    } else {
+      message = `expected error with element '${expectedFieldElement}' and 'message ${expectedMessage}' to be found, but was not found`;
+    }
+
+    return {
+      message: () => message,
+      pass: pass
+    };
+  }
+});

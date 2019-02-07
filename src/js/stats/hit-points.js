@@ -2,6 +2,10 @@ import Abilities from '/src/js/stats/abilities.js';
 
 class HitPoints {
   constructor() {
+    this.reset();
+  }
+
+  reset() {
     this._hitPoints = 4;
     this.useHitDie = true;
     this.hitDieQuantity = 1;

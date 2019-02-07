@@ -3,8 +3,6 @@ import { EnableDisableElementsCheckboxInternal } from '/src/js/extensions/enable
 import ErrorMessages from '/src/js/elements/error-messages.js';
 jest.mock('/src/js/elements/error-messages.js');
 
-import '/src/js/helpers/expect-matchers.js';
-
 let armorClassSection;
 
 beforeAll(async() => {
@@ -19,7 +17,7 @@ beforeEach(() => {
 });
 
 describe('when the show section is clicked', () => {
-  it('should switch to edit mode and focus on initial element', () => {
+  it('should switch to edit mode and focus on the armor class field', () => {
     armorClassSection.showElements.section.click(); 
     
     expect(armorClassSection).toBeInMode('edit');
@@ -33,7 +31,7 @@ describe('when the custom text checkbox is checked', () => {
     armorClassSection.editElements.useCustom.click();
   });
 
-  it('should enable the custom text field, disable all other input elements, and focus on the correct element', () => {
+  it('should enable the custom text field, disable all other fields, and focus on the custom text field', () => {
     expect(armorClassSection.editElements.armorClass).toBeDisabled();
     expect(armorClassSection.editElements.armorType).toBeDisabled();
     expect(armorClassSection.editElements.shield).toBeDisabled();
@@ -42,10 +40,10 @@ describe('when the custom text checkbox is checked', () => {
     expect(armorClassSection.editElements.customText).toHaveFocus();
   });
 
-  describe('when the save button is clicked', () => {
+  describe('and the save button is clicked', () => {
     it('should switch to show mode and save the custom text', () => {
       let customText = '14 (natural armor), 11 while prone';
-      armorClassSection.editElements.customText.value = customText;
+      inputValue(armorClassSection.editElements.customText, customText);
 
       armorClassSection.editElements.saveAction.click();
 
@@ -53,8 +51,8 @@ describe('when the custom text checkbox is checked', () => {
       expect(armorClassSection.showElements.text).toHaveTextContent(customText);
     });
 
-    it('should display an error if the custom text is blank', () => {
-      armorClassSection.editElements.customText.value = '';
+    it('should display an error if the custom text field is blank', () => {
+      inputValue(armorClassSection.editElements.customText, '');
 
       armorClassSection.editElements.saveAction.click();
 
@@ -64,9 +62,9 @@ describe('when the custom text checkbox is checked', () => {
         'Armor Class Custom Text cannot be blank.');
     });
 
-    it('should display only one error if the armor class and custom text are both blank', () => {
-      armorClassSection.editElements.armorClass.value = '';
-      armorClassSection.editElements.customText.value = '';
+    it('should display only one error if the armor class and custom text fields are both blank', () => {
+      inputValue(armorClassSection.editElements.armorClass, '');
+      inputValue(armorClassSection.editElements.customText, '');
 
       armorClassSection.editElements.saveAction.click();
 
@@ -85,7 +83,7 @@ describe('when the custom text checkbox is unchecked', () => {
     armorClassSection.editElements.useCustom.click();
   });
 
-  it('should enable the custom text field, disable all other input elements, and focus on the correct element', () => {
+  it('should disable the custom text field, enable all other fields, and focus on the armor class field', () => {
     expect(armorClassSection.editElements.armorClass).not.toBeDisabled();
     expect(armorClassSection.editElements.armorType).not.toBeDisabled();
     expect(armorClassSection.editElements.shield).not.toBeDisabled();
@@ -94,9 +92,9 @@ describe('when the custom text checkbox is unchecked', () => {
     expect(armorClassSection.editElements.armorClass).toHaveFocus();
   });
 
-  describe('when the save button is clicked', () => {
+  describe('and the save button is clicked', () => {
     it('should switch to show mode and save the armor class only', () => {
-      armorClassSection.editElements.armorClass.value = 7;
+      inputValue(armorClassSection.editElements.armorClass, 7);
 
       armorClassSection.editElements.saveAction.click();
 
@@ -105,8 +103,8 @@ describe('when the custom text checkbox is unchecked', () => {
     });
 
     it('should switch to show mode and save the armor class and armor type', () => {
-      armorClassSection.editElements.armorClass.value = 21;
-      armorClassSection.editElements.armorType.value = 'natural armor';
+      inputValue(armorClassSection.editElements.armorClass, 21);
+      inputValue(armorClassSection.editElements.armorType, 'natural armor');
 
       armorClassSection.editElements.saveAction.click();
 
@@ -115,7 +113,7 @@ describe('when the custom text checkbox is unchecked', () => {
     });
 
     it('should switch to show mode and save the armor class and shield', () => {
-      armorClassSection.editElements.armorClass.value = 12;      
+      inputValue(armorClassSection.editElements.armorClass, 12);      
       armorClassSection.editElements.shield.click();
 
       armorClassSection.editElements.saveAction.click();
@@ -125,8 +123,8 @@ describe('when the custom text checkbox is unchecked', () => {
     });
 
     it('should switch to show mode and save the armor class, armor type, and shield', () => {
-      armorClassSection.editElements.armorClass.value = 16;
-      armorClassSection.editElements.armorType.value = 'chain shirt';
+      inputValue(armorClassSection.editElements.armorClass, 16);
+      inputValue(armorClassSection.editElements.armorType, 'chain shirt');
       armorClassSection.editElements.shield.click();
 
       armorClassSection.editElements.saveAction.click();
@@ -135,8 +133,8 @@ describe('when the custom text checkbox is unchecked', () => {
       expect(armorClassSection.showElements.text).toHaveTextContent('16 (chain shirt, shield)');
     });
 
-    it('should display an error if the armor class is blank', () => {
-      armorClassSection.editElements.armorClass.value = '';
+    it('should display an error if the armor class field is blank', () => {
+      inputValue(armorClassSection.editElements.armorClass, '');
 
       armorClassSection.editElements.saveAction.click();
 
@@ -146,9 +144,9 @@ describe('when the custom text checkbox is unchecked', () => {
         'Armor Class must be a valid number.');
     });
 
-    it('should display only one error if the armor class and custom text are both blank', () => {
-      armorClassSection.editElements.armorClass.value = '';
-      armorClassSection.editElements.customText.value = '';
+    it('should display only one error if the armor class and custom text fields are both blank', () => {
+      inputValue(armorClassSection.editElements.armorClass, '');
+      inputValue(armorClassSection.editElements.customText, '');
 
       armorClassSection.editElements.saveAction.click();
 

@@ -2,8 +2,6 @@ import HeadingSection from '/src/js/sections/heading-section.js';
 import ErrorMessages from '/src/js/elements/error-messages.js';
 jest.mock('/src/js/elements/error-messages.js');
 
-import '/src/js/helpers/expect-matchers.js';
-
 let headingSection;
 
 beforeAll(async() => {
@@ -16,7 +14,7 @@ beforeEach(() => {
 });
 
 describe('when the show section is clicked', () => {
-  it('should switch to edit mode and focus on initial element', () => {
+  it('should switch to edit mode and focus on the title field', () => {
     headingSection.showElements.section.click(); 
     
     expect(headingSection).toBeInMode('edit');
@@ -30,10 +28,10 @@ describe('when the save button is clicked', () => {
   });
 
   it('should switch to show mode and save the creature name, size, type, and alignment', () => {
-    headingSection.editElements.title.value = 'Beholder';
-    headingSection.editElements.size.value = 'Large';
-    headingSection.editElements.type.value = 'aberration';
-    headingSection.editElements.alignment.value = 'lawful evil';
+    inputValue(headingSection.editElements.title, 'Beholder');
+    inputValue(headingSection.editElements.size, 'Large');
+    inputValue(headingSection.editElements.type, 'aberration');
+    inputValue(headingSection.editElements.alignment, 'lawful evil');
   
     headingSection.editElements.saveAction.click();
 
@@ -43,7 +41,7 @@ describe('when the save button is clicked', () => {
   });
 
   it('should capitalize the first letter in the creature name', () => {
-    headingSection.editElements.title.value = 'young red dragon';
+    inputValue(headingSection.editElements.title, 'young red dragon');
 
     headingSection.editElements.saveAction.click();
 
@@ -52,10 +50,10 @@ describe('when the save button is clicked', () => {
   });
 
   it('should trim whitespace from the creature name and type', () => {
-    headingSection.editElements.title.value = '  Purple Worm ';
-    headingSection.editElements.size.value = 'Gargantuan';
-    headingSection.editElements.type.value = '    monstrosity        ';
-    headingSection.editElements.alignment.value = 'unaligned';
+    inputValue(headingSection.editElements.title, '  Purple Worm ');
+    inputValue(headingSection.editElements.size, 'Gargantuan');
+    inputValue(headingSection.editElements.type, '    monstrosity        ');
+    inputValue(headingSection.editElements.alignment, 'unaligned');
 
     headingSection.editElements.saveAction.click();
 
@@ -64,8 +62,8 @@ describe('when the save button is clicked', () => {
     expect(headingSection.showElements.subtitle).toHaveTextContent('Gargantuan monstrosity, unaligned');
   });
 
-  it('should display an error if the creature name is blank', () => {
-    headingSection.editElements.title.value = '';
+  it('should display an error if the creature name field is blank', () => {
+    inputValue(headingSection.editElements.title, '');
 
     headingSection.editElements.saveAction.click();
 
@@ -75,8 +73,8 @@ describe('when the save button is clicked', () => {
       'Creature Name cannot be blank.');
   });
 
-  it('should display an error if the creature type is blank', () => {
-    headingSection.editElements.type.value = '';
+  it('should display an error if the creature type field is blank', () => {
+    inputValue(headingSection.editElements.type, '');
 
     headingSection.editElements.saveAction.click();
 
@@ -85,5 +83,20 @@ describe('when the save button is clicked', () => {
       headingSection.editElements.type,
       'Creature Type cannot be blank.');
   });
-});
 
+  it('should display both errors if the creature name and creature type fields are both blank', () => {
+    inputValue(headingSection.editElements.title, '');
+    inputValue(headingSection.editElements.type, '');
+
+    headingSection.editElements.saveAction.click();
+
+    expect(headingSection).toBeInMode('edit');
+    expect(headingSection.errorMessages.errors.length).toBe(2);
+    expect(headingSection).toHaveError(
+      headingSection.editElements.title,
+      'Creature Name cannot be blank.');
+    expect(headingSection).toHaveError(
+      headingSection.editElements.type,
+      'Creature Type cannot be blank.');
+  });
+});

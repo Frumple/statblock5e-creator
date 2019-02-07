@@ -67,4 +67,8 @@ export class EnableDisableElementsCheckboxInternal {
   click() {
     this.checkboxElement.click();
   }
+
+  addEventListener(type, listener) {
+    this.checkboxElement.addEventListener(type, listener);
+  }
 }

@@ -14,6 +14,7 @@ export default class ArmorClassSection extends sectionModule.Section {
     super(ArmorClassSection.templatePaths,
           ArmorClassShowElements,
           ArmorClassEditElements);
+          
     this.isInitialized = false;
   }
 

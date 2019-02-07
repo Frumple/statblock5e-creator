@@ -20,7 +20,9 @@
       "^/(.*)$": "<rootDir>/$1"
     },
     "setupFilesAfterEnv": [
-      "jest-dom/extend-expect"
+      "jest-dom/extend-expect",
+      "<rootDir>/src/js/helpers/test/expect-matchers",
+      "<rootDir>/src/js/helpers/test/test-utils"
     ]
   },
   "repository": {

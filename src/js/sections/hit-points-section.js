@@ -17,46 +17,57 @@ export default class HitPointsSection extends sectionModule.Section {
           HitPointsShowElements,
           HitPointsEditElements);
 
-    let useHitDieCheckbox = this.editElements.useHitDie;
-    useHitDieCheckbox.disableElementsWhenChecked(
-      this.editElements.hitPoints);
-    useHitDieCheckbox.enableElementsWhenChecked(
-      this.editElements.hitDieQuantity,
-      this.editElements.hitDieSize);
+    this.isInitialized = false;
+  }
 
-    this.editElements.hitPoints.addEventListener('input', () => {
-      if (! this.editElements.useHitDie.checked) {
-        let hitPoints = parseInt(this.editElements.hitPoints.value, 10);
+  connectedCallback() {
+    if (this.isConnected && ! this.isInitialized) {
+      this.editElements.useHitDie.disableElementsWhenChecked(
+        this.editElements.hitPoints);
 
-        if (! isNaN(hitPoints)) {
-          HitPoints.hitPoints = hitPoints;
-          this.updateHitPoints();
-        }
+      this.editElements.useHitDie.enableElementsWhenChecked(
+        this.editElements.hitDieQuantity,
+        this.editElements.hitDieSize);
+
+      this.editElements.hitPoints.addEventListener('input', this.onInputHitPoints.bind(this));
+      this.editElements.useHitDie.addEventListener('input', this.onInputUseHitDie.bind(this));
+      this.editElements.hitDieQuantity.addEventListener('input', this.onInputHitDieQuantity.bind(this));
+      this.editElements.hitDieSize.addEventListener('input', this.onInputHitDieSize.bind(this));
+    }
+  }
+
+  onInputHitPoints() {
+    if (! HitPoints.useHitDie) {
+      let hitPoints = parseInt(this.editElements.hitPoints.value, 10);
+
+      if (! isNaN(hitPoints)) {
+        HitPoints.hitPoints = hitPoints;
+        this.updateHitPoints();
       }
-    });
+    }
+  }
 
-    this.editElements.useHitDie.addEventListener('input', () => {
-      HitPoints.useHitDie = this.editElements.useHitDie.checked;
+  onInputUseHitDie() {
+    HitPoints.useHitDie = this.editElements.useHitDie.checked;
+    this.updateHitPoints();
+  }
+
+  onInputHitDieQuantity() {
+    let hitDieQuantity = parseInt(this.editElements.hitDieQuantity.value, 10);
+
+    if (! isNaN(hitDieQuantity)) {
+      HitPoints.hitDieQuantity = hitDieQuantity;
       this.updateHitPoints();
-    });
+    }
+  }
 
-    this.editElements.hitDieQuantity.addEventListener('input', () => {
-      let hitDieQuantity = parseInt(this.editElements.hitDieQuantity.value, 10);
+  onInputHitDieSize() {
+    let hitDieSize = parseInt(this.editElements.hitDieSize.value, 10);
 
-      if (! isNaN(hitDieQuantity)) {
-        HitPoints.hitDieQuantity = hitDieQuantity;
-        this.updateHitPoints();
-      }
-    });
-
-    this.editElements.hitDieSize.addEventListener('input', () => {
-      let hitDieSize = parseInt(this.editElements.hitDieSize.value, 10);
-
-      if (! isNaN(hitDieSize)) {
-        HitPoints.hitDieSize = hitDieSize;
-        this.updateHitPoints();
-      }
-    });
+    if (! isNaN(hitDieSize)) {
+      HitPoints.hitDieSize = hitDieSize;
+      this.updateHitPoints();
+    }
   }
 
   updateHitPoints() {
@@ -71,8 +82,11 @@ export default class HitPointsSection extends sectionModule.Section {
   }
 
   checkForErrors() {
-    validateIntegerInput(this.editElements.hitPoints, this.errorMessages);
-    validateIntegerInput(this.editElements.hitDieQuantity, this.errorMessages);
+    if (HitPoints.useHitDie) {
+      validateIntegerInput(this.editElements.hitDieQuantity, this.errorMessages);
+    } else {
+      validateIntegerInput(this.editElements.hitPoints, this.errorMessages);
+    }    
   }
 
   updateShowSection() {
