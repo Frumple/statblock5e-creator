@@ -50,6 +50,12 @@ describe('when the show section is clicked', () => {
       it('should update the hit points field with the correctly calculated value, and save all the fields', () => {
         inputValue(hitPointsSection.editElements.hitDieQuantity, 5);
 
+        expect(HitPoints.useHitDie).toBe(true);
+        expect(HitPoints.hitDieQuantity).toBe(5);
+        expect(HitPoints.hitDieSize).toBe(8);
+        expect(HitPoints.constitutionHitPoints).toBe(0);
+        expect(HitPoints.hitPoints).toBe(22);
+
         hitPointsSection.editElements.saveAction.click();
 
         expect(hitPointsSection).toBeInMode('show');
@@ -58,6 +64,12 @@ describe('when the show section is clicked', () => {
 
       it('should display an error if the hit die quantity field is blank', () => {
         inputValue(hitPointsSection.editElements.hitDieQuantity, '');
+
+        expect(HitPoints.useHitDie).toBe(true);
+        expect(HitPoints.hitDieQuantity).toBe(1);
+        expect(HitPoints.hitDieSize).toBe(8);
+        expect(HitPoints.constitutionHitPoints).toBe(0);
+        expect(HitPoints.hitPoints).toBe(4);
 
         hitPointsSection.editElements.saveAction.click();
 
@@ -70,6 +82,12 @@ describe('when the show section is clicked', () => {
       it('should display only one error if the hit points and hit die quantity fields are both blank', () => {
         inputValue(hitPointsSection.editElements.hitPoints, '');
         inputValue(hitPointsSection.editElements.hitDieQuantity, '');
+
+        expect(HitPoints.useHitDie).toBe(true);
+        expect(HitPoints.hitDieQuantity).toBe(1);
+        expect(HitPoints.hitDieSize).toBe(8);
+        expect(HitPoints.constitutionHitPoints).toBe(0);
+        expect(HitPoints.hitPoints).toBe(4);
 
         hitPointsSection.editElements.saveAction.click();
 
@@ -85,6 +103,12 @@ describe('when the show section is clicked', () => {
         inputValue(hitPointsSection.editElements.hitDieSize, 6);
         expect(hitPointsSection.editElements.hitPoints.value).toBe('3');
 
+        expect(HitPoints.useHitDie).toBe(true);
+        expect(HitPoints.hitDieQuantity).toBe(1);
+        expect(HitPoints.hitDieSize).toBe(6);
+        expect(HitPoints.constitutionHitPoints).toBe(0);
+        expect(HitPoints.hitPoints).toBe(3);
+
         hitPointsSection.editElements.saveAction.click();
 
         expect(hitPointsSection).toBeInMode('show');
@@ -96,6 +120,12 @@ describe('when the show section is clicked', () => {
       it('should update the hit points field with the correctly calculated value, and save all the fields', () => {
         Abilities.abilities['constitution'].score = 15;
         hitPointsSection.updateHitPoints();
+        
+        expect(HitPoints.useHitDie).toBe(true);
+        expect(HitPoints.hitDieQuantity).toBe(1);
+        expect(HitPoints.hitDieSize).toBe(8);
+        expect(HitPoints.constitutionHitPoints).toBe(2);
+        expect(HitPoints.hitPoints).toBe(6);
 
         expect(hitPointsSection.editElements.hitPoints.value).toBe('6');
 
@@ -110,6 +140,13 @@ describe('when the show section is clicked', () => {
       it('should update the hit points field with the correctly calculated value, and save all the fields', () => {
         inputValue(hitPointsSection.editElements.hitDieQuantity, 6);
         inputValue(hitPointsSection.editElements.hitDieSize, 10);
+
+        expect(HitPoints.useHitDie).toBe(true);
+        expect(HitPoints.hitDieQuantity).toBe(6);
+        expect(HitPoints.hitDieSize).toBe(10);
+        expect(HitPoints.constitutionHitPoints).toBe(0);
+        expect(HitPoints.hitPoints).toBe(33);
+
         expect(hitPointsSection.editElements.hitPoints.value).toBe('33');
 
         hitPointsSection.editElements.saveAction.click();
@@ -125,6 +162,12 @@ describe('when the show section is clicked', () => {
         Abilities.abilities['constitution'].score = 8;
         hitPointsSection.updateHitPoints();
 
+        expect(HitPoints.useHitDie).toBe(true);
+        expect(HitPoints.hitDieQuantity).toBe(1);
+        expect(HitPoints.hitDieSize).toBe(4);
+        expect(HitPoints.constitutionHitPoints).toBe(-1);
+        expect(HitPoints.hitPoints).toBe(1);
+
         expect(hitPointsSection.editElements.hitPoints.value).toBe('1');
 
         hitPointsSection.editElements.saveAction.click();
@@ -139,6 +182,12 @@ describe('when the show section is clicked', () => {
         inputValue(hitPointsSection.editElements.hitDieQuantity, 9);
         Abilities.abilities['constitution'].score = 17;
         hitPointsSection.updateHitPoints();
+
+        expect(HitPoints.useHitDie).toBe(true);
+        expect(HitPoints.hitDieQuantity).toBe(9);
+        expect(HitPoints.hitDieSize).toBe(8);
+        expect(HitPoints.constitutionHitPoints).toBe(27);
+        expect(HitPoints.hitPoints).toBe(67);
 
         expect(hitPointsSection.editElements.hitPoints.value).toBe('67');
 
@@ -156,6 +205,12 @@ describe('when the show section is clicked', () => {
         Abilities.abilities['constitution'].score = 21;
         hitPointsSection.updateHitPoints();
 
+        expect(HitPoints.useHitDie).toBe(true);
+        expect(HitPoints.hitDieQuantity).toBe(17);
+        expect(HitPoints.hitDieSize).toBe(10);
+        expect(HitPoints.constitutionHitPoints).toBe(85);
+        expect(HitPoints.hitPoints).toBe(178);
+
         expect(hitPointsSection.editElements.hitPoints.value).toBe('178');
 
         hitPointsSection.editElements.saveAction.click();
@@ -172,6 +227,12 @@ describe('when the show section is clicked', () => {
         Abilities.abilities['constitution'].score = 19;
         hitPointsSection.updateHitPoints();
 
+        expect(HitPoints.useHitDie).toBe(true);
+        expect(HitPoints.hitDieQuantity).toBe(10);
+        expect(HitPoints.hitDieSize).toBe(12);
+        expect(HitPoints.constitutionHitPoints).toBe(40);
+        expect(HitPoints.hitPoints).toBe(105);
+
         hitPointsSection.editElements.useHitDie.click();
 
         inputValue(hitPointsSection.editElements.hitPoints, 89);
@@ -179,7 +240,7 @@ describe('when the show section is clicked', () => {
         hitPointsSection.editElements.useHitDie.click();
 
         expect(hitPointsSection.editElements.hitPoints.value).toBe('105');
-      })
+      });
     });
 
     describe('additional examples', () => {
@@ -188,6 +249,12 @@ describe('when the show section is clicked', () => {
         inputValue(hitPointsSection.editElements.hitDieSize, 10);
         Abilities.abilities['constitution'].score = 14;
         hitPointsSection.updateHitPoints();
+
+        expect(HitPoints.useHitDie).toBe(true);
+        expect(HitPoints.hitDieQuantity).toBe(12);
+        expect(HitPoints.hitDieSize).toBe(10);
+        expect(HitPoints.constitutionHitPoints).toBe(24);
+        expect(HitPoints.hitPoints).toBe(90);
 
         expect(hitPointsSection.editElements.hitPoints.value).toBe('90');
 
@@ -203,6 +270,12 @@ describe('when the show section is clicked', () => {
         Abilities.abilities['constitution'].score = 9;
         hitPointsSection.updateHitPoints();
 
+        expect(HitPoints.useHitDie).toBe(true);
+        expect(HitPoints.hitDieQuantity).toBe(7);
+        expect(HitPoints.hitDieSize).toBe(8);
+        expect(HitPoints.constitutionHitPoints).toBe(-7);
+        expect(HitPoints.hitPoints).toBe(24);
+
         expect(hitPointsSection.editElements.hitPoints.value).toBe('24');
 
         hitPointsSection.editElements.saveAction.click();
@@ -216,6 +289,12 @@ describe('when the show section is clicked', () => {
         inputValue(hitPointsSection.editElements.hitDieSize, 20);
         Abilities.abilities['constitution'].score = 30;
         hitPointsSection.updateHitPoints();
+
+        expect(HitPoints.useHitDie).toBe(true);
+        expect(HitPoints.hitDieQuantity).toBe(33);
+        expect(HitPoints.hitDieSize).toBe(20);
+        expect(HitPoints.constitutionHitPoints).toBe(330);
+        expect(HitPoints.hitPoints).toBe(676);
 
         expect(hitPointsSection.editElements.hitPoints.value).toBe('676');
 
@@ -231,6 +310,12 @@ describe('when the show section is clicked', () => {
         Abilities.abilities['constitution'].score = 9;
         hitPointsSection.updateHitPoints();
 
+        expect(HitPoints.useHitDie).toBe(true);
+        expect(HitPoints.hitDieQuantity).toBe(3);
+        expect(HitPoints.hitDieSize).toBe(6);
+        expect(HitPoints.constitutionHitPoints).toBe(-3);
+        expect(HitPoints.hitPoints).toBe(7);
+
         expect(hitPointsSection.editElements.hitPoints.value).toBe('7');
 
         hitPointsSection.editElements.saveAction.click();
@@ -245,6 +330,12 @@ describe('when the show section is clicked', () => {
         Abilities.abilities['constitution'].score = 1;
         hitPointsSection.updateHitPoints();
 
+        expect(HitPoints.useHitDie).toBe(true);
+        expect(HitPoints.hitDieQuantity).toBe(1);
+        expect(HitPoints.hitDieSize).toBe(4);
+        expect(HitPoints.constitutionHitPoints).toBe(-5);
+        expect(HitPoints.hitPoints).toBe(0);
+
         expect(hitPointsSection.editElements.hitPoints.value).toBe('0');
 
         hitPointsSection.editElements.saveAction.click();
@@ -258,6 +349,12 @@ describe('when the show section is clicked', () => {
         inputValue(hitPointsSection.editElements.hitDieSize, 20);
         Abilities.abilities['constitution'].score = 999;
         hitPointsSection.updateHitPoints();
+
+        expect(HitPoints.useHitDie).toBe(true);
+        expect(HitPoints.hitDieQuantity).toBe(999);
+        expect(HitPoints.hitDieSize).toBe(20);
+        expect(HitPoints.constitutionHitPoints).toBe(493506);
+        expect(HitPoints.hitPoints).toBe(503995);
 
         expect(hitPointsSection.editElements.hitPoints.value).toBe('503995');
 
@@ -287,6 +384,12 @@ describe('when the show section is clicked', () => {
       it('should switch to show mode and save the hit points', () => {
         inputValue(hitPointsSection.editElements.hitPoints, 142);
 
+        expect(HitPoints.useHitDie).toBe(false);
+        expect(HitPoints.hitDieQuantity).toBe(1);
+        expect(HitPoints.hitDieSize).toBe(8);
+        expect(HitPoints.constitutionHitPoints).toBe(0);
+        expect(HitPoints.hitPoints).toBe(142);
+
         hitPointsSection.editElements.saveAction.click();
 
         expect(hitPointsSection).toBeInMode('show');
@@ -295,6 +398,12 @@ describe('when the show section is clicked', () => {
 
       it('should display an error if the hit points field is blank', () => {
         inputValue(hitPointsSection.editElements.hitPoints, '');
+
+        expect(HitPoints.useHitDie).toBe(false);
+        expect(HitPoints.hitDieQuantity).toBe(1);
+        expect(HitPoints.hitDieSize).toBe(8);
+        expect(HitPoints.constitutionHitPoints).toBe(0);
+        expect(HitPoints.hitPoints).toBe(4);
 
         hitPointsSection.editElements.saveAction.click();
 
@@ -307,6 +416,12 @@ describe('when the show section is clicked', () => {
       it('should display only one error if the hit points and hit die quantity fields are both blank', () => {
         inputValue(hitPointsSection.editElements.hitPoints, '');
         inputValue(hitPointsSection.editElements.hitDieQuantity, '');
+
+        expect(HitPoints.useHitDie).toBe(false);
+        expect(HitPoints.hitDieQuantity).toBe(1);
+        expect(HitPoints.hitDieSize).toBe(8);
+        expect(HitPoints.constitutionHitPoints).toBe(0);
+        expect(HitPoints.hitPoints).toBe(4);
         
         hitPointsSection.editElements.saveAction.click();
 
