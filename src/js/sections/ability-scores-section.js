@@ -18,14 +18,10 @@ export default class AbilityScoresSection extends sectionModule.Section {
           AbilityScoresEditElements);
 
     for (const key of Abilities.keys) {
-      this.editElements.score[key].addEventListener('input', () => {
-        this.onAbilityScoreChange(key);
-      });
+      this.editElements.score[key].addEventListener('input', this.onAbilityScoreChange.bind(this, key));
     }
 
-    this.editElements.proficiencyBonus.addEventListener('input', () => {
-      this.onProficiencyBonusChange();
-    });
+    this.editElements.proficiencyBonus.addEventListener('input', this.onProficiencyBonusChange.bind(this));
   }
 
   onAbilityScoreChange(key) {
