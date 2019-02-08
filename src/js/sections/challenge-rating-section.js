@@ -15,7 +15,7 @@ export default class ChallengeRatingSection extends sectionModule.Section {
           ChallengeRatingShowElements,
           ChallengeRatingEditElements);
 
-    this.editElements.challengeRating.addEventListener('change', () => {
+    this.editElements.challengeRating.addEventListener('input', () => {
       let challengeRating = parseFloat(this.editElements.challengeRating.value);
       let experiencePoints = ExperiencePointsByChallengeRating[challengeRating];
       this.editElements.experiencePoints.value = experiencePoints;

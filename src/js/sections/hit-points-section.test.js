@@ -34,7 +34,7 @@ describe('when the show section is clicked', () => {
     hitPointsSection.showElements.section.click(); 
   });
 
-  it('should switch to edit mode and focus on the initial element', () => {
+  it('should switch to edit mode and focus on the hit die quantity field', () => {
     expect(hitPointsSection).toBeInMode('edit');
     expect(hitPointsSection.editElements.hitDieQuantity).toHaveFocus();
   });

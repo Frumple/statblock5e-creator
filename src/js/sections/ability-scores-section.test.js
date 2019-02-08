@@ -29,7 +29,7 @@ describe('when the show section is clicked', () => {
     abilityScoresSection.showElements.section.click(); 
   });
 
-  it('should switch to edit mode and focus on the initial element', () => {
+  it('should switch to edit mode and focus on the strength score field', () => {
     expect(abilityScoresSection).toBeInMode('edit');
     expect(abilityScoresSection.editElements.score['strength']).toHaveFocus();
   });
