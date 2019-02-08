@@ -14,18 +14,16 @@ export default class ArmorClassSection extends sectionModule.Section {
     super(ArmorClassSection.templatePaths,
           ArmorClassShowElements,
           ArmorClassEditElements);
-          
-    this.isInitialized = false;
   }
 
   connectedCallback() {
     if (this.isConnected && ! this.isInitialized) {
-      let useCustomCheckbox = this.editElements.useCustom;
-      useCustomCheckbox.disableElementsWhenChecked(
+      this.editElements.useCustom.disableElementsWhenChecked(
         this.editElements.armorClass,
         this.editElements.armorType,
         this.editElements.shield);
-      useCustomCheckbox.enableElementsWhenChecked(
+        
+      this.editElements.useCustom.enableElementsWhenChecked(
         this.editElements.customText);
 
       this.isInitialized = true;

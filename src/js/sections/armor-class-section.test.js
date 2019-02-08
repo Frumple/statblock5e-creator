@@ -16,6 +16,10 @@ beforeEach(() => {
   armorClassSection.forceConnect();
 });
 
+afterEach(() => {
+  document.clear();
+});
+
 describe('when the show section is clicked', () => {
   beforeEach(() => {
     armorClassSection.showElements.section.click(); 
@@ -63,7 +67,7 @@ describe('when the show section is clicked', () => {
       });
 
       it('should display only one error if the armor class and custom text fields are both blank', () => {
-        inputValue(armorClassSection.editElements.armorClass, '');
+        inputValue(armorClassSection.editElements.armorClass, NaN);
         inputValue(armorClassSection.editElements.customText, '');
 
         armorClassSection.editElements.saveAction.click();
@@ -133,7 +137,7 @@ describe('when the show section is clicked', () => {
       });
 
       it('should display an error if the armor class field is blank', () => {
-        inputValue(armorClassSection.editElements.armorClass, '');
+        inputValue(armorClassSection.editElements.armorClass, NaN);
 
         armorClassSection.editElements.saveAction.click();
 
@@ -144,7 +148,7 @@ describe('when the show section is clicked', () => {
       });
 
       it('should display only one error if the armor class and custom text fields are both blank', () => {
-        inputValue(armorClassSection.editElements.armorClass, '');
+        inputValue(armorClassSection.editElements.armorClass, NaN);
         inputValue(armorClassSection.editElements.customText, '');
 
         armorClassSection.editElements.saveAction.click();

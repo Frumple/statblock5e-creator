@@ -22,6 +22,10 @@ beforeEach(() => {
   hitPointsSection.forceConnect();
 });
 
+afterEach(() => {
+  document.clear();
+});
+
 describe('when the show section is clicked', () => {
   beforeEach(() => {
     hitPointsSection.showElements.section.click(); 
@@ -63,7 +67,7 @@ describe('when the show section is clicked', () => {
       });
 
       it('should display an error if the hit die quantity field is blank', () => {
-        inputValue(hitPointsSection.editElements.hitDieQuantity, '');
+        inputValue(hitPointsSection.editElements.hitDieQuantity, NaN);
 
         expect(HitPoints.useHitDie).toBe(true);
         expect(HitPoints.hitDieQuantity).toBe(1);
@@ -80,8 +84,8 @@ describe('when the show section is clicked', () => {
       });
 
       it('should display only one error if the hit points and hit die quantity fields are both blank', () => {
-        inputValue(hitPointsSection.editElements.hitPoints, '');
-        inputValue(hitPointsSection.editElements.hitDieQuantity, '');
+        inputValue(hitPointsSection.editElements.hitPoints, NaN);
+        inputValue(hitPointsSection.editElements.hitDieQuantity, NaN);
 
         expect(HitPoints.useHitDie).toBe(true);
         expect(HitPoints.hitDieQuantity).toBe(1);
@@ -397,7 +401,7 @@ describe('when the show section is clicked', () => {
       });
 
       it('should display an error if the hit points field is blank', () => {
-        inputValue(hitPointsSection.editElements.hitPoints, '');
+        inputValue(hitPointsSection.editElements.hitPoints, NaN);
 
         expect(HitPoints.useHitDie).toBe(false);
         expect(HitPoints.hitDieQuantity).toBe(1);
@@ -414,8 +418,8 @@ describe('when the show section is clicked', () => {
       });
 
       it('should display only one error if the hit points and hit die quantity fields are both blank', () => {
-        inputValue(hitPointsSection.editElements.hitPoints, '');
-        inputValue(hitPointsSection.editElements.hitDieQuantity, '');
+        inputValue(hitPointsSection.editElements.hitPoints, NaN);
+        inputValue(hitPointsSection.editElements.hitDieQuantity, NaN);
 
         expect(HitPoints.useHitDie).toBe(false);
         expect(HitPoints.hitDieQuantity).toBe(1);

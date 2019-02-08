@@ -26,6 +26,12 @@ class Skills {
     Object.freeze(this.skills);
   }
 
+  reset() {
+    for(const skill of Object.values(this.skills)) {
+      skill.reset();
+    }
+  }
+
   get keys() {
     return Object.keys(this.skills);
   }
@@ -39,6 +45,10 @@ class Skill {
   constructor(prettyName, abilityName) {
     this.prettyName = prettyName;
     this.abilityName = abilityName;
+    this.reset();
+  }
+
+  reset() {
     this.isEnabled = false;
     this.isProficient = true;
     this.override = NaN;

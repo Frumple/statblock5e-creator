@@ -13,21 +13,25 @@ export default class SensesSection extends sectionModule.Section {
   constructor() {
     super(SensesSection.templatePaths,
           SensesShowElements,
-          SensesEditElements);
+          SensesEditElements);    
+  }
 
-    let useCustomCheckbox = this.editElements.useCustom;
-    useCustomCheckbox.disableElementsWhenChecked(
-      this.editElements.blindsight,
-      this.editElements.darkvision,
-      this.editElements.tremorsense,
-      this.editElements.truesight);
-    useCustomCheckbox.enableElementsWhenChecked(
-      this.editElements.customText);
+  connectedCallback() {
+    if (this.isConnected && ! this.isInitialized) {
+      this.editElements.useCustom.disableElementsWhenChecked(
+        this.editElements.blindsight,
+        this.editElements.darkvision,
+        this.editElements.tremorsense,
+        this.editElements.truesight);
+
+      this.editElements.useCustom.enableElementsWhenChecked(
+        this.editElements.customText);
+    }
   }
 
   updatePassivePerception() {
     let passivePerception = Skills.skills['perception'].passiveScore;
-    this.editElements.passivePerception.textContent = passivePerception;
+    this.editElements.passivePerception.textContent = passivePerception;    
 
     this.updateShowSection();
   }

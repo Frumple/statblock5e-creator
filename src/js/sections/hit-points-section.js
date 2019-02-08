@@ -15,10 +15,7 @@ export default class HitPointsSection extends sectionModule.Section {
   constructor() {
     super(HitPointsSection.templatePaths,
           HitPointsShowElements,
-          HitPointsEditElements);
-
-    this.isInitialized = false;
-  }
+          HitPointsEditElements);  }
 
   connectedCallback() {
     if (this.isConnected && ! this.isInitialized) {
@@ -33,6 +30,8 @@ export default class HitPointsSection extends sectionModule.Section {
       this.editElements.useHitDie.addEventListener('input', this.onInputUseHitDie.bind(this));
       this.editElements.hitDieQuantity.addEventListener('input', this.onInputHitDieQuantity.bind(this));
       this.editElements.hitDieSize.addEventListener('input', this.onInputHitDieSize.bind(this));
+    
+      this.isInitialized = true;
     }
   }
 

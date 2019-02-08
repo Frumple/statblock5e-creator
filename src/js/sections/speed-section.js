@@ -13,17 +13,23 @@ export default class SpeedSection extends sectionModule.Section {
     super(SpeedSection.templatePaths,
           SpeedShowElements,
           SpeedEditElements);
+  }
 
-    let useCustomCheckbox = this.editElements.useCustom;
-    useCustomCheckbox.disableElementsWhenChecked(
-      this.editElements.walk,
-      this.editElements.burrow,
-      this.editElements.climb,
-      this.editElements.fly,
-      this.editElements.hover,
-      this.editElements.swim);
-    useCustomCheckbox.enableElementsWhenChecked(
-      this.editElements.customText);
+  connectedCallback() {
+    if(this.isConnected && ! this.isInitialized) {
+      this.editElements.useCustom.disableElementsWhenChecked(
+        this.editElements.walk,
+        this.editElements.burrow,
+        this.editElements.climb,
+        this.editElements.fly,
+        this.editElements.hover,
+        this.editElements.swim);
+
+      this.editElements.useCustom.enableElementsWhenChecked(
+        this.editElements.customText);
+
+      this.isInitialized = true;
+    }
   }
 
   checkForErrors() {

@@ -12,6 +12,7 @@ export class Section extends CustomAutonomousElement {
   constructor(templatePaths, showElementsClass, editElementsClass) {
     super(templatePaths);
 
+    this.isInitialized = false;
     this.dataset.mode = 'show';
 
     this.showElements = new showElementsClass(this.shadowRoot);

@@ -13,6 +13,10 @@ beforeEach(() => {
   headingSection.errorMessages = new ErrorMessages();
 });
 
+afterEach(() => {
+  document.clear();
+});
+
 describe('when the show section is clicked', () => {
   beforeEach(() => {
     headingSection.showElements.section.click(); 
