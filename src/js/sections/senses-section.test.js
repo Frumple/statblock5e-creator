@@ -118,7 +118,7 @@ describe('when the show section is clicked', () => {
           ${'maximum values'}                        | ${999}     | ${999}     | ${999}      | ${999}    | ${'blindsight 999 ft., darkvision 999 ft., tremorsense 999 ft., truesight 999 ft., passive Perception 10'}
         `
         ('$description: {blindsight="$blindsight", darkvision="$darkvision", tremorsense="$tremorsense", truesight="$truesight"} => "$expectedText"',
-        ({description, blindsight, darkvision, tremorsense, truesight, expectedText}) => { // eslint-disable-line no-unused-vars
+        ({blindsight, darkvision, tremorsense, truesight, expectedText}) => {
           inputValue(sensesSection.editElements.blindsight, blindsight);
           inputValue(sensesSection.editElements.darkvision, darkvision);
           inputValue(sensesSection.editElements.tremorsense, tremorsense);
@@ -159,7 +159,7 @@ describe('should calculate the passive perception based on the following conditi
     ${'positive wis and positive prof bonus'}             | ${14}       | ${3}             | ${true}           | ${true}              | ${NaN}             | ${15}
   `
   ('$description: {wisdomScore="$wisdomScore", proficiencyBonus="$proficiencyBonus", perceptionEnabled="$perceptionEnabled", perceptionProficient="$perceptionProficient", perceptionOverride="$perceptionOverride"} => $expectedPassivePerception',
-  ({description, wisdomScore, proficiencyBonus, perceptionEnabled, perceptionProficient, perceptionOverride, expectedPassivePerception}) => { // eslint-disable-line no-unused-vars
+  ({wisdomScore, proficiencyBonus, perceptionEnabled, perceptionProficient, perceptionOverride, expectedPassivePerception}) => {
     Abilities.abilities['wisdom'].score = wisdomScore;
     ProficiencyBonus.value = proficiencyBonus;
 

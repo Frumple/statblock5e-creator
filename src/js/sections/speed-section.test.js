@@ -93,9 +93,8 @@ describe('when the show section is clicked', () => {
       describe('should switch to show mode and save the fields in the following combinations:', () => {
         /* eslint-disable indent, no-unexpected-multiline */
 
-        // For combinations that involve 3 or 4 speeds, we'll only test the most
-        // common combinations to avoid exhaustively testing every case.
-        // These combinations are typically found in any dragon:
+        // For combinations that involve 3 or 4 speeds, we'll only test the most common combinations to avoid exhaustively testing every case.
+        // These combinations are typically found in several dragons in the 5e Monster Manual:
         // - Walk + Burrow + Fly
         // - Walk + Climb + Fly
         // - Walk + Fly + Swim
@@ -127,7 +126,7 @@ describe('when the show section is clicked', () => {
           ${'maximum values'}                | ${999} | ${999} | ${999} | ${999} | ${true}  | ${999} | ${'999 ft., burrow 999 ft., climb 999 ft., fly 999 ft. (hover), swim 999 ft.'}
         `
         ('$description: {walk="$walk", burrow="$burrow", climb="$climb", fly="$fly", hover="$hover", swim="$swim"} => "$expectedText"', 
-        ({description, walk, burrow, climb, fly, hover, swim, expectedText}) => { // eslint-disable-line no-unused-vars
+        ({walk, burrow, climb, fly, hover, swim, expectedText}) => {
           inputValue(speedSection.editElements.walk, walk);
           inputValue(speedSection.editElements.burrow, burrow);
           inputValue(speedSection.editElements.climb, climb);

@@ -66,7 +66,7 @@ describe('when the show section is clicked', () => {
           'Armor Class Custom Text cannot be blank.');
       });
 
-      it('should display only one error if the armor class and custom text fields are both blank', () => {
+      it('should display only one error if the armor class is not a valid number and custom text field is blank', () => {
         inputValue(armorClassSection.editElements.armorClass, NaN);
         inputValue(armorClassSection.editElements.customText, '');
 
@@ -136,7 +136,7 @@ describe('when the show section is clicked', () => {
         expect(armorClassSection.showElements.text).toHaveTextContent('16 (chain shirt, shield)');
       });
 
-      it('should display an error if the armor class field is blank', () => {
+      it('should display an error if the armor class field is not a valid number', () => {
         inputValue(armorClassSection.editElements.armorClass, NaN);
 
         armorClassSection.editElements.saveAction.click();
@@ -147,7 +147,7 @@ describe('when the show section is clicked', () => {
           'Armor Class must be a valid number.');
       });
 
-      it('should display only one error if the armor class and custom text fields are both blank', () => {
+      it('should display only one error if the armor class is not a valid number and custom text field is blank', () => {
         inputValue(armorClassSection.editElements.armorClass, NaN);
         inputValue(armorClassSection.editElements.customText, '');
 

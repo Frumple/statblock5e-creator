@@ -3,6 +3,9 @@ import { EnableDisableElementsCheckboxInternal } from '/src/js/extensions/enable
 import ErrorMessages from '/src/js/elements/error-messages.js';
 jest.mock('/src/js/elements/error-messages.js');
 
+import { formatModifierOperator } from '/src/js/helpers/string-formatter.js';
+import { formatModifierNumber } from '/src/js/helpers/string-formatter.js';
+
 import Abilities from '/src/js/stats/abilities.js';
 import HitPoints from '/src/js/stats/hit-points.js';
 
@@ -51,7 +54,7 @@ describe('when the show section is clicked', () => {
     });
 
     describe('and the hit die fields are populated and the save button is clicked', () => {
-      describe('update the hit points field, switch to show mode and save all the fields in the following combinations:', () => {
+      describe('should update the hit points field, switch to show mode and save all the fields in the following combinations:', () => {
         /* eslint-disable indent, no-unexpected-multiline */
         it.each
         `
@@ -74,7 +77,7 @@ describe('when the show section is clicked', () => {
           ${'maximum values'}                         | ${999}         | ${20}      | ${999}            | ${493506}                     | ${503995}         | ${'503995 (999d20 + 493506)'}
         `
         ('$description: {hitDieQuantity="$hitDieQuantity", hitDieSize="$hitDieSize", constitutionScore="$constitutionScore"} => {expectedConstitutionHitPoints="$expectedConstitutionHitPoints", expectedHitPoints="$expectedHitPoints", expectedText="$expectedText"}',
-        ({description, hitDieQuantity, hitDieSize, constitutionScore, expectedConstitutionHitPoints, expectedHitPoints, expectedText}) => { // eslint-disable-line no-unused-vars
+        ({hitDieQuantity, hitDieSize, constitutionScore, expectedConstitutionHitPoints, expectedHitPoints, expectedText}) => {
           inputValue(hitPointsSection.editElements.hitDieQuantity, hitDieQuantity);
           inputValue(hitPointsSection.editElements.hitDieSize, hitDieSize);
 
@@ -87,6 +90,10 @@ describe('when the show section is clicked', () => {
           expect(HitPoints.constitutionHitPoints).toBe(expectedConstitutionHitPoints);
           expect(HitPoints.hitPoints).toBe(expectedHitPoints);
 
+          let constitutionHitPointsOperator = formatModifierOperator(expectedConstitutionHitPoints);
+          let constitutionHitPointsNumber = formatModifierNumber(expectedConstitutionHitPoints);
+
+          expect(hitPointsSection.editElements.trailingText).toHaveTextContent(`${constitutionHitPointsOperator} ${constitutionHitPointsNumber} )`);
           expect(hitPointsSection.editElements.hitPoints.value).toBe(`${expectedHitPoints}`);
 
           hitPointsSection.editElements.saveAction.click();
@@ -99,7 +106,7 @@ describe('when the show section is clicked', () => {
     });    
 
     describe('and the hit die quantity is changed, and the save button is clicked', () => {
-      it('should display an error if the hit die quantity field is blank', () => {
+      it('should display an error if the hit die quantity field is not a valid number', () => {
         inputValue(hitPointsSection.editElements.hitDieQuantity, NaN);
 
         expect(HitPoints.useHitDie).toBe(true);
@@ -116,7 +123,7 @@ describe('when the show section is clicked', () => {
           'Hit Die Quantity must be a valid number.');
       });
 
-      it('should display only one error if the hit points and hit die quantity fields are both blank', () => {
+      it('should display only one error if the hit points and hit die quantity fields are both not valid numbers', () => {
         inputValue(hitPointsSection.editElements.hitPoints, NaN);
         inputValue(hitPointsSection.editElements.hitDieQuantity, NaN);
 
@@ -189,7 +196,7 @@ describe('when the show section is clicked', () => {
         expect(hitPointsSection.showElements.text).toHaveTextContent('142');
       });
 
-      it('should display an error if the hit points field is blank', () => {
+      it('should display an error if the hit points field is not a valid number', () => {
         inputValue(hitPointsSection.editElements.hitPoints, NaN);
 
         expect(HitPoints.useHitDie).toBe(false);
