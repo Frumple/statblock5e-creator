@@ -15,11 +15,13 @@ export default class ChallengeRatingSection extends sectionModule.Section {
           ChallengeRatingShowElements,
           ChallengeRatingEditElements);
 
-    this.editElements.challengeRating.addEventListener('input', () => {
-      let challengeRating = parseFloat(this.editElements.challengeRating.value);
-      let experiencePoints = ExperiencePointsByChallengeRating[challengeRating];
-      this.editElements.experiencePoints.value = experiencePoints;
-    });
+    this.editElements.challengeRating.addEventListener('input', this.onInputChallengeRating.bind(this));
+  }
+
+  onInputChallengeRating() {
+    const challengeRating = parseFloat(this.editElements.challengeRating.value);
+    const experiencePoints = ExperiencePointsByChallengeRating[challengeRating];
+    this.editElements.experiencePoints.value = experiencePoints;
   }
 
   checkForErrors() {
@@ -27,12 +29,12 @@ export default class ChallengeRatingSection extends sectionModule.Section {
   }
 
   updateShowSection() {
-    let challengeRatingElement = this.editElements.challengeRating;
+    const challengeRatingElement = this.editElements.challengeRating;
 
-    let challengeRating = challengeRatingElement.options[challengeRatingElement.selectedIndex].text;
-    let experiencePoints = this.editElements.experiencePoints.value;
+    const challengeRating = challengeRatingElement.options[challengeRatingElement.selectedIndex].text;
+    const experiencePoints = this.editElements.experiencePoints.value;
 
-    let text = `${challengeRating} (${experiencePoints} XP)`;
+    const text = `${challengeRating} (${experiencePoints} XP)`;
     this.showElements.text.textContent = text;
   }
 }

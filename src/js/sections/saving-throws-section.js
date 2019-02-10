@@ -31,8 +31,7 @@ export default class SavingThrowsSection extends sectionModule.Section {
     }
   }
 
-  initializeSavingThrowElements(key) {
-    const labelDisabledClass = 'section__label_disabled';
+  initializeSavingThrowElements(key) {    
     let elements = this.editElements.savingThrow[key];
 
     elements.enable.enableElementsWhenChecked(
@@ -40,35 +39,41 @@ export default class SavingThrowsSection extends sectionModule.Section {
       elements.override
     );
 
-    elements.enable.addEventListener('input', () => {
-      SavingThrows.savingThrows[key].isEnabled = elements.enable.checked;
+    elements.enable.addEventListener('input', this.onInputSavingThrowEnabled.bind(this, key));
+    elements.proficient.addEventListener('input', this.onInputSavingThrowProficiency.bind(this, key));
+    elements.override.addEventListener('input', this.onInputSavingThrowOverride.bind(this, key));
+  }
 
-      if (elements.enable.checked) {
-        elements.label.classList.remove(labelDisabledClass);
-        elements.modifier.classList.remove(labelDisabledClass);
+  onInputSavingThrowEnabled(key) {
+    const labelDisabledClass = 'section__label_disabled';
+    let elements = this.editElements.savingThrow[key];
+    SavingThrows.savingThrows[key].isEnabled = elements.enable.checked;
 
-        inputValueAndTriggerEvent(elements.proficient, true);
-      } else {
-        elements.label.classList.add(labelDisabledClass);
-        elements.modifier.classList.add(labelDisabledClass);
+    if (elements.enable.checked) {
+      elements.label.classList.remove(labelDisabledClass);
+      elements.modifier.classList.remove(labelDisabledClass);
 
-        inputValueAndTriggerEvent(elements.proficient, false);
-        inputValueAndTriggerEvent(elements.override, '');
-      }
-    });
+      inputValueAndTriggerEvent(elements.proficient, true);
+    } else {
+      elements.label.classList.add(labelDisabledClass);
+      elements.modifier.classList.add(labelDisabledClass);
 
-    elements.proficient.addEventListener('input', () => {
-      SavingThrows.savingThrows[key].isProficient = elements.proficient.checked;
+      inputValueAndTriggerEvent(elements.proficient, false);
+      inputValueAndTriggerEvent(elements.override, '');
+    }
+  }
 
-      this.updateEditSectionModifier(key);
-    });
+  onInputSavingThrowProficiency(key) {
+    SavingThrows.savingThrows[key].isProficient = this.editElements.savingThrow[key].proficient.checked;
 
-    elements.override.addEventListener('input', () => {
-      let overrideValue = parseInt(elements.override.value, 10);
-      SavingThrows.savingThrows[key].override = overrideValue;
+    this.updateEditSectionModifier(key);
+  }
 
-      this.updateEditSectionModifier(key);
-    });
+  onInputSavingThrowOverride(key) {
+    let overrideValue = parseInt(this.editElements.savingThrow[key].override.value, 10);
+    SavingThrows.savingThrows[key].override = overrideValue;
+
+    this.updateEditSectionModifier(key);
   }
 
   updateModifiers(abilityName = null) {

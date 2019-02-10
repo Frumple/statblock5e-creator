@@ -18,13 +18,13 @@ export default class AbilityScoresSection extends sectionModule.Section {
           AbilityScoresEditElements);
 
     for (const key of Abilities.keys) {
-      this.editElements.score[key].addEventListener('input', this.onAbilityScoreChange.bind(this, key));
+      this.editElements.score[key].addEventListener('input', this.onInputAbilityScore.bind(this, key));
     }
 
-    this.editElements.proficiencyBonus.addEventListener('input', this.onProficiencyBonusChange.bind(this));
+    this.editElements.proficiencyBonus.addEventListener('input', this.onInputProficiencyBonus.bind(this));
   }
 
-  onAbilityScoreChange(key) {
+  onInputAbilityScore(key) {
     let scoreElement = this.editElements.score[key];
     let score = parseInt(scoreElement.value, 10);
     
@@ -53,7 +53,7 @@ export default class AbilityScoresSection extends sectionModule.Section {
     modifierElement.textContent = formattedModifier;
   }  
 
-  onProficiencyBonusChange() {
+  onInputProficiencyBonus() {
     let proficiencyBonusElement = this.editElements.proficiencyBonus;
     let bonus = parseInt(proficiencyBonusElement.value, 10);
 

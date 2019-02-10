@@ -30,8 +30,7 @@ export default class SkillsSection extends sectionModule.Section {
     }
   }
 
-  initializeSkillElements(key) {
-    const labelDisabledClass = 'section__label_disabled';
+  initializeSkillElements(key) {    
     let elements = this.editElements.skill[key];
 
     elements.enable.enableElementsWhenChecked(
@@ -39,39 +38,45 @@ export default class SkillsSection extends sectionModule.Section {
       elements.override
     );
 
-    elements.enable.addEventListener('input', () => {
-      Skills.skills[key].isEnabled = elements.enable.checked;
+    elements.enable.addEventListener('input', this.onInputSkillEnabled.bind(this, key));
+    elements.proficient.addEventListener('input', this.onInputSkillProficiency.bind(this, key));
+    elements.override.addEventListener('input', this.onInputSkillOverride.bind(this, key));
+  }
 
-      if (elements.enable.checked) {
-        elements.label.classList.remove(labelDisabledClass);
-        elements.modifier.classList.remove(labelDisabledClass);
+  onInputSkillEnabled(key) {
+    const labelDisabledClass = 'section__label_disabled';
+    let elements = this.editElements.skill[key];
+    Skills.skills[key].isEnabled = elements.enable.checked;
 
-        inputValueAndTriggerEvent(elements.proficient, true);
-      } else {
-        elements.label.classList.add(labelDisabledClass);
-        elements.modifier.classList.add(labelDisabledClass);
+    if (elements.enable.checked) {
+      elements.label.classList.remove(labelDisabledClass);
+      elements.modifier.classList.remove(labelDisabledClass);
 
-        inputValueAndTriggerEvent(elements.proficient, false);
-        inputValueAndTriggerEvent(elements.override, '');
-      }
-      
-      this.dispatchSkillChangedEvent(key);
-    });
+      inputValueAndTriggerEvent(elements.proficient, true);
+    } else {
+      elements.label.classList.add(labelDisabledClass);
+      elements.modifier.classList.add(labelDisabledClass);
 
-    elements.proficient.addEventListener('input', () => {
-      Skills.skills[key].isProficient = elements.proficient.checked;
+      inputValueAndTriggerEvent(elements.proficient, false);
+      inputValueAndTriggerEvent(elements.override, '');
+    }
+    
+    this.dispatchSkillChangedEvent(key);
+  }
 
-      this.updateEditSectionModifier(key);
-      this.dispatchSkillChangedEvent(key);
-    });
+  onInputSkillProficiency(key) {
+    Skills.skills[key].isProficient = this.editElements.skill[key].proficient.checked;
 
-    elements.override.addEventListener('input', () => {
-      let overrideValue = parseInt(elements.override.value, 10);
-      Skills.skills[key].override = overrideValue;
+    this.updateEditSectionModifier(key);
+    this.dispatchSkillChangedEvent(key);
+  }
 
-      this.updateEditSectionModifier(key);
-      this.dispatchSkillChangedEvent(key);
-    });
+  onInputSkillOverride(key) {
+    let overrideValue = parseInt(this.editElements.skill[key].override.value, 10);
+    Skills.skills[key].override = overrideValue;
+
+    this.updateEditSectionModifier(key);
+    this.dispatchSkillChangedEvent(key);
   }
 
   dispatchSkillChangedEvent(skillName) {

@@ -26,26 +26,28 @@ export class EnableDisableElementsCheckboxInternal {
     this.enabledElements = [];
     this.disabledElements = [];
 
-    checkboxElement.addEventListener('input', () => {
-      let elementsToEnable, elementsToDisable;       
-      if (checkboxElement.checked) {
-        elementsToEnable = this.enabledElements;
-        elementsToDisable = this.disabledElements;        
-      } else {
-        elementsToEnable = this.disabledElements;
-        elementsToDisable = this.enabledElements;
-      }
+    checkboxElement.addEventListener('input', this.onInputCheckbox.bind(this));
+  }
 
-      for (const [index, element] of elementsToEnable.entries()) {
-        element.removeAttribute('disabled');
-        if (index === 0) {
-          focusAndSelectElement(element);
-        }
+  onInputCheckbox() {
+    let elementsToEnable, elementsToDisable;       
+    if (this.checkboxElement.checked) {
+      elementsToEnable = this.enabledElements;
+      elementsToDisable = this.disabledElements;        
+    } else {
+      elementsToEnable = this.disabledElements;
+      elementsToDisable = this.enabledElements;
+    }
+
+    for (const [index, element] of elementsToEnable.entries()) {
+      element.removeAttribute('disabled');
+      if (index === 0) {
+        focusAndSelectElement(element);
       }
-      for (const element of elementsToDisable) {
-        element.setAttribute('disabled', '');
-      }
-    });
+    }
+    for (const element of elementsToDisable) {
+      element.setAttribute('disabled', '');
+    }
   }
 
   enableElementsWhenChecked(...elements) {
