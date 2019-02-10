@@ -9,3 +9,16 @@ export function focusAndSelectElement(element) {
     element.focus();
   }
 }
+
+export function inputValueAndTriggerEvent(element, value) {
+  let tagName = element.tagName;
+  let type = element.getAttribute('type');
+
+  if (tagName === 'INPUT' && type === 'checkbox') {
+    element.checked = value;
+  } else {
+    element.value = value;
+  }
+
+  element.dispatchEvent(new Event('input'));
+}

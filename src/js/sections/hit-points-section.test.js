@@ -3,8 +3,8 @@ import { EnableDisableElementsCheckboxInternal } from '/src/js/extensions/enable
 import ErrorMessages from '/src/js/elements/error-messages.js';
 jest.mock('/src/js/elements/error-messages.js');
 
-import { formatModifierOperator } from '/src/js/helpers/string-formatter.js';
-import { formatModifierNumber } from '/src/js/helpers/string-formatter.js';
+import { inputValueAndTriggerEvent } from '/src/js/helpers/element-helpers.js';
+import { formatModifierOperator, formatModifierNumber } from '/src/js/helpers/string-formatter.js';
 
 import Abilities from '/src/js/stats/abilities.js';
 import HitPoints from '/src/js/stats/hit-points.js';
@@ -78,8 +78,8 @@ describe('when the show section is clicked', () => {
         `
         ('$description: {hitDieQuantity="$hitDieQuantity", hitDieSize="$hitDieSize", constitutionScore="$constitutionScore"} => {expectedConstitutionHitPoints="$expectedConstitutionHitPoints", expectedHitPoints="$expectedHitPoints", expectedText="$expectedText"}',
         ({hitDieQuantity, hitDieSize, constitutionScore, expectedConstitutionHitPoints, expectedHitPoints, expectedText}) => {
-          inputValue(hitPointsSection.editElements.hitDieQuantity, hitDieQuantity);
-          inputValue(hitPointsSection.editElements.hitDieSize, hitDieSize);
+          inputValueAndTriggerEvent(hitPointsSection.editElements.hitDieQuantity, hitDieQuantity);
+          inputValueAndTriggerEvent(hitPointsSection.editElements.hitDieSize, hitDieSize);
 
           Abilities.abilities['constitution'].score = constitutionScore;
           hitPointsSection.updateHitPoints();
@@ -106,8 +106,8 @@ describe('when the show section is clicked', () => {
     });    
 
     describe('and the hit die quantity is changed, and the save button is clicked', () => {
-      it('should display an error if the hit die quantity field is not a valid number', () => {
-        inputValue(hitPointsSection.editElements.hitDieQuantity, NaN);
+      it('should display an error if the hit die quantity field is not a valid number, and the hit die quantity should not be saved', () => {
+        inputValueAndTriggerEvent(hitPointsSection.editElements.hitDieQuantity, NaN);
 
         expect(HitPoints.useHitDie).toBe(true);
         expect(HitPoints.hitDieQuantity).toBe(1);
@@ -123,9 +123,9 @@ describe('when the show section is clicked', () => {
           'Hit Die Quantity must be a valid number.');
       });
 
-      it('should display only one error if the hit points and hit die quantity fields are both not valid numbers', () => {
-        inputValue(hitPointsSection.editElements.hitPoints, NaN);
-        inputValue(hitPointsSection.editElements.hitDieQuantity, NaN);
+      it('should display only one error if the hit points and hit die quantity fields are both not valid numbers, and neither should be saved', () => {
+        inputValueAndTriggerEvent(hitPointsSection.editElements.hitPoints, NaN);
+        inputValueAndTriggerEvent(hitPointsSection.editElements.hitDieQuantity, NaN);
 
         expect(HitPoints.useHitDie).toBe(true);
         expect(HitPoints.hitDieQuantity).toBe(1);
@@ -144,8 +144,8 @@ describe('when the show section is clicked', () => {
 
     describe('and the "Calculate using Hit Die" checkbox is unchecked, the hit points field is changed, then the checkbox is checked again', () => {
       it('should reset the hit points field to the value calculated from hit die', () => {
-        inputValue(hitPointsSection.editElements.hitDieQuantity, 10);
-        inputValue(hitPointsSection.editElements.hitDieSize, 12);
+        inputValueAndTriggerEvent(hitPointsSection.editElements.hitDieQuantity, 10);
+        inputValueAndTriggerEvent(hitPointsSection.editElements.hitDieSize, 12);
         Abilities.abilities['constitution'].score = 19;
         hitPointsSection.updateHitPoints();
 
@@ -157,7 +157,7 @@ describe('when the show section is clicked', () => {
 
         hitPointsSection.editElements.useHitDie.click();
 
-        inputValue(hitPointsSection.editElements.hitPoints, 89);
+        inputValueAndTriggerEvent(hitPointsSection.editElements.hitPoints, 89);
 
         hitPointsSection.editElements.useHitDie.click();
 
@@ -182,7 +182,7 @@ describe('when the show section is clicked', () => {
 
     describe('and the hit points field is changed and the save button is clicked', () => {
       it('should switch to show mode and save the hit points', () => {
-        inputValue(hitPointsSection.editElements.hitPoints, 142);
+        inputValueAndTriggerEvent(hitPointsSection.editElements.hitPoints, 142);
 
         expect(HitPoints.useHitDie).toBe(false);
         expect(HitPoints.hitDieQuantity).toBe(1);
@@ -196,8 +196,8 @@ describe('when the show section is clicked', () => {
         expect(hitPointsSection.showElements.text).toHaveTextContent('142');
       });
 
-      it('should display an error if the hit points field is not a valid number', () => {
-        inputValue(hitPointsSection.editElements.hitPoints, NaN);
+      it('should display an error if the hit points field is not a valid number, and the hit points should not be saved', () => {
+        inputValueAndTriggerEvent(hitPointsSection.editElements.hitPoints, NaN);
 
         expect(HitPoints.useHitDie).toBe(false);
         expect(HitPoints.hitDieQuantity).toBe(1);
@@ -213,9 +213,9 @@ describe('when the show section is clicked', () => {
           'Hit Points must be a valid number.');
       });
 
-      it('should display only one error if the hit points and hit die quantity fields are both blank', () => {
-        inputValue(hitPointsSection.editElements.hitPoints, NaN);
-        inputValue(hitPointsSection.editElements.hitDieQuantity, NaN);
+      it('should display only one error if the hit points and hit die quantity fields are both not valid numbers, and neither should be saved', () => {
+        inputValueAndTriggerEvent(hitPointsSection.editElements.hitPoints, NaN);
+        inputValueAndTriggerEvent(hitPointsSection.editElements.hitDieQuantity, NaN);
 
         expect(HitPoints.useHitDie).toBe(false);
         expect(HitPoints.hitDieQuantity).toBe(1);

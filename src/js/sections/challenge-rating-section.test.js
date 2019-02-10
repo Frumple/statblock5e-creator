@@ -2,6 +2,8 @@ import ChallengeRatingSection from '/src/js/sections/challenge-rating-section.js
 import ErrorMessages from '/src/js/elements/error-messages.js';
 jest.mock('/src/js/elements/error-messages.js');
 
+import { inputValueAndTriggerEvent } from '/src/js/helpers/element-helpers.js';
+
 let challengeRatingSection;
 
 beforeAll(async() => {
@@ -29,7 +31,7 @@ describe('when the show section is clicked', () => {
 
   describe('and the challenge rating field is changed, and the save button is clicked', () => {
     it('should automatically change the experience points to the corresponding amount, and save the fields', () => {
-      inputValue(challengeRatingSection.editElements.challengeRating, 8);
+      inputValueAndTriggerEvent(challengeRatingSection.editElements.challengeRating, 8);
 
       expect(challengeRatingSection.editElements.experiencePoints.value).toBe('3900');
 
@@ -41,7 +43,7 @@ describe('when the show section is clicked', () => {
 
   describe('and the experience points field is changed, and the save button is clicked', () => {
     it('should save the fields', () => {
-      inputValue(challengeRatingSection.editElements.experiencePoints, 234);
+      inputValueAndTriggerEvent(challengeRatingSection.editElements.experiencePoints, 234);
 
       challengeRatingSection.editElements.saveAction.click();
 
@@ -49,7 +51,7 @@ describe('when the show section is clicked', () => {
     });
 
     it('should display an error if the custom text field is not a valid number', () => {
-      inputValue(challengeRatingSection.editElements.experiencePoints, NaN);
+      inputValueAndTriggerEvent(challengeRatingSection.editElements.experiencePoints, NaN);
 
       challengeRatingSection.editElements.saveAction.click();
 
@@ -62,8 +64,8 @@ describe('when the show section is clicked', () => {
 
   describe('and the challenge rating field is changed followed by the experience points field, and the save button is clicked', () => {
     it('should save the fields', () => {
-      inputValue(challengeRatingSection.editElements.challengeRating, 3);
-      inputValue(challengeRatingSection.editElements.experiencePoints, 888);
+      inputValueAndTriggerEvent(challengeRatingSection.editElements.challengeRating, 3);
+      inputValueAndTriggerEvent(challengeRatingSection.editElements.experiencePoints, 888);
 
       challengeRatingSection.editElements.saveAction.click();
 
@@ -73,8 +75,8 @@ describe('when the show section is clicked', () => {
 
   describe('and the experience points field is changed followed by the challenge rating field, and the save button is clicked', () => {
     it('should automatically change the experience points to the corresponding amount, and save the fields', () => {
-      inputValue(challengeRatingSection.editElements.experiencePoints, 1586);
-      inputValue(challengeRatingSection.editElements.challengeRating, 20);
+      inputValueAndTriggerEvent(challengeRatingSection.editElements.experiencePoints, 1586);
+      inputValueAndTriggerEvent(challengeRatingSection.editElements.challengeRating, 20);
 
       expect(challengeRatingSection.editElements.experiencePoints.value).toBe('25000');
 

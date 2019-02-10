@@ -1,7 +1,6 @@
 import * as sectionModule from '/src/js/base/section.js';
 import HitPoints from '/src/js/stats/hit-points.js';
-import { formatModifierOperator } from '/src/js/helpers/string-formatter.js';
-import { formatModifierNumber } from '/src/js/helpers/string-formatter.js';
+import { formatModifierOperator, formatModifierNumber } from '/src/js/helpers/string-formatter.js';
 import validateIntegerInput from '/src/js/helpers/integer-input-validator.js';
 
 export default class HitPointsSection extends sectionModule.Section {

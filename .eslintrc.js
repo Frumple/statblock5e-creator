@@ -6,9 +6,6 @@ module.exports = {
         "jest" : true
     },
     "extends": "eslint:recommended",
-    "globals": {
-      "inputValue": "readable"
-    },
     "parserOptions": {
         "ecmaVersion": 2018,
         "sourceType": "module"

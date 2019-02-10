@@ -3,6 +3,8 @@ import { EnableDisableElementsCheckboxInternal } from '/src/js/extensions/enable
 import ErrorMessages from '/src/js/elements/error-messages.js';
 jest.mock('/src/js/elements/error-messages.js');
 
+import { inputValueAndTriggerEvent } from '/src/js/helpers/element-helpers.js';
+
 import Abilities from '/src/js/stats/abilities.js';
 import ProficiencyBonus from '/src/js/stats/proficiency-bonus.js';
 import Skills from '/src/js/stats/skills.js';
@@ -56,7 +58,7 @@ describe('when the show section is clicked', () => {
     describe('and the custom text field is populated and the save button is clicked', () => {
       it('should switch to show mode and save the custom text', () => {
         let customText = 'darkvision 120 ft. (penetrates magical darkness), passive Perception 13';
-        inputValue(sensesSection.editElements.customText, customText);
+        inputValueAndTriggerEvent(sensesSection.editElements.customText, customText);
 
         sensesSection.editElements.saveAction.click();
 
@@ -65,7 +67,7 @@ describe('when the show section is clicked', () => {
       });
 
       it('should display an error if the custom text field is blank', () => {
-        inputValue(sensesSection.editElements.customText, '');
+        inputValueAndTriggerEvent(sensesSection.editElements.customText, '');
 
         sensesSection.editElements.saveAction.click();
 
@@ -119,10 +121,10 @@ describe('when the show section is clicked', () => {
         `
         ('$description: {blindsight="$blindsight", darkvision="$darkvision", tremorsense="$tremorsense", truesight="$truesight"} => "$expectedText"',
         ({blindsight, darkvision, tremorsense, truesight, expectedText}) => {
-          inputValue(sensesSection.editElements.blindsight, blindsight);
-          inputValue(sensesSection.editElements.darkvision, darkvision);
-          inputValue(sensesSection.editElements.tremorsense, tremorsense);
-          inputValue(sensesSection.editElements.truesight, truesight);
+          inputValueAndTriggerEvent(sensesSection.editElements.blindsight, blindsight);
+          inputValueAndTriggerEvent(sensesSection.editElements.darkvision, darkvision);
+          inputValueAndTriggerEvent(sensesSection.editElements.tremorsense, tremorsense);
+          inputValueAndTriggerEvent(sensesSection.editElements.truesight, truesight);
 
           sensesSection.editElements.saveAction.click();
 
@@ -142,21 +144,18 @@ describe('should calculate the passive perception based on the following conditi
     description                                           | wisdomScore | proficiencyBonus | perceptionEnabled | perceptionProficient | perceptionOverride | expectedPassivePerception
     ${'perception disabled, not proficient, no override'} | ${10}       | ${2}             | ${false}          | ${false}             | ${NaN}             | ${10}
     ${'perception enabled, not proficient, no override'}  | ${10}       | ${2}             | ${true}           | ${false}             | ${NaN}             | ${10}
-    ${'perception disabled, proficient, no override'}     | ${10}       | ${2}             | ${false}          | ${true}              | ${NaN}             | ${10}
     ${'perception enabled, proficient, no override'}      | ${10}       | ${2}             | ${true}           | ${true}              | ${NaN}             | ${12}
-    ${'perception disabled, not proficient, override'}    | ${10}       | ${2}             | ${false}          | ${false}             | ${6}               | ${10}
     ${'perception enabled, not proficient, override'}     | ${10}       | ${2}             | ${true}           | ${false}             | ${7}               | ${17}
-    ${'perception disabled, proficient, override'}        | ${10}       | ${2}             | ${false}          | ${true}              | ${8}               | ${10}
-    ${'perception enabled, proficient, override'}         | ${10}       | ${2}             | ${true}           | ${true}              | ${9}               | ${19}
-    ${'negative wis and negative prof bonus'}             | ${3}        | ${-1}            | ${true}           | ${true}              | ${NaN}             | ${5}
-    ${'negative wis and zero prof bonus'}                 | ${3}        | ${0}             | ${true}           | ${true}              | ${NaN}             | ${6}
-    ${'negative wis and positive prof bonus'}             | ${3}        | ${3}             | ${true}           | ${true}              | ${NaN}             | ${9}
-    ${'zero wis and negative prof bonus'}                 | ${10}       | ${-1}            | ${true}           | ${true}              | ${NaN}             | ${9}
-    ${'zero wis and zero prof bonus'}                     | ${10}       | ${0}             | ${true}           | ${true}              | ${NaN}             | ${10}
-    ${'zero wis and positive prof bonus'}                 | ${10}       | ${3}             | ${true}           | ${true}              | ${NaN}             | ${13}
-    ${'positive wis and negative prof bonus'}             | ${14}       | ${-1}            | ${true}           | ${true}              | ${NaN}             | ${11}
-    ${'positive wis and zero prof bonus'}                 | ${14}       | ${0}             | ${true}           | ${true}              | ${NaN}             | ${12}
-    ${'positive wis and positive prof bonus'}             | ${14}       | ${3}             | ${true}           | ${true}              | ${NaN}             | ${15}
+    ${'perception enabled, proficient, override'}         | ${10}       | ${2}             | ${true}           | ${true}              | ${8}               | ${18}
+    ${'- wisdom score and - proficiency bonus'}           | ${3}        | ${-1}            | ${true}           | ${true}              | ${NaN}             | ${5}
+    ${'- wisdom score and 0 proficiency bonus'}           | ${3}        | ${0}             | ${true}           | ${true}              | ${NaN}             | ${6}
+    ${'- wisdom score and + proficiency bonus'}           | ${3}        | ${3}             | ${true}           | ${true}              | ${NaN}             | ${9}
+    ${'0 wisdom score and - proficiency bonus'}           | ${10}       | ${-1}            | ${true}           | ${true}              | ${NaN}             | ${9}
+    ${'0 wisdom score and 0 proficiency bonus'}           | ${10}       | ${0}             | ${true}           | ${true}              | ${NaN}             | ${10}
+    ${'0 wisdom score and + proficiency bonus'}           | ${10}       | ${3}             | ${true}           | ${true}              | ${NaN}             | ${13}
+    ${'+ wisdom score and - proficiency bonus'}           | ${14}       | ${-1}            | ${true}           | ${true}              | ${NaN}             | ${11}
+    ${'+ wisdom score and 0 proficiency bonus'}           | ${14}       | ${0}             | ${true}           | ${true}              | ${NaN}             | ${12}
+    ${'+ wisdom score and + proficiency bonus'}           | ${14}       | ${3}             | ${true}           | ${true}              | ${NaN}             | ${15}
   `
   ('$description: {wisdomScore="$wisdomScore", proficiencyBonus="$proficiencyBonus", perceptionEnabled="$perceptionEnabled", perceptionProficient="$perceptionProficient", perceptionOverride="$perceptionOverride"} => $expectedPassivePerception',
   ({wisdomScore, proficiencyBonus, perceptionEnabled, perceptionProficient, perceptionOverride, expectedPassivePerception}) => {

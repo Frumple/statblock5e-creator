@@ -13,6 +13,12 @@ class SavingThrows {
     };
   }
 
+  reset() {
+    for(const savingThrow of Object.values(this.savingThrows)) {
+      savingThrow.reset();
+    }
+  }
+
   get keys() {
     return Object.keys(this.savingThrows);
   }
@@ -25,8 +31,12 @@ class SavingThrows {
 class SavingThrow {
   constructor(abilityName) {
     this.abilityName = abilityName;
+    this.reset();
+  }
+
+  reset() {
     this.isEnabled = false;
-    this.isProficient = true;
+    this.isProficient = false;
     this.override = NaN;
   }
 

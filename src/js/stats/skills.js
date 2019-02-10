@@ -50,7 +50,7 @@ class Skill {
 
   reset() {
     this.isEnabled = false;
-    this.isProficient = true;
+    this.isProficient = false;
     this.override = NaN;
   }
 

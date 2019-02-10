@@ -1,6 +1,7 @@
 import * as sectionModule from '/src/js/base/section.js';
 import Abilities from '/src/js/stats/abilities.js';
 import SavingThrows from '/src/js/stats/saving-throws.js';
+import { inputValueAndTriggerEvent } from '/src/js/helpers/element-helpers.js';
 import { capitalizeFirstLetter, formatModifier } from '/src/js/helpers/string-formatter.js';
 
 export default class SavingThrowsSection extends sectionModule.Section {
@@ -15,48 +16,55 @@ export default class SavingThrowsSection extends sectionModule.Section {
     super(SavingThrowsSection.templatePaths,
           SavingThrowsShowElements,
           SavingThrowsEditElements);
-
-    for (const key of Abilities.keys) {
-      this.initializeSavingThrowElements(key);
-    }
-
+          
     this.mode = 'hidden';
     this.empty = true;
   }
 
+  connectedCallback() {
+    if (this.isConnected && ! this.isInitialized) {
+      for (const key of Abilities.keys) {
+        this.initializeSavingThrowElements(key);
+      }
+
+      this.isInitialized = true;
+    }
+  }
+
   initializeSavingThrowElements(key) {
     const labelDisabledClass = 'section__label_disabled';
-    let enableElement = this.editElements.enable[key];
-    let labelElement = this.editElements.label[key];
-    let modifierElement = this.editElements.savingThrowModifier[key];
-    let isProficientElement = this.editElements.proficient[key];
-    let overrideElement = this.editElements.override[key];
+    let elements = this.editElements.savingThrow[key];
 
-    enableElement.enableElementsWhenChecked(
-      isProficientElement,
-      overrideElement
+    elements.enable.enableElementsWhenChecked(
+      elements.proficient,
+      elements.override
     );
 
-    enableElement.addEventListener('input', () => {
-      SavingThrows.savingThrows[key].isEnabled = enableElement.checked;
+    elements.enable.addEventListener('input', () => {
+      SavingThrows.savingThrows[key].isEnabled = elements.enable.checked;
 
-      if (enableElement.checked) {
-        labelElement.classList.remove(labelDisabledClass);
-        modifierElement.classList.remove(labelDisabledClass);
+      if (elements.enable.checked) {
+        elements.label.classList.remove(labelDisabledClass);
+        elements.modifier.classList.remove(labelDisabledClass);
+
+        inputValueAndTriggerEvent(elements.proficient, true);
       } else {
-        labelElement.classList.add(labelDisabledClass);
-        modifierElement.classList.add(labelDisabledClass);
+        elements.label.classList.add(labelDisabledClass);
+        elements.modifier.classList.add(labelDisabledClass);
+
+        inputValueAndTriggerEvent(elements.proficient, false);
+        inputValueAndTriggerEvent(elements.override, '');
       }
     });
 
-    isProficientElement.addEventListener('input', () => {
-      SavingThrows.savingThrows[key].isProficient = isProficientElement.checked;
+    elements.proficient.addEventListener('input', () => {
+      SavingThrows.savingThrows[key].isProficient = elements.proficient.checked;
 
       this.updateEditSectionModifier(key);
     });
 
-    overrideElement.addEventListener('input', () => {
-      let overrideValue = parseInt(overrideElement.value, 10);
+    elements.override.addEventListener('input', () => {
+      let overrideValue = parseInt(elements.override.value, 10);
       SavingThrows.savingThrows[key].override = overrideValue;
 
       this.updateEditSectionModifier(key);
@@ -76,7 +84,7 @@ export default class SavingThrowsSection extends sectionModule.Section {
   updateEditSectionModifier(key) {    
     let savingThrowModifier = SavingThrows.savingThrows[key].calculateModifier(false);
     let formattedSavingThrowModifier = formatModifier(savingThrowModifier);
-    this.editElements.savingThrowModifier[key].textContent = formattedSavingThrowModifier; 
+    this.editElements.savingThrow[key].modifier.textContent = formattedSavingThrowModifier; 
   }
 
   checkForErrors() {
@@ -123,22 +131,20 @@ class SavingThrowsEditElements extends sectionModule.EditElements {
   constructor(shadowRoot) {
     super(shadowRoot);
 
-    this.enable = {};
-    this.label = {};
-    this.savingThrowModifier = {};
-    this.proficient = {};
-    this.override = {};
+    this.savingThrow = {};
 
     for (const key of Abilities.keys) {
-      this.enable[key] = shadowRoot.getElementById(`${key}-enable`);
-      this.label[key] = shadowRoot.getElementById(`${key}-label`);
-      this.savingThrowModifier[key] = shadowRoot.getElementById(`${key}-saving-throw-modifier`);
-      this.proficient[key] = shadowRoot.getElementById(`${key}-proficient`);
-      this.override[key] = shadowRoot.getElementById(`${key}-override`);
+      this.savingThrow[key] = {
+        enable: shadowRoot.getElementById(`${key}-enable`),
+        label: shadowRoot.getElementById(`${key}-label`),
+        modifier: shadowRoot.getElementById(`${key}-saving-throw-modifier`),
+        proficient: shadowRoot.getElementById(`${key}-proficient`),
+        override: shadowRoot.getElementById(`${key}-override`)
+      };
     }
   }
 
   get initiallySelectedElement() {
-    return this.enable.strength;
+    return this.savingThrow['strength'].enable;
   }
 }

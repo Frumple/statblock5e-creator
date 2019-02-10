@@ -1,5 +1,6 @@
 import * as sectionModule from '/src/js/base/section.js';
 import Skills from '/src/js/stats/skills.js';
+import { inputValueAndTriggerEvent } from '/src/js/helpers/element-helpers.js';
 import { formatModifier } from '/src/js/helpers/string-formatter.js';
 
 export default class SkillsSection extends sectionModule.Section {
@@ -15,50 +16,57 @@ export default class SkillsSection extends sectionModule.Section {
           SkillsShowElements,
           SkillsEditElements);
 
-    for (const key of Skills.keys) {
-      this.initializeSkillElements(key);
-    }
-
     this.mode = 'hidden';
     this.empty = true;
   }
 
+  connectedCallback() {
+    if (this.isConnected && ! this.isInitialized) {
+      for (const key of Skills.keys) {
+        this.initializeSkillElements(key);
+      }
+
+      this.isInitialized = true;
+    }
+  }
+
   initializeSkillElements(key) {
     const labelDisabledClass = 'section__label_disabled';
-    let enableElement = this.editElements.enable[key];
-    let labelElement = this.editElements.label[key];
-    let modifierElement = this.editElements.skillModifier[key];
-    let isProficientElement = this.editElements.proficient[key];
-    let overrideElement = this.editElements.override[key];
+    let elements = this.editElements.skill[key];
 
-    enableElement.enableElementsWhenChecked(
-      isProficientElement,
-      overrideElement
+    elements.enable.enableElementsWhenChecked(
+      elements.proficient,
+      elements.override
     );
 
-    enableElement.addEventListener('input', () => {
-      Skills.skills[key].isEnabled = enableElement.checked;
+    elements.enable.addEventListener('input', () => {
+      Skills.skills[key].isEnabled = elements.enable.checked;
 
-      if (enableElement.checked) {
-        labelElement.classList.remove(labelDisabledClass);
-        modifierElement.classList.remove(labelDisabledClass);
+      if (elements.enable.checked) {
+        elements.label.classList.remove(labelDisabledClass);
+        elements.modifier.classList.remove(labelDisabledClass);
+
+        inputValueAndTriggerEvent(elements.proficient, true);
       } else {
-        labelElement.classList.add(labelDisabledClass);
-        modifierElement.classList.add(labelDisabledClass);
+        elements.label.classList.add(labelDisabledClass);
+        elements.modifier.classList.add(labelDisabledClass);
+
+        inputValueAndTriggerEvent(elements.proficient, false);
+        inputValueAndTriggerEvent(elements.override, '');
       }
       
       this.dispatchSkillChangedEvent(key);
     });
 
-    isProficientElement.addEventListener('input', () => {
-      Skills.skills[key].isProficient = isProficientElement.checked;
+    elements.proficient.addEventListener('input', () => {
+      Skills.skills[key].isProficient = elements.proficient.checked;
 
       this.updateEditSectionModifier(key);
       this.dispatchSkillChangedEvent(key);
     });
 
-    overrideElement.addEventListener('input', () => {
-      let overrideValue = parseInt(overrideElement.value, 10);
+    elements.override.addEventListener('input', () => {
+      let overrideValue = parseInt(elements.override.value, 10);
       Skills.skills[key].override = overrideValue;
 
       this.updateEditSectionModifier(key);
@@ -90,7 +98,7 @@ export default class SkillsSection extends sectionModule.Section {
   updateEditSectionModifier(key) {
     let skillModifier = Skills.skills[key].calculateModifier(false);
     let formattedSkillModifier = formatModifier(skillModifier);
-    this.editElements.skillModifier[key].textContent = formattedSkillModifier;
+    this.editElements.skill[key].modifier.textContent = formattedSkillModifier;
   }
 
   checkForErrors() {
@@ -102,7 +110,7 @@ export default class SkillsSection extends sectionModule.Section {
 
     for (const [key, value] of Skills.entries) {
       let skill = Skills.skills[key];
-      let isEnabled = this.editElements.enable[key].checked;
+      let isEnabled = skill.isEnabled;
       
       if (isEnabled) {
         let skillModifier = formatModifier(skill.calculateModifier());
@@ -136,22 +144,20 @@ class SkillsEditElements extends sectionModule.EditElements {
   constructor(shadowRoot) {
     super(shadowRoot);
 
-    this.enable = {};
-    this.label = {};
-    this.skillModifier = {};
-    this.proficient = {};
-    this.override = {};
+    this.skill = {};
 
     for (const key of Skills.keys) {
-      this.enable[key] = shadowRoot.getElementById(`${key}-enable`);
-      this.label[key] = shadowRoot.getElementById(`${key}-label`);
-      this.skillModifier[key] = shadowRoot.getElementById(`${key}-skill-modifier`);
-      this.proficient[key] = shadowRoot.getElementById(`${key}-proficient`);
-      this.override[key] = shadowRoot.getElementById(`${key}-override`);
+      this.skill[key] = {
+        enable: shadowRoot.getElementById(`${key}-enable`),
+        label: shadowRoot.getElementById(`${key}-label`),
+        modifier: shadowRoot.getElementById(`${key}-skill-modifier`),
+        proficient: shadowRoot.getElementById(`${key}-proficient`),
+        override: shadowRoot.getElementById(`${key}-override`)
+      };
     }
   }
   
   get initiallySelectedElement() {
-    return this.enable.acrobatics;
+    return this.skill['acrobatics'].enable;
   }
 }

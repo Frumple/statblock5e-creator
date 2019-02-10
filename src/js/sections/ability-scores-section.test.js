@@ -5,7 +5,8 @@ jest.mock('/src/js/elements/error-messages.js');
 import Abilities from '/src/js/stats/abilities.js';
 import ProficiencyBonus from '/src/js/stats/proficiency-bonus.js';
 
-import { formatModifier } from '/src/js/helpers/string-formatter';
+import { inputValueAndTriggerEvent } from '/src/js/helpers/element-helpers.js';
+import { formatModifier } from '/src/js/helpers/string-formatter.js';
 
 let abilityScoresSection;
 
@@ -15,6 +16,7 @@ beforeAll(async() => {
 
 beforeEach(() => {
   Abilities.reset();
+  ProficiencyBonus.reset();
 
   abilityScoresSection = new AbilityScoresSection();
   abilityScoresSection.errorMessages = new ErrorMessages();
@@ -62,7 +64,7 @@ describe('when the show section is clicked', () => {
       `
       ('$description: {abilityName="$abilityName", score="$score"} => $expectedModifier',
       ({abilityName, score, expectedModifier}) => {
-        inputValue(abilityScoresSection.editElements.score[abilityName], score);
+        inputValueAndTriggerEvent(abilityScoresSection.editElements.score[abilityName], score);
 
         let ability = Abilities.abilities[abilityName];
         expect(ability.score).toBe(score);
@@ -90,23 +92,23 @@ describe('when the show section is clicked', () => {
         ${'WIS not a number'} | ${'wisdom'}       | ${'Wisdom Score must be a valid number.'}
         ${'CHA not a number'} | ${'charisma'}     | ${'Charisma Score must be a valid number.'}        
       `
-      ('$description: abilityName="$abilityName" => $expectedErrorMessage',
+      ('$description: $abilityName => $expectedErrorMessage',
       ({abilityName, expectedErrorMessage}) => {
         let ability = Abilities.abilities[abilityName];
         let oldScore = ability.score;
         let oldModifier = ability.modifier;
 
-        inputValue(abilityScoresSection.editElements.score[abilityName], NaN);
+        inputValueAndTriggerEvent(abilityScoresSection.editElements.score[abilityName], NaN);
 
         expect(ability.score).toBe(oldScore);
         expect(ability.modifier).toBe(oldModifier);
 
-        let formattedModifier = `(${formatModifier(oldModifier)})`;
-        expect(abilityScoresSection.editElements.modifier[abilityName]).toHaveTextContent(formattedModifier);
+        let formattedOldModifier = `(${formatModifier(oldModifier)})`;
+        expect(abilityScoresSection.editElements.modifier[abilityName]).toHaveTextContent(formattedOldModifier);
 
         abilityScoresSection.editElements.saveAction.click();
 
-        expect(abilityScoresSection.showElements.modifier[abilityName]).toHaveTextContent(formattedModifier);
+        expect(abilityScoresSection.showElements.modifier[abilityName]).toHaveTextContent(formattedOldModifier);
 
         expect(abilityScoresSection).toBeInMode('edit');
         expect(abilityScoresSection).toHaveSingleError(
@@ -129,7 +131,7 @@ describe('when the show section is clicked', () => {
       `
       ('$description: $proficiencyBonus',
       ({proficiencyBonus}) => {
-        inputValue(abilityScoresSection.editElements.proficiencyBonus, proficiencyBonus);
+        inputValueAndTriggerEvent(abilityScoresSection.editElements.proficiencyBonus, proficiencyBonus);
 
         expect(ProficiencyBonus.value).toBe(proficiencyBonus);
 
@@ -143,13 +145,11 @@ describe('when the show section is clicked', () => {
     it('should display an error if the proficiency bonus is not a valid number, and the proficiency bonus is not saved', () => {
       let oldProficiencyBonus = ProficiencyBonus.value;
 
-      inputValue(abilityScoresSection.editElements.proficiencyBonus, NaN);
+      inputValueAndTriggerEvent(abilityScoresSection.editElements.proficiencyBonus, NaN);
 
       expect(ProficiencyBonus.value).toBe(oldProficiencyBonus);
 
       abilityScoresSection.editElements.saveAction.click();
-
-      expect(ProficiencyBonus.value).toBe(oldProficiencyBonus);
 
       expect(abilityScoresSection).toBeInMode('edit');
       expect(abilityScoresSection).toHaveSingleError(
@@ -177,13 +177,13 @@ describe('when the show section is clicked', () => {
         ${'minimum values'}     | ${1}     | ${1}     | ${1}     | ${1}     | ${1}     | ${1}     | ${-999}          | ${-5}   | ${-5}   | ${-5}   | ${-5}   | ${-5}   | ${-5}
         ${'maximum values'}     | ${999}   | ${999}   | ${999}   | ${999}   | ${999}   | ${999}   | ${999}           | ${494}  | ${494}  | ${494}  | ${494}  | ${494}  | ${494}
       `
-      ('$description: {strScore="$strScore", dexScore="$dexScore", conScore="$conScore", intScore="$intScore", wisScore="$wisScore", chaScore="$chaScore", proficiencyBonus="$proficiencyBonus", strMod="$strMod", dexMod="$dexMod", conMod="$conMod", intMod="$intMod", wisMod="$wisMod", chaMod="$chaMod"',
+      ('$description: {strScore="$strScore", dexScore="$dexScore", conScore="$conScore", intScore="$intScore", wisScore="$wisScore", chaScore="$chaScore", proficiencyBonus="$proficiencyBonus"} => {strMod="$strMod", dexMod="$dexMod", conMod="$conMod", intMod="$intMod", wisMod="$wisMod", chaMod="$chaMod"}',
       ({strScore, dexScore, conScore, intScore, wisScore, chaScore, proficiencyBonus, strMod, dexMod, conMod, intMod, wisMod, chaMod}) => { // eslint-disable-line no-unused-vars
         for (const [key, value] of Abilities.entries) {
           let score = eval(`${value.abbreviation}Score`);
-          inputValue(abilityScoresSection.editElements.score[key], score);
+          inputValueAndTriggerEvent(abilityScoresSection.editElements.score[key], score);
         }
-        inputValue(abilityScoresSection.editElements.proficiencyBonus, proficiencyBonus);
+        inputValueAndTriggerEvent(abilityScoresSection.editElements.proficiencyBonus, proficiencyBonus);
 
         for (const [key, value] of Abilities.entries) {
           let expectedScore = eval(`${value.abbreviation}Score`);

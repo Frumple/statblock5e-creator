@@ -64,11 +64,19 @@ export class EnableDisableElementsCheckboxInternal {
     this.checkboxElement.checked = isChecked;
   }
 
+  addEventListener(type, listener) {
+    this.checkboxElement.addEventListener(type, listener);
+  }
+
+  getAttribute(attributeName) {
+    return this.checkboxElement.getAttribute(attributeName);
+  }
+
   click() {
     this.checkboxElement.click();
   }
 
-  addEventListener(type, listener) {
-    this.checkboxElement.addEventListener(type, listener);
+  focus() {
+    this.checkboxElement.focus();
   }
 }

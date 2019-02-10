@@ -3,6 +3,8 @@ import { EnableDisableElementsCheckboxInternal } from '/src/js/extensions/enable
 import ErrorMessages from '/src/js/elements/error-messages.js';
 jest.mock('/src/js/elements/error-messages.js');
 
+import { inputValueAndTriggerEvent } from '/src/js/helpers/element-helpers.js';
+
 let speedSection;
 
 beforeAll(async() => {
@@ -50,7 +52,7 @@ describe('when the show section is clicked', () => {
     describe('and the custom text field is populated and the save button is clicked', () => {
       it('should switch to show mode and save the custom text', () => {
         let customText = '30 ft. (40ft., climb 30ft. in bear or hybrid form)';
-        inputValue(speedSection.editElements.customText, customText);
+        inputValueAndTriggerEvent(speedSection.editElements.customText, customText);
 
         speedSection.editElements.saveAction.click();
 
@@ -59,7 +61,7 @@ describe('when the show section is clicked', () => {
       });
 
       it('should display an error if the custom text field is blank', () => {
-        inputValue(speedSection.editElements.customText, '');
+        inputValueAndTriggerEvent(speedSection.editElements.customText, '');
 
         speedSection.editElements.saveAction.click();
 
@@ -127,11 +129,11 @@ describe('when the show section is clicked', () => {
         `
         ('$description: {walk="$walk", burrow="$burrow", climb="$climb", fly="$fly", hover="$hover", swim="$swim"} => "$expectedText"', 
         ({walk, burrow, climb, fly, hover, swim, expectedText}) => {
-          inputValue(speedSection.editElements.walk, walk);
-          inputValue(speedSection.editElements.burrow, burrow);
-          inputValue(speedSection.editElements.climb, climb);
-          inputValue(speedSection.editElements.fly, fly);
-          inputValue(speedSection.editElements.swim, swim);
+          inputValueAndTriggerEvent(speedSection.editElements.walk, walk);
+          inputValueAndTriggerEvent(speedSection.editElements.burrow, burrow);
+          inputValueAndTriggerEvent(speedSection.editElements.climb, climb);
+          inputValueAndTriggerEvent(speedSection.editElements.fly, fly);
+          inputValueAndTriggerEvent(speedSection.editElements.swim, swim);
 
           if (hover) {
             speedSection.editElements.hover.click();
