@@ -64,9 +64,9 @@ class FakeCustomAutonomousElement {
   }
 
   dispatchEvent() {
-    // This method does nothing since we are only able to test one custom element at time for now
+    // This method does nothing since we are only able to test the shadow tree of one custom element at a time for now
     return;
-  }
+  }  
 }
 
 let elementClass;

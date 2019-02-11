@@ -1,5 +1,4 @@
 import SensesSection from '/src/js/sections/senses-section.js';
-import { EnableDisableElementsCheckboxInternal } from '/src/js/extensions/enable-disable-elements-checkbox.js';
 import ErrorMessages from '/src/js/elements/error-messages.js';
 jest.mock('/src/js/elements/error-messages.js');
 
@@ -22,7 +21,7 @@ beforeEach(() => {
 
   sensesSection = new SensesSection();
   sensesSection.errorMessages = new ErrorMessages();
-  sensesSection.editElements.useCustom = new EnableDisableElementsCheckboxInternal(sensesSection.editElements.useCustom);
+  sensesSection.initializeCustomEditElements();
   sensesSection.forceConnect();
 });
 

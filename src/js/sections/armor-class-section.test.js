@@ -1,5 +1,4 @@
 import ArmorClassSection from '/src/js/sections/armor-class-section.js';
-import { EnableDisableElementsCheckboxInternal } from '/src/js/extensions/enable-disable-elements-checkbox.js';
 import ErrorMessages from '/src/js/elements/error-messages.js';
 jest.mock('/src/js/elements/error-messages.js');
 
@@ -14,7 +13,7 @@ beforeAll(async() => {
 beforeEach(() => {
   armorClassSection = new ArmorClassSection();
   armorClassSection.errorMessages = new ErrorMessages();
-  armorClassSection.editElements.useCustom = new EnableDisableElementsCheckboxInternal(armorClassSection.editElements.useCustom);
+  armorClassSection.initializeCustomEditElements();
   armorClassSection.forceConnect();
 });
 

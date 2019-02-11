@@ -7,31 +7,22 @@ export default class EnableDisableElementsCheckbox extends CustomBuiltinInputEle
   constructor() {
     super();
 
-    this.internal = new EnableDisableElementsCheckboxInternal(this);
-  }
-
-  enableElementsWhenChecked(...elements) {
-    this.internal.enableElementsWhenChecked(...elements);
-  }
-
-  disableElementsWhenChecked(...elements) {
-    this.internal.disableElementsWhenChecked(...elements);
+    Object.assign(this, EnableDisableElementsCheckboxMixin);
+    this.initializeMixin();
   }
 }
 
-export class EnableDisableElementsCheckboxInternal {
-  constructor(checkboxElement) {
-    this.checkboxElement = checkboxElement;
+export let EnableDisableElementsCheckboxMixin = {
+  enabledElements: [],
+  disabledElements: [],
 
-    this.enabledElements = [];
-    this.disabledElements = [];
-
-    checkboxElement.addEventListener('input', this.onInputCheckbox.bind(this));
-  }
+  initializeMixin() {
+    this.addEventListener('input', this.onInputCheckbox.bind(this));
+  },
 
   onInputCheckbox() {
     let elementsToEnable, elementsToDisable;       
-    if (this.checkboxElement.checked) {
+    if (this.checked) {
       elementsToEnable = this.enabledElements;
       elementsToDisable = this.disabledElements;        
     } else {
@@ -48,37 +39,13 @@ export class EnableDisableElementsCheckboxInternal {
     for (const element of elementsToDisable) {
       element.setAttribute('disabled', '');
     }
-  }
+  },
 
   enableElementsWhenChecked(...elements) {
     this.enabledElements = this.enabledElements.concat(elements);
-  }
+  },
 
   disableElementsWhenChecked(...elements) {
     this.disabledElements = this.disabledElements.concat(elements);
   }
-
-  get checked() {
-    return this.checkboxElement.checked;
-  }
-
-  set checked(isChecked) {
-    this.checkboxElement.checked = isChecked;
-  }
-
-  addEventListener(type, listener) {
-    this.checkboxElement.addEventListener(type, listener);
-  }
-
-  getAttribute(attributeName) {
-    return this.checkboxElement.getAttribute(attributeName);
-  }
-
-  click() {
-    this.checkboxElement.click();
-  }
-
-  focus() {
-    this.checkboxElement.focus();
-  }
-}
+};

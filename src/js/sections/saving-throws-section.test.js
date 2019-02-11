@@ -1,5 +1,4 @@
 import SavingThrowsSection from '/src/js/sections/saving-throws-section.js';
-import { EnableDisableElementsCheckboxInternal } from '/src/js/extensions/enable-disable-elements-checkbox.js';
 import ErrorMessages from '/src/js/elements/error-messages.js';
 jest.mock('/src/js/elements/error-messages.js');
 
@@ -26,9 +25,7 @@ beforeEach(() => {
 
   savingThrowsSection = new SavingThrowsSection();
   savingThrowsSection.errorMessages = new ErrorMessages();
-  for (const key of Abilities.keys) {
-    savingThrowsSection.editElements.savingThrow[key].enable = new EnableDisableElementsCheckboxInternal(savingThrowsSection.editElements.savingThrow[key].enable);
-  }
+  savingThrowsSection.initializeCustomEditElements();
   savingThrowsSection.forceConnect();
 });
 
@@ -43,7 +40,7 @@ describe('when the show section is clicked', () => {
 
   it('should switch to edit mode and focus on the strength enable checkbox', () => {
     expect(savingThrowsSection).toBeInMode('edit');
-    expect(savingThrowsSection.editElements.savingThrow['strength'].enable.checkboxElement).toHaveFocus();
+    expect(savingThrowsSection.editElements.savingThrow['strength'].enable).toHaveFocus();
   });
 
   describe('and the enable checkbox is checked', () => {

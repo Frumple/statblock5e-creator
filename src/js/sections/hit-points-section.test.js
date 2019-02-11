@@ -1,5 +1,4 @@
 import HitPointsSection from '/src/js/sections/hit-points-section.js';
-import { EnableDisableElementsCheckboxInternal } from '/src/js/extensions/enable-disable-elements-checkbox.js';
 import ErrorMessages from '/src/js/elements/error-messages.js';
 jest.mock('/src/js/elements/error-messages.js');
 
@@ -21,7 +20,7 @@ beforeEach(() => {
   
   hitPointsSection = new HitPointsSection();
   hitPointsSection.errorMessages = new ErrorMessages();
-  hitPointsSection.editElements.useHitDie = new EnableDisableElementsCheckboxInternal(hitPointsSection.editElements.useHitDie);
+  hitPointsSection.initializeCustomEditElements();
   hitPointsSection.forceConnect();
 });
 

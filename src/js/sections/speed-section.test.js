@@ -1,5 +1,4 @@
 import SpeedSection from '/src/js/sections/speed-section.js';
-import { EnableDisableElementsCheckboxInternal } from '/src/js/extensions/enable-disable-elements-checkbox.js';
 import ErrorMessages from '/src/js/elements/error-messages.js';
 jest.mock('/src/js/elements/error-messages.js');
 
@@ -14,7 +13,7 @@ beforeAll(async() => {
 beforeEach(() => {
   speedSection = new SpeedSection();
   speedSection.errorMessages = new ErrorMessages();
-  speedSection.editElements.useCustom = new EnableDisableElementsCheckboxInternal(speedSection.editElements.useCustom);
+  speedSection.initializeCustomEditElements();
   speedSection.forceConnect();
 });
 

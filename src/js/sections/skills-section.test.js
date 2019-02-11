@@ -1,5 +1,4 @@
 import SkillsSection from '/src/js/sections/skills-section.js';
-import { EnableDisableElementsCheckboxInternal } from '/src/js/extensions/enable-disable-elements-checkbox.js';
 import ErrorMessages from '/src/js/elements/error-messages.js';
 jest.mock('/src/js/elements/error-messages.js');
 
@@ -27,9 +26,7 @@ beforeEach(() => {
 
   skillsSection = new SkillsSection();
   skillsSection.errorMessages = new ErrorMessages();
-  for (const key of Skills.keys) {
-    skillsSection.editElements.skill[key].enable = new EnableDisableElementsCheckboxInternal(skillsSection.editElements.skill[key].enable);
-  }
+  skillsSection.initializeCustomEditElements();
   skillsSection.forceConnect();
 });
 
@@ -44,7 +41,7 @@ describe('when the show section is clicked', () => {
 
   it('should switch to edit mode and focus on the acrobatics enable checkbox', () => {
     expect(skillsSection).toBeInMode('edit');
-    expect(skillsSection.editElements.skill['acrobatics'].enable.checkboxElement).toHaveFocus();
+    expect(skillsSection.editElements.skill['acrobatics'].enable).toHaveFocus();
   });
 
   describe('and the enable checkbox is checked', () => {
