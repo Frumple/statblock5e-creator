@@ -2,11 +2,13 @@ import ArmorClassSection from '/src/js/sections/armor-class-section.js';
 import ErrorMessages from '/src/js/elements/error-messages.js';
 jest.mock('/src/js/elements/error-messages.js');
 
+import defineBuiltinCustomElements from '/src/js/helpers/test/define-builtin-custom-elements.js';
 import { inputValueAndTriggerEvent } from '/src/js/helpers/element-helpers.js';
 
 let armorClassSection;
 
 beforeAll(async() => {
+  defineBuiltinCustomElements();
   await ArmorClassSection.define();
 });
 

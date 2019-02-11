@@ -2,7 +2,7 @@ import CustomAutonomousElement from '/src/js/base/custom-autonomous-element.js';
 import GlobalOptions from '/src/js/helpers/global-options.js';
 import isRunningInNode from '/src/js/helpers/is-running-in-node.js';
 import { focusAndSelectElement, traverseElements } from '/src/js/helpers/element-helpers.js';
-import { getCustomElementMixin, assignCustomElementMixin } from '/src/js/helpers/test/custom-element-mixin.js';
+import CustomElementMixins from '/src/js/helpers/test/custom-element-mixins.js';
 
 export class Section extends CustomAutonomousElement {
   static get templatePaths() {
@@ -177,11 +177,7 @@ export class EditElements {
 let InitializeCustomEditElementsMixin = {
   initializeCustomEditElements() {
     traverseElements(this.editElements, 3, (element) => {
-      const mixin = getCustomElementMixin(element);
-  
-      if (mixin) {
-        assignCustomElementMixin(element, mixin);
-      }
+      CustomElementMixins.applyToElement(element);
     });
   }
 };

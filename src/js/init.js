@@ -31,8 +31,8 @@ import TopStats from '/src/js/containers/top-stats.js';
 import BasicStats from '/src/js/containers/basic-stats.js';
 import AdvancedStats from '/src/js/containers/advanced-stats.js';
 
-async function defineCustomElements() {
-  let elementClasses = [];
+async function init() {
+  const elementClasses = [];
 
   elementClasses.push(AttributeDataList);
   elementClasses.push(EnableDisableElementsCheckbox);
@@ -70,10 +70,6 @@ async function defineCustomElements() {
   for (const elementClass of elementClasses) {
     await elementClass.define();
   }
-}
-
-async function init() {
-  await defineCustomElements();
 }
 
 init();

@@ -2,6 +2,7 @@ import SavingThrowsSection from '/src/js/sections/saving-throws-section.js';
 import ErrorMessages from '/src/js/elements/error-messages.js';
 jest.mock('/src/js/elements/error-messages.js');
 
+import defineBuiltinCustomElements from '/src/js/helpers/test/define-builtin-custom-elements.js';
 import { inputValueAndTriggerEvent } from '/src/js/helpers/element-helpers.js';
 import { formatModifier } from '/src/js/helpers/string-formatter.js';
 
@@ -15,6 +16,7 @@ const singleSavingThrowUnderTest = 'intelligence';
 let savingThrowsSection;
 
 beforeAll(async() => {
+  defineBuiltinCustomElements();
   await SavingThrowsSection.define();
 });
 

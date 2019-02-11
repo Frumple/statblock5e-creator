@@ -3,12 +3,10 @@ import { focusAndSelectElement } from '/src/js/helpers/element-helpers.js';
 
 export default class EnableDisableElementsCheckbox extends CustomBuiltinInputElement {
   static get elementName() { return 'enable-disable-elements-checkbox'; }
+  static get mixin() { return EnableDisableElementsCheckboxMixin; }
 
   constructor() {
     super();
-
-    Object.assign(this, EnableDisableElementsCheckboxMixin);
-    this.initializeMixin();
   }
 }
 
@@ -16,7 +14,7 @@ export let EnableDisableElementsCheckboxMixin = {
   enabledElements: [],
   disabledElements: [],
 
-  initializeMixin() {
+  iniitalizeMixin() {
     this.addEventListener('input', this.onInputCheckbox.bind(this));
   },
 

@@ -2,6 +2,7 @@ import HitPointsSection from '/src/js/sections/hit-points-section.js';
 import ErrorMessages from '/src/js/elements/error-messages.js';
 jest.mock('/src/js/elements/error-messages.js');
 
+import defineBuiltinCustomElements from '/src/js/helpers/test/define-builtin-custom-elements.js';
 import { inputValueAndTriggerEvent } from '/src/js/helpers/element-helpers.js';
 import { formatModifierOperator, formatModifierNumber } from '/src/js/helpers/string-formatter.js';
 
@@ -11,6 +12,7 @@ import HitPoints from '/src/js/stats/hit-points.js';
 let hitPointsSection;
 
 beforeAll(async() => {
+  defineBuiltinCustomElements();
   await HitPointsSection.define();
 });
 

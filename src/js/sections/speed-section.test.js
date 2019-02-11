@@ -2,11 +2,13 @@ import SpeedSection from '/src/js/sections/speed-section.js';
 import ErrorMessages from '/src/js/elements/error-messages.js';
 jest.mock('/src/js/elements/error-messages.js');
 
+import defineBuiltinCustomElements from '/src/js/helpers/test/define-builtin-custom-elements.js';
 import { inputValueAndTriggerEvent } from '/src/js/helpers/element-helpers.js';
 
 let speedSection;
 
 beforeAll(async() => {
+  defineBuiltinCustomElements();
   await SpeedSection.define();
 });
 

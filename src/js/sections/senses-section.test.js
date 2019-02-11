@@ -2,6 +2,7 @@ import SensesSection from '/src/js/sections/senses-section.js';
 import ErrorMessages from '/src/js/elements/error-messages.js';
 jest.mock('/src/js/elements/error-messages.js');
 
+import defineBuiltinCustomElements from '/src/js/helpers/test/define-builtin-custom-elements.js';
 import { inputValueAndTriggerEvent } from '/src/js/helpers/element-helpers.js';
 
 import Abilities from '/src/js/stats/abilities.js';
@@ -11,6 +12,7 @@ import Skills from '/src/js/stats/skills.js';
 let sensesSection;
 
 beforeAll(async() => {
+  defineBuiltinCustomElements();
   await SensesSection.define();
 });
 
