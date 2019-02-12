@@ -15,9 +15,9 @@ export let IntegerInputMixin = {
       if (this.value) {
         let value = this.valueAsInt;
 
-        if (this.min && value < this.valueAsMin) {
+        if (this.min && value < this.minAsInt) {
           this.value = this.min;
-        } else if(this.max && value > this.valueAsMax) {
+        } else if(this.max && value > this.maxAsInt) {
           this.value = this.max;
         } else {
           // Used to eliminate leading zeroes from the inputted value
