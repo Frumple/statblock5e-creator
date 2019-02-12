@@ -1,7 +1,7 @@
 import ChallengeRatingSection from '/src/js/sections/challenge-rating-section.js';
-import ErrorMessages from '/src/js/elements/error-messages.js';
-jest.mock('/src/js/elements/error-messages.js');
+import SectionTestMixin from '/src/js/helpers/test/section-test-mixin.js';
 
+import { copyObjectProperties } from '/src/js/helpers/object-helpers.js';
 import defineBuiltinCustomElements from '/src/js/helpers/test/define-builtin-custom-elements.js';
 import { inputValueAndTriggerEvent } from '/src/js/helpers/element-helpers.js';
 
@@ -14,8 +14,9 @@ beforeAll(async() => {
 
 beforeEach(() => {
   challengeRatingSection = new ChallengeRatingSection();
-  challengeRatingSection.errorMessages = new ErrorMessages();
-  challengeRatingSection.initializeCustomEditElements();
+  copyObjectProperties(challengeRatingSection, SectionTestMixin);
+  challengeRatingSection.initializeCustomElements();
+  challengeRatingSection.forceConnect();
 });
 
 afterEach(() => {

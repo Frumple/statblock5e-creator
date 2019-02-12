@@ -1,7 +1,7 @@
 import HitPointsSection from '/src/js/sections/hit-points-section.js';
-import ErrorMessages from '/src/js/elements/error-messages.js';
-jest.mock('/src/js/elements/error-messages.js');
+import SectionTestMixin from '/src/js/helpers/test/section-test-mixin.js';
 
+import { copyObjectProperties } from '/src/js/helpers/object-helpers.js';
 import defineBuiltinCustomElements from '/src/js/helpers/test/define-builtin-custom-elements.js';
 import { inputValueAndTriggerEvent } from '/src/js/helpers/element-helpers.js';
 import { formatModifierOperator, formatModifierNumber } from '/src/js/helpers/string-formatter.js';
@@ -21,8 +21,8 @@ beforeEach(() => {
   HitPoints.reset();
   
   hitPointsSection = new HitPointsSection();
-  hitPointsSection.errorMessages = new ErrorMessages();
-  hitPointsSection.initializeCustomEditElements();
+  copyObjectProperties(hitPointsSection, SectionTestMixin);
+  hitPointsSection.initializeCustomElements();
   hitPointsSection.forceConnect();
 });
 

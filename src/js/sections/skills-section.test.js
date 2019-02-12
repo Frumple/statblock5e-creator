@@ -1,7 +1,7 @@
 import SkillsSection from '/src/js/sections/skills-section.js';
-import ErrorMessages from '/src/js/elements/error-messages.js';
-jest.mock('/src/js/elements/error-messages.js');
+import SectionTestMixin from '/src/js/helpers/test/section-test-mixin.js';
 
+import { copyObjectProperties } from '/src/js/helpers/object-helpers.js';
 import defineBuiltinCustomElements from '/src/js/helpers/test/define-builtin-custom-elements.js';
 import { inputValueAndTriggerEvent } from '/src/js/helpers/element-helpers.js';
 import { formatModifier } from '/src/js/helpers/string-formatter.js';
@@ -27,8 +27,8 @@ beforeEach(() => {
   Skills.reset();
 
   skillsSection = new SkillsSection();
-  skillsSection.errorMessages = new ErrorMessages();
-  skillsSection.initializeCustomEditElements();
+  copyObjectProperties(skillsSection, SectionTestMixin);
+  skillsSection.initializeCustomElements();
   skillsSection.forceConnect();
 });
 

@@ -1,9 +1,6 @@
 import CustomAutonomousElement from '/src/js/base/custom-autonomous-element.js';
 import GlobalOptions from '/src/js/helpers/global-options.js';
-import isRunningInNode from '/src/js/helpers/is-running-in-node.js';
-import { focusAndSelectElement, traverseElements } from '/src/js/helpers/element-helpers.js';
-import { copyObjectProperties } from '/src/js/helpers/object-helpers.js';
-import CustomElementMixins from '/src/js/helpers/test/custom-element-mixins.js';
+import { focusAndSelectElement } from '/src/js/helpers/element-helpers.js';
 
 export class Section extends CustomAutonomousElement {
   static get templatePaths() {
@@ -50,10 +47,6 @@ export class Section extends CustomAutonomousElement {
       event.preventDefault();
       this.save();
     });
-
-    if (isRunningInNode) {
-      copyObjectProperties(this, InitializeCustomEditElementsMixin);
-    }
   }
 
   connectedCallback() {
@@ -167,18 +160,3 @@ export class EditElements {
       `The class '${this.constructor.name}' must implement the initiallySelectedElement() getter.`);
   }
 }
-
-// For tests, JSDOM does not currently support builtin custom elements.
-// These will appear as normal elements in JSDOM, but we can add the
-// custom element behaviour by assigning mixins.
-
-// initializeCustomEditElements() is only enabled in test environments.
-// It finds all custom elements in the edit section that have an
-// appropriate mixin and assigns the mixin to the element.
-let InitializeCustomEditElementsMixin = {
-  initializeCustomEditElements() {
-    traverseElements(this.editElements, 3, (element) => {
-      CustomElementMixins.applyToElement(element);
-    });
-  }
-};

@@ -1,13 +1,13 @@
 import AbilityScoresSection from '/src/js/sections/ability-scores-section.js';
-import ErrorMessages from '/src/js/elements/error-messages.js';
-jest.mock('/src/js/elements/error-messages.js');
+import SectionTestMixin from '/src/js/helpers/test/section-test-mixin.js';
 
-import Abilities from '/src/js/stats/abilities.js';
-import ProficiencyBonus from '/src/js/stats/proficiency-bonus.js';
-
+import { copyObjectProperties } from '/src/js/helpers/object-helpers.js';
 import defineBuiltinCustomElements from '/src/js/helpers/test/define-builtin-custom-elements.js';
 import { inputValueAndTriggerEvent } from '/src/js/helpers/element-helpers.js';
 import { formatModifier } from '/src/js/helpers/string-formatter.js';
+
+import Abilities from '/src/js/stats/abilities.js';
+import ProficiencyBonus from '/src/js/stats/proficiency-bonus.js';
 
 let abilityScoresSection;
 
@@ -21,8 +21,9 @@ beforeEach(() => {
   ProficiencyBonus.reset();
 
   abilityScoresSection = new AbilityScoresSection();
-  abilityScoresSection.errorMessages = new ErrorMessages();
-  abilityScoresSection.initializeCustomEditElements();
+  copyObjectProperties(abilityScoresSection, SectionTestMixin);
+  abilityScoresSection.initializeCustomElements();
+  abilityScoresSection.forceConnect();
 });
 
 afterEach(() => {
