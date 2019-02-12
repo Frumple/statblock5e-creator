@@ -14,19 +14,19 @@ export default class AttributeList extends CustomAutonomousElement {
     this.draggedItem = null;
   }
 
-  get itemTextList() {
+  get items() {
     let listItemElements = this.querySelectorAll('attribute-list-item');
     let elementArray = Array.from(listItemElements);
     return elementArray.map(element => element.text);
   }
 
-  contains(text) {
-    return this.itemTextList.includes(text);
+  contains(itemText) {
+    return this.items.includes(itemText);
   }
 
-  addItem(text) {
+  addItem(itemText) {
     let listItemElement = document.createElement('attribute-list-item');
-    listItemElement.text = text;
+    listItemElement.text = itemText;
     this.appendChild(listItemElement);
   }
 

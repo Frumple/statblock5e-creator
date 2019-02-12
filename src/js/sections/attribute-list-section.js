@@ -13,8 +13,10 @@ export default class AttributeListSection extends sectionModule.Section {
           AttributeListEditElements);
 
     this.showElements.header.textContent = headerText;
-    this.editElements.label.textContent = `${headerText}:`;
+    this.editElements.label.textContent = `${headerText}:`;    
+  }
 
+  connectedCallback() {
     this.editElements.input.addEventListener('keydown', (keyEvent) => {
       if (keyEvent.key === 'Enter') {
         keyEvent.preventDefault();
@@ -66,8 +68,8 @@ export default class AttributeListSection extends sectionModule.Section {
     this.editElements.input.value = '';
 
     let text = '';
-    let itemTextList = this.editElements.list.itemTextList;
-    for (const itemText of itemTextList) {
+    let items = this.editElements.list.items;
+    for (const itemText of items) {
       if (text === '') {
         text += itemText;
       } else {

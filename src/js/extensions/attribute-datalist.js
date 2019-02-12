@@ -1,14 +1,40 @@
+import CustomElementMixins from '/src/js/helpers/test/custom-element-mixins.js';
+import isRunningInNode from '/src/js/helpers/is-running-in-node.js';
+import { copyObjectProperties } from '/src/js/helpers/object-helpers.js';
+
 export default class AttributeDataList extends HTMLDataListElement {
   static async define() {
-    customElements.define('attribute-datalist', this, { extends: 'datalist' });
+    const elementName = 'attribute-datalist';
+    CustomElementMixins.define(elementName, AttributeDataListMixin);
+
+    if (! isRunningInNode) {
+      customElements.define(elementName, this, { extends: 'datalist' });
+    }    
   }
 
   constructor() {
     super();
+
+    copyObjectProperties(this, this.constructor.mixin);
+    this.initializeMixin();
   }
+}
+
+const AttributeDataListMixin = {
+  initializeMixin() {
+
+  },
 
   setOptionEnabled(optionText, isEnabled) {
-    let item = this.options.namedItem(optionText);
+    let item = null;
+
+    // JSDOM's implementation of HTMLDataListElement lacks the 'options'
+    // property, so we have to find the matching option element manually.
+    if (isRunningInNode) {      
+      item = this.findOption(optionText);
+    } else {
+      item = this.options.namedItem(optionText);
+    }    
 
     if (item !== null) {
       if (isEnabled) {
@@ -17,5 +43,15 @@ export default class AttributeDataList extends HTMLDataListElement {
         item.setAttribute('disabled', '');
       }
     }
+  },
+
+  findOption(optionText) {
+    for (const child of this.childNodes) {
+      if (child.tagName === 'OPTION' && child.value === optionText) {
+        return child;
+      }
+    }
+
+    return null;
   }
-}
+};

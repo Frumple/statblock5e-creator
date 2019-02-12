@@ -12,17 +12,17 @@ export default class LanguagesSection extends AttributeListSection {
     super(LanguagesSection.templatePaths,
           'Languages');
 
-    this.listInitialized = false;
+    this.isInitialized = false;
   }
 
   connectedCallback() {
-    if (this.isConnected) {
-      if (! this.listInitialized) {
+    if (this.isConnected && ! this.isInitialized) {
+      super.connectedCallback();
 
-        this.addItem('Common');
-        this.updateShowSection();
-        this.listInitialized = true;
-      }
+      this.addItem('Common');
+      this.updateShowSection();
+
+      this.isInitialized = true;
     }
   }
 
