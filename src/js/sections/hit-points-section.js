@@ -1,7 +1,6 @@
 import * as sectionModule from '/src/js/base/section.js';
 import HitPoints from '/src/js/stats/hit-points.js';
 import { formatModifierOperator, formatModifierNumber } from '/src/js/helpers/string-formatter.js';
-import validateIntegerInput from '/src/js/helpers/integer-input-validator.js';
 
 export default class HitPointsSection extends sectionModule.Section {
   static get elementName() { return 'hit-points-section'; }
@@ -81,9 +80,9 @@ export default class HitPointsSection extends sectionModule.Section {
 
   checkForErrors() {
     if (HitPoints.useHitDie) {
-      validateIntegerInput(this.editElements.hitDieQuantity, this.errorMessages);
+      this.editElements.hitDieQuantity.validate(this.errorMessages);
     } else {
-      validateIntegerInput(this.editElements.hitPoints, this.errorMessages);
+      this.editElements.hitPoints.validate(this.errorMessages);
     }    
   }
 

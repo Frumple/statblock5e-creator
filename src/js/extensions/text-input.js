@@ -12,5 +12,13 @@ export default class TextInput extends CustomBuiltinInputElement {
 export let TextInputMixin = {
   initializeMixin() {
 
+  },
+
+  validate(errorMessages) {
+    if (this.required && this.value === '') {
+      let prettyName = this.getAttribute('pretty-name');
+      let fieldName = prettyName ? prettyName : this.name;
+      errorMessages.add(this, `${fieldName} cannot be blank.`);
+    }
   }
 };

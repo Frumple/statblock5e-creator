@@ -26,6 +26,14 @@ export let IntegerInputMixin = {
       }
     });
   },
+
+  validate(errorMessages) {
+    if (isNaN(this.valueAsInt)) {
+      let prettyName = this.getAttribute('pretty-name');
+      let fieldName = prettyName ? prettyName : this.name;
+      errorMessages.add(this, `${fieldName} must be a valid number.`);
+    }
+  },
   
   get valueAsInt() {
     return parseInt(this.value, 10);

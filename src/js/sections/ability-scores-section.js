@@ -2,7 +2,6 @@ import * as sectionModule from '/src/js/base/section.js';
 import Abilities from '/src/js/stats/abilities.js';
 import ProficiencyBonus from '/src/js/stats/proficiency-bonus.js';
 import { formatModifier } from '/src/js/helpers/string-formatter.js';
-import validateIntegerInput from '/src/js/helpers/integer-input-validator.js';
 
 export default class AbilityScoresSection extends sectionModule.Section {
   static get elementName() { return 'ability-scores-section'; }
@@ -71,9 +70,9 @@ export default class AbilityScoresSection extends sectionModule.Section {
 
   checkForErrors() {
     for (const key of Abilities.keys) {
-      validateIntegerInput(this.editElements.score[key], this.errorMessages);
+      this.editElements.score[key].validate(this.errorMessages);
     }
-    validateIntegerInput(this.editElements.proficiencyBonus, this.errorMessages);
+    this.editElements.proficiencyBonus.validate(this.errorMessages);
   }
 
   updateShowSection() {

@@ -2,17 +2,20 @@ import HeadingSection from '/src/js/sections/heading-section.js';
 import ErrorMessages from '/src/js/elements/error-messages.js';
 jest.mock('/src/js/elements/error-messages.js');
 
+import defineBuiltinCustomElements from '/src/js/helpers/test/define-builtin-custom-elements.js';
 import { inputValueAndTriggerEvent } from '/src/js/helpers/element-helpers.js';
 
 let headingSection;
 
 beforeAll(async() => {
+  defineBuiltinCustomElements();
   await HeadingSection.define();
 });
 
 beforeEach(() => {
   headingSection = new HeadingSection();
   headingSection.errorMessages = new ErrorMessages();
+  headingSection.initializeCustomEditElements();
 });
 
 afterEach(() => {

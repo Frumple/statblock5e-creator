@@ -1,6 +1,4 @@
 import * as sectionModule from '/src/js/base/section.js';
-import validateTextInput from '/src/js/helpers/text-input-validator.js';
-import validateIntegerInput from '/src/js/helpers/integer-input-validator.js';
 
 export default class ArmorClassSection extends sectionModule.Section {
   static get elementName() { return 'armor-class-section'; }
@@ -35,9 +33,9 @@ export default class ArmorClassSection extends sectionModule.Section {
     this.editElements.customText.value = this.editElements.customText.value.trim();
 
     if (this.editElements.useCustom.checked) {
-      validateTextInput(this.editElements.customText, this.errorMessages);
+      this.editElements.customText.validate(this.errorMessages);
     } else {
-      validateIntegerInput(this.editElements.armorClass, this.errorMessages);
+      this.editElements.armorClass.validate(this.errorMessages);
     }
   }
 

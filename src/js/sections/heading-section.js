@@ -1,6 +1,5 @@
 import * as sectionModule from '/src/js/base/section.js';
 import { capitalizeFirstLetter } from '/src/js/helpers/string-formatter.js';
-import validateTextInput from '/src/js/helpers/text-input-validator.js';
 
 export default class HeadingSection extends sectionModule.Section {
   static get elementName() { return 'heading-section'; }
@@ -20,8 +19,8 @@ export default class HeadingSection extends sectionModule.Section {
     this.editElements.title.value = this.editElements.title.value.trim();
     this.editElements.type.value = this.editElements.type.value.trim();
 
-    validateTextInput(this.editElements.title, this.errorMessages);
-    validateTextInput(this.editElements.type, this.errorMessages);
+    this.editElements.title.validate(this.errorMessages);
+    this.editElements.type.validate(this.errorMessages);
   }
 
   updateShowSection() {
