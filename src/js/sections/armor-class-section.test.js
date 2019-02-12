@@ -70,7 +70,7 @@ describe('when the show section is clicked', () => {
       });
 
       it('should display only one error if the armor class is not a valid number and custom text field is blank', () => {
-        inputValueAndTriggerEvent(armorClassSection.editElements.armorClass, NaN);
+        inputValueAndTriggerEvent(armorClassSection.editElements.armorClass, '');
         inputValueAndTriggerEvent(armorClassSection.editElements.customText, '');
 
         armorClassSection.editElements.saveAction.click();
@@ -140,7 +140,7 @@ describe('when the show section is clicked', () => {
       });
 
       it('should display an error if the armor class field is not a valid number', () => {
-        inputValueAndTriggerEvent(armorClassSection.editElements.armorClass, NaN);
+        inputValueAndTriggerEvent(armorClassSection.editElements.armorClass, '');
 
         armorClassSection.editElements.saveAction.click();
 
@@ -151,7 +151,7 @@ describe('when the show section is clicked', () => {
       });
 
       it('should display only one error if the armor class is not a valid number and custom text field is blank', () => {
-        inputValueAndTriggerEvent(armorClassSection.editElements.armorClass, NaN);
+        inputValueAndTriggerEvent(armorClassSection.editElements.armorClass, '');
         inputValueAndTriggerEvent(armorClassSection.editElements.customText, '');
 
         armorClassSection.editElements.saveAction.click();

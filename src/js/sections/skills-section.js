@@ -72,7 +72,7 @@ export default class SkillsSection extends sectionModule.Section {
   }
 
   onInputSkillOverride(key) {
-    let overrideValue = parseInt(this.editElements.skill[key].override.value, 10);
+    let overrideValue = this.editElements.skill[key].override.valueAsInt;
     Skills.skills[key].override = overrideValue;
 
     this.updateEditSectionModifier(key);

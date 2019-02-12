@@ -84,28 +84,28 @@ describe('when the show section is clicked', () => {
       /* eslint-disable indent, no-unexpected-multiline */
       it.each
       `
-        description                                             | abilityScore | proficiencyBonus | savingThrowEnabled | savingThrowProficient | savingThrowOverride | expectedModifier    | expectedText
-        ${'saving throw disabled, not proficient, no override'} | ${10}        | ${2}             | ${false}           | ${false}              | ${NaN}              | ${0}             | ${''}
-        ${'saving throw enabled, not proficient, no override'}  | ${10}        | ${2}             | ${true}            | ${false}              | ${NaN}              | ${0}             | ${'Int +0'}
-        ${'saving throw enabled, proficient, no override'}      | ${10}        | ${2}             | ${true}            | ${true}               | ${NaN}              | ${2}             | ${'Int +2'}
+        description                                             | abilityScore | proficiencyBonus | savingThrowEnabled | savingThrowProficient | savingThrowOverride | expectedModifier | expectedText
+        ${'saving throw disabled, not proficient, no override'} | ${10}        | ${2}             | ${false}           | ${false}              | ${''}               | ${0}             | ${''}
+        ${'saving throw enabled, not proficient, no override'}  | ${10}        | ${2}             | ${true}            | ${false}              | ${''}               | ${0}             | ${'Int +0'}
+        ${'saving throw enabled, proficient, no override'}      | ${10}        | ${2}             | ${true}            | ${true}               | ${''}               | ${2}             | ${'Int +2'}
         ${'saving throw enabled, not proficient, override'}     | ${10}        | ${2}             | ${true}            | ${false}              | ${7}                | ${7}             | ${'Int +7'}
         ${'saving throw enabled, proficient, override'}         | ${10}        | ${2}             | ${true}            | ${true}               | ${8}                | ${8}             | ${'Int +8'}
-        ${'- ability score and - proficiency bonus'}            | ${3}         | ${-1}            | ${true}            | ${true}               | ${NaN}              | ${-5}             | ${'Int –5'}
-        ${'- ability score and 0 proficiency bonus'}            | ${3}         | ${0}             | ${true}            | ${true}               | ${NaN}              | ${-4}             | ${'Int –4'}
-        ${'- ability score and + proficiency bonus'}            | ${3}         | ${3}             | ${true}            | ${true}               | ${NaN}              | ${-1}             | ${'Int –1'}
-        ${'0 ability score and - proficiency bonus'}            | ${10}        | ${-1}            | ${true}            | ${true}               | ${NaN}              | ${-1}             | ${'Int –1'}
-        ${'0 ability score and 0 proficiency bonus'}            | ${10}        | ${0}             | ${true}            | ${true}               | ${NaN}              | ${0}             | ${'Int +0'}
-        ${'0 ability score and + proficiency bonus'}            | ${10}        | ${3}             | ${true}            | ${true}               | ${NaN}              | ${3}             | ${'Int +3'}
-        ${'+ ability score and - proficiency bonus'}            | ${14}        | ${-1}            | ${true}            | ${true}               | ${NaN}              | ${1}             | ${'Int +1'}
-        ${'+ ability score and 0 proficiency bonus'}            | ${14}        | ${0}             | ${true}            | ${true}               | ${NaN}              | ${2}             | ${'Int +2'}
-        ${'+ ability score and + proficiency bonus'}            | ${14}        | ${3}             | ${true}            | ${true}               | ${NaN}              | ${5}             | ${'Int +5'}
+        ${'- ability score and - proficiency bonus'}            | ${3}         | ${-1}            | ${true}            | ${true}               | ${''}               | ${-5}            | ${'Int –5'}
+        ${'- ability score and 0 proficiency bonus'}            | ${3}         | ${0}             | ${true}            | ${true}               | ${''}               | ${-4}            | ${'Int –4'}
+        ${'- ability score and + proficiency bonus'}            | ${3}         | ${3}             | ${true}            | ${true}               | ${''}               | ${-1}            | ${'Int –1'}
+        ${'0 ability score and - proficiency bonus'}            | ${10}        | ${-1}            | ${true}            | ${true}               | ${''}               | ${-1}            | ${'Int –1'}
+        ${'0 ability score and 0 proficiency bonus'}            | ${10}        | ${0}             | ${true}            | ${true}               | ${''}               | ${0}             | ${'Int +0'}
+        ${'0 ability score and + proficiency bonus'}            | ${10}        | ${3}             | ${true}            | ${true}               | ${''}               | ${3}             | ${'Int +3'}
+        ${'+ ability score and - proficiency bonus'}            | ${14}        | ${-1}            | ${true}            | ${true}               | ${''}               | ${1}             | ${'Int +1'}
+        ${'+ ability score and 0 proficiency bonus'}            | ${14}        | ${0}             | ${true}            | ${true}               | ${''}               | ${2}             | ${'Int +2'}
+        ${'+ ability score and + proficiency bonus'}            | ${14}        | ${3}             | ${true}            | ${true}               | ${''}               | ${5}             | ${'Int +5'}
       `
       ('$description: {abilityScore="$abilityScore", proficiencyBonus="$proficiencyBonus", savingThrowEnabled="$savingThrowEnabled", savingThrowProficient="$savingThrowProficient", savingThrowOverride="$savingThrowOverride"} => {expectedModifier="$expectedModifier", expectedText="$expectedText"}',
       ({abilityScore, proficiencyBonus, savingThrowEnabled, savingThrowProficient, savingThrowOverride, expectedModifier, expectedText}) => {
         const savingThrowElements = savingThrowsSection.editElements.savingThrow[singleSavingThrowUnderTest];
         
         Abilities.abilities[singleSavingThrowUnderTest].score = abilityScore;
-        ProficiencyBonus.value = proficiencyBonus;
+        ProficiencyBonus.proficiencyBonus = proficiencyBonus;
 
         if (savingThrowEnabled) {
           savingThrowElements.enable.click();
@@ -120,7 +120,11 @@ describe('when the show section is clicked', () => {
         const savingThrow = SavingThrows.savingThrows[singleSavingThrowUnderTest];
         expect(savingThrow.isEnabled).toBe(savingThrowEnabled);
         expect(savingThrow.isProficient).toBe(savingThrowProficient);
-        expect(savingThrow.override).toBe(savingThrowOverride);
+        if (savingThrowOverride === '') {
+          expect(savingThrow.override).toBe(NaN);
+        } else {
+          expect(savingThrow.override).toBe(savingThrowOverride);
+        }
         expect(savingThrow.calculateModifier()).toBe(expectedModifier);
 
         let formattedModifier = formatModifier(expectedModifier);
@@ -161,7 +165,7 @@ describe('when the show section is clicked', () => {
         Abilities.abilities['intelligence'].score = 1;
         Abilities.abilities['wisdom'].score = 4;
         Abilities.abilities['charisma'].score = 12;
-        ProficiencyBonus.value = 5;
+        ProficiencyBonus.proficiencyBonus = 5;
 
         if (strength) {
           let elements = savingThrowsSection.editElements.savingThrow['strength'];

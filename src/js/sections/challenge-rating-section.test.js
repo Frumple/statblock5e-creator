@@ -51,7 +51,7 @@ describe('when the show section is clicked', () => {
     });
 
     it('should display an error if the custom text field is not a valid number', () => {
-      inputValueAndTriggerEvent(challengeRatingSection.editElements.experiencePoints, NaN);
+      inputValueAndTriggerEvent(challengeRatingSection.editElements.experiencePoints, '');
 
       challengeRatingSection.editElements.saveAction.click();
 

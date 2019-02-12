@@ -67,7 +67,7 @@ class Skill {
       } 
       
       if (this.isProficient) {
-        passiveScore += ProficiencyBonus.value;
+        passiveScore += ProficiencyBonus.proficiencyBonus;
       }
     }
     passiveScore += this.ability.modifier;
@@ -84,7 +84,7 @@ class Skill {
       }
       
       if (this.isProficient) {
-        skillModifier += ProficiencyBonus.value;
+        skillModifier += ProficiencyBonus.proficiencyBonus;
       }
     }
     skillModifier += this.ability.modifier;

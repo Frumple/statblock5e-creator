@@ -1,3 +1,5 @@
+import { copyObjectProperties } from '/src/js/helpers/object-helpers.js';
+
 class CustomElementMixins {
   constructor() {
     this.mixins = new Map();
@@ -14,8 +16,8 @@ class CustomElementMixins {
       const mixin = this.mixins.get(is);
 
       if (mixin) {
-        Object.assign(element, mixin);
-        element.iniitalizeMixin();
+        copyObjectProperties(element, mixin);
+        element.initializeMixin();
       }
     }
   }

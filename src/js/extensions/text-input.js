@@ -10,7 +10,7 @@ export default class TextInput extends CustomBuiltinInputElement {
 }
 
 export let TextInputMixin = {
-  iniitalizeMixin() {
+  initializeMixin() {
 
   }
 };

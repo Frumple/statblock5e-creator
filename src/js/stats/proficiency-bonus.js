@@ -4,7 +4,7 @@ class ProficiencyBonus {
   }
 
   reset() {
-    this.value = 2;
+    this.proficiencyBonus = 2;
   }
 }
 

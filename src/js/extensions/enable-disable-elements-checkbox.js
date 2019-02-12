@@ -14,7 +14,7 @@ export let EnableDisableElementsCheckboxMixin = {
   enabledElements: [],
   disabledElements: [],
 
-  iniitalizeMixin() {
+  initializeMixin() {
     this.addEventListener('input', this.onInputCheckbox.bind(this));
   },
 

@@ -2,6 +2,7 @@ import CustomAutonomousElement from '/src/js/base/custom-autonomous-element.js';
 import GlobalOptions from '/src/js/helpers/global-options.js';
 import isRunningInNode from '/src/js/helpers/is-running-in-node.js';
 import { focusAndSelectElement, traverseElements } from '/src/js/helpers/element-helpers.js';
+import { copyObjectProperties } from '/src/js/helpers/object-helpers.js';
 import CustomElementMixins from '/src/js/helpers/test/custom-element-mixins.js';
 
 export class Section extends CustomAutonomousElement {
@@ -51,7 +52,7 @@ export class Section extends CustomAutonomousElement {
     });
 
     if (isRunningInNode) {
-      Object.assign(this, InitializeCustomEditElementsMixin);
+      copyObjectProperties(this, InitializeCustomEditElementsMixin);
     }
   }
 

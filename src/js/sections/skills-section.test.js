@@ -85,28 +85,28 @@ describe('when the show section is clicked', () => {
       /* eslint-disable indent, no-unexpected-multiline */
       it.each
       `
-        description                                      | abilityScore | proficiencyBonus | skillEnabled | skillProficient | skillOverride | expectedModifier    | expectedText
-        ${'skill disabled, not proficient, no override'} | ${10}        | ${2}             | ${false}     | ${false}        | ${NaN}        | ${0}             | ${''}
-        ${'skill enabled, not proficient, no override'}  | ${10}        | ${2}             | ${true}      | ${false}        | ${NaN}        | ${0}             | ${'Investigation +0'}
-        ${'skill enabled, proficient, no override'}      | ${10}        | ${2}             | ${true}      | ${true}         | ${NaN}        | ${2}             | ${'Investigation +2'}
+        description                                      | abilityScore | proficiencyBonus | skillEnabled | skillProficient | skillOverride | expectedModifier | expectedText
+        ${'skill disabled, not proficient, no override'} | ${10}        | ${2}             | ${false}     | ${false}        | ${''}         | ${0}             | ${''}
+        ${'skill enabled, not proficient, no override'}  | ${10}        | ${2}             | ${true}      | ${false}        | ${''}         | ${0}             | ${'Investigation +0'}
+        ${'skill enabled, proficient, no override'}      | ${10}        | ${2}             | ${true}      | ${true}         | ${''}         | ${2}             | ${'Investigation +2'}
         ${'skill enabled, not proficient, override'}     | ${10}        | ${2}             | ${true}      | ${false}        | ${7}          | ${7}             | ${'Investigation +7'}
         ${'skill enabled, proficient, override'}         | ${10}        | ${2}             | ${true}      | ${true}         | ${8}          | ${8}             | ${'Investigation +8'}
-        ${'- ability score and - proficiency bonus'}     | ${3}         | ${-1}            | ${true}      | ${true}         | ${NaN}        | ${-5}             | ${'Investigation –5'}
-        ${'- ability score and 0 proficiency bonus'}     | ${3}         | ${0}             | ${true}      | ${true}         | ${NaN}        | ${-4}             | ${'Investigation –4'}
-        ${'- ability score and + proficiency bonus'}     | ${3}         | ${3}             | ${true}      | ${true}         | ${NaN}        | ${-1}             | ${'Investigation –1'}
-        ${'0 ability score and - proficiency bonus'}     | ${10}        | ${-1}            | ${true}      | ${true}         | ${NaN}        | ${-1}             | ${'Investigation –1'}
-        ${'0 ability score and 0 proficiency bonus'}     | ${10}        | ${0}             | ${true}      | ${true}         | ${NaN}        | ${0}             | ${'Investigation +0'}
-        ${'0 ability score and + proficiency bonus'}     | ${10}        | ${3}             | ${true}      | ${true}         | ${NaN}        | ${3}             | ${'Investigation +3'}
-        ${'+ ability score and - proficiency bonus'}     | ${14}        | ${-1}            | ${true}      | ${true}         | ${NaN}        | ${1}             | ${'Investigation +1'}
-        ${'+ ability score and 0 proficiency bonus'}     | ${14}        | ${0}             | ${true}      | ${true}         | ${NaN}        | ${2}             | ${'Investigation +2'}
-        ${'+ ability score and + proficiency bonus'}     | ${14}        | ${3}             | ${true}      | ${true}         | ${NaN}        | ${5}             | ${'Investigation +5'}
+        ${'- ability score and - proficiency bonus'}     | ${3}         | ${-1}            | ${true}      | ${true}         | ${''}         | ${-5}            | ${'Investigation –5'}
+        ${'- ability score and 0 proficiency bonus'}     | ${3}         | ${0}             | ${true}      | ${true}         | ${''}         | ${-4}            | ${'Investigation –4'}
+        ${'- ability score and + proficiency bonus'}     | ${3}         | ${3}             | ${true}      | ${true}         | ${''}         | ${-1}            | ${'Investigation –1'}
+        ${'0 ability score and - proficiency bonus'}     | ${10}        | ${-1}            | ${true}      | ${true}         | ${''}         | ${-1}            | ${'Investigation –1'}
+        ${'0 ability score and 0 proficiency bonus'}     | ${10}        | ${0}             | ${true}      | ${true}         | ${''}         | ${0}             | ${'Investigation +0'}
+        ${'0 ability score and + proficiency bonus'}     | ${10}        | ${3}             | ${true}      | ${true}         | ${''}         | ${3}             | ${'Investigation +3'}
+        ${'+ ability score and - proficiency bonus'}     | ${14}        | ${-1}            | ${true}      | ${true}         | ${''}         | ${1}             | ${'Investigation +1'}
+        ${'+ ability score and 0 proficiency bonus'}     | ${14}        | ${0}             | ${true}      | ${true}         | ${''}         | ${2}             | ${'Investigation +2'}
+        ${'+ ability score and + proficiency bonus'}     | ${14}        | ${3}             | ${true}      | ${true}         | ${''}         | ${5}             | ${'Investigation +5'}
       `
       ('$description: {abilityScore="$abilityScore", proficiencyBonus="$proficiencyBonus", skillEnabled="$skillEnabled", skillProficient="$skillProficient", skillOverride="$skillOverride"} => {expectedModifier="$expectedModifier", expectedText="$expectedText"}',
       ({abilityScore, proficiencyBonus, skillEnabled, skillProficient, skillOverride, expectedModifier, expectedText}) => {
         const savingThrowElements = skillsSection.editElements.skill[singleSkillUnderTest];
         
         Abilities.abilities[singleAbilityUnderTest].score = abilityScore;
-        ProficiencyBonus.value = proficiencyBonus;
+        ProficiencyBonus.proficiencyBonus = proficiencyBonus;
 
         if (skillEnabled) {
           savingThrowElements.enable.click();
@@ -121,7 +121,11 @@ describe('when the show section is clicked', () => {
         const skill = Skills.skills[singleSkillUnderTest];
         expect(skill.isEnabled).toBe(skillEnabled);
         expect(skill.isProficient).toBe(skillProficient);
-        expect(skill.override).toBe(skillOverride);
+        if (skillOverride === '') {
+          expect(skill.override).toBe(NaN);
+        } else {
+          expect(skill.override).toBe(skillOverride);
+        }        
         expect(skill.calculateModifier()).toBe(expectedModifier);
 
         let formattedModifier = formatModifier(expectedModifier);
@@ -160,7 +164,7 @@ describe('when the show section is clicked', () => {
         Abilities.abilities['intelligence'].score = 13;
         Abilities.abilities['wisdom'].score = 11;
         Abilities.abilities['charisma'].score = 20;
-        ProficiencyBonus.value = 3;
+        ProficiencyBonus.proficiencyBonus = 3;
 
         if (athletics) {
           let elements = skillsSection.editElements.skill['athletics'];

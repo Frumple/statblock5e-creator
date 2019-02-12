@@ -25,8 +25,7 @@ export default class AbilityScoresSection extends sectionModule.Section {
   }
 
   onInputAbilityScore(key) {
-    let scoreElement = this.editElements.score[key];
-    let score = parseInt(scoreElement.value, 10);
+    let score = this.editElements.score[key].valueAsInt;
     
     if (! isNaN(score)) {
       Abilities.abilities[key].score = score;
@@ -54,17 +53,16 @@ export default class AbilityScoresSection extends sectionModule.Section {
   }  
 
   onInputProficiencyBonus() {
-    let proficiencyBonusElement = this.editElements.proficiencyBonus;
-    let bonus = parseInt(proficiencyBonusElement.value, 10);
+    let proficiencyBonus = this.editElements.proficiencyBonus.valueAsInt;
 
-    if (! isNaN(bonus)) {
-      ProficiencyBonus.value = bonus;
+    if (! isNaN(proficiencyBonus)) {
+      ProficiencyBonus.proficiencyBonus = proficiencyBonus;
     
       let changeEvent = new CustomEvent('proficiencyBonusChanged', {
         bubbles: true,
         composed: true,
         detail: {
-          proficiencyBonus: bonus
+          proficiencyBonus: proficiencyBonus
         }
       });
       this.dispatchEvent(changeEvent);

@@ -10,14 +10,14 @@ export default class IntegerInput extends CustomBuiltinInputElement {
 }
 
 export let IntegerInputMixin = {
-  iniitalizeMixin() {
+  initializeMixin() {
     this.addEventListener('input', () => {
       if (this.value) {
-        let value = parseInt(this.value, 10);
+        let value = this.valueAsInt;
 
-        if (this.min && value < parseInt(this.min, 10)) {
+        if (this.min && value < this.valueAsMin) {
           this.value = this.min;
-        } else if(this.max && value > parseInt(this.max, 10)) {
+        } else if(this.max && value > this.valueAsMax) {
           this.value = this.max;
         } else {
           // Used to eliminate leading zeroes from the inputted value
@@ -25,5 +25,17 @@ export let IntegerInputMixin = {
         }
       }
     });
+  },
+  
+  get valueAsInt() {
+    return parseInt(this.value, 10);
+  },
+
+  get minAsInt() {
+    return parseInt(this.min, 10);
+  },
+
+  get maxAsInt() {
+    return parseInt(this.max, 10);
   }
 };

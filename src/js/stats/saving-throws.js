@@ -49,7 +49,7 @@ class SavingThrow {
       }
 
       if (this.isProficient) {
-        savingThrowModifier += ProficiencyBonus.value;
+        savingThrowModifier += ProficiencyBonus.proficiencyBonus;
       }
     }
     savingThrowModifier += Abilities.abilities[this.abilityName].modifier;

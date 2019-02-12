@@ -70,7 +70,7 @@ export default class SavingThrowsSection extends sectionModule.Section {
   }
 
   onInputSavingThrowOverride(key) {
-    let overrideValue = parseInt(this.editElements.savingThrow[key].override.value, 10);
+    let overrideValue = this.editElements.savingThrow[key].override.valueAsInt;
     SavingThrows.savingThrows[key].override = overrideValue;
 
     this.updateEditSectionModifier(key);

@@ -102,21 +102,21 @@ describe('when the show section is clicked', () => {
         it.each
         `
           description                                | blindsight | darkvision | tremorsense | truesight | expectedText
-          ${'all blank'}                             | ${NaN}     | ${NaN}     | ${NaN}      | ${NaN}    | ${'passive Perception 10'}
-          ${'blindsight only'}                       | ${30}      | ${NaN}     | ${NaN}      | ${NaN}    | ${'blindsight 30 ft., passive Perception 10'}
-          ${'darkvision only'}                       | ${NaN}     | ${60}      | ${NaN}      | ${NaN}    | ${'darkvision 60 ft., passive Perception 10'}
-          ${'tremorsense only'}                      | ${NaN}     | ${NaN}     | ${90}       | ${NaN}    | ${'tremorsense 90 ft., passive Perception 10'}
-          ${'truesight only'}                        | ${NaN}     | ${NaN}     | ${NaN}      | ${120}    | ${'truesight 120 ft., passive Perception 10'}
-          ${'blindsight + darkvision'}               | ${15}      | ${40}      | ${NaN}      | ${NaN}    | ${'blindsight 15 ft., darkvision 40 ft., passive Perception 10'}
-          ${'blindsight + tremorsense'}              | ${50}      | ${NaN}     | ${35}       | ${NaN}    | ${'blindsight 50 ft., tremorsense 35 ft., passive Perception 10'}
-          ${'blindsight + truesight'}                | ${25}      | ${NaN}     | ${NaN}      | ${80}     | ${'blindsight 25 ft., truesight 80 ft., passive Perception 10'}
-          ${'darkvision + tremorsense'}              | ${NaN}     | ${45}      | ${100}      | ${NaN}    | ${'darkvision 45 ft., tremorsense 100 ft., passive Perception 10'}
-          ${'darkvision + truesight'}                | ${NaN}     | ${180}     | ${NaN}      | ${20}     | ${'darkvision 180 ft., truesight 20 ft., passive Perception 10'}
-          ${'tremorsense + truesight'}               | ${NaN}     | ${NaN}     | ${75}       | ${35}     | ${'tremorsense 75 ft., truesight 35 ft., passive Perception 10'}
-          ${'blindsight + darkvision + tremorsense'} | ${150}     | ${55}      | ${5}        | ${NaN}    | ${'blindsight 150 ft., darkvision 55 ft., tremorsense 5 ft., passive Perception 10'}
-          ${'blindsight + darkvision + truesight'}   | ${65}      | ${10}      | ${NaN}      | ${0}      | ${'blindsight 65 ft., darkvision 10 ft., truesight 0 ft., passive Perception 10'}
-          ${'blindsight + tremorsense + truesight'}  | ${85}      | ${NaN}     | ${70}       | ${95}     | ${'blindsight 85 ft., tremorsense 70 ft., truesight 95 ft., passive Perception 10'}
-          ${'darkvision + tremorsense + truesight'}  | ${NaN}     | ${105}     | ${110}      | ${115}    | ${'darkvision 105 ft., tremorsense 110 ft., truesight 115 ft., passive Perception 10'}
+          ${'all blank'}                             | ${''}      | ${''}      | ${''}       | ${''}     | ${'passive Perception 10'}
+          ${'blindsight only'}                       | ${30}      | ${''}      | ${''}       | ${''}     | ${'blindsight 30 ft., passive Perception 10'}
+          ${'darkvision only'}                       | ${''}      | ${60}      | ${''}       | ${''}     | ${'darkvision 60 ft., passive Perception 10'}
+          ${'tremorsense only'}                      | ${''}      | ${''}      | ${90}       | ${''}     | ${'tremorsense 90 ft., passive Perception 10'}
+          ${'truesight only'}                        | ${''}      | ${''}      | ${''}       | ${120}    | ${'truesight 120 ft., passive Perception 10'}
+          ${'blindsight + darkvision'}               | ${15}      | ${40}      | ${''}       | ${''}     | ${'blindsight 15 ft., darkvision 40 ft., passive Perception 10'}
+          ${'blindsight + tremorsense'}              | ${50}      | ${''}      | ${35}       | ${''}     | ${'blindsight 50 ft., tremorsense 35 ft., passive Perception 10'}
+          ${'blindsight + truesight'}                | ${25}      | ${''}      | ${''}       | ${80}     | ${'blindsight 25 ft., truesight 80 ft., passive Perception 10'}
+          ${'darkvision + tremorsense'}              | ${''}      | ${45}      | ${100}      | ${''}     | ${'darkvision 45 ft., tremorsense 100 ft., passive Perception 10'}
+          ${'darkvision + truesight'}                | ${''}      | ${180}     | ${''}       | ${20}     | ${'darkvision 180 ft., truesight 20 ft., passive Perception 10'}
+          ${'tremorsense + truesight'}               | ${''}      | ${''}      | ${75}       | ${35}     | ${'tremorsense 75 ft., truesight 35 ft., passive Perception 10'}
+          ${'blindsight + darkvision + tremorsense'} | ${150}     | ${55}      | ${5}        | ${''}     | ${'blindsight 150 ft., darkvision 55 ft., tremorsense 5 ft., passive Perception 10'}
+          ${'blindsight + darkvision + truesight'}   | ${65}      | ${10}      | ${''}       | ${0}      | ${'blindsight 65 ft., darkvision 10 ft., truesight 0 ft., passive Perception 10'}
+          ${'blindsight + tremorsense + truesight'}  | ${85}      | ${''}      | ${70}       | ${95}     | ${'blindsight 85 ft., tremorsense 70 ft., truesight 95 ft., passive Perception 10'}
+          ${'darkvision + tremorsense + truesight'}  | ${''}      | ${105}     | ${110}      | ${115}    | ${'darkvision 105 ft., tremorsense 110 ft., truesight 115 ft., passive Perception 10'}
           ${'all senses'}                            | ${125}     | ${130}     | ${135}      | ${140}    | ${'blindsight 125 ft., darkvision 130 ft., tremorsense 135 ft., truesight 140 ft., passive Perception 10'}
           ${'maximum values'}                        | ${999}     | ${999}     | ${999}      | ${999}    | ${'blindsight 999 ft., darkvision 999 ft., tremorsense 999 ft., truesight 999 ft., passive Perception 10'}
         `
@@ -161,7 +161,7 @@ describe('should calculate the passive perception based on the following conditi
   ('$description: {wisdomScore="$wisdomScore", proficiencyBonus="$proficiencyBonus", perceptionEnabled="$perceptionEnabled", perceptionProficient="$perceptionProficient", perceptionOverride="$perceptionOverride"} => $expectedPassivePerception',
   ({wisdomScore, proficiencyBonus, perceptionEnabled, perceptionProficient, perceptionOverride, expectedPassivePerception}) => {
     Abilities.abilities['wisdom'].score = wisdomScore;
-    ProficiencyBonus.value = proficiencyBonus;
+    ProficiencyBonus.proficiencyBonus = proficiencyBonus;
 
     let skill = Skills.skills['perception'];
     skill.isEnabled = perceptionEnabled;

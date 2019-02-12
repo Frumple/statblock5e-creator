@@ -108,7 +108,7 @@ describe('when the show section is clicked', () => {
 
     describe('and the hit die quantity is changed, and the save button is clicked', () => {
       it('should display an error if the hit die quantity field is not a valid number, and the hit die quantity should not be saved', () => {
-        inputValueAndTriggerEvent(hitPointsSection.editElements.hitDieQuantity, NaN);
+        inputValueAndTriggerEvent(hitPointsSection.editElements.hitDieQuantity, '');
 
         expect(HitPoints.useHitDie).toBe(true);
         expect(HitPoints.hitDieQuantity).toBe(1);
@@ -125,8 +125,8 @@ describe('when the show section is clicked', () => {
       });
 
       it('should display only one error if the hit points and hit die quantity fields are both not valid numbers, and neither should be saved', () => {
-        inputValueAndTriggerEvent(hitPointsSection.editElements.hitPoints, NaN);
-        inputValueAndTriggerEvent(hitPointsSection.editElements.hitDieQuantity, NaN);
+        inputValueAndTriggerEvent(hitPointsSection.editElements.hitPoints, '');
+        inputValueAndTriggerEvent(hitPointsSection.editElements.hitDieQuantity, '');
 
         expect(HitPoints.useHitDie).toBe(true);
         expect(HitPoints.hitDieQuantity).toBe(1);
@@ -198,7 +198,7 @@ describe('when the show section is clicked', () => {
       });
 
       it('should display an error if the hit points field is not a valid number, and the hit points should not be saved', () => {
-        inputValueAndTriggerEvent(hitPointsSection.editElements.hitPoints, NaN);
+        inputValueAndTriggerEvent(hitPointsSection.editElements.hitPoints, '');
 
         expect(HitPoints.useHitDie).toBe(false);
         expect(HitPoints.hitDieQuantity).toBe(1);
@@ -215,8 +215,8 @@ describe('when the show section is clicked', () => {
       });
 
       it('should display only one error if the hit points and hit die quantity fields are both not valid numbers, and neither should be saved', () => {
-        inputValueAndTriggerEvent(hitPointsSection.editElements.hitPoints, NaN);
-        inputValueAndTriggerEvent(hitPointsSection.editElements.hitDieQuantity, NaN);
+        inputValueAndTriggerEvent(hitPointsSection.editElements.hitPoints, '');
+        inputValueAndTriggerEvent(hitPointsSection.editElements.hitDieQuantity, '');
 
         expect(HitPoints.useHitDie).toBe(false);
         expect(HitPoints.hitDieQuantity).toBe(1);

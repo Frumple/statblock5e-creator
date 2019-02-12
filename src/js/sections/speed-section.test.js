@@ -106,24 +106,24 @@ describe('when the show section is clicked', () => {
         it.each
         `
           description                        | walk   | burrow | climb  | fly    | hover    | swim   | expectedText
-          ${'all blank'}                     | ${NaN} | ${NaN} | ${NaN} | ${NaN} | ${false} | ${NaN} | ${'0 ft.'}
-          ${'walk only'}                     | ${30}  | ${NaN} | ${NaN} | ${NaN} | ${false} | ${NaN} | ${'30 ft.'}
-          ${'burrow only'}                   | ${NaN} | ${20}  | ${NaN} | ${NaN} | ${false} | ${NaN} | ${'0 ft., burrow 20 ft.'}
-          ${'climb only'}                    | ${NaN} | ${NaN} | ${15}  | ${NaN} | ${false} | ${NaN} | ${'0 ft., climb 15 ft.'}
-          ${'fly only'}                      | ${NaN} | ${NaN} | ${NaN} | ${60}  | ${false} | ${NaN} | ${'0 ft., fly 60 ft.'}
-          ${'fly + hover only'}              | ${NaN} | ${NaN} | ${NaN} | ${90}  | ${true}  | ${NaN} | ${'0 ft., fly 90 ft. (hover)'}
-          ${'hover not visible without fly'} | ${40}  | ${NaN} | ${NaN} | ${NaN} | ${true}  | ${NaN} | ${'40 ft.'}
-          ${'swim only'}                     | ${NaN} | ${NaN} | ${NaN} | ${NaN} | ${false} | ${45}  | ${'0 ft., swim 45 ft.'}
-          ${'walk + swim'}                   | ${50}  | ${30}  | ${NaN} | ${NaN} | ${false} | ${NaN} | ${'50 ft., burrow 30 ft.'}
-          ${'walk + climb'}                  | ${10}  | ${NaN} | ${10}  | ${NaN} | ${false} | ${NaN} | ${'10 ft., climb 10 ft.'}
-          ${'walk + fly'}                    | ${20}  | ${NaN} | ${NaN} | ${120} | ${false} | ${NaN} | ${'20 ft., fly 120 ft.'}
-          ${'walk + fly + hover'}            | ${10}  | ${NaN} | ${NaN} | ${25}  | ${true}  | ${NaN} | ${'10 ft., fly 25 ft. (hover)'}
-          ${'walk + swim'}                   | ${30}  | ${NaN} | ${NaN} | ${NaN} | ${false} | ${50}  | ${'30 ft., swim 50 ft.'}
-          ${'walk + burrow + fly'}           | ${30}  | ${15}  | ${NaN} | ${60}  | ${false} | ${NaN} | ${'30 ft., burrow 15 ft., fly 60 ft.'}
-          ${'walk + climb + fly'}            | ${40}  | ${NaN} | ${40}  | ${80}  | ${false} | ${NaN} | ${'40 ft., climb 40 ft., fly 80 ft.'}
-          ${'walk + fly + swim'}             | ${30}  | ${NaN} | ${NaN} | ${60}  | ${false} | ${30}  | ${'30 ft., fly 60 ft., swim 30 ft.'}
-          ${'walk + climb + fly + swim'}     | ${50}  | ${NaN} | ${25}  | ${100} | ${false} | ${75}  | ${'50 ft., climb 25 ft., fly 100 ft., swim 75 ft.'}
-          ${'walk + burrow + fly + swim'}    | ${40}  | ${30}  | ${NaN} | ${80}  | ${false} | ${40}  | ${'40 ft., burrow 30 ft., fly 80 ft., swim 40 ft.'}
+          ${'all blank'}                     | ${''}  | ${''}  | ${''}  | ${''}  | ${false} | ${''}  | ${'0 ft.'}
+          ${'walk only'}                     | ${30}  | ${''}  | ${''}  | ${''}  | ${false} | ${''}  | ${'30 ft.'}
+          ${'burrow only'}                   | ${''}  | ${20}  | ${''}  | ${''}  | ${false} | ${''}  | ${'0 ft., burrow 20 ft.'}
+          ${'climb only'}                    | ${''}  | ${''}  | ${15}  | ${''}  | ${false} | ${''}  | ${'0 ft., climb 15 ft.'}
+          ${'fly only'}                      | ${''}  | ${''}  | ${''}  | ${60}  | ${false} | ${''}  | ${'0 ft., fly 60 ft.'}
+          ${'fly + hover only'}              | ${''}  | ${''}  | ${''}  | ${90}  | ${true}  | ${''}  | ${'0 ft., fly 90 ft. (hover)'}
+          ${'hover not visible without fly'} | ${40}  | ${''}  | ${''}  | ${''}  | ${true}  | ${''}  | ${'40 ft.'}
+          ${'swim only'}                     | ${''}  | ${''}  | ${''}  | ${''}  | ${false} | ${45}  | ${'0 ft., swim 45 ft.'}
+          ${'walk + swim'}                   | ${50}  | ${30}  | ${''}  | ${''}  | ${false} | ${''}  | ${'50 ft., burrow 30 ft.'}
+          ${'walk + climb'}                  | ${10}  | ${''}  | ${10}  | ${''}  | ${false} | ${''}  | ${'10 ft., climb 10 ft.'}
+          ${'walk + fly'}                    | ${20}  | ${''}  | ${''}  | ${120} | ${false} | ${''}  | ${'20 ft., fly 120 ft.'}
+          ${'walk + fly + hover'}            | ${10}  | ${''}  | ${''}  | ${25}  | ${true}  | ${''}  | ${'10 ft., fly 25 ft. (hover)'}
+          ${'walk + swim'}                   | ${30}  | ${''}  | ${''}  | ${''}  | ${false} | ${50}  | ${'30 ft., swim 50 ft.'}
+          ${'walk + burrow + fly'}           | ${30}  | ${15}  | ${''}  | ${60}  | ${false} | ${''}  | ${'30 ft., burrow 15 ft., fly 60 ft.'}
+          ${'walk + climb + fly'}            | ${40}  | ${''}  | ${40}  | ${80}  | ${false} | ${''}  | ${'40 ft., climb 40 ft., fly 80 ft.'}
+          ${'walk + fly + swim'}             | ${30}  | ${''}  | ${''}  | ${60}  | ${false} | ${30}  | ${'30 ft., fly 60 ft., swim 30 ft.'}
+          ${'walk + climb + fly + swim'}     | ${50}  | ${''}  | ${25}  | ${100} | ${false} | ${75}  | ${'50 ft., climb 25 ft., fly 100 ft., swim 75 ft.'}
+          ${'walk + burrow + fly + swim'}    | ${40}  | ${30}  | ${''}  | ${80}  | ${false} | ${40}  | ${'40 ft., burrow 30 ft., fly 80 ft., swim 40 ft.'}
           ${'all speeds'}                    | ${5}   | ${10}  | ${15}  | ${20}  | ${false} | ${25}  | ${'5 ft., burrow 10 ft., climb 15 ft., fly 20 ft., swim 25 ft.'}
           ${'all speeds + hover'}            | ${150} | ${120} | ${100} | ${240} | ${true}  | ${185} | ${'150 ft., burrow 120 ft., climb 100 ft., fly 240 ft. (hover), swim 185 ft.'}
           ${'maximum values'}                | ${999} | ${999} | ${999} | ${999} | ${true}  | ${999} | ${'999 ft., burrow 999 ft., climb 999 ft., fly 999 ft. (hover), swim 999 ft.'}

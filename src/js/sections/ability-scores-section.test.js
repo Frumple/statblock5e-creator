@@ -5,12 +5,14 @@ jest.mock('/src/js/elements/error-messages.js');
 import Abilities from '/src/js/stats/abilities.js';
 import ProficiencyBonus from '/src/js/stats/proficiency-bonus.js';
 
+import defineBuiltinCustomElements from '/src/js/helpers/test/define-builtin-custom-elements.js';
 import { inputValueAndTriggerEvent } from '/src/js/helpers/element-helpers.js';
 import { formatModifier } from '/src/js/helpers/string-formatter.js';
 
 let abilityScoresSection;
 
 beforeAll(async() => {
+  defineBuiltinCustomElements();
   await AbilityScoresSection.define();
 });
 
@@ -20,6 +22,7 @@ beforeEach(() => {
 
   abilityScoresSection = new AbilityScoresSection();
   abilityScoresSection.errorMessages = new ErrorMessages();
+  abilityScoresSection.initializeCustomEditElements();
 });
 
 afterEach(() => {
@@ -98,7 +101,7 @@ describe('when the show section is clicked', () => {
         let oldScore = ability.score;
         let oldModifier = ability.modifier;
 
-        inputValueAndTriggerEvent(abilityScoresSection.editElements.score[abilityName], NaN);
+        inputValueAndTriggerEvent(abilityScoresSection.editElements.score[abilityName], '');
 
         expect(ability.score).toBe(oldScore);
         expect(ability.modifier).toBe(oldModifier);
@@ -133,21 +136,21 @@ describe('when the show section is clicked', () => {
       ({proficiencyBonus}) => {
         inputValueAndTriggerEvent(abilityScoresSection.editElements.proficiencyBonus, proficiencyBonus);
 
-        expect(ProficiencyBonus.value).toBe(proficiencyBonus);
+        expect(ProficiencyBonus.proficiencyBonus).toBe(proficiencyBonus);
 
         abilityScoresSection.editElements.saveAction.click();
 
-        expect(ProficiencyBonus.value).toBe(proficiencyBonus);
+        expect(ProficiencyBonus.proficiencyBonus).toBe(proficiencyBonus);
       });
       /* eslint-enable indent, no-unexpected-multiline */
     });
 
     it('should display an error if the proficiency bonus is not a valid number, and the proficiency bonus is not saved', () => {
-      let oldProficiencyBonus = ProficiencyBonus.value;
+      let oldProficiencyBonus = ProficiencyBonus.proficiencyBonus;
 
-      inputValueAndTriggerEvent(abilityScoresSection.editElements.proficiencyBonus, NaN);
+      inputValueAndTriggerEvent(abilityScoresSection.editElements.proficiencyBonus, '');
 
-      expect(ProficiencyBonus.value).toBe(oldProficiencyBonus);
+      expect(ProficiencyBonus.proficiencyBonus).toBe(oldProficiencyBonus);
 
       abilityScoresSection.editElements.saveAction.click();
 
@@ -195,7 +198,7 @@ describe('when the show section is clicked', () => {
           let formattedModifier = `(${formatModifier(expectedModifier)})`;
           expect(abilityScoresSection.editElements.modifier[key]).toHaveTextContent(formattedModifier);
         }
-        expect(ProficiencyBonus.value).toBe(proficiencyBonus);
+        expect(ProficiencyBonus.proficiencyBonus).toBe(proficiencyBonus);
 
         abilityScoresSection.editElements.saveAction.click();
 

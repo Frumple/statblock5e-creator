@@ -36,7 +36,7 @@ export default class HitPointsSection extends sectionModule.Section {
 
   onInputHitPoints() {
     if (! HitPoints.useHitDie) {
-      let hitPoints = parseInt(this.editElements.hitPoints.value, 10);
+      let hitPoints = this.editElements.hitPoints.valueAsInt;
 
       if (! isNaN(hitPoints)) {
         HitPoints.hitPoints = hitPoints;
@@ -51,7 +51,7 @@ export default class HitPointsSection extends sectionModule.Section {
   }
 
   onInputHitDieQuantity() {
-    let hitDieQuantity = parseInt(this.editElements.hitDieQuantity.value, 10);
+    let hitDieQuantity = this.editElements.hitDieQuantity.valueAsInt;
 
     if (! isNaN(hitDieQuantity)) {
       HitPoints.hitDieQuantity = hitDieQuantity;

@@ -1,5 +1,6 @@
 import CustomElementMixins from '/src/js/helpers/test/custom-element-mixins.js';
 import isRunningInNode from '/src/js/helpers/is-running-in-node.js';
+import { copyObjectProperties } from '/src/js/helpers/object-helpers.js';
 
 export default class CustomBuiltinInputElement extends HTMLInputElement {
   static get elementName() {
@@ -23,7 +24,7 @@ export default class CustomBuiltinInputElement extends HTMLInputElement {
   constructor() {
     super();
 
-    Object.assign(this, this.constructor.mixin);
-    this.iniitalizeMixin();
+    copyObjectProperties(this, this.constructor.mixin);
+    this.initializeMixin();
   }
 }
