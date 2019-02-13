@@ -15,14 +15,14 @@ export default class AttributeDataList extends HTMLDataListElement {
   constructor() {
     super();
 
-    copyObjectProperties(this, this.constructor.mixin);
+    copyObjectProperties(this, AttributeDataListMixin);
     this.initializeMixin();
   }
 }
 
 const AttributeDataListMixin = {
   initializeMixin() {
-
+    return;
   },
 
   setOptionEnabled(optionText, isEnabled) {

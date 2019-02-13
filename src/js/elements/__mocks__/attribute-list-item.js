@@ -13,9 +13,18 @@ export default class AttributeListItem {
   }
 
   remove() {
-    let index = this._list.indexOf(this);
-    if (index !== -1) {
-      this._list.splice(index, 1);
+    let removeEvent = new CustomEvent('attributeListItemRemoved', {
+      bubbles: true,
+      composed: true,
+      detail: {
+        itemText: this.text
+      }
+    });
+    document.dispatchEvent(removeEvent);
+
+    let index = this._parent._list.indexOf(this);
+    if (index >= 0) {
+      this._parent._list.splice(index, 1);
     }
   }  
 }

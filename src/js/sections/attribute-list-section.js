@@ -68,8 +68,7 @@ export default class AttributeListSection extends sectionModule.Section {
     this.editElements.input.value = '';
 
     let text = '';
-    let items = this.editElements.list.items;
-    for (const itemText of items) {
+    for (const itemText of this.editElements.list.itemsAsText) {
       if (text === '') {
         text += itemText;
       } else {

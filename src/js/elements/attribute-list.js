@@ -14,20 +14,24 @@ export default class AttributeList extends CustomAutonomousElement {
     this.draggedItem = null;
   }
 
-  get items() {
-    let listItemElements = this.querySelectorAll('attribute-list-item');
-    let elementArray = Array.from(listItemElements);
-    return elementArray.map(element => element.text);
+  get itemsAsText() {
+    let listItemElements = Array.from(this.querySelectorAll('attribute-list-item'));
+    return listItemElements.map(element => element.text);
   }
 
   contains(itemText) {
-    return this.items.includes(itemText);
+    return this.itemsAsText.includes(itemText);
   }
 
   addItem(itemText) {
     let listItemElement = document.createElement('attribute-list-item');
     listItemElement.text = itemText;
     this.appendChild(listItemElement);
+  }
+
+  findItem(itemText) {
+    let listItemElements = Array.from(this.querySelectorAll('attribute-list-item'));
+    return listItemElements.filter(element => element.text === itemText)[0];
   }
 
   insertDraggedItemBefore(element) {
