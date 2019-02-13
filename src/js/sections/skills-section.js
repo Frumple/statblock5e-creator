@@ -16,7 +16,6 @@ export default class SkillsSection extends sectionModule.Section {
           SkillsShowElements,
           SkillsEditElements);
 
-    this.mode = 'hidden';
     this.empty = true;
   }
 

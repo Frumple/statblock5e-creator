@@ -12,7 +12,6 @@ export default class ConditionImmunitiesSection extends AttributeListSection {
     super(ConditionImmunitiesSection.templatePaths,
           'Condition Immunities');
 
-    this.mode = 'hidden';
     this.empty = true;
   }
 }

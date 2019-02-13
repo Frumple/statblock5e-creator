@@ -12,7 +12,6 @@ export default class DamageVulnerabilitiesSection extends AttributeListSection {
     super(DamageVulnerabilitiesSection.templatePaths,
           'Damage Vulnerabilities');
 
-    this.mode = 'hidden';
     this.empty = true;
   }
 }

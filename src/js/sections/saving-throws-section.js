@@ -17,7 +17,6 @@ export default class SavingThrowsSection extends sectionModule.Section {
           SavingThrowsShowElements,
           SavingThrowsEditElements);
           
-    this.mode = 'hidden';
     this.empty = true;
   }
 

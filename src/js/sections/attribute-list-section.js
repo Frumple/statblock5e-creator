@@ -61,7 +61,11 @@ export default class AttributeListSection extends sectionModule.Section {
   }
 
   checkForErrors() {
-    return;
+    const input = this.editElements.input;
+    if (input.value !== '') {
+      const message = 'Cannot save while the item text field is not blank. Clear the field or add the item, then try again.';
+      this.errorMessages.add(input, message);
+    }
   }
 
   updateShowSection() {

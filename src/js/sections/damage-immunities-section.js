@@ -12,7 +12,6 @@ export default class DamageImmunitiesSection extends AttributeListSection {
     super(DamageImmunitiesSection.templatePaths,
           'Damage Immunities');
 
-    this.mode = 'hidden';
     this.empty = true;
   }
 }

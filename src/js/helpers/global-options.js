@@ -1,6 +1,6 @@
 class GlobalOptions {
   constructor() {
-    this.showEmptyAttributes = false;
+    this.showEmptyAttributes = true;
   }
 }
 
