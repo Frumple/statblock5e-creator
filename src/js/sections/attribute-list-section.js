@@ -17,22 +17,26 @@ export default class AttributeListSection extends sectionModule.Section {
   }
 
   connectedCallback() {
-    this.editElements.input.addEventListener('keydown', (keyEvent) => {
-      if (keyEvent.key === 'Enter') {
-        keyEvent.preventDefault();
+    this.editElements.input.addEventListener('keydown', this.onEnterKeyDownOnInputField.bind(this));
+    this.editElements.addButton.addEventListener('click', this.onClickAddButton.bind(this));
+    this.addEventListener('attributeListItemRemoved', this.onAttributeListItemRemoved.bind(this));
+  }
 
-        this.addItemFromInput();
-      }
-    });
+  onEnterKeyDownOnInputField(keyEvent) {
+    if (keyEvent.key === 'Enter') {
+      keyEvent.preventDefault();
 
-    this.editElements.addButton.addEventListener('click', () => {
       this.addItemFromInput();
-    });
+    }
+  }
 
-    this.addEventListener('attributeListItemRemoved', (event) => {
-      let itemText = event.detail.itemText;
-      this.editElements.datalist.setOptionEnabled(itemText, true);
-    });
+  onClickAddButton() {
+    this.addItemFromInput();
+  }
+
+  onAttributeListItemRemoved(event) {
+    let itemText = event.detail.itemText;
+    this.editElements.datalist.setOptionEnabled(itemText, true);
   }
 
   addItemFromInput() {
