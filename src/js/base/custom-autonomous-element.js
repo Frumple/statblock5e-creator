@@ -24,6 +24,7 @@ class CustomAutonomousElement extends HTMLElement {
   constructor(templatePaths) {
     super();
 
+    this.isInitialized = false;
     this.attachShadow({mode: 'open'});
 
     for (const name of templatePaths.keys()) {

@@ -8,6 +8,7 @@
 
 .list-item__container:hover {
   background: LightCyan;
+  cursor: move;
 }
 
 .list-item__container_dragover-top {
@@ -23,8 +24,9 @@
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
+  cursor: move;
 }
 
-.list-item__remove-button {
-
+.list-item__remove-button:hover {
+  cursor: pointer;
 }
