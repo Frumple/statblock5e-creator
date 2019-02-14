@@ -36,7 +36,8 @@ export default class AttributeListItem extends CustomAutonomousElement {
   }
 
   onDragStartItem(event) {
-    event.dataTransfer.setData('text', 'google');
+    // Drag and Drop on Firefox only works if data is set
+    event.dataTransfer.setData('text', '');
 
     let target = event.target;
     target.parentNode.draggedItem = target;
