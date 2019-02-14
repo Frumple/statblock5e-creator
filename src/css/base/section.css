@@ -54,7 +54,10 @@
 
 .section__action {
   height: 100%;
-  width: 50px;
+  width: 55px;
+  max-height: 55px;
+  padding-top: 0;
+  padding-bottom: 0;
   justify-self: end;
   font-family: inherit;
   font-size: inherit;

@@ -4,7 +4,7 @@
 
 .senses-edit-section {
   display: grid;
-  grid-template-columns: 90px auto auto auto;
+  grid-template-columns: 110px auto auto auto;
   grid-template-rows: auto auto auto auto 5px auto 5px auto auto;
   grid-column-gap: 5px;
   align-items: center;
