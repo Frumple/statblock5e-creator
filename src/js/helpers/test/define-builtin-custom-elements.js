@@ -1,7 +1,7 @@
-import EnableDisableElementsCheckbox from '/src/js/extensions/enable-disable-elements-checkbox.js';
-import IntegerInput from '/src/js/extensions/integer-input.js';
-import TextInput from '/src/js/extensions/text-input.js';
-import AttributeDataList from '/src/js/extensions/attribute-datalist';
+import EnableDisableElementsCheckbox from '/src/js/elements/builtin/enable-disable-elements-checkbox.js';
+import IntegerInput from '/src/js/elements/builtin/integer-input.js';
+import TextInput from '/src/js/elements/builtin/text-input.js';
+import AttributeDataList from '/src/js/elements/builtin/attribute-datalist';
 
 export default function defineBuiltinCustomElements() {
   const builtinCustomElements = [];

@@ -1,11 +1,11 @@
 import CustomElementMixins from '/src/js/helpers/test/custom-element-mixins.js';
 import { traverseElements } from '/src/js/helpers/element-helpers.js';
 
-import AttributeList from '/src/js/elements/attribute-list.js';
-import ErrorMessages from '/src/js/elements/error-messages.js';
+import AttributeList from '/src/js/elements/autonomous/attribute-list.js';
+import ErrorMessages from '/src/js/elements/autonomous/error-messages.js';
 
-jest.mock('/src/js/elements/attribute-list.js');
-jest.mock('/src/js/elements/error-messages.js');
+jest.mock('/src/js/elements/autonomous/attribute-list.js');
+jest.mock('/src/js/elements/autonomous/error-messages.js');
 
 /*
 JSDOM does not currently support custom elements, so in our tests,
