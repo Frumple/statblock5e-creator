@@ -40,7 +40,7 @@ describe('when the show section is clicked', () => {
       inputValueAndTriggerEvent(headingSection.editElements.type, 'aberration');
       inputValueAndTriggerEvent(headingSection.editElements.alignment, 'lawful evil');
     
-      headingSection.editElements.saveAction.click();
+      headingSection.editElements.saveButton.click();
 
       expect(headingSection).toBeInMode('show');
       expect(headingSection.showElements.title).toHaveTextContent('Beholder');
@@ -50,7 +50,7 @@ describe('when the show section is clicked', () => {
     it('should capitalize the first letter in the creature name', () => {
       inputValueAndTriggerEvent(headingSection.editElements.title, 'young red dragon');
 
-      headingSection.editElements.saveAction.click();
+      headingSection.editElements.saveButton.click();
 
       expect(headingSection).toBeInMode('show');
       expect(headingSection.showElements.title).toHaveTextContent('Young red dragon');
@@ -62,7 +62,7 @@ describe('when the show section is clicked', () => {
       inputValueAndTriggerEvent(headingSection.editElements.type, '    monstrosity        ');
       inputValueAndTriggerEvent(headingSection.editElements.alignment, 'unaligned');
 
-      headingSection.editElements.saveAction.click();
+      headingSection.editElements.saveButton.click();
 
       expect(headingSection).toBeInMode('show');
       expect(headingSection.showElements.title).toHaveTextContent('Purple Worm');
@@ -72,7 +72,7 @@ describe('when the show section is clicked', () => {
     it('should display an error if the creature name field is blank', () => {
       inputValueAndTriggerEvent(headingSection.editElements.title, '');
 
-      headingSection.editElements.saveAction.click();
+      headingSection.editElements.saveButton.click();
 
       expect(headingSection).toBeInMode('edit');
       expect(headingSection).toHaveSingleError(
@@ -83,7 +83,7 @@ describe('when the show section is clicked', () => {
     it('should display an error if the creature type field is blank', () => {
       inputValueAndTriggerEvent(headingSection.editElements.type, '');
 
-      headingSection.editElements.saveAction.click();
+      headingSection.editElements.saveButton.click();
 
       expect(headingSection).toBeInMode('edit');
       expect(headingSection).toHaveSingleError(
@@ -95,7 +95,7 @@ describe('when the show section is clicked', () => {
       inputValueAndTriggerEvent(headingSection.editElements.title, '');
       inputValueAndTriggerEvent(headingSection.editElements.type, '');
 
-      headingSection.editElements.saveAction.click();
+      headingSection.editElements.saveButton.click();
 
       expect(headingSection).toBeInMode('edit');
       expect(headingSection.errorMessages.errors.length).toBe(2);

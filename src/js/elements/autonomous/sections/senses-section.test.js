@@ -61,7 +61,7 @@ describe('when the show section is clicked', () => {
         let customText = 'darkvision 120 ft. (penetrates magical darkness), passive Perception 13';
         inputValueAndTriggerEvent(sensesSection.editElements.customText, customText);
 
-        sensesSection.editElements.saveAction.click();
+        sensesSection.editElements.saveButton.click();
 
         expect(sensesSection).toBeInMode('show');
         expect(sensesSection.showElements.text).toHaveTextContent(customText);
@@ -70,7 +70,7 @@ describe('when the show section is clicked', () => {
       it('should display an error if the custom text field is blank', () => {
         inputValueAndTriggerEvent(sensesSection.editElements.customText, '');
 
-        sensesSection.editElements.saveAction.click();
+        sensesSection.editElements.saveButton.click();
 
         expect(sensesSection).toBeInMode('edit');
         expect(sensesSection).toHaveSingleError(
@@ -127,7 +127,7 @@ describe('when the show section is clicked', () => {
           inputValueAndTriggerEvent(sensesSection.editElements.tremorsense, tremorsense);
           inputValueAndTriggerEvent(sensesSection.editElements.truesight, truesight);
 
-          sensesSection.editElements.saveAction.click();
+          sensesSection.editElements.saveButton.click();
 
           expect(sensesSection).toBeInMode('show');
           expect(sensesSection.showElements.text).toHaveTextContent(expectedText);
@@ -172,7 +172,7 @@ describe('should calculate the passive perception based on the following conditi
 
     expect(sensesSection.showElements.text).toHaveTextContent(`passive Perception ${expectedPassivePerception}`);
 
-    sensesSection.showElements.editAction.click();
+    sensesSection.showElements.section.click();
 
     expect(sensesSection.editElements.passivePerception).toHaveTextContent(expectedPassivePerception);    
   });

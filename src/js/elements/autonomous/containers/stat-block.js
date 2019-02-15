@@ -12,33 +12,53 @@ export default class StatBlock extends CustomAutonomousElement {
     super(StatBlock.templatePaths);
 
     this.headingSection = document.querySelector('heading-section');
-    this.topStats = document.querySelector('top-stats');
+    this.topStats = document.querySelector('top-stats');   
+  }
 
-    this.addEventListener('abilityScoreChanged', (event) => {
-      let abilityName = event.detail.abilityName;
+  connectedCallback() {
+    if (this.isConnected && ! this.isInitialized) {
+      this.addEventListener('abilityScoreChanged', this.onAbilityScoreChanged);  
+      this.addEventListener('proficiencyBonusChanged', this.onProficiencyBonusChanged);  
+      this.addEventListener('skillChanged', this.onSkillChanged);
 
-      if (abilityName === 'constitution') {
-        this.topStats.basicStats.hitPointsSection.updateHitPoints();
-      } else if (abilityName === 'wisdom') {
-        this.topStats.advancedStats.sensesSection.updatePassivePerception();
-      }
-
-      this.topStats.advancedStats.savingThrowsSection.updateModifiers(abilityName);
-      this.topStats.advancedStats.skillsSection.updateModifiers(abilityName);
-    });
-
-    this.addEventListener('proficiencyBonusChanged', () => {
-      this.topStats.advancedStats.savingThrowsSection.updateModifiers();
-      this.topStats.advancedStats.skillsSection.updateModifiers();
+      this.isInitialized = true;
+    }
+  }
+  
+  onAbilityScoreChanged() {
+    let abilityName = event.detail.abilityName;
+  
+    if (abilityName === 'constitution') {
+      this.topStats.basicStats.hitPointsSection.updateHitPoints();
+    } else if (abilityName === 'wisdom') {
       this.topStats.advancedStats.sensesSection.updatePassivePerception();
-    });
+    }
 
-    this.addEventListener('skillChanged', (event) => {
-      let skillName = event.detail.skillName;
+    this.topStats.advancedStats.savingThrowsSection.updateModifiers(abilityName);
+    this.topStats.advancedStats.skillsSection.updateModifiers(abilityName);
+  }
 
-      if (skillName === 'perception') {
-        this.topStats.advancedStats.sensesSection.updatePassivePerception();
-      }
-    });
+  onProficiencyBonusChanged() {
+    this.topStats.advancedStats.savingThrowsSection.updateModifiers();
+    this.topStats.advancedStats.skillsSection.updateModifiers();
+    this.topStats.advancedStats.sensesSection.updatePassivePerception();
+  }
+
+  onSkillChanged() {
+    let skillName = event.detail.skillName;
+  
+    if (skillName === 'perception') {
+      this.topStats.advancedStats.sensesSection.updatePassivePerception();
+    }
+  }
+
+  editAllSections() {
+    this.topStats.editAllSections();
+    this.headingSection.edit();
+  }
+
+  saveAllSections() {    
+    this.topStats.saveAllSections();
+    this.headingSection.save();
   }
 }

@@ -6,8 +6,8 @@ export function shouldAddASuggestedItem(section, itemText) {
 
   expect(section.editElements.list.itemsAsText).toEqual([itemText]);
 
-  section.editElements.saveAction.click();
-  section.editElements.saveAction.click();
+  section.editElements.saveButton.click();
+  section.editElements.saveButton.click();
 
   expect(section).toBeInMode('show');
   expect(section.showElements.text).toHaveTextContent(`${itemText}`);
@@ -19,7 +19,7 @@ export function shouldAddACustomItem(section, itemText) {
 
   expect(section.editElements.list.itemsAsText).toEqual([itemText]);
 
-  section.editElements.saveAction.click();
+  section.editElements.saveButton.click();
 
   expect(section).toBeInMode('show');
   expect(section.showElements.text).toHaveTextContent(`${itemText}`);
@@ -33,7 +33,7 @@ export function shouldAddManyItems(section, itemTexts) {
 
   expect(section.editElements.list.itemsAsText).toEqual(itemTexts);
 
-  section.editElements.saveAction.click();
+  section.editElements.saveButton.click();
 
   expect(section).toBeInMode('show');
   expect(section.showElements.text).toHaveTextContent(`${itemTexts.join(', ')}`);
@@ -63,7 +63,7 @@ export function shouldDisplayAnErrorIfAddingDuplicate(section, itemText) {
 export function shouldDisplayAnErrorIfSavingWithUnaddedInputText(section, itemText) {
   inputValueAndTriggerEvent(section.editElements.input, itemText);
 
-  section.editElements.saveAction.click();
+  section.editElements.saveButton.click();
 
   expect(section).toHaveSingleError(
     section.editElements.input,
@@ -93,7 +93,7 @@ export function shouldAddAndRemoveItem(section, itemText) {
 
   expect(section.editElements.list.itemsAsText).toEqual([]);
 
-  section.editElements.saveAction.click();
+  section.editElements.saveButton.click();
 
   expect(section).toBeInMode('show');
   expect(section.showElements.text).toHaveTextContent('');
@@ -111,7 +111,7 @@ export function shouldDeleteOneOfThreeItems(section, initialItems, itemToDelete,
 
   expect(section.editElements.list.itemsAsText).toEqual(expectedItems);
 
-  section.editElements.saveAction.click();
+  section.editElements.saveButton.click();
 
   expect(section).toBeInMode('show');
   expect(section.showElements.text).toHaveTextContent(expectedItems.join(', '));
@@ -127,7 +127,7 @@ export function shouldReorderOneOfThreeItems(section, initialItems, fromIndex, t
 
   expect(section.editElements.list.itemsAsText).toEqual(expectedItems);
 
-  section.editElements.saveAction.click();
+  section.editElements.saveButton.click();
 
   expect(section).toBeInMode('show');
   expect(section.showElements.text).toHaveTextContent(expectedItems.join(', '));

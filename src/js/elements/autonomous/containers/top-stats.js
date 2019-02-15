@@ -15,4 +15,16 @@ export default class TopStats extends CustomAutonomousElement {
     this.abilityScoresSection = document.querySelector('ability-scores-section');
     this.advancedStats = document.querySelector('advanced-stats');
   }
+
+  editAllSections() {
+    this.basicStats.editAllSections();
+    this.abilityScoresSection.edit();
+    this.advancedStats.editAllSections();
+  }
+
+  saveAllSections() {
+    this.basicStats.saveAllSections();
+    this.abilityScoresSection.save();
+    this.advancedStats.saveAllSections();
+  }
 }

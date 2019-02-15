@@ -131,7 +131,7 @@ describe('when the show section is clicked', () => {
         let formattedModifier = formatModifier(expectedModifier);
         expect(savingThrowElements.modifier).toHaveTextContent(formattedModifier);
 
-        skillsSection.editElements.saveAction.click();
+        skillsSection.editElements.saveButton.click();
 
         expect(skillsSection.showElements.text).toHaveTextContent(expectedText);
 
@@ -196,7 +196,7 @@ describe('when the show section is clicked', () => {
           inputValueAndTriggerEvent(elements.override, 0);
         }
 
-        skillsSection.editElements.saveAction.click();
+        skillsSection.editElements.saveButton.click();
 
         expect(skillsSection.showElements.text).toHaveTextContent(expectedText);
       });

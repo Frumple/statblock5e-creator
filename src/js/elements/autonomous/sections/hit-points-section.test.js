@@ -97,7 +97,7 @@ describe('when the show section is clicked', () => {
           expect(hitPointsSection.editElements.trailingText).toHaveTextContent(`${constitutionHitPointsOperator} ${constitutionHitPointsNumber} )`);
           expect(hitPointsSection.editElements.hitPoints.value).toBe(`${expectedHitPoints}`);
 
-          hitPointsSection.editElements.saveAction.click();
+          hitPointsSection.editElements.saveButton.click();
 
           expect(hitPointsSection).toBeInMode('show');
           expect(hitPointsSection.showElements.text).toHaveTextContent(expectedText);
@@ -116,7 +116,7 @@ describe('when the show section is clicked', () => {
         expect(HitPoints.constitutionHitPoints).toBe(0);
         expect(HitPoints.hitPoints).toBe(4);
 
-        hitPointsSection.editElements.saveAction.click();
+        hitPointsSection.editElements.saveButton.click();
 
         expect(hitPointsSection).toBeInMode('edit');
         expect(hitPointsSection).toHaveSingleError(
@@ -134,7 +134,7 @@ describe('when the show section is clicked', () => {
         expect(HitPoints.constitutionHitPoints).toBe(0);
         expect(HitPoints.hitPoints).toBe(4);
 
-        hitPointsSection.editElements.saveAction.click();
+        hitPointsSection.editElements.saveButton.click();
 
         expect(hitPointsSection).toBeInMode('edit');
         expect(hitPointsSection).toHaveSingleError(
@@ -191,7 +191,7 @@ describe('when the show section is clicked', () => {
         expect(HitPoints.constitutionHitPoints).toBe(0);
         expect(HitPoints.hitPoints).toBe(142);
 
-        hitPointsSection.editElements.saveAction.click();
+        hitPointsSection.editElements.saveButton.click();
 
         expect(hitPointsSection).toBeInMode('show');
         expect(hitPointsSection.showElements.text).toHaveTextContent('142');
@@ -206,7 +206,7 @@ describe('when the show section is clicked', () => {
         expect(HitPoints.constitutionHitPoints).toBe(0);
         expect(HitPoints.hitPoints).toBe(4);
 
-        hitPointsSection.editElements.saveAction.click();
+        hitPointsSection.editElements.saveButton.click();
 
         expect(hitPointsSection).toBeInMode('edit');
         expect(hitPointsSection).toHaveSingleError(
@@ -224,7 +224,7 @@ describe('when the show section is clicked', () => {
         expect(HitPoints.constitutionHitPoints).toBe(0);
         expect(HitPoints.hitPoints).toBe(4);
         
-        hitPointsSection.editElements.saveAction.click();
+        hitPointsSection.editElements.saveButton.click();
 
         expect(hitPointsSection).toBeInMode('edit');
         expect(hitPointsSection).toHaveSingleError(

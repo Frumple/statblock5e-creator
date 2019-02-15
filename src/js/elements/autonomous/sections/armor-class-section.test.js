@@ -52,7 +52,7 @@ describe('when the show section is clicked', () => {
         let customText = '14 (natural armor), 11 while prone';
         inputValueAndTriggerEvent(armorClassSection.editElements.customText, customText);
 
-        armorClassSection.editElements.saveAction.click();
+        armorClassSection.editElements.saveButton.click();
 
         expect(armorClassSection).toBeInMode('show');
         expect(armorClassSection.showElements.text).toHaveTextContent(customText);
@@ -61,7 +61,7 @@ describe('when the show section is clicked', () => {
       it('should display an error if the custom text field is blank', () => {
         inputValueAndTriggerEvent(armorClassSection.editElements.customText, '');
 
-        armorClassSection.editElements.saveAction.click();
+        armorClassSection.editElements.saveButton.click();
 
         expect(armorClassSection).toBeInMode('edit');
         expect(armorClassSection).toHaveSingleError(
@@ -73,7 +73,7 @@ describe('when the show section is clicked', () => {
         inputValueAndTriggerEvent(armorClassSection.editElements.armorClass, '');
         inputValueAndTriggerEvent(armorClassSection.editElements.customText, '');
 
-        armorClassSection.editElements.saveAction.click();
+        armorClassSection.editElements.saveButton.click();
 
         expect(armorClassSection).toBeInMode('edit');
         expect(armorClassSection).toHaveSingleError(
@@ -102,7 +102,7 @@ describe('when the show section is clicked', () => {
       it('should switch to show mode and save the armor class only', () => {
         inputValueAndTriggerEvent(armorClassSection.editElements.armorClass, 7);
 
-        armorClassSection.editElements.saveAction.click();
+        armorClassSection.editElements.saveButton.click();
 
         expect(armorClassSection).toBeInMode('show');
         expect(armorClassSection.showElements.text).toHaveTextContent('7');
@@ -112,7 +112,7 @@ describe('when the show section is clicked', () => {
         inputValueAndTriggerEvent(armorClassSection.editElements.armorClass, 21);
         inputValueAndTriggerEvent(armorClassSection.editElements.armorType, 'natural armor');
 
-        armorClassSection.editElements.saveAction.click();
+        armorClassSection.editElements.saveButton.click();
 
         expect(armorClassSection).toBeInMode('show');
         expect(armorClassSection.showElements.text).toHaveTextContent('21 (natural armor)');
@@ -122,7 +122,7 @@ describe('when the show section is clicked', () => {
         inputValueAndTriggerEvent(armorClassSection.editElements.armorClass, 12);      
         armorClassSection.editElements.shield.click();
 
-        armorClassSection.editElements.saveAction.click();
+        armorClassSection.editElements.saveButton.click();
 
         expect(armorClassSection).toBeInMode('show');
         expect(armorClassSection.showElements.text).toHaveTextContent('12 (shield)');
@@ -133,7 +133,7 @@ describe('when the show section is clicked', () => {
         inputValueAndTriggerEvent(armorClassSection.editElements.armorType, 'chain shirt');
         armorClassSection.editElements.shield.click();
 
-        armorClassSection.editElements.saveAction.click();
+        armorClassSection.editElements.saveButton.click();
 
         expect(armorClassSection).toBeInMode('show');
         expect(armorClassSection.showElements.text).toHaveTextContent('16 (chain shirt, shield)');
@@ -142,7 +142,7 @@ describe('when the show section is clicked', () => {
       it('should display an error if the armor class field is not a valid number', () => {
         inputValueAndTriggerEvent(armorClassSection.editElements.armorClass, '');
 
-        armorClassSection.editElements.saveAction.click();
+        armorClassSection.editElements.saveButton.click();
 
         expect(armorClassSection).toBeInMode('edit');
         expect(armorClassSection).toHaveSingleError(
@@ -154,7 +154,7 @@ describe('when the show section is clicked', () => {
         inputValueAndTriggerEvent(armorClassSection.editElements.armorClass, '');
         inputValueAndTriggerEvent(armorClassSection.editElements.customText, '');
 
-        armorClassSection.editElements.saveAction.click();
+        armorClassSection.editElements.saveButton.click();
 
         expect(armorClassSection).toBeInMode('edit');
         expect(armorClassSection).toHaveSingleError(

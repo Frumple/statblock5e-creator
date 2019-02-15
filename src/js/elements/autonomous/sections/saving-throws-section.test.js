@@ -130,7 +130,7 @@ describe('when the show section is clicked', () => {
         let formattedModifier = formatModifier(expectedModifier);
         expect(savingThrowElements.modifier).toHaveTextContent(formattedModifier);
 
-        savingThrowsSection.editElements.saveAction.click();
+        savingThrowsSection.editElements.saveButton.click();
 
         expect(savingThrowsSection.showElements.text).toHaveTextContent(expectedText);
 
@@ -203,7 +203,7 @@ describe('when the show section is clicked', () => {
           inputValueAndTriggerEvent(elements.override, 9);
         }
 
-        savingThrowsSection.editElements.saveAction.click();
+        savingThrowsSection.editElements.saveButton.click();
 
         expect(savingThrowsSection.showElements.text).toHaveTextContent(expectedText);
       });

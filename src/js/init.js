@@ -26,6 +26,8 @@ import SensesSection from '/src/js/elements/autonomous/sections/senses-section.j
 import LanguagesSection from '/src/js/elements/autonomous/sections/languages-section.js';
 import ChallengeRatingSection from '/src/js/elements/autonomous/sections/challenge-rating-section.js';
 
+import StatBlockEditor from '/src/js/elements/autonomous/containers/stat-block-editor.js';
+import StatBlockMenu from '/src/js/elements/autonomous/containers/stat-block-menu.js';
 import StatBlock from '/src/js/elements/autonomous/containers/stat-block.js';
 import TopStats from '/src/js/elements/autonomous/containers/top-stats.js';
 import BasicStats from '/src/js/elements/autonomous/containers/basic-stats.js';
@@ -62,6 +64,8 @@ async function init() {
   elementClasses.push(LanguagesSection);
   elementClasses.push(ChallengeRatingSection);
 
+  elementClasses.push(StatBlockEditor);
+  elementClasses.push(StatBlockMenu);
   elementClasses.push(StatBlock);
   elementClasses.push(TopStats);
   elementClasses.push(BasicStats);

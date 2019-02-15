@@ -39,7 +39,7 @@ describe('when the show section is clicked', () => {
 
       expect(challengeRatingSection.editElements.experiencePoints.value).toBe('3900');
 
-      challengeRatingSection.editElements.saveAction.click();
+      challengeRatingSection.editElements.saveButton.click();
 
       expect(challengeRatingSection.showElements.text).toHaveTextContent('8 (3900 XP)');
     });
@@ -49,7 +49,7 @@ describe('when the show section is clicked', () => {
     it('should save the fields', () => {
       inputValueAndTriggerEvent(challengeRatingSection.editElements.experiencePoints, 234);
 
-      challengeRatingSection.editElements.saveAction.click();
+      challengeRatingSection.editElements.saveButton.click();
 
       expect(challengeRatingSection.showElements.text).toHaveTextContent('0 (234 XP)');
     });
@@ -57,7 +57,7 @@ describe('when the show section is clicked', () => {
     it('should display an error if the custom text field is not a valid number', () => {
       inputValueAndTriggerEvent(challengeRatingSection.editElements.experiencePoints, '');
 
-      challengeRatingSection.editElements.saveAction.click();
+      challengeRatingSection.editElements.saveButton.click();
 
       expect(challengeRatingSection).toBeInMode('edit');
       expect(challengeRatingSection).toHaveSingleError(
@@ -71,7 +71,7 @@ describe('when the show section is clicked', () => {
       inputValueAndTriggerEvent(challengeRatingSection.editElements.challengeRating, 3);
       inputValueAndTriggerEvent(challengeRatingSection.editElements.experiencePoints, 888);
 
-      challengeRatingSection.editElements.saveAction.click();
+      challengeRatingSection.editElements.saveButton.click();
 
       expect(challengeRatingSection.showElements.text).toHaveTextContent('3 (888 XP)');
     });
@@ -84,7 +84,7 @@ describe('when the show section is clicked', () => {
 
       expect(challengeRatingSection.editElements.experiencePoints.value).toBe('25000');
 
-      challengeRatingSection.editElements.saveAction.click();
+      challengeRatingSection.editElements.saveButton.click();
 
       expect(challengeRatingSection.showElements.text).toHaveTextContent('20 (25000 XP)');
     });

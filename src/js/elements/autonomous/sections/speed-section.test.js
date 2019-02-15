@@ -55,7 +55,7 @@ describe('when the show section is clicked', () => {
         let customText = '30 ft. (40ft., climb 30ft. in bear or hybrid form)';
         inputValueAndTriggerEvent(speedSection.editElements.customText, customText);
 
-        speedSection.editElements.saveAction.click();
+        speedSection.editElements.saveButton.click();
 
         expect(speedSection).toBeInMode('show');
         expect(speedSection.showElements.text).toHaveTextContent(customText);
@@ -64,7 +64,7 @@ describe('when the show section is clicked', () => {
       it('should display an error if the custom text field is blank', () => {
         inputValueAndTriggerEvent(speedSection.editElements.customText, '');
 
-        speedSection.editElements.saveAction.click();
+        speedSection.editElements.saveButton.click();
 
         expect(speedSection).toBeInMode('edit');
         expect(speedSection).toHaveSingleError(
@@ -140,7 +140,7 @@ describe('when the show section is clicked', () => {
             speedSection.editElements.hover.click();
           }
 
-          speedSection.editElements.saveAction.click();
+          speedSection.editElements.saveButton.click();
 
           expect(speedSection).toBeInMode('show');
           expect(speedSection.showElements.text).toHaveTextContent(expectedText);

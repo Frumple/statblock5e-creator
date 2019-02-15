@@ -1,0 +1,47 @@
+.stat-block-menu {
+  background: #606060;
+  width: 100%;
+}
+
+.stat-block-menu__controls {
+  display: grid;
+  grid-template-columns: 1fr 1fr 5px 1fr 1fr 5px 1fr 1fr;
+  grid-template-rows: auto auto;
+  justify-content: space-between;
+  justify-items: center;
+  align-items: center;
+  overflow: hidden;
+  font-family: 'Noto Sans', 'Myriad Pro', Calibri, Helvetica, Arial,
+               sans-serif;
+  font-size: 13.5px;
+  height: 100%;
+  width: 420px;
+  padding-left: 20px;
+  padding-right: 20px;
+  padding-top: 2px;
+  padding-bottom: 2px;
+}
+
+.stat-block-menu__label {
+  color: white;
+  font-family: inherit;
+  font-size: inherit;
+  font-weight: bold;
+}
+
+.stat-block-menu__button {
+  width: 70px;
+  padding-top: 0;
+  padding-bottom: 0;
+  font-family: inherit;
+  font-size: inherit;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.stat-block-menu__columns-label { grid-area: 1 / 1 / 2 / 3; }
+.stat-block-menu__empty-sections-label { grid-area: 1 / 4 / 2 / 6; }
+.stat-block-menu__all-sections-label { grid-area: 1 / 7 / 2 / 9; }
+
+.stat-block-menu__edit-all-sections-button { grid-area: 2 / 7; }
+.stat-block-menu__save-all-sections-button { grid-area: 2 / 8; }

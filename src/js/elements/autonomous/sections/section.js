@@ -19,17 +19,15 @@ export class Section extends CustomAutonomousElement {
     this.errorMessages = this.shadowRoot.querySelector('error-messages');
 
     this.showElements.section.addEventListener('mouseenter', () => {
-      this.showElements.editAction.classList.remove('section__action_hidden');
+      this.showElements.editButton.classList.remove('section__action_hidden');
     });
 
     this.showElements.section.addEventListener('mouseleave', () => {
-      this.showElements.editAction.classList.add('section__action_hidden');
+      this.showElements.editButton.classList.add('section__action_hidden');
     });
 
     this.showElements.section.addEventListener('click', () => {
-      this.mode = 'edit';
-      this.dispatchModeChangedEvent();
-      this.focusOnInitialEditSectionElement();
+      this.edit();
     });
 
     this.showElements.section.addEventListener('transitionend', () => {
@@ -38,7 +36,7 @@ export class Section extends CustomAutonomousElement {
       }
     });
 
-    this.editElements.saveAction.addEventListener('click', () => {
+    this.editElements.saveButton.addEventListener('click', () => {
       this.save();
     });
 
@@ -46,15 +44,6 @@ export class Section extends CustomAutonomousElement {
       event.preventDefault();
       this.save();
     });
-  }
-
-  connectedCallback() {
-    return;
-  }
-
-  forceConnect() {
-    this.isConnected = true;
-    this.connectedCallback();
   }
 
   get mode() {
@@ -105,14 +94,10 @@ export class Section extends CustomAutonomousElement {
     focusAndSelectElement(this.editElements.initiallySelectedElement);    
   }
 
-  checkForErrors() {
-    throw new Error(
-      `The class '${this.constructor.name}' must implement the checkForErrors() method.`);
-  }
-
-  updateShowSection() {
-    throw new Error(
-      `The class '${this.constructor.name}' must implement the updateShowSection() method.`);
+  edit() {
+    this.mode = 'edit';
+    this.dispatchModeChangedEvent();
+    this.focusOnInitialEditSectionElement();
   }
 
   save() {
@@ -132,6 +117,16 @@ export class Section extends CustomAutonomousElement {
     this.dispatchModeChangedEvent();
   }
 
+  checkForErrors() {
+    throw new Error(
+      `The class '${this.constructor.name}' must implement the checkForErrors() method.`);
+  }
+
+  updateShowSection() {
+    throw new Error(
+      `The class '${this.constructor.name}' must implement the updateShowSection() method.`);
+  }
+
   dispatchModeChangedEvent() {
     let changeEvent = new CustomEvent('sectionModeChanged', {
       bubbles: true,
@@ -144,14 +139,14 @@ export class Section extends CustomAutonomousElement {
 export class ShowElements {
   constructor(shadowRoot) {
     this.section = shadowRoot.getElementById('show-section');
-    this.editAction = shadowRoot.getElementById('edit-action');
+    this.editButton = shadowRoot.getElementById('edit-button');
   }
 }
 
 export class EditElements {
   constructor(shadowRoot) {
     this.section = shadowRoot.getElementById('edit-section');
-    this.saveAction = shadowRoot.getElementById('save-action');
+    this.saveButton = shadowRoot.getElementById('save-button');
   }
 
   get initiallySelectedElement() {

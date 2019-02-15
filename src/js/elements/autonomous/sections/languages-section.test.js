@@ -79,7 +79,7 @@ describe('when the show section is clicked', () => {
     it('should remove the item, and the show languagesSection should show a "—" character indicating no items', () => {
       expect(languagesSection.editElements.list.itemsAsText).toHaveLength(0);
 
-      languagesSection.editElements.saveAction.click();
+      languagesSection.editElements.saveButton.click();
 
       expect(languagesSection).toBeInMode('show');
       expect(languagesSection.showElements.text).toHaveTextContent('—');

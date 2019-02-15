@@ -40,4 +40,16 @@ export default class AdvancedStats extends DivisibleContainer {
       this.toggleEmptyAttributeVisibility();
     });
   }
+
+  editAllSections() {
+    for (const section of this.allSections) {
+      section.edit();
+    }
+  }
+
+  saveAllSections() {
+    for (const section of this.allSections) {
+      section.save();
+    }
+  }
 }

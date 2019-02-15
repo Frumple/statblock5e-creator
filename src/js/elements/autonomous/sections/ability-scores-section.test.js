@@ -77,7 +77,7 @@ describe('when the show section is clicked', () => {
         let formattedModifier = `(${formatModifier(expectedModifier)})`;
         expect(abilityScoresSection.editElements.modifier[abilityName]).toHaveTextContent(formattedModifier);
 
-        abilityScoresSection.editElements.saveAction.click();
+        abilityScoresSection.editElements.saveButton.click();
 
         expect(abilityScoresSection.showElements.modifier[abilityName]).toHaveTextContent(formattedModifier);
       });
@@ -110,7 +110,7 @@ describe('when the show section is clicked', () => {
         let formattedOldModifier = `(${formatModifier(oldModifier)})`;
         expect(abilityScoresSection.editElements.modifier[abilityName]).toHaveTextContent(formattedOldModifier);
 
-        abilityScoresSection.editElements.saveAction.click();
+        abilityScoresSection.editElements.saveButton.click();
 
         expect(abilityScoresSection.showElements.modifier[abilityName]).toHaveTextContent(formattedOldModifier);
 
@@ -139,7 +139,7 @@ describe('when the show section is clicked', () => {
 
         expect(ProficiencyBonus.proficiencyBonus).toBe(proficiencyBonus);
 
-        abilityScoresSection.editElements.saveAction.click();
+        abilityScoresSection.editElements.saveButton.click();
 
         expect(ProficiencyBonus.proficiencyBonus).toBe(proficiencyBonus);
       });
@@ -153,7 +153,7 @@ describe('when the show section is clicked', () => {
 
       expect(ProficiencyBonus.proficiencyBonus).toBe(oldProficiencyBonus);
 
-      abilityScoresSection.editElements.saveAction.click();
+      abilityScoresSection.editElements.saveButton.click();
 
       expect(abilityScoresSection).toBeInMode('edit');
       expect(abilityScoresSection).toHaveSingleError(
@@ -201,7 +201,7 @@ describe('when the show section is clicked', () => {
         }
         expect(ProficiencyBonus.proficiencyBonus).toBe(proficiencyBonus);
 
-        abilityScoresSection.editElements.saveAction.click();
+        abilityScoresSection.editElements.saveButton.click();
 
         for (const [key, value] of Abilities.entries) {
           let expectedModifier = eval(`${value.abbreviation}Mod`);

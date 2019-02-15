@@ -64,14 +64,23 @@ class FakeCustomAutonomousElement {
     }
   }
 
+  connectedCallback() {
+    return;
+  }
+
+  forceConnect() {
+    this.isConnected = true;
+    this.connectedCallback();
+  }
+
   addEventListener(type, callback) {
     // Since this element is fake, add the event listener on the document on behalf of the element.
     document.addEventListener(type, callback);
   }
 
-  dispatchEvent() {
-    // This method does nothing since we are only able to test the shadow tree of one custom element at a time for now
-    return;
+  dispatchEvent(event) {
+    // Since this element is fake, dispatch the event from the document on behalf of the element.
+    document.dispatchEvent(event);
   }
 }
 
