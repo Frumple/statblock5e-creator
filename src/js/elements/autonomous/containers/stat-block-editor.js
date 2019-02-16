@@ -28,6 +28,7 @@ export default class StatBlockEditor extends CustomAutonomousElement {
 
   onNumberOfColumnsChanged() {
     const columns = event.detail.columns;
+    this.statBlock.setColumns(columns);
   }
 
   onEmptySectionsVisiblityChanged(event) {

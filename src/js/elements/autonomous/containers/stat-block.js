@@ -52,6 +52,14 @@ export default class StatBlock extends CustomAutonomousElement {
     }
   }
 
+  setColumns(columns) {
+    if (columns === 1) {
+      delete this.dataset.twoColumn;
+    } else if (columns === 2) {
+      this.dataset.twoColumn = '';
+    }
+  }
+
   setEmptySectionsVisibility(visibliity) {
     this.topStats.setEmptySectionsVisibility(visibliity);
   }
