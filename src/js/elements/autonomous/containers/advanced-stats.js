@@ -32,13 +32,6 @@ export default class AdvancedStats extends DivisibleContainer {
       this.languagesSection,
       this.challengeRatingSection
     ];
-
-    this.showEmptyAttributesContainer = this.shadowRoot.getElementById('show-empty-attributes-container');
-    this.showEmptyAttributesCheckbox = this.shadowRoot.getElementById('show-empty-attributes-checkbox');
-
-    this.showEmptyAttributesCheckbox.addEventListener('input', () => {
-      this.toggleEmptyAttributeVisibility();
-    });
   }
 
   editAllSections() {

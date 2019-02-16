@@ -108,7 +108,7 @@ export class Section extends CustomAutonomousElement {
     }
     this.updateShowSection();
 
-    if (this.empty && ! GlobalOptions.showEmptyAttributes) {
+    if (this.empty && ! GlobalOptions.emptySectionsVisibility) {
       this.mode = 'hidden';
     } else {
       this.mode = 'show';

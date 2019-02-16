@@ -16,6 +16,10 @@ export default class TopStats extends CustomAutonomousElement {
     this.advancedStats = document.querySelector('advanced-stats');
   }
 
+  setEmptySectionsVisibility(visibliity) {
+    this.advancedStats.setEmptySectionsVisibility(visibliity);
+  }
+
   editAllSections() {
     this.basicStats.editAllSections();
     this.abilityScoresSection.edit();

@@ -1,5 +1,4 @@
 import CustomAutonomousElement from '/src/js/elements/autonomous/custom-autonomous-element.js';
-import GlobalOptions from '/src/js/helpers/global-options.js';
 
 export default class DivisibleContainer extends CustomAutonomousElement {
   constructor(templatePaths) {
@@ -13,12 +12,10 @@ export default class DivisibleContainer extends CustomAutonomousElement {
     });
   }
 
-  toggleEmptyAttributeVisibility() {
-    GlobalOptions.showEmptyAttributes = this.showEmptyAttributesCheckbox.checked;
-
+  setEmptySectionsVisibility(visibility) {
     for (const section of this.allSections) {
       if (section.empty) {
-        if (GlobalOptions.showEmptyAttributes) {
+        if (visibility) {
           if (section.mode === 'hidden') {
             section.mode = 'show';
           }

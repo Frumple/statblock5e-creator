@@ -52,6 +52,10 @@ export default class StatBlock extends CustomAutonomousElement {
     }
   }
 
+  setEmptySectionsVisibility(visibliity) {
+    this.topStats.setEmptySectionsVisibility(visibliity);
+  }
+
   editAllSections() {
     this.topStats.editAllSections();
     this.headingSection.edit();
