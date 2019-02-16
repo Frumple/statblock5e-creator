@@ -18,6 +18,8 @@
 }
 
 .attribute-list-edit-section__add-button {
+  padding-left: 5px;
+  padding-right: 5px;
   margin-left: 5px;
 }
 

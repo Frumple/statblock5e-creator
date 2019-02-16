@@ -1,0 +1,8 @@
+.radio-button__input {
+  display: none;
+  appearance: none;
+}
+
+.radio-button__input:checked + label {
+  background: #90FF70;
+}

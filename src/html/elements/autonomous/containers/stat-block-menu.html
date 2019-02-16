@@ -1,13 +1,39 @@
 <link href='src/css/elements/autonomous/containers/stat-block-menu.css' rel='stylesheet' type='text/css'>
+<link href='src/css/elements/button.css' rel='stylesheet' type='text/css'>
+<link href='src/css/elements/radio-button.css' rel='stylesheet' type='text/css'>
 
 <div class="stat-block-menu">
   <div class="stat-block-menu__controls">
-    <label class="stat-block-menu__label stat-block-menu__columns-label">Columns</label>  
-    <label class="stat-block-menu__label stat-block-menu__empty-sections-label">Empty Sections</label>  
-    <label class="stat-block-menu__label stat-block-menu__all-sections-label">All Sections</label>  
-  
-    <button id="edit-all-sections-button" class="stat-block-menu__button stat-block-menu__edit-all-sections-button">Edit</button>
-    <button id="save-all-sections-button" class="stat-block-menu__button stat-block-menu__save-all-sections-button">Save</button>
+    <div class="stat-block-menu__group">
+      <label class="stat-block-menu__label stat-block-menu__columns-label">Columns</label>
+
+      <div class="stat-block-menu__radio-group">
+        <input id="one-column-radio" class="radio-button__input" type="radio" name="columns" value="1" checked />
+        <label for="one-column-radio" class="button radio-button__label stat-block-menu__radio-label">One</label>
+        <input id="two-column-radio" class="radio-button__input" type="radio" name="columns" value="2" />
+        <label for="two-column-radio" class="button radio-button__label stat-block-menu__radio-label">Two</label> 
+      </div>
+    </div>
+
+    <div class="stat-block-menu__group">
+      <label class="stat-block-menu__label stat-block-menu__empty-sections-label">Empty Sections</label>
+
+      <div class="stat-block-menu__radio-group">
+        <input id="show-empty-sections-radio" class="radio-button__input" type="radio" name="empty-sections" value="1" checked />
+        <label for="show-empty-sections-radio" class="button radio-button__label stat-block-menu__radio-label">Show</label>
+        <input id="hide-empty-sections-radio" class="radio-button__input" type="radio" name="empty-sections" value="2" />
+        <label for="hide-empty-sections-radio" class="button radio-button__label stat-block-menu__radio-label">Hide</label>
+      </div>      
+    </div>
+
+    <div class="stat-block-menu__group">
+      <label class="stat-block-menu__label stat-block-menu__all-sections-label">All Sections</label>
+
+      <div class="stat-block-menu__radio-group">
+        <button id="edit-all-sections-button" class="button stat-block-menu__button">Edit</button>
+        <button id="save-all-sections-button" class="button stat-block-menu__button">Save</button>
+      </div>      
+    </div>    
   </div>
 </div>
 

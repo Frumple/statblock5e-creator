@@ -27,6 +27,7 @@
   cursor: move;
 }
 
-.list-item__remove-button:hover {
-  cursor: pointer;
+.list-item__remove-button {
+  padding-left: 5px;
+  padding-right: 5px;
 }

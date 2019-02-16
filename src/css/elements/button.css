@@ -1,0 +1,17 @@
+.button {
+  background: #dddddd;
+  border: 1px outset #949494;
+  font-family: inherit;
+  font-size: inherit;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background 100ms ease-in-out;
+}
+
+.button:hover {
+  background: #eeeeee;
+}
+
+.button:active {
+  background: #90FF70;
+}
