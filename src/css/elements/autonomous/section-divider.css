@@ -1,5 +1,4 @@
 .section-divider {
-  height: 100%;
   opacity: 1;
   visibility: visible;
   transition: opacity var(--section-transition-duration) ease-out var(--section-transition-duration),

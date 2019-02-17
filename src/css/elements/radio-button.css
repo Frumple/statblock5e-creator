@@ -6,3 +6,7 @@
 .radio-button__input:checked + label {
   background: #90FF70;
 }
+
+.radio-button__label {
+  user-select: none;
+}

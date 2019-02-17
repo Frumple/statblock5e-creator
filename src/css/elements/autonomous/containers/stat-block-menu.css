@@ -1,19 +1,18 @@
 .stat-block-menu {
+  position: fixed;
+  top: 0;
   background: #606060;
   width: 100%;
+  height: 42px;
+  z-index: 10;
 }
 
 .stat-block-menu__controls {
   display: flex;
-  font-family: 'Noto Sans', 'Myriad Pro', Calibri, Helvetica, Arial,
-               sans-serif;
-  font-size: 13.5px;
-  height: 100%;
   width: 420px;
-  padding-left: 20px;
-  padding-right: 20px;
   padding-top: 2px;
   padding-bottom: 2px;
+  margin-left: 90px;
 }
 
 .stat-block-menu__group {
@@ -43,5 +42,5 @@
 }
 
 .stat-block-menu__button {
-  width: 70px;
+  width: 100%;
 }

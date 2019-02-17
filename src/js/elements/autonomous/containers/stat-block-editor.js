@@ -13,12 +13,14 @@ export default class StatBlockEditor extends CustomAutonomousElement {
     super(StatBlockEditor.templatePaths);
 
     this.statBlockMenu = document.querySelector('stat-block-menu');
+    this.statBlockSidebar = document.querySelector('stat-block-sidebar');
     this.statBlock = document.querySelector('stat-block');
   }
 
   connectedCallback() {
     if (this.isConnected && ! this.isInitialized) {
       this.addEventListener('numberOfColumnsChanged', this.onNumberOfColumnsChanged);
+      this.addEventListener('twoColumnHeightChanged', this.onTwoColumnHeightChanged);
       this.addEventListener('emptySectionsVisibilityChanged', this.onEmptySectionsVisiblityChanged);
       this.addEventListener('allSectionsAction', this.onAllSectionsAction);
 
@@ -28,7 +30,28 @@ export default class StatBlockEditor extends CustomAutonomousElement {
 
   onNumberOfColumnsChanged() {
     const columns = event.detail.columns;
+    GlobalOptions.columns = columns;
+
+    if (columns === 1) {
+      this.statBlockSidebar.visible = false;
+      this.statBlock.setColumnHeight('auto');
+    } else if (columns === 2) {
+      this.statBlockSidebar.visible = true;
+      this.statBlock.setColumnHeight(
+        GlobalOptions.twoColumnMode,
+        GlobalOptions.twoColumnHeight);
+    }
+    
     this.statBlock.setColumns(columns);
+  }
+
+  onTwoColumnHeightChanged() {
+    const mode = event.detail.mode;
+    const height = event.detail.height;
+    GlobalOptions.twoColumnMode = mode;
+    GlobalOptions.twoColumnHeight = height;
+
+    this.statBlock.setColumnHeight(mode, height);
   }
 
   onEmptySectionsVisiblityChanged(event) {

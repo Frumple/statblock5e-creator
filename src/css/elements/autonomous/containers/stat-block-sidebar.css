@@ -1,0 +1,66 @@
+.stat-block-sidebar {
+  display: flex;
+  flex-direction: column;
+  background: #808080;
+  width: 60px;
+  min-height: 100%;
+  margin: 0;
+  padding-top: 0;
+  padding-bottom: 0;
+  padding-left: 5px;
+  padding-right: 5px;
+  opacity: 1;
+  visibility: visible;
+  transition: opacity 250ms ease-out,
+              visibility 250ms linear
+}
+
+.stat-block-sidebar_hidden {
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 250ms ease-in,
+              visibility 250ms linear
+}
+
+.stat-block-sidebar__top-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  height: 340px;
+}
+
+.stat-block-sidebar__label {
+  color: white;
+  font-weight: bold;
+  margin-bottom: 5px;
+}
+
+.stat-block-sidebar__height-mode-radio-group {
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+}
+
+.stat-block-sidebar__radio-label {
+  width: 100%;
+}
+
+.stat-block-sidebar__slider-container {  
+  width: 60px;
+  height: 735px;
+  margin-top: 20px;
+  margin-bottom: 20px;
+}
+
+.stat-block-sidebar__slider-container_hidden {
+  display: none;
+}
+
+.stat-block-sidebar__slider {
+  width: 735px;
+  height: 60px;
+  margin: 0;
+  transform-origin: top left;
+  transform: rotate(90deg) translatey(-60px);
+}
+

@@ -28,6 +28,7 @@ import ChallengeRatingSection from '/src/js/elements/autonomous/sections/challen
 
 import StatBlockEditor from '/src/js/elements/autonomous/containers/stat-block-editor.js';
 import StatBlockMenu from '/src/js/elements/autonomous/containers/stat-block-menu.js';
+import StatBlockSidebar from '/src/js/elements/autonomous/containers/stat-block-sidebar.js';
 import StatBlock from '/src/js/elements/autonomous/containers/stat-block.js';
 import TopStats from '/src/js/elements/autonomous/containers/top-stats.js';
 import BasicStats from '/src/js/elements/autonomous/containers/basic-stats.js';
@@ -66,6 +67,7 @@ async function init() {
 
   elementClasses.push(StatBlockEditor);
   elementClasses.push(StatBlockMenu);
+  elementClasses.push(StatBlockSidebar);
   elementClasses.push(StatBlock);
   elementClasses.push(TopStats);
   elementClasses.push(BasicStats);

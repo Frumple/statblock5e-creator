@@ -5,7 +5,7 @@
 
 .container {
   display: inline-block;
-  margin-top: 20px;
+  margin-top: 60px;
   margin-left: 20px;
 }
 
@@ -47,7 +47,7 @@
 
   /* We can't use CSS3 attr() here because no browser currently supports it,
      but we can use a CSS custom property instead. */
-  height: var(--data-content-height);
+  height: var(--statblock-content-height);
 
   /* When height is constrained, we want sequential filling of columns. */
   -webkit-column-fill: auto;

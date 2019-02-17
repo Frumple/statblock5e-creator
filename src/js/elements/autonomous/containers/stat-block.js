@@ -60,6 +60,14 @@ export default class StatBlock extends CustomAutonomousElement {
     }
   }
 
+  setColumnHeight(mode, height) {
+    if (mode === 'auto') {
+      this.removeAttribute('style');
+    } else if (mode === 'manual') {
+      this.setAttribute('style', `--statblock-content-height: ${height}px;`)
+    }
+  }
+
   setEmptySectionsVisibility(visibliity) {
     this.topStats.setEmptySectionsVisibility(visibliity);
   }
