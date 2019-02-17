@@ -53,6 +53,9 @@
   -webkit-column-fill: auto;
      -moz-column-fill: auto;
           column-fill: auto;
+
+  /* Hide any content that overflows into a 3rd column. */
+  overflow: hidden;
 }
 
 :host([data-two-column]) .content-wrap {
