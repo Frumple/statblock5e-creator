@@ -46,28 +46,33 @@ describe('when the show section is clicked', () => {
       it.each
       `
         description         | abilityName       | score   | expectedModifier
-        ${'+ STR mod'}      | ${'strength'}     | ${12}   | ${+1}
+        ${'+ STR mod'}      | ${'strength'}     | ${12}   | ${1}
         ${'0 STR mod'}      | ${'strength'}     | ${11}   | ${0}
         ${'- STR mod'}      | ${'strength'}     | ${8}    | ${-1}
-        ${'+ DEX mod'}      | ${'dexterity'}    | ${15}   | ${+2}
+        ${'+ DEX mod'}      | ${'dexterity'}    | ${15}   | ${2}
         ${'0 DEX mod'}      | ${'dexterity'}    | ${11}   | ${0}
         ${'- DEX mod'}      | ${'dexterity'}    | ${7}    | ${-2}
-        ${'+ CON mod'}      | ${'constitution'} | ${16}   | ${+3}
+        ${'+ CON mod'}      | ${'constitution'} | ${16}   | ${3}
         ${'0 CON mod'}      | ${'constitution'} | ${11}   | ${0}
         ${'- CON mod'}      | ${'constitution'} | ${4}    | ${-3}
-        ${'+ INT mod'}      | ${'intelligence'} | ${19}   | ${+4}
+        ${'+ INT mod'}      | ${'intelligence'} | ${19}   | ${4}
         ${'0 INT mod'}      | ${'intelligence'} | ${11}   | ${0}
         ${'- INT mod'}      | ${'intelligence'} | ${3}    | ${-4}
-        ${'+ WIS mod'}      | ${'wisdom'}       | ${20}   | ${+5}
+        ${'+ WIS mod'}      | ${'wisdom'}       | ${20}   | ${5}
         ${'0 WIS mod'}      | ${'wisdom'}       | ${11}   | ${0}
         ${'- WIS mod'}      | ${'wisdom'}       | ${1}    | ${-5}
-        ${'+ CHA mod'}      | ${'charisma'}     | ${23}   | ${+6}
+        ${'+ CHA mod'}      | ${'charisma'}     | ${23}   | ${6}
         ${'0 CHA mod'}      | ${'charisma'}     | ${11}   | ${0}
         ${'- CHA mod'}      | ${'charisma'}     | ${9}    | ${-1}
         ${'maximum values'} | ${'charisma'}     | ${999}  | ${494}            
       `
       ('$description: {abilityName="$abilityName", score="$score"} => $expectedModifier',
       ({abilityName, score, expectedModifier}) => {
+        let receivedEvent = null;
+        document.addEventListener('abilityScoreChanged', (event) => {
+          receivedEvent = event;
+        });
+
         inputValueAndTriggerEvent(abilityScoresSection.editElements.score[abilityName], score);
 
         let ability = Abilities.abilities[abilityName];
@@ -76,6 +81,11 @@ describe('when the show section is clicked', () => {
 
         let formattedModifier = `(${formatModifier(expectedModifier)})`;
         expect(abilityScoresSection.editElements.modifier[abilityName]).toHaveTextContent(formattedModifier);
+
+        expect(receivedEvent).not.toBeNull();
+        expect(receivedEvent.detail.abilityName).toBe(abilityName);
+        expect(receivedEvent.detail.abilityScore).toBe(score);
+        expect(receivedEvent.detail.abilityModifier).toBe(expectedModifier);
 
         abilityScoresSection.editElements.saveButton.click();
 
@@ -98,6 +108,11 @@ describe('when the show section is clicked', () => {
       `
       ('$description: $abilityName => $expectedErrorMessage',
       ({abilityName, expectedErrorMessage}) => {
+        let receivedEvent = null;
+        document.addEventListener('abilityScoreChanged', (event) => {
+          receivedEvent = event;
+        });
+
         let ability = Abilities.abilities[abilityName];
         let oldScore = ability.score;
         let oldModifier = ability.modifier;
@@ -109,6 +124,8 @@ describe('when the show section is clicked', () => {
 
         let formattedOldModifier = `(${formatModifier(oldModifier)})`;
         expect(abilityScoresSection.editElements.modifier[abilityName]).toHaveTextContent(formattedOldModifier);
+
+        expect(receivedEvent).toBeNull();
 
         abilityScoresSection.editElements.saveButton.click();
 
@@ -135,9 +152,17 @@ describe('when the show section is clicked', () => {
       `
       ('$description: $proficiencyBonus',
       ({proficiencyBonus}) => {
+        let receivedEvent = null;
+        document.addEventListener('proficiencyBonusChanged', (event) => {
+          receivedEvent = event;
+        });
+
         inputValueAndTriggerEvent(abilityScoresSection.editElements.proficiencyBonus, proficiencyBonus);
 
         expect(ProficiencyBonus.proficiencyBonus).toBe(proficiencyBonus);
+        
+        expect(receivedEvent).not.toBeNull();
+        expect(receivedEvent.detail.proficiencyBonus).toBe(proficiencyBonus);
 
         abilityScoresSection.editElements.saveButton.click();
 
@@ -147,11 +172,17 @@ describe('when the show section is clicked', () => {
     });
 
     it('should display an error if the proficiency bonus is not a valid number, and the proficiency bonus is not saved', () => {
+      let receivedEvent = null;
+      document.addEventListener('proficiencyBonusChanged', (event) => {
+        receivedEvent = event;
+      });
+      
       let oldProficiencyBonus = ProficiencyBonus.proficiencyBonus;
 
       inputValueAndTriggerEvent(abilityScoresSection.editElements.proficiencyBonus, '');
 
       expect(ProficiencyBonus.proficiencyBonus).toBe(oldProficiencyBonus);
+      expect(receivedEvent).toBeNull();
 
       abilityScoresSection.editElements.saveButton.click();
 

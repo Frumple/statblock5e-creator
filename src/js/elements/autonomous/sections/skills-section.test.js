@@ -103,19 +103,32 @@ describe('when the show section is clicked', () => {
       `
       ('$description: {abilityScore="$abilityScore", proficiencyBonus="$proficiencyBonus", skillEnabled="$skillEnabled", skillProficient="$skillProficient", skillOverride="$skillOverride"} => {expectedModifier="$expectedModifier", expectedText="$expectedText"}',
       ({abilityScore, proficiencyBonus, skillEnabled, skillProficient, skillOverride, expectedModifier, expectedText}) => {
-        const savingThrowElements = skillsSection.editElements.skill[singleSkillUnderTest];
+        let receivedEvent = null;
+        document.addEventListener('skillChanged', (event) => {
+          receivedEvent = event;
+        });
+        
+        const skillElements = skillsSection.editElements.skill[singleSkillUnderTest];
         
         Abilities.abilities[singleAbilityUnderTest].score = abilityScore;
         ProficiencyBonus.proficiencyBonus = proficiencyBonus;
 
         if (skillEnabled) {
-          savingThrowElements.enable.click();
-        }
-        if (! skillProficient) {
-          savingThrowElements.proficient.click();
-        }
-        if (! isNaN(skillOverride)) {
-          inputValueAndTriggerEvent(savingThrowElements.override, skillOverride);
+          skillElements.enable.click();
+          expectSkillChangedEvent(receivedEvent, singleSkillUnderTest);
+          receivedEvent = null;
+
+          if (! skillProficient) {
+            skillElements.proficient.click();
+            expectSkillChangedEvent(receivedEvent, singleSkillUnderTest);
+            receivedEvent = null;
+          }
+
+          if (! isNaN(skillOverride)) {
+            inputValueAndTriggerEvent(skillElements.override, skillOverride);
+            expectSkillChangedEvent(receivedEvent, singleSkillUnderTest);
+            receivedEvent = null;
+          }
         }
 
         const skill = Skills.skills[singleSkillUnderTest];
@@ -129,7 +142,7 @@ describe('when the show section is clicked', () => {
         expect(skill.calculateModifier()).toBe(expectedModifier);
 
         let formattedModifier = formatModifier(expectedModifier);
-        expect(savingThrowElements.modifier).toHaveTextContent(formattedModifier);
+        expect(skillElements.modifier).toHaveTextContent(formattedModifier);
 
         skillsSection.editElements.saveButton.click();
 
@@ -204,3 +217,8 @@ describe('when the show section is clicked', () => {
     });
   });
 });
+
+function expectSkillChangedEvent(event, skillName) {
+  expect(event).not.toBeNull();
+  expect(event.detail.skillName).toBe(skillName);
+}
