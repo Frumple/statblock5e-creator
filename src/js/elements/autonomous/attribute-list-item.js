@@ -25,6 +25,7 @@ export default class AttributeListItem extends CustomAutonomousElement {
       this.addEventListener('dragstart', this.onDragStartItem);
       this.addEventListener('dragover', this.onDragOverItem);
       this.addEventListener('dragleave', this.onDragLeaveItem);
+      this.addEventListener('dragend', this.onDragEndItem);
       this.addEventListener('drop', this.onDropItem);
 
       this.isInitialized = true;
@@ -45,21 +46,32 @@ export default class AttributeListItem extends CustomAutonomousElement {
 
   onDragOverItem(event) {
     event.preventDefault();
-    event.dataTransfer.dropEffect = 'move';
 
     let target = event.target;
-    let rect = target.getBoundingClientRect();
-    let midpointY = rect.y + (rect.height / 2);
 
-    if (event.clientY < midpointY) {
-      target.dragoverRegion = 'top';
+    if (target.parentNode.draggedItem !== null) {
+      event.dataTransfer.dropEffect = 'move';
+    
+      let rect = target.getBoundingClientRect();
+      let midpointY = rect.y + (rect.height / 2);
+
+      if (event.clientY < midpointY) {
+        target.dragoverRegion = 'top';
+      } else {
+        target.dragoverRegion = 'bottom';
+      }
     } else {
-      target.dragoverRegion = 'bottom';
-    }
+      event.dataTransfer.dropEffect = 'none';
+    }    
   }
 
   onDragLeaveItem() {
     this.dragoverRegion = 'none';
+  }
+
+  onDragEndItem(event) {
+    let target = event.target;
+    target.parentNode.draggedItem = null;
   }
 
   onDropItem(event) {
