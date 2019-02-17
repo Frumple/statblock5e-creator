@@ -28,7 +28,7 @@ export default class StatBlockEditor extends CustomAutonomousElement {
     }
   }
 
-  onNumberOfColumnsChanged() {
+  onNumberOfColumnsChanged(event) {
     const columns = event.detail.columns;
     GlobalOptions.columns = columns;
 
@@ -45,7 +45,7 @@ export default class StatBlockEditor extends CustomAutonomousElement {
     this.statBlock.setColumns(columns);
   }
 
-  onTwoColumnHeightChanged() {
+  onTwoColumnHeightChanged(event) {
     const mode = event.detail.mode;
     const height = event.detail.height;
     GlobalOptions.twoColumnMode = mode;

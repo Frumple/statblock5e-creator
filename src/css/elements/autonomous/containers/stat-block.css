@@ -38,29 +38,31 @@
   /* This is possibly overriden by next CSS rule. */
   width: 400px;
 
-  -webkit-columns: 400px;
-     -moz-columns: 400px;
-          columns: 400px;
-  -webkit-column-gap: 40px;
-     -moz-column-gap: 40px;
-          column-gap: 40px;
+  column-width: 400px;
+  column-gap: 40px;
+  column-count: 1;
 
   /* We can't use CSS3 attr() here because no browser currently supports it,
      but we can use a CSS custom property instead. */
   height: var(--statblock-content-height);
 
-  /* When height is constrained, we want sequential filling of columns. */
-  -webkit-column-fill: auto;
-     -moz-column-fill: auto;
-          column-fill: auto;
+  /* By default, balance the content between the columns */
+  column-fill: balance-all;
 
   /* Hide any content that overflows into a 3rd column. */
   overflow: hidden;
 }
 
 :host([data-two-column]) .content-wrap {
+  column-count: 2;
+
   /* One column is 400px and the gap between them is 40px. */
   width: 840px;
+}
+
+:host([style^="--statblock-content-height"]) .content-wrap {
+  /* When the height is manually set, fill columns sequentially. */
+  column-fill: auto;
 }
 
 ::slotted(h3) {
