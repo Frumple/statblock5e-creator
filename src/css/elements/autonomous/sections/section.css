@@ -5,19 +5,20 @@
   grid-column-gap: 10px;
   align-items: center;
   overflow: hidden;
+  max-height: 100%;
   opacity: 1;
   visibility: visible;
   transition: opacity var(--section-transition-duration) ease-out var(--section-transition-duration),
-              height 0ms linear var(--section-transition-duration),
+              max-height 0ms linear var(--section-transition-duration),
               visibility 0ms linear var(--section-transition-duration);
 }
 
 .section_hidden {
-  height: 0;
+  max-height: 0;
   opacity: 0;
   visibility: hidden;
   transition: opacity var(--section-transition-duration) ease-in 0ms,
-              height 0ms linear var(--section-transition-duration),
+              max-height 0ms linear var(--section-transition-duration),
               visibility 0ms linear var(--section-transition-duration);
 }
 
