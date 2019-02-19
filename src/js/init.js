@@ -10,6 +10,8 @@ import PropertyBlock from '/src/js/elements/autonomous/property-block.js';
 import PropertyLine from '/src/js/elements/autonomous/property-line.js';
 import SectionDivider from '/src/js/elements/autonomous/section-divider.js';
 import TaperedRule from '/src/js/elements/autonomous/tapered-rule.js';
+import TextBlockListItem from '/src/js/elements/autonomous/text-block-list-item.js';
+import TextBlockList from '/src/js/elements/autonomous/text-block-list.js';
 
 import HeadingSection from '/src/js/elements/autonomous/sections/heading-section.js';
 import ArmorClassSection from '/src/js/elements/autonomous/sections/armor-class-section.js';
@@ -49,6 +51,8 @@ async function init() {
   elementClasses.push(PropertyLine);
   elementClasses.push(SectionDivider);
   elementClasses.push(TaperedRule);
+  elementClasses.push(TextBlockListItem);
+  elementClasses.push(TextBlockList);
 
   elementClasses.push(HeadingSection);
   elementClasses.push(ArmorClassSection);

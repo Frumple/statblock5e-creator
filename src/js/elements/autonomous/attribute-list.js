@@ -1,6 +1,6 @@
-import CustomAutonomousElement from '/src/js/elements/autonomous/custom-autonomous-element.js';
+import DragAndDropList from '/src/js/elements/autonomous/drag-and-drop-list.js';
 
-export default class AttributeList extends CustomAutonomousElement {
+export default class AttributeList extends DragAndDropList {
   static get elementName() { return 'attribute-list'; }
   static get templatePaths() {
     return super.templatePaths.set(
@@ -10,8 +10,6 @@ export default class AttributeList extends CustomAutonomousElement {
 
   constructor() {
     super(AttributeList.templatePaths);
-
-    this.draggedItem = null;
   }
 
   get itemsAsText() {
@@ -32,12 +30,5 @@ export default class AttributeList extends CustomAutonomousElement {
   findItem(itemText) {
     let listItemElements = Array.from(this.querySelectorAll('attribute-list-item'));
     return listItemElements.filter(element => element.text === itemText)[0];
-  }
-
-  insertDraggedItemBefore(element) {
-    if (this.draggedItem !== null) {
-      this.insertBefore(this.draggedItem, element);
-      this.draggedItem = null;
-    }
-  }
+  }  
 }

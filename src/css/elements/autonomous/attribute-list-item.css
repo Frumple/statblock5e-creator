@@ -1,25 +1,16 @@
-.list-item__container {
+.attribute-list-item__container {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  border: 1px solid Gray;
   padding: 5px;
 }
 
-.list-item__container:hover {
+.attribute-list-item__container:hover {
   background: LightCyan;
   cursor: move;
 }
 
-.list-item__container_dragover-top {
-  border-top: solid 10px DodgerBlue;
-}
-
-.list-item__container_dragover-bottom {
-  border-bottom: solid 10px DodgerBlue;
-}
-
-.list-item__label {
+.attribute-list-item__label {
   min-width: 0;
   overflow: hidden;
   text-overflow: ellipsis;
@@ -27,7 +18,7 @@
   cursor: move;
 }
 
-.list-item__remove-button {
+.attribute-list-item__remove-button {
   padding-left: 5px;
   padding-right: 5px;
 }
