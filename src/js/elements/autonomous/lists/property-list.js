@@ -1,11 +1,11 @@
-import DragAndDropList from '/src/js/elements/autonomous/drag-and-drop-list.js';
+import DragAndDropList from '/src/js/elements/autonomous/lists/drag-and-drop-list.js';
 
 export default class PropertyList extends DragAndDropList {
   static get elementName() { return 'property-list'; }
   static get templatePaths() {
     return super.templatePaths.set(
       'property-list',
-      'src/html/elements/autonomous/property-list.html');
+      'src/html/elements/autonomous/lists/property-list.html');
   }
 
   constructor() {

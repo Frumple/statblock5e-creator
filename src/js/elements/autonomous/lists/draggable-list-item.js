@@ -4,7 +4,7 @@ export default class DraggableListItem extends CustomAutonomousElement {
   static get templatePaths() {
     return super.templatePaths.set(
       'draggable-list-item',
-      'src/html/elements/autonomous/draggable-list-item.html');
+      'src/html/elements/autonomous/lists/draggable-list-item.html');
   }
 
   constructor(templatePaths) {

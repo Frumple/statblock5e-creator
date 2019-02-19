@@ -6,12 +6,12 @@ import TextInput from '/src/js/elements/builtin/text-input.js';
 import ErrorMessages from '/src/js/elements/autonomous/error-messages.js';
 import PropertyBlock from '/src/js/elements/autonomous/property-block.js';
 import PropertyLine from '/src/js/elements/autonomous/property-line.js';
-import PropertyListItem from '/src/js/elements/autonomous/property-list-item.js';
-import PropertyList from '/src/js/elements/autonomous/property-list.js';
+import PropertyListItem from '/src/js/elements/autonomous/lists/property-list-item.js';
+import PropertyList from '/src/js/elements/autonomous/lists/property-list.js';
 import SectionDivider from '/src/js/elements/autonomous/section-divider.js';
 import TaperedRule from '/src/js/elements/autonomous/tapered-rule.js';
-import TextBlockListItem from '/src/js/elements/autonomous/text-block-list-item.js';
-import TextBlockList from '/src/js/elements/autonomous/text-block-list.js';
+import TextBlockListItem from '/src/js/elements/autonomous/lists/text-block-list-item.js';
+import TextBlockList from '/src/js/elements/autonomous/lists/text-block-list.js';
 
 import HeadingSection from '/src/js/elements/autonomous/sections/heading-section.js';
 import ArmorClassSection from '/src/js/elements/autonomous/sections/armor-class-section.js';

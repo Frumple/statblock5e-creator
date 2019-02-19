@@ -1,10 +1,10 @@
 import CustomElementMixins from '/src/js/helpers/test/custom-element-mixins.js';
 import { traverseElements } from '/src/js/helpers/element-helpers.js';
 
-import PropertyList from '/src/js/elements/autonomous/property-list.js';
+import PropertyList from '/src/js/elements/autonomous/lists/property-list.js';
 import ErrorMessages from '/src/js/elements/autonomous/error-messages.js';
 
-jest.mock('/src/js/elements/autonomous/property-list.js');
+jest.mock('/src/js/elements/autonomous/lists/property-list.js');
 jest.mock('/src/js/elements/autonomous/error-messages.js');
 
 /*

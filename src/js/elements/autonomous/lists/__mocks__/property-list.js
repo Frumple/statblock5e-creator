@@ -1,5 +1,5 @@
-import PropertyListItem from '/src/js/elements/autonomous/property-list-item.js';
-jest.mock('/src/js/elements/autonomous/property-list-item.js');
+import PropertyListItem from '/src/js/elements/autonomous/lists/property-list-item.js';
+jest.mock('/src/js/elements/autonomous/lists/property-list-item.js');
 
 export default class PropertyList {
   constructor() {

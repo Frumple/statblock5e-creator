@@ -1,11 +1,11 @@
-import DraggableListItem from '/src/js/elements/autonomous/draggable-list-item.js';
+import DraggableListItem from '/src/js/elements/autonomous/lists/draggable-list-item.js';
 
 export default class TextBlockListItem extends DraggableListItem {
   static get elementName() { return 'text-block-list-item'; }
   static get templatePaths() {
     return super.templatePaths.set(
       'text-block-list-item',
-      'src/html/elements/autonomous/text-block-list-item.html');
+      'src/html/elements/autonomous/lists/text-block-list-item.html');
   }
 
   constructor() {
