@@ -1,10 +1,10 @@
 import CustomAutonomousElement from '/src/js/elements/autonomous/custom-autonomous-element.js';
 
-export default class DraggableListItem extends CustomAutonomousElement {
+export default class DragAndDropListItem extends CustomAutonomousElement {
   static get templatePaths() {
     return super.templatePaths.set(
-      'draggable-list-item',
-      'src/html/elements/autonomous/lists/draggable-list-item.html');
+      'drag-and-drop-list-item',
+      'src/html/elements/autonomous/lists/drag-and-drop-list-item.html');
   }
 
   constructor(templatePaths) {
@@ -78,8 +78,8 @@ export default class DraggableListItem extends CustomAutonomousElement {
   }
 
   set dragoverRegion(state) {
-    const dragoverTopClass = 'draggable-list-item__container_dragover-top';
-    const dragoverBottomClass = 'draggable-list-item__container_dragover-bottom';
+    const dragoverTopClass = 'drag-and-drop-list-item__container_dragover-top';
+    const dragoverBottomClass = 'drag-and-drop-list-item__container_dragover-bottom';
 
     switch (state) {
     case 'top':

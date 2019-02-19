@@ -1,0 +1,11 @@
+.drag-and-drop-list-item__container {
+  border: 1px solid Gray;
+}
+
+.drag-and-drop-list-item__container_dragover-top {
+  border-top: solid 10px DodgerBlue;
+}
+
+.drag-and-drop-list-item__container_dragover-bottom {
+  border-bottom: solid 10px DodgerBlue;
+}

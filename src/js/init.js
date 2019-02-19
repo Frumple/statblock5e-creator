@@ -6,10 +6,11 @@ import TextInput from '/src/js/elements/builtin/text-input.js';
 import ErrorMessages from '/src/js/elements/autonomous/error-messages.js';
 import PropertyBlock from '/src/js/elements/autonomous/property-block.js';
 import PropertyLine from '/src/js/elements/autonomous/property-line.js';
-import PropertyListItem from '/src/js/elements/autonomous/lists/property-list-item.js';
-import PropertyList from '/src/js/elements/autonomous/lists/property-list.js';
 import SectionDivider from '/src/js/elements/autonomous/section-divider.js';
 import TaperedRule from '/src/js/elements/autonomous/tapered-rule.js';
+
+import PropertyListItem from '/src/js/elements/autonomous/lists/property-list-item.js';
+import PropertyList from '/src/js/elements/autonomous/lists/property-list.js';
 import TextBlockListItem from '/src/js/elements/autonomous/lists/text-block-list-item.js';
 import TextBlockList from '/src/js/elements/autonomous/lists/text-block-list.js';
 
@@ -47,10 +48,11 @@ async function init() {
   elementClasses.push(ErrorMessages);
   elementClasses.push(PropertyBlock);
   elementClasses.push(PropertyLine);
-  elementClasses.push(PropertyListItem);
-  elementClasses.push(PropertyList);
   elementClasses.push(SectionDivider);
   elementClasses.push(TaperedRule);
+
+  elementClasses.push(PropertyListItem);
+  elementClasses.push(PropertyList);
   elementClasses.push(TextBlockListItem);
   elementClasses.push(TextBlockList);
 

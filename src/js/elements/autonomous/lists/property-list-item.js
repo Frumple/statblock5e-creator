@@ -1,6 +1,6 @@
-import DraggableListItem from '/src/js/elements/autonomous/lists/draggable-list-item.js';
+import DragAndDropListItem from '/src/js/elements/autonomous/lists/drag-and-drop-list-item.js';
 
-export default class PropertyListItem extends DraggableListItem {
+export default class PropertyListItem extends DragAndDropListItem {
   static get elementName() { return 'property-list-item'; }
   static get templatePaths() {
     return super.templatePaths.set(
