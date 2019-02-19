@@ -1,10 +1,10 @@
 import CustomElementMixins from '/src/js/helpers/test/custom-element-mixins.js';
 import { traverseElements } from '/src/js/helpers/element-helpers.js';
 
-import AttributeList from '/src/js/elements/autonomous/attribute-list.js';
+import PropertyList from '/src/js/elements/autonomous/property-list.js';
 import ErrorMessages from '/src/js/elements/autonomous/error-messages.js';
 
-jest.mock('/src/js/elements/autonomous/attribute-list.js');
+jest.mock('/src/js/elements/autonomous/property-list.js');
 jest.mock('/src/js/elements/autonomous/error-messages.js');
 
 /*
@@ -30,8 +30,8 @@ export default SectionTestMixin = {
     this.errorMessages = new ErrorMessages();
 
     const listElement = this.editElements.list;
-    if (listElement && listElement.tagName === 'ATTRIBUTE-LIST') {
-      this.editElements.list = new AttributeList();
+    if (listElement && listElement.tagName === 'PROPERTY-LIST') {
+      this.editElements.list = new PropertyList();
     }
 
     traverseElements(this.editElements, 3, (element) => {            

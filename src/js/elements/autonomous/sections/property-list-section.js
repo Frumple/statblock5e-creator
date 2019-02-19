@@ -1,16 +1,16 @@
 import * as sectionModule from '/src/js/elements/autonomous/sections/section.js';
 
-export default class AttributeListSection extends sectionModule.Section {
+export default class PropertyListSection extends sectionModule.Section {
   static get templatePaths() {
     return super.templatePaths.set(
-      'attribute-list-section',
-      'src/html/elements/autonomous/sections/attribute-list-section.html');
+      'property-list-section',
+      'src/html/elements/autonomous/sections/property-list-section.html');
   }
 
   constructor(templatePaths, headerText) {
     super(templatePaths,
-          AttributeListShowElements,
-          AttributeListEditElements);
+          PropertyListShowElements,
+          PropertyListEditElements);
 
     this.showElements.header.textContent = headerText;
     this.editElements.label.textContent = `${headerText}:`;    
@@ -19,7 +19,7 @@ export default class AttributeListSection extends sectionModule.Section {
   connectedCallback() {
     this.editElements.input.addEventListener('keydown', this.onEnterKeyDownOnInputField.bind(this));
     this.editElements.addButton.addEventListener('click', this.onClickAddButton.bind(this));
-    this.addEventListener('attributeListItemRemoved', this.onAttributeListItemRemoved.bind(this));
+    this.addEventListener('propertyListItemRemoved', this.onPropertyListItemRemoved.bind(this));
   }
 
   onEnterKeyDownOnInputField(keyEvent) {
@@ -34,7 +34,7 @@ export default class AttributeListSection extends sectionModule.Section {
     this.addItemFromInput();
   }
 
-  onAttributeListItemRemoved(event) {
+  onPropertyListItemRemoved(event) {
     let itemText = event.detail.itemText;
     this.editElements.datalist.setOptionEnabled(itemText, true);
   }
@@ -99,23 +99,23 @@ export default class AttributeListSection extends sectionModule.Section {
   }
 }
 
-class AttributeListShowElements extends sectionModule.ShowElements {
+class PropertyListShowElements extends sectionModule.ShowElements {
   constructor(shadowRoot) {
     super(shadowRoot);
-    this.header = shadowRoot.getElementById('attribute-list-header');
-    this.text = shadowRoot.getElementById('attribute-list-text');
+    this.header = shadowRoot.getElementById('property-list-header');
+    this.text = shadowRoot.getElementById('property-list-text');
   }
 }
 
-class AttributeListEditElements extends sectionModule.EditElements {
+class PropertyListEditElements extends sectionModule.EditElements {
   constructor(shadowRoot) {
     super(shadowRoot);
 
-    this.label = shadowRoot.getElementById('attribute-list-label');
-    this.input = shadowRoot.getElementById('attribute-list-input');
-    this.addButton = shadowRoot.getElementById('attribute-list-add-button');
-    this.list = shadowRoot.getElementById('attribute-list');
-    this.datalist = shadowRoot.getElementById('attribute-list-datalist');
+    this.label = shadowRoot.getElementById('property-list-label');
+    this.input = shadowRoot.getElementById('property-list-input');
+    this.addButton = shadowRoot.getElementById('property-list-add-button');
+    this.list = shadowRoot.getElementById('property-list');
+    this.datalist = shadowRoot.getElementById('property-list-datalist');
   }
   
   get initiallySelectedElement() {

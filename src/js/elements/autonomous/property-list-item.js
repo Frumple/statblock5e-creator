@@ -1,19 +1,19 @@
 import DraggableListItem from '/src/js/elements/autonomous/draggable-list-item.js';
 
-export default class AttributeListItem extends DraggableListItem {
-  static get elementName() { return 'attribute-list-item'; }
+export default class PropertyListItem extends DraggableListItem {
+  static get elementName() { return 'property-list-item'; }
   static get templatePaths() {
     return super.templatePaths.set(
-      'attribute-list-item',
-      'src/html/elements/autonomous/attribute-list-item.html');
+      'property-list-item',
+      'src/html/elements/autonomous/property-list-item.html');
   }
 
   constructor() {
-    super(AttributeListItem.templatePaths);
+    super(PropertyListItem.templatePaths);
 
-    this.container = this.shadowRoot.getElementById('attribute-list-item-container');
-    this.label = this.shadowRoot.getElementById('attribute-list-item-label');
-    this.removeButton = this.shadowRoot.getElementById('attribute-list-item-remove-button');
+    this.container = this.shadowRoot.getElementById('property-list-item-container');
+    this.label = this.shadowRoot.getElementById('property-list-item-label');
+    this.removeButton = this.shadowRoot.getElementById('property-list-item-remove-button');
   }
 
   connectedCallback() {
@@ -39,7 +39,7 @@ export default class AttributeListItem extends DraggableListItem {
   }
 
   remove() {
-    let removeEvent = new CustomEvent('attributeListItemRemoved', {
+    let removeEvent = new CustomEvent('propertyListItemRemoved', {
       bubbles: true,
       composed: true,
       detail: {

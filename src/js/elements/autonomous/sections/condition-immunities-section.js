@@ -1,6 +1,6 @@
-import AttributeListSection from '/src/js/elements/autonomous/sections/attribute-list-section.js';
+import PropertyListSection from '/src/js/elements/autonomous/sections/property-list-section.js';
 
-export default class ConditionImmunitiesSection extends AttributeListSection {
+export default class ConditionImmunitiesSection extends PropertyListSection {
   static get elementName() { return 'condition-immunities-section'; }
   static get templatePaths() {
     return super.templatePaths.set(

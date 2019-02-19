@@ -1,7 +1,7 @@
-import AttributeListItem from '/src/js/elements/autonomous/attribute-list-item.js';
-jest.mock('/src/js/elements/autonomous/attribute-list-item.js');
+import PropertyListItem from '/src/js/elements/autonomous/property-list-item.js';
+jest.mock('/src/js/elements/autonomous/property-list-item.js');
 
-export default class AttributeList {
+export default class PropertyList {
   constructor() {
     this._list = [];
     this.draggedItem = null;
@@ -16,7 +16,7 @@ export default class AttributeList {
   }
 
   addItem(itemText) {
-    const item = new AttributeListItem(this);
+    const item = new PropertyListItem(this);
     item.text = itemText;
     this._list.push(item);
   }

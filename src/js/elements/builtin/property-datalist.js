@@ -2,10 +2,10 @@ import CustomElementMixins from '/src/js/helpers/test/custom-element-mixins.js';
 import isRunningInNode from '/src/js/helpers/is-running-in-node.js';
 import { copyObjectProperties } from '/src/js/helpers/object-helpers.js';
 
-export default class AttributeDataList extends HTMLDataListElement {
+export default class PropertyDataList extends HTMLDataListElement {
   static async define() {
-    const elementName = 'attribute-datalist';
-    CustomElementMixins.define(elementName, AttributeDataListMixin);
+    const elementName = 'property-datalist';
+    CustomElementMixins.define(elementName, PropertyDataListMixin);
 
     if (! isRunningInNode) {
       customElements.define(elementName, this, { extends: 'datalist' });
@@ -15,12 +15,12 @@ export default class AttributeDataList extends HTMLDataListElement {
   constructor() {
     super();
 
-    copyObjectProperties(this, AttributeDataListMixin);
+    copyObjectProperties(this, PropertyDataListMixin);
     this.initializeMixin();
   }
 }
 
-const AttributeDataListMixin = {
+const PropertyDataListMixin = {
   initializeMixin() {
     return;
   },

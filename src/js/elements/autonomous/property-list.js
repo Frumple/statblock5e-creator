@@ -1,19 +1,19 @@
 import DragAndDropList from '/src/js/elements/autonomous/drag-and-drop-list.js';
 
-export default class AttributeList extends DragAndDropList {
-  static get elementName() { return 'attribute-list'; }
+export default class PropertyList extends DragAndDropList {
+  static get elementName() { return 'property-list'; }
   static get templatePaths() {
     return super.templatePaths.set(
-      'attribute-list',
-      'src/html/elements/autonomous/attribute-list.html');
+      'property-list',
+      'src/html/elements/autonomous/property-list.html');
   }
 
   constructor() {
-    super(AttributeList.templatePaths);
+    super(PropertyList.templatePaths);
   }
 
   get itemsAsText() {
-    let listItemElements = Array.from(this.querySelectorAll('attribute-list-item'));
+    let listItemElements = Array.from(this.querySelectorAll('property-list-item'));
     return listItemElements.map(element => element.text);
   }
 
@@ -22,13 +22,13 @@ export default class AttributeList extends DragAndDropList {
   }
 
   addItem(itemText) {
-    let listItemElement = document.createElement('attribute-list-item');
+    let listItemElement = document.createElement('property-list-item');
     listItemElement.text = itemText;
     this.appendChild(listItemElement);
   }
 
   findItem(itemText) {
-    let listItemElements = Array.from(this.querySelectorAll('attribute-list-item'));
+    let listItemElements = Array.from(this.querySelectorAll('property-list-item'));
     return listItemElements.filter(element => element.text === itemText)[0];
   }  
 }

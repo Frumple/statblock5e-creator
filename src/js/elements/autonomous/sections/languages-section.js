@@ -1,6 +1,6 @@
-import AttributeListSection from '/src/js/elements/autonomous/sections/attribute-list-section.js';
+import PropertyListSection from '/src/js/elements/autonomous/sections/property-list-section.js';
 
-export default class LanguagesSection extends AttributeListSection {
+export default class LanguagesSection extends PropertyListSection {
   static get elementName() { return 'languages-section'; }
   static get templatePaths() {
     return super.templatePaths.set(

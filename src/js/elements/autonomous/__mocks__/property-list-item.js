@@ -1,4 +1,4 @@
-export default class AttributeListItem {
+export default class PropertyListItem {
   constructor(parent) {
     this._parent = parent;
     this._text = '';
@@ -13,7 +13,7 @@ export default class AttributeListItem {
   }
 
   remove() {
-    let removeEvent = new CustomEvent('attributeListItemRemoved', {
+    let removeEvent = new CustomEvent('propertyListItemRemoved', {
       bubbles: true,
       composed: true,
       detail: {
