@@ -1,4 +1,4 @@
-.button {
+.default-button {
   background: #dddddd;
   border: 1px outset #949494;
   font-family: inherit;
@@ -9,10 +9,10 @@
   transition: background 100ms ease-in-out;
 }
 
-.button:hover {
+.default-button:hover {
   background: #eeeeee;
 }
 
-.button:active {
+.default-button:active {
   background: #90FF70;
 }

@@ -32,7 +32,6 @@
 
 .heading-edit-section__title-input {
   grid-area: 1 / 1 / 2 / 4;
-  height: 23px;
 }
 
 .heading-edit-section__label {

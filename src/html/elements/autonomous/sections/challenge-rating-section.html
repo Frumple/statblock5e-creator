@@ -7,13 +7,13 @@
       <p id="challenge-rating-text">0 (10 XP)</p>
     </property-line>
   </div>
-  <button id="edit-button" class="button section__action section__action_hidden">Edit</button>
+  <button id="edit-button" class="default-button section__action section__action_hidden">Edit</button>
 </div>
 
 <form id="edit-section" class="section section_hidden" novalidate>
   <div class="challenge-rating-edit-section">
     <label id="challenge-rating-label" class="challenge-rating-edit-section__challenge-rating-label section__header-label">Challenge Rating:</label>
-    <select id="challenge-rating-input" class="challenge-rating-edit-section__challenge-rating-input" name="challenge-rating" pretty-name="Challenge Rating">
+    <select id="challenge-rating-input" class="challenge-rating-edit-section__challenge-rating-input section__select" name="challenge-rating" pretty-name="Challenge Rating">
       <option value="0">0</option>
       <option value="0.125">1/8</option>
       <option value="0.25">1/4</option>
@@ -53,5 +53,5 @@
     <label id="experience-points-label" class="challenge-rating-edit-section__experience-points-label">Experience Points:</label>
     <input id="experience-points-input" class="challenge-rating-edit-section__experience-points-input section__number-input" is="integer-input" type="number" name="experience-points" pretty-name="Experience Points" min="0" max="999999" value="10" required />
   </div>
-  <button id="save-button" class="button section__action">Save</button>
+  <button id="save-button" class="default-button section__action">Save</button>
 </form>

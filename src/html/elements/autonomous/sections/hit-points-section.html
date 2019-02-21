@@ -7,7 +7,7 @@
       <p id="hit-points-text">4 (1d8)</p>
     </property-line>
   </div>
-  <button id="edit-button" class="button section__action section__action_hidden">Edit</button>
+  <button id="edit-button" class="default-button section__action section__action_hidden">Edit</button>
 </div>
 
 <form id="edit-section" class="section section_hidden" novalidate>
@@ -21,7 +21,7 @@
       <label id="hit-die-quantity-label" class="hit-points-edit-section__hit-die-quantity-label" for="hit-die-quantity-input">Hit Die Qty:</label>
       <input id="hit-die-quantity-input" class="hit-points-edit-section__hit-die-quantity-input section__number-input section__small-number-input" is="integer-input" type="number" name="hit-die-quantity" pretty-name="Hit Die Quantity" value="1" min="1" max="999" required />
       <label id="hit-die-size-label" class="hit-points-edit-section__hit-die-size-label" for="hit-die-size-input">Hit Die Size:</label>
-      <select id="hit-die-size-input" class="hit-points-edit-section__hit-die-size-input" name="hit-die-size">
+      <select id="hit-die-size-input" class="hit-points-edit-section__hit-die-size-input section__select" name="hit-die-size">
         <option value="4">d4</option>
         <option value="6">d6</option>
         <option value="8" selected>d8</option>
@@ -32,5 +32,5 @@
       <label id="hit-die-trailing-text" class="hit-points-edit-section__hit-die-trailing-text">+ 0 )</label>
     </div>
   </div>
-  <button id="save-button" class="button section__action">Save</button>
+  <button id="save-button" class="default-button section__action">Save</button>
 </form>
