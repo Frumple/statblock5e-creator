@@ -44,14 +44,14 @@
   font-size: inherit;
   box-sizing: border-box;
   width: 100%;
-  height: 25px;
+  height: 24px;
 }
 
 .section__number-input {
   font-family: inherit;
   font-size: inherit;
   box-sizing: border-box;
-  height: 25px;
+  height: 24px;
 }
 
 .section__small-number-input {
@@ -62,7 +62,7 @@
   font-family: inherit;
   font-size: inherit;
   box-sizing: border-box;
-  height: 25px;
+  height: 24px;
 }
 
 .section__textarea {
