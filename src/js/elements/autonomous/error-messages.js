@@ -24,6 +24,7 @@ export default class ErrorMessages extends CustomAutonomousElement {
     };
 
     this.errors.push(error);
+    fieldElement.classList.add('section__error-highlight');
 
     let messageElement = ErrorMessages.createErrorMessageElement(message);
     this.containerElement.classList.remove('error-messages_hidden');
@@ -34,7 +35,8 @@ export default class ErrorMessages extends CustomAutonomousElement {
     this.containerElement.classList.add('error-messages_hidden');
 
     while (this.errors.length > 0) {
-      this.errors.pop();
+      let error = this.errors.pop();
+      error.fieldElement.classList.remove('section__error-highlight');
     }
 
     let messageList = this.listElement;

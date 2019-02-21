@@ -70,11 +70,6 @@
   font-size: inherit;
 }
 
-.section__text-input:invalid,
-.section__number-input:invalid {
-  border: 2px solid red;
-}
-
 .section__action {  
   width: 55px;
   height: 100%;
@@ -84,4 +79,8 @@
 
 .section__action_hidden {
   display: none;
+}
+
+.section__error-highlight {
+  border: 2px solid red;
 }
