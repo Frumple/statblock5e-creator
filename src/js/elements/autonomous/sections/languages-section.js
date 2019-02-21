@@ -11,8 +11,6 @@ export default class LanguagesSection extends PropertyListSection {
   constructor() {
     super(LanguagesSection.templatePaths,
           'Languages');
-
-    this.isInitialized = false;
   }
 
   connectedCallback() {

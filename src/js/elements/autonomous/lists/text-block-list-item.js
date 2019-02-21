@@ -12,7 +12,8 @@ export default class TextBlockListItem extends DragAndDropListItem {
     super(TextBlockListItem.templatePaths);
 
     this.container = this.shadowRoot.getElementById('text-block-list-item-container');
-    this.textarea = this.shadowRoot.getElementById('text-block-list-item-textarea');
+    this.nameElement = this.shadowRoot.getElementById('text-block-list-item-name');
+    this.textElement = this.shadowRoot.getElementById('text-block-list-item-text');
     this.removeButton = this.shadowRoot.getElementById('text-block-list-item-remove-button');
   }
 
@@ -30,12 +31,25 @@ export default class TextBlockListItem extends DragAndDropListItem {
     this.remove();
   }
 
+  get name() {
+    return this.nameElement.value;
+  }
+
+  set name(name) {
+    this.nameElement.value = name;
+  }
+
   get text() {
-    return this.textarea.value;
+    return this.textElement.value;
   }
 
   set text(text) {
-    this.textarea.value = text;
+    this.textElement.value = text;
+  }
+
+  validate(errorMessages) {
+    this.nameElement.validate(errorMessages);
+    this.textElement.validate(errorMessages);
   }
 
   remove() {

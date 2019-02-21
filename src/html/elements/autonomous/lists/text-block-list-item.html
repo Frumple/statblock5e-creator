@@ -1,7 +1,11 @@
+<link href='src/css/elements/default-text.css' rel='stylesheet' type='text/css'>
 <link href='src/css/elements/button.css' rel='stylesheet' type='text/css'>
 <link href='src/css/elements/autonomous/lists/text-block-list-item.css' rel='stylesheet' type='text/css'>
 
 <div id="text-block-list-item-container" class="drag-and-drop-list-item__container text-block-list-item__container">
-  <textarea id="text-block-list-item-textarea" class="text-block-list-item__textarea"></textarea>
-  <button id="text-block-list-item-remove-button" class="button text-block-list-item__remove-button">Remove</button>
+  <div id="text-block-list-item-header" class="text-block-list-item__header">
+    <input id="text-block-list-item-name" class="default-text text-block-list-item__name" is="text-input" pretty-name="Item Name" required></input>
+    <button id="text-block-list-item-remove-button" class="button text-block-list-item__remove-button">Remove</button>
+  </div>
+  <textarea id="text-block-list-item-text" class="default-text text-block-list-item__text" is="custom-textarea" pretty-name="Item Text" cols="30" rows="4" required></textarea>
 </div>

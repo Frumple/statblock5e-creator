@@ -36,10 +36,6 @@ export class Section extends CustomAutonomousElement {
       }
     });
 
-    this.editElements.saveButton.addEventListener('click', () => {
-      this.save();
-    });
-
     this.editElements.section.addEventListener('submit', (event) => {
       event.preventDefault();
       this.save();

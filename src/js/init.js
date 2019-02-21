@@ -1,3 +1,4 @@
+import CustomTextArea from '/src/js/elements/builtin/custom-textarea.js';
 import EnableDisableElementsCheckbox from '/src/js/elements/builtin/enable-disable-elements-checkbox.js';
 import IntegerInput from '/src/js/elements/builtin/integer-input.js';
 import PropertyDataList from '/src/js/elements/builtin/property-datalist.js';
@@ -11,6 +12,8 @@ import TaperedRule from '/src/js/elements/autonomous/tapered-rule.js';
 
 import PropertyListItem from '/src/js/elements/autonomous/lists/property-list-item.js';
 import PropertyList from '/src/js/elements/autonomous/lists/property-list.js';
+import TextBlockDisplayList from '/src/js/elements/autonomous/lists/text-block-display-list.js';
+import TextBlockDisplayListItem from '/src/js/elements/autonomous/lists/text-block-display-list-item.js';
 import TextBlockListItem from '/src/js/elements/autonomous/lists/text-block-list-item.js';
 import TextBlockList from '/src/js/elements/autonomous/lists/text-block-list.js';
 
@@ -28,6 +31,7 @@ import ConditionImmunitiesSection from '/src/js/elements/autonomous/sections/con
 import SensesSection from '/src/js/elements/autonomous/sections/senses-section.js';
 import LanguagesSection from '/src/js/elements/autonomous/sections/languages-section.js';
 import ChallengeRatingSection from '/src/js/elements/autonomous/sections/challenge-rating-section.js';
+import SpecialTraitsSection from '/src/js/elements/autonomous/sections/special-traits-section.js';
 
 import StatBlockEditor from '/src/js/elements/autonomous/containers/stat-block-editor.js';
 import StatBlockMenu from '/src/js/elements/autonomous/containers/stat-block-menu.js';
@@ -40,6 +44,7 @@ import AdvancedStats from '/src/js/elements/autonomous/containers/advanced-stats
 async function init() {
   const elementClasses = [];
 
+  elementClasses.push(CustomTextArea);
   elementClasses.push(EnableDisableElementsCheckbox);
   elementClasses.push(IntegerInput);
   elementClasses.push(PropertyDataList);
@@ -53,6 +58,8 @@ async function init() {
 
   elementClasses.push(PropertyListItem);
   elementClasses.push(PropertyList);
+  elementClasses.push(TextBlockDisplayList);
+  elementClasses.push(TextBlockDisplayListItem);
   elementClasses.push(TextBlockListItem);
   elementClasses.push(TextBlockList);
 
@@ -70,6 +77,7 @@ async function init() {
   elementClasses.push(SensesSection);
   elementClasses.push(LanguagesSection);
   elementClasses.push(ChallengeRatingSection);
+  elementClasses.push(SpecialTraitsSection);
 
   elementClasses.push(StatBlockEditor);
   elementClasses.push(StatBlockMenu);

@@ -2,9 +2,6 @@
   display: grid;
   grid-template-columns: auto 1fr;
   grid-template-rows: auto 1fr;
-  font-family: 'Noto Sans', 'Myriad Pro', Calibri, Helvetica, Arial,
-               sans-serif;
-  font-size: 13.5px;
 }
 
 ::slotted(stat-block-menu) {

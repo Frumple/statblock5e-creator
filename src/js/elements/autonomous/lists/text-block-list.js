@@ -11,4 +11,21 @@ export default class TextBlockList extends DragAndDropList {
   constructor() {
     super(TextBlockList.templatePaths);
   }
+
+  get textBlocks() {
+    let listItemElements = Array.from(this.querySelectorAll('text-block-list-item'));
+    return listItemElements;
+  }
+
+  addTextBlock() {
+    let listItemElement = document.createElement('text-block-list-item');
+    this.appendChild(listItemElement);
+  }
+
+  validate(errorMessages) {
+    let listItemElements = Array.from(this.querySelectorAll('text-block-list-item'));
+    for (const element of listItemElements) {
+      element.validate(errorMessages);
+    }
+  }
 }
