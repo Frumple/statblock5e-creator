@@ -86,6 +86,20 @@ export class Section extends CustomAutonomousElement {
     }
   }
 
+  setEmptyVisibility(visibility) {
+    if (this.empty) {
+      if (visibility) {
+        if (this.mode === 'hidden') {
+          this.mode = 'show';
+        }
+      } else {
+        if (this.mode === 'show') {
+          this.mode = 'hidden';
+        }
+      }
+    }
+  }
+
   focusOnInitialEditSectionElement() {
     focusAndSelectElement(this.editElements.initiallySelectedElement);    
   }

@@ -21,6 +21,10 @@ export default class TextBlockListSection extends sectionModule.Section {
     this.editElements.list.addTextBlock();
   }
 
+  get empty() {
+    return super.empty;
+  }
+
   set empty(isEmpty) {
     super.empty = isEmpty;
 

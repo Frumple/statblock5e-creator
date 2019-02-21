@@ -14,17 +14,7 @@ export default class DivisibleContainer extends CustomAutonomousElement {
 
   setEmptySectionsVisibility(visibility) {
     for (const section of this.allSections) {
-      if (section.empty) {
-        if (visibility) {
-          if (section.mode === 'hidden') {
-            section.mode = 'show';
-          }
-        } else {
-          if (section.mode === 'show') {
-            section.mode = 'hidden';
-          }
-        }
-      }
+      section.setEmptyVisibility(visibility);
     }
 
     this.updateSectionDividers();

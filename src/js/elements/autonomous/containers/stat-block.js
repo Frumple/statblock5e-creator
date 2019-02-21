@@ -12,7 +12,8 @@ export default class StatBlock extends CustomAutonomousElement {
     super(StatBlock.templatePaths);
 
     this.headingSection = document.querySelector('heading-section');
-    this.topStats = document.querySelector('top-stats');   
+    this.topStats = document.querySelector('top-stats');
+    this.specialTraitsSection = document.querySelector('special-traits-section');
   }
 
   connectedCallback() {
@@ -68,17 +69,20 @@ export default class StatBlock extends CustomAutonomousElement {
     }
   }
 
-  setEmptySectionsVisibility(visibliity) {
-    this.topStats.setEmptySectionsVisibility(visibliity);
+  setEmptySectionsVisibility(visibility) {
+    this.topStats.advancedStats.setEmptySectionsVisibility(visibility);
+    this.specialTraitsSection.setEmptyVisibility(visibility);
   }
 
   editAllSections() {
     this.topStats.editAllSections();
+    this.specialTraitsSection.edit();
     this.headingSection.edit();
   }
 
   saveAllSections() {    
     this.topStats.saveAllSections();
+    this.specialTraitsSection.save();
     this.headingSection.save();
   }
 }
