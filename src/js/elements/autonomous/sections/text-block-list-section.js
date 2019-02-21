@@ -34,6 +34,7 @@ export default class TextBlockListSection extends sectionModule.Section {
   }
 
   checkForErrors() {
+    this.editElements.list.trimTrailingPeriodsInNames();
     this.editElements.list.validate(this.errorMessages);
   }
 

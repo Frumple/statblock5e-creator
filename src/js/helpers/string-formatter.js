@@ -24,3 +24,7 @@ export function formatModifierNumber(modifier) {
   }
   return modifier.toString();
 }
+
+export function trimTrailingPeriods(string) {
+  return string.replace(/\.+$/, '');
+}

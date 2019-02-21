@@ -1,4 +1,5 @@
 import DragAndDropList from '/src/js/elements/autonomous/lists/drag-and-drop-list.js';
+import { trimTrailingPeriods } from '/src/js/helpers/string-formatter.js'
 
 export default class TextBlockList extends DragAndDropList {
   static get elementName() { return 'text-block-list'; }
@@ -13,8 +14,8 @@ export default class TextBlockList extends DragAndDropList {
   }
 
   get textBlocks() {
-    let listItemElements = Array.from(this.querySelectorAll('text-block-list-item'));
-    return listItemElements;
+    let textBlocks = Array.from(this.querySelectorAll('text-block-list-item'));
+    return textBlocks;
   }
 
   addTextBlock() {
@@ -22,10 +23,17 @@ export default class TextBlockList extends DragAndDropList {
     this.appendChild(listItemElement);
   }
 
+  trimTrailingPeriodsInNames() {
+    let textBlocks = this.textBlocks;
+    for (const textBlock of textBlocks) {
+      textBlock.name = trimTrailingPeriods(textBlock.name);
+    }
+  }
+
   validate(errorMessages) {
-    let listItemElements = Array.from(this.querySelectorAll('text-block-list-item'));
-    for (const element of listItemElements) {
-      element.validate(errorMessages);
+    let textBlocks = this.textBlocks;
+    for (const textBlock of textBlocks) {
+      textBlock.validate(errorMessages);
     }
   }
 }
