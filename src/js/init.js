@@ -10,12 +10,12 @@ import PropertyLine from '/src/js/elements/autonomous/property-line.js';
 import SectionDivider from '/src/js/elements/autonomous/section-divider.js';
 import TaperedRule from '/src/js/elements/autonomous/tapered-rule.js';
 
+import DisplayBlockList from '/src/js/elements/autonomous/lists/display-block-list.js';
+import DisplayBlockListItem from '/src/js/elements/autonomous/lists/display-block-list-item.js';
+import EditableBlockListItem from '/src/js/elements/autonomous/lists/editable-block-list-item.js';
+import EditableBlockList from '/src/js/elements/autonomous/lists/editable-block-list.js';
 import PropertyListItem from '/src/js/elements/autonomous/lists/property-list-item.js';
 import PropertyList from '/src/js/elements/autonomous/lists/property-list.js';
-import TextBlockDisplayList from '/src/js/elements/autonomous/lists/text-block-display-list.js';
-import TextBlockDisplayListItem from '/src/js/elements/autonomous/lists/text-block-display-list-item.js';
-import TextBlockListItem from '/src/js/elements/autonomous/lists/text-block-list-item.js';
-import TextBlockList from '/src/js/elements/autonomous/lists/text-block-list.js';
 
 import HeadingSection from '/src/js/elements/autonomous/sections/heading-section.js';
 import ArmorClassSection from '/src/js/elements/autonomous/sections/armor-class-section.js';
@@ -56,12 +56,12 @@ async function init() {
   elementClasses.push(SectionDivider);
   elementClasses.push(TaperedRule);
 
+  elementClasses.push(DisplayBlockList);
+  elementClasses.push(DisplayBlockListItem);
+  elementClasses.push(EditableBlockListItem);
+  elementClasses.push(EditableBlockList);
   elementClasses.push(PropertyListItem);
   elementClasses.push(PropertyList);
-  elementClasses.push(TextBlockDisplayList);
-  elementClasses.push(TextBlockDisplayListItem);
-  elementClasses.push(TextBlockListItem);
-  elementClasses.push(TextBlockList);
 
   elementClasses.push(HeadingSection);
   elementClasses.push(ArmorClassSection);

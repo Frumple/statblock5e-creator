@@ -1,27 +1,27 @@
-.text-block-list-item__container {
+.editable-block-list-item__container {
   display: flex;
   flex-direction: column;
   padding: 5px;
 }
 
-.text-block-list-item__header {
+.editable-block-list-item__header {
   display: flex;
   flex-direction: row;
 }
 
-.text-block-list-item__name {
+.editable-block-list-item__name {
   width: 100%;
   font-weight: bold;
   font-style: italic;
 }
 
-.text-block-list-item__remove-button {
+.editable-block-list-item__remove-button {
   padding-left: 5px;
   padding-right: 5px;
   margin-left: 5px;
 }
 
-.text-block-list-item__text {
+.editable-block-list-item__text {
   resize: none;
   margin-top: 5px;
 }

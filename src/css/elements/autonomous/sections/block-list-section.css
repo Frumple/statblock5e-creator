@@ -1,0 +1,15 @@
+.block-list-section__empty-label {
+  font-weight: bold;
+}
+
+.block-list-section__empty-label_hidden {
+  display: none;
+}
+
+.block-list-section__add-button {
+  width: 100%;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  margin-top: 5px;
+}
+

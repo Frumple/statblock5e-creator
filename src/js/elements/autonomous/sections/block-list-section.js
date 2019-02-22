@@ -1,16 +1,16 @@
 import * as sectionModule from '/src/js/elements/autonomous/sections/section.js';
 
-export default class TextBlockListSection extends sectionModule.Section {
+export default class BlockListSection extends sectionModule.Section {
   static get templatePaths() {
     return super.templatePaths.set(
-      'text-block-list-section',
-      'src/html/elements/autonomous/sections/text-block-list-section.html');
+      'block-list-section',
+      'src/html/elements/autonomous/sections/block-list-section.html');
   }
 
   constructor(templatePaths) {
     super(templatePaths,
-          TextBlockListShowElements,
-          TextBlockListEditElements);
+          EditableBlockListShowElements,
+          EditableBlockListEditElements);
   }
 
   connectedCallback() {
@@ -18,7 +18,7 @@ export default class TextBlockListSection extends sectionModule.Section {
   }
 
   onClickAddTextBlockButton() {
-    this.editElements.list.addTextBlock();
+    this.editElements.editableList.addTextBlock();
   }
 
   get empty() {
@@ -28,7 +28,7 @@ export default class TextBlockListSection extends sectionModule.Section {
   set empty(isEmpty) {
     super.empty = isEmpty;
 
-    const hiddenEmptyLabelClass = 'text-block-list-section__empty-label_hidden';
+    const hiddenEmptyLabelClass = 'block-list-section__empty-label_hidden';
 
     if (isEmpty) {
       this.showElements.emptyLabel.classList.remove(hiddenEmptyLabelClass);
@@ -38,12 +38,12 @@ export default class TextBlockListSection extends sectionModule.Section {
   }
 
   checkForErrors() {
-    this.editElements.list.trimTrailingPeriodsInNames();
-    this.editElements.list.validate(this.errorMessages);
+    this.editElements.editableList.trimTrailingPeriodsInNames();
+    this.editElements.editableList.validate(this.errorMessages);
   }
 
   updateShowSection() {
-    let textBlocks = this.editElements.list.textBlocks;
+    let textBlocks = this.editElements.editableList.textBlocks;
 
     this.showElements.displayList.clear();
     for (const textBlock of textBlocks) {
@@ -58,7 +58,7 @@ export default class TextBlockListSection extends sectionModule.Section {
   }
 }
 
-class TextBlockListShowElements extends sectionModule.ShowElements {
+class EditableBlockListShowElements extends sectionModule.ShowElements {
   constructor(shadowRoot) {
     super(shadowRoot);
 
@@ -67,11 +67,11 @@ class TextBlockListShowElements extends sectionModule.ShowElements {
   }
 }
 
-class TextBlockListEditElements extends sectionModule.EditElements {
+class EditableBlockListEditElements extends sectionModule.EditElements {
   constructor(shadowRoot) {
     super(shadowRoot);
 
-    this.list = shadowRoot.getElementById('list');
+    this.editableList = shadowRoot.getElementById('editable-list');
     this.addButton = shadowRoot.getElementById('add-button');
   }
   

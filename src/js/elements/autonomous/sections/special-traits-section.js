@@ -1,6 +1,6 @@
-import TextBlockListSection from '/src/js/elements/autonomous/sections/text-block-list-section.js';
+import BlockListSection from '/src/js/elements/autonomous/sections/block-list-section.js';
 
-export default class SpecialTraitsSection extends TextBlockListSection {
+export default class SpecialTraitsSection extends BlockListSection {
   static get elementName() { return 'special-traits-section'; }
   static get templatePaths() {
     return super.templatePaths.set(
