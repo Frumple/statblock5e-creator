@@ -113,7 +113,7 @@ export class Section extends CustomAutonomousElement {
   save() {
     this.errorMessages.clear();
     this.checkForErrors();
-    if (this.errorMessages.any()) {
+    if (this.errorMessages.any) {
       return;
     }
     this.updateShowSection();

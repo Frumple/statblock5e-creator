@@ -49,7 +49,7 @@ export default class PropertyListSection extends sectionModule.Section {
     } else if(this.editElements.list.contains(text)) {
       this.errorMessages.add(this.editElements.input, 'Cannot add a duplicate item.');
     }
-    if (this.errorMessages.any()) {
+    if (this.errorMessages.any) {
       return;
     }
 

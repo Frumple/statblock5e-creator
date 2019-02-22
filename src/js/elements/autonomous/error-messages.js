@@ -11,8 +11,8 @@ export default class ErrorMessages extends CustomAutonomousElement {
   constructor() {
     super(ErrorMessages.templatePaths);
 
-    this.containerElement = this.shadowRoot.getElementById('error-messages');
-    this.listElement = this.shadowRoot.getElementById('error-messages-list');
+    this.container = this.shadowRoot.getElementById('error-messages');
+    this.list = this.shadowRoot.getElementById('error-messages-list');
 
     this.errors = [];
   }
@@ -25,35 +25,37 @@ export default class ErrorMessages extends CustomAutonomousElement {
 
     this.errors.push(error);
     fieldElement.classList.add('section__error-highlight');
+    this.container.classList.remove('error-messages_hidden');
 
     let messageElement = ErrorMessages.createErrorMessageElement(message);
-    this.containerElement.classList.remove('error-messages_hidden');
-    this.listElement.appendChild(messageElement);
+    this.list.appendChild(messageElement);
   }
 
   clear() {
-    this.containerElement.classList.add('error-messages_hidden');
+    this.container.classList.add('error-messages_hidden');
 
     while (this.errors.length > 0) {
       let error = this.errors.pop();
       error.fieldElement.classList.remove('section__error-highlight');
     }
 
-    let messageList = this.listElement;
+    let list = this.list;
 
-    while (messageList.hasChildNodes()) {
-      messageList.removeChild(messageList.lastChild);
+    while (list.hasChildNodes()) {
+      list.removeChild(list.lastChild);
     }
   }
 
-  any() {
+  get any() {
     return this.errors.length > 0;
   }
 
   static createErrorMessageElement(message) {
     let listItemElement = document.createElement('li');
+
     let textNode = document.createTextNode(message);
     listItemElement.appendChild(textNode);
+    
     return listItemElement;
   }
 }

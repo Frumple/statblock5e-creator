@@ -18,7 +18,7 @@ export default class ErrorMessages {
     }
   }
 
-  any() {
+  get any() {
     return this.errors.length > 0;
   }
 }

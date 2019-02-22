@@ -1,4 +1,23 @@
 .error-messages {
+  background: #EEEEEE;
+  color: red;
+  border: 1px solid black;
+  font-weight: bold;
+  margin-bottom: 10px;
+}
+
+.error-messages_hidden {
+  display: none;
+}
+
+.error-messages__list {
+  list-style-type: none;
+  padding: 5px;
+  margin: 0;
+}
+
+
+/* .error-messages {
   position: absolute;
   left: 440px;
   width: fit-content;
@@ -20,4 +39,4 @@
   list-style-type: none;
   padding-left: 0px;
   margin: 0px;
-}
+} */
