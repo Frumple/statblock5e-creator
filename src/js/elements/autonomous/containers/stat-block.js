@@ -13,7 +13,7 @@ export default class StatBlock extends CustomAutonomousElement {
 
     this.headingSection = document.querySelector('heading-section');
     this.topStats = document.querySelector('top-stats');
-    this.specialTraitsSection = document.querySelector('special-traits-section');
+    this.bottomStats = document.querySelector('bottom-stats');
   }
 
   connectedCallback() {
@@ -65,24 +65,24 @@ export default class StatBlock extends CustomAutonomousElement {
     if (mode === 'auto') {
       this.removeAttribute('style');
     } else if (mode === 'manual') {
-      this.setAttribute('style', `--statblock-content-height: ${height}px;`)
+      this.setAttribute('style', `--statblock-content-height: ${height}px;`);
     }
   }
 
   setEmptySectionsVisibility(visibility) {
     this.topStats.advancedStats.setEmptySectionsVisibility(visibility);
-    this.specialTraitsSection.setEmptyVisibility(visibility);
+    this.bottomStats.setEmptySectionsVisibility(visibility);
   }
 
   editAllSections() {
     this.topStats.editAllSections();
-    this.specialTraitsSection.edit();
+    this.bottomStats.editAllSections();
     this.headingSection.edit();
   }
 
   saveAllSections() {    
     this.topStats.saveAllSections();
-    this.specialTraitsSection.save();
+    this.bottomStats.saveAllSections();
     this.headingSection.save();
   }
 }

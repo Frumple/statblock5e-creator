@@ -38,6 +38,7 @@ import StatBlockMenu from '/src/js/elements/autonomous/containers/stat-block-men
 import StatBlockSidebar from '/src/js/elements/autonomous/containers/stat-block-sidebar.js';
 import StatBlock from '/src/js/elements/autonomous/containers/stat-block.js';
 import TopStats from '/src/js/elements/autonomous/containers/top-stats.js';
+import BottomStats from '/src/js/elements/autonomous/containers/bottom-stats.js';
 import BasicStats from '/src/js/elements/autonomous/containers/basic-stats.js';
 import AdvancedStats from '/src/js/elements/autonomous/containers/advanced-stats.js';
 
@@ -84,6 +85,7 @@ async function init() {
   elementClasses.push(StatBlockSidebar);
   elementClasses.push(StatBlock);
   elementClasses.push(TopStats);
+  elementClasses.push(BottomStats);
   elementClasses.push(BasicStats);
   elementClasses.push(AdvancedStats);
 
