@@ -12,17 +12,20 @@ export default class DisplayBlockList extends CustomAutonomousElement {
     super(DisplayBlockList.templatePaths);
   }
 
+  get blocks() {
+    return Array.from(this.querySelectorAll('display-block-list-item'));
+  }
+
   clear() {
-    let listItemElements = Array.from(this.querySelectorAll('display-block-list-item'));
-    for (const element of listItemElements) {
-      element.remove();
+    for (const block of this.blocks) {
+      block.remove();
     }
   }
 
-  addTextBlock(name, text) {
-    let listItemElement = document.createElement('display-block-list-item');
-    listItemElement.name = name;
-    listItemElement.text = text;
-    this.appendChild(listItemElement);
+  addBlock(name, text) {
+    const block = document.createElement('display-block-list-item');
+    block.name = name;
+    block.text = text;
+    this.appendChild(block);
   }
 }

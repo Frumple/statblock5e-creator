@@ -7,10 +7,9 @@ export function shouldAddASuggestedItem(section, itemText) {
   expect(section.editElements.list.itemsAsText).toEqual([itemText]);
 
   section.editElements.saveButton.click();
-  section.editElements.saveButton.click();
 
   expect(section).toBeInMode('show');
-  expect(section.showElements.text).toHaveTextContent(`${itemText}`);
+  expect(section.showElements.text).toHaveTextContent(itemText);
 }
 
 export function shouldAddACustomItem(section, itemText) {
@@ -22,7 +21,7 @@ export function shouldAddACustomItem(section, itemText) {
   section.editElements.saveButton.click();
 
   expect(section).toBeInMode('show');
-  expect(section.showElements.text).toHaveTextContent(`${itemText}`);
+  expect(section.showElements.text).toHaveTextContent(itemText);
 }
 
 export function shouldAddManyItems(section, itemTexts) {
@@ -35,8 +34,10 @@ export function shouldAddManyItems(section, itemTexts) {
 
   section.editElements.saveButton.click();
 
+  const expectedTextContent = itemTexts.join(', ');
+
   expect(section).toBeInMode('show');
-  expect(section.showElements.text).toHaveTextContent(`${itemTexts.join(', ')}`);
+  expect(section.showElements.text).toHaveTextContent(expectedTextContent);
 }
 
 export function shouldDisplayAnErrorIfAddingBlank(section) {

@@ -1,11 +1,15 @@
 import CustomElementMixins from '/src/js/helpers/test/custom-element-mixins.js';
 import { traverseElements } from '/src/js/helpers/element-helpers.js';
 
-import PropertyList from '/src/js/elements/autonomous/lists/property-list.js';
 import ErrorMessages from '/src/js/elements/autonomous/error-messages.js';
+import PropertyList from '/src/js/elements/autonomous/lists/property-list.js';
+import EditableBlockList from '/src/js/elements/autonomous/lists/editable-block-list.js';
+import DisplayBlockList from '/src/js/elements/autonomous/lists/display-block-list';
 
-jest.mock('/src/js/elements/autonomous/lists/property-list.js');
 jest.mock('/src/js/elements/autonomous/error-messages.js');
+jest.mock('/src/js/elements/autonomous/lists/property-list.js');
+jest.mock('/src/js/elements/autonomous/lists/editable-block-list.js');
+jest.mock('/src/js/elements/autonomous/lists/display-block-list');
 
 /*
 JSDOM does not currently support custom elements, so in our tests,
@@ -32,6 +36,16 @@ export default SectionTestMixin = {
     const listElement = this.editElements.list;
     if (listElement && listElement.tagName === 'PROPERTY-LIST') {
       this.editElements.list = new PropertyList();
+    }
+
+    const editableListElement = this.editElements.editableList;
+    if (editableListElement && editableListElement.tagName === 'EDITABLE-BLOCK-LIST') {
+      this.editElements.editableList = new EditableBlockList();
+    }
+
+    const displayListElement = this.showElements.displayList;
+    if (displayListElement && displayListElement.tagName === 'DISPLAY-BLOCK-LIST') {
+      this.showElements.displayList = new DisplayBlockList();
     }
 
     traverseElements(this.editElements, 3, (element) => {            

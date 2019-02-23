@@ -20,7 +20,7 @@ export default class DisplayBlockListItem extends CustomAutonomousElement {
   }
 
   set name(name) {
-    this.nameElement.textContent = `${name}.`;
+    this.nameElement.textContent = name;
   }
 
   get text() {

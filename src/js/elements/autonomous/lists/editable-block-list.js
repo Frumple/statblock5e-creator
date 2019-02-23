@@ -13,27 +13,25 @@ export default class EditableBlockList extends DragAndDropList {
     super(EditableBlockList.templatePaths);
   }
 
-  get textBlocks() {
-    let textBlocks = Array.from(this.querySelectorAll('editable-block-list-item'));
-    return textBlocks;
+  get blocks() {
+    const blocks = Array.from(this.querySelectorAll('editable-block-list-item'));
+    return blocks;
   }
 
-  addTextBlock() {
-    let listItemElement = document.createElement('editable-block-list-item');
-    this.appendChild(listItemElement);
+  addBlock() {
+    const listItem = document.createElement('editable-block-list-item');
+    this.appendChild(listItem);
   }
 
   trimTrailingPeriodsInNames() {
-    let textBlocks = this.textBlocks;
-    for (const textBlock of textBlocks) {
-      textBlock.name = trimTrailingPeriods(textBlock.name);
+    for (const block of this.blocks) {
+      block.name = trimTrailingPeriods(block.name);
     }
   }
 
   validate(errorMessages) {
-    let textBlocks = this.textBlocks;
-    for (const textBlock of textBlocks) {
-      textBlock.validate(errorMessages);
+    for (const block of this.blocks) {
+      block.validate(errorMessages);
     }
   }
 }

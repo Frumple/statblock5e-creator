@@ -98,7 +98,7 @@ describe('when the show section is clicked', () => {
       headingSection.editElements.saveButton.click();
 
       expect(headingSection).toBeInMode('edit');
-      expect(headingSection.errorMessages.errors.length).toBe(2);
+      expect(headingSection.errorMessages.errors).toHaveLength(2);
       expect(headingSection).toHaveError(
         headingSection.editElements.title,
         'Creature Name cannot be blank.');

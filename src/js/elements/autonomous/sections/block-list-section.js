@@ -18,7 +18,7 @@ export default class BlockListSection extends sectionModule.Section {
   }
 
   onClickAddTextBlockButton() {
-    this.editElements.editableList.addTextBlock();
+    this.editElements.editableList.addBlock();
   }
 
   get empty() {
@@ -43,14 +43,14 @@ export default class BlockListSection extends sectionModule.Section {
   }
 
   updateShowSection() {
-    let textBlocks = this.editElements.editableList.textBlocks;
+    let blocks = this.editElements.editableList.blocks;
 
     this.showElements.displayList.clear();
-    for (const textBlock of textBlocks) {
-      this.showElements.displayList.addTextBlock(textBlock.name, textBlock.text);
+    for (const textBlock of blocks) {
+      this.showElements.displayList.addBlock(textBlock.name, textBlock.text);
     }
 
-    if (textBlocks.length > 0) {
+    if (blocks.length > 0) {
       this.empty = false;
     } else {
       this.empty = true;
@@ -76,6 +76,10 @@ class EditableBlockListEditElements extends sectionModule.EditElements {
   }
   
   get initiallySelectedElement() {
+    if (this.editableList.blocks.length > 0) {
+      return this.editableList.blocks[0].nameElement;
+    }
+
     return this.addButton;
   }
 }

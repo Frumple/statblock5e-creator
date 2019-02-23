@@ -4,7 +4,6 @@ jest.mock('/src/js/elements/autonomous/lists/property-list-item.js');
 export default class PropertyList {
   constructor() {
     this._list = [];
-    this.draggedItem = null;
   }
 
   get itemsAsText() {
