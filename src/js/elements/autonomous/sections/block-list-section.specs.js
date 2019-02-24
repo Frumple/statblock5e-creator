@@ -104,7 +104,7 @@ export function shouldDisplayAnErrorIfBlockNameIsBlank(section, expectedItemType
 
   section.editElements.saveButton.click();
 
-  expect(section).toHaveSingleError(
+  expect(section).toHaveError(
     section.editElements.editableList.blocks[0].nameElement,
     `${expectedItemType} Name cannot be blank.`);
 }
@@ -114,7 +114,7 @@ export function shouldDisplayAnErrorIfBlockTextIsBlank(section, expectedItemType
 
   section.editElements.saveButton.click();
 
-  expect(section).toHaveSingleError(
+  expect(section).toHaveError(
     section.editElements.editableList.blocks[0].textElement,
     `${expectedItemType} Text cannot be blank.`);
 }
@@ -129,10 +129,12 @@ export function shouldDisplayErrorsIfBlockNameAndTextAreBothBlank(section, expec
   expect(section.errorMessages.errors).toHaveLength(2);
   expect(section).toHaveError(
     editableBlock.nameElement,
-    `${expectedItemType} Name cannot be blank.`);
+    `${expectedItemType} Name cannot be blank.`,
+    0);
   expect(section).toHaveError(
     editableBlock.textElement,
-    `${expectedItemType} Text cannot be blank.`);
+    `${expectedItemType} Text cannot be blank.`,
+    1);
 }
 
 function addAndPopulateBlock(section, blockName, blockText) {

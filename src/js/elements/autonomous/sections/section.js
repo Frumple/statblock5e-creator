@@ -114,6 +114,7 @@ export class Section extends CustomAutonomousElement {
     this.errorMessages.clear();
     this.checkForErrors();
     if (this.errorMessages.any) {
+      this.errorMessages.focusOnFirstErrorField();
       return;
     }
     this.updateShowSection();

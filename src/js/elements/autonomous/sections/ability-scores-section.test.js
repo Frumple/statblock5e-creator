@@ -132,7 +132,7 @@ describe('when the show section is clicked', () => {
         expect(abilityScoresSection.showElements.modifier[abilityName]).toHaveTextContent(formattedOldModifier);
 
         expect(abilityScoresSection).toBeInMode('edit');
-        expect(abilityScoresSection).toHaveSingleError(
+        expect(abilityScoresSection).toHaveError(
           abilityScoresSection.editElements.score[abilityName],
           expectedErrorMessage);
       });
@@ -187,7 +187,7 @@ describe('when the show section is clicked', () => {
       abilityScoresSection.editElements.saveButton.click();
 
       expect(abilityScoresSection).toBeInMode('edit');
-      expect(abilityScoresSection).toHaveSingleError(
+      expect(abilityScoresSection).toHaveError(
         abilityScoresSection.editElements.proficiencyBonus,
         'Proficiency Bonus must be a valid number.');
     });

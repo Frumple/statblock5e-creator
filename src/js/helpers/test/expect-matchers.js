@@ -48,27 +48,36 @@ expect.extend({
 });
 
 expect.extend({
-  toHaveSingleError(section, expectedFieldElement, expectedMessage) {
+  toHaveError(section, expectedFieldElement, expectedMessage, expectedIndex = 0) {
     if (this.isNot) {
-      throw new Error('The matcher toHaveSingleError cannot be used with the not modifier');
+      throw new Error('The matcher toHaveError cannot be used with the not modifier.');
     }
 
     const errors = section.errorMessages.errors;
 
-    const hasOneError = (errors.length === 1);
-    if (! hasOneError) {
+    const errorExists = (errors.length - 1 >= expectedIndex);
+    if (! errorExists) {
       return {
-        message: () => `expected 1 section error, but found ${errors.length}`,
+        message: () => `expected error with index ${expectedIndex} to exist, but only ${errors.length} errors exist`,
         pass: false
       };
     }
     
-    const theError = errors[0];
+    const theError = errors[expectedIndex];
+    const focusedElement = theError.fieldElement.ownerDocument.activeElement;
+
     const hasMatchingFieldElement = (theError.fieldElement === expectedFieldElement);
     const hasMatchingMessage = (theError.message === expectedMessage);
+    const fieldElementHasFocus = (focusedElement === expectedFieldElement);
 
     let message = '';
-    let pass = (hasMatchingFieldElement && hasMatchingMessage);
+    let pass = false;
+
+    if (expectedIndex == 0) {
+      pass = (hasMatchingFieldElement && hasMatchingMessage && fieldElementHasFocus);
+    } else {
+      pass = (hasMatchingFieldElement && hasMatchingMessage);
+    }   
 
     if (! hasMatchingFieldElement) {
       message += `expected error element to be '${expectedFieldElement}', but was '${theError.fieldElement}'\n`;
@@ -76,27 +85,8 @@ expect.extend({
     if (! hasMatchingMessage) {
       message += `expected error message to be '${expectedMessage}', but was '${theError.message}'`;
     }
-
-    return {
-      message: () => message,
-      pass: pass
-    };
-  }
-});
-
-expect.extend({
-  toHaveError(section, expectedFieldElement, expectedMessage) {
-    let matches = section.errorMessages.errors.filter(error => 
-      (error.fieldElement === expectedFieldElement &&
-       error.message === expectedMessage));
-
-    let message = '';
-    let pass = matches.length > 0;
-    
-    if (pass) {
-      message = `expected error with element '${expectedFieldElement}' and 'message ${expectedMessage}' to not be found, but was found`;
-    } else {
-      message = `expected error with element '${expectedFieldElement}' and 'message ${expectedMessage}' to be found, but was not found`;
+    if (expectedIndex === 0 && ! fieldElementHasFocus) {
+      message += `expected error element '${expectedFieldElement}' to have focus, but was '${focusedElement}'\n`;
     }
 
     return {

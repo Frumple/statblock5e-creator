@@ -52,6 +52,7 @@ export default class PropertyListSection extends sectionModule.Section {
       this.errorMessages.add(this.editElements.input, `Cannot add a duplicate ${this.itemType}.`);
     }
     if (this.errorMessages.any) {
+      this.errorMessages.focusOnFirstErrorField();
       return;
     }
 

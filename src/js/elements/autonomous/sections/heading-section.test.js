@@ -75,7 +75,7 @@ describe('when the show section is clicked', () => {
       headingSection.editElements.saveButton.click();
 
       expect(headingSection).toBeInMode('edit');
-      expect(headingSection).toHaveSingleError(
+      expect(headingSection).toHaveError(
         headingSection.editElements.title,
         'Creature Name cannot be blank.');
     });
@@ -86,7 +86,7 @@ describe('when the show section is clicked', () => {
       headingSection.editElements.saveButton.click();
 
       expect(headingSection).toBeInMode('edit');
-      expect(headingSection).toHaveSingleError(
+      expect(headingSection).toHaveError(
         headingSection.editElements.type,
         'Creature Type cannot be blank.');
     });
@@ -101,10 +101,12 @@ describe('when the show section is clicked', () => {
       expect(headingSection.errorMessages.errors).toHaveLength(2);
       expect(headingSection).toHaveError(
         headingSection.editElements.title,
-        'Creature Name cannot be blank.');
+        'Creature Name cannot be blank.',
+        0);
       expect(headingSection).toHaveError(
         headingSection.editElements.type,
-        'Creature Type cannot be blank.');
+        'Creature Type cannot be blank.',
+        1);
     });
   });
 });

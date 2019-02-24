@@ -73,7 +73,7 @@ describe('when the show section is clicked', () => {
         sensesSection.editElements.saveButton.click();
 
         expect(sensesSection).toBeInMode('edit');
-        expect(sensesSection).toHaveSingleError(
+        expect(sensesSection).toHaveError(
           sensesSection.editElements.customText,
           'Senses Custom Text cannot be blank.');
       });

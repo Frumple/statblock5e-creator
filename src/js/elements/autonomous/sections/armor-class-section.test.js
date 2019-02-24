@@ -64,7 +64,7 @@ describe('when the show section is clicked', () => {
         armorClassSection.editElements.saveButton.click();
 
         expect(armorClassSection).toBeInMode('edit');
-        expect(armorClassSection).toHaveSingleError(
+        expect(armorClassSection).toHaveError(
           armorClassSection.editElements.customText,
           'Armor Class Custom Text cannot be blank.');
       });
@@ -76,7 +76,7 @@ describe('when the show section is clicked', () => {
         armorClassSection.editElements.saveButton.click();
 
         expect(armorClassSection).toBeInMode('edit');
-        expect(armorClassSection).toHaveSingleError(
+        expect(armorClassSection).toHaveError(
           armorClassSection.editElements.customText,
           'Armor Class Custom Text cannot be blank.');
       });
@@ -145,7 +145,7 @@ describe('when the show section is clicked', () => {
         armorClassSection.editElements.saveButton.click();
 
         expect(armorClassSection).toBeInMode('edit');
-        expect(armorClassSection).toHaveSingleError(
+        expect(armorClassSection).toHaveError(
           armorClassSection.editElements.armorClass,
           'Armor Class must be a valid number.');
       });
@@ -157,7 +157,7 @@ describe('when the show section is clicked', () => {
         armorClassSection.editElements.saveButton.click();
 
         expect(armorClassSection).toBeInMode('edit');
-        expect(armorClassSection).toHaveSingleError(
+        expect(armorClassSection).toHaveError(
           armorClassSection.editElements.armorClass,
           'Armor Class must be a valid number.');
       });

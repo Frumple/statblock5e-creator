@@ -54,13 +54,13 @@ describe('when the show section is clicked', () => {
       expect(challengeRatingSection.showElements.text).toHaveTextContent('0 (234 XP)');
     });
 
-    it('should display an error if the custom text field is not a valid number', () => {
+    it('should display an error if the experience points field is not a valid number', () => {
       inputValueAndTriggerEvent(challengeRatingSection.editElements.experiencePoints, '');
 
       challengeRatingSection.editElements.saveButton.click();
 
       expect(challengeRatingSection).toBeInMode('edit');
-      expect(challengeRatingSection).toHaveSingleError(
+      expect(challengeRatingSection).toHaveError(
         challengeRatingSection.editElements.experiencePoints,
         'Experience Points must be a valid number.');
     });

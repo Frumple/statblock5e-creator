@@ -67,7 +67,7 @@ describe('when the show section is clicked', () => {
         speedSection.editElements.saveButton.click();
 
         expect(speedSection).toBeInMode('edit');
-        expect(speedSection).toHaveSingleError(
+        expect(speedSection).toHaveError(
           speedSection.editElements.customText,
           'Speed Custom Text cannot be blank.');
       });

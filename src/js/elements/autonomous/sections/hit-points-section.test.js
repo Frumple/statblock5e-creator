@@ -119,7 +119,7 @@ describe('when the show section is clicked', () => {
         hitPointsSection.editElements.saveButton.click();
 
         expect(hitPointsSection).toBeInMode('edit');
-        expect(hitPointsSection).toHaveSingleError(
+        expect(hitPointsSection).toHaveError(
           hitPointsSection.editElements.hitDieQuantity,
           'Hit Die Quantity must be a valid number.');
       });
@@ -137,7 +137,7 @@ describe('when the show section is clicked', () => {
         hitPointsSection.editElements.saveButton.click();
 
         expect(hitPointsSection).toBeInMode('edit');
-        expect(hitPointsSection).toHaveSingleError(
+        expect(hitPointsSection).toHaveError(
           hitPointsSection.editElements.hitDieQuantity,
           'Hit Die Quantity must be a valid number.');
       });
@@ -209,7 +209,7 @@ describe('when the show section is clicked', () => {
         hitPointsSection.editElements.saveButton.click();
 
         expect(hitPointsSection).toBeInMode('edit');
-        expect(hitPointsSection).toHaveSingleError(
+        expect(hitPointsSection).toHaveError(
           hitPointsSection.editElements.hitPoints,
           'Hit Points must be a valid number.');
       });
@@ -227,7 +227,7 @@ describe('when the show section is clicked', () => {
         hitPointsSection.editElements.saveButton.click();
 
         expect(hitPointsSection).toBeInMode('edit');
-        expect(hitPointsSection).toHaveSingleError(
+        expect(hitPointsSection).toHaveError(
           hitPointsSection.editElements.hitPoints,
           'Hit Points must be a valid number.');
       });

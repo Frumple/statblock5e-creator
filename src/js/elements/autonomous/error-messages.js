@@ -1,4 +1,5 @@
 import CustomAutonomousElement from '/src/js/elements/autonomous/custom-autonomous-element.js';
+import { focusAndSelectElement } from '/src/js/helpers/element-helpers.js';
 
 export default class ErrorMessages extends CustomAutonomousElement {
   static get elementName() { return 'error-messages'; }
@@ -44,6 +45,10 @@ export default class ErrorMessages extends CustomAutonomousElement {
     while (list.hasChildNodes()) {
       list.removeChild(list.lastChild);
     }
+  }
+
+  focusOnFirstErrorField() {
+    focusAndSelectElement(this.errors[0].fieldElement);
   }
 
   get any() {

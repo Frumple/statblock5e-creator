@@ -44,7 +44,7 @@ export function shouldDisplayAnErrorIfAddingBlank(section, expectedItemType) {
   inputValueAndTriggerEvent(section.editElements.input, '');
   section.editElements.addButton.click();
 
-  expect(section).toHaveSingleError(
+  expect(section).toHaveError(
     section.editElements.input,
     `Cannot add a blank ${expectedItemType}.`);
 }
@@ -56,7 +56,7 @@ export function shouldDisplayAnErrorIfAddingDuplicate(section, itemText, expecte
   inputValueAndTriggerEvent(section.editElements.input, itemText);
   section.editElements.addButton.click();
 
-  expect(section).toHaveSingleError(
+  expect(section).toHaveError(
     section.editElements.input,
     `Cannot add a duplicate ${expectedItemType}.`);
 }
@@ -66,7 +66,7 @@ export function shouldDisplayAnErrorIfSavingWithUnaddedInputText(section, itemTe
 
   section.editElements.saveButton.click();
 
-  expect(section).toHaveSingleError(
+  expect(section).toHaveError(
     section.editElements.input,
     `Cannot save while the ${expectedItemType} field contains text.\nClear the field or click 'Add', then click 'Save' again.`);
 }
