@@ -26,7 +26,7 @@
   display: flex;
   flex-direction: column;
   justify-content: flex-end;
-  height: 340px;
+  height: 210px;
 }
 
 .stat-block-sidebar__label {
@@ -47,7 +47,7 @@
 
 .stat-block-sidebar__slider-container {  
   width: 60px;
-  height: 735px;
+  height: 860px;
   margin-top: 20px;
   margin-bottom: 20px;
 }
@@ -57,7 +57,7 @@
 }
 
 .stat-block-sidebar__slider {
-  width: 735px;
+  width: 860px;
   height: 60px;
   margin: 0;
   transform-origin: top left;
