@@ -1,0 +1,4 @@
+/* Last item should have no bottom margin as it takes too much whitespace. */
+::slotted(*:last-child) {
+  margin-bottom: 0;
+}

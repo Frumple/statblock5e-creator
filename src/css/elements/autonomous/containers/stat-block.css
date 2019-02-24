@@ -70,6 +70,7 @@
   font-weight: normal;
   letter-spacing: 1px;
   margin: 0;
+  margin-top: 0.58em;
   margin-bottom: 0.3em;
 
   break-inside: avoid-column;
@@ -81,9 +82,4 @@
   margin-top: 0.3em;
   margin-bottom: 0.9em;
   line-height: 1.5;
-}
-
-/* Last child shouldn't have bottom margin, too much white space. */
-::slotted(*:last-child) {
-  margin-bottom: 0;
 }
