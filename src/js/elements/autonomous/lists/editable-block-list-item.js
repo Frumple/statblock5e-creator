@@ -31,6 +31,11 @@ export default class EditableBlockListItem extends DragAndDropListItem {
     this.remove();
   }
 
+  setItemType(itemType) {
+    this.nameElement.setAttribute('pretty-name', `${itemType} Name`);
+    this.textElement.setAttribute('pretty-name', `${itemType} Text`);
+  }
+
   get name() {
     return this.nameElement.value;
   }

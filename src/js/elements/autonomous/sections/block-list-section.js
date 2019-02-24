@@ -7,10 +7,12 @@ export default class BlockListSection extends sectionModule.Section {
       'src/html/elements/autonomous/sections/block-list-section.html');
   }
 
-  constructor(templatePaths) {
+  constructor(templatePaths, itemType) {
     super(templatePaths,
           EditableBlockListShowElements,
           EditableBlockListEditElements);
+
+    this.itemType = itemType;
   }
 
   connectedCallback() {
@@ -18,7 +20,7 @@ export default class BlockListSection extends sectionModule.Section {
   }
 
   onClickAddTextBlockButton() {
-    this.editElements.editableList.addBlock();
+    this.editElements.editableList.addBlock(this.itemType);
   }
 
   get empty() {

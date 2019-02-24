@@ -12,8 +12,9 @@ export default class EditableBlockList {
     return this._list;
   }
 
-  addBlock() {
+  addBlock(itemType) {
     const listItem = new EditableBlockListItem(this);
+    listItem.setItemType(itemType);
     this._list.push(listItem);
   }
 

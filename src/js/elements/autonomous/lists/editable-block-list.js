@@ -18,8 +18,9 @@ export default class EditableBlockList extends DragAndDropList {
     return blocks;
   }
 
-  addBlock() {
+  addBlock(itemType) {
     const listItem = document.createElement('editable-block-list-item');
+    listItem.setItemType(itemType);
     this.appendChild(listItem);
   }
 

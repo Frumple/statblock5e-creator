@@ -10,7 +10,8 @@ export default class ConditionImmunitiesSection extends PropertyListSection {
 
   constructor() {
     super(ConditionImmunitiesSection.templatePaths,
-          'Condition Immunities');
+          'Condition Immunities',
+          'Condition Immunity');
 
     this.empty = true;
   }

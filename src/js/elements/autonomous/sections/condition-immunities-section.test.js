@@ -6,6 +6,8 @@ import defineBuiltinCustomElements from '/src/js/helpers/test/define-builtin-cus
 
 import * as sharedSpecs from '/src/js/elements/autonomous/sections/property-list-section.specs.js';
 
+const expectedItemType = 'Condition Immunity';
+
 let conditionImmunitiesSection;
 
 beforeAll(async() => {
@@ -51,17 +53,17 @@ describe('when the show section is clicked', () => {
     });
 
     it('should display an error after clicking the add button if the input field is blank', () => {
-      sharedSpecs.shouldDisplayAnErrorIfAddingBlank(conditionImmunitiesSection);
+      sharedSpecs.shouldDisplayAnErrorIfAddingBlank(conditionImmunitiesSection, expectedItemType);
     });
 
     it('should display an error after clicking the add button if there is already a duplicate item in the list', () => {
       const itemText = 'restrained';
-      sharedSpecs.shouldDisplayAnErrorIfAddingDuplicate(conditionImmunitiesSection, itemText);
+      sharedSpecs.shouldDisplayAnErrorIfAddingDuplicate(conditionImmunitiesSection, itemText, expectedItemType);
     });
 
     it('should display an error after clicking the save button if the input field is not blank', () => {
       const itemText = 'unconscious';
-      sharedSpecs.shouldDisplayAnErrorIfSavingWithUnaddedInputText(conditionImmunitiesSection, itemText);
+      sharedSpecs.shouldDisplayAnErrorIfSavingWithUnaddedInputText(conditionImmunitiesSection, itemText, expectedItemType);
     });
   });
 

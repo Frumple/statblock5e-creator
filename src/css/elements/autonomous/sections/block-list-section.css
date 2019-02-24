@@ -1,5 +1,6 @@
 .block-list-section__empty-label {
   font-weight: bold;
+  cursor: pointer;
 }
 
 .block-list-section__empty-label_hidden {

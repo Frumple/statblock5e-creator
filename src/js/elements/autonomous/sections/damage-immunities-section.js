@@ -10,7 +10,8 @@ export default class DamageImmunitiesSection extends PropertyListSection {
 
   constructor() {
     super(DamageImmunitiesSection.templatePaths,
-          'Damage Immunities');
+          'Damage Immunities',
+          'Damage Immunity');
 
     this.empty = true;
   }

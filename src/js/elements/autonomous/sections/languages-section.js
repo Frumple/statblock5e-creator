@@ -10,7 +10,8 @@ export default class LanguagesSection extends PropertyListSection {
 
   constructor() {
     super(LanguagesSection.templatePaths,
-          'Languages');
+          'Languages',
+          'Language');
   }
 
   connectedCallback() {

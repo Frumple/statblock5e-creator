@@ -10,14 +10,16 @@ export default class EditableBlockListItem {
     this.nameElement.setAttribute('required', '');
     this.textElement.setAttribute('required', '');
 
-    this.nameElement.setAttribute('pretty-name', 'Item Name');
-    this.textElement.setAttribute('pretty-name', 'Item Text');
-
     copyObjectProperties(this.nameElement, TextInputMixin);
     copyObjectProperties(this.textElement, TextInputMixin);
 
     this.nameElement.initializeMixin();
     this.textElement.initializeMixin();
+  }
+
+  setItemType(itemType) {
+    this.nameElement.setAttribute('pretty-name', `${itemType} Name`);
+    this.textElement.setAttribute('pretty-name', `${itemType} Text`);
   }
 
   get name() {

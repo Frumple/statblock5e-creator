@@ -99,27 +99,27 @@ export function shouldTrimAllTrailingPeriodCharactersInBlockName(section) {
   expect(section.editElements.editableList.blocks[0].name).toBe(expectedBlocks[0].name);
 }
 
-export function shouldDisplayAnErrorIfBlockNameIsBlank(section) {
+export function shouldDisplayAnErrorIfBlockNameIsBlank(section, expectedItemType) {
   addAndPopulateBlock(section, '', 'Some text.');
 
   section.editElements.saveButton.click();
 
   expect(section).toHaveSingleError(
     section.editElements.editableList.blocks[0].nameElement,
-    'Item Name cannot be blank.');
+    `${expectedItemType} Name cannot be blank.`);
 }
 
-export function shouldDisplayAnErrorIfBlockTextIsBlank(section) {
+export function shouldDisplayAnErrorIfBlockTextIsBlank(section, expectedItemType) {
   addAndPopulateBlock(section, 'Some name', '');
 
   section.editElements.saveButton.click();
 
   expect(section).toHaveSingleError(
     section.editElements.editableList.blocks[0].textElement,
-    'Item Text cannot be blank.');
+    `${expectedItemType} Text cannot be blank.`);
 }
 
-export function shouldDisplayErrorsIfBlockNameAndTextAreBothBlank(section) {
+export function shouldDisplayErrorsIfBlockNameAndTextAreBothBlank(section, expectedItemType) {
   addAndPopulateBlock(section, '', '');
 
   section.editElements.saveButton.click();
@@ -129,10 +129,10 @@ export function shouldDisplayErrorsIfBlockNameAndTextAreBothBlank(section) {
   expect(section.errorMessages.errors).toHaveLength(2);
   expect(section).toHaveError(
     editableBlock.nameElement,
-    'Item Name cannot be blank.');
+    `${expectedItemType} Name cannot be blank.`);
   expect(section).toHaveError(
     editableBlock.textElement,
-    'Item Text cannot be blank.');
+    `${expectedItemType} Text cannot be blank.`);
 }
 
 function addAndPopulateBlock(section, blockName, blockText) {

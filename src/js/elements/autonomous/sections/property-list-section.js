@@ -7,13 +7,15 @@ export default class PropertyListSection extends sectionModule.Section {
       'src/html/elements/autonomous/sections/property-list-section.html');
   }
 
-  constructor(templatePaths, headerText) {
+  constructor(templatePaths, headerText, itemType) {
     super(templatePaths,
           PropertyListShowElements,
           PropertyListEditElements);
 
     this.showElements.header.textContent = headerText;
-    this.editElements.label.textContent = `${headerText}:`;    
+    this.editElements.label.textContent = `${headerText}:`;
+
+    this.itemType = itemType;
   }
 
   connectedCallback() {
@@ -45,9 +47,9 @@ export default class PropertyListSection extends sectionModule.Section {
 
     this.errorMessages.clear();
     if (text === '') {
-      this.errorMessages.add(this.editElements.input, 'Cannot add a blank item.');
+      this.errorMessages.add(this.editElements.input, `Cannot add a blank ${this.itemType}.`);
     } else if(this.editElements.list.contains(text)) {
-      this.errorMessages.add(this.editElements.input, 'Cannot add a duplicate item.');
+      this.errorMessages.add(this.editElements.input, `Cannot add a duplicate ${this.itemType}.`);
     }
     if (this.errorMessages.any) {
       return;
@@ -67,7 +69,7 @@ export default class PropertyListSection extends sectionModule.Section {
   checkForErrors() {
     const input = this.editElements.input;
     if (input.value !== '') {
-      const message = 'Cannot save while the item text field is not blank. Clear the field or add the item, then try again.';
+      const message = `Cannot save while the ${this.itemType} field contains text.\nClear the field or click 'Add', then click 'Save' again.`;
       this.errorMessages.add(input, message);
     }
   }

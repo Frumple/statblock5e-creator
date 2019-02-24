@@ -9,7 +9,8 @@ export default class SpecialTraitsSection extends BlockListSection {
   }
 
   constructor() {
-    super(SpecialTraitsSection.templatePaths);
+    super(SpecialTraitsSection.templatePaths,
+          'Special Trait');
 
     this.empty = true;
   }

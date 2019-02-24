@@ -40,16 +40,16 @@ export function shouldAddManyItems(section, itemTexts) {
   expect(section.showElements.text).toHaveTextContent(expectedTextContent);
 }
 
-export function shouldDisplayAnErrorIfAddingBlank(section) {
+export function shouldDisplayAnErrorIfAddingBlank(section, expectedItemType) {
   inputValueAndTriggerEvent(section.editElements.input, '');
   section.editElements.addButton.click();
 
   expect(section).toHaveSingleError(
     section.editElements.input,
-    'Cannot add a blank item.');
+    `Cannot add a blank ${expectedItemType}.`);
 }
 
-export function shouldDisplayAnErrorIfAddingDuplicate(section, itemText) {
+export function shouldDisplayAnErrorIfAddingDuplicate(section, itemText, expectedItemType) {
   inputValueAndTriggerEvent(section.editElements.input, itemText);
   section.editElements.addButton.click();
 
@@ -58,17 +58,17 @@ export function shouldDisplayAnErrorIfAddingDuplicate(section, itemText) {
 
   expect(section).toHaveSingleError(
     section.editElements.input,
-    'Cannot add a duplicate item.');
+    `Cannot add a duplicate ${expectedItemType}.`);
 }
 
-export function shouldDisplayAnErrorIfSavingWithUnaddedInputText(section, itemText) {
+export function shouldDisplayAnErrorIfSavingWithUnaddedInputText(section, itemText, expectedItemType) {
   inputValueAndTriggerEvent(section.editElements.input, itemText);
 
   section.editElements.saveButton.click();
 
   expect(section).toHaveSingleError(
     section.editElements.input,
-    'Cannot save while the item text field is not blank. Clear the field or add the item, then try again.');
+    `Cannot save while the ${expectedItemType} field contains text.\nClear the field or click 'Add', then click 'Save' again.`);
 }
 
 export function shouldRemoveAndAddSuggestions(section, itemText) {
