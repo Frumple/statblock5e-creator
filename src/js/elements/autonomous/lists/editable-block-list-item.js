@@ -11,10 +11,11 @@ export default class EditableBlockListItem extends DragAndDropListItem {
   constructor() {
     super(EditableBlockListItem.templatePaths);
 
-    this.container = this.shadowRoot.getElementById('editable-block-list-item-container');
     this.nameElement = this.shadowRoot.getElementById('editable-block-list-item-name');
     this.textElement = this.shadowRoot.getElementById('editable-block-list-item-text');
     this.removeButton = this.shadowRoot.getElementById('editable-block-list-item-remove-button');
+
+    this.dragImage = this.nameElement;
   }
 
   connectedCallback() {

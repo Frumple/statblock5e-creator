@@ -2,22 +2,11 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 5px;
-}
-
-.property-list-item__container:hover {
-  background: LightCyan;
-  cursor: move;
+  padding: 3px;
 }
 
 .property-list-item__label {
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
-  cursor: move;
-}
-
-.property-list-item__remove-button {
-  padding-left: 5px;
-  padding-right: 5px;
 }

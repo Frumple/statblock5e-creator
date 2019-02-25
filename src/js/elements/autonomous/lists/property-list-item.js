@@ -11,9 +11,10 @@ export default class PropertyListItem extends DragAndDropListItem {
   constructor() {
     super(PropertyListItem.templatePaths);
 
-    this.container = this.shadowRoot.getElementById('property-list-item-container');
     this.label = this.shadowRoot.getElementById('property-list-item-label');
     this.removeButton = this.shadowRoot.getElementById('property-list-item-remove-button');
+
+    this.dragImage = this.label;
   }
 
   connectedCallback() {

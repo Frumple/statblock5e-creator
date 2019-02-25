@@ -70,7 +70,7 @@ export default class PropertyListSection extends sectionModule.Section {
   checkForErrors() {
     const input = this.editElements.input;
     if (input.value !== '') {
-      const message = `Cannot save while the ${this.itemType} field contains text.\nClear the field or click 'Add', then click 'Save' again.`;
+      const message = `Cannot save while the ${this.itemType} field contains text.\nClear or add the field, then try again.`;
       this.errorMessages.add(input, message);
     }
   }

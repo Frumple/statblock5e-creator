@@ -13,11 +13,10 @@
   width: 100%;
   font-weight: bold;
   font-style: italic;
+  margin-left: 5px;
 }
 
 .editable-block-list-item__remove-button {
-  padding-left: 5px;
-  padding-right: 5px;
   margin-left: 5px;
 }
 

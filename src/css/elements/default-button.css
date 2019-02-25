@@ -1,4 +1,7 @@
 .default-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
   background: #dddddd;
   border: 1px outset #949494;
   font-family: inherit;

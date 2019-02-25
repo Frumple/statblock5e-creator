@@ -9,11 +9,14 @@ export default class DragAndDropListItem extends CustomAutonomousElement {
 
   constructor(templatePaths) {
     super(templatePaths);
+
+    this.container = this.shadowRoot.getElementById('drag-and-drop-list-item-container');
+    this.dragHandle = this.shadowRoot.getElementById('drag-and-drop-list-item-drag-handle');
   }
 
   connectedCallback() {
-    this.container.style.cssText = 'user-select: none; -webkit-user-drag: element;';
-    this.container.setAttribute('draggable', 'true');
+    this.dragHandle.style.cssText = 'user-select: none; -webkit-user-drag: element;';
+    this.dragHandle.setAttribute('draggable', 'true');
 
     this.addEventListener('dragstart', this.onDragStartItem);
     this.addEventListener('dragover', this.onDragOverItem);
@@ -25,6 +28,9 @@ export default class DragAndDropListItem extends CustomAutonomousElement {
   onDragStartItem(event) {
     // Drag and Drop on Firefox only works if data is set
     event.dataTransfer.setData('text', '');
+
+    // Don't show any image of the element when dragging
+    event.dataTransfer.setDragImage(this.dragImage, 0, 0);
 
     let target = event.target;
     target.parentNode.draggedItem = target;

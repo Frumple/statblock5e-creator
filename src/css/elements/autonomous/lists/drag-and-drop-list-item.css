@@ -9,3 +9,8 @@
 .drag-and-drop-list-item__container_dragover-bottom {
   border-bottom: solid 10px DodgerBlue;
 }
+
+.drag-and-drop-list-item__drag-handle:hover {
+  background: #90FFFF;
+  cursor: move;
+}

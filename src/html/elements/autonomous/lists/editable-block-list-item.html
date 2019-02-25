@@ -1,11 +1,15 @@
+<link href='src/css/vendor/material-icons.css' rel='stylesheet' type='text/css'>
+<link href='//fonts.googleapis.com/icon?family=Material+Icons' rel='stylesheet'>
+
 <link href='src/css/elements/default-button.css' rel='stylesheet' type='text/css'>
 <link href='src/css/elements/autonomous/sections/section.css' rel='stylesheet' type='text/css'>
 <link href='src/css/elements/autonomous/lists/editable-block-list-item.css' rel='stylesheet' type='text/css'>
 
-<div id="editable-block-list-item-container" class="drag-and-drop-list-item__container editable-block-list-item__container">
+<div id="drag-and-drop-list-item-container" class="drag-and-drop-list-item__container editable-block-list-item__container">
   <div id="editable-block-list-item-header" class="editable-block-list-item__header">
-    <input id="editable-block-list-item-name" class="editable-block-list-item__name" is="text-input" type="text" required></input>
-    <button id="editable-block-list-item-remove-button" class="default-button editable-block-list-item__remove-button">Remove</button>
+    <i id="drag-and-drop-list-item-drag-handle" class="drag-and-drop-list-item__drag-handle material-icons">drag_handle</i>
+    <input id="editable-block-list-item-name" class="editable-block-list-item__name section__text-input" is="text-input" type="text" required></input>
+    <button id="editable-block-list-item-remove-button" class="default-button editable-block-list-item__remove-button"><i class="material-icons">clear</i></button>
   </div>
   <textarea id="editable-block-list-item-text" class="editable-block-list-item__text section__textarea" is="custom-textarea" cols="30" rows="4" required></textarea>
 </div>

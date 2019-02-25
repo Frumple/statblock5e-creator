@@ -68,7 +68,7 @@ export function shouldDisplayAnErrorIfSavingWithUnaddedInputText(section, itemTe
 
   expect(section).toHaveError(
     section.editElements.input,
-    `Cannot save while the ${expectedItemType} field contains text.\nClear the field or click 'Add', then click 'Save' again.`);
+    `Cannot save while the ${expectedItemType} field contains text.\nClear or add the field, then try again.`);
 }
 
 export function shouldRemoveAndAddSuggestions(section, itemText) {
