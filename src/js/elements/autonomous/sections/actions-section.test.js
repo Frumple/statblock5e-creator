@@ -27,12 +27,22 @@ afterEach(() => {
 });
 
 describe('when the show section is clicked', () => {
+  beforeEach(() => {
+    actionsSection.showElements.section.click();
+  });
+
   it('should switch to edit mode and focus on the add button if there are no blocks', () => {
     sharedSpecs.shouldSwitchToEditModeAndFocusOnAddButtonIfNoBlocks(actionsSection);
   });
 
   it('should switch to edit mode and focus on the name field of the first block if there is at least one block', () => {
     sharedSpecs.shouldSwitchToEditModeAndFocusOnNameFieldOfFirstBlockIfExists(actionsSection);
+  });
+
+  describe('when the add block button is clicked', () => {
+    it('should focus on the name field of the newly created block', () => {
+      sharedSpecs.shouldFocusOnNameFieldOfNewBlock(actionsSection);
+    });
   });
 
   describe('and blocks are added and/or removed, and the save button is clicked', () => {

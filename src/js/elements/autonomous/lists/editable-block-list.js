@@ -1,4 +1,5 @@
 import DragAndDropList from '/src/js/elements/autonomous/lists/drag-and-drop-list.js';
+import { focusAndSelectElement } from '/src/js/helpers/element-helpers.js';
 import { trimTrailingPeriods } from '/src/js/helpers/string-formatter.js';
 
 export default class EditableBlockList extends DragAndDropList {
@@ -22,6 +23,8 @@ export default class EditableBlockList extends DragAndDropList {
     const listItem = document.createElement('editable-block-list-item');
     listItem.setItemType(itemType);
     this.appendChild(listItem);
+
+    focusAndSelectElement(listItem.nameElement);
   }
 
   trimTrailingPeriodsInNames() {

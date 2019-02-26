@@ -1,15 +1,11 @@
 import { inputValueAndTriggerEvent } from '/src/js/helpers/element-helpers.js';
 
-export function shouldSwitchToEditModeAndFocusOnAddButtonIfNoBlocks(section) {
-  section.showElements.section.click();
-  
+export function shouldSwitchToEditModeAndFocusOnAddButtonIfNoBlocks(section) {  
   expect(section).toBeInMode('edit');
   expect(section.editElements.addButton).toHaveFocus();
 }
 
 export function shouldSwitchToEditModeAndFocusOnNameFieldOfFirstBlockIfExists(section) {
-  section.showElements.section.click();
-
   addAndPopulateBlock(section, 'Some name', 'Some text.');
 
   section.editElements.saveButton.click();
@@ -17,6 +13,15 @@ export function shouldSwitchToEditModeAndFocusOnNameFieldOfFirstBlockIfExists(se
   
   expect(section).toBeInMode('edit');
   expect(section.editElements.editableList.blocks[0].nameElement).toHaveFocus();
+}
+
+export function shouldFocusOnNameFieldOfNewBlock(section) {
+  const blocks = section.editElements.editableList.blocks;
+
+  for (let index = 0; index <= 2; index++) {
+    section.editElements.addButton.click();    
+    expect(blocks[index].nameElement).toHaveFocus();
+  }
 }
 
 export function shouldAddASingleBlock(section, blockName, blockText) {
