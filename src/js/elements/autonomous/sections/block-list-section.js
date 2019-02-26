@@ -13,6 +13,8 @@ export default class BlockListSection extends sectionModule.Section {
           EditableBlockListEditElements);
 
     this.itemType = itemType;
+
+    this.header = this.shadowRoot.getElementById('header');
   }
 
   connectedCallback() {
@@ -21,6 +23,28 @@ export default class BlockListSection extends sectionModule.Section {
 
   onClickAddTextBlockButton() {
     this.editElements.editableList.addBlock(this.itemType);
+  }
+
+  get mode() {
+    return super.mode;
+  }
+
+  set mode(mode) {
+    super.mode = mode;
+
+    const hiddenHeaderClass = 'block-list-section__header_hidden';
+
+    switch (mode) {
+    case 'hidden':
+      this.header.classList.add(hiddenHeaderClass);
+      break;
+    case 'show':
+      this.header.classList.remove(hiddenHeaderClass);
+      break;
+    case 'edit':
+      this.header.classList.remove(hiddenHeaderClass);
+      break;
+    }
   }
 
   get empty() {
@@ -32,7 +56,7 @@ export default class BlockListSection extends sectionModule.Section {
 
     const hiddenEmptyLabelClass = 'block-list-section__empty-label_hidden';
 
-    if (isEmpty) {
+    if (isEmpty) {      
       this.showElements.emptyLabel.classList.remove(hiddenEmptyLabelClass);
     } else {
       this.showElements.emptyLabel.classList.add(hiddenEmptyLabelClass);

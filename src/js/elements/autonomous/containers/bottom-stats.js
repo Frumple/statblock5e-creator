@@ -12,10 +12,12 @@ export default class BottomStats extends CustomAutonomousElement {
     super(BottomStats.templatePaths);
 
     this.specialTraitsSection = document.querySelector('special-traits-section');
+    this.actionsSection = document.querySelector('actions-section');
   }
 
   setEmptySectionsVisibility(visibility) {
     this.specialTraitsSection.setEmptyVisibility(visibility);
+    this.actionsSection.setEmptyVisibility(visibility);
   }
 
   editAllSections() {

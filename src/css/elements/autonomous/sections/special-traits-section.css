@@ -1,0 +1,8 @@
+.special-traits-section__header {
+  display: none;
+}
+
+.special-traits-section__generate-spellcasting-button {
+  flex: 1 1 auto;
+  padding: 5px;
+}
