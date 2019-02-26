@@ -32,7 +32,7 @@ describe('when the show section is clicked', () => {
   });
 
   it('should switch to edit mode and focus on the name field of the first block if there is at least one block', () => {
-    sharedSpecs.shouldSwitchToEditModeAndFocusOnFirstNameFieldIfBlockExists(specialTraitsSection);
+    sharedSpecs.shouldSwitchToEditModeAndFocusOnNameFieldOfFirstBlockIfExists(specialTraitsSection);
   });
 
   describe('and blocks are added and/or removed, and the save button is clicked', () => {

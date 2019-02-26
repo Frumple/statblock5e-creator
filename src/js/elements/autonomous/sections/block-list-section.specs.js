@@ -7,7 +7,7 @@ export function shouldSwitchToEditModeAndFocusOnAddButtonIfNoBlocks(section) {
   expect(section.editElements.addButton).toHaveFocus();
 }
 
-export function shouldSwitchToEditModeAndFocusOnFirstNameFieldIfBlockExists(section) {
+export function shouldSwitchToEditModeAndFocusOnNameFieldOfFirstBlockIfExists(section) {
   section.showElements.section.click();
 
   addAndPopulateBlock(section, 'Some name', 'Some text.');
