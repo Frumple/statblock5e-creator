@@ -33,6 +33,7 @@ import LanguagesSection from '/src/js/elements/autonomous/sections/languages-sec
 import ChallengeRatingSection from '/src/js/elements/autonomous/sections/challenge-rating-section.js';
 import SpecialTraitsSection from '/src/js/elements/autonomous/sections/special-traits-section.js';
 import ActionsSection from '/src/js/elements/autonomous/sections/actions-section.js';
+import ReactionsSection from '/src/js/elements/autonomous/sections/reactions-section.js';
 
 import StatBlockEditor from '/src/js/elements/autonomous/containers/stat-block-editor.js';
 import StatBlockMenu from '/src/js/elements/autonomous/containers/stat-block-menu.js';
@@ -81,6 +82,7 @@ async function init() {
   elementClasses.push(ChallengeRatingSection);
   elementClasses.push(SpecialTraitsSection);
   elementClasses.push(ActionsSection);
+  elementClasses.push(ReactionsSection);
 
   elementClasses.push(StatBlockEditor);
   elementClasses.push(StatBlockMenu);
