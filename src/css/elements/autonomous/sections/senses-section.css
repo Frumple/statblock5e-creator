@@ -28,6 +28,13 @@
 .senses-edit-section__truesight-input { grid-area: 4 / 3; }
 .senses-edit-section__truesight-unit { grid-area: 4 / 4; }
 
+.senses-edit-section__passive-perception-help-tooltip {
+  grid-area: 6 / 1;
+  justify-self: end;
+  align-self: center;
+  --help-tooltip-width: 55em;
+}
+
 .senses-edit-section__passive-perception-label { grid-area: 6 / 2; }
 .senses-edit-section__passive-perception-value { grid-area: 6 / 3; }
 

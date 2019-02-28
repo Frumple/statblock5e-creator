@@ -16,8 +16,19 @@
   <div class="hit-points-edit-section">
     <label id="hit-points-label" class="hit-points-edit-section__hit-points-label section__header-label" for="hit-points-input">Hit Points:</label>
     <input id="hit-points-input" class="hit-points-edit-section__hit-points-input section__number-input section__small-number-input" is="integer-input" type="number" name="hit-points" pretty-name="Hit Points" value="4" min="0" max="999999" disabled required />
-    <label id="use-hit-die-label" class="hit-points-edit-section__use-hit-die-label" for="use-hit-die-input">Calculate using Hit Die:</label>
     <input id="use-hit-die-input" class="hit-points-edit-section__use-hit-die-input" is="enable-disable-elements-checkbox" type="checkbox" name="use-hit-die" checked />
+    <label id="use-hit-die-label" class="hit-points-edit-section__use-hit-die-label" for="use-hit-die-input">Calculate using Hit Die:</label>
+    <help-tooltip class="hit-points-edit-section__help-tooltip">
+      <h4>A creature's hit points are calculated with the following formula:</h4>
+      <blockquote>  
+  <strong>HP = (Hit Die Quantity * Hit Die Average) rounded down + CON HP</strong>
+
+    where   Hit Die Average = (Hit Die Size / 2) + 0.5
+      and   CON HP          = (Hit Die Quantity * CON Modifier)
+      </blockquote>
+      <cite>* See "Hit Points" on page 7 of the DnD 5e Monster Manual for full details.</cite>
+    </help-tooltip>
+        
     <div class="hit-points-edit-section__hit-die-calculation-container">
       <label id="hit-die-leading-text" class="hit-points-edit-section__hit_die-leading-text">(</label>
       <label id="hit-die-quantity-label" class="hit-points-edit-section__hit-die-quantity-label" for="hit-die-quantity-input">Hit Die Qty:</label>

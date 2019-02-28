@@ -1,0 +1,37 @@
+.help-tooltip__icon {
+  cursor: help;
+}
+
+.help-tooltip__text {
+  position: absolute;
+  z-index: 2;
+  visibility: hidden;
+  background: white;
+  color: black;
+  border: 1px solid black;
+  width: var(--help-tooltip-width);
+  padding: 5px;
+}
+
+.help-tooltip:hover .help-tooltip__text {
+  visibility: visible;
+}
+
+::slotted(h4) {
+  margin: 0;
+}
+
+::slotted(p) {
+  margin: 0;
+}
+
+::slotted(blockquote) {
+  font-family: monospace;
+  white-space: pre-wrap;
+  margin: 0;
+}
+
+::slotted(cite) {
+  font-style: italic;
+}
+

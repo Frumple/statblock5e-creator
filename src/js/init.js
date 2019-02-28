@@ -5,6 +5,7 @@ import PropertyDataList from '/src/js/elements/builtin/property-datalist.js';
 import TextInput from '/src/js/elements/builtin/text-input.js';
 
 import ErrorMessages from '/src/js/elements/autonomous/error-messages.js';
+import HelpTooltip from '/src/js/elements/autonomous/help-tooltip.js';
 import PropertyBlock from '/src/js/elements/autonomous/property-block.js';
 import PropertyLine from '/src/js/elements/autonomous/property-line.js';
 import SectionDivider from '/src/js/elements/autonomous/section-divider.js';
@@ -54,6 +55,7 @@ async function init() {
   elementClasses.push(TextInput);
 
   elementClasses.push(ErrorMessages);
+  elementClasses.push(HelpTooltip);
   elementClasses.push(PropertyBlock);
   elementClasses.push(PropertyLine);
   elementClasses.push(SectionDivider);

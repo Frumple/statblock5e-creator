@@ -45,9 +45,6 @@
 
   /* By default, balance the content between the columns */
   column-fill: balance-all;
-
-  /* Hide any content that overflows into a 3rd column. */
-  overflow: hidden;
 }
 
 :host([data-two-column]) .content-wrap {

@@ -23,6 +23,13 @@
   grid-area: 3 / 2;
 }
 
+.hit-points-edit-section__help-tooltip {
+  grid-area: 4 / 1;
+  justify-self: end;
+  align-self: end;
+  --help-tooltip-width: 40em;
+}
+
 .hit-points-edit-section__hit-die-calculation-container {
   grid-area: 4 / 2;
   display: grid;
