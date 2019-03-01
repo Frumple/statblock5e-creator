@@ -13,50 +13,90 @@
 <form id="edit-section" class="section section_hidden" novalidate>
   <div class="heading-edit-section">
     <input id="title-input" class="heading-edit-section__title-input heading-show-section__title-text section__text-input" is="text-input" type="text" name="title" pretty-name="Creature Name" value="Commoner" required />
-    <label id="size-label" class="heading-edit-section__size-label heading-edit-section__label" for="size-input">Size:</label>
-    <select id="size-input" class="heading-edit-section__size-input heading-show-section__subtitle-text section__select">
-      <option value="Fine">Fine</option>
-      <option value="Diminuitive">Diminuitive</option>
-      <option value="Tiny">Tiny</option>
-      <option value="Small">Small</option>
-      <option value="Medium" selected>Medium</option>
-      <option value="Large">Large</option>
-      <option value="Huge">Huge</option>
-      <option value="Gargantuan">Gargantuan</option>
-      <option value="Colossal">Colossal</option>
-      <option value="Colossal+">Colossal+</option>
-    </select>
-    <label id="type-label" class="heading-edit-section__type-label heading-edit-section__label" for="type-input">Type:</label>
-    <input id="type-input" class="heading-edit-section__type-input heading-show-section__subtitle-text section__text-input" is="text-input" type="text" name="type" pretty-name="Creature Type" list="type-list" value="humanoid" required />
-    <datalist id="type-list">
-      <option value="aberration" />
-      <option value="beast" />
-      <option value="celestial" />
-      <option value="construct" />
-      <option value="dragon" />
-      <option value="elemental" />
-      <option value="fey" />
-      <option value="fiend" />
-      <option value="giant" />
-      <option value="humanoid" />
-      <option value="monstrosity" />
-      <option value="ooze" />
-      <option value="plant" />
-      <option value="undead" />
-    </datalist>
-    <label id="alignment-label" class="heading-edit-section__alignment-label heading-edit-section__label" for="alignment-input">Alignment:</label>
-    <select id="alignment-input" class="heading-edit-section__alignment-input heading-show-section__subtitle-text section__select">
-      <option value="unaligned">unaligned</option>
-      <option value="lawful good">lawful good</option>
-      <option value="neutral good">neutral good</option>
-      <option value="chaotic good">chaotic good</option>
-      <option value="lawful neutral">lawful neutral</option>
-      <option value="neutral">neutral</option>
-      <option value="chaotic neutral">chaotic neutral</option>
-      <option value="lawful evil">lawful evil</option>
-      <option value="neutral evil">neutral evil</option>
-      <option value="chaotic evil">chaotic evil</option>
-    </select>
+    <div class="heading-edit-section__meta-container">
+      <div class="heading-edit-section__short-name-container">        
+        <label id="short-name-label" class="heading-edit-section__short-name-label heading-edit-section__label" for="short-name-input">Short Name:</label>
+        <help-tooltip class="heading-edit-section__short-name-help-tooltip">
+          <p>The <strong>short name</strong> is typically one or two words used to refer to the creature in its special traits, actions, reactions, and legendary actions.</p>
+          <p>If the short name is left blank, the creature's full name will be used instead.</p>
+          <h4>Examples of short names:</h4>
+          <ul>
+            <li>"Ancient Red Dragon" has the short name "dragon".</li>
+            <li>"Gelatinous Cube" has the short name "cube".</li>
+            <li>"Orc War Chief" has the short name "orc".</li>
+            <li>"Rust Monster" has the short name "rust monster".</li>
+          </ul>
+        </help-tooltip>        
+        <input id="short-name-input" class="heading-edit-section__short-name-input section__text-input" is="text-input" type="text" name="short-name" pretty-name="Short Name" value="" />        
+      </div>
+      <div class="heading-edit-section__proper-noun-container">
+        <input id="proper-noun-input" class="heading-edit-section__proper-name-input" type="checkbox" name="proper-noun" />
+        <label id="proper-noun-label" class="heading-edit-section__proper-name-label heading-edit-section__label" for="proper-noun-input">Proper Noun</label>
+        <help-tooltip class="heading-edit-section__proper-noun-help-tooltip">
+          <p>Check the <strong>proper noun</strong> box if this statblock describes a specific and unique individual or creature.</p>
+          <p>If this box is unchecked, the word "The" will precede the creature's short name/full name in its special traits, actions, reactions, and legendary actions. Any capitalization from the short name/full name will also be removed.</p>
+          <h4>For example:</h4>
+          <ul>
+            <li>"Basilisk" becomes "The basilisk ..."</li>
+            <li>"Mind Flayer" becomes "The mind flayer ..."</li>
+          </ul>
+          <p>Otherwise if the box is checked, the word "The" will not appear and capitalization will be preserved.</p>
+          <h4>Examples of proper nouns:</h4>
+          <ul>
+            <li>"Casper the Friendly Ghost"</li>
+            <li>"Drizzt Do'urden"</li>
+            <li>"Lady Kima of Vord"</li>
+            <li>"Tiamat"</li>
+          </ul>
+        </help-tooltip>
+      </div>      
+    </div>
+    <div class="heading-edit-section__subtitle-container">
+      <label id="size-label" class="heading-edit-section__size-label heading-edit-section__label" for="size-input">Size:</label>
+      <select id="size-input" class="heading-edit-section__size-input heading-show-section__subtitle-text section__select">
+        <option value="Fine">Fine</option>
+        <option value="Diminuitive">Diminuitive</option>
+        <option value="Tiny">Tiny</option>
+        <option value="Small">Small</option>
+        <option value="Medium" selected>Medium</option>
+        <option value="Large">Large</option>
+        <option value="Huge">Huge</option>
+        <option value="Gargantuan">Gargantuan</option>
+        <option value="Colossal">Colossal</option>
+        <option value="Colossal+">Colossal+</option>
+      </select>
+      <label id="type-label" class="heading-edit-section__type-label heading-edit-section__label" for="type-input">Type:</label>
+      <input id="type-input" class="heading-edit-section__type-input heading-show-section__subtitle-text section__text-input" is="text-input" type="text" name="type" pretty-name="Creature Type" list="type-list" value="humanoid" required />
+      <datalist id="type-list">
+        <option value="aberration" />
+        <option value="beast" />
+        <option value="celestial" />
+        <option value="construct" />
+        <option value="dragon" />
+        <option value="elemental" />
+        <option value="fey" />
+        <option value="fiend" />
+        <option value="giant" />
+        <option value="humanoid" />
+        <option value="monstrosity" />
+        <option value="ooze" />
+        <option value="plant" />
+        <option value="undead" />
+      </datalist>
+      <label id="alignment-label" class="heading-edit-section__alignment-label heading-edit-section__label" for="alignment-input">Alignment:</label>
+      <select id="alignment-input" class="heading-edit-section__alignment-input heading-show-section__subtitle-text section__select">
+        <option value="unaligned">unaligned</option>
+        <option value="lawful good">lawful good</option>
+        <option value="neutral good">neutral good</option>
+        <option value="chaotic good">chaotic good</option>
+        <option value="lawful neutral">lawful neutral</option>
+        <option value="neutral">neutral</option>
+        <option value="chaotic neutral">chaotic neutral</option>
+        <option value="lawful evil">lawful evil</option>
+        <option value="neutral evil">neutral evil</option>
+        <option value="chaotic evil">chaotic evil</option>
+      </select>
+    </div>    
   </div>
   <button id="save-button" class="default-button section__action"><i class="material-icons">done</i></button>
 </form>

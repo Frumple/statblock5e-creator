@@ -23,26 +23,66 @@
 }
 
 .heading-edit-section {
-  display: grid;
-  grid-template-columns: auto auto auto;
-  grid-template-rows: auto 5px auto auto;
-  grid-column-gap: 5px;
-  align-items: center;
-}
-
-.heading-edit-section__title-input {
-  grid-area: 1 / 1 / 2 / 4;
-  height: 30px;
+  display: flex;
+  flex-direction: column;
 }
 
 .heading-edit-section__label {
-  font-size: 12px;
+  color: #7A200D;
 }
 
-.heading-edit-section__size-label { grid-area: 3 / 1; }
-.heading-edit-section__type-label { grid-area: 3 / 2; }
-.heading-edit-section__alignment-label { grid-area: 3 / 3; }
+.heading-edit-section__title-input {
+  height: 30px;
+}
 
-.heading-edit-section__size-input { grid-area: 4 / 1; }
-.heading-edit-section__type-input { grid-area: 4 / 2; }
-.heading-edit-section__alignment-input { grid-area: 4 / 3; }
+.heading-edit-section__meta-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  white-space: nowrap;
+  margin-top: 5px;
+}
+
+.heading-edit-section__short-name-container {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+.heading-edit-section__short-name-help-tooltip {
+  --help-tooltip-width: 30em;
+  margin-left: 5px;
+}
+
+.heading-edit-section__short-name-input {
+  margin-left: 5px;
+}
+
+.heading-edit-section__proper-noun-container {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  margin-left: 10px;
+}
+
+.heading-edit-section__proper-noun-help-tooltip {
+  --help-tooltip-width: 35em;
+  margin-left: 5px;
+}
+
+.heading-edit-section__subtitle-container {
+  display: grid;
+  grid-template-columns: auto auto auto;
+  grid-template-rows: auto auto;
+  grid-column-gap: 5px;
+  margin-top: 5px;
+}
+
+.heading-edit-section__size-label { grid-area: 1 / 1; }
+.heading-edit-section__type-label { grid-area: 1 / 2; }
+.heading-edit-section__alignment-label { grid-area: 1 / 3; }
+
+.heading-edit-section__size-input { grid-area: 2 / 1; }
+.heading-edit-section__type-input { grid-area: 2 / 2; }
+.heading-edit-section__alignment-input { grid-area: 2 / 3; }

@@ -27,7 +27,7 @@
   grid-area: 4 / 1;
   justify-self: end;
   align-self: end;
-  --help-tooltip-width: 40em;
+  --help-tooltip-width: 45em;
 }
 
 .hit-points-edit-section__hit-die-calculation-container {

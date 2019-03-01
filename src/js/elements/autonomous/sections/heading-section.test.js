@@ -5,6 +5,8 @@ import { copyObjectProperties } from '/src/js/helpers/object-helpers.js';
 import defineBuiltinCustomElements from '/src/js/helpers/test/define-builtin-custom-elements.js';
 import { inputValueAndTriggerEvent } from '/src/js/helpers/element-helpers.js';
 
+import Creature from '/src/js/stats/creature.js';
+
 let headingSection;
 
 beforeAll(async() => {
@@ -13,6 +15,8 @@ beforeAll(async() => {
 });
 
 beforeEach(() => {
+  Creature.reset();
+
   headingSection = new HeadingSection();
   copyObjectProperties(headingSection, SectionTestMixin);
   headingSection.initializeCustomElements();
@@ -33,6 +37,61 @@ describe('when the show section is clicked', () => {
     expect(headingSection.editElements.title).toHaveFocus();
   });
 
+  describe('and creature name, short name, and/or the proper noun checkbox is changed', () => {
+    describe('should save the changes, the grammatical name used in block list sections should be correct, and should fire a creatureNameChanged event', () => {
+      /* eslint-disable indent, no-unexpected-multiline */
+      it.each
+      `
+        description                                  | creatureName           | shortName      | isProperNoun | expectedGrammaticalName
+        ${'no changes'}                              | ${''}                  | ${''}          | ${false}     | ${'The commoner'}
+        ${'creature name'}                           | ${'Bullywug'}          | ${''}          | ${false}     | ${'The bullywug'}
+        ${'short name'}                              | ${''}                  | ${'peasant'}   | ${false}     | ${'The peasant'}
+        ${'creature name + short name'}              | ${'Beholder Zombie'}   | ${'zombie'}    | ${false}     | ${'The zombie'}
+        ${'no changes, proper noun'}                 | ${''}                  | ${''}          | ${true}      | ${'Commoner'}
+        ${'creature name, proper noun'}              | ${'Tiamat'}            | ${''}          | ${true}      | ${'Tiamat'}
+        ${'short name, proper noun'}                 | ${''}                  | ${'Bob'}       | ${true}      | ${'Bob'}
+        ${'creature name + short name, proper noun'} | ${'Lady Kima of Vord'} | ${'Lady Kima'} | ${true}      | ${'Lady Kima'}
+      `
+      ('$description: {creatureName="$creatureName", shortName="$shortName", isProperNoun="$isProperNoun"} => expectedGrammaticalName',
+      ({creatureName, shortName, isProperNoun, expectedGrammaticalName}) => {
+        let expectedCreatureName = 'Commoner';
+        let expectedShortName = '';
+
+        let receivedEvent = null;
+        document.addEventListener('creatureNameChanged', (event) => {
+          receivedEvent = event;
+        });
+
+        if (creatureName !== '') {
+          expectedCreatureName = creatureName;
+          inputValueAndTriggerEvent(headingSection.editElements.title, creatureName);
+        }
+        if (shortName !== '') {
+          expectedShortName = shortName;
+          inputValueAndTriggerEvent(headingSection.editElements.shortName, shortName);
+        }        
+        if (isProperNoun) {
+          headingSection.editElements.properNoun.click();
+        }
+
+        expect(Creature.name).toBe(expectedCreatureName);
+        expect(Creature.shortName).toBe(expectedShortName);
+        expect(Creature.isProperNoun).toBe(isProperNoun);
+        expect(Creature.grammaticalName).toBe(expectedGrammaticalName);
+
+        if (creatureName !== '' || shortName !== '' || isProperNoun) {
+          expect(receivedEvent).not.toBeNull();
+          expect(receivedEvent.detail.creatureName).toBe(expectedCreatureName);
+          expect(receivedEvent.detail.shortName).toBe(expectedShortName);
+          expect(receivedEvent.detail.isProperNoun).toBe(isProperNoun);
+        } else {
+          expect(receivedEvent).toBeNull();
+        }        
+      });
+      /* eslint-enable indent, no-unexpected-multiline */
+    });    
+  });
+
   describe('and fields are populated and the save button is clicked', () => {
     it('should switch to show mode and save the creature name, size, type, and alignment', () => {
       inputValueAndTriggerEvent(headingSection.editElements.title, 'Beholder');
@@ -45,6 +104,9 @@ describe('when the show section is clicked', () => {
       expect(headingSection).toBeInMode('show');
       expect(headingSection.showElements.title).toHaveTextContent('Beholder');
       expect(headingSection.showElements.subtitle).toHaveTextContent('Large aberration, lawful evil');
+
+      expect(Creature.shortName).toBe('');
+      expect(Creature.isProperNoun).toBe(false);
     });
 
     it('should capitalize the first letter in the creature name', () => {
@@ -108,5 +170,5 @@ describe('when the show section is clicked', () => {
         'Creature Type cannot be blank.',
         1);
     });
-  });
+  });  
 });

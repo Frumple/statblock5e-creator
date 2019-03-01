@@ -1,6 +1,8 @@
 import * as sectionModule from '/src/js/elements/autonomous/sections/section.js';
 import { capitalizeFirstLetter } from '/src/js/helpers/string-formatter.js';
 
+import Creature from '/src/js/stats/creature.js';
+
 export default class HeadingSection extends sectionModule.Section {
   static get elementName() { return 'heading-section'; }
   static get templatePaths() {
@@ -13,6 +15,42 @@ export default class HeadingSection extends sectionModule.Section {
     super(HeadingSection.templatePaths,
           HeadingShowElements,
           HeadingEditElements);
+  }
+
+  connectedCallback() {
+    if (this.isConnected && ! this.isInitialized) {
+      this.editElements.title.addEventListener('input', this.onInputCreatureName.bind(this));
+      this.editElements.shortName.addEventListener('input', this.onInputShortName.bind(this));
+      this.editElements.properNoun.addEventListener('input', this.onInputProperNoun.bind(this));
+    }
+  }
+
+  onInputCreatureName() {
+    Creature.name = this.editElements.title.value;
+    this.dispatchCreatureNameChangedEvent();
+  }
+
+  onInputShortName() {
+    Creature.shortName = this.editElements.shortName.value;
+    this.dispatchCreatureNameChangedEvent();
+  }
+
+  onInputProperNoun() {
+    Creature.isProperNoun = this.editElements.properNoun.checked;
+    this.dispatchCreatureNameChangedEvent();
+  }
+
+  dispatchCreatureNameChangedEvent() {
+    let changeEvent = new CustomEvent('creatureNameChanged', {
+      bubbles: true,
+      composed: true,
+      detail: {
+        creatureName: Creature.name,
+        shortName: Creature.shortName,
+        isProperNoun: Creature.isProperNoun
+      }
+    });
+    this.dispatchEvent(changeEvent);
   }
 
   checkForErrors() {
@@ -50,6 +88,10 @@ class HeadingEditElements extends sectionModule.EditElements {
   constructor(shadowRoot) {
     super(shadowRoot);
     this.title = shadowRoot.getElementById('title-input');
+
+    this.shortName = shadowRoot.getElementById('short-name-input');
+    this.properNoun = shadowRoot.getElementById('proper-noun-input');
+
     this.size = shadowRoot.getElementById('size-input');
     this.type = shadowRoot.getElementById('type-input');
     this.alignment = shadowRoot.getElementById('alignment-input');

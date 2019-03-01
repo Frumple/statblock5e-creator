@@ -18,12 +18,18 @@ export default class StatBlock extends CustomAutonomousElement {
 
   connectedCallback() {
     if (this.isConnected && ! this.isInitialized) {
-      this.addEventListener('abilityScoreChanged', this.onAbilityScoreChanged);  
+      this.addEventListener('creatureNameChanged', this.onCreatureNameChanged);
+      this.addEventListener('abilityScoreChanged', this.onAbilityScoreChanged);
       this.addEventListener('proficiencyBonusChanged', this.onProficiencyBonusChanged);  
       this.addEventListener('skillChanged', this.onSkillChanged);
 
       this.isInitialized = true;
     }
+  }
+
+  onCreatureNameChanged() {
+    // TODO: Update block list sections when the creature name field, 
+    //       short name field, and/or the proper noun checkbox are changed.
   }
   
   onAbilityScoreChanged() {
