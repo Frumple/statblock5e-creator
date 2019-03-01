@@ -13,8 +13,6 @@
   height: 5px;
   background: #E69A28;
   border: 1px solid #000;
-  position: relative;
-  z-index: 1;
 }
 
 .content-wrap {
@@ -45,6 +43,16 @@
 
   /* By default, balance the content between the columns */
   column-fill: balance-all;
+}
+
+.overflow-hide {
+  position: absolute;
+  top: 0;
+  left: 880px;
+  width: 100%;
+  height: 100%;
+  background: white;
+  z-index: 1;
 }
 
 :host([data-two-column]) .content-wrap {
