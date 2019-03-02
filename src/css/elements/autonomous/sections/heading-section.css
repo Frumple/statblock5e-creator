@@ -38,16 +38,8 @@
 .heading-edit-section__meta-container {
   display: flex;
   flex-direction: row;
-  justify-content: space-between;
   align-items: center;
-  white-space: nowrap;
   margin-top: 5px;
-}
-
-.heading-edit-section__short-name-container {
-  display: flex;
-  flex-direction: row;
-  align-items: center;
 }
 
 .heading-edit-section__short-name-help-tooltip {
@@ -56,6 +48,16 @@
 }
 
 .heading-edit-section__short-name-input {
+  min-width: 0;
+  flex: 1 1 5em;
+  margin-left: 5px;
+}
+
+.heading-edit-section__proper-noun-input {
+  margin-left: 10px;
+}
+
+.heading-edit-section__proper-noun-label {
   margin-left: 5px;
 }
 
