@@ -2,7 +2,7 @@ import DamageImmunitiesSection from '/src/js/elements/autonomous/sections/damage
 import SectionTestMixin from '/src/js/helpers/test/section-test-mixin.js';
 
 import { copyObjectProperties } from '/src/js/helpers/object-helpers.js';
-import defineBuiltinCustomElements from '/src/js/helpers/test/define-builtin-custom-elements.js';
+import defineCustomElements from '/src/js/helpers/test/define-custom-elements.js';
 
 import * as sharedSpecs from '/src/js/elements/autonomous/sections/property-list-section.specs.js';
 
@@ -11,7 +11,7 @@ const expectedItemType = 'Damage Immunity';
 let damageImmunitiesSection;
 
 beforeAll(async() => {
-  defineBuiltinCustomElements();
+  await defineCustomElements();
   await DamageImmunitiesSection.define();
 });
 

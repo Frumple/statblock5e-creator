@@ -2,7 +2,7 @@ import HeadingSection from '/src/js/elements/autonomous/sections/heading-section
 import SectionTestMixin from '/src/js/helpers/test/section-test-mixin.js';
 
 import { copyObjectProperties } from '/src/js/helpers/object-helpers.js';
-import defineBuiltinCustomElements from '/src/js/helpers/test/define-builtin-custom-elements.js';
+import defineCustomElements from '/src/js/helpers/test/define-custom-elements.js';
 import { inputValueAndTriggerEvent } from '/src/js/helpers/element-helpers.js';
 
 import Creature from '/src/js/stats/creature.js';
@@ -10,7 +10,7 @@ import Creature from '/src/js/stats/creature.js';
 let headingSection;
 
 beforeAll(async() => {
-  defineBuiltinCustomElements();
+  await defineCustomElements();
   await HeadingSection.define();
 });
 

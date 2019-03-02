@@ -2,7 +2,7 @@ import SensesSection from '/src/js/elements/autonomous/sections/senses-section.j
 import SectionTestMixin from '/src/js/helpers/test/section-test-mixin.js';
 
 import { copyObjectProperties } from '/src/js/helpers/object-helpers.js';
-import defineBuiltinCustomElements from '/src/js/helpers/test/define-builtin-custom-elements.js';
+import defineCustomElements from '/src/js/helpers/test/define-custom-elements.js';
 import { inputValueAndTriggerEvent } from '/src/js/helpers/element-helpers.js';
 
 import Abilities from '/src/js/stats/abilities.js';
@@ -12,7 +12,7 @@ import Skills from '/src/js/stats/skills.js';
 let sensesSection;
 
 beforeAll(async() => {
-  defineBuiltinCustomElements();
+  await defineCustomElements();
   await SensesSection.define();
 });
 

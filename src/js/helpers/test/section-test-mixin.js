@@ -6,10 +6,9 @@ import PropertyList from '/src/js/elements/autonomous/lists/property-list.js';
 import EditableBlockList from '/src/js/elements/autonomous/lists/editable-block-list.js';
 import DisplayBlockList from '/src/js/elements/autonomous/lists/display-block-list';
 
-jest.mock('/src/js/elements/autonomous/error-messages.js');
 jest.mock('/src/js/elements/autonomous/lists/property-list.js');
 jest.mock('/src/js/elements/autonomous/lists/editable-block-list.js');
-jest.mock('/src/js/elements/autonomous/lists/display-block-list');
+jest.mock('/src/js/elements/autonomous/lists/display-block-list.js');
 
 /*
 JSDOM does not currently support custom elements, so in our tests,
