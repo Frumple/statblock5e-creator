@@ -19,11 +19,7 @@ beforeEach(() => {
   specialTraitsSection = new SpecialTraitsSection();
   copyObjectProperties(specialTraitsSection, SectionTestMixin);
   specialTraitsSection.initializeCustomElements();
-  specialTraitsSection.forceConnect();
-});
-
-afterEach(() => {
-  document.clear();
+  specialTraitsSection.connect();
 });
 
 describe('when the show section is clicked', () => {
@@ -45,7 +41,7 @@ describe('when the show section is clicked', () => {
     });
   });
 
-  describe('and blocks are added and/or removed, and the save button is clicked', () => {
+  describe('and blocks are added and/or removed, and the edit section is submitted', () => {
     it('should add a single block', () => {
       const blockName = 'Amphibious';
       const blockText = 'The dragon can breathe air and water.';

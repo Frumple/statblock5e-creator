@@ -28,11 +28,7 @@ beforeEach(() => {
   savingThrowsSection = new SavingThrowsSection();
   copyObjectProperties(savingThrowsSection, SectionTestMixin);
   savingThrowsSection.initializeCustomElements();
-  savingThrowsSection.forceConnect();
-});
-
-afterEach(() => {
-  document.clear();
+  savingThrowsSection.connect();
 });
 
 describe('when the show section is clicked', () => {
@@ -79,7 +75,7 @@ describe('when the show section is clicked', () => {
     });
   });
 
-  describe('and the ability score and proficiency bonus are set, the saving throw fields are set, and the save button is clicked', () => {
+  describe('and the ability score and proficiency bonus are set, the saving throw fields are set, and the edit section is submitted', () => {
     describe('should update the saving throw modifier, switch to show mode, and display the saving throw modifier in show mode if enabled', () => {
       /* eslint-disable indent, no-unexpected-multiline */
       it.each
@@ -130,7 +126,7 @@ describe('when the show section is clicked', () => {
         let formattedModifier = formatModifier(expectedModifier);
         expect(savingThrowElements.modifier).toHaveTextContent(formattedModifier);
 
-        savingThrowsSection.editElements.saveButton.click();
+        savingThrowsSection.editElements.submitForm();
 
         expect(savingThrowsSection.showElements.text).toHaveTextContent(expectedText);
 
@@ -144,7 +140,7 @@ describe('when the show section is clicked', () => {
     });
   });
 
-  describe('and multiple saving throws are enabled in various configurations, and the save button is clicked', () => {
+  describe('and multiple saving throws are enabled in various configurations, and the edit section is submitted', () => {
     describe('should update the corresponding saving throw modifiers, switch to show mode, and display the saving throw modifiers in show mode if enabled', () => {
       /* eslint-disable indent, no-unexpected-multiline */
       it.each
@@ -203,7 +199,7 @@ describe('when the show section is clicked', () => {
           inputValueAndTriggerEvent(elements.override, 9);
         }
 
-        savingThrowsSection.editElements.saveButton.click();
+        savingThrowsSection.editElements.submitForm();
 
         expect(savingThrowsSection.showElements.text).toHaveTextContent(expectedText);
       });

@@ -8,16 +8,12 @@ beforeAll(async() => {
 
 beforeEach(() => {
   statBlockMenu = new StatBlockMenu();
-  statBlockMenu.forceConnect();
-});
-
-afterEach(() => {
-  document.clear();
+  statBlockMenu.connect();
 });
 
 it('should dispatch an event when the "One Column" button is clicked', () => {
   let receivedEvent = null;
-  document.addEventListener('numberOfColumnsChanged', (event) => {
+  statBlockMenu.addEventListener('numberOfColumnsChanged', (event) => {
     receivedEvent = event;
   });
 
@@ -29,7 +25,7 @@ it('should dispatch an event when the "One Column" button is clicked', () => {
 
 it('should dispatch an event when the "Two Column" button is clicked', () => {
   let receivedEvent = null;
-  document.addEventListener('numberOfColumnsChanged', (event) => {
+  statBlockMenu.addEventListener('numberOfColumnsChanged', (event) => {
     receivedEvent = event;
   });
 
@@ -41,7 +37,7 @@ it('should dispatch an event when the "Two Column" button is clicked', () => {
 
 it('should dispatch an event when the "Show Empty Sections" button is clicked', () => {
   let receivedEvent = null;
-  document.addEventListener('emptySectionsVisibilityChanged', (event) => {
+  statBlockMenu.addEventListener('emptySectionsVisibilityChanged', (event) => {
     receivedEvent = event;
   });
 
@@ -53,7 +49,7 @@ it('should dispatch an event when the "Show Empty Sections" button is clicked', 
 
 it('should dispatch an event when the "Hide Empty Sections" button is clicked', () => {
   let receivedEvent = null;
-  document.addEventListener('emptySectionsVisibilityChanged', (event) => {
+  statBlockMenu.addEventListener('emptySectionsVisibilityChanged', (event) => {
     receivedEvent = event;
   });
 
@@ -65,7 +61,7 @@ it('should dispatch an event when the "Hide Empty Sections" button is clicked', 
 
 it('should dispatch an event when the "Edit All Sections" button is clicked', () => {
   let receivedEvent = null;
-  document.addEventListener('allSectionsAction', (event) => {
+  statBlockMenu.addEventListener('allSectionsAction', (event) => {
     receivedEvent = event;
   });
 
@@ -77,7 +73,7 @@ it('should dispatch an event when the "Edit All Sections" button is clicked', ()
 
 it('should dispatch an event when the "Save All Sections" button is clicked', () => {
   let receivedEvent = null;
-  document.addEventListener('allSectionsAction', (event) => {
+  statBlockMenu.addEventListener('allSectionsAction', (event) => {
     receivedEvent = event;
   });
 

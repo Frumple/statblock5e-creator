@@ -23,11 +23,7 @@ beforeEach(() => {
   hitPointsSection = new HitPointsSection();
   copyObjectProperties(hitPointsSection, SectionTestMixin);
   hitPointsSection.initializeCustomElements();
-  hitPointsSection.forceConnect();
-});
-
-afterEach(() => {
-  document.clear();
+  hitPointsSection.connect();
 });
 
 describe('when the show section is clicked', () => {
@@ -54,7 +50,7 @@ describe('when the show section is clicked', () => {
       expect(hitPointsSection.editElements.hitDieQuantity).toHaveFocus();
     });
 
-    describe('and the hit die fields are populated and the save button is clicked', () => {
+    describe('and the hit die fields are populated and the edit section is submitted', () => {
       describe('should update the hit points field, switch to show mode and save all the fields in the following combinations:', () => {
         /* eslint-disable indent, no-unexpected-multiline */
         it.each
@@ -97,7 +93,7 @@ describe('when the show section is clicked', () => {
           expect(hitPointsSection.editElements.trailingText).toHaveTextContent(`${constitutionHitPointsOperator} ${constitutionHitPointsNumber} )`);
           expect(hitPointsSection.editElements.hitPoints.value).toBe(`${expectedHitPoints}`);
 
-          hitPointsSection.editElements.saveButton.click();
+          hitPointsSection.editElements.submitForm();
 
           expect(hitPointsSection).toBeInMode('show');
           expect(hitPointsSection.showElements.text).toHaveTextContent(expectedText);
@@ -106,7 +102,7 @@ describe('when the show section is clicked', () => {
       });
     });    
 
-    describe('and the hit die quantity is changed, and the save button is clicked', () => {
+    describe('and the hit die quantity is changed, and the edit section is submitted', () => {
       it('should display an error if the hit die quantity field is not a valid number, and the hit die quantity should not be saved', () => {
         inputValueAndTriggerEvent(hitPointsSection.editElements.hitDieQuantity, '');
 
@@ -116,7 +112,7 @@ describe('when the show section is clicked', () => {
         expect(HitPoints.constitutionHitPoints).toBe(0);
         expect(HitPoints.hitPoints).toBe(4);
 
-        hitPointsSection.editElements.saveButton.click();
+        hitPointsSection.editElements.submitForm();
 
         expect(hitPointsSection).toBeInMode('edit');
         expect(hitPointsSection).toHaveError(
@@ -134,7 +130,7 @@ describe('when the show section is clicked', () => {
         expect(HitPoints.constitutionHitPoints).toBe(0);
         expect(HitPoints.hitPoints).toBe(4);
 
-        hitPointsSection.editElements.saveButton.click();
+        hitPointsSection.editElements.submitForm();
 
         expect(hitPointsSection).toBeInMode('edit');
         expect(hitPointsSection).toHaveError(
@@ -181,7 +177,7 @@ describe('when the show section is clicked', () => {
       expect(hitPointsSection.editElements.hitPoints).toHaveFocus();
     });
 
-    describe('and the hit points field is changed and the save button is clicked', () => {
+    describe('and the hit points field is changed and the edit section is submitted', () => {
       it('should switch to show mode and save the hit points', () => {
         inputValueAndTriggerEvent(hitPointsSection.editElements.hitPoints, 142);
 
@@ -191,7 +187,7 @@ describe('when the show section is clicked', () => {
         expect(HitPoints.constitutionHitPoints).toBe(0);
         expect(HitPoints.hitPoints).toBe(142);
 
-        hitPointsSection.editElements.saveButton.click();
+        hitPointsSection.editElements.submitForm();
 
         expect(hitPointsSection).toBeInMode('show');
         expect(hitPointsSection.showElements.text).toHaveTextContent('142');
@@ -206,7 +202,7 @@ describe('when the show section is clicked', () => {
         expect(HitPoints.constitutionHitPoints).toBe(0);
         expect(HitPoints.hitPoints).toBe(4);
 
-        hitPointsSection.editElements.saveButton.click();
+        hitPointsSection.editElements.submitForm();
 
         expect(hitPointsSection).toBeInMode('edit');
         expect(hitPointsSection).toHaveError(
@@ -224,7 +220,7 @@ describe('when the show section is clicked', () => {
         expect(HitPoints.constitutionHitPoints).toBe(0);
         expect(HitPoints.hitPoints).toBe(4);
         
-        hitPointsSection.editElements.saveButton.click();
+        hitPointsSection.editElements.submitForm();
 
         expect(hitPointsSection).toBeInMode('edit');
         expect(hitPointsSection).toHaveError(

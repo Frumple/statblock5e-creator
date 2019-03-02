@@ -8,11 +8,7 @@ beforeAll(async() => {
 
 beforeEach(() => {
   statBlockSidebar = new StatBlockSidebar();
-  statBlockSidebar.forceConnect();
-});
-
-afterEach(() => {
-  document.clear();
+  statBlockSidebar.connect();
 });
 
 const initialSliderValue = 600;
@@ -35,7 +31,7 @@ it('should be hidden when visible is set to false', () => {
 
 it('should dispatch an event when the "Auto Two-Column Height" button is clicked, and the slider should not be visible', () => {
   let receivedEvent = null;
-  document.addEventListener('twoColumnHeightChanged', (event) => {
+  statBlockSidebar.addEventListener('twoColumnHeightChanged', (event) => {
     receivedEvent = event;
   });
 
@@ -51,7 +47,7 @@ it('should dispatch an event when the "Auto Two-Column Height" button is clicked
 
 it('should dispatch an event when the "Manual Two-Column Height" button is clicked, and the slider should be visible', () => {
   let receivedEvent = null;
-  document.addEventListener('twoColumnHeightChanged', (event) => {
+  statBlockSidebar.addEventListener('twoColumnHeightChanged', (event) => {
     receivedEvent = event;
   });
 
@@ -67,7 +63,7 @@ it('should dispatch an event when the "Manual Two-Column Height" button is click
 
 it('should dispatch an event when the "Manual Two-Column Height" slider is decremented', () => {
   let receivedEvent = null;
-  document.addEventListener('twoColumnHeightChanged', (event) => {
+  statBlockSidebar.addEventListener('twoColumnHeightChanged', (event) => {
     receivedEvent = event;
   });
 
@@ -83,7 +79,7 @@ it('should dispatch an event when the "Manual Two-Column Height" slider is decre
 
 it('should dispatch an event when the "Manual Two-Column Height" slider is incremented', () => {
   let receivedEvent = null;
-  document.addEventListener('twoColumnHeightChanged', (event) => {
+  statBlockSidebar.addEventListener('twoColumnHeightChanged', (event) => {
     receivedEvent = event;
   });
 

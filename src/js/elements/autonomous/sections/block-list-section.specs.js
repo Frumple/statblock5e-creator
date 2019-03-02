@@ -8,7 +8,7 @@ export function shouldSwitchToEditModeAndFocusOnAddButtonIfNoBlocks(section) {
 export function shouldSwitchToEditModeAndFocusOnNameFieldOfFirstBlockIfExists(section) {
   addAndPopulateBlock(section, 'Some name', 'Some text.');
 
-  section.editElements.saveButton.click();
+  section.editElements.submitForm();
   section.showElements.section.click();
   
   expect(section).toBeInMode('edit');
@@ -27,7 +27,7 @@ export function shouldFocusOnNameFieldOfNewBlock(section) {
 export function shouldAddASingleBlock(section, blockName, blockText) {
   addAndPopulateBlock(section, blockName, blockText);
 
-  section.editElements.saveButton.click();
+  section.editElements.submitForm();
 
   expect(section).toBeInMode('show');
   expectSectionToBeEmpty(section, false);
@@ -45,7 +45,7 @@ export function shouldAddMultipleBlocks(section, blocks) {
     addAndPopulateBlock(section, block.name, block.text);
   }
 
-  section.editElements.saveButton.click();
+  section.editElements.submitForm();
 
   expect(section).toBeInMode('show');
   expectSectionToBeEmpty(section, false);
@@ -59,7 +59,7 @@ export function shouldAddASingleBlockThenRemoveIt(section, blockName, blockText)
   const editableBlock = section.editElements.editableList.blocks[0];
   editableBlock.remove();
 
-  section.editElements.saveButton.click();
+  section.editElements.submitForm();
 
   expect(section).toBeInMode('show');
   expectSectionToBeEmpty(section, true);
@@ -75,7 +75,7 @@ export function shouldAddMultipleBlocksThenRemoveOneOfThem(section, blocks, remo
   const editableBlock = section.editElements.editableList.blocks[removeIndex];
   editableBlock.remove();
 
-  section.editElements.saveButton.click();
+  section.editElements.submitForm();
 
   expect(section).toBeInMode('show');
   expectSectionToBeEmpty(section, false);
@@ -88,7 +88,7 @@ export function shouldAddMultipleBlocksThenRemoveOneOfThem(section, blocks, remo
 export function shouldTrimAllTrailingPeriodCharactersInBlockName(section) {
   addAndPopulateBlock(section, 'Cthulhu. fhtag.n........', 'Some text.');
 
-  section.editElements.saveButton.click();
+  section.editElements.submitForm();
 
   expect(section).toBeInMode('show');
   expectSectionToBeEmpty(section, false);
@@ -107,7 +107,7 @@ export function shouldTrimAllTrailingPeriodCharactersInBlockName(section) {
 export function shouldDisplayAnErrorIfBlockNameIsBlank(section, expectedItemType) {
   addAndPopulateBlock(section, '', 'Some text.');
 
-  section.editElements.saveButton.click();
+  section.editElements.submitForm();
 
   expect(section).toHaveError(
     section.editElements.editableList.blocks[0].nameElement,
@@ -117,7 +117,7 @@ export function shouldDisplayAnErrorIfBlockNameIsBlank(section, expectedItemType
 export function shouldDisplayAnErrorIfBlockTextIsBlank(section, expectedItemType) {
   addAndPopulateBlock(section, 'Some name', '');
 
-  section.editElements.saveButton.click();
+  section.editElements.submitForm();
 
   expect(section).toHaveError(
     section.editElements.editableList.blocks[0].textElement,
@@ -127,7 +127,7 @@ export function shouldDisplayAnErrorIfBlockTextIsBlank(section, expectedItemType
 export function shouldDisplayErrorsIfBlockNameAndTextAreBothBlank(section, expectedItemType) {
   addAndPopulateBlock(section, '', '');
 
-  section.editElements.saveButton.click();
+  section.editElements.submitForm();
 
   const editableBlock = section.editElements.editableList.blocks[0];
 

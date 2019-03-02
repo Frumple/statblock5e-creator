@@ -164,4 +164,8 @@ export class EditElements {
     throw new Error(
       `The class '${this.constructor.name}' must implement the initiallySelectedElement() getter.`);
   }
+
+  submitForm() {
+    this.section.dispatchEvent(new Event('submit'));
+  }
 }

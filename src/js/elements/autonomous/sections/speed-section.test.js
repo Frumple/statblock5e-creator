@@ -16,11 +16,7 @@ beforeEach(() => {
   speedSection = new SpeedSection();
   copyObjectProperties(speedSection, SectionTestMixin);
   speedSection.initializeCustomElements();
-  speedSection.forceConnect();
-});
-
-afterEach(() => {
-  document.clear();
+  speedSection.connect();
 });
 
 describe('when the show section is clicked', () => {
@@ -50,12 +46,12 @@ describe('when the show section is clicked', () => {
       expect(speedSection.editElements.customText).toHaveFocus();
     });
 
-    describe('and the custom text field is populated and the save button is clicked', () => {
+    describe('and the custom text field is populated and the edit section is submitted', () => {
       it('should switch to show mode and save the custom text', () => {
         let customText = '30 ft. (40ft., climb 30ft. in bear or hybrid form)';
         inputValueAndTriggerEvent(speedSection.editElements.customText, customText);
 
-        speedSection.editElements.saveButton.click();
+        speedSection.editElements.submitForm();
 
         expect(speedSection).toBeInMode('show');
         expect(speedSection.showElements.text).toHaveTextContent(customText);
@@ -64,7 +60,7 @@ describe('when the show section is clicked', () => {
       it('should display an error if the custom text field is blank', () => {
         inputValueAndTriggerEvent(speedSection.editElements.customText, '');
 
-        speedSection.editElements.saveButton.click();
+        speedSection.editElements.submitForm();
 
         expect(speedSection).toBeInMode('edit');
         expect(speedSection).toHaveError(
@@ -92,7 +88,7 @@ describe('when the show section is clicked', () => {
       expect(speedSection.editElements.walk).toHaveFocus();
     });
 
-    describe('and the speed fields are populated and the save button is clicked', () => {
+    describe('and the speed fields are populated and the edit section is submitted', () => {
       describe('should switch to show mode and save the fields in the following combinations:', () => {
         /* eslint-disable indent, no-unexpected-multiline */
 
@@ -140,7 +136,7 @@ describe('when the show section is clicked', () => {
             speedSection.editElements.hover.click();
           }
 
-          speedSection.editElements.saveButton.click();
+          speedSection.editElements.submitForm();
 
           expect(speedSection).toBeInMode('show');
           expect(speedSection.showElements.text).toHaveTextContent(expectedText);

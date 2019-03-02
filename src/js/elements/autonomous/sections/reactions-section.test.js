@@ -19,11 +19,7 @@ beforeEach(() => {
   reactionsSection = new ReactionsSection();
   copyObjectProperties(reactionsSection, SectionTestMixin);
   reactionsSection.initializeCustomElements();
-  reactionsSection.forceConnect();
-});
-
-afterEach(() => {
-  document.clear();
+  reactionsSection.connect();
 });
 
 describe('when the show section is clicked', () => {
@@ -45,7 +41,7 @@ describe('when the show section is clicked', () => {
     });
   });
 
-  describe('and blocks are added and/or removed, and the save button is clicked', () => {
+  describe('and blocks are added and/or removed, and the edit section is submitted', () => {
     it('should add a single block', () => {
       const blockName = 'Parry';
       const blockText = 'The gladiator adds 3 to its AC against one melee attack that would hit it. To do so, the gladiator must see the attacker and be wielding a melee weapon.';

@@ -29,11 +29,7 @@ beforeEach(() => {
   skillsSection = new SkillsSection();
   copyObjectProperties(skillsSection, SectionTestMixin);
   skillsSection.initializeCustomElements();
-  skillsSection.forceConnect();
-});
-
-afterEach(() => {
-  document.clear();
+  skillsSection.connect();
 });
 
 describe('when the show section is clicked', () => {
@@ -80,7 +76,7 @@ describe('when the show section is clicked', () => {
     });
   });
 
-  describe('and the ability score and proficiency bonus are set, the skill fields are set, and the save button is clicked', () => {
+  describe('and the ability score and proficiency bonus are set, the skill fields are set, and the edit section is submitted', () => {
     describe('should update the skill modifier, switch to show mode, and display the skill modifier in show mode if enabled', () => {
       /* eslint-disable indent, no-unexpected-multiline */
       it.each
@@ -104,7 +100,7 @@ describe('when the show section is clicked', () => {
       ('$description: {abilityScore="$abilityScore", proficiencyBonus="$proficiencyBonus", skillEnabled="$skillEnabled", skillProficient="$skillProficient", skillOverride="$skillOverride"} => {expectedModifier="$expectedModifier", expectedText="$expectedText"}',
       ({abilityScore, proficiencyBonus, skillEnabled, skillProficient, skillOverride, expectedModifier, expectedText}) => {
         let receivedEvent = null;
-        document.addEventListener('skillChanged', (event) => {
+        skillsSection.addEventListener('skillChanged', (event) => {
           receivedEvent = event;
         });
         
@@ -144,7 +140,7 @@ describe('when the show section is clicked', () => {
         let formattedModifier = formatModifier(expectedModifier);
         expect(skillElements.modifier).toHaveTextContent(formattedModifier);
 
-        skillsSection.editElements.saveButton.click();
+        skillsSection.editElements.submitForm();
 
         expect(skillsSection.showElements.text).toHaveTextContent(expectedText);
 
@@ -158,7 +154,7 @@ describe('when the show section is clicked', () => {
     });
   });
 
-  describe('and multiple skills are enabled in various configurations, and the save button is clicked', () => {
+  describe('and multiple skills are enabled in various configurations, and the edit section is submitted', () => {
     describe('should update the corresponding skill modifiers, switch to show mode, and display the skill modifiers in show mode if enabled', () => {
       /* eslint-disable indent, no-unexpected-multiline */
       it.each
@@ -209,7 +205,7 @@ describe('when the show section is clicked', () => {
           inputValueAndTriggerEvent(elements.override, 0);
         }
 
-        skillsSection.editElements.saveButton.click();
+        skillsSection.editElements.submitForm();
 
         expect(skillsSection.showElements.text).toHaveTextContent(expectedText);
       });

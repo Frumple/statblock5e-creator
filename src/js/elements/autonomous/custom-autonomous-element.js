@@ -28,8 +28,8 @@ class CustomAutonomousElement extends HTMLElement {
     this.attachShadow({mode: 'open'});
 
     for (const name of templatePaths.keys()) {
-      let template = HtmlTemplates.getTemplate(name);
-      let fragment = document.createRange().createContextualFragment(template);
+      const template = HtmlTemplates.getTemplate(name);
+      const fragment = document.createRange().createContextualFragment(template);
       this.shadowRoot.appendChild(fragment.cloneNode(true));
     }
   }
@@ -56,11 +56,14 @@ class FakeCustomAutonomousElement {
   constructor(templatePaths) {
     this.dataset = new Map();
 
-    this.shadowRoot = document;
+    // Create an in-memory fake shadow root and append the HTML templates to its body
+    this.shadowRoot = document.createDocumentFragment();
+    const body = document.createElement('body');
+    this.shadowRoot.appendChild(body);
 
     for (const name of templatePaths.keys()) {
-      let template = HtmlTemplates.getTemplate(name);
-      this.shadowRoot.body.innerHTML += template;
+      const template = HtmlTemplates.getTemplate(name);
+      body.innerHTML += template;
     }
   }
 
@@ -68,19 +71,19 @@ class FakeCustomAutonomousElement {
     return;
   }
 
-  forceConnect() {
+  connect() {
     this.isConnected = true;
     this.connectedCallback();
   }
 
   addEventListener(type, callback) {
-    // Since this element is fake, add the event listener on the document on behalf of the element.
-    document.addEventListener(type, callback);
+    // Since this element is fake, add the event listener to the fake shadow root on behalf of the element.
+    this.shadowRoot.addEventListener(type, callback);
   }
 
   dispatchEvent(event) {
-    // Since this element is fake, dispatch the event from the document on behalf of the element.
-    document.dispatchEvent(event);
+    // Since this element is fake, dispatch the event from the fake shadow root on behalf of the element.
+    this.shadowRoot.dispatchEvent(event);
   }
 }
 

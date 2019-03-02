@@ -13,7 +13,8 @@ class HtmlTemplates {
       const util = require('util');
       const readFile = util.promisify(fs.readFile);
 
-      content = await readFile(path);
+      const buffer = await readFile(path);
+      content = buffer.toString();
     } else {
       content = await fetch(path).then(stream => stream.text());
     }

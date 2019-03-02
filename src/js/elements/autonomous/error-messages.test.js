@@ -8,11 +8,7 @@ beforeAll(async() => {
 
 beforeEach(() => {
   errorMessages = new ErrorMessages();
-  errorMessages.forceConnect();
-});
-
-afterEach(() => {
-  document.clear();
+  errorMessages.connect();
 });
 
 it('should add a single error', () => {

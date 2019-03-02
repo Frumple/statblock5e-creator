@@ -23,11 +23,7 @@ beforeEach(() => {
   abilityScoresSection = new AbilityScoresSection();
   copyObjectProperties(abilityScoresSection, SectionTestMixin);
   abilityScoresSection.initializeCustomElements();
-  abilityScoresSection.forceConnect();
-});
-
-afterEach(() => {
-  document.clear();
+  abilityScoresSection.connect();
 });
 
 describe('when the show section is clicked', () => {
@@ -40,7 +36,7 @@ describe('when the show section is clicked', () => {
     expect(abilityScoresSection.editElements.score['strength']).toHaveFocus();
   });
 
-  describe('and one of the ability score fields is changed and the save button is clicked', () => {
+  describe('and one of the ability score fields is changed and the edit section is submitted', () => {
     describe('should switch to show mode, save the ability score, and update the ability score modifiers on both edit and show mode', () => {
       /* eslint-disable indent, no-unexpected-multiline */
       it.each
@@ -69,7 +65,7 @@ describe('when the show section is clicked', () => {
       ('$description: {abilityName="$abilityName", score="$score"} => $expectedModifier',
       ({abilityName, score, expectedModifier}) => {
         let receivedEvent = null;
-        document.addEventListener('abilityScoreChanged', (event) => {
+        abilityScoresSection.addEventListener('abilityScoreChanged', (event) => {
           receivedEvent = event;
         });
 
@@ -87,7 +83,7 @@ describe('when the show section is clicked', () => {
         expect(receivedEvent.detail.abilityScore).toBe(score);
         expect(receivedEvent.detail.abilityModifier).toBe(expectedModifier);
 
-        abilityScoresSection.editElements.saveButton.click();
+        abilityScoresSection.editElements.submitForm();
 
         expect(abilityScoresSection.showElements.modifier[abilityName]).toHaveTextContent(formattedModifier);
       });
@@ -109,7 +105,7 @@ describe('when the show section is clicked', () => {
       ('$description: $abilityName => $expectedErrorMessage',
       ({abilityName, expectedErrorMessage}) => {
         let receivedEvent = null;
-        document.addEventListener('abilityScoreChanged', (event) => {
+        abilityScoresSection.addEventListener('abilityScoreChanged', (event) => {
           receivedEvent = event;
         });
 
@@ -127,7 +123,7 @@ describe('when the show section is clicked', () => {
 
         expect(receivedEvent).toBeNull();
 
-        abilityScoresSection.editElements.saveButton.click();
+        abilityScoresSection.editElements.submitForm();
 
         expect(abilityScoresSection.showElements.modifier[abilityName]).toHaveTextContent(formattedOldModifier);
 
@@ -140,7 +136,7 @@ describe('when the show section is clicked', () => {
     });
   });
 
-  describe('and the proficiency bonus is changed and the save button is clicked', () => {
+  describe('and the proficiency bonus is changed and the edit section is submitted', () => {
     describe('should save the proficiency bonus', () => {
       /* eslint-disable indent, no-unexpected-multiline */
       it.each
@@ -153,7 +149,7 @@ describe('when the show section is clicked', () => {
       ('$description: $proficiencyBonus',
       ({proficiencyBonus}) => {
         let receivedEvent = null;
-        document.addEventListener('proficiencyBonusChanged', (event) => {
+        abilityScoresSection.addEventListener('proficiencyBonusChanged', (event) => {
           receivedEvent = event;
         });
 
@@ -164,7 +160,7 @@ describe('when the show section is clicked', () => {
         expect(receivedEvent).not.toBeNull();
         expect(receivedEvent.detail.proficiencyBonus).toBe(proficiencyBonus);
 
-        abilityScoresSection.editElements.saveButton.click();
+        abilityScoresSection.editElements.submitForm();
 
         expect(ProficiencyBonus.proficiencyBonus).toBe(proficiencyBonus);
       });
@@ -173,7 +169,7 @@ describe('when the show section is clicked', () => {
 
     it('should display an error if the proficiency bonus is not a valid number, and the proficiency bonus is not saved', () => {
       let receivedEvent = null;
-      document.addEventListener('proficiencyBonusChanged', (event) => {
+      abilityScoresSection.addEventListener('proficiencyBonusChanged', (event) => {
         receivedEvent = event;
       });
       
@@ -184,7 +180,7 @@ describe('when the show section is clicked', () => {
       expect(ProficiencyBonus.proficiencyBonus).toBe(oldProficiencyBonus);
       expect(receivedEvent).toBeNull();
 
-      abilityScoresSection.editElements.saveButton.click();
+      abilityScoresSection.editElements.submitForm();
 
       expect(abilityScoresSection).toBeInMode('edit');
       expect(abilityScoresSection).toHaveError(
@@ -193,7 +189,7 @@ describe('when the show section is clicked', () => {
     });
   });
 
-  describe('and all of the fields are populated and the save button is clicked', () => {
+  describe('and all of the fields are populated and the edit section is submitted', () => {
     describe('should switch to show mode, save the fields, and update the ability score modifiers on both edit and show mode', () => {
       /* eslint-disable indent, no-unexpected-multiline */
       it.each
@@ -232,7 +228,7 @@ describe('when the show section is clicked', () => {
         }
         expect(ProficiencyBonus.proficiencyBonus).toBe(proficiencyBonus);
 
-        abilityScoresSection.editElements.saveButton.click();
+        abilityScoresSection.editElements.submitForm();
 
         for (const [key, value] of Abilities.entries) {
           let expectedModifier = eval(`${value.abbreviation}Mod`);

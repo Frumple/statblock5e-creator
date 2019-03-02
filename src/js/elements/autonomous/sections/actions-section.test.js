@@ -19,11 +19,7 @@ beforeEach(() => {
   actionsSection = new ActionsSection();
   copyObjectProperties(actionsSection, SectionTestMixin);
   actionsSection.initializeCustomElements();
-  actionsSection.forceConnect();
-});
-
-afterEach(() => {
-  document.clear();
+  actionsSection.connect();
 });
 
 describe('when the show section is clicked', () => {
@@ -45,7 +41,7 @@ describe('when the show section is clicked', () => {
     });
   });
 
-  describe('and blocks are added and/or removed, and the save button is clicked', () => {
+  describe('and blocks are added and/or removed, and the edit section is submitted', () => {
     it('should add a single block', () => {
       const blockName = 'Slam';
       const blockText = '*Melee Weapon Attack:* +3 to hit, reach 5 ft., one target. *Hit:* 4 (1d6 + 1) bludgeoning damage.';

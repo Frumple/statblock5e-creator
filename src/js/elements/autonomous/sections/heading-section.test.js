@@ -20,11 +20,7 @@ beforeEach(() => {
   headingSection = new HeadingSection();
   copyObjectProperties(headingSection, SectionTestMixin);
   headingSection.initializeCustomElements();
-  headingSection.forceConnect();
-});
-
-afterEach(() => {
-  document.clear();
+  headingSection.connect();
 });
 
 describe('when the show section is clicked', () => {
@@ -58,7 +54,7 @@ describe('when the show section is clicked', () => {
         let expectedShortName = '';
 
         let receivedEvent = null;
-        document.addEventListener('creatureNameChanged', (event) => {
+        headingSection.addEventListener('creatureNameChanged', (event) => {
           receivedEvent = event;
         });
 
@@ -92,14 +88,14 @@ describe('when the show section is clicked', () => {
     });    
   });
 
-  describe('and fields are populated and the save button is clicked', () => {
+  describe('and fields are populated and the edit section is submitted', () => {
     it('should switch to show mode and save the creature name, size, type, and alignment', () => {
       inputValueAndTriggerEvent(headingSection.editElements.title, 'Beholder');
       inputValueAndTriggerEvent(headingSection.editElements.size, 'Large');
       inputValueAndTriggerEvent(headingSection.editElements.type, 'aberration');
       inputValueAndTriggerEvent(headingSection.editElements.alignment, 'lawful evil');
     
-      headingSection.editElements.saveButton.click();
+      headingSection.editElements.submitForm();
 
       expect(headingSection).toBeInMode('show');
       expect(headingSection.showElements.title).toHaveTextContent('Beholder');
@@ -112,7 +108,7 @@ describe('when the show section is clicked', () => {
     it('should capitalize the first letter in the creature name', () => {
       inputValueAndTriggerEvent(headingSection.editElements.title, 'young red dragon');
 
-      headingSection.editElements.saveButton.click();
+      headingSection.editElements.submitForm();
 
       expect(headingSection).toBeInMode('show');
       expect(headingSection.showElements.title).toHaveTextContent('Young red dragon');
@@ -124,7 +120,7 @@ describe('when the show section is clicked', () => {
       inputValueAndTriggerEvent(headingSection.editElements.type, '    monstrosity        ');
       inputValueAndTriggerEvent(headingSection.editElements.alignment, 'unaligned');
 
-      headingSection.editElements.saveButton.click();
+      headingSection.editElements.submitForm();
 
       expect(headingSection).toBeInMode('show');
       expect(headingSection.showElements.title).toHaveTextContent('Purple Worm');
@@ -134,7 +130,7 @@ describe('when the show section is clicked', () => {
     it('should display an error if the creature name field is blank', () => {
       inputValueAndTriggerEvent(headingSection.editElements.title, '');
 
-      headingSection.editElements.saveButton.click();
+      headingSection.editElements.submitForm();
 
       expect(headingSection).toBeInMode('edit');
       expect(headingSection).toHaveError(
@@ -145,7 +141,7 @@ describe('when the show section is clicked', () => {
     it('should display an error if the creature type field is blank', () => {
       inputValueAndTriggerEvent(headingSection.editElements.type, '');
 
-      headingSection.editElements.saveButton.click();
+      headingSection.editElements.submitForm();
 
       expect(headingSection).toBeInMode('edit');
       expect(headingSection).toHaveError(
@@ -157,7 +153,7 @@ describe('when the show section is clicked', () => {
       inputValueAndTriggerEvent(headingSection.editElements.title, '');
       inputValueAndTriggerEvent(headingSection.editElements.type, '');
 
-      headingSection.editElements.saveButton.click();
+      headingSection.editElements.submitForm();
 
       expect(headingSection).toBeInMode('edit');
       expect(headingSection.errorMessages.errors).toHaveLength(2);

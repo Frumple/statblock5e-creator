@@ -6,7 +6,7 @@ export function shouldAddASuggestedItem(section, itemText) {
 
   expect(section.editElements.list.itemsAsText).toEqual([itemText]);
 
-  section.editElements.saveButton.click();
+  section.editElements.submitForm();
 
   expect(section).toBeInMode('show');
   expect(section.showElements.text).toHaveTextContent(itemText);
@@ -18,7 +18,7 @@ export function shouldAddACustomItem(section, itemText) {
 
   expect(section.editElements.list.itemsAsText).toEqual([itemText]);
 
-  section.editElements.saveButton.click();
+  section.editElements.submitForm();
 
   expect(section).toBeInMode('show');
   expect(section.showElements.text).toHaveTextContent(itemText);
@@ -32,7 +32,7 @@ export function shouldAddManyItems(section, itemTexts) {
 
   expect(section.editElements.list.itemsAsText).toEqual(itemTexts);
 
-  section.editElements.saveButton.click();
+  section.editElements.submitForm();
 
   const expectedTextContent = itemTexts.join(', ');
 
@@ -64,7 +64,7 @@ export function shouldDisplayAnErrorIfAddingDuplicate(section, itemText, expecte
 export function shouldDisplayAnErrorIfSavingWithUnaddedInputText(section, itemText, expectedItemType) {
   inputValueAndTriggerEvent(section.editElements.input, itemText);
 
-  section.editElements.saveButton.click();
+  section.editElements.submitForm();
 
   expect(section).toHaveError(
     section.editElements.input,
@@ -94,7 +94,7 @@ export function shouldAddAndRemoveItem(section, itemText) {
 
   expect(section.editElements.list.itemsAsText).toEqual([]);
 
-  section.editElements.saveButton.click();
+  section.editElements.submitForm();
 
   expect(section).toBeInMode('show');
   expect(section.showElements.text).toHaveTextContent('');
@@ -112,7 +112,7 @@ export function shouldDeleteOneOfThreeItems(section, initialItems, itemToDelete,
 
   expect(section.editElements.list.itemsAsText).toEqual(expectedItems);
 
-  section.editElements.saveButton.click();
+  section.editElements.submitForm();
 
   expect(section).toBeInMode('show');
   expect(section.showElements.text).toHaveTextContent(expectedItems.join(', '));
@@ -128,7 +128,7 @@ export function shouldReorderOneOfThreeItems(section, initialItems, fromIndex, t
 
   expect(section.editElements.list.itemsAsText).toEqual(expectedItems);
 
-  section.editElements.saveButton.click();
+  section.editElements.submitForm();
 
   expect(section).toBeInMode('show');
   expect(section.showElements.text).toHaveTextContent(expectedItems.join(', '));

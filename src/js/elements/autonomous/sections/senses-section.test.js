@@ -24,11 +24,7 @@ beforeEach(() => {
   sensesSection = new SensesSection();
   copyObjectProperties(sensesSection, SectionTestMixin);
   sensesSection.initializeCustomElements();
-  sensesSection.forceConnect();
-});
-
-afterEach(() => {
-  document.clear();
+  sensesSection.connect();
 });
 
 describe('when the show section is clicked', () => {
@@ -56,12 +52,12 @@ describe('when the show section is clicked', () => {
       expect(sensesSection.editElements.customText).toHaveFocus();
     });
 
-    describe('and the custom text field is populated and the save button is clicked', () => {
+    describe('and the custom text field is populated and the edit section is submitted', () => {
       it('should switch to show mode and save the custom text', () => {
         let customText = 'darkvision 120 ft. (penetrates magical darkness), passive Perception 13';
         inputValueAndTriggerEvent(sensesSection.editElements.customText, customText);
 
-        sensesSection.editElements.saveButton.click();
+        sensesSection.editElements.submitForm();
 
         expect(sensesSection).toBeInMode('show');
         expect(sensesSection.showElements.text).toHaveTextContent(customText);
@@ -70,7 +66,7 @@ describe('when the show section is clicked', () => {
       it('should display an error if the custom text field is blank', () => {
         inputValueAndTriggerEvent(sensesSection.editElements.customText, '');
 
-        sensesSection.editElements.saveButton.click();
+        sensesSection.editElements.submitForm();
 
         expect(sensesSection).toBeInMode('edit');
         expect(sensesSection).toHaveError(
@@ -96,7 +92,7 @@ describe('when the show section is clicked', () => {
       expect(sensesSection.editElements.blindsight).toHaveFocus();
     });
 
-    describe('and the senses fields are populated and the save button is clicked', () => {
+    describe('and the senses fields are populated and the edit section is submitted', () => {
       describe('should switch to show mode and save the fields in the following combinations:', () => {
         /* eslint-disable indent, no-unexpected-multiline */
         it.each
@@ -127,7 +123,7 @@ describe('when the show section is clicked', () => {
           inputValueAndTriggerEvent(sensesSection.editElements.tremorsense, tremorsense);
           inputValueAndTriggerEvent(sensesSection.editElements.truesight, truesight);
 
-          sensesSection.editElements.saveButton.click();
+          sensesSection.editElements.submitForm();
 
           expect(sensesSection).toBeInMode('show');
           expect(sensesSection.showElements.text).toHaveTextContent(expectedText);
