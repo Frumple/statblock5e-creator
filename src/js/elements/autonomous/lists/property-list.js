@@ -1,5 +1,8 @@
 import DragAndDropList from '/src/js/elements/autonomous/lists/drag-and-drop-list.js';
 
+import isRunningInNode from '/src/js/helpers/is-running-in-node.js';
+import PropertyListItem from '/src/js/elements/autonomous/lists/property-list-item.js';
+
 export default class PropertyList extends DragAndDropList {
   static get elementName() { return 'property-list'; }
   static get templatePaths() {
@@ -12,9 +15,12 @@ export default class PropertyList extends DragAndDropList {
     super(PropertyList.templatePaths);
   }
 
+  get items() {
+    return Array.from(this.children);
+  }
+
   get itemsAsText() {
-    let listItemElements = Array.from(this.querySelectorAll('property-list-item'));
-    return listItemElements.map(element => element.text);
+    return this.items.map(element => element.text);
   }
 
   contains(itemText) {
@@ -22,13 +28,20 @@ export default class PropertyList extends DragAndDropList {
   }
 
   addItem(itemText) {
-    let listItemElement = document.createElement('property-list-item');
-    listItemElement.text = itemText;
-    this.appendChild(listItemElement);
+    let listItem = PropertyList.createListItem();
+    listItem.list = this;
+    listItem.text = itemText;
+    this.appendChild(listItem);
   }
 
   findItem(itemText) {
-    let listItemElements = Array.from(this.querySelectorAll('property-list-item'));
-    return listItemElements.filter(element => element.text === itemText)[0];
-  }  
+    return this.items.filter(element => element.text === itemText)[0];
+  }
+
+  static createListItem() {
+    if (isRunningInNode) {
+      return new PropertyListItem();
+    }
+    return document.createElement('property-list-item');
+  }
 }

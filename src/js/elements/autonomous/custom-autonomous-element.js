@@ -55,6 +55,7 @@ class FakeCustomAutonomousElement {
 
   constructor(templatePaths) {
     this.dataset = new Map();
+    this._children = [];
 
     // Create an in-memory fake shadow root and append the HTML templates to its body
     this.shadowRoot = document.createDocumentFragment();
@@ -76,14 +77,31 @@ class FakeCustomAutonomousElement {
     this.connectedCallback();
   }
 
-  addEventListener(type, callback) {
-    // Since this element is fake, add the event listener to the fake shadow root on behalf of the element.
+  // Since this element is fake, add event listeners and dispatch events
+  // from the fake shadow root on behalf of the element.
+  addEventListener(type, callback) {    
     this.shadowRoot.addEventListener(type, callback);
   }
 
-  dispatchEvent(event) {
-    // Since this element is fake, dispatch the event from the fake shadow root on behalf of the element.
+  dispatchEvent(event) {    
     this.shadowRoot.dispatchEvent(event);
+  }
+
+  // Since this element is fake, non-shadow DOM child elements that are added
+  // to the element are stored in an internal array.
+  get children() {
+    return this._children;
+  }
+
+  appendChild(child) {
+    this._children.push(child);
+  }
+
+  removeChild(child) {
+    const index = this._children.indexOf(child);
+    if (index >= 0) {
+      this._children.splice(index, 1);
+    }
   }
 }
 

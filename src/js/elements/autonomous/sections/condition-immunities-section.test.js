@@ -99,7 +99,7 @@ describe('when the show section is clicked', () => {
   describe('and 3 items are in the list, one of the items is reordered, and the edit section is submitted', () => {
     describe('should show the items in correct order depending on which item was moved to what position', () => {
       /* eslint-disable indent, no-unexpected-multiline */
-      it.each
+      it.skip.each
       `
         description                         | fromIndex | toIndex | expectedItems
         ${'1st item moved to 2nd position'} | ${0}      | ${1}    | ${['petrified', 'paralyzed', 'poisoned']}

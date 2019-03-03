@@ -49,6 +49,6 @@ export default class PropertyListItem extends DragAndDropListItem {
     });
     this.dispatchEvent(removeEvent);
 
-    this.parentNode.removeChild(this);
+    this.list.removeChild(this);
   }
 }

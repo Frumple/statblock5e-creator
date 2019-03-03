@@ -1,4 +1,5 @@
 import DragAndDropListItem from '/src/js/elements/autonomous/lists/drag-and-drop-list-item.js';
+import CustomElementMixins from '/src/js/helpers/test/custom-element-mixins.js';
 
 export default class EditableBlockListItem extends DragAndDropListItem {
   static get elementName() { return 'editable-block-list-item'; }
@@ -11,11 +12,16 @@ export default class EditableBlockListItem extends DragAndDropListItem {
   constructor() {
     super(EditableBlockListItem.templatePaths);
 
+    this._itemType = null;
+
     this.nameElement = this.shadowRoot.getElementById('editable-block-list-item-name');
     this.textElement = this.shadowRoot.getElementById('editable-block-list-item-text');
     this.removeButton = this.shadowRoot.getElementById('editable-block-list-item-remove-button');
 
     this.dragImage = this.nameElement;
+
+    CustomElementMixins.applyToElement(this.nameElement);
+    CustomElementMixins.applyToElement(this.textElement);
   }
 
   connectedCallback() {
@@ -32,9 +38,15 @@ export default class EditableBlockListItem extends DragAndDropListItem {
     this.remove();
   }
 
-  setItemType(itemType) {
+  set itemType(itemType) {
+    this._itemType = itemType;
+
     this.nameElement.setAttribute('pretty-name', `${itemType} Name`);
     this.textElement.setAttribute('pretty-name', `${itemType} Text`);
+  }
+
+  get itemType() {
+    return this._itemType;
   }
 
   get name() {
@@ -59,6 +71,6 @@ export default class EditableBlockListItem extends DragAndDropListItem {
   }
 
   remove() {
-    this.parentNode.removeChild(this);
+    this.list.removeChild(this);
   }
 }

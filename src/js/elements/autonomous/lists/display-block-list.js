@@ -1,5 +1,8 @@
 import CustomAutonomousElement from '/src/js/elements/autonomous/custom-autonomous-element.js';
 
+import isRunningInNode from '/src/js/helpers/is-running-in-node.js';
+import DisplayBlockListItem from '/src/js/elements/autonomous/lists/editable-block-list-item.js';
+
 export default class DisplayBlockList extends CustomAutonomousElement {
   static get elementName() { return 'display-block-list'; }
   static get templatePaths() {
@@ -13,7 +16,7 @@ export default class DisplayBlockList extends CustomAutonomousElement {
   }
 
   get blocks() {
-    return Array.from(this.querySelectorAll('display-block-list-item'));
+    return Array.from(this.children);
   }
 
   clear() {
@@ -27,5 +30,12 @@ export default class DisplayBlockList extends CustomAutonomousElement {
     block.name = name;
     block.text = text;
     this.appendChild(block);
+  }
+
+  static createListItem() {
+    if (isRunningInNode) {
+      return new DisplayBlockListItem();
+    }
+    return document.createElement('display-block-list-item');
   }
 }

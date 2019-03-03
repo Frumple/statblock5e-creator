@@ -10,6 +10,8 @@ export default class DragAndDropListItem extends CustomAutonomousElement {
   constructor(templatePaths) {
     super(templatePaths);
 
+    this.list = null;
+
     this.container = this.shadowRoot.getElementById('drag-and-drop-list-item-container');
     this.dragHandle = this.shadowRoot.getElementById('drag-and-drop-list-item-drag-handle');
   }
@@ -33,7 +35,7 @@ export default class DragAndDropListItem extends CustomAutonomousElement {
     event.dataTransfer.setDragImage(this.dragImage, 0, 0);
 
     let target = event.target;
-    target.parentNode.draggedItem = target;
+    target.list.draggedItem = target;
   }
 
   onDragOverItem(event) {
@@ -41,7 +43,7 @@ export default class DragAndDropListItem extends CustomAutonomousElement {
 
     let target = event.target;
 
-    if (target.parentNode.draggedItem !== null) {
+    if (target.list.draggedItem !== null) {
       event.dataTransfer.dropEffect = 'move';
     
       let rect = target.getBoundingClientRect();
@@ -63,7 +65,7 @@ export default class DragAndDropListItem extends CustomAutonomousElement {
 
   onDragEndItem(event) {
     let target = event.target;
-    target.parentNode.draggedItem = null;
+    target.list.draggedItem = null;
   }
 
   onDropItem(event) {
@@ -71,10 +73,10 @@ export default class DragAndDropListItem extends CustomAutonomousElement {
 
     let target = event.target;
     if (target.dragoverRegion === 'top') {
-      target.parentNode.insertDraggedItemBefore(target);
+      target.list.insertDraggedItemBefore(target);
       target.dragoverRegion = 'none';
     } else if (target.dragoverRegion === 'bottom') {
-      target.parentNode.insertDraggedItemBefore(target.nextElementSibling);
+      target.list.insertDraggedItemBefore(target.nextElementSibling);
       target.dragoverRegion = 'none';
     }
   }
