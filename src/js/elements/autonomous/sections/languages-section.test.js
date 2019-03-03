@@ -1,8 +1,5 @@
 import LanguagesSection from '/src/js/elements/autonomous/sections/languages-section.js';
-import SectionTestMixin from '/src/js/helpers/test/section-test-mixin.js';
-
-import { copyObjectProperties } from '/src/js/helpers/object-helpers.js';
-import defineCustomElements from '/src/js/helpers/test/define-custom-elements.js';
+import * as TestCustomElements from '/src/js/helpers/test/test-custom-elements.js';
 
 import * as sharedSpecs from '/src/js/elements/autonomous/sections/property-list-section.specs.js';
 
@@ -11,14 +8,13 @@ const expectedItemType = 'Language';
 let languagesSection;
 
 beforeAll(async() => {
-  await defineCustomElements();
+  await TestCustomElements.define();
   await LanguagesSection.define();
 });
 
 beforeEach(() => {
   languagesSection = new LanguagesSection();
-  copyObjectProperties(languagesSection, SectionTestMixin);
-  languagesSection.initializeCustomElements();
+  TestCustomElements.initializeSection(languagesSection);
   languagesSection.connect();
 });
 

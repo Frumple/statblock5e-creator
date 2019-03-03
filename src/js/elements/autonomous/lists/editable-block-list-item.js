@@ -1,5 +1,5 @@
 import DragAndDropListItem from '/src/js/elements/autonomous/lists/drag-and-drop-list-item.js';
-import CustomElementMixins from '/src/js/helpers/test/custom-element-mixins.js';
+import CustomBuiltinElementMixins from '/src/js/helpers/custom-builtin-element-mixins.js';
 
 export default class EditableBlockListItem extends DragAndDropListItem {
   static get elementName() { return 'editable-block-list-item'; }
@@ -20,8 +20,8 @@ export default class EditableBlockListItem extends DragAndDropListItem {
 
     this.dragImage = this.nameElement;
 
-    CustomElementMixins.applyToElement(this.nameElement);
-    CustomElementMixins.applyToElement(this.textElement);
+    CustomBuiltinElementMixins.applyToElement(this.nameElement);
+    CustomBuiltinElementMixins.applyToElement(this.textElement);
   }
 
   connectedCallback() {

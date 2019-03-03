@@ -1,8 +1,5 @@
 import ConditionImmunitiesSection from '/src/js/elements/autonomous/sections/condition-immunities-section.js';
-import SectionTestMixin from '/src/js/helpers/test/section-test-mixin.js';
-
-import { copyObjectProperties } from '/src/js/helpers/object-helpers.js';
-import defineCustomElements from '/src/js/helpers/test/define-custom-elements.js';
+import * as TestCustomElements from '/src/js/helpers/test/test-custom-elements.js';
 
 import * as sharedSpecs from '/src/js/elements/autonomous/sections/property-list-section.specs.js';
 
@@ -11,14 +8,13 @@ const expectedItemType = 'Condition Immunity';
 let conditionImmunitiesSection;
 
 beforeAll(async() => {
-  await defineCustomElements();
+  await TestCustomElements.define();
   await ConditionImmunitiesSection.define();
 });
 
 beforeEach(() => {
   conditionImmunitiesSection = new ConditionImmunitiesSection();
-  copyObjectProperties(conditionImmunitiesSection, SectionTestMixin);
-  conditionImmunitiesSection.initializeCustomElements();
+  TestCustomElements.initializeSection(conditionImmunitiesSection);
   conditionImmunitiesSection.connect();
 });
 

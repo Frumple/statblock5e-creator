@@ -1,6 +1,6 @@
 import { copyObjectProperties } from '/src/js/helpers/object-helpers.js';
 
-class CustomElementMixins {
+class CustomBuiltinElementMixins {
   constructor() {
     this.mixins = new Map();
   }
@@ -23,4 +23,4 @@ class CustomElementMixins {
   }
 }
 
-export default new CustomElementMixins();
+export default new CustomBuiltinElementMixins();

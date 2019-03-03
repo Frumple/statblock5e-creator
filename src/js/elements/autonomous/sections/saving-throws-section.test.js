@@ -1,8 +1,6 @@
 import SavingThrowsSection from '/src/js/elements/autonomous/sections/saving-throws-section.js';
-import SectionTestMixin from '/src/js/helpers/test/section-test-mixin.js';
+import * as TestCustomElements from '/src/js/helpers/test/test-custom-elements.js';
 
-import { copyObjectProperties } from '/src/js/helpers/object-helpers.js';
-import defineCustomElements from '/src/js/helpers/test/define-custom-elements.js';
 import { inputValueAndTriggerEvent } from '/src/js/helpers/element-helpers.js';
 import { formatModifier } from '/src/js/helpers/string-formatter.js';
 
@@ -16,7 +14,7 @@ const singleSavingThrowUnderTest = 'intelligence';
 let savingThrowsSection;
 
 beforeAll(async() => {
-  await defineCustomElements();
+  await TestCustomElements.define();
   await SavingThrowsSection.define();
 });
 
@@ -26,8 +24,7 @@ beforeEach(() => {
   SavingThrows.reset();
 
   savingThrowsSection = new SavingThrowsSection();
-  copyObjectProperties(savingThrowsSection, SectionTestMixin);
-  savingThrowsSection.initializeCustomElements();
+  TestCustomElements.initializeSection(savingThrowsSection);
   savingThrowsSection.connect();
 });
 

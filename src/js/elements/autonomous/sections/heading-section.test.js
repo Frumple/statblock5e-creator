@@ -1,8 +1,6 @@
 import HeadingSection from '/src/js/elements/autonomous/sections/heading-section.js';
-import SectionTestMixin from '/src/js/helpers/test/section-test-mixin.js';
+import * as TestCustomElements from '/src/js/helpers/test/test-custom-elements.js';
 
-import { copyObjectProperties } from '/src/js/helpers/object-helpers.js';
-import defineCustomElements from '/src/js/helpers/test/define-custom-elements.js';
 import { inputValueAndTriggerEvent } from '/src/js/helpers/element-helpers.js';
 
 import Creature from '/src/js/stats/creature.js';
@@ -10,7 +8,7 @@ import Creature from '/src/js/stats/creature.js';
 let headingSection;
 
 beforeAll(async() => {
-  await defineCustomElements();
+  await TestCustomElements.define();
   await HeadingSection.define();
 });
 
@@ -18,8 +16,7 @@ beforeEach(() => {
   Creature.reset();
 
   headingSection = new HeadingSection();
-  copyObjectProperties(headingSection, SectionTestMixin);
-  headingSection.initializeCustomElements();
+  TestCustomElements.initializeSection(headingSection);
   headingSection.connect();
 });
 

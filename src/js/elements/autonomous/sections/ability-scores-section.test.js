@@ -1,8 +1,6 @@
 import AbilityScoresSection from '/src/js/elements/autonomous/sections/ability-scores-section.js';
-import SectionTestMixin from '/src/js/helpers/test/section-test-mixin.js';
+import * as TestCustomElements from '/src/js/helpers/test/test-custom-elements.js';
 
-import { copyObjectProperties } from '/src/js/helpers/object-helpers.js';
-import defineCustomElements from '/src/js/helpers/test/define-custom-elements.js';
 import { inputValueAndTriggerEvent } from '/src/js/helpers/element-helpers.js';
 import { formatModifier } from '/src/js/helpers/string-formatter.js';
 
@@ -12,7 +10,7 @@ import ProficiencyBonus from '/src/js/stats/proficiency-bonus.js';
 let abilityScoresSection;
 
 beforeAll(async() => {
-  await defineCustomElements();
+  await TestCustomElements.define();
   await AbilityScoresSection.define();
 });
 
@@ -21,8 +19,7 @@ beforeEach(() => {
   ProficiencyBonus.reset();
 
   abilityScoresSection = new AbilityScoresSection();
-  copyObjectProperties(abilityScoresSection, SectionTestMixin);
-  abilityScoresSection.initializeCustomElements();
+  TestCustomElements.initializeSection(abilityScoresSection);
   abilityScoresSection.connect();
 });
 

@@ -1,8 +1,6 @@
 import SkillsSection from '/src/js/elements/autonomous/sections/skills-section.js';
-import SectionTestMixin from '/src/js/helpers/test/section-test-mixin.js';
+import * as TestCustomElements from '/src/js/helpers/test/test-custom-elements.js';
 
-import { copyObjectProperties } from '/src/js/helpers/object-helpers.js';
-import defineCustomElements from '/src/js/helpers/test/define-custom-elements.js';
 import { inputValueAndTriggerEvent } from '/src/js/helpers/element-helpers.js';
 import { formatModifier } from '/src/js/helpers/string-formatter.js';
 
@@ -17,7 +15,7 @@ const singleAbilityUnderTest = 'intelligence';
 let skillsSection;
 
 beforeAll(async() => {
-  await defineCustomElements();
+  await TestCustomElements.define();
   await SkillsSection.define();
 });
 
@@ -27,8 +25,7 @@ beforeEach(() => {
   Skills.reset();
 
   skillsSection = new SkillsSection();
-  copyObjectProperties(skillsSection, SectionTestMixin);
-  skillsSection.initializeCustomElements();
+  TestCustomElements.initializeSection(skillsSection);
   skillsSection.connect();
 });
 

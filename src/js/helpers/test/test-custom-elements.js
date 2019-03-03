@@ -1,3 +1,6 @@
+import CustomBuiltinElementMixins from '/src/js/helpers/custom-builtin-element-mixins.js';
+import { traverseElements } from '/src/js/helpers/element-helpers.js';
+
 import CustomTextArea from '/src/js/elements/builtin/custom-textarea.js';
 import EnableDisableElementsCheckbox from '/src/js/elements/builtin/enable-disable-elements-checkbox.js';
 import IntegerInput from '/src/js/elements/builtin/integer-input.js';
@@ -12,7 +15,7 @@ import DisplayBlockListItem from '/src/js/elements/autonomous/lists/display-bloc
 import EditableBlockList from '/src/js/elements/autonomous/lists/editable-block-list.js';
 import EditableBlockListItem from '/src/js/elements/autonomous/lists/editable-block-list-item.js';
 
-export default async function defineCustomElements() {
+export async function define() {
   const customElements = [];
 
   customElements.push(CustomTextArea);
@@ -31,5 +34,31 @@ export default async function defineCustomElements() {
 
   for (const element of customElements) {
     await element.define();
+  }
+}
+
+export function initializeSection(section) {
+  replaceWithFakes(section);
+
+  traverseElements(section.editElements, 3, (element) => {
+    CustomBuiltinElementMixins.applyToElement(element);
+  });
+}
+
+function replaceWithFakes(section) {
+  if (section.errorMessages && section.errorMessages.tagName === 'ERROR-MESSAGES') {
+    section.errorMessages = new ErrorMessages();
+  }
+
+  if (section.editElements.list && section.editElements.list.tagName === 'PROPERTY-LIST') {
+    section.editElements.list = new PropertyList();
+  }
+
+  if (section.showElements.displayList && section.showElements.displayList.tagName === 'DISPLAY-BLOCK-LIST') {
+    section.showElements.displayList = new DisplayBlockList();
+  }
+
+  if (section.editElements.editableList && section.editElements.editableList.tagName === 'EDITABLE-BLOCK-LIST') {
+    section.editElements.editableList = new EditableBlockList();
   }
 }

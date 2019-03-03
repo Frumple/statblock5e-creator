@@ -1,8 +1,5 @@
 import ReactionsSection from '/src/js/elements/autonomous/sections/reactions-section.js';
-import SectionTestMixin from '/src/js/helpers/test/section-test-mixin.js';
-
-import { copyObjectProperties } from '/src/js/helpers/object-helpers.js';
-import defineCustomElements from '/src/js/helpers/test/define-custom-elements.js';
+import * as TestCustomElements from '/src/js/helpers/test/test-custom-elements.js';
 
 import * as sharedSpecs from '/src/js/elements/autonomous/sections/block-list-section.specs.js';
 
@@ -11,14 +8,13 @@ const expectedItemType = 'Reaction';
 let reactionsSection;
 
 beforeAll(async() => {
-  await defineCustomElements();
+  await TestCustomElements.define();
   await ReactionsSection.define();
 });
 
 beforeEach(() => {
   reactionsSection = new ReactionsSection();
-  copyObjectProperties(reactionsSection, SectionTestMixin);
-  reactionsSection.initializeCustomElements();
+  TestCustomElements.initializeSection(reactionsSection);
   reactionsSection.connect();
 });
 

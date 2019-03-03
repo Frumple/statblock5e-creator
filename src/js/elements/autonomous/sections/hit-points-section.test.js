@@ -1,8 +1,6 @@
 import HitPointsSection from '/src/js/elements/autonomous/sections/hit-points-section.js';
-import SectionTestMixin from '/src/js/helpers/test/section-test-mixin.js';
+import * as TestCustomElements from '/src/js/helpers/test/test-custom-elements.js';
 
-import { copyObjectProperties } from '/src/js/helpers/object-helpers.js';
-import defineCustomElements from '/src/js/helpers/test/define-custom-elements.js';
 import { inputValueAndTriggerEvent } from '/src/js/helpers/element-helpers.js';
 import { formatModifierOperator, formatModifierNumber } from '/src/js/helpers/string-formatter.js';
 
@@ -12,7 +10,7 @@ import HitPoints from '/src/js/stats/hit-points.js';
 let hitPointsSection;
 
 beforeAll(async() => {
-  await defineCustomElements();
+  await TestCustomElements.define();
   await HitPointsSection.define();
 });
 
@@ -21,8 +19,7 @@ beforeEach(() => {
   HitPoints.reset();
   
   hitPointsSection = new HitPointsSection();
-  copyObjectProperties(hitPointsSection, SectionTestMixin);
-  hitPointsSection.initializeCustomElements();
+  TestCustomElements.initializeSection(hitPointsSection);
   hitPointsSection.connect();
 });
 

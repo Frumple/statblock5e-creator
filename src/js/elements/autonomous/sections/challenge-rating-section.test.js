@@ -1,21 +1,18 @@
 import ChallengeRatingSection from '/src/js/elements/autonomous/sections/challenge-rating-section.js';
-import SectionTestMixin from '/src/js/helpers/test/section-test-mixin.js';
+import * as TestCustomElements from '/src/js/helpers/test/test-custom-elements.js';
 
-import { copyObjectProperties } from '/src/js/helpers/object-helpers.js';
-import defineCustomElements from '/src/js/helpers/test/define-custom-elements.js';
 import { inputValueAndTriggerEvent } from '/src/js/helpers/element-helpers.js';
 
 let challengeRatingSection;
 
 beforeAll(async() => {
-  await defineCustomElements();
+  await TestCustomElements.define();
   await ChallengeRatingSection.define();
 });
 
 beforeEach(() => {
   challengeRatingSection = new ChallengeRatingSection();
-  copyObjectProperties(challengeRatingSection, SectionTestMixin);
-  challengeRatingSection.initializeCustomElements();
+  TestCustomElements.initializeSection(challengeRatingSection);
   challengeRatingSection.connect();
 });
 

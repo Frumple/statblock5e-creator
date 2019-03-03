@@ -1,8 +1,6 @@
 import SensesSection from '/src/js/elements/autonomous/sections/senses-section.js';
-import SectionTestMixin from '/src/js/helpers/test/section-test-mixin.js';
+import * as TestCustomElements from '/src/js/helpers/test/test-custom-elements.js';
 
-import { copyObjectProperties } from '/src/js/helpers/object-helpers.js';
-import defineCustomElements from '/src/js/helpers/test/define-custom-elements.js';
 import { inputValueAndTriggerEvent } from '/src/js/helpers/element-helpers.js';
 
 import Abilities from '/src/js/stats/abilities.js';
@@ -12,7 +10,7 @@ import Skills from '/src/js/stats/skills.js';
 let sensesSection;
 
 beforeAll(async() => {
-  await defineCustomElements();
+  await TestCustomElements.define();
   await SensesSection.define();
 });
 
@@ -22,8 +20,7 @@ beforeEach(() => {
   Skills.reset();
 
   sensesSection = new SensesSection();
-  copyObjectProperties(sensesSection, SectionTestMixin);
-  sensesSection.initializeCustomElements();
+  TestCustomElements.initializeSection(sensesSection);
   sensesSection.connect();
 });
 
