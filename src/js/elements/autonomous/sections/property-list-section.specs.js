@@ -4,7 +4,7 @@ export function shouldAddASuggestedItem(section, itemText) {
   inputValueAndTriggerEvent(section.editElements.input, itemText);
   section.editElements.addButton.click();
 
-  expect(section.editElements.list.itemsAsText).toEqual([itemText]);
+  expect(section.editElements.propertyList.itemsAsText).toEqual([itemText]);
 
   section.editElements.submitForm();
 
@@ -16,7 +16,7 @@ export function shouldAddACustomItem(section, itemText) {
   inputValueAndTriggerEvent(section.editElements.input, itemText);      
   section.editElements.addButton.click();
 
-  expect(section.editElements.list.itemsAsText).toEqual([itemText]);
+  expect(section.editElements.propertyList.itemsAsText).toEqual([itemText]);
 
   section.editElements.submitForm();
 
@@ -30,7 +30,7 @@ export function shouldAddManyItems(section, itemTexts) {
     section.editElements.addButton.click();
   }
 
-  expect(section.editElements.list.itemsAsText).toEqual(itemTexts);
+  expect(section.editElements.propertyList.itemsAsText).toEqual(itemTexts);
 
   section.editElements.submitForm();
 
@@ -75,11 +75,11 @@ export function shouldRemoveAndAddSuggestions(section, itemText) {
   inputValueAndTriggerEvent(section.editElements.input, itemText);
   section.editElements.addButton.click();
 
-  let datalist = section.editElements.datalist;
-  let option = datalist.findOption(itemText);
+  let dataList = section.editElements.dataList;
+  let option = dataList.findOption(itemText);
   expect(option).toHaveAttribute('disabled');
 
-  let item = section.editElements.list.findItem(itemText);
+  let item = section.editElements.propertyList.findItem(itemText);
   item.remove();
 
   expect(option).not.toHaveAttribute('disabled');
@@ -89,10 +89,10 @@ export function shouldAddAndRemoveItem(section, itemText) {
   inputValueAndTriggerEvent(section.editElements.input, itemText);
   section.editElements.addButton.click();
 
-  let item = section.editElements.list.findItem(itemText);
+  let item = section.editElements.propertyList.findItem(itemText);
   item.remove();
 
-  expect(section.editElements.list.itemsAsText).toEqual([]);
+  expect(section.editElements.propertyList.itemsAsText).toEqual([]);
 
   section.editElements.submitForm();
 
@@ -107,10 +107,10 @@ export function shouldDeleteOneOfThreeItems(section, initialItems, itemToDelete,
     section.editElements.addButton.click();
   }
 
-  let item = section.editElements.list.findItem(itemToDelete);
+  let item = section.editElements.propertyList.findItem(itemToDelete);
   item.remove();
 
-  expect(section.editElements.list.itemsAsText).toEqual(expectedItems);
+  expect(section.editElements.propertyList.itemsAsText).toEqual(expectedItems);
 
   section.editElements.submitForm();
 

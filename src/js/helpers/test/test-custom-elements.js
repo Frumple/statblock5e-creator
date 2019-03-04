@@ -50,8 +50,8 @@ function replaceWithFakes(section) {
     section.errorMessages = new ErrorMessages();
   }
 
-  if (section.editElements.list && section.editElements.list.tagName === 'PROPERTY-LIST') {
-    section.editElements.list = new PropertyList();
+  if (section.editElements.propertyList && section.editElements.propertyList.tagName === 'PROPERTY-LIST') {
+    section.editElements.propertyList = new PropertyList();
   }
 
   if (section.showElements.displayList && section.showElements.displayList.tagName === 'DISPLAY-BLOCK-LIST') {

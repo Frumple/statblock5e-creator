@@ -38,7 +38,7 @@ export default class PropertyListSection extends sectionModule.Section {
 
   onPropertyListItemRemoved(event) {
     let itemText = event.detail.itemText;
-    this.editElements.datalist.setOptionEnabled(itemText, true);
+    this.editElements.dataList.setOptionEnabled(itemText, true);
   }
 
   addItemFromInput() {
@@ -48,7 +48,7 @@ export default class PropertyListSection extends sectionModule.Section {
     this.errorMessages.clear();
     if (text === '') {
       this.errorMessages.add(this.editElements.input, `Cannot add a blank ${this.itemType}.`);
-    } else if(this.editElements.list.contains(text)) {
+    } else if(this.editElements.propertyList.contains(text)) {
       this.errorMessages.add(this.editElements.input, `Cannot add a duplicate ${this.itemType}.`);
     }
     if (this.errorMessages.any) {
@@ -63,8 +63,8 @@ export default class PropertyListSection extends sectionModule.Section {
   }
 
   addItem(text) {
-    this.editElements.list.addItem(text);
-    this.editElements.datalist.setOptionEnabled(text, false);
+    this.editElements.propertyList.addItem(text);
+    this.editElements.dataList.setOptionEnabled(text, false);
   }
 
   checkForErrors() {
@@ -79,7 +79,7 @@ export default class PropertyListSection extends sectionModule.Section {
     this.editElements.input.value = '';
 
     let text = '';
-    for (const itemText of this.editElements.list.itemsAsText) {
+    for (const itemText of this.editElements.propertyList.itemsAsText) {
       if (text === '') {
         text += itemText;
       } else {
@@ -117,8 +117,8 @@ class PropertyListEditElements extends sectionModule.EditElements {
     this.label = shadowRoot.getElementById('property-list-label');
     this.input = shadowRoot.getElementById('property-list-input');
     this.addButton = shadowRoot.getElementById('property-list-add-button');
-    this.list = shadowRoot.getElementById('property-list');
-    this.datalist = shadowRoot.getElementById('property-list-datalist');
+    this.propertyList = shadowRoot.getElementById('property-list');
+    this.dataList = shadowRoot.getElementById('property-list-datalist');
   }
   
   get initiallySelectedElement() {
