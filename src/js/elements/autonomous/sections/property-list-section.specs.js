@@ -117,19 +117,3 @@ export function shouldDeleteOneOfThreeItems(section, initialItems, itemToDelete,
   expect(section).toBeInMode('show');
   expect(section.showElements.text).toHaveTextContent(expectedItems.join(', '));
 }
-
-export function shouldReorderOneOfThreeItems(section, initialItems, fromIndex, toIndex, expectedItems) {
-  for (const item of initialItems) {
-    inputValueAndTriggerEvent(section.editElements.input, item);
-    section.editElements.addButton.click();
-  }
-
-  section.editElements.list.moveItem(fromIndex, toIndex);
-
-  expect(section.editElements.list.itemsAsText).toEqual(expectedItems);
-
-  section.editElements.submitForm();
-
-  expect(section).toBeInMode('show');
-  expect(section.showElements.text).toHaveTextContent(expectedItems.join(', '));
-}

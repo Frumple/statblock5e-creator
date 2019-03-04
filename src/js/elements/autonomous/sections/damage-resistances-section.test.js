@@ -91,26 +91,4 @@ describe('when the show section is clicked', () => {
       /* eslint-enable indent, no-unexpected-multiline */
     });
   });
-
-  describe('and 3 items are in the list, one of the items is reordered, and the edit section is submitted', () => {
-    describe('should show the items in correct order depending on which item was moved to what position', () => {
-      /* eslint-disable indent, no-unexpected-multiline */
-      it.skip.each
-      `
-        description                         | fromIndex | toIndex | expectedItems
-        ${'1st item moved to 2nd position'} | ${0}      | ${1}    | ${['piercing', 'bludgeoning', 'slashing']}
-        ${'1st item moved to 3rd position'} | ${0}      | ${2}    | ${['piercing', 'slashing', 'bludgeoning']}
-        ${'2nd item moved to 1st position'} | ${1}      | ${0}    | ${['piercing', 'bludgeoning', 'slashing']}
-        ${'2nd item moved to 3rd position'} | ${1}      | ${2}    | ${['bludgeoning', 'slashing', 'piercing']}
-        ${'3rd item moved to 1st position'} | ${2}      | ${0}    | ${['slashing', 'bludgeoning', 'piercing']}
-        ${'3rd item moved to 2nd position'} | ${2}      | ${1}    | ${['bludgeoning', 'slashing', 'piercing']}
-      `
-      ('$description: {fromIndex="$fromIndex", toIndex="$toIndex"} => $expectedItems',
-      ({fromIndex, toIndex, expectedItems}) => {
-        const initialItems = ['bludgeoning', 'piercing', 'slashing'];
-        sharedSpecs.shouldReorderOneOfThreeItems(damageResistancesSection, initialItems, fromIndex, toIndex, expectedItems);
-      });
-      /* eslint-enable indent, no-unexpected-multiline */
-    });
-  });
 });
