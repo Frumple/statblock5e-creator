@@ -18,6 +18,10 @@
   flex-direction: row;
 }
 
+.property-list-edit-section__input {
+  flex: 1 1 auto;
+}
+
 .property-list-edit-section__add-button {
   margin-left: 5px;
   margin-right: 4px;
