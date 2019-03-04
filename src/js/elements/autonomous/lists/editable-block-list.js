@@ -25,6 +25,10 @@ export default class EditableBlockList extends DragAndDropList {
     const listItem = EditableBlockList.createListItem(); 
     listItem.list = this;
     listItem.itemType = itemType;
+    if (isRunningInNode) {
+      listItem.connect();
+    }
+
     this.appendChild(listItem);
 
     focusAndSelectElement(listItem.nameElement);

@@ -31,6 +31,10 @@ export default class PropertyList extends DragAndDropList {
     let listItem = PropertyList.createListItem();
     listItem.list = this;
     listItem.text = itemText;
+    if (isRunningInNode) {
+      listItem.connect();
+    }
+
     this.appendChild(listItem);
   }
 

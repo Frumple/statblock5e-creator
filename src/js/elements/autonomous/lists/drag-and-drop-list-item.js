@@ -11,6 +11,7 @@ export default class DragAndDropListItem extends CustomAutonomousElement {
     super(templatePaths);
 
     this.list = null;
+    this.dragImage = null;
 
     this.container = this.shadowRoot.getElementById('drag-and-drop-list-item-container');
     this.dragHandle = this.shadowRoot.getElementById('drag-and-drop-list-item-drag-handle');
@@ -20,39 +21,35 @@ export default class DragAndDropListItem extends CustomAutonomousElement {
     this.dragHandle.style.cssText = 'user-select: none; -webkit-user-drag: element;';
     this.dragHandle.setAttribute('draggable', 'true');
 
-    this.addEventListener('dragstart', this.onDragStartItem);
-    this.addEventListener('dragover', this.onDragOverItem);
-    this.addEventListener('dragleave', this.onDragLeaveItem);
-    this.addEventListener('dragend', this.onDragEndItem);
-    this.addEventListener('drop', this.onDropItem);
+    this.addEventListener('dragstart', this.onDragStartItem.bind(this));
+    this.addEventListener('dragover', this.onDragOverItem.bind(this));
+    this.addEventListener('dragleave', this.onDragLeaveItem.bind(this));
+    this.addEventListener('dragend', this.onDragEndItem.bind(this));
+    this.addEventListener('drop', this.onDropItem.bind(this));
   }
 
   onDragStartItem(event) {
     // Drag and Drop on Firefox only works if data is set
     event.dataTransfer.setData('text', '');
 
-    // Don't show any image of the element when dragging
-    event.dataTransfer.setDragImage(this.dragImage, 0, 0);
+    event.dataTransfer.setDragImage(this.dragImage, 0, 0);    
 
-    let target = event.target;
-    target.list.draggedItem = target;
+    this.list.draggedItem = event.target;
   }
 
   onDragOverItem(event) {
     event.preventDefault();
 
-    let target = event.target;
-
-    if (target.list.draggedItem !== null) {
+    if (this.list.draggedItem !== null) {
       event.dataTransfer.dropEffect = 'move';
     
-      let rect = target.getBoundingClientRect();
+      let rect = event.target.getBoundingClientRect();
       let midpointY = rect.y + (rect.height / 2);
 
       if (event.clientY < midpointY) {
-        target.dragoverRegion = 'top';
+        this.dragoverRegion = 'top';
       } else {
-        target.dragoverRegion = 'bottom';
+        this.dragoverRegion = 'bottom';
       }
     } else {
       event.dataTransfer.dropEffect = 'none';
@@ -63,21 +60,19 @@ export default class DragAndDropListItem extends CustomAutonomousElement {
     this.dragoverRegion = 'none';
   }
 
-  onDragEndItem(event) {
-    let target = event.target;
-    target.list.draggedItem = null;
+  onDragEndItem() {
+    this.list.draggedItem = null;
   }
 
   onDropItem(event) {
     event.preventDefault();
 
-    let target = event.target;
-    if (target.dragoverRegion === 'top') {
-      target.list.insertDraggedItemBefore(target);
-      target.dragoverRegion = 'none';
-    } else if (target.dragoverRegion === 'bottom') {
-      target.list.insertDraggedItemBefore(target.nextElementSibling);
-      target.dragoverRegion = 'none';
+    if (this.dragoverRegion === 'top') {
+      this.list.insertDraggedItemBefore(this);
+      this.dragoverRegion = 'none';
+    } else if (this.dragoverRegion === 'bottom') {
+      this.list.insertDraggedItemBefore(this.nextElementSibling);
+      this.dragoverRegion = 'none';
     }
   }
 

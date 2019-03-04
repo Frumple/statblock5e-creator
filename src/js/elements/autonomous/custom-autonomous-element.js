@@ -103,6 +103,12 @@ class FakeCustomAutonomousElement {
       this._children.splice(index, 1);
     }
   }
+
+  insertBefore(newNode, referenceNode) {
+    const newNodeIndex = this._children.indexOf(newNode);
+    const referenceNodeIndex = this._children.indexOf(referenceNode);
+    this._children.splice(referenceNodeIndex, 0, this._children.splice(newNodeIndex, 1)[0]);
+  }
 }
 
 let elementClass;
