@@ -9,7 +9,9 @@
     <label id="empty-label" class="block-list-section__empty-label">Reactions</label>
     <display-block-list id="display-list"></display-block-list>
   </div>
-  <button id="edit-button" class="default-button section__action section__action_hidden"><i class="material-icons">edit</i></button>
+  <div class="section__action-container">
+    <button id="edit-button" class="default-button section__action section__action_hidden"><i class="material-icons">edit</i></button>
+  </div>
 </div>
 
 <form id="edit-section" class="section section_hidden" novalidate>
@@ -19,5 +21,7 @@
     </div>
     <editable-block-list id="editable-list"></editable-block-list>
   </div>
-  <button id="save-button" class="default-button section__action"><i class="material-icons">done</i></button>
+  <div class="section__action-container">
+    <button id="save-button" class="default-button section__action"><i class="material-icons">done</i></button>
+  </div>
 </form>

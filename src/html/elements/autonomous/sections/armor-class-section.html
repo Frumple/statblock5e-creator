@@ -9,7 +9,9 @@
       <p id="armor-class-text">10</p>
     </property-line>
   </div>
-  <button id="edit-button" class="default-button section__action section__action_hidden"><i class="material-icons">edit</i></button>
+  <div class="section__action-container">
+    <button id="edit-button" class="default-button section__action section__action_hidden"><i class="material-icons">edit</i></button>
+  </div>
 </div>
 
 <form id="edit-section" class="section section_hidden" novalidate>
@@ -41,5 +43,7 @@
     <label id="custom-label" class="armor-class-edit-section__use-custom-label" for="use-custom-input">Override with custom text:</label>
     <input id="custom-input" class="armor-class-edit-section__custom-input section__text-input" is="text-input" type="text" name="armor-class-custom" pretty-name="Armor Class Custom Text" required disabled />
   </div>
-  <button id="save-button" class="default-button section__action"><i class="material-icons">done</i></button>
+  <div class="section__action-container">
+    <button id="save-button" class="default-button section__action"><i class="material-icons">done</i></button>
+  </div>
 </form>

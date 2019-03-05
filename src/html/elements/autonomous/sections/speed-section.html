@@ -9,7 +9,9 @@
       <p id="speed-text">30 ft.</p>
     </property-line>
   </div>
-  <button id="edit-button" class="default-button section__action section__action_hidden"><i class="material-icons">edit</i></button>
+  <div class="section__action-container">
+    <button id="edit-button" class="default-button section__action section__action_hidden"><i class="material-icons">edit</i></button>
+  </div>
 </div>
 
 <form id="edit-section" class="section section_hidden" novalidate>
@@ -42,5 +44,7 @@
     <label id="custom-label" class="speed-edit-section__custom-label" for="use-custom-input">Override with custom text:</label>
     <input id="custom-input" class="speed-edit-section__custom-input section__text-input" is="text-input" type="text" name="speed-custom" pretty-name="Speed Custom Text" required disabled />
   </div>
-  <button id="save-button" class="default-button section__action"><i class="material-icons">done</i></button>
+  <div class="section__action-container">
+    <button id="save-button" class="default-button section__action"><i class="material-icons">done</i></button>
+  </div>
 </form>
