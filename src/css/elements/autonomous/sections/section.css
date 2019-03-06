@@ -74,7 +74,6 @@
 }
 
 .section__action-container {
-  flex: 0 0 40px;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -83,6 +82,7 @@
 
 .section__action {  
   flex: 1 1 auto;
+  width: 40px;
   max-width: 40px;
   max-height: 40px;  
 }
