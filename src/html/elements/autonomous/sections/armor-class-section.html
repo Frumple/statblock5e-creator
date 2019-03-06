@@ -16,32 +16,38 @@
 
 <form id="edit-section" class="section section_hidden" novalidate>
   <div class="armor-class-edit-section section__content">
-    <label id="armor-class-label" class="armor-class-section__armor-class-label section__header-label" for="armor-class-input">Armor Class:</label>
-    <input id="armor-class-input" class="armor-class-edit-section__armor-class-input section__number-input section__small-number-input" is="integer-input" type="number" name="armor-class" pretty-name="Armor Class" value="10" min="0" max="999" required />
-    <label id="armor-type-label" class="armor-class-edit-section__armor-type-label" for="armor-type-input">Armor Type:</label>
-    <input id="armor-type-input" class="armor-class-edit-section__armor-type-input section__text-input" is="text-input" type="text" name="armor-type" list="armor-type-list" />
-    <datalist id="armor-type-list">
-      <option value="armor scraps" />
-      <option value="breastplate" />
-      <option value="chain mail" />
-      <option value="chain shirt" />
-      <option value="half plate" />
-      <option value="hide armor" />
-      <option value="leather armor" />
-      <option value="natural armor" />
-      <option value="padded armor" />
-      <option value="patchwork armor" />
-      <option value="plate" />
-      <option value="ring mail" />
-      <option value="scale mail" />
-      <option value="splint" />
-      <option value="studded leather" />
-    </datalist>
-    <input id="shield-input" class="armor-class-edit-section__shield-input" type="checkbox" name="armor-class-shield" />
-    <label id="shield-label" class="armor-class-edit-section__shield-label" for="shield-input">shield</label>
-    <input id="use-custom-input" class="armor-class-edit-section__use-custom-input" is="enable-disable-elements-checkbox" type="checkbox" name="armor-class-use-custom" />
-    <label id="custom-label" class="armor-class-edit-section__use-custom-label" for="use-custom-input">Override with custom text:</label>
-    <input id="custom-input" class="armor-class-edit-section__custom-input section__text-input" is="text-input" type="text" name="armor-class-custom" pretty-name="Armor Class Custom Text" required disabled />
+    <div class="armor-class-edit-section__armor-class-container">
+      <label id="armor-class-label" class="armor-class-edit-section__armor-class-label section__header-label" for="armor-class-input">Armor Class:</label>
+      <input id="armor-class-input" class="armor-class-edit-section__armor-class-input section__number-input section__small-number-input" is="integer-input" type="number" name="armor-class" pretty-name="Armor Class" value="10" min="0" max="999" required />
+    </div>
+    <div class="armor-class-edit-section__armor-type-container">
+      <label id="armor-type-label" class="armor-class-edit-section__armor-type-label" for="armor-type-input">Armor Type:</label>
+      <input id="armor-type-input" class="armor-class-edit-section__armor-type-input section__text-input" is="text-input" type="text" name="armor-type" list="armor-type-list" />
+      <datalist id="armor-type-list">
+        <option value="armor scraps" />
+        <option value="breastplate" />
+        <option value="chain mail" />
+        <option value="chain shirt" />
+        <option value="half plate" />
+        <option value="hide armor" />
+        <option value="leather armor" />
+        <option value="natural armor" />
+        <option value="padded armor" />
+        <option value="patchwork armor" />
+        <option value="plate" />
+        <option value="ring mail" />
+        <option value="scale mail" />
+        <option value="splint" />
+        <option value="studded leather" />
+      </datalist>
+      <input id="shield-input" class="armor-class-edit-section__shield-input" type="checkbox" name="armor-class-shield" />
+      <label id="shield-label" class="armor-class-edit-section__shield-label" for="shield-input">shield</label>
+    </div>
+    <div class="armor-class-edit-section__custom-container">
+      <input id="use-custom-input" class="armor-class-edit-section__use-custom-input" is="enable-disable-elements-checkbox" type="checkbox" name="armor-class-use-custom" />
+      <label id="custom-label" class="armor-class-edit-section__use-custom-label" for="use-custom-input">Override with custom text:</label>
+      <input id="custom-input" class="armor-class-edit-section__custom-input section__text-input" is="text-input" type="text" name="armor-class-custom" pretty-name="Armor Class Custom Text" required disabled />
+    </div>
   </div>
   <div class="section__action-container">
     <button id="save-button" class="default-button section__action"><i class="material-icons">done</i></button>

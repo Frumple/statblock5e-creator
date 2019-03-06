@@ -61,13 +61,6 @@
   margin-left: 5px;
 }
 
-.heading-edit-section__proper-noun-container {
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  margin-left: 10px;
-}
-
 .heading-edit-section__proper-noun-help-tooltip {
   --help-tooltip-width: 35em;
   margin-left: 5px;

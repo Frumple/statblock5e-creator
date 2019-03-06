@@ -3,27 +3,56 @@
 }
 
 .armor-class-edit-section {
-  display: grid;
-  grid-template-columns: 90px auto 25px 50px;
-  grid-template-rows: auto 5px auto 5px auto auto;
-  grid-column-gap: 5px;
+  display: flex;
+  flex-direction: column;
+  /* grid-template-columns: 90px auto 25px 50px;
+  grid-template-rows: auto 5px auto 5px auto auto; */
+}
+
+.armor-class-edit-section__armor-class-container {
+  display: flex;
+  flex-direction: row;
   align-items: center;
 }
 
-.armor-class-edit-section__armor-class-label { grid-area: 1 / 1; }
-.armor-class-edit-section__armor-class-input { grid-area: 1 / 2; }
-
-.armor-class-edit-section__armor-type-label { grid-area: 3 / 1; }
-.armor-class-edit-section__armor-type-input { grid-area: 3 / 2; }
-.armor-class-edit-section__shield-input {
-  grid-area: 3 / 3;
-  justify-self: end;
+.armor-class-edit-section__armor-class-label {
+  flex: 0 0 95px;
 }
-.armor-class-edit-section__shield-label { grid-area: 3 / 4; }
+
+.armor-class-edit-section__armor-type-container {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  margin-top: 5px;
+}
+
+.armor-class-edit-section__armor-type-label {
+  flex: 0 0 95px;
+}
+
+.armor-class-edit-section__armor-type-input {
+  flex: 1 1 auto;
+}
+
+.armor-class-edit-section__shield-input {
+  flex: 1 1 auto;
+}
+
+.armor-class-edit-section__shield-label {
+  flex: 1 1 auto;
+}
+
+.armor-class-edit-section__custom-container {
+  display: grid;
+  grid-template-columns: 90px auto;
+  grid-template-rows: auto auto;
+  grid-column-gap: 5px;
+  margin-top: 5px;
+}
 
 .armor-class-edit-section__use-custom-input {
-  grid-area: 5 / 1;
+  grid-area: 1 / 1;
   justify-self: end;
 }
-.armor-class-edit-section__use-custom-label { grid-area: 5 / 2 / 6 / 5; }
-.armor-class-edit-section__custom-input { grid-area: 6 / 2 / 7 / 5; }
+.armor-class-edit-section__use-custom-label { grid-area: 1 / 2; }
+.armor-class-edit-section__custom-input { grid-area: 2 / 2; }
