@@ -1,7 +1,7 @@
-import * as sectionModule from '/src/js/elements/autonomous/sections/section.js';
-import Abilities from '/src/js/stats/abilities.js';
-import ProficiencyBonus from '/src/js/stats/proficiency-bonus.js';
-import { formatModifier } from '/src/js/helpers/string-formatter.js';
+import * as sectionModule from './section.js';
+import Abilities from '../../../stats/abilities.js';
+import ProficiencyBonus from '../../../stats/proficiency-bonus.js';
+import { formatModifier } from '../../../helpers/string-formatter.js';
 
 export default class AbilityScoresSection extends sectionModule.Section {
   static get elementName() { return 'ability-scores-section'; }

@@ -1,5 +1,5 @@
-import CustomAutonomousElement from '/src/js/elements/autonomous/custom-autonomous-element.js';
-import GlobalOptions from '/src/js/helpers/global-options.js';
+import CustomAutonomousElement from '../custom-autonomous-element.js';
+import GlobalOptions from '../../../helpers/global-options.js';
 
 export default class StatBlockEditor extends CustomAutonomousElement {
   static get elementName() { return 'stat-block-editor'; }

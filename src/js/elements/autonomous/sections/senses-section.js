@@ -1,5 +1,5 @@
-import * as sectionModule from '/src/js/elements/autonomous/sections/section.js';
-import Skills from '/src/js/stats/skills.js';
+import * as sectionModule from './section.js';
+import Skills from '../../../stats/skills.js';
 
 export default class SensesSection extends sectionModule.Section {
   static get elementName() { return 'senses-section'; }

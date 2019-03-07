@@ -1,6 +1,6 @@
-import * as sectionModule from '/src/js/elements/autonomous/sections/section.js';
-import HitPoints from '/src/js/stats/hit-points.js';
-import { formatModifierOperator, formatModifierNumber } from '/src/js/helpers/string-formatter.js';
+import * as sectionModule from './section.js';
+import HitPoints from '../../../stats/hit-points.js';
+import { formatModifierOperator, formatModifierNumber } from '../../../helpers/string-formatter.js';
 
 export default class HitPointsSection extends sectionModule.Section {
   static get elementName() { return 'hit-points-section'; }

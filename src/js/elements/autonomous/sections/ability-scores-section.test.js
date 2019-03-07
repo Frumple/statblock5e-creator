@@ -1,11 +1,11 @@
-import AbilityScoresSection from '/src/js/elements/autonomous/sections/ability-scores-section.js';
-import * as TestCustomElements from '/src/js/helpers/test/test-custom-elements.js';
+import AbilityScoresSection from './ability-scores-section.js';
+import * as TestCustomElements from '../../../helpers/test/test-custom-elements.js';
 
-import { inputValueAndTriggerEvent } from '/src/js/helpers/element-helpers.js';
-import { formatModifier } from '/src/js/helpers/string-formatter.js';
+import { inputValueAndTriggerEvent } from '../../../helpers/element-helpers.js';
+import { formatModifier } from '../../../helpers/string-formatter.js';
 
-import Abilities from '/src/js/stats/abilities.js';
-import ProficiencyBonus from '/src/js/stats/proficiency-bonus.js';
+import Abilities from '../../../stats/abilities.js';
+import ProficiencyBonus from '../../../stats/proficiency-bonus.js';
 
 let abilityScoresSection;
 

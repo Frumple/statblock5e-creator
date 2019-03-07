@@ -1,7 +1,7 @@
-import CustomAutonomousElement from '/src/js/elements/autonomous/custom-autonomous-element.js';
+import CustomAutonomousElement from '../custom-autonomous-element.js';
 
-import isRunningInNode from '/src/js/helpers/is-running-in-node.js';
-import DisplayBlockListItem from '/src/js/elements/autonomous/lists/editable-block-list-item.js';
+import isRunningInNode from '../../../helpers/is-running-in-node.js';
+import DisplayBlockListItem from './display-block-list-item.js';
 
 export default class DisplayBlockList extends CustomAutonomousElement {
   static get elementName() { return 'display-block-list'; }

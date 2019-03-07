@@ -1,8 +1,8 @@
-import * as sectionModule from '/src/js/elements/autonomous/sections/section.js';
-import Abilities from '/src/js/stats/abilities.js';
-import SavingThrows from '/src/js/stats/saving-throws.js';
-import { inputValueAndTriggerEvent } from '/src/js/helpers/element-helpers.js';
-import { capitalizeFirstLetter, formatModifier } from '/src/js/helpers/string-formatter.js';
+import * as sectionModule from './section.js';
+import Abilities from '../../../stats/abilities.js';
+import SavingThrows from '../../../stats/saving-throws.js';
+import { inputValueAndTriggerEvent } from '../../../helpers/element-helpers.js';
+import { capitalizeFirstLetter, formatModifier } from '../../../helpers/string-formatter.js';
 
 export default class SavingThrowsSection extends sectionModule.Section {
   static get elementName() { return 'saving-throws-section'; }

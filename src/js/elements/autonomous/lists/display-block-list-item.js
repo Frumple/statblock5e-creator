@@ -1,4 +1,4 @@
-import CustomAutonomousElement from '/src/js/elements/autonomous/custom-autonomous-element.js';
+import CustomAutonomousElement from '../custom-autonomous-element.js';
 
 export default class DisplayBlockListItem extends CustomAutonomousElement {
   static get elementName() { return 'display-block-list-item'; }

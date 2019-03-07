@@ -1,4 +1,4 @@
-import isRunningInNode from '/src/js/helpers/is-running-in-node.js';
+import isRunningInNode from './is-running-in-node.js';
 
 class HtmlTemplates {
   constructor() {

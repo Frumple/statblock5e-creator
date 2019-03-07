@@ -1,4 +1,4 @@
-import { inputValueAndTriggerEvent } from '/src/js/helpers/element-helpers.js';
+import { inputValueAndTriggerEvent } from '../../../helpers/element-helpers.js';
 
 export function shouldAddASuggestedItem(section, itemText) {
   inputValueAndTriggerEvent(section.editElements.input, itemText);

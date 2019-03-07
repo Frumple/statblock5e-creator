@@ -1,4 +1,4 @@
-import StatBlockMenu from '/src/js/elements/autonomous/containers/stat-block-menu.js';
+import StatBlockMenu from './stat-block-menu.js';
 
 let statBlockMenu;
 

@@ -1,7 +1,7 @@
-import ReactionsSection from '/src/js/elements/autonomous/sections/reactions-section.js';
-import * as TestCustomElements from '/src/js/helpers/test/test-custom-elements.js';
+import ReactionsSection from './reactions-section.js';
+import * as TestCustomElements from '../../../helpers/test/test-custom-elements.js';
 
-import * as sharedSpecs from '/src/js/elements/autonomous/sections/block-list-section.specs.js';
+import * as sharedSpecs from './block-list-section.specs.js';
 
 const expectedItemType = 'Reaction';
 

@@ -1,6 +1,6 @@
-import CustomBuiltinElementMixins from '/src/js/helpers/custom-builtin-element-mixins.js';
-import isRunningInNode from '/src/js/helpers/is-running-in-node.js';
-import { copyObjectProperties } from '/src/js/helpers/object-helpers.js';
+import CustomBuiltinElementMixins from '../../helpers/custom-builtin-element-mixins.js';
+import isRunningInNode from '../../helpers/is-running-in-node.js';
+import { copyObjectProperties } from '../../helpers/object-helpers.js';
 
 export default class PropertyDataList extends HTMLDataListElement {
   static async define() {

@@ -1,4 +1,4 @@
-import ErrorMessages from '/src/js/elements/autonomous/error-messages.js';
+import ErrorMessages from './error-messages.js';
 
 let errorMessages;
 

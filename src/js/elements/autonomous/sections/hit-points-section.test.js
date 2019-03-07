@@ -1,11 +1,11 @@
-import HitPointsSection from '/src/js/elements/autonomous/sections/hit-points-section.js';
-import * as TestCustomElements from '/src/js/helpers/test/test-custom-elements.js';
+import HitPointsSection from './hit-points-section.js';
+import * as TestCustomElements from '../../../helpers/test/test-custom-elements.js';
 
-import { inputValueAndTriggerEvent } from '/src/js/helpers/element-helpers.js';
-import { formatModifierOperator, formatModifierNumber } from '/src/js/helpers/string-formatter.js';
+import { inputValueAndTriggerEvent } from '../../../helpers/element-helpers.js';
+import { formatModifierOperator, formatModifierNumber } from '../../../helpers/string-formatter.js';
 
-import Abilities from '/src/js/stats/abilities.js';
-import HitPoints from '/src/js/stats/hit-points.js';
+import Abilities from '../../../stats/abilities.js';
+import HitPoints from '../../../stats/hit-points.js';
 
 let hitPointsSection;
 

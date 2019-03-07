@@ -1,4 +1,4 @@
-import Abilities from '/src/js/stats/abilities.js';
+import Abilities from './abilities.js';
 
 class HitPoints {
   constructor() {

@@ -1,9 +1,9 @@
-import HeadingSection from '/src/js/elements/autonomous/sections/heading-section.js';
-import * as TestCustomElements from '/src/js/helpers/test/test-custom-elements.js';
+import HeadingSection from './heading-section.js';
+import * as TestCustomElements from '../../../helpers/test/test-custom-elements.js';
 
-import { inputValueAndTriggerEvent } from '/src/js/helpers/element-helpers.js';
+import { inputValueAndTriggerEvent } from '../../../helpers/element-helpers.js';
 
-import Creature from '/src/js/stats/creature.js';
+import Creature from '../../../stats/creature.js';
 
 let headingSection;
 

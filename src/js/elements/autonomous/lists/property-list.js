@@ -1,7 +1,7 @@
-import DragAndDropList from '/src/js/elements/autonomous/lists/drag-and-drop-list.js';
+import DragAndDropList from './drag-and-drop-list.js';
 
-import isRunningInNode from '/src/js/helpers/is-running-in-node.js';
-import PropertyListItem from '/src/js/elements/autonomous/lists/property-list-item.js';
+import isRunningInNode from '../../../helpers/is-running-in-node.js';
+import PropertyListItem from './property-list-item.js';
 
 export default class PropertyList extends DragAndDropList {
   static get elementName() { return 'property-list'; }

@@ -1,4 +1,4 @@
-import StatBlockSidebar from '/src/js/elements/autonomous/containers/stat-block-sidebar.js';
+import StatBlockSidebar from './stat-block-sidebar.js';
 
 let statBlockSidebar;
 

@@ -1,7 +1,7 @@
-import * as sectionModule from '/src/js/elements/autonomous/sections/section.js';
-import Skills from '/src/js/stats/skills.js';
-import { inputValueAndTriggerEvent } from '/src/js/helpers/element-helpers.js';
-import { formatModifier } from '/src/js/helpers/string-formatter.js';
+import * as sectionModule from './section.js';
+import Skills from '../../../stats/skills.js';
+import { inputValueAndTriggerEvent } from '../../../helpers/element-helpers.js';
+import { formatModifier } from '../../../helpers/string-formatter.js';
 
 export default class SkillsSection extends sectionModule.Section {
   static get elementName() { return 'skills-section'; }

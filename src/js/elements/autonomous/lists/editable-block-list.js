@@ -1,9 +1,9 @@
-import DragAndDropList from '/src/js/elements/autonomous/lists/drag-and-drop-list.js';
-import { focusAndSelectElement } from '/src/js/helpers/element-helpers.js';
-import { trimTrailingPeriods } from '/src/js/helpers/string-formatter.js';
+import DragAndDropList from './drag-and-drop-list.js';
+import { focusAndSelectElement } from '../../../helpers/element-helpers.js';
+import { trimTrailingPeriods } from '../../../helpers/string-formatter.js';
 
-import isRunningInNode from '/src/js/helpers/is-running-in-node.js';
-import EditableBlockListItem from '/src/js/elements/autonomous/lists/editable-block-list-item.js';
+import isRunningInNode from '../../../helpers/is-running-in-node.js';
+import EditableBlockListItem from './editable-block-list-item.js';
 
 export default class EditableBlockList extends DragAndDropList {
   static get elementName() { return 'editable-block-list'; }

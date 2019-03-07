@@ -1,7 +1,7 @@
-import ConditionImmunitiesSection from '/src/js/elements/autonomous/sections/condition-immunities-section.js';
-import * as TestCustomElements from '/src/js/helpers/test/test-custom-elements.js';
+import ConditionImmunitiesSection from './condition-immunities-section.js';
+import * as TestCustomElements from '../../../helpers/test/test-custom-elements.js';
 
-import * as sharedSpecs from '/src/js/elements/autonomous/sections/property-list-section.specs.js';
+import * as sharedSpecs from './property-list-section.specs.js';
 
 const expectedItemType = 'Condition Immunity';
 

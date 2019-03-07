@@ -1,4 +1,4 @@
-import * as sectionModule from '/src/js/elements/autonomous/sections/section.js';
+import * as sectionModule from './section.js';
 
 export default class SpeedSection extends sectionModule.Section {
   static get elementName() { return 'speed-section'; }

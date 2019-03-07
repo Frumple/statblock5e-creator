@@ -1,4 +1,4 @@
-import BlockListSection from '/src/js/elements/autonomous/sections/block-list-section.js';
+import BlockListSection from './block-list-section.js';
 
 export default class ReactionsSection extends BlockListSection {
   static get elementName() { return 'reactions-section'; }

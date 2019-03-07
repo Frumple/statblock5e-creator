@@ -1,7 +1,7 @@
-import ArmorClassSection from '/src/js/elements/autonomous/sections/armor-class-section.js';
-import * as TestCustomElements from '/src/js/helpers/test/test-custom-elements.js';
+import ArmorClassSection from './armor-class-section.js';
+import * as TestCustomElements from '../../../helpers/test/test-custom-elements.js';
 
-import { inputValueAndTriggerEvent } from '/src/js/helpers/element-helpers.js';
+import { inputValueAndTriggerEvent } from '../../../helpers/element-helpers.js';
 
 let armorClassSection;
 

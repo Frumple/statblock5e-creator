@@ -1,6 +1,6 @@
-import CustomAutonomousElement from '/src/js/elements/autonomous/custom-autonomous-element.js';
-import GlobalOptions from '/src/js/helpers/global-options.js';
-import { focusAndSelectElement } from '/src/js/helpers/element-helpers.js';
+import CustomAutonomousElement from '../custom-autonomous-element.js';
+import GlobalOptions from '../../../helpers/global-options.js';
+import { focusAndSelectElement } from '../../../helpers/element-helpers.js';
 
 export class Section extends CustomAutonomousElement {
   static get templatePaths() {

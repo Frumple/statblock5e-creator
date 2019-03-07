@@ -1,4 +1,4 @@
-import DivisibleContainer from '/src/js/elements/autonomous/containers/divisible-container.js';
+import DivisibleContainer from './divisible-container.js';
 
 export default class BasicStats extends DivisibleContainer {
   static get elementName() { return 'basic-stats'; }

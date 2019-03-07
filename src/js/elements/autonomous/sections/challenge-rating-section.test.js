@@ -1,7 +1,7 @@
-import ChallengeRatingSection from '/src/js/elements/autonomous/sections/challenge-rating-section.js';
-import * as TestCustomElements from '/src/js/helpers/test/test-custom-elements.js';
+import ChallengeRatingSection from './challenge-rating-section.js';
+import * as TestCustomElements from '../../../helpers/test/test-custom-elements.js';
 
-import { inputValueAndTriggerEvent } from '/src/js/helpers/element-helpers.js';
+import { inputValueAndTriggerEvent } from '../../../helpers/element-helpers.js';
 
 let challengeRatingSection;
 

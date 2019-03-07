@@ -1,7 +1,7 @@
-import * as sectionModule from '/src/js/elements/autonomous/sections/section.js';
-import { capitalizeFirstLetter } from '/src/js/helpers/string-formatter.js';
+import * as sectionModule from './section.js';
+import { capitalizeFirstLetter } from '../../../helpers/string-formatter.js';
 
-import Creature from '/src/js/stats/creature.js';
+import Creature from '../../../stats/creature.js';
 
 export default class HeadingSection extends sectionModule.Section {
   static get elementName() { return 'heading-section'; }

@@ -1,7 +1,7 @@
-import DamageImmunitiesSection from '/src/js/elements/autonomous/sections/damage-immunities-section.js';
-import * as TestCustomElements from '/src/js/helpers/test/test-custom-elements.js';
+import DamageImmunitiesSection from './damage-immunities-section.js';
+import * as TestCustomElements from '../../../helpers/test/test-custom-elements.js';
 
-import * as sharedSpecs from '/src/js/elements/autonomous/sections/property-list-section.specs.js';
+import * as sharedSpecs from './property-list-section.specs.js';
 
 const expectedItemType = 'Damage Immunity';
 

@@ -1,4 +1,4 @@
-import CustomBuiltinInputElement from '/src/js/elements/builtin/custom-builtin-input-element.js';
+import CustomBuiltinInputElement from './custom-builtin-input-element.js';
 
 export default class IntegerInput extends CustomBuiltinInputElement {
   static get elementName() { return 'integer-input'; }

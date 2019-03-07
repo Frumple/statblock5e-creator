@@ -1,5 +1,5 @@
-import CustomBuiltinInputElement from '/src/js/elements/builtin/custom-builtin-input-element.js';
-import { focusAndSelectElement } from '/src/js/helpers/element-helpers.js';
+import CustomBuiltinInputElement from './custom-builtin-input-element.js';
+import { focusAndSelectElement } from '../../helpers/element-helpers.js';
 
 export default class EnableDisableElementsCheckbox extends CustomBuiltinInputElement {
   static get elementName() { return 'enable-disable-elements-checkbox'; }

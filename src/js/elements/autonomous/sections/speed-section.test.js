@@ -1,7 +1,7 @@
-import SpeedSection from '/src/js/elements/autonomous/sections/speed-section.js';
-import * as TestCustomElements from '/src/js/helpers/test/test-custom-elements.js';
+import SpeedSection from './speed-section.js';
+import * as TestCustomElements from '../../../helpers/test/test-custom-elements.js';
 
-import { inputValueAndTriggerEvent } from '/src/js/helpers/element-helpers.js';
+import { inputValueAndTriggerEvent } from '../../../helpers/element-helpers.js';
 
 let speedSection;
 

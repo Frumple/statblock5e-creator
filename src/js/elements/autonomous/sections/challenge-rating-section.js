@@ -1,5 +1,5 @@
-import * as sectionModule from '/src/js/elements/autonomous/sections/section.js';
-import ExperiencePointsByChallengeRating from '/src/js/helpers/experience-points-by-challenge-rating.js';
+import * as sectionModule from './section.js';
+import ExperiencePointsByChallengeRating from '../../../helpers/experience-points-by-challenge-rating.js';
 
 export default class ChallengeRatingSection extends sectionModule.Section {
   static get elementName() { return 'challenge-rating-section'; }

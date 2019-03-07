@@ -1,5 +1,5 @@
-import DragAndDropListItem from '/src/js/elements/autonomous/lists/drag-and-drop-list-item.js';
-import CustomBuiltinElementMixins from '/src/js/helpers/custom-builtin-element-mixins.js';
+import DragAndDropListItem from './drag-and-drop-list-item.js';
+import CustomBuiltinElementMixins from '../../../helpers/custom-builtin-element-mixins.js';
 
 export default class EditableBlockListItem extends DragAndDropListItem {
   static get elementName() { return 'editable-block-list-item'; }

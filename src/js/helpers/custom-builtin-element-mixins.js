@@ -1,4 +1,4 @@
-import { copyObjectProperties } from '/src/js/helpers/object-helpers.js';
+import { copyObjectProperties } from './object-helpers.js';
 
 class CustomBuiltinElementMixins {
   constructor() {

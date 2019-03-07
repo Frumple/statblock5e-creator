@@ -1,4 +1,4 @@
-import PropertyListSection from '/src/js/elements/autonomous/sections/property-list-section.js';
+import PropertyListSection from './property-list-section.js';
 
 export default class LanguagesSection extends PropertyListSection {
   static get elementName() { return 'languages-section'; }

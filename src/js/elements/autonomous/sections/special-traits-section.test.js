@@ -1,7 +1,7 @@
-import SpecialTraitsSection from '/src/js/elements/autonomous/sections/special-traits-section.js';
-import * as TestCustomElements from '/src/js/helpers/test/test-custom-elements.js';
+import SpecialTraitsSection from './special-traits-section.js';
+import * as TestCustomElements from '../../../helpers/test/test-custom-elements.js';
 
-import * as sharedSpecs from '/src/js/elements/autonomous/sections/block-list-section.specs.js';
+import * as sharedSpecs from './block-list-section.specs.js';
 
 const expectedItemType = 'Special Trait';
 

@@ -1,5 +1,5 @@
-import Abilities from '/src/js/stats/abilities.js';
-import ProficiencyBonus from '/src/js/stats/proficiency-bonus.js';
+import Abilities from './abilities.js';
+import ProficiencyBonus from './proficiency-bonus.js';
 
 class SavingThrows {
   constructor() {
