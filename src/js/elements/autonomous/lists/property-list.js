@@ -11,8 +11,8 @@ export default class PropertyList extends DragAndDropList {
       'src/html/elements/autonomous/lists/property-list.html');
   }
 
-  constructor() {
-    super(PropertyList.templatePaths);
+  constructor(parent) {
+    super(PropertyList.templatePaths, parent);
   }
 
   get items() {
@@ -28,7 +28,7 @@ export default class PropertyList extends DragAndDropList {
   }
 
   addItem(itemText) {
-    let listItem = PropertyList.createListItem();
+    let listItem = PropertyList.createListItem(this);
     listItem.list = this;
     listItem.text = itemText;
     if (isRunningInNode) {
@@ -42,9 +42,9 @@ export default class PropertyList extends DragAndDropList {
     return this.items.filter(element => element.text === itemText)[0];
   }
 
-  static createListItem() {
+  static createListItem(parent) {
     if (isRunningInNode) {
-      return new PropertyListItem();
+      return new PropertyListItem(parent);
     }
     return document.createElement('property-list-item');
   }

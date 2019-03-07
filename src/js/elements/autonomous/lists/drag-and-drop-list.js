@@ -1,8 +1,8 @@
 import CustomAutonomousElement from '../custom-autonomous-element.js';
 
 export default class DragAndDropList extends CustomAutonomousElement {
-  constructor(templatePaths) {
-    super(templatePaths);
+  constructor(templatePaths, parent) {
+    super(templatePaths, parent);
 
     this.draggedItem = null;
   }

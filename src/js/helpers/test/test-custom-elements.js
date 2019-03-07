@@ -51,7 +51,7 @@ function replaceWithFakes(section) {
   }
 
   if (section.editElements.propertyList && section.editElements.propertyList.tagName === 'PROPERTY-LIST') {
-    section.editElements.propertyList = new PropertyList();
+    section.editElements.propertyList = new PropertyList(section);
   }
 
   if (section.showElements.displayList && section.showElements.displayList.tagName === 'DISPLAY-BLOCK-LIST') {

@@ -63,7 +63,7 @@ describe('when the show section is clicked', () => {
   });
 
   describe('and a suggested item is added, and then removed', () => {
-    it.skip('should remove the item from the list of suggestions, and then re-add the item', () => {
+    it('should remove the item from the list of suggestions, and then re-add the item', () => {
       const itemText = 'Abyssal';
       sharedSpecs.shouldRemoveAndAddSuggestions(languagesSection, itemText);
     });

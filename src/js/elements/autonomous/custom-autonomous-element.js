@@ -53,9 +53,11 @@ class FakeCustomAutonomousElement {
     }
   }
 
-  constructor(templatePaths) {
-    this.dataset = new Map();
+  constructor(templatePaths, parent = null) {
+    this._parent = parent;
     this._children = [];
+
+    this.dataset = new Map();
 
     // Create an in-memory fake shadow root and append the HTML templates to its body
     this.shadowRoot = document.createDocumentFragment();
@@ -85,6 +87,17 @@ class FakeCustomAutonomousElement {
 
   dispatchEvent(event) {    
     this.shadowRoot.dispatchEvent(event);
+
+    // Simulate event bubbling by dispatching the event to the parent if it exists.
+    // Notes:
+    // - Unlike real event bubbling, this event will continue to bubble even 
+    //   if it is caught by a listener.
+    // - JSDOM doesn't support the 'composed' property on events, so we only check
+    //   if the event 'bubbles' property is true
+
+    if (this._parent !== null && event.bubbles) {      
+      this._parent.dispatchEvent(event);
+    }
   }
 
   // Since this element is fake, non-shadow DOM child elements that are added

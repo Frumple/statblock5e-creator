@@ -7,8 +7,8 @@ export default class DragAndDropListItem extends CustomAutonomousElement {
       'src/html/elements/autonomous/lists/drag-and-drop-list-item.html');
   }
 
-  constructor(templatePaths) {
-    super(templatePaths);
+  constructor(templatePaths, parent) {
+    super(templatePaths, parent);
 
     this.list = null;
     this.dragImage = null;
