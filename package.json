@@ -3,7 +3,9 @@
   "version": "1.0.0",
   "description": "A Web Component statblock for D&D 5E\r ====================================",
   "main": "index.js",
-  "dependencies": {},
+  "dependencies": {
+    "pegjs": "^0.10.0"
+  },
   "devDependencies": {
     "@babel/cli": "^7.2.3",
     "@babel/core": "^7.2.2",
@@ -18,7 +20,9 @@
   "jest": {
     "collectCoverage": false,
     "collectCoverageFrom": [
-      "src/**/*.js"
+      "src/**/*.js",
+      "!src/js/init.js",
+      "!src/js/parser/generate-parser.js"
     ],
     "moduleNameMapper": {
       "^/(.*)$": "<rootDir>/$1"
@@ -26,7 +30,7 @@
     "setupFilesAfterEnv": [
       "jest-dom/extend-expect",
       "<rootDir>/src/js/helpers/test/expect-matchers",
-      "<rootDir>/src/js/helpers/test/test-utils"
+      "<rootDir>/src/js/helpers/test/test-globals"
     ]
   },
   "repository": {

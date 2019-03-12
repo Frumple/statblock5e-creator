@@ -23,7 +23,7 @@ export function shouldFocusOnNameFieldOfNewBlock(section) {
   }
 }
 
-export function shouldAddASingleBlock(section, blockName, blockText) {
+export function shouldAddASingleBlock(section, blockName, blockText, expectedText = null) {
   addAndPopulateBlock(section, blockName, blockText);
 
   section.editElements.submitForm();
@@ -33,7 +33,8 @@ export function shouldAddASingleBlock(section, blockName, blockText) {
   
   const blocks = [{
     name: blockName,
-    text: blockText
+    text: blockText,
+    expectedText: expectedText
   }];
 
   expectDisplayBlocks(section, blocks);
@@ -123,6 +124,16 @@ export function shouldDisplayAnErrorIfBlockTextIsBlank(section, expectedItemType
     `${expectedItemType} Text cannot be blank.`);
 }
 
+export function shouldDisplayAnErrorIfBlockTextHasInvalidMarkdownSyntax(section, expectedItemType) {
+  addAndPopulateBlock(section, 'Some name', 'Some *invalid syntax');
+
+  section.editElements.submitForm();
+
+  expect(section).toHaveError(
+    section.editElements.editableList.blocks[0].textElement,
+    `${expectedItemType} Text has invalid syntax.`);
+}
+
 export function shouldDisplayErrorsIfBlockNameAndTextAreBothBlank(section, expectedItemType) {
   addAndPopulateBlock(section, '', '');
 
@@ -141,6 +152,24 @@ export function shouldDisplayErrorsIfBlockNameAndTextAreBothBlank(section, expec
     1);
 }
 
+export function shouldDisplayErrorsIfBlockNameIsBlankAndBlockTextHasInvalidMarkdownSyntax(section, expectedItemType) {
+  addAndPopulateBlock(section, '', 'Some __invalid syntax');
+
+  section.editElements.submitForm();
+
+  const editableBlock = section.editElements.editableList.blocks[0];
+
+  expect(section.errorMessages.errors).toHaveLength(2);
+  expect(section).toHaveError(
+    editableBlock.nameElement,
+    `${expectedItemType} Name cannot be blank.`,
+    0);
+  expect(section).toHaveError(
+    editableBlock.textElement,
+    `${expectedItemType} Text has invalid syntax.`,
+    1);
+}
+
 function addAndPopulateBlock(section, blockName, blockText) {
   section.editElements.addButton.click();
 
@@ -154,8 +183,13 @@ function addAndPopulateBlock(section, blockName, blockText) {
 function expectDisplayBlocks(section, expectedBlocks) {
   for (const [index, block] of expectedBlocks.entries()) {
     const displayBlock = section.showElements.displayList.blocks[index];
+    
     expect(displayBlock.name).toBe(block.name);
-    expect(displayBlock.text).toBe(block.text);
+    if (block.expectedText) {
+      expect(displayBlock.text).toBe(block.expectedText);
+    } else {
+      expect(displayBlock.text).toBe(block.text);
+    }    
   }
 }
 

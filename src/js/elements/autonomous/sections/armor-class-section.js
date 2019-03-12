@@ -30,9 +30,9 @@ export default class ArmorClassSection extends sectionModule.Section {
 
   checkForErrors() {
     this.editElements.armorType.value = this.editElements.armorType.value.trim();
-    this.editElements.customText.value = this.editElements.customText.value.trim();
+    this.editElements.customText.value = this.editElements.customText.value.trim();    
 
-    if (this.editElements.useCustom.checked) {
+    if (this.editElements.useCustom.checked) {      
       this.editElements.customText.validate(this.errorMessages);
     } else {
       this.editElements.armorClass.validate(this.errorMessages);
@@ -44,12 +44,13 @@ export default class ArmorClassSection extends sectionModule.Section {
     let armorType = this.editElements.armorType.value;
     let shield = this.editElements.shield.checked;
     let useCustom = this.editElements.useCustom.checked;
-    let customText = this.editElements.customText.value;
+    let customText = this.editElements.customText.parsedText;
 
-    let text = '';
     if (useCustom) {
-      text = customText;
+      this.showElements.text.innerHTML = customText;
     } else {
+      let text = '';
+
       if (armorType) {
         if (shield) {
           text = `${armorClass} (${armorType}, shield)`;
@@ -63,8 +64,9 @@ export default class ArmorClassSection extends sectionModule.Section {
           text = armorClass;
         }
       }
-    }
-    this.showElements.text.textContent = text;
+
+      this.showElements.text.textContent = text;
+    }    
   }
 }
 

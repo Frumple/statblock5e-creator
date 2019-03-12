@@ -7,6 +7,7 @@ module.exports = {
     },
     "extends": "eslint:recommended",
     "globals": {
+      "DOMPurify": "readable",
       "global": "readable"
     },
     "parserOptions": {

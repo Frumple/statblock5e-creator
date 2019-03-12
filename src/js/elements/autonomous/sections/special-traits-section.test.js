@@ -39,9 +39,10 @@ describe('when the show section is clicked', () => {
 
   describe('and blocks are added and/or removed, and the edit section is submitted', () => {
     it('should add a single block', () => {
-      const blockName = 'Amphibious';
-      const blockText = 'The dragon can breathe air and water.';
-      sharedSpecs.shouldAddASingleBlock(specialTraitsSection, blockName, blockText);
+      const blockName = 'Antimagic Susceptibility';
+      const blockText = 'The armor is incapacitated while in the area of an _antimagic field_. If targeted by *dispel magic*, the armor must succeed on a Constitution saving throw against the caster\'s sepll save DC or fall unconscious for 1 minute.';
+      const expectedText = 'The armor is incapacitated while in the area of an <em>antimagic field</em>. If targeted by <em>dispel magic</em>, the armor must succeed on a Constitution saving throw against the caster\'s sepll save DC or fall unconscious for 1 minute.';
+      sharedSpecs.shouldAddASingleBlock(specialTraitsSection, blockName, blockText, expectedText);
     });
 
     it('should add multiple blocks', () => {
@@ -98,8 +99,16 @@ describe('when the show section is clicked', () => {
       sharedSpecs.shouldDisplayAnErrorIfBlockTextIsBlank(specialTraitsSection, expectedItemType);
     });
 
+    it('should display an error if the block text has invalid markdown syntax', () => {
+      sharedSpecs.shouldDisplayAnErrorIfBlockTextHasInvalidMarkdownSyntax(specialTraitsSection, expectedItemType);
+    });
+
     it('should display errors if the block name and text are both blank', () => {
       sharedSpecs.shouldDisplayErrorsIfBlockNameAndTextAreBothBlank(specialTraitsSection, expectedItemType);
+    });
+
+    it('should display errors if the block name is blank and block text has invalid markdown syntax', () => {
+      sharedSpecs.shouldDisplayErrorsIfBlockNameIsBlankAndBlockTextHasInvalidMarkdownSyntax(specialTraitsSection, expectedItemType);
     });
   });
 });

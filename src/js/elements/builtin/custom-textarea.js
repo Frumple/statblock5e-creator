@@ -1,6 +1,7 @@
 import CustomBuiltinElementMixins from '../../helpers/custom-builtin-element-mixins.js';
 import isRunningInNode from '../../helpers/is-running-in-node.js';
 import { copyObjectProperties } from '../../helpers/object-helpers.js';
+import parseText from '../../parser/parse-text.js';
 
 export default class CustomTextArea extends HTMLTextAreaElement {
   static async define() {
@@ -22,14 +23,29 @@ export default class CustomTextArea extends HTMLTextAreaElement {
 
 const CustomTextAreaMixin = {
   initializeMixin() {
-    return;
+    this.parsedText = null;
   },
 
   validate(errorMessages) {
-    if (this.required && this.value === '') {
-      let prettyName = this.getAttribute('pretty-name');
-      let fieldName = prettyName ? prettyName : this.name;
+    const prettyName = this.getAttribute('pretty-name');
+    const fieldName = prettyName ? prettyName : this.name;
+
+    const sanitizedValue = DOMPurify.sanitize(this.value);
+
+    if (this.required && sanitizedValue === '') {      
       errorMessages.add(this, `${fieldName} cannot be blank.`);
+    } else if('parsed' in this.dataset) {
+      const parserResults = parseText(sanitizedValue);
+      const error = parserResults.error;
+
+      if (error) {
+        const message = 
+          `${fieldName} has invalid syntax.`;
+
+        errorMessages.add(this, message);
+      } else {
+        this.parsedText = parserResults.outputText;
+      }
     }
   }
 };

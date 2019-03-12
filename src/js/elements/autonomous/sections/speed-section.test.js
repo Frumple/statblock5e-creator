@@ -45,13 +45,23 @@ describe('when the show section is clicked', () => {
 
     describe('and the custom text field is populated and the edit section is submitted', () => {
       it('should switch to show mode and save the custom text', () => {
-        let customText = '30 ft. (40ft., climb 30ft. in bear or hybrid form)';
+        const customText = '30 ft. (40 ft., climb 30 ft. in bear or hybrid form)';
         inputValueAndTriggerEvent(speedSection.editElements.customText, customText);
 
         speedSection.editElements.submitForm();
 
         expect(speedSection).toBeInMode('show');
         expect(speedSection.showElements.text).toHaveTextContent(customText);
+      });
+
+      it('should switch to show mode and save the custom text with valid markdown syntax', () => {
+        const customText = '40 ft. (80 ft. when _hasted_)';
+        inputValueAndTriggerEvent(speedSection.editElements.customText, customText);
+
+        speedSection.editElements.submitForm();
+
+        expect(speedSection).toBeInMode('show');
+        expect(speedSection.showElements.text).toContainHTML('40 ft. (80 ft. when <em>hasted</em>)');
       });
 
       it('should display an error if the custom text field is blank', () => {
@@ -63,6 +73,17 @@ describe('when the show section is clicked', () => {
         expect(speedSection).toHaveError(
           speedSection.editElements.customText,
           'Speed Custom Text cannot be blank.');
+      });
+
+      it('should display an error if the custom text field has invalid markdown syntax', () => {
+        inputValueAndTriggerEvent(speedSection.editElements.customText, '30 ft. (15 ft. when *slowed)');
+
+        speedSection.editElements.submitForm();
+
+        expect(speedSection).toBeInMode('edit');
+        expect(speedSection).toHaveError(
+          speedSection.editElements.customText,
+          'Speed Custom Text has invalid syntax.');
       });
     });
   });

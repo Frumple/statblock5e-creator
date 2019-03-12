@@ -47,14 +47,13 @@ export default class SpeedSection extends sectionModule.Section {
     let hover = this.editElements.hover.checked;
     let swimSpeed = this.editElements.swim.value;
     let useCustom = this.editElements.useCustom.checked;
-    let customText = this.editElements.customText.value;
-
-    let text = '';
+    let customText = this.editElements.customText.parsedText;
 
     if (useCustom) {
-      text = customText;
+      this.showElements.text.innerHTML = customText;
     } else {
       const unit = 'ft.';
+      let text = '';
 
       if (!walkSpeed) {
         walkSpeed = 0;
@@ -76,9 +75,9 @@ export default class SpeedSection extends sectionModule.Section {
       if (swimSpeed) {
         text += `, swim ${swimSpeed} ${unit}`;
       }
-    }
 
-    this.showElements.text.textContent = text;
+      this.showElements.text.textContent = text;
+    }
   }
 }
 

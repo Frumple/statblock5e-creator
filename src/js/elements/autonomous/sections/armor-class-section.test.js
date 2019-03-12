@@ -42,13 +42,23 @@ describe('when the show section is clicked', () => {
 
     describe('and the edit section is submitted', () => {
       it('should switch to show mode and save the custom text', () => {
-        let customText = '14 (natural armor), 11 while prone';
+        const customText = '14 (natural armor), 11 while prone';
         inputValueAndTriggerEvent(armorClassSection.editElements.customText, customText);
 
         armorClassSection.editElements.submitForm();
 
         expect(armorClassSection).toBeInMode('show');
         expect(armorClassSection.showElements.text).toHaveTextContent(customText);
+      });
+
+      it('should switch to show mode and save the custom text with valid markdown syntax', () => {
+        const customText = '12 (15 with *mage armor*)';
+        inputValueAndTriggerEvent(armorClassSection.editElements.customText, customText);
+
+        armorClassSection.editElements.submitForm();
+
+        expect(armorClassSection).toBeInMode('show');
+        expect(armorClassSection.showElements.text).toContainHTML('12 (15 with <em>mage armor</em>)');
       });
 
       it('should display an error if the custom text field is blank', () => {
@@ -60,6 +70,17 @@ describe('when the show section is clicked', () => {
         expect(armorClassSection).toHaveError(
           armorClassSection.editElements.customText,
           'Armor Class Custom Text cannot be blank.');
+      });
+
+      it('should display an error if the custom text field has invalid markdown syntax', () => {
+        inputValueAndTriggerEvent(armorClassSection.editElements.customText, '11 (16 with _barkskin)');
+
+        armorClassSection.editElements.submitForm();
+
+        expect(armorClassSection).toBeInMode('edit');
+        expect(armorClassSection).toHaveError(
+          armorClassSection.editElements.customText,
+          'Armor Class Custom Text has invalid syntax.');
       });
 
       it('should display only one error if the armor class is not a valid number and custom text field is blank', () => {

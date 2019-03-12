@@ -24,10 +24,10 @@ export default class DisplayBlockListItem extends CustomAutonomousElement {
   }
 
   get text() {
-    return this.textElement.textContent;
+    return this.textElement.innerHTML;
   }
 
   set text(text) {
-    this.textElement.textContent = text;
+    this.textElement.innerHTML = text;
   }
 }

@@ -51,13 +51,23 @@ describe('when the show section is clicked', () => {
 
     describe('and the custom text field is populated and the edit section is submitted', () => {
       it('should switch to show mode and save the custom text', () => {
-        let customText = 'darkvision 120 ft. (penetrates magical darkness), passive Perception 13';
+        const customText = 'darkvision 120 ft. (penetrates magical darkness), passive Perception 13';
         inputValueAndTriggerEvent(sensesSection.editElements.customText, customText);
 
         sensesSection.editElements.submitForm();
 
         expect(sensesSection).toBeInMode('show');
         expect(sensesSection.showElements.text).toHaveTextContent(customText);
+      });
+
+      it('should switch to show mode and save the custom text with valid markdown syntax', () => {
+        const customText = '**boldvision 60 ft.**';
+        inputValueAndTriggerEvent(sensesSection.editElements.customText, customText);
+
+        sensesSection.editElements.submitForm();
+
+        expect(sensesSection).toBeInMode('show');
+        expect(sensesSection.showElements.text).toContainHTML('<strong>boldvision 60 ft.</strong>');
       });
 
       it('should display an error if the custom text field is blank', () => {
@@ -69,6 +79,17 @@ describe('when the show section is clicked', () => {
         expect(sensesSection).toHaveError(
           sensesSection.editElements.customText,
           'Senses Custom Text cannot be blank.');
+      });
+
+      it('should display an error if the custom text field has invalid markdown syntax', () => {
+        inputValueAndTriggerEvent(sensesSection.editElements.customText, 'Here is some __invalid bold text');
+
+        sensesSection.editElements.submitForm();
+
+        expect(sensesSection).toBeInMode('edit');
+        expect(sensesSection).toHaveError(
+          sensesSection.editElements.customText,
+          'Senses Custom Text has invalid syntax.');
       });
     });
   });

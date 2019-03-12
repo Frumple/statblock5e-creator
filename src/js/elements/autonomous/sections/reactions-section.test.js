@@ -52,7 +52,8 @@ describe('when the show section is clicked', () => {
         },
         {
           name: 'Reaction 2',
-          text: 'Reaction Text 2'
+          text: 'Reaction __Text__ 2',
+          expectedText: 'Reaction <strong>Text</strong> 2'
         },
         {
           name: 'Reaction 2',
@@ -80,7 +81,8 @@ describe('when the show section is clicked', () => {
         },
         {
           name: 'Reaction 2',
-          text: 'Reaction Text 3'
+          text: '**Reaction** Text 3',
+          expectedText: '<strong>Reaction</strong> Text 3'
         }
       ];
       sharedSpecs.shouldAddMultipleBlocksThenRemoveOneOfThem(reactionsSection, blocks, 1);
@@ -98,8 +100,16 @@ describe('when the show section is clicked', () => {
       sharedSpecs.shouldDisplayAnErrorIfBlockTextIsBlank(reactionsSection, expectedItemType);
     });
 
+    it('should display an error if the block text has invalid markdown syntax', () => {
+      sharedSpecs.shouldDisplayAnErrorIfBlockTextHasInvalidMarkdownSyntax(reactionsSection, expectedItemType);
+    });
+
     it('should display errors if the block name and text are both blank', () => {
       sharedSpecs.shouldDisplayErrorsIfBlockNameAndTextAreBothBlank(reactionsSection, expectedItemType);
+    });
+
+    it('should display errors if the block name is blank and block text has invalid markdown syntax', () => {
+      sharedSpecs.shouldDisplayErrorsIfBlockNameIsBlankAndBlockTextHasInvalidMarkdownSyntax(reactionsSection, expectedItemType);
     });
   });
 });

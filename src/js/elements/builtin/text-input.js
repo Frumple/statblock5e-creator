@@ -1,4 +1,5 @@
 import CustomBuiltinInputElement from './custom-builtin-input-element.js';
+import parseText from '../../parser/parse-text.js';
 
 export default class TextInput extends CustomBuiltinInputElement {
   static get elementName() { return 'text-input'; }
@@ -11,14 +12,29 @@ export default class TextInput extends CustomBuiltinInputElement {
 
 export let TextInputMixin = {
   initializeMixin() {
-
+    this.parsedText = null;
   },
 
   validate(errorMessages) {
-    if (this.required && this.value === '') {
-      let prettyName = this.getAttribute('pretty-name');
-      let fieldName = prettyName ? prettyName : this.name;
+    const prettyName = this.getAttribute('pretty-name');
+    const fieldName = prettyName ? prettyName : this.name;
+
+    const sanitizedValue = DOMPurify.sanitize(this.value);
+
+    if (this.required && sanitizedValue === '') {      
       errorMessages.add(this, `${fieldName} cannot be blank.`);
+    } else if ('parsed' in this.dataset) {
+      const parserResults = parseText(sanitizedValue);
+      const error = parserResults.error;
+
+      if (error) {
+        const message = 
+          `${fieldName} has invalid syntax.`;
+
+        errorMessages.add(this, message);
+      } else {
+        this.parsedText = parserResults.outputText;
+      }
     }
   }
 };
