@@ -22,7 +22,18 @@ export default class BlockListSection extends sectionModule.Section {
   }
 
   onClickAddTextBlockButton() {
-    this.editElements.editableList.addBlock(this.itemType);
+    this.addBlock();
+  }
+
+  addBlock(name = null, text = null) {
+    const block = this.editElements.editableList.addBlock(this.itemType);
+
+    if (name) {
+      block.name = name;
+    }
+    if (text) {
+      block.text = text;
+    }
   }
 
   get mode() {

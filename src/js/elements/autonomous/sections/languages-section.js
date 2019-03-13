@@ -1,4 +1,5 @@
 import PropertyListSection from './property-list-section.js';
+import isRunningInNode from '../../../helpers/is-running-in-node.js';
 
 export default class LanguagesSection extends PropertyListSection {
   static get elementName() { return 'languages-section'; }
@@ -18,8 +19,10 @@ export default class LanguagesSection extends PropertyListSection {
     if (this.isConnected && ! this.isInitialized) {
       super.connectedCallback();
 
-      this.addItem('Common');
-      this.updateShowSection();
+      if (! isRunningInNode) {
+        this.addItem('Common');
+        this.save();
+      }
 
       this.isInitialized = true;
     }

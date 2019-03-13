@@ -1,4 +1,5 @@
 import BlockListSection from './block-list-section.js';
+import isRunningInNode from '../../../helpers/is-running-in-node.js';
 
 export default class ActionsSection extends BlockListSection {
   static get elementName() { return 'actions-section'; }
@@ -18,6 +19,11 @@ export default class ActionsSection extends BlockListSection {
   connectedCallback() {
     if (this.isConnected && ! this.isInitialized) {
       super.connectedCallback();
+
+      if (! isRunningInNode) {
+        this.addBlock('Club', '*Melee Weapon Attack:* +2 to hit, reach 5 ft., one target. *Hit:* 2 (1d4) bludgeoning damage.');
+        this.save();
+      }      
 
       this.isInitialized = true;
     }

@@ -21,9 +21,6 @@ beforeEach(() => {
 describe('when the show section is clicked', () => {
   beforeEach(() => {
     languagesSection.showElements.section.click();
-
-    let item = languagesSection.editElements.propertyList.findItem('Common');
-    item.remove();
   });
 
   it('should switch to edit mode and focus on the text field', () => {
@@ -70,7 +67,7 @@ describe('when the show section is clicked', () => {
   });
 
   describe('and the only remaining item is removed, and the edit section is submitted', () => {
-    it('should remove the item, and the show languagesSection should show a "—" character indicating no items', () => {
+    it('should remove the item, and the show section should show a "—" character indicating no items', () => {
       expect(languagesSection.editElements.propertyList.itemsAsText).toHaveLength(0);
 
       languagesSection.editElements.submitForm();

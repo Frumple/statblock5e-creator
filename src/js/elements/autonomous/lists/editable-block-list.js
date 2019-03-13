@@ -22,16 +22,18 @@ export default class EditableBlockList extends DragAndDropList {
   }
 
   addBlock(itemType) {
-    const listItem = EditableBlockList.createListItem(); 
-    listItem.list = this;
-    listItem.itemType = itemType;
+    const block = EditableBlockList.createListItem(); 
+    block.list = this;
+    block.itemType = itemType;
     if (isRunningInNode) {
-      listItem.connect();
+      block.connect();
     }
 
-    this.appendChild(listItem);
+    this.appendChild(block);
 
-    focusAndSelectElement(listItem.nameElement);
+    focusAndSelectElement(block.nameElement);
+
+    return block;
   }
 
   trimTrailingPeriodsInNames() {
