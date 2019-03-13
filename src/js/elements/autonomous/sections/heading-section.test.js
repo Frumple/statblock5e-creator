@@ -27,7 +27,7 @@ describe('when the show section is clicked', () => {
 
   it('should switch to edit mode and focus on the title field', () => {
     expect(headingSection).toBeInMode('edit');
-    expect(headingSection.editElements.title).toHaveFocus();
+    expect(headingSection.editElements.fullName).toHaveFocus();
   });
 
   describe('and creature name, short name, and/or the proper noun checkbox is changed', () => {
@@ -36,10 +36,10 @@ describe('when the show section is clicked', () => {
       it.each
       `
         description                                  | creatureName           | shortName      | isProperNoun | expectedGrammaticalName
-        ${'no changes'}                              | ${''}                  | ${''}          | ${false}     | ${'The commoner'}
-        ${'creature name'}                           | ${'Bullywug'}          | ${''}          | ${false}     | ${'The bullywug'}
-        ${'short name'}                              | ${''}                  | ${'peasant'}   | ${false}     | ${'The peasant'}
-        ${'creature name + short name'}              | ${'Beholder Zombie'}   | ${'zombie'}    | ${false}     | ${'The zombie'}
+        ${'no changes'}                              | ${''}                  | ${''}          | ${false}     | ${'the commoner'}
+        ${'creature name'}                           | ${'Bullywug'}          | ${''}          | ${false}     | ${'the bullywug'}
+        ${'short name'}                              | ${''}                  | ${'peasant'}   | ${false}     | ${'the peasant'}
+        ${'creature name + short name'}              | ${'Beholder Zombie'}   | ${'zombie'}    | ${false}     | ${'the zombie'}
         ${'no changes, proper noun'}                 | ${''}                  | ${''}          | ${true}      | ${'Commoner'}
         ${'creature name, proper noun'}              | ${'Tiamat'}            | ${''}          | ${true}      | ${'Tiamat'}
         ${'short name, proper noun'}                 | ${''}                  | ${'Bob'}       | ${true}      | ${'Bob'}
@@ -57,7 +57,7 @@ describe('when the show section is clicked', () => {
 
         if (creatureName !== '') {
           expectedCreatureName = creatureName;
-          inputValueAndTriggerEvent(headingSection.editElements.title, creatureName);
+          inputValueAndTriggerEvent(headingSection.editElements.fullName, creatureName);
         }
         if (shortName !== '') {
           expectedShortName = shortName;
@@ -67,7 +67,7 @@ describe('when the show section is clicked', () => {
           headingSection.editElements.properNoun.click();
         }
 
-        expect(Creature.name).toBe(expectedCreatureName);
+        expect(Creature.fullName).toBe(expectedCreatureName);
         expect(Creature.shortName).toBe(expectedShortName);
         expect(Creature.isProperNoun).toBe(isProperNoun);
         expect(Creature.grammaticalName).toBe(expectedGrammaticalName);
@@ -87,7 +87,7 @@ describe('when the show section is clicked', () => {
 
   describe('and fields are populated and the edit section is submitted', () => {
     it('should switch to show mode and save the creature name, size, type, and alignment', () => {
-      inputValueAndTriggerEvent(headingSection.editElements.title, 'Beholder');
+      inputValueAndTriggerEvent(headingSection.editElements.fullName, 'Beholder');
       inputValueAndTriggerEvent(headingSection.editElements.size, 'Large');
       inputValueAndTriggerEvent(headingSection.editElements.type, 'aberration');
       inputValueAndTriggerEvent(headingSection.editElements.alignment, 'lawful evil');
@@ -95,7 +95,7 @@ describe('when the show section is clicked', () => {
       headingSection.editElements.submitForm();
 
       expect(headingSection).toBeInMode('show');
-      expect(headingSection.showElements.title).toHaveTextContent('Beholder');
+      expect(headingSection.showElements.fullName).toHaveTextContent('Beholder');
       expect(headingSection.showElements.subtitle).toHaveTextContent('Large aberration, lawful evil');
 
       expect(Creature.shortName).toBe('');
@@ -103,16 +103,16 @@ describe('when the show section is clicked', () => {
     });
 
     it('should capitalize the first letter in the creature name', () => {
-      inputValueAndTriggerEvent(headingSection.editElements.title, 'young red dragon');
+      inputValueAndTriggerEvent(headingSection.editElements.fullName, 'young red dragon');
 
       headingSection.editElements.submitForm();
 
       expect(headingSection).toBeInMode('show');
-      expect(headingSection.showElements.title).toHaveTextContent('Young red dragon');
+      expect(headingSection.showElements.fullName).toHaveTextContent('Young red dragon');
     });
 
     it('should trim whitespace from the creature name and type', () => {
-      inputValueAndTriggerEvent(headingSection.editElements.title, '  Purple Worm ');
+      inputValueAndTriggerEvent(headingSection.editElements.fullName, '  Purple Worm ');
       inputValueAndTriggerEvent(headingSection.editElements.size, 'Gargantuan');
       inputValueAndTriggerEvent(headingSection.editElements.type, '    monstrosity        ');
       inputValueAndTriggerEvent(headingSection.editElements.alignment, 'unaligned');
@@ -120,18 +120,18 @@ describe('when the show section is clicked', () => {
       headingSection.editElements.submitForm();
 
       expect(headingSection).toBeInMode('show');
-      expect(headingSection.showElements.title).toHaveTextContent('Purple Worm');
+      expect(headingSection.showElements.fullName).toHaveTextContent('Purple Worm');
       expect(headingSection.showElements.subtitle).toHaveTextContent('Gargantuan monstrosity, unaligned');
     });
 
     it('should display an error if the creature name field is blank', () => {
-      inputValueAndTriggerEvent(headingSection.editElements.title, '');
+      inputValueAndTriggerEvent(headingSection.editElements.fullName, '');
 
       headingSection.editElements.submitForm();
 
       expect(headingSection).toBeInMode('edit');
       expect(headingSection).toHaveError(
-        headingSection.editElements.title,
+        headingSection.editElements.fullName,
         'Creature Name cannot be blank.');
     });
 
@@ -147,7 +147,7 @@ describe('when the show section is clicked', () => {
     });
 
     it('should display both errors if the creature name and creature type fields are both blank', () => {
-      inputValueAndTriggerEvent(headingSection.editElements.title, '');
+      inputValueAndTriggerEvent(headingSection.editElements.fullName, '');
       inputValueAndTriggerEvent(headingSection.editElements.type, '');
 
       headingSection.editElements.submitForm();
@@ -155,7 +155,7 @@ describe('when the show section is clicked', () => {
       expect(headingSection).toBeInMode('edit');
       expect(headingSection.errorMessages.errors).toHaveLength(2);
       expect(headingSection).toHaveError(
-        headingSection.editElements.title,
+        headingSection.editElements.fullName,
         'Creature Name cannot be blank.',
         0);
       expect(headingSection).toHaveError(

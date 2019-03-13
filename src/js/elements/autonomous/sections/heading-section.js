@@ -19,14 +19,14 @@ export default class HeadingSection extends sectionModule.Section {
 
   connectedCallback() {
     if (this.isConnected && ! this.isInitialized) {
-      this.editElements.title.addEventListener('input', this.onInputCreatureName.bind(this));
+      this.editElements.fullName.addEventListener('input', this.onInputCreatureName.bind(this));
       this.editElements.shortName.addEventListener('input', this.onInputShortName.bind(this));
       this.editElements.properNoun.addEventListener('input', this.onInputProperNoun.bind(this));
     }
   }
 
   onInputCreatureName() {
-    Creature.name = this.editElements.title.value;
+    Creature.fullName = this.editElements.fullName.value;
     this.dispatchCreatureNameChangedEvent();
   }
 
@@ -41,11 +41,11 @@ export default class HeadingSection extends sectionModule.Section {
   }
 
   dispatchCreatureNameChangedEvent() {
-    let changeEvent = new CustomEvent('creatureNameChanged', {
+    const changeEvent = new CustomEvent('creatureNameChanged', {
       bubbles: true,
       composed: true,
       detail: {
-        creatureName: Creature.name,
+        creatureName: Creature.fullName,
         shortName: Creature.shortName,
         isProperNoun: Creature.isProperNoun
       }
@@ -54,24 +54,24 @@ export default class HeadingSection extends sectionModule.Section {
   }
 
   checkForErrors() {
-    this.editElements.title.value = this.editElements.title.value.trim();
+    this.editElements.fullName.value = this.editElements.fullName.value.trim();
     this.editElements.type.value = this.editElements.type.value.trim();
 
-    this.editElements.title.validate(this.errorMessages);
+    this.editElements.fullName.validate(this.errorMessages);
     this.editElements.type.validate(this.errorMessages);
   }
 
   updateShowSection() {
-    let title = this.editElements.title.value;
-    let size = this.editElements.size.value;
-    let type = this.editElements.type.value;
-    let alignment = this.editElements.alignment.value;
+    let fullName = this.editElements.fullName.value;
+    const size = this.editElements.size.value;
+    const type = this.editElements.type.value;
+    const alignment = this.editElements.alignment.value;
 
-    title = capitalizeFirstLetter(title);
-    let subtitle = `${size} ${type}, ${alignment}`;
+    fullName = capitalizeFirstLetter(fullName);
+    const subtitle = `${size} ${type}, ${alignment}`;
 
-    this.editElements.title.value = title;
-    this.showElements.title.textContent = title;
+    this.editElements.fullName.value = fullName;
+    this.showElements.fullName.textContent = fullName;
     this.showElements.subtitle.textContent = subtitle;
   }
 }
@@ -79,7 +79,7 @@ export default class HeadingSection extends sectionModule.Section {
 class HeadingShowElements extends sectionModule.ShowElements {
   constructor(shadowRoot) {
     super(shadowRoot);
-    this.title = shadowRoot.getElementById('title-text');
+    this.fullName = shadowRoot.getElementById('full-name-text');
     this.subtitle = shadowRoot.getElementById('subtitle-text');
   }
 }
@@ -87,7 +87,7 @@ class HeadingShowElements extends sectionModule.ShowElements {
 class HeadingEditElements extends sectionModule.EditElements {
   constructor(shadowRoot) {
     super(shadowRoot);
-    this.title = shadowRoot.getElementById('title-input');
+    this.fullName = shadowRoot.getElementById('full-name-input');
 
     this.shortName = shadowRoot.getElementById('short-name-input');
     this.properNoun = shadowRoot.getElementById('proper-noun-input');
@@ -98,6 +98,6 @@ class HeadingEditElements extends sectionModule.EditElements {
   }
 
   get initiallySelectedElement() {
-    return this.title;
+    return this.fullName;
   }
 }

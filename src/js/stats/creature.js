@@ -4,21 +4,34 @@ class Creature {
   }
 
   reset() {
-    this.name = 'Commoner';
+    this.fullName = 'Commoner';
     this.shortName = '';
     this.isProperNoun = false;
   }
 
-  get grammaticalName() {
-    let name = (this.shortName !== '') ? 
-      this.shortName :
-      this.name;
-    
-    if (! this.isProperNoun) {
-      name = `The ${name.toLowerCase()}`;
-    }
+  grammaticize(name) {
+    return (this.isProperNoun ? name : `the ${name.toLowerCase()}`);
+  }
 
-    return name;
+  get grammaticalFullName() {
+    return this.grammaticize(this.fullName);
+  }
+
+  get grammaticalShortName() {
+    return this.grammaticize(this.shortName);
+  }
+
+  get grammaticalName() {
+    return (this.shortName !== '') ?
+      this.grammaticalShortName :
+      this.grammaticalFullName;      
+  }
+
+  get toParserOptions() {
+    return {
+      name: this.grammaticalName,
+      fullName: this.grammaticalFullName
+    };
   }
 }
 

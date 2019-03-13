@@ -1,6 +1,7 @@
 import ReactionsSection from './reactions-section.js';
-import * as TestCustomElements from '../../../helpers/test/test-custom-elements.js';
+import Creature from '../../../stats/creature.js';
 
+import * as TestCustomElements from '../../../helpers/test/test-custom-elements.js';
 import * as sharedSpecs from './block-list-section.specs.js';
 
 const expectedItemType = 'Reaction';
@@ -13,6 +14,8 @@ beforeAll(async() => {
 });
 
 beforeEach(() => {
+  Creature.reset();
+
   reactionsSection = new ReactionsSection();
   TestCustomElements.initializeSection(reactionsSection);
   reactionsSection.connect();
@@ -40,8 +43,12 @@ describe('when the show section is clicked', () => {
   describe('and blocks are added and/or removed, and the edit section is submitted', () => {
     it('should add a single block', () => {
       const blockName = 'Parry';
-      const blockText = 'The gladiator adds 3 to its AC against one melee attack that would hit it. To do so, the gladiator must see the attacker and be wielding a melee weapon.';
-      sharedSpecs.shouldAddASingleBlock(reactionsSection, blockName, blockText);
+      const blockText = '{name} adds 3 to its AC against one melee attack that would hit it. To do so, {name} must see the attacker and be wielding a melee weapon.';
+      const expectedText = 'The gladiator adds 3 to its AC against one melee attack that would hit it. To do so, the gladiator must see the attacker and be wielding a melee weapon.';
+
+      Creature.fullName = 'Gladiator';
+
+      sharedSpecs.shouldAddASingleBlock(reactionsSection, blockName, blockText, expectedText);
     });
 
     it('should add multiple blocks', () => {
@@ -66,6 +73,7 @@ describe('when the show section is clicked', () => {
     it('should add a single block, then remove it', () => {
       const blockName = 'Split';
       const blockText = 'When a jelly that is Medium or larger is subjected to lightning or slashing damage, it splits into two new jellies if it has at least 10 hit points. Each new jelly has hit points equal to half the original jelly\'s, rounded down. New jellies are one size smaller than the original jelly.';
+
       sharedSpecs.shouldAddASingleBlockThenRemoveIt(reactionsSection, blockName, blockText);   
     });
 

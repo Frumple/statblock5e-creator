@@ -1,6 +1,7 @@
 import ActionsSection from './actions-section.js';
-import * as TestCustomElements from '../../../helpers/test/test-custom-elements.js';
+import Creature from '../../../stats/creature.js';
 
+import * as TestCustomElements from '../../../helpers/test/test-custom-elements.js';
 import * as sharedSpecs from './block-list-section.specs.js';
 
 const expectedItemType = 'Action';
@@ -13,6 +14,8 @@ beforeAll(async() => {
 });
 
 beforeEach(() => {
+  Creature.reset();
+
   actionsSection = new ActionsSection();
   TestCustomElements.initializeSection(actionsSection);
   actionsSection.connect();
@@ -49,7 +52,8 @@ describe('when the show section is clicked', () => {
       const blocks = [
         { 
           name: 'Multiattack',
-          text: 'The goblin makes two attacks with its scimitar. The second attack has disadvantage.'
+          text: '{name} makes two attacks with its scimitar. The second attack has disadvantage.',
+          expectedText: 'The goblin makes two attacks with its scimitar. The second attack has disadvantage.'
         },
         {
           name: 'Scimitar',
@@ -62,6 +66,9 @@ describe('when the show section is clicked', () => {
           expectedText: '<em>Melee or Ranged Weapon Attack:</em> +2 to hit, reach 5 ft. or range 30/120 ft., one target. <em>Hit:</em> 3 (1d6) piercing damage.'
         }
       ];
+
+      Creature.fullName = 'Goblin';
+
       sharedSpecs.shouldAddMultipleBlocks(actionsSection, blocks);
     });
 
@@ -75,7 +82,8 @@ describe('when the show section is clicked', () => {
       const blocks = [
         { 
           name: 'Multiattack',
-          text: 'The gladiator makes three melee attacks or two ranged attacks.'
+          text: '{name} makes three melee attacks or two ranged attacks.',
+          expectedText: 'The gladiator makes three melee attacks or two ranged attacks.'
         },
         {
           name: 'Spear',
@@ -88,6 +96,9 @@ describe('when the show section is clicked', () => {
           expectedText: '<em>Melee Weapon Attack:</em> +7 to hit, reach 5 ft., one creature. <em>Hit:</em> 9 (2d4 + 4) bludgeoning damage. If the target is a Medium or smaller creature, it must succeed on a DC 15 Strength saving throw or be knocked prone.'
         }
       ];
+
+      Creature.fullName = 'Gladiator';
+
       sharedSpecs.shouldAddMultipleBlocksThenRemoveOneOfThem(actionsSection, blocks, 1);
     });
 

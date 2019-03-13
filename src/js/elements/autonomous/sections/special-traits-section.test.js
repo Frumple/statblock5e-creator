@@ -1,6 +1,7 @@
 import SpecialTraitsSection from './special-traits-section.js';
-import * as TestCustomElements from '../../../helpers/test/test-custom-elements.js';
+import Creature from '../../../stats/creature.js';
 
+import * as TestCustomElements from '../../../helpers/test/test-custom-elements.js';
 import * as sharedSpecs from './block-list-section.specs.js';
 
 const expectedItemType = 'Special Trait';
@@ -13,6 +14,8 @@ beforeAll(async() => {
 });
 
 beforeEach(() => {
+  Creature.reset();
+
   specialTraitsSection = new SpecialTraitsSection();
   TestCustomElements.initializeSection(specialTraitsSection);
   specialTraitsSection.connect();
@@ -40,8 +43,12 @@ describe('when the show section is clicked', () => {
   describe('and blocks are added and/or removed, and the edit section is submitted', () => {
     it('should add a single block', () => {
       const blockName = 'Antimagic Susceptibility';
-      const blockText = 'The armor is incapacitated while in the area of an _antimagic field_. If targeted by *dispel magic*, the armor must succeed on a Constitution saving throw against the caster\'s sepll save DC or fall unconscious for 1 minute.';
-      const expectedText = 'The armor is incapacitated while in the area of an <em>antimagic field</em>. If targeted by <em>dispel magic</em>, the armor must succeed on a Constitution saving throw against the caster\'s sepll save DC or fall unconscious for 1 minute.';
+      const blockText = '{name} is incapacitated while in the area of an _antimagic field_. If targeted by *dispel magic*, {name} must succeed on a Constitution saving throw against the caster\'s spell save DC or fall unconscious for 1 minute.';
+      const expectedText = 'The armor is incapacitated while in the area of an <em>antimagic field</em>. If targeted by <em>dispel magic</em>, the armor must succeed on a Constitution saving throw against the caster\'s spell save DC or fall unconscious for 1 minute.';
+      
+      Creature.fullName = 'Animated Armor';
+      Creature.shortName = 'armor';
+      
       sharedSpecs.shouldAddASingleBlock(specialTraitsSection, blockName, blockText, expectedText);
     });
 
@@ -49,41 +56,59 @@ describe('when the show section is clicked', () => {
       const blocks = [
         { 
           name: 'Keen Hearing and Smell',
-          text: 'The wolf has advantage on Wisdom (Perception) checks that rely on hearing or smell.'
+          text: '{name} has advantage on Wisdom (Perception) checks that rely on hearing or smell.',
+          expectedText: 'The wolf has advantage on Wisdom (Perception) checks that rely on hearing or smell.'
         },
         {
           name: 'Pack Tactics',
-          text: 'The wolf has advantage on an attack roll against a creature if at least one of the creature\'s allies is within 5 feet of the creature and the ally isn\'t incapacitated.'
+          text: '{name} has advantage on an attack roll against a creature if at least one of the creature\'s allies is within 5 feet of the creature and the ally isn\'t incapacitated.',
+          expectedText: 'The wolf has advantage on an attack roll against a creature if at least one of the creature\'s allies is within 5 feet of the creature and the ally isn\'t incapacitated.'
         },
         {
           name: 'Snow Camouflage',
-          text: 'The wolf has advantage on Dexterity (Stealth) checks made to hide in snowy terrain.'
+          text: '{name} has advantage on Dexterity (Stealth) checks made to hide in snowy terrain.',
+          expectedText: 'The wolf has advantage on Dexterity (Stealth) checks made to hide in snowy terrain.'
         }
       ];
+
+      Creature.fullName = 'Winter Wolf';
+      Creature.shortName = 'wolf';
+
       sharedSpecs.shouldAddMultipleBlocks(specialTraitsSection, blocks);
     });
 
     it('should add a single block, then remove it', () => {
       const blockName = 'Spider Climb';
-      const blockText = 'The jelly can climb difficult surfaces, including upside down on ceilings, without needing to make an ability check.';
-      sharedSpecs.shouldAddASingleBlockThenRemoveIt(specialTraitsSection, blockName, blockText);   
+      const blockText = '{name} can climb difficult surfaces, including upside down on ceilings, without needing to make an ability check.';
+      const expectedText = 'The jelly can climb difficult surfaces, including upside down on ceilings, without needing to make an ability check.';
+
+      Creature.fullName = 'Ochre Jelly';
+      Creature.shortName = 'jelly';
+
+      sharedSpecs.shouldAddASingleBlockThenRemoveIt(specialTraitsSection, blockName, blockText, expectedText);   
     });
 
     it('should add multiple blocks, then remove one of them', () => {
       const blocks = [
         { 
           name: 'Advanced Telepathy',
-          text: 'The flumph can perceive the content of any telepathic communication used within 60 feet of it, and it can\'t be surprised by creatures with any form to telepathy.'
+          text: '{name} can perceive the content of any telepathic communication used within 60 feet of it, and it can\'t be surprised by creatures with any form to telepathy.',
+          expectedText: 'The flumph can perceive the content of any telepathic communication used within 60 feet of it, and it can\'t be surprised by creatures with any form to telepathy.'
         },
         {
           name: 'Prone Deficiency',
-          text: 'If the flumph is knocked prone, roll a die. On an odd result, the flumph lands upside-down and is incapacitated. At the end each of its turns, the flumph can make a DC 10 Dexterity saving throw, righting itself and ending the incapacitated condition if it succeeds.'
+          text: 'If {name} is knocked prone, roll a die. On an odd result, the flumph lands upside-down and is incapacitated. At the end each of its turns, the flumph can make a DC 10 Dexterity saving throw, righting itself and ending the incapacitated condition if it succeeds.',
+          expectedText: 'If the flumph is knocked prone, roll a die. On an odd result, the flumph lands upside-down and is incapacitated. At the end each of its turns, the flumph can make a DC 10 Dexterity saving throw, righting itself and ending the incapacitated condition if it succeeds.'
         },
         {
           name: 'Telepathic Shroud',
-          text: 'The flumph is immune to any effect that would sense its emotions or read its thoughts, as well as all diviniation spells.'
+          text: '{name} is immune to any effect that would sense its emotions or read its thoughts, as well as all diviniation spells.',
+          expectedText: 'The flumph is immune to any effect that would sense its emotions or read its thoughts, as well as all diviniation spells.'
         }
       ];
+
+      Creature.fullName = 'Flumph';
+
       sharedSpecs.shouldAddMultipleBlocksThenRemoveOneOfThem(specialTraitsSection, blocks, 1);
     });
 
