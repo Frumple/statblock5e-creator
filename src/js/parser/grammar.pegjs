@@ -1,7 +1,4 @@
 {
-  const name = options['name'];
-  const fullName = options['fullName'];
-
   function capitalizeFirstLetter(string) {
     return string.charAt(0).toUpperCase() + string.slice(1);
   }
@@ -47,16 +44,16 @@ NameExpression
   / FullName
 
 BeginningName
-  = '{name}' { return capitalizeFirstLetter(name); }
+  = literal:'{name}' { return (options.settings.enableExpressions ? capitalizeFirstLetter(options.creature.name) : literal); }
 
 BeginningFullName
-  = '{fullname}' { return capitalizeFirstLetter(fullName); }
+  = literal:'{fullname}' { return (options.settings.enableExpressions ? capitalizeFirstLetter(options.creature.fullName) : literal); }
 
 Name
-  = '{name}' { return name; }
+  = literal:'{name}' { return (options.settings.enableExpressions ? options.creature.name : literal); }
 
 FullName
-  = '{fullname}' { return fullName; }
+  = literal:'{fullname}' { return (options.settings.enableExpressions ? options.creature.fullName : literal); }
 
 Markup
   = Strong
@@ -134,7 +131,7 @@ SpecialChar
   = '*' / '_' / '{' / '}' / '.'
 
 NewLineChar
-  = '\n' / carriage:'\r' newline:'\n'? { return `${carriage}${newline ? newline : ''}` }
+  = '\n' / $('\r' '\n'?)
   
 SpaceChar
   = ' ' / '\t'

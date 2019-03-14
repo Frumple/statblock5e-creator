@@ -24,7 +24,10 @@ export let TextInputMixin = {
     if (this.required && sanitizedValue === '') {      
       errorMessages.add(this, `${fieldName} cannot be blank.`);
     } else if ('parsed' in this.dataset) {
-      const parserResults = parseText(sanitizedValue);
+      const parserSettings = {
+        enableExpressions: false
+      };
+      const parserResults = parseText(sanitizedValue, parserSettings);
       const error = parserResults.error;
 
       if (error) {

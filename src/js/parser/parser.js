@@ -146,12 +146,12 @@ export default (function() {
         peg$c2 = function(period, whitespace, expression) { return `${period}${whitespace}${expression}`; },
         peg$c3 = "{name}",
         peg$c4 = peg$literalExpectation("{name}", false),
-        peg$c5 = function() { return capitalizeFirstLetter(name); },
+        peg$c5 = function(literal) { return (options.settings.enableExpressions ? capitalizeFirstLetter(options.creature.name) : literal); },
         peg$c6 = "{fullname}",
         peg$c7 = peg$literalExpectation("{fullname}", false),
-        peg$c8 = function() { return capitalizeFirstLetter(fullName); },
-        peg$c9 = function() { return name; },
-        peg$c10 = function() { return fullName; },
+        peg$c8 = function(literal) { return (options.settings.enableExpressions ? capitalizeFirstLetter(options.creature.fullName) : literal); },
+        peg$c9 = function(literal) { return (options.settings.enableExpressions ? options.creature.name : literal); },
+        peg$c10 = function(literal) { return (options.settings.enableExpressions ? options.creature.fullName : literal); },
         peg$c11 = "**",
         peg$c12 = peg$literalExpectation("**", false),
         peg$c13 = function(inline) { return `<strong>${inline.join('')}</strong>`; },
@@ -173,11 +173,10 @@ export default (function() {
         peg$c29 = peg$literalExpectation("\n", false),
         peg$c30 = "\r",
         peg$c31 = peg$literalExpectation("\r", false),
-        peg$c32 = function(carriage, newline) { return `${carriage}${newline ? newline : ''}` },
-        peg$c33 = " ",
-        peg$c34 = peg$literalExpectation(" ", false),
-        peg$c35 = "\t",
-        peg$c36 = peg$literalExpectation("\t", false),
+        peg$c32 = " ",
+        peg$c33 = peg$literalExpectation(" ", false),
+        peg$c34 = "\t",
+        peg$c35 = peg$literalExpectation("\t", false),
 
         peg$currPos          = 0,
         peg$savedPos         = 0,
@@ -489,7 +488,7 @@ export default (function() {
       }
       if (s1 !== peg$FAILED) {
         peg$savedPos = s0;
-        s1 = peg$c5();
+        s1 = peg$c5(s1);
       }
       s0 = s1;
 
@@ -509,7 +508,7 @@ export default (function() {
       }
       if (s1 !== peg$FAILED) {
         peg$savedPos = s0;
-        s1 = peg$c8();
+        s1 = peg$c8(s1);
       }
       s0 = s1;
 
@@ -529,7 +528,7 @@ export default (function() {
       }
       if (s1 !== peg$FAILED) {
         peg$savedPos = s0;
-        s1 = peg$c9();
+        s1 = peg$c9(s1);
       }
       s0 = s1;
 
@@ -549,7 +548,7 @@ export default (function() {
       }
       if (s1 !== peg$FAILED) {
         peg$savedPos = s0;
-        s1 = peg$c10();
+        s1 = peg$c10(s1);
       }
       s0 = s1;
 
@@ -1044,7 +1043,7 @@ export default (function() {
     }
 
     function peg$parseNewLineChar() {
-      var s0, s1, s2;
+      var s0, s1, s2, s3;
 
       if (input.charCodeAt(peg$currPos) === 10) {
         s0 = peg$c28;
@@ -1055,35 +1054,40 @@ export default (function() {
       }
       if (s0 === peg$FAILED) {
         s0 = peg$currPos;
+        s1 = peg$currPos;
         if (input.charCodeAt(peg$currPos) === 13) {
-          s1 = peg$c30;
+          s2 = peg$c30;
           peg$currPos++;
         } else {
-          s1 = peg$FAILED;
+          s2 = peg$FAILED;
           if (peg$silentFails === 0) { peg$fail(peg$c31); }
         }
-        if (s1 !== peg$FAILED) {
+        if (s2 !== peg$FAILED) {
           if (input.charCodeAt(peg$currPos) === 10) {
-            s2 = peg$c28;
+            s3 = peg$c28;
             peg$currPos++;
           } else {
-            s2 = peg$FAILED;
+            s3 = peg$FAILED;
             if (peg$silentFails === 0) { peg$fail(peg$c29); }
           }
-          if (s2 === peg$FAILED) {
-            s2 = null;
+          if (s3 === peg$FAILED) {
+            s3 = null;
           }
-          if (s2 !== peg$FAILED) {
-            peg$savedPos = s0;
-            s1 = peg$c32(s1, s2);
-            s0 = s1;
+          if (s3 !== peg$FAILED) {
+            s2 = [s2, s3];
+            s1 = s2;
           } else {
-            peg$currPos = s0;
-            s0 = peg$FAILED;
+            peg$currPos = s1;
+            s1 = peg$FAILED;
           }
         } else {
-          peg$currPos = s0;
-          s0 = peg$FAILED;
+          peg$currPos = s1;
+          s1 = peg$FAILED;
+        }
+        if (s1 !== peg$FAILED) {
+          s0 = input.substring(s0, peg$currPos);
+        } else {
+          s0 = s1;
         }
       }
 
@@ -1094,19 +1098,19 @@ export default (function() {
       var s0;
 
       if (input.charCodeAt(peg$currPos) === 32) {
-        s0 = peg$c33;
+        s0 = peg$c32;
         peg$currPos++;
       } else {
         s0 = peg$FAILED;
-        if (peg$silentFails === 0) { peg$fail(peg$c34); }
+        if (peg$silentFails === 0) { peg$fail(peg$c33); }
       }
       if (s0 === peg$FAILED) {
         if (input.charCodeAt(peg$currPos) === 9) {
-          s0 = peg$c35;
+          s0 = peg$c34;
           peg$currPos++;
         } else {
           s0 = peg$FAILED;
-          if (peg$silentFails === 0) { peg$fail(peg$c36); }
+          if (peg$silentFails === 0) { peg$fail(peg$c35); }
         }
       }
 
@@ -1150,9 +1154,6 @@ export default (function() {
       return s0;
     }
 
-
-      const name = options['name'];
-      const fullName = options['fullName'];
 
       function capitalizeFirstLetter(string) {
         return string.charAt(0).toUpperCase() + string.slice(1);

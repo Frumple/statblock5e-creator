@@ -1,9 +1,14 @@
 import Parser from './parser.js';
 import Creature from '../stats/creature.js';
 
-export default function(inputText) {
+const defaultSettings = {
+  enableExpressions: true
+};
+
+export default function(inputText, settings = defaultSettings) {
   const parserOptions = {};
-  Object.assign(parserOptions, Creature.toParserOptions);
+  parserOptions.settings = settings;
+  parserOptions.creature = Creature.toParserOptions;
 
   const parserResults = {
     inputText: inputText,

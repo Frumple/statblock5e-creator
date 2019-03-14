@@ -156,3 +156,22 @@ describe('should return an error with invalid name expressions', () => {
   });
   /* eslint-enable indent, no-unexpected-multiline */
 });
+
+it('should not parse expressions if disabled in settings', () => {
+  const inputText =
+    '{name} should not be parsed, neither should {fullname}. **Markdown _formatting_ should still work.**';
+
+  const expectedOutputText =
+    '{name} should not be parsed, neither should {fullname}. <strong>Markdown <em>formatting</em> should still work.</strong>';
+
+  const settings = {
+    enableExpressions: false
+  };
+
+  const parserResults = parseText(inputText, settings);    
+  
+  expect(parserResults).not.toBeNull();
+  expect(parserResults.inputText).toBe(inputText);
+  expect(parserResults.outputText).toBe(expectedOutputText);
+  expect(parserResults.error).toBeNull();
+});
