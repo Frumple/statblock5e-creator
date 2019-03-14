@@ -5,6 +5,26 @@ beforeEach(() => {
   Creature.reset();
 });
 
+it('should preserve newline characters', () => {
+  const inputText =
+    '\n' +
+    'Line 2\n' +
+    '\n' +
+    'Line 4\r\n' +
+    'Line 5\n' +
+    '\n' +
+    '\n' +
+    'Line 8\n' +
+    '\n';
+
+  const parserResults = parseText(inputText);    
+  
+  expect(parserResults).not.toBeNull();
+  expect(parserResults.inputText).toBe(inputText);
+  expect(parserResults.outputText).toBe(inputText);
+  expect(parserResults.error).toBeNull();
+});
+
 describe('should parse valid markdown formatting', () => {
   /* eslint-disable indent, no-unexpected-multiline */
   it.each

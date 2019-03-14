@@ -8,10 +8,17 @@
 }
 
 start
-  = line:Line+ { return line.join('\n'); }
+  = line:Line+ { return line.join(''); }
   
 Line
-  = beginningInline:BeginningInline inline:Inline* EndOfLine { return `${beginningInline}${inline.join('')}`; }
+  = BlankLine
+  / NormalLine
+
+BlankLine
+  = NewLineChar
+
+NormalLine
+  = beginningInline:BeginningInline inline:Inline* end:EndOfLine { return `${beginningInline}${inline.join('')}${end ? end : ''}`; }
 
 BeginningInline
   = BeginningNameExpression
@@ -118,7 +125,7 @@ Whitespace
   = SpaceChar+
 
 EndOfLine
-  = NewLineChar+ / End
+  = NewLineChar / End
 
 NormalChar
   = !( SpecialChar / SpaceChar / NewLineChar ) .
@@ -127,7 +134,7 @@ SpecialChar
   = '*' / '_' / '{' / '}' / '.'
 
 NewLineChar
-  = '\n' / '\r' '\n'?
+  = '\n' / carriage:'\r' newline:'\n'? { return `${carriage}${newline ? newline : ''}` }
   
 SpaceChar
   = ' ' / '\t'

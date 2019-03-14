@@ -15,6 +15,7 @@ h4 {
 p:first-of-type {
   display: inline;
   text-indent: 0;
+  white-space: pre-wrap;
 }
 
 p {

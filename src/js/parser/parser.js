@@ -141,8 +141,8 @@ export default (function() {
         peg$startRuleFunctions = { start: peg$parsestart },
         peg$startRuleFunction  = peg$parsestart,
 
-        peg$c0 = function(line) { return line.join('\n'); },
-        peg$c1 = function(beginningInline, inline) { return `${beginningInline}${inline.join('')}`; },
+        peg$c0 = function(line) { return line.join(''); },
+        peg$c1 = function(beginningInline, inline, end) { return `${beginningInline}${inline.join('')}${end ? end : ''}`; },
         peg$c2 = function(period, whitespace, expression) { return `${period}${whitespace}${expression}`; },
         peg$c3 = "{name}",
         peg$c4 = peg$literalExpectation("{name}", false),
@@ -173,10 +173,11 @@ export default (function() {
         peg$c29 = peg$literalExpectation("\n", false),
         peg$c30 = "\r",
         peg$c31 = peg$literalExpectation("\r", false),
-        peg$c32 = " ",
-        peg$c33 = peg$literalExpectation(" ", false),
-        peg$c34 = "\t",
-        peg$c35 = peg$literalExpectation("\t", false),
+        peg$c32 = function(carriage, newline) { return `${carriage}${newline ? newline : ''}` },
+        peg$c33 = " ",
+        peg$c34 = peg$literalExpectation(" ", false),
+        peg$c35 = "\t",
+        peg$c36 = peg$literalExpectation("\t", false),
 
         peg$currPos          = 0,
         peg$savedPos         = 0,
@@ -338,6 +339,17 @@ export default (function() {
     }
 
     function peg$parseLine() {
+      var s0;
+
+      s0 = peg$parseNewLineChar();
+      if (s0 === peg$FAILED) {
+        s0 = peg$parseNormalLine();
+      }
+
+      return s0;
+    }
+
+    function peg$parseNormalLine() {
       var s0, s1, s2, s3;
 
       s0 = peg$currPos;
@@ -353,7 +365,7 @@ export default (function() {
           s3 = peg$parseEndOfLine();
           if (s3 !== peg$FAILED) {
             peg$savedPos = s0;
-            s1 = peg$c1(s1, s2);
+            s1 = peg$c1(s1, s2, s3);
             s0 = s1;
           } else {
             peg$currPos = s0;
@@ -928,18 +940,9 @@ export default (function() {
     }
 
     function peg$parseEndOfLine() {
-      var s0, s1;
+      var s0;
 
-      s0 = [];
-      s1 = peg$parseNewLineChar();
-      if (s1 !== peg$FAILED) {
-        while (s1 !== peg$FAILED) {
-          s0.push(s1);
-          s1 = peg$parseNewLineChar();
-        }
-      } else {
-        s0 = peg$FAILED;
-      }
+      s0 = peg$parseNewLineChar();
       if (s0 === peg$FAILED) {
         s0 = peg$parseEnd();
       }
@@ -1071,7 +1074,8 @@ export default (function() {
             s2 = null;
           }
           if (s2 !== peg$FAILED) {
-            s1 = [s1, s2];
+            peg$savedPos = s0;
+            s1 = peg$c32(s1, s2);
             s0 = s1;
           } else {
             peg$currPos = s0;
@@ -1090,19 +1094,19 @@ export default (function() {
       var s0;
 
       if (input.charCodeAt(peg$currPos) === 32) {
-        s0 = peg$c32;
+        s0 = peg$c33;
         peg$currPos++;
       } else {
         s0 = peg$FAILED;
-        if (peg$silentFails === 0) { peg$fail(peg$c33); }
+        if (peg$silentFails === 0) { peg$fail(peg$c34); }
       }
       if (s0 === peg$FAILED) {
         if (input.charCodeAt(peg$currPos) === 9) {
-          s0 = peg$c34;
+          s0 = peg$c35;
           peg$currPos++;
         } else {
           s0 = peg$FAILED;
-          if (peg$silentFails === 0) { peg$fail(peg$c35); }
+          if (peg$silentFails === 0) { peg$fail(peg$c36); }
         }
       }
 
