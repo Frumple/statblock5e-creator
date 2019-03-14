@@ -1,4 +1,5 @@
 import CustomAutonomousElement from '../custom-autonomous-element.js';
+import sanitizeHTML from '../../../helpers/sanitize-html.js';
 
 export default class DisplayBlockListItem extends CustomAutonomousElement {
   static get elementName() { return 'display-block-list-item'; }
@@ -28,6 +29,6 @@ export default class DisplayBlockListItem extends CustomAutonomousElement {
   }
 
   set text(text) {
-    this.textElement.innerHTML = text;
+    this.textElement.innerHTML = sanitizeHTML(text);
   }
 }

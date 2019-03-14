@@ -61,6 +61,7 @@ describe('when the show section is clicked', () => {
         speedSection.editElements.submitForm();
 
         expect(speedSection).toBeInMode('show');
+        expect(speedSection.showElements.text).toHaveTextContent('40 ft. (80 ft. when hasted)');
         expect(speedSection.showElements.text).toContainHTML('40 ft. (80 ft. when <em>hasted</em>)');
       });
 

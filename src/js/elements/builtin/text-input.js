@@ -19,15 +19,13 @@ export let TextInputMixin = {
     const prettyName = this.getAttribute('pretty-name');
     const fieldName = prettyName ? prettyName : this.name;
 
-    const sanitizedValue = DOMPurify.sanitize(this.value);
-
-    if (this.required && sanitizedValue === '') {      
+    if (this.required && this.value === '') {      
       errorMessages.add(this, `${fieldName} cannot be blank.`);
     } else if ('parsed' in this.dataset) {
       const parserSettings = {
         enableExpressions: false
       };
-      const parserResults = parseText(sanitizedValue, parserSettings);
+      const parserResults = parseText(this.value, parserSettings);
       const error = parserResults.error;
 
       if (error) {

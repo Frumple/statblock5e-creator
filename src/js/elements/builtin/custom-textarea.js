@@ -30,12 +30,10 @@ const CustomTextAreaMixin = {
     const prettyName = this.getAttribute('pretty-name');
     const fieldName = prettyName ? prettyName : this.name;
 
-    const sanitizedValue = DOMPurify.sanitize(this.value);
-
-    if (this.required && sanitizedValue === '') {      
+    if (this.required && this.value === '') {      
       errorMessages.add(this, `${fieldName} cannot be blank.`);
     } else if('parsed' in this.dataset) {
-      const parserResults = parseText(sanitizedValue);
+      const parserResults = parseText(this.value);
       const error = parserResults.error;
 
       if (error) {

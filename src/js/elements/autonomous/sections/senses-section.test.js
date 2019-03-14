@@ -67,6 +67,7 @@ describe('when the show section is clicked', () => {
         sensesSection.editElements.submitForm();
 
         expect(sensesSection).toBeInMode('show');
+        expect(sensesSection.showElements.text).toHaveTextContent('boldvision 60 ft.');
         expect(sensesSection.showElements.text).toContainHTML('<strong>boldvision 60 ft.</strong>');
       });
 
@@ -177,7 +178,7 @@ describe('should calculate the passive perception based on the following conditi
     Abilities.abilities['wisdom'].score = wisdomScore;
     ProficiencyBonus.proficiencyBonus = proficiencyBonus;
 
-    let skill = Skills.skills['perception'];
+    const skill = Skills.skills['perception'];
     skill.isEnabled = perceptionEnabled;
     skill.isProficient = perceptionProficient;
     skill.override = perceptionOverride;

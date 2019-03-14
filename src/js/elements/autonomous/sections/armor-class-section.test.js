@@ -58,6 +58,7 @@ describe('when the show section is clicked', () => {
         armorClassSection.editElements.submitForm();
 
         expect(armorClassSection).toBeInMode('show');
+        expect(armorClassSection.showElements.text).toHaveTextContent('12 (15 with mage armor)');
         expect(armorClassSection.showElements.text).toContainHTML('12 (15 with <em>mage armor</em>)');
       });
 
