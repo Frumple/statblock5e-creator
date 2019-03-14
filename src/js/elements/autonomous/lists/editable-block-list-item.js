@@ -58,6 +58,10 @@ export default class EditableBlockListItem extends DragAndDropListItem {
   }
 
   get text() {
+    return this.textElement.text;
+  }
+
+  get parsedText() {
     return this.textElement.parsedText;
   }
 

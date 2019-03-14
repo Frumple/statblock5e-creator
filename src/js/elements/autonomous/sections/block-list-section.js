@@ -80,17 +80,28 @@ export default class BlockListSection extends sectionModule.Section {
   }
 
   updateShowSection() {
-    let blocks = this.editElements.editableList.blocks;
+    const blocks = this.editElements.editableList.blocks;
 
     this.showElements.displayList.clear();
-    for (const textBlock of blocks) {
-      this.showElements.displayList.addBlock(textBlock.name, textBlock.text);
+    for (const block of blocks) {
+      this.showElements.displayList.addBlock(block.name, block.parsedText);
     }
 
     if (blocks.length > 0) {
       this.empty = false;
     } else {
       this.empty = true;
+    }
+  }
+
+  reparse() {
+    if (this.mode !== 'edit') {
+      this.checkForErrors();
+
+      for (const [index, editableBlock] of this.editElements.editableList.blocks.entries()) {
+        const displayBlock = this.showElements.displayList.blocks[index];
+        displayBlock.text = editableBlock.parsedText;
+      }
     }
   }
 }

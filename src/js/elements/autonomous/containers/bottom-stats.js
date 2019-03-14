@@ -14,23 +14,35 @@ export default class BottomStats extends CustomAutonomousElement {
     this.specialTraitsSection = document.querySelector('special-traits-section');
     this.actionsSection = document.querySelector('actions-section');
     this.reactionsSection = document.querySelector('reactions-section');
+
+    this.allSections = [
+      this.specialTraitsSection,
+      this.actionsSection,
+      this.reactionsSection
+    ];
   }
 
   setEmptySectionsVisibility(visibility) {
-    this.specialTraitsSection.setEmptyVisibility(visibility);
-    this.actionsSection.setEmptyVisibility(visibility);
-    this.reactionsSection.setEmptyVisibility(visibility);
+    for (const section of this.allSections) {
+      section.setEmptyVisibility(visibility);
+    }
   }
 
   editAllSections() {
-    this.specialTraitsSection.edit();
-    this.actionsSection.edit();
-    this.reactionsSection.edit();
+    for (const section of this.allSections) {
+      section.edit();
+    }
   }
 
   saveAllSections() {
-    this.specialTraitsSection.save();
-    this.actionsSection.save();
-    this.reactionsSection.save();
+    for (const section of this.allSections) {
+      section.save();
+    }
+  }
+
+  reparseAllSections() {
+    for (const section of this.allSections) {
+      section.reparse();
+    }
   }
 }

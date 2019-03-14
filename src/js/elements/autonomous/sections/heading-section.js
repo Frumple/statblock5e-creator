@@ -26,13 +26,17 @@ export default class HeadingSection extends sectionModule.Section {
   }
 
   onInputCreatureName() {
-    Creature.fullName = this.editElements.fullName.value;
-    this.dispatchCreatureNameChangedEvent();
+    const fullName = this.editElements.fullName.value;
+
+    if (fullName !== '') {
+      Creature.fullName = fullName;
+      this.dispatchCreatureNameChangedEvent();
+    }    
   }
 
   onInputShortName() {
     Creature.shortName = this.editElements.shortName.value;
-    this.dispatchCreatureNameChangedEvent();
+    this.dispatchCreatureNameChangedEvent(); 
   }
 
   onInputProperNoun() {

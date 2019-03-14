@@ -112,6 +112,53 @@ describe('when the show section is clicked', () => {
       sharedSpecs.shouldAddMultipleBlocksThenRemoveOneOfThem(specialTraitsSection, blocks, 1);
     });
 
+    describe('should reparse the block text', () => {
+      const blockName = 'Pack Tactics';
+      const blockText = '{name} has advantage on an attack roll against a creature if at least one of {name}\'s allies is within 5 feet of the creature an ally isn\'t incapacitated.';
+
+      const oldNames = {
+        fullName: 'Winged Kobold',
+        shortName: '',
+        isProperNoun: false
+      };
+
+      it('when the full name is changed', () => {
+        const newNames = {
+          fullName: 'Burrowing Kobold',
+          shortName: '',
+          isProperNoun: false
+        };
+
+        const expectedText = 'The burrowing kobold has advantage on an attack roll against a creature if at least one of the burrowing kobold\'s allies is within 5 feet of the creature an ally isn\'t incapacitated.';
+
+        sharedSpecs.shouldReparseNameChanges(specialTraitsSection, blockName, blockText, oldNames, newNames, expectedText);
+      });
+
+      it('when the short name is changed', () => {
+        const newNames = {
+          fullName: 'Winged Kobold',
+          shortName: 'kobold',
+          isProperNoun: false
+        };
+
+        const expectedText = 'The kobold has advantage on an attack roll against a creature if at least one of the kobold\'s allies is within 5 feet of the creature an ally isn\'t incapacitated.';
+
+        sharedSpecs.shouldReparseNameChanges(specialTraitsSection, blockName, blockText, oldNames, newNames, expectedText);
+      });
+
+      it('when the proper noun is changed', () => {
+        const newNames = {
+          fullName: 'Winged Kobold',
+          shortName: '',
+          isProperNoun: true
+        };
+
+        const expectedText = 'Winged Kobold has advantage on an attack roll against a creature if at least one of Winged Kobold\'s allies is within 5 feet of the creature an ally isn\'t incapacitated.';
+
+        sharedSpecs.shouldReparseNameChanges(specialTraitsSection, blockName, blockText, oldNames, newNames, expectedText);
+      });
+    });
+
     it('should trim all trailing period characters in the block name', () => {
       sharedSpecs.shouldTrimAllTrailingPeriodCharactersInBlockName(specialTraitsSection);
     });

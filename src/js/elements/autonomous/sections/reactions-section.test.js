@@ -96,6 +96,53 @@ describe('when the show section is clicked', () => {
       sharedSpecs.shouldAddMultipleBlocksThenRemoveOneOfThem(reactionsSection, blocks, 1);
     });
 
+    describe('should reparse the block text', () => {
+      const blockName = 'Shield';
+      const blockText = 'When a creature makes an attack against the wearer of {name}\'s amulet, {name} grants a +2 bonus to the wearer\'s AC if {name} is within 5 feet of the wearer.';
+
+      const oldNames = {
+        fullName: 'Shield Guardian',
+        shortName: '',
+        isProperNoun: false
+      };
+
+      it('when the full name is changed', () => {
+        const newNames = {
+          fullName: 'Shield Automaton',
+          shortName: '',
+          isProperNoun: false
+        };
+
+        const expectedText = 'When a creature makes an attack against the wearer of the shield automaton\'s amulet, the shield automaton grants a +2 bonus to the wearer\'s AC if the shield automaton is within 5 feet of the wearer.';
+
+        sharedSpecs.shouldReparseNameChanges(reactionsSection, blockName, blockText, oldNames, newNames, expectedText);
+      });
+
+      it('when the short name is changed', () => {
+        const newNames = {
+          fullName: 'Shield Guardian',
+          shortName: 'guardian',
+          isProperNoun: false
+        };
+
+        const expectedText = 'When a creature makes an attack against the wearer of the guardian\'s amulet, the guardian grants a +2 bonus to the wearer\'s AC if the guardian is within 5 feet of the wearer.';
+
+        sharedSpecs.shouldReparseNameChanges(reactionsSection, blockName, blockText, oldNames, newNames, expectedText);
+      });
+
+      it('when the proper noun is changed', () => {
+        const newNames = {
+          fullName: 'Shield Guardian',
+          shortName: '',
+          isProperNoun: true
+        };
+
+        const expectedText = 'When a creature makes an attack against the wearer of Shield Guardian\'s amulet, Shield Guardian grants a +2 bonus to the wearer\'s AC if Shield Guardian is within 5 feet of the wearer.';
+
+        sharedSpecs.shouldReparseNameChanges(reactionsSection, blockName, blockText, oldNames, newNames, expectedText);
+      });
+    });
+
     it('should trim all trailing period characters in the block name', () => {
       sharedSpecs.shouldTrimAllTrailingPeriodCharactersInBlockName(reactionsSection);
     });

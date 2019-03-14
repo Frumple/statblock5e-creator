@@ -28,8 +28,7 @@ export default class StatBlock extends CustomAutonomousElement {
   }
 
   onCreatureNameChanged() {
-    // TODO: Update block list sections when the creature name field, 
-    //       short name field, and/or the proper noun checkbox are changed.
+    this.reparseAllSections();
   }
   
   onAbilityScoreChanged() {
@@ -90,5 +89,9 @@ export default class StatBlock extends CustomAutonomousElement {
     this.topStats.saveAllSections();
     this.bottomStats.saveAllSections();
     this.headingSection.save();
+  }
+
+  reparseAllSections() {
+    this.bottomStats.reparseAllSections();
   }
 }

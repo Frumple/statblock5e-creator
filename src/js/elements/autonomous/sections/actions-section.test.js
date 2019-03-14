@@ -102,6 +102,53 @@ describe('when the show section is clicked', () => {
       sharedSpecs.shouldAddMultipleBlocksThenRemoveOneOfThem(actionsSection, blocks, 1);
     });
 
+    describe('should reparse the block text', () => {
+      const blockName = 'Teleport (Recharge 4-6)';
+      const blockText = '{name} magically teleports, along with any equipment it is wearing or carrying, up to 40 feet to an unoccupied space it can see. Before or after teleporting, {name} can make one bite attack.';
+
+      const oldNames = {
+        fullName: 'Blink Dog',
+        shortName: '',
+        isProperNoun: false
+      };
+
+      it('when the full name is changed', () => {
+        const newNames = {
+          fullName: 'Blink Doggo',
+          shortName: '',
+          isProperNoun: false
+        };
+
+        const expectedText = 'The blink doggo magically teleports, along with any equipment it is wearing or carrying, up to 40 feet to an unoccupied space it can see. Before or after teleporting, the blink doggo can make one bite attack.';
+
+        sharedSpecs.shouldReparseNameChanges(actionsSection, blockName, blockText, oldNames, newNames, expectedText);
+      });
+
+      it('when the short name is changed', () => {
+        const newNames = {
+          fullName: 'Blink Dog',
+          shortName: 'dog',
+          isProperNoun: false
+        };
+
+        const expectedText = 'The dog magically teleports, along with any equipment it is wearing or carrying, up to 40 feet to an unoccupied space it can see. Before or after teleporting, the dog can make one bite attack.';
+
+        sharedSpecs.shouldReparseNameChanges(actionsSection, blockName, blockText, oldNames, newNames, expectedText);
+      });
+
+      it('when the proper noun is changed', () => {
+        const newNames = {
+          fullName: 'Blink Dog',
+          shortName: '',
+          isProperNoun: true
+        };
+
+        const expectedText = 'Blink Dog magically teleports, along with any equipment it is wearing or carrying, up to 40 feet to an unoccupied space it can see. Before or after teleporting, Blink Dog can make one bite attack.';
+
+        sharedSpecs.shouldReparseNameChanges(actionsSection, blockName, blockText, oldNames, newNames, expectedText);
+      });
+    });
+
     it('should trim all trailing period characters in the block name', () => {
       sharedSpecs.shouldTrimAllTrailingPeriodCharactersInBlockName(actionsSection);
     });

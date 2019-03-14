@@ -1,4 +1,5 @@
 import { inputValueAndTriggerEvent } from '../../../helpers/element-helpers.js';
+import Creature from '../../../stats/creature.js';
 
 export function shouldSwitchToEditModeAndFocusOnAddButtonIfNoBlocks(section) {  
   expect(section).toBeInMode('edit');
@@ -81,6 +82,30 @@ export function shouldAddMultipleBlocksThenRemoveOneOfThem(section, blocks, remo
   expectSectionToBeEmpty(section, false);
 
   blocks.splice(removeIndex, 1);
+
+  expectDisplayBlocks(section, blocks);
+}
+
+export function shouldReparseNameChanges(section, blockName, blockText, oldNames, newNames, expectedText) {
+  Creature.fullName = oldNames.fullName;
+  Creature.shortName = oldNames.shortName;
+  Creature.isProperNoun = oldNames.isProperNoun;
+  
+  addAndPopulateBlock(section, blockName, blockText);
+
+  section.editElements.submitForm();
+
+  Creature.fullName = newNames.fullName;
+  Creature.shortName = newNames.shortName;
+  Creature.isProperNoun = newNames.isProperNoun;
+
+  section.reparse();
+
+  const blocks = [{
+    name: blockName,
+    text: blockText,
+    expectedText: expectedText
+  }];
 
   expectDisplayBlocks(section, blocks);
 }
