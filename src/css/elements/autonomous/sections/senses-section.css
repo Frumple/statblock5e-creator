@@ -43,4 +43,9 @@
   justify-self: end;
 }
 .senses-edit-section__custom-label { grid-area: 8 / 2 / 9 / 5; }
+.senses-edit-section__custom-text-help-tooltip {
+  grid-area: 9 / 1;
+  justify-self: end;
+  align-self: end;
+}
 .senses-edit-section__custom-input { grid-area: 9 / 2 / 10 / 5; }

@@ -1,0 +1,10 @@
+.custom-text-help-tooltip {
+  --help-tooltip-width: 55em;
+}
+
+code {
+  background: white;
+  border-radius: 3px;
+  font-family: Courier, monospace;
+  padding: 0 3px;
+}

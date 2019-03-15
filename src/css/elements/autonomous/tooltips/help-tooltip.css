@@ -13,7 +13,7 @@
   position: absolute;
   z-index: 2;
   visibility: hidden;
-  background: white;
+  background: #eeeeee;
   color: black;
   border: 1px solid black;
   white-space: normal;
@@ -27,15 +27,29 @@
 
 ::slotted(h4) {
   margin-top: 0;
+  margin-bottom: 0;
 }
 
 ::slotted(p) {
-  margin-top: 0;  
+  margin-top: 0;
+  margin-bottom: 0;
+}
+
+::slotted(ul) {
+  margin-top: 0;
+  margin-bottom: 0;
 }
 
 ::slotted(blockquote) {
-  font-family: monospace;
+  background: white;
+  border-radius: 3px;
+  font-family: Courier, monospace;
+  padding: 0 3px;
   white-space: pre-wrap;
+}
+
+::slotted(table) {
+  margin-left: 40px;
 }
 
 ::slotted(cite) {

@@ -5,11 +5,13 @@ import PropertyDataList from './elements/builtin/property-datalist.js';
 import TextInput from './elements/builtin/text-input.js';
 
 import ErrorMessages from './elements/autonomous/error-messages.js';
-import HelpTooltip from './elements/autonomous/help-tooltip.js';
 import PropertyBlock from './elements/autonomous/property-block.js';
 import PropertyLine from './elements/autonomous/property-line.js';
 import SectionDivider from './elements/autonomous/section-divider.js';
 import TaperedRule from './elements/autonomous/tapered-rule.js';
+
+import HelpTooltip from './elements/autonomous/tooltips/help-tooltip.js';
+import CustomTextHelpTooltip from './elements/autonomous/tooltips/custom-text-help-tooltip.js';
 
 import DisplayBlockList from './elements/autonomous/lists/display-block-list.js';
 import DisplayBlockListItem from './elements/autonomous/lists/display-block-list-item.js';
@@ -55,11 +57,13 @@ async function init() {
   elementClasses.push(TextInput);
 
   elementClasses.push(ErrorMessages);
-  elementClasses.push(HelpTooltip);
   elementClasses.push(PropertyBlock);
   elementClasses.push(PropertyLine);
   elementClasses.push(SectionDivider);
   elementClasses.push(TaperedRule);
+
+  elementClasses.push(HelpTooltip);
+  elementClasses.push(CustomTextHelpTooltip);
 
   elementClasses.push(DisplayBlockList);
   elementClasses.push(DisplayBlockListItem);

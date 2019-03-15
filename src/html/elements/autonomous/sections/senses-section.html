@@ -37,14 +37,16 @@
     <label id="passive-perception-label" class="senses-edit-section__passive-perception-label">passive Perception</label>
     <label id="passive-perception-value" class="senses-edit-section__passive-perception-value">10</label>
     <help-tooltip class="senses-edit-section__passive-perception-help-tooltip">
-      <h4>A creature's Passive Perception is calculated using the following formula:</h4>
+      <p>A creature's <strong>Passive Perception</strong> is calculated using the following formula:</p>
       <blockquote><strong>Passive Perception = 10 + WIS Modifier + Proficiency Bonus (if proficient in Perception)</strong></blockquote>
       <p>Note: If you specify an override value for the Perception skill, the Passive Perception is 10 + the override instead.</p>
+      <br />
       <cite>* See "Passive Checks" on page 175 of the DnD 5e Player's Handbook for full details.</cite>
     </help-tooltip>
 
     <input id="use-custom-input" class="senses-edit-section__use-custom-input" is="enable-disable-elements-checkbox" type="checkbox" name="senses-use-custom" />
     <label id="custom-label" class="senses-edit-section__custom-label" for="use-custom-input">Override with custom text:</label>
+    <custom-text-help-tooltip class="senses-edit-section__custom-text-help-tooltip"></custom-text-help-tooltip>
     <input id="custom-input" class="senses-edit-section__custom-input section__text-input" is="text-input" type="text" name="senses-custom" pretty-name="Senses Custom Text" data-parsed required disabled />
   </div>
   <div class="section__action-container">

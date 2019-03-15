@@ -5,8 +5,6 @@
 .armor-class-edit-section {
   display: flex;
   flex-direction: column;
-  /* grid-template-columns: 90px auto 25px 50px;
-  grid-template-rows: auto 5px auto 5px auto auto; */
 }
 
 .armor-class-edit-section__armor-class-container {
@@ -55,4 +53,9 @@
   justify-self: end;
 }
 .armor-class-edit-section__use-custom-label { grid-area: 1 / 2; }
+.armor-class-edit-section__custom-text-help-tooltip { 
+  grid-area: 2 / 1; 
+  justify-self: end;
+  align-self: end;
+}
 .armor-class-edit-section__custom-input { grid-area: 2 / 2; }
