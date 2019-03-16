@@ -1,6 +1,6 @@
-import BlockListSection from './block-list-section.js';
+import * as blockListSectionModule from './block-list-section.js';
 
-export default class ReactionsSection extends BlockListSection {
+export default class ReactionsSection extends blockListSectionModule.BlockListSection {
   static get elementName() { return 'reactions-section'; }
   static get templatePaths() {
     return super.templatePaths.set(

@@ -14,11 +14,13 @@ export default class BottomStats extends CustomAutonomousElement {
     this.specialTraitsSection = document.querySelector('special-traits-section');
     this.actionsSection = document.querySelector('actions-section');
     this.reactionsSection = document.querySelector('reactions-section');
+    this.legendaryActionsSection = document.querySelector('legendary-actions-section');
 
     this.allSections = [
       this.specialTraitsSection,
       this.actionsSection,
-      this.reactionsSection
+      this.reactionsSection,
+      this.legendaryActionsSection
     ];
   }
 

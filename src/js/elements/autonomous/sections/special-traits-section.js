@@ -1,6 +1,6 @@
-import BlockListSection from './block-list-section.js';
+import * as blockListSectionModule from './block-list-section.js';
 
-export default class SpecialTraitsSection extends BlockListSection {
+export default class SpecialTraitsSection extends blockListSectionModule.BlockListSection {
   static get elementName() { return 'special-traits-section'; }
   static get templatePaths() {
     return super.templatePaths.set(

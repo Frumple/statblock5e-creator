@@ -1,7 +1,7 @@
-import BlockListSection from './block-list-section.js';
+import * as blockListSectionModule from './block-list-section.js';
 import isRunningInNode from '../../../helpers/is-running-in-node.js';
 
-export default class ActionsSection extends BlockListSection {
+export default class ActionsSection extends blockListSectionModule.BlockListSection {
   static get elementName() { return 'actions-section'; }
   static get templatePaths() {
     return super.templatePaths.set(

@@ -37,6 +37,7 @@ import ChallengeRatingSection from './elements/autonomous/sections/challenge-rat
 import SpecialTraitsSection from './elements/autonomous/sections/special-traits-section.js';
 import ActionsSection from './elements/autonomous/sections/actions-section.js';
 import ReactionsSection from './elements/autonomous/sections/reactions-section.js';
+import LegendaryActionsSection from './elements/autonomous/sections/legendary-actions-section.js';
 
 import StatBlockEditor from './elements/autonomous/containers/stat-block-editor.js';
 import StatBlockMenu from './elements/autonomous/containers/stat-block-menu.js';
@@ -89,6 +90,7 @@ async function init() {
   elementClasses.push(SpecialTraitsSection);
   elementClasses.push(ActionsSection);
   elementClasses.push(ReactionsSection);
+  elementClasses.push(LegendaryActionsSection);
 
   elementClasses.push(StatBlockEditor);
   elementClasses.push(StatBlockMenu);

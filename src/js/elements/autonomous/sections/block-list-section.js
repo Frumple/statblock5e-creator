@@ -1,16 +1,18 @@
 import * as sectionModule from './section.js';
 
-export default class BlockListSection extends sectionModule.Section {
+export class BlockListSection extends sectionModule.Section {
   static get templatePaths() {
     return super.templatePaths.set(
       'block-list-section',
       'src/html/elements/autonomous/sections/block-list-section.html');
   }
 
-  constructor(templatePaths, itemType) {
-    super(templatePaths,
-          EditableBlockListShowElements,
-          EditableBlockListEditElements);
+  constructor(templatePaths, 
+    itemType,
+    showElements = EditableBlockListShowElements,
+    editElements = EditableBlockListEditElements) {
+
+    super(templatePaths, showElements, editElements);
 
     this.itemType = itemType;
 
@@ -106,7 +108,7 @@ export default class BlockListSection extends sectionModule.Section {
   }
 }
 
-class EditableBlockListShowElements extends sectionModule.ShowElements {
+export class EditableBlockListShowElements extends sectionModule.ShowElements {
   constructor(shadowRoot) {
     super(shadowRoot);
 
@@ -115,7 +117,7 @@ class EditableBlockListShowElements extends sectionModule.ShowElements {
   }
 }
 
-class EditableBlockListEditElements extends sectionModule.EditElements {
+export class EditableBlockListEditElements extends sectionModule.EditElements {
   constructor(shadowRoot) {
     super(shadowRoot);
 

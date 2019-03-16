@@ -1,0 +1,23 @@
+.legendary-actions-edit-section {
+  display: flex;
+  flex-direction: column;
+}
+
+.legendary-actions-show-section__text {
+  margin-top: 0.3em;
+  margin-bottom: 0.9em;
+  line-height: 1.5;
+}
+
+.legendary-actions-show-section__text_hidden {
+  display: none;
+}
+
+.legendary-actions-edit-section__textarea-container {
+  margin-right: 5px;
+}
+
+.legendary-actions-edit-section__textarea {
+  width: 100%;
+  resize: none;
+}
