@@ -13,6 +13,8 @@ export default class DisplayBlockList extends CustomAutonomousElement {
 
   constructor() {
     super(DisplayBlockList.templatePaths);
+
+    this.disableBlockNameItalics = false;
   }
 
   get blocks() {
@@ -26,9 +28,13 @@ export default class DisplayBlockList extends CustomAutonomousElement {
   }
 
   addBlock(name, text) {
-    const block = document.createElement('display-block-list-item');
+    const block = DisplayBlockList.createListItem();
     block.name = name;
     block.text = text;
+    if (this.disableBlockNameItalics) {
+      block.disableBlockNameItalics();
+    }
+
     this.appendChild(block);
   }
 

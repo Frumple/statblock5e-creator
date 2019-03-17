@@ -15,6 +15,8 @@ export default class EditableBlockList extends DragAndDropList {
 
   constructor() {
     super(EditableBlockList.templatePaths);
+
+    this.disableBlockNameItalics = false;
   }
 
   get blocks() {
@@ -25,6 +27,10 @@ export default class EditableBlockList extends DragAndDropList {
     const block = EditableBlockList.createListItem(); 
     block.list = this;
     block.itemType = itemType;
+    if (this.disableBlockNameItalics) {
+      block.disableBlockNameItalics();
+    }
+
     if (isRunningInNode) {
       block.connect();
     }

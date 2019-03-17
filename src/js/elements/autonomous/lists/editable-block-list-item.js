@@ -38,6 +38,10 @@ export default class EditableBlockListItem extends DragAndDropListItem {
     this.remove();
   }
 
+  disableBlockNameItalics() {
+    this.nameElement.classList.add('editable-block-list-item__name_no-italic');
+  }
+
   set itemType(itemType) {
     this._itemType = itemType;
 

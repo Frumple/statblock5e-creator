@@ -5,20 +5,24 @@
   display: block;
 }
 
-h4 {
+.display-block-list-item__name {
   margin: 0;
   display: inline;
   font-weight: bold;
   font-style: italic;
 }
 
-p:first-of-type {
+.display-block-list-item__name_no-italic {
+  font-style: normal;
+}
+
+.display-block-list-item__text:first-of-type {
   display: inline;
   text-indent: 0;
   white-space: pre-wrap;
 }
 
-p {
+.display-block-list-item__text {
   text-indent: 1em;
   margin: 0;
 }

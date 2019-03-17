@@ -16,6 +16,10 @@ export default class DisplayBlockListItem extends CustomAutonomousElement {
     this.textElement = this.shadowRoot.getElementById('display-block-text');
   }
 
+  disableBlockNameItalics() {
+    this.nameElement.classList.add('display-block-list-item__name_no-italic');
+  }
+
   get name() {
     return this.nameElement.textContent;
   }

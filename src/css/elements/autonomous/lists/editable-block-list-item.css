@@ -17,6 +17,10 @@
   margin-left: 5px;
 }
 
+.editable-block-list-item__name_no-italic {
+  font-style: normal;
+}
+
 .editable-block-list-item__remove-button {
   margin-left: 5px;
 }
