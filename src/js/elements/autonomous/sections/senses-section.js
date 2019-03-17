@@ -1,6 +1,5 @@
 import * as sectionModule from './section.js';
 import Skills from '../../../stats/skills.js';
-import sanitizeHTML from '../../../helpers/sanitize-html.js';
 
 export default class SensesSection extends sectionModule.Section {
   static get elementName() { return 'senses-section'; }
@@ -54,7 +53,7 @@ export default class SensesSection extends sectionModule.Section {
     let customText = this.editElements.customText.parsedText;
 
     if (useCustom) {
-      this.showElements.text.innerHTML = sanitizeHTML(customText);
+      this.showElements.text.innerHTMLSanitized = customText;
     } else {
       const unit = 'ft.';
       let text = '';

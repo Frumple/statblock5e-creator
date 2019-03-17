@@ -1,5 +1,4 @@
 import * as blockListSectionModule from './block-list-section.js';
-import sanitizeHTML from '../../../helpers/sanitize-html.js';
 
 export default class LegendaryActionsSection extends blockListSectionModule.BlockListSection {
   static get elementName() { return 'legendary-actions-section'; }
@@ -54,14 +53,14 @@ export default class LegendaryActionsSection extends blockListSectionModule.Bloc
   updateShowSection() {
     super.updateShowSection();
 
-    this.showElements.description.innerHTML = sanitizeHTML(this.editElements.description.parsedText);
+    this.showElements.description.innerHTMLSanitized = this.editElements.description.parsedText;
   }
 
   reparse() {
     super.reparse();
 
     if (this.mode !== 'edit') {
-      this.showElements.description.innerHTML = sanitizeHTML(this.editElements.description.parsedText);
+      this.showElements.description.innerHTMLSanitized = this.editElements.description.parsedText;
     }
   }
 }

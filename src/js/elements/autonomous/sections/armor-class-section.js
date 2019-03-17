@@ -1,5 +1,4 @@
 import * as sectionModule from './section.js';
-import sanitizeHTML from '../../../helpers/sanitize-html.js';
 
 export default class ArmorClassSection extends sectionModule.Section {
   static get elementName() { return 'armor-class-section'; }
@@ -48,7 +47,7 @@ export default class ArmorClassSection extends sectionModule.Section {
     let customText = this.editElements.customText.parsedText;
 
     if (useCustom) {
-      this.showElements.text.innerHTML = sanitizeHTML(customText);
+      this.showElements.text.innerHTMLSanitized = customText;
     } else {
       let text = '';
 

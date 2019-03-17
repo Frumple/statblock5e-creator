@@ -2,6 +2,7 @@ import CustomTextArea from './elements/builtin/custom-textarea.js';
 import EnableDisableElementsCheckbox from './elements/builtin/enable-disable-elements-checkbox.js';
 import IntegerInput from './elements/builtin/integer-input.js';
 import PropertyDataList from './elements/builtin/property-datalist.js';
+import SanitizedParagraph from './elements/builtin/sanitized-paragraph.js';
 import TextInput from './elements/builtin/text-input.js';
 
 import ErrorMessages from './elements/autonomous/error-messages.js';
@@ -55,6 +56,7 @@ async function init() {
   elementClasses.push(EnableDisableElementsCheckbox);
   elementClasses.push(IntegerInput);
   elementClasses.push(PropertyDataList);
+  elementClasses.push(SanitizedParagraph);
   elementClasses.push(TextInput);
 
   elementClasses.push(ErrorMessages);
