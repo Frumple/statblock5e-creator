@@ -14,6 +14,7 @@ export function shouldSwitchToEditModeAndFocusOnNameFieldOfFirstBlockIfExists(se
   
   expect(section).toBeInMode('edit');
   expect(section.editElements.editableList.blocks[0].nameElement).toHaveFocus();
+  expect(section.editElements.editableList.blocks[0].nameElement).toBeSelected();
 }
 
 export function shouldFocusOnNameFieldOfNewBlock(section) {
@@ -21,6 +22,7 @@ export function shouldFocusOnNameFieldOfNewBlock(section) {
     section.editElements.addButton.click();
     const blocks = section.editElements.editableList.blocks;
     expect(blocks[index].nameElement).toHaveFocus();
+    expect(blocks[index].nameElement).toBeSelected();
   }
 }
 

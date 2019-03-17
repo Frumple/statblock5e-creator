@@ -26,6 +26,7 @@ describe('when the show section is clicked', () => {
   it('should switch to edit mode and focus on the text field', () => {
     expect(conditionImmunitiesSection).toBeInMode('edit');
     expect(conditionImmunitiesSection.editElements.input).toHaveFocus();
+    expect(conditionImmunitiesSection.editElements.input).toBeSelected();
   });
 
   describe('and the input field is set, the add button is clicked, and the edit section is submitted', () => {

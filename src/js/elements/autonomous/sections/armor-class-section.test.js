@@ -38,6 +38,7 @@ describe('when the show section is clicked', () => {
       expect(armorClassSection.editElements.customText).not.toBeDisabled();
 
       expect(armorClassSection.editElements.customText).toHaveFocus();
+      expect(armorClassSection.editElements.customText).toBeSelected();
     });
 
     describe('and the edit section is submitted', () => {

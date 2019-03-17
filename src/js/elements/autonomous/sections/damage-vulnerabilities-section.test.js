@@ -26,6 +26,7 @@ describe('when the show section is clicked', () => {
   it('should switch to edit mode and focus on the text field', () => {
     expect(damageVulnerabilitiesSection).toBeInMode('edit');
     expect(damageVulnerabilitiesSection.editElements.input).toHaveFocus();
+    expect(damageVulnerabilitiesSection.editElements.input).toBeSelected();
   });
 
   describe('and the input field is set, the add button is clicked, and the edit section is submitted', () => {

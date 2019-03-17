@@ -28,6 +28,7 @@ describe('when the show section is clicked', () => {
   it('should switch to edit mode and focus on the title field', () => {
     expect(headingSection).toBeInMode('edit');
     expect(headingSection.editElements.fullName).toHaveFocus();
+    expect(headingSection.editElements.fullName).toBeSelected();
   });
 
   describe('and creature name, short name, and/or the proper noun checkbox is changed', () => {

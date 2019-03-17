@@ -41,6 +41,7 @@ describe('when the show section is clicked', () => {
       expect(speedSection.editElements.customText).not.toBeDisabled();
 
       expect(speedSection.editElements.customText).toHaveFocus();
+      expect(speedSection.editElements.customText).toBeSelected();
     });
 
     describe('and the custom text field is populated and the edit section is submitted', () => {

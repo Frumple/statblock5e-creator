@@ -2,12 +2,21 @@ export function focusAndSelectElement(element) {
   let tagName = element.tagName;
   let type = element.getAttribute('type');
 
-  if (tagName === 'INPUT' && (type === 'text' || type === 'number')) {
+  if (isTextOrNumberInputElement(tagName, type) ||
+      isTextAreaElement(tagName)) {
     element.focus();
     element.select();
   } else {
     element.focus();
   }
+}
+
+function isTextOrNumberInputElement(tagName, type) {
+  return tagName === 'INPUT' && (type === 'text' || type === 'number');
+}
+
+function isTextAreaElement(tagName) {
+  return tagName === 'TEXTAREA';
 }
 
 export function inputValueAndTriggerEvent(element, value) {

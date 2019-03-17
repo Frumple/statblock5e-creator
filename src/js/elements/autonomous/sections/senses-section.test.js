@@ -47,6 +47,7 @@ describe('when the show section is clicked', () => {
       expect(sensesSection.editElements.customText).not.toBeDisabled();
 
       expect(sensesSection.editElements.customText).toHaveFocus();
+      expect(sensesSection.editElements.customText).toBeSelected();
     });
 
     describe('and the custom text field is populated and the edit section is submitted', () => {

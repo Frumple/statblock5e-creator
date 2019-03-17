@@ -31,6 +31,7 @@ describe('when the show section is clicked', () => {
   it('should switch to edit mode and focus on the description text area', () => {
     expect(legendaryActionsSection).toBeInMode('edit');
     expect(legendaryActionsSection.editElements.description).toHaveFocus();
+    expect(legendaryActionsSection.editElements.description).toBeSelected();
   });  
 
   describe('and the add block button is clicked', () => {
