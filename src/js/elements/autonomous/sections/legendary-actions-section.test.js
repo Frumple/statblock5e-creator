@@ -54,6 +54,17 @@ describe('when the show section is clicked', () => {
       expect(legendaryActionsSection).toBeInMode('show');
       expect(legendaryActionsSection.showElements.description).toHaveTextContent(expectedTextContent);
     });
+
+    it('should display an error if the description is blank', () => {
+      inputValueAndTriggerEvent(legendaryActionsSection.editElements.description, '');
+
+      legendaryActionsSection.editElements.submitForm();
+
+      expect(legendaryActionsSection).toBeInMode('edit');
+      expect(legendaryActionsSection).toHaveError(
+        legendaryActionsSection.editElements.description,
+        'Legendary Actions Description cannot be blank.');
+    });
   });
 
   describe('and blocks are added and/or removed, and the edit section is submitted', () => {
