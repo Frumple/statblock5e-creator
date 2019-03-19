@@ -36,12 +36,22 @@
   visibility: visible;
 }
 
-::slotted(a) {
+::slotted(button) {
+  background: #606060;
   border: 1px solid #909090;
+  color: white;
+  font-family: inherit;
+  font-size: inherit;
+  font-weight: bold;
   padding: 5px;
   cursor: pointer;
+  transition: background 100ms ease-in-out;
 }
 
-::slotted(a:hover) {
+::slotted(button:hover) {
   background: #909090;
+}
+
+::slotted(button:active) {
+  background: #90FF70;
 }

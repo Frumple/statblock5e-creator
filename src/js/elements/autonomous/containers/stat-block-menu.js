@@ -19,6 +19,15 @@ export default class StatBlockMenu extends CustomAutonomousElement {
 
     this.editAllSectionsButton = this.shadowRoot.getElementById('edit-all-sections-button');
     this.saveAllSectionsButton = this.shadowRoot.getElementById('save-all-sections-button');
+
+    this.printButton = this.shadowRoot.getElementById('print-button');
+
+    this.exportJsonButton = this.shadowRoot.getElementById('export-json-button');
+    this.exportImageButton = this.shadowRoot.getElementById('export-image-button');
+    this.exportHtmlButton = this.shadowRoot.getElementById('export-html-button');
+    this.exportHomebreweryButton = this.shadowRoot.getElementById('export-homebrewery-button');
+
+    this.importJsonButton = this.shadowRoot.getElementById('import-json-button');
   }
 
   connectedCallback() {
@@ -31,6 +40,15 @@ export default class StatBlockMenu extends CustomAutonomousElement {
 
       this.editAllSectionsButton.addEventListener('click', this.onClickEditAllSectionsButton.bind(this));
       this.saveAllSectionsButton.addEventListener('click', this.onClickSaveAllSectionsButton.bind(this));
+
+      this.printButton.addEventListener('click', this.onClickPrintButton.bind(this));
+
+      this.exportJsonButton.addEventListener('click', this.onClickExportJsonButton.bind(this));
+      this.exportImageButton.addEventListener('click', this.onClickExportImageButton.bind(this));
+      this.exportHtmlButton.addEventListener('click', this.onClickExportHtmlButton.bind(this));
+      this.exportHomebreweryButton.addEventListener('click', this.onClickExportHomebreweryButton.bind(this));
+
+      this.importJsonButton.addEventListener('click', this.onClickImportJsonButton.bind(this));
 
       this.isInitialized = true;
     }
@@ -60,8 +78,32 @@ export default class StatBlockMenu extends CustomAutonomousElement {
     this.dispatchMenuEvent('allSectionsAction', { action: 'save' });
   }
 
+  onClickPrintButton() {
+    // TODO
+  }
+
+  onClickExportJsonButton() {
+    // TODO
+  }
+
+  onClickExportImageButton() {
+    // TODO
+  }
+
+  onClickExportHtmlButton() {
+    this.dispatchMenuEvent('exportAction', { format: 'html'});
+  }
+
+  onClickExportHomebreweryButton() {
+    // TODO
+  }
+
+  onClickImportJsonButton() {
+    // TODO
+  }
+
   dispatchMenuEvent(eventType, detail) {
-    let menuEvent = new CustomEvent(eventType, {
+    const menuEvent = new CustomEvent(eventType, {
       bubbles: true,
       composed: true,
       detail: detail

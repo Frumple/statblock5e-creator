@@ -24,6 +24,8 @@ export default class StatBlockEditor extends CustomAutonomousElement {
       this.addEventListener('emptySectionsVisibilityChanged', this.onEmptySectionsVisiblityChanged);
       this.addEventListener('allSectionsAction', this.onAllSectionsAction);
 
+      this.addEventListener('exportAction', this.onExportAction);
+
       this.isInitialized = true;
     }
   }
@@ -69,4 +71,14 @@ export default class StatBlockEditor extends CustomAutonomousElement {
       this.statBlock.saveAllSections();
     }
   }
+
+  onExportAction(event) {
+    const format = event.detail.format;
+
+    switch(format) {
+    case 'html':
+      // TODO
+      break;
+    }
+  }  
 }
