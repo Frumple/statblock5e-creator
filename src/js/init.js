@@ -5,6 +5,7 @@ import PropertyDataList from './elements/builtin/property-datalist.js';
 import SanitizedParagraph from './elements/builtin/sanitized-paragraph.js';
 import TextInput from './elements/builtin/text-input.js';
 
+import DropDownMenu from './elements/autonomous/drop-down-menu.js';
 import ErrorMessages from './elements/autonomous/error-messages.js';
 import PropertyBlock from './elements/autonomous/property-block.js';
 import PropertyLine from './elements/autonomous/property-line.js';
@@ -59,6 +60,7 @@ async function init() {
   elementClasses.push(SanitizedParagraph);
   elementClasses.push(TextInput);
 
+  elementClasses.push(DropDownMenu);
   elementClasses.push(ErrorMessages);
   elementClasses.push(PropertyBlock);
   elementClasses.push(PropertyLine);
