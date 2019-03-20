@@ -28,4 +28,14 @@ export default class ActionsSection extends blockListSectionModule.BlockListSect
       this.isInitialized = true;
     }
   }
+
+  exportToHtml() {
+    const fragment = super.exportToHtml();
+
+    const sectionHeading = document.createElement('h3');
+    sectionHeading.textContent = 'Actions';
+    fragment.insertBefore(sectionHeading, fragment.firstElementChild);
+
+    return fragment;
+  }
 }

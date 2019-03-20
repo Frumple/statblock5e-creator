@@ -1,4 +1,5 @@
 import * as sectionModule from './section.js';
+import { createPropertyLine } from '../../../helpers/export-helpers.js';
 
 export default class ArmorClassSection extends sectionModule.Section {
   static get elementName() { return 'armor-class-section'; }
@@ -39,34 +40,43 @@ export default class ArmorClassSection extends sectionModule.Section {
     }
   }
 
-  updateShowSection() {
-    let armorClass = this.editElements.armorClass.value;
-    let armorType = this.editElements.armorType.value;
-    let shield = this.editElements.shield.checked;
-    let useCustom = this.editElements.useCustom.checked;
-    let customText = this.editElements.customText.parsedText;
+  updateShowSection() {    
+    const useCustom = this.editElements.useCustom.checked;
+    const customText = this.editElements.customText.parsedText;
 
     if (useCustom) {
       this.showElements.text.innerHTMLSanitized = customText;
     } else {
-      let text = '';
-
-      if (armorType) {
-        if (shield) {
-          text = `${armorClass} (${armorType}, shield)`;
-        } else {
-          text = `${armorClass} (${armorType})`;
-        }
-      } else {
-        if (shield) {
-          text = `${armorClass} (shield)`;
-        } else {
-          text = armorClass;
-        }
-      }
-
-      this.showElements.text.textContent = text;
+      this.showElements.text.textContent = this.normalShowSectionText;
     }    
+  }
+
+  get normalShowSectionText() {
+    const armorClass = this.editElements.armorClass.value;
+    const armorType = this.editElements.armorType.value;
+    const shield = this.editElements.shield.checked;
+
+    if (armorType) {
+      if (shield) {
+        return `${armorClass} (${armorType}, shield)`;
+      } else {
+        return `${armorClass} (${armorType})`;
+      }
+    } else {
+      if (shield) {
+        return `${armorClass} (shield)`;
+      } else {
+        return armorClass;
+      }
+    }
+  }
+
+  exportToHtml() {
+    const heading = 'Armor Class';
+    const text = this.showElements.text.innerHTMLSanitized;
+    const propertyLine = createPropertyLine(heading, text);
+
+    return propertyLine;
   }
 }
 

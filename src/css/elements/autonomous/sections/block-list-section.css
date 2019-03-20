@@ -1,4 +1,4 @@
-.block-list-section__header {
+.block-list-section__heading {
   border-bottom: 1px solid #7A200D;
   color: #7A200D;
   font-size: 21px;
@@ -22,7 +22,7 @@
               margin 0ms linear var(--section-transition-duration);
 }
 
-.block-list-section__header_hidden {
+.block-list-section__heading_hidden {
   max-height: 0;
   opacity: 0;
   visibility: hidden;

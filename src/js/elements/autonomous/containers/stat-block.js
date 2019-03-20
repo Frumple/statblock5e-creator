@@ -1,4 +1,5 @@
 import CustomAutonomousElement from '../custom-autonomous-element.js';
+import * as HtmlExportDocumentFactory from '../../../helpers/html-export-document-factory.js';
 
 export default class StatBlock extends CustomAutonomousElement {
   static get elementName() { return 'stat-block'; }
@@ -93,5 +94,32 @@ export default class StatBlock extends CustomAutonomousElement {
 
   reparseAllSections() {
     this.bottomStats.reparseAllSections();
+  }
+
+  exportToJson() {
+    // TODO
+  }
+
+  exportToHtml() {
+    const doc = HtmlExportDocumentFactory.createInstance();
+    const statBlock = doc.querySelector('stat-block');
+
+    const headingSection = this.headingSection.exportToHtml();
+    const topStats = this.topStats.exportToHtml();
+    const bottomStats = this.bottomStats.exportToHtml();
+
+    statBlock.appendChild(headingSection);
+    statBlock.appendChild(topStats);
+    statBlock.appendChild(bottomStats);
+
+    const doctype = '<!DOCTYPE html>';
+    const content = `${doctype}${doc.documentElement.outerHTML}`;
+    const beautified_content = html_beautify(content);
+
+    return beautified_content;
+  }
+
+  exportToHomebrewery() {
+    // TODO
   }
 }

@@ -27,4 +27,18 @@ export default class TopStats extends CustomAutonomousElement {
     this.abilityScoresSection.save();
     this.advancedStats.saveAllSections();
   }
+
+  exportToHtml() {
+    const topStats = document.createElement('top-stats');
+
+    const basicStats = this.basicStats.exportToHtml();
+    const abilityScoresSection = this.abilityScoresSection.exportToHtml();
+    const advancedStats = this.advancedStats.exportToHtml();
+
+    topStats.appendChild(basicStats);
+    topStats.appendChild(abilityScoresSection);
+    topStats.appendChild(advancedStats);
+    
+    return topStats;
+  }
 }

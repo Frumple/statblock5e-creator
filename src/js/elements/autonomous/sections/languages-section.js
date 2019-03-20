@@ -28,12 +28,17 @@ export default class LanguagesSection extends PropertyListSection {
     }
   }
 
-  postProcessText(text) {
+  updateShowSection() {
+    this.editElements.input.value = '';
+
+    let text = this.showSectionText;
+
     if (text === '') {
       // This is an EM dash (U+2014).
       // This appears significantly wider than a normal dash.
       text = '—';
     }
-    return text;
+
+    this.showElements.text.textContent = text;
   }
 }

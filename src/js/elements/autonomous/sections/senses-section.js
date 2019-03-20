@@ -1,5 +1,6 @@
 import * as sectionModule from './section.js';
 import Skills from '../../../stats/skills.js';
+import { createPropertyLine } from '../../../helpers/export-helpers.js';
 
 export default class SensesSection extends sectionModule.Section {
   static get elementName() { return 'senses-section'; }
@@ -29,7 +30,7 @@ export default class SensesSection extends sectionModule.Section {
   }
 
   updatePassivePerception() {
-    let passivePerception = Skills.skills['perception'].passiveScore;
+    const passivePerception = Skills.skills['perception'].passiveScore;
     this.editElements.passivePerception.textContent = passivePerception;    
 
     this.updateShowSection();
@@ -44,42 +45,55 @@ export default class SensesSection extends sectionModule.Section {
   }
 
   updateShowSection() {
-    let blindsightRange = this.editElements.blindsight.value;
-    let darkvisionRange = this.editElements.darkvision.value;
-    let tremorsenseRange = this.editElements.tremorsense.value;
-    let truesightRange = this.editElements.truesight.value;
-    let passivePerception = this.editElements.passivePerception.textContent;
-    let useCustom = this.editElements.useCustom.checked;
-    let customText = this.editElements.customText.parsedText;
+    const useCustom = this.editElements.useCustom.checked;
+    const customText = this.editElements.customText.parsedText;
 
     if (useCustom) {
       this.showElements.text.innerHTMLSanitized = customText;
     } else {
-      const unit = 'ft.';
-      let text = '';
-      let comma = '';
-
-      if (blindsightRange) {
-        text += `blindsight ${blindsightRange} ${unit}`;
-        comma = ', ';
-      }
-      if (darkvisionRange) {
-        text += `${comma}darkvision ${darkvisionRange} ${unit}`;
-        comma = ', ';
-      }
-      if (tremorsenseRange) {
-        text += `${comma}tremorsense ${tremorsenseRange} ${unit}`;
-        comma = ', ';
-      }
-      if (truesightRange) {
-        text += `${comma}truesight ${truesightRange} ${unit}`;
-        comma = ', ';
-      }
-
-      text += `${comma}passive Perception ${passivePerception}`;
-
-      this.showElements.text.textContent = text;
+      this.showElements.text.textContent = this.showSectionText;
     }    
+  }
+
+  get showSectionText() {
+    const blindsightRange = this.editElements.blindsight.value;
+    const darkvisionRange = this.editElements.darkvision.value;
+    const tremorsenseRange = this.editElements.tremorsense.value;
+    const truesightRange = this.editElements.truesight.value;
+    const passivePerception = this.editElements.passivePerception.textContent;
+
+    const unit = 'ft.';
+    let text = '';
+    let comma = '';
+
+    if (blindsightRange) {
+      text += `blindsight ${blindsightRange} ${unit}`;
+      comma = ', ';
+    }
+    if (darkvisionRange) {
+      text += `${comma}darkvision ${darkvisionRange} ${unit}`;
+      comma = ', ';
+    }
+    if (tremorsenseRange) {
+      text += `${comma}tremorsense ${tremorsenseRange} ${unit}`;
+      comma = ', ';
+    }
+    if (truesightRange) {
+      text += `${comma}truesight ${truesightRange} ${unit}`;
+      comma = ', ';
+    }
+
+    text += `${comma}passive Perception ${passivePerception}`;
+
+    return text;
+  }
+
+  exportToHtml() {
+    const heading = 'Senses';
+    const text = this.showElements.text.innerHTMLSanitized;
+    const propertyLine = createPropertyLine(heading, text);
+
+    return propertyLine;
   }
 }
 

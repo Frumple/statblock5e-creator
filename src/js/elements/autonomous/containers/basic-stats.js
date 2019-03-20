@@ -33,4 +33,13 @@ export default class BasicStats extends DivisibleContainer {
       section.save();
     }
   }
+
+  exportToHtml() {
+    const fragment = document.createDocumentFragment();
+    for (const section of this.allSections) {
+      fragment.appendChild(section.exportToHtml());
+    }
+
+    return fragment;
+  }
 }

@@ -75,15 +75,29 @@ export default class HeadingSection extends sectionModule.Section {
     const subtitle = `${size} ${type}, ${alignment}`;
 
     this.editElements.fullName.value = fullName;
-    this.showElements.fullName.textContent = fullName;
+    this.showElements.title.textContent = fullName;
     this.showElements.subtitle.textContent = subtitle;
+  }
+
+  exportToHtml() {
+    const creatureHeading = document.createElement('creature-heading');
+    const title = document.createElement('h1');
+    const subtitle = document.createElement('h2');
+
+    title.textContent = this.showElements.title.textContent;
+    subtitle.textContent = this.showElements.subtitle.textContent;
+
+    creatureHeading.appendChild(title);
+    creatureHeading.appendChild(subtitle);
+
+    return creatureHeading;
   }
 }
 
 class HeadingShowElements extends sectionModule.ShowElements {
   constructor(shadowRoot) {
     super(shadowRoot);
-    this.fullName = shadowRoot.getElementById('full-name-text');
+    this.title = shadowRoot.getElementById('title-text');
     this.subtitle = shadowRoot.getElementById('subtitle-text');
   }
 }

@@ -145,6 +145,21 @@ export class Section extends CustomAutonomousElement {
     });
     this.dispatchEvent(changeEvent);
   }
+
+  exportToJson() {
+    throw new Error(
+      `The class '${this.constructor.name}' must implement the exportToJson() method.`);
+  }
+
+  exportToHtml() {
+    throw new Error(
+      `The class '${this.constructor.name}' must implement the exportToHtml() method.`);
+  }
+
+  exportToHomebrewery() {
+    throw new Error(
+      `The class '${this.constructor.name}' must implement the exportToHomebrewery() method.`);
+  }
 }
 
 export class ShowElements {

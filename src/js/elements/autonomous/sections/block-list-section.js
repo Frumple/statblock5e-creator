@@ -1,4 +1,5 @@
 import * as sectionModule from './section.js';
+import { createPropertyBlock } from '../../../helpers/export-helpers.js';
 
 export class BlockListSection extends sectionModule.Section {
   static get templatePaths() {
@@ -16,7 +17,7 @@ export class BlockListSection extends sectionModule.Section {
 
     this.itemType = itemType;
 
-    this.header = this.shadowRoot.getElementById('header');
+    this.heading = this.shadowRoot.getElementById('heading');
   }
 
   connectedCallback() {
@@ -45,17 +46,17 @@ export class BlockListSection extends sectionModule.Section {
   set mode(mode) {
     super.mode = mode;
 
-    const hiddenHeaderClass = 'block-list-section__header_hidden';
+    const hiddenHeadingClass = 'block-list-section__heading_hidden';
 
     switch (mode) {
     case 'hidden':
-      this.header.classList.add(hiddenHeaderClass);
+      this.heading.classList.add(hiddenHeadingClass);
       break;
     case 'show':
-      this.header.classList.remove(hiddenHeaderClass);
+      this.heading.classList.remove(hiddenHeadingClass);
       break;
     case 'edit':
-      this.header.classList.remove(hiddenHeaderClass);
+      this.heading.classList.remove(hiddenHeadingClass);
       break;
     }
   }
@@ -105,6 +106,17 @@ export class BlockListSection extends sectionModule.Section {
         displayBlock.text = editableBlock.parsedText;
       }
     }
+  }
+
+  exportToHtml() {
+    const fragment = document.createDocumentFragment();
+
+    for (const block of this.showElements.displayList.blocks) {
+      const propertyBlock = createPropertyBlock(block.name, block.text);
+      fragment.appendChild(propertyBlock);
+    }
+
+    return fragment;
   }
 }
 

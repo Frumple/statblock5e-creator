@@ -1,4 +1,5 @@
 import * as sectionModule from './section.js';
+import { createPropertyLine } from '../../../helpers/export-helpers.js';
 
 export default class PropertyListSection extends sectionModule.Section {
   static get templatePaths() {
@@ -7,13 +8,15 @@ export default class PropertyListSection extends sectionModule.Section {
       'src/html/elements/autonomous/sections/property-list-section.html');
   }
 
-  constructor(templatePaths, headerText, itemType) {
+  constructor(templatePaths, headingText, itemType) {
     super(templatePaths,
           PropertyListShowElements,
           PropertyListEditElements);
 
-    this.showElements.header.textContent = headerText;
-    this.editElements.label.textContent = `${headerText}:`;
+    this.headingText = headingText;
+
+    this.showElements.heading.textContent = headingText;
+    this.editElements.label.textContent = `${headingText}:`;
 
     this.itemType = itemType;
   }
@@ -78,6 +81,18 @@ export default class PropertyListSection extends sectionModule.Section {
   updateShowSection() {
     this.editElements.input.value = '';
 
+    const text = this.showSectionText;
+
+    if (text === '') {
+      this.empty = true;
+    } else {
+      this.empty = false;
+    }
+
+    this.showElements.text.textContent = text;
+  }
+
+  get showSectionText() {
     let text = '';
     for (const itemText of this.editElements.propertyList.itemsAsText) {
       if (text === '') {
@@ -87,25 +102,21 @@ export default class PropertyListSection extends sectionModule.Section {
       }
     }
 
-    text = this.postProcessText(text);
-
-    this.showElements.text.textContent = text;
+    return text;
   }
 
-  postProcessText(text) {
-    if (text === '') {
-      this.empty = true;
-    } else {
-      this.empty = false;
-    }
-    return text;
+  exportToHtml() {
+    const text = this.showElements.text.textContent;
+    const propertyLine = createPropertyLine(this.headingText, text);
+
+    return propertyLine;
   }
 }
 
 class PropertyListShowElements extends sectionModule.ShowElements {
   constructor(shadowRoot) {
     super(shadowRoot);
-    this.header = shadowRoot.getElementById('property-list-header');
+    this.heading = shadowRoot.getElementById('property-list-heading');
     this.text = shadowRoot.getElementById('property-list-text');
   }
 }

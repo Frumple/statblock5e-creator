@@ -45,4 +45,15 @@ export default class AdvancedStats extends DivisibleContainer {
       section.save();
     }
   }
+
+  exportToHtml() {
+    const fragment = document.createDocumentFragment();
+    for (const section of this.allSections) {
+      if (! section.empty) {
+        fragment.appendChild(section.exportToHtml());
+      }     
+    }
+
+    return fragment;
+  }
 }

@@ -1,3 +1,5 @@
+import * as HtmlExportDocumentFactory from './helpers/html-export-document-factory.js';
+
 import CustomTextArea from './elements/builtin/custom-textarea.js';
 import EnableDisableElementsCheckbox from './elements/builtin/enable-disable-elements-checkbox.js';
 import IntegerInput from './elements/builtin/integer-input.js';
@@ -51,6 +53,11 @@ import BasicStats from './elements/autonomous/containers/basic-stats.js';
 import AdvancedStats from './elements/autonomous/containers/advanced-stats.js';
 
 async function init() {
+  await HtmlExportDocumentFactory.init();
+  await defineElements();
+}
+
+async function defineElements() {
   const elementClasses = [];
 
   elementClasses.push(CustomTextArea);

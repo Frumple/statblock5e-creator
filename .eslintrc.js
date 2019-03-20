@@ -8,6 +8,7 @@ module.exports = {
     "extends": "eslint:recommended",
     "globals": {
       "DOMPurify": "readable",
+      "html_beautify": "readable",
       "global": "readable"
     },
     "parserOptions": {

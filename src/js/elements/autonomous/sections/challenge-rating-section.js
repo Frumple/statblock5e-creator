@@ -1,5 +1,6 @@
 import * as sectionModule from './section.js';
 import ExperiencePointsByChallengeRating from '../../../helpers/experience-points-by-challenge-rating.js';
+import { createPropertyLine } from '../../../helpers/export-helpers.js';
 
 export default class ChallengeRatingSection extends sectionModule.Section {
   static get elementName() { return 'challenge-rating-section'; }
@@ -35,6 +36,14 @@ export default class ChallengeRatingSection extends sectionModule.Section {
 
     const text = `${challengeRating} (${experiencePoints} XP)`;
     this.showElements.text.textContent = text;
+  }
+
+  exportToHtml() {
+    const heading = 'Challenge';
+    const text = this.showElements.text.textContent;
+    const propertyLine = createPropertyLine(heading, text);
+
+    return propertyLine;
   }
 }
 

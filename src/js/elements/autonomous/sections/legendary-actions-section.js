@@ -63,6 +63,20 @@ export default class LegendaryActionsSection extends blockListSectionModule.Bloc
       this.showElements.description.innerHTMLSanitized = this.editElements.description.parsedText;
     }
   }
+
+  exportToHtml() {
+    const fragment = super.exportToHtml();
+
+    const description = document.createElement('p');
+    description.innerHTML = this.showElements.description.innerHTMLSanitized;
+    fragment.insertBefore(description, fragment.firstElementChild);
+
+    const sectionHeading = document.createElement('h3');
+    sectionHeading.textContent = 'Legendary Actions';
+    fragment.insertBefore(sectionHeading, fragment.firstElementChild);
+
+    return fragment;
+  }
 }
 
 class LegendaryActionsSectionShowElements extends blockListSectionModule.EditableBlockListShowElements {

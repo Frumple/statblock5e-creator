@@ -1,4 +1,5 @@
 import * as sectionModule from './section.js';
+import { createPropertyLine } from '../../../helpers/export-helpers.js';
 
 export default class SpeedSection extends sectionModule.Section {
   static get elementName() { return 'speed-section'; }
@@ -39,45 +40,57 @@ export default class SpeedSection extends sectionModule.Section {
     }
   }
 
-  updateShowSection() {
-    let walkSpeed = this.editElements.walk.value;
-    let burrowSpeed = this.editElements.burrow.value;
-    let climbSpeed = this.editElements.climb.value;
-    let flySpeed = this.editElements.fly.value;
-    let hover = this.editElements.hover.checked;
-    let swimSpeed = this.editElements.swim.value;
-    let useCustom = this.editElements.useCustom.checked;
-    let customText = this.editElements.customText.parsedText;
+  updateShowSection() {    
+    const useCustom = this.editElements.useCustom.checked;
+    const customText = this.editElements.customText.parsedText;
 
     if (useCustom) {
       this.showElements.text.innerHTMLSanitized = customText;
     } else {
-      const unit = 'ft.';
-      let text = '';
-
-      if (!walkSpeed) {
-        walkSpeed = 0;
-      }
-      text += `${walkSpeed} ${unit}`;
-
-      if (burrowSpeed) {
-        text += `, burrow ${burrowSpeed} ${unit}`;
-      }
-      if (climbSpeed) {
-        text += `, climb ${climbSpeed} ${unit}`;
-      }
-      if (flySpeed) {
-        text += `, fly ${flySpeed} ${unit}`;
-        if (hover) {
-          text += ' (hover)';
-        }
-      }
-      if (swimSpeed) {
-        text += `, swim ${swimSpeed} ${unit}`;
-      }
-
-      this.showElements.text.textContent = text;
+      this.showElements.text.textContent = this.normalShowSectionText;
     }
+  }
+
+  get normalShowSectionText() {
+    let walkSpeed = this.editElements.walk.value;
+    const burrowSpeed = this.editElements.burrow.value;
+    const climbSpeed = this.editElements.climb.value;
+    const flySpeed = this.editElements.fly.value;
+    const hover = this.editElements.hover.checked;
+    const swimSpeed = this.editElements.swim.value;
+
+    const unit = 'ft.';
+
+    if (! walkSpeed) {
+      walkSpeed = 0;
+    }
+    let text = `${walkSpeed} ${unit}`;
+
+    if (burrowSpeed) {
+      text += `, burrow ${burrowSpeed} ${unit}`;
+    }
+    if (climbSpeed) {
+      text += `, climb ${climbSpeed} ${unit}`;
+    }
+    if (flySpeed) {
+      text += `, fly ${flySpeed} ${unit}`;
+      if (hover) {
+        text += ' (hover)';
+      }
+    }
+    if (swimSpeed) {
+      text += `, swim ${swimSpeed} ${unit}`;
+    }
+
+    return text;
+  }
+
+  exportToHtml() {
+    const heading = 'Speed';
+    const text = this.showElements.text.innerHTMLSanitized;
+    const propertyLine = createPropertyLine(heading, text);
+
+    return propertyLine;
   }
 }
 

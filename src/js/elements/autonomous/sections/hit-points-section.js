@@ -1,6 +1,7 @@
 import * as sectionModule from './section.js';
 import HitPoints from '../../../stats/hit-points.js';
 import { formatModifierOperator, formatModifierNumber } from '../../../helpers/string-formatter.js';
+import { createPropertyLine } from '../../../helpers/export-helpers.js';
 
 export default class HitPointsSection extends sectionModule.Section {
   static get elementName() { return 'hit-points-section'; }
@@ -35,7 +36,7 @@ export default class HitPointsSection extends sectionModule.Section {
 
   onInputHitPoints() {
     if (! HitPoints.useHitDie) {
-      let hitPoints = this.editElements.hitPoints.valueAsInt;
+      const hitPoints = this.editElements.hitPoints.valueAsInt;
 
       if (! isNaN(hitPoints)) {
         HitPoints.hitPoints = hitPoints;
@@ -50,7 +51,7 @@ export default class HitPointsSection extends sectionModule.Section {
   }
 
   onInputHitDieQuantity() {
-    let hitDieQuantity = this.editElements.hitDieQuantity.valueAsInt;
+    const hitDieQuantity = this.editElements.hitDieQuantity.valueAsInt;
 
     if (! isNaN(hitDieQuantity)) {
       HitPoints.hitDieQuantity = hitDieQuantity;
@@ -59,7 +60,7 @@ export default class HitPointsSection extends sectionModule.Section {
   }
 
   onInputHitDieSize() {
-    let hitDieSize = parseInt(this.editElements.hitDieSize.value, 10);
+    const hitDieSize = parseInt(this.editElements.hitDieSize.value, 10);
 
     if (! isNaN(hitDieSize)) {
       HitPoints.hitDieSize = hitDieSize;
@@ -68,9 +69,9 @@ export default class HitPointsSection extends sectionModule.Section {
   }
 
   updateHitPoints() {
-    let constitutionHitPoints = HitPoints.constitutionHitPoints;
-    let constitutionHitPointsOperator = formatModifierOperator(constitutionHitPoints);
-    let constitutionHitPointsNumber = formatModifierNumber(constitutionHitPoints);
+    const constitutionHitPoints = HitPoints.constitutionHitPoints;
+    const constitutionHitPointsOperator = formatModifierOperator(constitutionHitPoints);
+    const constitutionHitPointsNumber = formatModifierNumber(constitutionHitPoints);
 
     this.editElements.trailingText.textContent = `${constitutionHitPointsOperator} ${constitutionHitPointsNumber} )`;
     this.editElements.hitPoints.value = HitPoints.hitPoints;
@@ -87,26 +88,38 @@ export default class HitPointsSection extends sectionModule.Section {
   }
 
   updateShowSection() {
-    let text = '';
-    let hitPoints = HitPoints.hitPoints;
+    let text;
 
     if (HitPoints.useHitDie) {
-      let hitDieQuantity = HitPoints.hitDieQuantity;
-      let hitDieSize = HitPoints.hitDieSize;
-      let constitutionHitPoints = HitPoints.constitutionHitPoints;      
-
-      if (constitutionHitPoints != 0) {
-        let modifierOperator = formatModifierOperator(constitutionHitPoints);
-        let modifierNumber = formatModifierNumber(constitutionHitPoints);
-        text = `${hitPoints} (${hitDieQuantity}d${hitDieSize} ${modifierOperator} ${modifierNumber})`;
-      } else {
-        text = `${hitPoints} (${hitDieQuantity}d${hitDieSize})`;
-      }
+      text = this.hitDieShowSectionText;
     } else {
-      text = hitPoints;
+      text = HitPoints.hitPoints;
     }
 
     this.showElements.text.textContent = text;
+  }
+
+  get hitDieShowSectionText() {
+    const hitPoints = HitPoints.hitPoints;
+    const hitDieQuantity = HitPoints.hitDieQuantity;
+    const hitDieSize = HitPoints.hitDieSize;
+    const constitutionHitPoints = HitPoints.constitutionHitPoints;      
+
+    if (constitutionHitPoints != 0) {
+      const modifierOperator = formatModifierOperator(constitutionHitPoints);
+      const modifierNumber = formatModifierNumber(constitutionHitPoints);
+      return `${hitPoints} (${hitDieQuantity}d${hitDieSize} ${modifierOperator} ${modifierNumber})`;
+    } else {
+      return `${hitPoints} (${hitDieQuantity}d${hitDieSize})`;
+    }
+  }
+
+  exportToHtml() {
+    const heading = 'Hit Points';
+    const text = this.showElements.text.textContent;
+    const propertyLine = createPropertyLine(heading, text);
+
+    return propertyLine;
   }
 }
 

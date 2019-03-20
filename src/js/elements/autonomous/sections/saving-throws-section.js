@@ -3,6 +3,7 @@ import Abilities from '../../../stats/abilities.js';
 import SavingThrows from '../../../stats/saving-throws.js';
 import { inputValueAndTriggerEvent } from '../../../helpers/element-helpers.js';
 import { capitalizeFirstLetter, formatModifier } from '../../../helpers/string-formatter.js';
+import { createPropertyLine } from '../../../helpers/export-helpers.js';
 
 export default class SavingThrowsSection extends sectionModule.Section {
   static get elementName() { return 'saving-throws-section'; }
@@ -31,7 +32,7 @@ export default class SavingThrowsSection extends sectionModule.Section {
   }
 
   initializeSavingThrowElements(key) {    
-    let elements = this.editElements.savingThrow[key];
+    const elements = this.editElements.savingThrow[key];
 
     elements.enable.enableElementsWhenChecked(
       elements.proficient,
@@ -45,7 +46,7 @@ export default class SavingThrowsSection extends sectionModule.Section {
 
   onInputSavingThrowEnabled(key) {
     const labelDisabledClass = 'section__label_disabled';
-    let elements = this.editElements.savingThrow[key];
+    const elements = this.editElements.savingThrow[key];
     SavingThrows.savingThrows[key].isEnabled = elements.enable.checked;
 
     if (elements.enable.checked) {
@@ -69,7 +70,7 @@ export default class SavingThrowsSection extends sectionModule.Section {
   }
 
   onInputSavingThrowOverride(key) {
-    let overrideValue = this.editElements.savingThrow[key].override.valueAsInt;
+    const overrideValue = this.editElements.savingThrow[key].override.valueAsInt;
     SavingThrows.savingThrows[key].override = overrideValue;
 
     this.updateEditSectionModifier(key);
@@ -86,25 +87,37 @@ export default class SavingThrowsSection extends sectionModule.Section {
   }
 
   updateEditSectionModifier(key) {    
-    let savingThrowModifier = SavingThrows.savingThrows[key].calculateModifier(false);
-    let formattedSavingThrowModifier = formatModifier(savingThrowModifier);
+    const savingThrowModifier = SavingThrows.savingThrows[key].calculateModifier(false);
+    const formattedSavingThrowModifier = formatModifier(savingThrowModifier);
     this.editElements.savingThrow[key].modifier.textContent = formattedSavingThrowModifier; 
   }
 
   checkForErrors() {
-
+    return;
   }
 
   updateShowSection() {
+    const text = this.showSectionText;
+
+    if (text === '') {
+      this.empty = true;
+    } else {
+      this.empty = false;
+    }
+
+    this.showElements.text.textContent = text;
+  }
+
+  get showSectionText() {
     let text = '';
 
     for (const [key, value] of Abilities.entries) {
-      let savingThrow = SavingThrows.savingThrows[key];
-      let isEnabled = savingThrow.isEnabled;
+      const savingThrow = SavingThrows.savingThrows[key];
+      const isEnabled = savingThrow.isEnabled;
 
       if (isEnabled) {
-        let abbreviation = capitalizeFirstLetter(value.abbreviation);
-        let savingThrowModifier = formatModifier(savingThrow.calculateModifier());
+        const abbreviation = capitalizeFirstLetter(value.abbreviation);
+        const savingThrowModifier = formatModifier(savingThrow.calculateModifier());
 
         if (text === '') {
           text += `${abbreviation} ${savingThrowModifier}`;
@@ -114,13 +127,15 @@ export default class SavingThrowsSection extends sectionModule.Section {
       }
     }
 
-    if (text === '') {
-      this.empty = true;
-    } else {
-      this.empty = false;
-    }
+    return text;
+  }
 
-    this.showElements.text.textContent = text;
+  exportToHtml() {
+    const heading = 'Saving Throws';
+    const text = this.showElements.text.textContent;
+    const propertyLine = createPropertyLine(heading, text);
+
+    return propertyLine;
   }
 }
 

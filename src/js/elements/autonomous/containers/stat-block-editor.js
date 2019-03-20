@@ -1,6 +1,8 @@
 import CustomAutonomousElement from '../custom-autonomous-element.js';
 import GlobalOptions from '../../../helpers/global-options.js';
 
+import Creature from '../../../stats/creature.js';
+
 export default class StatBlockEditor extends CustomAutonomousElement {
   static get elementName() { return 'stat-block-editor'; }
   static get templatePaths() {
@@ -74,11 +76,43 @@ export default class StatBlockEditor extends CustomAutonomousElement {
 
   onExportAction(event) {
     const format = event.detail.format;
-
+    this.exportToFormat(format);    
+  }
+  
+  exportToFormat(format) {
     switch(format) {
-    case 'html':
-      // TODO
+    case 'json':
+      this.exportToJson();
       break;
+    case 'html':
+      this.exportToHtml();
+      break;
+    case 'homebrewery':
+      this.exportToHomebrewery();
+      break;
+    default:
+      throw new Error(`Cannot export to an unknown format '${format}'.`);
     }
-  }  
+  }
+
+  exportToJson() {
+    // TODO
+  }
+
+  exportToHtml() {
+    const content = this.statBlock.exportToHtml();
+    
+    // TODO: Open modal dialog and provide options to either copy to clipboard
+    //       or save to file
+
+    const blob = new Blob([content], {type: 'text/html'});
+    const link = document.createElement('a');
+    link.download = `${Creature.fullName}.html`;
+    link.href = URL.createObjectURL(blob);
+    link.click();
+  }
+
+  exportToHomebrewery() {
+    // TODO
+  }
 }

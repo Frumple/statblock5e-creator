@@ -5,20 +5,20 @@ class HtmlTemplates {
     this.templates = new Map();
   }
 
-  async addTemplate(name, path) {
-    let content;
-
+  async fetchFromFile(path) {
     if (isRunningInNode) {
       const fs = require('fs');
       const util = require('util');
       const readFile = util.promisify(fs.readFile);
 
-      const buffer = await readFile(path);
-      content = buffer.toString();
+      return await readFile(path).then(buffer => buffer.toString());
     } else {
-      content = await fetch(path).then(stream => stream.text());
+      return await fetch(path).then(stream => stream.text());
     }
+  }
 
+  async addTemplate(name, path) {
+    const content = await this.fetchFromFile(path);
     this.templates.set(name, content);
   }
 

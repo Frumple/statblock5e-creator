@@ -96,7 +96,7 @@ describe('when the show section is clicked', () => {
       headingSection.editElements.submitForm();
 
       expect(headingSection).toBeInMode('show');
-      expect(headingSection.showElements.fullName).toHaveTextContent('Beholder');
+      expect(headingSection.showElements.title).toHaveTextContent('Beholder');
       expect(headingSection.showElements.subtitle).toHaveTextContent('Large aberration, lawful evil');
 
       expect(Creature.shortName).toBe('');
@@ -109,7 +109,7 @@ describe('when the show section is clicked', () => {
       headingSection.editElements.submitForm();
 
       expect(headingSection).toBeInMode('show');
-      expect(headingSection.showElements.fullName).toHaveTextContent('Young red dragon');
+      expect(headingSection.showElements.title).toHaveTextContent('Young red dragon');
     });
 
     it('should trim whitespace from the creature name and type', () => {
@@ -121,7 +121,7 @@ describe('when the show section is clicked', () => {
       headingSection.editElements.submitForm();
 
       expect(headingSection).toBeInMode('show');
-      expect(headingSection.showElements.fullName).toHaveTextContent('Purple Worm');
+      expect(headingSection.showElements.title).toHaveTextContent('Purple Worm');
       expect(headingSection.showElements.subtitle).toHaveTextContent('Gargantuan monstrosity, unaligned');
     });
 

@@ -5,7 +5,7 @@
   margin-top: 5px;
 }
 
-.editable-block-list-item__header {
+.editable-block-list-item__heading {
   display: flex;
   flex-direction: row;
 }

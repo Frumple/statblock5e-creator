@@ -24,15 +24,15 @@ export default class AbilityScoresSection extends sectionModule.Section {
   }
 
   onInputAbilityScore(key) {
-    let score = this.editElements.score[key].valueAsInt;
+    const score = this.editElements.score[key].valueAsInt;
     
     if (! isNaN(score)) {
       Abilities.abilities[key].score = score;
-      let modifier = Abilities.abilities[key].modifier;
+      const modifier = Abilities.abilities[key].modifier;
 
       this.updateEditSectionModifier(key, modifier);
     
-      let changeEvent = new CustomEvent('abilityScoreChanged', {
+      const changeEvent = new CustomEvent('abilityScoreChanged', {
         bubbles: true,
         composed: true,
         detail: {
@@ -46,18 +46,18 @@ export default class AbilityScoresSection extends sectionModule.Section {
   }
 
   updateEditSectionModifier(key, modifier) {
-    let modifierElement = this.editElements.modifier[key];
-    let formattedModifier = AbilityScoresSection.formatAbilityModifier(modifier);
+    const modifierElement = this.editElements.modifier[key];
+    const formattedModifier = AbilityScoresSection.formatAbilityModifier(modifier);
     modifierElement.textContent = formattedModifier;
   }  
 
   onInputProficiencyBonus() {
-    let proficiencyBonus = this.editElements.proficiencyBonus.valueAsInt;
+    const proficiencyBonus = this.editElements.proficiencyBonus.valueAsInt;
 
     if (! isNaN(proficiencyBonus)) {
       ProficiencyBonus.proficiencyBonus = proficiencyBonus;
     
-      let changeEvent = new CustomEvent('proficiencyBonusChanged', {
+      const changeEvent = new CustomEvent('proficiencyBonusChanged', {
         bubbles: true,
         composed: true,
         detail: {
@@ -82,19 +82,29 @@ export default class AbilityScoresSection extends sectionModule.Section {
   }
 
   updateShowSectionAbilities(key) {
-    let scoreShowElement = this.showElements.score[key];
-    let modifierShowElement = this.showElements.modifier[key];
-    let ability = Abilities.abilities[key];
-    let score = ability.score;
-    let modifier = ability.modifier;
+    const scoreShowElement = this.showElements.score[key];
+    const modifierShowElement = this.showElements.modifier[key];
+    const ability = Abilities.abilities[key];
+    const score = ability.score;
+    const modifier = ability.modifier;
 
     scoreShowElement.textContent = score;
     modifierShowElement.textContent = AbilityScoresSection.formatAbilityModifier(modifier);
   }
 
   static formatAbilityModifier(modifier) {
-    let formattedModifier = formatModifier(modifier);
+    const formattedModifier = formatModifier(modifier);
     return `(${formattedModifier})`;
+  }
+
+  exportToHtml() {
+    const abilitiesBlock = document.createElement('abilities-block');
+    for (const [key, value] of Abilities.entries) {
+      const abbreviation = value.abbreviation;
+      abilitiesBlock.dataset[abbreviation] = this.showElements.score[key].textContent;
+    }
+
+    return abilitiesBlock;
   }
 }
 

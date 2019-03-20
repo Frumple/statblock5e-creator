@@ -2,6 +2,7 @@ import * as sectionModule from './section.js';
 import Skills from '../../../stats/skills.js';
 import { inputValueAndTriggerEvent } from '../../../helpers/element-helpers.js';
 import { formatModifier } from '../../../helpers/string-formatter.js';
+import { createPropertyLine } from '../../../helpers/export-helpers.js';
 
 export default class SkillsSection extends sectionModule.Section {
   static get elementName() { return 'skills-section'; }
@@ -30,7 +31,7 @@ export default class SkillsSection extends sectionModule.Section {
   }
 
   initializeSkillElements(key) {    
-    let elements = this.editElements.skill[key];
+    const elements = this.editElements.skill[key];
 
     elements.enable.enableElementsWhenChecked(
       elements.proficient,
@@ -44,7 +45,7 @@ export default class SkillsSection extends sectionModule.Section {
 
   onInputSkillEnabled(key) {
     const labelDisabledClass = 'section__label_disabled';
-    let elements = this.editElements.skill[key];
+    const elements = this.editElements.skill[key];
     Skills.skills[key].isEnabled = elements.enable.checked;
 
     if (elements.enable.checked) {
@@ -71,7 +72,7 @@ export default class SkillsSection extends sectionModule.Section {
   }
 
   onInputSkillOverride(key) {
-    let overrideValue = this.editElements.skill[key].override.valueAsInt;
+    const overrideValue = this.editElements.skill[key].override.valueAsInt;
     Skills.skills[key].override = overrideValue;
 
     this.updateEditSectionModifier(key);
@@ -79,7 +80,7 @@ export default class SkillsSection extends sectionModule.Section {
   }
 
   dispatchSkillChangedEvent(skillName) {
-    let changeEvent = new CustomEvent('skillChanged', {
+    const changeEvent = new CustomEvent('skillChanged', {
       bubbles: true,
       composed: true,
       detail: {
@@ -100,32 +101,17 @@ export default class SkillsSection extends sectionModule.Section {
   }
 
   updateEditSectionModifier(key) {
-    let skillModifier = Skills.skills[key].calculateModifier(false);
-    let formattedSkillModifier = formatModifier(skillModifier);
+    const skillModifier = Skills.skills[key].calculateModifier(false);
+    const formattedSkillModifier = formatModifier(skillModifier);
     this.editElements.skill[key].modifier.textContent = formattedSkillModifier;
   }
 
   checkForErrors() {
-
+    return;
   }
 
   updateShowSection() {
-    let text = '';
-
-    for (const [key, value] of Skills.entries) {
-      let skill = Skills.skills[key];
-      let isEnabled = skill.isEnabled;
-      
-      if (isEnabled) {
-        let skillModifier = formatModifier(skill.calculateModifier());
-
-        if (text === '') {
-          text += `${value.prettyName} ${skillModifier}`;
-        } else {
-          text += `, ${value.prettyName} ${skillModifier}`;
-        }
-      }
-    }
+    const text = this.showSectionText;
 
     if (text === '') {
       this.empty = true;
@@ -134,6 +120,35 @@ export default class SkillsSection extends sectionModule.Section {
     }
 
     this.showElements.text.textContent = text;
+  }
+
+  get showSectionText() {
+    let text = '';
+
+    for (const [key, value] of Skills.entries) {
+      const skill = Skills.skills[key];
+      const isEnabled = skill.isEnabled;
+      
+      if (isEnabled) {
+        const skillModifier = formatModifier(skill.calculateModifier());
+
+        if (text === '') {
+          text += `${value.prettyName} ${skillModifier}`;
+        } else {
+          text += `, ${value.prettyName} ${skillModifier}`;
+        }
+      }
+    }
+    
+    return text;
+  }
+
+  exportToHtml() {
+    const heading = 'Skills';
+    const text = this.showElements.text.textContent;
+    const propertyLine = createPropertyLine(heading, text);
+
+    return propertyLine;
   }
 }
 
