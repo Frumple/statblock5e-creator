@@ -1,7 +1,13 @@
 import CustomAutonomousElement from '../custom-autonomous-element.js';
 import GlobalOptions from '../../../helpers/global-options.js';
+import isRunningInNode from '../../../helpers/is-running-in-node.js';
 
 import Creature from '../../../stats/creature.js';
+import StatBlockMenu from './stat-block-menu.js';
+import StatBlockSidebar from './stat-block-sidebar.js';
+import StatBlock from './stat-block.js';
+
+import { startFileDownload } from '../../../helpers/file-helpers.js';
 
 export default class StatBlockEditor extends CustomAutonomousElement {
   static get elementName() { return 'stat-block-editor'; }
@@ -14,19 +20,25 @@ export default class StatBlockEditor extends CustomAutonomousElement {
   constructor() {
     super(StatBlockEditor.templatePaths);
 
-    this.statBlockMenu = document.querySelector('stat-block-menu');
-    this.statBlockSidebar = document.querySelector('stat-block-sidebar');
-    this.statBlock = document.querySelector('stat-block');
+    if (isRunningInNode) {
+      this.statBlockMenu = new StatBlockMenu(this);
+      this.statBlockSidebar = new StatBlockSidebar(this);
+      this.statBlock = new StatBlock(this);
+    } else {
+      this.statBlockMenu = document.querySelector('stat-block-menu');
+      this.statBlockSidebar = document.querySelector('stat-block-sidebar');
+      this.statBlock = document.querySelector('stat-block');
+    }    
   }
 
   connectedCallback() {
     if (this.isConnected && ! this.isInitialized) {
-      this.addEventListener('numberOfColumnsChanged', this.onNumberOfColumnsChanged);
-      this.addEventListener('twoColumnHeightChanged', this.onTwoColumnHeightChanged);
-      this.addEventListener('emptySectionsVisibilityChanged', this.onEmptySectionsVisiblityChanged);
-      this.addEventListener('allSectionsAction', this.onAllSectionsAction);
+      this.addEventListener('numberOfColumnsChanged', this.onNumberOfColumnsChanged.bind(this));
+      this.addEventListener('twoColumnHeightChanged', this.onTwoColumnHeightChanged.bind(this));
+      this.addEventListener('emptySectionsVisibilityChanged', this.onEmptySectionsVisiblityChanged.bind(this));
+      this.addEventListener('allSectionsAction', this.onAllSectionsAction.bind(this));
 
-      this.addEventListener('exportAction', this.onExportAction);
+      this.addEventListener('exportAction', this.onExportAction.bind(this));
 
       this.isInitialized = true;
     }
@@ -101,15 +113,13 @@ export default class StatBlockEditor extends CustomAutonomousElement {
 
   exportToHtml() {
     const content = this.statBlock.exportToHtml();
+    const contentType = 'text/html';
+    const fileName = `${Creature.fullName}.html`;
     
     // TODO: Open modal dialog and provide options to either copy to clipboard
     //       or save to file
 
-    const blob = new Blob([content], {type: 'text/html'});
-    const link = document.createElement('a');
-    link.download = `${Creature.fullName}.html`;
-    link.href = URL.createObjectURL(blob);
-    link.click();
+    startFileDownload(content, contentType, fileName);
   }
 
   exportToHomebrewery() {

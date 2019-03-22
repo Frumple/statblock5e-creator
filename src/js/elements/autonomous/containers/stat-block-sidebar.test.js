@@ -1,5 +1,9 @@
 import StatBlockSidebar from './stat-block-sidebar.js';
 
+const initialSliderValue = 600;
+const sidebarHiddenClass = 'stat-block-sidebar_hidden';
+const sliderContainerHiddenClass = 'stat-block-sidebar__slider-container_hidden';
+
 let statBlockSidebar;
 
 beforeAll(async() => {
@@ -10,10 +14,6 @@ beforeEach(() => {
   statBlockSidebar = new StatBlockSidebar();
   statBlockSidebar.connect();
 });
-
-const initialSliderValue = 600;
-const sidebarHiddenClass = 'stat-block-sidebar_hidden';
-const sliderContainerHiddenClass = 'stat-block-sidebar__slider-container_hidden';
 
 it('should be visible when visible is set to true', () => {
   statBlockSidebar.visible = true;

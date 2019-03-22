@@ -8,8 +8,8 @@ export default class StatBlockMenu extends CustomAutonomousElement {
       'src/html/elements/autonomous/containers/stat-block-menu.html');
   }
 
-  constructor() {
-    super(StatBlockMenu.templatePaths);
+  constructor(parent = null) {
+    super(StatBlockMenu.templatePaths, parent);
 
     this.oneColumnButton = this.shadowRoot.getElementById('one-column-label');
     this.twoColumnButton = this.shadowRoot.getElementById('two-column-label');

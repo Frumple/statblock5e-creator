@@ -1,5 +1,11 @@
 import CustomAutonomousElement from '../custom-autonomous-element.js';
 import * as HtmlExportDocumentFactory from '../../../helpers/html-export-document-factory.js';
+import isRunningInNode from '../../../helpers/is-running-in-node.js';
+import GlobalOptions from '../../../helpers/global-options.js';
+
+import HeadingSection from '../sections/heading-section.js';
+import TopStats from '../containers/top-stats.js';
+import BottomStats from '../containers/bottom-stats.js';
 
 export default class StatBlock extends CustomAutonomousElement {
   static get elementName() { return 'stat-block'; }
@@ -9,12 +15,18 @@ export default class StatBlock extends CustomAutonomousElement {
       'src/html/elements/autonomous/containers/stat-block.html');
   }
 
-  constructor() {
-    super(StatBlock.templatePaths);
+  constructor(parent = null) {
+    super(StatBlock.templatePaths, parent);
 
-    this.headingSection = document.querySelector('heading-section');
-    this.topStats = document.querySelector('top-stats');
-    this.bottomStats = document.querySelector('bottom-stats');
+    if (isRunningInNode) {
+      this.headingSection = new HeadingSection();
+      this.topStats = new TopStats();
+      this.bottomStats = new BottomStats();
+    } else {
+      this.headingSection = document.querySelector('heading-section');
+      this.topStats = document.querySelector('top-stats');
+      this.bottomStats = document.querySelector('bottom-stats');
+    }    
   }
 
   connectedCallback() {
@@ -111,6 +123,14 @@ export default class StatBlock extends CustomAutonomousElement {
     statBlock.appendChild(headingSection);
     statBlock.appendChild(topStats);
     statBlock.appendChild(bottomStats);
+
+    if (GlobalOptions.columns === 2) {
+      statBlock.dataset.twoColumn = '';
+
+      if (GlobalOptions.twoColumnMode === 'manual') {
+        statBlock.setAttribute('style', `--data-content-height: ${GlobalOptions.twoColumnHeight}px`);
+      }
+    }
 
     const doctype = '<!DOCTYPE html>';
     const content = `${doctype}${doc.documentElement.outerHTML}`;

@@ -1,5 +1,9 @@
 class GlobalOptions {
   constructor() {
+    this.reset();
+  }
+
+  reset() {
     this.columns = 1;
     this.twoColumnMode = 'auto';
     this.twoColumnHeight = 600;

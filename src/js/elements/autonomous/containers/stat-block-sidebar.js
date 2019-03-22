@@ -8,8 +8,8 @@ export default class StatBlockSidebar extends CustomAutonomousElement {
       'src/html/elements/autonomous/containers/stat-block-sidebar.html');
   }
 
-  constructor() {
-    super(StatBlockSidebar.templatePaths);
+  constructor(parent = null) {
+    super(StatBlockSidebar.templatePaths, parent);
 
     this.sidebar = this.shadowRoot.getElementById('stat-block-sidebar');
     this.autoHeightModeButton = this.shadowRoot.getElementById('auto-height-mode-label');
@@ -49,7 +49,7 @@ export default class StatBlockSidebar extends CustomAutonomousElement {
       height = parseInt(this.manualHeightSlider.value);
     }    
 
-    let heightEvent = new CustomEvent('twoColumnHeightChanged', {
+    const heightEvent = new CustomEvent('twoColumnHeightChanged', {
       bubbles: true,
       composed: true,
       detail: {

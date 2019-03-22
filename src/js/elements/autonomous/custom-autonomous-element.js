@@ -57,6 +57,8 @@ class FakeCustomAutonomousElement {
     this._parent = parent;
     this._children = [];
 
+    this.element = document.createElement(this.elementName);
+
     this.dataset = new Map();
 
     // Create an in-memory fake shadow root and append the HTML templates to its body
@@ -98,6 +100,19 @@ class FakeCustomAutonomousElement {
     if (this._parent !== null && event.bubbles) {      
       this._parent.dispatchEvent(event);
     }
+  }
+
+  // Since this element is fake, apply attribute operations on the internal element
+  getAttribute(name) {
+    return this.element.getAttribute(name);
+  }
+
+  setAttribute(name, value) {
+    this.element.setAttribute(name, value);
+  }
+
+  removeAttribute(name) {
+    this.element.removeAttribute(name);
   }
 
   // Since this element is fake, non-shadow DOM child elements that are added
