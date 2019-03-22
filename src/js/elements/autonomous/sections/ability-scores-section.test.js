@@ -68,11 +68,11 @@ describe('when the show section is clicked', () => {
 
         inputValueAndTriggerEvent(abilityScoresSection.editElements.score[abilityName], score);
 
-        let ability = Abilities.abilities[abilityName];
+        const ability = Abilities.abilities[abilityName];
         expect(ability.score).toBe(score);
         expect(ability.modifier).toBe(expectedModifier);
 
-        let formattedModifier = `(${formatModifier(expectedModifier)})`;
+        const formattedModifier = `(${formatModifier(expectedModifier)})`;
         expect(abilityScoresSection.editElements.modifier[abilityName]).toHaveTextContent(formattedModifier);
 
         expect(receivedEvent).not.toBeNull();
@@ -83,6 +83,10 @@ describe('when the show section is clicked', () => {
         abilityScoresSection.editElements.submitForm();
 
         expect(abilityScoresSection.showElements.modifier[abilityName]).toHaveTextContent(formattedModifier);
+
+        const htmlExport = abilityScoresSection.exportToHtml();
+        expect(htmlExport.tagName).toBe('ABILITIES-BLOCK');
+        expect(htmlExport.dataset[ability.abbreviation]).toBe(score.toString());
       });
       /* eslint-enable indent, no-unexpected-multiline */
     });
@@ -106,16 +110,16 @@ describe('when the show section is clicked', () => {
           receivedEvent = event;
         });
 
-        let ability = Abilities.abilities[abilityName];
-        let oldScore = ability.score;
-        let oldModifier = ability.modifier;
+        const ability = Abilities.abilities[abilityName];
+        const oldScore = ability.score;
+        const oldModifier = ability.modifier;
 
         inputValueAndTriggerEvent(abilityScoresSection.editElements.score[abilityName], '');
 
         expect(ability.score).toBe(oldScore);
         expect(ability.modifier).toBe(oldModifier);
 
-        let formattedOldModifier = `(${formatModifier(oldModifier)})`;
+        const formattedOldModifier = `(${formatModifier(oldModifier)})`;
         expect(abilityScoresSection.editElements.modifier[abilityName]).toHaveTextContent(formattedOldModifier);
 
         expect(receivedEvent).toBeNull();
@@ -170,7 +174,7 @@ describe('when the show section is clicked', () => {
         receivedEvent = event;
       });
       
-      let oldProficiencyBonus = ProficiencyBonus.proficiencyBonus;
+      const oldProficiencyBonus = ProficiencyBonus.proficiencyBonus;
 
       inputValueAndTriggerEvent(abilityScoresSection.editElements.proficiencyBonus, '');
 
@@ -208,30 +212,40 @@ describe('when the show section is clicked', () => {
       ('$description: {strScore="$strScore", dexScore="$dexScore", conScore="$conScore", intScore="$intScore", wisScore="$wisScore", chaScore="$chaScore", proficiencyBonus="$proficiencyBonus"} => {strMod="$strMod", dexMod="$dexMod", conMod="$conMod", intMod="$intMod", wisMod="$wisMod", chaMod="$chaMod"}',
       ({strScore, dexScore, conScore, intScore, wisScore, chaScore, proficiencyBonus, strMod, dexMod, conMod, intMod, wisMod, chaMod}) => { // eslint-disable-line no-unused-vars
         for (const [key, value] of Abilities.entries) {
-          let score = eval(`${value.abbreviation}Score`);
+          const score = eval(`${value.abbreviation}Score`);
           inputValueAndTriggerEvent(abilityScoresSection.editElements.score[key], score);
         }
         inputValueAndTriggerEvent(abilityScoresSection.editElements.proficiencyBonus, proficiencyBonus);
 
         for (const [key, value] of Abilities.entries) {
-          let expectedScore = eval(`${value.abbreviation}Score`);
-          let expectedModifier = eval(`${value.abbreviation}Mod`);
+          const abbreviation = value.abbreviation;
+          const expectedScore = eval(`${abbreviation}Score`);
+          const expectedModifier = eval(`${abbreviation}Mod`);
 
           expect(value.score).toBe(expectedScore);
           expect(value.modifier).toBe(expectedModifier);
 
-          let formattedModifier = `(${formatModifier(expectedModifier)})`;
+          const formattedModifier = `(${formatModifier(expectedModifier)})`;
           expect(abilityScoresSection.editElements.modifier[key]).toHaveTextContent(formattedModifier);
         }
         expect(ProficiencyBonus.proficiencyBonus).toBe(proficiencyBonus);
 
         abilityScoresSection.editElements.submitForm();
 
+        const htmlExport = abilityScoresSection.exportToHtml();
+        expect(htmlExport.tagName).toBe('ABILITIES-BLOCK');
+
         for (const [key, value] of Abilities.entries) {
-          let expectedModifier = eval(`${value.abbreviation}Mod`);
-          let formattedModifier = `(${formatModifier(expectedModifier)})`;
-          expect(abilityScoresSection.showElements.modifier[key]).toHaveTextContent(formattedModifier);
-        }
+          const abbreviation = value.abbreviation;
+          const expectedScore = eval(`${abbreviation}Score`);
+          const expectedModifier = eval(`${abbreviation}Mod`);
+          const formattedModifier = `(${formatModifier(expectedModifier)})`;
+
+          expect(abilityScoresSection.showElements.score[key]).toHaveTextContent(expectedScore); 
+          expect(abilityScoresSection.showElements.modifier[key]).toHaveTextContent(formattedModifier); 
+
+          expect(htmlExport.dataset[abbreviation]).toBe(expectedScore.toString());
+        }       
       });
       /* eslint-enable indent, no-unexpected-multiline */
     });
