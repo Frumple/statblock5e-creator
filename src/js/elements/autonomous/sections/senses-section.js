@@ -1,8 +1,7 @@
-import * as sectionModule from './section.js';
+import * as propertyLineSectionModule from './property-line-section.js';
 import Skills from '../../../stats/skills.js';
-import { createPropertyLine } from '../../../helpers/export-helpers.js';
 
-export default class SensesSection extends sectionModule.Section {
+export default class SensesSection extends propertyLineSectionModule.PropertyLineSection {
   static get elementName() { return 'senses-section'; }
   static get templatePaths() {
     return super.templatePaths.set(
@@ -13,7 +12,8 @@ export default class SensesSection extends sectionModule.Section {
   constructor() {
     super(SensesSection.templatePaths,
           SensesShowElements,
-          SensesEditElements);    
+          SensesEditElements,
+          'Senses');    
   }
 
   connectedCallback() {
@@ -87,24 +87,15 @@ export default class SensesSection extends sectionModule.Section {
 
     return text;
   }
-
-  exportToHtml() {
-    const heading = 'Senses';
-    const text = this.showElements.text.innerHTMLSanitized;
-    const propertyLine = createPropertyLine(heading, text);
-
-    return propertyLine;
-  }
 }
 
-class SensesShowElements extends sectionModule.ShowElements {
+class SensesShowElements extends propertyLineSectionModule.PropertyLineShowElements {
   constructor(shadowRoot) {
     super(shadowRoot);
-    this.text = shadowRoot.getElementById('senses-text');
   }
 }
 
-class SensesEditElements extends sectionModule.EditElements {
+class SensesEditElements extends propertyLineSectionModule.PropertyLineEditElements {
   constructor(shadowRoot) {
     super(shadowRoot);
     this.blindsight = shadowRoot.getElementById('blindsight-input');

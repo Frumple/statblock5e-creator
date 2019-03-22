@@ -1,10 +1,9 @@
-import * as sectionModule from './section.js';
+import * as propertyLineSectionModule from './property-line-section.js';
 import Skills from '../../../stats/skills.js';
 import { inputValueAndTriggerEvent } from '../../../helpers/element-helpers.js';
 import { formatModifier } from '../../../helpers/string-formatter.js';
-import { createPropertyLine } from '../../../helpers/export-helpers.js';
 
-export default class SkillsSection extends sectionModule.Section {
+export default class SkillsSection extends propertyLineSectionModule.PropertyLineSection {
   static get elementName() { return 'skills-section'; }
   static get templatePaths() {
     return super.templatePaths.set(
@@ -15,7 +14,8 @@ export default class SkillsSection extends sectionModule.Section {
   constructor() {
     super(SkillsSection.templatePaths,
           SkillsShowElements,
-          SkillsEditElements);
+          SkillsEditElements,
+          'Skills');
 
     this.empty = true;
   }
@@ -142,24 +142,15 @@ export default class SkillsSection extends sectionModule.Section {
     
     return text;
   }
-
-  exportToHtml() {
-    const heading = 'Skills';
-    const text = this.showElements.text.textContent;
-    const propertyLine = createPropertyLine(heading, text);
-
-    return propertyLine;
-  }
 }
 
-class SkillsShowElements extends sectionModule.ShowElements {
+class SkillsShowElements extends propertyLineSectionModule.PropertyLineShowElements {
   constructor(shadowRoot) {
     super(shadowRoot);
-    this.text = shadowRoot.getElementById('skills-text');
   }
 }
 
-class SkillsEditElements extends sectionModule.EditElements {
+class SkillsEditElements extends propertyLineSectionModule.PropertyLineEditElements {
   constructor(shadowRoot) {
     super(shadowRoot);
 

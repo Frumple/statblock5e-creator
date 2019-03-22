@@ -3,6 +3,8 @@ import * as TestCustomElements from '../../../helpers/test/test-custom-elements.
 
 import { inputValueAndTriggerEvent } from '../../../helpers/element-helpers.js';
 
+const expectedHeading = 'Armor Class';
+
 let armorClassSection;
 
 beforeAll(async() => {
@@ -49,18 +51,23 @@ describe('when the show section is clicked', () => {
         armorClassSection.editElements.submitForm();
 
         expect(armorClassSection).toBeInMode('show');
-        expect(armorClassSection.showElements.text).toHaveTextContent(customText);
+        expect(armorClassSection).toHavePropertyLine(expectedHeading, customText);
+
+        expect(armorClassSection).toExportPropertyLineToHtml(expectedHeading, customText);
       });
 
       it('should switch to show mode and save the custom text with valid markdown syntax', () => {
         const customText = '12 (15 with *mage armor*)';
+        const expectedText = '12 (15 with mage armor)';
+        const expectedTextHtml = '12 (15 with <em>mage armor</em>)';
         inputValueAndTriggerEvent(armorClassSection.editElements.customText, customText);
 
         armorClassSection.editElements.submitForm();
 
         expect(armorClassSection).toBeInMode('show');
-        expect(armorClassSection.showElements.text).toHaveTextContent('12 (15 with mage armor)');
-        expect(armorClassSection.showElements.text).toContainHTML('12 (15 with <em>mage armor</em>)');
+        expect(armorClassSection).toHavePropertyLine(expectedHeading, expectedText, expectedTextHtml);
+
+        expect(armorClassSection).toExportPropertyLineToHtml(expectedHeading, expectedText, expectedTextHtml);
       });
 
       it('should display an error if the custom text field is blank', () => {
@@ -116,35 +123,49 @@ describe('when the show section is clicked', () => {
 
     describe('and the edit section is submitted', () => {
       it('should switch to show mode and save the armor class only', () => {
+        const expectedText = '7';
+
         inputValueAndTriggerEvent(armorClassSection.editElements.armorClass, 7);
 
         armorClassSection.editElements.submitForm();
 
         expect(armorClassSection).toBeInMode('show');
-        expect(armorClassSection.showElements.text).toHaveTextContent('7');
+        expect(armorClassSection).toHavePropertyLine(expectedHeading, expectedText);
+
+        expect(armorClassSection).toExportPropertyLineToHtml(expectedHeading, expectedText);
       });
 
       it('should switch to show mode and save the armor class and armor type', () => {
+        const expectedText = '21 (natural armor)';
+
         inputValueAndTriggerEvent(armorClassSection.editElements.armorClass, 21);
         inputValueAndTriggerEvent(armorClassSection.editElements.armorType, 'natural armor');
 
         armorClassSection.editElements.submitForm();
 
         expect(armorClassSection).toBeInMode('show');
-        expect(armorClassSection.showElements.text).toHaveTextContent('21 (natural armor)');
+        expect(armorClassSection).toHavePropertyLine(expectedHeading, expectedText);
+
+        expect(armorClassSection).toExportPropertyLineToHtml(expectedHeading, expectedText);
       });
 
       it('should switch to show mode and save the armor class and shield', () => {
+        const expectedText = '12 (shield)';
+
         inputValueAndTriggerEvent(armorClassSection.editElements.armorClass, 12);      
         armorClassSection.editElements.shield.click();
 
         armorClassSection.editElements.submitForm();
 
         expect(armorClassSection).toBeInMode('show');
-        expect(armorClassSection.showElements.text).toHaveTextContent('12 (shield)');
+        expect(armorClassSection).toHavePropertyLine(expectedHeading, expectedText);
+
+        expect(armorClassSection).toExportPropertyLineToHtml(expectedHeading, expectedText);
       });
 
       it('should switch to show mode and save the armor class, armor type, and shield', () => {
+        const expectedText = '16 (chain shirt, shield)';
+
         inputValueAndTriggerEvent(armorClassSection.editElements.armorClass, 16);
         inputValueAndTriggerEvent(armorClassSection.editElements.armorType, 'chain shirt');
         armorClassSection.editElements.shield.click();
@@ -152,7 +173,9 @@ describe('when the show section is clicked', () => {
         armorClassSection.editElements.submitForm();
 
         expect(armorClassSection).toBeInMode('show');
-        expect(armorClassSection.showElements.text).toHaveTextContent('16 (chain shirt, shield)');
+        expect(armorClassSection).toHavePropertyLine(expectedHeading, expectedText);
+
+        expect(armorClassSection).toExportPropertyLineToHtml(expectedHeading, expectedText);
       });
 
       it('should display an error if the armor class field is not a valid number', () => {

@@ -1,9 +1,8 @@
-import * as sectionModule from './section.js';
+import * as propertyLineSectionModule from './property-line-section.js';
 import HitPoints from '../../../stats/hit-points.js';
 import { formatModifierOperator, formatModifierNumber } from '../../../helpers/string-formatter.js';
-import { createPropertyLine } from '../../../helpers/export-helpers.js';
 
-export default class HitPointsSection extends sectionModule.Section {
+export default class HitPointsSection extends propertyLineSectionModule.PropertyLineSection {
   static get elementName() { return 'hit-points-section'; }
   static get templatePaths() {
     return super.templatePaths.set(
@@ -14,7 +13,9 @@ export default class HitPointsSection extends sectionModule.Section {
   constructor() {
     super(HitPointsSection.templatePaths,
           HitPointsShowElements,
-          HitPointsEditElements);  }
+          HitPointsEditElements,
+          'Hit Points');  
+  }
 
   connectedCallback() {
     if (this.isConnected && ! this.isInitialized) {
@@ -113,24 +114,15 @@ export default class HitPointsSection extends sectionModule.Section {
       return `${hitPoints} (${hitDieQuantity}d${hitDieSize})`;
     }
   }
-
-  exportToHtml() {
-    const heading = 'Hit Points';
-    const text = this.showElements.text.textContent;
-    const propertyLine = createPropertyLine(heading, text);
-
-    return propertyLine;
-  }
 }
 
-class HitPointsShowElements extends sectionModule.ShowElements {
+class HitPointsShowElements extends propertyLineSectionModule.PropertyLineShowElements {
   constructor(shadowRoot) {
     super(shadowRoot);
-    this.text = shadowRoot.getElementById('hit-points-text');
   }
 }
 
-class HitPointsEditElements extends sectionModule.EditElements {
+class HitPointsEditElements extends propertyLineSectionModule.PropertyLineEditElements {
   constructor(shadowRoot) {
     super(shadowRoot);
     this.hitPoints = shadowRoot.getElementById('hit-points-input');

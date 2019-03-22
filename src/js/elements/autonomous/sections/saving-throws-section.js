@@ -1,11 +1,10 @@
-import * as sectionModule from './section.js';
+import * as propertyLineSectionModule from './property-line-section.js';
 import Abilities from '../../../stats/abilities.js';
 import SavingThrows from '../../../stats/saving-throws.js';
 import { inputValueAndTriggerEvent } from '../../../helpers/element-helpers.js';
 import { capitalizeFirstLetter, formatModifier } from '../../../helpers/string-formatter.js';
-import { createPropertyLine } from '../../../helpers/export-helpers.js';
 
-export default class SavingThrowsSection extends sectionModule.Section {
+export default class SavingThrowsSection extends propertyLineSectionModule.PropertyLineSection {
   static get elementName() { return 'saving-throws-section'; }
   static get templatePaths() {
     return super.templatePaths.set(
@@ -16,7 +15,8 @@ export default class SavingThrowsSection extends sectionModule.Section {
   constructor() {
     super(SavingThrowsSection.templatePaths,
           SavingThrowsShowElements,
-          SavingThrowsEditElements);
+          SavingThrowsEditElements,
+          'Saving Throws');
           
     this.empty = true;
   }
@@ -129,24 +129,15 @@ export default class SavingThrowsSection extends sectionModule.Section {
 
     return text;
   }
-
-  exportToHtml() {
-    const heading = 'Saving Throws';
-    const text = this.showElements.text.textContent;
-    const propertyLine = createPropertyLine(heading, text);
-
-    return propertyLine;
-  }
 }
 
-class SavingThrowsShowElements extends sectionModule.ShowElements {
+class SavingThrowsShowElements extends propertyLineSectionModule.PropertyLineShowElements {
   constructor(shadowRoot) {
     super(shadowRoot);
-    this.text = shadowRoot.getElementById('saving-throws-text');
   }
 }
 
-class SavingThrowsEditElements extends sectionModule.EditElements {
+class SavingThrowsEditElements extends propertyLineSectionModule.PropertyLineEditElements {
   constructor(shadowRoot) {
     super(shadowRoot);
 

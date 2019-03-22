@@ -7,6 +7,8 @@ import { formatModifierOperator, formatModifierNumber } from '../../../helpers/s
 import Abilities from '../../../stats/abilities.js';
 import HitPoints from '../../../stats/hit-points.js';
 
+const expectedHeading = 'Hit Points';
+
 let hitPointsSection;
 
 beforeAll(async() => {
@@ -93,7 +95,9 @@ describe('when the show section is clicked', () => {
           hitPointsSection.editElements.submitForm();
 
           expect(hitPointsSection).toBeInMode('show');
-          expect(hitPointsSection.showElements.text).toHaveTextContent(expectedText);
+          expect(hitPointsSection).toHavePropertyLine(expectedHeading, expectedText);
+
+          expect(hitPointsSection).toExportPropertyLineToHtml(expectedHeading, expectedText);
         });      
         /* eslint-enable indent, no-unexpected-multiline */
       });
@@ -176,6 +180,8 @@ describe('when the show section is clicked', () => {
 
     describe('and the hit points field is changed and the edit section is submitted', () => {
       it('should switch to show mode and save the hit points', () => {
+        const expectedText = '142';
+
         inputValueAndTriggerEvent(hitPointsSection.editElements.hitPoints, 142);
 
         expect(HitPoints.useHitDie).toBe(false);
@@ -187,7 +193,9 @@ describe('when the show section is clicked', () => {
         hitPointsSection.editElements.submitForm();
 
         expect(hitPointsSection).toBeInMode('show');
-        expect(hitPointsSection.showElements.text).toHaveTextContent('142');
+        expect(hitPointsSection).toHavePropertyLine(expectedHeading, expectedText);
+
+        expect(hitPointsSection).toExportPropertyLineToHtml(expectedHeading, expectedText);
       });
 
       it('should display an error if the hit points field is not a valid number, and the hit points should not be saved', () => {

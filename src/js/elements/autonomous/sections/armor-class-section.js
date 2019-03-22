@@ -1,7 +1,6 @@
-import * as sectionModule from './section.js';
-import { createPropertyLine } from '../../../helpers/export-helpers.js';
+import * as propertyLineSectionModule from './property-line-section.js';
 
-export default class ArmorClassSection extends sectionModule.Section {
+export default class ArmorClassSection extends propertyLineSectionModule.PropertyLineSection {
   static get elementName() { return 'armor-class-section'; }
   static get templatePaths() {
     return super.templatePaths.set(
@@ -12,7 +11,8 @@ export default class ArmorClassSection extends sectionModule.Section {
   constructor() {
     super(ArmorClassSection.templatePaths,
           ArmorClassShowElements,
-          ArmorClassEditElements);
+          ArmorClassEditElements,
+          'Armor Class');
   }
 
   connectedCallback() {
@@ -70,24 +70,15 @@ export default class ArmorClassSection extends sectionModule.Section {
       }
     }
   }
-
-  exportToHtml() {
-    const heading = 'Armor Class';
-    const text = this.showElements.text.innerHTMLSanitized;
-    const propertyLine = createPropertyLine(heading, text);
-
-    return propertyLine;
-  }
 }
 
-class ArmorClassShowElements extends sectionModule.ShowElements {
+class ArmorClassShowElements extends propertyLineSectionModule.PropertyLineShowElements {
   constructor(shadowRoot) {
     super(shadowRoot);
-    this.text = shadowRoot.getElementById('armor-class-text');
   }
 }
 
-class ArmorClassEditElements extends sectionModule.EditElements {
+class ArmorClassEditElements extends propertyLineSectionModule.PropertyLineEditElements {
   constructor(shadowRoot) {
     super(shadowRoot);
     this.armorClass = shadowRoot.getElementById('armor-class-input');

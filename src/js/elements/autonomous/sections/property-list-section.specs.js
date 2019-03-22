@@ -1,6 +1,6 @@
 import { inputValueAndTriggerEvent } from '../../../helpers/element-helpers.js';
 
-export function shouldAddASuggestedItem(section, itemText) {
+export function shouldAddASuggestedItem(section, headingName, itemText) {
   inputValueAndTriggerEvent(section.editElements.input, itemText);
   section.editElements.addButton.click();
 
@@ -9,10 +9,12 @@ export function shouldAddASuggestedItem(section, itemText) {
   section.editElements.submitForm();
 
   expect(section).toBeInMode('show');
-  expect(section.showElements.text).toHaveTextContent(itemText);
+  expect(section).toHavePropertyLine(headingName, itemText);
+
+  expect(section).toExportPropertyLineToHtml(headingName, itemText);
 }
 
-export function shouldAddACustomItem(section, itemText) {
+export function shouldAddACustomItem(section, headingName, itemText) {
   inputValueAndTriggerEvent(section.editElements.input, itemText);      
   section.editElements.addButton.click();
 
@@ -21,10 +23,12 @@ export function shouldAddACustomItem(section, itemText) {
   section.editElements.submitForm();
 
   expect(section).toBeInMode('show');
-  expect(section.showElements.text).toHaveTextContent(itemText);
+  expect(section).toHavePropertyLine(headingName, itemText);
+
+  expect(section).toExportPropertyLineToHtml(headingName, itemText);
 }
 
-export function shouldAddManyItems(section, itemTexts) {
+export function shouldAddManyItems(section, headingName, itemTexts) {
   for (const itemText of itemTexts) {
     inputValueAndTriggerEvent(section.editElements.input, itemText);      
     section.editElements.addButton.click();
@@ -37,7 +41,9 @@ export function shouldAddManyItems(section, itemTexts) {
   const expectedTextContent = itemTexts.join(', ');
 
   expect(section).toBeInMode('show');
-  expect(section.showElements.text).toHaveTextContent(expectedTextContent);
+  expect(section).toHavePropertyLine(headingName, expectedTextContent);
+
+  expect(section).toExportPropertyLineToHtml(headingName, expectedTextContent);
 }
 
 export function shouldDisplayAnErrorIfAddingBlank(section, expectedItemType) {
@@ -85,7 +91,7 @@ export function shouldRemoveAndAddSuggestions(section, itemText) {
   expect(option).not.toHaveAttribute('disabled');
 }
 
-export function shouldAddAndRemoveItem(section, itemText) {
+export function shouldAddAndRemoveItem(section, headingName, itemText) {
   inputValueAndTriggerEvent(section.editElements.input, itemText);
   section.editElements.addButton.click();
 
@@ -96,12 +102,16 @@ export function shouldAddAndRemoveItem(section, itemText) {
 
   section.editElements.submitForm();
 
+  const expectedTextContent = '';
+
   expect(section).toBeInMode('show');
-  expect(section.showElements.text).toHaveTextContent('');
   expect(section.showElements.section).toHaveClass('section_empty');
+  expect(section).toHavePropertyLine(headingName, expectedTextContent);
+
+  expect(section).toExportPropertyLineToHtml(headingName, expectedTextContent);
 }
 
-export function shouldDeleteOneOfThreeItems(section, initialItems, itemToDelete, expectedItems) {
+export function shouldDeleteOneOfThreeItems(section, headingName, initialItems, itemToDelete, expectedItems) {
   for (const item of initialItems) {
     inputValueAndTriggerEvent(section.editElements.input, item);
     section.editElements.addButton.click();
@@ -114,6 +124,10 @@ export function shouldDeleteOneOfThreeItems(section, initialItems, itemToDelete,
 
   section.editElements.submitForm();
 
+  const expectedTextContent = expectedItems.join(', ');
+
   expect(section).toBeInMode('show');
-  expect(section.showElements.text).toHaveTextContent(expectedItems.join(', '));
+  expect(section).toHavePropertyLine(headingName, expectedTextContent);
+
+  expect(section).toExportPropertyLineToHtml(headingName, expectedTextContent);
 }

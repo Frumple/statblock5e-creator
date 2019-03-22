@@ -7,6 +7,8 @@ import Abilities from '../../../stats/abilities.js';
 import ProficiencyBonus from '../../../stats/proficiency-bonus.js';
 import Skills from '../../../stats/skills.js';
 
+const expectedHeading = 'Senses';
+
 let sensesSection;
 
 beforeAll(async() => {
@@ -58,18 +60,23 @@ describe('when the show section is clicked', () => {
         sensesSection.editElements.submitForm();
 
         expect(sensesSection).toBeInMode('show');
-        expect(sensesSection.showElements.text).toHaveTextContent(customText);
+        expect(sensesSection).toHavePropertyLine(expectedHeading, customText);
+
+        expect(sensesSection).toExportPropertyLineToHtml(expectedHeading, customText);
       });
 
       it('should switch to show mode and save the custom text with valid markdown syntax', () => {
         const customText = '**boldvision 60 ft.**';
+        const expectedText = 'boldvision 60 ft.';
+        const expectedTextHtml = '<strong>boldvision 60 ft.</strong>';
         inputValueAndTriggerEvent(sensesSection.editElements.customText, customText);
 
         sensesSection.editElements.submitForm();
 
         expect(sensesSection).toBeInMode('show');
-        expect(sensesSection.showElements.text).toHaveTextContent('boldvision 60 ft.');
-        expect(sensesSection.showElements.text).toContainHTML('<strong>boldvision 60 ft.</strong>');
+        expect(sensesSection).toHavePropertyLine(expectedHeading, expectedText, expectedTextHtml);
+
+        expect(sensesSection).toExportPropertyLineToHtml(expectedHeading, expectedText, expectedTextHtml);
       });
 
       it('should display an error if the custom text field is blank', () => {
@@ -146,7 +153,9 @@ describe('when the show section is clicked', () => {
           sensesSection.editElements.submitForm();
 
           expect(sensesSection).toBeInMode('show');
-          expect(sensesSection.showElements.text).toHaveTextContent(expectedText);
+          expect(sensesSection).toHavePropertyLine(expectedHeading, expectedText);
+
+          expect(sensesSection).toExportPropertyLineToHtml(expectedHeading, expectedText);
         });
         /* eslint-enable indent, no-unexpected-multiline */
       });
@@ -176,6 +185,8 @@ describe('should calculate the passive perception based on the following conditi
   `
   ('$description: {wisdomScore="$wisdomScore", proficiencyBonus="$proficiencyBonus", perceptionEnabled="$perceptionEnabled", perceptionProficient="$perceptionProficient", perceptionOverride="$perceptionOverride"} => $expectedPassivePerception',
   ({wisdomScore, proficiencyBonus, perceptionEnabled, perceptionProficient, perceptionOverride, expectedPassivePerception}) => {
+    const expectedText = `passive Perception ${expectedPassivePerception}`;
+    
     Abilities.abilities['wisdom'].score = wisdomScore;
     ProficiencyBonus.proficiencyBonus = proficiencyBonus;
 
@@ -186,7 +197,9 @@ describe('should calculate the passive perception based on the following conditi
     
     sensesSection.updatePassivePerception();
 
-    expect(sensesSection.showElements.text).toHaveTextContent(`passive Perception ${expectedPassivePerception}`);
+    expect(sensesSection).toHavePropertyLine(expectedHeading, expectedText);
+
+    expect(sensesSection).toExportPropertyLineToHtml(expectedHeading, expectedText);
 
     sensesSection.showElements.section.click();
 

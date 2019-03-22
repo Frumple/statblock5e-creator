@@ -12,6 +12,8 @@ const labelDisabledClass = 'section__label_disabled';
 const singleSkillUnderTest = 'investigation';
 const singleAbilityUnderTest = 'intelligence';
 
+const expectedHeading = 'Skills';
+
 let skillsSection;
 
 beforeAll(async() => {
@@ -139,7 +141,10 @@ describe('when the show section is clicked', () => {
 
         skillsSection.editElements.submitForm();
 
-        expect(skillsSection.showElements.text).toHaveTextContent(expectedText);
+        expect(skillsSection).toBeInMode('show');
+        expect(skillsSection).toHavePropertyLine(expectedHeading, expectedText);
+
+        expect(skillsSection).toExportPropertyLineToHtml(expectedHeading, expectedText);
 
         if (expectedText === '') {
           expect(skillsSection.showElements.section).toHaveClass('section_empty');
@@ -204,7 +209,10 @@ describe('when the show section is clicked', () => {
 
         skillsSection.editElements.submitForm();
 
-        expect(skillsSection.showElements.text).toHaveTextContent(expectedText);
+        expect(skillsSection).toBeInMode('show');
+        expect(skillsSection).toHavePropertyLine(expectedHeading, expectedText);
+
+        expect(skillsSection).toExportPropertyLineToHtml(expectedHeading, expectedText);
       });
       /* eslint-enable indent, no-unexpected-multiline */
     });

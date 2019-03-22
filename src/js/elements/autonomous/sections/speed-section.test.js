@@ -3,6 +3,8 @@ import * as TestCustomElements from '../../../helpers/test/test-custom-elements.
 
 import { inputValueAndTriggerEvent } from '../../../helpers/element-helpers.js';
 
+const expectedHeading = 'Speed';
+
 let speedSection;
 
 beforeAll(async() => {
@@ -52,18 +54,23 @@ describe('when the show section is clicked', () => {
         speedSection.editElements.submitForm();
 
         expect(speedSection).toBeInMode('show');
-        expect(speedSection.showElements.text).toHaveTextContent(customText);
+        expect(speedSection).toHavePropertyLine(expectedHeading, customText);
+
+        expect(speedSection).toExportPropertyLineToHtml(expectedHeading, customText);
       });
 
       it('should switch to show mode and save the custom text with valid markdown syntax', () => {
         const customText = '40 ft. (80 ft. when _hasted_)';
+        const expectedText = '40 ft. (80 ft. when hasted)';
+        const expectedTextHtml = '40 ft. (80 ft. when <em>hasted</em>)';
         inputValueAndTriggerEvent(speedSection.editElements.customText, customText);
 
         speedSection.editElements.submitForm();
 
         expect(speedSection).toBeInMode('show');
-        expect(speedSection.showElements.text).toHaveTextContent('40 ft. (80 ft. when hasted)');
-        expect(speedSection.showElements.text).toContainHTML('40 ft. (80 ft. when <em>hasted</em>)');
+        expect(speedSection).toHavePropertyLine(expectedHeading, expectedText, expectedTextHtml);
+
+        expect(speedSection).toExportPropertyLineToHtml(expectedHeading, expectedText, expectedTextHtml);
       });
 
       it('should display an error if the custom text field is blank', () => {
@@ -159,7 +166,9 @@ describe('when the show section is clicked', () => {
           speedSection.editElements.submitForm();
 
           expect(speedSection).toBeInMode('show');
-          expect(speedSection.showElements.text).toHaveTextContent(expectedText);
+          expect(speedSection).toHavePropertyLine(expectedHeading, expectedText);
+
+          expect(speedSection).toExportPropertyLineToHtml(expectedHeading, expectedText);
         });
         /* eslint-enable indent, no-unexpected-multiline */
       });

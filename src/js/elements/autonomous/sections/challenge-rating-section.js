@@ -1,8 +1,7 @@
-import * as sectionModule from './section.js';
+import * as propertyLineSectionModule from './property-line-section.js';
 import ExperiencePointsByChallengeRating from '../../../helpers/experience-points-by-challenge-rating.js';
-import { createPropertyLine } from '../../../helpers/export-helpers.js';
 
-export default class ChallengeRatingSection extends sectionModule.Section {
+export default class ChallengeRatingSection extends propertyLineSectionModule.PropertyLineSection {
   static get elementName() { return 'challenge-rating-section'; }
   static get templatePaths() {
     return super.templatePaths.set(
@@ -13,7 +12,8 @@ export default class ChallengeRatingSection extends sectionModule.Section {
   constructor() {
     super(ChallengeRatingSection.templatePaths,
           ChallengeRatingShowElements,
-          ChallengeRatingEditElements);
+          ChallengeRatingEditElements,
+          'Challenge');
 
     this.editElements.challengeRating.addEventListener('input', this.onInputChallengeRating.bind(this));
   }
@@ -37,24 +37,15 @@ export default class ChallengeRatingSection extends sectionModule.Section {
     const text = `${challengeRating} (${experiencePoints} XP)`;
     this.showElements.text.textContent = text;
   }
-
-  exportToHtml() {
-    const heading = 'Challenge';
-    const text = this.showElements.text.textContent;
-    const propertyLine = createPropertyLine(heading, text);
-
-    return propertyLine;
-  }
 }
 
-class ChallengeRatingShowElements extends sectionModule.ShowElements {
+class ChallengeRatingShowElements extends propertyLineSectionModule.PropertyLineShowElements {
   constructor(shadowRoot) {
     super(shadowRoot);
-    this.text = shadowRoot.getElementById('challenge-rating-text');
   }
 }
 
-class ChallengeRatingEditElements extends sectionModule.EditElements {
+class ChallengeRatingEditElements extends propertyLineSectionModule.PropertyLineEditElements {
   constructor(shadowRoot) {
     super(shadowRoot);
     this.challengeRating = shadowRoot.getElementById('challenge-rating-input');

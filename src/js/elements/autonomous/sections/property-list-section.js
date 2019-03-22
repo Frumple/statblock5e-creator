@@ -1,22 +1,20 @@
-import * as sectionModule from './section.js';
-import { createPropertyLine } from '../../../helpers/export-helpers.js';
+import * as propertyLineSectionModule from './property-line-section.js';
 
-export default class PropertyListSection extends sectionModule.Section {
+export default class PropertyListSection extends propertyLineSectionModule.PropertyLineSection {
   static get templatePaths() {
     return super.templatePaths.set(
       'property-list-section',
       'src/html/elements/autonomous/sections/property-list-section.html');
   }
 
-  constructor(templatePaths, headingText, itemType) {
+  constructor(templatePaths, headingName, itemType) {
     super(templatePaths,
           PropertyListShowElements,
-          PropertyListEditElements);
+          PropertyListEditElements,
+          headingName);
 
-    this.headingText = headingText;
-
-    this.showElements.heading.textContent = headingText;
-    this.editElements.label.textContent = `${headingText}:`;
+    this.showElements.heading.textContent = headingName;
+    this.editElements.label.textContent = `${headingName}:`;
 
     this.itemType = itemType;
   }
@@ -104,24 +102,15 @@ export default class PropertyListSection extends sectionModule.Section {
 
     return text;
   }
-
-  exportToHtml() {
-    const text = this.showElements.text.textContent;
-    const propertyLine = createPropertyLine(this.headingText, text);
-
-    return propertyLine;
-  }
 }
 
-class PropertyListShowElements extends sectionModule.ShowElements {
+class PropertyListShowElements extends propertyLineSectionModule.PropertyLineShowElements {
   constructor(shadowRoot) {
     super(shadowRoot);
-    this.heading = shadowRoot.getElementById('property-list-heading');
-    this.text = shadowRoot.getElementById('property-list-text');
   }
 }
 
-class PropertyListEditElements extends sectionModule.EditElements {
+class PropertyListEditElements extends propertyLineSectionModule.PropertyLineEditElements {
   constructor(shadowRoot) {
     super(shadowRoot);
 

@@ -11,6 +11,8 @@ import SavingThrows from '../../../stats/saving-throws.js';
 const labelDisabledClass = 'section__label_disabled';
 const singleSavingThrowUnderTest = 'intelligence';
 
+const expectedHeading = 'Saving Throws';
+
 let savingThrowsSection;
 
 beforeAll(async() => {
@@ -120,12 +122,15 @@ describe('when the show section is clicked', () => {
         }
         expect(savingThrow.calculateModifier()).toBe(expectedModifier);
 
-        let formattedModifier = formatModifier(expectedModifier);
+        const formattedModifier = formatModifier(expectedModifier);
         expect(savingThrowElements.modifier).toHaveTextContent(formattedModifier);
 
         savingThrowsSection.editElements.submitForm();
 
-        expect(savingThrowsSection.showElements.text).toHaveTextContent(expectedText);
+        expect(savingThrowsSection).toBeInMode('show');
+        expect(savingThrowsSection).toHavePropertyLine(expectedHeading, expectedText);
+
+        expect(savingThrowsSection).toExportPropertyLineToHtml(expectedHeading, expectedText);
 
         if (expectedText === '') {
           expect(savingThrowsSection.showElements.section).toHaveClass('section_empty');
@@ -161,36 +166,36 @@ describe('when the show section is clicked', () => {
         ProficiencyBonus.proficiencyBonus = 5;
 
         if (strength) {
-          let elements = savingThrowsSection.editElements.savingThrow['strength'];
+          const elements = savingThrowsSection.editElements.savingThrow['strength'];
           elements.enable.click();
           elements.proficient.click();
           inputValueAndTriggerEvent(elements.override, -3);
         }
 
         if (dexterity) {
-          let elements = savingThrowsSection.editElements.savingThrow['dexterity'];
+          const elements = savingThrowsSection.editElements.savingThrow['dexterity'];
           elements.enable.click();          
           inputValueAndTriggerEvent(elements.override, 0);
         }
 
         if (constitution) {
-          let elements = savingThrowsSection.editElements.savingThrow['constitution'];
+          const elements = savingThrowsSection.editElements.savingThrow['constitution'];
           elements.enable.click();
         }
 
         if (intelligence) {
-          let elements = savingThrowsSection.editElements.savingThrow['intelligence'];
+          const elements = savingThrowsSection.editElements.savingThrow['intelligence'];
           elements.enable.click();
           elements.proficient.click();
         }
 
         if (wisdom) {
-          let elements = savingThrowsSection.editElements.savingThrow['wisdom'];
+          const elements = savingThrowsSection.editElements.savingThrow['wisdom'];
           elements.enable.click();
         }
 
         if (charisma) {
-          let elements = savingThrowsSection.editElements.savingThrow['charisma'];
+          const elements = savingThrowsSection.editElements.savingThrow['charisma'];
           elements.enable.click();
           elements.proficient.click();
           inputValueAndTriggerEvent(elements.override, 9);
@@ -198,7 +203,10 @@ describe('when the show section is clicked', () => {
 
         savingThrowsSection.editElements.submitForm();
 
-        expect(savingThrowsSection.showElements.text).toHaveTextContent(expectedText);
+        expect(savingThrowsSection).toBeInMode('show');
+        expect(savingThrowsSection).toHavePropertyLine(expectedHeading, expectedText);
+
+        expect(savingThrowsSection).toExportPropertyLineToHtml(expectedHeading, expectedText);
       });
       /* eslint-enable indent, no-unexpected-multiline */
     });

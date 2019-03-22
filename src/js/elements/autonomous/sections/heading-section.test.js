@@ -88,6 +88,9 @@ describe('when the show section is clicked', () => {
 
   describe('and fields are populated and the edit section is submitted', () => {
     it('should switch to show mode and save the creature name, size, type, and alignment', () => {
+      const expectedTitle = 'Beholder';
+      const expectedSubtitle = 'Large aberration, lawful evil';
+
       inputValueAndTriggerEvent(headingSection.editElements.fullName, 'Beholder');
       inputValueAndTriggerEvent(headingSection.editElements.size, 'Large');
       inputValueAndTriggerEvent(headingSection.editElements.type, 'aberration');
@@ -96,12 +99,24 @@ describe('when the show section is clicked', () => {
       headingSection.editElements.submitForm();
 
       expect(headingSection).toBeInMode('show');
-      expect(headingSection.showElements.title).toHaveTextContent('Beholder');
-      expect(headingSection.showElements.subtitle).toHaveTextContent('Large aberration, lawful evil');
+      expect(headingSection.showElements.title).toHaveTextContent(expectedTitle);
+      expect(headingSection.showElements.subtitle).toHaveTextContent(expectedSubtitle);
 
       expect(Creature.shortName).toBe('');
       expect(Creature.isProperNoun).toBe(false);
+
+      verifyHtmlExport(headingSection, expectedTitle, expectedSubtitle);      
     });
+
+    function verifyHtmlExport(headingSection, expectedTitle, expectedSubtitle) {
+      const creatureHeading = headingSection.exportToHtml();
+      const title = creatureHeading.querySelector('h1');      
+      const subtitle = creatureHeading.querySelector('h2');  
+
+      expect(creatureHeading.tagName).toBe('CREATURE-HEADING');
+      expect(title).toHaveTextContent(expectedTitle);
+      expect(subtitle).toHaveTextContent(expectedSubtitle);
+    }
 
     it('should capitalize the first letter in the creature name', () => {
       inputValueAndTriggerEvent(headingSection.editElements.fullName, 'young red dragon');

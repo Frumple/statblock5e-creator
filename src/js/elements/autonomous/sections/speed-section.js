@@ -1,7 +1,6 @@
-import * as sectionModule from './section.js';
-import { createPropertyLine } from '../../../helpers/export-helpers.js';
+import * as propertyLineSectionModule from './property-line-section.js';
 
-export default class SpeedSection extends sectionModule.Section {
+export default class SpeedSection extends propertyLineSectionModule.PropertyLineSection {
   static get elementName() { return 'speed-section'; }
   static get templatePaths() {
     return super.templatePaths.set(
@@ -12,7 +11,8 @@ export default class SpeedSection extends sectionModule.Section {
   constructor() {
     super(SpeedSection.templatePaths,
           SpeedShowElements,
-          SpeedEditElements);
+          SpeedEditElements,
+          'Speed');
   }
 
   connectedCallback() {
@@ -84,24 +84,15 @@ export default class SpeedSection extends sectionModule.Section {
 
     return text;
   }
-
-  exportToHtml() {
-    const heading = 'Speed';
-    const text = this.showElements.text.innerHTMLSanitized;
-    const propertyLine = createPropertyLine(heading, text);
-
-    return propertyLine;
-  }
 }
 
-class SpeedShowElements extends sectionModule.ShowElements {
+class SpeedShowElements extends propertyLineSectionModule.PropertyLineShowElements {
   constructor(shadowRoot) {
     super(shadowRoot);
-    this.text = shadowRoot.getElementById('speed-text');
   }
 }
 
-class SpeedEditElements extends sectionModule.EditElements {
+class SpeedEditElements extends propertyLineSectionModule.PropertyLineEditElements {
   constructor(shadowRoot) {
     super(shadowRoot);
     this.walk = shadowRoot.getElementById('walk-input');

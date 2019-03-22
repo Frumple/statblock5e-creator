@@ -13,20 +13,8 @@ expect.extend({
       pass: pass,
       message: () => message
     };
-  }
-});
+  },  
 
-function isTextSelected(element) {
-  if (typeof element.selectionStart === 'number') {
-    return element.selectionStart === 0 && element.selectionEnd === element.value.length;
-  } else if (typeof document.selection !== 'undefined') {
-    return document.selection.createRange().text === element.value;
-  } else {
-    throw 'Unable to determine the selected text for the element using JSDOM.';
-  }
-}
-
-expect.extend({
   toBeInMode(section, expectedMode) {
     const sectionHiddenClass = 'section_hidden';
 
@@ -72,10 +60,8 @@ expect.extend({
       message: () => message,
       pass: pass
     };
-  }
-});
+  },
 
-expect.extend({
   toHaveError(section, expectedFieldElement, expectedMessage, expectedIndex = 0) {
     if (this.isNot) {
       throw new Error('The matcher toHaveError cannot be used with the not modifier.');
@@ -121,5 +107,62 @@ expect.extend({
       message: () => message,
       pass: pass
     };
+  },
+
+  toHavePropertyLine(section, expectedHeading, expectedText, expectedTextHtml = null) {
+    if (this.isNot) {
+      throw new Error('The matcher toHavePropertyLine cannot be used with the not modifier.');
+    }
+
+    const headingElement = section.showElements.heading;
+    const textElement = section.showElements.text;
+
+    return matchPropertyLine(headingElement, textElement, expectedHeading, expectedText, expectedTextHtml);
+  },
+
+  toExportPropertyLineToHtml(section, expectedHeading, expectedText, expectedTextHtml = null) {
+    if (this.isNot) {
+      throw new Error('The matcher toExportPropertyLineToHtml cannot be used with the not modifier.');
+    }
+
+    const propertyLine = section.exportToHtml();
+    const headingElement = propertyLine.querySelector('h4');
+    const textElement = propertyLine.querySelector('p');
+
+    return matchPropertyLine(headingElement, textElement, expectedHeading, expectedText, expectedTextHtml);
   }
 });
+
+function isTextSelected(element) {
+  if (typeof element.selectionStart === 'number') {
+    return element.selectionStart === 0 && element.selectionEnd === element.value.length;
+  } else if (typeof document.selection !== 'undefined') {
+    return document.selection.createRange().text === element.value;
+  } else {
+    throw 'Unable to determine the selected text for the element using JSDOM.';
+  }
+}
+
+function matchPropertyLine(headingElement, textElement, expectedHeading, expectedText, expectedTextHtml = null) {
+  const hasMatchingHeading = (headingElement.textContent === expectedHeading);
+  const hasMatchingText = (textElement.textContent === expectedText);
+  const hasMatchingTextHtml = (expectedTextHtml !== null) ? (textElement.innerHTML === expectedTextHtml) : true;
+
+  const pass = (hasMatchingHeading && hasMatchingText && hasMatchingTextHtml);
+  let message = '';
+
+  if (! hasMatchingHeading) {
+    message += `expected property line heading to be '${expectedHeading}', but was '${headingElement.textContent}'\n`;
+  }
+  if (! hasMatchingText) {
+    message += `expected property line text to be '${expectedText}', but was '${textElement.textContent}'`;
+  }
+  if (! hasMatchingTextHtml) {
+    message += `expected property line text to contain HTML '${expectedTextHtml}', but was '${textElement.innerHTML}'`;
+  }
+
+  return {
+    message: () => message,
+    pass: pass
+  };
+}
