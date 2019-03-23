@@ -44,6 +44,10 @@ export default class HeadingSection extends sectionModule.Section {
     this.dispatchCreatureNameChangedEvent();
   }
 
+  get title() {
+    return this.showElements.title.textContent;
+  }
+
   dispatchCreatureNameChangedEvent() {
     const changeEvent = new CustomEvent('creatureNameChanged', {
       bubbles: true,

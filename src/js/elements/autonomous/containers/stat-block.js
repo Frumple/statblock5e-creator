@@ -112,29 +112,32 @@ export default class StatBlock extends CustomAutonomousElement {
     // TODO
   }
 
-  exportToHtml() {
+  exportToHtml(title) {
     const doc = HtmlExportDocumentFactory.createInstance();
-    const statBlock = doc.querySelector('stat-block');
+    const titleElement = doc.querySelector('title');
+    const statBlockElement = doc.querySelector('stat-block');
 
     const headingSection = this.headingSection.exportToHtml();
     const topStats = this.topStats.exportToHtml();
     const bottomStats = this.bottomStats.exportToHtml();
 
-    statBlock.appendChild(headingSection);
-    statBlock.appendChild(topStats);
-    statBlock.appendChild(bottomStats);
+    titleElement.textContent = title;
+
+    statBlockElement.appendChild(headingSection);
+    statBlockElement.appendChild(topStats);
+    statBlockElement.appendChild(bottomStats);
 
     if (GlobalOptions.columns === 2) {
-      statBlock.dataset.twoColumn = '';
+      statBlockElement.dataset.twoColumn = '';
 
       if (GlobalOptions.twoColumnMode === 'manual') {
-        statBlock.setAttribute('style', `--data-content-height: ${GlobalOptions.twoColumnHeight}px`);
+        statBlockElement.setAttribute('style', `--data-content-height: ${GlobalOptions.twoColumnHeight}px`);
       }
     }
 
     const doctype = '<!DOCTYPE html>';
     const content = `${doctype}${doc.documentElement.outerHTML}`;
-    const beautified_content = html_beautify(content);
+    const beautified_content = html_beautify(content, { indent_size: 2 });
 
     return beautified_content;
   }

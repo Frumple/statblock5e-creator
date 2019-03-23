@@ -2,7 +2,6 @@ import CustomAutonomousElement from '../custom-autonomous-element.js';
 import GlobalOptions from '../../../helpers/global-options.js';
 import isRunningInNode from '../../../helpers/is-running-in-node.js';
 
-import Creature from '../../../stats/creature.js';
 import StatBlockMenu from './stat-block-menu.js';
 import StatBlockSidebar from './stat-block-sidebar.js';
 import StatBlock from './stat-block.js';
@@ -112,9 +111,12 @@ export default class StatBlockEditor extends CustomAutonomousElement {
   }
 
   exportToHtml() {
-    const content = this.statBlock.exportToHtml();
+    const creatureName = this.statBlock.headingSection.title;
+    const title = `Statblock5e - ${creatureName}`;
+
+    const content = this.statBlock.exportToHtml(title);
     const contentType = 'text/html';
-    const fileName = `${Creature.fullName}.html`;
+    const fileName = `${title}.html`;
     
     // TODO: Open modal dialog and provide options to either copy to clipboard
     //       or save to file

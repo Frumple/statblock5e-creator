@@ -26,13 +26,20 @@ let statBlock;
 
 beforeAll(async() => {
   HeadingSection.mockImplementation(() => {
-    return {exportToHtml: () => { return document.createElement('creature-heading'); }};
+    return {
+      title: 'Commoner',
+      exportToHtml: () => { return document.createElement('creature-heading'); }
+    };
   });
   TopStats.mockImplementation(() => {
-    return {exportToHtml: () => { return document.createElement('top-stats'); }};
+    return {
+      exportToHtml: () => { return document.createElement('top-stats'); }
+    };
   });
   BottomStats.mockImplementation(() => {
-    return {exportToHtml: () => { return document.createElement('bottom-stats'); }};
+    return {
+      exportToHtml: () => { return document.createElement('bottom-stats'); }
+    };
   });
 
   HtmlExportDocumentFactory.init();
@@ -59,7 +66,7 @@ beforeEach(() => {
 
 describe('should export HTML as file', () => {
   const expectedContentType = 'text/html';
-  const expectedFileName = 'Commoner.html';
+  const expectedFileName = 'Statblock5e - Commoner.html';
 
   it('one-column version', () => {
     statBlockMenu.oneColumnButton.click();
