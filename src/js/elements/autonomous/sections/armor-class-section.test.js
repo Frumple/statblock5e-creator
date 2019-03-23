@@ -58,16 +58,15 @@ describe('when the show section is clicked', () => {
 
       it('should switch to show mode and save the custom text with valid markdown syntax', () => {
         const customText = '12 (15 with *mage armor*)';
-        const expectedText = '12 (15 with mage armor)';
-        const expectedTextHtml = '12 (15 with <em>mage armor</em>)';
+        const expectedText = '12 (15 with <em>mage armor</em>)';
         inputValueAndTriggerEvent(armorClassSection.editElements.customText, customText);
 
         armorClassSection.editElements.submitForm();
 
         expect(armorClassSection).toBeInMode('show');
-        expect(armorClassSection).toHavePropertyLine(expectedHeading, expectedText, expectedTextHtml);
+        expect(armorClassSection).toHavePropertyLine(expectedHeading, expectedText);
 
-        expect(armorClassSection).toExportPropertyLineToHtml(expectedHeading, expectedText, expectedTextHtml);
+        expect(armorClassSection).toExportPropertyLineToHtml(expectedHeading, expectedText);
       });
 
       it('should display an error if the custom text field is blank', () => {

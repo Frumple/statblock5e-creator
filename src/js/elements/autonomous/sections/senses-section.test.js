@@ -67,16 +67,15 @@ describe('when the show section is clicked', () => {
 
       it('should switch to show mode and save the custom text with valid markdown syntax', () => {
         const customText = '**boldvision 60 ft.**';
-        const expectedText = 'boldvision 60 ft.';
-        const expectedTextHtml = '<strong>boldvision 60 ft.</strong>';
+        const expectedText = '<strong>boldvision 60 ft.</strong>';
         inputValueAndTriggerEvent(sensesSection.editElements.customText, customText);
 
         sensesSection.editElements.submitForm();
 
         expect(sensesSection).toBeInMode('show');
-        expect(sensesSection).toHavePropertyLine(expectedHeading, expectedText, expectedTextHtml);
+        expect(sensesSection).toHavePropertyLine(expectedHeading, expectedText);
 
-        expect(sensesSection).toExportPropertyLineToHtml(expectedHeading, expectedText, expectedTextHtml);
+        expect(sensesSection).toExportPropertyLineToHtml(expectedHeading, expectedText);
       });
 
       it('should display an error if the custom text field is blank', () => {

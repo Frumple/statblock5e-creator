@@ -109,7 +109,7 @@ expect.extend({
     };
   },
 
-  toHavePropertyLine(section, expectedHeading, expectedText, expectedTextHtml = null) {
+  toHavePropertyLine(section, expectedHeading, expectedText) {
     if (this.isNot) {
       throw new Error('The matcher toHavePropertyLine cannot be used with the not modifier.');
     }
@@ -117,10 +117,10 @@ expect.extend({
     const headingElement = section.showElements.heading;
     const textElement = section.showElements.text;
 
-    return matchPropertyLine(headingElement, textElement, expectedHeading, expectedText, expectedTextHtml);
+    return matchPropertyLineOrBlock(headingElement, textElement, expectedHeading, expectedText);
   },
 
-  toExportPropertyLineToHtml(section, expectedHeading, expectedText, expectedTextHtml = null) {
+  toExportPropertyLineToHtml(section, expectedHeading, expectedText) {
     if (this.isNot) {
       throw new Error('The matcher toExportPropertyLineToHtml cannot be used with the not modifier.');
     }
@@ -129,7 +129,22 @@ expect.extend({
     const headingElement = propertyLine.querySelector('h4');
     const textElement = propertyLine.querySelector('p');
 
-    return matchPropertyLine(headingElement, textElement, expectedHeading, expectedText, expectedTextHtml);
+    expect(propertyLine.tagName).toBe('PROPERTY-LINE');
+
+    return matchPropertyLineOrBlock(headingElement, textElement, expectedHeading, expectedText);
+  },
+
+  toBePropertyBlock(propertyBlock, expectedHeading, expectedText) {
+    if (this.isNot) {
+      throw new Error('The matcher toBePropertyBlock cannot be used with the not modifier.');
+    }
+
+    const headingElement = propertyBlock.querySelector('h4');
+    const textElement = propertyBlock.querySelector('p');
+
+    expect(propertyBlock.tagName).toBe('PROPERTY-BLOCK');
+
+    return matchPropertyLineOrBlock(headingElement, textElement, expectedHeading, expectedText);
   }
 });
 
@@ -143,22 +158,18 @@ function isTextSelected(element) {
   }
 }
 
-function matchPropertyLine(headingElement, textElement, expectedHeading, expectedText, expectedTextHtml = null) {
+function matchPropertyLineOrBlock(headingElement, textElement, expectedHeading, expectedText) {
   const hasMatchingHeading = (headingElement.textContent === expectedHeading);
-  const hasMatchingText = (textElement.textContent === expectedText);
-  const hasMatchingTextHtml = (expectedTextHtml !== null) ? (textElement.innerHTML === expectedTextHtml) : true;
+  const hasMatchingText = (textElement.innerHTML === expectedText);
 
-  const pass = (hasMatchingHeading && hasMatchingText && hasMatchingTextHtml);
+  const pass = (hasMatchingHeading && hasMatchingText);
   let message = '';
 
   if (! hasMatchingHeading) {
-    message += `expected property line heading to be '${expectedHeading}', but was '${headingElement.textContent}'\n`;
+    message += `expected heading to be '${expectedHeading}', but was '${headingElement.textContent}'\n`;
   }
   if (! hasMatchingText) {
-    message += `expected property line text to be '${expectedText}', but was '${textElement.textContent}'`;
-  }
-  if (! hasMatchingTextHtml) {
-    message += `expected property line text to contain HTML '${expectedTextHtml}', but was '${textElement.innerHTML}'`;
+    message += `expected text to be '${expectedText}', but was '${textElement.textContent}'`;
   }
 
   return {

@@ -1,6 +1,12 @@
 import { inputValueAndTriggerEvent } from '../../../helpers/element-helpers.js';
 import Creature from '../../../stats/creature.js';
 
+let expectedHeading = null;
+
+export function setExpectedHeading(heading) {
+  expectedHeading = heading;
+}
+
 export function shouldSwitchToEditModeAndFocusOnAddButtonIfNoBlocks(section) {  
   expect(section).toBeInMode('edit');
   expect(section.editElements.addButton).toHaveFocus();
@@ -41,6 +47,7 @@ export function shouldAddASingleBlock(section, blockName, blockText, expectedTex
   }];
 
   expectDisplayBlocks(section, blocks);
+  expectHtmlExport(section, blocks);
 }
 
 export function shouldAddMultipleBlocks(section, blocks) {
@@ -54,6 +61,7 @@ export function shouldAddMultipleBlocks(section, blocks) {
   expectSectionToBeEmpty(section, false);
 
   expectDisplayBlocks(section, blocks);
+  expectHtmlExport(section, blocks);
 }
 
 export function shouldAddASingleBlockThenRemoveIt(section, blockName, blockText) {
@@ -86,6 +94,7 @@ export function shouldAddMultipleBlocksThenRemoveOneOfThem(section, blocks, remo
   blocks.splice(removeIndex, 1);
 
   expectDisplayBlocks(section, blocks);
+  expectHtmlExport(section, blocks);
 }
 
 export function shouldReparseNameChanges(section, blockName, blockText, oldNames, newNames, expectedText) {
@@ -110,6 +119,7 @@ export function shouldReparseNameChanges(section, blockName, blockText, oldNames
   }];
 
   expectDisplayBlocks(section, blocks);
+  expectHtmlExport(section, blocks);
 }
 
 export function shouldTrimAllTrailingPeriodCharactersInBlockName(section) {
@@ -125,6 +135,7 @@ export function shouldTrimAllTrailingPeriodCharactersInBlockName(section) {
     text: 'Some text.'
   }];
   expectDisplayBlocks(section, expectedBlocks);
+  expectHtmlExport(section, expectedBlocks);
 
   section.showElements.editButton.click();
 
@@ -212,11 +223,29 @@ function expectDisplayBlocks(section, expectedBlocks) {
     const displayBlock = section.showElements.displayList.blocks[index];
     
     expect(displayBlock.name).toBe(block.name);
-    if (block.expectedText) {
-      expect(displayBlock.text).toBe(block.expectedText);
-    } else {
-      expect(displayBlock.text).toBe(block.text);
-    }    
+    expect(displayBlock.text).toBe(block.expectedText ? block.expectedText : block.text);    
+  }  
+}
+
+function expectHtmlExport(section, expectedBlocks) {
+  const htmlExport = section.exportToHtml();
+  const children = htmlExport.children;
+  
+  if (expectedHeading !== null) {
+    expect(children[0].tagName).toBe('H3');
+    expect(children[0]).toHaveTextContent(expectedHeading);
+  }
+
+  const htmlExportPropertyBlocks = Array.from(children)
+    .filter(element => element.tagName === 'PROPERTY-BLOCK');
+
+  for (const [index, block] of expectedBlocks.entries()) {
+    const displayBlock = section.showElements.displayList.blocks[index];
+
+    const htmlExportPropertyBlock = htmlExportPropertyBlocks[index];
+    expect(htmlExportPropertyBlock).toBePropertyBlock(
+      `${displayBlock.name}.`, 
+      (block.expectedText ? block.expectedText : block.text));
   }
 }
 

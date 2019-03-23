@@ -6,6 +6,7 @@ import * as sharedSpecs from './block-list-section.specs.js';
 
 import { inputValueAndTriggerEvent } from '../../../helpers/element-helpers.js';
 
+const expectedHeading = 'Legendary Actions';
 const expectedItemType = 'Legendary Action';
 
 let legendaryActionsSection;
@@ -13,6 +14,8 @@ let legendaryActionsSection;
 beforeAll(async() => {
   await TestCustomElements.define();
   await LegendaryActionsSection.define();
+
+  sharedSpecs.setExpectedHeading(expectedHeading);
 });
 
 beforeEach(() => {
@@ -53,7 +56,16 @@ describe('when the show section is clicked', () => {
 
       expect(legendaryActionsSection).toBeInMode('show');
       expect(legendaryActionsSection.showElements.description).toHaveTextContent(expectedTextContent);
+      expectHtmlExportDescription(expectedTextContent);
     });
+    
+    function expectHtmlExportDescription(expectedText) {
+      const htmlExport = legendaryActionsSection.exportToHtml();
+      const description = htmlExport.children[1];
+
+      expect(description.tagName).toBe('P');
+      expect(description).toHaveTextContent(expectedText);
+    }
 
     it('should display an error if the description is blank', () => {
       inputValueAndTriggerEvent(legendaryActionsSection.editElements.description, '');
@@ -109,7 +121,7 @@ describe('when the show section is clicked', () => {
 
       Creature.fullName = 'Empyrean';
 
-      sharedSpecs.shouldAddASingleBlockThenRemoveIt(legendaryActionsSection, blockName, blockText);   
+      sharedSpecs.shouldAddASingleBlockThenRemoveIt(legendaryActionsSection, blockName, blockText);
     });
 
     it('should add multiple blocks, then remove one of them', () => {

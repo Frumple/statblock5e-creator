@@ -4,6 +4,7 @@ import Creature from '../../../stats/creature.js';
 import * as TestCustomElements from '../../../helpers/test/test-custom-elements.js';
 import * as sharedSpecs from './block-list-section.specs.js';
 
+const expectedHeading = 'Actions';
 const expectedItemType = 'Action';
 
 let actionsSection;
@@ -11,6 +12,8 @@ let actionsSection;
 beforeAll(async() => {
   await TestCustomElements.define();
   await ActionsSection.define();
+
+  sharedSpecs.setExpectedHeading(expectedHeading);
 });
 
 beforeEach(() => {
