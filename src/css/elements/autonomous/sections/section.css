@@ -26,6 +26,14 @@
   cursor: pointer;
 }
 
+.section_selectable:active {
+  background: #FFDDDD;
+}
+
+.section_selectable:hover .section__edit-label {
+  display: inline-flex;
+}
+
 .section_empty {
   color: Gray;
 }
@@ -84,10 +92,25 @@
   flex: 1 1 auto;
   width: 40px;
   max-width: 40px;
-  max-height: 40px;  
+  max-height: 40px;
 }
 
-.section__action_hidden {
+.section__edit-label-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.section__edit-label {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  position: absolute;
+  left: 420px;
+  color: #7A200D;
+}
+
+.section__edit-label_hidden {
   display: none;
 }
 

@@ -137,7 +137,7 @@ export function shouldTrimAllTrailingPeriodCharactersInBlockName(section) {
   expectDisplayBlocks(section, expectedBlocks);
   expectHtmlExport(section, expectedBlocks);
 
-  section.showElements.editButton.click();
+  section.showElements.section.click();
 
   expect(section.editElements.editableList.blocks[0].name).toBe(expectedBlocks[0].name);
 }

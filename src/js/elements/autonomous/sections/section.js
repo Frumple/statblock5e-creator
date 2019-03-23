@@ -18,14 +18,6 @@ export class Section extends CustomAutonomousElement {
     this.editElements = new editElementsClass(this.shadowRoot);
     this.errorMessages = this.shadowRoot.querySelector('error-messages');
 
-    this.showElements.section.addEventListener('mouseenter', () => {
-      this.showElements.editButton.classList.remove('section__action_hidden');
-    });
-
-    this.showElements.section.addEventListener('mouseleave', () => {
-      this.showElements.editButton.classList.add('section__action_hidden');
-    });
-
     this.showElements.section.addEventListener('click', () => {
       this.edit();
     });
@@ -165,7 +157,6 @@ export class Section extends CustomAutonomousElement {
 export class ShowElements {
   constructor(shadowRoot) {
     this.section = shadowRoot.getElementById('show-section');
-    this.editButton = shadowRoot.getElementById('edit-button');
   }
 }
 
