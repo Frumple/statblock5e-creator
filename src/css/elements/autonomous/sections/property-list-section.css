@@ -16,6 +16,7 @@
 .property-list-edit-section__input-container {
   display: flex;
   flex-direction: row;
+  align-items: center;
 }
 
 .property-list-edit-section__input {

@@ -33,8 +33,10 @@
     <label id="fly-label" class="speed-edit-section__fly-label" for="fly-input">fly</label>
     <input id="fly-input" class="speed-edit-section__fly-input section__number-input section__small-number-input" is="integer-input" type="number" name="speed-fly" pretty-name="Fly Speed" min="0" max="999" step="5" />
     <label class="speed-edit-section__fly-unit">ft.</label>
-    <input id="hover-input" class="speed-edit-section__hover-input" type="checkbox" name="speed-hover" />
-    <label id="hover-label" class="speed-edit-section__hover-label" for="hover-input">(hover)</label>
+    <div class="speed-edit-section__hover-container">
+      <input id="hover-input" class="speed-edit-section__hover-input" type="checkbox" name="speed-hover" />
+      <label id="hover-label" class="speed-edit-section__hover-label" for="hover-input">(hover)</label>
+    </div>
 
     <label id="swim-label" class="speed-edit-section__swim-label" for="swim-input">swim</label>
     <input id="swim-input" class="speed-edit-section__swim-input section__number-input section__small-number-input" is="integer-input" type="number" name="speed-swim" pretty-name="Swim Speed" min="0" max="999" step="5" />

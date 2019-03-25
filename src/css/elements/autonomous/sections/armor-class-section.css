@@ -32,12 +32,11 @@
   flex: 1 1 auto;
 }
 
-.armor-class-edit-section__shield-input {
+.armor-class-edit-section__shield-container {
   flex: 1 1 auto;
-}
-
-.armor-class-edit-section__shield-label {
-  flex: 1 1 auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .armor-class-edit-section__custom-container {

@@ -1,6 +1,6 @@
 .skills-edit-section {
   display: grid;
-  grid-template-columns: auto auto 40px auto auto;
+  grid-template-columns: 20px 150px 40px auto auto;
   grid-template-rows: auto 5px auto auto auto auto auto auto auto auto auto auto auto auto auto auto auto auto auto auto;
   grid-column-gap: 5px;
   align-items: center;

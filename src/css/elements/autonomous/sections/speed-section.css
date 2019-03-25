@@ -4,7 +4,7 @@
 
 .speed-edit-section {
   display: grid;
-  grid-template-columns: 90px auto auto auto 25px 50px;
+  grid-template-columns: 90px auto auto auto auto;
   grid-template-rows: auto auto auto auto auto 5px auto auto;
   grid-column-gap: 5px;
   align-items: center;
@@ -27,11 +27,12 @@
 .speed-edit-section__fly-label { grid-area: 4 / 2; }
 .speed-edit-section__fly-input { grid-area: 4 / 3; }
 .speed-edit-section__fly-unit { grid-area: 4 / 4; }
-.speed-edit-section__hover-input {
+.speed-edit-section__hover-container { 
   grid-area: 4 / 5;
-  justify-self: end;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
-.speed-edit-section__hover-label { grid-area: 4 / 6; }
 
 .speed-edit-section__swim-label { grid-area: 5 / 2; }
 .speed-edit-section__swim-input { grid-area: 5 / 3; }
@@ -41,10 +42,10 @@
   grid-area: 7 / 1;
   justify-self: end;
 }
-.speed-edit-section__custom-label { grid-area: 7 / 2 / 8 / 7; }
+.speed-edit-section__custom-label { grid-area: 7 / 2 / 8 / 6; }
 .speed-edit-section__custom-text-help-tooltip {
   grid-area: 8 / 1;
   justify-self: end;
   align-self: end;
 }
-.speed-edit-section__custom-input { grid-area: 8 / 2 / 9 / 7; }
+.speed-edit-section__custom-input { grid-area: 8 / 2 / 9 / 6; }

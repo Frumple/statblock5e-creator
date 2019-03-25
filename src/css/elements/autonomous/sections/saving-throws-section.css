@@ -1,12 +1,12 @@
 .saving-throws-edit-section {
   display: grid;
-  grid-template-columns: auto auto 40px auto auto;
+  grid-template-columns: 20px 150px 40px auto auto;
   grid-template-rows: auto 5px auto auto auto auto auto auto;
   grid-column-gap: 5px;
   align-items: center;
   justify-items: center;
 }
-
+ 
 .saving-throws-edit-section__saving-throws-label {
   grid-area: 1 / 1 / 2 / 4;
   justify-self: start;
