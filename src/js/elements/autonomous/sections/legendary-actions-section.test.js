@@ -31,11 +31,13 @@ describe('when the show section is clicked', () => {
     legendaryActionsSection.showElements.section.click();
   });
 
-  it('should switch to edit mode and focus on the description text area', () => {
-    expect(legendaryActionsSection).toBeInMode('edit');
-    expect(legendaryActionsSection.editElements.description).toHaveFocus();
-    expect(legendaryActionsSection.editElements.description).toBeSelected();
-  });  
+  it('should switch to edit mode and focus on the add button if there are no blocks', () => {
+    sharedSpecs.shouldSwitchToEditModeAndFocusOnAddButtonIfNoBlocks(legendaryActionsSection);
+  });
+
+  it('should switch to edit mode and focus on the name field of the first block if there is at least one block', () => {
+    sharedSpecs.shouldSwitchToEditModeAndFocusOnNameFieldOfFirstBlockIfExists(legendaryActionsSection);
+  });
 
   describe('and the add block button is clicked', () => {
     it('should focus on the name field of the newly created block', () => {

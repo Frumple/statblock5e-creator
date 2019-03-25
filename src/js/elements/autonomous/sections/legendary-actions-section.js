@@ -93,8 +93,4 @@ class LegendaryActionsSectionEditElements extends blockListSectionModule.Editabl
 
     this.description = shadowRoot.getElementById('description-edit');
   }
-
-  get initiallySelectedElement() {
-    return this.description;
-  }
 }
