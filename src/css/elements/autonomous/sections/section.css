@@ -3,7 +3,8 @@
   flex-direction: row;
   justify-content: space-between;
   align-items: stretch;
-  overflow: hidden;
+  position: relative;
+  overflow: visible;
   max-height: 100%;
   opacity: 1;
   visibility: visible;
@@ -13,6 +14,7 @@
 }
 
 .section_hidden {
+  overflow: hidden;
   max-height: 0;
   opacity: 0;
   visibility: hidden;
@@ -85,14 +87,15 @@
   display: flex;
   flex-direction: column;
   justify-content: center;
-  margin-left: 10px;
 }
 
 .section__action {  
   flex: 1 1 auto;
-  width: 40px;
-  max-width: 40px;
-  max-height: 40px;
+  position: absolute;
+  left: 410px;
+  width: 25px;
+  height: 100%;
+  z-index: 1;
 }
 
 .section__edit-label-container {
@@ -102,12 +105,10 @@
 }
 
 .section__edit-label {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
   position: absolute;
-  left: 420px;
+  left: 410px;
   color: #7A200D;
+  z-index: 1;
 }
 
 .section__edit-label_hidden {

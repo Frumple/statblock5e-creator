@@ -1,12 +1,14 @@
 :host {
   display: flex;
   justify-content: flex-start;
+  position: relative;
 }
 
 .container {
   display: inline-block;
   margin-top: 60px;
-  margin-left: 20px;
+  margin-left: 25px;
+  margin-right: 25px;
 }
 
 .bar {
@@ -23,7 +25,6 @@
   box-shadow: 0 0 1.5em #867453;
 
   /* We don't want the box-shadow in front of the bar divs. */
-  position: relative;
   z-index: 0;
 
   /* Leaving room for the two bars to protrude outwards */
@@ -45,16 +46,6 @@
   column-fill: balance-all;
 }
 
-.overflow-hide {
-  position: absolute;
-  top: 0;
-  left: 880px;
-  width: 100%;
-  height: 100%;
-  background: white;
-  z-index: 1;
-}
-
 :host([data-two-column]) .content-wrap {
   column-count: 2;
 
@@ -65,4 +56,10 @@
 :host([style^="--statblock-content-height"]) .content-wrap {
   /* When the height is manually set, fill columns sequentially. */
   column-fill: auto;
+}
+
+.overflow-hide {
+  flex: 1 1 auto;
+  background: white;
+  z-index: 1;
 }
