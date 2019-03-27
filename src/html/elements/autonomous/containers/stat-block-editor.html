@@ -1,4 +1,11 @@
-<link href='src/css/elements/default-text.css' rel='stylesheet' type='text/css'>
 <link href='src/css/elements/autonomous/containers/stat-block-editor.css' rel='stylesheet' type='text/css'>
 
-<slot class="default-text"></slot>
+<div class="stat-block-editor__dialogs">
+  <export-dialog id="html-export-dialog">
+    <span slot="title">Export to HTML</span>
+    <span slot="message">You can export your statblock into a standalone HTML document, based on <a href="https://github.com/Valloric/statblock5e" target="_blank">Valloric's statblock5e template</a>.<br />This document works best in Chrome.</span>
+  </export-dialog>
+</div>
+<div class="stat-block-editor__components">
+  <slot class="default-text"></slot>
+</div>

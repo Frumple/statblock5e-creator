@@ -9,6 +9,6 @@ export default class HelpTooltip extends CustomAutonomousElement {
   }
 
   constructor() {
-    super(HelpTooltip.templatePaths);
+    super(HelpTooltip.templatePaths);    
   }
 }

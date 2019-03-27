@@ -91,11 +91,8 @@ class FakeCustomAutonomousElement {
     this.shadowRoot.dispatchEvent(event);
 
     // Simulate event bubbling by dispatching the event to the parent if it exists.
-    // Notes:
-    // - Unlike real event bubbling, this event will continue to bubble even 
-    //   if it is caught by a listener.
-    // - JSDOM doesn't support the 'composed' property on events, so we only check
-    //   if the event 'bubbles' property is true
+    // JSDOM doesn't support the 'composed' property on events, so we only check
+    // if the event 'bubbles' property is true.
 
     if (this._parent !== null && event.bubbles) {      
       this._parent.dispatchEvent(event);

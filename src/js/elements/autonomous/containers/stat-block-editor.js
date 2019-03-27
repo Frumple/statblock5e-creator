@@ -6,7 +6,9 @@ import StatBlockMenu from './stat-block-menu.js';
 import StatBlockSidebar from './stat-block-sidebar.js';
 import StatBlock from './stat-block.js';
 
-import { startFileDownload } from '../../../helpers/file-helpers.js';
+import ExportDialog from '../dialogs/export-dialog.js';
+
+import { startFileDownload } from '../../../helpers/export-helpers.js';
 
 export default class StatBlockEditor extends CustomAutonomousElement {
   static get elementName() { return 'stat-block-editor'; }
@@ -23,10 +25,14 @@ export default class StatBlockEditor extends CustomAutonomousElement {
       this.statBlockMenu = new StatBlockMenu(this);
       this.statBlockSidebar = new StatBlockSidebar(this);
       this.statBlock = new StatBlock(this);
+
+      this.htmlExportDialog = new ExportDialog();
     } else {
       this.statBlockMenu = document.querySelector('stat-block-menu');
       this.statBlockSidebar = document.querySelector('stat-block-sidebar');
       this.statBlock = document.querySelector('stat-block');
+
+      this.htmlExportDialog = this.shadowRoot.getElementById('html-export-dialog');
     }    
   }
 
@@ -38,6 +44,10 @@ export default class StatBlockEditor extends CustomAutonomousElement {
       this.addEventListener('allSectionsAction', this.onAllSectionsAction.bind(this));
 
       this.addEventListener('exportAction', this.onExportAction.bind(this));
+
+      this.htmlExportDialog.attachCallbacks( 
+        this.copyHtmlToClipboard.bind(this),
+        this.downloadHtml.bind(this));
 
       this.isInitialized = true;
     }
@@ -89,42 +99,50 @@ export default class StatBlockEditor extends CustomAutonomousElement {
     const format = event.detail.format;
     this.exportToFormat(format);    
   }
+
+  get title() {
+    const creatureName = this.statBlock.headingSection.title;
+    return `Statblock5e - ${creatureName}`;
+  }
   
   exportToFormat(format) {
     switch(format) {
     case 'json':
-      this.exportToJson();
+      this.openJsonExportDialog();
       break;
     case 'html':
-      this.exportToHtml();
+      this.openHtmlExportDialog();
       break;
     case 'homebrewery':
-      this.exportToHomebrewery();
+      this.openHomebreweryExportDialog();
       break;
     default:
       throw new Error(`Cannot export to an unknown format '${format}'.`);
     }
   }
 
-  exportToJson() {
+  openJsonExportDialog() {
     // TODO
   }
 
-  exportToHtml() {
-    const creatureName = this.statBlock.headingSection.title;
-    const title = `Statblock5e - ${creatureName}`;
+  openHtmlExportDialog() {
+    this.htmlExportDialog.showModal();
+  }
 
+  openHomebreweryExportDialog() {
+    // TODO
+  }
+
+  copyHtmlToClipboard() {
+    return;
+  }
+
+  downloadHtml() {
+    const title = this.title;
     const content = this.statBlock.exportToHtml(title);
     const contentType = 'text/html';
     const fileName = `${title}.html`;
-    
-    // TODO: Open modal dialog and provide options to either copy to clipboard
-    //       or save to file
 
     startFileDownload(content, contentType, fileName);
-  }
-
-  exportToHomebrewery() {
-    // TODO
   }
 }

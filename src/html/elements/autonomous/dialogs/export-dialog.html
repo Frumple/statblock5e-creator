@@ -1,0 +1,21 @@
+<link href='src/css/elements/autonomous/dialogs/export-dialog.css' rel='stylesheet' type='text/css'>
+
+<dialog id="dialog" class="custom-dialog">
+  <form method="dialog">
+    <div class="custom-dialog__title-bar">
+      <h3 id="title" class="custom-dialog__title"><slot name="title"></slot></h3>
+      <button id="close-button" class="custom-dialog__close-button"><i class="material-icons">close</i></button>
+    </div>
+    
+    <div class="export-dialog">
+      <p class="export-dialog__message"><slot name="message"></slot></p>
+      <div class="export-dialog__status-container">
+        <p id="status" class="export-dialog__status">Choose one of following options:</p>
+      </div>
+      <div class="export-dialog__actions">
+        <button id="copy-to-clipboard-button" class="default-button export-dialog__action-button" type="button">Copy to Clipboard</button>
+        <button id="download-as-file-button" class="default-button export-dialog__action-button" type="button">Download as File</button>
+      </div>      
+    </div>
+  </form>  
+</dialog>

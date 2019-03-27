@@ -14,6 +14,8 @@ import PropertyLine from './elements/autonomous/property-line.js';
 import SectionDivider from './elements/autonomous/section-divider.js';
 import TaperedRule from './elements/autonomous/tapered-rule.js';
 
+import ExportDialog from './elements/autonomous/dialogs/export-dialog.js';
+
 import HelpTooltip from './elements/autonomous/tooltips/help-tooltip.js';
 import CustomTextHelpTooltip from './elements/autonomous/tooltips/custom-text-help-tooltip.js';
 
@@ -73,6 +75,8 @@ async function defineElements() {
   elementClasses.push(PropertyLine);
   elementClasses.push(SectionDivider);
   elementClasses.push(TaperedRule);
+
+  elementClasses.push(ExportDialog);
 
   elementClasses.push(HelpTooltip);
   elementClasses.push(CustomTextHelpTooltip);

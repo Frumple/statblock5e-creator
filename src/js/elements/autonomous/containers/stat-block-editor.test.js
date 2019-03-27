@@ -7,12 +7,14 @@ import HeadingSection from '../sections/heading-section.js';
 import TopStats from '../containers/top-stats.js';
 import BottomStats from '../containers/bottom-stats.js';
 
+import ExportDialog from '../dialogs/export-dialog.js';
+
 import GlobalOptions from '../../../helpers/global-options.js';
 
 import * as HtmlExportDocumentFactory from '../../../helpers/html-export-document-factory.js';
-import { startFileDownload } from '../../../helpers/file-helpers.js';
+import { startFileDownload } from '../../../helpers/export-helpers.js';
 
-jest.mock('../../../helpers/file-helpers.js');
+jest.mock('../../../helpers/export-helpers.js');
 jest.mock('../sections/heading-section.js');
 jest.mock('../containers/top-stats.js');
 jest.mock('../containers/bottom-stats.js');
@@ -48,6 +50,8 @@ beforeAll(async() => {
   await StatBlockMenu.define();
   await StatBlockSidebar.define();
   await StatBlock.define();
+
+  await ExportDialog.define();
 });
 
 beforeEach(() => {
@@ -62,6 +66,8 @@ beforeEach(() => {
   statBlockMenu.connect();
   statBlockSidebar.connect();
   statBlock.connect();
+
+  statBlockEditor.htmlExportDialog.connect();
 });
 
 describe('should export HTML as file', () => {
@@ -70,8 +76,10 @@ describe('should export HTML as file', () => {
 
   it('one-column version', () => {
     statBlockMenu.oneColumnButton.click();
-    
+
     statBlockMenu.exportHtmlButton.click();
+
+    statBlockEditor.htmlExportDialog.downloadAsFileButton.click();
 
     expect(startFileDownload).toHaveBeenCalledWith(
       expect.stringContaining('<stat-block>'), 
@@ -84,6 +92,8 @@ describe('should export HTML as file', () => {
     statBlockSidebar.autoHeightModeButton.click();
 
     statBlockMenu.exportHtmlButton.click();
+
+    statBlockEditor.htmlExportDialog.downloadAsFileButton.click();
 
     expect(startFileDownload).toHaveBeenCalledWith(
       expect.stringContaining('<stat-block data-two-column="">'), 
@@ -101,6 +111,7 @@ describe('should export HTML as file', () => {
     statBlockSidebar.onInputSlider();
 
     statBlockMenu.exportHtmlButton.click();
+    statBlockEditor.htmlExportDialog.downloadAsFileButton.click();
 
     expect(startFileDownload).toHaveBeenCalledWith(
       expect.stringContaining('<stat-block data-two-column="" style="--data-content-height: 625px">'), 

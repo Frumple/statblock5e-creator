@@ -1,0 +1,31 @@
+.custom-dialog {
+  max-width: 400px;
+  border: none;
+  box-shadow: 0 0 1.5em #867453;
+  padding: 0;
+}
+
+.custom-dialog__title-bar {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  background: #606060;
+  color: white;
+  padding-left: 1em;
+}
+
+.custom-dialog__title {
+  margin: 0;
+}
+
+.custom-dialog__close-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background: #606060;
+  color: white;
+  border: none;
+  padding: 1em;
+  cursor: pointer;
+}
