@@ -79,7 +79,7 @@ export default class StatBlockMenu extends CustomAutonomousElement {
   }
 
   onClickPrintButton() {
-    // TODO
+    this.dispatchMenuEvent('printAction');
   }
 
   onClickExportJsonButton() {
@@ -91,7 +91,7 @@ export default class StatBlockMenu extends CustomAutonomousElement {
   }
 
   onClickExportHtmlButton() {
-    this.dispatchMenuEvent('exportAction', { format: 'html'});
+    this.dispatchMenuEvent('exportAction', { format: 'html' });
   }
 
   onClickExportHomebreweryButton() {
@@ -102,7 +102,7 @@ export default class StatBlockMenu extends CustomAutonomousElement {
     // TODO
   }
 
-  dispatchMenuEvent(eventType, detail) {
+  dispatchMenuEvent(eventType, detail = null) {
     const menuEvent = new CustomEvent(eventType, {
       bubbles: true,
       composed: true,

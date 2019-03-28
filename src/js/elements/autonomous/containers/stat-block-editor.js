@@ -8,6 +8,8 @@ import StatBlock from './stat-block.js';
 
 import ExportDialog from '../dialogs/export-dialog.js';
 
+import printHtml from '../../../helpers/print-helpers.js';
+
 export default class StatBlockEditor extends CustomAutonomousElement {
   static get elementName() { return 'stat-block-editor'; }
   static get templatePaths() {
@@ -41,6 +43,7 @@ export default class StatBlockEditor extends CustomAutonomousElement {
       this.addEventListener('emptySectionsVisibilityChanged', this.onEmptySectionsVisiblityChanged.bind(this));
       this.addEventListener('allSectionsAction', this.onAllSectionsAction.bind(this));
 
+      this.addEventListener('printAction', this.onPrintAction.bind(this));
       this.addEventListener('exportAction', this.onExportAction.bind(this));
 
       this.isInitialized = true;
@@ -89,14 +92,18 @@ export default class StatBlockEditor extends CustomAutonomousElement {
     }
   }
 
+  onPrintAction() {
+    const content = this.statBlock.exportToHtml(this.title);
+    printHtml(content);
+  }
+
   onExportAction(event) {
     const format = event.detail.format;
     this.openExportDialog(format);    
   }
 
   get title() {
-    const creatureName = this.statBlock.headingSection.title;
-    return `Statblock5e - ${creatureName}`;
+    return this.statBlock.headingSection.title;
   }
   
   openExportDialog(format) {
@@ -120,10 +127,9 @@ export default class StatBlockEditor extends CustomAutonomousElement {
   }
 
   openHtmlExportDialog() {
-    const title = this.title;
-    const content = this.statBlock.exportToHtml(title);
+    const content = this.statBlock.exportToHtml(`Statblock5e - ${this.title}`);
 
-    this.htmlExportDialog.launch(title, content);
+    this.htmlExportDialog.launch(this.title, content);
   }
 
   openHomebreweryExportDialog() {

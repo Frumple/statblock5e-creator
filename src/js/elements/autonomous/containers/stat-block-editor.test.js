@@ -12,8 +12,10 @@ import ExportDialog from '../dialogs/export-dialog.js';
 import GlobalOptions from '../../../helpers/global-options.js';
 
 import * as HtmlExportDocumentFactory from '../../../helpers/html-export-document-factory.js';
+import printHtml from '../../../helpers/print-helpers.js';
 import { startFileDownload } from '../../../helpers/export-helpers.js';
 
+jest.mock('../../../helpers/print-helpers.js');
 jest.mock('../../../helpers/export-helpers.js');
 jest.mock('../sections/heading-section.js');
 jest.mock('../containers/top-stats.js');
@@ -70,6 +72,42 @@ beforeEach(() => {
   statBlockEditor.htmlExportDialog.connect();
 });
 
+describe('should print', () => {
+  it('one-column version', () => {
+    statBlockMenu.oneColumnButton.click();
+
+    statBlockMenu.printButton.click();
+
+    expect(printHtml).toHaveBeenCalledWith(
+      expect.stringContaining('<stat-block>'));
+  });
+
+  it('two-column version with automatic height', () => {
+    statBlockMenu.twoColumnButton.click();
+    statBlockSidebar.autoHeightModeButton.click();
+
+    statBlockMenu.printButton.click();
+
+    expect(printHtml).toHaveBeenCalledWith(
+      expect.stringContaining('<stat-block data-two-column="">'));
+  });
+
+  it('two-column version with manual height', () => {
+    statBlockMenu.twoColumnButton.click();
+    statBlockSidebar.manualHeightModeButton.click();
+
+    // JSDOM doesn't support the stepUp() method, set the value and dispatch the event manually
+    // statBlockSidebar.manualHeightSlider.stepUp(25);
+    statBlockSidebar.manualHeightSlider.value = initialHeightSliderValue + 25;
+    statBlockSidebar.onInputSlider();
+
+    statBlockMenu.printButton.click();
+
+    expect(printHtml).toHaveBeenCalledWith(
+      expect.stringContaining('<stat-block data-two-column="" style="--data-content-height: 625px">'));
+  });
+});
+
 describe('should export HTML', () => {
   describe('to clipboard', () => {
 
@@ -122,7 +160,7 @@ describe('should export HTML', () => {
 
   describe('as file download', () => {
     const expectedContentType = 'text/html';
-    const expectedFileName = 'Statblock5e - Commoner.html';
+    const expectedFileName = 'Commoner.html';
 
     it('one-column version', () => {
       statBlockMenu.oneColumnButton.click();
