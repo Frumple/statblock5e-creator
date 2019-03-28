@@ -8,8 +8,6 @@ import StatBlock from './stat-block.js';
 
 import ExportDialog from '../dialogs/export-dialog.js';
 
-import { startFileDownload } from '../../../helpers/export-helpers.js';
-
 export default class StatBlockEditor extends CustomAutonomousElement {
   static get elementName() { return 'stat-block-editor'; }
   static get templatePaths() {
@@ -44,10 +42,6 @@ export default class StatBlockEditor extends CustomAutonomousElement {
       this.addEventListener('allSectionsAction', this.onAllSectionsAction.bind(this));
 
       this.addEventListener('exportAction', this.onExportAction.bind(this));
-
-      this.htmlExportDialog.attachCallbacks( 
-        this.copyHtmlToClipboard.bind(this),
-        this.downloadHtml.bind(this));
 
       this.isInitialized = true;
     }
@@ -97,7 +91,7 @@ export default class StatBlockEditor extends CustomAutonomousElement {
 
   onExportAction(event) {
     const format = event.detail.format;
-    this.exportToFormat(format);    
+    this.openExportDialog(format);    
   }
 
   get title() {
@@ -105,7 +99,7 @@ export default class StatBlockEditor extends CustomAutonomousElement {
     return `Statblock5e - ${creatureName}`;
   }
   
-  exportToFormat(format) {
+  openExportDialog(format) {
     switch(format) {
     case 'json':
       this.openJsonExportDialog();
@@ -117,7 +111,7 @@ export default class StatBlockEditor extends CustomAutonomousElement {
       this.openHomebreweryExportDialog();
       break;
     default:
-      throw new Error(`Cannot export to an unknown format '${format}'.`);
+      throw new Error(`Unknown export format: '${format}'.`);
     }
   }
 
@@ -126,23 +120,13 @@ export default class StatBlockEditor extends CustomAutonomousElement {
   }
 
   openHtmlExportDialog() {
-    this.htmlExportDialog.showModal();
+    const title = this.title;
+    const content = this.statBlock.exportToHtml(title);
+
+    this.htmlExportDialog.launch(title, content);
   }
 
   openHomebreweryExportDialog() {
     // TODO
-  }
-
-  copyHtmlToClipboard() {
-    return;
-  }
-
-  downloadHtml() {
-    const title = this.title;
-    const content = this.statBlock.exportToHtml(title);
-    const contentType = 'text/html';
-    const fileName = `${title}.html`;
-
-    startFileDownload(content, contentType, fileName);
   }
 }

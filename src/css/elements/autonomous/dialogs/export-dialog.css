@@ -16,6 +16,10 @@
 }
 
 .export-dialog__status_complete {
+  color: green;
+}
+
+.export-dialog__status_error {
   color: red;
 }
 

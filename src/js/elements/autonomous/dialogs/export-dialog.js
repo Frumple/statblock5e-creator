@@ -1,5 +1,7 @@
 import CustomDialog from './custom-dialog.js';
 
+import { startFileDownload } from '../../../helpers/export-helpers.js';
+
 export default class ExportDialog extends CustomDialog {
   static get elementName() { return 'export-dialog'; }
   static get templatePaths() {
@@ -15,42 +17,59 @@ export default class ExportDialog extends CustomDialog {
     this.downloadAsFileButton = this.shadowRoot.getElementById('download-as-file-button');
     this.status = this.shadowRoot.getElementById('status');
 
-    this.copyToClipboardCallback = null;
-    this.downloadAsFileCallback = null;
+    this.clipboard = null;
+
+    this.title = null;
+    this.content = null;
   }
 
   connectedCallback() {
     if (this.isConnected && ! this.isInitialized) {
-      this.copyToClipboardButton.addEventListener('click', this.onClickCopyToClipboardButton.bind(this));
       this.downloadAsFileButton.addEventListener('click', this.onClickDownloadAsFileButton.bind(this));
+      this.closeButton.addEventListener('click', this.onClickCloseButton.bind(this));
 
       this.isInitialized = true;
     }
   }
 
-  onClickCopyToClipboardButton() {
-    this.copyToClipboardCallback();
-    
-    this.status.textContent = 'Content copied to clipboard.';
-    this.status.classList.add('export-dialog__status_complete');
-  }
-
   onClickDownloadAsFileButton() {
-    this.downloadAsFileCallback();
+    const contentType = 'text/html';
+    const fileName = `${this.title}.html`;
+
+    startFileDownload(this.content, contentType, fileName);
 
     this.status.textContent = 'File download initiated.';
     this.status.classList.add('export-dialog__status_complete');
   }
 
-  attachCallbacks(copyToClipboardCallback, downloadAsFileCallback) {
-    this.copyToClipboardCallback = copyToClipboardCallback;
-    this.downloadAsFileCallback = downloadAsFileCallback;
+  onClickCloseButton() {
+    this.clipboard.destroy();
   }
 
-  showModal() {
-    super.showModal();
+  launch(title, content) {
+    this.title = title;
+    this.content = content;
 
     this.status.textContent = 'Choose one of the following options:';
     this.status.classList.remove('export-dialog__status_complete');
+
+    this.clipboard = new ClipboardJS(this.copyToClipboardButton, {
+      container: this.dialog,
+      text: function() {
+        return content;
+      }
+    });
+
+    this.clipboard.on('success', () => {
+      this.status.textContent = 'Copied to clipboard.';
+      this.status.classList.add('export-dialog__status_complete');
+    });
+
+    this.clipboard.on('error', () => {
+      this.status.textContent = 'Press Ctrl+C to copy to clipboard.';
+      this.status.classList.add('export-dialog__status_error');
+    });
+
+    this.showModal();
   }
 }

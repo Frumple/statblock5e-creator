@@ -70,52 +70,115 @@ beforeEach(() => {
   statBlockEditor.htmlExportDialog.connect();
 });
 
-describe('should export HTML as file', () => {
-  const expectedContentType = 'text/html';
-  const expectedFileName = 'Statblock5e - Commoner.html';
+describe('should export HTML', () => {
+  describe('to clipboard', () => {
 
-  it('one-column version', () => {
-    statBlockMenu.oneColumnButton.click();
+    // JSDOM does not support document.execCommand() or any sort of Clipboard API.
+    // The best that these tests can do is check that the fallback status is
+    // shown on the export dialog.
 
-    statBlockMenu.exportHtmlButton.click();
+    it('one-column version', () => {
+      statBlockMenu.oneColumnButton.click();
 
-    statBlockEditor.htmlExportDialog.downloadAsFileButton.click();
+      statBlockMenu.exportHtmlButton.click();
 
-    expect(startFileDownload).toHaveBeenCalledWith(
-      expect.stringContaining('<stat-block>'), 
-      expectedContentType,
-      expectedFileName);
+      statBlockEditor.htmlExportDialog.copyToClipboardButton.click();
+
+      expectCopyToClipboardStatus();
+    });
+
+    it('two-column version with automatic height', () => {
+      statBlockMenu.twoColumnButton.click();
+      statBlockSidebar.autoHeightModeButton.click();
+
+      statBlockMenu.exportHtmlButton.click();
+
+      statBlockEditor.htmlExportDialog.copyToClipboardButton.click();
+
+      expectCopyToClipboardStatus();
+    });
+
+    it('two-column version with manual height', () => {
+      statBlockMenu.twoColumnButton.click();
+      statBlockSidebar.manualHeightModeButton.click();
+
+      // JSDOM doesn't support the stepUp() method, set the value and dispatch the event manually
+      // statBlockSidebar.manualHeightSlider.stepUp(25);
+      statBlockSidebar.manualHeightSlider.value = initialHeightSliderValue + 25;
+      statBlockSidebar.onInputSlider();
+
+      statBlockMenu.exportHtmlButton.click();
+      statBlockEditor.htmlExportDialog.copyToClipboardButton.click();
+
+      expectCopyToClipboardStatus();
+    });
+
+    function expectCopyToClipboardStatus() {
+      const status = statBlockEditor.htmlExportDialog.status;
+      expect(status).toHaveTextContent('Press Ctrl+C to copy to clipboard.');
+      expect(status).toHaveClass('export-dialog__status_error');
+    }
   });
 
-  it('two-column version with automatic height', () => {
-    statBlockMenu.twoColumnButton.click();
-    statBlockSidebar.autoHeightModeButton.click();
+  describe('as file download', () => {
+    const expectedContentType = 'text/html';
+    const expectedFileName = 'Statblock5e - Commoner.html';
 
-    statBlockMenu.exportHtmlButton.click();
+    it('one-column version', () => {
+      statBlockMenu.oneColumnButton.click();
 
-    statBlockEditor.htmlExportDialog.downloadAsFileButton.click();
+      statBlockMenu.exportHtmlButton.click();
 
-    expect(startFileDownload).toHaveBeenCalledWith(
-      expect.stringContaining('<stat-block data-two-column="">'), 
-      expectedContentType,
-      expectedFileName);
-  });
+      statBlockEditor.htmlExportDialog.downloadAsFileButton.click();
 
-  it('two-column version with manual height', () => {
-    statBlockMenu.twoColumnButton.click();
-    statBlockSidebar.manualHeightModeButton.click();
+      expect(startFileDownload).toHaveBeenCalledWith(
+        expect.stringContaining('<stat-block>'), 
+        expectedContentType,
+        expectedFileName);
 
-    // JSDOM doesn't support the stepUp() method, set the value and dispatch the event manually
-    // statBlockSidebar.manualHeightSlider.stepUp(25);
-    statBlockSidebar.manualHeightSlider.value = initialHeightSliderValue + 25;
-    statBlockSidebar.onInputSlider();
+      expectFileDownloadStatus();
+    });
 
-    statBlockMenu.exportHtmlButton.click();
-    statBlockEditor.htmlExportDialog.downloadAsFileButton.click();
+    it('two-column version with automatic height', () => {
+      statBlockMenu.twoColumnButton.click();
+      statBlockSidebar.autoHeightModeButton.click();
 
-    expect(startFileDownload).toHaveBeenCalledWith(
-      expect.stringContaining('<stat-block data-two-column="" style="--data-content-height: 625px">'), 
-      expectedContentType,
-      expectedFileName);
-  });
+      statBlockMenu.exportHtmlButton.click();
+
+      statBlockEditor.htmlExportDialog.downloadAsFileButton.click();
+
+      expect(startFileDownload).toHaveBeenCalledWith(
+        expect.stringContaining('<stat-block data-two-column="">'), 
+        expectedContentType,
+        expectedFileName);
+
+      expectFileDownloadStatus();
+    });
+
+    it('two-column version with manual height', () => {
+      statBlockMenu.twoColumnButton.click();
+      statBlockSidebar.manualHeightModeButton.click();
+
+      // JSDOM doesn't support the stepUp() method, set the value and dispatch the event manually
+      // statBlockSidebar.manualHeightSlider.stepUp(25);
+      statBlockSidebar.manualHeightSlider.value = initialHeightSliderValue + 25;
+      statBlockSidebar.onInputSlider();
+
+      statBlockMenu.exportHtmlButton.click();
+      statBlockEditor.htmlExportDialog.downloadAsFileButton.click();
+
+      expect(startFileDownload).toHaveBeenCalledWith(
+        expect.stringContaining('<stat-block data-two-column="" style="--data-content-height: 625px">'), 
+        expectedContentType,
+        expectedFileName);
+      
+      expectFileDownloadStatus();
+    });
+
+    function expectFileDownloadStatus() {
+      const status = statBlockEditor.htmlExportDialog.status;
+      expect(status).toHaveTextContent('File download initiated.');
+      expect(status).toHaveClass('export-dialog__status_complete');
+    }
+  });  
 });

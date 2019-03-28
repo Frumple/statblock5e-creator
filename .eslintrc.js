@@ -7,6 +7,7 @@ module.exports = {
     },
     "extends": "eslint:recommended",
     "globals": {
+      "ClipboardJS": "readable",
       "DOMPurify": "readable",
       "html_beautify": "readable",
       "global": "readable"
