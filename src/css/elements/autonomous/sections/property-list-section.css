@@ -24,8 +24,8 @@
 }
 
 .property-list-edit-section__add-button {
-  margin-left: 5px;
-  margin-right: 4px;
+  padding: 0 10px;
+  margin: 0 4px 0 5px;
 }
 
 .property-list-edit-section__list {

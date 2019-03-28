@@ -47,10 +47,28 @@
   margin-left: 5px;
 }
 
-.heading-edit-section__short-name-help-tooltip th, td {
+.heading-edit-section__short-name-help-tooltip code {
+  background: white;
+}
+
+.heading-edit-section__short-name-help-tooltip-table-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+}
+
+.heading-edit-section__short-name-help-tooltip-table-container table {
+  background: white;
+}
+
+.heading-edit-section__short-name-help-tooltip-table-container th {
+  text-decoration: underline;
+}
+
+.heading-edit-section__short-name-help-tooltip-table-container th, td {
   text-align: left;
-  padding-left: 5px;
-  padding-right: 5px;
+  padding-left: 10px;
+  padding-right: 10px;
 }
 
 .heading-edit-section__short-name-input {
@@ -70,6 +88,10 @@
 .heading-edit-section__proper-noun-help-tooltip {
   --help-tooltip-width: 30em;
   margin-left: 5px;
+}
+
+.heading-edit-section__proper-noun-help-tooltip code {
+  background: white;
 }
 
 .heading-edit-section__subtitle-container {

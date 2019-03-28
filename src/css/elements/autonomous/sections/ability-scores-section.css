@@ -18,6 +18,7 @@
 
 .ability-scores-section__score-label {
   font-weight: bold;
+  cursor: pointer;
 }
 
 .ability-scores-section__strength-label { grid-area: 1 / 1; }

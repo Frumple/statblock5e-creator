@@ -23,6 +23,7 @@
 }
 
 .editable-block-list-item__remove-button {
+  padding: 0 10px;
   margin-left: 5px;
 }
 

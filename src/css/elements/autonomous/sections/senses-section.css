@@ -32,7 +32,7 @@
   grid-area: 6 / 1;
   justify-self: end;
   align-self: center;
-  --help-tooltip-width: 60em;
+  --help-tooltip-width: 58em;
 }
 
 .senses-edit-section__passive-perception-label { grid-area: 6 / 2; }

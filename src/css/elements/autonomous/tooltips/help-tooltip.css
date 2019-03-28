@@ -43,13 +43,9 @@
 ::slotted(blockquote) {
   background: white;
   border-radius: 3px;
-  font-family: Courier, monospace;
+  font-family: monospace;
   padding: 0 3px;
   white-space: pre-wrap;
-}
-
-::slotted(table) {
-  margin-left: 40px;
 }
 
 ::slotted(cite) {

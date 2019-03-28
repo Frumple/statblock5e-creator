@@ -20,44 +20,58 @@
       <help-tooltip class="heading-edit-section__short-name-help-tooltip">
         <p>The <strong>short name</strong> is typically one or two words used to refer to the creature in its special traits, actions, reactions, and legendary actions.</p>
         <br />
-        <p>If the short name is left blank, the creature's full name will be used instead.</p>
+        <p>In these sections, all instances of <code>{name}</code> will be replaced with the short name when displayed. If the short name is left blank, the creature's full name will be used instead.</p>
         <br />
         <h4>Examples of short names:</h4>
-        <table>
-          <tr>
-            <th>Full Name</th>
-            <th>Short Name</th>
-          </tr>
-          <tr>
-            <td>Ancient Red Dragon</td>
-            <td>dragon</td>
-          </tr>
-          <tr>
-            <td>Gelatinous Cube</td>
-            <td>cube</td>
-          </tr>
-          <tr>
-            <td>Orc War Chief</td>
-            <td>orc</td>
-          </tr>
-          <tr>
-            <td>Rust Monster</td>
-            <td>rust monster</td>
-          </tr>
-        </table>
+        <br />
+        <div class="heading-edit-section__short-name-help-tooltip-table-container">
+          <table>
+            <tr>
+              <th>Full Name</th>
+              <th>Short Name</th>
+            </tr>
+            <tr>
+              <td>Ancient Red Dragon</td>
+              <td>dragon</td>
+            </tr>
+            <tr>
+              <td>Gelatinous Cube</td>
+              <td>cube</td>
+            </tr>
+            <tr>
+              <td>Orc War Chief</td>
+              <td>orc</td>
+            </tr>
+            <tr>
+              <td>Rust Monster</td>
+              <td>rust monster</td>
+            </tr>
+            <tr>
+              <td>Drizzt Do'urden</td>
+              <td>Drizzt</td>
+            </tr>
+            <tr>
+              <td>Lady Kima of Vord</td>
+              <td>Lady Kima</td>
+            </tr>
+          </table>
+        </div>
+        
       </help-tooltip>        
       <input id="short-name-input" class="heading-edit-section__short-name-input section__text-input" is="text-input" type="text" name="short-name" pretty-name="Short Name" value="" />        
       <input id="proper-noun-input" class="heading-edit-section__proper-noun-input" type="checkbox" name="proper-noun" />
       <label id="proper-noun-label" class="heading-edit-section__proper-noun-label heading-edit-section__label" for="proper-noun-input">Proper Noun</label>
       <help-tooltip class="heading-edit-section__proper-noun-help-tooltip">
-        <p>Check the <strong>proper noun</strong> box if this statblock describes a specific and unique individual or creature.</p>
+        <p>Check the <strong>proper noun</strong> box if this statblock describes a unique individual or creature.</p>
         <br />
-        <p>If this box is unchecked, the word "the" will precede the creature's short name/full name in its special traits, actions, reactions, and legendary actions. Any capitalization from the short name/full name will also be removed.</p>
+        <p>If this box is unchecked, the word "the" will precede all instances of <code>{name}</code> in its special traits, actions, reactions, and legendary actions when displayed.</p>
         <br />
-        <h4>For example:</h4>
+        <p>"The" will begin with a capital letter if it used at the beginning of a sentence. Any capitalization from the short name/full name will also be removed.</p>
+        <br />
+        <h4>For example, if the short name is "Mind Flayer":</h4>
         <ul>
-          <li>"Basilisk" becomes "the basilisk ..."</li>
-          <li>"Mind Flayer" becomes "the mind flayer ..."</li>
+          <li><code>{name} has advantage...</code> becomes<br /><code>The mind flayer has advantage...</code></li>
+          <li><code>...within 30 feet of {name}.</code> becomes<br /><code>...within 30 feet of the mind flayer.</code></li>          
         </ul>
         <br />
         <p>Otherwise if the box is checked, the word "the" will not appear and capitalization will be preserved.</p>

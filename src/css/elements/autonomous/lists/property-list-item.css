@@ -10,3 +10,7 @@
   text-overflow: ellipsis;
   white-space: nowrap;
 }
+
+.property-list-item__remove-button {
+  padding: 0 10px;
+}
