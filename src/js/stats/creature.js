@@ -1,20 +1,38 @@
+import { capitalizeFirstLetter } from '../helpers/string-formatter.js';
+
 class Creature {
   constructor() {
     this.reset();
   }
 
   reset() {
-    this.fullName = 'Commoner';
+    this._fullName = 'Commoner';
     this.shortName = '';
     this.isProperNoun = false;
+    
+    this.size = 'Medium';
+    this.type = 'humanoid';
+    this.alignment = 'unaligned';
   }
 
-  grammaticize(name) {
-    return (this.isProperNoun ? name : `the ${name.toLowerCase()}`);
+  set fullName(fullName) {
+    this._fullName = capitalizeFirstLetter(fullName);
+  }
+
+  get fullName() {
+    return this._fullName;
+  }
+
+  get title() {
+    return this._fullName;
+  }
+
+  get subtitle() {
+    return `${this.size} ${this.type}, ${this.alignment}`;
   }
 
   get grammaticalFullName() {
-    return this.grammaticize(this.fullName);
+    return this.grammaticize(this._fullName);
   }
 
   get grammaticalShortName() {
@@ -27,11 +45,29 @@ class Creature {
       this.grammaticalFullName;      
   }
 
-  get toParserOptions() {
+  grammaticize(name) {
+    return (this.isProperNoun ? name : `the ${name.toLowerCase()}`);
+  }
+
+  toParserOptions() {
     return {
       name: this.grammaticalName,
       fullName: this.grammaticalFullName
     };
+  }
+
+  toHtml() {
+    const creatureHeading = document.createElement('creature-heading');
+    const titleElement = document.createElement('h1');
+    const subtitleElement = document.createElement('h2');
+
+    titleElement.textContent = this.title;
+    subtitleElement.textContent = this.subtitle;
+
+    creatureHeading.appendChild(titleElement);
+    creatureHeading.appendChild(subtitleElement);
+
+    return creatureHeading;
   }
 }
 

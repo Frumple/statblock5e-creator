@@ -1,4 +1,5 @@
 import PropertyListSection from './property-list-section.js';
+import Languages from '../../../stats/lists/property/languages.js';
 import isRunningInNode from '../../../helpers/is-running-in-node.js';
 
 export default class LanguagesSection extends PropertyListSection {
@@ -11,8 +12,7 @@ export default class LanguagesSection extends PropertyListSection {
 
   constructor() {
     super(LanguagesSection.templatePaths,
-          'Languages',
-          'Language');
+          Languages);
   }
 
   connectedCallback() {
@@ -26,19 +26,5 @@ export default class LanguagesSection extends PropertyListSection {
 
       this.isInitialized = true;
     }
-  }
-
-  updateShowSection() {
-    this.editElements.input.value = '';
-
-    let text = this.showSectionText;
-
-    if (text === '') {
-      // This is an EM dash (U+2014).
-      // This appears significantly wider than a normal dash.
-      text = '—';
-    }
-
-    this.showElements.text.textContent = text;
   }
 }

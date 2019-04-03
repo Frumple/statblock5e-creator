@@ -1,6 +1,7 @@
 import DamageImmunitiesSection from './damage-immunities-section.js';
-import * as TestCustomElements from '../../../helpers/test/test-custom-elements.js';
+import DamageImmunities from '../../../stats/lists/property/damage-immunities.js';
 
+import * as TestCustomElements from '../../../helpers/test/test-custom-elements.js';
 import * as sharedSpecs from './property-list-section.specs.js';
 
 const headingName = 'Damage Immunities';
@@ -14,6 +15,8 @@ beforeAll(async() => {
 });
 
 beforeEach(() => {
+  DamageImmunities.reset();
+
   damageImmunitiesSection = new DamageImmunitiesSection();
   TestCustomElements.initializeSection(damageImmunitiesSection);
   damageImmunitiesSection.connect();

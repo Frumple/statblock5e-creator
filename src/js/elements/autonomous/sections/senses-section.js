@@ -1,5 +1,5 @@
 import * as propertyLineSectionModule from './property-line-section.js';
-import Skills from '../../../stats/skills.js';
+import Senses from '../../../stats/senses.js';
 
 export default class SensesSection extends propertyLineSectionModule.PropertyLineSection {
   static get elementName() { return 'senses-section'; }
@@ -12,80 +12,53 @@ export default class SensesSection extends propertyLineSectionModule.PropertyLin
   constructor() {
     super(SensesSection.templatePaths,
           SensesShowElements,
-          SensesEditElements,
-          'Senses');    
+          SensesEditElements);    
   }
 
   connectedCallback() {
     if (this.isConnected && ! this.isInitialized) {
-      this.editElements.useCustom.disableElementsWhenChecked(
+      this.editElements.useCustomText.disableElementsWhenChecked(
         this.editElements.blindsight,
         this.editElements.darkvision,
         this.editElements.tremorsense,
         this.editElements.truesight);
 
-      this.editElements.useCustom.enableElementsWhenChecked(
+      this.editElements.useCustomText.enableElementsWhenChecked(
         this.editElements.customText);
     }
-  }
-
-  updatePassivePerception() {
-    const passivePerception = Skills.skills['perception'].passiveScore;
-    this.editElements.passivePerception.textContent = passivePerception;    
-
-    this.updateShowSection();
   }
 
   checkForErrors() {
     this.editElements.customText.value = this.editElements.customText.value.trim();
 
-    if (this.editElements.useCustom.checked) {
+    if (this.editElements.useCustomText.checked) {
       this.editElements.customText.validate(this.errorMessages);
     }
   }
 
-  updateShowSection() {
-    const useCustom = this.editElements.useCustom.checked;
-    const customText = this.editElements.customText.parsedText;
+  updateModel() {
+    Senses.blindsight = this.editElements.blindsight.valueAsInt;
+    Senses.darkvision = this.editElements.darkvision.valueAsInt;
+    Senses.tremorsense = this.editElements.tremorsense.valueAsInt;
+    Senses.truesight = this.editElements.truesight.valueAsInt;
 
-    if (useCustom) {
-      this.showElements.text.innerHTMLSanitized = customText;
+    Senses.useCustomText = this.editElements.useCustomText.checked;
+    Senses.originalCustomText = this.editElements.customText.value;
+    Senses.parsedCustomText = this.editElements.customText.parsedText;
+  }
+
+  updateView() {
+    this.editElements.passivePerception.textContent = Senses.passivePerception;  
+
+    if (Senses.useCustomText) {
+      this.showElements.text.innerHTMLSanitized = Senses.parsedCustomText;
     } else {
-      this.showElements.text.textContent = this.showSectionText;
+      this.showElements.text.textContent = Senses.normalText;
     }    
   }
 
-  get showSectionText() {
-    const blindsightRange = this.editElements.blindsight.value;
-    const darkvisionRange = this.editElements.darkvision.value;
-    const tremorsenseRange = this.editElements.tremorsense.value;
-    const truesightRange = this.editElements.truesight.value;
-    const passivePerception = this.editElements.passivePerception.textContent;
-
-    const unit = 'ft.';
-    let text = '';
-    let comma = '';
-
-    if (blindsightRange) {
-      text += `blindsight ${blindsightRange} ${unit}`;
-      comma = ', ';
-    }
-    if (darkvisionRange) {
-      text += `${comma}darkvision ${darkvisionRange} ${unit}`;
-      comma = ', ';
-    }
-    if (tremorsenseRange) {
-      text += `${comma}tremorsense ${tremorsenseRange} ${unit}`;
-      comma = ', ';
-    }
-    if (truesightRange) {
-      text += `${comma}truesight ${truesightRange} ${unit}`;
-      comma = ', ';
-    }
-
-    text += `${comma}passive Perception ${passivePerception}`;
-
-    return text;
+  exportToHtml() {
+    return Senses.toHtml();
   }
 }
 
@@ -103,12 +76,12 @@ class SensesEditElements extends propertyLineSectionModule.PropertyLineEditEleme
     this.tremorsense = shadowRoot.getElementById('tremorsense-input');
     this.truesight = shadowRoot.getElementById('truesight-input');
     this.passivePerception = shadowRoot.getElementById('passive-perception-value');
-    this.useCustom = shadowRoot.getElementById('use-custom-input');
-    this.customText = shadowRoot.getElementById('custom-input');
+    this.useCustomText = shadowRoot.getElementById('use-custom-text-input');
+    this.customText = shadowRoot.getElementById('custom-text-input');
   }
 
   get initiallySelectedElement() {
-    if (this.useCustom.checked) {
+    if (this.useCustomText.checked) {
       return this.customText;
     }
     return this.blindsight;

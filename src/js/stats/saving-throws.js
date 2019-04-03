@@ -1,8 +1,12 @@
 import Abilities from './abilities.js';
 import ProficiencyBonus from './proficiency-bonus.js';
+import { capitalizeFirstLetter, formatModifier } from '../helpers/string-formatter.js';
+import { createPropertyLine } from '../helpers/export-helpers.js';
 
 class SavingThrows {
   constructor() {
+    this.headingName = 'Saving Throws';
+
     this.savingThrows = {
       'strength' : new SavingThrow('strength'),
       'dexterity' : new SavingThrow('dexterity'),
@@ -11,6 +15,7 @@ class SavingThrows {
       'wisdom' : new SavingThrow('wisdom'),
       'charisma' : new SavingThrow('charisma')
     };
+    Object.freeze(this.savingThrows);
   }
 
   reset() {
@@ -26,6 +31,25 @@ class SavingThrows {
   get entries() {
     return Object.entries(this.savingThrows);
   }
+
+  get text() {
+    const list = [];
+
+    for (const key of Abilities.keys) {
+      const savingThrow = this.savingThrows[key];
+      const isEnabled = savingThrow.isEnabled;
+
+      if (isEnabled) {
+        list.push(savingThrow.text);
+      }
+    }
+
+    return list.join(', ');
+  }
+  
+  toHtml() {
+    return createPropertyLine(this.headingName, this.text);
+  }
 }
 
 class SavingThrow {
@@ -40,10 +64,17 @@ class SavingThrow {
     this.override = NaN;
   }
 
-  calculateModifier(checkIfEnabled = true) {
+  get text() {
+    const ability = Abilities.abilities[this.abilityName];
+    const abbreviation = capitalizeFirstLetter(ability.abbreviation);
+
+    return `${abbreviation} ${this.formattedModifier}`;
+  }
+
+  get modifier() {
     let savingThrowModifier = 0;
 
-    if (! checkIfEnabled || this.isEnabled) {
+    if (this.isEnabled) {
       if (! isNaN(this.override)) {
         return this.override;
       }
@@ -55,6 +86,10 @@ class SavingThrow {
     savingThrowModifier += Abilities.abilities[this.abilityName].modifier;
 
     return savingThrowModifier;
+  }
+
+  get formattedModifier() {
+    return formatModifier(this.modifier);
   }
 }
 

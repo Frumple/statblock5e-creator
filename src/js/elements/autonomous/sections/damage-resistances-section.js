@@ -1,4 +1,5 @@
 import PropertyListSection from './property-list-section.js';
+import DamageResistances from '../../../stats/lists/property/damage-resistances.js';
 
 export default class DamageResistancesSection extends PropertyListSection {
   static get elementName() { return 'damage-resistances-section'; }
@@ -10,8 +11,7 @@ export default class DamageResistancesSection extends PropertyListSection {
 
   constructor() {
     super(DamageResistancesSection.templatePaths,
-          'Damage Resistances',
-          'Damage Resistance');
+          DamageResistances);
 
     this.empty = true;
   }

@@ -1,6 +1,7 @@
 import ConditionImmunitiesSection from './condition-immunities-section.js';
-import * as TestCustomElements from '../../../helpers/test/test-custom-elements.js';
+import ConditionImmunities from '../../../stats/lists/property/condition-immunities.js';
 
+import * as TestCustomElements from '../../../helpers/test/test-custom-elements.js';
 import * as sharedSpecs from './property-list-section.specs.js';
 
 const headingName = 'Condition Immunities';
@@ -14,6 +15,8 @@ beforeAll(async() => {
 });
 
 beforeEach(() => {
+  ConditionImmunities.reset();
+
   conditionImmunitiesSection = new ConditionImmunitiesSection();
   TestCustomElements.initializeSection(conditionImmunitiesSection);
   conditionImmunitiesSection.connect();

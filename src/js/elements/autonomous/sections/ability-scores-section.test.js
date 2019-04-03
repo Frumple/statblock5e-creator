@@ -77,8 +77,6 @@ describe('when the show section is clicked', () => {
 
         expect(receivedEvent).not.toBeNull();
         expect(receivedEvent.detail.abilityName).toBe(abilityName);
-        expect(receivedEvent.detail.abilityScore).toBe(score);
-        expect(receivedEvent.detail.abilityModifier).toBe(expectedModifier);
 
         abilityScoresSection.editElements.submitForm();
 
@@ -159,7 +157,6 @@ describe('when the show section is clicked', () => {
         expect(ProficiencyBonus.proficiencyBonus).toBe(proficiencyBonus);
         
         expect(receivedEvent).not.toBeNull();
-        expect(receivedEvent.detail.proficiencyBonus).toBe(proficiencyBonus);
 
         abilityScoresSection.editElements.submitForm();
 

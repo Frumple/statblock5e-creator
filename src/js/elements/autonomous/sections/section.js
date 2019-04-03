@@ -109,7 +109,9 @@ export class Section extends CustomAutonomousElement {
       this.errorMessages.focusOnFirstErrorField();
       return;
     }
-    this.updateShowSection();
+
+    this.updateModel();
+    this.updateView();
 
     if (this.empty && ! GlobalOptions.emptySectionsVisibility) {
       this.mode = 'hidden';
@@ -125,13 +127,18 @@ export class Section extends CustomAutonomousElement {
       `The class '${this.constructor.name}' must implement the checkForErrors() method.`);
   }
 
-  updateShowSection() {
+  updateModel() {
     throw new Error(
-      `The class '${this.constructor.name}' must implement the updateShowSection() method.`);
+      `The class '${this.constructor.name}' must implement the updateView() method.`);
+  }
+
+  updateView() {
+    throw new Error(
+      `The class '${this.constructor.name}' must implement the updateView() method.`);
   }
 
   dispatchModeChangedEvent() {
-    let changeEvent = new CustomEvent('sectionModeChanged', {
+    const changeEvent = new CustomEvent('sectionModeChanged', {
       bubbles: true,
       composed: true
     });

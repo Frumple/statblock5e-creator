@@ -88,24 +88,31 @@ describe('when the show section is clicked', () => {
 
   describe('and fields are populated and the edit section is submitted', () => {
     it('should switch to show mode and save the creature name, size, type, and alignment', () => {
-      const expectedTitle = 'Beholder';
+      const fullName = 'Beholder';
+      const size = 'Large';
+      const type = 'aberration';
+      const alignment = 'lawful evil';
       const expectedSubtitle = 'Large aberration, lawful evil';
 
-      inputValueAndTriggerEvent(headingSection.editElements.fullName, 'Beholder');
-      inputValueAndTriggerEvent(headingSection.editElements.size, 'Large');
-      inputValueAndTriggerEvent(headingSection.editElements.type, 'aberration');
-      inputValueAndTriggerEvent(headingSection.editElements.alignment, 'lawful evil');
+      inputValueAndTriggerEvent(headingSection.editElements.fullName, fullName);
+      inputValueAndTriggerEvent(headingSection.editElements.size, size);
+      inputValueAndTriggerEvent(headingSection.editElements.type, type);
+      inputValueAndTriggerEvent(headingSection.editElements.alignment, alignment);
     
       headingSection.editElements.submitForm();
 
-      expect(headingSection).toBeInMode('show');
-      expect(headingSection.showElements.title).toHaveTextContent(expectedTitle);
-      expect(headingSection.showElements.subtitle).toHaveTextContent(expectedSubtitle);
-
+      expect(Creature.fullName).toBe(fullName);
       expect(Creature.shortName).toBe('');
       expect(Creature.isProperNoun).toBe(false);
+      expect(Creature.size).toBe(size);
+      expect(Creature.type).toBe(type);
+      expect(Creature.alignment).toBe(alignment);
 
-      verifyHtmlExport(headingSection, expectedTitle, expectedSubtitle);      
+      expect(headingSection).toBeInMode('show');
+      expect(headingSection.showElements.title).toHaveTextContent(fullName);
+      expect(headingSection.showElements.subtitle).toHaveTextContent(expectedSubtitle);
+
+      verifyHtmlExport(headingSection, fullName, expectedSubtitle);      
     });
 
     function verifyHtmlExport(headingSection, expectedTitle, expectedSubtitle) {
@@ -119,12 +126,17 @@ describe('when the show section is clicked', () => {
     }
 
     it('should capitalize the first letter in the creature name', () => {
-      inputValueAndTriggerEvent(headingSection.editElements.fullName, 'young red dragon');
+      const fullName = 'young red dragon';
+      const expectedFullName = 'Young red dragon';
+
+      inputValueAndTriggerEvent(headingSection.editElements.fullName, fullName);
 
       headingSection.editElements.submitForm();
 
+      expect(Creature.fullName).toBe(expectedFullName);
+
       expect(headingSection).toBeInMode('show');
-      expect(headingSection.showElements.title).toHaveTextContent('Young red dragon');
+      expect(headingSection.showElements.title).toHaveTextContent(expectedFullName);
     });
 
     it('should trim whitespace from the creature name and type', () => {
@@ -134,6 +146,11 @@ describe('when the show section is clicked', () => {
       inputValueAndTriggerEvent(headingSection.editElements.alignment, 'unaligned');
 
       headingSection.editElements.submitForm();
+
+      expect(Creature.fullName).toBe('Purple Worm');
+      expect(Creature.size).toBe('Gargantuan');
+      expect(Creature.type).toBe('monstrosity');
+      expect(Creature.alignment).toBe('unaligned');
 
       expect(headingSection).toBeInMode('show');
       expect(headingSection.showElements.title).toHaveTextContent('Purple Worm');

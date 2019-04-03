@@ -2,7 +2,6 @@ import * as propertyLineSectionModule from './property-line-section.js';
 import Abilities from '../../../stats/abilities.js';
 import SavingThrows from '../../../stats/saving-throws.js';
 import { inputValueAndTriggerEvent } from '../../../helpers/element-helpers.js';
-import { capitalizeFirstLetter, formatModifier } from '../../../helpers/string-formatter.js';
 
 export default class SavingThrowsSection extends propertyLineSectionModule.PropertyLineSection {
   static get elementName() { return 'saving-throws-section'; }
@@ -15,8 +14,7 @@ export default class SavingThrowsSection extends propertyLineSectionModule.Prope
   constructor() {
     super(SavingThrowsSection.templatePaths,
           SavingThrowsShowElements,
-          SavingThrowsEditElements,
-          'Saving Throws');
+          SavingThrowsEditElements);
           
     this.empty = true;
   }
@@ -46,8 +44,7 @@ export default class SavingThrowsSection extends propertyLineSectionModule.Prope
 
   onInputSavingThrowEnabled(key) {
     const labelDisabledClass = 'section__label_disabled';
-    const elements = this.editElements.savingThrow[key];
-    SavingThrows.savingThrows[key].isEnabled = elements.enable.checked;
+    const elements = this.editElements.savingThrow[key];    
 
     if (elements.enable.checked) {
       elements.label.classList.remove(labelDisabledClass);
@@ -61,43 +58,63 @@ export default class SavingThrowsSection extends propertyLineSectionModule.Prope
       inputValueAndTriggerEvent(elements.proficient, false);
       inputValueAndTriggerEvent(elements.override, '');
     }
+
+    this.updateModelSavingThrowEnabled(key);
+    this.updateViewSavingThrow(key);
+    this.updateViewText();   
   }
 
   onInputSavingThrowProficiency(key) {
-    SavingThrows.savingThrows[key].isProficient = this.editElements.savingThrow[key].proficient.checked;
-
-    this.updateEditSectionModifier(key);
+    this.updateModelSavingThrowProficiency(key);
+    this.updateViewSavingThrow(key);
+    this.updateViewText();  
   }
 
   onInputSavingThrowOverride(key) {
-    const overrideValue = this.editElements.savingThrow[key].override.valueAsInt;
-    SavingThrows.savingThrows[key].override = overrideValue;
-
-    this.updateEditSectionModifier(key);
-  }
-
-  updateModifiers(abilityName = null) {
-    for (const key of SavingThrows.keys) {
-      if (abilityName === null || abilityName === key) {
-        this.updateEditSectionModifier(key);
-      }
-    }
-
-    this.updateShowSection();
-  }
-
-  updateEditSectionModifier(key) {    
-    const savingThrowModifier = SavingThrows.savingThrows[key].calculateModifier(false);
-    const formattedSavingThrowModifier = formatModifier(savingThrowModifier);
-    this.editElements.savingThrow[key].modifier.textContent = formattedSavingThrowModifier; 
+    this.updateModelSavingThrowOverride(key);
+    this.updateViewSavingThrow(key);
+    this.updateViewText();  
   }
 
   checkForErrors() {
     return;
   }
 
-  updateShowSection() {
-    const text = this.showSectionText;
+  updateModel() {
+    for (const key of SavingThrows.keys) {
+      this.updateModelSavingThrowEnabled(key);
+      this.updateModelSavingThrowProficiency(key);
+      this.updateModelSavingThrowOverride(key);
+    }
+  }
+
+  updateModelSavingThrowEnabled(key) {
+    SavingThrows.savingThrows[key].isEnabled = this.editElements.savingThrow[key].enable.checked;
+  }
+
+  updateModelSavingThrowProficiency(key) {
+    SavingThrows.savingThrows[key].isProficient = this.editElements.savingThrow[key].proficient.checked;
+  }
+
+  updateModelSavingThrowOverride(key) {
+    SavingThrows.savingThrows[key].override = this.editElements.savingThrow[key].override.valueAsInt;
+  }
+
+  updateView() {
+    for (const key of SavingThrows.keys) {
+      this.updateViewSavingThrow(key);
+    }    
+
+    this.updateViewText();
+  }
+
+  updateViewSavingThrow(key) {
+    const savingThrow = SavingThrows.savingThrows[key];
+    this.editElements.savingThrow[key].modifier.textContent = savingThrow.formattedModifier;
+  }
+
+  updateViewText() {
+    const text = SavingThrows.text;
 
     if (text === '') {
       this.empty = true;
@@ -108,26 +125,8 @@ export default class SavingThrowsSection extends propertyLineSectionModule.Prope
     this.showElements.text.textContent = text;
   }
 
-  get showSectionText() {
-    let text = '';
-
-    for (const [key, value] of Abilities.entries) {
-      const savingThrow = SavingThrows.savingThrows[key];
-      const isEnabled = savingThrow.isEnabled;
-
-      if (isEnabled) {
-        const abbreviation = capitalizeFirstLetter(value.abbreviation);
-        const savingThrowModifier = formatModifier(savingThrow.calculateModifier());
-
-        if (text === '') {
-          text += `${abbreviation} ${savingThrowModifier}`;
-        } else {
-          text += `, ${abbreviation} ${savingThrowModifier}`;
-        }
-      }
-    }
-
-    return text;
+  exportToHtml() {
+    return SavingThrows.toHtml();
   }
 }
 

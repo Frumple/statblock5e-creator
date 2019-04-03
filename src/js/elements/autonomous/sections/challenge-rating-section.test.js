@@ -1,6 +1,7 @@
 import ChallengeRatingSection from './challenge-rating-section.js';
-import * as TestCustomElements from '../../../helpers/test/test-custom-elements.js';
+import ChallengeRating from '../../../stats/challenge-rating.js';
 
+import * as TestCustomElements from '../../../helpers/test/test-custom-elements.js';
 import { inputValueAndTriggerEvent } from '../../../helpers/element-helpers.js';
 
 const expectedHeading = 'Challenge';
@@ -13,6 +14,8 @@ beforeAll(async() => {
 });
 
 beforeEach(() => {
+  ChallengeRating.reset();
+
   challengeRatingSection = new ChallengeRatingSection();
   TestCustomElements.initializeSection(challengeRatingSection);
   challengeRatingSection.connect();

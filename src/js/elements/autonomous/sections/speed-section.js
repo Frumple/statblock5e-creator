@@ -1,4 +1,5 @@
 import * as propertyLineSectionModule from './property-line-section.js';
+import Speed from '../../../stats/speed.js';
 
 export default class SpeedSection extends propertyLineSectionModule.PropertyLineSection {
   static get elementName() { return 'speed-section'; }
@@ -11,13 +12,12 @@ export default class SpeedSection extends propertyLineSectionModule.PropertyLine
   constructor() {
     super(SpeedSection.templatePaths,
           SpeedShowElements,
-          SpeedEditElements,
-          'Speed');
+          SpeedEditElements);
   }
 
   connectedCallback() {
     if(this.isConnected && ! this.isInitialized) {
-      this.editElements.useCustom.disableElementsWhenChecked(
+      this.editElements.useCustomText.disableElementsWhenChecked(
         this.editElements.walk,
         this.editElements.burrow,
         this.editElements.climb,
@@ -25,7 +25,7 @@ export default class SpeedSection extends propertyLineSectionModule.PropertyLine
         this.editElements.hover,
         this.editElements.swim);
 
-      this.editElements.useCustom.enableElementsWhenChecked(
+      this.editElements.useCustomText.enableElementsWhenChecked(
         this.editElements.customText);
 
       this.isInitialized = true;
@@ -35,54 +35,34 @@ export default class SpeedSection extends propertyLineSectionModule.PropertyLine
   checkForErrors() {
     this.editElements.customText.value = this.editElements.customText.value.trim();
 
-    if (this.editElements.useCustom.checked) {
+    if (this.editElements.useCustomText.checked) {
       this.editElements.customText.validate(this.errorMessages);
     }
   }
 
-  updateShowSection() {    
-    const useCustom = this.editElements.useCustom.checked;
-    const customText = this.editElements.customText.parsedText;
+  updateModel() {
+    Speed.walk = this.editElements.walk.valueAsInt;
+    Speed.burrow = this.editElements.burrow.valueAsInt;
+    Speed.climb = this.editElements.climb.valueAsInt;
+    Speed.fly = this.editElements.fly.valueAsInt;
+    Speed.hover = this.editElements.hover.checked;
+    Speed.swim = this.editElements.swim.valueAsInt;
 
-    if (useCustom) {
-      this.showElements.text.innerHTMLSanitized = customText;
+    Speed.useCustomText = this.editElements.useCustomText.checked;
+    Speed.originalCustomText = this.editElements.customText.value;
+    Speed.parsedCustomText = this.editElements.customText.parsedText;
+  }
+
+  updateView() {    
+    if (Speed.useCustomText) {
+      this.showElements.text.innerHTMLSanitized = Speed.parsedCustomText;
     } else {
-      this.showElements.text.textContent = this.normalShowSectionText;
+      this.showElements.text.textContent = Speed.normalText;
     }
   }
 
-  get normalShowSectionText() {
-    let walkSpeed = this.editElements.walk.value;
-    const burrowSpeed = this.editElements.burrow.value;
-    const climbSpeed = this.editElements.climb.value;
-    const flySpeed = this.editElements.fly.value;
-    const hover = this.editElements.hover.checked;
-    const swimSpeed = this.editElements.swim.value;
-
-    const unit = 'ft.';
-
-    if (! walkSpeed) {
-      walkSpeed = 0;
-    }
-    let text = `${walkSpeed} ${unit}`;
-
-    if (burrowSpeed) {
-      text += `, burrow ${burrowSpeed} ${unit}`;
-    }
-    if (climbSpeed) {
-      text += `, climb ${climbSpeed} ${unit}`;
-    }
-    if (flySpeed) {
-      text += `, fly ${flySpeed} ${unit}`;
-      if (hover) {
-        text += ' (hover)';
-      }
-    }
-    if (swimSpeed) {
-      text += `, swim ${swimSpeed} ${unit}`;
-    }
-
-    return text;
+  exportToHtml() {
+    return Speed.toHtml();
   }
 }
 
@@ -101,12 +81,12 @@ class SpeedEditElements extends propertyLineSectionModule.PropertyLineEditElemen
     this.fly = shadowRoot.getElementById('fly-input');
     this.hover = shadowRoot.getElementById('hover-input');
     this.swim = shadowRoot.getElementById('swim-input');
-    this.useCustom = shadowRoot.getElementById('use-custom-input');
-    this.customText = shadowRoot.getElementById('custom-input');
+    this.useCustomText = shadowRoot.getElementById('use-custom-text-input');
+    this.customText = shadowRoot.getElementById('custom-text-input');
   }
 
   get initiallySelectedElement() {
-    if (this.useCustom.checked) {
+    if (this.useCustomText.checked) {
       return this.customText;
     }
     return this.walk;

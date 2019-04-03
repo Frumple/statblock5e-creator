@@ -8,7 +8,7 @@ const defaultSettings = {
 export default function(inputText, settings = defaultSettings) {
   const parserOptions = {};
   parserOptions.settings = settings;
-  parserOptions.creature = Creature.toParserOptions;
+  parserOptions.creature = Creature.toParserOptions();
 
   const parserResults = {
     inputText: inputText,

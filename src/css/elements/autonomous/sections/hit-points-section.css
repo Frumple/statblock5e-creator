@@ -33,7 +33,7 @@
 .hit-points-edit-section__hit-die-calculation-container {
   grid-area: 4 / 2;
   display: grid;
-  grid-template-columns: auto auto auto auto;
+  grid-template-columns: auto auto auto 60px auto;
   grid-template-rows: auto auto;
   grid-column-gap: 5px;
   justify-items: center;
@@ -50,9 +50,12 @@
   grid-area: 1 / 3;
 }
 
-.hit-points-edit-section__hit_die-leading-text {
+.hit-points-edit-section__constitution-hit-points-label {
+  grid-area: 1 / 4;
+}
+
+.hit-points-edit-section__hit_die-leading-text-label {
   grid-area: 2 / 1;
-  justify-self: end;
 }
 
 .hit-points-edit-section__hit-die-quantity-input {
@@ -63,6 +66,10 @@
   grid-area: 2 / 3;
 }
 
-.hit-points-edit-section__hit-die-trailing-text {
+.hit-points-edit-section__constitution-hit-points-value-label {
   grid-area: 2 / 4;
+}
+
+.hit-points-edit-section__hit-die-trailing-text-label {
+  grid-area: 2 / 5;
 }

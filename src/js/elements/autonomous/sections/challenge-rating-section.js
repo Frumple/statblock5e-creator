@@ -1,4 +1,5 @@
 import * as propertyLineSectionModule from './property-line-section.js';
+import ChallengeRating from '../../../stats/challenge-rating.js';
 import ExperiencePointsByChallengeRating from '../../../helpers/experience-points-by-challenge-rating.js';
 
 export default class ChallengeRatingSection extends propertyLineSectionModule.PropertyLineSection {
@@ -12,8 +13,7 @@ export default class ChallengeRatingSection extends propertyLineSectionModule.Pr
   constructor() {
     super(ChallengeRatingSection.templatePaths,
           ChallengeRatingShowElements,
-          ChallengeRatingEditElements,
-          'Challenge');
+          ChallengeRatingEditElements);
 
     this.editElements.challengeRating.addEventListener('input', this.onInputChallengeRating.bind(this));
   }
@@ -28,14 +28,18 @@ export default class ChallengeRatingSection extends propertyLineSectionModule.Pr
     this.editElements.experiencePoints.validate(this.errorMessages);
   }
 
-  updateShowSection() {
+  updateModel() {
     const challengeRatingElement = this.editElements.challengeRating;
+    ChallengeRating.challengeRating = challengeRatingElement.options[challengeRatingElement.selectedIndex].text;
+    ChallengeRating.experiencePoints = this.editElements.experiencePoints.value;
+  }
 
-    const challengeRating = challengeRatingElement.options[challengeRatingElement.selectedIndex].text;
-    const experiencePoints = this.editElements.experiencePoints.value;
+  updateView() {
+    this.showElements.text.textContent = ChallengeRating.text;
+  }
 
-    const text = `${challengeRating} (${experiencePoints} XP)`;
-    this.showElements.text.textContent = text;
+  exportToHtml() {
+    return ChallengeRating.toHtml();
   }
 }
 

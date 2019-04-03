@@ -30,10 +30,11 @@
     </help-tooltip>
         
     <div class="hit-points-edit-section__hit-die-calculation-container">
-      <label id="hit-die-leading-text" class="hit-points-edit-section__hit_die-leading-text">(</label>
       <label id="hit-die-quantity-label" class="hit-points-edit-section__hit-die-quantity-label" for="hit-die-quantity-input">Hit Die Quantity:</label>
-      <input id="hit-die-quantity-input" class="hit-points-edit-section__hit-die-quantity-input section__number-input section__small-number-input" is="integer-input" type="number" name="hit-die-quantity" pretty-name="Hit Die Quantity" value="1" min="1" max="999" required />
       <label id="hit-die-size-label" class="hit-points-edit-section__hit-die-size-label" for="hit-die-size-input">Hit Die Size:</label>
+      <label id="constitution-hit-points-label" class="hit-points-edit-section__constitution-hit-points-label">CON HP:</label>
+      <label id="hit-die-leading-text-label" class="hit-points-edit-section__hit_die-leading-text-label">(</label>
+      <input id="hit-die-quantity-input" class="hit-points-edit-section__hit-die-quantity-input section__number-input section__small-number-input" is="integer-input" type="number" name="hit-die-quantity" pretty-name="Hit Die Quantity" value="1" min="1" max="999" required />
       <select id="hit-die-size-input" class="hit-points-edit-section__hit-die-size-input section__select" name="hit-die-size">
         <option value="4">d4</option>
         <option value="6">d6</option>
@@ -42,7 +43,8 @@
         <option value="12">d12</option>
         <option value="20">d20</option>
       </select>
-      <label id="hit-die-trailing-text" class="hit-points-edit-section__hit-die-trailing-text">+ 0 )</label>
+      <label id="constitution-hit-points-value-label" class="hit-points-edit-section__constitution-hit-points-value-label">+ 0</label>
+      <label id="hit-die-trailing-text-label" class="hit-points-edit-section__hit-die-trailing-text-label">)</label>
     </div>
   </div>
   <div class="section__save-button-container">

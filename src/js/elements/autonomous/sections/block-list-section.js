@@ -1,5 +1,4 @@
 import * as sectionModule from './section.js';
-import { createPropertyBlock } from '../../../helpers/export-helpers.js';
 
 export class BlockListSection extends sectionModule.Section {
   static get templatePaths() {
@@ -9,14 +8,12 @@ export class BlockListSection extends sectionModule.Section {
   }
 
   constructor(templatePaths, 
-    itemType,
-    showElements = EditableBlockListShowElements,
-    editElements = EditableBlockListEditElements) {
-
+    listModel,
+    showElements = BlockListShowSection,
+    editElements = BlockListEditSection) {
     super(templatePaths, showElements, editElements);
 
-    this.itemType = itemType;
-
+    this.listModel = listModel;
     this.heading = this.shadowRoot.getElementById('heading');
   }
 
@@ -29,13 +26,13 @@ export class BlockListSection extends sectionModule.Section {
   }
 
   addBlock(name = null, text = null) {
-    const block = this.editElements.editableList.addBlock(this.itemType);
+    const block = this.editElements.editableList.addBlock(this.listModel.singleName);
 
     if (name) {
       block.name = name;
     }
     if (text) {
-      block.text = text;
+      block.originalText = text;
     }
   }
 
@@ -82,8 +79,13 @@ export class BlockListSection extends sectionModule.Section {
     this.editElements.editableList.validate(this.errorMessages);
   }
 
-  updateShowSection() {
-    const blocks = this.editElements.editableList.blocks;
+  updateModel() {
+    this.listModel.blocks = 
+      this.editElements.editableList.blocks.map(block => block.toModel());
+  }
+
+  updateView() {
+    const blocks = this.listModel.blocks;
 
     this.showElements.displayList.clear();
     for (const block of blocks) {
@@ -98,29 +100,23 @@ export class BlockListSection extends sectionModule.Section {
   }
 
   reparse() {
-    if (this.mode !== 'edit') {
+    if (this.mode === 'show') {
       this.checkForErrors();
+      this.updateModel();
 
-      for (const [index, editableBlock] of this.editElements.editableList.blocks.entries()) {
+      for (const [index, blockModel] of this.listModel.blocks.entries()) {
         const displayBlock = this.showElements.displayList.blocks[index];
-        displayBlock.text = editableBlock.parsedText;
+        displayBlock.text = blockModel.parsedText;
       }
     }
   }
 
   exportToHtml() {
-    const fragment = document.createDocumentFragment();
-
-    for (const block of this.showElements.displayList.blocks) {
-      const propertyBlock = createPropertyBlock(block.name, block.text);
-      fragment.appendChild(propertyBlock);
-    }
-
-    return fragment;
+    return this.listModel.toHtml();
   }
 }
 
-export class EditableBlockListShowElements extends sectionModule.ShowElements {
+export class BlockListShowSection extends sectionModule.ShowElements {
   constructor(shadowRoot) {
     super(shadowRoot);
 
@@ -129,7 +125,7 @@ export class EditableBlockListShowElements extends sectionModule.ShowElements {
   }
 }
 
-export class EditableBlockListEditElements extends sectionModule.EditElements {
+export class BlockListEditSection extends sectionModule.EditElements {
   constructor(shadowRoot) {
     super(shadowRoot);
 

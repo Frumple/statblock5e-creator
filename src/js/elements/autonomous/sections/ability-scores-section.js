@@ -1,7 +1,7 @@
 import * as sectionModule from './section.js';
 import Abilities from '../../../stats/abilities.js';
 import ProficiencyBonus from '../../../stats/proficiency-bonus.js';
-import { formatModifier } from '../../../helpers/string-formatter.js';
+
 
 export default class AbilityScoresSection extends sectionModule.Section {
   static get elementName() { return 'ability-scores-section'; }
@@ -24,49 +24,13 @@ export default class AbilityScoresSection extends sectionModule.Section {
   }
 
   onInputAbilityScore(key) {
-    const score = this.editElements.score[key].valueAsInt;
-    
-    if (! isNaN(score)) {
-      Abilities.abilities[key].score = score;
-      const modifier = Abilities.abilities[key].modifier;
-
-      this.updateEditSectionModifier(key, modifier);
-    
-      const changeEvent = new CustomEvent('abilityScoreChanged', {
-        bubbles: true,
-        composed: true,
-        detail: {
-          abilityName: key,
-          abilityScore: score,
-          abilityModifier: modifier
-        }
-      });
-      this.dispatchEvent(changeEvent);
-    }
-  }
-
-  updateEditSectionModifier(key, modifier) {
-    const modifierElement = this.editElements.modifier[key];
-    const formattedModifier = AbilityScoresSection.formatAbilityModifier(modifier);
-    modifierElement.textContent = formattedModifier;
+    this.updateModelAbilityScore(key);
+    this.updateViewAbility(key);    
   }  
 
   onInputProficiencyBonus() {
-    const proficiencyBonus = this.editElements.proficiencyBonus.valueAsInt;
-
-    if (! isNaN(proficiencyBonus)) {
-      ProficiencyBonus.proficiencyBonus = proficiencyBonus;
-    
-      const changeEvent = new CustomEvent('proficiencyBonusChanged', {
-        bubbles: true,
-        composed: true,
-        detail: {
-          proficiencyBonus: proficiencyBonus
-        }
-      });
-      this.dispatchEvent(changeEvent);
-    }
-  }
+    this.updateModelProficiencyBonus();
+  } 
 
   checkForErrors() {
     for (const key of Abilities.keys) {
@@ -75,26 +39,66 @@ export default class AbilityScoresSection extends sectionModule.Section {
     this.editElements.proficiencyBonus.validate(this.errorMessages);
   }
 
-  updateShowSection() {
+  updateModel() {
     for (const key of Abilities.keys) {
-      this.updateShowSectionAbilities(key);
+      this.updateModelAbilityScore(key);
+    }
+
+    this.updateModelProficiencyBonus();
+  }
+
+  updateModelAbilityScore(key) {
+    const score = this.editElements.score[key].valueAsInt;
+
+    if (! isNaN(score)) {
+      Abilities.abilities[key].score = score;
+      this.dispatchAbilityScoreChangedEvent(key);
     }
   }
 
-  updateShowSectionAbilities(key) {
-    const scoreShowElement = this.showElements.score[key];
-    const modifierShowElement = this.showElements.modifier[key];
-    const ability = Abilities.abilities[key];
-    const score = ability.score;
-    const modifier = ability.modifier;
-
-    scoreShowElement.textContent = score;
-    modifierShowElement.textContent = AbilityScoresSection.formatAbilityModifier(modifier);
+  dispatchAbilityScoreChangedEvent(key) {
+    const changeEvent = new CustomEvent('abilityScoreChanged', {
+      bubbles: true,
+      composed: true,
+      detail: {
+        abilityName: key
+      }
+    });
+    this.dispatchEvent(changeEvent);
   }
 
-  static formatAbilityModifier(modifier) {
-    const formattedModifier = formatModifier(modifier);
-    return `(${formattedModifier})`;
+  updateModelProficiencyBonus() {
+    const proficiencyBonus = this.editElements.proficiencyBonus.valueAsInt;
+
+    if (! isNaN(proficiencyBonus)) {
+      ProficiencyBonus.proficiencyBonus = proficiencyBonus;      
+      this.dispatchProficiencyBonusChangedEvent();
+    }
+  }
+
+  dispatchProficiencyBonusChangedEvent() {
+    const changeEvent = new CustomEvent('proficiencyBonusChanged', {
+      bubbles: true,
+      composed: true,
+      detail: {}
+    });
+    this.dispatchEvent(changeEvent);
+  }
+
+  updateView() {
+    for (const key of Abilities.keys) {
+      this.updateViewAbility(key);
+    }
+  }
+
+  updateViewAbility(key) {
+    const ability = Abilities.abilities[key];
+    const formattedModifier = ability.formattedModifier;
+
+    this.editElements.modifier[key].textContent = formattedModifier;
+
+    this.showElements.score[key].textContent = ability.score;
+    this.showElements.modifier[key].textContent = formattedModifier;
   }
 
   exportToHtml() {

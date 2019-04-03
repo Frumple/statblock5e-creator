@@ -45,29 +45,33 @@ export default class StatBlock extends CustomAutonomousElement {
   }
   
   onAbilityScoreChanged() {
-    let abilityName = event.detail.abilityName;
+    const abilityName = event.detail.abilityName;
   
     if (abilityName === 'constitution') {
-      this.topStats.basicStats.hitPointsSection.updateHitPoints();
+      this.topStats.basicStats.hitPointsSection.updateView();
     } else if (abilityName === 'wisdom') {
-      this.topStats.advancedStats.sensesSection.updatePassivePerception();
+      this.topStats.advancedStats.sensesSection.updateView();
     }
 
-    this.topStats.advancedStats.savingThrowsSection.updateModifiers(abilityName);
-    this.topStats.advancedStats.skillsSection.updateModifiers(abilityName);
+    this.topStats.advancedStats.savingThrowsSection.updateViewSavingThrow(abilityName);
+    this.topStats.advancedStats.savingThrowsSection.updateViewText();
+
+
+    this.topStats.advancedStats.skillsSection.updateViewSkillsByAbility(abilityName);
+    this.topStats.advancedStats.skillsSection.updateViewText();
   }
 
   onProficiencyBonusChanged() {
-    this.topStats.advancedStats.savingThrowsSection.updateModifiers();
-    this.topStats.advancedStats.skillsSection.updateModifiers();
-    this.topStats.advancedStats.sensesSection.updatePassivePerception();
+    this.topStats.advancedStats.savingThrowsSection.updateView();
+    this.topStats.advancedStats.skillsSection.updateView();
+    this.topStats.advancedStats.sensesSection.updateView();
   }
 
   onSkillChanged() {
-    let skillName = event.detail.skillName;
+    const skillName = event.detail.skillName;
   
     if (skillName === 'perception') {
-      this.topStats.advancedStats.sensesSection.updatePassivePerception();
+      this.topStats.advancedStats.sensesSection.updateView();
     }
   }
 

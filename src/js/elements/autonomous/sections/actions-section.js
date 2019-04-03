@@ -1,4 +1,5 @@
 import * as blockListSectionModule from './block-list-section.js';
+import Actions from '../../../stats/lists/block/actions.js';
 import isRunningInNode from '../../../helpers/is-running-in-node.js';
 
 export default class ActionsSection extends blockListSectionModule.BlockListSection {
@@ -11,7 +12,7 @@ export default class ActionsSection extends blockListSectionModule.BlockListSect
 
   constructor() {
     super(ActionsSection.templatePaths,
-          'Action');
+          Actions);
 
     this.empty = true;
   }
@@ -27,15 +28,5 @@ export default class ActionsSection extends blockListSectionModule.BlockListSect
 
       this.isInitialized = true;
     }
-  }
-
-  exportToHtml() {
-    const fragment = super.exportToHtml();
-
-    const sectionHeading = document.createElement('h3');
-    sectionHeading.textContent = 'Actions';
-    fragment.insertBefore(sectionHeading, fragment.firstElementChild);
-
-    return fragment;
   }
 }

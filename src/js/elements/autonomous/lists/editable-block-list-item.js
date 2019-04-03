@@ -1,5 +1,6 @@
 import DragAndDropListItem from './drag-and-drop-list-item.js';
 import CustomBuiltinElementMixins from '../../../helpers/custom-builtin-element-mixins.js';
+import BlockModel from '../../../stats/lists/block/block-model.js';
 
 export default class EditableBlockListItem extends DragAndDropListItem {
   static get elementName() { return 'editable-block-list-item'; }
@@ -53,24 +54,24 @@ export default class EditableBlockListItem extends DragAndDropListItem {
     return this._itemType;
   }
 
-  get name() {
-    return this.nameElement.value;
-  }
-
   set name(name) {
     this.nameElement.value = name;
   }
 
-  get text() {
-    return this.textElement.text;
+  get name() {
+    return this.nameElement.value;
+  }
+
+  set originalText(text) {
+    this.textElement.value = text;
+  }
+
+  get originalText() {
+    return this.textElement.value;
   }
 
   get parsedText() {
     return this.textElement.parsedText;
-  }
-
-  set text(text) {
-    this.textElement.value = text;
   }
 
   validate(errorMessages) {
@@ -80,5 +81,9 @@ export default class EditableBlockListItem extends DragAndDropListItem {
 
   remove() {
     this.list.removeChild(this);
+  }
+
+  toModel() {
+    return new BlockModel(this.name, this.originalText, this.parsedText);
   }
 }

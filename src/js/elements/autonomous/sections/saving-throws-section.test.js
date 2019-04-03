@@ -120,7 +120,7 @@ describe('when the show section is clicked', () => {
         } else {
           expect(savingThrow.override).toBe(savingThrowOverride);
         }
-        expect(savingThrow.calculateModifier()).toBe(expectedModifier);
+        expect(savingThrow.modifier).toBe(expectedModifier);
 
         const formattedModifier = formatModifier(expectedModifier);
         expect(savingThrowElements.modifier).toHaveTextContent(formattedModifier);

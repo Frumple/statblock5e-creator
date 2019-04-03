@@ -134,9 +134,9 @@ describe('when the show section is clicked', () => {
         } else {
           expect(skill.override).toBe(skillOverride);
         }        
-        expect(skill.calculateModifier()).toBe(expectedModifier);
+        expect(skill.modifier).toBe(expectedModifier);
 
-        let formattedModifier = formatModifier(expectedModifier);
+        const formattedModifier = formatModifier(expectedModifier);
         expect(skillElements.modifier).toHaveTextContent(formattedModifier);
 
         skillsSection.editElements.submitForm();
@@ -178,30 +178,30 @@ describe('when the show section is clicked', () => {
         ProficiencyBonus.proficiencyBonus = 3;
 
         if (athletics) {
-          let elements = skillsSection.editElements.skill['athletics'];
+          const elements = skillsSection.editElements.skill['athletics'];
           elements.enable.click();
           elements.proficient.click();
         }
 
         if (history) {
-          let elements = skillsSection.editElements.skill['history'];
+          const elements = skillsSection.editElements.skill['history'];
           elements.enable.click();
           elements.proficient.click();          
         }
 
         if (insight) {
-          let elements = skillsSection.editElements.skill['insight'];
+          const elements = skillsSection.editElements.skill['insight'];
           elements.enable.click();
           inputValueAndTriggerEvent(elements.override, -3);
         }
 
         if (persuasion) {
-          let elements = skillsSection.editElements.skill['persuasion'];
+          const elements = skillsSection.editElements.skill['persuasion'];
           elements.enable.click();
         }
 
         if (sleightOfHand) {
-          let elements = skillsSection.editElements.skill['sleight-of-hand'];
+          const elements = skillsSection.editElements.skill['sleight-of-hand'];
           elements.enable.click();
           elements.proficient.click();
           inputValueAndTriggerEvent(elements.override, 0);

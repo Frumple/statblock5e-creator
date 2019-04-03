@@ -1,4 +1,5 @@
 import * as blockListSectionModule from './block-list-section.js';
+import LegendaryActions from '../../../stats/lists/block/legendary-actions.js';
 
 export default class LegendaryActionsSection extends blockListSectionModule.BlockListSection {
   static get elementName() { return 'legendary-actions-section'; }
@@ -10,7 +11,7 @@ export default class LegendaryActionsSection extends blockListSectionModule.Bloc
 
   constructor() {
     super(LegendaryActionsSection.templatePaths,
-          'Legendary Action',
+          LegendaryActions,
           LegendaryActionsSectionShowElements,
           LegendaryActionsSectionEditElements);
 
@@ -50,36 +51,29 @@ export default class LegendaryActionsSection extends blockListSectionModule.Bloc
     this.editElements.description.validate(this.errorMessages);
   }
 
-  updateShowSection() {
-    super.updateShowSection();
+  updateModel() {
+    super.updateModel();
 
-    this.showElements.description.innerHTMLSanitized = this.editElements.description.parsedText;
+    this.listModel.originalDescription = this.editElements.description.originalText;
+    this.listModel.parsedDescription = this.editElements.description.parsedText;
+  }
+
+  updateView() {
+    super.updateView();
+
+    this.showElements.description.innerHTMLSanitized = this.listModel.parsedDescription;
   }
 
   reparse() {
     super.reparse();
 
-    if (this.mode !== 'edit') {
-      this.showElements.description.innerHTMLSanitized = this.editElements.description.parsedText;
+    if (this.mode === 'show') {
+      this.showElements.description.innerHTMLSanitized = this.listModel.parsedDescription;
     }
-  }
-
-  exportToHtml() {
-    const fragment = super.exportToHtml();
-
-    const description = document.createElement('p');
-    description.innerHTML = this.showElements.description.innerHTMLSanitized;
-    fragment.insertBefore(description, fragment.firstElementChild);
-
-    const sectionHeading = document.createElement('h3');
-    sectionHeading.textContent = 'Legendary Actions';
-    fragment.insertBefore(sectionHeading, fragment.firstElementChild);
-
-    return fragment;
   }
 }
 
-class LegendaryActionsSectionShowElements extends blockListSectionModule.EditableBlockListShowElements {
+class LegendaryActionsSectionShowElements extends blockListSectionModule.BlockListShowSection {
   constructor(shadowRoot) {
     super(shadowRoot);
 
@@ -87,7 +81,7 @@ class LegendaryActionsSectionShowElements extends blockListSectionModule.Editabl
   }
 }
 
-class LegendaryActionsSectionEditElements extends blockListSectionModule.EditableBlockListEditElements {
+class LegendaryActionsSectionEditElements extends blockListSectionModule.BlockListEditSection {
   constructor(shadowRoot) {
     super(shadowRoot);
 

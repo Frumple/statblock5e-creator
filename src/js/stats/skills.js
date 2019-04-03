@@ -1,8 +1,12 @@
 import Abilities from './abilities.js';
 import ProficiencyBonus from './proficiency-bonus.js';
+import { formatModifier } from '../helpers/string-formatter.js';
+import { createPropertyLine } from '../helpers/export-helpers.js';
 
 class Skills {
   constructor() {
+    this.headingName = 'Skills';
+
     this.skills = {
       'acrobatics' : new Skill('Acrobatics', 'dexterity'),
       'animal-handling' : new Skill('Animal Handling', 'wisdom'),
@@ -39,6 +43,25 @@ class Skills {
   get entries() {
     return Object.entries(this.skills);
   }
+
+  get text() {
+    const list = [];
+
+    for (const key of this.keys) {
+      const skill = this.skills[key];
+      const isEnabled = skill.isEnabled;
+      
+      if (isEnabled) {
+        list.push(skill.text);        
+      }
+    }
+    
+    return list.join(', ');
+  }
+
+  toHtml() {
+    return createPropertyLine(this.headingName, this.text);
+  }
 }
 
 class Skill {
@@ -58,6 +81,10 @@ class Skill {
     return Abilities.abilities[this.abilityName];
   }
 
+  get text() {
+    return `${this.prettyName} ${this.formattedModifier}`;
+  }
+
   get passiveScore() {
     let passiveScore = 10;
 
@@ -75,10 +102,10 @@ class Skill {
     return passiveScore;
   }
 
-  calculateModifier(checkIfEnabled = true) {
+  get modifier() {
     let skillModifier = 0;
 
-    if (! checkIfEnabled || this.isEnabled) {
+    if (this.isEnabled) {
       if (! isNaN(this.override)) {
         return this.override;
       }
@@ -90,6 +117,10 @@ class Skill {
     skillModifier += this.ability.modifier;
     
     return skillModifier;
+  }
+
+  get formattedModifier() {
+    return formatModifier(this.modifier);
   }
 }
 

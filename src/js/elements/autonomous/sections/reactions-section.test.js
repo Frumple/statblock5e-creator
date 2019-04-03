@@ -1,4 +1,5 @@
 import ReactionsSection from './reactions-section.js';
+import Reactions from '../../../stats/lists/block/reactions.js';
 import Creature from '../../../stats/creature.js';
 
 import * as TestCustomElements from '../../../helpers/test/test-custom-elements.js';
@@ -18,6 +19,7 @@ beforeAll(async() => {
 
 beforeEach(() => {
   Creature.reset();
+  Reactions.reset();
 
   reactionsSection = new ReactionsSection();
   TestCustomElements.initializeSection(reactionsSection);

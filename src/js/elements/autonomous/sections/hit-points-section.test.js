@@ -76,9 +76,9 @@ describe('when the show section is clicked', () => {
         ({hitDieQuantity, hitDieSize, constitutionScore, expectedConstitutionHitPoints, expectedHitPoints, expectedText}) => {
           inputValueAndTriggerEvent(hitPointsSection.editElements.hitDieQuantity, hitDieQuantity);
           inputValueAndTriggerEvent(hitPointsSection.editElements.hitDieSize, hitDieSize);
-
           Abilities.abilities['constitution'].score = constitutionScore;
-          hitPointsSection.updateHitPoints();
+
+          hitPointsSection.updateView();
 
           expect(HitPoints.useHitDie).toBe(true);
           expect(HitPoints.hitDieQuantity).toBe(hitDieQuantity);
@@ -86,10 +86,10 @@ describe('when the show section is clicked', () => {
           expect(HitPoints.constitutionHitPoints).toBe(expectedConstitutionHitPoints);
           expect(HitPoints.hitPoints).toBe(expectedHitPoints);
 
-          let constitutionHitPointsOperator = formatModifierOperator(expectedConstitutionHitPoints);
-          let constitutionHitPointsNumber = formatModifierNumber(expectedConstitutionHitPoints);
+          const constitutionHitPointsOperator = formatModifierOperator(expectedConstitutionHitPoints);
+          const constitutionHitPointsNumber = formatModifierNumber(expectedConstitutionHitPoints);
 
-          expect(hitPointsSection.editElements.trailingText).toHaveTextContent(`${constitutionHitPointsOperator} ${constitutionHitPointsNumber} )`);
+          expect(hitPointsSection.editElements.constitutionHitPoints).toHaveTextContent(`${constitutionHitPointsOperator} ${constitutionHitPointsNumber}`);
           expect(hitPointsSection.editElements.hitPoints.value).toBe(`${expectedHitPoints}`);
 
           hitPointsSection.editElements.submitForm();
@@ -145,7 +145,8 @@ describe('when the show section is clicked', () => {
         inputValueAndTriggerEvent(hitPointsSection.editElements.hitDieQuantity, 10);
         inputValueAndTriggerEvent(hitPointsSection.editElements.hitDieSize, 12);
         Abilities.abilities['constitution'].score = 19;
-        hitPointsSection.updateHitPoints();
+
+        hitPointsSection.updateView();
 
         expect(HitPoints.useHitDie).toBe(true);
         expect(HitPoints.hitDieQuantity).toBe(10);

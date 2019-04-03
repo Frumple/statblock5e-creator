@@ -1,4 +1,5 @@
 import SpecialTraitsSection from './special-traits-section.js';
+import SpecialTraits from '../../../stats/lists/block/special-traits.js';
 import Creature from '../../../stats/creature.js';
 
 import * as TestCustomElements from '../../../helpers/test/test-custom-elements.js';
@@ -15,6 +16,7 @@ beforeAll(async() => {
 
 beforeEach(() => {
   Creature.reset();
+  SpecialTraits.reset();
 
   specialTraitsSection = new SpecialTraitsSection();
   TestCustomElements.initializeSection(specialTraitsSection);

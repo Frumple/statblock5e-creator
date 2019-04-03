@@ -1,7 +1,6 @@
 import * as propertyLineSectionModule from './property-line-section.js';
 import Skills from '../../../stats/skills.js';
 import { inputValueAndTriggerEvent } from '../../../helpers/element-helpers.js';
-import { formatModifier } from '../../../helpers/string-formatter.js';
 
 export default class SkillsSection extends propertyLineSectionModule.PropertyLineSection {
   static get elementName() { return 'skills-section'; }
@@ -14,8 +13,7 @@ export default class SkillsSection extends propertyLineSectionModule.PropertyLin
   constructor() {
     super(SkillsSection.templatePaths,
           SkillsShowElements,
-          SkillsEditElements,
-          'Skills');
+          SkillsEditElements);
 
     this.empty = true;
   }
@@ -46,7 +44,6 @@ export default class SkillsSection extends propertyLineSectionModule.PropertyLin
   onInputSkillEnabled(key) {
     const labelDisabledClass = 'section__label_disabled';
     const elements = this.editElements.skill[key];
-    Skills.skills[key].isEnabled = elements.enable.checked;
 
     if (elements.enable.checked) {
       elements.label.classList.remove(labelDisabledClass);
@@ -61,21 +58,23 @@ export default class SkillsSection extends propertyLineSectionModule.PropertyLin
       inputValueAndTriggerEvent(elements.override, '');
     }
     
+    this.updateModelSkillEnabled(key);
+    this.updateViewSkill(key);
+    this.updateViewText();
     this.dispatchSkillChangedEvent(key);
   }
 
   onInputSkillProficiency(key) {
-    Skills.skills[key].isProficient = this.editElements.skill[key].proficient.checked;
-
-    this.updateEditSectionModifier(key);
+    this.updateModelSkillProficiency(key);
+    this.updateViewSkill(key);
+    this.updateViewText();
     this.dispatchSkillChangedEvent(key);
   }
 
   onInputSkillOverride(key) {
-    const overrideValue = this.editElements.skill[key].override.valueAsInt;
-    Skills.skills[key].override = overrideValue;
-
-    this.updateEditSectionModifier(key);
+    this.updateModelSkillOverride(key);
+    this.updateViewSkill(key);
+    this.updateViewText();  
     this.dispatchSkillChangedEvent(key);
   }
 
@@ -90,28 +89,53 @@ export default class SkillsSection extends propertyLineSectionModule.PropertyLin
     this.dispatchEvent(changeEvent);
   }
 
-  updateModifiers(abilityName = null) {
-    for (const [key, value] of Skills.entries) {      
-      if (abilityName === null || abilityName === value.abilityName) {
-        this.updateEditSectionModifier(key);
-      }
-    }
-
-    this.updateShowSection();
-  }
-
-  updateEditSectionModifier(key) {
-    const skillModifier = Skills.skills[key].calculateModifier(false);
-    const formattedSkillModifier = formatModifier(skillModifier);
-    this.editElements.skill[key].modifier.textContent = formattedSkillModifier;
-  }
-
   checkForErrors() {
     return;
   }
 
-  updateShowSection() {
-    const text = this.showSectionText;
+  updateModel() {
+    for (const key of Skills.keys) {
+      this.updateModelSkillEnabled(key);
+      this.updateModelSkillProficiency(key);
+      this.updateModelSkillOverride(key);
+    }
+  }
+
+  updateModelSkillEnabled(key) {
+    Skills.skills[key].isEnabled = this.editElements.skill[key].enable.checked;
+  }
+
+  updateModelSkillProficiency(key) {
+    Skills.skills[key].isProficient = this.editElements.skill[key].proficient.checked;
+  }
+
+  updateModelSkillOverride(key) {
+    Skills.skills[key].override = this.editElements.skill[key].override.valueAsInt;
+  }
+
+  updateView() {
+    for (const key of Skills.keys) {
+      this.updateViewSkill(key);
+    }
+
+    this.updateViewText();
+  }
+
+  updateViewSkillsByAbility(abilityName) {
+    for (const [key, value] of Skills.entries) {
+      if (abilityName === value.abilityName) {
+        this.updateViewSkill(key);
+      }
+    }
+  }
+
+  updateViewSkill(key) {
+    const skill = Skills.skills[key];
+    this.editElements.skill[key].modifier.textContent = skill.formattedModifier;
+  }
+
+  updateViewText() {
+    const text = Skills.text;
 
     if (text === '') {
       this.empty = true;
@@ -122,25 +146,8 @@ export default class SkillsSection extends propertyLineSectionModule.PropertyLin
     this.showElements.text.textContent = text;
   }
 
-  get showSectionText() {
-    let text = '';
-
-    for (const [key, value] of Skills.entries) {
-      const skill = Skills.skills[key];
-      const isEnabled = skill.isEnabled;
-      
-      if (isEnabled) {
-        const skillModifier = formatModifier(skill.calculateModifier());
-
-        if (text === '') {
-          text += `${value.prettyName} ${skillModifier}`;
-        } else {
-          text += `, ${value.prettyName} ${skillModifier}`;
-        }
-      }
-    }
-    
-    return text;
+  exportToHtml() {
+    return Skills.toHtml();
   }
 }
 

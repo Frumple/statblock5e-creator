@@ -1,4 +1,5 @@
 import * as propertyLineSectionModule from './property-line-section.js';
+import ArmorClass from '../../../stats/armor-class.js';
 
 export default class ArmorClassSection extends propertyLineSectionModule.PropertyLineSection {
   static get elementName() { return 'armor-class-section'; }
@@ -11,18 +12,17 @@ export default class ArmorClassSection extends propertyLineSectionModule.Propert
   constructor() {
     super(ArmorClassSection.templatePaths,
           ArmorClassShowElements,
-          ArmorClassEditElements,
-          'Armor Class');
+          ArmorClassEditElements);
   }
 
   connectedCallback() {
     if (this.isConnected && ! this.isInitialized) {
-      this.editElements.useCustom.disableElementsWhenChecked(
+      this.editElements.useCustomText.disableElementsWhenChecked(
         this.editElements.armorClass,
         this.editElements.armorType,
-        this.editElements.shield);
+        this.editElements.hasShield);
         
-      this.editElements.useCustom.enableElementsWhenChecked(
+      this.editElements.useCustomText.enableElementsWhenChecked(
         this.editElements.customText);
 
       this.isInitialized = true;
@@ -33,42 +33,33 @@ export default class ArmorClassSection extends propertyLineSectionModule.Propert
     this.editElements.armorType.value = this.editElements.armorType.value.trim();
     this.editElements.customText.value = this.editElements.customText.value.trim();    
 
-    if (this.editElements.useCustom.checked) {      
+    if (this.editElements.useCustomText.checked) {      
       this.editElements.customText.validate(this.errorMessages);
     } else {
       this.editElements.armorClass.validate(this.errorMessages);
     }
   }
 
-  updateShowSection() {    
-    const useCustom = this.editElements.useCustom.checked;
-    const customText = this.editElements.customText.parsedText;
+  updateModel() {
+    ArmorClass.armorClass = this.editElements.armorClass.valueAsInt;
+    ArmorClass.armorType = this.editElements.armorType.value;
+    ArmorClass.hasShield = this.editElements.hasShield.checked;
 
-    if (useCustom) {
-      this.showElements.text.innerHTMLSanitized = customText;
+    ArmorClass.useCustomText = this.editElements.useCustomText.checked;
+    ArmorClass.originalCustomText = this.editElements.customText.value;
+    ArmorClass.parsedCustomText = this.editElements.customText.parsedText;
+  }
+
+  updateView() {    
+    if (ArmorClass.useCustomText) {
+      this.showElements.text.innerHTMLSanitized = ArmorClass.parsedCustomText;
     } else {
-      this.showElements.text.textContent = this.normalShowSectionText;
+      this.showElements.text.textContent = ArmorClass.normalText;
     }    
   }
 
-  get normalShowSectionText() {
-    const armorClass = this.editElements.armorClass.value;
-    const armorType = this.editElements.armorType.value;
-    const shield = this.editElements.shield.checked;
-
-    if (armorType) {
-      if (shield) {
-        return `${armorClass} (${armorType}, shield)`;
-      } else {
-        return `${armorClass} (${armorType})`;
-      }
-    } else {
-      if (shield) {
-        return `${armorClass} (shield)`;
-      } else {
-        return armorClass;
-      }
-    }
+  exportToHtml() {
+    return ArmorClass.toHtml();
   }
 }
 
@@ -83,13 +74,13 @@ class ArmorClassEditElements extends propertyLineSectionModule.PropertyLineEditE
     super(shadowRoot);
     this.armorClass = shadowRoot.getElementById('armor-class-input');
     this.armorType = shadowRoot.getElementById('armor-type-input');
-    this.shield = shadowRoot.getElementById('shield-input');
-    this.useCustom = shadowRoot.getElementById('use-custom-input');
-    this.customText = shadowRoot.getElementById('custom-input');
+    this.hasShield = shadowRoot.getElementById('shield-input');
+    this.useCustomText = shadowRoot.getElementById('use-custom-text-input');
+    this.customText = shadowRoot.getElementById('custom-text-input');
   }
 
   get initiallySelectedElement() {
-    if (this.useCustom.checked) {
+    if (this.useCustomText.checked) {
       return this.customText;
     }
     return this.armorClass;

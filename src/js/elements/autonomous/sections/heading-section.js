@@ -1,6 +1,4 @@
 import * as sectionModule from './section.js';
-import { capitalizeFirstLetter } from '../../../helpers/string-formatter.js';
-
 import Creature from '../../../stats/creature.js';
 
 export default class HeadingSection extends sectionModule.Section {
@@ -69,32 +67,23 @@ export default class HeadingSection extends sectionModule.Section {
     this.editElements.type.validate(this.errorMessages);
   }
 
-  updateShowSection() {
-    let fullName = this.editElements.fullName.value;
-    const size = this.editElements.size.value;
-    const type = this.editElements.type.value;
-    const alignment = this.editElements.alignment.value;
+  updateModel() {
+    Creature.fullName = this.editElements.fullName.value;
+    Creature.shortName = this.editElements.shortName.value;
+    Creature.isProperNoun = this.editElements.properNoun.checked;
+    Creature.size = this.editElements.size.value;
+    Creature.type = this.editElements.type.value;
+    Creature.alignment = this.editElements.alignment.value;
+  }
 
-    fullName = capitalizeFirstLetter(fullName);
-    const subtitle = `${size} ${type}, ${alignment}`;
-
-    this.editElements.fullName.value = fullName;
-    this.showElements.title.textContent = fullName;
-    this.showElements.subtitle.textContent = subtitle;
+  updateView() {
+    this.editElements.fullName.value = Creature.fullName;
+    this.showElements.title.textContent = Creature.title;
+    this.showElements.subtitle.textContent = Creature.subtitle;
   }
 
   exportToHtml() {
-    const creatureHeading = document.createElement('creature-heading');
-    const title = document.createElement('h1');
-    const subtitle = document.createElement('h2');
-
-    title.textContent = this.showElements.title.textContent;
-    subtitle.textContent = this.showElements.subtitle.textContent;
-
-    creatureHeading.appendChild(title);
-    creatureHeading.appendChild(subtitle);
-
-    return creatureHeading;
+    return Creature.toHtml();
   }
 }
 

@@ -7,16 +7,15 @@ export default class PropertyListSection extends propertyLineSectionModule.Prope
       'src/html/elements/autonomous/sections/property-list-section.html');
   }
 
-  constructor(templatePaths, headingName, itemType) {
+  constructor(templatePaths, listModel) {
     super(templatePaths,
           PropertyListShowElements,
-          PropertyListEditElements,
-          headingName);
+          PropertyListEditElements);
 
-    this.showElements.heading.textContent = headingName;
-    this.editElements.label.textContent = `${headingName}:`;
+    this.listModel = listModel;
 
-    this.itemType = itemType;
+    this.showElements.heading.textContent = listModel.headingName;
+    this.editElements.label.textContent = `${listModel.headingName}:`;
   }
 
   connectedCallback() {
@@ -38,7 +37,7 @@ export default class PropertyListSection extends propertyLineSectionModule.Prope
   }
 
   onPropertyListItemRemoved(event) {
-    let itemText = event.detail.itemText;
+    const itemText = event.detail.itemText;
     this.editElements.dataList.setOptionEnabled(itemText, true);
   }
 
@@ -48,9 +47,9 @@ export default class PropertyListSection extends propertyLineSectionModule.Prope
 
     this.errorMessages.clear();
     if (text === '') {
-      this.errorMessages.add(this.editElements.input, `Cannot add a blank ${this.itemType}.`);
+      this.errorMessages.add(this.editElements.input, `Cannot add a blank ${this.listModel.singleName}.`);
     } else if(this.editElements.propertyList.contains(text)) {
-      this.errorMessages.add(this.editElements.input, `Cannot add a duplicate ${this.itemType}.`);
+      this.errorMessages.add(this.editElements.input, `Cannot add a duplicate ${this.listModel.singleName}.`);
     }
     if (this.errorMessages.any) {
       this.errorMessages.focusOnFirstErrorField();
@@ -71,15 +70,19 @@ export default class PropertyListSection extends propertyLineSectionModule.Prope
   checkForErrors() {
     const input = this.editElements.input;
     if (input.value !== '') {
-      const message = `Cannot save while the ${this.itemType} field contains text.\nClear or add the field, then try again.`;
+      const message = `Cannot save while the ${this.listModel.singleName} field contains text.\nClear or add the field, then try again.`;
       this.errorMessages.add(input, message);
     }
   }
 
-  updateShowSection() {
+  updateModel() {
+    this.listModel.items = this.editElements.propertyList.itemsAsText;
+  }
+
+  updateView() {
     this.editElements.input.value = '';
 
-    const text = this.showSectionText;
+    const text = this.listModel.text;
 
     if (text === '') {
       this.empty = true;
@@ -90,17 +93,8 @@ export default class PropertyListSection extends propertyLineSectionModule.Prope
     this.showElements.text.textContent = text;
   }
 
-  get showSectionText() {
-    let text = '';
-    for (const itemText of this.editElements.propertyList.itemsAsText) {
-      if (text === '') {
-        text += itemText;
-      } else {
-        text += `, ${itemText}`;
-      }
-    }
-
-    return text;
+  exportToHtml() {
+    return this.listModel.toHtml();
   }
 }
 

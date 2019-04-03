@@ -1,3 +1,5 @@
+import { formatModifier } from '../helpers/string-formatter.js';
+
 class Abilities {
   constructor() {
     this.abilities = {
@@ -38,6 +40,10 @@ class Ability {
 
   get modifier() {
     return Math.floor((this.score - 10) / 2);
+  }
+
+  get formattedModifier() {
+    return `(${formatModifier(this.modifier)})`;
   }
 }
 

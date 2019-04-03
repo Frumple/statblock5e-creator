@@ -1,4 +1,5 @@
 import PropertyListSection from './property-list-section.js';
+import ConditionImmunities from '../../../stats/lists/property/condition-immunities.js';
 
 export default class ConditionImmunitiesSection extends PropertyListSection {
   static get elementName() { return 'condition-immunities-section'; }
@@ -10,8 +11,7 @@ export default class ConditionImmunitiesSection extends PropertyListSection {
 
   constructor() {
     super(ConditionImmunitiesSection.templatePaths,
-          'Condition Immunities',
-          'Condition Immunity');
+          ConditionImmunities);
 
     this.empty = true;
   }

@@ -1,4 +1,5 @@
 import * as blockListSectionModule from './block-list-section.js';
+import Reactions from '../../../stats/lists/block/reactions.js';
 
 export default class ReactionsSection extends blockListSectionModule.BlockListSection {
   static get elementName() { return 'reactions-section'; }
@@ -10,7 +11,7 @@ export default class ReactionsSection extends blockListSectionModule.BlockListSe
 
   constructor() {
     super(ReactionsSection.templatePaths,
-          'Reaction');
+          Reactions);
 
     this.empty = true;
   }
@@ -21,15 +22,5 @@ export default class ReactionsSection extends blockListSectionModule.BlockListSe
 
       this.isInitialized = true;
     }
-  }
-
-  exportToHtml() {
-    const fragment = super.exportToHtml();
-
-    const sectionHeading = document.createElement('h3');
-    sectionHeading.textContent = 'Reactions';
-    fragment.insertBefore(sectionHeading, fragment.firstElementChild);
-
-    return fragment;
   }
 }

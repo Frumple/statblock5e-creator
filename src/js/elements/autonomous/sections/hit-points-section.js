@@ -1,6 +1,5 @@
 import * as propertyLineSectionModule from './property-line-section.js';
 import HitPoints from '../../../stats/hit-points.js';
-import { formatModifierOperator, formatModifierNumber } from '../../../helpers/string-formatter.js';
 
 export default class HitPointsSection extends propertyLineSectionModule.PropertyLineSection {
   static get elementName() { return 'hit-points-section'; }
@@ -13,8 +12,7 @@ export default class HitPointsSection extends propertyLineSectionModule.Property
   constructor() {
     super(HitPointsSection.templatePaths,
           HitPointsShowElements,
-          HitPointsEditElements,
-          'Hit Points');  
+          HitPointsEditElements);  
   }
 
   connectedCallback() {
@@ -36,48 +34,23 @@ export default class HitPointsSection extends propertyLineSectionModule.Property
   }
 
   onInputHitPoints() {
-    if (! HitPoints.useHitDie) {
-      const hitPoints = this.editElements.hitPoints.valueAsInt;
-
-      if (! isNaN(hitPoints)) {
-        HitPoints.hitPoints = hitPoints;
-        this.updateHitPoints();
-      }
-    }
+    this.updateModelHitPoints();
+    this.updateView();
   }
 
   onInputUseHitDie() {
-    HitPoints.useHitDie = this.editElements.useHitDie.checked;
-    this.updateHitPoints();
+    this.updateModelUseHitDie();
+    this.updateView();
   }
 
   onInputHitDieQuantity() {
-    const hitDieQuantity = this.editElements.hitDieQuantity.valueAsInt;
-
-    if (! isNaN(hitDieQuantity)) {
-      HitPoints.hitDieQuantity = hitDieQuantity;
-      this.updateHitPoints();
-    }
+    this.updateModelHitDieQuantity();
+    this.updateView();
   }
 
   onInputHitDieSize() {
-    const hitDieSize = parseInt(this.editElements.hitDieSize.value, 10);
-
-    if (! isNaN(hitDieSize)) {
-      HitPoints.hitDieSize = hitDieSize;
-      this.updateHitPoints();
-    }
-  }
-
-  updateHitPoints() {
-    const constitutionHitPoints = HitPoints.constitutionHitPoints;
-    const constitutionHitPointsOperator = formatModifierOperator(constitutionHitPoints);
-    const constitutionHitPointsNumber = formatModifierNumber(constitutionHitPoints);
-
-    this.editElements.trailingText.textContent = `${constitutionHitPointsOperator} ${constitutionHitPointsNumber} )`;
-    this.editElements.hitPoints.value = HitPoints.hitPoints;
-
-    this.updateShowSection();
+    this.updateModelHitDieSize();
+    this.updateView();
   }
 
   checkForErrors() {
@@ -88,31 +61,53 @@ export default class HitPointsSection extends propertyLineSectionModule.Property
     }    
   }
 
-  updateShowSection() {
-    let text;
-
-    if (HitPoints.useHitDie) {
-      text = this.hitDieShowSectionText;
-    } else {
-      text = HitPoints.hitPoints;
-    }
-
-    this.showElements.text.textContent = text;
+  updateModel() {
+    this.updateModelHitPoints();
+    this.updateModelUseHitDie();
+    this.updateModelHitDieQuantity();
+    this.updateModelHitDieSize();
   }
 
-  get hitDieShowSectionText() {
-    const hitPoints = HitPoints.hitPoints;
-    const hitDieQuantity = HitPoints.hitDieQuantity;
-    const hitDieSize = HitPoints.hitDieSize;
-    const constitutionHitPoints = HitPoints.constitutionHitPoints;      
+  updateModelHitPoints() {
+    const hitPoints = this.editElements.hitPoints.valueAsInt;
 
-    if (constitutionHitPoints != 0) {
-      const modifierOperator = formatModifierOperator(constitutionHitPoints);
-      const modifierNumber = formatModifierNumber(constitutionHitPoints);
-      return `${hitPoints} (${hitDieQuantity}d${hitDieSize} ${modifierOperator} ${modifierNumber})`;
-    } else {
-      return `${hitPoints} (${hitDieQuantity}d${hitDieSize})`;
+    if (! isNaN(hitPoints)) {
+      HitPoints.hitPoints = hitPoints;
     }
+  }
+
+  updateModelUseHitDie() {
+    HitPoints.useHitDie = this.editElements.useHitDie.checked;
+  }
+
+  updateModelHitDieQuantity() {
+    const hitDieQuantity = this.editElements.hitDieQuantity.valueAsInt;
+
+    if (! isNaN(hitDieQuantity)) {
+      HitPoints.hitDieQuantity = hitDieQuantity;
+    }
+  }
+
+  updateModelHitDieSize() {
+    const hitDieSize = parseInt(this.editElements.hitDieSize.value, 10);
+
+    if (! isNaN(hitDieSize)) {
+      HitPoints.hitDieSize = hitDieSize;
+    }
+  }
+
+  updateView() {
+    this.editElements.constitutionHitPoints.textContent = HitPoints.constitutionHitPointsText;
+
+    if (HitPoints.useHitDie) {      
+      this.editElements.hitPoints.value = HitPoints.hitPoints;
+    }
+
+    this.showElements.text.textContent = HitPoints.text;
+  }
+
+  exportToHtml() {
+    return HitPoints.toHtml();
   }
 }
 
@@ -129,7 +124,7 @@ class HitPointsEditElements extends propertyLineSectionModule.PropertyLineEditEl
     this.useHitDie = shadowRoot.getElementById('use-hit-die-input');
     this.hitDieQuantity = shadowRoot.getElementById('hit-die-quantity-input');
     this.hitDieSize = shadowRoot.getElementById('hit-die-size-input');
-    this.trailingText = shadowRoot.getElementById('hit-die-trailing-text');
+    this.constitutionHitPoints = shadowRoot.getElementById('constitution-hit-points-value-label');
   }
 
   get initiallySelectedElement() {

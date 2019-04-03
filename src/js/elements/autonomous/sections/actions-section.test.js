@@ -1,4 +1,5 @@
 import ActionsSection from './actions-section.js';
+import Actions from '../../../stats/lists/block/actions.js';
 import Creature from '../../../stats/creature.js';
 
 import * as TestCustomElements from '../../../helpers/test/test-custom-elements.js';
@@ -18,6 +19,7 @@ beforeAll(async() => {
 
 beforeEach(() => {
   Creature.reset();
+  Actions.reset();
 
   actionsSection = new ActionsSection();
   TestCustomElements.initializeSection(actionsSection);

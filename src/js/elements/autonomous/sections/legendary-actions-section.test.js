@@ -1,4 +1,5 @@
 import LegendaryActionsSection from './legendary-actions-section.js';
+import LegendaryActions from '../../../stats/lists/block/legendary-actions.js';
 import Creature from '../../../stats/creature.js';
 
 import * as TestCustomElements from '../../../helpers/test/test-custom-elements.js';
@@ -20,6 +21,7 @@ beforeAll(async() => {
 
 beforeEach(() => {
   Creature.reset();
+  LegendaryActions.reset();
 
   legendaryActionsSection = new LegendaryActionsSection();
   TestCustomElements.initializeSection(legendaryActionsSection);

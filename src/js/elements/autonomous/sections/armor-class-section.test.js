@@ -1,6 +1,8 @@
 import ArmorClassSection from './armor-class-section.js';
 import * as TestCustomElements from '../../../helpers/test/test-custom-elements.js';
 
+import ArmorClass from '../../../stats/armor-class.js';
+
 import { inputValueAndTriggerEvent } from '../../../helpers/element-helpers.js';
 
 const expectedHeading = 'Armor Class';
@@ -13,6 +15,8 @@ beforeAll(async() => {
 });
 
 beforeEach(() => {
+  ArmorClass.reset();
+
   armorClassSection = new ArmorClassSection();
   TestCustomElements.initializeSection(armorClassSection);
   armorClassSection.connect();
@@ -30,13 +34,13 @@ describe('when the show section is clicked', () => {
 
   describe('and the custom text checkbox is checked', () => {
     beforeEach(() => {
-      armorClassSection.editElements.useCustom.click();
+      armorClassSection.editElements.useCustomText.click();
     });
 
     it('should enable the custom text field, disable all other fields, and focus on the custom text field', () => {
       expect(armorClassSection.editElements.armorClass).toBeDisabled();
       expect(armorClassSection.editElements.armorType).toBeDisabled();
-      expect(armorClassSection.editElements.shield).toBeDisabled();
+      expect(armorClassSection.editElements.hasShield).toBeDisabled();
       expect(armorClassSection.editElements.customText).not.toBeDisabled();
 
       expect(armorClassSection.editElements.customText).toHaveFocus();
@@ -50,6 +54,10 @@ describe('when the show section is clicked', () => {
 
         armorClassSection.editElements.submitForm();
 
+        expect(ArmorClass.useCustomText).toBe(true);
+        expect(ArmorClass.originalCustomText).toBe(customText);
+        expect(ArmorClass.parsedCustomText).toBe(customText);
+
         expect(armorClassSection).toBeInMode('show');
         expect(armorClassSection).toHavePropertyLine(expectedHeading, customText);
 
@@ -62,6 +70,10 @@ describe('when the show section is clicked', () => {
         inputValueAndTriggerEvent(armorClassSection.editElements.customText, customText);
 
         armorClassSection.editElements.submitForm();
+
+        expect(ArmorClass.useCustomText).toBe(true);
+        expect(ArmorClass.originalCustomText).toBe(customText);
+        expect(ArmorClass.parsedCustomText).toBe(expectedText);
 
         expect(armorClassSection).toBeInMode('show');
         expect(armorClassSection).toHavePropertyLine(expectedHeading, expectedText);
@@ -107,14 +119,14 @@ describe('when the show section is clicked', () => {
 
   describe('and the custom text checkbox is unchecked', () => {
     beforeEach(() => {
-      armorClassSection.editElements.useCustom.click();
-      armorClassSection.editElements.useCustom.click();
+      armorClassSection.editElements.useCustomText.click();
+      armorClassSection.editElements.useCustomText.click();
     });
 
     it('should disable the custom text field, enable all other fields, and focus on the armor class field', () => {
       expect(armorClassSection.editElements.armorClass).not.toBeDisabled();
       expect(armorClassSection.editElements.armorType).not.toBeDisabled();
-      expect(armorClassSection.editElements.shield).not.toBeDisabled();
+      expect(armorClassSection.editElements.hasShield).not.toBeDisabled();
       expect(armorClassSection.editElements.customText).toBeDisabled();
 
       expect(armorClassSection.editElements.armorClass).toHaveFocus();
@@ -127,6 +139,10 @@ describe('when the show section is clicked', () => {
         inputValueAndTriggerEvent(armorClassSection.editElements.armorClass, 7);
 
         armorClassSection.editElements.submitForm();
+
+        expect(ArmorClass.armorClass).toBe(7);
+        expect(ArmorClass.armorType).toBe('');
+        expect(ArmorClass.hasShield).toBe(false);
 
         expect(armorClassSection).toBeInMode('show');
         expect(armorClassSection).toHavePropertyLine(expectedHeading, expectedText);
@@ -142,6 +158,10 @@ describe('when the show section is clicked', () => {
 
         armorClassSection.editElements.submitForm();
 
+        expect(ArmorClass.armorClass).toBe(21);
+        expect(ArmorClass.armorType).toBe('natural armor');
+        expect(ArmorClass.hasShield).toBe(false);
+
         expect(armorClassSection).toBeInMode('show');
         expect(armorClassSection).toHavePropertyLine(expectedHeading, expectedText);
 
@@ -152,9 +172,13 @@ describe('when the show section is clicked', () => {
         const expectedText = '12 (shield)';
 
         inputValueAndTriggerEvent(armorClassSection.editElements.armorClass, 12);      
-        armorClassSection.editElements.shield.click();
+        armorClassSection.editElements.hasShield.click();
 
         armorClassSection.editElements.submitForm();
+
+        expect(ArmorClass.armorClass).toBe(12);
+        expect(ArmorClass.armorType).toBe('');
+        expect(ArmorClass.hasShield).toBe(true);
 
         expect(armorClassSection).toBeInMode('show');
         expect(armorClassSection).toHavePropertyLine(expectedHeading, expectedText);
@@ -167,9 +191,13 @@ describe('when the show section is clicked', () => {
 
         inputValueAndTriggerEvent(armorClassSection.editElements.armorClass, 16);
         inputValueAndTriggerEvent(armorClassSection.editElements.armorType, 'chain shirt');
-        armorClassSection.editElements.shield.click();
+        armorClassSection.editElements.hasShield.click();
 
         armorClassSection.editElements.submitForm();
+
+        expect(ArmorClass.armorClass).toBe(16);
+        expect(ArmorClass.armorType).toBe('chain shirt');
+        expect(ArmorClass.hasShield).toBe(true);
 
         expect(armorClassSection).toBeInMode('show');
         expect(armorClassSection).toHavePropertyLine(expectedHeading, expectedText);
