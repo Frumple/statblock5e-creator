@@ -1,7 +1,7 @@
 import SpeedSection from './speed-section.js';
 import * as TestCustomElements from '../../../helpers/test/test-custom-elements.js';
 
-import Speed from '../../../stats/speed.js';
+import Speed from '../../../models/speed.js';
 
 import { inputValueAndTriggerEvent } from '../../../helpers/element-helpers.js';
 

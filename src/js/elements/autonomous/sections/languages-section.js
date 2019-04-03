@@ -1,5 +1,5 @@
 import PropertyListSection from './property-list-section.js';
-import Languages from '../../../stats/lists/property/languages.js';
+import Languages from '../../../models/lists/property/languages.js';
 import isRunningInNode from '../../../helpers/is-running-in-node.js';
 
 export default class LanguagesSection extends PropertyListSection {

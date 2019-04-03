@@ -1,5 +1,5 @@
 import ConditionImmunitiesSection from './condition-immunities-section.js';
-import ConditionImmunities from '../../../stats/lists/property/condition-immunities.js';
+import ConditionImmunities from '../../../models/lists/property/condition-immunities.js';
 
 import * as TestCustomElements from '../../../helpers/test/test-custom-elements.js';
 import * as sharedSpecs from './property-list-section.specs.js';

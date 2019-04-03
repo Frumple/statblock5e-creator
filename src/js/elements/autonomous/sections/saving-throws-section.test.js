@@ -4,9 +4,9 @@ import * as TestCustomElements from '../../../helpers/test/test-custom-elements.
 import { inputValueAndTriggerEvent } from '../../../helpers/element-helpers.js';
 import { formatModifier } from '../../../helpers/string-formatter.js';
 
-import Abilities from '../../../stats/abilities.js';
-import ProficiencyBonus from '../../../stats/proficiency-bonus.js';
-import SavingThrows from '../../../stats/saving-throws.js';
+import Abilities from '../../../models/abilities.js';
+import ProficiencyBonus from '../../../models/proficiency-bonus.js';
+import SavingThrows from '../../../models/saving-throws.js';
 
 const labelDisabledClass = 'section__label_disabled';
 const singleSavingThrowUnderTest = 'intelligence';

@@ -1,5 +1,5 @@
 import Parser from './parser.js';
-import Creature from '../stats/creature.js';
+import Creature from '../models/creature.js';
 
 const defaultSettings = {
   enableExpressions: true

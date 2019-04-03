@@ -1,5 +1,5 @@
 import parseText from './parse-text.js';
-import Creature from '../stats/creature.js';
+import Creature from '../models/creature.js';
 
 beforeEach(() => {
   Creature.reset();

@@ -1,7 +1,7 @@
 import ArmorClassSection from './armor-class-section.js';
 import * as TestCustomElements from '../../../helpers/test/test-custom-elements.js';
 
-import ArmorClass from '../../../stats/armor-class.js';
+import ArmorClass from '../../../models/armor-class.js';
 
 import { inputValueAndTriggerEvent } from '../../../helpers/element-helpers.js';
 

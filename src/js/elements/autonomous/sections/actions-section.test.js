@@ -1,6 +1,6 @@
 import ActionsSection from './actions-section.js';
-import Actions from '../../../stats/lists/block/actions.js';
-import Creature from '../../../stats/creature.js';
+import Actions from '../../../models/lists/block/actions.js';
+import Creature from '../../../models/creature.js';
 
 import * as TestCustomElements from '../../../helpers/test/test-custom-elements.js';
 import * as sharedSpecs from './block-list-section.specs.js';

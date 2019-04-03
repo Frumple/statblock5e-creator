@@ -1,5 +1,5 @@
 import * as blockListSectionModule from './block-list-section.js';
-import Reactions from '../../../stats/lists/block/reactions.js';
+import Reactions from '../../../models/lists/block/reactions.js';
 
 export default class ReactionsSection extends blockListSectionModule.BlockListSection {
   static get elementName() { return 'reactions-section'; }

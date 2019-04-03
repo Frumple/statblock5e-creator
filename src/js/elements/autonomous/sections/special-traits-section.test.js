@@ -1,6 +1,6 @@
 import SpecialTraitsSection from './special-traits-section.js';
-import SpecialTraits from '../../../stats/lists/block/special-traits.js';
-import Creature from '../../../stats/creature.js';
+import SpecialTraits from '../../../models/lists/block/special-traits.js';
+import Creature from '../../../models/creature.js';
 
 import * as TestCustomElements from '../../../helpers/test/test-custom-elements.js';
 import * as sharedSpecs from './block-list-section.specs.js';

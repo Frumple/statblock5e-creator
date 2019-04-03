@@ -1,6 +1,6 @@
 import ReactionsSection from './reactions-section.js';
-import Reactions from '../../../stats/lists/block/reactions.js';
-import Creature from '../../../stats/creature.js';
+import Reactions from '../../../models/lists/block/reactions.js';
+import Creature from '../../../models/creature.js';
 
 import * as TestCustomElements from '../../../helpers/test/test-custom-elements.js';
 import * as sharedSpecs from './block-list-section.specs.js';

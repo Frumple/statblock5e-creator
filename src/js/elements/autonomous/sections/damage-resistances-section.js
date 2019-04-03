@@ -1,5 +1,5 @@
 import PropertyListSection from './property-list-section.js';
-import DamageResistances from '../../../stats/lists/property/damage-resistances.js';
+import DamageResistances from '../../../models/lists/property/damage-resistances.js';
 
 export default class DamageResistancesSection extends PropertyListSection {
   static get elementName() { return 'damage-resistances-section'; }

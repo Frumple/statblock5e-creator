@@ -1,10 +1,10 @@
 import DamageResistancesSection from './damage-resistances-section.js';
-import DamageResistances from '../../../stats/lists/property/damage-resistances.js';
+import DamageResistances from '../../../models/lists/property/damage-resistances.js';
 
 import * as TestCustomElements from '../../../helpers/test/test-custom-elements.js';
 import * as sharedSpecs from './property-list-section.specs.js';
 
-const headingName = "Damage Resistances";
+const headingName = 'Damage Resistances';
 const expectedItemType = 'Damage Resistance';
 
 let damageResistancesSection;

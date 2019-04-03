@@ -1,5 +1,5 @@
 import ChallengeRatingSection from './challenge-rating-section.js';
-import ChallengeRating from '../../../stats/challenge-rating.js';
+import ChallengeRating from '../../../models/challenge-rating.js';
 
 import * as TestCustomElements from '../../../helpers/test/test-custom-elements.js';
 import { inputValueAndTriggerEvent } from '../../../helpers/element-helpers.js';

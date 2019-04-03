@@ -1,5 +1,5 @@
 import * as blockListSectionModule from './block-list-section.js';
-import LegendaryActions from '../../../stats/lists/block/legendary-actions.js';
+import LegendaryActions from '../../../models/lists/block/legendary-actions.js';
 
 export default class LegendaryActionsSection extends blockListSectionModule.BlockListSection {
   static get elementName() { return 'legendary-actions-section'; }

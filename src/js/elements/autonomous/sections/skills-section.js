@@ -1,5 +1,5 @@
 import * as propertyLineSectionModule from './property-line-section.js';
-import Skills from '../../../stats/skills.js';
+import Skills from '../../../models/skills.js';
 import { inputValueAndTriggerEvent } from '../../../helpers/element-helpers.js';
 
 export default class SkillsSection extends propertyLineSectionModule.PropertyLineSection {

@@ -1,6 +1,6 @@
 import LegendaryActionsSection from './legendary-actions-section.js';
-import LegendaryActions from '../../../stats/lists/block/legendary-actions.js';
-import Creature from '../../../stats/creature.js';
+import LegendaryActions from '../../../models/lists/block/legendary-actions.js';
+import Creature from '../../../models/creature.js';
 
 import * as TestCustomElements from '../../../helpers/test/test-custom-elements.js';
 import * as sharedSpecs from './block-list-section.specs.js';

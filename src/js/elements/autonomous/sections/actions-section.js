@@ -1,5 +1,5 @@
 import * as blockListSectionModule from './block-list-section.js';
-import Actions from '../../../stats/lists/block/actions.js';
+import Actions from '../../../models/lists/block/actions.js';
 import isRunningInNode from '../../../helpers/is-running-in-node.js';
 
 export default class ActionsSection extends blockListSectionModule.BlockListSection {

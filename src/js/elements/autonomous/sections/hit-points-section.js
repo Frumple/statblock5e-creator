@@ -1,5 +1,5 @@
 import * as propertyLineSectionModule from './property-line-section.js';
-import HitPoints from '../../../stats/hit-points.js';
+import HitPoints from '../../../models/hit-points.js';
 
 export default class HitPointsSection extends propertyLineSectionModule.PropertyLineSection {
   static get elementName() { return 'hit-points-section'; }

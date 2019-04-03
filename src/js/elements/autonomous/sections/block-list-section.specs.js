@@ -1,5 +1,5 @@
 import { inputValueAndTriggerEvent } from '../../../helpers/element-helpers.js';
-import Creature from '../../../stats/creature.js';
+import Creature from '../../../models/creature.js';
 
 let expectedHeading = null;
 

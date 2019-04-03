@@ -1,5 +1,5 @@
 import PropertyListSection from './property-list-section.js';
-import ConditionImmunities from '../../../stats/lists/property/condition-immunities.js';
+import ConditionImmunities from '../../../models/lists/property/condition-immunities.js';
 
 export default class ConditionImmunitiesSection extends PropertyListSection {
   static get elementName() { return 'condition-immunities-section'; }

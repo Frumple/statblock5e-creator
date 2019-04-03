@@ -1,5 +1,5 @@
 import * as propertyLineSectionModule from './property-line-section.js';
-import ArmorClass from '../../../stats/armor-class.js';
+import ArmorClass from '../../../models/armor-class.js';
 
 export default class ArmorClassSection extends propertyLineSectionModule.PropertyLineSection {
   static get elementName() { return 'armor-class-section'; }

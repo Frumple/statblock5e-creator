@@ -4,8 +4,8 @@ import * as TestCustomElements from '../../../helpers/test/test-custom-elements.
 import { inputValueAndTriggerEvent } from '../../../helpers/element-helpers.js';
 import { formatModifierOperator, formatModifierNumber } from '../../../helpers/string-formatter.js';
 
-import Abilities from '../../../stats/abilities.js';
-import HitPoints from '../../../stats/hit-points.js';
+import Abilities from '../../../models/abilities.js';
+import HitPoints from '../../../models/hit-points.js';
 
 const expectedHeading = 'Hit Points';
 

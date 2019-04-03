@@ -1,6 +1,6 @@
 import * as sectionModule from './section.js';
-import Abilities from '../../../stats/abilities.js';
-import ProficiencyBonus from '../../../stats/proficiency-bonus.js';
+import Abilities from '../../../models/abilities.js';
+import ProficiencyBonus from '../../../models/proficiency-bonus.js';
 
 
 export default class AbilityScoresSection extends sectionModule.Section {

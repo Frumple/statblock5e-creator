@@ -1,5 +1,5 @@
 import PropertyListSection from './property-list-section.js';
-import DamageVulnerabilities from '../../../stats/lists/property/damage-vulnerabilities.js';
+import DamageVulnerabilities from '../../../models/lists/property/damage-vulnerabilities.js';
 
 export default class DamageVulnerabilitiesSection extends PropertyListSection {
   static get elementName() { return 'damage-vulnerabilities-section'; }

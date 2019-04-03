@@ -1,5 +1,5 @@
 import * as sectionModule from './section.js';
-import Creature from '../../../stats/creature.js';
+import Creature from '../../../models/creature.js';
 
 export default class HeadingSection extends sectionModule.Section {
   static get elementName() { return 'heading-section'; }

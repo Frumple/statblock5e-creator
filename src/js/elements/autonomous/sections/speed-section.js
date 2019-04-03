@@ -1,5 +1,5 @@
 import * as propertyLineSectionModule from './property-line-section.js';
-import Speed from '../../../stats/speed.js';
+import Speed from '../../../models/speed.js';
 
 export default class SpeedSection extends propertyLineSectionModule.PropertyLineSection {
   static get elementName() { return 'speed-section'; }

@@ -1,5 +1,5 @@
 import DamageVulnerabilitiesSection from './damage-vulnerabilities-section.js';
-import DamageVulnerabilities from '../../../stats/lists/property/damage-vulnerabilities.js';
+import DamageVulnerabilities from '../../../models/lists/property/damage-vulnerabilities.js';
 
 import * as TestCustomElements from '../../../helpers/test/test-custom-elements.js';
 import * as sharedSpecs from './property-list-section.specs.js';

@@ -1,5 +1,5 @@
 import * as propertyLineSectionModule from './property-line-section.js';
-import Senses from '../../../stats/senses.js';
+import Senses from '../../../models/senses.js';
 
 export default class SensesSection extends propertyLineSectionModule.PropertyLineSection {
   static get elementName() { return 'senses-section'; }

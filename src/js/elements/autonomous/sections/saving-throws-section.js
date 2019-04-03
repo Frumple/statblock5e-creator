@@ -1,6 +1,6 @@
 import * as propertyLineSectionModule from './property-line-section.js';
-import Abilities from '../../../stats/abilities.js';
-import SavingThrows from '../../../stats/saving-throws.js';
+import Abilities from '../../../models/abilities.js';
+import SavingThrows from '../../../models/saving-throws.js';
 import { inputValueAndTriggerEvent } from '../../../helpers/element-helpers.js';
 
 export default class SavingThrowsSection extends propertyLineSectionModule.PropertyLineSection {
