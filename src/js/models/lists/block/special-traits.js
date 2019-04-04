@@ -2,7 +2,7 @@ import BlockListModel from './block-list-model.js';
 
 class SpecialTraits extends BlockListModel {
   constructor() {
-    super('Special Trait');
+    super(null, 'Special Trait');
   }
 }
 

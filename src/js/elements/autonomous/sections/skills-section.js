@@ -149,6 +149,10 @@ export default class SkillsSection extends propertyLineSectionModule.PropertyLin
   exportToHtml() {
     return Skills.toHtml();
   }
+
+  exportToHomebrewery() {
+    return Skills.toHomebrewery();
+  }
 }
 
 class SkillsShowElements extends propertyLineSectionModule.PropertyLineShowElements {

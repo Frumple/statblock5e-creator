@@ -42,4 +42,9 @@ export default class BasicStats extends DivisibleContainer {
 
     return fragment;
   }
+
+  exportToHomebrewery() {
+    const exports = this.allSections.map(section => section.exportToHomebrewery());
+    return exports.join('\n');
+  }
 }

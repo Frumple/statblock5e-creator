@@ -41,6 +41,10 @@ export default class ChallengeRatingSection extends propertyLineSectionModule.Pr
   exportToHtml() {
     return ChallengeRating.toHtml();
   }
+
+  exportToHomebrewery() {
+    return ChallengeRating.toHomebrewery();
+  }
 }
 
 class ChallengeRatingShowElements extends propertyLineSectionModule.PropertyLineShowElements {

@@ -95,7 +95,7 @@ export default class StatBlockMenu extends CustomAutonomousElement {
   }
 
   onClickExportHomebreweryButton() {
-    // TODO
+    this.dispatchMenuEvent('exportAction', { format: 'homebrewery' });
   }
 
   onClickImportJsonButton() {

@@ -96,6 +96,10 @@ export default class PropertyListSection extends propertyLineSectionModule.Prope
   exportToHtml() {
     return this.listModel.toHtml();
   }
+
+  exportToHomebrewery() {
+    return this.listModel.toHomebrewery();
+  }
 }
 
 class PropertyListShowElements extends propertyLineSectionModule.PropertyLineShowElements {

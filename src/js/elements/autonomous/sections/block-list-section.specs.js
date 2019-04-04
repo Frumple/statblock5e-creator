@@ -48,6 +48,7 @@ export function shouldAddASingleBlock(section, blockName, blockText, expectedTex
 
   expectDisplayBlocks(section, blocks);
   expectHtmlExport(section, blocks);
+  expectHomebreweryExport(section, blocks);
 }
 
 export function shouldAddMultipleBlocks(section, blocks) {
@@ -62,6 +63,7 @@ export function shouldAddMultipleBlocks(section, blocks) {
 
   expectDisplayBlocks(section, blocks);
   expectHtmlExport(section, blocks);
+  expectHomebreweryExport(section, blocks);
 }
 
 export function shouldAddASingleBlockThenRemoveIt(section, blockName, blockText) {
@@ -95,6 +97,7 @@ export function shouldAddMultipleBlocksThenRemoveOneOfThem(section, blocks, remo
 
   expectDisplayBlocks(section, blocks);
   expectHtmlExport(section, blocks);
+  expectHomebreweryExport(section, blocks);
 }
 
 export function shouldReparseNameChanges(section, blockName, blockText, oldNames, newNames, expectedText) {
@@ -120,6 +123,7 @@ export function shouldReparseNameChanges(section, blockName, blockText, oldNames
 
   expectDisplayBlocks(section, blocks);
   expectHtmlExport(section, blocks);
+  expectHomebreweryExport(section, blocks);
 }
 
 export function shouldTrimAllTrailingPeriodCharactersInBlockName(section) {
@@ -136,6 +140,7 @@ export function shouldTrimAllTrailingPeriodCharactersInBlockName(section) {
   }];
   expectDisplayBlocks(section, expectedBlocks);
   expectHtmlExport(section, expectedBlocks);
+  expectHomebreweryExport(section, expectedBlocks);
 
   section.showElements.section.click();
 
@@ -240,13 +245,35 @@ function expectHtmlExport(section, expectedBlocks) {
     .filter(element => element.tagName === 'PROPERTY-BLOCK');
 
   for (const [index, block] of expectedBlocks.entries()) {
-    const displayBlock = section.showElements.displayList.blocks[index];
-
     const htmlExportPropertyBlock = htmlExportPropertyBlocks[index];
-    expect(htmlExportPropertyBlock).toBePropertyBlock(
-      `${displayBlock.name}.`, 
+
+    expect(htmlExportPropertyBlock).toBeHtmlPropertyBlock(
+      `${block.name}.`,
       (block.expectedText ? block.expectedText : block.text));
   }
+}
+
+function expectHomebreweryExport(section, expectedBlocks) {
+  const homebreweryExport = section.exportToHomebrewery();
+
+  if (expectedHeading !== null) {
+    const firstNewLineIndex = homebreweryExport.indexOf('\n');
+    const firstLine = homebreweryExport.slice(0, firstNewLineIndex);
+
+    expect(firstLine).toBe(`> ### ${expectedHeading}`);
+  }
+
+  const firstBlockIndex = homebreweryExport.indexOf('> ***');
+  const blocksText = homebreweryExport.slice(firstBlockIndex);
+
+  const expectedBlocksInHomebreweryFormat = 
+    expectedBlocks.map(
+      block => `> ***${block.name}.*** ${block.text}`);
+
+  // TODO: Homebrewery should not parse Markdown, but should parse expressions
+
+  const expectedBlocksText = expectedBlocksInHomebreweryFormat.join('\n\n');
+  expect(blocksText).toBe(expectedBlocksText);
 }
 
 function expectSectionToBeEmpty(section, isEmpty) {

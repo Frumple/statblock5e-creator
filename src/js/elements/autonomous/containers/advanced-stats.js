@@ -56,4 +56,11 @@ export default class AdvancedStats extends DivisibleContainer {
 
     return fragment;
   }
+
+  exportToHomebrewery() {
+    const exports = this.allSections
+      .filter(section => ! section.empty)
+      .map(section => section.exportToHomebrewery());
+    return exports.join('\n');
+  }
 }

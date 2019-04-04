@@ -54,7 +54,7 @@ export default class LegendaryActionsSection extends blockListSectionModule.Bloc
   updateModel() {
     super.updateModel();
 
-    this.listModel.originalDescription = this.editElements.description.originalText;
+    this.listModel.originalDescription = this.editElements.description.value;
     this.listModel.parsedDescription = this.editElements.description.parsedText;
   }
 

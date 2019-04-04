@@ -28,21 +28,34 @@ let statBlockMenu;
 let statBlockSidebar;
 let statBlock;
 
+/* Notes about JSDOM limitations:
+
+   JSDOM does not support document.execCommand() or any sort of Clipboard API.
+   The best that the "Copy to Clipboard" tests can do is check that the
+   fallback "Press Ctrl+C..." status is shown on the export dialog.
+
+   JSDOM does not support the stepUp() method, so when interacting with the
+   two-column manual height slider, we have to set its value and dispatch
+   a change event manually.
+*/
+
 beforeAll(async() => {
   HeadingSection.mockImplementation(() => {
     return {
-      title: 'Commoner',
-      exportToHtml: () => { return document.createElement('creature-heading'); }
+      exportToHtml: () => { return document.createElement('creature-heading'); },
+      exportToHomebrewery: () => { return ''; }
     };
   });
   TopStats.mockImplementation(() => {
     return {
-      exportToHtml: () => { return document.createElement('top-stats'); }
+      exportToHtml: () => { return document.createElement('top-stats'); },
+      exportToHomebrewery: () => { return ''; }
     };
   });
   BottomStats.mockImplementation(() => {
     return {
-      exportToHtml: () => { return document.createElement('bottom-stats'); }
+      exportToHtml: () => { return document.createElement('bottom-stats'); },
+      exportToHomebrewery: () => { return ''; }
     };
   });
 
@@ -57,6 +70,12 @@ beforeAll(async() => {
 });
 
 beforeEach(() => {
+  printHtml.mockClear();
+  startFileDownload.mockClear();
+  HeadingSection.mockClear();
+  TopStats.mockClear();
+  BottomStats.mockClear();
+
   GlobalOptions.reset();
 
   statBlockEditor = new StatBlockEditor();
@@ -70,6 +89,7 @@ beforeEach(() => {
   statBlock.connect();
 
   statBlockEditor.htmlExportDialog.connect();
+  statBlockEditor.homebreweryExportDialog.connect();
 });
 
 describe('should print', () => {
@@ -96,8 +116,7 @@ describe('should print', () => {
     statBlockMenu.twoColumnButton.click();
     statBlockSidebar.manualHeightModeButton.click();
 
-    // JSDOM doesn't support the stepUp() method, set the value and dispatch the event manually
-    // statBlockSidebar.manualHeightSlider.stepUp(25);
+    
     statBlockSidebar.manualHeightSlider.value = initialHeightSliderValue + 25;
     statBlockSidebar.onInputSlider();
 
@@ -110,11 +129,6 @@ describe('should print', () => {
 
 describe('should export HTML', () => {
   describe('to clipboard', () => {
-
-    // JSDOM does not support document.execCommand() or any sort of Clipboard API.
-    // The best that these tests can do is check that the fallback status is
-    // shown on the export dialog.
-
     it('one-column version', () => {
       statBlockMenu.oneColumnButton.click();
 
@@ -122,7 +136,7 @@ describe('should export HTML', () => {
 
       statBlockEditor.htmlExportDialog.copyToClipboardButton.click();
 
-      expectCopyToClipboardStatus();
+      expectCopyToClipboardStatus(statBlockEditor.htmlExportDialog);
     });
 
     it('two-column version with automatic height', () => {
@@ -133,29 +147,21 @@ describe('should export HTML', () => {
 
       statBlockEditor.htmlExportDialog.copyToClipboardButton.click();
 
-      expectCopyToClipboardStatus();
+      expectCopyToClipboardStatus(statBlockEditor.htmlExportDialog);
     });
 
     it('two-column version with manual height', () => {
       statBlockMenu.twoColumnButton.click();
       statBlockSidebar.manualHeightModeButton.click();
 
-      // JSDOM doesn't support the stepUp() method, set the value and dispatch the event manually
-      // statBlockSidebar.manualHeightSlider.stepUp(25);
       statBlockSidebar.manualHeightSlider.value = initialHeightSliderValue + 25;
       statBlockSidebar.onInputSlider();
 
       statBlockMenu.exportHtmlButton.click();
       statBlockEditor.htmlExportDialog.copyToClipboardButton.click();
 
-      expectCopyToClipboardStatus();
+      expectCopyToClipboardStatus(statBlockEditor.htmlExportDialog);
     });
-
-    function expectCopyToClipboardStatus() {
-      const status = statBlockEditor.htmlExportDialog.status;
-      expect(status).toHaveTextContent('Press Ctrl+C to copy to clipboard.');
-      expect(status).toHaveClass('export-dialog__status_error');
-    }
   });
 
   describe('as file download', () => {
@@ -174,7 +180,7 @@ describe('should export HTML', () => {
         expectedContentType,
         expectedFileName);
 
-      expectFileDownloadStatus();
+      expectFileDownloadStatus(statBlockEditor.htmlExportDialog);
     });
 
     it('two-column version with automatic height', () => {
@@ -190,15 +196,13 @@ describe('should export HTML', () => {
         expectedContentType,
         expectedFileName);
 
-      expectFileDownloadStatus();
+      expectFileDownloadStatus(statBlockEditor.htmlExportDialog);
     });
 
     it('two-column version with manual height', () => {
       statBlockMenu.twoColumnButton.click();
       statBlockSidebar.manualHeightModeButton.click();
 
-      // JSDOM doesn't support the stepUp() method, set the value and dispatch the event manually
-      // statBlockSidebar.manualHeightSlider.stepUp(25);
       statBlockSidebar.manualHeightSlider.value = initialHeightSliderValue + 25;
       statBlockSidebar.onInputSlider();
 
@@ -210,13 +214,80 @@ describe('should export HTML', () => {
         expectedContentType,
         expectedFileName);
       
-      expectFileDownloadStatus();
+      expectFileDownloadStatus(statBlockEditor.htmlExportDialog);
     });
-
-    function expectFileDownloadStatus() {
-      const status = statBlockEditor.htmlExportDialog.status;
-      expect(status).toHaveTextContent('File download initiated.');
-      expect(status).toHaveClass('export-dialog__status_complete');
-    }
   });  
 });
+
+describe('should export homebrewery', () => {
+  describe('to clipboard', () => {
+    it('one-column version', () => {
+      statBlockMenu.oneColumnButton.click();
+
+      statBlockMenu.exportHomebreweryButton.click();
+
+      statBlockEditor.homebreweryExportDialog.copyToClipboardButton.click();
+
+      expectCopyToClipboardStatus(statBlockEditor.homebreweryExportDialog);
+    });
+
+    it('two-column version', () => {
+      statBlockMenu.twoColumnButton.click();
+      statBlockSidebar.autoHeightModeButton.click();
+
+      statBlockMenu.exportHomebreweryButton.click();
+
+      statBlockEditor.homebreweryExportDialog.copyToClipboardButton.click();
+
+      expectCopyToClipboardStatus(statBlockEditor.homebreweryExportDialog);
+    });
+  });
+
+  describe('as file download', () => {
+    const expectedContentType = 'text/plain';
+    const expectedFileName = 'Commoner.txt';
+
+    it('one-column version', () => {
+      statBlockMenu.oneColumnButton.click();
+
+      statBlockMenu.exportHomebreweryButton.click();
+
+      statBlockEditor.homebreweryExportDialog.downloadAsFileButton.click();
+
+      expect(startFileDownload).toHaveBeenCalledWith(
+        expect.stringMatching(/^___\n.*/), 
+        expectedContentType,
+        expectedFileName);
+
+      expectFileDownloadStatus(statBlockEditor.homebreweryExportDialog);
+    });
+
+    it('two-column version', () => {
+      statBlockMenu.twoColumnButton.click();
+      statBlockSidebar.autoHeightModeButton.click();
+
+      statBlockMenu.exportHomebreweryButton.click();
+
+      statBlockEditor.homebreweryExportDialog.downloadAsFileButton.click();
+
+      expect(startFileDownload).toHaveBeenCalledWith(
+        expect.stringMatching(/^___\n___\n.*/), 
+        expectedContentType,
+        expectedFileName);
+
+      expectFileDownloadStatus(statBlockEditor.homebreweryExportDialog);
+    });
+  });  
+});
+
+function expectCopyToClipboardStatus(dialog) {
+  const statusLabel = dialog.statusLabel;
+  expect(statusLabel).toHaveTextContent('Press Ctrl+C to copy to clipboard.');
+  expect(statusLabel).toHaveClass('export-dialog__status-label_error');
+}
+
+function expectFileDownloadStatus(dialog) {
+  const statusLabel = dialog.statusLabel;
+  expect(statusLabel).toHaveTextContent('File download initiated.');
+  expect(statusLabel).toHaveClass('export-dialog__status-label_complete');
+}

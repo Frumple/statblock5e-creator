@@ -15,12 +15,13 @@ export default class ExportDialog extends CustomDialog {
 
     this.copyToClipboardButton = this.shadowRoot.getElementById('copy-to-clipboard-button');
     this.downloadAsFileButton = this.shadowRoot.getElementById('download-as-file-button');
-    this.status = this.shadowRoot.getElementById('status');
+    this.statusLabel = this.shadowRoot.getElementById('status-label');
 
     this.clipboard = null;
 
-    this.title = null;
-    this.content = null;
+    this.exportContent = null;
+    this.exportContentType = null;
+    this.exportFileName = null;
   }
 
   connectedCallback() {
@@ -33,25 +34,23 @@ export default class ExportDialog extends CustomDialog {
   }
 
   onClickDownloadAsFileButton() {
-    const contentType = 'text/html';
-    const fileName = `${this.title}.html`;
+    startFileDownload(this.exportContent, this.exportContentType, this.exportFileName);
 
-    startFileDownload(this.content, contentType, fileName);
-
-    this.status.textContent = 'File download initiated.';
-    this.status.classList.add('export-dialog__status_complete');
+    this.statusLabel.textContent = 'File download initiated.';
+    this.statusLabel.classList.add('export-dialog__status-label_complete');
   }
 
   onClickCloseButton() {
     this.clipboard.destroy();
   }
 
-  launch(title, content) {
-    this.title = title;
-    this.content = content;
+  launch(content, contentType, fileName) {
+    this.exportContent = content;
+    this.exportContentType = contentType;
+    this.exportFileName = fileName;
 
-    this.status.textContent = 'Choose one of the following options:';
-    this.status.classList.remove('export-dialog__status_complete');
+    this.statusLabel.textContent = 'Choose one of the following options:';
+    this.statusLabel.classList.remove('export-dialog__status-label_complete');
 
     this.clipboard = new ClipboardJS(this.copyToClipboardButton, {
       container: this.dialog,
@@ -61,13 +60,13 @@ export default class ExportDialog extends CustomDialog {
     });
 
     this.clipboard.on('success', () => {
-      this.status.textContent = 'Copied to clipboard.';
-      this.status.classList.add('export-dialog__status_complete');
+      this.statusLabel.textContent = 'Copied to clipboard.';
+      this.statusLabel.classList.add('export-dialog__status-label_complete');
     });
 
     this.clipboard.on('error', () => {
-      this.status.textContent = 'Press Ctrl+C to copy to clipboard.';
-      this.status.classList.add('export-dialog__status_error');
+      this.statusLabel.textContent = 'Press Ctrl+C to copy to clipboard.';
+      this.statusLabel.classList.add('export-dialog__status-label_error');
     });
 
     this.showModal();

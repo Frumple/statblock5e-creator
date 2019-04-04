@@ -53,12 +53,16 @@ export default class SensesSection extends propertyLineSectionModule.PropertyLin
     if (Senses.useCustomText) {
       this.showElements.text.innerHTMLSanitized = Senses.parsedCustomText;
     } else {
-      this.showElements.text.textContent = Senses.normalText;
+      this.showElements.text.textContent = Senses.nonCustomText;
     }    
   }
 
   exportToHtml() {
     return Senses.toHtml();
+  }
+
+  exportToHomebrewery() {
+    return Senses.toHomebrewery();
   }
 }
 

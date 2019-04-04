@@ -1,4 +1,6 @@
 import CustomAutonomousElement from '../custom-autonomous-element.js';
+import * as HtmlExportDocumentFactory from '../../../helpers/html-export-document-factory.js';
+import printHtml from '../../../helpers/print-helpers.js';
 import GlobalOptions from '../../../helpers/global-options.js';
 import isRunningInNode from '../../../helpers/is-running-in-node.js';
 
@@ -8,7 +10,7 @@ import StatBlock from './stat-block.js';
 
 import ExportDialog from '../dialogs/export-dialog.js';
 
-import printHtml from '../../../helpers/print-helpers.js';
+import Creature from '../../../models/creature.js';
 
 export default class StatBlockEditor extends CustomAutonomousElement {
   static get elementName() { return 'stat-block-editor'; }
@@ -27,12 +29,14 @@ export default class StatBlockEditor extends CustomAutonomousElement {
       this.statBlock = new StatBlock(this);
 
       this.htmlExportDialog = new ExportDialog();
+      this.homebreweryExportDialog = new ExportDialog();
     } else {
       this.statBlockMenu = document.querySelector('stat-block-menu');
       this.statBlockSidebar = document.querySelector('stat-block-sidebar');
       this.statBlock = document.querySelector('stat-block');
 
       this.htmlExportDialog = this.shadowRoot.getElementById('html-export-dialog');
+      this.homebreweryExportDialog = this.shadowRoot.getElementById('homebrewery-export-dialog');
     }    
   }
 
@@ -93,17 +97,13 @@ export default class StatBlockEditor extends CustomAutonomousElement {
   }
 
   onPrintAction() {
-    const content = this.statBlock.exportToHtml(this.title);
+    const content = this.exportToHtml(this.title);
     printHtml(content);
   }
 
   onExportAction(event) {
     const format = event.detail.format;
     this.openExportDialog(format);    
-  }
-
-  get title() {
-    return this.statBlock.headingSection.title;
   }
   
   openExportDialog(format) {
@@ -127,12 +127,32 @@ export default class StatBlockEditor extends CustomAutonomousElement {
   }
 
   openHtmlExportDialog() {
-    const content = this.statBlock.exportToHtml(`Statblock5e - ${this.title}`);
-
-    this.htmlExportDialog.launch(this.title, content);
+    const content = this.exportToHtml(`Statblock5e - ${Creature.title}`);
+    this.htmlExportDialog.launch(content, 'text/html', `${Creature.title}.html`);
   }
 
   openHomebreweryExportDialog() {
-    // TODO
+    const content = this.exportToHomebrewery();
+    this.homebreweryExportDialog.launch(content, 'text/plain', `${Creature.title}.txt`);
+  }
+
+  exportToHtml(title) {
+    const exportDocument = HtmlExportDocumentFactory.createInstance();
+    const titleElement = exportDocument.querySelector('title');
+    const bodyElement = exportDocument.querySelector('body');
+    const statBlockElement = this.statBlock.exportToHtml();
+
+    titleElement.textContent = title;
+    bodyElement.appendChild(statBlockElement);
+    
+    const doctype = '<!DOCTYPE html>';
+    const content = `${doctype}${exportDocument.documentElement.outerHTML}`;
+    const beautified_content = html_beautify(content, { indent_size: 2 });
+
+    return beautified_content;
+  }
+
+  exportToHomebrewery() {
+    return this.statBlock.exportToHomebrewery();
   }
 }

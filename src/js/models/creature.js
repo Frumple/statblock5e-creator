@@ -69,6 +69,10 @@ class Creature {
 
     return creatureHeading;
   }
+
+  toHomebrewery() {
+    return `> ## ${this.title}\n>*${this.subtitle}*`;
+  }
 }
 
 export default new Creature();

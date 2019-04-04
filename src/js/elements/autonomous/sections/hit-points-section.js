@@ -109,6 +109,10 @@ export default class HitPointsSection extends propertyLineSectionModule.Property
   exportToHtml() {
     return HitPoints.toHtml();
   }
+
+  exportToHomebrewery() {
+    return HitPoints.toHomebrewery();
+  }
 }
 
 class HitPointsShowElements extends propertyLineSectionModule.PropertyLineShowElements {

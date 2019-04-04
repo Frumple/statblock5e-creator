@@ -114,6 +114,10 @@ export class BlockListSection extends sectionModule.Section {
   exportToHtml() {
     return this.listModel.toHtml();
   }
+
+  exportToHomebrewery() {
+    return this.listModel.toHomebrewery();
+  }
 }
 
 export class BlockListShowSection extends sectionModule.ShowElements {

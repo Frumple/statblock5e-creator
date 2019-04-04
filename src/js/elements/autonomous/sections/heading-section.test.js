@@ -112,10 +112,11 @@ describe('when the show section is clicked', () => {
       expect(headingSection.showElements.title).toHaveTextContent(fullName);
       expect(headingSection.showElements.subtitle).toHaveTextContent(expectedSubtitle);
 
-      verifyHtmlExport(headingSection, fullName, expectedSubtitle);      
+      verifyHtmlExport(fullName, expectedSubtitle);      
+      verifyHomebreweryExport(fullName, expectedSubtitle);      
     });
 
-    function verifyHtmlExport(headingSection, expectedTitle, expectedSubtitle) {
+    function verifyHtmlExport(expectedTitle, expectedSubtitle) {
       const creatureHeading = headingSection.exportToHtml();
       const title = creatureHeading.querySelector('h1');      
       const subtitle = creatureHeading.querySelector('h2');  
@@ -123,6 +124,14 @@ describe('when the show section is clicked', () => {
       expect(creatureHeading.tagName).toBe('CREATURE-HEADING');
       expect(title).toHaveTextContent(expectedTitle);
       expect(subtitle).toHaveTextContent(expectedSubtitle);
+    }
+
+    function verifyHomebreweryExport(expectedTitle, expectedSubtitle) {
+      const text = headingSection.exportToHomebrewery();
+      const expectedText = 
+        `> ## ${expectedTitle}\n>*${expectedSubtitle}*`;
+
+      expect(text).toBe(expectedText);
     }
 
     it('should capitalize the first letter in the creature name', () => {

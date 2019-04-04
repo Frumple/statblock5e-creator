@@ -109,15 +109,15 @@ expect.extend({
     };
   },
 
-  toHavePropertyLine(section, expectedHeading, expectedText) {
+  toShowPropertyLine(section, expectedHeading, expectedText) {
     if (this.isNot) {
-      throw new Error('The matcher toHavePropertyLine cannot be used with the not modifier.');
+      throw new Error('The matcher toShowPropertyLine cannot be used with the not modifier.');
     }
 
     const headingElement = section.showElements.heading;
     const textElement = section.showElements.text;
 
-    return matchPropertyLineOrBlock(headingElement, textElement, expectedHeading, expectedText);
+    return matchPropertyLineOrBlock(headingElement.textContent, textElement.innerHTML, expectedHeading, expectedText);
   },
 
   toExportPropertyLineToHtml(section, expectedHeading, expectedText) {
@@ -129,23 +129,56 @@ expect.extend({
     const headingElement = propertyLine.querySelector('h4');
     const textElement = propertyLine.querySelector('p');
 
+    if (propertyLine.tagName !== 'PROPERTY-LINE') {
+      return {
+        message: () => `expected tag name to be 'property-line', but was ${propertyLine.tagName}`,
+        pass: false
+      };
+    }
+
     expect(propertyLine.tagName).toBe('PROPERTY-LINE');
 
-    return matchPropertyLineOrBlock(headingElement, textElement, expectedHeading, expectedText);
+    return matchPropertyLineOrBlock(headingElement.textContent, textElement.innerHTML, expectedHeading, expectedText);
   },
 
-  toBePropertyBlock(propertyBlock, expectedHeading, expectedText) {
+  toExportPropertyLineToHomebrewery(section, expectedHeading, expectedText) {
     if (this.isNot) {
-      throw new Error('The matcher toBePropertyBlock cannot be used with the not modifier.');
+      throw new Error('The matcher toExportPropertyLineToHomebrewery cannot be used with the not modifier.');
+    }
+
+    const propertyLine = section.exportToHomebrewery();
+    const expectedPropertyLine = `> - **${expectedHeading}** ${expectedText}`;
+    
+    let message = '';
+    const pass = (propertyLine === expectedPropertyLine);
+
+    if (! pass) {
+      message = `expected property line to be '${expectedPropertyLine}', but was ${propertyLine}`; 
+    }
+
+    return {
+      message: () => message,
+      pass: pass
+    };
+  },
+
+  toBeHtmlPropertyBlock(propertyBlock, expectedHeading, expectedText) {
+    if (this.isNot) {
+      throw new Error('The matcher toBeHtmlPropertyBlock cannot be used with the not modifier.');
     }
 
     const headingElement = propertyBlock.querySelector('h4');
     const textElement = propertyBlock.querySelector('p');
 
-    expect(propertyBlock.tagName).toBe('PROPERTY-BLOCK');
+    if (propertyBlock.tagName !== 'PROPERTY-BLOCK') {
+      return {
+        message: () => `expected tag name to be 'property-block', but was ${propertyBlock.tagName}`,
+        pass: false
+      };
+    }
 
-    return matchPropertyLineOrBlock(headingElement, textElement, expectedHeading, expectedText);
-  }
+    return matchPropertyLineOrBlock(headingElement.textContent, textElement.innerHTML, expectedHeading, expectedText);
+  }  
 });
 
 function isTextSelected(element) {
@@ -158,18 +191,18 @@ function isTextSelected(element) {
   }
 }
 
-function matchPropertyLineOrBlock(headingElement, textElement, expectedHeading, expectedText) {
-  const hasMatchingHeading = (headingElement.textContent === expectedHeading);
-  const hasMatchingText = (textElement.innerHTML === expectedText);
+function matchPropertyLineOrBlock(heading, text, expectedHeading, expectedText) {
+  const hasMatchingHeading = (heading === expectedHeading);
+  const hasMatchingText = (text === expectedText);
 
   const pass = (hasMatchingHeading && hasMatchingText);
   let message = '';
 
   if (! hasMatchingHeading) {
-    message += `expected heading to be '${expectedHeading}', but was '${headingElement.textContent}'\n`;
+    message += `expected heading to be '${expectedHeading}', but was '${heading}'\n`;
   }
   if (! hasMatchingText) {
-    message += `expected text to be '${expectedText}', but was '${textElement.textContent}'`;
+    message += `expected text to be '${expectedText}', but was '${text}'`;
   }
 
   return {

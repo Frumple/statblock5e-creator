@@ -85,6 +85,8 @@ describe('when the show section is clicked', () => {
         const htmlExport = abilityScoresSection.exportToHtml();
         expect(htmlExport.tagName).toBe('ABILITIES-BLOCK');
         expect(htmlExport.dataset[ability.abbreviation]).toBe(score.toString());
+
+        verifyHomebreweryExport();        
       });
       /* eslint-enable indent, no-unexpected-multiline */
     });
@@ -242,9 +244,25 @@ describe('when the show section is clicked', () => {
           expect(abilityScoresSection.showElements.modifier[key]).toHaveTextContent(formattedModifier); 
 
           expect(htmlExport.dataset[abbreviation]).toBe(expectedScore.toString());
-        }       
+        }   
+        
+        verifyHomebreweryExport();
       });
       /* eslint-enable indent, no-unexpected-multiline */
     });
   });
 });
+
+function verifyHomebreweryExport() {  
+  const homebreweryExport = abilityScoresSection.exportToHomebrewery();
+
+  const abilityStrings = Abilities.orderedAbilities.map(ability => `${ability.score} ${ability.formattedModifier}`);
+  const abilityLine = abilityStrings.join('|');
+
+  const expectedText =
+`>|STR|DEX|CON|INT|WIS|CHA|
+>|:---:|:---:|:---:|:---:|:---:|:---:|
+>|${abilityLine}|`;
+
+  expect(homebreweryExport).toBe(expectedText);
+}

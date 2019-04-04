@@ -85,6 +85,10 @@ export default class HeadingSection extends sectionModule.Section {
   exportToHtml() {
     return Creature.toHtml();
   }
+
+  exportToHomebrewery() {
+    return Creature.toHomebrewery();
+  }
 }
 
 class HeadingShowElements extends sectionModule.ShowElements {

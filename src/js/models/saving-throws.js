@@ -1,7 +1,7 @@
 import Abilities from './abilities.js';
 import ProficiencyBonus from './proficiency-bonus.js';
 import { capitalizeFirstLetter, formatModifier } from '../helpers/string-formatter.js';
-import { createPropertyLine } from '../helpers/export-helpers.js';
+import { createHtmlPropertyLine, createHomebreweryPropertyLine } from '../helpers/export-helpers.js';
 
 class SavingThrows {
   constructor() {
@@ -48,7 +48,11 @@ class SavingThrows {
   }
   
   toHtml() {
-    return createPropertyLine(this.headingName, this.text);
+    return createHtmlPropertyLine(this.headingName, this.text);
+  }
+
+  toHomebrewery() {
+    return createHomebreweryPropertyLine(this.headingName, this.text);
   }
 }
 

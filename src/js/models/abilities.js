@@ -26,6 +26,39 @@ class Abilities {
   get entries() {
     return Object.entries(this.abilities);
   }
+
+  get orderedAbilities() {
+    return [
+      this.abilities['strength'],
+      this.abilities['dexterity'],
+      this.abilities['constitution'],
+      this.abilities['intelligence'],
+      this.abilities['wisdom'],
+      this.abilities['charisma'],
+    ];
+  }
+
+  toHtml() {
+    const abilitiesBlock = document.createElement('abilities-block');
+    for (const [key, value] of this.entries) {
+      const abbreviation = value.abbreviation;
+      abilitiesBlock.dataset[abbreviation] = this.abilities[key].score;
+    }
+
+    return abilitiesBlock;
+  }
+
+  toHomebrewery() {
+    const abilityStrings = this.orderedAbilities.map(ability => `${ability.score} ${ability.formattedModifier}`);
+    const abilityLine = abilityStrings.join('|');
+
+    const text = 
+`>|STR|DEX|CON|INT|WIS|CHA|
+>|:---:|:---:|:---:|:---:|:---:|:---:|
+>|${abilityLine}|`;
+
+    return text;
+  }
 }
 
 class Ability {

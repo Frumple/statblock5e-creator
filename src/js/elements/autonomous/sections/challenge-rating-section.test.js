@@ -42,10 +42,10 @@ describe('when the show section is clicked', () => {
       challengeRatingSection.editElements.submitForm();
 
       expect(challengeRatingSection).toBeInMode('show');
-      expect(challengeRatingSection).toHavePropertyLine(expectedHeading, expectedText);
+      expect(challengeRatingSection).toShowPropertyLine(expectedHeading, expectedText);
 
       expect(challengeRatingSection).toExportPropertyLineToHtml(expectedHeading, expectedText);
-
+      expect(challengeRatingSection).toExportPropertyLineToHomebrewery(expectedHeading, expectedText);
     });
   });
 
@@ -58,9 +58,10 @@ describe('when the show section is clicked', () => {
       challengeRatingSection.editElements.submitForm();
 
       expect(challengeRatingSection).toBeInMode('show');
-      expect(challengeRatingSection).toHavePropertyLine(expectedHeading, expectedText);
+      expect(challengeRatingSection).toShowPropertyLine(expectedHeading, expectedText);
 
       expect(challengeRatingSection).toExportPropertyLineToHtml(expectedHeading, expectedText);
+      expect(challengeRatingSection).toExportPropertyLineToHomebrewery(expectedHeading, expectedText);
     });
 
     it('should display an error if the experience points field is not a valid number', () => {
@@ -85,9 +86,10 @@ describe('when the show section is clicked', () => {
       challengeRatingSection.editElements.submitForm();
 
       expect(challengeRatingSection).toBeInMode('show');
-      expect(challengeRatingSection).toHavePropertyLine(expectedHeading, expectedText);
+      expect(challengeRatingSection).toShowPropertyLine(expectedHeading, expectedText);
 
       expect(challengeRatingSection).toExportPropertyLineToHtml(expectedHeading, expectedText);
+      expect(challengeRatingSection).toExportPropertyLineToHomebrewery(expectedHeading, expectedText);
     });
   });
 
@@ -103,9 +105,10 @@ describe('when the show section is clicked', () => {
       challengeRatingSection.editElements.submitForm();
 
       expect(challengeRatingSection).toBeInMode('show');
-      expect(challengeRatingSection).toHavePropertyLine(expectedHeading, expectedText);
+      expect(challengeRatingSection).toShowPropertyLine(expectedHeading, expectedText);
 
       expect(challengeRatingSection).toExportPropertyLineToHtml(expectedHeading, expectedText);
+      expect(challengeRatingSection).toExportPropertyLineToHomebrewery(expectedHeading, expectedText);
     });
   });
 });

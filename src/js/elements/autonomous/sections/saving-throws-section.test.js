@@ -128,9 +128,10 @@ describe('when the show section is clicked', () => {
         savingThrowsSection.editElements.submitForm();
 
         expect(savingThrowsSection).toBeInMode('show');
-        expect(savingThrowsSection).toHavePropertyLine(expectedHeading, expectedText);
+        expect(savingThrowsSection).toShowPropertyLine(expectedHeading, expectedText);
 
         expect(savingThrowsSection).toExportPropertyLineToHtml(expectedHeading, expectedText);
+        expect(savingThrowsSection).toExportPropertyLineToHomebrewery(expectedHeading, expectedText);
 
         if (expectedText === '') {
           expect(savingThrowsSection.showElements.section).toHaveClass('section_empty');
@@ -204,9 +205,10 @@ describe('when the show section is clicked', () => {
         savingThrowsSection.editElements.submitForm();
 
         expect(savingThrowsSection).toBeInMode('show');
-        expect(savingThrowsSection).toHavePropertyLine(expectedHeading, expectedText);
+        expect(savingThrowsSection).toShowPropertyLine(expectedHeading, expectedText);
 
         expect(savingThrowsSection).toExportPropertyLineToHtml(expectedHeading, expectedText);
+        expect(savingThrowsSection).toExportPropertyLineToHomebrewery(expectedHeading, expectedText);
       });
       /* eslint-enable indent, no-unexpected-multiline */
     });

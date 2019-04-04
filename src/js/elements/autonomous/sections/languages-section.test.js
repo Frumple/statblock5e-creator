@@ -77,9 +77,10 @@ describe('when the show section is clicked', () => {
       languagesSection.editElements.submitForm();
 
       expect(languagesSection).toBeInMode('show');
-      expect(languagesSection).toHavePropertyLine(headingName, expectedText);
+      expect(languagesSection).toShowPropertyLine(headingName, expectedText);
 
       expect(languagesSection).toExportPropertyLineToHtml(headingName, expectedText);
+      expect(languagesSection).toExportPropertyLineToHomebrewery(headingName, expectedText);
     });
   });
 

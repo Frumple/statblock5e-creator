@@ -142,9 +142,10 @@ describe('when the show section is clicked', () => {
         skillsSection.editElements.submitForm();
 
         expect(skillsSection).toBeInMode('show');
-        expect(skillsSection).toHavePropertyLine(expectedHeading, expectedText);
+        expect(skillsSection).toShowPropertyLine(expectedHeading, expectedText);
 
         expect(skillsSection).toExportPropertyLineToHtml(expectedHeading, expectedText);
+        expect(skillsSection).toExportPropertyLineToHomebrewery(expectedHeading, expectedText);
 
         if (expectedText === '') {
           expect(skillsSection.showElements.section).toHaveClass('section_empty');
@@ -210,9 +211,10 @@ describe('when the show section is clicked', () => {
         skillsSection.editElements.submitForm();
 
         expect(skillsSection).toBeInMode('show');
-        expect(skillsSection).toHavePropertyLine(expectedHeading, expectedText);
+        expect(skillsSection).toShowPropertyLine(expectedHeading, expectedText);
 
         expect(skillsSection).toExportPropertyLineToHtml(expectedHeading, expectedText);
+        expect(skillsSection).toExportPropertyLineToHomebrewery(expectedHeading, expectedText);
       });
       /* eslint-enable indent, no-unexpected-multiline */
     });

@@ -62,22 +62,24 @@ describe('when the show section is clicked', () => {
         sensesSection.editElements.submitForm();
 
         expect(sensesSection).toBeInMode('show');
-        expect(sensesSection).toHavePropertyLine(expectedHeading, customText);
+        expect(sensesSection).toShowPropertyLine(expectedHeading, customText);
 
         expect(sensesSection).toExportPropertyLineToHtml(expectedHeading, customText);
+        expect(sensesSection).toExportPropertyLineToHomebrewery(expectedHeading, customText);
       });
 
       it('should switch to show mode and save the custom text with valid markdown syntax', () => {
-        const customText = '**boldvision 60 ft.**';
-        const expectedText = '<strong>boldvision 60 ft.</strong>';
-        inputValueAndTriggerEvent(sensesSection.editElements.customText, customText);
+        const originalText = '**boldvision 60 ft.**';
+        const parsedText = '<strong>boldvision 60 ft.</strong>';
+        inputValueAndTriggerEvent(sensesSection.editElements.customText, originalText);
 
         sensesSection.editElements.submitForm();
 
         expect(sensesSection).toBeInMode('show');
-        expect(sensesSection).toHavePropertyLine(expectedHeading, expectedText);
+        expect(sensesSection).toShowPropertyLine(expectedHeading, parsedText);
 
-        expect(sensesSection).toExportPropertyLineToHtml(expectedHeading, expectedText);
+        expect(sensesSection).toExportPropertyLineToHtml(expectedHeading, parsedText);
+        expect(sensesSection).toExportPropertyLineToHomebrewery(expectedHeading, originalText);
       });
 
       it('should display an error if the custom text field is blank', () => {
@@ -159,9 +161,10 @@ describe('when the show section is clicked', () => {
           expect(Senses.truesight).toBe(truesight);
 
           expect(sensesSection).toBeInMode('show');
-          expect(sensesSection).toHavePropertyLine(expectedHeading, expectedText);
+          expect(sensesSection).toShowPropertyLine(expectedHeading, expectedText);
 
           expect(sensesSection).toExportPropertyLineToHtml(expectedHeading, expectedText);
+          expect(sensesSection).toExportPropertyLineToHomebrewery(expectedHeading, expectedText);
         });
         /* eslint-enable indent, no-unexpected-multiline */
       });
@@ -205,9 +208,10 @@ describe('should calculate the passive perception based on the following conditi
 
     expect(Senses.passivePerception).toBe(expectedPassivePerception);
 
-    expect(sensesSection).toHavePropertyLine(expectedHeading, expectedText);
+    expect(sensesSection).toShowPropertyLine(expectedHeading, expectedText);
 
     expect(sensesSection).toExportPropertyLineToHtml(expectedHeading, expectedText);
+    expect(sensesSection).toExportPropertyLineToHomebrewery(expectedHeading, expectedText);
 
     sensesSection.showElements.section.click();
 

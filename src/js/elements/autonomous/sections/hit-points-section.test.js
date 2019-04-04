@@ -95,9 +95,10 @@ describe('when the show section is clicked', () => {
           hitPointsSection.editElements.submitForm();
 
           expect(hitPointsSection).toBeInMode('show');
-          expect(hitPointsSection).toHavePropertyLine(expectedHeading, expectedText);
+          expect(hitPointsSection).toShowPropertyLine(expectedHeading, expectedText);
 
           expect(hitPointsSection).toExportPropertyLineToHtml(expectedHeading, expectedText);
+          expect(hitPointsSection).toExportPropertyLineToHomebrewery(expectedHeading, expectedText);
         });      
         /* eslint-enable indent, no-unexpected-multiline */
       });
@@ -194,9 +195,10 @@ describe('when the show section is clicked', () => {
         hitPointsSection.editElements.submitForm();
 
         expect(hitPointsSection).toBeInMode('show');
-        expect(hitPointsSection).toHavePropertyLine(expectedHeading, expectedText);
+        expect(hitPointsSection).toShowPropertyLine(expectedHeading, expectedText);
 
         expect(hitPointsSection).toExportPropertyLineToHtml(expectedHeading, expectedText);
+        expect(hitPointsSection).toExportPropertyLineToHomebrewery(expectedHeading, expectedText);
       });
 
       it('should display an error if the hit points field is not a valid number, and the hit points should not be saved', () => {

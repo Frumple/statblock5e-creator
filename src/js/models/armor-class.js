@@ -1,4 +1,4 @@
-import { createPropertyLine } from '../helpers/export-helpers.js';
+import * as ExportHelpers from '../helpers/export-helpers.js';
 
 class ArmorClass {
   constructor() {
@@ -15,9 +15,25 @@ class ArmorClass {
     this.useCustomText = false;
     this.originalCustomText = '';
     this.parsedCustomText = '';
-  }  
+  }
 
-  get normalText() {
+  get originalText() {
+    if (this.useCustomText) {
+      return this.originalCustomText;
+    }
+
+    return this.nonCustomText;
+  }
+
+  get parsedText() {
+    if (this.useCustomText) {
+      return this.parsedCustomText;
+    }
+
+    return this.nonCustomText;
+  }
+
+  get nonCustomText() {
     if (this.armorType) {
       if (this.hasShield) {
         return `${this.armorClass} (${this.armorType}, shield)`;
@@ -33,16 +49,12 @@ class ArmorClass {
     }
   }
 
-  get htmlText() {
-    if (this.useCustomText) {
-      return this.parsedCustomText;
-    }
-
-    return this.normalText;
+  toHtml() {    
+    return ExportHelpers.createHtmlPropertyLine(this.headingName, this.parsedText);
   }
 
-  toHtml() {    
-    return createPropertyLine(this.headingName, this.htmlText);
+  toHomebrewery() {
+    return ExportHelpers.createHomebreweryPropertyLine(this.headingName, this.originalText);
   }
 }
 

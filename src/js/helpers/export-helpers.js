@@ -6,12 +6,12 @@ export function startFileDownload(content, contentType, fileName) {
   link.click();
 }
 
-export function createPropertyLine(heading, text) {
+export function createHtmlPropertyLine(heading, text) {
   const propertyLine = document.createElement('property-line');
   return populatePropertyElement(propertyLine, heading, text);
 }
 
-export function createPropertyBlock(heading, text) {
+export function createHtmlPropertyBlock(heading, text) {
   const propertyBlock = document.createElement('property-block');
   return populatePropertyElement(propertyBlock, `${heading}.`, text);
 }
@@ -27,4 +27,12 @@ function populatePropertyElement(element, heading, text) {
   element.appendChild(textElement);
 
   return element;
+}
+
+export function createHomebreweryPropertyLine(heading, text) {
+  return `> - **${heading}** ${text}`;
+}
+
+export function createHomebreweryPropertyBlock(heading, text) {
+  return `> ***${heading}.*** ${text}`;
 }

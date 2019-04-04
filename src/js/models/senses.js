@@ -1,5 +1,5 @@
 import Skills from './skills.js';
-import { createPropertyLine } from '../helpers/export-helpers.js';
+import { createHtmlPropertyLine, createHomebreweryPropertyLine } from '../helpers/export-helpers.js';
 
 class Senses {
   constructor() {
@@ -23,7 +23,23 @@ class Senses {
     return Skills.skills['perception'].passiveScore;
   }
 
-  get normalText() {
+  get originalText() {
+    if (this.useCustomText) {
+      return this.originalCustomText;
+    }
+
+    return this.nonCustomText;
+  }
+
+  get parsedText() {
+    if (this.useCustomText) {
+      return this.parsedCustomText;
+    }
+
+    return this.nonCustomText;
+  }
+
+  get nonCustomText() {
     const unit = 'ft.';
     const list = [];
 
@@ -45,16 +61,12 @@ class Senses {
     return list.join(', ');
   }
 
-  get htmlText() {
-    if (this.useCustomText) {
-      return this.parsedCustomText;
-    }
-
-    return this.normalText;
+  toHtml() {
+    return createHtmlPropertyLine(this.headingName, this.parsedText);
   }
 
-  toHtml() {
-    return createPropertyLine(this.headingName, this.htmlText);
+  toHomebrewery() {
+    return createHomebreweryPropertyLine(this.headingName, this.originalText);
   }
 }
 

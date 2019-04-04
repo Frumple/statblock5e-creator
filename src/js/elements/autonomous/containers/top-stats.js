@@ -31,14 +31,31 @@ export default class TopStats extends CustomAutonomousElement {
   exportToHtml() {
     const topStats = document.createElement('top-stats');
 
-    const basicStats = this.basicStats.exportToHtml();
-    const abilityScoresSection = this.abilityScoresSection.exportToHtml();
-    const advancedStats = this.advancedStats.exportToHtml();
+    const basicStatsExport = this.basicStats.exportToHtml();
+    const abilityScoresExport = this.abilityScoresSection.exportToHtml();
+    const advancedStatsExport = this.advancedStats.exportToHtml();
 
-    topStats.appendChild(basicStats);
-    topStats.appendChild(abilityScoresSection);
-    topStats.appendChild(advancedStats);
+    topStats.appendChild(basicStatsExport);
+    topStats.appendChild(abilityScoresExport);
+    topStats.appendChild(advancedStatsExport);
     
     return topStats;
+  }
+
+  exportToHomebrewery() {
+    const basicStatsExport = this.basicStats.exportToHomebrewery();
+    const abilityScoresExport = this.abilityScoresSection.exportToHomebrewery();
+    const advancedStatsExport = this.advancedStats.exportToHomebrewery();
+
+    const text =
+`>___
+${basicStatsExport}
+>___
+${abilityScoresExport}
+>___
+${advancedStatsExport}
+>___`;
+
+    return text;
   }
 }

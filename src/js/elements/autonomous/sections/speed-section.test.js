@@ -62,26 +62,28 @@ describe('when the show section is clicked', () => {
         expect(Speed.parsedCustomText).toBe(customText);
 
         expect(speedSection).toBeInMode('show');
-        expect(speedSection).toHavePropertyLine(expectedHeading, customText);
+        expect(speedSection).toShowPropertyLine(expectedHeading, customText);
 
         expect(speedSection).toExportPropertyLineToHtml(expectedHeading, customText);
+        expect(speedSection).toExportPropertyLineToHomebrewery(expectedHeading, customText);
       });
 
       it('should switch to show mode and save the custom text with valid markdown syntax', () => {
-        const customText = '40 ft. (80 ft. when _hasted_)';
-        const expectedText = '40 ft. (80 ft. when <em>hasted</em>)';
-        inputValueAndTriggerEvent(speedSection.editElements.customText, customText);
+        const originalText = '40 ft. (80 ft. when _hasted_)';
+        const parsedText = '40 ft. (80 ft. when <em>hasted</em>)';
+        inputValueAndTriggerEvent(speedSection.editElements.customText, originalText);
 
         speedSection.editElements.submitForm();
 
         expect(Speed.useCustomText).toBe(true);
-        expect(Speed.originalCustomText).toBe(customText);
-        expect(Speed.parsedCustomText).toBe(expectedText);
+        expect(Speed.originalCustomText).toBe(originalText);
+        expect(Speed.parsedCustomText).toBe(parsedText);
 
         expect(speedSection).toBeInMode('show');
-        expect(speedSection).toHavePropertyLine(expectedHeading, expectedText);
+        expect(speedSection).toShowPropertyLine(expectedHeading, parsedText);
 
-        expect(speedSection).toExportPropertyLineToHtml(expectedHeading, expectedText);
+        expect(speedSection).toExportPropertyLineToHtml(expectedHeading, parsedText);
+        expect(speedSection).toExportPropertyLineToHomebrewery(expectedHeading, originalText);
       });
 
       it('should display an error if the custom text field is blank', () => {
@@ -184,9 +186,10 @@ describe('when the show section is clicked', () => {
           expect(Speed.swim).toBe(swim);
 
           expect(speedSection).toBeInMode('show');
-          expect(speedSection).toHavePropertyLine(expectedHeading, expectedText);
+          expect(speedSection).toShowPropertyLine(expectedHeading, expectedText);
 
           expect(speedSection).toExportPropertyLineToHtml(expectedHeading, expectedText);
+          expect(speedSection).toExportPropertyLineToHomebrewery(expectedHeading, expectedText);
         });
         /* eslint-enable indent, no-unexpected-multiline */
       });

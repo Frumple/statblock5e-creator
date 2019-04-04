@@ -1,5 +1,4 @@
 import CustomAutonomousElement from '../custom-autonomous-element.js';
-import * as HtmlExportDocumentFactory from '../../../helpers/html-export-document-factory.js';
 import isRunningInNode from '../../../helpers/is-running-in-node.js';
 import GlobalOptions from '../../../helpers/global-options.js';
 
@@ -116,16 +115,12 @@ export default class StatBlock extends CustomAutonomousElement {
     // TODO
   }
 
-  exportToHtml(title) {
-    const doc = HtmlExportDocumentFactory.createInstance();
-    const titleElement = doc.querySelector('title');
-    const statBlockElement = doc.querySelector('stat-block');
+  exportToHtml() {
+    const statBlockElement = document.createElement('stat-block');
 
     const headingSection = this.headingSection.exportToHtml();
     const topStats = this.topStats.exportToHtml();
     const bottomStats = this.bottomStats.exportToHtml();
-
-    titleElement.textContent = title;
 
     statBlockElement.appendChild(headingSection);
     statBlockElement.appendChild(topStats);
@@ -139,14 +134,19 @@ export default class StatBlock extends CustomAutonomousElement {
       }
     }
 
-    const doctype = '<!DOCTYPE html>';
-    const content = `${doctype}${doc.documentElement.outerHTML}`;
-    const beautified_content = html_beautify(content, { indent_size: 2 });
-
-    return beautified_content;
+    return statBlockElement;
   }
 
   exportToHomebrewery() {
-    // TODO
+    let blockHeader = '___';
+    if (GlobalOptions.columns === 2) {
+      blockHeader += '\n___';
+    }
+
+    const headingSection = this.headingSection.exportToHomebrewery();
+    const topStats = this.topStats.exportToHomebrewery();
+    const bottomStats = this.bottomStats.exportToHomebrewery();
+
+    return `${blockHeader}\n${headingSection}\n${topStats}\n${bottomStats}`;
   }
 }

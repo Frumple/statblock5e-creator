@@ -102,13 +102,11 @@ export default class AbilityScoresSection extends sectionModule.Section {
   }
 
   exportToHtml() {
-    const abilitiesBlock = document.createElement('abilities-block');
-    for (const [key, value] of Abilities.entries) {
-      const abbreviation = value.abbreviation;
-      abilitiesBlock.dataset[abbreviation] = this.showElements.score[key].textContent;
-    }
+    return Abilities.toHtml();
+  }
 
-    return abilitiesBlock;
+  exportToHomebrewery() {
+    return Abilities.toHomebrewery();
   }
 }
 

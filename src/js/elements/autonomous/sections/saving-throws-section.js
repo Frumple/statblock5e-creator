@@ -128,6 +128,10 @@ export default class SavingThrowsSection extends propertyLineSectionModule.Prope
   exportToHtml() {
     return SavingThrows.toHtml();
   }
+
+  exportToHomebrewery() {
+    return SavingThrows.toHomebrewery();
+  }
 }
 
 class SavingThrowsShowElements extends propertyLineSectionModule.PropertyLineShowElements {

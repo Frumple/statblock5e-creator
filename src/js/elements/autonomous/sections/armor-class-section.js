@@ -54,12 +54,16 @@ export default class ArmorClassSection extends propertyLineSectionModule.Propert
     if (ArmorClass.useCustomText) {
       this.showElements.text.innerHTMLSanitized = ArmorClass.parsedCustomText;
     } else {
-      this.showElements.text.textContent = ArmorClass.normalText;
+      this.showElements.text.textContent = ArmorClass.nonCustomText;
     }    
   }
 
   exportToHtml() {
     return ArmorClass.toHtml();
+  }
+
+  exportToHomebrewery() {
+    return ArmorClass.toHomebrewery();
   }
 }
 

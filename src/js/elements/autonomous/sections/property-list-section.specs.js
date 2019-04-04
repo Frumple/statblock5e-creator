@@ -9,9 +9,10 @@ export function shouldAddASuggestedItem(section, headingName, itemText) {
   section.editElements.submitForm();
 
   expect(section).toBeInMode('show');
-  expect(section).toHavePropertyLine(headingName, itemText);
+  expect(section).toShowPropertyLine(headingName, itemText);
 
   expect(section).toExportPropertyLineToHtml(headingName, itemText);
+  expect(section).toExportPropertyLineToHomebrewery(headingName, itemText);
 }
 
 export function shouldAddACustomItem(section, headingName, itemText) {
@@ -23,9 +24,10 @@ export function shouldAddACustomItem(section, headingName, itemText) {
   section.editElements.submitForm();
 
   expect(section).toBeInMode('show');
-  expect(section).toHavePropertyLine(headingName, itemText);
+  expect(section).toShowPropertyLine(headingName, itemText);
 
   expect(section).toExportPropertyLineToHtml(headingName, itemText);
+  expect(section).toExportPropertyLineToHomebrewery(headingName, itemText);
 }
 
 export function shouldAddManyItems(section, headingName, itemTexts) {
@@ -41,9 +43,10 @@ export function shouldAddManyItems(section, headingName, itemTexts) {
   const expectedTextContent = itemTexts.join(', ');
 
   expect(section).toBeInMode('show');
-  expect(section).toHavePropertyLine(headingName, expectedTextContent);
+  expect(section).toShowPropertyLine(headingName, expectedTextContent);
 
   expect(section).toExportPropertyLineToHtml(headingName, expectedTextContent);
+  expect(section).toExportPropertyLineToHomebrewery(headingName, expectedTextContent);
 }
 
 export function shouldDisplayAnErrorIfAddingBlank(section, expectedItemType) {
@@ -106,9 +109,10 @@ export function shouldAddAndRemoveItem(section, headingName, itemText) {
 
   expect(section).toBeInMode('show');
   expect(section.showElements.section).toHaveClass('section_empty');
-  expect(section).toHavePropertyLine(headingName, expectedTextContent);
+  expect(section).toShowPropertyLine(headingName, expectedTextContent);
 
   expect(section).toExportPropertyLineToHtml(headingName, expectedTextContent);
+  expect(section).toExportPropertyLineToHomebrewery(headingName, expectedTextContent);
 }
 
 export function shouldDeleteOneOfThreeItems(section, headingName, initialItems, itemToDelete, expectedItems) {
@@ -127,7 +131,8 @@ export function shouldDeleteOneOfThreeItems(section, headingName, initialItems, 
   const expectedTextContent = expectedItems.join(', ');
 
   expect(section).toBeInMode('show');
-  expect(section).toHavePropertyLine(headingName, expectedTextContent);
+  expect(section).toShowPropertyLine(headingName, expectedTextContent);
 
   expect(section).toExportPropertyLineToHtml(headingName, expectedTextContent);
+  expect(section).toExportPropertyLineToHomebrewery(headingName, expectedTextContent);
 }

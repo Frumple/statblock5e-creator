@@ -9,17 +9,17 @@
   justify-content: center;
 }
 
-.export-dialog__status {
+.export-dialog__status-label {
   font-weight: bold;
   padding: 0 1em;
   margin: 0;
 }
 
-.export-dialog__status_complete {
+.export-dialog__status-label_complete {
   color: green;
 }
 
-.export-dialog__status_error {
+.export-dialog__status-label_error {
   color: red;
 }
 

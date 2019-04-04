@@ -59,26 +59,28 @@ describe('when the show section is clicked', () => {
         expect(ArmorClass.parsedCustomText).toBe(customText);
 
         expect(armorClassSection).toBeInMode('show');
-        expect(armorClassSection).toHavePropertyLine(expectedHeading, customText);
+        expect(armorClassSection).toShowPropertyLine(expectedHeading, customText);
 
         expect(armorClassSection).toExportPropertyLineToHtml(expectedHeading, customText);
+        expect(armorClassSection).toExportPropertyLineToHomebrewery(expectedHeading, customText);
       });
 
       it('should switch to show mode and save the custom text with valid markdown syntax', () => {
-        const customText = '12 (15 with *mage armor*)';
-        const expectedText = '12 (15 with <em>mage armor</em>)';
-        inputValueAndTriggerEvent(armorClassSection.editElements.customText, customText);
+        const originalText = '12 (15 with *mage armor*)';
+        const parsedText = '12 (15 with <em>mage armor</em>)';
+        inputValueAndTriggerEvent(armorClassSection.editElements.customText, originalText);
 
         armorClassSection.editElements.submitForm();
 
         expect(ArmorClass.useCustomText).toBe(true);
-        expect(ArmorClass.originalCustomText).toBe(customText);
-        expect(ArmorClass.parsedCustomText).toBe(expectedText);
+        expect(ArmorClass.originalCustomText).toBe(originalText);
+        expect(ArmorClass.parsedCustomText).toBe(parsedText);
 
         expect(armorClassSection).toBeInMode('show');
-        expect(armorClassSection).toHavePropertyLine(expectedHeading, expectedText);
+        expect(armorClassSection).toShowPropertyLine(expectedHeading, parsedText);
 
-        expect(armorClassSection).toExportPropertyLineToHtml(expectedHeading, expectedText);
+        expect(armorClassSection).toExportPropertyLineToHtml(expectedHeading, parsedText);
+        expect(armorClassSection).toExportPropertyLineToHomebrewery(expectedHeading, originalText);
       });
 
       it('should display an error if the custom text field is blank', () => {
@@ -145,9 +147,10 @@ describe('when the show section is clicked', () => {
         expect(ArmorClass.hasShield).toBe(false);
 
         expect(armorClassSection).toBeInMode('show');
-        expect(armorClassSection).toHavePropertyLine(expectedHeading, expectedText);
+        expect(armorClassSection).toShowPropertyLine(expectedHeading, expectedText);
 
         expect(armorClassSection).toExportPropertyLineToHtml(expectedHeading, expectedText);
+        expect(armorClassSection).toExportPropertyLineToHomebrewery(expectedHeading, expectedText);
       });
 
       it('should switch to show mode and save the armor class and armor type', () => {
@@ -163,9 +166,10 @@ describe('when the show section is clicked', () => {
         expect(ArmorClass.hasShield).toBe(false);
 
         expect(armorClassSection).toBeInMode('show');
-        expect(armorClassSection).toHavePropertyLine(expectedHeading, expectedText);
+        expect(armorClassSection).toShowPropertyLine(expectedHeading, expectedText);
 
         expect(armorClassSection).toExportPropertyLineToHtml(expectedHeading, expectedText);
+        expect(armorClassSection).toExportPropertyLineToHomebrewery(expectedHeading, expectedText);
       });
 
       it('should switch to show mode and save the armor class and shield', () => {
@@ -181,9 +185,10 @@ describe('when the show section is clicked', () => {
         expect(ArmorClass.hasShield).toBe(true);
 
         expect(armorClassSection).toBeInMode('show');
-        expect(armorClassSection).toHavePropertyLine(expectedHeading, expectedText);
+        expect(armorClassSection).toShowPropertyLine(expectedHeading, expectedText);
 
         expect(armorClassSection).toExportPropertyLineToHtml(expectedHeading, expectedText);
+        expect(armorClassSection).toExportPropertyLineToHomebrewery(expectedHeading, expectedText);
       });
 
       it('should switch to show mode and save the armor class, armor type, and shield', () => {
@@ -200,9 +205,10 @@ describe('when the show section is clicked', () => {
         expect(ArmorClass.hasShield).toBe(true);
 
         expect(armorClassSection).toBeInMode('show');
-        expect(armorClassSection).toHavePropertyLine(expectedHeading, expectedText);
+        expect(armorClassSection).toShowPropertyLine(expectedHeading, expectedText);
 
         expect(armorClassSection).toExportPropertyLineToHtml(expectedHeading, expectedText);
+        expect(armorClassSection).toExportPropertyLineToHomebrewery(expectedHeading, expectedText);
       });
 
       it('should display an error if the armor class field is not a valid number', () => {

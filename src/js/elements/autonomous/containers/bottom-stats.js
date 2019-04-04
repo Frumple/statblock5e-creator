@@ -58,4 +58,11 @@ export default class BottomStats extends CustomAutonomousElement {
 
     return fragment;
   }
+
+  exportToHomebrewery() {
+    const exports = this.allSections
+      .filter(section => ! section.empty)
+      .map(section => section.exportToHomebrewery());
+    return exports.join('\n');
+  }
 }
