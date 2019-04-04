@@ -1,5 +1,5 @@
 import CustomBuiltinInputElement from './custom-builtin-input-element.js';
-import parseText from '../../parser/parse-text.js';
+import parseText from '../../parsers/parse-text.js';
 
 export default class TextInput extends CustomBuiltinInputElement {
   static get elementName() { return 'text-input'; }

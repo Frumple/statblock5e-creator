@@ -1,7 +1,7 @@
 import CustomBuiltinElementMixins from '../../helpers/custom-builtin-element-mixins.js';
 import isRunningInNode from '../../helpers/is-running-in-node.js';
 import { copyObjectProperties } from '../../helpers/object-helpers.js';
-import parseText from '../../parser/parse-text.js';
+import parseText from '../../parsers/parse-text.js';
 
 export default class CustomTextArea extends HTMLTextAreaElement {
   static async define() {
