@@ -31,7 +31,7 @@ export default class BlockListModel {
     const homebreweryBlocks = 
       this.blocks.map(block => block.toHomebrewery());
     const homebreweryBlocksAsText =
-      homebreweryBlocks.join('\n\n');      
+      homebreweryBlocks.join('\n>\n');
 
     return `${heading}${homebreweryBlocksAsText}`;
   }

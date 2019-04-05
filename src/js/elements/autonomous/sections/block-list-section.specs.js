@@ -32,19 +32,15 @@ export function shouldFocusOnNameFieldOfNewBlock(section) {
   }
 }
 
-export function shouldAddASingleBlock(section, blockName, blockText, expectedText = null) {
-  addAndPopulateBlock(section, blockName, blockText);
+export function shouldAddASingleBlock(section, block) {
+  addAndPopulateBlock(section, block.name, block.originalText);
 
   section.editElements.submitForm();
 
   expect(section).toBeInMode('show');
   expectSectionToBeEmpty(section, false);
   
-  const blocks = [{
-    name: blockName,
-    text: blockText,
-    expectedText: expectedText
-  }];
+  const blocks = [block];
 
   expectDisplayBlocks(section, blocks);
   expectHtmlExport(section, blocks);
@@ -53,7 +49,7 @@ export function shouldAddASingleBlock(section, blockName, blockText, expectedTex
 
 export function shouldAddMultipleBlocks(section, blocks) {
   for (const block of blocks) {
-    addAndPopulateBlock(section, block.name, block.text);
+    addAndPopulateBlock(section, block.name, block.originalText);
   }
 
   section.editElements.submitForm();
@@ -66,8 +62,8 @@ export function shouldAddMultipleBlocks(section, blocks) {
   expectHomebreweryExport(section, blocks);
 }
 
-export function shouldAddASingleBlockThenRemoveIt(section, blockName, blockText) {
-  addAndPopulateBlock(section, blockName, blockText);
+export function shouldAddASingleBlockThenRemoveIt(section, block) {
+  addAndPopulateBlock(section, block.name, block.originalText);
 
   const editableBlock = section.editElements.editableList.blocks[0];
   editableBlock.remove();
@@ -82,7 +78,7 @@ export function shouldAddASingleBlockThenRemoveIt(section, blockName, blockText)
 
 export function shouldAddMultipleBlocksThenRemoveOneOfThem(section, blocks, removeIndex) {
   for (const block of blocks) {
-    addAndPopulateBlock(section, block.name, block.text);
+    addAndPopulateBlock(section, block.name, block.originalText);
   }
 
   const editableBlock = section.editElements.editableList.blocks[removeIndex];
@@ -100,12 +96,12 @@ export function shouldAddMultipleBlocksThenRemoveOneOfThem(section, blocks, remo
   expectHomebreweryExport(section, blocks);
 }
 
-export function shouldReparseNameChanges(section, blockName, blockText, oldNames, newNames, expectedText) {
+export function shouldReparseNameChanges(section, block, oldNames, newNames) {
   Creature.fullName = oldNames.fullName;
   Creature.shortName = oldNames.shortName;
   Creature.isProperNoun = oldNames.isProperNoun;
   
-  addAndPopulateBlock(section, blockName, blockText);
+  addAndPopulateBlock(section, block.name, block.originalText);
 
   section.editElements.submitForm();
 
@@ -115,11 +111,7 @@ export function shouldReparseNameChanges(section, blockName, blockText, oldNames
 
   section.reparse();
 
-  const blocks = [{
-    name: blockName,
-    text: blockText,
-    expectedText: expectedText
-  }];
+  const blocks = [block];
 
   expectDisplayBlocks(section, blocks);
   expectHtmlExport(section, blocks);
@@ -136,7 +128,7 @@ export function shouldTrimAllTrailingPeriodCharactersInBlockName(section) {
 
   const expectedBlocks = [{
     name: 'Cthulhu. fhtag.n',
-    text: 'Some text.'
+    originalText: 'Some text.'
   }];
   expectDisplayBlocks(section, expectedBlocks);
   expectHtmlExport(section, expectedBlocks);
@@ -228,7 +220,7 @@ function expectDisplayBlocks(section, expectedBlocks) {
     const displayBlock = section.showElements.displayList.blocks[index];
     
     expect(displayBlock.name).toBe(block.name);
-    expect(displayBlock.text).toBe(block.expectedText ? block.expectedText : block.text);    
+    expect(displayBlock.text).toBe(block.htmlText ? block.htmlText : block.originalText);    
   }  
 }
 
@@ -249,7 +241,7 @@ function expectHtmlExport(section, expectedBlocks) {
 
     expect(htmlExportPropertyBlock).toBeHtmlPropertyBlock(
       `${block.name}.`,
-      (block.expectedText ? block.expectedText : block.text));
+      (block.htmlText ? block.htmlText : block.originalText));
   }
 }
 
@@ -268,11 +260,9 @@ function expectHomebreweryExport(section, expectedBlocks) {
 
   const expectedBlocksInHomebreweryFormat = 
     expectedBlocks.map(
-      block => `> ***${block.name}.*** ${block.text}`);
+      block => `> ***${block.name}.*** ${(block.homebreweryText ? block.homebreweryText : block.originalText)}`);
 
-  // TODO: Homebrewery should not parse Markdown, but should parse expressions
-
-  const expectedBlocksText = expectedBlocksInHomebreweryFormat.join('\n\n');
+  const expectedBlocksText = expectedBlocksInHomebreweryFormat.join('\n>\n');
   expect(blocksText).toBe(expectedBlocksText);
 }
 

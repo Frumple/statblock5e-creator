@@ -47,28 +47,47 @@ describe('when the show section is clicked', () => {
 
   describe('and blocks are added and/or removed, and the edit section is submitted', () => {
     it('should add a single block', () => {
-      const blockName = 'Slam';
-      const blockText = '*Melee Weapon Attack:* +3 to hit, reach 5 ft., one target. *Hit:* 4 (1d6 + 1) bludgeoning damage.';
-      const expectedText = '<em>Melee Weapon Attack:</em> +3 to hit, reach 5 ft., one target. <em>Hit:</em> 4 (1d6 + 1) bludgeoning damage.';
-      sharedSpecs.shouldAddASingleBlock(actionsSection, blockName, blockText, expectedText);
+      const block = {
+        name: 'Slam',
+        originalText: '*Melee Weapon Attack:* +3 to hit, reach 5 ft., one target. *Hit:* 4 (1d6 + 1) bludgeoning damage.',
+        homebreweryText: '*Melee Weapon Attack:* +3 to hit, reach 5 ft., one target. *Hit:* 4 (1d6 + 1) bludgeoning damage.',
+        htmlText: '<em>Melee Weapon Attack:</em> +3 to hit, reach 5 ft., one target. <em>Hit:</em> 4 (1d6 + 1) bludgeoning damage.'
+      };
+      sharedSpecs.shouldAddASingleBlock(actionsSection, block);
+    });
+
+    it('should add a single block with multiline text', () => {
+      const block = {
+        name: 'Multiline Action',
+        originalText: '**Line 1**. {name} is hot.\n  **Line 2**. {name} is cold.\n    **Line 3**. {name} is warm.',
+        homebreweryText: '**Line 1**. The dummy is hot.  \n>   **Line 2**. The dummy is cold.  \n>     **Line 3**. The dummy is warm.',
+        htmlText: '<strong>Line 1</strong>. The dummy is hot.\n  <strong>Line 2</strong>. The dummy is cold.\n    <strong>Line 3</strong>. The dummy is warm.'
+      };
+      
+      Creature.fullName = 'Dummy';
+      
+      sharedSpecs.shouldAddASingleBlock(actionsSection, block);
     });
 
     it('should add multiple blocks', () => {
       const blocks = [
         { 
           name: 'Multiattack',
-          text: '{name} makes two attacks with its scimitar. The second attack has disadvantage.',
-          expectedText: 'The goblin makes two attacks with its scimitar. The second attack has disadvantage.'
+          originalText: '{name} makes two attacks with its scimitar. The second attack has disadvantage.',
+          homebreweryText: 'The goblin makes two attacks with its scimitar. The second attack has disadvantage.',
+          htmlText: 'The goblin makes two attacks with its scimitar. The second attack has disadvantage.'
         },
         {
           name: 'Scimitar',
-          text: '*Melee Weapon Attack:* +4 to hit, reach 5 ft., one target. *Hit:* 5 (1d6 + 2) slashing damage.',
-          expectedText: '<em>Melee Weapon Attack:</em> +4 to hit, reach 5 ft., one target. <em>Hit:</em> 5 (1d6 + 2) slashing damage.'
+          originalText: '*Melee Weapon Attack:* +4 to hit, reach 5 ft., one target. *Hit:* 5 (1d6 + 2) slashing damage.',
+          homebreweryText: '*Melee Weapon Attack:* +4 to hit, reach 5 ft., one target. *Hit:* 5 (1d6 + 2) slashing damage.',
+          htmlText: '<em>Melee Weapon Attack:</em> +4 to hit, reach 5 ft., one target. <em>Hit:</em> 5 (1d6 + 2) slashing damage.'
         },
         {
           name: 'Javelin',
-          text: '*Melee or Ranged Weapon Attack:* +2 to hit, reach 5 ft. or range 30/120 ft., one target. *Hit:* 3 (1d6) piercing damage.',
-          expectedText: '<em>Melee or Ranged Weapon Attack:</em> +2 to hit, reach 5 ft. or range 30/120 ft., one target. <em>Hit:</em> 3 (1d6) piercing damage.'
+          originalText: '*Melee or Ranged Weapon Attack:* +2 to hit, reach 5 ft. or range 30/120 ft., one target. *Hit:* 3 (1d6) piercing damage.',
+          homebreweryText: '*Melee or Ranged Weapon Attack:* +2 to hit, reach 5 ft. or range 30/120 ft., one target. *Hit:* 3 (1d6) piercing damage.',
+          htmlText: '<em>Melee or Ranged Weapon Attack:</em> +2 to hit, reach 5 ft. or range 30/120 ft., one target. <em>Hit:</em> 3 (1d6) piercing damage.'
         }
       ];
 
@@ -87,18 +106,21 @@ describe('when the show section is clicked', () => {
       const blocks = [
         { 
           name: 'Multiattack',
-          text: '{name} makes three melee attacks or two ranged attacks.',
-          expectedText: 'The gladiator makes three melee attacks or two ranged attacks.'
+          originalText: '{name} makes three melee attacks or two ranged attacks.',
+          homebreweryText: 'The gladiator makes three melee attacks or two ranged attacks.',
+          htmlText: 'The gladiator makes three melee attacks or two ranged attacks.'
         },
         {
           name: 'Spear',
-          text: '*Melee or Ranged Weapon Attack:* +7 to hit, reach 5 ft. or range 20/60 ft., one target. *Hit:* 11 (2d6) piercing damage, or 13 (2d8 + 4) piercing damage if used with two hands to make a melee attack.',
-          expectedText: '<em>Melee or Ranged Weapon Attack:</em> +7 to hit, reach 5 ft. or range 20/60 ft., one target. <em>Hit:</em> 11 (2d6) piercing damage, or 13 (2d8 + 4) piercing damage if used with two hands to make a melee attack.'
+          originalText: '*Melee or Ranged Weapon Attack:* +7 to hit, reach 5 ft. or range 20/60 ft., one target. *Hit:* 11 (2d6) piercing damage, or 13 (2d8 + 4) piercing damage if used with two hands to make a melee attack.',
+          homebreweryText: '*Melee or Ranged Weapon Attack:* +7 to hit, reach 5 ft. or range 20/60 ft., one target. *Hit:* 11 (2d6) piercing damage, or 13 (2d8 + 4) piercing damage if used with two hands to make a melee attack.',
+          htmlText: '<em>Melee or Ranged Weapon Attack:</em> +7 to hit, reach 5 ft. or range 20/60 ft., one target. <em>Hit:</em> 11 (2d6) piercing damage, or 13 (2d8 + 4) piercing damage if used with two hands to make a melee attack.'
         },
         {
           name: 'Shield Bash',
-          text: '*Melee Weapon Attack:* +7 to hit, reach 5 ft., one creature. *Hit:* 9 (2d4 + 4) bludgeoning damage. If the target is a Medium or smaller creature, it must succeed on a DC 15 Strength saving throw or be knocked prone.',
-          expectedText: '<em>Melee Weapon Attack:</em> +7 to hit, reach 5 ft., one creature. <em>Hit:</em> 9 (2d4 + 4) bludgeoning damage. If the target is a Medium or smaller creature, it must succeed on a DC 15 Strength saving throw or be knocked prone.'
+          originalText: '*Melee Weapon Attack:* +7 to hit, reach 5 ft., one creature. *Hit:* 9 (2d4 + 4) bludgeoning damage. If the target is a Medium or smaller creature, it must succeed on a DC 15 Strength saving throw or be knocked prone.',
+          homebreweryText: '*Melee Weapon Attack:* +7 to hit, reach 5 ft., one creature. *Hit:* 9 (2d4 + 4) bludgeoning damage. If the target is a Medium or smaller creature, it must succeed on a DC 15 Strength saving throw or be knocked prone.',
+          htmlText: '<em>Melee Weapon Attack:</em> +7 to hit, reach 5 ft., one creature. <em>Hit:</em> 9 (2d4 + 4) bludgeoning damage. If the target is a Medium or smaller creature, it must succeed on a DC 15 Strength saving throw or be knocked prone.'
         }
       ];
 
@@ -108,8 +130,12 @@ describe('when the show section is clicked', () => {
     });
 
     describe('should reparse the block text', () => {
-      const blockName = 'Teleport (Recharge 4-6)';
-      const blockText = '{name} magically teleports, along with any equipment it is wearing or carrying, up to 40 feet to an unoccupied space it can see. Before or after teleporting, {name} can make one bite attack.';
+      const block = {
+        name: 'Teleport (Recharge 4-6)',
+        originalText: '{name} magically teleports, along with any equipment it is wearing or carrying, up to 40 feet to an unoccupied space it can see. Before or after teleporting, {name} can make one bite attack.',
+        homebreweryText: null,
+        htmlText: null
+      };
 
       const oldNames = {
         fullName: 'Blink Dog',
@@ -124,9 +150,10 @@ describe('when the show section is clicked', () => {
           isProperNoun: false
         };
 
-        const expectedText = 'The blink doggo magically teleports, along with any equipment it is wearing or carrying, up to 40 feet to an unoccupied space it can see. Before or after teleporting, the blink doggo can make one bite attack.';
+        block.homebreweryText = 'The blink doggo magically teleports, along with any equipment it is wearing or carrying, up to 40 feet to an unoccupied space it can see. Before or after teleporting, the blink doggo can make one bite attack.';
+        block.htmlText = block.homebreweryText;
 
-        sharedSpecs.shouldReparseNameChanges(actionsSection, blockName, blockText, oldNames, newNames, expectedText);
+        sharedSpecs.shouldReparseNameChanges(actionsSection, block, oldNames, newNames);
       });
 
       it('when the short name is changed', () => {
@@ -136,9 +163,10 @@ describe('when the show section is clicked', () => {
           isProperNoun: false
         };
 
-        const expectedText = 'The dog magically teleports, along with any equipment it is wearing or carrying, up to 40 feet to an unoccupied space it can see. Before or after teleporting, the dog can make one bite attack.';
+        block.homebreweryText = 'The dog magically teleports, along with any equipment it is wearing or carrying, up to 40 feet to an unoccupied space it can see. Before or after teleporting, the dog can make one bite attack.';
+        block.htmlText = block.homebreweryText;
 
-        sharedSpecs.shouldReparseNameChanges(actionsSection, blockName, blockText, oldNames, newNames, expectedText);
+        sharedSpecs.shouldReparseNameChanges(actionsSection, block, oldNames, newNames);
       });
 
       it('when the proper noun is changed', () => {
@@ -148,9 +176,10 @@ describe('when the show section is clicked', () => {
           isProperNoun: true
         };
 
-        const expectedText = 'Blink Dog magically teleports, along with any equipment it is wearing or carrying, up to 40 feet to an unoccupied space it can see. Before or after teleporting, Blink Dog can make one bite attack.';
+        block.homebreweryText = 'Blink Dog magically teleports, along with any equipment it is wearing or carrying, up to 40 feet to an unoccupied space it can see. Before or after teleporting, Blink Dog can make one bite attack.';
+        block.htmlText = block.homebreweryText;
 
-        sharedSpecs.shouldReparseNameChanges(actionsSection, blockName, blockText, oldNames, newNames, expectedText);
+        sharedSpecs.shouldReparseNameChanges(actionsSection, block, oldNames, newNames);
       });
     });
 

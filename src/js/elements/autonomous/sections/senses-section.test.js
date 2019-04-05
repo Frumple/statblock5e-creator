@@ -70,15 +70,15 @@ describe('when the show section is clicked', () => {
 
       it('should switch to show mode and save the custom text with valid markdown syntax', () => {
         const originalText = '**boldvision 60 ft.**';
-        const parsedText = '<strong>boldvision 60 ft.</strong>';
+        const htmlText = '<strong>boldvision 60 ft.</strong>';
         inputValueAndTriggerEvent(sensesSection.editElements.customText, originalText);
 
         sensesSection.editElements.submitForm();
 
         expect(sensesSection).toBeInMode('show');
-        expect(sensesSection).toShowPropertyLine(expectedHeading, parsedText);
+        expect(sensesSection).toShowPropertyLine(expectedHeading, htmlText);
 
-        expect(sensesSection).toExportPropertyLineToHtml(expectedHeading, parsedText);
+        expect(sensesSection).toExportPropertyLineToHtml(expectedHeading, htmlText);
         expect(sensesSection).toExportPropertyLineToHomebrewery(expectedHeading, originalText);
       });
 

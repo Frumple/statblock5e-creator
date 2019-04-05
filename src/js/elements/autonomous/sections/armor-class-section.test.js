@@ -56,7 +56,7 @@ describe('when the show section is clicked', () => {
 
         expect(ArmorClass.useCustomText).toBe(true);
         expect(ArmorClass.originalCustomText).toBe(customText);
-        expect(ArmorClass.parsedCustomText).toBe(customText);
+        expect(ArmorClass.htmlCustomText).toBe(customText);
 
         expect(armorClassSection).toBeInMode('show');
         expect(armorClassSection).toShowPropertyLine(expectedHeading, customText);
@@ -67,19 +67,19 @@ describe('when the show section is clicked', () => {
 
       it('should switch to show mode and save the custom text with valid markdown syntax', () => {
         const originalText = '12 (15 with *mage armor*)';
-        const parsedText = '12 (15 with <em>mage armor</em>)';
+        const htmlText = '12 (15 with <em>mage armor</em>)';
         inputValueAndTriggerEvent(armorClassSection.editElements.customText, originalText);
 
         armorClassSection.editElements.submitForm();
 
         expect(ArmorClass.useCustomText).toBe(true);
         expect(ArmorClass.originalCustomText).toBe(originalText);
-        expect(ArmorClass.parsedCustomText).toBe(parsedText);
+        expect(ArmorClass.htmlCustomText).toBe(htmlText);
 
         expect(armorClassSection).toBeInMode('show');
-        expect(armorClassSection).toShowPropertyLine(expectedHeading, parsedText);
+        expect(armorClassSection).toShowPropertyLine(expectedHeading, htmlText);
 
-        expect(armorClassSection).toExportPropertyLineToHtml(expectedHeading, parsedText);
+        expect(armorClassSection).toExportPropertyLineToHtml(expectedHeading, htmlText);
         expect(armorClassSection).toExportPropertyLineToHomebrewery(expectedHeading, originalText);
       });
 

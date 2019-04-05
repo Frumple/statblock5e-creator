@@ -89,7 +89,7 @@ export class BlockListSection extends sectionModule.Section {
 
     this.showElements.displayList.clear();
     for (const block of blocks) {
-      this.showElements.displayList.addBlock(block.name, block.parsedText);
+      this.showElements.displayList.addBlock(block.name, block.htmlText);
     }
 
     if (blocks.length > 0) {
@@ -106,7 +106,7 @@ export class BlockListSection extends sectionModule.Section {
 
       for (const [index, blockModel] of this.listModel.blocks.entries()) {
         const displayBlock = this.showElements.displayList.blocks[index];
-        displayBlock.text = blockModel.parsedText;
+        displayBlock.text = blockModel.htmlText;
       }
     }
   }

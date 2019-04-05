@@ -22,7 +22,7 @@
     "collectCoverageFrom": [
       "src/**/*.js",
       "!src/js/init.js",
-      "!src/js/parser/generate-parser.js"
+      "!src/js/parsers/scripts/generate-parser-script.js"
     ],
     "moduleNameMapper": {
       "^/(.*)$": "<rootDir>/$1"

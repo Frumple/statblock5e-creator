@@ -50,12 +50,12 @@ export default class SpeedSection extends propertyLineSectionModule.PropertyLine
 
     Speed.useCustomText = this.editElements.useCustomText.checked;
     Speed.originalCustomText = this.editElements.customText.value;
-    Speed.parsedCustomText = this.editElements.customText.parsedText;
+    Speed.htmlCustomText = this.editElements.customText.htmlText;
   }
 
   updateView() {    
     if (Speed.useCustomText) {
-      this.showElements.text.innerHTMLSanitized = Speed.parsedCustomText;
+      this.showElements.text.innerHTMLSanitized = Speed.htmlCustomText;
     } else {
       this.showElements.text.textContent = Speed.nonCustomText;
     }

@@ -55,20 +55,21 @@ export default class LegendaryActionsSection extends blockListSectionModule.Bloc
     super.updateModel();
 
     this.listModel.originalDescription = this.editElements.description.value;
-    this.listModel.parsedDescription = this.editElements.description.parsedText;
+    this.listModel.homebreweryDescription = this.editElements.description.homebreweryText;
+    this.listModel.htmlDescription = this.editElements.description.htmlText;
   }
 
   updateView() {
     super.updateView();
 
-    this.showElements.description.innerHTMLSanitized = this.listModel.parsedDescription;
+    this.showElements.description.innerHTMLSanitized = this.listModel.htmlDescription;
   }
 
   reparse() {
     super.reparse();
 
     if (this.mode === 'show') {
-      this.showElements.description.innerHTMLSanitized = this.listModel.parsedDescription;
+      this.showElements.description.innerHTMLSanitized = this.listModel.htmlDescription;
     }
   }
 }

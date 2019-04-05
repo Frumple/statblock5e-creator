@@ -1,9 +1,3 @@
-{
-  function capitalizeFirstLetter(string) {
-    return string.charAt(0).toUpperCase() + string.slice(1);
-  }
-}
-
 start
   = line:Line+ { return line.join(''); }
   
@@ -15,45 +9,12 @@ BlankLine
   = NewLineChar
 
 NormalLine
-  = beginningInline:BeginningInline inline:Inline* end:EndOfLine { return `${beginningInline}${inline.join('')}${end ? end : ''}`; }
-
-BeginningInline
-  = BeginningNameExpression
-  / InlineCommon
+  = inline:Inline+ end:EndOfLine { return `${inline.join('')}${end ? end : ''}`; }
 
 Inline
-  = SentenceBeginningNameExpression
-  / NameExpression
-  / InlineCommon
-  
-InlineCommon
   = Markup
   / Text
   / Whitespace
-  / PeriodChar
-
-SentenceBeginningNameExpression
-  = period:PeriodChar whitespace:Whitespace expression:BeginningNameExpression { return `${period}${whitespace}${expression}`; }
-
-BeginningNameExpression
-  = BeginningName
-  / BeginningFullName
-
-NameExpression
-  = Name
-  / FullName
-
-BeginningName
-  = literal:'{name}' { return (options.settings.enableExpressions ? capitalizeFirstLetter(options.creature.name) : literal); }
-
-BeginningFullName
-  = literal:'{fullname}' { return (options.settings.enableExpressions ? capitalizeFirstLetter(options.creature.fullName) : literal); }
-
-Name
-  = literal:'{name}' { return (options.settings.enableExpressions ? options.creature.name : literal); }
-
-FullName
-  = literal:'{fullname}' { return (options.settings.enableExpressions ? options.creature.fullName : literal); }
 
 Markup
   = Strong
@@ -119,7 +80,7 @@ Text
   = $(NormalChar+)
   
 Whitespace
-  = SpaceChar+
+  = $(SpaceChar+)
 
 EndOfLine
   = NewLineChar / End
@@ -128,16 +89,13 @@ NormalChar
   = !( SpecialChar / SpaceChar / NewLineChar ) .
   
 SpecialChar
-  = '*' / '_' / '{' / '}' / '.'
+  = '*' / '_'
 
 NewLineChar
   = '\n' / $('\r' '\n'?)
   
 SpaceChar
   = ' ' / '\t'
-  
-PeriodChar
-  = '.'
   
 End
   = !.

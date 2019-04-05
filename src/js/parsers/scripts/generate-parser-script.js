@@ -2,11 +2,15 @@
 
 // Run this script in node to generate the parser source code from the grammar.
 
+// Example usage:
+// node scripts/generate-parser-script.js grammars/expression-grammar.pegjs expression-parser.js
+// node scripts/generate-parser-script.js grammars/markdown-grammar.pegjs markdown-parser.js
+
 const fs = require('fs');
 const peg = require('pegjs');
 
-const grammarFileName = 'grammar.pegjs';
-const parserFileName = 'parser.js';
+const grammarFileName = process.argv[2];
+const parserFileName = process.argv[3];
 
 const parserOptions = {
   format: 'bare',

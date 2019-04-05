@@ -44,14 +44,14 @@ export default class SensesSection extends propertyLineSectionModule.PropertyLin
 
     Senses.useCustomText = this.editElements.useCustomText.checked;
     Senses.originalCustomText = this.editElements.customText.value;
-    Senses.parsedCustomText = this.editElements.customText.parsedText;
+    Senses.htmlCustomText = this.editElements.customText.htmlText;
   }
 
   updateView() {
     this.editElements.passivePerception.textContent = Senses.passivePerception;  
 
     if (Senses.useCustomText) {
-      this.showElements.text.innerHTMLSanitized = Senses.parsedCustomText;
+      this.showElements.text.innerHTMLSanitized = Senses.htmlCustomText;
     } else {
       this.showElements.text.textContent = Senses.nonCustomText;
     }    

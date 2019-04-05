@@ -14,7 +14,7 @@ class ArmorClass {
 
     this.useCustomText = false;
     this.originalCustomText = '';
-    this.parsedCustomText = '';
+    this.htmlCustomText = '';
   }
 
   get originalText() {
@@ -25,9 +25,9 @@ class ArmorClass {
     return this.nonCustomText;
   }
 
-  get parsedText() {
+  get htmlText() {
     if (this.useCustomText) {
-      return this.parsedCustomText;
+      return this.htmlCustomText;
     }
 
     return this.nonCustomText;
@@ -50,7 +50,7 @@ class ArmorClass {
   }
 
   toHtml() {    
-    return ExportHelpers.createHtmlPropertyLine(this.headingName, this.parsedText);
+    return ExportHelpers.createHtmlPropertyLine(this.headingName, this.htmlText);
   }
 
   toHomebrewery() {

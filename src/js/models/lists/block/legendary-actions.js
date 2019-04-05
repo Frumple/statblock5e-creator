@@ -5,7 +5,8 @@ class LegendaryActions extends BlockListModel {
     super('Legendary Actions', 'Legendary Action');
 
     this.originalDescription = '';
-    this.parsedDescription = '';
+    this.homebreweryDescription = '';
+    this.htmlDescription = '';
   }
 
   toHtml() {
@@ -14,7 +15,7 @@ class LegendaryActions extends BlockListModel {
     const firstBlockElement = fragment.querySelector('property-block');
 
     const descriptionElement = document.createElement('p');
-    descriptionElement.innerHTML = this.parsedDescription;
+    descriptionElement.innerHTML = this.htmlDescription;
     fragment.insertBefore(descriptionElement, firstBlockElement);
 
     return fragment;
@@ -22,12 +23,11 @@ class LegendaryActions extends BlockListModel {
 
   toHomebrewery() {
     const heading = `> ### ${this.headingName}\n`;
-    // TODO: Get description with expressions parsed, but not markdown
-    const description = `> ${this.originalDescription}\n`;
+    const description = `> ${this.homebreweryDescription}\n`;
     const homebreweryBlocks = 
       this.blocks.map(block => block.toHomebrewery());
     const homebreweryBlocksAsText =
-      homebreweryBlocks.join('\n\n');      
+      homebreweryBlocks.join('\n>\n');      
 
     return `${heading}${description}${homebreweryBlocksAsText}`;
   }

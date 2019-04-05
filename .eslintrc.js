@@ -10,7 +10,8 @@ module.exports = {
       "ClipboardJS": "readable",
       "DOMPurify": "readable",
       "html_beautify": "readable",
-      "global": "readable"
+      "global": "readable",
+      "process": "readable"
     },
     "parserOptions": {
         "ecmaVersion": 2018,

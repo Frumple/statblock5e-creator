@@ -17,7 +17,7 @@ class Speed {
 
     this.useCustomText = false;
     this.originalCustomText = '';
-    this.parsedCustomText = '';
+    this.htmlCustomText = '';
   }
 
   get originalText() {
@@ -28,9 +28,9 @@ class Speed {
     return this.nonCustomText;
   }
 
-  get parsedText() {
+  get htmlText() {
     if (this.useCustomText) {
-      return this.parsedCustomText;
+      return this.htmlCustomText;
     }
 
     return this.nonCustomText;
@@ -61,7 +61,7 @@ class Speed {
   }
 
   toHtml() {
-    return ExportHelpers.createHtmlPropertyLine(this.headingName, this.parsedText);
+    return ExportHelpers.createHtmlPropertyLine(this.headingName, this.htmlText);
   }
 
   toHomebrewery() {

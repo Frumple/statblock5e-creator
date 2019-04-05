@@ -1,7 +1,7 @@
 import CustomBuiltinElementMixins from '../../helpers/custom-builtin-element-mixins.js';
 import isRunningInNode from '../../helpers/is-running-in-node.js';
 import { copyObjectProperties } from '../../helpers/object-helpers.js';
-import parseText from '../../parsers/parse-text.js';
+import * as Parser from '../../parsers/parser.js';
 
 export default class CustomTextArea extends HTMLTextAreaElement {
   static async define() {
@@ -23,27 +23,44 @@ export default class CustomTextArea extends HTMLTextAreaElement {
 
 const CustomTextAreaMixin = {
   initializeMixin() {
-    this.parsedText = null;
+    this.htmlText = null;
+  },
+
+  get fieldName() {
+    const prettyName = this.getAttribute('pretty-name');
+    return (prettyName ? prettyName : this.name);
   },
 
   validate(errorMessages) {
-    const prettyName = this.getAttribute('pretty-name');
-    const fieldName = prettyName ? prettyName : this.name;
-
     if (this.required && this.value === '') {      
-      errorMessages.add(this, `${fieldName} cannot be blank.`);
+      errorMessages.add(this, `${this.fieldName} cannot be blank.`);
     } else if('parsed' in this.dataset) {
-      const parserResults = parseText(this.value);
-      const error = parserResults.error;
-
-      if (error) {
-        const message = 
-          `${fieldName} has invalid syntax.`;
-
-        errorMessages.add(this, message);
-      } else {
-        this.parsedText = parserResults.outputText;
-      }
+      this.parse(errorMessages);
     }
+  },
+
+  parse(errorMessages) {
+    const expressionParserResults = Parser.parseExpressions(this.value);
+
+    if (expressionParserResults.error) {
+      const message = `${this.fieldName} has invalid syntax.`;
+
+      errorMessages.add(this, message);
+      return;
+    } 
+    
+    const expressionParsedText = expressionParserResults.outputText;
+
+    const markdownParserResults = Parser.parseMarkdown(expressionParsedText);
+
+    if (markdownParserResults.error) {
+      const message = `${this.fieldName} has invalid syntax.`;
+
+      errorMessages.add(this, message);
+      return;
+    }
+
+    this.homebreweryText = expressionParsedText.replace(/\n/g, '  \n> ');
+    this.htmlText = markdownParserResults.outputText;    
   }
 };

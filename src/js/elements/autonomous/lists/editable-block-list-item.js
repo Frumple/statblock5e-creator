@@ -70,8 +70,12 @@ export default class EditableBlockListItem extends DragAndDropListItem {
     return this.textElement.value;
   }
 
-  get parsedText() {
-    return this.textElement.parsedText;
+  get homebreweryText() {
+    return this.textElement.homebreweryText;
+  }
+
+  get htmlText() {
+    return this.textElement.htmlText;
   }
 
   validate(errorMessages) {
@@ -84,6 +88,10 @@ export default class EditableBlockListItem extends DragAndDropListItem {
   }
 
   toModel() {
-    return new BlockModel(this.name, this.originalText, this.parsedText);
+    return new BlockModel(
+      this.name, 
+      this.originalText,
+      this.homebreweryText,
+      this.htmlText);
   }
 }

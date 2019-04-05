@@ -16,7 +16,7 @@ class Senses {
 
     this.useCustomText = false;
     this.originalCustomText = '';
-    this.parsedCustomText = '';
+    this.htmlCustomText = '';
   }
 
   get passivePerception() {
@@ -31,9 +31,9 @@ class Senses {
     return this.nonCustomText;
   }
 
-  get parsedText() {
+  get htmlText() {
     if (this.useCustomText) {
-      return this.parsedCustomText;
+      return this.htmlCustomText;
     }
 
     return this.nonCustomText;
@@ -62,7 +62,7 @@ class Senses {
   }
 
   toHtml() {
-    return createHtmlPropertyLine(this.headingName, this.parsedText);
+    return createHtmlPropertyLine(this.headingName, this.htmlText);
   }
 
   toHomebrewery() {

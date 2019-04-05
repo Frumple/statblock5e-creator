@@ -47,12 +47,12 @@ export default class ArmorClassSection extends propertyLineSectionModule.Propert
 
     ArmorClass.useCustomText = this.editElements.useCustomText.checked;
     ArmorClass.originalCustomText = this.editElements.customText.value;
-    ArmorClass.parsedCustomText = this.editElements.customText.parsedText;
+    ArmorClass.htmlCustomText = this.editElements.customText.htmlText;
   }
 
   updateView() {    
     if (ArmorClass.useCustomText) {
-      this.showElements.text.innerHTMLSanitized = ArmorClass.parsedCustomText;
+      this.showElements.text.innerHTMLSanitized = ArmorClass.htmlCustomText;
     } else {
       this.showElements.text.textContent = ArmorClass.nonCustomText;
     }    
