@@ -103,10 +103,7 @@ export default class StatBlockEditor extends CustomAutonomousElement {
 
   onExportAction(event) {
     const format = event.detail.format;
-    this.openExportDialog(format);    
-  }
-  
-  openExportDialog(format) {
+
     switch(format) {
     case 'json':
       this.openJsonExportDialog();
@@ -119,7 +116,7 @@ export default class StatBlockEditor extends CustomAutonomousElement {
       break;
     default:
       throw new Error(`Unknown export format: '${format}'.`);
-    }
+    }   
   }
 
   openJsonExportDialog() {

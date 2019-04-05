@@ -23,7 +23,6 @@ export default class StatBlockMenu extends CustomAutonomousElement {
     this.printButton = this.shadowRoot.getElementById('print-button');
 
     this.exportJsonButton = this.shadowRoot.getElementById('export-json-button');
-    this.exportImageButton = this.shadowRoot.getElementById('export-image-button');
     this.exportHtmlButton = this.shadowRoot.getElementById('export-html-button');
     this.exportHomebreweryButton = this.shadowRoot.getElementById('export-homebrewery-button');
 
@@ -44,7 +43,6 @@ export default class StatBlockMenu extends CustomAutonomousElement {
       this.printButton.addEventListener('click', this.onClickPrintButton.bind(this));
 
       this.exportJsonButton.addEventListener('click', this.onClickExportJsonButton.bind(this));
-      this.exportImageButton.addEventListener('click', this.onClickExportImageButton.bind(this));
       this.exportHtmlButton.addEventListener('click', this.onClickExportHtmlButton.bind(this));
       this.exportHomebreweryButton.addEventListener('click', this.onClickExportHomebreweryButton.bind(this));
 
@@ -83,10 +81,6 @@ export default class StatBlockMenu extends CustomAutonomousElement {
   }
 
   onClickExportJsonButton() {
-    // TODO
-  }
-
-  onClickExportImageButton() {
     // TODO
   }
 

@@ -37,6 +37,8 @@
 }
 
 ::slotted(button) {
+  display: flex;
+  justify-content: flex-start;
   background: #606060;
   border: 1px solid #909090;
   color: white;
