@@ -1,10 +1,14 @@
 .custom-text-help-tooltip {
-  --help-tooltip-width: 55em;
+  --help-tooltip-width: 50em;
+}
+
+table {
+  margin-left: 2em;
 }
 
 code {
   background: white;
   border-radius: 3px;
-  font-family: Courier, monospace;
+  font-family: monospace;
   padding: 0 3px;
 }

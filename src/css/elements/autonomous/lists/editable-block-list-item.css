@@ -1,21 +1,23 @@
 .editable-block-list-item__container {
-  display: flex;
-  flex-direction: column;
+  display: grid;
+  grid-template-columns: 24px auto 50px;
+  grid-template-rows: auto auto;
+  grid-column-gap: 5px;
+  grid-row-gap: 5px;
+  align-items: center;
   padding: 5px;
   margin-top: 5px;
 }
 
-.editable-block-list-item__heading {
-  display: flex;
-  flex-direction: row;
-  align-items: center;
+.editable-block-list-item__drag-handle {
+  grid-area: 1 / 1;
 }
 
 .editable-block-list-item__name {
+  grid-area: 1 / 2;
   width: 100%;
   font-weight: bold;
   font-style: italic;
-  margin-left: 5px;
 }
 
 .editable-block-list-item__name_no-italic {
@@ -23,11 +25,30 @@
 }
 
 .editable-block-list-item__remove-button {
+  grid-area: 1 / 3;
   padding: 0 10px;
-  margin-left: 5px;
+}
+
+.editable-block-list-item__sidebar {
+  grid-area: 2 / 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.editable-block-list-item__help-tooltip {
+  --help-tooltip-width: 50em;
+}
+
+.editable-block-list-item__help-tooltip code {
+  background: white;
+}
+
+.editable-block-list-item__help-tooltip table {
+  margin-left: 2em;
 }
 
 .editable-block-list-item__text {
+  grid-area: 2 / 2 / 3 / 4;
   resize: none;
-  margin-top: 5px;
 }

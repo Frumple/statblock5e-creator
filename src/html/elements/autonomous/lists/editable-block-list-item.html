@@ -6,10 +6,37 @@
 <link href='src/css/elements/autonomous/lists/editable-block-list-item.css' rel='stylesheet' type='text/css'>
 
 <div id="drag-and-drop-list-item-container" class="drag-and-drop-list-item__container editable-block-list-item__container">
-  <div id="editable-block-list-item-heading" class="editable-block-list-item__heading">
-    <i id="drag-and-drop-list-item-drag-handle" class="drag-and-drop-list-item__drag-handle material-icons">drag_handle</i>
-    <input id="editable-block-list-item-name" class="editable-block-list-item__name section__text-input" is="text-input" type="text" tabindex="1" required></input>
-    <button id="editable-block-list-item-remove-button" class="default-button editable-block-list-item__remove-button" tabindex="3"><i class="material-icons">clear</i></button>
+  <i id="drag-and-drop-list-item-drag-handle" class="drag-and-drop-list-item__drag-handle material-icons">drag_handle</i>
+  <input id="editable-block-list-item-name" class="editable-block-list-item__name section__text-input" is="text-input" type="text" tabindex="1" required></input>
+  <button id="editable-block-list-item-remove-button" class="default-button editable-block-list-item__remove-button" tabindex="3"><i class="material-icons">clear</i></button>
+  <div id="editable-block-list-item-sidebar" class="editable-block-list-item__sidebar">
+    <help-tooltip class="editable-block-list-item__help-tooltip">
+      <p>This text area supports basic <strong>Markdown formatting</strong>:</p>
+      <table>
+        <tr>
+          <td><em>Emphasis (italic):</em></td>
+          <td><code>*single asterisks* or _single underscores_</code></td>
+        </tr>
+        <tr>
+          <td><strong>Strong Emphasis (bold):</strong></td>
+          <td><code>**double asterisks** or __double underlines__</code></td>
+        </tr>    
+        <tr>
+          <td><strong><em>Combined Emphasis:</em></strong></td>
+          <td><code>__*asterisks* nested in underlines__ and **vice _versa_**</code></td>
+        </tr>
+      </table>
+      <br />
+      <p>This text area supports <strong>name expressions</strong>:</p>
+      <ul>
+        <li>All instances of <code>{name}</code> are replaced with the creature's short name when displayed.<br />If the short name is blank, the creature's full name is used instead.</li>
+        <li>All instances of <code>{fullname}</code> are replaced with the creature's full name when displayed.</li>
+      </ul>
+      <br />
+      <p>If the creature is not a proper noun, the word "the" will precede the creature's short name/full name.</p>
+      <cite>* For more details, see the help tooltips for "Short Name" and "Proper Noun" in the first section.</cite>
+    </help-tooltip>
   </div>
   <textarea id="editable-block-list-item-text" class="editable-block-list-item__text section__textarea" is="custom-textarea" cols="30" rows="4" tabindex="2" data-parsed required></textarea>
+
 </div>
