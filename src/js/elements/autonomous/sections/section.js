@@ -22,7 +22,7 @@ export class Section extends CustomAutonomousElement {
       this.edit();
     });
 
-    this.showElements.section.addEventListener('transitionend', () => {
+    this.showElements.section.addEventListener('animationend', () => {
       if (this.mode === 'edit') {
         this.focusOnInitialEditSectionElement();
       }

@@ -5,32 +5,27 @@
   font-variant: small-caps;
   font-weight: normal;
   letter-spacing: 1px;
-  margin: 0;
-  margin-top: 0.3em;
-  margin-bottom: 0.3em;
-
+  
   break-inside: avoid-column;
   break-after: avoid-column;
 
-  max-height: 100%;
   opacity: 1;
+  max-height: 100%;
+  margin: 0.3em 0;
+  overflow: visible;
   visibility: visible;
-  overflow: hidden;
-  transition: opacity var(--section-transition-duration) ease-out var(--section-transition-duration),
-              max-height 0ms linear var(--section-transition-duration),
-              visibility 0ms linear var(--section-transition-duration),
-              margin 0ms linear var(--section-transition-duration);
+
+  animation: show-block-section-heading var(--section-animation-duration) ease-out;
 }
 
-.block-list-section__heading_hidden {
+.block-list-section__heading_hidden {  
+  opacity: 0;  
   max-height: 0;
-  opacity: 0;
-  visibility: hidden;
   margin: 0;
-  transition: opacity var(--section-transition-duration) ease-in 0ms,
-              max-height 0ms linear var(--section-transition-duration),
-              visibility 0ms linear var(--section-transition-duration),
-              margin 0ms linear var(--section-transition-duration);
+  overflow: hidden;
+  visibility: hidden;
+
+  animation: hide-block-section-heading var(--section-animation-duration) ease-in;
 }
 
 .block-list-section__empty-label {

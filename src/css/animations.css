@@ -1,0 +1,71 @@
+:host {
+  --section-animation-duration: 500ms;
+}
+
+@keyframes show-section {
+  from {
+    opacity: 0;
+    max-height: 0;
+    overflow: hidden;
+    visibility: hidden;
+  }
+
+  50% {
+    opacity: 0;  
+    max-height: 0;
+    overflow: hidden;
+    visibility: hidden;
+  }
+}
+
+@keyframes hide-section {
+  from {
+    opacity: 1;
+    max-height: 100%;
+    overflow: visible;
+    visibility: visible;
+  }
+
+  50% {
+    opacity: 0;
+    max-height: 0;
+    overflow: hidden;
+    visibility: hidden;
+  }
+}
+
+@keyframes show-block-section-heading {
+  from {
+    opacity: 0;
+    max-height: 0;
+    margin: 0;
+    overflow: hidden;
+    visibility: hidden;
+  }
+
+  50% {
+    opacity: 0;  
+    max-height: 0;
+    margin: 0;
+    overflow: hidden;
+    visibility: hidden;
+  }
+}
+
+@keyframes hide-block-section-heading {
+  from {
+    opacity: 1;
+    max-height: 100%;
+    margin: 0.3em 0;
+    overflow: visible;
+    visibility: visible;
+  }
+
+  50% {
+    opacity: 0;
+    max-height: 0;
+    margin: 0;
+    overflow: hidden;
+    visibility: hidden;
+  }
+}

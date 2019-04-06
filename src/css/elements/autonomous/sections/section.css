@@ -4,23 +4,22 @@
   justify-content: space-between;
   align-items: stretch;
   position: relative;
-  overflow: visible;
-  max-height: 100%;
+
   opacity: 1;
+  max-height: 100%;
+  overflow: visible;
   visibility: visible;
-  transition: opacity var(--section-transition-duration) ease-out var(--section-transition-duration),
-              max-height 0ms linear var(--section-transition-duration),
-              visibility 0ms linear var(--section-transition-duration);
+
+  animation: show-section var(--section-animation-duration) ease-out;
 }
 
 .section_hidden {
-  overflow: hidden;
+  opacity: 0;  
   max-height: 0;
-  opacity: 0;
+  overflow: hidden;
   visibility: hidden;
-  transition: opacity var(--section-transition-duration) ease-in 0ms,
-              max-height 0ms linear var(--section-transition-duration),
-              visibility 0ms linear var(--section-transition-duration);
+
+  animation: hide-section var(--section-animation-duration) ease-in;
 }
 
 .section_selectable:hover {
