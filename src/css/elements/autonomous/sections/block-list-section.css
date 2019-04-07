@@ -5,6 +5,7 @@
   font-variant: small-caps;
   font-weight: normal;
   letter-spacing: 1px;
+  overflow: hidden;
   
   break-inside: avoid-column;
   break-after: avoid-column;
@@ -12,7 +13,6 @@
   opacity: 1;
   max-height: 100%;
   margin: 0.3em 0;
-  overflow: visible;
   visibility: visible;
 
   animation: show-block-section-heading var(--section-animation-duration) ease-out;
@@ -22,7 +22,6 @@
   opacity: 0;  
   max-height: 0;
   margin: 0;
-  overflow: hidden;
   visibility: hidden;
 
   animation: hide-block-section-heading var(--section-animation-duration) ease-in;

@@ -12,7 +12,7 @@
 .help-tooltip__text {
   position: absolute;
   z-index: 2;
-  visibility: hidden;
+  display: none;
   background: #eeeeee;
   color: black;
   border: 1px solid black;
@@ -22,7 +22,7 @@
 }
 
 .help-tooltip:hover .help-tooltip__text {
-  visibility: visible;
+  display: block;
 }
 
 ::slotted(h4) {
