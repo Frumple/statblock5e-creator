@@ -1,6 +1,6 @@
 import * as HtmlExportDocumentFactory from './helpers/html-export-document-factory.js';
 
-import CustomTextArea from './elements/builtin/custom-textarea.js';
+import BlockTextArea from './elements/builtin/block-textarea.js';
 import EnableDisableElementsCheckbox from './elements/builtin/enable-disable-elements-checkbox.js';
 import IntegerInput from './elements/builtin/integer-input.js';
 import PropertyDataList from './elements/builtin/property-datalist.js';
@@ -62,7 +62,7 @@ async function init() {
 async function defineElements() {
   const elementClasses = [];
 
-  elementClasses.push(CustomTextArea);
+  elementClasses.push(BlockTextArea);
   elementClasses.push(EnableDisableElementsCheckbox);
   elementClasses.push(IntegerInput);
   elementClasses.push(PropertyDataList);

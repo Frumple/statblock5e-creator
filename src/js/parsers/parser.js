@@ -1,10 +1,10 @@
-import ExpressionParser from './expression-parser.js';
+import NameExpressionParser from './name-expression-parser.js';
 import MarkdownParser from './markdown-parser.js';
 import Creature from '../models/creature.js';
 
-export function parseExpressions(inputText, parserOptions = {}) {
+export function parseNameExpressions(inputText, parserOptions = {}) {
   parserOptions.creature = Creature.toParserOptions();
-  return parseText(ExpressionParser, inputText, parserOptions);
+  return parseText(NameExpressionParser, inputText, parserOptions);
 }
 
 export function parseMarkdown(inputText, parserOptions = {}) {
@@ -18,7 +18,7 @@ function parseText(parser, inputText, parserOptions) {
     error: null
   };
 
-  try {    
+  try {
     const outputText = parser.parse(inputText, parserOptions);
     parserResults.outputText = outputText;
   } catch (pegError) {

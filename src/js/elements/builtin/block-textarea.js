@@ -3,10 +3,10 @@ import isRunningInNode from '../../helpers/is-running-in-node.js';
 import { copyObjectProperties } from '../../helpers/object-helpers.js';
 import * as Parser from '../../parsers/parser.js';
 
-export default class CustomTextArea extends HTMLTextAreaElement {
+export default class BlockTextArea extends HTMLTextAreaElement {
   static async define() {
-    const elementName = 'custom-textarea';
-    CustomBuiltinElementMixins.define(elementName, CustomTextAreaMixin);
+    const elementName = 'block-textarea';
+    CustomBuiltinElementMixins.define(elementName, BlockTextAreaMixin);
 
     if (! isRunningInNode) {
       customElements.define(elementName, this, { extends: 'textarea' });
@@ -16,12 +16,12 @@ export default class CustomTextArea extends HTMLTextAreaElement {
   constructor() {
     super();
 
-    copyObjectProperties(this, CustomTextAreaMixin);
+    copyObjectProperties(this, BlockTextAreaMixin);
     this.initializeMixin();
   }
 }
 
-const CustomTextAreaMixin = {
+const BlockTextAreaMixin = {
   initializeMixin() {
     this.htmlText = null;
   },
@@ -32,7 +32,7 @@ const CustomTextAreaMixin = {
   },
 
   validate(errorMessages) {
-    if (this.required && this.value === '') {      
+    if (this.required && this.value === '') {
       errorMessages.add(this, `${this.fieldName} cannot be blank.`);
     } else if('parsed' in this.dataset) {
       this.parse(errorMessages);
@@ -40,18 +40,18 @@ const CustomTextAreaMixin = {
   },
 
   parse(errorMessages) {
-    const expressionParserResults = Parser.parseExpressions(this.value);
+    const nameParserResults = Parser.parseNameExpressions(this.value);
 
-    if (expressionParserResults.error) {
+    if (nameParserResults.error) {
       const message = `${this.fieldName} has invalid syntax.`;
 
       errorMessages.add(this, message);
       return;
-    } 
-    
-    const expressionParsedText = expressionParserResults.outputText;
+    }
 
-    const markdownParserResults = Parser.parseMarkdown(expressionParsedText);
+    const nameParserText = nameParserResults.outputText;
+
+    const markdownParserResults = Parser.parseMarkdown(nameParserText);
 
     if (markdownParserResults.error) {
       const message = `${this.fieldName} has invalid syntax.`;
@@ -60,7 +60,7 @@ const CustomTextAreaMixin = {
       return;
     }
 
-    this.homebreweryText = expressionParsedText.replace(/\n/g, '  \n> ');
-    this.htmlText = markdownParserResults.outputText;    
+    this.homebreweryText = nameParserText.replace(/\n/g, '  \n> ');
+    this.htmlText = markdownParserResults.outputText;
   }
 };

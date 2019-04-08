@@ -6,7 +6,7 @@
 
 start
   = line:Line+ { return line.join(''); }
-  
+
 Line
   = BlankLine
   / NormalLine
@@ -25,7 +25,7 @@ Inline
   = SentenceBeginningNameExpression
   / NameExpression
   / InlineCommon
-  
+
 InlineCommon
   = Text
   / Whitespace
@@ -56,7 +56,7 @@ FullName
 
 Text
   = $(NormalChar+)
-  
+
 Whitespace
   = $(SpaceChar+)
 
@@ -64,19 +64,16 @@ EndOfLine
   = NewLineChar / End
 
 NormalChar
-  = !( SpecialChar / SpaceChar / NewLineChar ) .
-  
-SpecialChar
-  = '{' / '}' / '.'
+  = !( PeriodChar / SpaceChar / NewLineChar ) .
 
 NewLineChar
   = '\n' / $('\r' '\n'?)
-  
+
 SpaceChar
   = ' ' / '\t'
-  
+
 PeriodChar
   = '.'
-  
+
 End
   = !.

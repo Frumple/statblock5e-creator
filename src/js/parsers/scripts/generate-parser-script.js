@@ -2,8 +2,8 @@
 
 // Run this script in node to generate the parser source code from the grammar.
 
-// Example usage:
-// node scripts/generate-parser-script.js grammars/expression-grammar.pegjs expression-parser.js
+// Example usage from the "parsers" directory:
+// node scripts/generate-parser-script.js grammars/name-expression-grammar.pegjs name-expression-parser.js
 // node scripts/generate-parser-script.js grammars/markdown-grammar.pegjs markdown-parser.js
 
 const fs = require('fs');
@@ -36,4 +36,3 @@ console.log('  Done');
 console.log(`Writing parser to '${parserFileName}'...`);
 fs.writeFileSync(parserFileName, parser);
 console.log('  Done');
-

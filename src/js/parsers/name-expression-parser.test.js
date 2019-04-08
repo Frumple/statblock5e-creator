@@ -1,4 +1,4 @@
-import { parseExpressions } from './parser.js';
+import { parseNameExpressions } from './parser.js';
 import Creature from '../models/creature.js';
 
 beforeEach(() => {
@@ -17,8 +17,8 @@ it('should preserve newline characters', () => {
     'Line 8\n' +
     '\n';
 
-  const parserResults = parseExpressions(inputText);    
-  
+  const parserResults = parseNameExpressions(inputText);
+
   expect(parserResults).not.toBeNull();
   expect(parserResults.inputText).toBe(inputText);
   expect(parserResults.outputText).toBe(inputText);
@@ -33,7 +33,7 @@ describe('should parse valid name expressions', () => {
   it('when only the full name is defined', () => {
     Creature.fullName = 'Hook Horror';
 
-    const expectedOutputText =      
+    const expectedOutputText =
       'The hook horror begins on a new line. The hook horror begins on a new sentence, but the hook horror does not.\n' +
       'The hook horror begins on a new line. The hook horror begins on a new sentence, but the hook horror does not.';
 
@@ -44,7 +44,7 @@ describe('should parse valid name expressions', () => {
     Creature.fullName = 'Ancient Red Dragon';
     Creature.shortName = 'dragon';
 
-    const expectedOutputText =      
+    const expectedOutputText =
       'The dragon begins on a new line. The dragon begins on a new sentence, but the dragon does not.\n' +
       'The ancient red dragon begins on a new line. The ancient red dragon begins on a new sentence, but the ancient red dragon does not.';
 
@@ -55,7 +55,7 @@ describe('should parse valid name expressions', () => {
     Creature.fullName = 'Tiamat';
     Creature.isProperNoun = true;
 
-    const expectedOutputText =      
+    const expectedOutputText =
       'Tiamat begins on a new line. Tiamat begins on a new sentence, but Tiamat does not.\n' +
       'Tiamat begins on a new line. Tiamat begins on a new sentence, but Tiamat does not.';
 
@@ -67,7 +67,7 @@ describe('should parse valid name expressions', () => {
     Creature.shortName = 'Lady Kima';
     Creature.isProperNoun = true;
 
-    const expectedOutputText =      
+    const expectedOutputText =
       'Lady Kima begins on a new line. Lady Kima begins on a new sentence, but Lady Kima does not.\n' +
       'Lady Kima of Vord begins on a new line. Lady Kima of Vord begins on a new sentence, but Lady Kima of Vord does not.';
 
@@ -75,8 +75,8 @@ describe('should parse valid name expressions', () => {
   });
 
   function parseAndVerifyNameExpressions(expectedOutputText) {
-    const parserResults = parseExpressions(inputText); 
-  
+    const parserResults = parseNameExpressions(inputText);
+
     expect(parserResults).not.toBeNull();
     expect(parserResults.inputText).toBe(inputText);
     expect(parserResults.outputText).toBe(expectedOutputText);
@@ -84,7 +84,7 @@ describe('should parse valid name expressions', () => {
   }
 });
 
-describe('should return an error with invalid name expressions', () => {
+describe('should return invalid name expressions with no change', () => {
   /* eslint-disable indent, no-unexpected-multiline */
   it.each
   `
@@ -95,12 +95,12 @@ describe('should return an error with invalid name expressions', () => {
   `
   ('$description: $inputText',
   ({inputText}) => {
-    const parserResults = parseExpressions(inputText);
+    const parserResults = parseNameExpressions(inputText);
 
     expect(parserResults).not.toBeNull();
     expect(parserResults.inputText).toBe(inputText);
-    expect(parserResults.outputText).toBeNull();
-    expect(parserResults.error).not.toBeNull();
+    expect(parserResults.outputText).toBe(inputText);
+    expect(parserResults.error).toBeNull();
   });
   /* eslint-enable indent, no-unexpected-multiline */
 });
