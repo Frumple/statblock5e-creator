@@ -40,27 +40,28 @@ const BlockTextAreaMixin = {
   },
 
   parse(errorMessages) {
-    const nameParserResults = Parser.parseNameExpressions(this.value);
+    const nameParserResults = Parser.parseNames(this.value);
 
     if (nameParserResults.error) {
-      const message = `${this.fieldName} has invalid syntax.`;
-
-      errorMessages.add(this, message);
+      errorMessages.add(this, `${this.fieldName} has at least one invalid name expression.`);
       return;
     }
 
-    const nameParserText = nameParserResults.outputText;
+    const mathParserResults = Parser.parseMath(nameParserResults.outputText);
 
-    const markdownParserResults = Parser.parseMarkdown(nameParserText);
+    if (mathParserResults.error) {
+      errorMessages.add(this, `${this.fieldName} has at least one invalid math expression.`);
+      return;
+    }
+
+    const markdownParserResults = Parser.parseMarkdown(mathParserResults.outputText);
 
     if (markdownParserResults.error) {
-      const message = `${this.fieldName} has invalid syntax.`;
-
-      errorMessages.add(this, message);
+      errorMessages.add(this, `${this.fieldName} has invalid markdown syntax.`);
       return;
     }
 
-    this.homebreweryText = nameParserText.replace(/\n/g, '  \n> ');
+    this.homebreweryText = mathParserResults.outputText.replace(/\n/g, '  \n> ');
     this.htmlText = markdownParserResults.outputText;
   }
 };

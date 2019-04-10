@@ -1,2 +1,2 @@
-src/js/parsers/name-expression-parser.js
 src/js/parsers/markdown-parser.js
+src/js/parsers/name-parser.js

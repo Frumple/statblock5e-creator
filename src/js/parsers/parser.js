@@ -1,10 +1,15 @@
-import NameExpressionParser from './name-expression-parser.js';
+import NameParser from './name-parser.js';
+import MathParser from './math-parser.js';
 import MarkdownParser from './markdown-parser.js';
 import Creature from '../models/creature.js';
 
-export function parseNameExpressions(inputText, parserOptions = {}) {
+export function parseNames(inputText, parserOptions = {}) {
   parserOptions.creature = Creature.toParserOptions();
-  return parseText(NameExpressionParser, inputText, parserOptions);
+  return parseText(NameParser, inputText, parserOptions);
+}
+
+export function parseMath(inputText, parserOptions = {}) {
+  return parseText(MathParser, inputText, parserOptions);
 }
 
 export function parseMarkdown(inputText, parserOptions = {}) {

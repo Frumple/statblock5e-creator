@@ -7,7 +7,7 @@ export function setExpectedHeading(heading) {
   expectedHeading = heading;
 }
 
-export function shouldSwitchToEditModeAndFocusOnAddButtonIfNoBlocks(section) {  
+export function shouldSwitchToEditModeAndFocusOnAddButtonIfNoBlocks(section) {
   expect(section).toBeInMode('edit');
   expect(section.editElements.addButton).toHaveFocus();
 }
@@ -17,7 +17,7 @@ export function shouldSwitchToEditModeAndFocusOnNameFieldOfFirstBlockIfExists(se
 
   section.editElements.submitForm();
   section.showElements.section.click();
-  
+
   expect(section).toBeInMode('edit');
   expect(section.editElements.editableList.blocks[0].nameElement).toHaveFocus();
   expect(section.editElements.editableList.blocks[0].nameElement).toBeSelected();
@@ -39,7 +39,7 @@ export function shouldAddASingleBlock(section, block) {
 
   expect(section).toBeInMode('show');
   expectSectionToBeEmpty(section, false);
-  
+
   const blocks = [block];
 
   expectDisplayBlocks(section, blocks);
@@ -100,7 +100,7 @@ export function shouldReparseNameChanges(section, block, oldNames, newNames) {
   Creature.fullName = oldNames.fullName;
   Creature.shortName = oldNames.shortName;
   Creature.isProperNoun = oldNames.isProperNoun;
-  
+
   addAndPopulateBlock(section, block.name, block.originalText);
 
   section.editElements.submitForm();
@@ -166,7 +166,7 @@ export function shouldDisplayAnErrorIfBlockTextHasInvalidMarkdownSyntax(section,
 
   expect(section).toHaveError(
     section.editElements.editableList.blocks[0].textElement,
-    `${expectedItemType} Text has invalid syntax.`);
+    `${expectedItemType} Text has invalid markdown syntax.`);
 }
 
 export function shouldDisplayErrorsIfBlockNameAndTextAreBothBlank(section, expectedItemType) {
@@ -201,7 +201,7 @@ export function shouldDisplayErrorsIfBlockNameIsBlankAndBlockTextHasInvalidMarkd
     0);
   expect(section).toHaveError(
     editableBlock.textElement,
-    `${expectedItemType} Text has invalid syntax.`,
+    `${expectedItemType} Text has invalid markdown syntax.`,
     1);
 }
 
@@ -218,16 +218,16 @@ function addAndPopulateBlock(section, blockName, blockText) {
 function expectDisplayBlocks(section, expectedBlocks) {
   for (const [index, block] of expectedBlocks.entries()) {
     const displayBlock = section.showElements.displayList.blocks[index];
-    
+
     expect(displayBlock.name).toBe(block.name);
-    expect(displayBlock.text).toBe(block.htmlText ? block.htmlText : block.originalText);    
-  }  
+    expect(displayBlock.text).toBe(block.htmlText ? block.htmlText : block.originalText);
+  }
 }
 
 function expectHtmlExport(section, expectedBlocks) {
   const htmlExport = section.exportToHtml();
   const children = htmlExport.children;
-  
+
   if (expectedHeading !== null) {
     expect(children[0].tagName).toBe('H3');
     expect(children[0]).toHaveTextContent(expectedHeading);
@@ -258,7 +258,7 @@ function expectHomebreweryExport(section, expectedBlocks) {
   const firstBlockIndex = homebreweryExport.indexOf('> ***');
   const blocksText = homebreweryExport.slice(firstBlockIndex);
 
-  const expectedBlocksInHomebreweryFormat = 
+  const expectedBlocksInHomebreweryFormat =
     expectedBlocks.map(
       block => `> ***${block.name}.*** ${(block.homebreweryText ? block.homebreweryText : block.originalText)}`);
 
@@ -271,7 +271,7 @@ function expectSectionToBeEmpty(section, isEmpty) {
   const emptyLabelHiddenClass = 'block-list-section__empty-label_hidden';
 
   expect(section.empty).toBe(isEmpty);
-  
+
   if (isEmpty) {
     expect(section.showElements.section).toHaveClass(emptySectionClass);
     expect(section.showElements.emptyLabel).not.toHaveClass(emptyLabelHiddenClass);

@@ -3,8 +3,9 @@
 // Run this script in node to generate the parser source code from the grammar.
 
 // Example usage from the "parsers" directory:
-// node scripts/generate-parser-script.js grammars/name-expression-grammar.pegjs name-expression-parser.js
 // node scripts/generate-parser-script.js grammars/markdown-grammar.pegjs markdown-parser.js
+// node scripts/generate-parser-script.js grammars/math-grammar.pegjs math-parser.js
+// node scripts/generate-parser-script.js grammars/name-grammar.pegjs name-parser.js
 
 const fs = require('fs');
 const peg = require('pegjs');

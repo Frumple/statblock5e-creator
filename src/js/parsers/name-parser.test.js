@@ -1,4 +1,4 @@
-import { parseNameExpressions } from './parser.js';
+import { parseNames } from './parser.js';
 import Creature from '../models/creature.js';
 
 beforeEach(() => {
@@ -17,7 +17,7 @@ it('should preserve newline characters', () => {
     'Line 8\n' +
     '\n';
 
-  const parserResults = parseNameExpressions(inputText);
+  const parserResults = parseNames(inputText);
 
   expect(parserResults).not.toBeNull();
   expect(parserResults.inputText).toBe(inputText);
@@ -75,7 +75,7 @@ describe('should parse valid name expressions', () => {
   });
 
   function parseAndVerifyNameExpressions(expectedOutputText) {
-    const parserResults = parseNameExpressions(inputText);
+    const parserResults = parseNames(inputText);
 
     expect(parserResults).not.toBeNull();
     expect(parserResults.inputText).toBe(inputText);
@@ -84,7 +84,7 @@ describe('should parse valid name expressions', () => {
   }
 });
 
-describe('should return invalid name expressions with no change', () => {
+describe('should parse invalid name expressions unchanged', () => {
   /* eslint-disable indent, no-unexpected-multiline */
   it.each
   `
@@ -95,7 +95,7 @@ describe('should return invalid name expressions with no change', () => {
   `
   ('$description: $inputText',
   ({inputText}) => {
-    const parserResults = parseNameExpressions(inputText);
+    const parserResults = parseNames(inputText);
 
     expect(parserResults).not.toBeNull();
     expect(parserResults.inputText).toBe(inputText);
