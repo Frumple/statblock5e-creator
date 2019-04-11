@@ -6,6 +6,10 @@ class ProficiencyBonus {
   reset() {
     this.proficiencyBonus = 2;
   }
+
+  toParserOptions() {
+    return this.proficiencyBonus;
+  }
 }
 
 export default new ProficiencyBonus();

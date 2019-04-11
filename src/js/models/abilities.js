@@ -38,6 +38,17 @@ class Abilities {
     ];
   }
 
+  toParserOptions() {
+    return {
+      strength: this.abilities['strength'].toParserOptions(),
+      dexterity: this.abilities['dexterity'].toParserOptions(),
+      constitution: this.abilities['constitution'].toParserOptions(),
+      intelligence: this.abilities['intelligence'].toParserOptions(),
+      wisdom: this.abilities['wisdom'].toParserOptions(),
+      charisma: this.abilities['charisma'].toParserOptions()
+    }
+  }
+
   toHtml() {
     const abilitiesBlock = document.createElement('abilities-block');
     for (const [key, value] of this.entries) {
@@ -52,7 +63,7 @@ class Abilities {
     const abilityStrings = this.orderedAbilities.map(ability => `${ability.score} ${ability.formattedModifier}`);
     const abilityLine = abilityStrings.join('|');
 
-    const text = 
+    const text =
 `>|STR|DEX|CON|INT|WIS|CHA|
 >|:---:|:---:|:---:|:---:|:---:|:---:|
 >|${abilityLine}|`;
@@ -77,6 +88,12 @@ class Ability {
 
   get formattedModifier() {
     return `(${formatModifier(this.modifier)})`;
+  }
+
+  toParserOptions() {
+    return {
+      modifier: this.modifier
+    }
   }
 }
 

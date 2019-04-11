@@ -66,15 +66,15 @@ describe('when the show section is clicked', () => {
         homebreweryText: '**Line 1**. The dummy is hot.  \n>   **Line 2**. The dummy is cold.  \n>     **Line 3**. The dummy is warm.',
         htmlText: '<strong>Line 1</strong>. The dummy is hot.\n  <strong>Line 2</strong>. The dummy is cold.\n    <strong>Line 3</strong>. The dummy is warm.'
       };
-      
+
       Creature.fullName = 'Dummy';
-      
+
       sharedSpecs.shouldAddASingleBlock(reactionsSection, block);
     });
 
     it('should add multiple blocks', () => {
       const blocks = [
-        { 
+        {
           name: 'Reaction 1',
           originalText: 'Reaction Text 1'
         },
@@ -97,12 +97,12 @@ describe('when the show section is clicked', () => {
         originalText: 'When a jelly that is Medium or larger is subjected to lightning or slashing damage, it splits into two new jellies if it has at least 10 hit points. Each new jelly has hit points equal to half the original jelly\'s, rounded down. New jellies are one size smaller than the original jelly.'
       };
 
-      sharedSpecs.shouldAddASingleBlockThenRemoveIt(reactionsSection, block);   
+      sharedSpecs.shouldAddASingleBlockThenRemoveIt(reactionsSection, block);
     });
 
     it('should add multiple blocks, then remove one of them', () => {
       const blocks = [
-        { 
+        {
           name: 'Reaction 1',
           originalText: 'Reaction Text 1'
         },

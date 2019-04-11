@@ -64,7 +64,7 @@ describe('when the show section is clicked', () => {
       expectHtmlExportDescription(htmlDescription);
       expectHomebreweryExportDescription(homebreweryDescription);
     });
-    
+
     function expectHtmlExportDescription(expectedText) {
       const htmlExport = legendaryActionsSection.exportToHtml();
       const description = htmlExport.children[1];
@@ -113,15 +113,15 @@ describe('when the show section is clicked', () => {
         homebreweryText: '**Line 1**. The dummy is hot.  \n>   **Line 2**. The dummy is cold.  \n>     **Line 3**. The dummy is warm.',
         htmlText: '<strong>Line 1</strong>. The dummy is hot.\n  <strong>Line 2</strong>. The dummy is cold.\n    <strong>Line 3</strong>. The dummy is warm.'
       };
-      
+
       Creature.fullName = 'Dummy';
-      
+
       sharedSpecs.shouldAddASingleBlock(legendaryActionsSection, block);
     });
 
     it('should add multiple blocks', () => {
       const blocks = [
-        { 
+        {
           name: 'Claw Attack',
           originalText: '{name} makes one claw attack.',
           homebreweryText: 'The sphinx makes one claw attack.',
@@ -162,7 +162,7 @@ describe('when the show section is clicked', () => {
 
     it('should add multiple blocks, then remove one of them', () => {
       const blocks = [
-        { 
+        {
           name: 'Teleport',
           originalText: '{name} magically teleports, along with any equipment it was wearing or carrying, up to 120 feet to an unoccupied space it can see.',
           homebreweryText: 'The solar magically teleports, along with any equipment it was wearing or carrying, up to 120 feet to an unoccupied space it can see.',
