@@ -3,8 +3,8 @@ export function capitalizeFirstLetter(string) {
 }
 
 export function formatModifier(modifier) {
-  let operator = formatModifierOperator(modifier);
-  let number = formatModifierNumber(modifier);
+  const operator = formatModifierOperator(modifier);
+  const number = formatModifierNumber(modifier);
 
   return `${operator}${number}`;
 }

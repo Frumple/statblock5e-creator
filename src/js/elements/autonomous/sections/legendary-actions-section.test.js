@@ -170,7 +170,7 @@ describe('when the show section is clicked', () => {
         },
         {
           name: 'Searing Burst (Costs 2 Actions)',
-          originalText: '{name} emits magical, divine energy. Each creature of its choice in a 10-foot radius must make a DC 23 Dexterity saving throw, taking 14 (4d6) fire damage plus 14 (4d6) radiant damage on a failed save, or half as much damage on a successful one.',
+          originalText: '{name} emits magical, divine energy. Each creature of its choice in a 10-foot radius must make a DC 23 Dexterity saving throw, taking dmg{4d6} fire damage plus dmg{4d6} radiant damage on a failed save, or half as much damage on a successful one.',
           homebreweryText: 'The solar emits magical, divine energy. Each creature of its choice in a 10-foot radius must make a DC 23 Dexterity saving throw, taking 14 (4d6) fire damage plus 14 (4d6) radiant damage on a failed save, or half as much damage on a successful one.',
           htmlText: 'The solar emits magical, divine energy. Each creature of its choice in a 10-foot radius must make a DC 23 Dexterity saving throw, taking 14 (4d6) fire damage plus 14 (4d6) radiant damage on a failed save, or half as much damage on a successful one.'
         },
@@ -190,7 +190,7 @@ describe('when the show section is clicked', () => {
     describe('should reparse the block text', () => {
       const block = {
         name: 'Wing Attack (Costs 2 Actions)',
-        originalText: '{name} beats its wings. Each creature within 10 feet of {name} must succeed on a DC 19 Dexterity saving throw or take 13 (2d6 + 6) bludgeoning damage and be knocked prone. {name} can then fly up to half its flying speed.',
+        originalText: '{name} beats its wings. Each creature within 10 feet of {name} must succeed on a DC 19 Dexterity saving throw or take dmg{2d6 + 6} bludgeoning damage and be knocked prone. {name} can then fly up to half its flying speed.',
         homebreweryText: null,
         htmlText: null
       };

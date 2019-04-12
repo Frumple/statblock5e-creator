@@ -22,9 +22,9 @@ export default class ActionsSection extends blockListSectionModule.BlockListSect
       super.connectedCallback();
 
       if (! isRunningInNode) {
-        this.addBlock('Club', '*Melee Weapon Attack:* +2 to hit, reach 5 ft., one target. *Hit:* 2 (1d4) bludgeoning damage.');
+        this.addBlock('Club', '*Melee Weapon Attack:* mod{strmod + prof} to hit, reach 5 ft., one target. *Hit:* dmg{1d4 + strmod} bludgeoning damage.');
         this.save();
-      }      
+      }
 
       this.isInitialized = true;
     }

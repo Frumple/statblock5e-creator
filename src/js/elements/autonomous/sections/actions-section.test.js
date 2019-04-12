@@ -55,7 +55,7 @@ describe('when the show section is clicked', () => {
 
       const block = {
         name: 'Slam',
-        originalText: '*Melee Weapon Attack:* mod{strmod + prof} to hit, reach 5 ft., one target. *Hit:* 4 (1d6 + 1) bludgeoning damage.',
+        originalText: '*Melee Weapon Attack:* mod{strmod + prof} to hit, reach 5 ft., one target. *Hit:* dmg{1d6 + strmod} bludgeoning damage.',
         homebreweryText: '*Melee Weapon Attack:* +3 to hit, reach 5 ft., one target. *Hit:* 4 (1d6 + 1) bludgeoning damage.',
         htmlText: '<em>Melee Weapon Attack:</em> +3 to hit, reach 5 ft., one target. <em>Hit:</em> 4 (1d6 + 1) bludgeoning damage.'
       };
@@ -88,13 +88,13 @@ describe('when the show section is clicked', () => {
         },
         {
           name: 'Scimitar',
-          originalText: '*Melee Weapon Attack:* mod{dexmod + prof} to hit, reach 5 ft., one target. *Hit:* 5 (1d6 + 2) slashing damage.',
+          originalText: '*Melee Weapon Attack:* mod{dexmod + prof} to hit, reach 5 ft., one target. *Hit:* dmg{1d6 + dexmod} slashing damage.',
           homebreweryText: '*Melee Weapon Attack:* +4 to hit, reach 5 ft., one target. *Hit:* 5 (1d6 + 2) slashing damage.',
           htmlText: '<em>Melee Weapon Attack:</em> +4 to hit, reach 5 ft., one target. <em>Hit:</em> 5 (1d6 + 2) slashing damage.'
         },
         {
           name: 'Javelin',
-          originalText: '*Melee or Ranged Weapon Attack:* mod{dexmod} to hit, reach 5 ft. or range 30/120 ft., one target. *Hit:* 3 (1d6) piercing damage.',
+          originalText: '*Melee or Ranged Weapon Attack:* mod{dexmod} to hit, reach 5 ft. or range 30/120 ft., one target. *Hit:* dmg{1d6} piercing damage.',
           homebreweryText: '*Melee or Ranged Weapon Attack:* +2 to hit, reach 5 ft. or range 30/120 ft., one target. *Hit:* 3 (1d6) piercing damage.',
           htmlText: '<em>Melee or Ranged Weapon Attack:</em> +2 to hit, reach 5 ft. or range 30/120 ft., one target. <em>Hit:</em> 3 (1d6) piercing damage.'
         }
@@ -124,13 +124,13 @@ describe('when the show section is clicked', () => {
         },
         {
           name: 'Spear',
-          originalText: '*Melee or Ranged Weapon Attack:* mod{strmod + prof} to hit, reach 5 ft. or range 20/60 ft., one target. *Hit:* 11 (2d6) piercing damage, or 13 (2d8 + 4) piercing damage if used with two hands to make a melee attack.',
+          originalText: '*Melee or Ranged Weapon Attack:* mod{strmod + prof} to hit, reach 5 ft. or range 20/60 ft., one target. *Hit:* dmg{2d6} piercing damage, or dmg{2d8 + strmod} piercing damage if used with two hands to make a melee attack.',
           homebreweryText: '*Melee or Ranged Weapon Attack:* +7 to hit, reach 5 ft. or range 20/60 ft., one target. *Hit:* 11 (2d6) piercing damage, or 13 (2d8 + 4) piercing damage if used with two hands to make a melee attack.',
           htmlText: '<em>Melee or Ranged Weapon Attack:</em> +7 to hit, reach 5 ft. or range 20/60 ft., one target. <em>Hit:</em> 11 (2d6) piercing damage, or 13 (2d8 + 4) piercing damage if used with two hands to make a melee attack.'
         },
         {
           name: 'Shield Bash',
-          originalText: '*Melee Weapon Attack:* mod{strmod + prof} to hit, reach 5 ft., one creature. *Hit:* 9 (2d4 + 4) bludgeoning damage. If the target is a Medium or smaller creature, it must succeed on a DC 15 Strength saving throw or be knocked prone.',
+          originalText: '*Melee Weapon Attack:* mod{strmod + prof} to hit, reach 5 ft., one creature. *Hit:* dmg{2d4 + strmod} bludgeoning damage. If the target is a Medium or smaller creature, it must succeed on a DC 15 Strength saving throw or be knocked prone.',
           homebreweryText: '*Melee Weapon Attack:* +7 to hit, reach 5 ft., one creature. *Hit:* 9 (2d4 + 4) bludgeoning damage. If the target is a Medium or smaller creature, it must succeed on a DC 15 Strength saving throw or be knocked prone.',
           htmlText: '<em>Melee Weapon Attack:</em> +7 to hit, reach 5 ft., one creature. <em>Hit:</em> 9 (2d4 + 4) bludgeoning damage. If the target is a Medium or smaller creature, it must succeed on a DC 15 Strength saving throw or be knocked prone.'
         }
