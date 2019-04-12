@@ -25,14 +25,14 @@ export default class StatBlock extends CustomAutonomousElement {
       this.headingSection = document.querySelector('heading-section');
       this.topStats = document.querySelector('top-stats');
       this.bottomStats = document.querySelector('bottom-stats');
-    }    
+    }
   }
 
   connectedCallback() {
     if (this.isConnected && ! this.isInitialized) {
       this.addEventListener('creatureNameChanged', this.onCreatureNameChanged);
       this.addEventListener('abilityScoreChanged', this.onAbilityScoreChanged);
-      this.addEventListener('proficiencyBonusChanged', this.onProficiencyBonusChanged);  
+      this.addEventListener('proficiencyBonusChanged', this.onProficiencyBonusChanged);
       this.addEventListener('skillChanged', this.onSkillChanged);
 
       this.isInitialized = true;
@@ -40,12 +40,12 @@ export default class StatBlock extends CustomAutonomousElement {
   }
 
   onCreatureNameChanged() {
-    this.reparseAllSections();
+    this.reparseBlockSections();
   }
-  
+
   onAbilityScoreChanged() {
     const abilityName = event.detail.abilityName;
-  
+
     if (abilityName === 'constitution') {
       this.topStats.basicStats.hitPointsSection.updateView();
     } else if (abilityName === 'wisdom') {
@@ -55,20 +55,23 @@ export default class StatBlock extends CustomAutonomousElement {
     this.topStats.advancedStats.savingThrowsSection.updateViewSavingThrow(abilityName);
     this.topStats.advancedStats.savingThrowsSection.updateViewText();
 
-
     this.topStats.advancedStats.skillsSection.updateViewSkillsByAbility(abilityName);
     this.topStats.advancedStats.skillsSection.updateViewText();
+
+    this.reparseBlockSections();
   }
 
   onProficiencyBonusChanged() {
     this.topStats.advancedStats.savingThrowsSection.updateView();
     this.topStats.advancedStats.skillsSection.updateView();
     this.topStats.advancedStats.sensesSection.updateView();
+
+    this.reparseBlockSections();
   }
 
   onSkillChanged() {
     const skillName = event.detail.skillName;
-  
+
     if (skillName === 'perception') {
       this.topStats.advancedStats.sensesSection.updateView();
     }
@@ -101,13 +104,13 @@ export default class StatBlock extends CustomAutonomousElement {
     this.headingSection.edit();
   }
 
-  saveAllSections() {    
+  saveAllSections() {
     this.topStats.saveAllSections();
     this.bottomStats.saveAllSections();
     this.headingSection.save();
   }
 
-  reparseAllSections() {
+  reparseBlockSections() {
     this.bottomStats.reparseAllSections();
   }
 
