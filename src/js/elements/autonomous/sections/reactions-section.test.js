@@ -49,19 +49,19 @@ describe('when the show section is clicked', () => {
     it('should add a single block', () => {
       const block = {
         name: 'Parry',
-        originalText: '{name} adds 3 to its AC against one melee attack that would hit it. To do so, {name} must see the attacker and be wielding a melee weapon.',
-        homebreweryText: 'The gladiator adds 3 to its AC against one melee attack that would hit it. To do so, the gladiator must see the attacker and be wielding a melee weapon.',
-        htmlText: 'The gladiator adds 3 to its AC against one melee attack that would hit it. To do so, the gladiator must see the attacker and be wielding a melee weapon.'
+        originalText: '{name} adds 2 to its AC against one melee attack that would hit it. To do so, {name} must see the attacker and be wielding a melee weapon.',
+        homebreweryText: 'The knight adds 2 to its AC against one melee attack that would hit it. To do so, the knight must see the attacker and be wielding a melee weapon.',
+        htmlText: 'The knight adds 2 to its AC against one melee attack that would hit it. To do so, the knight must see the attacker and be wielding a melee weapon.'
       };
 
-      Creature.fullName = 'Gladiator';
+      Creature.fullName = 'Knight';
 
       sharedSpecs.shouldAddASingleBlock(reactionsSection, block);
     });
 
     it('should add a single block with multiline text', () => {
       const block = {
-        name: 'Multiline Action',
+        name: 'Multiline Reaction',
         originalText: '**Line 1**. {name} is here.\n  **Line 2**. {name} is there.\n    **Line 3**. {name} is everywhere.',
         homebreweryText: '**Line 1**. The dummy is here.  \n>   **Line 2**. The dummy is there.  \n>     **Line 3**. The dummy is everywhere.',
         htmlText: '<strong>Line 1</strong>. The dummy is here.\n  <strong>Line 2</strong>. The dummy is there.\n    <strong>Line 3</strong>. The dummy is everywhere.'
@@ -74,7 +74,7 @@ describe('when the show section is clicked', () => {
 
     it('should add a single block with html escaped', () => {
       const block = {
-        name: 'Dummy Reaction',
+        name: 'Escaped Reaction',
         originalText: '<strong>Line 1</strong>. {name} is here.',
         homebreweryText: '&lt;strong&gt;Line 1&lt;/strong&gt;. The dummy is here.',
         htmlText: '&lt;strong&gt;Line 1&lt;/strong&gt;. The dummy is here.'
@@ -134,26 +134,26 @@ describe('when the show section is clicked', () => {
 
     describe('should reparse the block text', () => {
       const block = {
-        name: 'Shield',
-        originalText: 'When a creature makes an attack against the wearer of {name}\'s amulet, {name} grants a +2 bonus to the wearer\'s AC if {name} is within 5 feet of the wearer.',
+        name: 'Spell Reflection',
+        originalText: 'If {name} makes a successful saving throw against a spell, or a spell attack misses it, {name} can choose another creature (including the spellcaster) it can see within 30 feet of it. The spell targets the chosen creature instead of {name}. If the spell forced a saving throw, the chosen creature makes its own save. If the spell was an attack, the attack roll is rerolled against the chosen creature.',
         homebreweryText: null,
         htmlText: null
       };
 
       const oldNames = {
-        fullName: 'Shield Guardian',
+        fullName: 'Spectator',
         shortName: '',
         isProperNoun: false
       };
 
       it('when the full name is changed', () => {
         const newNames = {
-          fullName: 'Shield Automaton',
+          fullName: 'Old Spectator',
           shortName: '',
           isProperNoun: false
         };
 
-        block.homebreweryText = 'When a creature makes an attack against the wearer of the shield automaton\'s amulet, the shield automaton grants a +2 bonus to the wearer\'s AC if the shield automaton is within 5 feet of the wearer.';
+        block.homebreweryText = 'If the old spectator makes a successful saving throw against a spell, or a spell attack misses it, the old spectator can choose another creature (including the spellcaster) it can see within 30 feet of it. The spell targets the chosen creature instead of the old spectator. If the spell forced a saving throw, the chosen creature makes its own save. If the spell was an attack, the attack roll is rerolled against the chosen creature.';
         block.htmlText = block.homebreweryText;
 
         sharedSpecs.shouldReparseNameChanges(reactionsSection, block, oldNames, newNames);
@@ -161,12 +161,12 @@ describe('when the show section is clicked', () => {
 
       it('when the short name is changed', () => {
         const newNames = {
-          fullName: 'Shield Guardian',
-          shortName: 'guardian',
+          fullName: 'Old Spectator',
+          shortName: 'spectator',
           isProperNoun: false
         };
 
-        block.homebreweryText = 'When a creature makes an attack against the wearer of the guardian\'s amulet, the guardian grants a +2 bonus to the wearer\'s AC if the guardian is within 5 feet of the wearer.';
+        block.homebreweryText = 'If the spectator makes a successful saving throw against a spell, or a spell attack misses it, the spectator can choose another creature (including the spellcaster) it can see within 30 feet of it. The spell targets the chosen creature instead of the spectator. If the spell forced a saving throw, the chosen creature makes its own save. If the spell was an attack, the attack roll is rerolled against the chosen creature.';
         block.htmlText = block.homebreweryText;
 
         sharedSpecs.shouldReparseNameChanges(reactionsSection, block, oldNames, newNames);
@@ -174,12 +174,12 @@ describe('when the show section is clicked', () => {
 
       it('when the proper noun is changed', () => {
         const newNames = {
-          fullName: 'Shield Guardian',
+          fullName: 'Old Spectator',
           shortName: '',
           isProperNoun: true
         };
 
-        block.homebreweryText = 'When a creature makes an attack against the wearer of Shield Guardian\'s amulet, Shield Guardian grants a +2 bonus to the wearer\'s AC if Shield Guardian is within 5 feet of the wearer.';
+        block.homebreweryText = 'If Old Spectator makes a successful saving throw against a spell, or a spell attack misses it, Old Spectator can choose another creature (including the spellcaster) it can see within 30 feet of it. The spell targets the chosen creature instead of Old Spectator. If the spell forced a saving throw, the chosen creature makes its own save. If the spell was an attack, the attack roll is rerolled against the chosen creature.';
         block.htmlText = block.homebreweryText;
 
         sharedSpecs.shouldReparseNameChanges(reactionsSection, block, oldNames, newNames);

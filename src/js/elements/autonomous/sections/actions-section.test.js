@@ -50,14 +50,14 @@ describe('when the show section is clicked', () => {
 
   describe('and blocks are added and/or removed, and the edit section is submitted', () => {
     it('should add a single block', () => {
-      Abilities.abilities['strength'].score = 13;
+      Abilities.abilities['strength'].score = 16;
       ProficiencyBonus.proficiencyBonus = 2;
 
       const block = {
-        name: 'Slam',
-        originalText: '*Melee Weapon Attack:* mod{strmod + prof} to hit, reach 5 ft., one target. *Hit:* dmg{1d6 + strmod} bludgeoning damage.',
-        homebreweryText: '*Melee Weapon Attack:* +3 to hit, reach 5 ft., one target. *Hit:* 4 (1d6 + 1) bludgeoning damage.',
-        htmlText: '<em>Melee Weapon Attack:</em> +3 to hit, reach 5 ft., one target. <em>Hit:</em> 4 (1d6 + 1) bludgeoning damage.'
+        name: 'Greatsword',
+        originalText: '*Melee Weapon Attack:* mod{strmod + prof} to hit, reach 5 ft., one target. *Hit:* dmg{2d6 + strmod} slashing damage.',
+        homebreweryText: '*Melee Weapon Attack:* +5 to hit, reach 5 ft., one target. *Hit:* 10 (2d6 + 3) slashing damage.',
+        htmlText: '<em>Melee Weapon Attack:</em> +5 to hit, reach 5 ft., one target. <em>Hit:</em> 10 (2d6 + 3) slashing damage.'
       };
       sharedSpecs.shouldAddASingleBlock(actionsSection, block);
     });
@@ -76,14 +76,14 @@ describe('when the show section is clicked', () => {
     });
 
     it('should add a single block with html escaped', () => {
-      Abilities.abilities['strength'].score = 13;
+      Abilities.abilities['strength'].score = 16;
       ProficiencyBonus.proficiencyBonus = 2;
 
       const block = {
-        name: 'Slam',
-        originalText: '<em>Melee Weapon Attack:</em> +3 to hit, reach 5 ft., one target. <em>Hit:</em> 4 (1d6 + 1) bludgeoning damage.',
-        homebreweryText: '&lt;em&gt;Melee Weapon Attack:&lt;/em&gt; +3 to hit, reach 5 ft., one target. &lt;em&gt;Hit:&lt;/em&gt; 4 (1d6 + 1) bludgeoning damage.',
-        htmlText: '&lt;em&gt;Melee Weapon Attack:&lt;/em&gt; +3 to hit, reach 5 ft., one target. &lt;em&gt;Hit:&lt;/em&gt; 4 (1d6 + 1) bludgeoning damage.'
+        name: 'Greatsword',
+        originalText: '<em>Melee Weapon Attack:</em> mod{strmod + prof} to hit, reach 5 ft., one target. <em>Hit:</em> dmg{2d6 + strmod} slashing damage.',
+        homebreweryText: '&lt;em&gt;Melee Weapon Attack:&lt;/em&gt; +5 to hit, reach 5 ft., one target. &lt;em&gt;Hit:&lt;/em&gt; 10 (2d6 + 3) slashing damage.',
+        htmlText: '&lt;em&gt;Melee Weapon Attack:&lt;/em&gt; +5 to hit, reach 5 ft., one target. &lt;em&gt;Hit:&lt;/em&gt; 10 (2d6 + 3) slashing damage.'
       };
       sharedSpecs.shouldAddASingleBlock(actionsSection, block);
     });
@@ -125,31 +125,32 @@ describe('when the show section is clicked', () => {
     });
 
     it('should add multiple blocks, then remove one of them', () => {
-      Abilities.abilities['strength'].score = 19;
-      ProficiencyBonus.proficiencyBonus = 3;
+      Abilities.abilities['strength'].score = 16;
+      Abilities.abilities['dexterity'].score = 11;
+      ProficiencyBonus.proficiencyBonus = 2;
 
       const blocks = [
         {
           name: 'Multiattack',
-          originalText: '{name} makes three melee attacks or two ranged attacks.',
-          homebreweryText: 'The gladiator makes three melee attacks or two ranged attacks.',
-          htmlText: 'The gladiator makes three melee attacks or two ranged attacks.'
+          originalText: '{name} makes two melee attacks.',
+          homebreweryText: 'The knight makes two melee attacks.',
+          htmlText: 'The knight makes two melee attacks.'
         },
         {
-          name: 'Spear',
-          originalText: '*Melee or Ranged Weapon Attack:* mod{strmod + prof} to hit, reach 5 ft. or range 20/60 ft., one target. *Hit:* dmg{2d6} piercing damage, or dmg{2d8 + strmod} piercing damage if used with two hands to make a melee attack.',
-          homebreweryText: '*Melee or Ranged Weapon Attack:* +7 to hit, reach 5 ft. or range 20/60 ft., one target. *Hit:* 11 (2d6) piercing damage, or 13 (2d8 + 4) piercing damage if used with two hands to make a melee attack.',
-          htmlText: '<em>Melee or Ranged Weapon Attack:</em> +7 to hit, reach 5 ft. or range 20/60 ft., one target. <em>Hit:</em> 11 (2d6) piercing damage, or 13 (2d8 + 4) piercing damage if used with two hands to make a melee attack.'
+          name: 'Greatsword',
+          originalText: '<em>Melee Weapon Attack:</em> mod{strmod + prof} to hit, reach 5 ft., one target. <em>Hit:</em> dmg{2d6 + strmod} slashing damage.',
+          homebreweryText: '&lt;em&gt;Melee Weapon Attack:&lt;/em&gt; +5 to hit, reach 5 ft., one target. &lt;em&gt;Hit:&lt;/em&gt; 10 (2d6 + 3) slashing damage.',
+          htmlText: '&lt;em&gt;Melee Weapon Attack:&lt;/em&gt; +5 to hit, reach 5 ft., one target. &lt;em&gt;Hit:&lt;/em&gt; 10 (2d6 + 3) slashing damage.'
         },
         {
-          name: 'Shield Bash',
-          originalText: '*Melee Weapon Attack:* mod{strmod + prof} to hit, reach 5 ft., one creature. *Hit:* dmg{2d4 + strmod} bludgeoning damage. If the target is a Medium or smaller creature, it must succeed on a DC 15 Strength saving throw or be knocked prone.',
-          homebreweryText: '*Melee Weapon Attack:* +7 to hit, reach 5 ft., one creature. *Hit:* 9 (2d4 + 4) bludgeoning damage. If the target is a Medium or smaller creature, it must succeed on a DC 15 Strength saving throw or be knocked prone.',
-          htmlText: '<em>Melee Weapon Attack:</em> +7 to hit, reach 5 ft., one creature. <em>Hit:</em> 9 (2d4 + 4) bludgeoning damage. If the target is a Medium or smaller creature, it must succeed on a DC 15 Strength saving throw or be knocked prone.'
+          name: 'Heavy Crossbow',
+          originalText: '*Ranged Weapon Attack:* mod{dexmod + prof} to hit, range 100/400 ft., one target. *Hit:* dmg{1d10 + dexmod} piercing damage.',
+          homebreweryText: '*Ranged Weapon Attack:* +2 to hit, range 100/400 ft., one target. *Hit:* 5 (1d10) piercing damage.',
+          htmlText: '<em>Ranged Weapon Attack:</em> +2 to hit, range 100/400 ft., one target. <em>Hit:</em> 5 (1d10) piercing damage.'
         }
       ];
 
-      Creature.fullName = 'Gladiator';
+      Creature.fullName = 'Knight';
 
       sharedSpecs.shouldAddMultipleBlocksThenRemoveOneOfThem(actionsSection, blocks, 1);
     });

@@ -59,14 +59,13 @@ describe('when the show section is clicked', () => {
 
     it('should add a single block with multiline text', () => {
       const block = {
-        name: 'Vampire Weaknesses',
-        originalText: '{name} has the following flaws:\n  *Forbiddance*. {name} can\'t enter a residence without an invitation from one of the occupants.\n  *Harmed by Running Water*. {name} takes 20 acid damage when it ends its turn in running water.\n  *Stake to the Heart*. {name} is destroyed if a piercing weapon made of wood is driven into its heart while it is incapacitated in its resting place.\n  *Sunlight Hypersensitivity*. {name} takes 20 radiant damage when it starts its turn in sunlight. While in sunlight, it has disadvantage on attack rolls and ability check.',
-        homebreweryText: 'The vampire has the following flaws:  \n>   *Forbiddance*. The vampire can\'t enter a residence without an invitation from one of the occupants.  \n>   *Harmed by Running Water*. The vampire takes 20 acid damage when it ends its turn in running water.  \n>   *Stake to the Heart*. The vampire is destroyed if a piercing weapon made of wood is driven into its heart while it is incapacitated in its resting place.  \n>   *Sunlight Hypersensitivity*. The vampire takes 20 radiant damage when it starts its turn in sunlight. While in sunlight, it has disadvantage on attack rolls and ability check.',
-        htmlText: 'The vampire has the following flaws:\n  <em>Forbiddance</em>. The vampire can\'t enter a residence without an invitation from one of the occupants.\n  <em>Harmed by Running Water</em>. The vampire takes 20 acid damage when it ends its turn in running water.\n  <em>Stake to the Heart</em>. The vampire is destroyed if a piercing weapon made of wood is driven into its heart while it is incapacitated in its resting place.\n  <em>Sunlight Hypersensitivity</em>. The vampire takes 20 radiant damage when it starts its turn in sunlight. While in sunlight, it has disadvantage on attack rolls and ability check.'
+        name: 'Multiple Heads',
+        originalText: '{name} has five heads. While it has more than one head, {name} has advantage on saving throws against being blinded, charmed, deafened, frightened, stunned, and knocked unconscious.\n  Whenever {name} takes 25 or more damage in a single turn, one of its heads dies. If all its heads die, {name} dies.\n  At the end of its turn, it grows two heads for each of its heads that died since its last turn, unless it has taken fire damage since its last turn. {name} regains 10 hit points for each head regrown in this way.',
+        homebreweryText: 'The hydra has five heads. While it has more than one head, the hydra has advantage on saving throws against being blinded, charmed, deafened, frightened, stunned, and knocked unconscious.  \n>   Whenever the hydra takes 25 or more damage in a single turn, one of its heads dies. If all its heads die, the hydra dies.  \n>   At the end of its turn, it grows two heads for each of its heads that died since its last turn, unless it has taken fire damage since its last turn. The hydra regains 10 hit points for each head regrown in this way.',
+        htmlText: 'The hydra has five heads. While it has more than one head, the hydra has advantage on saving throws against being blinded, charmed, deafened, frightened, stunned, and knocked unconscious.\n  Whenever the hydra takes 25 or more damage in a single turn, one of its heads dies. If all its heads die, the hydra dies.\n  At the end of its turn, it grows two heads for each of its heads that died since its last turn, unless it has taken fire damage since its last turn. The hydra regains 10 hit points for each head regrown in this way.'
       };
 
-      Creature.fullName = 'Vampire Spawn';
-      Creature.shortName = 'vampire';
+      Creature.fullName = 'Hydra';
 
       sharedSpecs.shouldAddASingleBlock(specialTraitsSection, block);
     });
@@ -130,26 +129,26 @@ describe('when the show section is clicked', () => {
     it('should add multiple blocks, then remove one of them', () => {
       const blocks = [
         {
-          name: 'Advanced Telepathy',
-          originalText: '{name} can perceive the content of any telepathic communication used within 60 feet of it, and it can\'t be surprised by creatures with any form to telepathy.',
-          homebreweryText: 'The flumph can perceive the content of any telepathic communication used within 60 feet of it, and it can\'t be surprised by creatures with any form to telepathy.',
-          htmlText: 'The flumph can perceive the content of any telepathic communication used within 60 feet of it, and it can\'t be surprised by creatures with any form to telepathy.'
+          name: 'Shapechanger',
+          originalText: '{name} can use its action to polymorph into a Small or Medium humanoid it has seen, or back into its true form. Its statistics, other than its size, are the same in each form. Any equipment it is wearing or carrying isn\'t transformed. It reverts to its true form if it dies.',
+          homebreweryText: 'The doppelganger can use its action to polymorph into a Small or Medium humanoid it has seen, or back into its true form. Its statistics, other than its size, are the same in each form. Any equipment it is wearing or carrying isn\'t transformed. It reverts to its true form if it dies.',
+          htmlText: 'The doppelganger can use its action to polymorph into a Small or Medium humanoid it has seen, or back into its true form. Its statistics, other than its size, are the same in each form. Any equipment it is wearing or carrying isn\'t transformed. It reverts to its true form if it dies.'
         },
         {
-          name: 'Prone Deficiency',
-          originalText: 'If {name} is knocked prone, roll a die. On an odd result, the flumph lands upside-down and is incapacitated. At the end each of its turns, the flumph can make a DC 10 Dexterity saving throw, righting itself and ending the incapacitated condition if it succeeds.',
-          homebreweryText: 'If the flumph is knocked prone, roll a die. On an odd result, the flumph lands upside-down and is incapacitated. At the end each of its turns, the flumph can make a DC 10 Dexterity saving throw, righting itself and ending the incapacitated condition if it succeeds.',
-          htmlText: 'If the flumph is knocked prone, roll a die. On an odd result, the flumph lands upside-down and is incapacitated. At the end each of its turns, the flumph can make a DC 10 Dexterity saving throw, righting itself and ending the incapacitated condition if it succeeds.'
+          name: 'Ambusher',
+          originalText: '{name} has advantage on attack rolls against any creature it has surprised.',
+          homebreweryText: 'The doppelganger has advantage on attack rolls against any creature it has surprised.',
+          htmlText: 'The doppelganger has advantage on attack rolls against any creature it has surprised.'
         },
         {
-          name: 'Telepathic Shroud',
-          originalText: '{name} is immune to any effect that would sense its emotions or read its thoughts, as well as all diviniation spells.',
-          homebreweryText: 'The flumph is immune to any effect that would sense its emotions or read its thoughts, as well as all diviniation spells.',
-          htmlText: 'The flumph is immune to any effect that would sense its emotions or read its thoughts, as well as all diviniation spells.'
+          name: 'Surprise Attack',
+          originalText: 'If {name} surprises a creature and hits it with an attack during the first round of combat, the target takes an extra 10 (3d6) damage from the attack.',
+          homebreweryText: 'If the doppelganger surprises a creature and hits it with an attack during the first round of combat, the target takes an extra 10 (3d6) damage from the attack.',
+          htmlText: 'If the doppelganger surprises a creature and hits it with an attack during the first round of combat, the target takes an extra 10 (3d6) damage from the attack.'
         }
       ];
 
-      Creature.fullName = 'Flumph';
+      Creature.fullName = 'Doppelganger';
 
       sharedSpecs.shouldAddMultipleBlocksThenRemoveOneOfThem(specialTraitsSection, blocks, 1);
     });

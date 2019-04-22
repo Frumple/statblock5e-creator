@@ -1,6 +1,8 @@
 import LegendaryActionsSection from './legendary-actions-section.js';
 import LegendaryActions from '../../../models/lists/block/legendary-actions.js';
+
 import Creature from '../../../models/creature.js';
+import Abilities from '../../../models/abilities.js';
 
 import * as TestCustomElements from '../../../helpers/test/test-custom-elements.js';
 import * as sharedSpecs from './block-list-section.specs.js';
@@ -21,6 +23,7 @@ beforeAll(async() => {
 
 beforeEach(() => {
   Creature.reset();
+  Abilities.reset();
   LegendaryActions.reset();
 
   legendaryActionsSection = new LegendaryActionsSection();
@@ -49,11 +52,12 @@ describe('when the show section is clicked', () => {
 
   describe('and the description is changed and the edit section is submitted', () => {
     it('should switch to show mode and update the description', () => {
-      const description = '{name} can take 3 legendary actions, using the _Eye Ray_ option below. Only one legendary action option can be used at a time and only at the end of another creature\'s turn. {name} regains spent legendary actions at the start of its turn.';
-      const homebreweryDescription = 'The beholder can take 3 legendary actions, using the _Eye Ray_ option below. Only one legendary action option can be used at a time and only at the end of another creature\'s turn. The beholder regains spent legendary actions at the start of its turn.';
-      const htmlDescription = 'The beholder can take 3 legendary actions, using the <em>Eye Ray</em> option below. Only one legendary action option can be used at a time and only at the end of another creature\'s turn. The beholder regains spent legendary actions at the start of its turn.';
+      const description = '{name} can take 5 legendary actions, choosing from one of the options below. Only one legendary action option can be used at a time and only at the end of another creature\'s turn. {name} regains spent legendary actions at the start of its turn.';
+      const homebreweryDescription = 'The dragon can take 5 legendary actions, choosing from one of the options below. Only one legendary action option can be used at a time and only at the end of another creature\'s turn. The dragon regains spent legendary actions at the start of its turn.';
+      const htmlDescription = 'The dragon can take 5 legendary actions, choosing from one of the options below. Only one legendary action option can be used at a time and only at the end of another creature\'s turn. The dragon regains spent legendary actions at the start of its turn.';
 
-      Creature.fullName = 'Beholder';
+      Creature.fullName = 'Adult Red Dragon';
+      Creature.shortName = 'dragon';
 
       inputValueAndTriggerEvent(legendaryActionsSection.editElements.description, description);
 
@@ -95,20 +99,21 @@ describe('when the show section is clicked', () => {
   describe('and blocks are added and/or removed, and the edit section is submitted', () => {
     it('should add a single block', () => {
       const block = {
-        name: 'Eye Ray',
-        originalText: '{name} uses one random eye ray.',
-        homebreweryText: 'The beholder uses one random eye ray.',
-        htmlText: 'The beholder uses one random eye ray.'
+        name: 'Detect',
+        originalText: '{name} makes a Wisdom (Perception) check.',
+        homebreweryText: 'The dragon makes a Wisdom (Perception) check.',
+        htmlText: 'The dragon makes a Wisdom (Perception) check.'
       };
 
-      Creature.fullName = 'Beholder';
+      Creature.fullName = 'Adult Red Dragon';
+      Creature.shortName = 'dragon';
 
       sharedSpecs.shouldAddASingleBlock(legendaryActionsSection, block);
     });
 
     it('should add a single block with multiline text', () => {
       const block = {
-        name: 'Multiline Action',
+        name: 'Multiline Legendary Action',
         originalText: '**Line 1**. {name} is here.\n  **Line 2**. {name} is there.\n    **Line 3**. {name} is everywhere.',
         homebreweryText: '**Line 1**. The dummy is here.  \n>   **Line 2**. The dummy is there.  \n>     **Line 3**. The dummy is everywhere.',
         htmlText: '<strong>Line 1</strong>. The dummy is here.\n  <strong>Line 2</strong>. The dummy is there.\n    <strong>Line 3</strong>. The dummy is everywhere.'
@@ -121,7 +126,7 @@ describe('when the show section is clicked', () => {
 
     it('should add a single block with html escaped', () => {
       const block = {
-        name: 'Dummy Legendary Action',
+        name: 'Escaped Legendary Action',
         originalText: '<strong>Line 1</strong>. {name} is here.',
         homebreweryText: '&lt;strong&gt;Line 1&lt;/strong&gt;. The dummy is here.',
         htmlText: '&lt;strong&gt;Line 1&lt;/strong&gt;. The dummy is here.'
@@ -133,69 +138,75 @@ describe('when the show section is clicked', () => {
     });
 
     it('should add multiple blocks', () => {
+      Abilities.abilities['strength'].score = 27;
+
       const blocks = [
         {
-          name: 'Claw Attack',
-          originalText: '{name} makes one claw attack.',
-          homebreweryText: 'The sphinx makes one claw attack.',
-          htmlText: 'The sphinx makes one claw attack.'
+          name: 'Detect',
+          originalText: '{name} makes a Wisdom (Perception) check.',
+          homebreweryText: 'The dragon makes a Wisdom (Perception) check.',
+          htmlText: 'The dragon makes a Wisdom (Perception) check.'
         },
         {
-          name: 'Teleport (Costs 2 Actions)',
-          originalText: '{name} magically teleports, along with any equipment it was wearing or carrying, up to 120 feet to an unoccupied space it can see.',
-          homebreweryText: 'The sphinx magically teleports, along with any equipment it was wearing or carrying, up to 120 feet to an unoccupied space it can see.',
-          htmlText: 'The sphinx magically teleports, along with any equipment it was wearing or carrying, up to 120 feet to an unoccupied space it can see.'
+          name: 'Tail Attack',
+          originalText: '{name} makes a tail attack.',
+          homebreweryText: 'The dragon makes a tail attack.',
+          htmlText: 'The dragon makes a tail attack.'
         },
         {
-          name: 'Cast a Spell (Costs 3 Actions)',
-          originalText: '{name} casts a spell from its list of prepared spells, using a spell slot as normal.',
-          homebreweryText: 'The sphinx casts a spell from its list of prepared spells, using a spell slot as normal.',
-          htmlText: 'The sphinx casts a spell from its list of prepared spells, using a spell slot as normal.'
+          name: 'Wing Attack (Costs 2 Actions)',
+          originalText: '{name} beats its wings. Each creature within 10 feet of the dragon must succeed on a DC 22 Dexterity saving throw or take dmg{2d6 + strmod} bludgeoning damage and be knocked prone. {name} can then fly up to half its flying speed.',
+          homebreweryText: 'The dragon beats its wings. Each creature within 10 feet of the dragon must succeed on a DC 22 Dexterity saving throw or take 15 (2d6 + 8) bludgeoning damage and be knocked prone. The dragon can then fly up to half its flying speed.',
+          htmlText: 'The dragon beats its wings. Each creature within 10 feet of the dragon must succeed on a DC 22 Dexterity saving throw or take 15 (2d6 + 8) bludgeoning damage and be knocked prone. The dragon can then fly up to half its flying speed.'
         }
       ];
 
-      Creature.fullName = 'Androsphinx';
-      Creature.shortName = 'Sphinx';
+      Creature.fullName = 'Adult Red Dragon';
+      Creature.shortName = 'dragon';
 
       sharedSpecs.shouldAddMultipleBlocks(legendaryActionsSection, blocks);
     });
 
     it('should add a single block, then remove it', () => {
       const block = {
-        name: 'Attack',
-        originalText: '{name} makes one attack.',
-        homebreweryText: 'The empyrean makes one attack.',
-        htmlText: 'The empyrean makes one attack.'
+        name: 'Detect',
+        originalText: '{name} makes a Wisdom (Perception) check.',
+        homebreweryText: 'The dragon makes a Wisdom (Perception) check.',
+        htmlText: 'The dragon makes a Wisdom (Perception) check.'
       };
 
-      Creature.fullName = 'Empyrean';
+      Creature.fullName = 'Adult Red Dragon';
+      Creature.shortName = 'dragon';
 
       sharedSpecs.shouldAddASingleBlockThenRemoveIt(legendaryActionsSection, block);
     });
 
     it('should add multiple blocks, then remove one of them', () => {
+      Abilities.abilities['strength'].score = 27;
+
       const blocks = [
         {
-          name: 'Teleport',
-          originalText: '{name} magically teleports, along with any equipment it was wearing or carrying, up to 120 feet to an unoccupied space it can see.',
-          homebreweryText: 'The solar magically teleports, along with any equipment it was wearing or carrying, up to 120 feet to an unoccupied space it can see.',
-          htmlText: 'The solar magically teleports, along with any equipment it was wearing or carrying, up to 120 feet to an unoccupied space it can see.'
+          name: 'Detect',
+          originalText: '{name} makes a Wisdom (Perception) check.',
+          homebreweryText: 'The dragon makes a Wisdom (Perception) check.',
+          htmlText: 'The dragon makes a Wisdom (Perception) check.'
         },
         {
-          name: 'Searing Burst (Costs 2 Actions)',
-          originalText: '{name} emits magical, divine energy. Each creature of its choice in a 10-foot radius must make a DC 23 Dexterity saving throw, taking dmg{4d6} fire damage plus dmg{4d6} radiant damage on a failed save, or half as much damage on a successful one.',
-          homebreweryText: 'The solar emits magical, divine energy. Each creature of its choice in a 10-foot radius must make a DC 23 Dexterity saving throw, taking 14 (4d6) fire damage plus 14 (4d6) radiant damage on a failed save, or half as much damage on a successful one.',
-          htmlText: 'The solar emits magical, divine energy. Each creature of its choice in a 10-foot radius must make a DC 23 Dexterity saving throw, taking 14 (4d6) fire damage plus 14 (4d6) radiant damage on a failed save, or half as much damage on a successful one.'
+          name: 'Tail Attack',
+          originalText: '{name} makes a tail attack.',
+          homebreweryText: 'The dragon makes a tail attack.',
+          htmlText: 'The dragon makes a tail attack.'
         },
         {
-          name: 'Blinding Gaze (Costs 3 Actions)',
-          originalText: '{name} targets one creature it can see within 30 feet of it. If the target can see it, the target must succeed on a DC 15 Constitution saving throw or be blinded until magic such as the *lesser restoration* spell removes the blindness.',
-          homebreweryText: 'The solar targets one creature it can see within 30 feet of it. If the target can see it, the target must succeed on a DC 15 Constitution saving throw or be blinded until magic such as the *lesser restoration* spell removes the blindness.',
-          htmlText: 'The solar targets one creature it can see within 30 feet of it. If the target can see it, the target must succeed on a DC 15 Constitution saving throw or be blinded until magic such as the <em>lesser restoration</em> spell removes the blindness.'
+          name: 'Wing Attack (Costs 2 Actions)',
+          originalText: '{name} beats its wings. Each creature within 10 feet of the dragon must succeed on a DC 22 Dexterity saving throw or take dmg{2d6 + strmod} bludgeoning damage and be knocked prone. {name} can then fly up to half its flying speed.',
+          homebreweryText: 'The dragon beats its wings. Each creature within 10 feet of the dragon must succeed on a DC 22 Dexterity saving throw or take 15 (2d6 + 8) bludgeoning damage and be knocked prone. The dragon can then fly up to half its flying speed.',
+          htmlText: 'The dragon beats its wings. Each creature within 10 feet of the dragon must succeed on a DC 22 Dexterity saving throw or take 15 (2d6 + 8) bludgeoning damage and be knocked prone. The dragon can then fly up to half its flying speed.'
         }
       ];
 
-      Creature.fullName = 'Solar';
+      Creature.fullName = 'Adult Red Dragon';
+      Creature.shortName = 'dragon';
 
       sharedSpecs.shouldAddMultipleBlocksThenRemoveOneOfThem(legendaryActionsSection, blocks, 1);
     });
@@ -203,51 +214,57 @@ describe('when the show section is clicked', () => {
     describe('should reparse the block text', () => {
       const block = {
         name: 'Wing Attack (Costs 2 Actions)',
-        originalText: '{name} beats its wings. Each creature within 10 feet of {name} must succeed on a DC 19 Dexterity saving throw or take dmg{2d6 + 6} bludgeoning damage and be knocked prone. {name} can then fly up to half its flying speed.',
+        originalText: '{name} beats its wings. Each creature within 10 feet of {name} must succeed on a DC 22 Dexterity saving throw or take dmg{2d6 + strmod} bludgeoning damage and be knocked prone. {name} can then fly up to half its flying speed.',
         homebreweryText: null,
         htmlText: null
       };
 
       const oldNames = {
-        fullName: 'Adult Green Dragon',
+        fullName: 'Adult Red Dragon',
         shortName: '',
         isProperNoun: false
       };
 
       it('when the full name is changed', () => {
+        Abilities.abilities['strength'].score = 27;
+
         const newNames = {
-          fullName: 'Ancient Green Dragon',
+          fullName: 'Ancient Red Dragon',
           shortName: '',
           isProperNoun: false
         };
 
-        block.homebreweryText = 'The ancient green dragon beats its wings. Each creature within 10 feet of the ancient green dragon must succeed on a DC 19 Dexterity saving throw or take 13 (2d6 + 6) bludgeoning damage and be knocked prone. The ancient green dragon can then fly up to half its flying speed.';
+        block.homebreweryText = 'The ancient red dragon beats its wings. Each creature within 10 feet of the ancient red dragon must succeed on a DC 22 Dexterity saving throw or take 15 (2d6 + 8) bludgeoning damage and be knocked prone. The ancient red dragon can then fly up to half its flying speed.';
         block.htmlText = block.homebreweryText;
 
         sharedSpecs.shouldReparseNameChanges(legendaryActionsSection, block, oldNames, newNames);
       });
 
       it('when the short name is changed', () => {
+        Abilities.abilities['strength'].score = 27;
+
         const newNames = {
-          fullName: 'Adult Green Dragon',
+          fullName: 'Adult Red Dragon',
           shortName: 'dragon',
           isProperNoun: false
         };
 
-        block.homebreweryText = 'The dragon beats its wings. Each creature within 10 feet of the dragon must succeed on a DC 19 Dexterity saving throw or take 13 (2d6 + 6) bludgeoning damage and be knocked prone. The dragon can then fly up to half its flying speed.';
+        block.homebreweryText = 'The dragon beats its wings. Each creature within 10 feet of the dragon must succeed on a DC 22 Dexterity saving throw or take 15 (2d6 + 8) bludgeoning damage and be knocked prone. The dragon can then fly up to half its flying speed.';
         block.htmlText = block.homebreweryText;
 
         sharedSpecs.shouldReparseNameChanges(legendaryActionsSection, block, oldNames, newNames);
       });
 
       it('when the proper noun is changed', () => {
+        Abilities.abilities['strength'].score = 27;
+
         const newNames = {
-          fullName: 'Adult Green Dragon',
+          fullName: 'Adult Red Dragon',
           shortName: '',
           isProperNoun: true
         };
 
-        block.homebreweryText = 'Adult Green Dragon beats its wings. Each creature within 10 feet of Adult Green Dragon must succeed on a DC 19 Dexterity saving throw or take 13 (2d6 + 6) bludgeoning damage and be knocked prone. Adult Green Dragon can then fly up to half its flying speed.';
+        block.homebreweryText = 'Adult Red Dragon beats its wings. Each creature within 10 feet of Adult Red Dragon must succeed on a DC 22 Dexterity saving throw or take 15 (2d6 + 8) bludgeoning damage and be knocked prone. Adult Red Dragon can then fly up to half its flying speed.';
         block.htmlText = block.homebreweryText;
 
         sharedSpecs.shouldReparseNameChanges(legendaryActionsSection, block, oldNames, newNames);
