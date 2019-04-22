@@ -24,10 +24,10 @@ beforeEach(() => {
 
 describe('when the show section is clicked', () => {
   beforeEach(() => {
-    armorClassSection.showElements.section.click(); 
+    armorClassSection.showElements.section.click();
   });
 
-  it('should switch to edit mode and focus on the armor class field', () => {    
+  it('should switch to edit mode and focus on the armor class field', () => {
     expect(armorClassSection).toBeInMode('edit');
     expect(armorClassSection.editElements.armorClass).toHaveFocus();
   });
@@ -83,6 +83,24 @@ describe('when the show section is clicked', () => {
         expect(armorClassSection).toExportPropertyLineToHomebrewery(expectedHeading, originalText);
       });
 
+      it('should switch to show mode and save the custom text with html escaped', () => {
+        const originalText = '12 (15 with <em>mage armor</em>)';
+        const htmlText = '12 (15 with &lt;em&gt;mage armor&lt;/em&gt;)';
+        inputValueAndTriggerEvent(armorClassSection.editElements.customText, originalText);
+
+        armorClassSection.editElements.submitForm();
+
+        expect(ArmorClass.useCustomText).toBe(true);
+        expect(ArmorClass.originalCustomText).toBe(originalText);
+        expect(ArmorClass.htmlCustomText).toBe(htmlText);
+
+        expect(armorClassSection).toBeInMode('show');
+        expect(armorClassSection).toShowPropertyLine(expectedHeading, htmlText);
+
+        expect(armorClassSection).toExportPropertyLineToHtml(expectedHeading, htmlText);
+        expect(armorClassSection).toExportPropertyLineToHomebrewery(expectedHeading, originalText);
+      });
+
       it('should display an error if the custom text field is blank', () => {
         inputValueAndTriggerEvent(armorClassSection.editElements.customText, '');
 
@@ -102,7 +120,7 @@ describe('when the show section is clicked', () => {
         expect(armorClassSection).toBeInMode('edit');
         expect(armorClassSection).toHaveError(
           armorClassSection.editElements.customText,
-          'Armor Class Custom Text has invalid syntax.');
+          'Armor Class Custom Text has invalid Markdown syntax.');
       });
 
       it('should display only one error if the armor class is not a valid number and custom text field is blank', () => {
@@ -145,6 +163,7 @@ describe('when the show section is clicked', () => {
         expect(ArmorClass.armorClass).toBe(7);
         expect(ArmorClass.armorType).toBe('');
         expect(ArmorClass.hasShield).toBe(false);
+        expect(ArmorClass.useCustomText).toBe(false);
 
         expect(armorClassSection).toBeInMode('show');
         expect(armorClassSection).toShowPropertyLine(expectedHeading, expectedText);
@@ -164,6 +183,7 @@ describe('when the show section is clicked', () => {
         expect(ArmorClass.armorClass).toBe(21);
         expect(ArmorClass.armorType).toBe('natural armor');
         expect(ArmorClass.hasShield).toBe(false);
+        expect(ArmorClass.useCustomText).toBe(false);
 
         expect(armorClassSection).toBeInMode('show');
         expect(armorClassSection).toShowPropertyLine(expectedHeading, expectedText);
@@ -175,7 +195,7 @@ describe('when the show section is clicked', () => {
       it('should switch to show mode and save the armor class and shield', () => {
         const expectedText = '12 (shield)';
 
-        inputValueAndTriggerEvent(armorClassSection.editElements.armorClass, 12);      
+        inputValueAndTriggerEvent(armorClassSection.editElements.armorClass, 12);
         armorClassSection.editElements.hasShield.click();
 
         armorClassSection.editElements.submitForm();
@@ -183,6 +203,7 @@ describe('when the show section is clicked', () => {
         expect(ArmorClass.armorClass).toBe(12);
         expect(ArmorClass.armorType).toBe('');
         expect(ArmorClass.hasShield).toBe(true);
+        expect(ArmorClass.useCustomText).toBe(false);
 
         expect(armorClassSection).toBeInMode('show');
         expect(armorClassSection).toShowPropertyLine(expectedHeading, expectedText);
@@ -203,6 +224,7 @@ describe('when the show section is clicked', () => {
         expect(ArmorClass.armorClass).toBe(16);
         expect(ArmorClass.armorType).toBe('chain shirt');
         expect(ArmorClass.hasShield).toBe(true);
+        expect(ArmorClass.useCustomText).toBe(false);
 
         expect(armorClassSection).toBeInMode('show');
         expect(armorClassSection).toShowPropertyLine(expectedHeading, expectedText);
@@ -234,5 +256,5 @@ describe('when the show section is clicked', () => {
           'Armor Class must be a valid number.');
       });
     });
-  });  
+  });
 });

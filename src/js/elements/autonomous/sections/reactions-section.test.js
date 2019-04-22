@@ -62,9 +62,22 @@ describe('when the show section is clicked', () => {
     it('should add a single block with multiline text', () => {
       const block = {
         name: 'Multiline Action',
-        originalText: '**Line 1**. {name} is hot.\n  **Line 2**. {name} is cold.\n    **Line 3**. {name} is warm.',
-        homebreweryText: '**Line 1**. The dummy is hot.  \n>   **Line 2**. The dummy is cold.  \n>     **Line 3**. The dummy is warm.',
-        htmlText: '<strong>Line 1</strong>. The dummy is hot.\n  <strong>Line 2</strong>. The dummy is cold.\n    <strong>Line 3</strong>. The dummy is warm.'
+        originalText: '**Line 1**. {name} is here.\n  **Line 2**. {name} is there.\n    **Line 3**. {name} is everywhere.',
+        homebreweryText: '**Line 1**. The dummy is here.  \n>   **Line 2**. The dummy is there.  \n>     **Line 3**. The dummy is everywhere.',
+        htmlText: '<strong>Line 1</strong>. The dummy is here.\n  <strong>Line 2</strong>. The dummy is there.\n    <strong>Line 3</strong>. The dummy is everywhere.'
+      };
+
+      Creature.fullName = 'Dummy';
+
+      sharedSpecs.shouldAddASingleBlock(reactionsSection, block);
+    });
+
+    it('should add a single block with html escaped', () => {
+      const block = {
+        name: 'Dummy Reaction',
+        originalText: '<strong>Line 1</strong>. {name} is here.',
+        homebreweryText: '&lt;strong&gt;Line 1&lt;/strong&gt;. The dummy is here.',
+        htmlText: '&lt;strong&gt;Line 1&lt;/strong&gt;. The dummy is here.'
       };
 
       Creature.fullName = 'Dummy';

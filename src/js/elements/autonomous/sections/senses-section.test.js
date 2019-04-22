@@ -30,7 +30,7 @@ beforeEach(() => {
 
 describe('when the show section is clicked', () => {
   beforeEach(() => {
-    sensesSection.showElements.section.click(); 
+    sensesSection.showElements.section.click();
   });
 
   it('should switch to edit mode and focus on the blindsight field', () => {
@@ -61,6 +61,10 @@ describe('when the show section is clicked', () => {
 
         sensesSection.editElements.submitForm();
 
+        expect(Senses.useCustomText).toBe(true);
+        expect(Senses.originalCustomText).toBe(customText);
+        expect(Senses.htmlCustomText).toBe(customText);
+
         expect(sensesSection).toBeInMode('show');
         expect(sensesSection).toShowPropertyLine(expectedHeading, customText);
 
@@ -74,6 +78,28 @@ describe('when the show section is clicked', () => {
         inputValueAndTriggerEvent(sensesSection.editElements.customText, originalText);
 
         sensesSection.editElements.submitForm();
+
+        expect(Senses.useCustomText).toBe(true);
+        expect(Senses.originalCustomText).toBe(originalText);
+        expect(Senses.htmlCustomText).toBe(htmlText);
+
+        expect(sensesSection).toBeInMode('show');
+        expect(sensesSection).toShowPropertyLine(expectedHeading, htmlText);
+
+        expect(sensesSection).toExportPropertyLineToHtml(expectedHeading, htmlText);
+        expect(sensesSection).toExportPropertyLineToHomebrewery(expectedHeading, originalText);
+      });
+
+      it('should switch to show mode and save the custom text with html escaped', () => {
+        const originalText = '<strong>boldvision 60 ft.</strong>';
+        const htmlText = '&lt;strong&gt;boldvision 60 ft.&lt;/strong&gt;';
+        inputValueAndTriggerEvent(sensesSection.editElements.customText, originalText);
+
+        sensesSection.editElements.submitForm();
+
+        expect(Senses.useCustomText).toBe(true);
+        expect(Senses.originalCustomText).toBe(originalText);
+        expect(Senses.htmlCustomText).toBe(htmlText);
 
         expect(sensesSection).toBeInMode('show');
         expect(sensesSection).toShowPropertyLine(expectedHeading, htmlText);
@@ -101,7 +127,7 @@ describe('when the show section is clicked', () => {
         expect(sensesSection).toBeInMode('edit');
         expect(sensesSection).toHaveError(
           sensesSection.editElements.customText,
-          'Senses Custom Text has invalid syntax.');
+          'Senses Custom Text has invalid Markdown syntax.');
       });
     });
   });
@@ -159,6 +185,7 @@ describe('when the show section is clicked', () => {
           expect(Senses.darkvision).toBe(darkvision);
           expect(Senses.tremorsense).toBe(tremorsense);
           expect(Senses.truesight).toBe(truesight);
+          expect(Senses.useCustomText).toBe(false);
 
           expect(sensesSection).toBeInMode('show');
           expect(sensesSection).toShowPropertyLine(expectedHeading, expectedText);
@@ -195,7 +222,7 @@ describe('should calculate the passive perception based on the following conditi
   ('$description: {wisdomScore="$wisdomScore", proficiencyBonus="$proficiencyBonus", perceptionEnabled="$perceptionEnabled", perceptionProficient="$perceptionProficient", perceptionOverride="$perceptionOverride"} => $expectedPassivePerception',
   ({wisdomScore, proficiencyBonus, perceptionEnabled, perceptionProficient, perceptionOverride, expectedPassivePerception}) => {
     const expectedText = `passive Perception ${expectedPassivePerception}`;
-    
+
     Abilities.abilities['wisdom'].score = wisdomScore;
     ProficiencyBonus.proficiencyBonus = proficiencyBonus;
 
@@ -203,7 +230,7 @@ describe('should calculate the passive perception based on the following conditi
     skill.isEnabled = perceptionEnabled;
     skill.isProficient = perceptionProficient;
     skill.override = perceptionOverride;
-    
+
     sensesSection.updateView();
 
     expect(Senses.passivePerception).toBe(expectedPassivePerception);
@@ -215,7 +242,7 @@ describe('should calculate the passive perception based on the following conditi
 
     sensesSection.showElements.section.click();
 
-    expect(sensesSection.editElements.passivePerception).toHaveTextContent(expectedPassivePerception);    
+    expect(sensesSection.editElements.passivePerception).toHaveTextContent(expectedPassivePerception);
   });
   /* eslint-enable indent, no-unexpected-multiline */
 });

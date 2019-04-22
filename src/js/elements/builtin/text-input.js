@@ -1,4 +1,5 @@
 import CustomBuiltinInputElement from './custom-builtin-input-element.js';
+import { escapeHtml } from '../../helpers/string-formatter.js';
 import { parseMarkdown } from '../../parsers/parser.js';
 
 export default class TextInput extends CustomBuiltinInputElement {
@@ -21,7 +22,7 @@ export let TextInputMixin = {
   },
 
   validate(errorMessages) {
-    if (this.required && this.value === '') { 
+    if (this.required && this.value === '') {
       errorMessages.add(this, `${this.fieldName} cannot be blank.`);
     } else if ('parsed' in this.dataset) {
       this.parse(errorMessages);
@@ -29,10 +30,11 @@ export let TextInputMixin = {
   },
 
   parse(errorMessages) {
-    const parserResults = parseMarkdown(this.value);
+    const escapedText = escapeHtml(this.value);
+    const parserResults = parseMarkdown(escapedText);
 
     if (parserResults.error) {
-      const message = `${this.fieldName} has invalid syntax.`;
+      const message = `${this.fieldName} has invalid Markdown syntax.`;
       errorMessages.add(this, message);
     } else {
       this.htmlText = parserResults.outputText;

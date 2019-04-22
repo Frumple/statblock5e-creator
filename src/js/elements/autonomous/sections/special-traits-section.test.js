@@ -71,6 +71,20 @@ describe('when the show section is clicked', () => {
       sharedSpecs.shouldAddASingleBlock(specialTraitsSection, block);
     });
 
+    it('should add a single block with html escaped', () => {
+      const block = {
+        name: 'Antimagic Susceptibility',
+        originalText: '{name} is incapacitated while in the area of an <em>antimagic field</em>. If targeted by <em>dispel magic</em>, {name} must succeed on a Constitution saving throw against the caster\'s spell save DC or fall unconscious for 1 minute.',
+        homebreweryText: 'The armor is incapacitated while in the area of an &lt;em&gt;antimagic field&lt;/em&gt;. If targeted by &lt;em&gt;dispel magic&lt;/em&gt;, the armor must succeed on a Constitution saving throw against the caster\'s spell save DC or fall unconscious for 1 minute.',
+        htmlText: 'The armor is incapacitated while in the area of an &lt;em&gt;antimagic field&lt;/em&gt;. If targeted by &lt;em&gt;dispel magic&lt;/em&gt;, the armor must succeed on a Constitution saving throw against the caster\'s spell save DC or fall unconscious for 1 minute.'
+      };
+
+      Creature.fullName = 'Animated Armor';
+      Creature.shortName = 'armor';
+
+      sharedSpecs.shouldAddASingleBlock(specialTraitsSection, block);
+    });
+
     it('should add multiple blocks', () => {
       const blocks = [
         {

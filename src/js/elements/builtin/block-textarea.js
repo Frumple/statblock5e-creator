@@ -1,6 +1,7 @@
 import CustomBuiltinElementMixins from '../../helpers/custom-builtin-element-mixins.js';
 import isRunningInNode from '../../helpers/is-running-in-node.js';
 import { copyObjectProperties } from '../../helpers/object-helpers.js';
+import { escapeHtml } from '../../helpers/string-formatter.js';
 import * as Parser from '../../parsers/parser.js';
 
 export default class BlockTextArea extends HTMLTextAreaElement {
@@ -40,7 +41,9 @@ const BlockTextAreaMixin = {
   },
 
   parse(errorMessages) {
-    const nameParserResults = Parser.parseNames(this.value);
+    const escapedText = escapeHtml(this.value);
+
+    const nameParserResults = Parser.parseNames(escapedText);
 
     if (nameParserResults.error) {
       errorMessages.add(this, `${this.fieldName} has at least one invalid name expression.`);

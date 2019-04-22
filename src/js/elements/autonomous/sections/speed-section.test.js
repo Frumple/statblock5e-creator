@@ -24,7 +24,7 @@ beforeEach(() => {
 
 describe('when the show section is clicked', () => {
   beforeEach(() => {
-    speedSection.showElements.section.click(); 
+    speedSection.showElements.section.click();
   });
 
   it('should switch to edit mode and focus on the walk speed field', () => {
@@ -86,6 +86,24 @@ describe('when the show section is clicked', () => {
         expect(speedSection).toExportPropertyLineToHomebrewery(expectedHeading, originalText);
       });
 
+      it('should switch to show mode and save the custom text with html escaped', () => {
+        const originalText = '40 ft. (80 ft. when <em>hasted</em>)';
+        const htmlText = '40 ft. (80 ft. when &lt;em&gt;hasted&lt;/em&gt;)';
+        inputValueAndTriggerEvent(speedSection.editElements.customText, originalText);
+
+        speedSection.editElements.submitForm();
+
+        expect(Speed.useCustomText).toBe(true);
+        expect(Speed.originalCustomText).toBe(originalText);
+        expect(Speed.htmlCustomText).toBe(htmlText);
+
+        expect(speedSection).toBeInMode('show');
+        expect(speedSection).toShowPropertyLine(expectedHeading, htmlText);
+
+        expect(speedSection).toExportPropertyLineToHtml(expectedHeading, htmlText);
+        expect(speedSection).toExportPropertyLineToHomebrewery(expectedHeading, originalText);
+      });
+
       it('should display an error if the custom text field is blank', () => {
         inputValueAndTriggerEvent(speedSection.editElements.customText, '');
 
@@ -105,7 +123,7 @@ describe('when the show section is clicked', () => {
         expect(speedSection).toBeInMode('edit');
         expect(speedSection).toHaveError(
           speedSection.editElements.customText,
-          'Speed Custom Text has invalid syntax.');
+          'Speed Custom Text has invalid Markdown syntax.');
       });
     });
   });
@@ -121,7 +139,7 @@ describe('when the show section is clicked', () => {
       expect(speedSection.editElements.burrow).not.toBeDisabled();
       expect(speedSection.editElements.climb).not.toBeDisabled();
       expect(speedSection.editElements.fly).not.toBeDisabled();
-      expect(speedSection.editElements.hover).not.toBeDisabled(); 
+      expect(speedSection.editElements.hover).not.toBeDisabled();
       expect(speedSection.editElements.swim).not.toBeDisabled();
       expect(speedSection.editElements.customText).toBeDisabled();
 
@@ -164,7 +182,7 @@ describe('when the show section is clicked', () => {
           ${'all speeds + hover'}            | ${150} | ${0}   | ${100} | ${240} | ${true}  | ${185} | ${'150 ft., burrow 0 ft., climb 100 ft., fly 240 ft. (hover), swim 185 ft.'}
           ${'maximum values'}                | ${999} | ${999} | ${999} | ${999} | ${true}  | ${999} | ${'999 ft., burrow 999 ft., climb 999 ft., fly 999 ft. (hover), swim 999 ft.'}
         `
-        ('$description: {walk="$walk", burrow="$burrow", climb="$climb", fly="$fly", hover="$hover", swim="$swim"} => "$expectedText"', 
+        ('$description: {walk="$walk", burrow="$burrow", climb="$climb", fly="$fly", hover="$hover", swim="$swim"} => "$expectedText"',
         ({walk, burrow, climb, fly, hover, swim, expectedText}) => {
           inputValueAndTriggerEvent(speedSection.editElements.walk, walk);
           inputValueAndTriggerEvent(speedSection.editElements.burrow, burrow);
@@ -184,6 +202,7 @@ describe('when the show section is clicked', () => {
           expect(Speed.fly).toBe(fly);
           expect(Speed.hover).toBe(hover);
           expect(Speed.swim).toBe(swim);
+          expect(Speed.useCustomText).toBe(false);
 
           expect(speedSection).toBeInMode('show');
           expect(speedSection).toShowPropertyLine(expectedHeading, expectedText);

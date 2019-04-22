@@ -2,6 +2,13 @@ export function capitalizeFirstLetter(string) {
   return string.charAt(0).toUpperCase() + string.slice(1);
 }
 
+export function escapeHtml(string) {
+  return string
+    .replace(/&/g, '&amp;')
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;');
+}
+
 export function formatModifier(modifier) {
   const operator = formatModifierOperator(modifier);
   const number = formatModifierNumber(modifier);

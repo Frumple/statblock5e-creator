@@ -75,6 +75,19 @@ describe('when the show section is clicked', () => {
       sharedSpecs.shouldAddASingleBlock(actionsSection, block);
     });
 
+    it('should add a single block with html escaped', () => {
+      Abilities.abilities['strength'].score = 13;
+      ProficiencyBonus.proficiencyBonus = 2;
+
+      const block = {
+        name: 'Slam',
+        originalText: '<em>Melee Weapon Attack:</em> +3 to hit, reach 5 ft., one target. <em>Hit:</em> 4 (1d6 + 1) bludgeoning damage.',
+        homebreweryText: '&lt;em&gt;Melee Weapon Attack:&lt;/em&gt; +3 to hit, reach 5 ft., one target. &lt;em&gt;Hit:&lt;/em&gt; 4 (1d6 + 1) bludgeoning damage.',
+        htmlText: '&lt;em&gt;Melee Weapon Attack:&lt;/em&gt; +3 to hit, reach 5 ft., one target. &lt;em&gt;Hit:&lt;/em&gt; 4 (1d6 + 1) bludgeoning damage.'
+      };
+      sharedSpecs.shouldAddASingleBlock(actionsSection, block);
+    });
+
     it('should add multiple blocks', () => {
       Abilities.abilities['dexterity'].score = 14;
       ProficiencyBonus.proficiencyBonus = 2;
