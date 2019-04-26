@@ -49,6 +49,7 @@
 
 start
   = line:Line+ { return line.join(''); }
+  / End { return ""; }
 
 Line
   = BlankLine

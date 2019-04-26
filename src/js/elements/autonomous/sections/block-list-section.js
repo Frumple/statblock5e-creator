@@ -7,7 +7,7 @@ export class BlockListSection extends sectionModule.Section {
       'src/html/elements/autonomous/sections/block-list-section.html');
   }
 
-  constructor(templatePaths, 
+  constructor(templatePaths,
     listModel,
     showElements = BlockListShowSection,
     editElements = BlockListEditSection) {
@@ -67,7 +67,7 @@ export class BlockListSection extends sectionModule.Section {
 
     const hiddenEmptyLabelClass = 'block-list-section__empty-label_hidden';
 
-    if (isEmpty) {      
+    if (isEmpty) {
       this.showElements.emptyLabel.classList.remove(hiddenEmptyLabelClass);
     } else {
       this.showElements.emptyLabel.classList.add(hiddenEmptyLabelClass);
@@ -80,8 +80,7 @@ export class BlockListSection extends sectionModule.Section {
   }
 
   updateModel() {
-    this.listModel.blocks = 
-      this.editElements.editableList.blocks.map(block => block.toModel());
+    this.listModel.blocks = this.editElements.editableList.toModel();
   }
 
   updateView() {
@@ -100,14 +99,15 @@ export class BlockListSection extends sectionModule.Section {
   }
 
   reparse() {
-    if (this.mode === 'show') {
-      this.checkForErrors();
-      this.updateModel();
+    this.editElements.editableList.parse();
+    this.updateModel();
 
-      for (const [index, blockModel] of this.listModel.blocks.entries()) {
-        const displayBlock = this.showElements.displayList.blocks[index];
-        displayBlock.text = blockModel.htmlText;
-      }
+    for (const [index, blockModel] of this.listModel.blocks.entries()) {
+      const editableBlock = this.editElements.editableList.blocks[index];
+      editableBlock.textPreview.innerHTMLSanitized = blockModel.htmlText;
+
+      const displayBlock = this.showElements.displayList.blocks[index];
+      displayBlock.text = blockModel.htmlText;
     }
   }
 
@@ -136,10 +136,10 @@ export class BlockListEditSection extends sectionModule.EditElements {
     this.editableList = shadowRoot.getElementById('editable-list');
     this.addButton = shadowRoot.getElementById('add-button');
   }
-  
+
   get initiallySelectedElement() {
     if (this.editableList.blocks.length > 0) {
-      return this.editableList.blocks[0].nameElement;
+      return this.editableList.blocks[0].nameInput;
     }
 
     return this.addButton;

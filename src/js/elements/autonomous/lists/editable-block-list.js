@@ -24,7 +24,7 @@ export default class EditableBlockList extends DragAndDropList {
   }
 
   addBlock(itemType) {
-    const block = EditableBlockList.createListItem(); 
+    const block = EditableBlockList.createListItem();
     block.list = this;
     block.itemType = itemType;
     if (this.disableBlockNameItalics) {
@@ -37,7 +37,7 @@ export default class EditableBlockList extends DragAndDropList {
 
     this.appendChild(block);
 
-    focusAndSelectElement(block.nameElement);
+    focusAndSelectElement(block.nameInput);
 
     return block;
   }
@@ -52,6 +52,16 @@ export default class EditableBlockList extends DragAndDropList {
     for (const block of this.blocks) {
       block.validate(errorMessages);
     }
+  }
+
+  parse() {
+    for (const block of this.blocks) {
+      block.parse();
+    }
+  }
+
+  toModel() {
+    return this.blocks.map(block => block.toModel());
   }
 
   static createListItem() {

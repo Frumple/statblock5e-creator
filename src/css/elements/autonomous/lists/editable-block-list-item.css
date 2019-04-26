@@ -1,7 +1,7 @@
 .editable-block-list-item__container {
   display: grid;
   grid-template-columns: 24px auto 50px;
-  grid-template-rows: auto auto;
+  grid-template-rows: auto auto auto;
   grid-column-gap: 5px;
   grid-row-gap: 5px;
   align-items: center;
@@ -48,7 +48,12 @@
   margin-left: 2em;
 }
 
-.editable-block-list-item__text {
+.editable-block-list-item__textarea {
   grid-area: 2 / 2 / 3 / 4;
   resize: none;
+}
+
+.editable-block-list-item__text-preview {
+  grid-area: 3 / 2 / 4 / 4;
+  margin: 0;
 }

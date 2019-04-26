@@ -35,31 +35,30 @@ const BlockTextAreaMixin = {
   validate(errorMessages) {
     if (this.required && this.value === '') {
       errorMessages.add(this, `${this.fieldName} cannot be blank.`);
-    } else if('parsed' in this.dataset) {
-      this.parse(errorMessages);
     }
+    this.parse(errorMessages);
   },
 
-  parse(errorMessages) {
+  parse(errorMessages = null) {
     const escapedText = escapeHtml(this.value);
 
     const nameParserResults = Parser.parseNames(escapedText);
 
-    if (nameParserResults.error) {
+    if (errorMessages && nameParserResults.error) {
       errorMessages.add(this, `${this.fieldName} has at least one invalid name expression.`);
       return;
     }
 
     const mathParserResults = Parser.parseMath(nameParserResults.outputText);
 
-    if (mathParserResults.error) {
+    if (errorMessages && mathParserResults.error) {
       errorMessages.add(this, `${this.fieldName} has at least one invalid math expression.`);
       return;
     }
 
     const markdownParserResults = Parser.parseMarkdown(mathParserResults.outputText);
 
-    if (markdownParserResults.error) {
+    if (errorMessages && markdownParserResults.error) {
       errorMessages.add(this, `${this.fieldName} has invalid markdown syntax.`);
       return;
     }

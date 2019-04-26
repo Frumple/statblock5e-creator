@@ -19,16 +19,16 @@ export function shouldSwitchToEditModeAndFocusOnNameFieldOfFirstBlockIfExists(se
   section.showElements.section.click();
 
   expect(section).toBeInMode('edit');
-  expect(section.editElements.editableList.blocks[0].nameElement).toHaveFocus();
-  expect(section.editElements.editableList.blocks[0].nameElement).toBeSelected();
+  expect(section.editElements.editableList.blocks[0].nameInput).toHaveFocus();
+  expect(section.editElements.editableList.blocks[0].nameInput).toBeSelected();
 }
 
 export function shouldFocusOnNameFieldOfNewBlock(section) {
   for (let index = 0; index <= 2; index++) {
     section.editElements.addButton.click();
     const blocks = section.editElements.editableList.blocks;
-    expect(blocks[index].nameElement).toHaveFocus();
-    expect(blocks[index].nameElement).toBeSelected();
+    expect(blocks[index].nameInput).toHaveFocus();
+    expect(blocks[index].nameInput).toBeSelected();
   }
 }
 
@@ -41,10 +41,7 @@ export function shouldAddASingleBlock(section, block) {
   expectSectionToBeEmpty(section, false);
 
   const blocks = [block];
-
-  expectDisplayBlocks(section, blocks);
-  expectHtmlExport(section, blocks);
-  expectHomebreweryExport(section, blocks);
+  verifyBlocks(section, blocks);
 }
 
 export function shouldAddMultipleBlocks(section, blocks) {
@@ -57,9 +54,7 @@ export function shouldAddMultipleBlocks(section, blocks) {
   expect(section).toBeInMode('show');
   expectSectionToBeEmpty(section, false);
 
-  expectDisplayBlocks(section, blocks);
-  expectHtmlExport(section, blocks);
-  expectHomebreweryExport(section, blocks);
+  verifyBlocks(section, blocks);
 }
 
 export function shouldAddASingleBlockThenRemoveIt(section, block) {
@@ -91,9 +86,7 @@ export function shouldAddMultipleBlocksThenRemoveOneOfThem(section, blocks, remo
 
   blocks.splice(removeIndex, 1);
 
-  expectDisplayBlocks(section, blocks);
-  expectHtmlExport(section, blocks);
-  expectHomebreweryExport(section, blocks);
+  verifyBlocks(section, blocks);
 }
 
 export function shouldReparseNameChanges(section, block, oldNames, newNames) {
@@ -112,10 +105,7 @@ export function shouldReparseNameChanges(section, block, oldNames, newNames) {
   section.reparse();
 
   const blocks = [block];
-
-  expectDisplayBlocks(section, blocks);
-  expectHtmlExport(section, blocks);
-  expectHomebreweryExport(section, blocks);
+  verifyBlocks(section, blocks);
 }
 
 export function shouldTrimAllTrailingPeriodCharactersInBlockName(section) {
@@ -130,9 +120,7 @@ export function shouldTrimAllTrailingPeriodCharactersInBlockName(section) {
     name: 'Cthulhu. fhtag.n',
     originalText: 'Some text.'
   }];
-  expectDisplayBlocks(section, expectedBlocks);
-  expectHtmlExport(section, expectedBlocks);
-  expectHomebreweryExport(section, expectedBlocks);
+  verifyBlocks(section, expectedBlocks);
 
   section.showElements.section.click();
 
@@ -145,7 +133,7 @@ export function shouldDisplayAnErrorIfBlockNameIsBlank(section, expectedItemType
   section.editElements.submitForm();
 
   expect(section).toHaveError(
-    section.editElements.editableList.blocks[0].nameElement,
+    section.editElements.editableList.blocks[0].nameInput,
     `${expectedItemType} Name cannot be blank.`);
 }
 
@@ -155,7 +143,7 @@ export function shouldDisplayAnErrorIfBlockTextIsBlank(section, expectedItemType
   section.editElements.submitForm();
 
   expect(section).toHaveError(
-    section.editElements.editableList.blocks[0].textElement,
+    section.editElements.editableList.blocks[0].textArea,
     `${expectedItemType} Text cannot be blank.`);
 }
 
@@ -165,7 +153,7 @@ export function shouldDisplayAnErrorIfBlockTextHasInvalidMarkdownSyntax(section,
   section.editElements.submitForm();
 
   expect(section).toHaveError(
-    section.editElements.editableList.blocks[0].textElement,
+    section.editElements.editableList.blocks[0].textArea,
     `${expectedItemType} Text has invalid markdown syntax.`);
 }
 
@@ -178,11 +166,11 @@ export function shouldDisplayErrorsIfBlockNameAndTextAreBothBlank(section, expec
 
   expect(section.errorMessages.errors).toHaveLength(2);
   expect(section).toHaveError(
-    editableBlock.nameElement,
+    editableBlock.nameInput,
     `${expectedItemType} Name cannot be blank.`,
     0);
   expect(section).toHaveError(
-    editableBlock.textElement,
+    editableBlock.textArea,
     `${expectedItemType} Text cannot be blank.`,
     1);
 }
@@ -196,11 +184,11 @@ export function shouldDisplayErrorsIfBlockNameIsBlankAndBlockTextHasInvalidMarkd
 
   expect(section.errorMessages.errors).toHaveLength(2);
   expect(section).toHaveError(
-    editableBlock.nameElement,
+    editableBlock.nameInput,
     `${expectedItemType} Name cannot be blank.`,
     0);
   expect(section).toHaveError(
-    editableBlock.textElement,
+    editableBlock.textArea,
     `${expectedItemType} Text has invalid markdown syntax.`,
     1);
 }
@@ -211,20 +199,11 @@ function addAndPopulateBlock(section, blockName, blockText) {
   const blocks = section.editElements.editableList.blocks;
   const editableBlock = blocks[blocks.length - 1];
 
-  inputValueAndTriggerEvent(editableBlock.nameElement, blockName);
-  inputValueAndTriggerEvent(editableBlock.textElement, blockText);
+  inputValueAndTriggerEvent(editableBlock.nameInput, blockName);
+  inputValueAndTriggerEvent(editableBlock.textArea, blockText);
 }
 
-function expectDisplayBlocks(section, expectedBlocks) {
-  for (const [index, block] of expectedBlocks.entries()) {
-    const displayBlock = section.showElements.displayList.blocks[index];
-
-    expect(displayBlock.name).toBe(block.name);
-    expect(displayBlock.text).toBe(block.htmlText ? block.htmlText : block.originalText);
-  }
-}
-
-function expectHtmlExport(section, expectedBlocks) {
+function getHtmlExportBlocks(section) {
   const htmlExport = section.exportToHtml();
   const children = htmlExport.children;
 
@@ -233,19 +212,42 @@ function expectHtmlExport(section, expectedBlocks) {
     expect(children[0]).toHaveTextContent(expectedHeading);
   }
 
-  const htmlExportPropertyBlocks = Array.from(children)
+  return Array.from(children)
     .filter(element => element.tagName === 'PROPERTY-BLOCK');
-
-  for (const [index, block] of expectedBlocks.entries()) {
-    const htmlExportPropertyBlock = htmlExportPropertyBlocks[index];
-
-    expect(htmlExportPropertyBlock).toBeHtmlPropertyBlock(
-      `${block.name}.`,
-      (block.htmlText ? block.htmlText : block.originalText));
-  }
 }
 
-function expectHomebreweryExport(section, expectedBlocks) {
+function verifyBlocks(section, expectedBlocks) {
+  const htmlExportBlocks = getHtmlExportBlocks(section);
+
+  for (const [index, expectedBlock] of expectedBlocks.entries()) {
+    const editableBlock = section.editElements.editableList.blocks[index];
+    const displayBlock = section.showElements.displayList.blocks[index];
+    const htmlExportBlock = htmlExportBlocks[index];
+
+    verifyEditableBlock(editableBlock, expectedBlock);
+    verifyDisplayBlock(displayBlock, expectedBlock);
+    verifyHtmlExportBlock(htmlExportBlock, expectedBlock);
+  }
+
+  verifyHomebreweryExport(section, expectedBlocks);
+}
+
+function verifyEditableBlock(editableBlock, expectedBlock) {
+  expect(editableBlock.previewText).toBe(expectedBlock.htmlText ? expectedBlock.htmlText : expectedBlock.originalText);
+}
+
+function verifyDisplayBlock(displayBlock, expectedBlock) {
+  expect(displayBlock.name).toBe(expectedBlock.name);
+  expect(displayBlock.text).toBe(expectedBlock.htmlText ? expectedBlock.htmlText : expectedBlock.originalText);
+}
+
+function verifyHtmlExportBlock(htmlExportBlock, expectedBlock) {
+  expect(htmlExportBlock).toBeHtmlPropertyBlock(
+    `${expectedBlock.name}.`,
+    (expectedBlock.htmlText ? expectedBlock.htmlText : expectedBlock.originalText));
+}
+
+function verifyHomebreweryExport(section, expectedBlocks) {
   const homebreweryExport = section.exportToHomebrewery();
 
   if (expectedHeading !== null) {

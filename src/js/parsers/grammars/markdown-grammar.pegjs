@@ -1,6 +1,7 @@
 start
   = line:Line+ { return line.join(''); }
-  
+  / End { return ""; }
+
 Line
   = BlankLine
   / NormalLine
@@ -23,25 +24,25 @@ Markup
 Strong
   = StrongAsterisk
   / StrongUnderscore
-  
+
 TwoAsteriskOpen
   = '**'
-  
+
 TwoAsteriskClose
   = '**'
-  
+
 StrongAsterisk
   = TwoAsteriskOpen
     inline:Inline+
     TwoAsteriskClose
     { return `<strong>${inline.join('')}</strong>`; }
-    
+
 TwoUnderlineOpen
   = '__'
-  
+
 TwoUnderlineClose
   = '__'
-  
+
 StrongUnderscore
   = TwoUnderlineOpen
     inline:Inline+
@@ -51,25 +52,25 @@ StrongUnderscore
 Emphasis
   = EmphasisAsterisk
   / EmphasisUnderscore
-  
+
 OneAsteriskOpen
   = '*'
-  
+
 OneAsteriskClose
   = !StrongAsterisk '*'
-  
+
 EmphasisAsterisk
   = OneAsteriskOpen
     inline:Inline+
-    OneAsteriskClose 
+    OneAsteriskClose
     { return `<em>${inline.join('')}</em>`; }
-    
+
 OneUnderlineOpen
   = '_'
-  
+
 OneUnderlineClose
   = !StrongUnderscore '_'
-  
+
 EmphasisUnderscore
   = OneUnderlineOpen
     inline:Inline+
@@ -78,7 +79,7 @@ EmphasisUnderscore
 
 Text
   = $(NormalChar+)
-  
+
 Whitespace
   = $(SpaceChar+)
 
@@ -87,15 +88,15 @@ EndOfLine
 
 NormalChar
   = !( SpecialChar / SpaceChar / NewLineChar ) .
-  
+
 SpecialChar
   = '*' / '_'
 
 NewLineChar
   = '\n' / $('\r' '\n'?)
-  
+
 SpaceChar
   = ' ' / '\t'
-  
+
 End
   = !.

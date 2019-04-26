@@ -15,24 +15,31 @@ export default class EditableBlockListItem extends DragAndDropListItem {
 
     this._itemType = null;
 
-    this.nameElement = this.shadowRoot.getElementById('editable-block-list-item-name');
-    this.textElement = this.shadowRoot.getElementById('editable-block-list-item-text');
+    this.nameInput = this.shadowRoot.getElementById('editable-block-list-item-name');
+    this.textArea = this.shadowRoot.getElementById('editable-block-list-item-textarea');
+    this.textPreview = this.shadowRoot.getElementById('editable-block-list-item-text-preview');
     this.removeButton = this.shadowRoot.getElementById('editable-block-list-item-remove-button');
 
-    this.dragImage = this.nameElement;
+    this.dragImage = this.nameInput;
 
-    CustomBuiltinElementMixins.applyToElement(this.nameElement);
-    CustomBuiltinElementMixins.applyToElement(this.textElement);
+    CustomBuiltinElementMixins.applyToElement(this.nameInput);
+    CustomBuiltinElementMixins.applyToElement(this.textArea);
   }
 
   connectedCallback() {
     if (this.isConnected && ! this.isInitialized) {
       super.connectedCallback();
 
-      this.removeButton.addEventListener('click', this.onClickRemoveButton.bind(this));      
+      this.textArea.addEventListener('input', this.onInputTextArea.bind(this));
+      this.removeButton.addEventListener('click', this.onClickRemoveButton.bind(this));
 
       this.isInitialized = true;
     }
+  }
+
+  onInputTextArea() {
+    this.textArea.parse();
+    this.textPreview.innerHTMLSanitized = this.textArea.htmlText;
   }
 
   onClickRemoveButton() {
@@ -40,14 +47,14 @@ export default class EditableBlockListItem extends DragAndDropListItem {
   }
 
   disableBlockNameItalics() {
-    this.nameElement.classList.add('editable-block-list-item__name_no-italic');
+    this.nameInput.classList.add('editable-block-list-item__name_no-italic');
   }
 
   set itemType(itemType) {
     this._itemType = itemType;
 
-    this.nameElement.setAttribute('pretty-name', `${itemType} Name`);
-    this.textElement.setAttribute('pretty-name', `${itemType} Text`);
+    this.nameInput.setAttribute('pretty-name', `${itemType} Name`);
+    this.textArea.setAttribute('pretty-name', `${itemType} Text`);
   }
 
   get itemType() {
@@ -55,32 +62,40 @@ export default class EditableBlockListItem extends DragAndDropListItem {
   }
 
   set name(name) {
-    this.nameElement.value = name;
+    this.nameInput.value = name;
   }
 
   get name() {
-    return this.nameElement.value;
+    return this.nameInput.value;
   }
 
   set originalText(text) {
-    this.textElement.value = text;
+    this.textArea.value = text;
   }
 
   get originalText() {
-    return this.textElement.value;
+    return this.textArea.value;
   }
 
   get homebreweryText() {
-    return this.textElement.homebreweryText;
+    return this.textArea.homebreweryText;
   }
 
   get htmlText() {
-    return this.textElement.htmlText;
+    return this.textArea.htmlText;
+  }
+
+  get previewText() {
+    return this.textPreview.innerHTMLSanitized;
   }
 
   validate(errorMessages) {
-    this.nameElement.validate(errorMessages);
-    this.textElement.validate(errorMessages);
+    this.nameInput.validate(errorMessages);
+    this.textArea.validate(errorMessages);
+  }
+
+  parse() {
+    this.textArea.parse();
   }
 
   remove() {
@@ -89,7 +104,7 @@ export default class EditableBlockListItem extends DragAndDropListItem {
 
   toModel() {
     return new BlockModel(
-      this.name, 
+      this.name,
       this.originalText,
       this.homebreweryText,
       this.htmlText);
