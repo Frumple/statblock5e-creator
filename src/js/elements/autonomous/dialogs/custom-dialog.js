@@ -17,9 +17,11 @@ export default class CustomDialog extends CustomAutonomousElement {
   }
 
   connectedCallback() {
-    if (this.isConnected && ! this.isInitialized) {
-      this.isInitialized = true;
-    }
+    this.closeButton.addEventListener('click', this.onClickCloseButton.bind(this));
+  }
+
+  onClickCloseButton() {
+    this.closeModal();
   }
 
   set open(isOpen) {
@@ -39,6 +41,14 @@ export default class CustomDialog extends CustomAutonomousElement {
       this.open = true;
     } else {
       this.dialog.showModal();
-    }    
+    }
+  }
+
+  closeModal() {
+    if (isRunningInNode) {
+      this.open = false;
+    } else {
+      this.dialog.close();
+    }
   }
 }

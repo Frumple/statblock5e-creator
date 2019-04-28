@@ -26,8 +26,9 @@ export default class ExportDialog extends CustomDialog {
 
   connectedCallback() {
     if (this.isConnected && ! this.isInitialized) {
+      super.connectedCallback();
+
       this.downloadAsFileButton.addEventListener('click', this.onClickDownloadAsFileButton.bind(this));
-      this.closeButton.addEventListener('click', this.onClickCloseButton.bind(this));
 
       this.isInitialized = true;
     }
@@ -41,6 +42,8 @@ export default class ExportDialog extends CustomDialog {
   }
 
   onClickCloseButton() {
+    super.onClickCloseButton();
+
     this.clipboard.destroy();
   }
 

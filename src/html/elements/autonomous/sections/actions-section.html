@@ -15,14 +15,15 @@
 </div>
 
 <form id="edit-section" class="section section_hidden" novalidate>
-  <div class="actions-edit-section section__content">    
+  <div class="actions-edit-section section__content">
     <div class="block-list-section__button-container">
       <button id="add-button" class="default-button block-list-section__add-button" type="button">Add New Action</button>
-      <button id="generate-attack-button" class="default-button special-traits-section__generate-attack-button" type="button" disabled>Generate Attack</button>
+      <button id="generate-attack-button" class="default-button special-traits-section__generate-attack-button" type="button">Generate Attack</button>
     </div>
     <editable-block-list id="editable-list"></editable-block-list>
   </div>
   <div class="section__save-button-container">
     <button id="save-button" class="default-button section__save-button"><i class="material-icons">done</i></button>
   </div>
+  <generate-attack-dialog id="generate-attack-dialog"></generate-attack-dialog>
 </form>

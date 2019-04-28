@@ -42,34 +42,12 @@
   padding: 5px;
 }
 
-.hit-points-edit-section__hit-die-quantity-label {
-  grid-area: 1 / 2;
-}
+.hit-points-edit-section__hit-die-quantity-label { grid-area: 1 / 2; }
+.hit-points-edit-section__hit-die-size-label { grid-area: 1 / 3; }
+.hit-points-edit-section__constitution-hit-points-label { grid-area: 1 / 4; }
 
-.hit-points-edit-section__hit-die-size-label {
-  grid-area: 1 / 3;
-}
-
-.hit-points-edit-section__constitution-hit-points-label {
-  grid-area: 1 / 4;
-}
-
-.hit-points-edit-section__hit_die-leading-text-label {
-  grid-area: 2 / 1;
-}
-
-.hit-points-edit-section__hit-die-quantity-input {
-  grid-area: 2 / 2;
-}
-
-.hit-points-edit-section__hit-die-size-input {
-  grid-area: 2 / 3;
-}
-
-.hit-points-edit-section__constitution-hit-points-value-label {
-  grid-area: 2 / 4;
-}
-
-.hit-points-edit-section__hit-die-trailing-text-label {
-  grid-area: 2 / 5;
-}
+.hit-points-edit-section__hit_die-leading-text-label { grid-area: 2 / 1; }
+.hit-points-edit-section__hit-die-quantity-input { grid-area: 2 / 2; }
+.hit-points-edit-section__hit-die-size-input { grid-area: 2 / 3; }
+.hit-points-edit-section__constitution-hit-points-value-label { grid-area: 2 / 4; }
+.hit-points-edit-section__hit-die-trailing-text-label { grid-area: 2 / 5; }
