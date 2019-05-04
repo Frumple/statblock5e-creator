@@ -15,6 +15,7 @@ import DisplayBlockList from '/src/js/elements/autonomous/lists/display-block-li
 import DisplayBlockListItem from '/src/js/elements/autonomous/lists/display-block-list-item.js';
 import EditableBlockList from '/src/js/elements/autonomous/lists/editable-block-list.js';
 import EditableBlockListItem from '/src/js/elements/autonomous/lists/editable-block-list-item.js';
+import GenerateAttackDialog from '../../elements/autonomous/dialogs/generate-attack-dialog';
 
 export async function define() {
   const customElements = [];
@@ -42,11 +43,13 @@ export async function define() {
 export function initializeSection(section) {
   replaceWithFakes(section);
 
-  traverseElements(section.showElements, 3, (element) => {
+  const maxTraversalDepth = 5;
+
+  traverseElements(section.showElements, maxTraversalDepth, (element) => {
     CustomBuiltinElementMixins.applyToElement(element);
   });
 
-  traverseElements(section.editElements, 3, (element) => {
+  traverseElements(section.editElements, maxTraversalDepth, (element) => {
     CustomBuiltinElementMixins.applyToElement(element);
   });
 }
@@ -66,5 +69,9 @@ function replaceWithFakes(section) {
 
   if (section.editElements.editableList && section.editElements.editableList.tagName === 'EDITABLE-BLOCK-LIST') {
     section.editElements.editableList = new EditableBlockList();
+  }
+
+  if (section.editElements.generateAttackDialog && section.editElements.generateAttackDialog.tagName === 'GENERATE-ATTACK-DIALOG') {
+    section.editElements.generateAttackDialog = new GenerateAttackDialog(section);
   }
 }

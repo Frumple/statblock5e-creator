@@ -106,8 +106,10 @@ export class BlockListSection extends sectionModule.Section {
       const editableBlock = this.editElements.editableList.blocks[index];
       editableBlock.textPreview.innerHTMLSanitized = blockModel.htmlText;
 
-      const displayBlock = this.showElements.displayList.blocks[index];
-      displayBlock.text = blockModel.htmlText;
+      if (this.mode === 'show') {
+        const displayBlock = this.showElements.displayList.blocks[index];
+        displayBlock.text = blockModel.htmlText;
+      }
     }
   }
 

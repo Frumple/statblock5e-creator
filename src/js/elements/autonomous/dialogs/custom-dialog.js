@@ -9,8 +9,8 @@ export default class CustomDialog extends CustomAutonomousElement {
       'src/html/elements/autonomous/dialogs/custom-dialog.html');
   }
 
-  constructor(templatePaths) {
-    super(templatePaths);
+  constructor(templatePaths, parent = null) {
+    super(templatePaths, parent);
 
     this.dialog = this.shadowRoot.getElementById('dialog');
     this.closeButton = this.shadowRoot.getElementById('close-button');

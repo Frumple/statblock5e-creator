@@ -21,7 +21,7 @@ export default class PropertyListItem extends DragAndDropListItem {
     if (this.isConnected && ! this.isInitialized) {
       super.connectedCallback();
 
-      this.removeButton.addEventListener('click', this.onClickRemoveButton.bind(this));      
+      this.removeButton.addEventListener('click', this.onClickRemoveButton.bind(this));
 
       this.isInitialized = true;
     }
@@ -40,7 +40,7 @@ export default class PropertyListItem extends DragAndDropListItem {
   }
 
   remove() {
-    let removeEvent = new CustomEvent('propertyListItemRemoved', {
+    const removeEvent = new CustomEvent('propertyListItemRemoved', {
       bubbles: true,
       composed: true,
       detail: {

@@ -83,18 +83,18 @@ class FakeCustomAutonomousElement {
 
   // Since this element is fake, add event listeners and dispatch events
   // from the fake shadow root on behalf of the element.
-  addEventListener(type, callback) {    
+  addEventListener(type, callback) {
     this.shadowRoot.addEventListener(type, callback);
   }
 
-  dispatchEvent(event) {    
+  dispatchEvent(event) {
     this.shadowRoot.dispatchEvent(event);
 
     // Simulate event bubbling by dispatching the event to the parent if it exists.
     // JSDOM doesn't support the 'composed' property on events, so we only check
     // if the event 'bubbles' property is true.
 
-    if (this._parent !== null && event.bubbles) {      
+    if (event.bubbles && this._parent !== null) {
       this._parent.dispatchEvent(event);
     }
   }

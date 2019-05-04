@@ -22,6 +22,8 @@ beforeAll(async() => {
 
 beforeEach(() => {
   Creature.reset();
+  Abilities.reset();
+  ProficiencyBonus.reset();
   Actions.reset();
 
   actionsSection = new ActionsSection();

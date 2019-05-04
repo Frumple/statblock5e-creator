@@ -25,9 +25,12 @@ export default class ActionsSection extends blockListSectionModule.BlockListSect
 
       this.editElements.generateAttackButton.addEventListener('click', this.onClickGenerateAttackButton.bind(this));
 
+      this.addEventListener('generateAttack', this.onGenerateAttackEvent.bind(this));
+
       if (! isRunningInNode) {
         this.addBlock('Club', '*Melee Weapon Attack:* mod{strmod + prof} to hit, reach 5 ft., one target. *Hit:* dmg{1d4 + strmod} bludgeoning damage.');
         this.save();
+        this.reparse();
       }
 
       this.isInitialized = true;
@@ -35,7 +38,12 @@ export default class ActionsSection extends blockListSectionModule.BlockListSect
   }
 
   onClickGenerateAttackButton() {
-    this.editElements.generateAttackDialog.showModal();
+    this.editElements.generateAttackDialog.launch();
+  }
+
+  onGenerateAttackEvent(event) {
+    this.addBlock(event.detail.name, event.detail.text);
+    this.reparse();
   }
 }
 

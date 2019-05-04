@@ -15,7 +15,7 @@ export default class SavingThrowsSection extends propertyLineSectionModule.Prope
     super(SavingThrowsSection.templatePaths,
           SavingThrowsShowElements,
           SavingThrowsEditElements);
-          
+
     this.empty = true;
   }
 
@@ -29,7 +29,7 @@ export default class SavingThrowsSection extends propertyLineSectionModule.Prope
     }
   }
 
-  initializeSavingThrowElements(key) {    
+  initializeSavingThrowElements(key) {
     const elements = this.editElements.savingThrow[key];
 
     elements.enable.enableElementsWhenChecked(
@@ -44,7 +44,7 @@ export default class SavingThrowsSection extends propertyLineSectionModule.Prope
 
   onInputSavingThrowEnabled(key) {
     const labelDisabledClass = 'section__label_disabled';
-    const elements = this.editElements.savingThrow[key];    
+    const elements = this.editElements.savingThrow[key];
 
     if (elements.enable.checked) {
       elements.label.classList.remove(labelDisabledClass);
@@ -61,19 +61,19 @@ export default class SavingThrowsSection extends propertyLineSectionModule.Prope
 
     this.updateModelSavingThrowEnabled(key);
     this.updateViewSavingThrow(key);
-    this.updateViewText();   
+    this.updateViewText();
   }
 
   onInputSavingThrowProficiency(key) {
     this.updateModelSavingThrowProficiency(key);
     this.updateViewSavingThrow(key);
-    this.updateViewText();  
+    this.updateViewText();
   }
 
   onInputSavingThrowOverride(key) {
     this.updateModelSavingThrowOverride(key);
     this.updateViewSavingThrow(key);
-    this.updateViewText();  
+    this.updateViewText();
   }
 
   checkForErrors() {
@@ -103,7 +103,7 @@ export default class SavingThrowsSection extends propertyLineSectionModule.Prope
   updateView() {
     for (const key of SavingThrows.keys) {
       this.updateViewSavingThrow(key);
-    }    
+    }
 
     this.updateViewText();
   }

@@ -116,7 +116,7 @@ describe('should print', () => {
     statBlockMenu.twoColumnButton.click();
     statBlockSidebar.manualHeightModeButton.click();
 
-    
+
     statBlockSidebar.manualHeightSlider.value = initialHeightSliderValue + 25;
     statBlockSidebar.onInputSlider();
 
@@ -176,7 +176,7 @@ describe('should export HTML', () => {
       statBlockEditor.htmlExportDialog.downloadAsFileButton.click();
 
       expect(startFileDownload).toHaveBeenCalledWith(
-        expect.stringContaining('<stat-block>'), 
+        expect.stringContaining('<stat-block>'),
         expectedContentType,
         expectedFileName);
 
@@ -192,7 +192,7 @@ describe('should export HTML', () => {
       statBlockEditor.htmlExportDialog.downloadAsFileButton.click();
 
       expect(startFileDownload).toHaveBeenCalledWith(
-        expect.stringContaining('<stat-block data-two-column="">'), 
+        expect.stringContaining('<stat-block data-two-column="">'),
         expectedContentType,
         expectedFileName);
 
@@ -210,13 +210,13 @@ describe('should export HTML', () => {
       statBlockEditor.htmlExportDialog.downloadAsFileButton.click();
 
       expect(startFileDownload).toHaveBeenCalledWith(
-        expect.stringContaining('<stat-block data-two-column="" style="--data-content-height: 625px">'), 
+        expect.stringContaining('<stat-block data-two-column="" style="--data-content-height: 625px">'),
         expectedContentType,
         expectedFileName);
-      
+
       expectFileDownloadStatus(statBlockEditor.htmlExportDialog);
     });
-  });  
+  });
 });
 
 describe('should export homebrewery', () => {
@@ -255,7 +255,7 @@ describe('should export homebrewery', () => {
       statBlockEditor.homebreweryExportDialog.downloadAsFileButton.click();
 
       expect(startFileDownload).toHaveBeenCalledWith(
-        expect.stringMatching(/^___\n.*/), 
+        expect.stringMatching(/^___\n.*/),
         expectedContentType,
         expectedFileName);
 
@@ -271,13 +271,13 @@ describe('should export homebrewery', () => {
       statBlockEditor.homebreweryExportDialog.downloadAsFileButton.click();
 
       expect(startFileDownload).toHaveBeenCalledWith(
-        expect.stringMatching(/^___\n___\n.*/), 
+        expect.stringMatching(/^___\n___\n.*/),
         expectedContentType,
         expectedFileName);
 
       expectFileDownloadStatus(statBlockEditor.homebreweryExportDialog);
     });
-  });  
+  });
 });
 
 function expectCopyToClipboardStatus(dialog) {

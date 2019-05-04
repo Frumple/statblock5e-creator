@@ -36,7 +36,7 @@ export let IntegerInputMixin = {
       errorMessages.add(this, `${fieldName} must be a valid number.`);
     }
   },
-  
+
   get valueAsInt() {
     return parseInt(this.value, 10);
   },

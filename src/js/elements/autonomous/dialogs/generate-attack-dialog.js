@@ -1,4 +1,5 @@
 import CustomDialog from './custom-dialog.js';
+import Attack from '../../../models/attack.js';
 
 export default class GenerateAttackDialog extends CustomDialog {
   static get elementName() { return 'generate-attack-dialog'; }
@@ -8,40 +9,34 @@ export default class GenerateAttackDialog extends CustomDialog {
       'src/html/elements/autonomous/dialogs/generate-attack-dialog.html');
   }
 
-  constructor() {
-    super(GenerateAttackDialog.templatePaths);
+  constructor(parent = null) {
+    super(GenerateAttackDialog.templatePaths, parent);
 
-    this.weaponName = this.shadowRoot.getElementById('weapon-name-input');
-    this.finesse = this.shadowRoot.getElementById('finesse-input');
+    this.attackModel = new Attack();
 
-    this.reach = this.shadowRoot.getElementById('reach-input');
-    this.normalRange = this.shadowRoot.getElementById('normal-range-input');
-    this.longRange = this.shadowRoot.getElementById('long-range-input');
+    this.weaponNameInput = this.shadowRoot.getElementById('weapon-name-input');
+    this.finesseInput = this.shadowRoot.getElementById('finesse-input');
 
-    this.meleeEnabled = this.shadowRoot.getElementById('melee-enabled-input');
-    this.meleeDamageType = this.shadowRoot.getElementById('melee-damage-type-input');
-    this.meleeDamageDieQuantity = this.shadowRoot.getElementById('melee-damage-die-quantity-input');
-    this.meleeDamageDieSize = this.shadowRoot.getElementById('melee-damage-die-size-input');
+    this.damageCategoryInputs = {};
 
-    this.rangedEnabled = this.shadowRoot.getElementById('ranged-enabled-input');
-    this.rangedDamageType = this.shadowRoot.getElementById('ranged-damage-type-input');
-    this.rangedDamageDieQuantity = this.shadowRoot.getElementById('ranged-damage-die-quantity-input');
-    this.rangedDamageDieSize = this.shadowRoot.getElementById('ranged-damage-die-size-input');
+    for (const key of this.attackModel.damageCategoryKeys) {
+      this.damageCategoryInputs[key] = {
+        enabled: this.shadowRoot.getElementById(`${key}-enabled-input`),
+        damageType: this.shadowRoot.getElementById(`${key}-damage-type-input`),
+        damageDieQuantity: this.shadowRoot.getElementById(`${key}-damage-die-quantity-input`),
+        damageDieSize: this.shadowRoot.getElementById(`${key}-damage-die-size-input`)
+      };
+    }
 
-    this.versatileEnabled = this.shadowRoot.getElementById('versatile-enabled-input');
-    this.versatileDamageType = this.shadowRoot.getElementById('versatile-damage-type-input');
-    this.versatileDamageDieQuantity = this.shadowRoot.getElementById('versatile-damage-die-quantity-input');
-    this.versatileDamageDieSize = this.shadowRoot.getElementById('versatile-damage-die-size-input');
+    this.reachInput = this.shadowRoot.getElementById('reach-input');
+    this.normalRangeInput = this.shadowRoot.getElementById('normal-range-input');
+    this.longRangeInput = this.shadowRoot.getElementById('long-range-input');
 
-    this.bonusEnabled = this.shadowRoot.getElementById('bonus-enabled-input');
-    this.bonusDamageType = this.shadowRoot.getElementById('bonus-damage-type-input');
-    this.bonusDamageDieQuantity = this.shadowRoot.getElementById('bonus-damage-die-quantity-input');
-    this.bonusDamageDieSize = this.shadowRoot.getElementById('bonus-damage-die-size-input');
-
-    this.generatedText = this.shadowRoot.getElementById('generated-text');
-    this.displayedText = this.shadowRoot.getElementById('displayed-text');
+    this.generatedTextElement = this.shadowRoot.getElementById('generated-text');
+    this.renderedTextElement = this.shadowRoot.getElementById('rendered-text');
 
     this.cancelButton = this.shadowRoot.getElementById('cancel-button');
+    this.resetButton = this.shadowRoot.getElementById('reset-button');
     this.generateAttackButton = this.shadowRoot.getElementById('generate-attack-button');
   }
 
@@ -49,36 +44,154 @@ export default class GenerateAttackDialog extends CustomDialog {
     if (this.isConnected && ! this.isInitialized) {
       super.connectedCallback();
 
-      this.meleeEnabled.enableElementsWhenChecked(
-        this.reach,
-        this.meleeDamageType,
-        this.meleeDamageDieQuantity,
-        this.meleeDamageDieSize
-      );
+      for (const key of this.attackModel.damageCategoryKeys) {
+        const category = this.damageCategoryInputs[key];
 
-      this.rangedEnabled.enableElementsWhenChecked(
-        this.normalRange,
-        this.longRange,
-        this.rangedDamageType,
-        this.rangedDamageDieQuantity,
-        this.rangedDamageDieSize
-      );
+        const enabledElements = [
+          category.damageType,
+          category.damageDieQuantity,
+          category.damageDieSize
+        ];
 
-      this.versatileEnabled.enableElementsWhenChecked(
-        this.versatileDamageType,
-        this.versatileDamageDieQuantity,
-        this.versatileDamageDieSize
-      );
+        if (key === 'melee') {
+          enabledElements.push(this.reachInput);
+        } else if(key === 'ranged') {
+          enabledElements.push(this.normalRangeInput);
+          enabledElements.push(this.longRangeInput);
+        }
 
-      this.bonusEnabled.enableElementsWhenChecked(
-        this.bonusDamageType,
-        this.bonusDamageDieQuantity,
-        this.bonusDamageDieSize
-      );
+        category.enabled.enableElementsWhenChecked(...enabledElements);
+
+        category.enabled.addEventListener('input', this.onInputDamageCategoryEnabled.bind(this, key));
+        category.damageType.addEventListener('input', this.onInputDamageCategoryDamageType.bind(this, key));
+        category.damageDieQuantity.addEventListener('input', this.onInputDamageCategoryDamageDieQuantity.bind(this, key));
+        category.damageDieSize.addEventListener('input', this.onInputDamageCategoryDamageDieSize.bind(this, key));
+      }
+
+      this.weaponNameInput.addEventListener('input', this.onInputWeaponName.bind(this));
+      this.finesseInput.addEventListener('input', this.onInputFinesse.bind(this));
+
+      this.reachInput.addEventListener('input', this.onInputReach.bind(this));
+      this.normalRangeInput.addEventListener('input', this.onInputNormalRange.bind(this));
+      this.longRangeInput.addEventListener('input', this.onInputLongRange.bind(this));
 
       this.cancelButton.addEventListener('click', this.onClickCloseButton.bind(this));
+      this.resetButton.addEventListener('click', this.onClickResetButton.bind(this));
+      this.generateAttackButton.addEventListener('click', this.onClickGenerateAttackButton.bind(this));
 
       this.isInitialized = true;
+
+      this.update();
     }
+  }
+
+  onInputWeaponName() {
+    this.attackModel.weaponName = this.weaponNameInput.value;
+    this.update();
+  }
+
+  onInputDamageCategoryEnabled(key) {
+    this.attackModel.damageCategories[key].isEnabled = this.damageCategoryInputs[key].enabled.checked;
+    this.update();
+  }
+
+  onInputDamageCategoryDamageType(key) {
+    this.attackModel.damageCategories[key].damageType = this.damageCategoryInputs[key].damageType.value;
+    this.update();
+  }
+
+  onInputDamageCategoryDamageDieQuantity(key) {
+    this.attackModel.damageCategories[key].damageDieQuantity = this.damageCategoryInputs[key].damageDieQuantity.value;
+    this.update();
+  }
+
+  onInputDamageCategoryDamageDieSize(key) {
+    this.attackModel.damageCategories[key].damageDieSize = this.damageCategoryInputs[key].damageDieSize.value;
+    this.update();
+  }
+
+  onInputReach() {
+    this.attackModel.reach = this.reachInput.value;
+    this.update();
+  }
+
+  onInputFinesse() {
+    this.attackModel.isFinesse = this.finesseInput.checked;
+    this.update();
+  }
+
+  onInputNormalRange() {
+    this.attackModel.normalRange = this.normalRangeInput.value;
+    this.update();
+  }
+
+  onInputLongRange() {
+    this.attackModel.longRange = this.longRangeInput.value;
+    this.update();
+  }
+
+  onClickResetButton() {
+    this.reset();
+  }
+
+  onClickGenerateAttackButton() {
+    const generateAttackEvent = new CustomEvent('generateAttack', {
+      bubbles: true,
+      composed: true,
+      detail: {
+        name: this.attackModel.weaponName,
+        text: this.attackModel.generatedText
+      }
+    });
+    this.dispatchEvent(generateAttackEvent);
+
+    this.closeModal();
+    this.reset();
+  }
+
+  get generatedText() {
+    return this.generatedTextElement.textContent;
+  }
+
+  get renderedText() {
+    return this.renderedTextElement.innerHTMLSanitized;
+  }
+
+  launch() {
+    this.showModal();
+  }
+
+  reset() {
+    this.attackModel.reset();
+    this.populateFieldsFromModel(this.attackModel);
+    this.update();
+  }
+
+  populateFieldsFromModel(model) {
+    this.weaponNameInput.value = model.weaponName;
+    this.finesseInput.checked = model.isFinesse;
+
+    for (const key of model.damageCategoryKeys) {
+      const categoryModel = model.damageCategories[key];
+      const categoryInputs = this.damageCategoryInputs[key];
+
+      categoryInputs.enabled.checked = categoryModel.isEnabled;
+      categoryInputs.enabled.dispatchEvent(new Event('input'));
+
+      categoryInputs.damageType.value = categoryModel.damageType;
+      categoryInputs.damageDieQuantity.value = categoryModel.damageDieQuantity;
+      categoryInputs.damageDieSize.value = categoryModel.damageDieSize;
+    }
+
+    this.reachInput.value = model.reach;
+    this.normalRangeInput.value = model.normalRange;
+    this.longRangeInput.value = model.longRange;
+  }
+
+  update() {
+    const generatedText = this.attackModel.generatedText;
+
+    this.generatedTextElement.textContent = generatedText;
+    this.renderedTextElement.innerHTMLSanitized = this.attackModel.renderText(generatedText);
   }
 }
