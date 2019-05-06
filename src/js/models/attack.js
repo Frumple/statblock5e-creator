@@ -56,7 +56,7 @@ export default class Attack {
     const versatileDamageCategory = this.damageCategories['versatile'];
     const bonusDamageCategory = this.damageCategories['bonus'];
 
-    if (meleeDamageCategory) {
+    if (meleeDamageCategory.isEnabled) {
       const strModifier = Abilities.abilities['strength'].modifier;
       const dexModifier = Abilities.abilities['dexterity'].modifier;
 
@@ -77,6 +77,10 @@ export default class Attack {
   }
 
   renderText(generatedText) {
+    if (generatedText === '') {
+      return '';
+    }
+
     const mathParserResults = Parser.parseMath(generatedText);
 
     if (mathParserResults.error) {

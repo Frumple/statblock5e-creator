@@ -14,6 +14,8 @@ export default class GenerateAttackDialog extends CustomDialog {
 
     this.attackModel = new Attack();
 
+    this.errorMessages = this.shadowRoot.getElementById('error-messages');
+
     this.weaponNameInput = this.shadowRoot.getElementById('weapon-name-input');
     this.finesseInput = this.shadowRoot.getElementById('finesse-input');
 
@@ -135,18 +137,7 @@ export default class GenerateAttackDialog extends CustomDialog {
   }
 
   onClickGenerateAttackButton() {
-    const generateAttackEvent = new CustomEvent('generateAttack', {
-      bubbles: true,
-      composed: true,
-      detail: {
-        name: this.attackModel.weaponName,
-        text: this.attackModel.generatedText
-      }
-    });
-    this.dispatchEvent(generateAttackEvent);
-
-    this.closeModal();
-    this.reset();
+    this.generateAttack();
   }
 
   get generatedText() {
@@ -165,6 +156,39 @@ export default class GenerateAttackDialog extends CustomDialog {
     this.attackModel.reset();
     this.populateFieldsFromModel(this.attackModel);
     this.update();
+  }
+
+  checkForErrors() {
+    this.weaponNameInput.validate(this.errorMessages);
+
+    const meleeEnabledInput = this.damageCategoryInputs['melee'].enabled;
+    const rangedEnabledInput = this.damageCategoryInputs['ranged'].enabled;
+
+    if (! meleeEnabledInput.checked && ! rangedEnabledInput.checked) {
+      this.errorMessages.add(meleeEnabledInput, 'At least one of "Melee" or "Ranged" must be enabled.');
+    }
+  }
+
+  generateAttack() {
+    this.errorMessages.clear();
+    this.checkForErrors();
+    if (this.errorMessages.any) {
+      this.errorMessages.focusOnFirstErrorField();
+      return;
+    }
+
+    const generateAttackEvent = new CustomEvent('generateAttack', {
+      bubbles: true,
+      composed: true,
+      detail: {
+        name: this.attackModel.weaponName,
+        text: this.attackModel.generatedText
+      }
+    });
+    this.dispatchEvent(generateAttackEvent);
+
+    this.closeModal();
+    this.reset();
   }
 
   populateFieldsFromModel(model) {

@@ -21,7 +21,7 @@ export default class ArmorClassSection extends propertyLineSectionModule.Propert
         this.editElements.armorClass,
         this.editElements.armorType,
         this.editElements.hasShield);
-        
+
       this.editElements.useCustomText.enableElementsWhenChecked(
         this.editElements.customText);
 
@@ -31,9 +31,9 @@ export default class ArmorClassSection extends propertyLineSectionModule.Propert
 
   checkForErrors() {
     this.editElements.armorType.value = this.editElements.armorType.value.trim();
-    this.editElements.customText.value = this.editElements.customText.value.trim();    
+    this.editElements.customText.value = this.editElements.customText.value.trim();
 
-    if (this.editElements.useCustomText.checked) {      
+    if (this.editElements.useCustomText.checked) {
       this.editElements.customText.validate(this.errorMessages);
     } else {
       this.editElements.armorClass.validate(this.errorMessages);
@@ -50,12 +50,12 @@ export default class ArmorClassSection extends propertyLineSectionModule.Propert
     ArmorClass.htmlCustomText = this.editElements.customText.htmlText;
   }
 
-  updateView() {    
+  updateView() {
     if (ArmorClass.useCustomText) {
       this.showElements.text.innerHTMLSanitized = ArmorClass.htmlCustomText;
     } else {
       this.showElements.text.textContent = ArmorClass.nonCustomText;
-    }    
+    }
   }
 
   exportToHtml() {

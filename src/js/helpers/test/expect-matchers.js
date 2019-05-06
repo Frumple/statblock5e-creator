@@ -13,7 +13,7 @@ expect.extend({
       pass: pass,
       message: () => message
     };
-  },  
+  },
 
   toBeInMode(section, expectedMode) {
     const sectionHiddenClass = 'section_hidden';
@@ -32,10 +32,10 @@ expect.extend({
     } else if(expectedMode !== 'hidden') {
       throw new Error(`'${expectedMode}' is not a valid section mode.`);
     }
- 
+
     let message = '';
-    let pass = hasMatchingMode && 
-               showSectionHasHiddenClass && 
+    let pass = hasMatchingMode &&
+               showSectionHasHiddenClass &&
                editSectionHasHiddenClass;
 
     if (this.isNot && hasMatchingMode) {
@@ -54,7 +54,7 @@ expect.extend({
       message += `expected edit section classes not to have '${sectionHiddenClass}' class, but was '${editSectionClassList.value}'`;
     } else if (! this.isNot && ! editSectionHasHiddenClass) {
       message += `expected edit section classes to have '${sectionHiddenClass}' class, but was '${editSectionClassList.value}'`;
-    }  
+    }
 
     return {
       message: () => message,
@@ -76,7 +76,7 @@ expect.extend({
         pass: false
       };
     }
-    
+
     const theError = errors[expectedIndex];
     const focusedElement = theError.fieldElement.ownerDocument.activeElement;
 
@@ -91,16 +91,16 @@ expect.extend({
       pass = (hasMatchingFieldElement && hasMatchingMessage && fieldElementHasFocus);
     } else {
       pass = (hasMatchingFieldElement && hasMatchingMessage);
-    }   
+    }
 
     if (! hasMatchingFieldElement) {
-      message += `expected error element to be '${expectedFieldElement}', but was '${theError.fieldElement}'\n`;
+      message += `expected error element to be '${expectedFieldElement.id}', but was '${theError.fieldElement.id}'\n`;
     }
     if (! hasMatchingMessage) {
       message += `expected error message to be '${expectedMessage}', but was '${theError.message}'`;
     }
     if (expectedIndex === 0 && ! fieldElementHasFocus) {
-      message += `expected error element '${expectedFieldElement}' to have focus, but was '${focusedElement}'\n`;
+      message += `expected error element '${expectedFieldElement.id}' to have focus, but was '${focusedElement.id}'\n`;
     }
 
     return {
@@ -148,12 +148,12 @@ expect.extend({
 
     const propertyLine = section.exportToHomebrewery();
     const expectedPropertyLine = `> - **${expectedHeading}** ${expectedText}`;
-    
+
     let message = '';
     const pass = (propertyLine === expectedPropertyLine);
 
     if (! pass) {
-      message = `expected property line to be '${expectedPropertyLine}', but was ${propertyLine}`; 
+      message = `expected property line to be '${expectedPropertyLine}', but was ${propertyLine}`;
     }
 
     return {
@@ -178,7 +178,7 @@ expect.extend({
     }
 
     return matchPropertyLineOrBlock(headingElement.textContent, textElement.innerHTML, expectedHeading, expectedText);
-  }  
+  }
 });
 
 function isTextSelected(element) {

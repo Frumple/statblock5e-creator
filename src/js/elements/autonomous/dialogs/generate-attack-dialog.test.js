@@ -38,7 +38,7 @@ describe('when the generate attack dialog is opened', () => {
   });
 
   it('should initially have its model and controls set to their defaults', () => {
-    verifyDialogReset();
+    verifyDialogResetToDefaults();
   });
 
   describe('and the dialog is filled out and the reset button is clicked', () => {
@@ -56,7 +56,7 @@ describe('when the generate attack dialog is opened', () => {
 
       generateAttackDialog.resetButton.click();
 
-      verifyDialogReset();
+      verifyDialogResetToDefaults();
     });
   });
 
@@ -73,16 +73,35 @@ describe('when the generate attack dialog is opened', () => {
 
       actionsSection.editElements.generateAttackButton.click();
 
-      verifyDialogReset();
+      verifyDialogResetToDefaults();
     });
   });
 
   describe('and the dialog is submitted with a blank weapon name', () => {
+    it('should display an error', () => {
+      generateAttackDialog.generateAttackButton.click();
 
+      expect(generateAttackDialog).toHaveError(
+        generateAttackDialog.weaponNameInput,
+        'Weapon Name cannot be blank.');
+    });
   });
 
   describe('and the dialog is submitted with neither melee or ranged checked, it should display an error', () => {
+    it('should display an error', () => {
+      inputValueAndTriggerEvent(generateAttackDialog.weaponNameInput, 'Dummy');
 
+      setCategoryInputs('melee', false);
+
+      expect(generateAttackDialog.generatedText).toBe('');
+      expect(generateAttackDialog.renderedText).toBe('');
+
+      generateAttackDialog.generateAttackButton.click();
+
+      expect(generateAttackDialog).toHaveError(
+        generateAttackDialog.damageCategoryInputs['melee'].enabled,
+        'At least one of "Melee" or "Ranged" must be enabled.');
+    });
   });
 
   describe('and the dialog is submitted with melee checked, it should add a new action block for a melee weapon', () => {
@@ -109,7 +128,7 @@ describe('when the generate attack dialog is opened', () => {
 
       inputValueAndTriggerEvent(generateAttackDialog.weaponNameInput, weaponName);
 
-      setCategoryInputs('melee', false, 'slashing', 1, 8);
+      setCategoryInputs('melee', true, 'slashing', 1, 8);
 
       if (isFinesse) {
         generateAttackDialog.finesseInput.click();
@@ -151,10 +170,10 @@ describe('when the generate attack dialog is opened', () => {
   });
 });
 
-function setCategoryInputs(categoryKey, clickEnable = true, damageType = '', damageDieQuantity = 1, damageDieSize = 8) {
+function setCategoryInputs(categoryKey, isEnabled = true, damageType = '', damageDieQuantity = 1, damageDieSize = 8) {
   const categoryInputs = generateAttackDialog.damageCategoryInputs[categoryKey];
 
-  if (clickEnable) {
+  if (categoryInputs.enabled.checked !== isEnabled) {
     categoryInputs.enabled.click();
   }
 
@@ -192,7 +211,7 @@ function verifyCategoryInputs(categoryKey, isEnabled = true, damageType = '', da
   }
 }
 
-function verifyDialogReset() {
+function verifyDialogResetToDefaults() {
   verifyDialogModelReset();
   verifyDialogControlsReset();
 }

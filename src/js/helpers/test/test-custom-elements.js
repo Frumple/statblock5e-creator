@@ -73,5 +73,9 @@ function replaceWithFakes(section) {
 
   if (section.editElements.generateAttackDialog && section.editElements.generateAttackDialog.tagName === 'GENERATE-ATTACK-DIALOG') {
     section.editElements.generateAttackDialog = new GenerateAttackDialog(section);
+
+    if (section.editElements.generateAttackDialog.errorMessages && section.editElements.generateAttackDialog.errorMessages.tagName === 'ERROR-MESSAGES') {
+      section.editElements.generateAttackDialog.errorMessages = new ErrorMessages();
+    }
   }
 }
