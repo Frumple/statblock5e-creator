@@ -8,6 +8,7 @@ import ProficiencyBonus from '../../../models/proficiency-bonus.js';
 
 import * as TestCustomElements from '../../../helpers/test/test-custom-elements.js';
 import { inputValueAndTriggerEvent } from '../../../helpers/element-helpers.js';
+import Attack from '../../../models/attack.js';
 
 let actionsSection;
 let generateAttackDialog;
@@ -43,12 +44,31 @@ describe('when the generate attack dialog is opened', () => {
 
   describe('and the dialog is filled out and the reset button is clicked', () => {
     it('should reset the dialog model and controls back to their defaults', () => {
+      const attackModel = new Attack();
+      const meleeCategory = attackModel.damageCategories['melee'];
+      meleeCategory.isEnabled = false;
+      meleeCategory.damageType = 'piercing';
+      meleeCategory.damageDieQuantity = 2;
+      meleeCategory.dmageDieSize = 6;
+
+      const rangedCategory = attackModel.damageCategories['ranged'];
+      rangedCategory.isEnabled = true;
+      rangedCategory.damageType = 'piercing';
+      rangedCategory.damageDieQuantity = 1;
+      rangedCategory.dmageDieSize = 6;
+
+      const bonusCategory = attackModel.damageCategories['bonus'];
+      bonusCategory.isEnabled = true;
+      bonusCategory.damageType = 'cold';
+      bonusCategory.damageDieQuantity = 1;
+      bonusCategory.dmageDieSize = 4;
+
       inputValueAndTriggerEvent(generateAttackDialog.weaponNameInput, 'Ice Javelin');
       generateAttackDialog.finesseInput.click();
 
-      setCategoryInputs('melee', false, 'piercing', 2, 6);
-      setCategoryInputs('ranged', true, 'piercing', 1, 6);
-      setCategoryInputs('bonus', true, 'cold', 1, 4);
+      setDamageCategoryControls('melee', meleeCategory);
+      setDamageCategoryControls('ranged', rangedCategory);
+      setDamageCategoryControls('bonus', bonusCategory);
 
       inputValueAndTriggerEvent(generateAttackDialog.reachInput, 10);
       inputValueAndTriggerEvent(generateAttackDialog.normalRangeInput, 30);
@@ -62,12 +82,31 @@ describe('when the generate attack dialog is opened', () => {
 
   describe('and the dialog is submitted and then opened again', () => {
     it('should reset the dialog model and controls back to their defaults', () => {
+      const attackModel = new Attack();
+      const meleeCategory = attackModel.damageCategories['melee'];
+      meleeCategory.isEnabled = false;
+      meleeCategory.damageType = 'piercing';
+      meleeCategory.damageDieQuantity = 2;
+      meleeCategory.dmageDieSize = 6;
+
+      const rangedCategory = attackModel.damageCategories['ranged'];
+      rangedCategory.isEnabled = true;
+      rangedCategory.damageType = 'piercing';
+      rangedCategory.damageDieQuantity = 1;
+      rangedCategory.dmageDieSize = 6;
+
+      const bonusCategory = attackModel.damageCategories['bonus'];
+      bonusCategory.isEnabled = true;
+      bonusCategory.damageType = 'cold';
+      bonusCategory.damageDieQuantity = 1;
+      bonusCategory.dmageDieSize = 4;
+
       inputValueAndTriggerEvent(generateAttackDialog.weaponNameInput, 'Ice Javelin');
       generateAttackDialog.finesseInput.click();
 
-      setCategoryInputs('melee', false, 'piercing', 2, 6);
-      setCategoryInputs('ranged', true, 'piercing', 1, 6);
-      setCategoryInputs('bonus', true, 'cold', 1, 4);
+      setDamageCategoryControls('melee', meleeCategory);
+      setDamageCategoryControls('ranged', rangedCategory);
+      setDamageCategoryControls('bonus', bonusCategory);
 
       generateAttackDialog.generateAttackButton.click();
 
@@ -89,9 +128,13 @@ describe('when the generate attack dialog is opened', () => {
 
   describe('and the dialog is submitted with neither melee or ranged checked', () => {
     it('should display an error', () => {
+      const attackModel = new Attack();
+      const meleeCategory = attackModel.damageCategories['melee'];
+      meleeCategory.isEnabled = false;
+
       inputValueAndTriggerEvent(generateAttackDialog.weaponNameInput, 'Dummy');
 
-      setCategoryInputs('melee', false);
+      setDamageCategoryControls('melee', meleeCategory);
 
       expect(generateAttackDialog.generatedText).toBe('');
       expect(generateAttackDialog.renderedText).toBe('');
@@ -120,31 +163,41 @@ describe('when the generate attack dialog is opened', () => {
     `
     ('$description: {isFinesse="$isFinesse", isVersatile="$isVersatile", hasBonus="$hasBonus"} => {generatedText="$generatedText", renderedText="$renderedText"}',
     ({isFinesse, isVersatile, hasBonus, generatedText, renderedText}) => {
-      const weaponName = 'Claws';
-
       Abilities.abilities['strength'].score = 12;
       Abilities.abilities['dexterity'].score = 18;
       ProficiencyBonus.proficiencyBonus = 2;
 
-      inputValueAndTriggerEvent(generateAttackDialog.weaponNameInput, weaponName);
+      const attackModel = new Attack();
+      attackModel.weaponName = 'Claws';
+      attackModel.isFinesse = isFinesse;
+      attackModel.reach = 10;
 
-      setCategoryInputs('melee', true, 'slashing', 1, 8);
+      const meleeCategory = attackModel.damageCategories['melee'];
+      meleeCategory.isEnabled = true;
+      meleeCategory.damageType = 'slashing';
+      meleeCategory.damageDieQuantity = 1;
+      meleeCategory.damageDieSize = 8;
 
-      if (isFinesse) {
-        generateAttackDialog.finesseInput.click();
-      }
+      const rangedCategory = attackModel.damageCategories['ranged'];
+      rangedCategory.isEnabled = false;
 
-      if (isVersatile) {
-        setCategoryInputs('versatile', true, 'slashing', 1, 10);
-      }
+      const versatileCategory = attackModel.damageCategories['versatile'];
+      versatileCategory.isEnabled = isVersatile;
+      versatileCategory.damageType = 'slashing';
+      versatileCategory.damageDieQuantity = 1;
+      versatileCategory.damageDieSize = 10;
 
-      if (hasBonus) {
-        setCategoryInputs('bonus', true, 'fire', 2, 6);
-      }
+      const bonusCategory = attackModel.damageCategories['bonus'];
+      bonusCategory.isEnabled = hasBonus;
+      bonusCategory.damageType = 'fire';
+      bonusCategory.damageDieQuantity = 2;
+      bonusCategory.damageDieSize = 6;
 
-      inputValueAndTriggerEvent(generateAttackDialog.reachInput, 10);
+      setDialogControls(attackModel);
 
-      verifyWeapon(weaponName, generatedText, renderedText);
+      verifyDialogModel(attackModel);
+      verifyDialogControls(attackModel, generatedText, renderedText);
+      saveDialogAndVerifyActionBlocks(attackModel.weaponName, generatedText, renderedText);
     });
     /* eslint-enable indent, no-unexpected-multiline */
   });
@@ -165,33 +218,42 @@ describe('when the generate attack dialog is opened', () => {
     `
     ('$description: {isFinesse="$isFinesse", isVersatile="$isVersatile", hasBonus="$hasBonus"} => {generatedText="$generatedText", renderedText="$renderedText"}',
     ({isFinesse, isVersatile, hasBonus, generatedText, renderedText}) => {
-      const weaponName = 'Spikes';
-
       Abilities.abilities['strength'].score = 20;
       Abilities.abilities['dexterity'].score = 14;
       ProficiencyBonus.proficiencyBonus = 3;
 
-      inputValueAndTriggerEvent(generateAttackDialog.weaponNameInput, weaponName);
+      const attackModel = new Attack();
+      attackModel.weaponName = 'Spikes';
+      attackModel.isFinesse = isFinesse;
+      attackModel.normalRange = 30;
+      attackModel.longRange = 120;
 
-      setCategoryInputs('melee', false);
-      setCategoryInputs('ranged', true, 'piercing', 2, 10);
+      const meleeCategory = attackModel.damageCategories['melee'];
+      meleeCategory.isEnabled = false;
 
-      if (isFinesse) {
-        generateAttackDialog.finesseInput.click();
-      }
+      const rangedCategory = attackModel.damageCategories['ranged'];
+      rangedCategory.isEnabled = true;
+      rangedCategory.damageType = 'piercing';
+      rangedCategory.damageDieQuantity = 2;
+      rangedCategory.damageDieSize = 10;
 
-      if (isVersatile) {
-        setCategoryInputs('versatile', true, 'piercing', 2, 12);
-      }
+      const versatileCategory = attackModel.damageCategories['versatile'];
+      versatileCategory.isEnabled = isVersatile;
+      versatileCategory.damageType = 'piercing';
+      versatileCategory.damageDieQuantity = 2;
+      versatileCategory.damageDieSize = 12;
 
-      if (hasBonus) {
-        setCategoryInputs('bonus', true, 'poison', 4, 4);
-      }
+      const bonusCategory = attackModel.damageCategories['bonus'];
+      bonusCategory.isEnabled = hasBonus;
+      bonusCategory.damageType = 'poison';
+      bonusCategory.damageDieQuantity = 4;
+      bonusCategory.damageDieSize = 4;
 
-      inputValueAndTriggerEvent(generateAttackDialog.normalRangeInput, 30);
-      inputValueAndTriggerEvent(generateAttackDialog.longRangeInput, 120);
+      setDialogControls(attackModel);
 
-      verifyWeapon(weaponName, generatedText, renderedText);
+      verifyDialogModel(attackModel);
+      verifyDialogControls(attackModel, generatedText, renderedText);
+      saveDialogAndVerifyActionBlocks(attackModel.weaponName, generatedText, renderedText);
     });
     /* eslint-enable indent, no-unexpected-multiline */
   });
@@ -220,137 +282,235 @@ describe('when the generate attack dialog is opened', () => {
     `
     ('$description: {isFinesse="$isFinesse", isVersatile="$isVersatile", hasBonus="$hasBonus"} => {generatedText="$generatedText", renderedText="$renderedText"}',
     ({meleeDieQuantity, meleeDieSize, rangedDieQuantity, rangedDieSize, isFinesse, isVersatile, hasBonus, generatedText, renderedText}) => {
-      const weaponName = 'Spear of Lightning';
-
       Abilities.abilities['strength'].score = 14;
       Abilities.abilities['dexterity'].score = 16;
       ProficiencyBonus.proficiencyBonus = 4;
 
+      const attackModel = new Attack();
+      attackModel.weaponName = 'Spear of Lightning';
+      attackModel.isFinesse = isFinesse;
+      attackModel.normalRange = 20;
+      attackModel.longRange = 60;
+
+      const meleeCategory = attackModel.damageCategories['melee'];
+      meleeCategory.isEnabled = true;
+      meleeCategory.damageType = 'piercing';
+      meleeCategory.damageDieQuantity = meleeDieQuantity;
+      meleeCategory.damageDieSize = meleeDieSize;
+
+      const rangedCategory = attackModel.damageCategories['ranged'];
+      rangedCategory.isEnabled = true;
+      rangedCategory.damageType = 'piercing';
+      rangedCategory.damageDieQuantity = rangedDieQuantity;
+      rangedCategory.damageDieSize = rangedDieSize;
+
+      const versatileCategory = attackModel.damageCategories['versatile'];
+      versatileCategory.isEnabled = isVersatile;
+      versatileCategory.damageType = 'piercing';
+      versatileCategory.damageDieQuantity = 2;
+      versatileCategory.damageDieSize = 10;
+
+      const bonusCategory = attackModel.damageCategories['bonus'];
+      bonusCategory.isEnabled = hasBonus;
+      bonusCategory.damageType = 'lightning';
+      bonusCategory.damageDieQuantity = 1;
+      bonusCategory.damageDieSize = 12;
+
+      setDialogControls(attackModel);
+
+      verifyDialogModel(attackModel);
+      verifyDialogControls(attackModel, generatedText, renderedText);
+      saveDialogAndVerifyActionBlocks(attackModel.weaponName, generatedText, renderedText);
+    });
+    /* eslint-enable indent, no-unexpected-multiline */
+  });
+
+  describe('and a predefined weapon is entered, it should auto-fill the dialog fields and add a new action block for that weapon', () => {
+    /* eslint-disable indent, no-unexpected-multiline */
+    it.skip.each
+    `
+      weaponName   | isFinesse | reach | normalRange | longRange | damageType       | meleeEnabled | meleeDamageDieQuantity | meleeDamageDieSize | rangedEnabled | rangedDamageDieQuantity | rangedDamageDieSize | versatileEnabled | versatileDamageDieQuantity | versatileDamageDieSize | generatedText                                                                                                                                          | renderedText
+      ${'Club'}    | ${false}  | ${5}  | ${NaN}      | ${NaN}    | ${'bludgeoning'} | ${true}      | ${1}                   | ${4}               | ${false}      | ${NaN}                  | ${NaN}              | ${false}         | ${NaN}                     | ${NaN}                 | ${'*Melee Weapon Attack:* mod{strmod + prof} to hit, reach 5 ft., one target. *Hit:* dmg{1d4 + strmod} bludgeoning damage.'}                           | ${'<em>Melee Weapon Attack:</em> +3 to hit, reach 5 ft., one target. <em>Hit:</em> 5 (1d4 + 3) bludgeoning damage.'}
+      ${'Dagger'}  | ${true}   | ${5}  | ${20}       | ${60}     | ${'piercing'}    | ${true}      | ${1}                   | ${4}               | ${true}       | ${1}                    | ${4}                | ${false}         | ${NaN}                     | ${NaN}                 | ${'*Melee or Ranged Weapon Attack:* mod{dexmod + prof} to hit, reach 5 ft. or range 20/60 ft., one target. *Hit:* dmg{1d4 + dexmod} piercing damage.'} | ${'<em>Melee or Ranged Weapon Attack:</em> +4 to hit, reach 5 ft. or range 20/60 ft., one target. <em>Hit:</em> 6 (1d4 + 4) piercing damage.'}
+    `
+    ('$weaponName => {isFinesse="$isFinesse", reach="$reach", normalRange="$normalRange", longRange="$longRange", damageType="$damageType", meleeEnabled="$meleeEnabled", meleeDamageDieQuantity="$meleeDamageDieQuantity", meleeDamageDieSize="$meleeDamageDieSize", rangedEnabled="$rangedEnabled", rangedDamageDieQuantity="$rangedDamageDieQuantity", rangedDamageDieSize="$rangedDamageDieSize", versatileEnabled="$versatileEnabled", versatileDamageDieQuantity="$versatileDamageDieQuantity", versatileDamageDieSize="$versatileDamageDieSize", generatedText="$generatedText", renderedText="$renderedText"}',
+    ({weaponName, isFinesse, reach, normalRange, longRange, damageType, meleeEnabled, meleeDamageDieQuantity, meleeDamageDieSize, rangedEnabled, rangedDamageDieQuantity, rangedDamageDieSize, versatileEnabled, versatileDamageDieQuantity, versatileDamageDieSize, generatedText, renderedText}) => {
+      const attackModel = new Attack();
+      attackModel.weaponName = weaponName;
+      attackModel.isFinesse = isFinesse;
+      attackModel.reach = reach;
+      attackModel.normalRange = normalRange;
+      attackModel.longRange = longRange;
+
+      const meleeCategory = attackModel.damageCategories['melee'];
+      meleeCategory.isEnabled = meleeEnabled;
+      meleeCategory.damageType = damageType;
+      meleeCategory.damageDieQuantity = meleeDamageDieQuantity;
+      meleeCategory.damageDieSize = meleeDamageDieSize;
+
+      const rangedCategory = attackModel.damageCategories['ranged'];
+      rangedCategory.isEnabled = rangedEnabled;
+      rangedCategory.damageType = damageType;
+      rangedCategory.damageDieQuantity = rangedDamageDieQuantity;
+      rangedCategory.damageDieSize = rangedDamageDieSize;
+
+      const versatileCategory = attackModel.damageCategories['versatile'];
+      versatileCategory.isEnabled = versatileEnabled;
+      versatileCategory.damageType = damageType;
+      versatileCategory.damageDieQuantity = versatileDamageDieQuantity;
+      versatileCategory.damageDieSize = versatileDamageDieSize;
+
+      if (meleeEnabled) {
+        Abilities.abilities['strength'].score = 16;
+        Abilities.abilities['dexterity'].score = 18;
+      } else if (rangedEnabled) {
+        Abilities.abilities['strength'].score = 18;
+        Abilities.abilities['dexterity'].score = 16;
+      }
+      ProficiencyBonus.proficiencyBonus = 2;
+
       inputValueAndTriggerEvent(generateAttackDialog.weaponNameInput, weaponName);
 
-      setCategoryInputs('melee', true, 'piercing', meleeDieQuantity, meleeDieSize);
-      setCategoryInputs('ranged', true, 'piercing', rangedDieQuantity, rangedDieSize);
-
-      if (isFinesse) {
-        generateAttackDialog.finesseInput.click();
-      }
-
-      if (isVersatile) {
-        setCategoryInputs('versatile', true, 'piercing', 2, 10);
-      }
-
-      if (hasBonus) {
-        setCategoryInputs('bonus', true, 'lightning', 1, 12);
-      }
-
-      inputValueAndTriggerEvent(generateAttackDialog.reachInput, 5);
-      inputValueAndTriggerEvent(generateAttackDialog.normalRangeInput, 20);
-      inputValueAndTriggerEvent(generateAttackDialog.longRangeInput, 60);
-
-      verifyWeapon(weaponName, generatedText, renderedText);
+      verifyDialogModel(attackModel);
+      verifyDialogControls(attackModel, generatedText, renderedText);
+      saveDialogAndVerifyActionBlocks(attackModel.weaponName, generatedText, renderedText);
     });
     /* eslint-enable indent, no-unexpected-multiline */
   });
 });
 
-function setCategoryInputs(categoryKey, isEnabled = true, damageType = '', damageDieQuantity = 1, damageDieSize = 8) {
+function setDialogControls(attackModel) {
+  inputValueAndTriggerEvent(generateAttackDialog.weaponNameInput, attackModel.weaponName);
+
+  if (attackModel.isFinesse) {
+    generateAttackDialog.finesseInput.click();
+  }
+
+  for (const [key, categoryModel] of attackModel.damageCategoryEntries) {
+    setDamageCategoryControls(key, categoryModel);
+  }
+
+  if (attackModel.damageCategories['melee'].isEnabled) {
+    inputValueAndTriggerEvent(generateAttackDialog.reachInput, attackModel.reach);
+  }
+  if(attackModel.damageCategories['ranged'].isEnabled) {
+    inputValueAndTriggerEvent(generateAttackDialog.normalRangeInput, attackModel.normalRange);
+    inputValueAndTriggerEvent(generateAttackDialog.longRangeInput, attackModel.longRange);
+  }
+}
+
+function setDamageCategoryControls(categoryKey, categoryModel) {
   const categoryInputs = generateAttackDialog.damageCategoryInputs[categoryKey];
 
-  if (categoryInputs.enabled.checked !== isEnabled) {
+  if (categoryInputs.enabled.checked !== categoryModel.isEnabled) {
     categoryInputs.enabled.click();
   }
 
-  inputValueAndTriggerEvent(categoryInputs.damageType, damageType);
-  inputValueAndTriggerEvent(categoryInputs.damageDieQuantity, damageDieQuantity);
-  inputValueAndTriggerEvent(categoryInputs.damageDieSize, damageDieSize);
-}
-
-function verifyCategoryModel(categoryKey, isEnabled = true, damageType = '', damageDieQuantity = 1, damageDieSize = 8) {
-  const categoryModel = generateAttackDialog.attackModel.damageCategories[categoryKey];
-  expect(categoryModel.isEnabled).toBe(isEnabled);
-  expect(categoryModel.damageType).toBe(damageType);
-  expect(categoryModel.damageDieQuantity).toBe(damageDieQuantity);
-  expect(categoryModel.damageDieSize).toBe(damageDieSize);
-}
-
-function verifyCategoryInputs(categoryKey, isEnabled = true, damageType = '', damageDieQuantity = 1, damageDieSize = 8) {
-  const categoryInputs = generateAttackDialog.damageCategoryInputs[categoryKey];
-  expect(categoryInputs.enabled.checked).toBe(isEnabled);
-
-  expect(categoryInputs.damageType.disabled).not.toBe(isEnabled);
-  expect(categoryInputs.damageType.value).toBe(damageType);
-
-  expect(categoryInputs.damageDieQuantity.disabled).not.toBe(isEnabled);
-  expect(categoryInputs.damageDieQuantity.valueAsInt).toBe(damageDieQuantity);
-
-  expect(categoryInputs.damageDieSize.disabled).not.toBe(isEnabled);
-  expect(parseInt(categoryInputs.damageDieSize.value, 10)).toBe(damageDieSize);
-
-  if (categoryKey === 'melee') {
-    expect(generateAttackDialog.reachInput.disabled).not.toBe(isEnabled);
-  } else if(categoryKey === 'ranged') {
-    expect(generateAttackDialog.normalRangeInput.disabled).not.toBe(isEnabled);
-    expect(generateAttackDialog.longRangeInput.disabled).not.toBe(isEnabled);
+  if (categoryModel.isEnabled) {
+    inputValueAndTriggerEvent(categoryInputs.damageType, categoryModel.damageType);
+    inputValueAndTriggerEvent(categoryInputs.damageDieQuantity, categoryModel.damageDieQuantity);
+    inputValueAndTriggerEvent(categoryInputs.damageDieSize, categoryModel.damageDieSize);
   }
 }
 
-function verifyDialogResetToDefaults() {
-  verifyDialogModelReset();
-  verifyDialogControlsReset();
-}
-
-function verifyDialogModelReset() {
+function verifyDialogModel(expectedModel) {
   const attackModel = generateAttackDialog.attackModel;
 
-  expect(attackModel.weaponName).toBe('');
-  expect(attackModel.isFinesse).toBe(false);
+  expect(attackModel.weaponName).toBe(expectedModel.weaponName);
+  expect(attackModel.isFinesse).toBe(expectedModel.isFinesse);
 
-  verifyCategoryModel('melee');
-
-  for (const key of ['ranged', 'versatile', 'bonus']) {
-    verifyCategoryModel(key, false);
+  for (const [categoryKey, expectedCategoryModel] of Object.entries(expectedModel.damageCategories)) {
+    verifyDamageCategoryModel(categoryKey, expectedCategoryModel);
   }
 
-  expect(attackModel.reach).toBe(5);
-  expect(attackModel.normalRange).toBe(0);
-  expect(attackModel.longRange).toBe(0);
+  if (expectedModel.damageCategories['melee'].isEnabled) {
+    expect(attackModel.reach).toBe(expectedModel.reach);
+  } else if(expectedModel.damageCategories['ranged'].isEnabled) {
+    expect(attackModel.normalRange).toBe(expectedModel.normalRange);
+    expect(attackModel.longRange).toBe(expectedModel.longRange);
+  }
 }
 
-function verifyDialogControlsReset() {
-  expect(generateAttackDialog.weaponNameInput.value).toBe('');
-  expect(generateAttackDialog.finesseInput.checked).toBe(false);
+function verifyDialogControls(expectedModel, expectedGeneratedText, expectedRenderedText) {
+  expect(generateAttackDialog.weaponNameInput.value).toBe(expectedModel.weaponName);
+  expect(generateAttackDialog.finesseInput.checked).toBe(expectedModel.isFinesse);
 
-  verifyCategoryInputs('melee');
-
-  for (const key of ['ranged', 'versatile', 'bonus']) {
-    verifyCategoryInputs(key, false);
+  if (expectedModel.damageCategories['melee'].isEnabled) {
+    expect(generateAttackDialog.reachInput.valueAsInt).toBe(expectedModel.reach);
+  } else if(expectedModel.damageCategories['ranged'].isEnabled) {
+    expect(generateAttackDialog.normalRangeInput.valueAsInt).toBe(expectedModel.normalRange);
+    expect(generateAttackDialog.longRangeInput.valueAsInt).toBe(expectedModel.longRange);
   }
 
-  expect(generateAttackDialog.reachInput.valueAsInt).toBe(5);
-  expect(generateAttackDialog.normalRangeInput.valueAsInt).toBe(0);
-  expect(generateAttackDialog.longRangeInput.valueAsInt).toBe(0);
-
-  const expectedGeneratedText = '*Melee Weapon Attack:* mod{strmod + prof} to hit, reach 5 ft., one target. *Hit:* dmg{1d8 + strmod} damage.';
-  const expectedRenderedText = '<em>Melee Weapon Attack:</em> +2 to hit, reach 5 ft., one target. <em>Hit:</em> 4 (1d8) damage.';
+  for (const [categoryKey, expectedCategoryModel] of Object.entries(expectedModel.damageCategories)) {
+    verifyDamageCategoryControls(categoryKey, expectedCategoryModel);
+  }
 
   expect(generateAttackDialog.generatedTextElement).toHaveTextContent(expectedGeneratedText);
   expect(generateAttackDialog.renderedTextElement.innerHTMLSanitized).toBe(expectedRenderedText);
 }
 
-function verifyWeapon(weaponName, generatedText, renderedText) {
-  expect(generateAttackDialog.generatedText).toBe(generatedText);
-  expect(generateAttackDialog.renderedText).toBe(renderedText);
+function verifyDamageCategoryModel(categoryKey, expectedCategoryModel) {
+  const categoryModel = generateAttackDialog.attackModel.damageCategories[categoryKey];
 
+  expect(categoryModel.isEnabled).toBe(expectedCategoryModel.isEnabled);
+
+  if (expectedCategoryModel.isEnabled) {
+    expect(categoryModel.damageType).toBe(expectedCategoryModel.damageType);
+    expect(categoryModel.damageDieQuantity).toBe(expectedCategoryModel.damageDieQuantity);
+    expect(categoryModel.damageDieSize).toBe(expectedCategoryModel.damageDieSize);
+  }
+}
+
+function verifyDamageCategoryControls(categoryKey, expectedCategoryModel) {
+  const categoryInputs = generateAttackDialog.damageCategoryInputs[categoryKey];
+  expect(categoryInputs.enabled.checked).toBe(expectedCategoryModel.isEnabled);
+
+  expect(categoryInputs.damageType.disabled).not.toBe(expectedCategoryModel.isEnabled);
+  expect(categoryInputs.damageDieQuantity.disabled).not.toBe(expectedCategoryModel.isEnabled);
+  expect(categoryInputs.damageDieSize.disabled).not.toBe(expectedCategoryModel.isEnabled);
+
+  if (expectedCategoryModel.isEnabled) {
+    expect(categoryInputs.damageType.value).toBe(expectedCategoryModel.damageType);
+    expect(categoryInputs.damageDieQuantity.valueAsInt).toBe(expectedCategoryModel.damageDieQuantity);
+    expect(parseInt(categoryInputs.damageDieSize.value, 10)).toBe(expectedCategoryModel.damageDieSize);
+  }
+
+  if (categoryKey === 'melee') {
+    expect(generateAttackDialog.reachInput.disabled).not.toBe(expectedCategoryModel.isEnabled);
+  } else if(categoryKey === 'ranged') {
+    expect(generateAttackDialog.normalRangeInput.disabled).not.toBe(expectedCategoryModel.isEnabled);
+    expect(generateAttackDialog.longRangeInput.disabled).not.toBe(expectedCategoryModel.isEnabled);
+  }
+}
+
+function verifyDialogResetToDefaults() {
+  verifyDialogModelResetToDefaults();
+  verifyDialogControlsResetToDefaults();
+}
+
+function verifyDialogModelResetToDefaults() {
+  verifyDialogModel(new Attack());
+}
+
+function verifyDialogControlsResetToDefaults() {
+  const expectedGeneratedText = '*Melee Weapon Attack:* mod{strmod + prof} to hit, reach 5 ft., one target. *Hit:* dmg{1d8 + strmod} damage.';
+  const expectedRenderedText = '<em>Melee Weapon Attack:</em> +2 to hit, reach 5 ft., one target. <em>Hit:</em> 4 (1d8) damage.';
+
+  verifyDialogControls(new Attack(), expectedGeneratedText, expectedRenderedText);
+}
+
+function saveDialogAndVerifyActionBlocks(weaponName, expectedGeneratedText, expectedRenderedText) {
   generateAttackDialog.generateAttackButton.click();
 
   const editableBlock = actionsSection.editElements.editableList.blocks[0];
   expect(editableBlock.name).toBe(weaponName);
-  expect(editableBlock.originalText).toBe(generatedText);
-  expect(editableBlock.previewText).toBe(renderedText);
+  expect(editableBlock.originalText).toBe(expectedGeneratedText);
+  expect(editableBlock.previewText).toBe(expectedRenderedText);
 
   actionsSection.editElements.submitForm();
 
   const displayBlock = actionsSection.showElements.displayList.blocks[0];
   expect(displayBlock.name).toBe(weaponName);
-  expect(displayBlock.text).toBe(renderedText);
+  expect(displayBlock.text).toBe(expectedRenderedText);
 }

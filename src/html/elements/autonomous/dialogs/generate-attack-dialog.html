@@ -13,9 +13,52 @@
 
       <div class="generate-attack-dialog__top-container">
         <label class="generate-attack-dialog__weapon-name-label" for="weapon-name-input">Weapon Name:</label>
-        <input id="weapon-name-input" class="generate-attack-dialog__weapon-name-input section__text-input" is="text-input" type="text" name="weapon-name" pretty-name="Weapon Name" required />
+        <input id="weapon-name-input" class="generate-attack-dialog__weapon-name-input section__text-input" is="text-input" type="text" name="weapon-name" pretty-name="Weapon Name" list="predefined-weapons" required />
         <label class="generate-attack-dialog__finesse-label" for="finesse-input">Finesse:</label>
         <input id="finesse-input" class="generate-attack-dialog__finesse-input" type="checkbox" />
+
+        <datalist id="predefined-weapons">
+          <option value="Club">Simple Melee, 1d4 bludgeoning, light</option>
+          <option value="Dagger">Simple Melee, 1d4 piercing, finesse, light, thrown (range 20/60)</option>
+          <option value="Greatclub">Simple Melee, 1d8 bludgeoning, two-handed</option>
+          <option value="Handaxe">Simple Melee, 1d6 slashing, light, thrown (range 20/60)</option>
+          <option value="Javelin">Simple Melee, 1d6 piercing, thrown (range 30/120)</option>
+          <option value="Light Hammer">Simple Melee, 1d4 bludgeoning, light, thrown (range 20/60)</option>
+          <option value="Mace">Simple Melee, 1d6 bludgeoning</option>
+          <option value="Quarterstaff">Simple Melee, 1d6 bludgeoning, versatile (1d8)</option>
+          <option value="Sickle">Simple Melee, 1d4 slashing, light</option>
+          <option value="Spear">Simple Melee, 1d6 piercing, thrown (range 20/60), versatile (1d8)</option>
+
+          <option value="Light Crossbow">Simple Ranged, 1d8 piercing, ammunition (range 80/320), loading, two-handed</option>
+          <option value="Dart">Simple Ranged, 1d4 piercing, finesse, thrown (range 20/60)</option>
+          <option value="Shortbow">Simple Ranged, 1d6 piercing, ammunition (range 80/320), two-handed</option>
+          <option value="Sling">Simple Ranged, 1d4 bludgeoning, ammunition (range 30/120)</option>
+
+          <option value="Battleaxe">Martial Melee, 1d8 slashing, versatile (1d10)</option>
+          <option value="Flail">Martial Melee, 1d8 bludgeoning</option>
+          <option value="Glaive">Martial Melee, 1d10 slashing, heavy, reach, two-handed</option>
+          <option value="Greataxe">Martial Melee, 1d12 slashing, heavy, two-handed</option>
+          <option value="Greatsword">Martial Melee, 2d6 slashing, heavy, two-handed</option>
+          <option value="Halberd">Martial Melee, 1d10 slashing, heavy, reach, two-handed</option>
+          <option value="Lance">Martial Melee, 1d12 piercing, reach, special</option>
+          <option value="Longsword">Martial Melee, 1d8 slashing, versatile (1d10)</option>
+          <option value="Maul">Martial Melee, 2d6 bludgeoning, heavy, two-handed</option>
+          <option value="Morningstar">Martial Melee, 1d8 piercing</option>
+          <option value="Pike">Martial Melee, 1d10 piercing, heavy, reach, two-handed</option>
+          <option value="Rapier">Martial Melee, 1d8 piercing, finesse</option>
+          <option value="Scimitar">Martial Melee, 1d6 slashing, finesse, light</option>
+          <option value="Shortsword">Martial Melee, 1d6 piercing, finesse, light</option>
+          <option value="Trident">Martial Melee, 1d6 piercing, thrown (range 20/60), versatile (1d8)</option>
+          <option value="War Pick">Martial Melee, 1d8 piercing</option>
+          <option value="Warhammer">Martial Melee, 1d8 bludgeoning, versatile (1d10)</option>
+          <option value="Whip">Martial Melee, 1d4 slashing, finesse, reach</option>
+
+          <option value="Blowgun">Martial Ranged, 1 piercing, ammunition (range 25/100), loading</option>
+          <option value="Hand Crossbow">Martial Ranged, 1d6 piercing, ammunition (range 30/120), light, loading</option>
+          <option value="Heavy Crossbow">Martial Ranged, 1d10 piercing, ammunition (range 100/400), heavy, loading, two-handed</option>
+          <option value="Longbow">Martial Ranged, 1d8 piercing, ammunition (range 150/600), heavy, two-handed</option>
+          <option value="Net">Martial Ranged, special, thrown (range 5/15)</option>
+        </datalist>
       </div>
 
       <div class="generate-attack-dialog__damage-container">
@@ -76,19 +119,19 @@
         </select>
 
         <datalist id="damage-types">
-          <option id="acid" value="acid" />
-          <option id="bludgeoning" value="bludgeoning" />
-          <option id="cold" value="cold" />
-          <option id="fire" value="fire" />
-          <option id="force" value="force" />
-          <option id="lightning" value="lightning" />
-          <option id="necrotic" value="necrotic" />
-          <option id="piercing" value="piercing" />
-          <option id="poison" value="poison" />
-          <option id="psychic" value="psychic" />
-          <option id="radiant" value="radiant" />
-          <option id="slashing" value="slashing" />
-          <option id="thunder" value="thunder" />
+          <option value="acid" />
+          <option value="bludgeoning" />
+          <option value="cold" />
+          <option value="fire" />
+          <option value="force" />
+          <option value="lightning" />
+          <option value="necrotic" />
+          <option value="piercing" />
+          <option value="poison" />
+          <option value="psychic" />
+          <option value="radiant" />
+          <option value="slashing" />
+          <option value="thunder" />
         </datalist>
       </div>
 

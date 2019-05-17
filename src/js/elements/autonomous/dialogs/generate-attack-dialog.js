@@ -92,6 +92,11 @@ export default class GenerateAttackDialog extends CustomDialog {
     this.update();
   }
 
+  onInputFinesse() {
+    this.attackModel.isFinesse = this.finesseInput.checked;
+    this.update();
+  }
+
   onInputDamageCategoryEnabled(key) {
     this.attackModel.damageCategories[key].isEnabled = this.damageCategoryInputs[key].enabled.checked;
     this.update();
@@ -103,32 +108,27 @@ export default class GenerateAttackDialog extends CustomDialog {
   }
 
   onInputDamageCategoryDamageDieQuantity(key) {
-    this.attackModel.damageCategories[key].damageDieQuantity = this.damageCategoryInputs[key].damageDieQuantity.value;
+    this.attackModel.damageCategories[key].damageDieQuantity = this.damageCategoryInputs[key].damageDieQuantity.valueAsInt;
     this.update();
   }
 
   onInputDamageCategoryDamageDieSize(key) {
-    this.attackModel.damageCategories[key].damageDieSize = this.damageCategoryInputs[key].damageDieSize.value;
+    this.attackModel.damageCategories[key].damageDieSize = parseInt(this.damageCategoryInputs[key].damageDieSize.value, 10);
     this.update();
   }
 
   onInputReach() {
-    this.attackModel.reach = this.reachInput.value;
-    this.update();
-  }
-
-  onInputFinesse() {
-    this.attackModel.isFinesse = this.finesseInput.checked;
+    this.attackModel.reach = this.reachInput.valueAsInt;
     this.update();
   }
 
   onInputNormalRange() {
-    this.attackModel.normalRange = this.normalRangeInput.value;
+    this.attackModel.normalRange = this.normalRangeInput.valueAsInt;
     this.update();
   }
 
   onInputLongRange() {
-    this.attackModel.longRange = this.longRangeInput.value;
+    this.attackModel.longRange = this.longRangeInput.valueAsInt;
     this.update();
   }
 

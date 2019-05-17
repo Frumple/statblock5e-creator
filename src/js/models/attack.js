@@ -10,20 +10,24 @@ export default class Attack {
     this.weaponName = '';
     this.isFinesse = false;
 
+    this._reach = 5;
+    this._normalRange = 0;
+    this._longRange = 0;
+
     this.damageCategories = {
       melee: new DamageCategory(true),
       ranged: new DamageCategory(),
       versatile: new DamageCategory(),
       bonus: new DamageCategory()
     };
-
-    this._reach = 5;
-    this._normalRange = 0;
-    this._longRange = 0;
   }
 
   get damageCategoryKeys() {
     return Object.keys(this.damageCategories);
+  }
+
+  get damageCategoryEntries() {
+    return Object.entries(this.damageCategories);
   }
 
   set reach(value) {

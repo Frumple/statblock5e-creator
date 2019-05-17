@@ -59,7 +59,7 @@ class ChallengeRatingEditElements extends propertyLineSectionModule.PropertyLine
     this.challengeRating = shadowRoot.getElementById('challenge-rating-input');
     this.experiencePoints = shadowRoot.getElementById('experience-points-input');
   }
-  
+
   get initiallySelectedElement() {
     return this.challengeRating;
   }
