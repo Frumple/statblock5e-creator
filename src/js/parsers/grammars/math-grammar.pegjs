@@ -134,6 +134,7 @@ AbilityModifier
   / 'intmod' { return options.abilities.intelligence.modifier; }
   / 'wismod' { return options.abilities.wisdom.modifier; }
   / 'chamod' { return options.abilities.charisma.modifier; }
+  / 'finmod' { return (options.abilities.strength.modifier >= options.abilities.dexterity.modifier) ? options.abilities.strength.modifier : options.abilities.dexterity.modifier}
 
 ProficiencyBonus
   = 'prof' { return options.proficiencyBonus; }

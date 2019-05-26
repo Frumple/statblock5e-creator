@@ -1,9 +1,9 @@
-import HtmlTemplates from './html-templates.js';
+import { fetchFromFile } from './file-helpers.js';
 
 let doc = null;
 
 export async function init() {
-  const template = await HtmlTemplates.fetchFromFile('src/html/export-inlined.html');
+  const template = await fetchFromFile('src/html/export-inlined.html');
 
   const parser = new DOMParser();
   doc = parser.parseFromString(template, 'text/html');

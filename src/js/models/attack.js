@@ -1,9 +1,12 @@
-import Abilities from './abilities.js';
 import * as Parser from '../parsers/parser.js';
 
 export default class Attack {
-  constructor() {
+  constructor(jsObject = null) {
     this.reset();
+
+    if (jsObject) {
+      this.populateFromJsObject(jsObject);
+    }
   }
 
   reset() {
@@ -15,11 +18,27 @@ export default class Attack {
     this._longRange = 0;
 
     this.damageCategories = {
-      melee: new DamageCategory(true),
+      melee: new DamageCategory( {isEnabled: true} ),
       ranged: new DamageCategory(),
       versatile: new DamageCategory(),
       bonus: new DamageCategory()
     };
+  }
+
+  populateFromJsObject(jsObject) {
+    if (jsObject.weaponName) { this.weaponName = jsObject.weaponName; }
+    if (jsObject.isFinesse) { this.isFinesse = jsObject.isFinesse; }
+
+    if (jsObject.reach) { this.reach = jsObject.reach; }
+    if (jsObject.normalRange) { this.normalRange = jsObject.normalRange; }
+    if (jsObject.longRange) { this.longRange = jsObject.longRange; }
+
+    for (const categoryKey in this.damageCategories) {
+      const categoryJsObject = jsObject.damageCategories[categoryKey] ? jsObject.damageCategories[categoryKey] : null;
+      if (categoryJsObject) {
+        this.damageCategories[categoryKey].populateFromJsObject(categoryJsObject);
+      }
+    }
   }
 
   get damageCategoryKeys() {
@@ -75,18 +94,13 @@ export default class Attack {
   }
 
   generatedTextParserAbilityModifier(isMeleeEnabled, isRangedEnabled) {
-    const strModifier = Abilities.abilities['strength'].modifier;
-    const dexModifier = Abilities.abilities['dexterity'].modifier;
+    if (this.isFinesse) {
+      return 'finmod';
+    }
 
     if (isMeleeEnabled) {
-      if (this.isFinesse && dexModifier > strModifier) {
-        return 'dexmod';
-      }
       return 'strmod';
     } else if (isRangedEnabled) {
-      if (this.isFinesse && strModifier > dexModifier) {
-        return 'strmod';
-      }
       return 'dexmod';
     }
 
@@ -194,11 +208,26 @@ export default class Attack {
 }
 
 class DamageCategory {
-  constructor(isEnabled = false, damageType = '', damageDieQuantity = 1, damageDieSize = 8) {
-    this.isEnabled = isEnabled;
-    this.damageType = damageType;
-    this._damageDieQuantity = damageDieQuantity;
-    this._damageDieSize = damageDieSize;
+  constructor(jsObject = null) {
+    this.reset();
+
+    if (jsObject) {
+      this.populateFromJsObject(jsObject);
+    }
+  }
+
+  reset() {
+    this.isEnabled = false;
+    this.damageType = '';
+    this.damageDieQuantity = 1;
+    this.damageDieSize = 8;
+  }
+
+  populateFromJsObject(jsObject) {
+    if (jsObject.isEnabled) { this.isEnabled = jsObject.isEnabled; }
+    if (jsObject.damageType) { this.damageType = jsObject.damageType; }
+    if (jsObject.damageDieQuantity) { this.damageDieQuantity = jsObject.damageDieQuantity; }
+    if (jsObject.damageDieSize) { this.damageDieSize = jsObject.damageDieSize; }
   }
 
   set damageDieQuantity(value) {

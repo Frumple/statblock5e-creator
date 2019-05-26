@@ -1,24 +1,12 @@
-import isRunningInNode from './is-running-in-node.js';
+import { fetchFromFile } from './file-helpers.js';
 
 class HtmlTemplates {
   constructor() {
     this.templates = new Map();
   }
 
-  async fetchFromFile(path) {
-    if (isRunningInNode) {
-      const fs = require('fs');
-      const util = require('util');
-      const readFile = util.promisify(fs.readFile);
-
-      return await readFile(path).then(buffer => buffer.toString());
-    } else {
-      return await fetch(path).then(stream => stream.text());
-    }
-  }
-
   async addTemplate(name, path) {
-    const content = await this.fetchFromFile(path);
+    const content = await fetchFromFile(path);
     this.templates.set(name, content);
   }
 
