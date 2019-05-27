@@ -68,7 +68,7 @@
         <input id="melee-enabled-input" class="generate-attack-dialog__melee-enabled-input" is="enable-disable-elements-checkbox" type="checkbox" checked />
         <label class="generate-attack-dialog__melee-label generate-attack-dialog__damage-label" for="melee-enabled-input">Melee</label>
         <input id="melee-damage-type-input" class="generate-attack-dialog__melee-damage-type-input generate-attack-dialog__damage-type-input section__text-input" is="text-input" type="text" name="melee-damage-type" pretty-name="Melee Damage Type" list="damage-types" />
-        <input id="melee-damage-die-quantity-input" class="generate-attack-dialog__melee-damage-die-quantity-input section__number-input section__small-number-input" is="integer-input" type="number" name="melee-damage-die-quantity" pretty-name="Melee Damage Die Quantity" value="1" min="1" max="999" />
+        <input id="melee-damage-die-quantity-input" class="generate-attack-dialog__melee-damage-die-quantity-input section__number-input section__small-number-input" is="number-input" type="number" name="melee-damage-die-quantity" pretty-name="Melee Damage Die Quantity" value="1" min="1" max="999" />
         <select id="melee-damage-die-size-input" class="generate-attack-dialog__melee-damage-die-size-input section__select section__select" name="melee-damage-die-size">
           <option value="1">1</option>
           <option value="4">d4</option>
@@ -82,7 +82,7 @@
         <input id="ranged-enabled-input" class="generate-attack-dialog__ranged-enabled-input" is="enable-disable-elements-checkbox" type="checkbox" />
         <label class="generate-attack-dialog__ranged-label generate-attack-dialog__damage-label" for="ranged-enabled-input">Ranged</label>
         <input id="ranged-damage-type-input" class="generate-attack-dialog__ranged-damage-type-input generate-attack-dialog__damage-type-input section__text-input" is="text-input" type="text" name="ranged-damage-type" pretty-name="Ranged Damage Type" list="damage-types" disabled />
-        <input id="ranged-damage-die-quantity-input" class="generate-attack-dialog__ranged-damage-die-quantity-input section__number-input section__small-number-input" is="integer-input" type="number" name="ranged-damage-die-quantity" pretty-name="Ranged Damage Die Quantity" value="1" min="1" max="999" disabled />
+        <input id="ranged-damage-die-quantity-input" class="generate-attack-dialog__ranged-damage-die-quantity-input section__number-input section__small-number-input" is="number-input" type="number" name="ranged-damage-die-quantity" pretty-name="Ranged Damage Die Quantity" value="1" min="1" max="999" disabled />
         <select id="ranged-damage-die-size-input" class="generate-attack-dialog__ranged-damage-die-size-input section__select section__select" name="ranged-damage-die-size" disabled >
           <option value="1">1</option>
           <option value="4">d4</option>
@@ -96,7 +96,7 @@
         <input id="versatile-enabled-input" class="generate-attack-dialog__versatile-enabled-input" is="enable-disable-elements-checkbox" type="checkbox" />
         <label class="generate-attack-dialog__versatile-label generate-attack-dialog__damage-label" for="versatile-enabled-input">Versatile</label>
         <input id="versatile-damage-type-input" class="generate-attack-dialog__versatile-damage-type-input generate-attack-dialog__damage-type-input section__text-input" is="text-input" type="text" name="versatile-damage-type" pretty-name="Versatile Damage Type" list="damage-types" disabled />
-        <input id="versatile-damage-die-quantity-input" class="generate-attack-dialog__versatile-damage-die-quantity-input section__number-input section__small-number-input" is="integer-input" type="number" name="versatile-damage-die-quantity" pretty-name="Versatile Damage Die Quantity" value="1" min="1" max="999" disabled />
+        <input id="versatile-damage-die-quantity-input" class="generate-attack-dialog__versatile-damage-die-quantity-input section__number-input section__small-number-input" is="number-input" type="number" name="versatile-damage-die-quantity" pretty-name="Versatile Damage Die Quantity" value="1" min="1" max="999" disabled />
         <select id="versatile-damage-die-size-input" class="generate-attack-dialog__versatile-damage-die-size-input section__select section__select" name="versatile-damage-die-size" disabled >
           <option value="1">1</option>
           <option value="4">d4</option>
@@ -110,7 +110,7 @@
         <input id="bonus-enabled-input" class="generate-attack-dialog__bonus-enabled-input" is="enable-disable-elements-checkbox" type="checkbox" />
         <label class="generate-attack-dialog__bonus-label generate-attack-dialog__damage-label" for="bonus-enabled-input">Bonus</label>
         <input id="bonus-damage-type-input" class="generate-attack-dialog__bonus-damage-type-input generate-attack-dialog__damage-type-input section__text-input" is="text-input" type="text" name="bonus-damage-type" pretty-name="Bonus Damage Type" list="damage-types" disabled />
-        <input id="bonus-damage-die-quantity-input" class="generate-attack-dialog__bonus-damage-die-quantity-input section__number-input section__small-number-input" is="integer-input" type="number" name="bonus-damage-die-quantity" pretty-name="Bonus Damage Die Quantity" value="1" min="1" max="999" disabled />
+        <input id="bonus-damage-die-quantity-input" class="generate-attack-dialog__bonus-damage-die-quantity-input section__number-input section__small-number-input" is="number-input" type="number" name="bonus-damage-die-quantity" pretty-name="Bonus Damage Die Quantity" value="1" min="1" max="999" disabled />
         <select id="bonus-damage-die-size-input" class="generate-attack-dialog__bonus-damage-die-size-input section__select section__select" name="bonus-damage-die-size" disabled >
           <option value="1">1</option>
           <option value="4">d4</option>
@@ -141,19 +141,19 @@
       <div class="generate-attack-dialog__range-container">
         <label class="generate-attack-dialog__reach-label" for="reach-input">Reach:</label>
         <div class="generate-attack-dialog__reach-container">
-          <input id="reach-input" class="generate-attack-dialog__reach-input section__number-input section__small-number-input" is="integer-input" type="number" name="reach" pretty-name="Reach" value="5" min="0" max="999" step="5" />
+          <input id="reach-input" class="generate-attack-dialog__reach-input section__number-input section__small-number-input" is="number-input" type="number" name="reach" pretty-name="Reach" value="5" min="0" max="999" step="5" />
           <label class="generate-attack-dialog__unit-label">ft.</label>
         </div>
 
         <label class="generate-attack-dialog__normal-range-label" for="normal-range-input">Normal Range:</label>
         <div class="generate-attack-dialog__normal-range-container">
-          <input id="normal-range-input" class="generate-attack-dialog__normal-range-input section__number-input section__small-number-input" is="integer-input" type="number" name="normal-range" pretty-name="Normal Range" value="0" min="0" max="999" step="5" disabled />
+          <input id="normal-range-input" class="generate-attack-dialog__normal-range-input section__number-input section__small-number-input" is="number-input" type="number" name="normal-range" pretty-name="Normal Range" value="0" min="0" max="999" step="5" disabled />
           <label class="generate-attack-dialog__unit-label">ft.</label>
         </div>
 
         <label class="generate-attack-dialog__long-range-label" for="long-range-input">Long Range:</label>
         <div class="generate-attack-dialog__long-range-container">
-          <input id="long-range-input" class="generate-attack-dialog__long-range-input section__number-input section__small-number-input" is="integer-input" type="number" name="long-range" pretty-name="Long Range" value="0" min="0" max="999" step="5" disabled />
+          <input id="long-range-input" class="generate-attack-dialog__long-range-input section__number-input section__small-number-input" is="number-input" type="number" name="long-range" pretty-name="Long Range" value="0" min="0" max="999" step="5" disabled />
           <label class="generate-attack-dialog__unit-label">ft.</label>
         </div>
       </div>

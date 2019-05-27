@@ -1,7 +1,7 @@
 import CustomBuiltinInputElement from './custom-builtin-input-element.js';
 
 export default class IntegerInput extends CustomBuiltinInputElement {
-  static get elementName() { return 'integer-input'; }
+  static get elementName() { return 'number-input'; }
   static get mixin() { return IntegerInputMixin; }
 
   constructor() {

@@ -3,7 +3,7 @@ import { traverseElements } from '/src/js/helpers/element-helpers.js';
 
 import BlockTextArea from '/src/js/elements/builtin/block-textarea.js';
 import EnableDisableElementsCheckbox from '/src/js/elements/builtin/enable-disable-elements-checkbox.js';
-import IntegerInput from '/src/js/elements/builtin/integer-input.js';
+import IntegerInput from '/src/js/elements/builtin/number-input.js';
 import PropertyDataList from '/src/js/elements/builtin/property-datalist.js';
 import SanitizedParagraph from '/src/js/elements/builtin/sanitized-paragraph.js';
 import TextInput from '/src/js/elements/builtin/text-input.js';

@@ -2,7 +2,7 @@ import * as HtmlExportDocumentFactory from './helpers/html-export-document-facto
 
 import BlockTextArea from './elements/builtin/block-textarea.js';
 import EnableDisableElementsCheckbox from './elements/builtin/enable-disable-elements-checkbox.js';
-import IntegerInput from './elements/builtin/integer-input.js';
+import IntegerInput from './elements/builtin/number-input.js';
 import PropertyDataList from './elements/builtin/property-datalist.js';
 import SanitizedParagraph from './elements/builtin/sanitized-paragraph.js';
 import TextInput from './elements/builtin/text-input.js';
