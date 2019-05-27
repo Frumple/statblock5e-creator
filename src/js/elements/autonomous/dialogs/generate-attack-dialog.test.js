@@ -507,7 +507,7 @@ function verifyDamageCategoryControls(categoryKey, expectedCategoryModel) {
   if (expectedCategoryModel.isEnabled) {
     expect(categoryInputs.damageType.value).toBe(expectedCategoryModel.damageType);
     expect(categoryInputs.damageDieQuantity.valueAsInt).toBe(expectedCategoryModel.damageDieQuantity);
-    expect(parseInt(categoryInputs.damageDieSize.value, 10)).toBe(expectedCategoryModel.damageDieSize);
+    expect(categoryInputs.damageDieSize.valueAsInt).toBe(expectedCategoryModel.damageDieSize);
   }
 
   if (categoryKey === 'melee') {

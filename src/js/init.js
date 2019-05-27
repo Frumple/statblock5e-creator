@@ -2,7 +2,8 @@ import * as HtmlExportDocumentFactory from './helpers/html-export-document-facto
 
 import BlockTextArea from './elements/builtin/block-textarea.js';
 import EnableDisableElementsCheckbox from './elements/builtin/enable-disable-elements-checkbox.js';
-import IntegerInput from './elements/builtin/number-input.js';
+import NumberInput from './elements/builtin/number-input.js';
+import NumberSelect from './elements/builtin/number-select.js';
 import PropertyDataList from './elements/builtin/property-datalist.js';
 import SanitizedParagraph from './elements/builtin/sanitized-paragraph.js';
 import TextInput from './elements/builtin/text-input.js';
@@ -65,7 +66,8 @@ async function defineElements() {
 
   elementClasses.push(BlockTextArea);
   elementClasses.push(EnableDisableElementsCheckbox);
-  elementClasses.push(IntegerInput);
+  elementClasses.push(NumberInput);
+  elementClasses.push(NumberSelect);
   elementClasses.push(PropertyDataList);
   elementClasses.push(SanitizedParagraph);
   elementClasses.push(TextInput);

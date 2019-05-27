@@ -12,7 +12,7 @@ export default class HitPointsSection extends propertyLineSectionModule.Property
   constructor() {
     super(HitPointsSection.templatePaths,
           HitPointsShowElements,
-          HitPointsEditElements);  
+          HitPointsEditElements);
   }
 
   connectedCallback() {
@@ -28,7 +28,7 @@ export default class HitPointsSection extends propertyLineSectionModule.Property
       this.editElements.useHitDie.addEventListener('input', this.onInputUseHitDie.bind(this));
       this.editElements.hitDieQuantity.addEventListener('input', this.onInputHitDieQuantity.bind(this));
       this.editElements.hitDieSize.addEventListener('input', this.onInputHitDieSize.bind(this));
-    
+
       this.isInitialized = true;
     }
   }
@@ -58,7 +58,7 @@ export default class HitPointsSection extends propertyLineSectionModule.Property
       this.editElements.hitDieQuantity.validate(this.errorMessages);
     } else {
       this.editElements.hitPoints.validate(this.errorMessages);
-    }    
+    }
   }
 
   updateModel() {
@@ -89,7 +89,7 @@ export default class HitPointsSection extends propertyLineSectionModule.Property
   }
 
   updateModelHitDieSize() {
-    const hitDieSize = parseInt(this.editElements.hitDieSize.value, 10);
+    const hitDieSize = this.editElements.hitDieSize.valueAsInt;
 
     if (! isNaN(hitDieSize)) {
       HitPoints.hitDieSize = hitDieSize;
@@ -99,7 +99,7 @@ export default class HitPointsSection extends propertyLineSectionModule.Property
   updateView() {
     this.editElements.constitutionHitPoints.textContent = HitPoints.constitutionHitPointsText;
 
-    if (HitPoints.useHitDie) {      
+    if (HitPoints.useHitDie) {
       this.editElements.hitPoints.value = HitPoints.hitPoints;
     }
 

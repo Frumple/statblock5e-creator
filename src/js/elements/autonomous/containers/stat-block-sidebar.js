@@ -46,8 +46,8 @@ export default class StatBlockSidebar extends CustomAutonomousElement {
     let height = null;
 
     if (mode === 'manual') {
-      height = parseInt(this.manualHeightSlider.value);
-    }    
+      height = parseInt(this.manualHeightSlider.value, 10);
+    }
 
     const heightEvent = new CustomEvent('twoColumnHeightChanged', {
       bubbles: true,
@@ -83,10 +83,10 @@ export default class StatBlockSidebar extends CustomAutonomousElement {
   set heightMode(mode) {
     const sliderContainerHiddenClass = 'stat-block-sidebar__slider-container_hidden';
 
-    if (mode === 'auto') {      
-      this.dataset.heightMode = 'auto';    
+    if (mode === 'auto') {
+      this.dataset.heightMode = 'auto';
       this.manualHeightSliderContainer.classList.add(sliderContainerHiddenClass);
-    } else if(mode === 'manual') {      
+    } else if(mode === 'manual') {
       this.dataset.heightMode = 'manual';
       this.manualHeightSliderContainer.classList.remove(sliderContainerHiddenClass);
     }

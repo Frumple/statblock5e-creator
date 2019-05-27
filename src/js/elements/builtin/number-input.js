@@ -1,15 +1,15 @@
 import CustomBuiltinInputElement from './custom-builtin-input-element.js';
 
-export default class IntegerInput extends CustomBuiltinInputElement {
+export default class NumberInput extends CustomBuiltinInputElement {
   static get elementName() { return 'number-input'; }
-  static get mixin() { return IntegerInputMixin; }
+  static get mixin() { return NumberInputMixin; }
 
   constructor() {
     super();
   }
 }
 
-export let IntegerInputMixin = {
+export let NumberInputMixin = {
   initializeMixin() {
     this.addEventListener('input', this.onInput);
   },

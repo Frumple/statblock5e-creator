@@ -124,7 +124,7 @@ export default class GenerateAttackDialog extends CustomDialog {
   }
 
   onInputDamageCategoryDamageDieSize(key) {
-    this.attackModel.damageCategories[key].damageDieSize = parseInt(this.damageCategoryInputs[key].damageDieSize.value, 10);
+    this.attackModel.damageCategories[key].damageDieSize = this.damageCategoryInputs[key].damageDieSize.valueAsInt;
     this.update();
   }
 

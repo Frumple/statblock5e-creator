@@ -3,7 +3,8 @@ import { traverseElements } from '/src/js/helpers/element-helpers.js';
 
 import BlockTextArea from '/src/js/elements/builtin/block-textarea.js';
 import EnableDisableElementsCheckbox from '/src/js/elements/builtin/enable-disable-elements-checkbox.js';
-import IntegerInput from '/src/js/elements/builtin/number-input.js';
+import NumberInput from '/src/js/elements/builtin/number-input.js';
+import NumberSelect from '/src/js/elements/builtin/number-select.js';
 import PropertyDataList from '/src/js/elements/builtin/property-datalist.js';
 import SanitizedParagraph from '/src/js/elements/builtin/sanitized-paragraph.js';
 import TextInput from '/src/js/elements/builtin/text-input.js';
@@ -22,7 +23,8 @@ export async function define() {
 
   customElements.push(BlockTextArea);
   customElements.push(EnableDisableElementsCheckbox);
-  customElements.push(IntegerInput);
+  customElements.push(NumberInput);
+  customElements.push(NumberSelect);
   customElements.push(PropertyDataList);
   customElements.push(SanitizedParagraph);
   customElements.push(TextInput);
