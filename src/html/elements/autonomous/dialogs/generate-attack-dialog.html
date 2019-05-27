@@ -57,7 +57,6 @@
           <option value="Hand Crossbow">Martial Ranged, 1d6 piercing, ammunition (range 30/120), light, loading</option>
           <option value="Heavy Crossbow">Martial Ranged, 1d10 piercing, ammunition (range 100/400), heavy, loading, two-handed</option>
           <option value="Longbow">Martial Ranged, 1d8 piercing, ammunition (range 150/600), heavy, two-handed</option>
-          <option value="Net">Martial Ranged, special, thrown (range 5/15)</option>
         </datalist>
       </div>
 
@@ -71,6 +70,7 @@
         <input id="melee-damage-type-input" class="generate-attack-dialog__melee-damage-type-input generate-attack-dialog__damage-type-input section__text-input" is="text-input" type="text" name="melee-damage-type" pretty-name="Melee Damage Type" list="damage-types" />
         <input id="melee-damage-die-quantity-input" class="generate-attack-dialog__melee-damage-die-quantity-input section__number-input section__small-number-input" is="integer-input" type="number" name="melee-damage-die-quantity" pretty-name="Melee Damage Die Quantity" value="1" min="1" max="999" />
         <select id="melee-damage-die-size-input" class="generate-attack-dialog__melee-damage-die-size-input section__select section__select" name="melee-damage-die-size">
+          <option value="1">1</option>
           <option value="4">d4</option>
           <option value="6">d6</option>
           <option value="8" selected>d8</option>
@@ -84,6 +84,7 @@
         <input id="ranged-damage-type-input" class="generate-attack-dialog__ranged-damage-type-input generate-attack-dialog__damage-type-input section__text-input" is="text-input" type="text" name="ranged-damage-type" pretty-name="Ranged Damage Type" list="damage-types" disabled />
         <input id="ranged-damage-die-quantity-input" class="generate-attack-dialog__ranged-damage-die-quantity-input section__number-input section__small-number-input" is="integer-input" type="number" name="ranged-damage-die-quantity" pretty-name="Ranged Damage Die Quantity" value="1" min="1" max="999" disabled />
         <select id="ranged-damage-die-size-input" class="generate-attack-dialog__ranged-damage-die-size-input section__select section__select" name="ranged-damage-die-size" disabled >
+          <option value="1">1</option>
           <option value="4">d4</option>
           <option value="6">d6</option>
           <option value="8" selected>d8</option>
@@ -97,6 +98,7 @@
         <input id="versatile-damage-type-input" class="generate-attack-dialog__versatile-damage-type-input generate-attack-dialog__damage-type-input section__text-input" is="text-input" type="text" name="versatile-damage-type" pretty-name="Versatile Damage Type" list="damage-types" disabled />
         <input id="versatile-damage-die-quantity-input" class="generate-attack-dialog__versatile-damage-die-quantity-input section__number-input section__small-number-input" is="integer-input" type="number" name="versatile-damage-die-quantity" pretty-name="Versatile Damage Die Quantity" value="1" min="1" max="999" disabled />
         <select id="versatile-damage-die-size-input" class="generate-attack-dialog__versatile-damage-die-size-input section__select section__select" name="versatile-damage-die-size" disabled >
+          <option value="1">1</option>
           <option value="4">d4</option>
           <option value="6">d6</option>
           <option value="8" selected>d8</option>
@@ -110,6 +112,7 @@
         <input id="bonus-damage-type-input" class="generate-attack-dialog__bonus-damage-type-input generate-attack-dialog__damage-type-input section__text-input" is="text-input" type="text" name="bonus-damage-type" pretty-name="Bonus Damage Type" list="damage-types" disabled />
         <input id="bonus-damage-die-quantity-input" class="generate-attack-dialog__bonus-damage-die-quantity-input section__number-input section__small-number-input" is="integer-input" type="number" name="bonus-damage-die-quantity" pretty-name="Bonus Damage Die Quantity" value="1" min="1" max="999" disabled />
         <select id="bonus-damage-die-size-input" class="generate-attack-dialog__bonus-damage-die-size-input section__select section__select" name="bonus-damage-die-size" disabled >
+          <option value="1">1</option>
           <option value="4">d4</option>
           <option value="6">d6</option>
           <option value="8" selected>d8</option>

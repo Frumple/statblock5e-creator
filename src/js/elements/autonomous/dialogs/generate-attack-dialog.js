@@ -93,7 +93,7 @@ export default class GenerateAttackDialog extends CustomDialog {
     const weapon = Weapons[weaponName];
 
     if (weapon) {
-      this.reset();
+      this.reset(false);
       this.attackModel.populateFromJsObject(weapon);
       this.populateFieldsFromModel(this.attackModel);
     } else {
@@ -163,8 +163,8 @@ export default class GenerateAttackDialog extends CustomDialog {
     this.showModal();
   }
 
-  reset() {
-    this.attackModel.reset();
+  reset(isMeleeEnabled = true) {
+    this.attackModel.reset(isMeleeEnabled);
     this.populateFieldsFromModel(this.attackModel);
     this.update();
   }

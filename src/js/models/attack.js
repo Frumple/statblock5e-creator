@@ -9,16 +9,16 @@ export default class Attack {
     }
   }
 
-  reset() {
+  reset(isMeleeEnabled = true) {
     this.weaponName = '';
     this.isFinesse = false;
 
     this._reach = 5;
-    this._normalRange = 0;
-    this._longRange = 0;
+    this._normalRange = 20;
+    this._longRange = 60;
 
     this.damageCategories = {
-      melee: new DamageCategory( {isEnabled: true} ),
+      melee: new DamageCategory( {isEnabled: isMeleeEnabled} ),
       ranged: new DamageCategory(),
       versatile: new DamageCategory(),
       bonus: new DamageCategory()
@@ -248,6 +248,11 @@ class DamageCategory {
 
   generateDamageText(parserAbilityModifier) {
     const damageType = this.damageType ? ` ${this.damageType}` : '';
+
+    if (this.damageDieSize === 1) {
+      return `1${damageType} damage`;
+    }
+
     if (parserAbilityModifier) {
       return `dmg{${this.damageDieQuantity}d${this.damageDieSize} + ${parserAbilityModifier}}${damageType} damage`;
     }
