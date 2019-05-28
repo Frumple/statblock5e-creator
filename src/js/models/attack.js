@@ -250,7 +250,8 @@ class DamageCategory {
     const damageType = this.damageType ? ` ${this.damageType}` : '';
 
     if (this.damageDieSize === 1) {
-      return `1${damageType} damage`;
+      const damageAmount = this.damageDieQuantity * this.damageDieSize;
+      return `${damageAmount}${damageType} damage`;
     }
 
     if (parserAbilityModifier) {

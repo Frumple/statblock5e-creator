@@ -325,6 +325,38 @@ describe('when the generate attack dialog is opened', () => {
     /* eslint-enable indent, no-unexpected-multiline */
   });
 
+  describe('and the dialog is submitted with damage die sizes of 1, it should add a new action block for a weapon that deals a specific amount of damage', () => {
+    /* eslint-disable indent, no-unexpected-multiline */
+    it.each
+    `
+      description                   | damageDieQuantity | generatedText                                                                                              | renderedText
+      ${'weapon dealing 1 damage'}  | ${1}              | ${'*Melee Weapon Attack:* mod{strmod + prof} to hit, reach 5 ft., one target. *Hit:* 1 slashing damage.'}  | ${'<em>Melee Weapon Attack:</em> +4 to hit, reach 5 ft., one target. <em>Hit:</em> 1 slashing damage.'}
+      ${'weapon dealing 25 damage'} | ${25}             | ${'*Melee Weapon Attack:* mod{strmod + prof} to hit, reach 5 ft., one target. *Hit:* 25 slashing damage.'} | ${'<em>Melee Weapon Attack:</em> +4 to hit, reach 5 ft., one target. <em>Hit:</em> 25 slashing damage.'}
+    `
+    ('$description: {damageDieQuantity="$damageDieQuantity"} => {generatedText="$generatedText", renderedText="$renderedText"}',
+    ({damageDieQuantity, generatedText, renderedText}) => {
+      Abilities.abilities['strength'].score = 14;
+      ProficiencyBonus.proficiencyBonus = 2;
+
+      const attackModel = new Attack();
+      attackModel.weaponName = 'Machete';
+      attackModel.reach = 5;
+
+      const meleeCategory = attackModel.damageCategories['melee'];
+      meleeCategory.isEnabled = true;
+      meleeCategory.damageType = 'slashing';
+      meleeCategory.damageDieQuantity = damageDieQuantity;
+      meleeCategory.damageDieSize = 1;
+
+      setDialogControls(attackModel);
+
+      verifyDialogModel(attackModel);
+      verifyDialogControls(attackModel, generatedText, renderedText);
+      saveDialogAndVerifyActionBlocks(attackModel.weaponName, generatedText, renderedText);
+    });
+    /* eslint-enable indent, no-unexpected-multiline */
+  });
+
   describe('and a predefined weapon is entered, it should auto-fill the dialog fields and add a new action block for that weapon', () => {
     /* eslint-disable indent, no-unexpected-multiline */
     it.each
