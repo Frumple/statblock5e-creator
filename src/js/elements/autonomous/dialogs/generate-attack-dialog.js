@@ -1,6 +1,6 @@
 import CustomDialog from './custom-dialog.js';
 import Attack from '../../../models/attack.js';
-import Weapons from '../../../data/weapons.js';
+import PredefinedWeapons from '../../../data/predefined-weapons.js';
 
 export default class GenerateAttackDialog extends CustomDialog {
   static get elementName() { return 'generate-attack-dialog'; }
@@ -90,7 +90,7 @@ export default class GenerateAttackDialog extends CustomDialog {
 
   onInputWeaponName() {
     const weaponName = this.weaponNameInput.value;
-    const weapon = Weapons[weaponName];
+    const weapon = PredefinedWeapons[weaponName];
 
     if (weapon) {
       this.reset(false);

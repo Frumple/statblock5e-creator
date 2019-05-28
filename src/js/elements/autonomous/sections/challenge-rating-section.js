@@ -1,6 +1,6 @@
 import * as propertyLineSectionModule from './property-line-section.js';
 import ChallengeRating from '../../../models/challenge-rating.js';
-import ExperiencePointsByChallengeRating from '../../../helpers/experience-points-by-challenge-rating.js';
+import ExperiencePointsByChallengeRating from '../../../data/experience-points-by-challenge-rating.js';
 
 export default class ChallengeRatingSection extends propertyLineSectionModule.PropertyLineSection {
   static get elementName() { return 'challenge-rating-section'; }

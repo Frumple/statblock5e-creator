@@ -1,4 +1,4 @@
-let weapons = {
+export default {
   'Club': {
     'weaponName': 'Club',
     'reach': 5,
@@ -530,5 +530,3 @@ let weapons = {
     }
   }
 };
-
-export default weapons;
