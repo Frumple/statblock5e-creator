@@ -1,6 +1,8 @@
 import ActionsSection from './actions-section.js';
 import Actions from '../../../models/lists/block/actions.js';
 
+import GenerateAttackDialog from '../dialogs/generate-attack-dialog.js';
+
 import Creature from '../../../models/creature.js';
 import Abilities from '../../../models/abilities.js';
 import ProficiencyBonus from '../../../models/proficiency-bonus.js';
@@ -16,6 +18,7 @@ let actionsSection;
 beforeAll(async() => {
   await TestCustomElements.define();
   await ActionsSection.define();
+  await GenerateAttackDialog.define();
 
   sharedSpecs.setExpectedHeading(expectedHeading);
 });
