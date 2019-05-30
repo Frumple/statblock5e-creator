@@ -14,8 +14,13 @@
       <div class="generate-attack-dialog__top-container">
         <label class="generate-attack-dialog__weapon-name-label" for="weapon-name-input">Weapon Name:</label>
         <input id="weapon-name-input" class="generate-attack-dialog__weapon-name-input section__text-input" is="text-input" type="text" name="weapon-name" pretty-name="Weapon Name" list="predefined-weapons" required />
-        <label class="generate-attack-dialog__finesse-label" for="finesse-input">Finesse:</label>
         <input id="finesse-input" class="generate-attack-dialog__finesse-input" type="checkbox" />
+        <label class="generate-attack-dialog__finesse-label" for="finesse-input">Finesse</label>
+        <help-tooltip class="generate-attack-dialog__finesse-help-tooltip">
+          <p>If <strong>Finesse</strong> is checked, the highest of either the creature's Strength or Dexterity modifiers will be used for the weapon's attack and damage rolls. This is represented in the weapon's generated text as <code>{finmod}</code>.</p>
+          <br />
+          <cite>* For more details, see "Finesse" weapon properties on page 147 of the DnD 5e Player's Handbook.</cite>
+        </help-tooltip>
 
         <datalist id="predefined-weapons">
           <option value="Club">Simple Melee, 1d4 bludgeoning, light</option>
@@ -147,13 +152,13 @@
 
         <label class="generate-attack-dialog__normal-range-label" for="normal-range-input">Normal Range:</label>
         <div class="generate-attack-dialog__normal-range-container">
-          <input id="normal-range-input" class="generate-attack-dialog__normal-range-input section__number-input section__small-number-input" is="number-input" type="number" name="normal-range" pretty-name="Normal Range" value="0" min="0" max="999" step="5" disabled />
+          <input id="normal-range-input" class="generate-attack-dialog__normal-range-input section__number-input section__small-number-input" is="number-input" type="number" name="normal-range" pretty-name="Normal Range" value="20" min="0" max="999" step="5" disabled />
           <label class="generate-attack-dialog__unit-label">ft.</label>
         </div>
 
         <label class="generate-attack-dialog__long-range-label" for="long-range-input">Long Range:</label>
         <div class="generate-attack-dialog__long-range-container">
-          <input id="long-range-input" class="generate-attack-dialog__long-range-input section__number-input section__small-number-input" is="number-input" type="number" name="long-range" pretty-name="Long Range" value="0" min="0" max="999" step="5" disabled />
+          <input id="long-range-input" class="generate-attack-dialog__long-range-input section__number-input section__small-number-input" is="number-input" type="number" name="long-range" pretty-name="Long Range" value="60" min="0" max="999" step="5" disabled />
           <label class="generate-attack-dialog__unit-label">ft.</label>
         </div>
       </div>

@@ -5,7 +5,7 @@
 }
 
 .help-tooltip__icon {
-  color: #7A200D;
+  color: var(--help-tooltip-icon-color);
   cursor: help;
 }
 
@@ -51,4 +51,3 @@
 ::slotted(cite) {
   font-style: italic;
 }
-

@@ -20,6 +20,19 @@
   font-style: italic;
 }
 
+.generate-attack-dialog__finesse-label {
+  font-weight: bold;
+}
+
+.generate-attack-dialog__finesse-help-tooltip {
+  --help-tooltip-icon-color: black;
+  --help-tooltip-width: 45em;
+}
+
+.generate-attack-dialog__finesse-help-tooltip code {
+  background: white;
+}
+
 .generate-attack-dialog__damage-container {
   display: grid;
   grid-template-columns: auto auto auto auto auto;

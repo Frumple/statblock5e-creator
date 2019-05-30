@@ -37,6 +37,7 @@
 }
 
 .editable-block-list-item__help-tooltip {
+  --help-tooltip-icon-color: #7A200D;
   --help-tooltip-width: 50em;
 }
 

@@ -32,6 +32,7 @@
   grid-area: 6 / 1;
   justify-self: end;
   align-self: center;
+  --help-tooltip-icon-color: #7A200D;
   --help-tooltip-width: 58em;
 }
 
