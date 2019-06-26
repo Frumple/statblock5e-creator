@@ -59,6 +59,10 @@ import AdvancedStats from './elements/autonomous/containers/advanced-stats.js';
 async function init() {
   await HtmlExportDocumentFactory.init();
   await defineElements();
+  await onBodyLoaded(() => {
+    document.getElementById('stat-block-editor').classList.remove('stat-block-editor_hidden');
+    document.getElementById('loading-screen').classList.add('loading-screen_hidden');
+  });
 }
 
 async function defineElements() {
@@ -122,6 +126,17 @@ async function defineElements() {
 
   for (const elementClass of elementClasses) {
     await elementClass.define();
+  }
+}
+
+async function onBodyLoaded(callback) {
+  const intervalId = window.setInterval(checkBodyLoaded, 1000);
+
+  function checkBodyLoaded() {
+    if (document.getElementsByTagName('body')[0] !== undefined) {
+      window.clearInterval(intervalId);
+      callback.call(this);
+    }
   }
 }
 
