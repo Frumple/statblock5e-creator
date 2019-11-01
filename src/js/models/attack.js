@@ -120,7 +120,7 @@ export default class Attack {
   }
 
   generatedTextToHit(parserAbilityModifier) {
-    return `mod{${parserAbilityModifier} + prof} to hit`;
+    return `mod[${parserAbilityModifier} + prof] to hit`;
   }
 
   generatedTextReachOrRange(isMeleeEnabled, isRangedEnabled) {
@@ -255,9 +255,9 @@ class DamageCategory {
     }
 
     if (parserAbilityModifier) {
-      return `dmg{${this.damageDieQuantity}d${this.damageDieSize} + ${parserAbilityModifier}}${damageType} damage`;
+      return `dmg[${this.damageDieQuantity}d${this.damageDieSize} + ${parserAbilityModifier}]${damageType} damage`;
     }
-    return `dmg{${this.damageDieQuantity}d${this.damageDieSize}}${damageType} damage`;
+    return `dmg[${this.damageDieQuantity}d${this.damageDieSize}]${damageType} damage`;
   }
 
   hasSameValuesWith(otherDamageCategory) {

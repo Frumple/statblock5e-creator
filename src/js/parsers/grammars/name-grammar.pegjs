@@ -44,16 +44,16 @@ NameExpression
   / FullName
 
 BeginningName
-  = '{name}' { return capitalizeFirstLetter(options.creature.name); }
+  = '[name]' { return capitalizeFirstLetter(options.creature.name); }
 
 BeginningFullName
-  = '{fullname}' { return capitalizeFirstLetter(options.creature.fullName); }
+  = '[fullname]' { return capitalizeFirstLetter(options.creature.fullName); }
 
 Name
-  = '{name}' { return options.creature.name; }
+  = '[name]' { return options.creature.name; }
 
 FullName
-  = '{fullname}' { return options.creature.fullName; }
+  = '[fullname]' { return options.creature.fullName; }
 
 Text
   = $(NormalChar+)

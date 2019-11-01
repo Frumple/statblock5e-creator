@@ -15,12 +15,12 @@
 <form id="edit-section" class="section section_hidden" novalidate>
   <div class="heading-edit-section section__content">
     <input id="full-name-input" class="heading-edit-section__title-input heading-show-section__title-text section__text-input" is="text-input" type="text" name="title" pretty-name="Creature Name" value="Commoner" required />
-    <div class="heading-edit-section__meta-container">      
+    <div class="heading-edit-section__meta-container">
       <label id="short-name-label" class="heading-edit-section__short-name-label heading-edit-section__label" for="short-name-input">Short Name:</label>
       <help-tooltip class="heading-edit-section__short-name-help-tooltip">
         <p>The <strong>short name</strong> is typically one or two words used to refer to the creature in its special traits, actions, reactions, and legendary actions.</p>
         <br />
-        <p>In these sections, all instances of <code>{name}</code> will be replaced with the short name when displayed. If the short name is left blank, the creature's full name will be used instead.</p>
+        <p>In these sections, all instances of <code>[name]</code> will be replaced with the short name when displayed. If the short name is left blank, the creature's full name will be used instead.</p>
         <br />
         <h4>Examples of short names:</h4>
         <br />
@@ -56,22 +56,22 @@
             </tr>
           </table>
         </div>
-        
-      </help-tooltip>        
-      <input id="short-name-input" class="heading-edit-section__short-name-input section__text-input" is="text-input" type="text" name="short-name" pretty-name="Short Name" value="" />        
+
+      </help-tooltip>
+      <input id="short-name-input" class="heading-edit-section__short-name-input section__text-input" is="text-input" type="text" name="short-name" pretty-name="Short Name" value="" />
       <input id="proper-noun-input" class="heading-edit-section__proper-noun-input" type="checkbox" name="proper-noun" />
       <label id="proper-noun-label" class="heading-edit-section__proper-noun-label heading-edit-section__label" for="proper-noun-input">Proper Noun</label>
       <help-tooltip class="heading-edit-section__proper-noun-help-tooltip">
         <p>Check the <strong>proper noun</strong> box if this statblock describes a unique individual or creature.</p>
         <br />
-        <p>If this box is unchecked, the word "the" will precede all instances of <code>{name}</code> and <code>{fullname}</code> in its special traits, actions, reactions, and legendary actions when displayed.</p>
+        <p>If this box is unchecked, the word "the" will precede all instances of <code>[name]</code> and <code>[fullname]</code> in its special traits, actions, reactions, and legendary actions when displayed.</p>
         <br />
         <p>"The" will begin with a capital letter if it used at the beginning of a sentence. Any capitalization from the short name/full name will also be removed.</p>
         <br />
         <h4>For example, if the short name is "Mind Flayer":</h4>
         <ul>
-          <li><code>{name} has advantage...</code> becomes<br /><code>The mind flayer has advantage...</code></li>
-          <li><code>...within 30 feet of {name}.</code> becomes<br /><code>...within 30 feet of the mind flayer.</code></li>          
+          <li><code>[name] has advantage...</code> becomes<br /><code>The mind flayer has advantage...</code></li>
+          <li><code>...within 30 feet of [name].</code> becomes<br /><code>...within 30 feet of the mind flayer.</code></li>
         </ul>
         <br />
         <p>Otherwise if the box is checked, the word "the" will not appear and capitalization will be preserved.</p>
@@ -130,9 +130,9 @@
         <option value="neutral evil">neutral evil</option>
         <option value="chaotic evil">chaotic evil</option>
       </select>
-    </div>    
+    </div>
   </div>
   <div class="section__save-button-container">
     <button id="save-button" class="default-button section__save-button"><i class="material-icons">done</i></button>
-  </div>  
+  </div>
 </form>

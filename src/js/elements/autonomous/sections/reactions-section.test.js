@@ -49,7 +49,7 @@ describe('when the show section is clicked', () => {
     it('should add a single block', () => {
       const block = {
         name: 'Parry',
-        originalText: '{name} adds 2 to its AC against one melee attack that would hit it. To do so, {name} must see the attacker and be wielding a melee weapon.',
+        originalText: '[name] adds 2 to its AC against one melee attack that would hit it. To do so, [name] must see the attacker and be wielding a melee weapon.',
         homebreweryText: 'The knight adds 2 to its AC against one melee attack that would hit it. To do so, the knight must see the attacker and be wielding a melee weapon.',
         htmlText: 'The knight adds 2 to its AC against one melee attack that would hit it. To do so, the knight must see the attacker and be wielding a melee weapon.'
       };
@@ -62,7 +62,7 @@ describe('when the show section is clicked', () => {
     it('should add a single block with multiline text', () => {
       const block = {
         name: 'Multiline Reaction',
-        originalText: '**Line 1**. {name} is here.\n  **Line 2**. {name} is there.\n    **Line 3**. {name} is everywhere.',
+        originalText: '**Line 1**. [name] is here.\n  **Line 2**. [name] is there.\n    **Line 3**. [name] is everywhere.',
         homebreweryText: '**Line 1**. The dummy is here.  \n>   **Line 2**. The dummy is there.  \n>     **Line 3**. The dummy is everywhere.',
         htmlText: '<strong>Line 1</strong>. The dummy is here.\n  <strong>Line 2</strong>. The dummy is there.\n    <strong>Line 3</strong>. The dummy is everywhere.'
       };
@@ -75,7 +75,7 @@ describe('when the show section is clicked', () => {
     it('should add a single block with html escaped', () => {
       const block = {
         name: 'Escaped Reaction',
-        originalText: '<strong>Line 1</strong>. {name} is here.',
+        originalText: '<strong>Line 1</strong>. [name] is here.',
         homebreweryText: '&lt;strong&gt;Line 1&lt;/strong&gt;. The dummy is here.',
         htmlText: '&lt;strong&gt;Line 1&lt;/strong&gt;. The dummy is here.'
       };
@@ -135,7 +135,7 @@ describe('when the show section is clicked', () => {
     describe('should reparse the block text', () => {
       const block = {
         name: 'Spell Reflection',
-        originalText: 'If {name} makes a successful saving throw against a spell, or a spell attack misses it, {name} can choose another creature (including the spellcaster) it can see within 30 feet of it. The spell targets the chosen creature instead of {name}. If the spell forced a saving throw, the chosen creature makes its own save. If the spell was an attack, the attack roll is rerolled against the chosen creature.',
+        originalText: 'If [name] makes a successful saving throw against a spell, or a spell attack misses it, [name] can choose another creature (including the spellcaster) it can see within 30 feet of it. The spell targets the chosen creature instead of [name]. If the spell forced a saving throw, the chosen creature makes its own save. If the spell was an attack, the attack roll is rerolled against the chosen creature.',
         homebreweryText: null,
         htmlText: null
       };

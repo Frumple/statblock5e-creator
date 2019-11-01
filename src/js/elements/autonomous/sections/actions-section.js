@@ -28,7 +28,7 @@ export default class ActionsSection extends blockListSectionModule.BlockListSect
       this.addEventListener('generateAttack', this.onGenerateAttackEvent.bind(this));
 
       if (! isRunningInNode) {
-        this.addBlock('Club', '*Melee Weapon Attack:* mod{strmod + prof} to hit, reach 5 ft., one target. *Hit:* dmg{1d4 + strmod} bludgeoning damage.');
+        this.addBlock('Club', '*Melee Weapon Attack:* mod[strmod + prof] to hit, reach 5 ft., one target. *Hit:* dmg[1d4 + strmod] bludgeoning damage.');
         this.save();
         this.reparse();
       }

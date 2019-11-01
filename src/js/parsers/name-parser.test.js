@@ -27,8 +27,8 @@ it('should preserve newline characters', () => {
 
 describe('should parse valid name expressions', () => {
   const inputText =
-    '{name} begins on a new line. {name} begins on a new sentence, but {name} does not.\n' +
-    '{fullname} begins on a new line. {fullname} begins on a new sentence, but {fullname} does not.';
+    '[name] begins on a new line. [name] begins on a new sentence, but [name] does not.\n' +
+    '[fullname] begins on a new line. [fullname] begins on a new sentence, but [fullname] does not.';
 
   it('when only the full name is defined', () => {
     Creature.fullName = 'Hook Horror';
@@ -89,9 +89,9 @@ describe('should parse invalid name expressions unchanged', () => {
   it.each
   `
     description                       | inputText
-    ${'Unknown name expression'}      | ${'{blimey}'}
-    ${'Unclosed name expression'}     | ${'{name'}
-    ${'Unclosed fullname expression'} | ${'{fullname'}
+    ${'Unknown name expression'}      | ${'[blimey]'}
+    ${'Unclosed name expression'}     | ${'[name'}
+    ${'Unclosed fullname expression'} | ${'[fullname'}
   `
   ('$description: $inputText',
   ({inputText}) => {

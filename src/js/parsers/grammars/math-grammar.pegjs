@@ -68,7 +68,7 @@ Inline
   / Whitespace
 
 DamageExpression
-  = 'dmg' '{' SpaceChar* head:DiceOperand tail:(SpaceChar* Operator SpaceChar* Operand)* SpaceChar* '}' {
+  = 'dmg' '[' SpaceChar* head:DiceOperand tail:(SpaceChar* Operator SpaceChar* Operand)* SpaceChar* ']' {
     const modifier = tail.reduce((result, element) => {
       const operator = element[1];
       const operand = element[3];
@@ -92,7 +92,7 @@ MathExpression
   = value:MathExpressionCommon { return formatMathExpression(value); }
 
 MathExpressionCommon
-  = '{' SpaceChar* head:Operand tail:(SpaceChar* Operator SpaceChar* Operand)* SpaceChar* '}' {
+  = '[' SpaceChar* head:Operand tail:(SpaceChar* Operator SpaceChar* Operand)* SpaceChar* ']' {
     return tail.reduce((result, element) => {
       const operator = element[1];
       const operand = element[3];

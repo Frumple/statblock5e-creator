@@ -146,10 +146,10 @@ export default (function() {
         peg$c2 = function(inline, end) { return `${inline.join('')}${end ? end : ''}`; },
         peg$c3 = "dmg",
         peg$c4 = peg$literalExpectation("dmg", false),
-        peg$c5 = "{",
-        peg$c6 = peg$literalExpectation("{", false),
-        peg$c7 = "}",
-        peg$c8 = peg$literalExpectation("}", false),
+        peg$c5 = "[",
+        peg$c6 = peg$literalExpectation("[", false),
+        peg$c7 = "]",
+        peg$c8 = peg$literalExpectation("]", false),
         peg$c9 = function(head, tail) {
             const modifier = tail.reduce((result, element) => {
               const operator = element[1];
@@ -482,7 +482,7 @@ export default (function() {
         if (peg$silentFails === 0) { peg$fail(peg$c4); }
       }
       if (s1 !== peg$FAILED) {
-        if (input.charCodeAt(peg$currPos) === 123) {
+        if (input.charCodeAt(peg$currPos) === 91) {
           s2 = peg$c5;
           peg$currPos++;
         } else {
@@ -585,7 +585,7 @@ export default (function() {
                   s7 = peg$parseSpaceChar();
                 }
                 if (s6 !== peg$FAILED) {
-                  if (input.charCodeAt(peg$currPos) === 125) {
+                  if (input.charCodeAt(peg$currPos) === 93) {
                     s7 = peg$c7;
                     peg$currPos++;
                   } else {
@@ -675,7 +675,7 @@ export default (function() {
       var s0, s1, s2, s3, s4, s5, s6, s7, s8, s9;
 
       s0 = peg$currPos;
-      if (input.charCodeAt(peg$currPos) === 123) {
+      if (input.charCodeAt(peg$currPos) === 91) {
         s1 = peg$c5;
         peg$currPos++;
       } else {
@@ -778,7 +778,7 @@ export default (function() {
                 s6 = peg$parseSpaceChar();
               }
               if (s5 !== peg$FAILED) {
-                if (input.charCodeAt(peg$currPos) === 125) {
+                if (input.charCodeAt(peg$currPos) === 93) {
                   s6 = peg$c7;
                   peg$currPos++;
                 } else {

@@ -60,7 +60,7 @@ describe('when the show section is clicked', () => {
 
       const block = {
         name: 'Greatsword',
-        originalText: '*Melee Weapon Attack:* mod{strmod + prof} to hit, reach 5 ft., one target. *Hit:* dmg{2d6 + strmod} slashing damage.',
+        originalText: '*Melee Weapon Attack:* mod[strmod + prof] to hit, reach 5 ft., one target. *Hit:* dmg[2d6 + strmod] slashing damage.',
         homebreweryText: '*Melee Weapon Attack:* +5 to hit, reach 5 ft., one target. *Hit:* 10 (2d6 + 3) slashing damage.',
         htmlText: '<em>Melee Weapon Attack:</em> +5 to hit, reach 5 ft., one target. <em>Hit:</em> 10 (2d6 + 3) slashing damage.'
       };
@@ -70,7 +70,7 @@ describe('when the show section is clicked', () => {
     it('should add a single block with multiline text', () => {
       const block = {
         name: 'Multiline Action',
-        originalText: '**Line 1**. {name} is hot.\n  **Line 2**. {name} is cold.\n    **Line 3**. {name} is warm.',
+        originalText: '**Line 1**. [name] is hot.\n  **Line 2**. [name] is cold.\n    **Line 3**. [name] is warm.',
         homebreweryText: '**Line 1**. The dummy is hot.  \n>   **Line 2**. The dummy is cold.  \n>     **Line 3**. The dummy is warm.',
         htmlText: '<strong>Line 1</strong>. The dummy is hot.\n  <strong>Line 2</strong>. The dummy is cold.\n    <strong>Line 3</strong>. The dummy is warm.'
       };
@@ -86,7 +86,7 @@ describe('when the show section is clicked', () => {
 
       const block = {
         name: 'Greatsword',
-        originalText: '<em>Melee Weapon Attack:</em> mod{strmod + prof} to hit, reach 5 ft., one target. <em>Hit:</em> dmg{2d6 + strmod} slashing damage.',
+        originalText: '<em>Melee Weapon Attack:</em> mod[strmod + prof] to hit, reach 5 ft., one target. <em>Hit:</em> dmg[2d6 + strmod] slashing damage.',
         homebreweryText: '&lt;em&gt;Melee Weapon Attack:&lt;/em&gt; +5 to hit, reach 5 ft., one target. &lt;em&gt;Hit:&lt;/em&gt; 10 (2d6 + 3) slashing damage.',
         htmlText: '&lt;em&gt;Melee Weapon Attack:&lt;/em&gt; +5 to hit, reach 5 ft., one target. &lt;em&gt;Hit:&lt;/em&gt; 10 (2d6 + 3) slashing damage.'
       };
@@ -100,19 +100,19 @@ describe('when the show section is clicked', () => {
       const blocks = [
         {
           name: 'Multiattack',
-          originalText: '{name} makes two attacks with its scimitar. The second attack has disadvantage.',
+          originalText: '[name] makes two attacks with its scimitar. The second attack has disadvantage.',
           homebreweryText: 'The goblin makes two attacks with its scimitar. The second attack has disadvantage.',
           htmlText: 'The goblin makes two attacks with its scimitar. The second attack has disadvantage.'
         },
         {
           name: 'Scimitar',
-          originalText: '*Melee Weapon Attack:* mod{dexmod + prof} to hit, reach 5 ft., one target. *Hit:* dmg{1d6 + dexmod} slashing damage.',
+          originalText: '*Melee Weapon Attack:* mod[dexmod + prof] to hit, reach 5 ft., one target. *Hit:* dmg[1d6 + dexmod] slashing damage.',
           homebreweryText: '*Melee Weapon Attack:* +4 to hit, reach 5 ft., one target. *Hit:* 5 (1d6 + 2) slashing damage.',
           htmlText: '<em>Melee Weapon Attack:</em> +4 to hit, reach 5 ft., one target. <em>Hit:</em> 5 (1d6 + 2) slashing damage.'
         },
         {
           name: 'Javelin',
-          originalText: '*Melee or Ranged Weapon Attack:* mod{dexmod} to hit, reach 5 ft. or range 30/120 ft., one target. *Hit:* dmg{1d6} piercing damage.',
+          originalText: '*Melee or Ranged Weapon Attack:* mod[dexmod] to hit, reach 5 ft. or range 30/120 ft., one target. *Hit:* dmg[1d6] piercing damage.',
           homebreweryText: '*Melee or Ranged Weapon Attack:* +2 to hit, reach 5 ft. or range 30/120 ft., one target. *Hit:* 3 (1d6) piercing damage.',
           htmlText: '<em>Melee or Ranged Weapon Attack:</em> +2 to hit, reach 5 ft. or range 30/120 ft., one target. <em>Hit:</em> 3 (1d6) piercing damage.'
         }
@@ -137,19 +137,19 @@ describe('when the show section is clicked', () => {
       const blocks = [
         {
           name: 'Multiattack',
-          originalText: '{name} makes two melee attacks.',
+          originalText: '[name] makes two melee attacks.',
           homebreweryText: 'The knight makes two melee attacks.',
           htmlText: 'The knight makes two melee attacks.'
         },
         {
           name: 'Greatsword',
-          originalText: '<em>Melee Weapon Attack:</em> mod{strmod + prof} to hit, reach 5 ft., one target. <em>Hit:</em> dmg{2d6 + strmod} slashing damage.',
+          originalText: '<em>Melee Weapon Attack:</em> mod[strmod + prof] to hit, reach 5 ft., one target. <em>Hit:</em> dmg[2d6 + strmod] slashing damage.',
           homebreweryText: '&lt;em&gt;Melee Weapon Attack:&lt;/em&gt; +5 to hit, reach 5 ft., one target. &lt;em&gt;Hit:&lt;/em&gt; 10 (2d6 + 3) slashing damage.',
           htmlText: '&lt;em&gt;Melee Weapon Attack:&lt;/em&gt; +5 to hit, reach 5 ft., one target. &lt;em&gt;Hit:&lt;/em&gt; 10 (2d6 + 3) slashing damage.'
         },
         {
           name: 'Heavy Crossbow',
-          originalText: '*Ranged Weapon Attack:* mod{dexmod + prof} to hit, range 100/400 ft., one target. *Hit:* dmg{1d10 + dexmod} piercing damage.',
+          originalText: '*Ranged Weapon Attack:* mod[dexmod + prof] to hit, range 100/400 ft., one target. *Hit:* dmg[1d10 + dexmod] piercing damage.',
           homebreweryText: '*Ranged Weapon Attack:* +2 to hit, range 100/400 ft., one target. *Hit:* 5 (1d10) piercing damage.',
           htmlText: '<em>Ranged Weapon Attack:</em> +2 to hit, range 100/400 ft., one target. <em>Hit:</em> 5 (1d10) piercing damage.'
         }
@@ -163,7 +163,7 @@ describe('when the show section is clicked', () => {
     describe('should reparse the block text', () => {
       const block = {
         name: 'Teleport (Recharge 4-6)',
-        originalText: '{name} magically teleports, along with any equipment it is wearing or carrying, up to 40 feet to an unoccupied space it can see. Before or after teleporting, {name} can make one bite attack.',
+        originalText: '[name] magically teleports, along with any equipment it is wearing or carrying, up to 40 feet to an unoccupied space it can see. Before or after teleporting, [name] can make one bite attack.',
         homebreweryText: null,
         htmlText: null
       };
