@@ -44,7 +44,7 @@
 
 .heading-edit-section__short-name-help-tooltip {
   --help-tooltip-icon-color: #7A200D;
-  --help-tooltip-width: 30em;
+  --help-tooltip-width: 35em;
   margin-left: 5px;
 }
 
@@ -88,7 +88,7 @@
 
 .heading-edit-section__proper-noun-help-tooltip {
   --help-tooltip-icon-color: #7A200D;
-  --help-tooltip-width: 30em;
+  --help-tooltip-width: 35em;
   margin-left: 5px;
 }
 

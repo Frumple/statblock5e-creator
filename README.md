@@ -1,222 +1,179 @@
-A Web Component statblock for D&D 5E
-====================================
+# Interactive Creature Statblock Creator for D&D 5th Edition
 
-Statblock5e provides an easy way to display a creature statblock that looks
-almost exactly like the statblocks from the 5th edition D&D Monster Manual.
+### Live Demo: [https://frumple.github.io/statblock5e-creator](https://frumple.github.io/statblock5e-creator)
 
-<div align="center">
-  <img src="https://raw.githubusercontent.com/Valloric/statblock5e/gh-pages/images/statblock.png" />
-</div>
+A visual web interface for creating creature statblocks that are similar in appearance to the official blocks from the Dungeons and Dragons 5th Edition Monster Manual.
 
-This is implemented as a set of custom elements following the [Web
-Components][web-components] specs: [ES Modules][es-module], [Custom
-Elements][custom-elements], and the [Shadow DOM][shadow-dom].
+## Features
 
-While statblock5e has been tested the most in Chrome, it may also work in any browser that [properly implements the Web Components v1 specs][web-components]. **Make sure you are using _at least_ Chrome 61 or Firefox 63.**
+- Supports **one-column** or **two-column** formats. Two-column statblock heights can also be adjusted manually.
+- Automatically calculates hit points based on hit die and constitution, or allows you to enter your own custom hit points.
+- Automatically calculates saving throws and skills based on ability modifiers and proficiency bonus, or allows you to enter your own custom modifiers.
+- In the descriptions for Special Traits, Actions, Reactions, and Legendary Actions:
+  - **[Markdown Emphasis](#markdown-emphasis)** can be used to make text **bold** and/or *italic*.
+  - **[Name Expressions](#name-expressions)** can be used to inject the creature's full or short name into the description where needed.
+  - **[Math Expressions](#math-expressions)** can be used to automatically calculate attack roll modifiers, and average damage from damage rolls.
+- Weapon attack actions can be easily created using the **Generate Attack** dialog.
+- Statblocks can be printed, exported to an HTML file, or exported to a Markdown format for use in [Homebrewery](homebrewery).
 
-<div align="center">
-  <p><a href="http://valloric.github.io/statblock5e/demo.html">
-     <b>LIVE DEMO</b></a>
-  </p>
-</div>
+## Markdown Emphasis
 
-**There are _no_ dependencies** (JavaScript or otherwise), **this is entirely
-self-contained**.
+*Available only in descriptions for Special Traits, Actions, Reactions, and Legendary Actions, and in custom text for Armor Class, Speed, and Senses.*
 
-There's very little JavaScript actually; just a bit of boilerplate that
-defines the custom elements and some minor logic for computing the ability modifiers
-for the ability table. Other than that, it's pure HTML, CSS & SVG.
+You can surround text with asterisks and/or underscores to make it **bold** and/or *italic*:
 
-Here's the markup that produced the above picture. **No user-level CSS or
-JavaScript is necessary.**
+| Formatting | Example | Result |
+| ---------- | ------- | ------ |
+| single asterisks         | `*Melee Weapon Attack:* +2 to hit`                       | *Melee Weapon Attack:* +2 to hit                       |
+| single underscores       | `Cantrips (at will): _light, sacred flame, thaumaturgy_` | Cantrips (at will): _light, sacred flame, thaumaturgy_ |
+| double asterisks         | `\**Type 1:\** Human body with snake head`               | **Type 1:** Human body with snake head                 |
+| double underscores       | `\__Type 2:\__ Human head and body with snakes for arms` | __Type 2:__ Human head and body with snakes for arms   |
+| asterisks in underscores | `Here are some __*asterisks* in underscores__`           | Here are some __*asterisks* in underscores__           |
+| underscores in asterisks | `Here are some *__underscores__ in asterisks*`           | Here are some *__underscores__ in asterisks*           |
 
-```html
-<stat-block>
-  <creature-heading>
-    <h1>Animated Armor</h1>
-    <h2>Medium construct, unaligned</h2>
-  </creature-heading>
+## Name Expressions
 
-  <top-stats>
-    <property-line>
-      <h4>Armor Class</h4>
-      <p>18 (natural armor)</p>
-    </property-line>
-    <property-line>
-      <h4>Hit Points</h4>
-      <p>33 (6d8 + 6)</p>
-    </property-line>
-    <property-line>
-      <h4>Speed</h4>
-      <p>25ft</p>
-    </property-line>
+*Available only in descriptions for Special Traits, Actions, Reactions, and Legendary Actions.*
 
-    <abilities-block data-str="14"
-                     data-dex="11"
-                     data-con="13"
-                     data-int="1"
-                     data-wis="3"
-                     data-cha="1"></abilities-block>
+In the first section where you specify the creature's full name, you can also optionally specify a **short name**, and indicate whether the creature's name is a **proper noun**.
 
-    <property-line>
-      <h4>Damage Immunities</h4>
-      <p>poison, psychic</p>
-    </property-line>
-    <property-line>
-      <h4>Condition Immunities</h4>
-      <p>blinded, charmed, deafened, exhaustion, frightened, paralyzed,
-        petrified, poisoned</p>
-    </property-line>
-    <property-line>
-      <h4>Senses</h4>
-      <p>blindsight 60 ft. (blind beyond this radius), passive Perception 6</p>
-    </property-line>
-    <property-line>
-      <h4>Languages</h4>
-      <p>—</p>
-    </property-line>
-    <property-line>
-      <h4>Challenge</h4>
-      <p>1 (200 XP)</p>
-    </property-line>
-  </top-stats>
+**TODO: Image of first section here**
 
-  <property-block>
-    <h4>Antimagic Susceptibility.</h4>
-    <p>The armor is incapacitated while in the area of an <i>antimagic
-      field</i>.  If targeted by <i>dispel magic</i>, the armor must succeed
-      on a Constitution saving throw against the caster’s spell save DC or
-      fall unconscious for 1 minute.</p>
-  </property-block>
-  <property-block>
-    <h4>False Appearance.</h4>
-    <p>While the armor remains motionless, it is indistinguishable from a
-      normal suit of armor.</p>
-  </property-block>
+### Short Name
 
-  <h3>Actions</h3>
+The **short name** is typically one or two words used to refer to the creature in the descriptions of its special traits, actions, reactions, and legendary actions. In these descriptions, all instances of **`[name]`** are substituted with the short name when displayed. If the short name is blank, the creature's full name will be used instead. 
 
-  <property-block>
-    <h4>Multiattack.</h4>
-    <p>The armor makes two melee attacks.</p>
-  </property-block>
+Alternatively, you can use **`[fullname]`**, which is always replaced with the creature's full name. However, `[name]` should suffice for almost all use cases.
 
-  <property-block>
-    <h4>Slam.</h4>
-    <p><i>Melee Weapon Attack:</i> +4 to hit, reach 5 ft., one target.
-      <i>Hit:</i> 5 (1d6 + 2) bludgeoning damage.</p>
-  </property-block>
-</stat-block>
-```
+### Proper Noun
 
-The example text is copyright Wizards of the Coast; they make it [available for
-free on their website][wotc-basic] through the D&D 5E Basic Rules (it's in the
-[DM supplement][dm-basic]).
+Check the **proper noun** box if the statblock describes a unique individual or creature.
 
-Visual differences from the MM statblocks
------------------------------------------
+If the proper noun box is **NOT** checked:
+- The word "the" will precede all instances of `[name]` and `[fullname]`.
+- The word "The" will begin with a capital letter if `[name]` or `[fullname]` is used at the beginning of a sentence.
+- Any capitalization in the short name or full name will be removed.
 
-Unfortunately this statblock isn't _quite_ pixel-perfect with regards to the
-statblocks in the MM. The differences are:
+For example, if the creature's short name is "**Mind Flayer**":
 
-- **Different typefaces used.** I'm told that the body typeface used in the MM
-  is _FF Scala Sans_ and the one used for the monster name headings is
-  _Mrs Eaves Petite Caps_. They're not available for free from Google Fonts, so
-  substitutes are used instead.
-- **No textured background.** Obviously, I don't have access to the original
-  textures WotC used. Even if I did, I'm not sure I'd use them since that would
-  mean serving images which I wanted to avoid (scaling/resolution/deployment
-  issues etc).
-- **No textured block border.** Same as above.
+| Original Text | Displayed Text |
+| ------------- | -------------- |
+| `[name] has advantage...` | The mind flayer has advantage... |
+| `...within 30 feet of [name].` | ...within 30 feet of the mind flayer. |
 
-There are probably other differences as well but I haven't noticed them. I tried
-to stick as close to the original as reasonably possible; for instance, I spent
-_waaay_ too much time getting the drop-shadow to be the "correct" shade of
-brown and the tapered horizontal rule to render _just_ right. _Why?_ Because I
-had nothing better to do and it was fun! :)
+Otherwise, if the proper noun box **IS** checked:
+- The word "the" will not appear.
+- Capitalization of the short name and full name will be preserved.
+
+### Usage Examples for Name Expressions
+
+| Full Name | Short Name | Proper Noun? | Original Text and Displayed Text |
+| --------- | ---------- | ------------ | -------------------------------- |
+| Ancient Red Dragon | dragon | No | `[name] can take 3 legendary actions...`<br /><br />The dragon can take 3 legendary actions... |
+| Gelatinous Cube | cube | No | `...a creature that does so is subjected to [name]'s Engulf...`<br /><br />...a creature that does so is subjected to the cube's Engulf... |
+| Orc War Chief | orc | No | `As a bonus action, [name] can move up to its speed...`<br /><br />As a bonus action, the orc can move up to its speed... |
+| Rust Monster | rust monster | No | `Nonmagical ammunition made of metal that hits [name] is destroyed after dealing damage.`<br /><br />Nonmagical ammunition made of metal that hits the rust monster is destroyed after dealing damage. |
+| Casper the Friendly Ghost | Casper | Yes | `...the target is immune to [name]'s Horrifying Visage...`<br /><br />...the target is immune to Casper's Horrifying Visage... |
+| Drizzt Do'urden | Drizzt | Yes | `...within 30 feet of [name].`<br /><br />...within 30 feet of Drizzt. |
+| Lady Kima of Vord | Lady Kima | Yes | `[name] can invoke her Divine Smite...`<br /><br />Lady Kima can invoke her Divine Smite... |
+| Tiamat | *(blank)* | Yes | `[name] can innately cast *divine ward*...`<br /><br />Tiamat can innately cast *divine ward*... |
+
+Please note the use of name expressions is completely optional; you can certainly enter the creature's actual short/full names into the descriptions with no immediate issues. However, if you ever want to change the short/full name at a later time, or if you ever want to copy traits or actions into another statblock, then using name expressions will make these operations a lot easier than having to manually change every instance of the short/full name in the descriptions.
+
+## Math Expressions
+
+*Available only in descriptions for Special Traits, Actions, Reactions, and Legendary Actions.*
+
+### Basic Math Expressions
+
+Basic math expressions consist of a series of **operands** and **operators** within square brackets, allowing for the addition and subtraction of such operands.
+
+Supported operands include:
+- **variables** (e.g. ability modifiers represented by `strmod`, `dexmod`, etc., and proficiency bonus represented by `prof`) 
+- **integers** (e.g. 12, -3, or 0)
+
+Supported operators include:
+- **`+` (plus sign)** for addition
+- **`-` (minus sign)** for subtraction
+
+For example. if the creature's strength modifier is **+4** and its proficiency bonus is **+2**, **`[strmod + prof - 3]`** will be calculated as **4 + 2 - 3**, resulting in the final answer of **3**.
+
+Note that whitespace between the operands and operators is optional, meaning that **`[strmod+prof-3]`** is also a valid and equivalent math expression.
+
+### Variables
+
+Here are a list of variables that are currently supported in math expressions:
+
+| Variable | Description | Note |
+| -------- | ----------- | ---- |
+| **`strmod`** | Strength Modifier     |
+| **`dexmod`** | Dexterity Modifier    |
+| **`conmod`** | Constitution Modifier |
+| **`intmod`** | Intelligence Modifier |
+| **`wismod`** | Wisdom Modifier       |
+| **`chamod`** | Charisma Modifier     |
+| **`finmod`** | Finesse Modifier      | For use in finesse weapons. Equal to strength or dexterity modifier, whichever is highest. |
+| **`prof`**   | Proficiency Bonus     |
+
+### Modifier Expressions: mod[...]
+
+One limitation of basic math expressions is that resulting positive numbers will appear without a positive sign (e.g. **5** instead of **+5**). The positive sign is needed to accurately show attack roll modifiers, so to make it appear, simply add the word **`mod`** before the square brackets: **`mod[...]`**
+
+For example, assuming again that the creature's strength modifier is **+4** and its proficiency bonus is **+2**, **`*Melee Weapon Attack:* mod[strmod + prof - 3] to hit`** will appear as **_Melee Weapon Attack:_ +3 to hit**.
+
+### Damage Expressions: dmg[...]
+
+For damage rolls, you can use damage expressions to automatically calculate the average damage. All damage expressions begin with the word **`dmg`** before the square brackets, and the **first operand within the square brackets must be a dice operand (d8, 2d6, etc.).** Subsequent operands can be variables or integers that are added or subtracted from the dice result.
+
+For example, if the creature's dexterity modifier is **+3**, then **`dmg[1d8 + dexmod + 2] slashing damage`** results in **9 (1d8 + 5) slashing damage**. This is because since the average damage of 1d8 is 4.5 (rounded down to 4), then **4 + 3 + 2** equals **9** for the total average damage.
+
+## Development Setup
+
+First, install all dependencies:
+
+    npm install
+
+### Tests
+
+This application has an extensive suite of automated [Jest](jest) test cases that verify the behaviour of each section in the statblock.
+
+Run all the tests with:
+
+	npm test
 
 
-FAQ
----
+## Future Improvements
 
-### Is there a single-file version?
+- Generate Spellcasting (currently disabled under Special Traits)
+- Export as Image
+- Import/Export as JSON
+- HTML5 Offline Storage
 
-The [`demo.html`][demo] file in the repository HTML-imports the other HTML
-source files. There's also [`demo-inlined.html`][demo-inline] which renders
-exactly the same but has all the HTML-imports inlined directly into the
-document.
+## Dependencies
 
-The Python script that produces the inlined version [is also
-available][inline-script].
+- [PEG.js](pegjs) - Parsing for Markdown emphasis, creature names, ability score modifiers, and mathematical expressions
+- [DOMPurify](dompurify) - Sanitize inputted HTML tags
+- [JSBeautify](jsbeautify) - Beautify HTML Export
+- [Clipboard.js](clipboardjs) - Copy to clipboard functionality
 
-### How do I make two-column layouts?
+## Credits and Background
 
-See the [`demo-two-column.html`][demo2c] file ([here's a rendered
-image][2c-img]). The key thing to notice is the use of the `data-two-column`
-attribute on the `<stat-block>` element. You can also use the
-`data-content-height` attribute to tweak the layout. See [the
-comments][2c-comment] in the demo file for details.
+Statblock5e-creator is a fork of Valloric's awesome [statblock5e](statblock5e) template. It is also heavily inspired by [CritterDB](critterdb), another great tool for creating statblocks.
 
-### Why aren't you using polyfills?
+I wrote this project in pure Javascript as a means of learning basic web technologies. While I could have gone with a typical framework like Angular or React, I instead wanted to build things from scratch and learn how they work behind the scenes. However, perhaps in a future update, this project could be refactored using one of these frameworks for better maintainability.
 
-While polyfills for Web Components [do exist][platform], they're not perfect and
-require a preprocessing stage that inlines all HTML imports and rewrites the new
-CSS selectors like `:host`, `::content`, `/deep/` etc. There's no easy way to
-tie all this together and frankly, I don't care enough since I'll personally
-only use this for locally hosted pages rendered in Chrome.
+## License
 
-If someone wants to do the required work to implement the whole preprocessing
-pipeline, pull requests are welcome.
+Thie project is licensed under the [Apache License, Version 2.0][apache2].
 
-Version History
----------------
+[jest]: https://jestjs.io
+[pegjs]: https://pegjs.org
+[dompurify]: https://github.com/cure53/DOMPurify
+[jsbeautify]: https://github.com/beautify-web/js-beautify
+[clipboardjs]: https://clipboardjs.com
 
-### 0.0.5
-- Updated to the WebComponents v1 spec, since [several aspects of WebComponents v0 are being removed in Chrome 73][chrome-70-deprecations].
-  - Use ES Modules instead of HTML Imports.
-  - Use Custom Elements v1 instead of `registerElement()`.
-  - Use `createShadowRoot()` instead of `attachShadow()`.
-  - Use `<slot>` instead of `<content>`.
-- Define `data-content-height` as a CSS custom property instead of as an HTML attribute, so we don't have to use a javascript hack to set the height of the stat-block.
-- Rewrite `inline-imports.py` to parse the ES module and HTML template files.
+[statblock5e]: https://github.com/valloric/statblock5e
+[critterdb]: https://critterdb.com
+[homebrewery]: https://homebrewery.naturalcrit.com
 
-### 0.0.4
-- Fixed issue with text floating outside the statblock on Chrome 50+.
-
-### 0.0.3
-- Simpler way of supporting two-column layout.
-
-### 0.0.2
-- `<property-line>` can now be used for legendary actions since it doesn't
-  hardcode red text.
-- Support for two-column layout! See the new item in the FAQ.
-- Now supporting multiple `<p>` elements inside `<property-block>`. All `<p>`'s
-  after the first will have an indent like in the MM.
-- Increasing h3 size to be closer to MM.
-- Increasing line height of body font to be closer to MM.
-- Using a new typeface for monster name heading. Should be closer to MM.
-- Slightly increased body font size to be closer to MM font metrics.
-
-### 0.0.1
-- Initial release.
-
-License
--------
-
-This software is licensed under the [Apache License, Version 2.0][apache2].
-
-[web-components]: http://webcomponents.org/
-[es-module]: https://html.spec.whatwg.org/multipage/webappapis.html#integration-with-the-javascript-module-system
-[custom-elements]: https://html.spec.whatwg.org/multipage/custom-elements.html#custom-elements
-[shadow-dom]: http://w3c.github.io/webcomponents/spec/shadow/
-[wotc-basic]: http://dnd.wizards.com/articles/features/basicrules?x=dnd/basicrules
-[dm-basic]: http://media.wizards.com/2014/downloads/dnd/DMDnDBasicRules_v0.1.pdf
 [apache2]: http://www.apache.org/licenses/LICENSE-2.0.html
-[platform]: https://www.polymer-project.org/docs/start/platform.html
-[demo]: http://valloric.github.io/statblock5e/demo.html
-[demo2c]: http://valloric.github.io/statblock5e/demo-two-column.html
-[demo-inline]: http://valloric.github.io/statblock5e/demo-inlined.html
-[2c-img]: https://raw.githubusercontent.com/Valloric/statblock5e/gh-pages/images/statblock-2c.png
-[inline-script]: https://github.com/Valloric/statblock5e/blob/master/tools/inline-imports.py
-[2c-comment]: https://github.com/Valloric/statblock5e/blob/9c71e07d7a69aeb443ae9684dd3b73ef15a63f51/demo-two-column.html#L28
-[chrome-70-deprecations]: https://developers.google.com/web/updates/2018/09/chrome-70-deps-rems
