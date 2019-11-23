@@ -4,6 +4,7 @@ body {
 
 .stat-block-editor {
   display: block;
+  user-select: none;
 }
 
 .stat-block-editor_hidden {
