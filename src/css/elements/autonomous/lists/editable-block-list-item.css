@@ -54,7 +54,21 @@
   resize: none;
 }
 
-.editable-block-list-item__text-preview {
-  grid-area: 3 / 2 / 4 / 4;
+.editable-block-list-item__preview {
+  grid-area: 3 / 1 / 4 / 4;
   margin: 0;
+}
+
+.editable-block-list-item__name-preview {
+  margin: 0;
+  display: inline;
+  font-weight: bold;
+  font-style: italic;
+}
+
+.editable-block-list-item__text-preview {
+  display: inline;
+  text-indent: 0;
+  margin: 0;
+  white-space: pre-wrap;
 }

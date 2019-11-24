@@ -2,6 +2,8 @@ import DragAndDropListItem from './drag-and-drop-list-item.js';
 import CustomBuiltinElementMixins from '../../../helpers/custom-builtin-element-mixins.js';
 import BlockModel from '../../../models/lists/block/block-model.js';
 
+import { trimTrailingPeriods } from '../../../helpers/string-formatter.js';
+
 export default class EditableBlockListItem extends DragAndDropListItem {
   static get elementName() { return 'editable-block-list-item'; }
   static get templatePaths() {
@@ -17,6 +19,7 @@ export default class EditableBlockListItem extends DragAndDropListItem {
 
     this.nameInput = this.shadowRoot.getElementById('editable-block-list-item-name');
     this.textArea = this.shadowRoot.getElementById('editable-block-list-item-textarea');
+    this.namePreview = this.shadowRoot.getElementById('editable-block-list-item-name-preview');
     this.textPreview = this.shadowRoot.getElementById('editable-block-list-item-text-preview');
     this.removeButton = this.shadowRoot.getElementById('editable-block-list-item-remove-button');
 
@@ -30,14 +33,20 @@ export default class EditableBlockListItem extends DragAndDropListItem {
     if (this.isConnected && ! this.isInitialized) {
       super.connectedCallback();
 
-      this.textArea.addEventListener('input', this.onInputTextArea.bind(this));
+      this.nameInput.addEventListener('input', this.onInputName.bind(this));
+      this.textArea.addEventListener('input', this.onInputText.bind(this));
       this.removeButton.addEventListener('click', this.onClickRemoveButton.bind(this));
 
       this.isInitialized = true;
     }
   }
 
-  onInputTextArea() {
+  onInputName() {
+    this.nameInput.value = trimTrailingPeriods(this.nameInput.value);
+    this.namePreview.textContent = this.nameInput.value;
+  }
+
+  onInputText() {
     this.textArea.parse();
     this.textPreview.innerHTMLSanitized = this.textArea.htmlText;
   }
@@ -83,6 +92,10 @@ export default class EditableBlockListItem extends DragAndDropListItem {
 
   get htmlText() {
     return this.textArea.htmlText;
+  }
+
+  get previewName() {
+    return this.namePreview.textContent;
   }
 
   get previewText() {

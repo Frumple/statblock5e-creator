@@ -233,6 +233,7 @@ function verifyBlocks(section, expectedBlocks) {
 }
 
 function verifyEditableBlock(editableBlock, expectedBlock) {
+  expect(editableBlock.previewName).toBe(expectedBlock.name);
   expect(editableBlock.previewText).toBe(expectedBlock.htmlText ? expectedBlock.htmlText : expectedBlock.originalText);
 }
 

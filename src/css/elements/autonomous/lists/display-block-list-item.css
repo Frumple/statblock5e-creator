@@ -16,13 +16,9 @@
   font-style: normal;
 }
 
-.display-block-list-item__text:first-of-type {
+.display-block-list-item__text {
   display: inline;
   text-indent: 0;
-  white-space: pre-wrap;
-}
-
-.display-block-list-item__text {
-  text-indent: 1em;
   margin: 0;
+  white-space: pre-wrap;
 }

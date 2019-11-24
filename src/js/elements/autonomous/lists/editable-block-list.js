@@ -1,6 +1,5 @@
 import DragAndDropList from './drag-and-drop-list.js';
 import { focusAndSelectElement } from '../../../helpers/element-helpers.js';
-import { trimTrailingPeriods } from '../../../helpers/string-formatter.js';
 
 import isRunningInNode from '../../../helpers/is-running-in-node.js';
 import EditableBlockListItem from './editable-block-list-item.js';
@@ -40,12 +39,6 @@ export default class EditableBlockList extends DragAndDropList {
     focusAndSelectElement(block.nameInput);
 
     return block;
-  }
-
-  trimTrailingPeriodsInNames() {
-    for (const block of this.blocks) {
-      block.name = trimTrailingPeriods(block.name);
-    }
   }
 
   validate(errorMessages) {

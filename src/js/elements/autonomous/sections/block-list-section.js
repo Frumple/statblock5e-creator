@@ -75,7 +75,6 @@ export class BlockListSection extends sectionModule.Section {
   }
 
   checkForErrors() {
-    this.editElements.editableList.trimTrailingPeriodsInNames();
     this.editElements.editableList.validate(this.errorMessages);
   }
 
@@ -104,6 +103,7 @@ export class BlockListSection extends sectionModule.Section {
 
     for (const [index, blockModel] of this.listModel.blocks.entries()) {
       const editableBlock = this.editElements.editableList.blocks[index];
+      editableBlock.namePreview.textContent = blockModel.name;
       editableBlock.textPreview.innerHTMLSanitized = blockModel.htmlText;
 
       if (this.mode === 'show') {
