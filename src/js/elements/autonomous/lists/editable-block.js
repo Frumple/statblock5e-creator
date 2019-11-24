@@ -4,24 +4,24 @@ import BlockModel from '../../../models/lists/block/block-model.js';
 
 import { trimTrailingPeriods } from '../../../helpers/string-formatter.js';
 
-export default class EditableBlockListItem extends DragAndDropListItem {
-  static get elementName() { return 'editable-block-list-item'; }
+export default class EditableBlock extends DragAndDropListItem {
+  static get elementName() { return 'editable-block'; }
   static get templatePaths() {
     return super.templatePaths.set(
-      'editable-block-list-item',
-      'src/html/elements/autonomous/lists/editable-block-list-item.html');
+      'editable-block',
+      'src/html/elements/autonomous/lists/editable-block.html');
   }
 
   constructor() {
-    super(EditableBlockListItem.templatePaths);
+    super(EditableBlock.templatePaths);
 
     this._itemType = null;
 
-    this.nameInput = this.shadowRoot.getElementById('editable-block-list-item-name');
-    this.textArea = this.shadowRoot.getElementById('editable-block-list-item-textarea');
-    this.namePreview = this.shadowRoot.getElementById('editable-block-list-item-name-preview');
-    this.textPreview = this.shadowRoot.getElementById('editable-block-list-item-text-preview');
-    this.removeButton = this.shadowRoot.getElementById('editable-block-list-item-remove-button');
+    this.nameInput = this.shadowRoot.getElementById('editable-block-name');
+    this.textArea = this.shadowRoot.getElementById('editable-block-textarea');
+    this.namePreview = this.shadowRoot.getElementById('editable-block-name-preview');
+    this.textPreview = this.shadowRoot.getElementById('editable-block-text-preview');
+    this.removeButton = this.shadowRoot.getElementById('editable-block-remove-button');
 
     this.dragImage = this.nameInput;
 
@@ -56,7 +56,7 @@ export default class EditableBlockListItem extends DragAndDropListItem {
   }
 
   disableBlockNameItalics() {
-    this.nameInput.classList.add('editable-block-list-item__name_no-italic');
+    this.nameInput.classList.add('editable-block__name_no-italic');
   }
 
   set itemType(itemType) {

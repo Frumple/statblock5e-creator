@@ -3,14 +3,14 @@
 
 <link href='src/css/elements/default-button.css' rel='stylesheet' type='text/css'>
 <link href='src/css/elements/autonomous/sections/section.css' rel='stylesheet' type='text/css'>
-<link href='src/css/elements/autonomous/lists/editable-block-list-item.css' rel='stylesheet' type='text/css'>
+<link href='src/css/elements/autonomous/lists/editable-block.css' rel='stylesheet' type='text/css'>
 
-<div id="drag-and-drop-list-item-container" class="drag-and-drop-list-item__container editable-block-list-item__container">
+<div id="drag-and-drop-list-item-container" class="drag-and-drop-list-item__container editable-block__container">
   <i id="drag-and-drop-list-item-drag-handle" class="drag-and-drop-list-item__drag-handle material-icons">drag_handle</i>
-  <input id="editable-block-list-item-name" class="editable-block-list-item__name section__text-input" is="text-input" type="text" tabindex="1" required></input>
-  <button id="editable-block-list-item-remove-button" class="default-button editable-block-list-item__remove-button" tabindex="3"><i class="material-icons">clear</i></button>
-  <div id="editable-block-list-item-sidebar" class="editable-block-list-item__sidebar">
-    <help-tooltip class="editable-block-list-item__help-tooltip">
+  <input id="editable-block-name" class="editable-block__name section__text-input" is="text-input" type="text" tabindex="1" required></input>
+  <button id="editable-block-remove-button" class="default-button editable-block__remove-button" tabindex="3"><i class="material-icons">clear</i></button>
+  <div id="editable-block-sidebar" class="editable-block__sidebar">
+    <help-tooltip class="editable-block__help-tooltip">
       <p>This description supports <a href="https://github.com/frumple/statblock5e-creator#markdown-emphasis" target="_blank">Markdown Emphasis</a>:</p>
       <table>
         <tr>
@@ -34,9 +34,9 @@
       </ul>
     </help-tooltip>
   </div>
-  <textarea id="editable-block-list-item-textarea" class="editable-block-list-item__textarea section__textarea" is="block-textarea" cols="30" rows="4" tabindex="2" required></textarea>
-  <div class="editable-block-list-item__preview">
-    <h4 class="editable-block-list-item__name-preview"><span id="editable-block-list-item-name-preview"></span>.</h4>
-    <p id="editable-block-list-item-text-preview" class="editable-block-list-item__text-preview" is="sanitized-paragraph"></p>
+  <textarea id="editable-block-textarea" class="editable-block__textarea section__textarea" is="block-textarea" cols="30" rows="4" tabindex="2" required></textarea>
+  <div class="editable-block__preview">
+    <h4 class="editable-block__name-preview"><span id="editable-block-name-preview"></span>.</h4>
+    <p id="editable-block-text-preview" class="editable-block__text-preview" is="sanitized-paragraph"></p>
   </div>
 </div>

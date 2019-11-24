@@ -1,7 +1,7 @@
 import CustomAutonomousElement from '../custom-autonomous-element.js';
 
 import isRunningInNode from '../../../helpers/is-running-in-node.js';
-import DisplayBlockListItem from './display-block-list-item.js';
+import DisplayBlock from './display-block.js';
 
 export default class DisplayBlockList extends CustomAutonomousElement {
   static get elementName() { return 'display-block-list'; }
@@ -40,8 +40,8 @@ export default class DisplayBlockList extends CustomAutonomousElement {
 
   static createListItem() {
     if (isRunningInNode) {
-      return new DisplayBlockListItem();
+      return new DisplayBlock();
     }
-    return document.createElement('display-block-list-item');
+    return document.createElement('display-block');
   }
 }

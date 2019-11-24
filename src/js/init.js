@@ -22,8 +22,8 @@ import HelpTooltip from './elements/autonomous/tooltips/help-tooltip.js';
 import CustomTextHelpTooltip from './elements/autonomous/tooltips/custom-text-help-tooltip.js';
 
 import DisplayBlockList from './elements/autonomous/lists/display-block-list.js';
-import DisplayBlockListItem from './elements/autonomous/lists/display-block-list-item.js';
-import EditableBlockListItem from './elements/autonomous/lists/editable-block-list-item.js';
+import DisplayBlock from './elements/autonomous/lists/display-block.js';
+import EditableBlock from './elements/autonomous/lists/editable-block.js';
 import EditableBlockList from './elements/autonomous/lists/editable-block-list.js';
 import PropertyListItem from './elements/autonomous/lists/property-list-item.js';
 import PropertyList from './elements/autonomous/lists/property-list.js';
@@ -90,8 +90,8 @@ async function defineElements() {
   elementClasses.push(CustomTextHelpTooltip);
 
   elementClasses.push(DisplayBlockList);
-  elementClasses.push(DisplayBlockListItem);
-  elementClasses.push(EditableBlockListItem);
+  elementClasses.push(DisplayBlock);
+  elementClasses.push(EditableBlock);
   elementClasses.push(EditableBlockList);
   elementClasses.push(PropertyListItem);
   elementClasses.push(PropertyList);

@@ -13,9 +13,9 @@ import ErrorMessages from '/src/js/elements/autonomous/error-messages.js';
 import PropertyList from '/src/js/elements/autonomous/lists/property-list.js';
 import PropertyListItem from '/src/js/elements/autonomous/lists/property-list-item.js';
 import DisplayBlockList from '/src/js/elements/autonomous/lists/display-block-list.js';
-import DisplayBlockListItem from '/src/js/elements/autonomous/lists/display-block-list-item.js';
+import DisplayBlock from '/src/js/elements/autonomous/lists/display-block.js';
 import EditableBlockList from '/src/js/elements/autonomous/lists/editable-block-list.js';
-import EditableBlockListItem from '/src/js/elements/autonomous/lists/editable-block-list-item.js';
+import EditableBlock from '/src/js/elements/autonomous/lists/editable-block.js';
 import GenerateAttackDialog from '../../elements/autonomous/dialogs/generate-attack-dialog';
 
 export async function define() {
@@ -33,9 +33,9 @@ export async function define() {
   customElements.push(PropertyList);
   customElements.push(PropertyListItem);
   customElements.push(DisplayBlockList);
-  customElements.push(DisplayBlockListItem);
+  customElements.push(DisplayBlock);
   customElements.push(EditableBlockList);
-  customElements.push(EditableBlockListItem);
+  customElements.push(EditableBlock);
 
   for (const element of customElements) {
     await element.define();

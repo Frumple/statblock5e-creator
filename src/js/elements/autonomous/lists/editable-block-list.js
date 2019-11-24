@@ -2,7 +2,7 @@ import DragAndDropList from './drag-and-drop-list.js';
 import { focusAndSelectElement } from '../../../helpers/element-helpers.js';
 
 import isRunningInNode from '../../../helpers/is-running-in-node.js';
-import EditableBlockListItem from './editable-block-list-item.js';
+import EditableBlock from './editable-block.js';
 
 export default class EditableBlockList extends DragAndDropList {
   static get elementName() { return 'editable-block-list'; }
@@ -59,8 +59,8 @@ export default class EditableBlockList extends DragAndDropList {
 
   static createListItem() {
     if (isRunningInNode) {
-      return new EditableBlockListItem();
+      return new EditableBlock();
     }
-    return document.createElement('editable-block-list-item');
+    return document.createElement('editable-block');
   }
 }

@@ -1,4 +1,4 @@
-.editable-block-list-item__container {
+.editable-block__container {
   display: grid;
   grid-template-columns: 24px auto 50px;
   grid-template-rows: auto auto auto;
@@ -9,64 +9,64 @@
   margin-top: 5px;
 }
 
-.editable-block-list-item__drag-handle {
+.editable-block__drag-handle {
   grid-area: 1 / 1;
 }
 
-.editable-block-list-item__name {
+.editable-block__name {
   grid-area: 1 / 2;
   width: 100%;
   font-weight: bold;
   font-style: italic;
 }
 
-.editable-block-list-item__name_no-italic {
+.editable-block__name_no-italic {
   font-style: normal;
 }
 
-.editable-block-list-item__remove-button {
+.editable-block__remove-button {
   grid-area: 1 / 3;
   padding: 0 10px;
 }
 
-.editable-block-list-item__sidebar {
+.editable-block__sidebar {
   grid-area: 2 / 1;
   display: flex;
   flex-direction: column;
   align-items: center;
 }
 
-.editable-block-list-item__help-tooltip {
+.editable-block__help-tooltip {
   --help-tooltip-icon-color: #7A200D;
   --help-tooltip-width: 50em;
 }
 
-.editable-block-list-item__help-tooltip code {
+.editable-block__help-tooltip code {
   background: white;
 }
 
-.editable-block-list-item__help-tooltip table {
+.editable-block__help-tooltip table {
   margin-left: 2em;
 }
 
-.editable-block-list-item__textarea {
+.editable-block__textarea {
   grid-area: 2 / 2 / 3 / 4;
   resize: none;
 }
 
-.editable-block-list-item__preview {
+.editable-block__preview {
   grid-area: 3 / 1 / 4 / 4;
   margin: 0;
 }
 
-.editable-block-list-item__name-preview {
+.editable-block__name-preview {
   margin: 0;
   display: inline;
   font-weight: bold;
   font-style: italic;
 }
 
-.editable-block-list-item__text-preview {
+.editable-block__text-preview {
   display: inline;
   text-indent: 0;
   margin: 0;

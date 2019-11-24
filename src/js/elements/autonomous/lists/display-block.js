@@ -1,22 +1,22 @@
 import CustomAutonomousElement from '../custom-autonomous-element.js';
 
-export default class DisplayBlockListItem extends CustomAutonomousElement {
-  static get elementName() { return 'display-block-list-item'; }
+export default class DisplayBlock extends CustomAutonomousElement {
+  static get elementName() { return 'display-block'; }
   static get templatePaths() {
     return super.templatePaths.set(
-      'display-block-list-item',
-      'src/html/elements/autonomous/lists/display-block-list-item.html');
+      'display-block',
+      'src/html/elements/autonomous/lists/display-block.html');
   }
 
   constructor() {
-    super(DisplayBlockListItem.templatePaths);
+    super(DisplayBlock.templatePaths);
 
     this.nameElement = this.shadowRoot.getElementById('display-block-name');
     this.textElement = this.shadowRoot.getElementById('display-block-text');
   }
 
   disableBlockNameItalics() {
-    this.nameElement.classList.add('display-block-list-item__name_no-italic');
+    this.nameElement.classList.add('display-block__name_no-italic');
   }
 
   get name() {
