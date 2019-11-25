@@ -569,14 +569,14 @@ function verifyDialogControlsResetToDefaults() {
 function saveDialogAndVerifyActionBlocks(weaponName, expectedGeneratedText, expectedRenderedText) {
   generateAttackDialog.generateAttackButton.click();
 
-  const editableBlock = actionsSection.editElements.editableList.blocks[0];
+  const editableBlock = actionsSection.editElements.editableBlockList.blocks[0];
   expect(editableBlock.name).toBe(weaponName);
   expect(editableBlock.originalText).toBe(expectedGeneratedText);
   expect(editableBlock.previewText).toBe(expectedRenderedText);
 
   actionsSection.editElements.submitForm();
 
-  const displayBlock = actionsSection.showElements.displayList.blocks[0];
+  const displayBlock = actionsSection.showElements.displayBlockList.blocks[0];
   expect(displayBlock.name).toBe(weaponName);
   expect(displayBlock.text).toBe(expectedRenderedText);
 }

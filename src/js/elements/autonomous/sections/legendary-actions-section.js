@@ -22,8 +22,8 @@ export default class LegendaryActionsSection extends blockListSectionModule.Bloc
     if (this.isConnected && ! this.isInitialized) {
       super.connectedCallback();
 
-      this.showElements.displayList.disableBlockNameItalics = true;
-      this.editElements.editableList.disableBlockNameItalics = true;
+      this.showElements.displayBlockList.disableBlockNameItalics = true;
+      this.editElements.editableBlockList.disableBlockNameItalics = true;
 
       this.isInitialized = true;
     }
@@ -38,7 +38,7 @@ export default class LegendaryActionsSection extends blockListSectionModule.Bloc
 
     const hiddenEmptyLabelClass = 'legendary-actions-show-section__text_hidden';
 
-    if (isEmpty) {      
+    if (isEmpty) {
       this.showElements.description.classList.add(hiddenEmptyLabelClass);
     } else {
       this.showElements.description.classList.remove(hiddenEmptyLabelClass);

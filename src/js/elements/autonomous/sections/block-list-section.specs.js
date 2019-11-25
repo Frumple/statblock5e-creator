@@ -19,14 +19,14 @@ export function shouldSwitchToEditModeAndFocusOnNameFieldOfFirstBlockIfExists(se
   section.showElements.section.click();
 
   expect(section).toBeInMode('edit');
-  expect(section.editElements.editableList.blocks[0].nameInput).toHaveFocus();
-  expect(section.editElements.editableList.blocks[0].nameInput).toBeSelected();
+  expect(section.editElements.editableBlockList.blocks[0].nameInput).toHaveFocus();
+  expect(section.editElements.editableBlockList.blocks[0].nameInput).toBeSelected();
 }
 
 export function shouldFocusOnNameFieldOfNewBlock(section) {
   for (let index = 0; index <= 2; index++) {
     section.editElements.addButton.click();
-    const blocks = section.editElements.editableList.blocks;
+    const blocks = section.editElements.editableBlockList.blocks;
     expect(blocks[index].nameInput).toHaveFocus();
     expect(blocks[index].nameInput).toBeSelected();
   }
@@ -60,7 +60,7 @@ export function shouldAddMultipleBlocks(section, blocks) {
 export function shouldAddASingleBlockThenRemoveIt(section, block) {
   addAndPopulateBlock(section, block.name, block.originalText);
 
-  const editableBlock = section.editElements.editableList.blocks[0];
+  const editableBlock = section.editElements.editableBlockList.blocks[0];
   editableBlock.remove();
 
   section.editElements.submitForm();
@@ -68,7 +68,7 @@ export function shouldAddASingleBlockThenRemoveIt(section, block) {
   expect(section).toBeInMode('show');
   expectSectionToBeEmpty(section, true);
 
-  expect(section.showElements.displayList.blocks).toHaveLength(0);
+  expect(section.showElements.displayBlockList.blocks).toHaveLength(0);
 }
 
 export function shouldAddMultipleBlocksThenRemoveOneOfThem(section, blocks, removeIndex) {
@@ -76,7 +76,7 @@ export function shouldAddMultipleBlocksThenRemoveOneOfThem(section, blocks, remo
     addAndPopulateBlock(section, block.name, block.originalText);
   }
 
-  const editableBlock = section.editElements.editableList.blocks[removeIndex];
+  const editableBlock = section.editElements.editableBlockList.blocks[removeIndex];
   editableBlock.remove();
 
   section.editElements.submitForm();
@@ -124,7 +124,7 @@ export function shouldTrimAllTrailingPeriodCharactersInBlockName(section) {
 
   section.showElements.section.click();
 
-  expect(section.editElements.editableList.blocks[0].name).toBe(expectedBlocks[0].name);
+  expect(section.editElements.editableBlockList.blocks[0].name).toBe(expectedBlocks[0].name);
 }
 
 export function shouldDisplayAnErrorIfBlockNameIsBlank(section, expectedItemType) {
@@ -133,7 +133,7 @@ export function shouldDisplayAnErrorIfBlockNameIsBlank(section, expectedItemType
   section.editElements.submitForm();
 
   expect(section).toHaveError(
-    section.editElements.editableList.blocks[0].nameInput,
+    section.editElements.editableBlockList.blocks[0].nameInput,
     `${expectedItemType} Name cannot be blank.`);
 }
 
@@ -143,7 +143,7 @@ export function shouldDisplayAnErrorIfBlockTextIsBlank(section, expectedItemType
   section.editElements.submitForm();
 
   expect(section).toHaveError(
-    section.editElements.editableList.blocks[0].textArea,
+    section.editElements.editableBlockList.blocks[0].textArea,
     `${expectedItemType} Text cannot be blank.`);
 }
 
@@ -153,7 +153,7 @@ export function shouldDisplayAnErrorIfBlockTextHasInvalidMarkdownSyntax(section,
   section.editElements.submitForm();
 
   expect(section).toHaveError(
-    section.editElements.editableList.blocks[0].textArea,
+    section.editElements.editableBlockList.blocks[0].textArea,
     `${expectedItemType} Text has invalid markdown syntax.`);
 }
 
@@ -162,7 +162,7 @@ export function shouldDisplayErrorsIfBlockNameAndTextAreBothBlank(section, expec
 
   section.editElements.submitForm();
 
-  const editableBlock = section.editElements.editableList.blocks[0];
+  const editableBlock = section.editElements.editableBlockList.blocks[0];
 
   expect(section.errorMessages.errors).toHaveLength(2);
   expect(section).toHaveError(
@@ -180,7 +180,7 @@ export function shouldDisplayErrorsIfBlockNameIsBlankAndBlockTextHasInvalidMarkd
 
   section.editElements.submitForm();
 
-  const editableBlock = section.editElements.editableList.blocks[0];
+  const editableBlock = section.editElements.editableBlockList.blocks[0];
 
   expect(section.errorMessages.errors).toHaveLength(2);
   expect(section).toHaveError(
@@ -196,7 +196,7 @@ export function shouldDisplayErrorsIfBlockNameIsBlankAndBlockTextHasInvalidMarkd
 function addAndPopulateBlock(section, blockName, blockText) {
   section.editElements.addButton.click();
 
-  const blocks = section.editElements.editableList.blocks;
+  const blocks = section.editElements.editableBlockList.blocks;
   const editableBlock = blocks[blocks.length - 1];
 
   inputValueAndTriggerEvent(editableBlock.nameInput, blockName);
@@ -220,8 +220,8 @@ function verifyBlocks(section, expectedBlocks) {
   const htmlExportBlocks = getHtmlExportBlocks(section);
 
   for (const [index, expectedBlock] of expectedBlocks.entries()) {
-    const editableBlock = section.editElements.editableList.blocks[index];
-    const displayBlock = section.showElements.displayList.blocks[index];
+    const editableBlock = section.editElements.editableBlockList.blocks[index];
+    const displayBlock = section.showElements.displayBlockList.blocks[index];
     const htmlExportBlock = htmlExportBlocks[index];
 
     verifyEditableBlock(editableBlock, expectedBlock);

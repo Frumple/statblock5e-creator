@@ -65,12 +65,12 @@ function replaceWithFakes(section) {
     section.editElements.propertyList = new PropertyList(section);
   }
 
-  if (section.showElements.displayList && section.showElements.displayList.tagName === 'DISPLAY-BLOCK-LIST') {
-    section.showElements.displayList = new DisplayBlockList();
+  if (section.showElements.displayBlockList && section.showElements.displayBlockList.tagName === 'DISPLAY-BLOCK-LIST') {
+    section.showElements.displayBlockList = new DisplayBlockList();
   }
 
-  if (section.editElements.editableList && section.editElements.editableList.tagName === 'EDITABLE-BLOCK-LIST') {
-    section.editElements.editableList = new EditableBlockList();
+  if (section.editElements.editableBlockList && section.editElements.editableBlockList.tagName === 'EDITABLE-BLOCK-LIST') {
+    section.editElements.editableBlockList = new EditableBlockList();
   }
 
   if (section.editElements.generateAttackDialog && section.editElements.generateAttackDialog.tagName === 'GENERATE-ATTACK-DIALOG') {

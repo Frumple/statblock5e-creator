@@ -19,8 +19,8 @@ export default class EditableBlock extends DragAndDropListItem {
 
     this.nameInput = this.shadowRoot.getElementById('editable-block-name');
     this.textArea = this.shadowRoot.getElementById('editable-block-textarea');
-    this.namePreview = this.shadowRoot.getElementById('editable-block-name-preview');
-    this.textPreview = this.shadowRoot.getElementById('editable-block-text-preview');
+    this.namePreviewElement = this.shadowRoot.getElementById('editable-block-name-preview');
+    this.textPreviewElement = this.shadowRoot.getElementById('editable-block-text-preview');
     this.removeButton = this.shadowRoot.getElementById('editable-block-remove-button');
 
     this.dragImage = this.nameInput;
@@ -43,12 +43,12 @@ export default class EditableBlock extends DragAndDropListItem {
 
   onInputName() {
     this.nameInput.value = trimTrailingPeriods(this.nameInput.value);
-    this.namePreview.textContent = this.nameInput.value;
+    this.namePreviewElement.textContent = this.nameInput.value;
   }
 
   onInputText() {
     this.textArea.parse();
-    this.textPreview.innerHTMLSanitized = this.textArea.htmlText;
+    this.textPreviewElement.innerHTMLSanitized = this.textArea.htmlText;
   }
 
   onClickRemoveButton() {
@@ -94,12 +94,20 @@ export default class EditableBlock extends DragAndDropListItem {
     return this.textArea.htmlText;
   }
 
+  set previewName(name) {
+    this.namePreviewElement.textContent = name;
+  }
+
   get previewName() {
-    return this.namePreview.textContent;
+    return this.namePreviewElement.textContent;
+  }
+
+  set previewText(text) {
+    this.textPreviewElement.innerHTMLSanitized = text;
   }
 
   get previewText() {
-    return this.textPreview.innerHTMLSanitized;
+    return this.textPreviewElement.innerHTMLSanitized;
   }
 
   validate(errorMessages) {

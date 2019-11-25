@@ -26,7 +26,7 @@ export class BlockListSection extends sectionModule.Section {
   }
 
   addBlock(name = null, text = null) {
-    const block = this.editElements.editableList.addBlock(this.listModel.singleName);
+    const block = this.editElements.editableBlockList.addBlock(this.listModel.singleName);
 
     if (name) {
       block.name = name;
@@ -75,19 +75,19 @@ export class BlockListSection extends sectionModule.Section {
   }
 
   checkForErrors() {
-    this.editElements.editableList.validate(this.errorMessages);
+    this.editElements.editableBlockList.validate(this.errorMessages);
   }
 
   updateModel() {
-    this.listModel.blocks = this.editElements.editableList.toModel();
+    this.listModel.blocks = this.editElements.editableBlockList.toModel();
   }
 
   updateView() {
     const blocks = this.listModel.blocks;
 
-    this.showElements.displayList.clear();
+    this.showElements.displayBlockList.clear();
     for (const block of blocks) {
-      this.showElements.displayList.addBlock(block.name, block.htmlText);
+      this.showElements.displayBlockList.addBlock(block.name, block.htmlText);
     }
 
     if (blocks.length > 0) {
@@ -98,16 +98,16 @@ export class BlockListSection extends sectionModule.Section {
   }
 
   reparse() {
-    this.editElements.editableList.parse();
+    this.editElements.editableBlockList.parse();
     this.updateModel();
 
     for (const [index, blockModel] of this.listModel.blocks.entries()) {
-      const editableBlock = this.editElements.editableList.blocks[index];
-      editableBlock.namePreview.textContent = blockModel.name;
-      editableBlock.textPreview.innerHTMLSanitized = blockModel.htmlText;
+      const editableBlock = this.editElements.editableBlockList.blocks[index];
+      editableBlock.previewName = blockModel.name;
+      editableBlock.previewText = blockModel.htmlText;
 
       if (this.mode === 'show') {
-        const displayBlock = this.showElements.displayList.blocks[index];
+        const displayBlock = this.showElements.displayBlockList.blocks[index];
         displayBlock.text = blockModel.htmlText;
       }
     }
@@ -127,7 +127,7 @@ export class BlockListShowSection extends sectionModule.ShowElements {
     super(shadowRoot);
 
     this.emptyLabel = shadowRoot.getElementById('empty-label');
-    this.displayList = shadowRoot.getElementById('display-list');
+    this.displayBlockList = shadowRoot.getElementById('display-block-list');
   }
 }
 
@@ -135,13 +135,13 @@ export class BlockListEditSection extends sectionModule.EditElements {
   constructor(shadowRoot) {
     super(shadowRoot);
 
-    this.editableList = shadowRoot.getElementById('editable-list');
+    this.editableBlockList = shadowRoot.getElementById('editable-block-list');
     this.addButton = shadowRoot.getElementById('add-button');
   }
 
   get initiallySelectedElement() {
-    if (this.editableList.blocks.length > 0) {
-      return this.editableList.blocks[0].nameInput;
+    if (this.editableBlockList.blocks.length > 0) {
+      return this.editableBlockList.blocks[0].nameInput;
     }
 
     return this.addButton;
