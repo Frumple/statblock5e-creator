@@ -70,7 +70,7 @@ describe('when the show section is clicked', () => {
           expect(armorClassSection).toBeInMode('show');
           expect(armorClassSection).toShowPropertyLine(expectedHeading, expectedHtmlText);
 
-          verifyJsonExport(10, '', false, customText);
+          verifyJsonExport(null, null, null, customText);
           expect(armorClassSection).toExportPropertyLineToHtml(expectedHeading, expectedHtmlText);
           expect(armorClassSection).toExportPropertyLineToHomebrewery(expectedHeading, customText);
         });
@@ -157,7 +157,7 @@ describe('when the show section is clicked', () => {
           expect(armorClassSection).toBeInMode('show');
           expect(armorClassSection).toShowPropertyLine(expectedHeading, expectedText);
 
-          verifyJsonExport(armorClass, armorType, hasShield, '');
+          verifyJsonExport(armorClass, armorType, hasShield, null);
           expect(armorClassSection).toExportPropertyLineToHtml(expectedHeading, expectedText);
           expect(armorClassSection).toExportPropertyLineToHomebrewery(expectedHeading, expectedText);
         });

@@ -52,9 +52,9 @@ class ArmorClass {
   toJson() {
     if (this.useCustomText) {
       return {
-        armorClass: 10,
-        armorType: '',
-        hasShield: false,
+        armorClass: null,
+        armorType: null,
+        hasShield: null,
         customText: this.originalCustomText
       };
     }
@@ -63,7 +63,7 @@ class ArmorClass {
       armorClass: this.armorClass,
       armorType: this.armorType,
       hasShield: this.hasShield,
-      customText: ''
+      customText: null
     };
   }
 
