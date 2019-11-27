@@ -48,57 +48,33 @@ describe('when the show section is clicked', () => {
     });
 
     describe('and the edit section is submitted', () => {
-      it('should switch to show mode and save the custom text', () => {
-        const customText = '14 (natural armor), 11 while prone';
-        inputValueAndTriggerEvent(armorClassSection.editElements.customText, customText);
+      describe('should switch to show mode and save the custom text', () => {
+        /* eslint-disable indent, no-unexpected-multiline */
+        it.each
+        `
+          description                                 | customText                              | expectedHtmlText
+          ${'plain custom text'}                      | ${'14 (natural armor), 11 while prone'} | ${'14 (natural armor), 11 while prone'}
+          ${'custom text with valid markdown syntax'} | ${'12 (15 with *mage armor*)'}          | ${'12 (15 with <em>mage armor</em>)'}
+          ${'custom text with html tags escaped'}     | ${'12 (15 with <em>mage armor</em>)'}   | ${'12 (15 with &lt;em&gt;mage armor&lt;/em&gt;)'}
+        `
+        ('$description: $customText => $expectedHtmlText',
+        ({customText, expectedHtmlText}) => {
+          inputValueAndTriggerEvent(armorClassSection.editElements.customText, customText);
 
-        armorClassSection.editElements.submitForm();
+          armorClassSection.editElements.submitForm();
 
-        expect(ArmorClass.useCustomText).toBe(true);
-        expect(ArmorClass.originalCustomText).toBe(customText);
-        expect(ArmorClass.htmlCustomText).toBe(customText);
+          expect(ArmorClass.useCustomText).toBe(true);
+          expect(ArmorClass.originalCustomText).toBe(customText);
+          expect(ArmorClass.htmlCustomText).toBe(expectedHtmlText);
 
-        expect(armorClassSection).toBeInMode('show');
-        expect(armorClassSection).toShowPropertyLine(expectedHeading, customText);
+          expect(armorClassSection).toBeInMode('show');
+          expect(armorClassSection).toShowPropertyLine(expectedHeading, expectedHtmlText);
 
-        expect(armorClassSection).toExportPropertyLineToHtml(expectedHeading, customText);
-        expect(armorClassSection).toExportPropertyLineToHomebrewery(expectedHeading, customText);
-      });
-
-      it('should switch to show mode and save the custom text with valid markdown syntax', () => {
-        const originalText = '12 (15 with *mage armor*)';
-        const htmlText = '12 (15 with <em>mage armor</em>)';
-        inputValueAndTriggerEvent(armorClassSection.editElements.customText, originalText);
-
-        armorClassSection.editElements.submitForm();
-
-        expect(ArmorClass.useCustomText).toBe(true);
-        expect(ArmorClass.originalCustomText).toBe(originalText);
-        expect(ArmorClass.htmlCustomText).toBe(htmlText);
-
-        expect(armorClassSection).toBeInMode('show');
-        expect(armorClassSection).toShowPropertyLine(expectedHeading, htmlText);
-
-        expect(armorClassSection).toExportPropertyLineToHtml(expectedHeading, htmlText);
-        expect(armorClassSection).toExportPropertyLineToHomebrewery(expectedHeading, originalText);
-      });
-
-      it('should switch to show mode and save the custom text with html escaped', () => {
-        const originalText = '12 (15 with <em>mage armor</em>)';
-        const htmlText = '12 (15 with &lt;em&gt;mage armor&lt;/em&gt;)';
-        inputValueAndTriggerEvent(armorClassSection.editElements.customText, originalText);
-
-        armorClassSection.editElements.submitForm();
-
-        expect(ArmorClass.useCustomText).toBe(true);
-        expect(ArmorClass.originalCustomText).toBe(originalText);
-        expect(ArmorClass.htmlCustomText).toBe(htmlText);
-
-        expect(armorClassSection).toBeInMode('show');
-        expect(armorClassSection).toShowPropertyLine(expectedHeading, htmlText);
-
-        expect(armorClassSection).toExportPropertyLineToHtml(expectedHeading, htmlText);
-        expect(armorClassSection).toExportPropertyLineToHomebrewery(expectedHeading, originalText);
+          verifyJsonExport(10, '', false, customText);
+          expect(armorClassSection).toExportPropertyLineToHtml(expectedHeading, expectedHtmlText);
+          expect(armorClassSection).toExportPropertyLineToHomebrewery(expectedHeading, customText);
+        });
+        /* eslint-enable indent, no-unexpected-multiline */
       });
 
       it('should display an error if the custom text field is blank', () => {
@@ -153,84 +129,39 @@ describe('when the show section is clicked', () => {
     });
 
     describe('and the edit section is submitted', () => {
-      it('should switch to show mode and save the armor class only', () => {
-        const expectedText = '7';
+      describe('should switch to show mode and save the desired fields', () => {
+        /* eslint-disable indent, no-unexpected-multiline */
+        it.each
+        `
+          description                              | armorClass | armorType          | hasShield | expectedText
+          ${'armor class only'}                    | ${7}       | ${''}              | ${false}  | ${'7'}
+          ${'armor class and armor type'}          | ${21}      | ${'natural armor'} | ${false}  | ${'21 (natural armor)'}
+          ${'armor class and shield'}              | ${12}      | ${''}              | ${true}   | ${'12 (shield)'}
+          ${'armor class, armor type, and shield'} | ${16}      | ${'chain shirt'}   | ${true}   | ${'16 (chain shirt, shield)'}
+        `
+        ('$description: {armorClass="$armorClass", armorType="$armorType", hasShield="$hasShield"} => $expectedText',
+        ({armorClass, armorType, hasShield, expectedText}) => {
+          inputValueAndTriggerEvent(armorClassSection.editElements.armorClass, armorClass);
+          inputValueAndTriggerEvent(armorClassSection.editElements.armorType, armorType);
+          if (hasShield) {
+            armorClassSection.editElements.hasShield.click();
+          }
 
-        inputValueAndTriggerEvent(armorClassSection.editElements.armorClass, 7);
+          armorClassSection.editElements.submitForm();
 
-        armorClassSection.editElements.submitForm();
+          expect(ArmorClass.armorClass).toBe(armorClass);
+          expect(ArmorClass.armorType).toBe(armorType);
+          expect(ArmorClass.hasShield).toBe(hasShield);
+          expect(ArmorClass.useCustomText).toBe(false);
 
-        expect(ArmorClass.armorClass).toBe(7);
-        expect(ArmorClass.armorType).toBe('');
-        expect(ArmorClass.hasShield).toBe(false);
-        expect(ArmorClass.useCustomText).toBe(false);
+          expect(armorClassSection).toBeInMode('show');
+          expect(armorClassSection).toShowPropertyLine(expectedHeading, expectedText);
 
-        expect(armorClassSection).toBeInMode('show');
-        expect(armorClassSection).toShowPropertyLine(expectedHeading, expectedText);
-
-        expect(armorClassSection).toExportPropertyLineToHtml(expectedHeading, expectedText);
-        expect(armorClassSection).toExportPropertyLineToHomebrewery(expectedHeading, expectedText);
-      });
-
-      it('should switch to show mode and save the armor class and armor type', () => {
-        const expectedText = '21 (natural armor)';
-
-        inputValueAndTriggerEvent(armorClassSection.editElements.armorClass, 21);
-        inputValueAndTriggerEvent(armorClassSection.editElements.armorType, 'natural armor');
-
-        armorClassSection.editElements.submitForm();
-
-        expect(ArmorClass.armorClass).toBe(21);
-        expect(ArmorClass.armorType).toBe('natural armor');
-        expect(ArmorClass.hasShield).toBe(false);
-        expect(ArmorClass.useCustomText).toBe(false);
-
-        expect(armorClassSection).toBeInMode('show');
-        expect(armorClassSection).toShowPropertyLine(expectedHeading, expectedText);
-
-        expect(armorClassSection).toExportPropertyLineToHtml(expectedHeading, expectedText);
-        expect(armorClassSection).toExportPropertyLineToHomebrewery(expectedHeading, expectedText);
-      });
-
-      it('should switch to show mode and save the armor class and shield', () => {
-        const expectedText = '12 (shield)';
-
-        inputValueAndTriggerEvent(armorClassSection.editElements.armorClass, 12);
-        armorClassSection.editElements.hasShield.click();
-
-        armorClassSection.editElements.submitForm();
-
-        expect(ArmorClass.armorClass).toBe(12);
-        expect(ArmorClass.armorType).toBe('');
-        expect(ArmorClass.hasShield).toBe(true);
-        expect(ArmorClass.useCustomText).toBe(false);
-
-        expect(armorClassSection).toBeInMode('show');
-        expect(armorClassSection).toShowPropertyLine(expectedHeading, expectedText);
-
-        expect(armorClassSection).toExportPropertyLineToHtml(expectedHeading, expectedText);
-        expect(armorClassSection).toExportPropertyLineToHomebrewery(expectedHeading, expectedText);
-      });
-
-      it('should switch to show mode and save the armor class, armor type, and shield', () => {
-        const expectedText = '16 (chain shirt, shield)';
-
-        inputValueAndTriggerEvent(armorClassSection.editElements.armorClass, 16);
-        inputValueAndTriggerEvent(armorClassSection.editElements.armorType, 'chain shirt');
-        armorClassSection.editElements.hasShield.click();
-
-        armorClassSection.editElements.submitForm();
-
-        expect(ArmorClass.armorClass).toBe(16);
-        expect(ArmorClass.armorType).toBe('chain shirt');
-        expect(ArmorClass.hasShield).toBe(true);
-        expect(ArmorClass.useCustomText).toBe(false);
-
-        expect(armorClassSection).toBeInMode('show');
-        expect(armorClassSection).toShowPropertyLine(expectedHeading, expectedText);
-
-        expect(armorClassSection).toExportPropertyLineToHtml(expectedHeading, expectedText);
-        expect(armorClassSection).toExportPropertyLineToHomebrewery(expectedHeading, expectedText);
+          verifyJsonExport(armorClass, armorType, hasShield, '');
+          expect(armorClassSection).toExportPropertyLineToHtml(expectedHeading, expectedText);
+          expect(armorClassSection).toExportPropertyLineToHomebrewery(expectedHeading, expectedText);
+        });
+        /* eslint-enable indent, no-unexpected-multiline */
       });
 
       it('should display an error if the armor class field is not a valid number', () => {
@@ -258,3 +189,15 @@ describe('when the show section is clicked', () => {
     });
   });
 });
+
+function verifyJsonExport(armorClass, armorType, hasShield, customText) {
+  const jsObject = armorClassSection.exportToJson();
+  const expectedJsObject = {
+    armorClass: armorClass,
+    armorType: armorType,
+    hasShield: hasShield,
+    customText: customText
+  };
+
+  expect(jsObject).toStrictEqual(expectedJsObject);
+}

@@ -49,7 +49,25 @@ class ArmorClass {
     }
   }
 
-  toHtml() {    
+  toJson() {
+    if (this.useCustomText) {
+      return {
+        armorClass: 10,
+        armorType: '',
+        hasShield: false,
+        customText: this.originalCustomText
+      };
+    }
+
+    return {
+      armorClass: this.armorClass,
+      armorType: this.armorType,
+      hasShield: this.hasShield,
+      customText: ''
+    };
+  }
+
+  toHtml() {
     return ExportHelpers.createHtmlPropertyLine(this.headingName, this.htmlText);
   }
 

@@ -34,6 +34,16 @@ export default class BasicStats extends DivisibleContainer {
     }
   }
 
+  exportToJson() {
+    const jsObject = {};
+
+    jsObject.armorClass = this.armorClassSection.exportToJson();
+    // jsObject.hitPoints = this.hitPointsSection.exportToJson();
+    // jsObject.speed = this.speedSection.exportToJson();
+
+    return jsObject;
+  }
+
   exportToHtml() {
     const fragment = document.createDocumentFragment();
     for (const section of this.allSections) {

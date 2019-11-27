@@ -126,38 +126,6 @@ describe('when the show section is clicked', () => {
       /* eslint-enable indent, no-unexpected-multiline */
     });
 
-    function verifyJsonExport(expectedFullName, expectedShortName, expectedIsProperNoun, expectedSize, expectedType, expectedAlignment) {
-      const jsObject = headingSection.exportToJson();
-      const expectedJsObject = {
-        fullName: expectedFullName,
-        shortName: expectedShortName,
-        isProperNoun: expectedIsProperNoun,
-        size: expectedSize,
-        type: expectedType,
-        alignment: expectedAlignment
-      };
-
-      expect(jsObject).toStrictEqual(expectedJsObject);
-    }
-
-    function verifyHtmlExport(expectedTitle, expectedSubtitle) {
-      const creatureHeading = headingSection.exportToHtml();
-      const title = creatureHeading.querySelector('h1');
-      const subtitle = creatureHeading.querySelector('h2');
-
-      expect(creatureHeading.tagName).toBe('CREATURE-HEADING');
-      expect(title).toHaveTextContent(expectedTitle);
-      expect(subtitle).toHaveTextContent(expectedSubtitle);
-    }
-
-    function verifyHomebreweryExport(expectedTitle, expectedSubtitle) {
-      const text = headingSection.exportToHomebrewery();
-      const expectedText =
-        `> ## ${expectedTitle}\n>*${expectedSubtitle}*`;
-
-      expect(text).toBe(expectedText);
-    }
-
     it('should capitalize the first letter in the creature name', () => {
       const fullName = 'young red dragon';
       const expectedFullName = 'Young red dragon';
@@ -231,3 +199,35 @@ describe('when the show section is clicked', () => {
     });
   });
 });
+
+function verifyJsonExport(expectedFullName, expectedShortName, expectedIsProperNoun, expectedSize, expectedType, expectedAlignment) {
+  const jsObject = headingSection.exportToJson();
+  const expectedJsObject = {
+    fullName: expectedFullName,
+    shortName: expectedShortName,
+    isProperNoun: expectedIsProperNoun,
+    size: expectedSize,
+    type: expectedType,
+    alignment: expectedAlignment
+  };
+
+  expect(jsObject).toStrictEqual(expectedJsObject);
+}
+
+function verifyHtmlExport(expectedTitle, expectedSubtitle) {
+  const creatureHeading = headingSection.exportToHtml();
+  const title = creatureHeading.querySelector('h1');
+  const subtitle = creatureHeading.querySelector('h2');
+
+  expect(creatureHeading.tagName).toBe('CREATURE-HEADING');
+  expect(title).toHaveTextContent(expectedTitle);
+  expect(subtitle).toHaveTextContent(expectedSubtitle);
+}
+
+function verifyHomebreweryExport(expectedTitle, expectedSubtitle) {
+  const text = headingSection.exportToHomebrewery();
+  const expectedText =
+    `> ## ${expectedTitle}\n>*${expectedSubtitle}*`;
+
+  expect(text).toBe(expectedText);
+}

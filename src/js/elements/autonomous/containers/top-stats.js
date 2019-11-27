@@ -28,6 +28,16 @@ export default class TopStats extends CustomAutonomousElement {
     this.advancedStats.saveAllSections();
   }
 
+  exportToJson() {
+    const jsObject = {};
+
+    Object.assign(jsObject, this.basicStats.exportToJson());
+    // jsObject.abilityScores = this.abilityScoresSection.exportToJson());
+    // Object.assign(jsObject, this.advancedStats.exportToJson());
+
+    return jsObject;
+  }
+
   exportToHtml() {
     const topStats = document.createElement('top-stats');
 
@@ -38,7 +48,7 @@ export default class TopStats extends CustomAutonomousElement {
     topStats.appendChild(basicStatsExport);
     topStats.appendChild(abilityScoresExport);
     topStats.appendChild(advancedStatsExport);
-    
+
     return topStats;
   }
 

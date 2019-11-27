@@ -58,6 +58,10 @@ export default class ArmorClassSection extends propertyLineSectionModule.Propert
     }
   }
 
+  exportToJson() {
+    return ArmorClass.toJson();
+  }
+
   exportToHtml() {
     return ArmorClass.toHtml();
   }
