@@ -1,6 +1,6 @@
 # Interactive Creature Statblock Creator for D&D 5th Edition
 
-### Live Demo: [https://frumple.github.io/statblock5e-creator](https://frumple.github.io/statblock5e-creator)
+### Live Demo: [https://frumple.github.io/statblock5e-creator][demo]
 
 A visual web interface for creating creature statblocks that are similar in appearance to the official blocks from the Dungeons and Dragons 5th Edition Monster Manual.
 
@@ -14,7 +14,7 @@ A visual web interface for creating creature statblocks that are similar in appe
   - **[Name Expressions](#name-expressions)** can be used to inject the creature's full or short name into the description where needed.
   - **[Math Expressions](#math-expressions)** can be used to automatically calculate attack roll modifiers, and average damage from damage rolls.
 - Weapon attack actions can be easily created using the **Generate Attack** dialog.
-- Statblocks can be printed, exported to an HTML file, or exported to a Markdown format for use in [Homebrewery](homebrewery).
+- Statblocks can be printed, exported to an HTML file, or exported to a Markdown format for use in [Homebrewery][homebrewery].
 
 ## Markdown Emphasis
 
@@ -93,12 +93,16 @@ Supported operands include:
 - **integers** (e.g. 12, -3, or 0)
 
 Supported operators include:
-- **`+` (plus sign)** for addition
-- **`-` (minus sign)** for subtraction
+- **`+` plus sign** for addition
+- **`-` minus sign** for subtraction
 
-For example. if the creature's strength modifier is **+4** and its proficiency bonus is **+2**, **`[strmod + prof - 3]`** will be calculated as **4 + 2 - 3**, resulting in the final answer of **3**.
+For example. if the creature's strength modifier is **+4** and its proficiency bonus is **+2**:
+```
+[strmod + prof - 3]
+``` 
+will be calculated as **4 + 2 - 3**, resulting in a final answer of **3**.
 
-Note that whitespace between the operands and operators is optional, meaning that **`[strmod+prof-3]`** is also a valid and equivalent math expression.
+Note that whitespace between the operands and operators is optional, meaning that `[strmod+prof-3]` is also a valid and equivalent math expression.
 
 ### Variables
 
@@ -119,13 +123,31 @@ Here are a list of variables that are currently supported in math expressions:
 
 One limitation of basic math expressions is that resulting positive numbers will appear without a positive sign (e.g. **5** instead of **+5**). The positive sign is needed to accurately show attack roll modifiers, so to make it appear, simply add the word **`mod`** before the square brackets: **`mod[...]`**
 
-For example, assuming again that the creature's strength modifier is **+4** and its proficiency bonus is **+2**, **`*Melee Weapon Attack:* mod[strmod + prof - 3] to hit`** will appear as **_Melee Weapon Attack:_ +3 to hit**.
+For example, assuming again that the creature's strength modifier is **+4** and its proficiency bonus is **+2**: 
+
+```
+*Melee Weapon Attack:* mod[strmod + prof - 3] to hit
+``` 
+
+will appear as 
+
+> _Melee Weapon Attack:_ +3 to hit
 
 ### Damage Expressions: dmg[...]
 
 For damage rolls, you can use damage expressions to automatically calculate the average damage. All damage expressions begin with the word **`dmg`** before the square brackets, and the **first operand within the square brackets must be a dice operand (d8, 2d6, etc.).** Subsequent operands can be variables or integers that are added or subtracted from the dice result.
 
-For example, if the creature's dexterity modifier is **+3**, then **`dmg[1d8 + dexmod + 2] slashing damage`** results in **9 (1d8 + 5) slashing damage**. This is because since the average damage of 1d8 is 4.5 (rounded down to 4), then **4 + 3 + 2** equals **9** for the total average damage.
+For example, if the creature's dexterity modifier is **+3**, then:
+
+```
+dmg[1d8 + dexmod + 2] slashing damage
+```
+
+results in 
+
+> 9 (1d8 + 5) slashing damage
+ 
+This is because since the average damage of 1d8 is 4.5 (rounded down to 4), then **4 + 3 + 2** equals **9** for the total average damage.
 
 ## Development Setup
 
@@ -151,20 +173,22 @@ Run all the tests with:
 
 ## Dependencies
 
-- [PEG.js](pegjs) - Parsing for Markdown emphasis, creature names, ability score modifiers, and mathematical expressions
-- [DOMPurify](dompurify) - Sanitize inputted HTML tags
-- [JSBeautify](jsbeautify) - Beautify HTML Export
-- [Clipboard.js](clipboardjs) - Copy to clipboard functionality
+- [PEG.js][pegjs] - Parsing for Markdown emphasis, creature names, ability score modifiers, and mathematical expressions
+- [DOMPurify][dompurify] - Sanitize inputted HTML tags
+- [JSBeautify][jsbeautify] - Beautify HTML Export
+- [Clipboard.js][clipboardjs] - Copy to clipboard functionality
 
 ## Credits and Background
 
-Statblock5e-creator is a fork of Valloric's awesome [statblock5e](statblock5e) template. It is also heavily inspired by [CritterDB](critterdb), another great tool for creating statblocks.
+Statblock5e-creator is a fork of Valloric's awesome [statblock5e][statblock5e] template. It is also heavily inspired by [CritterDB][critterdb], another great tool for creating statblocks.
 
-I wrote this project in pure Javascript as a means of learning basic web technologies. While I could have gone with a typical framework like Angular or React, I instead wanted to build things from scratch and learn how they work behind the scenes. However, perhaps in a future update, this project could be refactored using one of these frameworks for better maintainability.
+I wrote this project in pure Javascript as a means of learning basic web technologies. While I could have gone with a typical framework like Angular or React, instead I wanted to build things from scratch and learn how they work behind the scenes.
 
 ## License
 
-Thie project is licensed under the [Apache License, Version 2.0][apache2].
+This project is licensed under the [Apache License, Version 2.0][apache2].
+
+[demo]: https://frumple.github.io/statblock5e-creator
 
 [jest]: https://jestjs.io
 [pegjs]: https://pegjs.org
