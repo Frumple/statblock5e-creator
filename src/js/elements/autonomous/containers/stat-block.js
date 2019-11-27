@@ -115,7 +115,13 @@ export default class StatBlock extends CustomAutonomousElement {
   }
 
   exportToJson() {
-    // TODO
+    const jsObject = {};
+
+    jsObject.creature = this.headingSection.exportToJson();
+    // const topStats = this.topStats.exportToJson();
+    // const bottomStats = this.bottomStats.exportToJson();
+
+    return jsObject;
   }
 
   exportToHtml() {

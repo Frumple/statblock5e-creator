@@ -22,7 +22,7 @@ beforeEach(() => {
 
 describe('when the show section is clicked', () => {
   beforeEach(() => {
-    headingSection.showElements.section.click(); 
+    headingSection.showElements.section.click();
   });
 
   it('should switch to edit mode and focus on the title field', () => {
@@ -63,7 +63,7 @@ describe('when the show section is clicked', () => {
         if (shortName !== '') {
           expectedShortName = shortName;
           inputValueAndTriggerEvent(headingSection.editElements.shortName, shortName);
-        }        
+        }
         if (isProperNoun) {
           headingSection.editElements.properNoun.click();
         }
@@ -80,46 +80,70 @@ describe('when the show section is clicked', () => {
           expect(receivedEvent.detail.isProperNoun).toBe(isProperNoun);
         } else {
           expect(receivedEvent).toBeNull();
-        }        
+        }
       });
       /* eslint-enable indent, no-unexpected-multiline */
-    });    
+    });
   });
 
   describe('and fields are populated and the edit section is submitted', () => {
-    it('should switch to show mode and save the creature name, size, type, and alignment', () => {
-      const fullName = 'Beholder';
-      const size = 'Large';
-      const type = 'aberration';
-      const alignment = 'lawful evil';
-      const expectedSubtitle = 'Large aberration, lawful evil';
+    describe('should switch to show mode and save the creature name, size, type, and alignment', () => {
+      /* eslint-disable indent, no-unexpected-multiline */
+      it.each
+      `
+        description                                   | fullName                 | shortName       | isProperNoun | size            | type                     | alignment         | expectedSubtitle
+        ${'full name only'}                           | ${'Aboleth'}             | ${''}           | ${false}     | ${'Large'}      | ${'aberration'}          | ${'lawful evil'}  | ${'Large aberration, lawful evil'}
+        ${'full name and short name'}                 | ${'Adult Copper Dragon'} | ${'dragon'}     | ${false}     | ${'Huge'}       | ${'dragon'}              | ${'chaotic good'} | ${'Huge dragon, chaotic good'}
+        ${'full name, is proper noun'}                | ${'Tiamat'}              | ${''}           | ${true}      | ${'Gargantuan'} | ${'fiend'}               | ${'chaotic evil'} | ${'Gargantuan fiend, chaotic evil'}
+        ${'full name and short name, is proper noun'} | ${'Lady Kima of Vord'}   | ${'Lady Kima'}  | ${true}      | ${'Medium'}     | ${'humanoid (halfling)'} | ${'lawful good'}  | ${'Medium humanoid (halfling), lawful good'}
+      `
+      ('$description: {fullName="$fullName", shortName="$shortName", isProperNoun="$isProperNoun", size="$size", type="$type", alignment="$alignment"} => $expectedSubtitle',
+      ({fullName, shortName, isProperNoun, size, type, alignment, expectedSubtitle}) => {
+        inputValueAndTriggerEvent(headingSection.editElements.fullName, fullName);
+        inputValueAndTriggerEvent(headingSection.editElements.shortName, shortName);
+        inputValueAndTriggerEvent(headingSection.editElements.properNoun, isProperNoun);
+        inputValueAndTriggerEvent(headingSection.editElements.size, size);
+        inputValueAndTriggerEvent(headingSection.editElements.type, type);
+        inputValueAndTriggerEvent(headingSection.editElements.alignment, alignment);
 
-      inputValueAndTriggerEvent(headingSection.editElements.fullName, fullName);
-      inputValueAndTriggerEvent(headingSection.editElements.size, size);
-      inputValueAndTriggerEvent(headingSection.editElements.type, type);
-      inputValueAndTriggerEvent(headingSection.editElements.alignment, alignment);
-    
-      headingSection.editElements.submitForm();
+        headingSection.editElements.submitForm();
 
-      expect(Creature.fullName).toBe(fullName);
-      expect(Creature.shortName).toBe('');
-      expect(Creature.isProperNoun).toBe(false);
-      expect(Creature.size).toBe(size);
-      expect(Creature.type).toBe(type);
-      expect(Creature.alignment).toBe(alignment);
+        expect(Creature.fullName).toBe(fullName);
+        expect(Creature.shortName).toBe(shortName);
+        expect(Creature.isProperNoun).toBe(isProperNoun);
+        expect(Creature.size).toBe(size);
+        expect(Creature.type).toBe(type);
+        expect(Creature.alignment).toBe(alignment);
 
-      expect(headingSection).toBeInMode('show');
-      expect(headingSection.showElements.title).toHaveTextContent(fullName);
-      expect(headingSection.showElements.subtitle).toHaveTextContent(expectedSubtitle);
+        expect(headingSection).toBeInMode('show');
+        expect(headingSection.showElements.title).toHaveTextContent(fullName);
+        expect(headingSection.showElements.subtitle).toHaveTextContent(expectedSubtitle);
 
-      verifyHtmlExport(fullName, expectedSubtitle);      
-      verifyHomebreweryExport(fullName, expectedSubtitle);      
+        verifyJsonExport(fullName, shortName, isProperNoun, size, type, alignment);
+        verifyHtmlExport(fullName, expectedSubtitle);
+        verifyHomebreweryExport(fullName, expectedSubtitle);
+      });
+      /* eslint-enable indent, no-unexpected-multiline */
     });
+
+    function verifyJsonExport(expectedFullName, expectedShortName, expectedIsProperNoun, expectedSize, expectedType, expectedAlignment) {
+      const jsObject = headingSection.exportToJson();
+      const expectedJsObject = {
+        fullName: expectedFullName,
+        shortName: expectedShortName,
+        isProperNoun: expectedIsProperNoun,
+        size: expectedSize,
+        type: expectedType,
+        alignment: expectedAlignment
+      };
+
+      expect(jsObject).toStrictEqual(expectedJsObject);
+    }
 
     function verifyHtmlExport(expectedTitle, expectedSubtitle) {
       const creatureHeading = headingSection.exportToHtml();
-      const title = creatureHeading.querySelector('h1');      
-      const subtitle = creatureHeading.querySelector('h2');  
+      const title = creatureHeading.querySelector('h1');
+      const subtitle = creatureHeading.querySelector('h2');
 
       expect(creatureHeading.tagName).toBe('CREATURE-HEADING');
       expect(title).toHaveTextContent(expectedTitle);
@@ -128,7 +152,7 @@ describe('when the show section is clicked', () => {
 
     function verifyHomebreweryExport(expectedTitle, expectedSubtitle) {
       const text = headingSection.exportToHomebrewery();
-      const expectedText = 
+      const expectedText =
         `> ## ${expectedTitle}\n>*${expectedSubtitle}*`;
 
       expect(text).toBe(expectedText);
@@ -205,5 +229,5 @@ describe('when the show section is clicked', () => {
         'Creature Type cannot be blank.',
         1);
     });
-  });  
+  });
 });

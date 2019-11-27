@@ -29,12 +29,12 @@ export default class HeadingSection extends sectionModule.Section {
     if (fullName !== '') {
       Creature.fullName = fullName;
       this.dispatchCreatureNameChangedEvent();
-    }    
+    }
   }
 
   onInputShortName() {
     Creature.shortName = this.editElements.shortName.value;
-    this.dispatchCreatureNameChangedEvent(); 
+    this.dispatchCreatureNameChangedEvent();
   }
 
   onInputProperNoun() {
@@ -80,6 +80,10 @@ export default class HeadingSection extends sectionModule.Section {
     this.editElements.fullName.value = Creature.fullName;
     this.showElements.title.textContent = Creature.title;
     this.showElements.subtitle.textContent = Creature.subtitle;
+  }
+
+  exportToJson() {
+    return Creature.toJson();
   }
 
   exportToHtml() {

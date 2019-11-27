@@ -28,6 +28,7 @@ export default class StatBlockEditor extends CustomAutonomousElement {
       this.statBlockSidebar = new StatBlockSidebar(this);
       this.statBlock = new StatBlock(this);
 
+      this.jsonExportDialog = new ExportDialog();
       this.htmlExportDialog = new ExportDialog();
       this.homebreweryExportDialog = new ExportDialog();
     } else {
@@ -35,9 +36,10 @@ export default class StatBlockEditor extends CustomAutonomousElement {
       this.statBlockSidebar = document.querySelector('stat-block-sidebar');
       this.statBlock = document.querySelector('stat-block');
 
+      this.jsonExportDialog = this.shadowRoot.getElementById('json-export-dialog');
       this.htmlExportDialog = this.shadowRoot.getElementById('html-export-dialog');
       this.homebreweryExportDialog = this.shadowRoot.getElementById('homebrewery-export-dialog');
-    }    
+    }
   }
 
   connectedCallback() {
@@ -67,7 +69,7 @@ export default class StatBlockEditor extends CustomAutonomousElement {
         GlobalOptions.twoColumnMode,
         GlobalOptions.twoColumnHeight);
     }
-    
+
     this.statBlock.setColumns(columns);
   }
 
@@ -116,11 +118,12 @@ export default class StatBlockEditor extends CustomAutonomousElement {
       break;
     default:
       throw new Error(`Unknown export format: '${format}'.`);
-    }   
+    }
   }
 
   openJsonExportDialog() {
-    // TODO
+    const content = this.exportToJson();
+    this.jsonExportDialog.launch(content, 'application/json', `${Creature.title}.json`);
   }
 
   openHtmlExportDialog() {
@@ -133,6 +136,18 @@ export default class StatBlockEditor extends CustomAutonomousElement {
     this.homebreweryExportDialog.launch(content, 'text/plain', `${Creature.title}.txt`);
   }
 
+  exportToJson() {
+    const jsObject = this.statBlock.exportToJson();
+
+    jsObject.meta = {
+      version: '1.0.0',
+      description: 'Created using statblock5e-creator',
+      url: 'https://frumple.github.io/statblock5e-creator'
+    };
+
+    return JSON.stringify(jsObject, null, 2);
+  }
+
   exportToHtml(title) {
     const exportDocument = HtmlExportDocumentFactory.createInstance();
     const titleElement = exportDocument.querySelector('title');
@@ -141,7 +156,7 @@ export default class StatBlockEditor extends CustomAutonomousElement {
 
     titleElement.textContent = title;
     bodyElement.appendChild(statBlockElement);
-    
+
     const doctype = '<!DOCTYPE html>';
     const content = `${doctype}${exportDocument.documentElement.outerHTML}`;
     const beautified_content = html_beautify(content, { indent_size: 2 });

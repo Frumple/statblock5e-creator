@@ -81,7 +81,7 @@ export default class StatBlockMenu extends CustomAutonomousElement {
   }
 
   onClickExportJsonButton() {
-    // TODO
+    this.dispatchMenuEvent('exportAction', { format: 'json' });
   }
 
   onClickExportHtmlButton() {

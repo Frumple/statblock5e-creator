@@ -9,7 +9,7 @@ class Creature {
     this._fullName = 'Commoner';
     this.shortName = '';
     this.isProperNoun = false;
-    
+
     this.size = 'Medium';
     this.type = 'humanoid';
     this.alignment = 'unaligned';
@@ -42,7 +42,7 @@ class Creature {
   get grammaticalName() {
     return (this.shortName !== '') ?
       this.grammaticalShortName :
-      this.grammaticalFullName;      
+      this.grammaticalFullName;
   }
 
   grammaticize(name) {
@@ -53,6 +53,17 @@ class Creature {
     return {
       name: this.grammaticalName,
       fullName: this.grammaticalFullName
+    };
+  }
+
+  toJson() {
+    return {
+      fullName: this._fullName,
+      shortName: this.shortName,
+      isProperNoun: this.isProperNoun,
+      size: this.size,
+      type: this.type,
+      alignment: this.alignment
     };
   }
 
