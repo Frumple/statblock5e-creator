@@ -30,7 +30,7 @@ class HitPoints {
   }
 
   get hitPoints() {
-    if (this.useHitDie) {      
+    if (this.useHitDie) {
       const hp = Math.floor(this.hitDieQuantity * this.hitDieAverage) + this.constitutionHitPoints;
       this._hitPoints = Math.max(0, hp);
     }
@@ -60,6 +60,22 @@ class HitPoints {
     const modifierNumber = formatModifierNumber(constitutionHitPoints);
 
     return `${modifierOperator} ${modifierNumber}`;
+  }
+
+  toJson() {
+    if (this.useHitDie) {
+      return {
+        hitPoints: null,
+        hitDieQuantity: this.hitDieQuantity,
+        hitDieSize: this.hitDieSize
+      };
+    }
+
+    return {
+      hitPoints: this._hitPoints,
+      hitDieQuantity: null,
+      hitDieSize: null
+    };
   }
 
   toHtml() {

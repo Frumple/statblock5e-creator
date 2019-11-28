@@ -106,6 +106,10 @@ export default class HitPointsSection extends propertyLineSectionModule.Property
     this.showElements.text.textContent = HitPoints.text;
   }
 
+  exportToJson() {
+    return HitPoints.toJson();
+  }
+
   exportToHtml() {
     return HitPoints.toHtml();
   }
