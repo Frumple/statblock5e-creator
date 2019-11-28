@@ -60,6 +60,30 @@ class Speed {
     return list.join(', ');
   }
 
+  toJson() {
+    if (this.useCustomText) {
+      return {
+        walk: null,
+        burrow: null,
+        climb: null,
+        fly: null,
+        hover: null,
+        swim: null,
+        customText: this.originalCustomText
+      };
+    }
+
+    return {
+      walk: this.walk,
+      burrow: this.burrow,
+      climb: this.climb,
+      fly: this.fly,
+      hover: this.hover,
+      swim: this.swim,
+      customText: null
+    };
+  }
+
   toHtml() {
     return ExportHelpers.createHtmlPropertyLine(this.headingName, this.htmlText);
   }

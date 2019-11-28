@@ -53,12 +53,16 @@ export default class SpeedSection extends propertyLineSectionModule.PropertyLine
     Speed.htmlCustomText = this.editElements.customText.htmlText;
   }
 
-  updateView() {    
+  updateView() {
     if (Speed.useCustomText) {
       this.showElements.text.innerHTMLSanitized = Speed.htmlCustomText;
     } else {
       this.showElements.text.textContent = Speed.nonCustomText;
     }
+  }
+
+  exportToJson() {
+    return Speed.toJson();
   }
 
   exportToHtml() {

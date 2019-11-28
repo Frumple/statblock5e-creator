@@ -52,57 +52,33 @@ describe('when the show section is clicked', () => {
     });
 
     describe('and the custom text field is populated and the edit section is submitted', () => {
-      it('should switch to show mode and save the custom text', () => {
-        const customText = '30 ft. (40 ft., climb 30 ft. in bear or hybrid form)';
-        inputValueAndTriggerEvent(speedSection.editElements.customText, customText);
+      describe('should switch to show mode and save the custom text', () => {
+        /* eslint-disable indent, no-unexpected-multiline */
+        it.each
+        `
+          description                                 | customText                                                | expectedHtmlText
+          ${'plain custom text'}                      | ${'30 ft. (40 ft., climb 30 ft. in bear or hybrid form)'} | ${'30 ft. (40 ft., climb 30 ft. in bear or hybrid form)'}
+          ${'custom text with valid markdown syntax'} | ${'40 ft. (80 ft. when _hasted_)'}                        | ${'40 ft. (80 ft. when <em>hasted</em>)'}
+          ${'custom text with html tags escaped'}     | ${'40 ft. (80 ft. when <em>hasted</em>)'}                 | ${'40 ft. (80 ft. when &lt;em&gt;hasted&lt;/em&gt;)'}
+        `
+        ('$description: $customText => $expectedHtmlText',
+        ({customText, expectedHtmlText}) => {
+          inputValueAndTriggerEvent(speedSection.editElements.customText, customText);
 
-        speedSection.editElements.submitForm();
+          speedSection.editElements.submitForm();
 
-        expect(Speed.useCustomText).toBe(true);
-        expect(Speed.originalCustomText).toBe(customText);
-        expect(Speed.htmlCustomText).toBe(customText);
+          expect(Speed.useCustomText).toBe(true);
+          expect(Speed.originalCustomText).toBe(customText);
+          expect(Speed.htmlCustomText).toBe(expectedHtmlText);
 
-        expect(speedSection).toBeInMode('show');
-        expect(speedSection).toShowPropertyLine(expectedHeading, customText);
+          expect(speedSection).toBeInMode('show');
+          expect(speedSection).toShowPropertyLine(expectedHeading, expectedHtmlText);
 
-        expect(speedSection).toExportPropertyLineToHtml(expectedHeading, customText);
-        expect(speedSection).toExportPropertyLineToHomebrewery(expectedHeading, customText);
-      });
-
-      it('should switch to show mode and save the custom text with valid markdown syntax', () => {
-        const originalText = '40 ft. (80 ft. when _hasted_)';
-        const htmlText = '40 ft. (80 ft. when <em>hasted</em>)';
-        inputValueAndTriggerEvent(speedSection.editElements.customText, originalText);
-
-        speedSection.editElements.submitForm();
-
-        expect(Speed.useCustomText).toBe(true);
-        expect(Speed.originalCustomText).toBe(originalText);
-        expect(Speed.htmlCustomText).toBe(htmlText);
-
-        expect(speedSection).toBeInMode('show');
-        expect(speedSection).toShowPropertyLine(expectedHeading, htmlText);
-
-        expect(speedSection).toExportPropertyLineToHtml(expectedHeading, htmlText);
-        expect(speedSection).toExportPropertyLineToHomebrewery(expectedHeading, originalText);
-      });
-
-      it('should switch to show mode and save the custom text with html escaped', () => {
-        const originalText = '40 ft. (80 ft. when <em>hasted</em>)';
-        const htmlText = '40 ft. (80 ft. when &lt;em&gt;hasted&lt;/em&gt;)';
-        inputValueAndTriggerEvent(speedSection.editElements.customText, originalText);
-
-        speedSection.editElements.submitForm();
-
-        expect(Speed.useCustomText).toBe(true);
-        expect(Speed.originalCustomText).toBe(originalText);
-        expect(Speed.htmlCustomText).toBe(htmlText);
-
-        expect(speedSection).toBeInMode('show');
-        expect(speedSection).toShowPropertyLine(expectedHeading, htmlText);
-
-        expect(speedSection).toExportPropertyLineToHtml(expectedHeading, htmlText);
-        expect(speedSection).toExportPropertyLineToHomebrewery(expectedHeading, originalText);
+          verifyJsonExport(null, null, null, null, null, null, customText);
+          expect(speedSection).toExportPropertyLineToHtml(expectedHeading, expectedHtmlText);
+          expect(speedSection).toExportPropertyLineToHomebrewery(expectedHeading, customText);
+        });
+        /* eslint-enable indent, no-unexpected-multiline */
       });
 
       it('should display an error if the custom text field is blank', () => {
@@ -197,17 +173,24 @@ describe('when the show section is clicked', () => {
 
           speedSection.editElements.submitForm();
 
-          expect(Speed.walk).toBe(nullIfEmptyString(walk));
-          expect(Speed.burrow).toBe(nullIfEmptyString(burrow));
-          expect(Speed.climb).toBe(nullIfEmptyString(climb));
-          expect(Speed.fly).toBe(nullIfEmptyString(fly));
+          walk = nullIfEmptyString(walk);
+          burrow = nullIfEmptyString(burrow);
+          climb = nullIfEmptyString(climb);
+          fly = nullIfEmptyString(fly);
+          swim = nullIfEmptyString(swim);
+
+          expect(Speed.walk).toBe(walk);
+          expect(Speed.burrow).toBe(burrow);
+          expect(Speed.climb).toBe(climb);
+          expect(Speed.fly).toBe(fly);
           expect(Speed.hover).toBe(hover);
-          expect(Speed.swim).toBe(nullIfEmptyString(swim));
+          expect(Speed.swim).toBe(swim);
           expect(Speed.useCustomText).toBe(false);
 
           expect(speedSection).toBeInMode('show');
           expect(speedSection).toShowPropertyLine(expectedHeading, expectedText);
 
+          verifyJsonExport(walk, burrow, climb, fly, hover, swim, null);
           expect(speedSection).toExportPropertyLineToHtml(expectedHeading, expectedText);
           expect(speedSection).toExportPropertyLineToHomebrewery(expectedHeading, expectedText);
         });
@@ -216,3 +199,18 @@ describe('when the show section is clicked', () => {
     });
   });
 });
+
+function verifyJsonExport(walk, burrow, climb, fly, hover, swim, customText) {
+  const jsObject = speedSection.exportToJson();
+  const expectedJsObject = {
+    walk: walk,
+    burrow: burrow,
+    climb: climb,
+    fly: fly,
+    hover: hover,
+    swim: swim,
+    customText: customText
+  };
+
+  expect(jsObject).toStrictEqual(expectedJsObject);
+}
