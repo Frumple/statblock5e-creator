@@ -50,12 +50,12 @@ class Skills {
     for (const key of this.keys) {
       const skill = this.skills[key];
       const isEnabled = skill.isEnabled;
-      
+
       if (isEnabled) {
-        list.push(skill.text);        
+        list.push(skill.text);
       }
     }
-    
+
     return list.join(', ');
   }
 
@@ -78,7 +78,7 @@ class Skill {
   reset() {
     this.isEnabled = false;
     this.isProficient = false;
-    this.override = NaN;
+    this.override = null;
   }
 
   get ability() {
@@ -93,10 +93,10 @@ class Skill {
     let passiveScore = 10;
 
     if (this.isEnabled) {
-      if (! isNaN(this.override)) {
+      if (this.override !== null) {
         return passiveScore + this.override;
-      } 
-      
+      }
+
       if (this.isProficient) {
         passiveScore += ProficiencyBonus.proficiencyBonus;
       }
@@ -110,16 +110,16 @@ class Skill {
     let skillModifier = 0;
 
     if (this.isEnabled) {
-      if (! isNaN(this.override)) {
+      if (this.override !== null) {
         return this.override;
       }
-      
+
       if (this.isProficient) {
         skillModifier += ProficiencyBonus.proficiencyBonus;
       }
     }
     skillModifier += this.ability.modifier;
-    
+
     return skillModifier;
   }
 

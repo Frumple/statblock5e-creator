@@ -9,11 +9,11 @@ class Speed {
 
   reset() {
     this.walk = 30;
-    this.burrow = NaN;
-    this.climb = NaN;
-    this.fly = NaN;
+    this.burrow = null;
+    this.climb = null;
+    this.fly = null;
     this.hover = false;
-    this.swim = NaN;
+    this.swim = null;
 
     this.useCustomText = false;
     this.originalCustomText = '';
@@ -43,17 +43,17 @@ class Speed {
 
     list.push(`${walk} ${unit}`);
 
-    if (! isNaN(this.burrow)) {
+    if (this.burrow != null) {
       list.push(`burrow ${this.burrow} ${unit}`);
     }
-    if (! isNaN(this.climb)) {
+    if (this.climb != null) {
       list.push(`climb ${this.climb} ${unit}`);
     }
-    if (! isNaN(this.fly)) {
+    if (this.fly != null) {
       const hover = (this.hover ? ' (hover)' : '');
-      list.push(`fly ${this.fly} ${unit}${hover}`);      
+      list.push(`fly ${this.fly} ${unit}${hover}`);
     }
-    if (! isNaN(this.swim)) {
+    if (this.swim != null) {
       list.push(`swim ${this.swim} ${unit}`);
     }
 

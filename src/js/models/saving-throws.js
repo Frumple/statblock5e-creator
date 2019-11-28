@@ -46,7 +46,7 @@ class SavingThrows {
 
     return list.join(', ');
   }
-  
+
   toHtml() {
     return createHtmlPropertyLine(this.headingName, this.text);
   }
@@ -65,7 +65,7 @@ class SavingThrow {
   reset() {
     this.isEnabled = false;
     this.isProficient = false;
-    this.override = NaN;
+    this.override = null;
   }
 
   get text() {
@@ -79,7 +79,7 @@ class SavingThrow {
     let savingThrowModifier = 0;
 
     if (this.isEnabled) {
-      if (! isNaN(this.override)) {
+      if (this.override !== null) {
         return this.override;
       }
 

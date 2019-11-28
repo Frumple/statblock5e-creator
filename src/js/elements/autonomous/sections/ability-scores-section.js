@@ -25,12 +25,12 @@ export default class AbilityScoresSection extends sectionModule.Section {
 
   onInputAbilityScore(key) {
     this.updateModelAbilityScore(key);
-    this.updateViewAbility(key);    
-  }  
+    this.updateViewAbility(key);
+  }
 
   onInputProficiencyBonus() {
     this.updateModelProficiencyBonus();
-  } 
+  }
 
   checkForErrors() {
     for (const key of Abilities.keys) {
@@ -50,7 +50,7 @@ export default class AbilityScoresSection extends sectionModule.Section {
   updateModelAbilityScore(key) {
     const score = this.editElements.score[key].valueAsInt;
 
-    if (! isNaN(score)) {
+    if (score !== null) {
       Abilities.abilities[key].score = score;
       this.dispatchAbilityScoreChangedEvent(key);
     }
@@ -70,8 +70,8 @@ export default class AbilityScoresSection extends sectionModule.Section {
   updateModelProficiencyBonus() {
     const proficiencyBonus = this.editElements.proficiencyBonus.valueAsInt;
 
-    if (! isNaN(proficiencyBonus)) {
-      ProficiencyBonus.proficiencyBonus = proficiencyBonus;      
+    if (proficiencyBonus !== null) {
+      ProficiencyBonus.proficiencyBonus = proficiencyBonus;
       this.dispatchProficiencyBonusChangedEvent();
     }
   }
@@ -138,7 +138,7 @@ class AbilityScoresEditElements extends sectionModule.EditElements {
 
     this.proficiencyBonus = shadowRoot.getElementById('proficiency-bonus-input');
   }
-  
+
   get initiallySelectedElement() {
     return this.score.strength;
   }

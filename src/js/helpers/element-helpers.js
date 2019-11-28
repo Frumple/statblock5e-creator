@@ -1,6 +1,6 @@
 export function focusAndSelectElement(element) {
-  let tagName = element.tagName;
-  let type = element.getAttribute('type');
+  const tagName = element.tagName;
+  const type = element.getAttribute('type');
 
   if (isTextOrNumberInputElement(tagName, type) ||
       isTextAreaElement(tagName)) {
@@ -20,8 +20,8 @@ function isTextAreaElement(tagName) {
 }
 
 export function inputValueAndTriggerEvent(element, value) {
-  let tagName = element.tagName;
-  let type = element.getAttribute('type');
+  const tagName = element.tagName;
+  const type = element.getAttribute('type');
 
   if (tagName === 'INPUT' && type === 'checkbox') {
     element.checked = value;

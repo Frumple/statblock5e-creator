@@ -7,12 +7,12 @@ class Senses {
 
     this.reset();
   }
-  
+
   reset() {
-    this.blindsight = NaN;
-    this.darkvision = NaN;
-    this.tremorsense = NaN;
-    this.truesight = NaN;
+    this.blindsight = null;
+    this.darkvision = null;
+    this.tremorsense = null;
+    this.truesight = null;
 
     this.useCustomText = false;
     this.originalCustomText = '';
@@ -43,16 +43,16 @@ class Senses {
     const unit = 'ft.';
     const list = [];
 
-    if (! isNaN(this.blindsight)) {
+    if (this.blindsight != null) {
       list.push(`blindsight ${this.blindsight} ${unit}`);
     }
-    if (! isNaN(this.darkvision)) {
+    if (this.darkvision != null) {
       list.push(`darkvision ${this.darkvision} ${unit}`);
     }
-    if (! isNaN(this.tremorsense)) {
+    if (this.tremorsense != null) {
       list.push(`tremorsense ${this.tremorsense} ${unit}`);
     }
-    if (! isNaN(this.truesight)) {
+    if (this.truesight != null) {
       list.push(`truesight ${this.truesight} ${unit}`);
     }
 

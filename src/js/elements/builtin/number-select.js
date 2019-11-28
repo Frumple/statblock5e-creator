@@ -1,6 +1,7 @@
 import CustomBuiltinElementMixins from '../../helpers/custom-builtin-element-mixins.js';
 import isRunningInNode from '../../helpers/is-running-in-node.js';
 import { copyObjectProperties } from '../../helpers/object-helpers.js';
+import { convertToInteger } from '../../helpers/number-helpers.js';
 
 export default class NumberSelect extends HTMLSelectElement {
   static async define() {
@@ -26,6 +27,6 @@ export let NumberSelectMixin = {
   },
 
   get valueAsInt() {
-    return parseInt(this.value, 10);
+    return convertToInteger(this.value);
   }
 };

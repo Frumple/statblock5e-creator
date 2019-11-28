@@ -2,7 +2,7 @@ import SkillsSection from './skills-section.js';
 import * as TestCustomElements from '../../../helpers/test/test-custom-elements.js';
 
 import { inputValueAndTriggerEvent } from '../../../helpers/element-helpers.js';
-import { formatModifier } from '../../../helpers/string-formatter.js';
+import { formatModifier, nullIfEmptyString } from '../../../helpers/string-formatter.js';
 
 import Abilities from '../../../models/abilities.js';
 import ProficiencyBonus from '../../../models/proficiency-bonus.js';
@@ -33,7 +33,7 @@ beforeEach(() => {
 
 describe('when the show section is clicked', () => {
   beforeEach(() => {
-    skillsSection.showElements.section.click(); 
+    skillsSection.showElements.section.click();
   });
 
   it('should switch to edit mode and focus on the acrobatics enable checkbox', () => {
@@ -102,9 +102,9 @@ describe('when the show section is clicked', () => {
         skillsSection.addEventListener('skillChanged', (event) => {
           receivedEvent = event;
         });
-        
+
         const skillElements = skillsSection.editElements.skill[singleSkillUnderTest];
-        
+
         Abilities.abilities[singleAbilityUnderTest].score = abilityScore;
         ProficiencyBonus.proficiencyBonus = proficiencyBonus;
 
@@ -119,7 +119,7 @@ describe('when the show section is clicked', () => {
             receivedEvent = null;
           }
 
-          if (! isNaN(skillOverride)) {
+          if (skillOverride !== '') {
             inputValueAndTriggerEvent(skillElements.override, skillOverride);
             expectSkillChangedEvent(receivedEvent, singleSkillUnderTest);
             receivedEvent = null;
@@ -129,11 +129,7 @@ describe('when the show section is clicked', () => {
         const skill = Skills.skills[singleSkillUnderTest];
         expect(skill.isEnabled).toBe(skillEnabled);
         expect(skill.isProficient).toBe(skillProficient);
-        if (skillOverride === '') {
-          expect(skill.override).toBe(NaN);
-        } else {
-          expect(skill.override).toBe(skillOverride);
-        }        
+        expect(skill.override).toBe(nullIfEmptyString(skillOverride));
         expect(skill.modifier).toBe(expectedModifier);
 
         const formattedModifier = formatModifier(expectedModifier);
@@ -187,7 +183,7 @@ describe('when the show section is clicked', () => {
         if (history) {
           const elements = skillsSection.editElements.skill['history'];
           elements.enable.click();
-          elements.proficient.click();          
+          elements.proficient.click();
         }
 
         if (insight) {

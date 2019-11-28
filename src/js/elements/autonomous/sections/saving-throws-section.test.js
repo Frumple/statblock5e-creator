@@ -2,7 +2,7 @@ import SavingThrowsSection from './saving-throws-section.js';
 import * as TestCustomElements from '../../../helpers/test/test-custom-elements.js';
 
 import { inputValueAndTriggerEvent } from '../../../helpers/element-helpers.js';
-import { formatModifier } from '../../../helpers/string-formatter.js';
+import { formatModifier, nullIfEmptyString } from '../../../helpers/string-formatter.js';
 
 import Abilities from '../../../models/abilities.js';
 import ProficiencyBonus from '../../../models/proficiency-bonus.js';
@@ -32,7 +32,7 @@ beforeEach(() => {
 
 describe('when the show section is clicked', () => {
   beforeEach(() => {
-    savingThrowsSection.showElements.section.click(); 
+    savingThrowsSection.showElements.section.click();
   });
 
   it('should switch to edit mode and focus on the strength enable checkbox', () => {
@@ -98,7 +98,7 @@ describe('when the show section is clicked', () => {
       ('$description: {abilityScore="$abilityScore", proficiencyBonus="$proficiencyBonus", savingThrowEnabled="$savingThrowEnabled", savingThrowProficient="$savingThrowProficient", savingThrowOverride="$savingThrowOverride"} => {expectedModifier="$expectedModifier", expectedText="$expectedText"}',
       ({abilityScore, proficiencyBonus, savingThrowEnabled, savingThrowProficient, savingThrowOverride, expectedModifier, expectedText}) => {
         const savingThrowElements = savingThrowsSection.editElements.savingThrow[singleSavingThrowUnderTest];
-        
+
         Abilities.abilities[singleSavingThrowUnderTest].score = abilityScore;
         ProficiencyBonus.proficiencyBonus = proficiencyBonus;
 
@@ -108,18 +108,14 @@ describe('when the show section is clicked', () => {
         if (! savingThrowProficient) {
           savingThrowElements.proficient.click();
         }
-        if (! isNaN(savingThrowOverride)) {
+        if (savingThrowOverride !== '') {
           inputValueAndTriggerEvent(savingThrowElements.override, savingThrowOverride);
         }
-       
+
         const savingThrow = SavingThrows.savingThrows[singleSavingThrowUnderTest];
         expect(savingThrow.isEnabled).toBe(savingThrowEnabled);
         expect(savingThrow.isProficient).toBe(savingThrowProficient);
-        if (savingThrowOverride === '') {
-          expect(savingThrow.override).toBe(NaN);
-        } else {
-          expect(savingThrow.override).toBe(savingThrowOverride);
-        }
+        expect(savingThrow.override).toBe(nullIfEmptyString(savingThrowOverride));
         expect(savingThrow.modifier).toBe(expectedModifier);
 
         const formattedModifier = formatModifier(expectedModifier);
@@ -175,7 +171,7 @@ describe('when the show section is clicked', () => {
 
         if (dexterity) {
           const elements = savingThrowsSection.editElements.savingThrow['dexterity'];
-          elements.enable.click();          
+          elements.enable.click();
           inputValueAndTriggerEvent(elements.override, 0);
         }
 

@@ -71,7 +71,7 @@ export default class HitPointsSection extends propertyLineSectionModule.Property
   updateModelHitPoints() {
     const hitPoints = this.editElements.hitPoints.valueAsInt;
 
-    if (! isNaN(hitPoints)) {
+    if (hitPoints !== null) {
       HitPoints.hitPoints = hitPoints;
     }
   }
@@ -83,7 +83,7 @@ export default class HitPointsSection extends propertyLineSectionModule.Property
   updateModelHitDieQuantity() {
     const hitDieQuantity = this.editElements.hitDieQuantity.valueAsInt;
 
-    if (! isNaN(hitDieQuantity)) {
+    if (hitDieQuantity !== null) {
       HitPoints.hitDieQuantity = hitDieQuantity;
     }
   }
@@ -91,7 +91,7 @@ export default class HitPointsSection extends propertyLineSectionModule.Property
   updateModelHitDieSize() {
     const hitDieSize = this.editElements.hitDieSize.valueAsInt;
 
-    if (! isNaN(hitDieSize)) {
+    if (hitDieSize !== null) {
       HitPoints.hitDieSize = hitDieSize;
     }
   }

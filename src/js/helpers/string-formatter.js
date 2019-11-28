@@ -35,3 +35,7 @@ export function formatModifierNumber(modifier) {
 export function trimTrailingPeriods(string) {
   return string.replace(/\.+$/, '');
 }
+
+export function nullIfEmptyString(string) {
+  return string === '' ? null : string;
+}

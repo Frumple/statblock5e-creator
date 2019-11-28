@@ -1,4 +1,5 @@
 import CustomBuiltinInputElement from './custom-builtin-input-element.js';
+import { convertToInteger } from '../../helpers/number-helpers.js';
 
 export default class NumberInput extends CustomBuiltinInputElement {
   static get elementName() { return 'number-input'; }
@@ -30,7 +31,7 @@ export let NumberInputMixin = {
   },
 
   validate(errorMessages) {
-    if (isNaN(this.valueAsInt)) {
+    if (this.valueAsInt === null) {
       const prettyName = this.getAttribute('pretty-name');
       const fieldName = prettyName ? prettyName : this.name;
       errorMessages.add(this, `${fieldName} must be a valid number.`);
@@ -38,14 +39,14 @@ export let NumberInputMixin = {
   },
 
   get valueAsInt() {
-    return parseInt(this.value, 10);
+    return convertToInteger(this.value);
   },
 
   get minAsInt() {
-    return parseInt(this.min, 10);
+    return convertToInteger(this.min);
   },
 
   get maxAsInt() {
-    return parseInt(this.max, 10);
+    return convertToInteger(this.max);
   }
 };

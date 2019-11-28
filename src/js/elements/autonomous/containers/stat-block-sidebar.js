@@ -1,4 +1,5 @@
 import CustomAutonomousElement from '../custom-autonomous-element.js';
+import { convertToInteger } from '../../../helpers/number-helpers.js';
 
 export default class StatBlockSidebar extends CustomAutonomousElement {
   static get elementName() { return 'stat-block-sidebar'; }
@@ -46,7 +47,7 @@ export default class StatBlockSidebar extends CustomAutonomousElement {
     let height = null;
 
     if (mode === 'manual') {
-      height = parseInt(this.manualHeightSlider.value, 10);
+      height = convertToInteger(this.manualHeightSlider.value);
     }
 
     const heightEvent = new CustomEvent('twoColumnHeightChanged', {
