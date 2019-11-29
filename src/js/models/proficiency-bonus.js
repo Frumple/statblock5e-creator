@@ -10,6 +10,10 @@ class ProficiencyBonus {
   toParserOptions() {
     return this.proficiencyBonus;
   }
+
+  toJson() {
+    return this.proficiencyBonus;
+  }
 }
 
 export default new ProficiencyBonus();

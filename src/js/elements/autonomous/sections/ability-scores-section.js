@@ -101,6 +101,13 @@ export default class AbilityScoresSection extends sectionModule.Section {
     this.showElements.modifier[key].textContent = formattedModifier;
   }
 
+  exportToJson() {
+    return {
+      abilityScores: Abilities.toJson(),
+      proficiencyBonus: ProficiencyBonus.toJson()
+    };
+  }
+
   exportToHtml() {
     return Abilities.toHtml();
   }

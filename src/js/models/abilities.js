@@ -34,7 +34,7 @@ class Abilities {
       this.abilities['constitution'],
       this.abilities['intelligence'],
       this.abilities['wisdom'],
-      this.abilities['charisma'],
+      this.abilities['charisma']
     ];
   }
 
@@ -46,7 +46,18 @@ class Abilities {
       intelligence: this.abilities['intelligence'].toParserOptions(),
       wisdom: this.abilities['wisdom'].toParserOptions(),
       charisma: this.abilities['charisma'].toParserOptions()
-    }
+    };
+  }
+
+  toJson() {
+    return {
+      strength: this.abilities['strength'].score,
+      dexterity: this.abilities['dexterity'].score,
+      constitution: this.abilities['constitution'].score,
+      intelligence: this.abilities['intelligence'].score,
+      wisdom: this.abilities['wisdom'].score,
+      charisma: this.abilities['charisma'].score
+    };
   }
 
   toHtml() {
@@ -93,7 +104,7 @@ class Ability {
   toParserOptions() {
     return {
       modifier: this.modifier
-    }
+    };
   }
 }
 

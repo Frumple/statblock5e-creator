@@ -25,7 +25,7 @@ beforeEach(() => {
 
 describe('when the show section is clicked', () => {
   beforeEach(() => {
-    abilityScoresSection.showElements.section.click(); 
+    abilityScoresSection.showElements.section.click();
   });
 
   it('should switch to edit mode and focus on the strength score field', () => {
@@ -57,7 +57,7 @@ describe('when the show section is clicked', () => {
         ${'+ CHA mod'}      | ${'charisma'}     | ${23}   | ${6}
         ${'0 CHA mod'}      | ${'charisma'}     | ${11}   | ${0}
         ${'- CHA mod'}      | ${'charisma'}     | ${9}    | ${-1}
-        ${'maximum values'} | ${'charisma'}     | ${999}  | ${494}            
+        ${'maximum values'} | ${'charisma'}     | ${999}  | ${494}
       `
       ('$description: {abilityName="$abilityName", score="$score"} => $expectedModifier',
       ({abilityName, score, expectedModifier}) => {
@@ -82,11 +82,31 @@ describe('when the show section is clicked', () => {
 
         expect(abilityScoresSection.showElements.modifier[abilityName]).toHaveTextContent(formattedModifier);
 
+        const expectedAbilityScores = {
+          strength: 10,
+          dexterity: 10,
+          constitution: 10,
+          intelligence: 10,
+          wisdom: 10,
+          charisma: 10,
+        };
+        expectedAbilityScores[abilityName] = score;
+
+        verifyJsonExport(
+          expectedAbilityScores.strength,
+          expectedAbilityScores.dexterity,
+          expectedAbilityScores.constitution,
+          expectedAbilityScores.intelligence,
+          expectedAbilityScores.wisdom,
+          expectedAbilityScores.charisma,
+          2
+        );
+
         const htmlExport = abilityScoresSection.exportToHtml();
         expect(htmlExport.tagName).toBe('ABILITIES-BLOCK');
         expect(htmlExport.dataset[ability.abbreviation]).toBe(score.toString());
 
-        verifyHomebreweryExport();        
+        verifyHomebreweryExport();
       });
       /* eslint-enable indent, no-unexpected-multiline */
     });
@@ -101,7 +121,7 @@ describe('when the show section is clicked', () => {
         ${'CON not a number'} | ${'constitution'} | ${'Constitution Score must be a valid number.'}
         ${'INT not a number'} | ${'intelligence'} | ${'Intelligence Score must be a valid number.'}
         ${'WIS not a number'} | ${'wisdom'}       | ${'Wisdom Score must be a valid number.'}
-        ${'CHA not a number'} | ${'charisma'}     | ${'Charisma Score must be a valid number.'}        
+        ${'CHA not a number'} | ${'charisma'}     | ${'Charisma Score must be a valid number.'}
       `
       ('$description: $abilityName => $expectedErrorMessage',
       ({abilityName, expectedErrorMessage}) => {
@@ -157,12 +177,14 @@ describe('when the show section is clicked', () => {
         inputValueAndTriggerEvent(abilityScoresSection.editElements.proficiencyBonus, proficiencyBonus);
 
         expect(ProficiencyBonus.proficiencyBonus).toBe(proficiencyBonus);
-        
+
         expect(receivedEvent).not.toBeNull();
 
         abilityScoresSection.editElements.submitForm();
 
         expect(ProficiencyBonus.proficiencyBonus).toBe(proficiencyBonus);
+
+        verifyJsonExport(10, 10, 10, 10, 10, 10, proficiencyBonus);
       });
       /* eslint-enable indent, no-unexpected-multiline */
     });
@@ -172,7 +194,7 @@ describe('when the show section is clicked', () => {
       abilityScoresSection.addEventListener('proficiencyBonusChanged', (event) => {
         receivedEvent = event;
       });
-      
+
       const oldProficiencyBonus = ProficiencyBonus.proficiencyBonus;
 
       inputValueAndTriggerEvent(abilityScoresSection.editElements.proficiencyBonus, '');
@@ -197,9 +219,9 @@ describe('when the show section is clicked', () => {
         description             | strScore | dexScore | conScore | intScore | wisScore | chaScore | proficiencyBonus | strMod  | dexMod  | conMod  | intMod  | wisMod  | chaMod
         ${'ancient red dragon'} | ${30}    | ${10}    | ${29}    | ${18}    | ${15}    | ${23}    | ${7}             | ${10}   | ${0}    | ${9}    | ${4}    | ${2}    | ${6}
         ${'basilisk'}           | ${16}    | ${8}     | ${15}    | ${2}     | ${8}     | ${7}     | ${2}             | ${3}    | ${-1}   | ${2}    | ${-4}   | ${-1}   | ${-2}
-        ${'commoner'}           | ${10}    | ${10}    | ${10}    | ${10}    | ${10}    | ${10}    | ${2}             | ${0}    | ${0}    | ${0}    | ${0}    | ${0}    | ${0}        
+        ${'commoner'}           | ${10}    | ${10}    | ${10}    | ${10}    | ${10}    | ${10}    | ${2}             | ${0}    | ${0}    | ${0}    | ${0}    | ${0}    | ${0}
         ${'gelatinous cube'}    | ${14}    | ${3}     | ${20}    | ${1}     | ${6}     | ${1}     | ${2}             | ${2}    | ${-4}   | ${5}    | ${-5}   | ${-2}   | ${-5}
-        ${'lich'}               | ${11}    | ${16}    | ${16}    | ${20}    | ${14}    | ${16}    | ${7}             | ${0}    | ${3}    | ${3}    | ${5}    | ${2}    | ${3} 
+        ${'lich'}               | ${11}    | ${16}    | ${16}    | ${20}    | ${14}    | ${16}    | ${7}             | ${0}    | ${3}    | ${3}    | ${5}    | ${2}    | ${3}
         ${'mage'}               | ${9}     | ${14}    | ${11}    | ${17}    | ${12}    | ${11}    | ${3}             | ${-1}   | ${2}    | ${0}    | ${3}    | ${1}    | ${0}
         ${'phase spider'}       | ${15}    | ${15}    | ${12}    | ${6}     | ${10}    | ${6}     | ${2}             | ${2}    | ${2}    | ${1}    | ${-2}   | ${0}    | ${-2}
         ${'priest'}             | ${10}    | ${10}    | ${12}    | ${13}    | ${16}    | ${13}    | ${2}             | ${0}    | ${0}    | ${1}    | ${1}    | ${3}    | ${1}
@@ -231,6 +253,8 @@ describe('when the show section is clicked', () => {
 
         abilityScoresSection.editElements.submitForm();
 
+        verifyJsonExport(strScore, dexScore, conScore, intScore, wisScore, chaScore, proficiencyBonus);
+
         const htmlExport = abilityScoresSection.exportToHtml();
         expect(htmlExport.tagName).toBe('ABILITIES-BLOCK');
 
@@ -240,12 +264,12 @@ describe('when the show section is clicked', () => {
           const expectedModifier = eval(`${abbreviation}Mod`);
           const formattedModifier = `(${formatModifier(expectedModifier)})`;
 
-          expect(abilityScoresSection.showElements.score[key]).toHaveTextContent(expectedScore); 
-          expect(abilityScoresSection.showElements.modifier[key]).toHaveTextContent(formattedModifier); 
+          expect(abilityScoresSection.showElements.score[key]).toHaveTextContent(expectedScore);
+          expect(abilityScoresSection.showElements.modifier[key]).toHaveTextContent(formattedModifier);
 
           expect(htmlExport.dataset[abbreviation]).toBe(expectedScore.toString());
-        }   
-        
+        }
+
         verifyHomebreweryExport();
       });
       /* eslint-enable indent, no-unexpected-multiline */
@@ -253,7 +277,24 @@ describe('when the show section is clicked', () => {
   });
 });
 
-function verifyHomebreweryExport() {  
+function verifyJsonExport(strength, dexterity, constitution, intelligence, wisdom, charisma, proficiencyBonus) {
+  const jsObject = abilityScoresSection.exportToJson();
+  const expectedJsObject = {
+    abilityScores: {
+      strength: strength,
+      dexterity: dexterity,
+      constitution: constitution,
+      intelligence: intelligence,
+      wisdom: wisdom,
+      charisma: charisma
+    },
+    proficiencyBonus: proficiencyBonus
+  };
+
+  expect(jsObject).toStrictEqual(expectedJsObject);
+}
+
+function verifyHomebreweryExport() {
   const homebreweryExport = abilityScoresSection.exportToHomebrewery();
 
   const abilityStrings = Abilities.orderedAbilities.map(ability => `${ability.score} ${ability.formattedModifier}`);
