@@ -66,8 +66,25 @@ describe('when the show section is clicked', () => {
           receivedEvent = event;
         });
 
+        // Collect expected values into nested JS object structure
+        const expectedAbilities = new Map();
+        for (const key of Abilities.keys) {
+          const expectedAbility = {};
+          if (key === abilityName) {
+            expectedAbility.score = score;
+            expectedAbility.modifier = expectedModifier;
+          } else {
+            expectedAbility.score = 10;
+            expectedAbility.modifier = 0;
+          }
+
+          expectedAbilities.set(key, expectedAbility);
+        }
+
+        // Input ability scores and proficiency bonus into UI
         inputValueAndTriggerEvent(abilityScoresSection.editElements.score[abilityName], score);
 
+        // Verify model
         const ability = Abilities.abilities[abilityName];
         expect(ability.score).toBe(score);
         expect(ability.modifier).toBe(expectedModifier);
@@ -82,31 +99,10 @@ describe('when the show section is clicked', () => {
 
         expect(abilityScoresSection.showElements.modifier[abilityName]).toHaveTextContent(formattedModifier);
 
-        const expectedAbilityScores = {
-          strength: 10,
-          dexterity: 10,
-          constitution: 10,
-          intelligence: 10,
-          wisdom: 10,
-          charisma: 10,
-        };
-        expectedAbilityScores[abilityName] = score;
-
-        verifyJsonExport(
-          expectedAbilityScores.strength,
-          expectedAbilityScores.dexterity,
-          expectedAbilityScores.constitution,
-          expectedAbilityScores.intelligence,
-          expectedAbilityScores.wisdom,
-          expectedAbilityScores.charisma,
-          2
-        );
-
-        const htmlExport = abilityScoresSection.exportToHtml();
-        expect(htmlExport.tagName).toBe('ABILITIES-BLOCK');
-        expect(htmlExport.dataset[ability.abbreviation]).toBe(score.toString());
-
-        verifyHomebreweryExport();
+        // Verify exports
+        verifyJsonExport(expectedAbilities, 2);
+        verifyHtmlExport(expectedAbilities);
+        verifyHomebreweryExport(expectedAbilities);
       });
       /* eslint-enable indent, no-unexpected-multiline */
     });
@@ -174,6 +170,16 @@ describe('when the show section is clicked', () => {
           receivedEvent = event;
         });
 
+        const expectedAbilities = new Map();
+        for (const key of Abilities.keys) {
+          const expectedAbility = {
+            score: 10,
+            modifier: 0
+          };
+
+          expectedAbilities.set(key, expectedAbility);
+        }
+
         inputValueAndTriggerEvent(abilityScoresSection.editElements.proficiencyBonus, proficiencyBonus);
 
         expect(ProficiencyBonus.proficiencyBonus).toBe(proficiencyBonus);
@@ -184,7 +190,7 @@ describe('when the show section is clicked', () => {
 
         expect(ProficiencyBonus.proficiencyBonus).toBe(proficiencyBonus);
 
-        verifyJsonExport(10, 10, 10, 10, 10, 10, proficiencyBonus);
+        verifyJsonExport(expectedAbilities, proficiencyBonus);
       });
       /* eslint-enable indent, no-unexpected-multiline */
     });
@@ -232,72 +238,93 @@ describe('when the show section is clicked', () => {
       `
       ('$description: {strScore="$strScore", dexScore="$dexScore", conScore="$conScore", intScore="$intScore", wisScore="$wisScore", chaScore="$chaScore", proficiencyBonus="$proficiencyBonus"} => {strMod="$strMod", dexMod="$dexMod", conMod="$conMod", intMod="$intMod", wisMod="$wisMod", chaMod="$chaMod"}',
       ({strScore, dexScore, conScore, intScore, wisScore, chaScore, proficiencyBonus, strMod, dexMod, conMod, intMod, wisMod, chaMod}) => { // eslint-disable-line no-unused-vars
+
+        // Collect expected values into nested JS object structure
+        const expectedAbilities = new Map();
         for (const [key, value] of Abilities.entries) {
-          const score = eval(`${value.abbreviation}Score`);
+          const abbreviation = value.abbreviation;
+          const score = eval(`${abbreviation}Score`);
+          const modifier = eval(`${abbreviation}Mod`);
+
+          const expectedAbility = {
+            score: score,
+            modifier: modifier
+          };
+
+          expectedAbilities.set(key, expectedAbility);
+        }
+
+        // Input ability scores and proficiency bonus into UI
+        for (const key of Abilities.keys) {
+          const score = expectedAbilities.get(key).score;
           inputValueAndTriggerEvent(abilityScoresSection.editElements.score[key], score);
         }
         inputValueAndTriggerEvent(abilityScoresSection.editElements.proficiencyBonus, proficiencyBonus);
 
+        // Verify model
         for (const [key, value] of Abilities.entries) {
-          const abbreviation = value.abbreviation;
-          const expectedScore = eval(`${abbreviation}Score`);
-          const expectedModifier = eval(`${abbreviation}Mod`);
+          const expectedAbility = expectedAbilities.get(key);
 
-          expect(value.score).toBe(expectedScore);
-          expect(value.modifier).toBe(expectedModifier);
+          expect(value.score).toBe(expectedAbility.score);
+          expect(value.modifier).toBe(expectedAbility.modifier);
 
-          const formattedModifier = `(${formatModifier(expectedModifier)})`;
+          const formattedModifier = `(${formatModifier(expectedAbility.modifier)})`;
           expect(abilityScoresSection.editElements.modifier[key]).toHaveTextContent(formattedModifier);
         }
         expect(ProficiencyBonus.proficiencyBonus).toBe(proficiencyBonus);
 
+        // Switch the section to "show" mode
         abilityScoresSection.editElements.submitForm();
 
-        verifyJsonExport(strScore, dexScore, conScore, intScore, wisScore, chaScore, proficiencyBonus);
-
-        const htmlExport = abilityScoresSection.exportToHtml();
-        expect(htmlExport.tagName).toBe('ABILITIES-BLOCK');
-
-        for (const [key, value] of Abilities.entries) {
-          const abbreviation = value.abbreviation;
-          const expectedScore = eval(`${abbreviation}Score`);
-          const expectedModifier = eval(`${abbreviation}Mod`);
-          const formattedModifier = `(${formatModifier(expectedModifier)})`;
-
-          expect(abilityScoresSection.showElements.score[key]).toHaveTextContent(expectedScore);
-          expect(abilityScoresSection.showElements.modifier[key]).toHaveTextContent(formattedModifier);
-
-          expect(htmlExport.dataset[abbreviation]).toBe(expectedScore.toString());
-        }
-
-        verifyHomebreweryExport();
+        // Verify exports
+        verifyJsonExport(expectedAbilities, proficiencyBonus);
+        verifyHtmlExport(expectedAbilities);
+        verifyHomebreweryExport(expectedAbilities);
       });
       /* eslint-enable indent, no-unexpected-multiline */
     });
   });
 });
 
-function verifyJsonExport(strength, dexterity, constitution, intelligence, wisdom, charisma, proficiencyBonus) {
+function verifyJsonExport(expectedAbilities, expectedProficiencyBonus) {
   const jsObject = abilityScoresSection.exportToJson();
+
+  const expectedAbilityScores = {};
+  for (const key of Abilities.keys) {
+    expectedAbilityScores[key] = expectedAbilities.get(key).score;
+  }
+
   const expectedJsObject = {
-    abilityScores: {
-      strength: strength,
-      dexterity: dexterity,
-      constitution: constitution,
-      intelligence: intelligence,
-      wisdom: wisdom,
-      charisma: charisma
-    },
-    proficiencyBonus: proficiencyBonus
+    abilityScores: expectedAbilityScores,
+    proficiencyBonus: expectedProficiencyBonus
   };
 
   expect(jsObject).toStrictEqual(expectedJsObject);
 }
 
-function verifyHomebreweryExport() {
+function verifyHtmlExport(expectedAbilities) {
+  const htmlExport = abilityScoresSection.exportToHtml();
+  expect(htmlExport.tagName).toBe('ABILITIES-BLOCK');
+
+  for (const [key, value] of Abilities.entries) {
+    const expectedAbility = expectedAbilities.get(key);
+
+    const abbreviation = value.abbreviation;
+    const expectedScore = expectedAbility.score;
+    const expectedModifier = `(${formatModifier(expectedAbility.modifier)})`;
+
+    expect(abilityScoresSection.showElements.score[key]).toHaveTextContent(expectedScore);
+    expect(abilityScoresSection.showElements.modifier[key]).toHaveTextContent(expectedModifier);
+
+    expect(htmlExport.dataset[abbreviation]).toBe(expectedScore.toString());
+  }
+}
+
+function verifyHomebreweryExport(expectedAbilities) {
   const homebreweryExport = abilityScoresSection.exportToHomebrewery();
 
-  const abilityStrings = Abilities.orderedAbilities.map(ability => `${ability.score} ${ability.formattedModifier}`);
+  const expectedAbilitiesArray = Array.from(expectedAbilities.values());
+  const abilityStrings = expectedAbilitiesArray.map(ability => `${ability.score} (${formatModifier(ability.modifier)})`);
   const abilityLine = abilityStrings.join('|');
 
   const expectedText =
