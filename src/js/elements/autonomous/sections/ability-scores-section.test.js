@@ -67,19 +67,10 @@ describe('when the show section is clicked', () => {
         });
 
         // Collect expected values into nested JS object structure
-        const expectedAbilities = new Map();
-        for (const key of Abilities.keys) {
-          const expectedAbility = {};
-          if (key === abilityName) {
-            expectedAbility.score = score;
-            expectedAbility.modifier = expectedModifier;
-          } else {
-            expectedAbility.score = 10;
-            expectedAbility.modifier = 0;
-          }
-
-          expectedAbilities.set(key, expectedAbility);
-        }
+        const expectedAbilities = createDefaultExpectedAbilities();
+        const expectedAbility = expectedAbilities.get(abilityName);
+        expectedAbility.score = score;
+        expectedAbility.modifier = expectedModifier;
 
         // Input ability scores and proficiency bonus into UI
         inputValueAndTriggerEvent(abilityScoresSection.editElements.score[abilityName], score);
@@ -170,26 +161,16 @@ describe('when the show section is clicked', () => {
           receivedEvent = event;
         });
 
-        const expectedAbilities = new Map();
-        for (const key of Abilities.keys) {
-          const expectedAbility = {
-            score: 10,
-            modifier: 0
-          };
-
-          expectedAbilities.set(key, expectedAbility);
-        }
+        const expectedAbilities = createDefaultExpectedAbilities();
 
         inputValueAndTriggerEvent(abilityScoresSection.editElements.proficiencyBonus, proficiencyBonus);
 
         expect(ProficiencyBonus.proficiencyBonus).toBe(proficiencyBonus);
-
         expect(receivedEvent).not.toBeNull();
 
         abilityScoresSection.editElements.submitForm();
 
         expect(ProficiencyBonus.proficiencyBonus).toBe(proficiencyBonus);
-
         verifyJsonExport(expectedAbilities, proficiencyBonus);
       });
       /* eslint-enable indent, no-unexpected-multiline */
@@ -240,18 +221,15 @@ describe('when the show section is clicked', () => {
       ({strScore, dexScore, conScore, intScore, wisScore, chaScore, proficiencyBonus, strMod, dexMod, conMod, intMod, wisMod, chaMod}) => { // eslint-disable-line no-unused-vars
 
         // Collect expected values into nested JS object structure
-        const expectedAbilities = new Map();
+        const expectedAbilities = createDefaultExpectedAbilities();
         for (const [key, value] of Abilities.entries) {
           const abbreviation = value.abbreviation;
           const score = eval(`${abbreviation}Score`);
           const modifier = eval(`${abbreviation}Mod`);
 
-          const expectedAbility = {
-            score: score,
-            modifier: modifier
-          };
-
-          expectedAbilities.set(key, expectedAbility);
+          const expectedAbility = expectedAbilities.get(key);
+          expectedAbility.score = score;
+          expectedAbility.modifier = modifier;
         }
 
         // Input ability scores and proficiency bonus into UI
@@ -285,6 +263,20 @@ describe('when the show section is clicked', () => {
     });
   });
 });
+
+function createDefaultExpectedAbilities() {
+  const expectedAbilities = new Map();
+  for (const key of Abilities.keys) {
+    const expectedAbility = {
+      score: 10,
+      modifier: 0
+    };
+
+    expectedAbilities.set(key, expectedAbility);
+  }
+
+  return expectedAbilities;
+}
 
 function verifyJsonExport(expectedAbilities, expectedProficiencyBonus) {
   const jsObject = abilityScoresSection.exportToJson();
