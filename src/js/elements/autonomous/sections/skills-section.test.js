@@ -104,6 +104,11 @@ describe('when the show section is clicked', () => {
         });
 
         const skillElements = skillsSection.editElements.skill[singleSkillUnderTest];
+        const expectedJson = createDefaultExpectedJson();
+        const expectedJsonSkill = expectedJson[singleSkillUnderTest];
+        expectedJsonSkill.isEnabled = skillEnabled;
+        expectedJsonSkill.isProficient = skillProficient;
+        expectedJsonSkill.override = skillOverride === '' ? null : skillOverride;
 
         Abilities.abilities[singleAbilityUnderTest].score = abilityScore;
         ProficiencyBonus.proficiencyBonus = proficiencyBonus;
@@ -140,6 +145,7 @@ describe('when the show section is clicked', () => {
         expect(skillsSection).toBeInMode('show');
         expect(skillsSection).toShowPropertyLine(expectedHeading, expectedText);
 
+        verifyJsonExport(expectedJson);
         expect(skillsSection).toExportPropertyLineToHtml(expectedHeading, expectedText);
         expect(skillsSection).toExportPropertyLineToHomebrewery(expectedHeading, expectedText);
 
@@ -174,27 +180,53 @@ describe('when the show section is clicked', () => {
         Abilities.abilities['charisma'].score = 20;
         ProficiencyBonus.proficiencyBonus = 3;
 
+        const expectedJson = createDefaultExpectedJson();
+
         if (athletics) {
           const elements = skillsSection.editElements.skill['athletics'];
           elements.enable.click();
           elements.proficient.click();
+
+          expectedJson['athletics'] = {
+            isEnabled: true,
+            isProficient: false,
+            override: null
+          };
         }
 
         if (history) {
           const elements = skillsSection.editElements.skill['history'];
           elements.enable.click();
           elements.proficient.click();
+
+          expectedJson['history'] = {
+            isEnabled: true,
+            isProficient: false,
+            override: null
+          };
         }
 
         if (insight) {
           const elements = skillsSection.editElements.skill['insight'];
           elements.enable.click();
           inputValueAndTriggerEvent(elements.override, -3);
+
+          expectedJson['insight'] = {
+            isEnabled: true,
+            isProficient: true,
+            override: -3
+          };
         }
 
         if (persuasion) {
           const elements = skillsSection.editElements.skill['persuasion'];
           elements.enable.click();
+
+          expectedJson['persuasion'] = {
+            isEnabled: true,
+            isProficient: true,
+            override: null
+          };
         }
 
         if (sleightOfHand) {
@@ -202,6 +234,12 @@ describe('when the show section is clicked', () => {
           elements.enable.click();
           elements.proficient.click();
           inputValueAndTriggerEvent(elements.override, 0);
+
+          expectedJson['sleight-of-hand'] = {
+            isEnabled: true,
+            isProficient: false,
+            override: 0
+          };
         }
 
         skillsSection.editElements.submitForm();
@@ -209,6 +247,7 @@ describe('when the show section is clicked', () => {
         expect(skillsSection).toBeInMode('show');
         expect(skillsSection).toShowPropertyLine(expectedHeading, expectedText);
 
+        verifyJsonExport(expectedJson);
         expect(skillsSection).toExportPropertyLineToHtml(expectedHeading, expectedText);
         expect(skillsSection).toExportPropertyLineToHomebrewery(expectedHeading, expectedText);
       });
@@ -220,4 +259,22 @@ describe('when the show section is clicked', () => {
 function expectSkillChangedEvent(event, skillName) {
   expect(event).not.toBeNull();
   expect(event.detail.skillName).toBe(skillName);
+}
+
+function createDefaultExpectedJson() {
+  const expectedJson = {};
+  for (const key of Skills.keys) {
+    expectedJson[key] = {
+      isEnabled: false,
+      isProficient: false,
+      override: null
+    };
+  }
+
+  return expectedJson;
+}
+
+function verifyJsonExport(expectedJson) {
+  const jsObject = skillsSection.exportToJson();
+  expect(jsObject).toStrictEqual(expectedJson);
 }

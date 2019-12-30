@@ -28,7 +28,7 @@ export default class SkillsSection extends propertyLineSectionModule.PropertyLin
     }
   }
 
-  initializeSkillElements(key) {    
+  initializeSkillElements(key) {
     const elements = this.editElements.skill[key];
 
     elements.enable.enableElementsWhenChecked(
@@ -57,7 +57,7 @@ export default class SkillsSection extends propertyLineSectionModule.PropertyLin
       inputValueAndTriggerEvent(elements.proficient, false);
       inputValueAndTriggerEvent(elements.override, '');
     }
-    
+
     this.updateModelSkillEnabled(key);
     this.updateViewSkill(key);
     this.updateViewText();
@@ -74,7 +74,7 @@ export default class SkillsSection extends propertyLineSectionModule.PropertyLin
   onInputSkillOverride(key) {
     this.updateModelSkillOverride(key);
     this.updateViewSkill(key);
-    this.updateViewText();  
+    this.updateViewText();
     this.dispatchSkillChangedEvent(key);
   }
 
@@ -146,6 +146,10 @@ export default class SkillsSection extends propertyLineSectionModule.PropertyLin
     this.showElements.text.textContent = text;
   }
 
+  exportToJson() {
+    return Skills.toJson();
+  }
+
   exportToHtml() {
     return Skills.toHtml();
   }
@@ -177,7 +181,7 @@ class SkillsEditElements extends propertyLineSectionModule.PropertyLineEditEleme
       };
     }
   }
-  
+
   get initiallySelectedElement() {
     return this.skill['acrobatics'].enable;
   }

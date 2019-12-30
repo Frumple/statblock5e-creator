@@ -125,6 +125,10 @@ export default class SavingThrowsSection extends propertyLineSectionModule.Prope
     this.showElements.text.textContent = text;
   }
 
+  exportToJson() {
+    return SavingThrows.toJson();
+  }
+
   exportToHtml() {
     return SavingThrows.toHtml();
   }

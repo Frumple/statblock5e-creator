@@ -98,18 +98,25 @@ describe('when the show section is clicked', () => {
       ('$description: {abilityScore="$abilityScore", proficiencyBonus="$proficiencyBonus", savingThrowEnabled="$savingThrowEnabled", savingThrowProficient="$savingThrowProficient", savingThrowOverride="$savingThrowOverride"} => {expectedModifier="$expectedModifier", expectedText="$expectedText"}',
       ({abilityScore, proficiencyBonus, savingThrowEnabled, savingThrowProficient, savingThrowOverride, expectedModifier, expectedText}) => {
         const savingThrowElements = savingThrowsSection.editElements.savingThrow[singleSavingThrowUnderTest];
+        const expectedJson = createDefaultExpectedJson();
+        const expectedJsonSavingThrow = expectedJson[singleSavingThrowUnderTest];
+        expectedJsonSavingThrow.isEnabled = savingThrowEnabled;
+        expectedJsonSavingThrow.isProficient = savingThrowProficient;
+        expectedJsonSavingThrow.override = savingThrowOverride === '' ? null : savingThrowOverride;
 
         Abilities.abilities[singleSavingThrowUnderTest].score = abilityScore;
         ProficiencyBonus.proficiencyBonus = proficiencyBonus;
 
         if (savingThrowEnabled) {
           savingThrowElements.enable.click();
-        }
-        if (! savingThrowProficient) {
-          savingThrowElements.proficient.click();
-        }
-        if (savingThrowOverride !== '') {
-          inputValueAndTriggerEvent(savingThrowElements.override, savingThrowOverride);
+
+          if (! savingThrowProficient) {
+            savingThrowElements.proficient.click();
+          }
+
+          if (savingThrowOverride !== '') {
+            inputValueAndTriggerEvent(savingThrowElements.override, savingThrowOverride);
+          }
         }
 
         const savingThrow = SavingThrows.savingThrows[singleSavingThrowUnderTest];
@@ -126,6 +133,7 @@ describe('when the show section is clicked', () => {
         expect(savingThrowsSection).toBeInMode('show');
         expect(savingThrowsSection).toShowPropertyLine(expectedHeading, expectedText);
 
+        verifyJsonExport(expectedJson);
         expect(savingThrowsSection).toExportPropertyLineToHtml(expectedHeading, expectedText);
         expect(savingThrowsSection).toExportPropertyLineToHomebrewery(expectedHeading, expectedText);
 
@@ -162,33 +170,65 @@ describe('when the show section is clicked', () => {
         Abilities.abilities['charisma'].score = 12;
         ProficiencyBonus.proficiencyBonus = 5;
 
+        const expectedJson = createDefaultExpectedJson();
+
         if (strength) {
           const elements = savingThrowsSection.editElements.savingThrow['strength'];
           elements.enable.click();
           elements.proficient.click();
           inputValueAndTriggerEvent(elements.override, -3);
+
+          expectedJson['strength'] = {
+            isEnabled: true,
+            isProficient: false,
+            override: -3
+          };
         }
 
         if (dexterity) {
           const elements = savingThrowsSection.editElements.savingThrow['dexterity'];
           elements.enable.click();
           inputValueAndTriggerEvent(elements.override, 0);
+
+          expectedJson['dexterity'] = {
+            isEnabled: true,
+            isProficient: true,
+            override: 0
+          };
         }
 
         if (constitution) {
           const elements = savingThrowsSection.editElements.savingThrow['constitution'];
           elements.enable.click();
+
+          expectedJson['constitution'] = {
+            isEnabled: true,
+            isProficient: true,
+            override: null
+          };
         }
 
         if (intelligence) {
           const elements = savingThrowsSection.editElements.savingThrow['intelligence'];
           elements.enable.click();
           elements.proficient.click();
+
+          expectedJson['intelligence'] = {
+            isEnabled: true,
+            isProficient: false,
+            override: null
+          };
         }
 
         if (wisdom) {
           const elements = savingThrowsSection.editElements.savingThrow['wisdom'];
           elements.enable.click();
+
+          expectedJson['wisdom'] = {
+            isEnabled: true,
+            isProficient: true,
+            override: null
+          };
         }
 
         if (charisma) {
@@ -196,6 +236,12 @@ describe('when the show section is clicked', () => {
           elements.enable.click();
           elements.proficient.click();
           inputValueAndTriggerEvent(elements.override, 9);
+
+          expectedJson['charisma'] = {
+            isEnabled: true,
+            isProficient: false,
+            override: 9
+          };
         }
 
         savingThrowsSection.editElements.submitForm();
@@ -203,6 +249,7 @@ describe('when the show section is clicked', () => {
         expect(savingThrowsSection).toBeInMode('show');
         expect(savingThrowsSection).toShowPropertyLine(expectedHeading, expectedText);
 
+        verifyJsonExport(expectedJson);
         expect(savingThrowsSection).toExportPropertyLineToHtml(expectedHeading, expectedText);
         expect(savingThrowsSection).toExportPropertyLineToHomebrewery(expectedHeading, expectedText);
       });
@@ -210,3 +257,21 @@ describe('when the show section is clicked', () => {
     });
   });
 });
+
+function createDefaultExpectedJson() {
+  const expectedJson = {};
+  for (const key of Abilities.keys) {
+    expectedJson[key] = {
+      isEnabled: false,
+      isProficient: false,
+      override: null
+    };
+  }
+
+  return expectedJson;
+}
+
+function verifyJsonExport(expectedJson) {
+  const jsObject = savingThrowsSection.exportToJson();
+  expect(jsObject).toStrictEqual(expectedJson);
+}

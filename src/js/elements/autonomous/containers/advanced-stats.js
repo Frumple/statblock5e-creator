@@ -46,12 +46,21 @@ export default class AdvancedStats extends DivisibleContainer {
     }
   }
 
+  exportToJson() {
+    const jsObject = {};
+
+    jsObject.savingThrows = this.savingThrowsSection.exportToJson();
+    jsObject.skills = this.skillsSection.exportToJson();
+
+    return jsObject;
+  }
+
   exportToHtml() {
     const fragment = document.createDocumentFragment();
     for (const section of this.allSections) {
       if (! section.empty) {
         fragment.appendChild(section.exportToHtml());
-      }     
+      }
     }
 
     return fragment;

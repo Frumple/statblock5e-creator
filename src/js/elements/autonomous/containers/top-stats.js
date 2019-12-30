@@ -33,7 +33,7 @@ export default class TopStats extends CustomAutonomousElement {
 
     Object.assign(jsObject, this.basicStats.exportToJson());
     jsObject.attributes = this.abilityScoresSection.exportToJson();
-    // Object.assign(jsObject, this.advancedStats.exportToJson());
+    Object.assign(jsObject, this.advancedStats.exportToJson());
 
     return jsObject;
   }

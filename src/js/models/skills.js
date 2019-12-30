@@ -59,6 +59,17 @@ class Skills {
     return list.join(', ');
   }
 
+  toJson() {
+    const jsObject = {};
+
+    for (const key of this.keys) {
+      const skill = this.skills[key];
+      jsObject[key] = skill.toJson();
+    }
+
+    return jsObject;
+  }
+
   toHtml() {
     return createHtmlPropertyLine(this.headingName, this.text);
   }
@@ -125,6 +136,14 @@ class Skill {
 
   get formattedModifier() {
     return formatModifier(this.modifier);
+  }
+
+  toJson() {
+    return {
+      isEnabled: this.isEnabled,
+      isProficient: this.isProficient,
+      override: this.override
+    };
   }
 }
 

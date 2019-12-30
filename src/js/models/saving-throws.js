@@ -47,6 +47,17 @@ class SavingThrows {
     return list.join(', ');
   }
 
+  toJson() {
+    const jsObject = {};
+
+    for (const key of Abilities.keys) {
+      const savingThrow = this.savingThrows[key];
+      jsObject[key] = savingThrow.toJson();
+    }
+
+    return jsObject;
+  }
+
   toHtml() {
     return createHtmlPropertyLine(this.headingName, this.text);
   }
@@ -94,6 +105,14 @@ class SavingThrow {
 
   get formattedModifier() {
     return formatModifier(this.modifier);
+  }
+
+  toJson() {
+    return {
+      isEnabled: this.isEnabled,
+      isProficient: this.isProficient,
+      override: this.override
+    };
   }
 }
 
