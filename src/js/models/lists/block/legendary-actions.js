@@ -4,9 +4,15 @@ class LegendaryActions extends BlockListModel {
   constructor() {
     super('Legendary Actions', 'Legendary Action');
 
-    this.originalDescription = '';
+    this.originalDescription = '[name] can take 3 legendary actions, choosing from the options below. Only one legendary action option can be used at a time and only at the end of another creature\'s turn. [name] regains spent legendary actions at the start of its turn.';
     this.homebreweryDescription = '';
     this.htmlDescription = '';
+  }
+
+  toJson() {
+    const json = super.toJson();
+    json.description = this.originalDescription;
+    return json;
   }
 
   toHtml() {
@@ -24,10 +30,10 @@ class LegendaryActions extends BlockListModel {
   toHomebrewery() {
     const heading = `> ### ${this.headingName}\n`;
     const description = `> ${this.homebreweryDescription}\n`;
-    const homebreweryBlocks = 
+    const homebreweryBlocks =
       this.blocks.map(block => block.toHomebrewery());
     const homebreweryBlocksAsText =
-      homebreweryBlocks.join('\n>\n');      
+      homebreweryBlocks.join('\n>\n');
 
     return `${heading}${description}${homebreweryBlocksAsText}`;
   }

@@ -113,6 +113,10 @@ export class BlockListSection extends sectionModule.Section {
     }
   }
 
+  exportToJson() {
+    return this.listModel.toJson();
+  }
+
   exportToHtml() {
     return this.listModel.toHtml();
   }

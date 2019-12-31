@@ -193,7 +193,7 @@ export function shouldDisplayErrorsIfBlockNameIsBlankAndBlockTextHasInvalidMarkd
     1);
 }
 
-function addAndPopulateBlock(section, blockName, blockText) {
+export function addAndPopulateBlock(section, blockName, blockText) {
   section.editElements.addButton.click();
 
   const blocks = section.editElements.editableBlockList.blocks;
@@ -217,18 +217,16 @@ function getHtmlExportBlocks(section) {
 }
 
 function verifyBlocks(section, expectedBlocks) {
-  const htmlExportBlocks = getHtmlExportBlocks(section);
-
   for (const [index, expectedBlock] of expectedBlocks.entries()) {
     const editableBlock = section.editElements.editableBlockList.blocks[index];
     const displayBlock = section.showElements.displayBlockList.blocks[index];
-    const htmlExportBlock = htmlExportBlocks[index];
 
     verifyEditableBlock(editableBlock, expectedBlock);
     verifyDisplayBlock(displayBlock, expectedBlock);
-    verifyHtmlExportBlock(htmlExportBlock, expectedBlock);
   }
 
+  verifyJsonExport(section, expectedBlocks);
+  verifyHtmlExport(section, expectedBlocks);
   verifyHomebreweryExport(section, expectedBlocks);
 }
 
@@ -242,10 +240,28 @@ function verifyDisplayBlock(displayBlock, expectedBlock) {
   expect(displayBlock.text).toBe(expectedBlock.htmlText ? expectedBlock.htmlText : expectedBlock.originalText);
 }
 
-function verifyHtmlExportBlock(htmlExportBlock, expectedBlock) {
-  expect(htmlExportBlock).toBeHtmlPropertyBlock(
-    `${expectedBlock.name}.`,
-    (expectedBlock.htmlText ? expectedBlock.htmlText : expectedBlock.originalText));
+function verifyJsonExport(section, expectedBlocks) {
+  const json = section.exportToJson();
+
+  const expectedJson = expectedBlocks.map(block => {
+    return {
+      name: block.name,
+      text: block.originalText
+    };
+  });
+
+  expect(json.blocks).toStrictEqual(expectedJson);
+}
+
+function verifyHtmlExport(section, expectedBlocks) {
+  const htmlExportBlocks = getHtmlExportBlocks(section);
+
+  for (const [index, expectedBlock] of expectedBlocks.entries()) {
+    const htmlExportBlock = htmlExportBlocks[index];
+    expect(htmlExportBlock).toBeHtmlPropertyBlock(
+      `${expectedBlock.name}.`,
+      (expectedBlock.htmlText ? expectedBlock.htmlText : expectedBlock.originalText));
+  }
 }
 
 function verifyHomebreweryExport(section, expectedBlocks) {

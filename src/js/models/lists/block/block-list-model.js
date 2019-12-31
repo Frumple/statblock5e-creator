@@ -10,6 +10,12 @@ export default class BlockListModel {
     this.blocks = [];
   }
 
+  toJson() {
+    return {
+      blocks: this.blocks.map(block => block.toJson())
+    };
+  }
+
   toHtml() {
     const fragment = document.createDocumentFragment();
 
@@ -28,7 +34,7 @@ export default class BlockListModel {
 
   toHomebrewery() {
     const heading = (this.headingName ? `> ### ${this.headingName}\n` : '');
-    const homebreweryBlocks = 
+    const homebreweryBlocks =
       this.blocks.map(block => block.toHomebrewery());
     const homebreweryBlocksAsText =
       homebreweryBlocks.join('\n>\n');

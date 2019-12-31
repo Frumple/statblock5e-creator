@@ -48,12 +48,23 @@ export default class BottomStats extends CustomAutonomousElement {
     }
   }
 
+  exportToJson() {
+    const jsObject = {};
+
+    jsObject.specialTraits = this.specialTraitsSection.exportToJson();
+    jsObject.actions = this.actionsSection.exportToJson();
+    jsObject.reactions = this.reactionsSection.exportToJson();
+    jsObject.legendaryActions = this.legendaryActionsSection.exportToJson();
+
+    return jsObject;
+  }
+
   exportToHtml() {
     const fragment = document.createDocumentFragment();
     for (const section of this.allSections) {
       if (! section.empty) {
         fragment.appendChild(section.exportToHtml());
-      }     
+      }
     }
 
     return fragment;

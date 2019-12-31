@@ -65,24 +65,10 @@ describe('when the show section is clicked', () => {
 
       expect(legendaryActionsSection).toBeInMode('show');
       expect(legendaryActionsSection.showElements.description).toContainHTML(htmlDescription);
+      expectJsonExportDescription(description);
       expectHtmlExportDescription(htmlDescription);
       expectHomebreweryExportDescription(homebreweryDescription);
     });
-
-    function expectHtmlExportDescription(expectedText) {
-      const htmlExport = legendaryActionsSection.exportToHtml();
-      const description = htmlExport.children[1];
-
-      expect(description.tagName).toBe('P');
-      expect(description).toContainHTML(expectedText);
-    }
-
-    function expectHomebreweryExportDescription(expectedText) {
-      const homebreweryExport = legendaryActionsSection.exportToHomebrewery();
-      const description = homebreweryExport.split('\n')[1];
-
-      expect(description).toBe(`> ${expectedText}`);
-    }
 
     it('should display an error if the description is blank', () => {
       inputValueAndTriggerEvent(legendaryActionsSection.editElements.description, '');
@@ -296,3 +282,24 @@ describe('when the show section is clicked', () => {
     });
   });
 });
+
+function expectJsonExportDescription(expectedText) {
+  const jsonExport = legendaryActionsSection.exportToJson();
+
+  expect(jsonExport.description).toBe(expectedText);
+}
+
+function expectHtmlExportDescription(expectedText) {
+  const htmlExport = legendaryActionsSection.exportToHtml();
+  const description = htmlExport.children[1];
+
+  expect(description.tagName).toBe('P');
+  expect(description).toContainHTML(expectedText);
+}
+
+function expectHomebreweryExportDescription(expectedText) {
+  const homebreweryExport = legendaryActionsSection.exportToHomebrewery();
+  const description = homebreweryExport.split('\n')[1];
+
+  expect(description).toBe(`> ${expectedText}`);
+}

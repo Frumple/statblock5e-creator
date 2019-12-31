@@ -8,6 +8,13 @@ export default class BlockModel {
     this.htmlText = htmlText;
   }
 
+  toJson() {
+    return {
+      name: this.name,
+      text: this.originalText
+    };
+  }
+
   toHtml() {
     return ExportHelpers.createHtmlPropertyBlock(this.name, this.htmlText);
   }
