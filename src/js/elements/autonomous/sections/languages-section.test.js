@@ -33,12 +33,12 @@ describe('when the show section is clicked', () => {
   describe('and the input field is set, the add button is clicked, and the edit section is submitted', () => {
     it('should add a suggested item, and the show section should have the item', () => {
       const itemText = 'Deep Speech';
-      sharedSpecs.shouldAddASuggestedItem(languagesSection, headingName, itemText);
+      sharedSpecs.shouldAddAnItem(languagesSection, headingName, itemText);
     });
 
     it('should add a custom item, and the show section should have the item', () => {
       const itemText = 'understands all languages it knew in life but can\'t speak';
-      sharedSpecs.shouldAddACustomItem(languagesSection, headingName, itemText);
+      sharedSpecs.shouldAddAnItem(languagesSection, headingName, itemText);
     });
 
     it('should add many items, and the show section should have the items', () => {
@@ -71,7 +71,7 @@ describe('when the show section is clicked', () => {
   describe('and the only remaining item is removed, and the edit section is submitted', () => {
     it('should remove the item, and the show section should show a "—" character indicating no items', () => {
       const expectedText = '—';
-      
+
       expect(languagesSection.editElements.propertyList.itemsAsText).toHaveLength(0);
 
       languagesSection.editElements.submitForm();
@@ -97,7 +97,7 @@ describe('when the show section is clicked', () => {
       ('$description: $itemToDelete => $expectedItems',
       ({itemToDelete, expectedItems}) => {
         const initialItems = ['Common', 'Elvish', 'Orc'];
-        sharedSpecs.shouldDeleteOneOfThreeItems(languagesSection, headingName, initialItems, itemToDelete, expectedItems);
+        sharedSpecs.shouldDeleteOneOfManyItems(languagesSection, headingName, initialItems, itemToDelete, expectedItems);
       });
       /* eslint-enable indent, no-unexpected-multiline */
     });

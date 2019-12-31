@@ -36,12 +36,12 @@ describe('when the show section is clicked', () => {
   describe('and the input field is set, the add button is clicked, and the edit section is submitted', () => {
     it('should add a suggested item, and the show section should have the item', () => {
       const itemText = 'necrotic';
-      sharedSpecs.shouldAddASuggestedItem(damageVulnerabilitiesSection, headingName, itemText);
+      sharedSpecs.shouldAddAnItem(damageVulnerabilitiesSection, headingName, itemText);
     });
 
     it('should add a custom item, and the show section should have the item', () => {
       const itemText = 'bludgeoning, piercing, and slashing from nonmagical attacks';
-      sharedSpecs.shouldAddACustomItem(damageVulnerabilitiesSection, headingName, itemText);
+      sharedSpecs.shouldAddAnItem(damageVulnerabilitiesSection, headingName, itemText);
     });
 
     it('should add many items, and the show section should have the items', () => {
@@ -91,7 +91,7 @@ describe('when the show section is clicked', () => {
       ('$description: $itemToDelete => $expectedItems',
       ({itemToDelete, expectedItems}) => {
         const initialItems = ['acid', 'force', 'psychic'];
-        sharedSpecs.shouldDeleteOneOfThreeItems(damageVulnerabilitiesSection, headingName, initialItems, itemToDelete, expectedItems);
+        sharedSpecs.shouldDeleteOneOfManyItems(damageVulnerabilitiesSection, headingName, initialItems, itemToDelete, expectedItems);
       });
       /* eslint-enable indent, no-unexpected-multiline */
     });

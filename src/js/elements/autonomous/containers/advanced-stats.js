@@ -51,6 +51,13 @@ export default class AdvancedStats extends DivisibleContainer {
 
     jsObject.savingThrows = this.savingThrowsSection.exportToJson();
     jsObject.skills = this.skillsSection.exportToJson();
+    jsObject.damageVulnerabilities = this.damageVulnerabilitiesSection.exportToJson();
+    jsObject.damageResistances = this.damageResistancesSection.exportToJson();
+    jsObject.damageImmunities = this.damageImmunitiesSection.exportToJson();
+    jsObject.conditionImmunities = this.conditionImmunitiesSection.exportToJson();
+    // jsObject.senses = this.sensesSection.exportToJson();
+    jsObject.languages = this.languagesSection.exportToJson();
+    // jsObject.challengeRating = this.challengeRatingSection.exportToJson();
 
     return jsObject;
   }

@@ -16,6 +16,12 @@ export default class PropertyListModel {
     return this.items.join(', ');
   }
 
+  toJson() {
+    return {
+      items: this.items
+    };
+  }
+
   toHtml() {
     return createHtmlPropertyLine(this.headingName, this.text);
   }

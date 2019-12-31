@@ -93,6 +93,10 @@ export default class PropertyListSection extends propertyLineSectionModule.Prope
     this.showElements.text.textContent = text;
   }
 
+  exportToJson() {
+    return this.listModel.toJson();
+  }
+
   exportToHtml() {
     return this.listModel.toHtml();
   }
@@ -118,7 +122,7 @@ class PropertyListEditElements extends propertyLineSectionModule.PropertyLineEdi
     this.propertyList = shadowRoot.getElementById('property-list');
     this.dataList = shadowRoot.getElementById('property-list-datalist');
   }
-  
+
   get initiallySelectedElement() {
     return this.input;
   }
