@@ -31,7 +31,7 @@ class Skills {
   }
 
   reset() {
-    for(const skill of Object.values(this.skills)) {
+    for(const skill of this.values) {
       skill.reset();
     }
   }
@@ -40,34 +40,24 @@ class Skills {
     return Object.keys(this.skills);
   }
 
+  get values() {
+    return Object.values(this.skills);
+  }
+
   get entries() {
     return Object.entries(this.skills);
   }
 
   get text() {
-    const list = [];
-
-    for (const key of this.keys) {
-      const skill = this.skills[key];
-      const isEnabled = skill.isEnabled;
-
-      if (isEnabled) {
-        list.push(skill.text);
-      }
-    }
-
-    return list.join(', ');
+    return this.values
+      .filter(skill => skill.isEnabled)
+      .map(skill => skill.text)
+      .join(', ');
   }
 
   toJson() {
-    const jsObject = {};
-
-    for (const key of this.keys) {
-      const skill = this.skills[key];
-      jsObject[key] = skill.toJson();
-    }
-
-    return jsObject;
+    const transformedEntries = this.entries.map(([key, skill]) => [key, skill.toJson()]);
+    return Object.fromEntries(transformedEntries);
   }
 
   toHtml() {

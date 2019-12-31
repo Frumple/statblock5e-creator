@@ -7,14 +7,8 @@ class SavingThrows {
   constructor() {
     this.headingName = 'Saving Throws';
 
-    this.savingThrows = {
-      'strength' : new SavingThrow('strength'),
-      'dexterity' : new SavingThrow('dexterity'),
-      'constitution' : new SavingThrow('constitution'),
-      'intelligence' : new SavingThrow('intelligence'),
-      'wisdom' : new SavingThrow('wisdom'),
-      'charisma' : new SavingThrow('charisma')
-    };
+    const entries = Abilities.keys.map(key => [key, new SavingThrow(key)]);
+    this.savingThrows = Object.fromEntries(entries);
     Object.freeze(this.savingThrows);
   }
 
@@ -28,34 +22,24 @@ class SavingThrows {
     return Object.keys(this.savingThrows);
   }
 
+  get values() {
+    return Object.values(this.savingThrows);
+  }
+
   get entries() {
     return Object.entries(this.savingThrows);
   }
 
   get text() {
-    const list = [];
-
-    for (const key of Abilities.keys) {
-      const savingThrow = this.savingThrows[key];
-      const isEnabled = savingThrow.isEnabled;
-
-      if (isEnabled) {
-        list.push(savingThrow.text);
-      }
-    }
-
-    return list.join(', ');
+    return this.values
+      .filter(savingThrow => savingThrow.isEnabled)
+      .map(savingThrow => savingThrow.text)
+      .join(', ');
   }
 
   toJson() {
-    const jsObject = {};
-
-    for (const key of Abilities.keys) {
-      const savingThrow = this.savingThrows[key];
-      jsObject[key] = savingThrow.toJson();
-    }
-
-    return jsObject;
+    const transformedEntries = this.entries.map(([key, savingThrow]) => [key, savingThrow.toJson()]);
+    return Object.fromEntries(transformedEntries);
   }
 
   toHtml() {

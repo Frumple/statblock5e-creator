@@ -23,41 +23,33 @@ class Abilities {
     return Object.keys(this.abilities);
   }
 
+  get values() {
+    return Object.values(this.savingThrows);
+  }
+
   get entries() {
     return Object.entries(this.abilities);
   }
 
-  get orderedAbilities() {
+  get orderedKeys() {
     return [
-      this.abilities['strength'],
-      this.abilities['dexterity'],
-      this.abilities['constitution'],
-      this.abilities['intelligence'],
-      this.abilities['wisdom'],
-      this.abilities['charisma']
+      'strength',
+      'dexterity',
+      'constitution',
+      'intelligence',
+      'wisdom',
+      'charisma'
     ];
   }
 
   toParserOptions() {
-    return {
-      strength: this.abilities['strength'].toParserOptions(),
-      dexterity: this.abilities['dexterity'].toParserOptions(),
-      constitution: this.abilities['constitution'].toParserOptions(),
-      intelligence: this.abilities['intelligence'].toParserOptions(),
-      wisdom: this.abilities['wisdom'].toParserOptions(),
-      charisma: this.abilities['charisma'].toParserOptions()
-    };
+    const transformedEntries = this.entries.map(([key, ability]) => [key, ability.toParserOptions()]);
+    return Object.fromEntries(transformedEntries);
   }
 
   toJson() {
-    return {
-      strength: this.abilities['strength'].score,
-      dexterity: this.abilities['dexterity'].score,
-      constitution: this.abilities['constitution'].score,
-      intelligence: this.abilities['intelligence'].score,
-      wisdom: this.abilities['wisdom'].score,
-      charisma: this.abilities['charisma'].score
-    };
+    const transformedEntries = this.entries.map(([key, ability]) => [key, ability.score]);
+    return Object.fromEntries(transformedEntries);
   }
 
   toHtml() {
@@ -71,7 +63,7 @@ class Abilities {
   }
 
   toHomebrewery() {
-    const abilityStrings = this.orderedAbilities.map(ability => `${ability.score} ${ability.formattedModifier}`);
+    const abilityStrings = this.orderedKeys.map(key => `${this.abilities[key].score} ${this.abilities[key].formattedModifier}`);
     const abilityLine = abilityStrings.join('|');
 
     const text =
