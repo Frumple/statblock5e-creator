@@ -23,7 +23,7 @@ beforeEach(() => {
 
 describe('when the show section is clicked', () => {
   beforeEach(() => {
-    challengeRatingSection.showElements.section.click(); 
+    challengeRatingSection.showElements.section.click();
   });
 
   it('should switch to edit mode and focus on the challenge rating field', () => {
@@ -33,17 +33,22 @@ describe('when the show section is clicked', () => {
 
   describe('and the challenge rating field is changed, and the edit section is submitted', () => {
     it('should automatically change the experience points to the corresponding amount, and save the fields', () => {
+      const inputtedChallengeRating = 8;
+
+      const expectedChallengeRating = inputtedChallengeRating;
+      const expectedExperiencePoints = 3900;
       const expectedText = '8 (3900 XP)';
 
-      inputValueAndTriggerEvent(challengeRatingSection.editElements.challengeRating, 8);
+      inputValueAndTriggerEvent(challengeRatingSection.editElements.challengeRating, inputtedChallengeRating);
 
-      expect(challengeRatingSection.editElements.experiencePoints.value).toBe('3900');
+      expect(challengeRatingSection.editElements.experiencePoints.value).toBe(`${expectedExperiencePoints}`);
 
       challengeRatingSection.editElements.submitForm();
 
       expect(challengeRatingSection).toBeInMode('show');
       expect(challengeRatingSection).toShowPropertyLine(expectedHeading, expectedText);
 
+      verifyJsonExport(expectedChallengeRating, expectedExperiencePoints);
       expect(challengeRatingSection).toExportPropertyLineToHtml(expectedHeading, expectedText);
       expect(challengeRatingSection).toExportPropertyLineToHomebrewery(expectedHeading, expectedText);
     });
@@ -51,15 +56,20 @@ describe('when the show section is clicked', () => {
 
   describe('and the experience points field is changed, and the edit section is submitted', () => {
     it('should save the fields', () => {
+      const inputtedExperiencePoints = 234;
+
+      const expectedChallengeRating = 0;
+      const expectedExperiencePoints = inputtedExperiencePoints;
       const expectedText = '0 (234 XP)';
 
-      inputValueAndTriggerEvent(challengeRatingSection.editElements.experiencePoints, 234);
+      inputValueAndTriggerEvent(challengeRatingSection.editElements.experiencePoints, inputtedExperiencePoints);
 
       challengeRatingSection.editElements.submitForm();
 
       expect(challengeRatingSection).toBeInMode('show');
       expect(challengeRatingSection).toShowPropertyLine(expectedHeading, expectedText);
 
+      verifyJsonExport(expectedChallengeRating, expectedExperiencePoints);
       expect(challengeRatingSection).toExportPropertyLineToHtml(expectedHeading, expectedText);
       expect(challengeRatingSection).toExportPropertyLineToHomebrewery(expectedHeading, expectedText);
     });
@@ -78,16 +88,22 @@ describe('when the show section is clicked', () => {
 
   describe('and the challenge rating field is changed followed by the experience points field, and the edit section is submitted', () => {
     it('should save the fields', () => {
+      const inputtedChallengeRating = 3;
+      const inputtedExperiencePoints = 888;
+
+      const expectedChallengeRating = inputtedChallengeRating;
+      const expectedExperiencePoints = inputtedExperiencePoints;
       const expectedText = '3 (888 XP)';
 
-      inputValueAndTriggerEvent(challengeRatingSection.editElements.challengeRating, 3);
-      inputValueAndTriggerEvent(challengeRatingSection.editElements.experiencePoints, 888);
+      inputValueAndTriggerEvent(challengeRatingSection.editElements.challengeRating, inputtedChallengeRating);
+      inputValueAndTriggerEvent(challengeRatingSection.editElements.experiencePoints, inputtedExperiencePoints);
 
       challengeRatingSection.editElements.submitForm();
 
       expect(challengeRatingSection).toBeInMode('show');
       expect(challengeRatingSection).toShowPropertyLine(expectedHeading, expectedText);
 
+      verifyJsonExport(expectedChallengeRating, expectedExperiencePoints);
       expect(challengeRatingSection).toExportPropertyLineToHtml(expectedHeading, expectedText);
       expect(challengeRatingSection).toExportPropertyLineToHomebrewery(expectedHeading, expectedText);
     });
@@ -95,20 +111,36 @@ describe('when the show section is clicked', () => {
 
   describe('and the experience points field is changed followed by the challenge rating field, and the edit section is submitted', () => {
     it('should automatically change the experience points to the corresponding amount, and save the fields', () => {
-      const expectedText = '20 (25000 XP)';
-      
-      inputValueAndTriggerEvent(challengeRatingSection.editElements.experiencePoints, 1586);
-      inputValueAndTriggerEvent(challengeRatingSection.editElements.challengeRating, 20);
+      const inputtedExperiencePoints = 1586;
+      const inputtedChallengeRating = 20;
 
-      expect(challengeRatingSection.editElements.experiencePoints.value).toBe('25000');
+      const expectedExperiencePoints = 25000;
+      const expectedChallengeRating = inputtedChallengeRating;
+      const expectedText = '20 (25000 XP)';
+
+      inputValueAndTriggerEvent(challengeRatingSection.editElements.experiencePoints, inputtedExperiencePoints);
+      inputValueAndTriggerEvent(challengeRatingSection.editElements.challengeRating, inputtedChallengeRating);
+
+      expect(challengeRatingSection.editElements.experiencePoints.value).toBe(`${expectedExperiencePoints}`);
 
       challengeRatingSection.editElements.submitForm();
 
       expect(challengeRatingSection).toBeInMode('show');
       expect(challengeRatingSection).toShowPropertyLine(expectedHeading, expectedText);
 
+      verifyJsonExport(expectedChallengeRating, expectedExperiencePoints);
       expect(challengeRatingSection).toExportPropertyLineToHtml(expectedHeading, expectedText);
       expect(challengeRatingSection).toExportPropertyLineToHomebrewery(expectedHeading, expectedText);
     });
   });
 });
+
+function verifyJsonExport(challengeRating, experiencePoints) {
+  const jsObject = challengeRatingSection.exportToJson();
+  const expectedJson = {
+    challengeRating: challengeRating,
+    experiencePoints: experiencePoints
+  };
+
+  expect(jsObject).toStrictEqual(expectedJson);
+}

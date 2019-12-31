@@ -12,7 +12,7 @@ export default class SensesSection extends propertyLineSectionModule.PropertyLin
   constructor() {
     super(SensesSection.templatePaths,
           SensesShowElements,
-          SensesEditElements);    
+          SensesEditElements);
   }
 
   connectedCallback() {
@@ -48,13 +48,17 @@ export default class SensesSection extends propertyLineSectionModule.PropertyLin
   }
 
   updateView() {
-    this.editElements.passivePerception.textContent = Senses.passivePerception;  
+    this.editElements.passivePerception.textContent = Senses.passivePerception;
 
     if (Senses.useCustomText) {
       this.showElements.text.innerHTMLSanitized = Senses.htmlCustomText;
     } else {
       this.showElements.text.textContent = Senses.nonCustomText;
-    }    
+    }
+  }
+
+  exportToJson() {
+    return Senses.toJson();
   }
 
   exportToHtml() {

@@ -16,6 +16,13 @@ class ChallengeRating {
     return `${this.challengeRating} (${this.experiencePoints} XP)`;
   }
 
+  toJson() {
+    return {
+      challengeRating: this.challengeRating,
+      experiencePoints: this.experiencePoints
+    };
+  }
+
   toHtml() {
     return createHtmlPropertyLine(this.headingName, this.text);
   }

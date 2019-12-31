@@ -28,5 +28,9 @@ export let NumberSelectMixin = {
 
   get valueAsInt() {
     return convertToInteger(this.value);
+  },
+
+  get valueAsFloat() {
+    return parseFloat(this.value);
   }
 };

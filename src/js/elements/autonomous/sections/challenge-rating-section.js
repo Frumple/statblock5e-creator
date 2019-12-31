@@ -19,7 +19,7 @@ export default class ChallengeRatingSection extends propertyLineSectionModule.Pr
   }
 
   onInputChallengeRating() {
-    const challengeRating = parseFloat(this.editElements.challengeRating.value);
+    const challengeRating = this.editElements.challengeRating.valueAsFloat;
     const experiencePoints = ExperiencePointsByChallengeRating[challengeRating];
     this.editElements.experiencePoints.value = experiencePoints;
   }
@@ -30,12 +30,16 @@ export default class ChallengeRatingSection extends propertyLineSectionModule.Pr
 
   updateModel() {
     const challengeRatingElement = this.editElements.challengeRating;
-    ChallengeRating.challengeRating = challengeRatingElement.options[challengeRatingElement.selectedIndex].text;
-    ChallengeRating.experiencePoints = this.editElements.experiencePoints.value;
+    ChallengeRating.challengeRating = challengeRatingElement.valueAsFloat;
+    ChallengeRating.experiencePoints = this.editElements.experiencePoints.valueAsInt;
   }
 
   updateView() {
     this.showElements.text.textContent = ChallengeRating.text;
+  }
+
+  exportToJson() {
+    return ChallengeRating.toJson();
   }
 
   exportToHtml() {

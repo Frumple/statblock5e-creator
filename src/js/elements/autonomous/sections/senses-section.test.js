@@ -56,57 +56,36 @@ describe('when the show section is clicked', () => {
     });
 
     describe('and the custom text field is populated and the edit section is submitted', () => {
-      it('should switch to show mode and save the custom text', () => {
-        const customText = 'darkvision 120 ft. (penetrates magical darkness), passive Perception 13';
-        inputValueAndTriggerEvent(sensesSection.editElements.customText, customText);
+      describe('should switch to show mode and save the custom text', () => {
+        /* eslint-disable indent, no-unexpected-multiline */
+        it.each
+        `
+        description                                 | customText                                                                   | expectedHtmlText
+        ${'plain custom text'}                      | ${'darkvision 120 ft. (penetrates magical darkness), passive Perception 13'} | ${'darkvision 120 ft. (penetrates magical darkness), passive Perception 13'}
+        ${'custom text with valid markdown syntax'} | ${'**boldvision 60 ft.**'}                                                   | ${'<strong>boldvision 60 ft.</strong>'}
+        ${'custom text with html tags escaped'}     | ${'<strong>boldvision 60 ft.</strong>'}                                      | ${'&lt;strong&gt;boldvision 60 ft.&lt;/strong&gt;'}
+        `
+        ('$description: $customText => $expectedHtmlText',
+        ({customText, expectedHtmlText}) => {
+          const expectedJson = createDefaultExpectedJson();
+          expectedJson.customText = customText;
 
-        sensesSection.editElements.submitForm();
+          inputValueAndTriggerEvent(sensesSection.editElements.customText, customText);
 
-        expect(Senses.useCustomText).toBe(true);
-        expect(Senses.originalCustomText).toBe(customText);
-        expect(Senses.htmlCustomText).toBe(customText);
+          sensesSection.editElements.submitForm();
 
-        expect(sensesSection).toBeInMode('show');
-        expect(sensesSection).toShowPropertyLine(expectedHeading, customText);
+          expect(Senses.useCustomText).toBe(true);
+          expect(Senses.originalCustomText).toBe(customText);
+          expect(Senses.htmlCustomText).toBe(expectedHtmlText);
 
-        expect(sensesSection).toExportPropertyLineToHtml(expectedHeading, customText);
-        expect(sensesSection).toExportPropertyLineToHomebrewery(expectedHeading, customText);
-      });
+          expect(sensesSection).toBeInMode('show');
+          expect(sensesSection).toShowPropertyLine(expectedHeading, expectedHtmlText);
 
-      it('should switch to show mode and save the custom text with valid markdown syntax', () => {
-        const originalText = '**boldvision 60 ft.**';
-        const htmlText = '<strong>boldvision 60 ft.</strong>';
-        inputValueAndTriggerEvent(sensesSection.editElements.customText, originalText);
-
-        sensesSection.editElements.submitForm();
-
-        expect(Senses.useCustomText).toBe(true);
-        expect(Senses.originalCustomText).toBe(originalText);
-        expect(Senses.htmlCustomText).toBe(htmlText);
-
-        expect(sensesSection).toBeInMode('show');
-        expect(sensesSection).toShowPropertyLine(expectedHeading, htmlText);
-
-        expect(sensesSection).toExportPropertyLineToHtml(expectedHeading, htmlText);
-        expect(sensesSection).toExportPropertyLineToHomebrewery(expectedHeading, originalText);
-      });
-
-      it('should switch to show mode and save the custom text with html escaped', () => {
-        const originalText = '<strong>boldvision 60 ft.</strong>';
-        const htmlText = '&lt;strong&gt;boldvision 60 ft.&lt;/strong&gt;';
-        inputValueAndTriggerEvent(sensesSection.editElements.customText, originalText);
-
-        sensesSection.editElements.submitForm();
-
-        expect(Senses.useCustomText).toBe(true);
-        expect(Senses.originalCustomText).toBe(originalText);
-        expect(Senses.htmlCustomText).toBe(htmlText);
-
-        expect(sensesSection).toBeInMode('show');
-        expect(sensesSection).toShowPropertyLine(expectedHeading, htmlText);
-
-        expect(sensesSection).toExportPropertyLineToHtml(expectedHeading, htmlText);
-        expect(sensesSection).toExportPropertyLineToHomebrewery(expectedHeading, originalText);
+          verifyJsonExport(expectedJson);
+          expect(sensesSection).toExportPropertyLineToHtml(expectedHeading, expectedHtmlText);
+          expect(sensesSection).toExportPropertyLineToHomebrewery(expectedHeading, customText);
+        });
+        /* eslint-enable indent, no-unexpected-multiline */
       });
 
       it('should display an error if the custom text field is blank', () => {
@@ -182,15 +161,27 @@ describe('when the show section is clicked', () => {
 
           sensesSection.editElements.submitForm();
 
-          expect(Senses.blindsight).toBe(nullIfEmptyString(blindsight));
-          expect(Senses.darkvision).toBe(nullIfEmptyString(darkvision));
-          expect(Senses.tremorsense).toBe(nullIfEmptyString(tremorsense));
-          expect(Senses.truesight).toBe(nullIfEmptyString(truesight));
+          blindsight = nullIfEmptyString(blindsight);
+          darkvision = nullIfEmptyString(darkvision);
+          tremorsense = nullIfEmptyString(tremorsense);
+          truesight = nullIfEmptyString(truesight);
+
+          const expectedJson = createDefaultExpectedJson();
+          expectedJson.blindsight = blindsight;
+          expectedJson.darkvision = darkvision;
+          expectedJson.tremorsense = tremorsense;
+          expectedJson.truesight = truesight;
+
+          expect(Senses.blindsight).toBe(blindsight);
+          expect(Senses.darkvision).toBe(darkvision);
+          expect(Senses.tremorsense).toBe(tremorsense);
+          expect(Senses.truesight).toBe(truesight);
           expect(Senses.useCustomText).toBe(false);
 
           expect(sensesSection).toBeInMode('show');
           expect(sensesSection).toShowPropertyLine(expectedHeading, expectedText);
 
+          verifyJsonExport(expectedJson);
           expect(sensesSection).toExportPropertyLineToHtml(expectedHeading, expectedText);
           expect(sensesSection).toExportPropertyLineToHomebrewery(expectedHeading, expectedText);
         });
@@ -247,3 +238,18 @@ describe('should calculate the passive perception based on the following conditi
   });
   /* eslint-enable indent, no-unexpected-multiline */
 });
+
+function createDefaultExpectedJson() {
+  return {
+    blindsight: null,
+    darkvision: null,
+    tremorsense: null,
+    truesight: null,
+    customText: null
+  };
+}
+
+function verifyJsonExport(expectedJson) {
+  const jsObject = sensesSection.exportToJson();
+  expect(jsObject).toStrictEqual(expectedJson);
+}

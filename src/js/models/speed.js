@@ -67,7 +67,7 @@ class Speed {
         burrow: null,
         climb: null,
         fly: null,
-        hover: null,
+        hover: false,
         swim: null,
         customText: this.originalCustomText
       };

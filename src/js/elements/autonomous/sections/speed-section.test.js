@@ -63,6 +63,9 @@ describe('when the show section is clicked', () => {
         `
         ('$description: $customText => $expectedHtmlText',
         ({customText, expectedHtmlText}) => {
+          const expectedJson = createDefaultExpectedJson();
+          expectedJson.customText = customText;
+
           inputValueAndTriggerEvent(speedSection.editElements.customText, customText);
 
           speedSection.editElements.submitForm();
@@ -74,7 +77,7 @@ describe('when the show section is clicked', () => {
           expect(speedSection).toBeInMode('show');
           expect(speedSection).toShowPropertyLine(expectedHeading, expectedHtmlText);
 
-          verifyJsonExport(null, null, null, null, null, null, customText);
+          verifyJsonExport(expectedJson);
           expect(speedSection).toExportPropertyLineToHtml(expectedHeading, expectedHtmlText);
           expect(speedSection).toExportPropertyLineToHomebrewery(expectedHeading, customText);
         });
@@ -179,6 +182,14 @@ describe('when the show section is clicked', () => {
           fly = nullIfEmptyString(fly);
           swim = nullIfEmptyString(swim);
 
+          const expectedJson = createDefaultExpectedJson();
+          expectedJson.walk = walk;
+          expectedJson.burrow = burrow;
+          expectedJson.climb = climb;
+          expectedJson.fly = fly;
+          expectedJson.hover = hover;
+          expectedJson.swim = swim;
+
           expect(Speed.walk).toBe(walk);
           expect(Speed.burrow).toBe(burrow);
           expect(Speed.climb).toBe(climb);
@@ -190,7 +201,7 @@ describe('when the show section is clicked', () => {
           expect(speedSection).toBeInMode('show');
           expect(speedSection).toShowPropertyLine(expectedHeading, expectedText);
 
-          verifyJsonExport(walk, burrow, climb, fly, hover, swim, null);
+          verifyJsonExport(expectedJson);
           expect(speedSection).toExportPropertyLineToHtml(expectedHeading, expectedText);
           expect(speedSection).toExportPropertyLineToHomebrewery(expectedHeading, expectedText);
         });
@@ -200,17 +211,19 @@ describe('when the show section is clicked', () => {
   });
 });
 
-function verifyJsonExport(walk, burrow, climb, fly, hover, swim, customText) {
-  const jsObject = speedSection.exportToJson();
-  const expectedJsObject = {
-    walk: walk,
-    burrow: burrow,
-    climb: climb,
-    fly: fly,
-    hover: hover,
-    swim: swim,
-    customText: customText
+function createDefaultExpectedJson() {
+  return {
+    walk: null,
+    burrow: null,
+    climb: null,
+    fly: null,
+    hover: false,
+    swim: null,
+    customText: null
   };
+}
 
-  expect(jsObject).toStrictEqual(expectedJsObject);
+function verifyJsonExport(expectedJson) {
+  const jsObject = speedSection.exportToJson();
+  expect(jsObject).toStrictEqual(expectedJson);
 }

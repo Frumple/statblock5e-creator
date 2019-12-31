@@ -61,6 +61,26 @@ class Senses {
     return list.join(', ');
   }
 
+  toJson() {
+    if (this.useCustomText) {
+      return {
+        blindsight: null,
+        darkvision: null,
+        tremorsense: null,
+        truesight: null,
+        customText: this.originalCustomText
+      };
+    }
+
+    return {
+      blindsight: this.blindsight,
+      darkvision: this.darkvision,
+      tremorsense: this.tremorsense,
+      truesight: this.truesight,
+      customText: null
+    };
+  }
+
   toHtml() {
     return createHtmlPropertyLine(this.headingName, this.htmlText);
   }
