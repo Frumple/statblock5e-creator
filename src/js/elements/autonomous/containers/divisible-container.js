@@ -1,6 +1,6 @@
-import CustomAutonomousElement from '../custom-autonomous-element.js';
+import StatsContainer from './stats-container.js';
 
-export default class DivisibleContainer extends CustomAutonomousElement {
+export default class DivisibleContainer extends StatsContainer {
   constructor(templatePaths) {
     super(templatePaths);
 
@@ -13,9 +13,7 @@ export default class DivisibleContainer extends CustomAutonomousElement {
   }
 
   setEmptySectionsVisibility(visibility) {
-    for (const section of this.sections.values()) {
-      section.setEmptyVisibility(visibility);
-    }
+    super.setEmptySectionsVisibility(visibility);
 
     this.updateSectionDividers();
   }
