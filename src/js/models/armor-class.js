@@ -50,20 +50,12 @@ class ArmorClass {
   }
 
   toJson() {
-    if (this.useCustomText) {
-      return {
-        armorClass: null,
-        armorType: null,
-        hasShield: null,
-        customText: this.originalCustomText
-      };
-    }
-
     return {
       armorClass: this.armorClass,
       armorType: this.armorType,
       hasShield: this.hasShield,
-      customText: null
+      useCustomText: this.useCustomText,
+      customText: this.originalCustomText
     };
   }
 

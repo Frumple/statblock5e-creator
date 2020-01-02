@@ -70,11 +70,36 @@ describe('when the show section is clicked', () => {
           expect(armorClassSection).toBeInMode('show');
           expect(armorClassSection).toShowPropertyLine(expectedHeading, expectedHtmlText);
 
-          verifyJsonExport(null, null, null, customText);
+          verifyJsonExport({
+            useCustomText: true,
+            customText: customText
+          });
           expect(armorClassSection).toExportPropertyLineToHtml(expectedHeading, expectedHtmlText);
           expect(armorClassSection).toExportPropertyLineToHomebrewery(expectedHeading, customText);
         });
         /* eslint-enable indent, no-unexpected-multiline */
+      });
+
+      it('should preserve the custom text if submitted with the custom text checkbox unchecked', () => {
+        const customText = '17 (19 with shield equipped)';
+
+        inputValueAndTriggerEvent(armorClassSection.editElements.customText, customText);
+
+        armorClassSection.editElements.useCustomText.click();
+        armorClassSection.editElements.submitForm();
+        armorClassSection.showElements.section.click();
+
+        expect(ArmorClass.useCustomText).toBe(false);
+        expect(ArmorClass.originalCustomText).toBe(customText);
+
+        expect(armorClassSection).toBeInMode('edit');
+        expect(armorClassSection.editElements.useCustomText).not.toBeChecked();
+        expect(armorClassSection.editElements.customText).toHaveValue(customText);
+
+        verifyJsonExport({
+          useCustomText: false,
+          customText: customText
+        });
       });
 
       it('should display an error if the custom text field is blank', () => {
@@ -157,11 +182,52 @@ describe('when the show section is clicked', () => {
           expect(armorClassSection).toBeInMode('show');
           expect(armorClassSection).toShowPropertyLine(expectedHeading, expectedText);
 
-          verifyJsonExport(armorClass, armorType, hasShield, null);
+          verifyJsonExport({
+            armorClass: armorClass,
+            armorType : armorType,
+            hasShield: hasShield
+          });
           expect(armorClassSection).toExportPropertyLineToHtml(expectedHeading, expectedText);
           expect(armorClassSection).toExportPropertyLineToHomebrewery(expectedHeading, expectedText);
         });
         /* eslint-enable indent, no-unexpected-multiline */
+      });
+
+      it('should preserve the armor class, armor type, and shield if submitted with the custom text checkbox checked', () => {
+        const armorClass = 13;
+        const armorType = 'studded leather armor';
+        const hasShield = true;
+        const useCustomText = true;
+        const customText = 'This custom text should be saved, but not shown.';
+
+        inputValueAndTriggerEvent(armorClassSection.editElements.armorClass, armorClass);
+        inputValueAndTriggerEvent(armorClassSection.editElements.armorType, armorType);
+        armorClassSection.editElements.hasShield.click();
+
+        armorClassSection.editElements.useCustomText.click();
+        inputValueAndTriggerEvent(armorClassSection.editElements.customText, customText);
+
+        armorClassSection.editElements.submitForm();
+        armorClassSection.showElements.section.click();
+
+        expect(ArmorClass.armorClass).toBe(armorClass);
+        expect(ArmorClass.armorType).toBe(armorType);
+        expect(ArmorClass.hasShield).toBe(hasShield);
+        expect(ArmorClass.useCustomText).toBe(true);
+
+        expect(armorClassSection).toBeInMode('edit');
+        expect(armorClassSection.editElements.armorClass).toHaveValue(armorClass);
+        expect(armorClassSection.editElements.armorType).toHaveValue(armorType);
+        expect(armorClassSection.editElements.hasShield).toBeChecked();
+        expect(armorClassSection.editElements.useCustomText).toBeChecked();
+
+        verifyJsonExport({
+          armorClass: armorClass,
+          armorType : armorType,
+          hasShield: hasShield,
+          useCustomText: useCustomText,
+          customText: customText
+        });
       });
 
       it('should display an error if the armor class field is not a valid number', () => {
@@ -190,14 +256,22 @@ describe('when the show section is clicked', () => {
   });
 });
 
-function verifyJsonExport(armorClass, armorType, hasShield, customText) {
-  const jsObject = armorClassSection.exportToJson();
-  const expectedJsObject = {
+function verifyJsonExport({
+  armorClass = 10,
+  armorType = '',
+  hasShield = false,
+  useCustomText = false,
+  customText = ''
+} = {}) {
+
+  const json = armorClassSection.exportToJson();
+  const expectedJson = {
     armorClass: armorClass,
     armorType: armorType,
     hasShield: hasShield,
+    useCustomText: useCustomText,
     customText: customText
   };
 
-  expect(jsObject).toStrictEqual(expectedJsObject);
+  expect(json).toStrictEqual(expectedJson);
 }

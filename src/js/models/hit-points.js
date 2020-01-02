@@ -63,18 +63,11 @@ class HitPoints {
   }
 
   toJson() {
-    if (this.useHitDie) {
-      return {
-        hitPoints: null,
-        hitDieQuantity: this.hitDieQuantity,
-        hitDieSize: this.hitDieSize
-      };
-    }
-
     return {
       hitPoints: this._hitPoints,
-      hitDieQuantity: null,
-      hitDieSize: null
+      useHitDie: this.useHitDie,
+      hitDieQuantity: this.hitDieQuantity,
+      hitDieSize: this.hitDieSize
     };
   }
 

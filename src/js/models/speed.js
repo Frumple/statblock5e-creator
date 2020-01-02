@@ -61,18 +61,6 @@ class Speed {
   }
 
   toJson() {
-    if (this.useCustomText) {
-      return {
-        walk: null,
-        burrow: null,
-        climb: null,
-        fly: null,
-        hover: false,
-        swim: null,
-        customText: this.originalCustomText
-      };
-    }
-
     return {
       walk: this.walk,
       burrow: this.burrow,
@@ -80,7 +68,8 @@ class Speed {
       fly: this.fly,
       hover: this.hover,
       swim: this.swim,
-      customText: null
+      useCustomText: this.useCustomText,
+      customText: this.originalCustomText
     };
   }
 

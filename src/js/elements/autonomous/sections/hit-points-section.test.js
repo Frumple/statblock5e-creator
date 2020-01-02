@@ -97,11 +97,46 @@ describe('when the show section is clicked', () => {
           expect(hitPointsSection).toBeInMode('show');
           expect(hitPointsSection).toShowPropertyLine(expectedHeading, expectedText);
 
-          verifyJsonExport(null, hitDieQuantity, hitDieSize);
+          verifyJsonExport({
+            hitPoints: expectedHitPoints,
+            useHitDie: true,
+            hitDieQuantity: hitDieQuantity,
+            hitDieSize: hitDieSize
+          });
           expect(hitPointsSection).toExportPropertyLineToHtml(expectedHeading, expectedText);
           expect(hitPointsSection).toExportPropertyLineToHomebrewery(expectedHeading, expectedText);
         });
         /* eslint-enable indent, no-unexpected-multiline */
+      });
+
+      it('should preserve the hit die quantity and size if submitted with the "Calculate using Hit Die" checkbox unchecked', () => {
+        const hitDieQuantity = 2;
+        const hitDieSize = 6;
+        const expectedHitPoints = 7;
+
+        inputValueAndTriggerEvent(hitPointsSection.editElements.hitDieQuantity, hitDieQuantity);
+        inputValueAndTriggerEvent(hitPointsSection.editElements.hitDieSize, hitDieSize);
+
+        hitPointsSection.editElements.useHitDie.click();
+        hitPointsSection.editElements.submitForm();
+        hitPointsSection.showElements.section.click();
+
+        expect(HitPoints.useHitDie).toBe(false);
+        expect(HitPoints.hitDieQuantity).toBe(hitDieQuantity);
+        expect(HitPoints.hitDieSize).toBe(hitDieSize);
+        expect(HitPoints.hitPoints).toBe(expectedHitPoints);
+
+        expect(hitPointsSection).toBeInMode('edit');
+        expect(hitPointsSection.editElements.useHitDie).not.toBeChecked();
+        expect(hitPointsSection.editElements.hitDieQuantity).toHaveValue(hitDieQuantity);
+        expect(hitPointsSection.editElements.hitDieSize.valueAsInt).toBe(hitDieSize);
+
+        verifyJsonExport({
+          hitPoints: expectedHitPoints,
+          useHitDie: false,
+          hitDieQuantity: hitDieQuantity,
+          hitDieSize: hitDieSize
+        });
       });
     });
 
@@ -199,7 +234,10 @@ describe('when the show section is clicked', () => {
         expect(hitPointsSection).toBeInMode('show');
         expect(hitPointsSection).toShowPropertyLine(expectedHeading, expectedText);
 
-        verifyJsonExport(hitPoints, null, null);
+        verifyJsonExport({
+          hitPoints: hitPoints,
+          useHitDie: false
+        });
         expect(hitPointsSection).toExportPropertyLineToHtml(expectedHeading, expectedText);
         expect(hitPointsSection).toExportPropertyLineToHomebrewery(expectedHeading, expectedText);
       });
@@ -242,13 +280,19 @@ describe('when the show section is clicked', () => {
   });
 });
 
-function verifyJsonExport(hitPoints, hitDieQuantity, hitDieSize) {
-  const jsObject = hitPointsSection.exportToJson();
-  const expectedJsObject = {
+function verifyJsonExport({
+  hitPoints = 4,
+  useHitDie = true,
+  hitDieQuantity = 1,
+  hitDieSize = 8} = {}) {
+
+  const json = hitPointsSection.exportToJson();
+  const expectedJson = {
     hitPoints: hitPoints,
+    useHitDie: useHitDie,
     hitDieQuantity: hitDieQuantity,
     hitDieSize: hitDieSize
   };
 
-  expect(jsObject).toStrictEqual(expectedJsObject);
+  expect(json).toStrictEqual(expectedJson);
 }

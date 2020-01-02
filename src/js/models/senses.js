@@ -62,22 +62,13 @@ class Senses {
   }
 
   toJson() {
-    if (this.useCustomText) {
-      return {
-        blindsight: null,
-        darkvision: null,
-        tremorsense: null,
-        truesight: null,
-        customText: this.originalCustomText
-      };
-    }
-
     return {
       blindsight: this.blindsight,
       darkvision: this.darkvision,
       tremorsense: this.tremorsense,
       truesight: this.truesight,
-      customText: null
+      useCustomText: this.useCustomText,
+      customText: this.originalCustomText
     };
   }
 

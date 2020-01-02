@@ -67,9 +67,6 @@ describe('when the show section is clicked', () => {
         `
         ('$description: $customText => $expectedHtmlText',
         ({customText, expectedHtmlText}) => {
-          const expectedJson = createDefaultExpectedJson();
-          expectedJson.customText = customText;
-
           inputValueAndTriggerEvent(sensesSection.editElements.customText, customText);
 
           sensesSection.editElements.submitForm();
@@ -81,11 +78,36 @@ describe('when the show section is clicked', () => {
           expect(sensesSection).toBeInMode('show');
           expect(sensesSection).toShowPropertyLine(expectedHeading, expectedHtmlText);
 
-          verifyJsonExport(expectedJson);
+          verifyJsonExport({
+            useCustomText: true,
+            customText: customText
+          });
           expect(sensesSection).toExportPropertyLineToHtml(expectedHeading, expectedHtmlText);
           expect(sensesSection).toExportPropertyLineToHomebrewery(expectedHeading, customText);
         });
         /* eslint-enable indent, no-unexpected-multiline */
+      });
+
+      it('should preserve the custom text if submitted with the custom text checkbox unchecked', () => {
+        const customText = '30 ft. (40 ft. in tiger form)';
+
+        inputValueAndTriggerEvent(sensesSection.editElements.customText, customText);
+
+        sensesSection.editElements.useCustomText.click();
+        sensesSection.editElements.submitForm();
+        sensesSection.showElements.section.click();
+
+        expect(Senses.useCustomText).toBe(false);
+        expect(Senses.originalCustomText).toBe(customText);
+
+        expect(sensesSection).toBeInMode('edit');
+        expect(sensesSection.editElements.useCustomText).not.toBeChecked();
+        expect(sensesSection.editElements.customText).toHaveValue(customText);
+
+        verifyJsonExport({
+          useCustomText: false,
+          customText: customText
+        });
       });
 
       it('should display an error if the custom text field is blank', () => {
@@ -166,12 +188,6 @@ describe('when the show section is clicked', () => {
           tremorsense = nullIfEmptyString(tremorsense);
           truesight = nullIfEmptyString(truesight);
 
-          const expectedJson = createDefaultExpectedJson();
-          expectedJson.blindsight = blindsight;
-          expectedJson.darkvision = darkvision;
-          expectedJson.tremorsense = tremorsense;
-          expectedJson.truesight = truesight;
-
           expect(Senses.blindsight).toBe(blindsight);
           expect(Senses.darkvision).toBe(darkvision);
           expect(Senses.tremorsense).toBe(tremorsense);
@@ -181,11 +197,58 @@ describe('when the show section is clicked', () => {
           expect(sensesSection).toBeInMode('show');
           expect(sensesSection).toShowPropertyLine(expectedHeading, expectedText);
 
-          verifyJsonExport(expectedJson);
+          verifyJsonExport({
+            blindsight: blindsight,
+            darkvision: darkvision,
+            tremorsense: tremorsense,
+            truesight: truesight
+          });
           expect(sensesSection).toExportPropertyLineToHtml(expectedHeading, expectedText);
           expect(sensesSection).toExportPropertyLineToHomebrewery(expectedHeading, expectedText);
         });
         /* eslint-enable indent, no-unexpected-multiline */
+      });
+
+      it('should preserve the speeds if submitted with the custom text checkbox checked', () => {
+        const blindsight = 10;
+        const darkvision = 20;
+        const tremorsense = 30;
+        const truesight = 40;
+        const useCustomText = true;
+        const customText = 'This custom text should be saved, but not shown.';
+
+        inputValueAndTriggerEvent(sensesSection.editElements.blindsight, blindsight);
+        inputValueAndTriggerEvent(sensesSection.editElements.darkvision, darkvision);
+        inputValueAndTriggerEvent(sensesSection.editElements.tremorsense, tremorsense);
+        inputValueAndTriggerEvent(sensesSection.editElements.truesight, truesight);
+
+        sensesSection.editElements.useCustomText.click();
+        inputValueAndTriggerEvent(sensesSection.editElements.customText, customText);
+
+        sensesSection.editElements.submitForm();
+        sensesSection.showElements.section.click();
+
+        expect(Senses.blindsight).toBe(blindsight);
+        expect(Senses.darkvision).toBe(darkvision);
+        expect(Senses.tremorsense).toBe(tremorsense);
+        expect(Senses.truesight).toBe(truesight);
+        expect(Senses.useCustomText).toBe(true);
+
+        expect(sensesSection).toBeInMode('edit');
+        expect(sensesSection.editElements.blindsight).toHaveValue(blindsight);
+        expect(sensesSection.editElements.darkvision).toHaveValue(darkvision);
+        expect(sensesSection.editElements.tremorsense).toHaveValue(tremorsense);
+        expect(sensesSection.editElements.truesight).toHaveValue(truesight);
+        expect(sensesSection.editElements.useCustomText).toBeChecked();
+
+        verifyJsonExport({
+          blindsight: blindsight,
+          darkvision: darkvision,
+          tremorsense: tremorsense,
+          truesight: truesight,
+          useCustomText: useCustomText,
+          customText: customText
+        });
       });
     });
   });
@@ -239,17 +302,23 @@ describe('should calculate the passive perception based on the following conditi
   /* eslint-enable indent, no-unexpected-multiline */
 });
 
-function createDefaultExpectedJson() {
-  return {
-    blindsight: null,
-    darkvision: null,
-    tremorsense: null,
-    truesight: null,
-    customText: null
+function verifyJsonExport({
+  blindsight = null,
+  darkvision = null,
+  tremorsense = null,
+  truesight = null,
+  useCustomText = false,
+  customText = ''
+} = {}) {
+  const json = sensesSection.exportToJson();
+  const expectedJson = {
+    blindsight: blindsight,
+    darkvision: darkvision,
+    tremorsense: tremorsense,
+    truesight: truesight,
+    useCustomText: useCustomText,
+    customText: customText
   };
-}
 
-function verifyJsonExport(expectedJson) {
-  const jsObject = sensesSection.exportToJson();
-  expect(jsObject).toStrictEqual(expectedJson);
+  expect(json).toStrictEqual(expectedJson);
 }
