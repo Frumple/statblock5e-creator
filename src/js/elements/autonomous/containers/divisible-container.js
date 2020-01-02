@@ -4,8 +4,8 @@ export default class DivisibleContainer extends CustomAutonomousElement {
   constructor(templatePaths) {
     super(templatePaths);
 
-    this.allDividers = this.querySelectorAll('section-divider');
-    this.allSections = [];
+    this.dividers = this.querySelectorAll('section-divider');
+    this.sections = new Map();
 
     this.addEventListener('sectionModeChanged', () => {
       this.updateSectionDividers();
@@ -13,7 +13,7 @@ export default class DivisibleContainer extends CustomAutonomousElement {
   }
 
   setEmptySectionsVisibility(visibility) {
-    for (const section of this.allSections) {
+    for (const section of this.sections.values()) {
       section.setEmptyVisibility(visibility);
     }
 
@@ -21,13 +21,13 @@ export default class DivisibleContainer extends CustomAutonomousElement {
   }
 
   updateSectionDividers() {
-    for (const divider of this.allDividers) {
+    for (const divider of this.dividers) {
       divider.hidden = true;
     }
 
     let previousSection = null;
 
-    for (const currentSection of this.allSections) {
+    for (const currentSection of this.sections.values()) {
       if (currentSection.mode !== 'hidden') {
         if (previousSection) {
           if (DivisibleContainer.shouldSectionDividerBeDisplayed(previousSection, currentSection)) {

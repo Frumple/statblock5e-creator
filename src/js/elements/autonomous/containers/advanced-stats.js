@@ -11,60 +11,38 @@ export default class AdvancedStats extends DivisibleContainer {
   constructor() {
     super(AdvancedStats.templatePaths);
 
-    this.savingThrowsSection = document.querySelector('saving-throws-section');
-    this.skillsSection = document.querySelector('skills-section');
-    this.damageVulnerabilitiesSection = document.querySelector('damage-vulnerabilities-section');
-    this.damageResistancesSection = document.querySelector('damage-resistances-section');
-    this.damageImmunitiesSection = document.querySelector('damage-immunities-section');
-    this.conditionImmunitiesSection = document.querySelector('condition-immunities-section');
-    this.sensesSection = document.querySelector('senses-section');
-    this.languagesSection = document.querySelector('languages-section');
-    this.challengeRatingSection = document.querySelector('challenge-rating-section');
-
-    this.allSections = [
-      this.savingThrowsSection,
-      this.skillsSection,
-      this.damageVulnerabilitiesSection,
-      this.damageResistancesSection,
-      this.damageImmunitiesSection,
-      this.conditionImmunitiesSection,
-      this.sensesSection,
-      this.languagesSection,
-      this.challengeRatingSection
-    ];
+    this.sections.set('savingThrows', document.querySelector('saving-throws-section'));
+    this.sections.set('skills', document.querySelector('skills-section'));
+    this.sections.set('damageVulnerabilities', document.querySelector('damage-vulnerabilities-section'));
+    this.sections.set('damageResistances', document.querySelector('damage-resistances-section'));
+    this.sections.set('damageImmunities', document.querySelector('damage-immunities-section'));
+    this.sections.set('conditionImmunities', document.querySelector('condition-immunities-section'));
+    this.sections.set('senses', document.querySelector('senses-section'));
+    this.sections.set('languages', document.querySelector('languages-section'));
+    this.sections.set('challengeRating', document.querySelector('challenge-rating-section'));
   }
 
   editAllSections() {
-    for (const section of this.allSections) {
+    for (const section of this.sections.values()) {
       section.edit();
     }
   }
 
   saveAllSections() {
-    for (const section of this.allSections) {
+    for (const section of this.sections.values()) {
       section.save();
     }
   }
 
   exportToJson() {
-    const jsObject = {};
-
-    jsObject.savingThrows = this.savingThrowsSection.exportToJson();
-    jsObject.skills = this.skillsSection.exportToJson();
-    jsObject.damageVulnerabilities = this.damageVulnerabilitiesSection.exportToJson();
-    jsObject.damageResistances = this.damageResistancesSection.exportToJson();
-    jsObject.damageImmunities = this.damageImmunitiesSection.exportToJson();
-    jsObject.conditionImmunities = this.conditionImmunitiesSection.exportToJson();
-    jsObject.senses = this.sensesSection.exportToJson();
-    jsObject.languages = this.languagesSection.exportToJson();
-    jsObject.challengeRating = this.challengeRatingSection.exportToJson();
-
-    return jsObject;
+    const entries = Array.from(this.sections.entries());
+    const transformedEntries = entries.map(([key, section]) => [key, section.exportToJson()]);
+    return Object.fromEntries(transformedEntries);
   }
 
   exportToHtml() {
     const fragment = document.createDocumentFragment();
-    for (const section of this.allSections) {
+    for (const section of this.sections.values()) {
       if (! section.empty) {
         fragment.appendChild(section.exportToHtml());
       }
@@ -74,9 +52,10 @@ export default class AdvancedStats extends DivisibleContainer {
   }
 
   exportToHomebrewery() {
-    const exports = this.allSections
+    const sections = Array.from(this.sections.values());
+    return sections
       .filter(section => ! section.empty)
-      .map(section => section.exportToHomebrewery());
-    return exports.join('\n');
+      .map(section => section.exportToHomebrewery())
+      .join('\n');
   }
 }

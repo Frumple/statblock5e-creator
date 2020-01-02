@@ -11,57 +11,47 @@ export default class BottomStats extends CustomAutonomousElement {
   constructor() {
     super(BottomStats.templatePaths);
 
-    this.specialTraitsSection = document.querySelector('special-traits-section');
-    this.actionsSection = document.querySelector('actions-section');
-    this.reactionsSection = document.querySelector('reactions-section');
-    this.legendaryActionsSection = document.querySelector('legendary-actions-section');
+    this.sections = new Map();
 
-    this.allSections = [
-      this.specialTraitsSection,
-      this.actionsSection,
-      this.reactionsSection,
-      this.legendaryActionsSection
-    ];
+    this.sections.set('specialTraits', document.querySelector('special-traits-section'));
+    this.sections.set('actions', document.querySelector('actions-section'));
+    this.sections.set('reactions', document.querySelector('reactions-section'));
+    this.sections.set('legendaryActions', document.querySelector('legendary-actions-section'));
   }
 
   setEmptySectionsVisibility(visibility) {
-    for (const section of this.allSections) {
+    for (const section of this.sections.values()) {
       section.setEmptyVisibility(visibility);
     }
   }
 
   editAllSections() {
-    for (const section of this.allSections) {
+    for (const section of this.sections.values()) {
       section.edit();
     }
   }
 
   saveAllSections() {
-    for (const section of this.allSections) {
+    for (const section of this.sections.values()) {
       section.save();
     }
   }
 
   reparseAllSections() {
-    for (const section of this.allSections) {
+    for (const section of this.sections.values()) {
       section.reparse();
     }
   }
 
   exportToJson() {
-    const jsObject = {};
-
-    jsObject.specialTraits = this.specialTraitsSection.exportToJson();
-    jsObject.actions = this.actionsSection.exportToJson();
-    jsObject.reactions = this.reactionsSection.exportToJson();
-    jsObject.legendaryActions = this.legendaryActionsSection.exportToJson();
-
-    return jsObject;
+    const entries = Array.from(this.sections.entries());
+    const transformedEntries = entries.map(([key, section]) => [key, section.exportToJson()]);
+    return Object.fromEntries(transformedEntries);
   }
 
   exportToHtml() {
     const fragment = document.createDocumentFragment();
-    for (const section of this.allSections) {
+    for (const section of this.sections.values()) {
       if (! section.empty) {
         fragment.appendChild(section.exportToHtml());
       }
@@ -71,9 +61,10 @@ export default class BottomStats extends CustomAutonomousElement {
   }
 
   exportToHomebrewery() {
-    const exports = this.allSections
+    const sections = Array.from(this.sections.values());
+    return sections
       .filter(section => ! section.empty)
-      .map(section => section.exportToHomebrewery());
-    return exports.join('\n');
+      .map(section => section.exportToHomebrewery())
+      .join('\n');
   }
 }

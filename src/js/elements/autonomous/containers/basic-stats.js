@@ -11,42 +11,32 @@ export default class BasicStats extends DivisibleContainer {
   constructor() {
     super(BasicStats.templatePaths);
 
-    this.armorClassSection = document.querySelector('armor-class-section');
-    this.hitPointsSection = document.querySelector('hit-points-section');
-    this.speedSection = document.querySelector('speed-section');
-
-    this.allSections = [
-      this.armorClassSection,
-      this.hitPointsSection,
-      this.speedSection
-    ];
+    this.sections.set('armorClass', document.querySelector('armor-class-section'));
+    this.sections.set('hitPoints', document.querySelector('hit-points-section'));
+    this.sections.set('speed', document.querySelector('speed-section'));
   }
 
   editAllSections() {
-    for (const section of this.allSections) {
+    for (const section of this.sections.values()) {
       section.edit();
     }
   }
 
   saveAllSections() {
-    for (const section of this.allSections) {
+    for (const section of this.sections.values()) {
       section.save();
     }
   }
 
   exportToJson() {
-    const jsObject = {};
-
-    jsObject.armorClass = this.armorClassSection.exportToJson();
-    jsObject.hitPoints = this.hitPointsSection.exportToJson();
-    jsObject.speed = this.speedSection.exportToJson();
-
-    return jsObject;
+    const entries = Array.from(this.sections.entries());
+    const transformedEntries = entries.map(([key, section]) => [key, section.exportToJson()]);
+    return Object.fromEntries(transformedEntries);
   }
 
   exportToHtml() {
     const fragment = document.createDocumentFragment();
-    for (const section of this.allSections) {
+    for (const section of this.sections.values()) {
       fragment.appendChild(section.exportToHtml());
     }
 
@@ -54,7 +44,9 @@ export default class BasicStats extends DivisibleContainer {
   }
 
   exportToHomebrewery() {
-    const exports = this.allSections.map(section => section.exportToHomebrewery());
-    return exports.join('\n');
+    const sections = Array.from(this.sections.values());
+    return sections
+      .map(section => section.exportToHomebrewery())
+      .join('\n');
   }
 }

@@ -47,24 +47,27 @@ export default class StatBlock extends CustomAutonomousElement {
     const abilityName = event.detail.abilityName;
 
     if (abilityName === 'constitution') {
-      this.topStats.basicStats.hitPointsSection.updateView();
+      this.topStats.basicStats.sections.get('hitPoints').updateView();
     } else if (abilityName === 'wisdom') {
-      this.topStats.advancedStats.sensesSection.updateView();
+      this.topStats.advancedStats.sections.get('senses').updateView();
     }
 
-    this.topStats.advancedStats.savingThrowsSection.updateViewSavingThrow(abilityName);
-    this.topStats.advancedStats.savingThrowsSection.updateViewText();
+    const savingThrowsSection = this.topStats.advancedStats.sections.get('savingThrows');
+    const skillsSection = this.topStats.advancedStats.sections.get('skills');
 
-    this.topStats.advancedStats.skillsSection.updateViewSkillsByAbility(abilityName);
-    this.topStats.advancedStats.skillsSection.updateViewText();
+    savingThrowsSection.updateViewSavingThrow(abilityName);
+    savingThrowsSection.updateViewText();
+
+    skillsSection.updateViewSkillsByAbility(abilityName);
+    skillsSection.updateViewText();
 
     this.reparseBlockSections();
   }
 
   onProficiencyBonusChanged() {
-    this.topStats.advancedStats.savingThrowsSection.updateView();
-    this.topStats.advancedStats.skillsSection.updateView();
-    this.topStats.advancedStats.sensesSection.updateView();
+    this.topStats.advancedStats.sections.get('savingThrows').updateView();
+    this.topStats.advancedStats.sections.get('skills').updateView();
+    this.topStats.advancedStats.sections.get('senses').updateView();
 
     this.reparseBlockSections();
   }
@@ -73,7 +76,7 @@ export default class StatBlock extends CustomAutonomousElement {
     const skillName = event.detail.skillName;
 
     if (skillName === 'perception') {
-      this.topStats.advancedStats.sensesSection.updateView();
+      this.topStats.advancedStats.sections.get('senses').updateView();
     }
   }
 
