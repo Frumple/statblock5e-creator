@@ -133,7 +133,7 @@ export default class StatBlockEditor extends CustomAutonomousElement {
 
   openHomebreweryExportDialog() {
     const content = this.exportToHomebrewery();
-    this.homebreweryExportDialog.launch(content, 'text/plain', `${Creature.title}.txt`);
+    this.homebreweryExportDialog.launch(content, 'text/markdown', `${Creature.title}.md`);
   }
 
   exportToJson() {

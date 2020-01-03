@@ -244,8 +244,8 @@ describe('should export homebrewery', () => {
   });
 
   describe('as file download', () => {
-    const expectedContentType = 'text/plain';
-    const expectedFileName = 'Commoner.txt';
+    const expectedContentType = 'text/markdown';
+    const expectedFileName = 'Commoner.md';
 
     it('one-column version', () => {
       statBlockMenu.oneColumnButton.click();
