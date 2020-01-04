@@ -1,18 +1,18 @@
 import * as sectionModule from './section.js';
 import Creature from '../../../models/creature.js';
 
-export default class HeadingSection extends sectionModule.Section {
-  static get elementName() { return 'heading-section'; }
+export default class TitleSection extends sectionModule.Section {
+  static get elementName() { return 'title-section'; }
   static get templatePaths() {
     return super.templatePaths.set(
-      'heading-section',
-      'src/html/elements/autonomous/sections/heading-section.html');
+      'title-section',
+      'src/html/elements/autonomous/sections/title-section.html');
   }
 
   constructor() {
-    super(HeadingSection.templatePaths,
-          HeadingShowElements,
-          HeadingEditElements);
+    super(TitleSection.templatePaths,
+          TitleShowElements,
+          TitleEditElements);
   }
 
   connectedCallback() {
@@ -95,7 +95,7 @@ export default class HeadingSection extends sectionModule.Section {
   }
 }
 
-class HeadingShowElements extends sectionModule.ShowElements {
+class TitleShowElements extends sectionModule.ShowElements {
   constructor(shadowRoot) {
     super(shadowRoot);
     this.title = shadowRoot.getElementById('title-text');
@@ -103,7 +103,7 @@ class HeadingShowElements extends sectionModule.ShowElements {
   }
 }
 
-class HeadingEditElements extends sectionModule.EditElements {
+class TitleEditElements extends sectionModule.EditElements {
   constructor(shadowRoot) {
     super(shadowRoot);
     this.fullName = shadowRoot.getElementById('full-name-input');

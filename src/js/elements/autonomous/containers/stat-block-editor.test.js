@@ -3,7 +3,7 @@ import StatBlockMenu from './stat-block-menu.js';
 import StatBlockSidebar from './stat-block-sidebar.js';
 import StatBlock from './stat-block.js';
 
-import HeadingSection from '../sections/heading-section.js';
+import TitleSection from '../sections/title-section.js';
 import TopStats from '../containers/top-stats.js';
 import BottomStats from '../containers/bottom-stats.js';
 
@@ -17,7 +17,7 @@ import { startFileDownload } from '../../../helpers/export-helpers.js';
 
 jest.mock('../../../helpers/print-helpers.js');
 jest.mock('../../../helpers/export-helpers.js');
-jest.mock('../sections/heading-section.js');
+jest.mock('../sections/title-section.js');
 jest.mock('../containers/top-stats.js');
 jest.mock('../containers/bottom-stats.js');
 
@@ -40,9 +40,9 @@ let statBlock;
 */
 
 beforeAll(async() => {
-  HeadingSection.mockImplementation(() => {
+  TitleSection.mockImplementation(() => {
     return {
-      exportToHtml: () => { return document.createElement('creature-heading'); },
+      exportToHtml: () => { return document.createElement('title-section'); },
       exportToHomebrewery: () => { return ''; }
     };
   });
@@ -72,7 +72,7 @@ beforeAll(async() => {
 beforeEach(() => {
   printHtml.mockClear();
   startFileDownload.mockClear();
-  HeadingSection.mockClear();
+  TitleSection.mockClear();
   TopStats.mockClear();
   BottomStats.mockClear();
 

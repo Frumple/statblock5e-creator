@@ -1,34 +1,34 @@
-import HeadingSection from './heading-section.js';
+import TitleSection from './title-section.js';
 import * as TestCustomElements from '../../../helpers/test/test-custom-elements.js';
 
 import { inputValueAndTriggerEvent } from '../../../helpers/element-helpers.js';
 
 import Creature from '../../../models/creature.js';
 
-let headingSection;
+let titleSection;
 
 beforeAll(async() => {
   await TestCustomElements.define();
-  await HeadingSection.define();
+  await TitleSection.define();
 });
 
 beforeEach(() => {
   Creature.reset();
 
-  headingSection = new HeadingSection();
-  TestCustomElements.initializeSection(headingSection);
-  headingSection.connect();
+  titleSection = new TitleSection();
+  TestCustomElements.initializeSection(titleSection);
+  titleSection.connect();
 });
 
 describe('when the show section is clicked', () => {
   beforeEach(() => {
-    headingSection.showElements.section.click();
+    titleSection.showElements.section.click();
   });
 
   it('should switch to edit mode and focus on the title field', () => {
-    expect(headingSection).toBeInMode('edit');
-    expect(headingSection.editElements.fullName).toHaveFocus();
-    expect(headingSection.editElements.fullName).toBeSelected();
+    expect(titleSection).toBeInMode('edit');
+    expect(titleSection.editElements.fullName).toHaveFocus();
+    expect(titleSection.editElements.fullName).toBeSelected();
   });
 
   describe('and creature name, short name, and/or the proper noun checkbox is changed', () => {
@@ -52,20 +52,20 @@ describe('when the show section is clicked', () => {
         let expectedShortName = '';
 
         let receivedEvent = null;
-        headingSection.addEventListener('creatureNameChanged', (event) => {
+        titleSection.addEventListener('creatureNameChanged', (event) => {
           receivedEvent = event;
         });
 
         if (creatureName !== '') {
           expectedCreatureName = creatureName;
-          inputValueAndTriggerEvent(headingSection.editElements.fullName, creatureName);
+          inputValueAndTriggerEvent(titleSection.editElements.fullName, creatureName);
         }
         if (shortName !== '') {
           expectedShortName = shortName;
-          inputValueAndTriggerEvent(headingSection.editElements.shortName, shortName);
+          inputValueAndTriggerEvent(titleSection.editElements.shortName, shortName);
         }
         if (isProperNoun) {
-          headingSection.editElements.properNoun.click();
+          titleSection.editElements.properNoun.click();
         }
 
         expect(Creature.fullName).toBe(expectedCreatureName);
@@ -99,15 +99,15 @@ describe('when the show section is clicked', () => {
       `
       ('$description: {fullName="$fullName", shortName="$shortName", isProperNoun="$isProperNoun", size="$size", type="$type", tags="$tags", alignment="$alignment"} => $expectedSubtitle',
       ({fullName, shortName, isProperNoun, size, type, tags, alignment, expectedSubtitle}) => {
-        inputValueAndTriggerEvent(headingSection.editElements.fullName, fullName);
-        inputValueAndTriggerEvent(headingSection.editElements.shortName, shortName);
-        inputValueAndTriggerEvent(headingSection.editElements.properNoun, isProperNoun);
-        inputValueAndTriggerEvent(headingSection.editElements.size, size);
-        inputValueAndTriggerEvent(headingSection.editElements.tags, tags);
-        inputValueAndTriggerEvent(headingSection.editElements.type, type);
-        inputValueAndTriggerEvent(headingSection.editElements.alignment, alignment);
+        inputValueAndTriggerEvent(titleSection.editElements.fullName, fullName);
+        inputValueAndTriggerEvent(titleSection.editElements.shortName, shortName);
+        inputValueAndTriggerEvent(titleSection.editElements.properNoun, isProperNoun);
+        inputValueAndTriggerEvent(titleSection.editElements.size, size);
+        inputValueAndTriggerEvent(titleSection.editElements.tags, tags);
+        inputValueAndTriggerEvent(titleSection.editElements.type, type);
+        inputValueAndTriggerEvent(titleSection.editElements.alignment, alignment);
 
-        headingSection.editElements.submitForm();
+        titleSection.editElements.submitForm();
 
         expect(Creature.fullName).toBe(fullName);
         expect(Creature.shortName).toBe(shortName);
@@ -117,9 +117,9 @@ describe('when the show section is clicked', () => {
         expect(Creature.tags).toBe(tags);
         expect(Creature.alignment).toBe(alignment);
 
-        expect(headingSection).toBeInMode('show');
-        expect(headingSection.showElements.title).toHaveTextContent(fullName);
-        expect(headingSection.showElements.subtitle).toHaveTextContent(expectedSubtitle);
+        expect(titleSection).toBeInMode('show');
+        expect(titleSection.showElements.title).toHaveTextContent(fullName);
+        expect(titleSection.showElements.subtitle).toHaveTextContent(expectedSubtitle);
 
         verifyJsonExport(fullName, shortName, isProperNoun, size, type, tags, alignment);
         verifyHtmlExport(fullName, expectedSubtitle);
@@ -132,49 +132,49 @@ describe('when the show section is clicked', () => {
       const fullName = 'young red dragon';
       const expectedFullName = 'Young red dragon';
 
-      inputValueAndTriggerEvent(headingSection.editElements.fullName, fullName);
+      inputValueAndTriggerEvent(titleSection.editElements.fullName, fullName);
 
-      headingSection.editElements.submitForm();
+      titleSection.editElements.submitForm();
 
       expect(Creature.fullName).toBe(expectedFullName);
 
-      expect(headingSection).toBeInMode('show');
-      expect(headingSection.showElements.title).toHaveTextContent(expectedFullName);
+      expect(titleSection).toBeInMode('show');
+      expect(titleSection.showElements.title).toHaveTextContent(expectedFullName);
     });
 
     it('should trim whitespace from the creature name', () => {
-      inputValueAndTriggerEvent(headingSection.editElements.fullName, '  Purple Worm ');
-      inputValueAndTriggerEvent(headingSection.editElements.size, 'Gargantuan');
-      inputValueAndTriggerEvent(headingSection.editElements.type, 'monstrosity');
-      inputValueAndTriggerEvent(headingSection.editElements.alignment, 'unaligned');
+      inputValueAndTriggerEvent(titleSection.editElements.fullName, '  Purple Worm ');
+      inputValueAndTriggerEvent(titleSection.editElements.size, 'Gargantuan');
+      inputValueAndTriggerEvent(titleSection.editElements.type, 'monstrosity');
+      inputValueAndTriggerEvent(titleSection.editElements.alignment, 'unaligned');
 
-      headingSection.editElements.submitForm();
+      titleSection.editElements.submitForm();
 
       expect(Creature.fullName).toBe('Purple Worm');
       expect(Creature.size).toBe('Gargantuan');
       expect(Creature.type).toBe('monstrosity');
       expect(Creature.alignment).toBe('unaligned');
 
-      expect(headingSection).toBeInMode('show');
-      expect(headingSection.showElements.title).toHaveTextContent('Purple Worm');
-      expect(headingSection.showElements.subtitle).toHaveTextContent('Gargantuan monstrosity, unaligned');
+      expect(titleSection).toBeInMode('show');
+      expect(titleSection.showElements.title).toHaveTextContent('Purple Worm');
+      expect(titleSection.showElements.subtitle).toHaveTextContent('Gargantuan monstrosity, unaligned');
     });
 
     it('should display an error if the creature name field is blank', () => {
-      inputValueAndTriggerEvent(headingSection.editElements.fullName, '');
+      inputValueAndTriggerEvent(titleSection.editElements.fullName, '');
 
-      headingSection.editElements.submitForm();
+      titleSection.editElements.submitForm();
 
-      expect(headingSection).toBeInMode('edit');
-      expect(headingSection).toHaveError(
-        headingSection.editElements.fullName,
+      expect(titleSection).toBeInMode('edit');
+      expect(titleSection).toHaveError(
+        titleSection.editElements.fullName,
         'Creature Name cannot be blank.');
     });
   });
 });
 
 function verifyJsonExport(expectedFullName, expectedShortName, expectedIsProperNoun, expectedSize, expectedType, expectedTags, expectedAlignment) {
-  const json = headingSection.exportToJson();
+  const json = titleSection.exportToJson();
   const expectedJson = {
     fullName: expectedFullName,
     shortName: expectedShortName,
@@ -189,7 +189,7 @@ function verifyJsonExport(expectedFullName, expectedShortName, expectedIsProperN
 }
 
 function verifyHtmlExport(expectedTitle, expectedSubtitle) {
-  const creatureHeading = headingSection.exportToHtml();
+  const creatureHeading = titleSection.exportToHtml();
   const title = creatureHeading.querySelector('h1');
   const subtitle = creatureHeading.querySelector('h2');
 
@@ -199,7 +199,7 @@ function verifyHtmlExport(expectedTitle, expectedSubtitle) {
 }
 
 function verifyHomebreweryExport(expectedTitle, expectedSubtitle) {
-  const text = headingSection.exportToHomebrewery();
+  const text = titleSection.exportToHomebrewery();
   const expectedText =
     `> ## ${expectedTitle}\n>*${expectedSubtitle}*`;
 

@@ -28,7 +28,7 @@ import EditableBlockList from './elements/autonomous/lists/editable-block-list.j
 import PropertyListItem from './elements/autonomous/lists/property-list-item.js';
 import PropertyList from './elements/autonomous/lists/property-list.js';
 
-import HeadingSection from './elements/autonomous/sections/heading-section.js';
+import TitleSection from './elements/autonomous/sections/title-section.js';
 import ArmorClassSection from './elements/autonomous/sections/armor-class-section.js';
 import HitPointsSection from './elements/autonomous/sections/hit-points-section.js';
 import SpeedSection from './elements/autonomous/sections/speed-section.js';
@@ -96,7 +96,7 @@ async function defineElements() {
   elementClasses.push(PropertyListItem);
   elementClasses.push(PropertyList);
 
-  elementClasses.push(HeadingSection);
+  elementClasses.push(TitleSection);
   elementClasses.push(ArmorClassSection);
   elementClasses.push(HitPointsSection);
   elementClasses.push(SpeedSection);
