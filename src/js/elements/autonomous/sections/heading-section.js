@@ -64,7 +64,6 @@ export default class HeadingSection extends sectionModule.Section {
     this.editElements.type.value = this.editElements.type.value.trim();
 
     this.editElements.fullName.validate(this.errorMessages);
-    this.editElements.type.validate(this.errorMessages);
   }
 
   updateModel() {
@@ -73,6 +72,7 @@ export default class HeadingSection extends sectionModule.Section {
     Creature.isProperNoun = this.editElements.properNoun.checked;
     Creature.size = this.editElements.size.value;
     Creature.type = this.editElements.type.value;
+    Creature.tags = this.editElements.tags.value;
     Creature.alignment = this.editElements.alignment.value;
   }
 
@@ -113,6 +113,7 @@ class HeadingEditElements extends sectionModule.EditElements {
 
     this.size = shadowRoot.getElementById('size-input');
     this.type = shadowRoot.getElementById('type-input');
+    this.tags = shadowRoot.getElementById('tags-input');
     this.alignment = shadowRoot.getElementById('alignment-input');
   }
 

@@ -87,22 +87,23 @@ describe('when the show section is clicked', () => {
   });
 
   describe('and fields are populated and the edit section is submitted', () => {
-    describe('should switch to show mode and save the creature name, size, type, and alignment', () => {
+    describe('should switch to show mode and save the creature name, size, type, tags, and alignment', () => {
       /* eslint-disable indent, no-unexpected-multiline */
       it.each
       `
-        description                                   | fullName                 | shortName       | isProperNoun | size            | type                     | alignment         | expectedSubtitle
-        ${'full name only'}                           | ${'Aboleth'}             | ${''}           | ${false}     | ${'Large'}      | ${'aberration'}          | ${'lawful evil'}  | ${'Large aberration, lawful evil'}
-        ${'full name and short name'}                 | ${'Adult Copper Dragon'} | ${'dragon'}     | ${false}     | ${'Huge'}       | ${'dragon'}              | ${'chaotic good'} | ${'Huge dragon, chaotic good'}
-        ${'full name, is proper noun'}                | ${'Tiamat'}              | ${''}           | ${true}      | ${'Gargantuan'} | ${'fiend'}               | ${'chaotic evil'} | ${'Gargantuan fiend, chaotic evil'}
-        ${'full name and short name, is proper noun'} | ${'Lady Kima of Vord'}   | ${'Lady Kima'}  | ${true}      | ${'Medium'}     | ${'humanoid (halfling)'} | ${'lawful good'}  | ${'Medium humanoid (halfling), lawful good'}
+        description                                   | fullName                 | shortName       | isProperNoun | size            | type            | tags          | alignment         | expectedSubtitle
+        ${'full name only'}                           | ${'Aboleth'}             | ${''}           | ${false}     | ${'Large'}      | ${'aberration'} | ${''}         | ${'lawful evil'}  | ${'Large aberration, lawful evil'}
+        ${'full name and short name'}                 | ${'Adult Copper Dragon'} | ${'dragon'}     | ${false}     | ${'Huge'}       | ${'dragon'}     | ${''}         | ${'chaotic good'} | ${'Huge dragon, chaotic good'}
+        ${'full name, is proper noun'}                | ${'Tiamat'}              | ${''}           | ${true}      | ${'Gargantuan'} | ${'fiend'}      | ${''}         | ${'chaotic evil'} | ${'Gargantuan fiend, chaotic evil'}
+        ${'full name and short name, is proper noun'} | ${'Lady Kima of Vord'}   | ${'Lady Kima'}  | ${true}      | ${'Medium'}     | ${'humanoid'}   | ${'halfling'} | ${'lawful good'}  | ${'Medium humanoid (halfling), lawful good'}
       `
-      ('$description: {fullName="$fullName", shortName="$shortName", isProperNoun="$isProperNoun", size="$size", type="$type", alignment="$alignment"} => $expectedSubtitle',
-      ({fullName, shortName, isProperNoun, size, type, alignment, expectedSubtitle}) => {
+      ('$description: {fullName="$fullName", shortName="$shortName", isProperNoun="$isProperNoun", size="$size", type="$type", tags="$tags", alignment="$alignment"} => $expectedSubtitle',
+      ({fullName, shortName, isProperNoun, size, type, tags, alignment, expectedSubtitle}) => {
         inputValueAndTriggerEvent(headingSection.editElements.fullName, fullName);
         inputValueAndTriggerEvent(headingSection.editElements.shortName, shortName);
         inputValueAndTriggerEvent(headingSection.editElements.properNoun, isProperNoun);
         inputValueAndTriggerEvent(headingSection.editElements.size, size);
+        inputValueAndTriggerEvent(headingSection.editElements.tags, tags);
         inputValueAndTriggerEvent(headingSection.editElements.type, type);
         inputValueAndTriggerEvent(headingSection.editElements.alignment, alignment);
 
@@ -113,13 +114,14 @@ describe('when the show section is clicked', () => {
         expect(Creature.isProperNoun).toBe(isProperNoun);
         expect(Creature.size).toBe(size);
         expect(Creature.type).toBe(type);
+        expect(Creature.tags).toBe(tags);
         expect(Creature.alignment).toBe(alignment);
 
         expect(headingSection).toBeInMode('show');
         expect(headingSection.showElements.title).toHaveTextContent(fullName);
         expect(headingSection.showElements.subtitle).toHaveTextContent(expectedSubtitle);
 
-        verifyJsonExport(fullName, shortName, isProperNoun, size, type, alignment);
+        verifyJsonExport(fullName, shortName, isProperNoun, size, type, tags, alignment);
         verifyHtmlExport(fullName, expectedSubtitle);
         verifyHomebreweryExport(fullName, expectedSubtitle);
       });
@@ -140,10 +142,10 @@ describe('when the show section is clicked', () => {
       expect(headingSection.showElements.title).toHaveTextContent(expectedFullName);
     });
 
-    it('should trim whitespace from the creature name and type', () => {
+    it('should trim whitespace from the creature name', () => {
       inputValueAndTriggerEvent(headingSection.editElements.fullName, '  Purple Worm ');
       inputValueAndTriggerEvent(headingSection.editElements.size, 'Gargantuan');
-      inputValueAndTriggerEvent(headingSection.editElements.type, '    monstrosity        ');
+      inputValueAndTriggerEvent(headingSection.editElements.type, 'monstrosity');
       inputValueAndTriggerEvent(headingSection.editElements.alignment, 'unaligned');
 
       headingSection.editElements.submitForm();
@@ -168,50 +170,22 @@ describe('when the show section is clicked', () => {
         headingSection.editElements.fullName,
         'Creature Name cannot be blank.');
     });
-
-    it('should display an error if the creature type field is blank', () => {
-      inputValueAndTriggerEvent(headingSection.editElements.type, '');
-
-      headingSection.editElements.submitForm();
-
-      expect(headingSection).toBeInMode('edit');
-      expect(headingSection).toHaveError(
-        headingSection.editElements.type,
-        'Creature Type cannot be blank.');
-    });
-
-    it('should display both errors if the creature name and creature type fields are both blank', () => {
-      inputValueAndTriggerEvent(headingSection.editElements.fullName, '');
-      inputValueAndTriggerEvent(headingSection.editElements.type, '');
-
-      headingSection.editElements.submitForm();
-
-      expect(headingSection).toBeInMode('edit');
-      expect(headingSection.errorMessages.errors).toHaveLength(2);
-      expect(headingSection).toHaveError(
-        headingSection.editElements.fullName,
-        'Creature Name cannot be blank.',
-        0);
-      expect(headingSection).toHaveError(
-        headingSection.editElements.type,
-        'Creature Type cannot be blank.',
-        1);
-    });
   });
 });
 
-function verifyJsonExport(expectedFullName, expectedShortName, expectedIsProperNoun, expectedSize, expectedType, expectedAlignment) {
-  const jsObject = headingSection.exportToJson();
-  const expectedJsObject = {
+function verifyJsonExport(expectedFullName, expectedShortName, expectedIsProperNoun, expectedSize, expectedType, expectedTags, expectedAlignment) {
+  const json = headingSection.exportToJson();
+  const expectedJson = {
     fullName: expectedFullName,
     shortName: expectedShortName,
     isProperNoun: expectedIsProperNoun,
     size: expectedSize,
     type: expectedType,
+    tags: expectedTags,
     alignment: expectedAlignment
   };
 
-  expect(jsObject).toStrictEqual(expectedJsObject);
+  expect(json).toStrictEqual(expectedJson);
 }
 
 function verifyHtmlExport(expectedTitle, expectedSubtitle) {

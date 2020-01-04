@@ -12,6 +12,7 @@ class Creature {
 
     this.size = 'Medium';
     this.type = 'humanoid';
+    this.tags = '';
     this.alignment = 'unaligned';
   }
 
@@ -28,7 +29,11 @@ class Creature {
   }
 
   get subtitle() {
-    return `${this.size} ${this.type}, ${this.alignment}`;
+    if (this.tags === '') {
+      return `${this.size} ${this.type}, ${this.alignment}`;
+    }
+
+    return `${this.size} ${this.type} (${this.tags}), ${this.alignment}`;
   }
 
   get grammaticalFullName() {
@@ -63,6 +68,7 @@ class Creature {
       isProperNoun: this.isProperNoun,
       size: this.size,
       type: this.type,
+      tags: this.tags,
       alignment: this.alignment
     };
   }

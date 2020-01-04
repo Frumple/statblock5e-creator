@@ -98,7 +98,7 @@
 
 .heading-edit-section__subtitle-container {
   display: grid;
-  grid-template-columns: auto auto auto;
+  grid-template-columns: auto auto minmax(0, 1fr) auto;
   grid-template-rows: auto auto;
   grid-column-gap: 5px;
   margin-top: 5px;
@@ -106,8 +106,10 @@
 
 .heading-edit-section__size-label { grid-area: 1 / 1; }
 .heading-edit-section__type-label { grid-area: 1 / 2; }
-.heading-edit-section__alignment-label { grid-area: 1 / 3; }
+.heading-edit-section__tags-label { grid-area: 1 / 3; }
+.heading-edit-section__alignment-label { grid-area: 1 / 4; }
 
 .heading-edit-section__size-input { grid-area: 2 / 1; }
 .heading-edit-section__type-input { grid-area: 2 / 2; }
-.heading-edit-section__alignment-input { grid-area: 2 / 3; }
+.heading-edit-section__tags-input { grid-area: 2 / 3; }
+.heading-edit-section__alignment-input { grid-area: 2 / 4; }

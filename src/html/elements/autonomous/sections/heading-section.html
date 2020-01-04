@@ -84,24 +84,67 @@
         <option value="Huge">Huge</option>
         <option value="Gargantuan">Gargantuan</option>
       </select>
+
       <label id="type-label" class="heading-edit-section__type-label heading-edit-section__label" for="type-input">Type:</label>
-      <input id="type-input" class="heading-edit-section__type-input heading-show-section__subtitle-text section__text-input" is="text-input" type="text" name="type" pretty-name="Creature Type" list="type-list" value="humanoid" required />
-      <datalist id="type-list">
-        <option value="aberration" />
-        <option value="beast" />
-        <option value="celestial" />
-        <option value="construct" />
-        <option value="dragon" />
-        <option value="elemental" />
-        <option value="fey" />
-        <option value="fiend" />
-        <option value="giant" />
-        <option value="humanoid" />
-        <option value="monstrosity" />
-        <option value="ooze" />
-        <option value="plant" />
-        <option value="undead" />
+      <select id="type-input" class="heading-edit-section__type-input heading-show-section__subtitle-text section__select">
+        <option value="aberration">aberration</option>
+        <option value="beast">beast</option>
+        <option value="celestial">celestial</option>
+        <option value="construct">construct</option>
+        <option value="dragon">dragon</option>
+        <option value="elemental">elemental</option>
+        <option value="fey">fey</option>
+        <option value="fiend">fiend</option>
+        <option value="giant">giant</option>
+        <option value="humanoid" selected>humanoid</option>
+        <option value="monstrosity">monstrosity</option>
+        <option value="ooze">ooze</option>
+        <option value="plant">plant</option>
+        <option value="undead">undead</option>
+      </select>
+
+      <label id="tags-label" class="heading-edit-section__tags-label heading-edit-section__label" for="tags-input">Tags:</label>
+      <input id="tags-input" class="heading-edit-section__tags-input heading-show-section__subtitle-text section__text-input" is="text-input" type="text" name="type" pretty-name="Creature Tags" list="tags-list" value="" />
+      <datalist id="tags-list">
+        <option value="aarakocra" />
+        <option value="aasimar" />
+        <option value="any race" />
+        <option value="bullywug" />
+        <option value="demon" />
+        <option value="devil" />
+        <option value="dragonborn" />
+        <option value="dwarf" />
+        <option value="elf" />
+        <option value="firbolg" />
+        <option value="gith" />
+        <option value="gnoll" />
+        <option value="gnome" />
+        <option value="goblinoid" />
+        <option value="goliath" />
+        <option value="grimlock" />
+        <option value="half-elf" />
+        <option value="halfling" />
+        <option value="half-orc" />
+        <option value="human" />
+        <option value="kenku" />
+        <option value="kobold" />
+        <option value="kuo-toa" />
+        <option value="lizardfolk" />
+        <option value="merfolk" />
+        <option value="orc" />
+        <option value="quaggoth" />
+        <option value="sahuagin" />
+        <option value="shapechanger" />
+        <option value="tabaxi" />
+        <option value="thri-kreen" />
+        <option value="tiefling" />
+        <option value="titan" />
+        <option value="triton" />
+        <option value="troglodyte" />
+        <option value="yuan-ti" />
+        <option value="yugoloth" />
       </datalist>
+
       <label id="alignment-label" class="heading-edit-section__alignment-label heading-edit-section__label" for="alignment-input">Alignment:</label>
       <select id="alignment-input" class="heading-edit-section__alignment-input heading-show-section__subtitle-text section__select">
         <option value="unaligned">unaligned</option>
