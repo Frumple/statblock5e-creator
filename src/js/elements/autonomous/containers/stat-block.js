@@ -2,7 +2,7 @@ import CustomAutonomousElement from '../custom-autonomous-element.js';
 import isRunningInNode from '../../../helpers/is-running-in-node.js';
 import GlobalOptions from '../../../helpers/global-options.js';
 
-import TitleSection from '../sections/title-section.js';
+import HeadingStats from '../containers/heading-stats.js';
 import TopStats from '../containers/top-stats.js';
 import BottomStats from '../containers/bottom-stats.js';
 
@@ -18,11 +18,11 @@ export default class StatBlock extends CustomAutonomousElement {
     super(StatBlock.templatePaths, parent);
 
     if (isRunningInNode) {
-      this.titleSection = new TitleSection();
+      this.headingStats = new HeadingStats();
       this.topStats = new TopStats();
       this.bottomStats = new BottomStats();
     } else {
-      this.titleSection = document.querySelector('title-section');
+      this.headingStats = document.querySelector('heading-stats');
       this.topStats = document.querySelector('top-stats');
       this.bottomStats = document.querySelector('bottom-stats');
     }
@@ -102,15 +102,16 @@ export default class StatBlock extends CustomAutonomousElement {
   }
 
   editAllSections() {
-    this.topStats.editAllSections();
+    // Edit in reverse order so that the title section is the last to gain focus
     this.bottomStats.editAllSections();
-    this.titleSection.edit();
+    this.topStats.editAllSections();
+    this.headingStats.editAllSections();
   }
 
   saveAllSections() {
-    this.topStats.saveAllSections();
     this.bottomStats.saveAllSections();
-    this.titleSection.save();
+    this.topStats.saveAllSections();
+    this.headingStats.saveAllSections();
   }
 
   reparseBlockSections() {
@@ -120,7 +121,7 @@ export default class StatBlock extends CustomAutonomousElement {
   exportToJson() {
     const jsObject = {};
 
-    jsObject.creature = this.titleSection.exportToJson();
+    Object.assign(jsObject, this.headingStats.exportToJson());
     Object.assign(jsObject, this.topStats.exportToJson());
     Object.assign(jsObject, this.bottomStats.exportToJson());
 
@@ -130,11 +131,11 @@ export default class StatBlock extends CustomAutonomousElement {
   exportToHtml() {
     const statBlockElement = document.createElement('stat-block');
 
-    const titleSection = this.titleSection.exportToHtml();
+    const headingStats = this.headingStats.exportToHtml();
     const topStats = this.topStats.exportToHtml();
     const bottomStats = this.bottomStats.exportToHtml();
 
-    statBlockElement.appendChild(titleSection);
+    statBlockElement.appendChild(headingStats);
     statBlockElement.appendChild(topStats);
     statBlockElement.appendChild(bottomStats);
 
@@ -155,10 +156,10 @@ export default class StatBlock extends CustomAutonomousElement {
       blockHeader += '\n___';
     }
 
-    const titleSection = this.titleSection.exportToHomebrewery();
+    const headingStats = this.headingStats.exportToHomebrewery();
     const topStats = this.topStats.exportToHomebrewery();
     const bottomStats = this.bottomStats.exportToHomebrewery();
 
-    return `${blockHeader}\n${titleSection}\n${topStats}\n${bottomStats}`;
+    return `${blockHeader}\n${headingStats}\n${topStats}\n${bottomStats}`;
   }
 }

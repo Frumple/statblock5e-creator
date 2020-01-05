@@ -12,13 +12,14 @@ export default class StatsContainer extends CustomAutonomousElement {
   }
 
   editAllSections() {
-    for (const section of this.sections.values()) {
+    // Edit in reverse order so that the title section is the last to gain focus
+    for (const section of Array.from(this.sections.values()).reverse()) {
       section.edit();
     }
   }
 
   saveAllSections() {
-    for (const section of this.sections.values()) {
+    for (const section of Array.from(this.sections.values()).reverse()) {
       section.save();
     }
   }

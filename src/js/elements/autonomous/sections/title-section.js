@@ -61,8 +61,6 @@ export default class TitleSection extends sectionModule.Section {
 
   checkForErrors() {
     this.editElements.fullName.value = this.editElements.fullName.value.trim();
-    this.editElements.type.value = this.editElements.type.value.trim();
-
     this.editElements.fullName.validate(this.errorMessages);
   }
 
@@ -70,16 +68,11 @@ export default class TitleSection extends sectionModule.Section {
     Creature.fullName = this.editElements.fullName.value;
     Creature.shortName = this.editElements.shortName.value;
     Creature.isProperNoun = this.editElements.properNoun.checked;
-    Creature.size = this.editElements.size.value;
-    Creature.type = this.editElements.type.value;
-    Creature.tags = this.editElements.tags.value;
-    Creature.alignment = this.editElements.alignment.value;
   }
 
   updateView() {
     this.editElements.fullName.value = Creature.fullName;
     this.showElements.title.textContent = Creature.title;
-    this.showElements.subtitle.textContent = Creature.subtitle;
   }
 
   exportToJson() {
@@ -99,7 +92,6 @@ class TitleShowElements extends sectionModule.ShowElements {
   constructor(shadowRoot) {
     super(shadowRoot);
     this.title = shadowRoot.getElementById('title-text');
-    this.subtitle = shadowRoot.getElementById('subtitle-text');
   }
 }
 
@@ -107,14 +99,8 @@ class TitleEditElements extends sectionModule.EditElements {
   constructor(shadowRoot) {
     super(shadowRoot);
     this.fullName = shadowRoot.getElementById('full-name-input');
-
     this.shortName = shadowRoot.getElementById('short-name-input');
     this.properNoun = shadowRoot.getElementById('proper-noun-input');
-
-    this.size = shadowRoot.getElementById('size-input');
-    this.type = shadowRoot.getElementById('type-input');
-    this.tags = shadowRoot.getElementById('tags-input');
-    this.alignment = shadowRoot.getElementById('alignment-input');
   }
 
   get initiallySelectedElement() {

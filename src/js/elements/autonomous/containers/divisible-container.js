@@ -29,7 +29,7 @@ export default class DivisibleContainer extends StatsContainer {
       if (currentSection.mode !== 'hidden') {
         if (previousSection) {
           if (DivisibleContainer.shouldSectionDividerBeDisplayed(previousSection, currentSection)) {
-            let previousDivider = currentSection.previousElementSibling;
+            const previousDivider = currentSection.previousElementSibling;
             previousDivider.hidden = false;
           }
         }

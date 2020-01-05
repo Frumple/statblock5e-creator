@@ -5,6 +5,8 @@ import { inputValueAndTriggerEvent } from '../../../helpers/element-helpers.js';
 
 import Creature from '../../../models/creature.js';
 
+const defaultSubtitle = 'Medium humanoid, unaligned';
+
 let titleSection;
 
 beforeAll(async() => {
@@ -87,77 +89,62 @@ describe('when the show section is clicked', () => {
   });
 
   describe('and fields are populated and the edit section is submitted', () => {
-    describe('should switch to show mode and save the creature name, size, type, tags, and alignment', () => {
+    describe('should switch to show mode and save the creature full name, short name, and whether it is a proper noun', () => {
       /* eslint-disable indent, no-unexpected-multiline */
       it.each
       `
-        description                                   | fullName                 | shortName       | isProperNoun | size            | type            | tags          | alignment         | expectedSubtitle
-        ${'full name only'}                           | ${'Aboleth'}             | ${''}           | ${false}     | ${'Large'}      | ${'aberration'} | ${''}         | ${'lawful evil'}  | ${'Large aberration, lawful evil'}
-        ${'full name and short name'}                 | ${'Adult Copper Dragon'} | ${'dragon'}     | ${false}     | ${'Huge'}       | ${'dragon'}     | ${''}         | ${'chaotic good'} | ${'Huge dragon, chaotic good'}
-        ${'full name, is proper noun'}                | ${'Tiamat'}              | ${''}           | ${true}      | ${'Gargantuan'} | ${'fiend'}      | ${''}         | ${'chaotic evil'} | ${'Gargantuan fiend, chaotic evil'}
-        ${'full name and short name, is proper noun'} | ${'Lady Kima of Vord'}   | ${'Lady Kima'}  | ${true}      | ${'Medium'}     | ${'humanoid'}   | ${'halfling'} | ${'lawful good'}  | ${'Medium humanoid (halfling), lawful good'}
+        description                                   | fullName                 | shortName       | isProperNoun
+        ${'full name only'}                           | ${'Aboleth'}             | ${''}           | ${false}
+        ${'full name and short name'}                 | ${'Adult Copper Dragon'} | ${'dragon'}     | ${false}
+        ${'full name, is proper noun'}                | ${'Tiamat'}              | ${''}           | ${true}
+        ${'full name and short name, is proper noun'} | ${'Lady Kima of Vord'}   | ${'Lady Kima'}  | ${true}
       `
-      ('$description: {fullName="$fullName", shortName="$shortName", isProperNoun="$isProperNoun", size="$size", type="$type", tags="$tags", alignment="$alignment"} => $expectedSubtitle',
-      ({fullName, shortName, isProperNoun, size, type, tags, alignment, expectedSubtitle}) => {
+      ('$description: {fullName="$fullName", shortName="$shortName", isProperNoun="$isProperNoun"}',
+      ({fullName, shortName, isProperNoun}) => {
         inputValueAndTriggerEvent(titleSection.editElements.fullName, fullName);
         inputValueAndTriggerEvent(titleSection.editElements.shortName, shortName);
         inputValueAndTriggerEvent(titleSection.editElements.properNoun, isProperNoun);
-        inputValueAndTriggerEvent(titleSection.editElements.size, size);
-        inputValueAndTriggerEvent(titleSection.editElements.tags, tags);
-        inputValueAndTriggerEvent(titleSection.editElements.type, type);
-        inputValueAndTriggerEvent(titleSection.editElements.alignment, alignment);
 
         titleSection.editElements.submitForm();
 
         expect(Creature.fullName).toBe(fullName);
         expect(Creature.shortName).toBe(shortName);
         expect(Creature.isProperNoun).toBe(isProperNoun);
-        expect(Creature.size).toBe(size);
-        expect(Creature.type).toBe(type);
-        expect(Creature.tags).toBe(tags);
-        expect(Creature.alignment).toBe(alignment);
 
         expect(titleSection).toBeInMode('show');
         expect(titleSection.showElements.title).toHaveTextContent(fullName);
-        expect(titleSection.showElements.subtitle).toHaveTextContent(expectedSubtitle);
 
-        verifyJsonExport(fullName, shortName, isProperNoun, size, type, tags, alignment);
-        verifyHtmlExport(fullName, expectedSubtitle);
-        verifyHomebreweryExport(fullName, expectedSubtitle);
+        verifyJsonExport(fullName, shortName, isProperNoun);
+        verifyHtmlExport(fullName);
+        verifyHomebreweryExport(fullName);
       });
       /* eslint-enable indent, no-unexpected-multiline */
     });
 
-    it('should capitalize the first letter in the creature name', () => {
-      const fullName = 'young red dragon';
-      const expectedFullName = 'Young red dragon';
+    describe('the creature name should have the following behaviours', () => {
+      /* eslint-disable indent, no-unexpected-multiline */
+      it.each
+      `
+        description                             | fullName              | expectedFullName
+        ${'should capitalize the first letter'} | ${'young red dragon'} | ${'Young red dragon'}
+        ${'should trim whitespace'}             | ${'  Purple Worm '}   | ${'Purple Worm'}
+      `
+      ('$description: $fullName => $expectedFullName',
+      ({fullName, expectedFullName}) => {
+        inputValueAndTriggerEvent(titleSection.editElements.fullName, fullName);
 
-      inputValueAndTriggerEvent(titleSection.editElements.fullName, fullName);
+        titleSection.editElements.submitForm();
 
-      titleSection.editElements.submitForm();
+        expect(Creature.fullName).toBe(expectedFullName);
 
-      expect(Creature.fullName).toBe(expectedFullName);
+        expect(titleSection).toBeInMode('show');
+        expect(titleSection.showElements.title).toHaveTextContent(expectedFullName);
 
-      expect(titleSection).toBeInMode('show');
-      expect(titleSection.showElements.title).toHaveTextContent(expectedFullName);
-    });
-
-    it('should trim whitespace from the creature name', () => {
-      inputValueAndTriggerEvent(titleSection.editElements.fullName, '  Purple Worm ');
-      inputValueAndTriggerEvent(titleSection.editElements.size, 'Gargantuan');
-      inputValueAndTriggerEvent(titleSection.editElements.type, 'monstrosity');
-      inputValueAndTriggerEvent(titleSection.editElements.alignment, 'unaligned');
-
-      titleSection.editElements.submitForm();
-
-      expect(Creature.fullName).toBe('Purple Worm');
-      expect(Creature.size).toBe('Gargantuan');
-      expect(Creature.type).toBe('monstrosity');
-      expect(Creature.alignment).toBe('unaligned');
-
-      expect(titleSection).toBeInMode('show');
-      expect(titleSection.showElements.title).toHaveTextContent('Purple Worm');
-      expect(titleSection.showElements.subtitle).toHaveTextContent('Gargantuan monstrosity, unaligned');
+        verifyJsonExport(expectedFullName, '', false);
+        verifyHtmlExport(expectedFullName);
+        verifyHomebreweryExport(expectedFullName);
+      });
+    /* eslint-enable indent, no-unexpected-multiline */
     });
 
     it('should display an error if the creature name field is blank', () => {
@@ -173,35 +160,35 @@ describe('when the show section is clicked', () => {
   });
 });
 
-function verifyJsonExport(expectedFullName, expectedShortName, expectedIsProperNoun, expectedSize, expectedType, expectedTags, expectedAlignment) {
+function verifyJsonExport(expectedFullName, expectedShortName, expectedIsProperNoun) {
   const json = titleSection.exportToJson();
   const expectedJson = {
     fullName: expectedFullName,
     shortName: expectedShortName,
     isProperNoun: expectedIsProperNoun,
-    size: expectedSize,
-    type: expectedType,
-    tags: expectedTags,
-    alignment: expectedAlignment
+    size: 'Medium',
+    type: 'humanoid',
+    tags: '',
+    alignment: 'unaligned'
   };
 
   expect(json).toStrictEqual(expectedJson);
 }
 
-function verifyHtmlExport(expectedTitle, expectedSubtitle) {
+function verifyHtmlExport(expectedTitle) {
   const creatureHeading = titleSection.exportToHtml();
   const title = creatureHeading.querySelector('h1');
   const subtitle = creatureHeading.querySelector('h2');
 
   expect(creatureHeading.tagName).toBe('CREATURE-HEADING');
   expect(title).toHaveTextContent(expectedTitle);
-  expect(subtitle).toHaveTextContent(expectedSubtitle);
+  expect(subtitle).toHaveTextContent(defaultSubtitle);
 }
 
-function verifyHomebreweryExport(expectedTitle, expectedSubtitle) {
+function verifyHomebreweryExport(expectedTitle) {
   const text = titleSection.exportToHomebrewery();
   const expectedText =
-    `> ## ${expectedTitle}\n>*${expectedSubtitle}*`;
+    `> ## ${expectedTitle}\n>*${defaultSubtitle}*`;
 
   expect(text).toBe(expectedText);
 }

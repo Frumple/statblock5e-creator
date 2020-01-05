@@ -29,6 +29,7 @@ import PropertyListItem from './elements/autonomous/lists/property-list-item.js'
 import PropertyList from './elements/autonomous/lists/property-list.js';
 
 import TitleSection from './elements/autonomous/sections/title-section.js';
+import SubtitleSection from './elements/autonomous/sections/subtitle-section.js';
 import ArmorClassSection from './elements/autonomous/sections/armor-class-section.js';
 import HitPointsSection from './elements/autonomous/sections/hit-points-section.js';
 import SpeedSection from './elements/autonomous/sections/speed-section.js';
@@ -51,6 +52,7 @@ import StatBlockEditor from './elements/autonomous/containers/stat-block-editor.
 import StatBlockMenu from './elements/autonomous/containers/stat-block-menu.js';
 import StatBlockSidebar from './elements/autonomous/containers/stat-block-sidebar.js';
 import StatBlock from './elements/autonomous/containers/stat-block.js';
+import HeadingStats from './elements/autonomous/containers/heading-stats.js';
 import TopStats from './elements/autonomous/containers/top-stats.js';
 import BottomStats from './elements/autonomous/containers/bottom-stats.js';
 import BasicStats from './elements/autonomous/containers/basic-stats.js';
@@ -97,6 +99,7 @@ async function defineElements() {
   elementClasses.push(PropertyList);
 
   elementClasses.push(TitleSection);
+  elementClasses.push(SubtitleSection);
   elementClasses.push(ArmorClassSection);
   elementClasses.push(HitPointsSection);
   elementClasses.push(SpeedSection);
@@ -119,6 +122,7 @@ async function defineElements() {
   elementClasses.push(StatBlockMenu);
   elementClasses.push(StatBlockSidebar);
   elementClasses.push(StatBlock);
+  elementClasses.push(HeadingStats);
   elementClasses.push(TopStats);
   elementClasses.push(BottomStats);
   elementClasses.push(BasicStats);

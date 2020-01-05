@@ -93,7 +93,7 @@ export class Section extends CustomAutonomousElement {
   }
 
   focusOnInitialEditSectionElement() {
-    focusAndSelectElement(this.editElements.initiallySelectedElement);    
+    focusAndSelectElement(this.editElements.initiallySelectedElement);
   }
 
   edit() {
