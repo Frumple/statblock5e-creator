@@ -169,7 +169,9 @@ function verifyJsonExport(expectedFullName, expectedShortName, expectedIsProperN
     size: 'Medium',
     type: 'humanoid',
     tags: '',
-    alignment: 'unaligned'
+    alignment: 'unaligned',
+    useCustomSubtitleText: false,
+    customSubtitleText: ''
   };
 
   expect(json).toStrictEqual(expectedJson);

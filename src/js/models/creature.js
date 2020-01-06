@@ -14,6 +14,9 @@ class Creature {
     this.type = 'humanoid';
     this.tags = '';
     this.alignment = 'unaligned';
+
+    this.useCustomSubtitleText = false;
+    this.customSubtitleText = '';
   }
 
   set fullName(fullName) {
@@ -29,6 +32,10 @@ class Creature {
   }
 
   get subtitle() {
+    if (this.useCustomSubtitleText) {
+      return this.customSubtitleText;
+    }
+
     if (this.tags === '') {
       return `${this.size} ${this.type}, ${this.alignment}`;
     }
@@ -69,7 +76,9 @@ class Creature {
       size: this.size,
       type: this.type,
       tags: this.tags,
-      alignment: this.alignment
+      alignment: this.alignment,
+      useCustomSubtitleText: this.useCustomSubtitleText,
+      customSubtitleText: this.customSubtitleText
     };
   }
 

@@ -52,8 +52,8 @@
   justify-self: end;
 }
 .armor-class-edit-section__use-use-custom-text-label { grid-area: 1 / 2; }
-.armor-class-edit-section__custom-text-help-tooltip { 
-  grid-area: 2 / 1; 
+.armor-class-edit-section__custom-text-help-tooltip {
+  grid-area: 2 / 1;
   justify-self: end;
   align-self: end;
 }

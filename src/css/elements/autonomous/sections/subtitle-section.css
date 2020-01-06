@@ -15,8 +15,11 @@
 }
 
 .subtitle-edit-section__label {
-  font-weight: bold;
   color: #7A200D;
+}
+
+.subtitle-edit-section__heading-label {
+  font-weight: bold;
 }
 
 .subtitle-edit-section__subtitle-container {
@@ -36,3 +39,18 @@
 .subtitle-edit-section__type-input { grid-area: 2 / 2; }
 .subtitle-edit-section__tags-input { grid-area: 2 / 3; }
 .subtitle-edit-section__alignment-input { grid-area: 2 / 4; }
+
+.subtitle-edit-section__custom-container {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr);
+  grid-template-rows: auto auto;
+  grid-column-gap: 5px;
+  margin-top: 5px;
+}
+
+.subtitle-edit-section__use-custom-text-input {
+  grid-area: 1 / 1;
+  justify-self: end;
+}
+.subtitle-edit-section__use-use-custom-text-label { grid-area: 1 / 2; }
+.subtitle-edit-section__custom-text-input { grid-area: 2 / 2; }

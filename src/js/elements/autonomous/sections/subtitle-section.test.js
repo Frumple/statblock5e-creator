@@ -32,55 +32,212 @@ describe('when the show section is clicked', () => {
     expect(subtitleSection.editElements.size).toHaveFocus();
   });
 
-  describe('and fields are populated and the edit section is submitted', () => {
-    describe('should switch to show mode and save the creature size, type, tags, and alignment', () => {
-      /* eslint-disable indent, no-unexpected-multiline */
-      it.each
-      `
-        description        | size            | type             | tags                     | alignment           | expectedSubtitle
-        ${'no tags'}       | ${'Gargantuan'} | ${'monstrosity'} | ${''}                    | ${'neutral'}        | ${'Gargantuan monstrosity, neutral'}
-        ${'single tag'}    | ${'Small'}      | ${'humanoid'}    | ${'halfling'}            | ${'lawful good'}    | ${'Small humanoid (halfling), lawful good'}
-        ${'multiple tags'} | ${'Tiny'}       | ${'fiend'}       | ${'demon, shapechanger'} | ${'chaotic evil'}   | ${'Tiny fiend (demon, shapechanger), chaotic evil'}
-        ${'trimmed tags'}  | ${'Large'}      | ${'giant'}       | ${'    titan '}          | ${'lawful neutral'} | ${'Large giant (titan), lawful neutral'}
-      `
-      ('$description: {size="$size", type="$type", tags="$tags", alignment="$alignment"} => $expectedSubtitle',
-      ({size, type, tags, alignment, expectedSubtitle}) => {
-        inputValueAndTriggerEvent(subtitleSection.editElements.size, size);
-        inputValueAndTriggerEvent(subtitleSection.editElements.tags, tags);
-        inputValueAndTriggerEvent(subtitleSection.editElements.type, type);
-        inputValueAndTriggerEvent(subtitleSection.editElements.alignment, alignment);
+  describe('and the custom text checkbox is checked', () => {
+    beforeEach(() => {
+      subtitleSection.editElements.useCustomText.click();
+    });
+
+    it('should enable the custom text field, disable all other fields, and focus on the custom text field', () => {
+      expect(subtitleSection.editElements.size).toBeDisabled();
+      expect(subtitleSection.editElements.type).toBeDisabled();
+      expect(subtitleSection.editElements.tags).toBeDisabled();
+      expect(subtitleSection.editElements.alignment).toBeDisabled();
+      expect(subtitleSection.editElements.customText).toBeEnabled();
+
+      expect(subtitleSection.editElements.customText).toHaveFocus();
+      expect(subtitleSection.editElements.customText).toBeSelected();
+    });
+
+    describe('and the edit section is submitted', () => {
+      describe('should switch to show mode and save the custom text', () => {
+        /* eslint-disable indent, no-unexpected-multiline */
+        it.each
+        `
+          description                     | customText
+          ${'custom alignment'}           | ${'Medium humanoid (any race), any non-lawful alignment'}
+          ${'alignment with percentages'} | ${'Huge giant, neutral good (50%) or neutral evil (50%)'}
+          ${'swarm'}                      | ${'Medium swarm of Tiny beasts, unaligned'}
+        `
+        ('$description: $customText',
+        ({customText}) => {
+          inputValueAndTriggerEvent(subtitleSection.editElements.customText, customText);
+
+          subtitleSection.editElements.submitForm();
+
+          expect(Creature.useCustomSubtitleText).toBe(true);
+          expect(Creature.customSubtitleText).toBe(customText);
+
+          expect(subtitleSection).toBeInMode('show');
+          expect(subtitleSection.showElements.text).toHaveTextContent(customText);
+
+          verifyJsonExport({
+            useCustomSubtitleText: true,
+            customSubtitleText: customText
+          });
+          verifyHtmlExport(customText);
+          verifyHomebreweryExport(customText);
+        });
+        /* eslint-enable indent, no-unexpected-multiline */
+      });
+
+      it('should preserve the custom text if submitted with the custom text checkbox unchecked', () => {
+        const customText = 'Medium swarm of Tiny beasts, unaligned';
+
+        inputValueAndTriggerEvent(subtitleSection.editElements.customText, customText);
+
+        subtitleSection.editElements.useCustomText.click();
+        subtitleSection.editElements.submitForm();
+        subtitleSection.showElements.section.click();
+
+        expect(Creature.useCustomSubtitleText).toBe(false);
+        expect(Creature.customSubtitleText).toBe(customText);
+
+        expect(subtitleSection).toBeInMode('edit');
+        expect(subtitleSection.editElements.useCustomText).not.toBeChecked();
+        expect(subtitleSection.editElements.customText).toHaveValue(customText);
+
+        verifyJsonExport({
+          useCustomSubtitleText: false,
+          customSubtitleText: customText
+        });
+      });
+
+      it('should display an error if the custom text field is blank', () => {
+        inputValueAndTriggerEvent(subtitleSection.editElements.customText, '');
 
         subtitleSection.editElements.submitForm();
 
-        tags = tags.trim();
+        expect(subtitleSection).toBeInMode('edit');
+        expect(subtitleSection).toHaveError(
+          subtitleSection.editElements.customText,
+          'Subtitle Custom Text cannot be blank.');
+      });
+    });
+  });
+
+  describe('and the custom text checkbox is unchecked', () => {
+    beforeEach(() => {
+      subtitleSection.editElements.useCustomText.click();
+      subtitleSection.editElements.useCustomText.click();
+    });
+
+    it('should disable the custom text field, enable all other fields, and focus on the size field', () => {
+      expect(subtitleSection.editElements.size).toBeEnabled();
+      expect(subtitleSection.editElements.type).toBeEnabled();
+      expect(subtitleSection.editElements.tags).toBeEnabled();
+      expect(subtitleSection.editElements.alignment).toBeEnabled();
+      expect(subtitleSection.editElements.customText).toBeDisabled();
+
+      expect(subtitleSection.editElements.size).toHaveFocus();
+    });
+
+    describe('and fields are populated and the edit section is submitted', () => {
+      describe('should switch to show mode and save the creature size, type, tags, and alignment', () => {
+        /* eslint-disable indent, no-unexpected-multiline */
+        it.each
+        `
+          description        | size            | type             | tags                     | alignment           | expectedSubtitle
+          ${'no tags'}       | ${'Gargantuan'} | ${'monstrosity'} | ${''}                    | ${'neutral'}        | ${'Gargantuan monstrosity, neutral'}
+          ${'single tag'}    | ${'Small'}      | ${'humanoid'}    | ${'halfling'}            | ${'lawful good'}    | ${'Small humanoid (halfling), lawful good'}
+          ${'multiple tags'} | ${'Tiny'}       | ${'fiend'}       | ${'demon, shapechanger'} | ${'chaotic evil'}   | ${'Tiny fiend (demon, shapechanger), chaotic evil'}
+          ${'trimmed tags'}  | ${'Large'}      | ${'giant'}       | ${'    titan '}          | ${'lawful neutral'} | ${'Large giant (titan), lawful neutral'}
+        `
+        ('$description: {size="$size", type="$type", tags="$tags", alignment="$alignment"} => $expectedSubtitle',
+        ({size, type, tags, alignment, expectedSubtitle}) => {
+          inputValueAndTriggerEvent(subtitleSection.editElements.size, size);
+          inputValueAndTriggerEvent(subtitleSection.editElements.type, type);
+          inputValueAndTriggerEvent(subtitleSection.editElements.tags, tags);
+          inputValueAndTriggerEvent(subtitleSection.editElements.alignment, alignment);
+
+          subtitleSection.editElements.submitForm();
+
+          tags = tags.trim();
+
+          expect(Creature.size).toBe(size);
+          expect(Creature.type).toBe(type);
+          expect(Creature.tags).toBe(tags);
+          expect(Creature.alignment).toBe(alignment);
+
+          expect(subtitleSection).toBeInMode('show');
+          expect(subtitleSection.showElements.text).toHaveTextContent(expectedSubtitle);
+
+          verifyJsonExport({
+            size: size,
+            type: type,
+            tags: tags,
+            alignment: alignment
+          });
+          verifyHtmlExport(expectedSubtitle);
+          verifyHomebreweryExport(expectedSubtitle);
+        });
+        /* eslint-enable indent, no-unexpected-multiline */
+      });
+
+      it('should preserve the size, type, tags, and alignment if submitted with the custom text checkbox checked', () => {
+        const size = 'Small';
+        const type = 'fey';
+        const tags = 'shapechanger';
+        const alignment = 'chaotic neutral';
+        const useCustomText = true;
+        const customText = 'This custom text should be saved, but not shown.';
+
+        inputValueAndTriggerEvent(subtitleSection.editElements.size, size);
+        inputValueAndTriggerEvent(subtitleSection.editElements.type, type);
+        inputValueAndTriggerEvent(subtitleSection.editElements.tags, tags);
+        inputValueAndTriggerEvent(subtitleSection.editElements.alignment, alignment);
+
+        subtitleSection.editElements.useCustomText.click();
+        inputValueAndTriggerEvent(subtitleSection.editElements.customText, customText);
+
+        subtitleSection.editElements.submitForm();
+        subtitleSection.showElements.section.click();
 
         expect(Creature.size).toBe(size);
         expect(Creature.type).toBe(type);
         expect(Creature.tags).toBe(tags);
         expect(Creature.alignment).toBe(alignment);
+        expect(Creature.useCustomSubtitleText).toBe(true);
 
-        expect(subtitleSection).toBeInMode('show');
-        expect(subtitleSection.showElements.subtitle).toHaveTextContent(expectedSubtitle);
+        expect(subtitleSection).toBeInMode('edit');
+        expect(subtitleSection.editElements.size).toHaveValue(size);
+        expect(subtitleSection.editElements.type).toHaveValue(type);
+        expect(subtitleSection.editElements.tags).toHaveValue(tags);
+        expect(subtitleSection.editElements.alignment).toHaveValue(alignment);
+        expect(subtitleSection.editElements.useCustomText).toBeChecked();
 
-        verifyJsonExport( size, type, tags, alignment);
-        verifyHtmlExport(expectedSubtitle);
-        verifyHomebreweryExport(expectedSubtitle);
+        verifyJsonExport({
+          size: size,
+          type: type,
+          tags: tags,
+          alignment: alignment,
+          useCustomSubtitleText: useCustomText,
+          customSubtitleText: customText
+        });
       });
-      /* eslint-enable indent, no-unexpected-multiline */
     });
   });
 });
 
-function verifyJsonExport(expectedSize, expectedType, expectedTags, expectedAlignment) {
+function verifyJsonExport({
+  size = 'Medium',
+  type = 'humanoid',
+  tags = '',
+  alignment = 'unaligned',
+  useCustomSubtitleText = false,
+  customSubtitleText = ''
+} = {}) {
+
   const json = subtitleSection.exportToJson();
   const expectedJson = {
     fullName: defaultTitle,
     shortName: '',
     isProperNoun: false,
-    size: expectedSize,
-    type: expectedType,
-    tags: expectedTags,
-    alignment: expectedAlignment
+    size: size,
+    type: type,
+    tags: tags,
+    alignment: alignment,
+    useCustomSubtitleText: useCustomSubtitleText,
+    customSubtitleText: customSubtitleText
   };
 
   expect(json).toStrictEqual(expectedJson);

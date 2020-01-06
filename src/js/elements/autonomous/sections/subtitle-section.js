@@ -15,8 +15,27 @@ export default class SubtitleSection extends sectionModule.Section {
           SubtitleEditElements);
   }
 
+  connectedCallback() {
+    if (this.isConnected && ! this.isInitialized) {
+      this.editElements.useCustomText.disableElementsWhenChecked(
+        this.editElements.size,
+        this.editElements.type,
+        this.editElements.tags,
+        this.editElements.alignment);
+
+      this.editElements.useCustomText.enableElementsWhenChecked(
+        this.editElements.customText);
+
+      this.isInitialized = true;
+    }
+  }
+
   checkForErrors() {
     this.editElements.tags.value = this.editElements.tags.value.trim();
+
+    if (this.editElements.useCustomText.checked) {
+      this.editElements.customText.validate(this.errorMessages);
+    }
   }
 
   updateModel() {
@@ -24,10 +43,13 @@ export default class SubtitleSection extends sectionModule.Section {
     Creature.type = this.editElements.type.value;
     Creature.tags = this.editElements.tags.value;
     Creature.alignment = this.editElements.alignment.value;
+
+    Creature.useCustomSubtitleText = this.editElements.useCustomText.checked;
+    Creature.customSubtitleText = this.editElements.customText.value;
   }
 
   updateView() {
-    this.showElements.subtitle.textContent = Creature.subtitle;
+    this.showElements.text.textContent = Creature.subtitle;
   }
 
   exportToJson() {
@@ -46,7 +68,7 @@ export default class SubtitleSection extends sectionModule.Section {
 class SubtitleShowElements extends sectionModule.ShowElements {
   constructor(shadowRoot) {
     super(shadowRoot);
-    this.subtitle = shadowRoot.getElementById('subtitle-text');
+    this.text = shadowRoot.getElementById('subtitle-text');
   }
 }
 
@@ -57,6 +79,8 @@ class SubtitleEditElements extends sectionModule.EditElements {
     this.type = shadowRoot.getElementById('type-input');
     this.tags = shadowRoot.getElementById('tags-input');
     this.alignment = shadowRoot.getElementById('alignment-input');
+    this.useCustomText = shadowRoot.getElementById('use-custom-text-input');
+    this.customText = shadowRoot.getElementById('custom-text-input');
   }
 
   get initiallySelectedElement() {

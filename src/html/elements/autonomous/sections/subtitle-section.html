@@ -14,7 +14,7 @@
 <form id="edit-section" class="section section_hidden" novalidate>
   <div class="subtitle-edit-section section__content">
     <div class="subtitle-edit-section__subtitle-container">
-      <label id="size-label" class="subtitle-edit-section__size-label subtitle-edit-section__label" for="size-input">Size:</label>
+      <label id="size-label" class="subtitle-edit-section__size-label subtitle-edit-section__heading-label subtitle-edit-section__label" for="size-input">Size:</label>
       <select id="size-input" class="subtitle-edit-section__size-input subtitle-show-section__subtitle-text section__select">
         <option value="Tiny">Tiny</option>
         <option value="Small">Small</option>
@@ -24,7 +24,7 @@
         <option value="Gargantuan">Gargantuan</option>
       </select>
 
-      <label id="type-label" class="subtitle-edit-section__type-label subtitle-edit-section__label" for="type-input">Type:</label>
+      <label id="type-label" class="subtitle-edit-section__type-label subtitle-edit-section__heading-label subtitle-edit-section__label" for="type-input">Type:</label>
       <select id="type-input" class="subtitle-edit-section__type-input subtitle-show-section__subtitle-text section__select">
         <option value="aberration">aberration</option>
         <option value="beast">beast</option>
@@ -42,7 +42,7 @@
         <option value="undead">undead</option>
       </select>
 
-      <label id="tags-label" class="subtitle-edit-section__tags-label subtitle-edit-section__label" for="tags-input">Tags:</label>
+      <label id="tags-label" class="subtitle-edit-section__tags-label subtitle-edit-section__heading-label subtitle-edit-section__label" for="tags-input">Tags:</label>
       <input id="tags-input" class="subtitle-edit-section__tags-input subtitle-show-section__subtitle-text section__text-input" is="text-input" type="text" name="type" pretty-name="Creature Tags" list="tags-list" value="" />
       <datalist id="tags-list">
         <option value="aarakocra" />
@@ -84,7 +84,7 @@
         <option value="yugoloth" />
       </datalist>
 
-      <label id="alignment-label" class="subtitle-edit-section__alignment-label subtitle-edit-section__label" for="alignment-input">Alignment:</label>
+      <label id="alignment-label" class="subtitle-edit-section__alignment-label subtitle-edit-section__heading-label subtitle-edit-section__label" for="alignment-input">Alignment:</label>
       <select id="alignment-input" class="subtitle-edit-section__alignment-input subtitle-show-section__subtitle-text section__select">
         <option value="unaligned">unaligned</option>
         <option value="unaligned">any alignment</option>
@@ -98,6 +98,11 @@
         <option value="neutral evil">neutral evil</option>
         <option value="chaotic evil">chaotic evil</option>
       </select>
+    </div>
+    <div class="subtitle-edit-section__custom-container">
+      <input id="use-custom-text-input" class="subtitle-edit-section__use-custom-text-input" is="enable-disable-elements-checkbox" type="checkbox" name="subtitle-use-custom" />
+      <label id="use-custom-text-label" class="subtitle-edit-section__use-custom-text-label subtitle-edit-section__label" for="use-custom-text-input">Override with custom text:</label>
+      <input id="custom-text-input" class="subtitle-edit-section__custom-text-input section__text-input" is="text-input" type="text" name="subtitle-custom" pretty-name="Subtitle Custom Text" data-parsed required disabled />
     </div>
   </div>
   <div class="section__save-button-container">
