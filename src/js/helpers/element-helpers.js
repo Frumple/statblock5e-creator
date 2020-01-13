@@ -32,16 +32,19 @@ export function inputValueAndTriggerEvent(element, value) {
   element.dispatchEvent(new Event('input'));
 }
 
-// maxDepth determines how many levels deep to search for element objects
-// Example: maxDepth = 3 will search the parent, its children, and its grandchildren only
-export function traverseElements(parent, maxDepth, callback) {
-  for (const propertyName in parent) {
-    let child = parent[propertyName];
+// Traverses the properties of an object and its descendant objects for HTMLElements
+// maxDepth is how many levels deep to search for elements
+// Example: maxDepth = 3 will search the object, its children, and its grandchildren only
+export function traverseElements(obj, maxDepth, callback) {
+  if (obj !== null) {
+    for (const propertyName of Object.keys(obj)) {
+      const property = obj[propertyName];
 
-    if (child instanceof HTMLElement) {
-      callback(child);
-    } else if (maxDepth > 1) {
-      traverseElements(child, maxDepth - 1, callback);
+      if (property instanceof HTMLElement) {
+        callback(property);
+      } else if (maxDepth > 1) {
+        traverseElements(property, maxDepth - 1, callback);
+      }
     }
   }
 }
