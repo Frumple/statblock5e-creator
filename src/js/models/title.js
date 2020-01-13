@@ -1,6 +1,6 @@
 import { capitalizeFirstLetter } from '../helpers/string-formatter.js';
 
-class Creature {
+class Title {
   constructor() {
     this.reset();
   }
@@ -9,14 +9,6 @@ class Creature {
     this._fullName = 'Commoner';
     this.shortName = '';
     this.isProperNoun = false;
-
-    this.size = 'Medium';
-    this.type = 'humanoid';
-    this.tags = '';
-    this.alignment = 'unaligned';
-
-    this.useCustomSubtitleText = false;
-    this.customSubtitleText = '';
   }
 
   set fullName(fullName) {
@@ -29,18 +21,6 @@ class Creature {
 
   get title() {
     return this._fullName;
-  }
-
-  get subtitle() {
-    if (this.useCustomSubtitleText) {
-      return this.customSubtitleText;
-    }
-
-    if (this.tags === '') {
-      return `${this.size} ${this.type}, ${this.alignment}`;
-    }
-
-    return `${this.size} ${this.type} (${this.tags}), ${this.alignment}`;
   }
 
   get grammaticalFullName() {
@@ -72,33 +52,19 @@ class Creature {
     return {
       fullName: this._fullName,
       shortName: this.shortName,
-      isProperNoun: this.isProperNoun,
-      size: this.size,
-      type: this.type,
-      tags: this.tags,
-      alignment: this.alignment,
-      useCustomSubtitleText: this.useCustomSubtitleText,
-      customSubtitleText: this.customSubtitleText
+      isProperNoun: this.isProperNoun
     };
   }
 
   toHtml() {
-    const creatureHeading = document.createElement('creature-heading');
     const titleElement = document.createElement('h1');
-    const subtitleElement = document.createElement('h2');
-
     titleElement.textContent = this.title;
-    subtitleElement.textContent = this.subtitle;
-
-    creatureHeading.appendChild(titleElement);
-    creatureHeading.appendChild(subtitleElement);
-
-    return creatureHeading;
+    return titleElement;
   }
 
   toHomebrewery() {
-    return `> ## ${this.title}\n>*${this.subtitle}*`;
+    return `> ## ${this.title}`;
   }
 }
 
-export default new Creature();
+export default new Title();

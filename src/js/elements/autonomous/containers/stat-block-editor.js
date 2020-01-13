@@ -10,7 +10,7 @@ import StatBlock from './stat-block.js';
 
 import ExportDialog from '../dialogs/export-dialog.js';
 
-import Creature from '../../../models/creature.js';
+import Title from '../../../models/title.js';
 
 export default class StatBlockEditor extends CustomAutonomousElement {
   static get elementName() { return 'stat-block-editor'; }
@@ -123,17 +123,17 @@ export default class StatBlockEditor extends CustomAutonomousElement {
 
   openJsonExportDialog() {
     const content = this.exportToJson();
-    this.jsonExportDialog.launch(content, 'application/json', `${Creature.title}.json`);
+    this.jsonExportDialog.launch(content, 'application/json', `${Title.title}.json`);
   }
 
   openHtmlExportDialog() {
-    const content = this.exportToHtml(`Statblock5e - ${Creature.title}`);
-    this.htmlExportDialog.launch(content, 'text/html', `${Creature.title}.html`);
+    const content = this.exportToHtml(`Statblock5e - ${Title.title}`);
+    this.htmlExportDialog.launch(content, 'text/html', `${Title.title}.html`);
   }
 
   openHomebreweryExportDialog() {
     const content = this.exportToHomebrewery();
-    this.homebreweryExportDialog.launch(content, 'text/markdown', `${Creature.title}.md`);
+    this.homebreweryExportDialog.launch(content, 'text/markdown', `${Title.title}.md`);
   }
 
   exportToJson() {

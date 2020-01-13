@@ -2,12 +2,12 @@ import NameParser from './name-parser.js';
 import MathParser from './math-parser.js';
 import MarkdownParser from './markdown-parser.js';
 
-import Creature from '../models/creature.js';
+import Title from '../models/title.js';
 import Abilities from '../models/abilities.js';
 import ProficiencyBonus from '../models/proficiency-bonus.js';
 
 export function parseNames(inputText, parserOptions = {}) {
-  parserOptions.creature = Creature.toParserOptions();
+  parserOptions.creature = Title.toParserOptions();
   return parseText(NameParser, inputText, parserOptions);
 }
 

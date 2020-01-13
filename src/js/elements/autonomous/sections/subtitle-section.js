@@ -1,5 +1,5 @@
 import * as sectionModule from './section.js';
-import Creature from '../../../models/creature.js';
+import Subtitle from '../../../models/subtitle.js';
 
 export default class SubtitleSection extends sectionModule.Section {
   static get elementName() { return 'subtitle-section'; }
@@ -39,29 +39,29 @@ export default class SubtitleSection extends sectionModule.Section {
   }
 
   updateModel() {
-    Creature.size = this.editElements.size.value;
-    Creature.type = this.editElements.type.value;
-    Creature.tags = this.editElements.tags.value;
-    Creature.alignment = this.editElements.alignment.value;
+    Subtitle.size = this.editElements.size.value;
+    Subtitle.type = this.editElements.type.value;
+    Subtitle.tags = this.editElements.tags.value;
+    Subtitle.alignment = this.editElements.alignment.value;
 
-    Creature.useCustomSubtitleText = this.editElements.useCustomText.checked;
-    Creature.customSubtitleText = this.editElements.customText.value;
+    Subtitle.useCustomSubtitleText = this.editElements.useCustomText.checked;
+    Subtitle.customSubtitleText = this.editElements.customText.value;
   }
 
   updateView() {
-    this.showElements.text.textContent = Creature.subtitle;
+    this.showElements.text.textContent = Subtitle.subtitle;
   }
 
   exportToJson() {
-    return Creature.toJson();
+    return Subtitle.toJson();
   }
 
   exportToHtml() {
-    return Creature.toHtml();
+    return Subtitle.toHtml();
   }
 
   exportToHomebrewery() {
-    return Creature.toHomebrewery();
+    return Subtitle.toHomebrewery();
   }
 }
 

@@ -1,8 +1,8 @@
 import { parseNames } from './parser.js';
-import Creature from '../models/creature.js';
+import Title from '../models/title.js';
 
 beforeEach(() => {
-  Creature.reset();
+  Title.reset();
 });
 
 it('should preserve newline characters', () => {
@@ -31,7 +31,7 @@ describe('should parse valid name expressions', () => {
     '[fullname] begins on a new line. [fullname] begins on a new sentence, but [fullname] does not.';
 
   it('when only the full name is defined', () => {
-    Creature.fullName = 'Hook Horror';
+    Title.fullName = 'Hook Horror';
 
     const expectedOutputText =
       'The hook horror begins on a new line. The hook horror begins on a new sentence, but the hook horror does not.\n' +
@@ -41,8 +41,8 @@ describe('should parse valid name expressions', () => {
   });
 
   it('when the full name and short name are defined', () => {
-    Creature.fullName = 'Ancient Red Dragon';
-    Creature.shortName = 'dragon';
+    Title.fullName = 'Ancient Red Dragon';
+    Title.shortName = 'dragon';
 
     const expectedOutputText =
       'The dragon begins on a new line. The dragon begins on a new sentence, but the dragon does not.\n' +
@@ -52,8 +52,8 @@ describe('should parse valid name expressions', () => {
   });
 
   it('when the full name is defined and it is a proper noun', () => {
-    Creature.fullName = 'Tiamat';
-    Creature.isProperNoun = true;
+    Title.fullName = 'Tiamat';
+    Title.isProperNoun = true;
 
     const expectedOutputText =
       'Tiamat begins on a new line. Tiamat begins on a new sentence, but Tiamat does not.\n' +
@@ -63,9 +63,9 @@ describe('should parse valid name expressions', () => {
   });
 
   it('when the full name and short name are defined and they are proper nouns', () => {
-    Creature.fullName = 'Lady Kima of Vord';
-    Creature.shortName = 'Lady Kima';
-    Creature.isProperNoun = true;
+    Title.fullName = 'Lady Kima of Vord';
+    Title.shortName = 'Lady Kima';
+    Title.isProperNoun = true;
 
     const expectedOutputText =
       'Lady Kima begins on a new line. Lady Kima begins on a new sentence, but Lady Kima does not.\n' +

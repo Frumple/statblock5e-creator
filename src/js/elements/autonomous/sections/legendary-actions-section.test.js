@@ -1,7 +1,7 @@
 import LegendaryActionsSection from './legendary-actions-section.js';
 import LegendaryActions from '../../../models/lists/block/legendary-actions.js';
 
-import Creature from '../../../models/creature.js';
+import Title from '../../../models/title.js';
 import Abilities from '../../../models/abilities.js';
 
 import * as TestCustomElements from '../../../helpers/test/test-custom-elements.js';
@@ -22,7 +22,7 @@ beforeAll(async() => {
 });
 
 beforeEach(() => {
-  Creature.reset();
+  Title.reset();
   Abilities.reset();
   LegendaryActions.reset();
 
@@ -56,8 +56,8 @@ describe('when the show section is clicked', () => {
       const homebreweryDescription = 'The dragon can take 5 legendary actions, choosing from one of the options below. Only one legendary action option can be used at a time and only at the end of another creature\'s turn. The dragon regains spent legendary actions at the start of its turn.';
       const htmlDescription = 'The dragon can take 5 legendary actions, choosing from one of the options below. Only one legendary action option can be used at a time and only at the end of another creature\'s turn. The dragon regains spent legendary actions at the start of its turn.';
 
-      Creature.fullName = 'Adult Red Dragon';
-      Creature.shortName = 'dragon';
+      Title.fullName = 'Adult Red Dragon';
+      Title.shortName = 'dragon';
 
       inputValueAndTriggerEvent(legendaryActionsSection.editElements.description, description);
 
@@ -91,8 +91,8 @@ describe('when the show section is clicked', () => {
         htmlText: 'The dragon makes a Wisdom (Perception) check.'
       };
 
-      Creature.fullName = 'Adult Red Dragon';
-      Creature.shortName = 'dragon';
+      Title.fullName = 'Adult Red Dragon';
+      Title.shortName = 'dragon';
 
       sharedSpecs.shouldAddASingleBlock(legendaryActionsSection, block);
     });
@@ -105,7 +105,7 @@ describe('when the show section is clicked', () => {
         htmlText: '<strong>Line 1</strong>. The dummy is here.\n  <strong>Line 2</strong>. The dummy is there.\n    <strong>Line 3</strong>. The dummy is everywhere.'
       };
 
-      Creature.fullName = 'Dummy';
+      Title.fullName = 'Dummy';
 
       sharedSpecs.shouldAddASingleBlock(legendaryActionsSection, block);
     });
@@ -118,7 +118,7 @@ describe('when the show section is clicked', () => {
         htmlText: '&lt;strong&gt;Line 1&lt;/strong&gt;. The dummy is here.'
       };
 
-      Creature.fullName = 'Dummy';
+      Title.fullName = 'Dummy';
 
       sharedSpecs.shouldAddASingleBlock(legendaryActionsSection, block);
     });
@@ -147,8 +147,8 @@ describe('when the show section is clicked', () => {
         }
       ];
 
-      Creature.fullName = 'Adult Red Dragon';
-      Creature.shortName = 'dragon';
+      Title.fullName = 'Adult Red Dragon';
+      Title.shortName = 'dragon';
 
       sharedSpecs.shouldAddMultipleBlocks(legendaryActionsSection, blocks);
     });
@@ -161,8 +161,8 @@ describe('when the show section is clicked', () => {
         htmlText: 'The dragon makes a Wisdom (Perception) check.'
       };
 
-      Creature.fullName = 'Adult Red Dragon';
-      Creature.shortName = 'dragon';
+      Title.fullName = 'Adult Red Dragon';
+      Title.shortName = 'dragon';
 
       sharedSpecs.shouldAddASingleBlockThenRemoveIt(legendaryActionsSection, block);
     });
@@ -191,8 +191,8 @@ describe('when the show section is clicked', () => {
         }
       ];
 
-      Creature.fullName = 'Adult Red Dragon';
-      Creature.shortName = 'dragon';
+      Title.fullName = 'Adult Red Dragon';
+      Title.shortName = 'dragon';
 
       sharedSpecs.shouldAddMultipleBlocksThenRemoveOneOfThem(legendaryActionsSection, blocks, 1);
     });

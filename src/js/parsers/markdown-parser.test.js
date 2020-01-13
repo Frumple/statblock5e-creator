@@ -1,8 +1,8 @@
 import { parseMarkdown } from './parser.js';
-import Creature from '../models/creature.js';
+import Title from '../models/title.js';
 
 beforeEach(() => {
-  Creature.reset();
+  Title.reset();
 });
 
 it('should preserve newline characters', () => {
@@ -17,8 +17,8 @@ it('should preserve newline characters', () => {
     'Line 8\n' +
     '\n';
 
-  const parserResults = parseMarkdown(inputText);    
-  
+  const parserResults = parseMarkdown(inputText);
+
   expect(parserResults).not.toBeNull();
   expect(parserResults.inputText).toBe(inputText);
   expect(parserResults.outputText).toBe(inputText);

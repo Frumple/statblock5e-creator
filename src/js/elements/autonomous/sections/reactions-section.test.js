@@ -1,6 +1,6 @@
 import ReactionsSection from './reactions-section.js';
 import Reactions from '../../../models/lists/block/reactions.js';
-import Creature from '../../../models/creature.js';
+import Title from '../../../models/title.js';
 
 import * as TestCustomElements from '../../../helpers/test/test-custom-elements.js';
 import * as sharedSpecs from './block-list-section.specs.js';
@@ -18,7 +18,7 @@ beforeAll(async() => {
 });
 
 beforeEach(() => {
-  Creature.reset();
+  Title.reset();
   Reactions.reset();
 
   reactionsSection = new ReactionsSection();
@@ -54,7 +54,7 @@ describe('when the show section is clicked', () => {
         htmlText: 'The knight adds 2 to its AC against one melee attack that would hit it. To do so, the knight must see the attacker and be wielding a melee weapon.'
       };
 
-      Creature.fullName = 'Knight';
+      Title.fullName = 'Knight';
 
       sharedSpecs.shouldAddASingleBlock(reactionsSection, block);
     });
@@ -67,7 +67,7 @@ describe('when the show section is clicked', () => {
         htmlText: '<strong>Line 1</strong>. The dummy is here.\n  <strong>Line 2</strong>. The dummy is there.\n    <strong>Line 3</strong>. The dummy is everywhere.'
       };
 
-      Creature.fullName = 'Dummy';
+      Title.fullName = 'Dummy';
 
       sharedSpecs.shouldAddASingleBlock(reactionsSection, block);
     });
@@ -80,7 +80,7 @@ describe('when the show section is clicked', () => {
         htmlText: '&lt;strong&gt;Line 1&lt;/strong&gt;. The dummy is here.'
       };
 
-      Creature.fullName = 'Dummy';
+      Title.fullName = 'Dummy';
 
       sharedSpecs.shouldAddASingleBlock(reactionsSection, block);
     });

@@ -1,5 +1,5 @@
 import * as sectionModule from './section.js';
-import Creature from '../../../models/creature.js';
+import Title from '../../../models/title.js';
 
 export default class TitleSection extends sectionModule.Section {
   static get elementName() { return 'title-section'; }
@@ -27,18 +27,18 @@ export default class TitleSection extends sectionModule.Section {
     const fullName = this.editElements.fullName.value;
 
     if (fullName !== '') {
-      Creature.fullName = fullName;
+      Title.fullName = fullName;
       this.dispatchCreatureNameChangedEvent();
     }
   }
 
   onInputShortName() {
-    Creature.shortName = this.editElements.shortName.value;
+    Title.shortName = this.editElements.shortName.value;
     this.dispatchCreatureNameChangedEvent();
   }
 
   onInputProperNoun() {
-    Creature.isProperNoun = this.editElements.properNoun.checked;
+    Title.isProperNoun = this.editElements.properNoun.checked;
     this.dispatchCreatureNameChangedEvent();
   }
 
@@ -51,9 +51,9 @@ export default class TitleSection extends sectionModule.Section {
       bubbles: true,
       composed: true,
       detail: {
-        creatureName: Creature.fullName,
-        shortName: Creature.shortName,
-        isProperNoun: Creature.isProperNoun
+        creatureName: Title.fullName,
+        shortName: Title.shortName,
+        isProperNoun: Title.isProperNoun
       }
     });
     this.dispatchEvent(changeEvent);
@@ -65,26 +65,26 @@ export default class TitleSection extends sectionModule.Section {
   }
 
   updateModel() {
-    Creature.fullName = this.editElements.fullName.value;
-    Creature.shortName = this.editElements.shortName.value;
-    Creature.isProperNoun = this.editElements.properNoun.checked;
+    Title.fullName = this.editElements.fullName.value;
+    Title.shortName = this.editElements.shortName.value;
+    Title.isProperNoun = this.editElements.properNoun.checked;
   }
 
   updateView() {
-    this.editElements.fullName.value = Creature.fullName;
-    this.showElements.title.textContent = Creature.title;
+    this.editElements.fullName.value = Title.fullName;
+    this.showElements.title.textContent = Title.title;
   }
 
   exportToJson() {
-    return Creature.toJson();
+    return Title.toJson();
   }
 
   exportToHtml() {
-    return Creature.toHtml();
+    return Title.toHtml();
   }
 
   exportToHomebrewery() {
-    return Creature.toHomebrewery();
+    return Title.toHomebrewery();
   }
 }
 

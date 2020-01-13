@@ -3,7 +3,7 @@ import Actions from '../../../models/lists/block/actions.js';
 
 import GenerateAttackDialog from '../dialogs/generate-attack-dialog.js';
 
-import Creature from '../../../models/creature.js';
+import Title from '../../../models/title.js';
 import Abilities from '../../../models/abilities.js';
 import ProficiencyBonus from '../../../models/proficiency-bonus.js';
 
@@ -24,7 +24,7 @@ beforeAll(async() => {
 });
 
 beforeEach(() => {
-  Creature.reset();
+  Title.reset();
   Abilities.reset();
   ProficiencyBonus.reset();
   Actions.reset();
@@ -75,7 +75,7 @@ describe('when the show section is clicked', () => {
         htmlText: '<strong>Line 1</strong>. The dummy is hot.\n  <strong>Line 2</strong>. The dummy is cold.\n    <strong>Line 3</strong>. The dummy is warm.'
       };
 
-      Creature.fullName = 'Dummy';
+      Title.fullName = 'Dummy';
 
       sharedSpecs.shouldAddASingleBlock(actionsSection, block);
     });
@@ -118,7 +118,7 @@ describe('when the show section is clicked', () => {
         }
       ];
 
-      Creature.fullName = 'Goblin';
+      Title.fullName = 'Goblin';
 
       sharedSpecs.shouldAddMultipleBlocks(actionsSection, blocks);
     });
@@ -155,7 +155,7 @@ describe('when the show section is clicked', () => {
         }
       ];
 
-      Creature.fullName = 'Knight';
+      Title.fullName = 'Knight';
 
       sharedSpecs.shouldAddMultipleBlocksThenRemoveOneOfThem(actionsSection, blocks, 1);
     });

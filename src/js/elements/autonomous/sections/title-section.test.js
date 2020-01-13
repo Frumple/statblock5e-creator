@@ -3,9 +3,7 @@ import * as TestCustomElements from '../../../helpers/test/test-custom-elements.
 
 import { inputValueAndTriggerEvent } from '../../../helpers/element-helpers.js';
 
-import Creature from '../../../models/creature.js';
-
-const defaultSubtitle = 'Medium humanoid, unaligned';
+import Title from '../../../models/title.js';
 
 let titleSection;
 
@@ -15,7 +13,7 @@ beforeAll(async() => {
 });
 
 beforeEach(() => {
-  Creature.reset();
+  Title.reset();
 
   titleSection = new TitleSection();
   TestCustomElements.initializeSection(titleSection);
@@ -70,10 +68,10 @@ describe('when the show section is clicked', () => {
           titleSection.editElements.properNoun.click();
         }
 
-        expect(Creature.fullName).toBe(expectedCreatureName);
-        expect(Creature.shortName).toBe(expectedShortName);
-        expect(Creature.isProperNoun).toBe(isProperNoun);
-        expect(Creature.grammaticalName).toBe(expectedGrammaticalName);
+        expect(Title.fullName).toBe(expectedCreatureName);
+        expect(Title.shortName).toBe(expectedShortName);
+        expect(Title.isProperNoun).toBe(isProperNoun);
+        expect(Title.grammaticalName).toBe(expectedGrammaticalName);
 
         if (creatureName !== '' || shortName !== '' || isProperNoun) {
           expect(receivedEvent).not.toBeNull();
@@ -107,9 +105,9 @@ describe('when the show section is clicked', () => {
 
         titleSection.editElements.submitForm();
 
-        expect(Creature.fullName).toBe(fullName);
-        expect(Creature.shortName).toBe(shortName);
-        expect(Creature.isProperNoun).toBe(isProperNoun);
+        expect(Title.fullName).toBe(fullName);
+        expect(Title.shortName).toBe(shortName);
+        expect(Title.isProperNoun).toBe(isProperNoun);
 
         expect(titleSection).toBeInMode('show');
         expect(titleSection.showElements.title).toHaveTextContent(fullName);
@@ -135,7 +133,7 @@ describe('when the show section is clicked', () => {
 
         titleSection.editElements.submitForm();
 
-        expect(Creature.fullName).toBe(expectedFullName);
+        expect(Title.fullName).toBe(expectedFullName);
 
         expect(titleSection).toBeInMode('show');
         expect(titleSection.showElements.title).toHaveTextContent(expectedFullName);
@@ -165,32 +163,22 @@ function verifyJsonExport(expectedFullName, expectedShortName, expectedIsProperN
   const expectedJson = {
     fullName: expectedFullName,
     shortName: expectedShortName,
-    isProperNoun: expectedIsProperNoun,
-    size: 'Medium',
-    type: 'humanoid',
-    tags: '',
-    alignment: 'unaligned',
-    useCustomSubtitleText: false,
-    customSubtitleText: ''
+    isProperNoun: expectedIsProperNoun
   };
 
   expect(json).toStrictEqual(expectedJson);
 }
 
 function verifyHtmlExport(expectedTitle) {
-  const creatureHeading = titleSection.exportToHtml();
-  const title = creatureHeading.querySelector('h1');
-  const subtitle = creatureHeading.querySelector('h2');
-
-  expect(creatureHeading.tagName).toBe('CREATURE-HEADING');
-  expect(title).toHaveTextContent(expectedTitle);
-  expect(subtitle).toHaveTextContent(defaultSubtitle);
+  const titleElement = titleSection.exportToHtml();
+  expect(titleElement.tagName).toBe('H1');
+  expect(titleElement).toHaveTextContent(expectedTitle);
 }
 
 function verifyHomebreweryExport(expectedTitle) {
   const text = titleSection.exportToHomebrewery();
   const expectedText =
-    `> ## ${expectedTitle}\n>*${defaultSubtitle}*`;
+    `> ## ${expectedTitle}`;
 
   expect(text).toBe(expectedText);
 }

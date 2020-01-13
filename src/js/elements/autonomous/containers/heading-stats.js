@@ -1,5 +1,6 @@
 import DivisibleContainer from './divisible-container.js';
-import Creature from '../../../models/creature.js';
+import Title from '../../../models/title.js';
+import Subtitle from '../../../models/subtitle.js';
 
 export default class HeadingStats extends DivisibleContainer {
   static get elementName() { return 'heading-stats'; }
@@ -18,15 +19,23 @@ export default class HeadingStats extends DivisibleContainer {
 
   exportToJson() {
     return {
-      creature: Creature.toJson()
+      title: Title.toJson(),
+      subtitle: Subtitle.toJson()
     };
   }
 
   exportToHtml() {
-    return Creature.toHtml();
+    const creatureHeading = document.createElement('creature-heading');
+    const titleElement = Title.toHtml();
+    const subtitleElement = Subtitle.toHtml();
+
+    creatureHeading.appendChild(titleElement);
+    creatureHeading.appendChild(subtitleElement);
+
+    return creatureHeading;
   }
 
   exportToHomebrewery() {
-    return Creature.toHomebrewery();
+    return `${Title.toHomebrewery()}\n${Subtitle.toHomebrewery()}`;
   }
 }

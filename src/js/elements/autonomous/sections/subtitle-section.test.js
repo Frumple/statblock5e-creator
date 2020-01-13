@@ -3,9 +3,7 @@ import * as TestCustomElements from '../../../helpers/test/test-custom-elements.
 
 import { inputValueAndTriggerEvent } from '../../../helpers/element-helpers.js';
 
-import Creature from '../../../models/creature.js';
-
-const defaultTitle = 'Commoner';
+import Subtitle from '../../../models/subtitle.js';
 
 let subtitleSection;
 
@@ -15,7 +13,7 @@ beforeAll(async() => {
 });
 
 beforeEach(() => {
-  Creature.reset();
+  Subtitle.reset();
 
   subtitleSection = new SubtitleSection();
   TestCustomElements.initializeSection(subtitleSection);
@@ -64,8 +62,8 @@ describe('when the show section is clicked', () => {
 
           subtitleSection.editElements.submitForm();
 
-          expect(Creature.useCustomSubtitleText).toBe(true);
-          expect(Creature.customSubtitleText).toBe(customText);
+          expect(Subtitle.useCustomSubtitleText).toBe(true);
+          expect(Subtitle.customSubtitleText).toBe(customText);
 
           expect(subtitleSection).toBeInMode('show');
           expect(subtitleSection.showElements.text).toHaveTextContent(customText);
@@ -89,8 +87,8 @@ describe('when the show section is clicked', () => {
         subtitleSection.editElements.submitForm();
         subtitleSection.showElements.section.click();
 
-        expect(Creature.useCustomSubtitleText).toBe(false);
-        expect(Creature.customSubtitleText).toBe(customText);
+        expect(Subtitle.useCustomSubtitleText).toBe(false);
+        expect(Subtitle.customSubtitleText).toBe(customText);
 
         expect(subtitleSection).toBeInMode('edit');
         expect(subtitleSection.editElements.useCustomText).not.toBeChecked();
@@ -153,10 +151,10 @@ describe('when the show section is clicked', () => {
 
           tags = tags.trim();
 
-          expect(Creature.size).toBe(size);
-          expect(Creature.type).toBe(type);
-          expect(Creature.tags).toBe(tags);
-          expect(Creature.alignment).toBe(alignment);
+          expect(Subtitle.size).toBe(size);
+          expect(Subtitle.type).toBe(type);
+          expect(Subtitle.tags).toBe(tags);
+          expect(Subtitle.alignment).toBe(alignment);
 
           expect(subtitleSection).toBeInMode('show');
           expect(subtitleSection.showElements.text).toHaveTextContent(expectedSubtitle);
@@ -192,11 +190,11 @@ describe('when the show section is clicked', () => {
         subtitleSection.editElements.submitForm();
         subtitleSection.showElements.section.click();
 
-        expect(Creature.size).toBe(size);
-        expect(Creature.type).toBe(type);
-        expect(Creature.tags).toBe(tags);
-        expect(Creature.alignment).toBe(alignment);
-        expect(Creature.useCustomSubtitleText).toBe(true);
+        expect(Subtitle.size).toBe(size);
+        expect(Subtitle.type).toBe(type);
+        expect(Subtitle.tags).toBe(tags);
+        expect(Subtitle.alignment).toBe(alignment);
+        expect(Subtitle.useCustomSubtitleText).toBe(true);
 
         expect(subtitleSection).toBeInMode('edit');
         expect(subtitleSection.editElements.size).toHaveValue(size);
@@ -229,9 +227,6 @@ function verifyJsonExport({
 
   const json = subtitleSection.exportToJson();
   const expectedJson = {
-    fullName: defaultTitle,
-    shortName: '',
-    isProperNoun: false,
     size: size,
     type: type,
     tags: tags,
@@ -244,19 +239,15 @@ function verifyJsonExport({
 }
 
 function verifyHtmlExport(expectedSubtitle) {
-  const creatureHeading = subtitleSection.exportToHtml();
-  const title = creatureHeading.querySelector('h1');
-  const subtitle = creatureHeading.querySelector('h2');
-
-  expect(creatureHeading.tagName).toBe('CREATURE-HEADING');
-  expect(title).toHaveTextContent(defaultTitle);
-  expect(subtitle).toHaveTextContent(expectedSubtitle);
+  const subtitleElement = subtitleSection.exportToHtml();
+  expect(subtitleElement.tagName).toBe('H2');
+  expect(subtitleElement).toHaveTextContent(expectedSubtitle);
 }
 
 function verifyHomebreweryExport(expectedSubtitle) {
   const text = subtitleSection.exportToHomebrewery();
   const expectedText =
-    `> ## ${defaultTitle}\n>*${expectedSubtitle}*`;
+    `>*${expectedSubtitle}*`;
 
   expect(text).toBe(expectedText);
 }
