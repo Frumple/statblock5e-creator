@@ -6,6 +6,8 @@ import HeadingStats from '../containers/heading-stats.js';
 import TopStats from '../containers/top-stats.js';
 import BottomStats from '../containers/bottom-stats.js';
 
+import Creature from '../../../models/creature.js';
+
 export default class StatBlock extends CustomAutonomousElement {
   static get elementName() { return 'stat-block'; }
   static get templatePaths() {
@@ -16,6 +18,8 @@ export default class StatBlock extends CustomAutonomousElement {
 
   constructor(parent = null) {
     super(StatBlock.templatePaths, parent);
+
+    this.creature = new Creature();
 
     if (isRunningInNode) {
       this.headingStats = new HeadingStats();
@@ -30,6 +34,10 @@ export default class StatBlock extends CustomAutonomousElement {
 
   connectedCallback() {
     if (this.isConnected && ! this.isInitialized) {
+      this.headingStats.creature = this.creature;
+      this.topStats.creature = this.creature;
+      this.bottomStats.creature = this.creature;
+
       this.addEventListener('creatureNameChanged', this.onCreatureNameChanged);
       this.addEventListener('abilityScoreChanged', this.onAbilityScoreChanged);
       this.addEventListener('proficiencyBonusChanged', this.onProficiencyBonusChanged);
@@ -47,27 +55,21 @@ export default class StatBlock extends CustomAutonomousElement {
     const abilityName = event.detail.abilityName;
 
     if (abilityName === 'constitution') {
-      this.topStats.basicStats.sections.get('hitPoints').updateView();
+      this.topStats.updateHitPointsView();
     } else if (abilityName === 'wisdom') {
-      this.topStats.advancedStats.sections.get('senses').updateView();
+      this.topStats.updateSensesView();
     }
 
-    const savingThrowsSection = this.topStats.advancedStats.sections.get('savingThrows');
-    const skillsSection = this.topStats.advancedStats.sections.get('skills');
-
-    savingThrowsSection.updateViewSavingThrow(abilityName);
-    savingThrowsSection.updateViewText();
-
-    skillsSection.updateViewSkillsByAbility(abilityName);
-    skillsSection.updateViewText();
+    this.topStats.updateSavingThrowsView(abilityName);
+    this.topStats.updateSkillsView(abilityName);
 
     this.reparseBlockSections();
   }
 
   onProficiencyBonusChanged() {
-    this.topStats.advancedStats.sections.get('savingThrows').updateView();
-    this.topStats.advancedStats.sections.get('skills').updateView();
-    this.topStats.advancedStats.sections.get('senses').updateView();
+    this.topStats.updateSavingThrowsView();
+    this.topStats.updateSkillsView();
+    this.topStats.updateSensesView();
 
     this.reparseBlockSections();
   }
@@ -76,7 +78,7 @@ export default class StatBlock extends CustomAutonomousElement {
     const skillName = event.detail.skillName;
 
     if (skillName === 'perception') {
-      this.topStats.advancedStats.sections.get('senses').updateView();
+      this.topStats.updateSensesView();
     }
   }
 
@@ -96,22 +98,23 @@ export default class StatBlock extends CustomAutonomousElement {
     }
   }
 
-  setEmptySectionsVisibility(visibility) {
-    this.topStats.advancedStats.setEmptySectionsVisibility(visibility);
-    this.bottomStats.setEmptySectionsVisibility(visibility);
+  setEmptyVisibility(visibility) {
+    this.headingStats.setEmptyVisibility(visibility);
+    this.topStats.setEmptyVisibility(visibility);
+    this.bottomStats.setEmptyVisibility(visibility);
   }
 
-  editAllSections() {
+  edit() {
     // Edit in reverse order so that the title section is the last to gain focus
-    this.bottomStats.editAllSections();
-    this.topStats.editAllSections();
-    this.headingStats.editAllSections();
+    this.bottomStats.edit();
+    this.topStats.edit();
+    this.headingStats.edit();
   }
 
-  saveAllSections() {
-    this.bottomStats.saveAllSections();
-    this.topStats.saveAllSections();
-    this.headingStats.saveAllSections();
+  save() {
+    this.bottomStats.save();
+    this.topStats.save();
+    this.headingStats.save();
   }
 
   reparseBlockSections() {

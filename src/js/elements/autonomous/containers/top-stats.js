@@ -1,6 +1,6 @@
-import CustomAutonomousElement from '../custom-autonomous-element.js';
+import StatsContainer from './stats-container.js';
 
-export default class TopStats extends CustomAutonomousElement {
+export default class TopStats extends StatsContainer {
   static get elementName() { return 'top-stats'; }
   static get templatePaths() {
     return super.templatePaths.set(
@@ -11,29 +11,33 @@ export default class TopStats extends CustomAutonomousElement {
   constructor() {
     super(TopStats.templatePaths);
 
-    this.basicStats = document.querySelector('basic-stats');
-    this.abilityScoresSection = document.querySelector('ability-scores-section');
-    this.advancedStats = document.querySelector('advanced-stats');
+    this.sections.set('basicStats', document.querySelector('basic-stats'));
+    this.sections.set('abilityScores', document.querySelector('ability-scores-section'));
+    this.sections.set('advancedStats', document.querySelector('advanced-stats'));
   }
 
-  editAllSections() {
-    this.basicStats.editAllSections();
-    this.abilityScoresSection.edit();
-    this.advancedStats.editAllSections();
+  updateHitPointsView() {
+    this.sections.get('basicStats').updateHitPointsView();
   }
 
-  saveAllSections() {
-    this.basicStats.saveAllSections();
-    this.abilityScoresSection.save();
-    this.advancedStats.saveAllSections();
+  updateSavingThrowsView(abilityName) {
+    this.sections.get('advancedStats').updateSavingThrowsView(abilityName);
+  }
+
+  updateSkillsView(abilityName) {
+    this.sections.get('advancedStats').updateSkillsView(abilityName);
+  }
+
+  updateSensesView() {
+    this.sections.get('advancedStats').updateSensesView();
   }
 
   exportToJson() {
     const jsObject = {};
 
-    Object.assign(jsObject, this.basicStats.exportToJson());
-    jsObject.attributes = this.abilityScoresSection.exportToJson();
-    Object.assign(jsObject, this.advancedStats.exportToJson());
+    Object.assign(jsObject, this.sections.get('basicStats').exportToJson());
+    jsObject.attributes = this.sections.get('abilityScores').exportToJson();
+    Object.assign(jsObject, this.sections.get('advancedStats').exportToJson());
 
     return jsObject;
   }
@@ -41,9 +45,9 @@ export default class TopStats extends CustomAutonomousElement {
   exportToHtml() {
     const topStats = document.createElement('top-stats');
 
-    const basicStatsExport = this.basicStats.exportToHtml();
-    const abilityScoresExport = this.abilityScoresSection.exportToHtml();
-    const advancedStatsExport = this.advancedStats.exportToHtml();
+    const basicStatsExport = this.sections.get('basicStats').exportToHtml();
+    const abilityScoresExport = this.sections.get('abilityScores').exportToHtml();
+    const advancedStatsExport = this.sections.get('advancedStats').exportToHtml();
 
     topStats.appendChild(basicStatsExport);
     topStats.appendChild(abilityScoresExport);
@@ -53,9 +57,9 @@ export default class TopStats extends CustomAutonomousElement {
   }
 
   exportToHomebrewery() {
-    const basicStatsExport = this.basicStats.exportToHomebrewery();
-    const abilityScoresExport = this.abilityScoresSection.exportToHomebrewery();
-    const advancedStatsExport = this.advancedStats.exportToHomebrewery();
+    const basicStatsExport = this.sections.get('basicStats').exportToHomebrewery();
+    const abilityScoresExport = this.sections.get('abilityScores').exportToHomebrewery();
+    const advancedStatsExport = this.sections.get('advancedStats').exportToHomebrewery();
 
     const text =
 `>___

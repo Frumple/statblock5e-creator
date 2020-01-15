@@ -86,15 +86,15 @@ export default class StatBlockEditor extends CustomAutonomousElement {
     const visibility = event.detail.visibility;
     GlobalOptions.emptySectionsVisibility = visibility;
 
-    this.statBlock.setEmptySectionsVisibility(visibility);
+    this.statBlock.setEmptyVisibility(visibility);
   }
 
   onAllSectionsAction(event) {
     const action = event.detail.action;
     if (action === 'edit') {
-      this.statBlock.editAllSections();
+      this.statBlock.edit();
     } else if (action === 'save') {
-      this.statBlock.saveAllSections();
+      this.statBlock.save();
     }
   }
 

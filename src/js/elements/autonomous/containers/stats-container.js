@@ -3,22 +3,35 @@ import CustomAutonomousElement from '../custom-autonomous-element.js';
 export default class StatsContainer extends CustomAutonomousElement {
   constructor(templatePaths) {
     super(templatePaths);
+
+    this.creature = null;
+    this.sections = new Map();
   }
 
-  setEmptySectionsVisibility(visibility) {
+  connectedCallback() {
+    if (this.isConnected && ! this.isInitialized) {
+      for (const section of this.sections.values()) {
+        section.creature = this.creature;
+      }
+
+      this.isInitialized = true;
+    }
+  }
+
+  setEmptyVisibility(visibility) {
     for (const section of this.sections.values()) {
       section.setEmptyVisibility(visibility);
     }
   }
 
-  editAllSections() {
+  edit() {
     // Edit in reverse order so that the title section is the last to gain focus
     for (const section of Array.from(this.sections.values()).reverse()) {
       section.edit();
     }
   }
 
-  saveAllSections() {
+  save() {
     for (const section of Array.from(this.sections.values()).reverse()) {
       section.save();
     }

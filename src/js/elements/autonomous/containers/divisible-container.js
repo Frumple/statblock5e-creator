@@ -5,15 +5,14 @@ export default class DivisibleContainer extends StatsContainer {
     super(templatePaths);
 
     this.dividers = this.querySelectorAll('section-divider');
-    this.sections = new Map();
 
     this.addEventListener('sectionModeChanged', () => {
       this.updateSectionDividers();
     });
   }
 
-  setEmptySectionsVisibility(visibility) {
-    super.setEmptySectionsVisibility(visibility);
+  setEmptyVisibility(visibility) {
+    super.setEmptyVisibility(visibility);
 
     this.updateSectionDividers();
   }

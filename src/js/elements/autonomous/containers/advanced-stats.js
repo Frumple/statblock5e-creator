@@ -21,4 +21,30 @@ export default class AdvancedStats extends DivisibleContainer {
     this.sections.set('languages', document.querySelector('languages-section'));
     this.sections.set('challengeRating', document.querySelector('challenge-rating-section'));
   }
+
+  updateSavingThrowsView(abilityName) {
+    const savingThrowsSection = this.sections.get('savingThrows');
+
+    if (abilityName) {
+      savingThrowsSection.updateViewSavingThrow(abilityName);
+      savingThrowsSection.updateViewText();
+    } else {
+      savingThrowsSection.updateView();
+    }
+  }
+
+  updateSkillsView(abilityName) {
+    const skillsSection = this.sections.get('skills');
+
+    if (abilityName) {
+      skillsSection.updateViewSkillsByAbility(abilityName);
+      skillsSection.updateViewText();
+    } else {
+      skillsSection.updateView();
+    }
+  }
+
+  updateSensesView() {
+    this.sections.get('senses').updateView();
+  }
 }

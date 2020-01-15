@@ -15,4 +15,8 @@ export default class BasicStats extends DivisibleContainer {
     this.sections.set('hitPoints', document.querySelector('hit-points-section'));
     this.sections.set('speed', document.querySelector('speed-section'));
   }
+
+  updateHitPointsView() {
+    this.sections.get('hitPoints').updateView();
+  }
 }

@@ -11,8 +11,6 @@ export default class BottomStats extends StatsContainer {
   constructor() {
     super(BottomStats.templatePaths);
 
-    this.sections = new Map();
-
     this.sections.set('specialTraits', document.querySelector('special-traits-section'));
     this.sections.set('actions', document.querySelector('actions-section'));
     this.sections.set('reactions', document.querySelector('reactions-section'));
