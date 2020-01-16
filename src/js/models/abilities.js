@@ -24,22 +24,11 @@ export default class Abilities {
   }
 
   get values() {
-    return Object.values(this.savingThrows);
+    return Object.values(this.abilities);
   }
 
   get entries() {
     return Object.entries(this.abilities);
-  }
-
-  get orderedKeys() {
-    return [
-      'strength',
-      'dexterity',
-      'constitution',
-      'intelligence',
-      'wisdom',
-      'charisma'
-    ];
   }
 
   toParserOptions() {
@@ -54,16 +43,16 @@ export default class Abilities {
 
   toHtml() {
     const abilitiesBlock = document.createElement('abilities-block');
-    for (const [key, value] of this.entries) {
-      const abbreviation = value.abbreviation;
-      abilitiesBlock.dataset[abbreviation] = this.abilities[key].score;
+    for (const ability of this.values) {
+      const abbreviation = ability.abbreviation;
+      abilitiesBlock.dataset[abbreviation] = ability.score;
     }
 
     return abilitiesBlock;
   }
 
   toHomebrewery() {
-    const abilityStrings = this.orderedKeys.map(key => `${this.abilities[key].score} ${this.abilities[key].formattedModifier}`);
+    const abilityStrings = this.values.map(ability => `${ability.score} ${ability.formattedModifier}`);
     const abilityLine = abilityStrings.join('|');
 
     const text =

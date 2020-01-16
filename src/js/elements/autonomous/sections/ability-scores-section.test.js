@@ -268,7 +268,7 @@ describe('when the show section is clicked', () => {
 
 function createDefaultExpectedAbilities() {
   const expectedAbilities = new Map();
-  for (const key of abilitiesModel.orderedKeys) {
+  for (const key of abilitiesModel.keys) {
     const expectedAbility = {
       score: 10,
       modifier: 0
