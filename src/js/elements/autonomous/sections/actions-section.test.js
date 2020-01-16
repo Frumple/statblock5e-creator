@@ -1,17 +1,18 @@
 import ActionsSection from './actions-section.js';
-import Actions from '../../../models/lists/block/actions.js';
-
 import GenerateAttackDialog from '../dialogs/generate-attack-dialog.js';
 
-import Title from '../../../models/title.js';
-import Abilities from '../../../models/abilities.js';
-import ProficiencyBonus from '../../../models/proficiency-bonus.js';
+import CurrentContext from '../../../models/current-context.js';
 
 import * as TestCustomElements from '../../../helpers/test/test-custom-elements.js';
 import * as sharedSpecs from './block-list-section.specs.js';
 
 const expectedHeading = 'Actions';
 const expectedItemType = 'Action';
+
+const title = CurrentContext.creature.title;
+const abilities = CurrentContext.creature.abilities;
+const proficiencyBonus = CurrentContext.creature.proficiencyBonus;
+const actions = CurrentContext.creature.actions;
 
 let actionsSection;
 
@@ -24,10 +25,10 @@ beforeAll(async() => {
 });
 
 beforeEach(() => {
-  Title.reset();
-  Abilities.reset();
-  ProficiencyBonus.reset();
-  Actions.reset();
+  title.reset();
+  abilities.reset();
+  proficiencyBonus.reset();
+  actions.reset();
 
   actionsSection = new ActionsSection();
   TestCustomElements.initializeSection(actionsSection);
@@ -55,8 +56,8 @@ describe('when the show section is clicked', () => {
 
   describe('and blocks are added and/or removed, and the edit section is submitted', () => {
     it('should add a single block', () => {
-      Abilities.abilities['strength'].score = 16;
-      ProficiencyBonus.proficiencyBonus = 2;
+      abilities.abilities['strength'].score = 16;
+      proficiencyBonus.proficiencyBonus = 2;
 
       const block = {
         name: 'Greatsword',
@@ -75,14 +76,14 @@ describe('when the show section is clicked', () => {
         htmlText: '<strong>Line 1</strong>. The dummy is hot.\n  <strong>Line 2</strong>. The dummy is cold.\n    <strong>Line 3</strong>. The dummy is warm.'
       };
 
-      Title.fullName = 'Dummy';
+      title.fullName = 'Dummy';
 
       sharedSpecs.shouldAddASingleBlock(actionsSection, block);
     });
 
     it('should add a single block with html escaped', () => {
-      Abilities.abilities['strength'].score = 16;
-      ProficiencyBonus.proficiencyBonus = 2;
+      abilities.abilities['strength'].score = 16;
+      proficiencyBonus.proficiencyBonus = 2;
 
       const block = {
         name: 'Greatsword',
@@ -94,8 +95,8 @@ describe('when the show section is clicked', () => {
     });
 
     it('should add multiple blocks', () => {
-      Abilities.abilities['dexterity'].score = 14;
-      ProficiencyBonus.proficiencyBonus = 2;
+      abilities.abilities['dexterity'].score = 14;
+      proficiencyBonus.proficiencyBonus = 2;
 
       const blocks = [
         {
@@ -118,7 +119,7 @@ describe('when the show section is clicked', () => {
         }
       ];
 
-      Title.fullName = 'Goblin';
+      title.fullName = 'Goblin';
 
       sharedSpecs.shouldAddMultipleBlocks(actionsSection, blocks);
     });
@@ -130,9 +131,9 @@ describe('when the show section is clicked', () => {
     });
 
     it('should add multiple blocks, then remove one of them', () => {
-      Abilities.abilities['strength'].score = 16;
-      Abilities.abilities['dexterity'].score = 11;
-      ProficiencyBonus.proficiencyBonus = 2;
+      abilities.abilities['strength'].score = 16;
+      abilities.abilities['dexterity'].score = 11;
+      proficiencyBonus.proficiencyBonus = 2;
 
       const blocks = [
         {
@@ -155,7 +156,7 @@ describe('when the show section is clicked', () => {
         }
       ];
 
-      Title.fullName = 'Knight';
+      title.fullName = 'Knight';
 
       sharedSpecs.shouldAddMultipleBlocksThenRemoveOneOfThem(actionsSection, blocks, 1);
     });

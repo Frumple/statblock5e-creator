@@ -1,5 +1,5 @@
 import PropertyListSection from './property-list-section.js';
-import DamageVulnerabilities from '../../../models/lists/property/damage-vulnerabilities.js';
+import CurrentContext from '../../../models/current-context.js';
 
 export default class DamageVulnerabilitiesSection extends PropertyListSection {
   static get elementName() { return 'damage-vulnerabilities-section'; }
@@ -11,7 +11,7 @@ export default class DamageVulnerabilitiesSection extends PropertyListSection {
 
   constructor() {
     super(DamageVulnerabilitiesSection.templatePaths,
-          DamageVulnerabilities);
+          CurrentContext.creature.damageVulnerabilities);
 
     this.empty = true;
   }

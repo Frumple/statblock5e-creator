@@ -10,7 +10,8 @@ import StatBlock from './stat-block.js';
 
 import ExportDialog from '../dialogs/export-dialog.js';
 
-import Title from '../../../models/title.js';
+import CurrentContext from '../../../models/current-context.js';
+import Creature from '../../../models/creature.js';
 
 export default class StatBlockEditor extends CustomAutonomousElement {
   static get elementName() { return 'stat-block-editor'; }
@@ -22,6 +23,8 @@ export default class StatBlockEditor extends CustomAutonomousElement {
 
   constructor() {
     super(StatBlockEditor.templatePaths);
+
+    CurrentContext.creature = new Creature();
 
     if (isRunningInNode) {
       this.statBlockMenu = new StatBlockMenu(this);
@@ -123,17 +126,17 @@ export default class StatBlockEditor extends CustomAutonomousElement {
 
   openJsonExportDialog() {
     const content = this.exportToJson();
-    this.jsonExportDialog.launch(content, 'application/json', `${Title.title}.json`);
+    this.jsonExportDialog.launch(content, 'application/json', `${CurrentContext.creature.title.fullName}.json`);
   }
 
   openHtmlExportDialog() {
-    const content = this.exportToHtml(`Statblock5e - ${Title.title}`);
-    this.htmlExportDialog.launch(content, 'text/html', `${Title.title}.html`);
+    const content = this.exportToHtml(`Statblock5e - ${CurrentContext.creature.title.fullName}`);
+    this.htmlExportDialog.launch(content, 'text/html', `${CurrentContext.creature.title.fullName}.html`);
   }
 
   openHomebreweryExportDialog() {
     const content = this.exportToHomebrewery();
-    this.homebreweryExportDialog.launch(content, 'text/markdown', `${Title.title}.md`);
+    this.homebreweryExportDialog.launch(content, 'text/markdown', `${CurrentContext.creature.title.fullName}.md`);
   }
 
   exportToJson() {

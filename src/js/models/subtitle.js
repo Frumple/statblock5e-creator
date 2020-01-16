@@ -1,4 +1,4 @@
-class Subtitle {
+export default class Subtitle {
   constructor() {
     this.reset();
   }
@@ -46,5 +46,3 @@ class Subtitle {
     return `>*${this.subtitle}*`;
   }
 }
-
-export default new Subtitle();

@@ -1,5 +1,7 @@
 import * as propertyLineSectionModule from './property-line-section.js';
-import ArmorClass from '../../../models/armor-class.js';
+import CurrentContext from '../../../models/current-context.js';
+
+const armorClass = CurrentContext.creature.armorClass;
 
 export default class ArmorClassSection extends propertyLineSectionModule.PropertyLineSection {
   static get elementName() { return 'armor-class-section'; }
@@ -41,33 +43,33 @@ export default class ArmorClassSection extends propertyLineSectionModule.Propert
   }
 
   updateModel() {
-    ArmorClass.armorClass = this.editElements.armorClass.valueAsInt;
-    ArmorClass.armorType = this.editElements.armorType.value;
-    ArmorClass.hasShield = this.editElements.hasShield.checked;
+    armorClass.armorClass = this.editElements.armorClass.valueAsInt;
+    armorClass.armorType = this.editElements.armorType.value;
+    armorClass.hasShield = this.editElements.hasShield.checked;
 
-    ArmorClass.useCustomText = this.editElements.useCustomText.checked;
-    ArmorClass.originalCustomText = this.editElements.customText.value;
-    ArmorClass.htmlCustomText = this.editElements.customText.htmlText;
+    armorClass.useCustomText = this.editElements.useCustomText.checked;
+    armorClass.originalCustomText = this.editElements.customText.value;
+    armorClass.htmlCustomText = this.editElements.customText.htmlText;
   }
 
   updateView() {
-    if (ArmorClass.useCustomText) {
-      this.showElements.text.innerHTMLSanitized = ArmorClass.htmlCustomText;
+    if (armorClass.useCustomText) {
+      this.showElements.text.innerHTMLSanitized = armorClass.htmlCustomText;
     } else {
-      this.showElements.text.textContent = ArmorClass.nonCustomText;
+      this.showElements.text.textContent = armorClass.nonCustomText;
     }
   }
 
   exportToJson() {
-    return ArmorClass.toJson();
+    return armorClass.toJson();
   }
 
   exportToHtml() {
-    return ArmorClass.toHtml();
+    return armorClass.toHtml();
   }
 
   exportToHomebrewery() {
-    return ArmorClass.toHomebrewery();
+    return armorClass.toHomebrewery();
   }
 }
 

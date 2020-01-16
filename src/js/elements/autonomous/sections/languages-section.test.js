@@ -1,10 +1,13 @@
 import LanguagesSection from './languages-section.js';
-import * as TestCustomElements from '../../../helpers/test/test-custom-elements.js';
+import CurrentContext from '../../../models/current-context.js';
 
+import * as TestCustomElements from '../../../helpers/test/test-custom-elements.js';
 import * as sharedSpecs from './property-list-section.specs.js';
 
 const headingName = 'Languages';
 const expectedItemType = 'Language';
+
+const languages = CurrentContext.creature.languages;
 
 let languagesSection;
 
@@ -14,6 +17,8 @@ beforeAll(async() => {
 });
 
 beforeEach(() => {
+  languages.reset();
+
   languagesSection = new LanguagesSection();
   TestCustomElements.initializeSection(languagesSection);
   languagesSection.connect();

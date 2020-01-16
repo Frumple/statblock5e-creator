@@ -1,4 +1,4 @@
-class ProficiencyBonus {
+export default class ProficiencyBonus {
   constructor() {
     this.reset();
   }
@@ -15,5 +15,3 @@ class ProficiencyBonus {
     return this.proficiencyBonus;
   }
 }
-
-export default new ProficiencyBonus();

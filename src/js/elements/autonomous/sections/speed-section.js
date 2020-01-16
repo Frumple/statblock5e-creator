@@ -1,5 +1,7 @@
 import * as propertyLineSectionModule from './property-line-section.js';
-import Speed from '../../../models/speed.js';
+import CurrentContext from '../../../models/current-context.js';
+
+const speed = CurrentContext.creature.speed;
 
 export default class SpeedSection extends propertyLineSectionModule.PropertyLineSection {
   static get elementName() { return 'speed-section'; }
@@ -41,36 +43,36 @@ export default class SpeedSection extends propertyLineSectionModule.PropertyLine
   }
 
   updateModel() {
-    Speed.walk = this.editElements.walk.valueAsInt;
-    Speed.burrow = this.editElements.burrow.valueAsInt;
-    Speed.climb = this.editElements.climb.valueAsInt;
-    Speed.fly = this.editElements.fly.valueAsInt;
-    Speed.hover = this.editElements.hover.checked;
-    Speed.swim = this.editElements.swim.valueAsInt;
+    speed.walk = this.editElements.walk.valueAsInt;
+    speed.burrow = this.editElements.burrow.valueAsInt;
+    speed.climb = this.editElements.climb.valueAsInt;
+    speed.fly = this.editElements.fly.valueAsInt;
+    speed.hover = this.editElements.hover.checked;
+    speed.swim = this.editElements.swim.valueAsInt;
 
-    Speed.useCustomText = this.editElements.useCustomText.checked;
-    Speed.originalCustomText = this.editElements.customText.value;
-    Speed.htmlCustomText = this.editElements.customText.htmlText;
+    speed.useCustomText = this.editElements.useCustomText.checked;
+    speed.originalCustomText = this.editElements.customText.value;
+    speed.htmlCustomText = this.editElements.customText.htmlText;
   }
 
   updateView() {
-    if (Speed.useCustomText) {
-      this.showElements.text.innerHTMLSanitized = Speed.htmlCustomText;
+    if (speed.useCustomText) {
+      this.showElements.text.innerHTMLSanitized = speed.htmlCustomText;
     } else {
-      this.showElements.text.textContent = Speed.nonCustomText;
+      this.showElements.text.textContent = speed.nonCustomText;
     }
   }
 
   exportToJson() {
-    return Speed.toJson();
+    return speed.toJson();
   }
 
   exportToHtml() {
-    return Speed.toHtml();
+    return speed.toHtml();
   }
 
   exportToHomebrewery() {
-    return Speed.toHomebrewery();
+    return speed.toHomebrewery();
   }
 }
 

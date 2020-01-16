@@ -1,6 +1,6 @@
 import { createHtmlPropertyLine, createHomebreweryPropertyLine } from '../helpers/export-helpers.js';
 
-class ChallengeRating {
+export default class ChallengeRating {
   constructor() {
     this.headingName = 'Challenge';
 
@@ -31,5 +31,3 @@ class ChallengeRating {
     return createHomebreweryPropertyLine(this.headingName, this.text);
   }
 }
-
-export default new ChallengeRating();

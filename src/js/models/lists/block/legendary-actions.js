@@ -1,6 +1,6 @@
 import BlockListModel from './block-list-model.js';
 
-class LegendaryActions extends BlockListModel {
+export default class LegendaryActions extends BlockListModel {
   constructor() {
     super('Legendary Actions', 'Legendary Action');
 
@@ -38,5 +38,3 @@ class LegendaryActions extends BlockListModel {
     return `${heading}${description}${homebreweryBlocksAsText}`;
   }
 }
-
-export default new LegendaryActions();

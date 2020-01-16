@@ -1,6 +1,6 @@
 import * as ExportHelpers from '../helpers/export-helpers.js';
 
-class ArmorClass {
+export default class ArmorClass {
   constructor() {
     this.headingName = 'Armor Class';
 
@@ -67,5 +67,3 @@ class ArmorClass {
     return ExportHelpers.createHomebreweryPropertyLine(this.headingName, this.originalText);
   }
 }
-
-export default new ArmorClass();

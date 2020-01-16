@@ -2,14 +2,16 @@ import SensesSection from './senses-section.js';
 import * as TestCustomElements from '../../../helpers/test/test-custom-elements.js';
 
 import { inputValueAndTriggerEvent } from '../../../helpers/element-helpers.js';
-
-import Abilities from '../../../models/abilities.js';
-import ProficiencyBonus from '../../../models/proficiency-bonus.js';
-import Skills from '../../../models/skills.js';
-import Senses from '../../../models/senses.js';
 import { nullIfEmptyString } from '../../../helpers/string-formatter.js';
 
+import CurrentContext from '../../../models/current-context.js';
+
 const expectedHeading = 'Senses';
+
+const abilitiesModel = CurrentContext.creature.abilities;
+const proficiencyBonusModel = CurrentContext.creature.proficiencyBonus;
+const skillsModel = CurrentContext.creature.skills;
+const sensesModel = CurrentContext.creature.senses;
 
 let sensesSection;
 
@@ -19,10 +21,10 @@ beforeAll(async() => {
 });
 
 beforeEach(() => {
-  Abilities.reset();
-  ProficiencyBonus.reset();
-  Skills.reset();
-  Senses.reset();
+  abilitiesModel.reset();
+  proficiencyBonusModel.reset();
+  skillsModel.reset();
+  sensesModel.reset();
 
   sensesSection = new SensesSection();
   TestCustomElements.initializeSection(sensesSection);
@@ -71,9 +73,9 @@ describe('when the show section is clicked', () => {
 
           sensesSection.editElements.submitForm();
 
-          expect(Senses.useCustomText).toBe(true);
-          expect(Senses.originalCustomText).toBe(customText);
-          expect(Senses.htmlCustomText).toBe(expectedHtmlText);
+          expect(sensesModel.useCustomText).toBe(true);
+          expect(sensesModel.originalCustomText).toBe(customText);
+          expect(sensesModel.htmlCustomText).toBe(expectedHtmlText);
 
           expect(sensesSection).toBeInMode('show');
           expect(sensesSection).toShowPropertyLine(expectedHeading, expectedHtmlText);
@@ -97,8 +99,8 @@ describe('when the show section is clicked', () => {
         sensesSection.editElements.submitForm();
         sensesSection.showElements.section.click();
 
-        expect(Senses.useCustomText).toBe(false);
-        expect(Senses.originalCustomText).toBe(customText);
+        expect(sensesModel.useCustomText).toBe(false);
+        expect(sensesModel.originalCustomText).toBe(customText);
 
         expect(sensesSection).toBeInMode('edit');
         expect(sensesSection.editElements.useCustomText).not.toBeChecked();
@@ -188,11 +190,11 @@ describe('when the show section is clicked', () => {
           tremorsense = nullIfEmptyString(tremorsense);
           truesight = nullIfEmptyString(truesight);
 
-          expect(Senses.blindsight).toBe(blindsight);
-          expect(Senses.darkvision).toBe(darkvision);
-          expect(Senses.tremorsense).toBe(tremorsense);
-          expect(Senses.truesight).toBe(truesight);
-          expect(Senses.useCustomText).toBe(false);
+          expect(sensesModel.blindsight).toBe(blindsight);
+          expect(sensesModel.darkvision).toBe(darkvision);
+          expect(sensesModel.tremorsense).toBe(tremorsense);
+          expect(sensesModel.truesight).toBe(truesight);
+          expect(sensesModel.useCustomText).toBe(false);
 
           expect(sensesSection).toBeInMode('show');
           expect(sensesSection).toShowPropertyLine(expectedHeading, expectedText);
@@ -228,11 +230,11 @@ describe('when the show section is clicked', () => {
         sensesSection.editElements.submitForm();
         sensesSection.showElements.section.click();
 
-        expect(Senses.blindsight).toBe(blindsight);
-        expect(Senses.darkvision).toBe(darkvision);
-        expect(Senses.tremorsense).toBe(tremorsense);
-        expect(Senses.truesight).toBe(truesight);
-        expect(Senses.useCustomText).toBe(true);
+        expect(sensesModel.blindsight).toBe(blindsight);
+        expect(sensesModel.darkvision).toBe(darkvision);
+        expect(sensesModel.tremorsense).toBe(tremorsense);
+        expect(sensesModel.truesight).toBe(truesight);
+        expect(sensesModel.useCustomText).toBe(true);
 
         expect(sensesSection).toBeInMode('edit');
         expect(sensesSection.editElements.blindsight).toHaveValue(blindsight);
@@ -278,17 +280,17 @@ describe('should calculate the passive perception based on the following conditi
   ({wisdomScore, proficiencyBonus, perceptionEnabled, perceptionProficient, perceptionOverride, expectedPassivePerception}) => {
     const expectedText = `passive Perception ${expectedPassivePerception}`;
 
-    Abilities.abilities['wisdom'].score = wisdomScore;
-    ProficiencyBonus.proficiencyBonus = proficiencyBonus;
+    abilitiesModel.abilities['wisdom'].score = wisdomScore;
+    proficiencyBonusModel.proficiencyBonus = proficiencyBonus;
 
-    const skill = Skills.skills['perception'];
+    const skill = skillsModel.skills['perception'];
     skill.isEnabled = perceptionEnabled;
     skill.isProficient = perceptionProficient;
     skill.override = nullIfEmptyString(perceptionOverride);
 
     sensesSection.updateView();
 
-    expect(Senses.passivePerception).toBe(expectedPassivePerception);
+    expect(sensesModel.passivePerception).toBe(expectedPassivePerception);
 
     expect(sensesSection).toShowPropertyLine(expectedHeading, expectedText);
 

@@ -1,6 +1,8 @@
 import * as propertyLineSectionModule from './property-line-section.js';
-import ChallengeRating from '../../../models/challenge-rating.js';
+import CurrentContext from '../../../models/current-context.js';
 import ExperiencePointsByChallengeRating from '../../../data/experience-points-by-challenge-rating.js';
+
+const challengeRating = CurrentContext.creature.challengeRating;
 
 export default class ChallengeRatingSection extends propertyLineSectionModule.PropertyLineSection {
   static get elementName() { return 'challenge-rating-section'; }
@@ -30,24 +32,24 @@ export default class ChallengeRatingSection extends propertyLineSectionModule.Pr
 
   updateModel() {
     const challengeRatingElement = this.editElements.challengeRating;
-    ChallengeRating.challengeRating = challengeRatingElement.valueAsFloat;
-    ChallengeRating.experiencePoints = this.editElements.experiencePoints.valueAsInt;
+    challengeRating.challengeRating = challengeRatingElement.valueAsFloat;
+    challengeRating.experiencePoints = this.editElements.experiencePoints.valueAsInt;
   }
 
   updateView() {
-    this.showElements.text.textContent = ChallengeRating.text;
+    this.showElements.text.textContent = challengeRating.text;
   }
 
   exportToJson() {
-    return ChallengeRating.toJson();
+    return challengeRating.toJson();
   }
 
   exportToHtml() {
-    return ChallengeRating.toHtml();
+    return challengeRating.toHtml();
   }
 
   exportToHomebrewery() {
-    return ChallengeRating.toHomebrewery();
+    return challengeRating.toHomebrewery();
   }
 }
 

@@ -1,5 +1,5 @@
 import * as blockListSectionModule from './block-list-section.js';
-import LegendaryActions from '../../../models/lists/block/legendary-actions.js';
+import CurrentContext from '../../../models/current-context.js';
 
 export default class LegendaryActionsSection extends blockListSectionModule.BlockListSection {
   static get elementName() { return 'legendary-actions-section'; }
@@ -11,7 +11,7 @@ export default class LegendaryActionsSection extends blockListSectionModule.Bloc
 
   constructor() {
     super(LegendaryActionsSection.templatePaths,
-          LegendaryActions,
+          CurrentContext.creature.legendaryActions,
           LegendaryActionsSectionShowElements,
           LegendaryActionsSectionEditElements);
 

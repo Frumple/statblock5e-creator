@@ -1,12 +1,14 @@
 import SpeedSection from './speed-section.js';
 import * as TestCustomElements from '../../../helpers/test/test-custom-elements.js';
 
-import Speed from '../../../models/speed.js';
+import CurrentContext from '../../../models/current-context.js';
 
 import { inputValueAndTriggerEvent } from '../../../helpers/element-helpers.js';
 import { nullIfEmptyString } from '../../../helpers/string-formatter.js';
 
 const expectedHeading = 'Speed';
+
+const speed = CurrentContext.creature.speed;
 
 let speedSection;
 
@@ -16,7 +18,7 @@ beforeAll(async() => {
 });
 
 beforeEach(() => {
-  Speed.reset();
+  speed.reset();
 
   speedSection = new SpeedSection();
   TestCustomElements.initializeSection(speedSection);
@@ -67,9 +69,9 @@ describe('when the show section is clicked', () => {
 
           speedSection.editElements.submitForm();
 
-          expect(Speed.useCustomText).toBe(true);
-          expect(Speed.originalCustomText).toBe(customText);
-          expect(Speed.htmlCustomText).toBe(expectedHtmlText);
+          expect(speed.useCustomText).toBe(true);
+          expect(speed.originalCustomText).toBe(customText);
+          expect(speed.htmlCustomText).toBe(expectedHtmlText);
 
           expect(speedSection).toBeInMode('show');
           expect(speedSection).toShowPropertyLine(expectedHeading, expectedHtmlText);
@@ -93,8 +95,8 @@ describe('when the show section is clicked', () => {
         speedSection.editElements.submitForm();
         speedSection.showElements.section.click();
 
-        expect(Speed.useCustomText).toBe(false);
-        expect(Speed.originalCustomText).toBe(customText);
+        expect(speed.useCustomText).toBe(false);
+        expect(speed.originalCustomText).toBe(customText);
 
         expect(speedSection).toBeInMode('edit');
         expect(speedSection.editElements.useCustomText).not.toBeChecked();
@@ -204,13 +206,13 @@ describe('when the show section is clicked', () => {
           fly = nullIfEmptyString(fly);
           swim = nullIfEmptyString(swim);
 
-          expect(Speed.walk).toBe(walk);
-          expect(Speed.burrow).toBe(burrow);
-          expect(Speed.climb).toBe(climb);
-          expect(Speed.fly).toBe(fly);
-          expect(Speed.hover).toBe(hover);
-          expect(Speed.swim).toBe(swim);
-          expect(Speed.useCustomText).toBe(false);
+          expect(speed.walk).toBe(walk);
+          expect(speed.burrow).toBe(burrow);
+          expect(speed.climb).toBe(climb);
+          expect(speed.fly).toBe(fly);
+          expect(speed.hover).toBe(hover);
+          expect(speed.swim).toBe(swim);
+          expect(speed.useCustomText).toBe(false);
 
           expect(speedSection).toBeInMode('show');
           expect(speedSection).toShowPropertyLine(expectedHeading, expectedText);
@@ -251,13 +253,13 @@ describe('when the show section is clicked', () => {
         speedSection.editElements.submitForm();
         speedSection.showElements.section.click();
 
-        expect(Speed.walk).toBe(walk);
-        expect(Speed.burrow).toBe(burrow);
-        expect(Speed.climb).toBe(climb);
-        expect(Speed.fly).toBe(fly);
-        expect(Speed.hover).toBe(hover);
-        expect(Speed.swim).toBe(swim);
-        expect(Speed.useCustomText).toBe(true);
+        expect(speed.walk).toBe(walk);
+        expect(speed.burrow).toBe(burrow);
+        expect(speed.climb).toBe(climb);
+        expect(speed.fly).toBe(fly);
+        expect(speed.hover).toBe(hover);
+        expect(speed.swim).toBe(swim);
+        expect(speed.useCustomText).toBe(true);
 
         expect(speedSection).toBeInMode('edit');
         expect(speedSection.editElements.walk).toHaveValue(walk);

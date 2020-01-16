@@ -1,11 +1,13 @@
 import ConditionImmunitiesSection from './condition-immunities-section.js';
-import ConditionImmunities from '../../../models/lists/property/condition-immunities.js';
+import CurrentContext from '../../../models/current-context.js';
 
 import * as TestCustomElements from '../../../helpers/test/test-custom-elements.js';
 import * as sharedSpecs from './property-list-section.specs.js';
 
 const headingName = 'Condition Immunities';
 const expectedItemType = 'Condition Immunity';
+
+const conditionImmunities = CurrentContext.creature.conditionImmunities;
 
 let conditionImmunitiesSection;
 
@@ -15,7 +17,7 @@ beforeAll(async() => {
 });
 
 beforeEach(() => {
-  ConditionImmunities.reset();
+  conditionImmunities.reset();
 
   conditionImmunitiesSection = new ConditionImmunitiesSection();
   TestCustomElements.initializeSection(conditionImmunitiesSection);

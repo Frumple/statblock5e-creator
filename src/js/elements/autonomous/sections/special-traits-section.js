@@ -1,5 +1,5 @@
 import * as blockListSectionModule from './block-list-section.js';
-import SpecialTraits from '../../../models/lists/block/special-traits.js';
+import CurrentContext from '../../../models/current-context.js';
 
 export default class SpecialTraitsSection extends blockListSectionModule.BlockListSection {
   static get elementName() { return 'special-traits-section'; }
@@ -11,7 +11,7 @@ export default class SpecialTraitsSection extends blockListSectionModule.BlockLi
 
   constructor() {
     super(SpecialTraitsSection.templatePaths,
-          SpecialTraits);
+          CurrentContext.creature.specialTraits);
 
     this.empty = true;
   }

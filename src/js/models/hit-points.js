@@ -1,9 +1,9 @@
-import Abilities from './abilities.js';
 import { formatModifierOperator, formatModifierNumber } from '../helpers/string-formatter.js';
 import { createHtmlPropertyLine, createHomebreweryPropertyLine } from '../helpers/export-helpers.js';
 
-class HitPoints {
-  constructor() {
+export default class HitPoints {
+  constructor(abilities) {
+    this.abilities = abilities;
     this.headingName = 'Hit Points';
 
     this.reset();
@@ -21,7 +21,7 @@ class HitPoints {
   }
 
   get constitutionHitPoints() {
-    const constitutionModifier = Abilities.abilities['constitution'].modifier;
+    const constitutionModifier = this.abilities.abilities['constitution'].modifier;
     return this.hitDieQuantity * constitutionModifier;
   }
 
@@ -79,5 +79,3 @@ class HitPoints {
     return createHomebreweryPropertyLine(this.headingName, this.text);
   }
 }
-
-export default new HitPoints();

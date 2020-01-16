@@ -4,14 +4,16 @@ import * as TestCustomElements from '../../../helpers/test/test-custom-elements.
 import { inputValueAndTriggerEvent } from '../../../helpers/element-helpers.js';
 import { formatModifier, nullIfEmptyString } from '../../../helpers/string-formatter.js';
 
-import Abilities from '../../../models/abilities.js';
-import ProficiencyBonus from '../../../models/proficiency-bonus.js';
-import SavingThrows from '../../../models/saving-throws.js';
+import CurrentContext from '../../../models/current-context.js';
 
 const labelDisabledClass = 'section__label_disabled';
 const singleSavingThrowUnderTest = 'intelligence';
 
 const expectedHeading = 'Saving Throws';
+
+const abilitiesModel = CurrentContext.creature.abilities;
+const proficiencyBonusModel = CurrentContext.creature.proficiencyBonus;
+const savingThrowsModel = CurrentContext.creature.savingThrows;
 
 let savingThrowsSection;
 
@@ -21,9 +23,9 @@ beforeAll(async() => {
 });
 
 beforeEach(() => {
-  Abilities.reset();
-  ProficiencyBonus.reset();
-  SavingThrows.reset();
+  abilitiesModel.reset();
+  proficiencyBonusModel.reset();
+  savingThrowsModel.reset();
 
   savingThrowsSection = new SavingThrowsSection();
   TestCustomElements.initializeSection(savingThrowsSection);
@@ -104,8 +106,8 @@ describe('when the show section is clicked', () => {
         expectedJsonSavingThrow.isProficient = savingThrowProficient;
         expectedJsonSavingThrow.override = savingThrowOverride === '' ? null : savingThrowOverride;
 
-        Abilities.abilities[singleSavingThrowUnderTest].score = abilityScore;
-        ProficiencyBonus.proficiencyBonus = proficiencyBonus;
+        abilitiesModel.abilities[singleSavingThrowUnderTest].score = abilityScore;
+        proficiencyBonusModel.proficiencyBonus = proficiencyBonus;
 
         if (savingThrowEnabled) {
           savingThrowElements.enable.click();
@@ -119,7 +121,7 @@ describe('when the show section is clicked', () => {
           }
         }
 
-        const savingThrow = SavingThrows.savingThrows[singleSavingThrowUnderTest];
+        const savingThrow = savingThrowsModel.savingThrows[singleSavingThrowUnderTest];
         expect(savingThrow.isEnabled).toBe(savingThrowEnabled);
         expect(savingThrow.isProficient).toBe(savingThrowProficient);
         expect(savingThrow.override).toBe(nullIfEmptyString(savingThrowOverride));
@@ -162,13 +164,13 @@ describe('when the show section is clicked', () => {
       `
       ('$description: {strength="$strength", dexterity="$dexterity", constitution="$constitution", intelligence="$intelligence", wisdom="$wisdom", charisma="$charisma"} => "$expectedText"',
       ({strength, dexterity, constitution, intelligence, wisdom, charisma, expectedText}) => {
-        Abilities.abilities['strength'].score = 18;
-        Abilities.abilities['dexterity'].score = 11;
-        Abilities.abilities['constitution'].score = 25;
-        Abilities.abilities['intelligence'].score = 1;
-        Abilities.abilities['wisdom'].score = 4;
-        Abilities.abilities['charisma'].score = 12;
-        ProficiencyBonus.proficiencyBonus = 5;
+        abilitiesModel.abilities['strength'].score = 18;
+        abilitiesModel.abilities['dexterity'].score = 11;
+        abilitiesModel.abilities['constitution'].score = 25;
+        abilitiesModel.abilities['intelligence'].score = 1;
+        abilitiesModel.abilities['wisdom'].score = 4;
+        abilitiesModel.abilities['charisma'].score = 12;
+        proficiencyBonusModel.proficiencyBonus = 5;
 
         const expectedJson = createDefaultExpectedJson();
 
@@ -260,7 +262,7 @@ describe('when the show section is clicked', () => {
 
 function createDefaultExpectedJson() {
   const expectedJson = {};
-  for (const key of Abilities.keys) {
+  for (const key of abilitiesModel.keys) {
     expectedJson[key] = {
       isEnabled: false,
       isProficient: false,

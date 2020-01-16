@@ -1,11 +1,13 @@
 import SpecialTraitsSection from './special-traits-section.js';
-import SpecialTraits from '../../../models/lists/block/special-traits.js';
-import Title from '../../../models/title.js';
+import CurrentContext from '../../../models/current-context.js';
 
 import * as TestCustomElements from '../../../helpers/test/test-custom-elements.js';
 import * as sharedSpecs from './block-list-section.specs.js';
 
 const expectedItemType = 'Special Trait';
+
+const title = CurrentContext.creature.title;
+const specialTraits = CurrentContext.creature.specialTraits;
 
 let specialTraitsSection;
 
@@ -15,8 +17,8 @@ beforeAll(async() => {
 });
 
 beforeEach(() => {
-  Title.reset();
-  SpecialTraits.reset();
+  title.reset();
+  specialTraits.reset();
 
   specialTraitsSection = new SpecialTraitsSection();
   TestCustomElements.initializeSection(specialTraitsSection);
@@ -51,8 +53,8 @@ describe('when the show section is clicked', () => {
         htmlText: 'The armor is incapacitated while in the area of an <em>antimagic field</em>. If targeted by <em>dispel magic</em>, the armor must succeed on a Constitution saving throw against the caster\'s spell save DC or fall unconscious for 1 minute.'
       };
 
-      Title.fullName = 'Animated Armor';
-      Title.shortName = 'armor';
+      title.fullName = 'Animated Armor';
+      title.shortName = 'armor';
 
       sharedSpecs.shouldAddASingleBlock(specialTraitsSection, block);
     });
@@ -65,7 +67,7 @@ describe('when the show section is clicked', () => {
         htmlText: 'The hydra has five heads. While it has more than one head, the hydra has advantage on saving throws against being blinded, charmed, deafened, frightened, stunned, and knocked unconscious.\n  Whenever the hydra takes 25 or more damage in a single turn, one of its heads dies. If all its heads die, the hydra dies.\n  At the end of its turn, it grows two heads for each of its heads that died since its last turn, unless it has taken fire damage since its last turn. The hydra regains 10 hit points for each head regrown in this way.'
       };
 
-      Title.fullName = 'Hydra';
+      title.fullName = 'Hydra';
 
       sharedSpecs.shouldAddASingleBlock(specialTraitsSection, block);
     });
@@ -78,8 +80,8 @@ describe('when the show section is clicked', () => {
         htmlText: 'The armor is incapacitated while in the area of an &lt;em&gt;antimagic field&lt;/em&gt;. If targeted by &lt;em&gt;dispel magic&lt;/em&gt;, the armor must succeed on a Constitution saving throw against the caster\'s spell save DC or fall unconscious for 1 minute.'
       };
 
-      Title.fullName = 'Animated Armor';
-      Title.shortName = 'armor';
+      title.fullName = 'Animated Armor';
+      title.shortName = 'armor';
 
       sharedSpecs.shouldAddASingleBlock(specialTraitsSection, block);
     });
@@ -106,8 +108,8 @@ describe('when the show section is clicked', () => {
         }
       ];
 
-      Title.fullName = 'Winter Wolf';
-      Title.shortName = 'wolf';
+      title.fullName = 'Winter Wolf';
+      title.shortName = 'wolf';
 
       sharedSpecs.shouldAddMultipleBlocks(specialTraitsSection, blocks);
     });
@@ -120,8 +122,8 @@ describe('when the show section is clicked', () => {
         htmlText: 'The jelly can climb difficult surfaces, including upside down on ceilings, without needing to make an ability check.'
       };
 
-      Title.fullName = 'Ochre Jelly';
-      Title.shortName = 'jelly';
+      title.fullName = 'Ochre Jelly';
+      title.shortName = 'jelly';
 
       sharedSpecs.shouldAddASingleBlockThenRemoveIt(specialTraitsSection, block);
     });
@@ -148,7 +150,7 @@ describe('when the show section is clicked', () => {
         }
       ];
 
-      Title.fullName = 'Doppelganger';
+      title.fullName = 'Doppelganger';
 
       sharedSpecs.shouldAddMultipleBlocksThenRemoveOneOfThem(specialTraitsSection, blocks, 1);
     });

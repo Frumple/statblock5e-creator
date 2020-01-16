@@ -1,13 +1,13 @@
-import Abilities from './abilities.js';
-import ProficiencyBonus from './proficiency-bonus.js';
 import { capitalizeFirstLetter, formatModifier } from '../helpers/string-formatter.js';
 import { createHtmlPropertyLine, createHomebreweryPropertyLine } from '../helpers/export-helpers.js';
 
-class SavingThrows {
-  constructor() {
+export default class SavingThrows {
+  constructor(abilitiesModel, proficiencyBonusModel) {
     this.headingName = 'Saving Throws';
 
-    const entries = Abilities.keys.map(key => [key, new SavingThrow(key)]);
+    const entries = abilitiesModel.keys.map(
+      key => [key, new SavingThrow(abilitiesModel.abilities[key], proficiencyBonusModel)]
+    );
     this.savingThrows = Object.fromEntries(entries);
     Object.freeze(this.savingThrows);
   }
@@ -52,8 +52,9 @@ class SavingThrows {
 }
 
 class SavingThrow {
-  constructor(abilityName) {
-    this.abilityName = abilityName;
+  constructor(ability, proficiencyBonusModel) {
+    this.ability = ability;
+    this.proficiencyBonusModel = proficiencyBonusModel;
     this.reset();
   }
 
@@ -64,8 +65,7 @@ class SavingThrow {
   }
 
   get text() {
-    const ability = Abilities.abilities[this.abilityName];
-    const abbreviation = capitalizeFirstLetter(ability.abbreviation);
+    const abbreviation = capitalizeFirstLetter(this.ability.abbreviation);
 
     return `${abbreviation} ${this.formattedModifier}`;
   }
@@ -79,10 +79,10 @@ class SavingThrow {
       }
 
       if (this.isProficient) {
-        savingThrowModifier += ProficiencyBonus.proficiencyBonus;
+        savingThrowModifier += this.proficiencyBonusModel.proficiencyBonus;
       }
     }
-    savingThrowModifier += Abilities.abilities[this.abilityName].modifier;
+    savingThrowModifier += this.ability.modifier;
 
     return savingThrowModifier;
   }
@@ -99,5 +99,3 @@ class SavingThrow {
     };
   }
 }
-
-export default new SavingThrows();

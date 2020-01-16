@@ -1,5 +1,5 @@
 import * as blockListSectionModule from './block-list-section.js';
-import Actions from '../../../models/lists/block/actions.js';
+import CurrentContext from '../../../models/current-context.js';
 import isRunningInNode from '../../../helpers/is-running-in-node.js';
 
 export default class ActionsSection extends blockListSectionModule.BlockListSection {
@@ -12,7 +12,7 @@ export default class ActionsSection extends blockListSectionModule.BlockListSect
 
   constructor() {
     super(ActionsSection.templatePaths,
-          Actions,
+          CurrentContext.creature.actions,
           ActionsSectionShowElements,
           ActionsSectionEditElements);
 

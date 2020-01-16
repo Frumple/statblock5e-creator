@@ -1,10 +1,8 @@
 import PropertyListModel from './property-list-model.js';
 
-class DamageResistances extends PropertyListModel {
+export default class DamageResistances extends PropertyListModel {
   constructor() {
-    super('Damage Resistances', 
+    super('Damage Resistances',
           'Damage Resistance');
   }
 }
-
-export default new DamageResistances();

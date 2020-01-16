@@ -1,5 +1,7 @@
 import * as propertyLineSectionModule from './property-line-section.js';
-import HitPoints from '../../../models/hit-points.js';
+import CurrentContext from '../../../models/current-context.js';
+
+const hitPointsModel = CurrentContext.creature.hitPoints;
 
 export default class HitPointsSection extends propertyLineSectionModule.PropertyLineSection {
   static get elementName() { return 'hit-points-section'; }
@@ -54,7 +56,7 @@ export default class HitPointsSection extends propertyLineSectionModule.Property
   }
 
   checkForErrors() {
-    if (HitPoints.useHitDie) {
+    if (hitPointsModel.useHitDie) {
       this.editElements.hitDieQuantity.validate(this.errorMessages);
     } else {
       this.editElements.hitPoints.validate(this.errorMessages);
@@ -72,19 +74,19 @@ export default class HitPointsSection extends propertyLineSectionModule.Property
     const hitPoints = this.editElements.hitPoints.valueAsInt;
 
     if (hitPoints !== null) {
-      HitPoints.hitPoints = hitPoints;
+      hitPointsModel.hitPoints = hitPoints;
     }
   }
 
   updateModelUseHitDie() {
-    HitPoints.useHitDie = this.editElements.useHitDie.checked;
+    hitPointsModel.useHitDie = this.editElements.useHitDie.checked;
   }
 
   updateModelHitDieQuantity() {
     const hitDieQuantity = this.editElements.hitDieQuantity.valueAsInt;
 
     if (hitDieQuantity !== null) {
-      HitPoints.hitDieQuantity = hitDieQuantity;
+      hitPointsModel.hitDieQuantity = hitDieQuantity;
     }
   }
 
@@ -92,30 +94,30 @@ export default class HitPointsSection extends propertyLineSectionModule.Property
     const hitDieSize = this.editElements.hitDieSize.valueAsInt;
 
     if (hitDieSize !== null) {
-      HitPoints.hitDieSize = hitDieSize;
+      hitPointsModel.hitDieSize = hitDieSize;
     }
   }
 
   updateView() {
-    this.editElements.constitutionHitPoints.textContent = HitPoints.constitutionHitPointsText;
+    this.editElements.constitutionHitPoints.textContent = hitPointsModel.constitutionHitPointsText;
 
-    if (HitPoints.useHitDie) {
-      this.editElements.hitPoints.value = HitPoints.hitPoints;
+    if (hitPointsModel.useHitDie) {
+      this.editElements.hitPoints.value = hitPointsModel.hitPoints;
     }
 
-    this.showElements.text.textContent = HitPoints.text;
+    this.showElements.text.textContent = hitPointsModel.text;
   }
 
   exportToJson() {
-    return HitPoints.toJson();
+    return hitPointsModel.toJson();
   }
 
   exportToHtml() {
-    return HitPoints.toHtml();
+    return hitPointsModel.toHtml();
   }
 
   exportToHomebrewery() {
-    return HitPoints.toHomebrewery();
+    return hitPointsModel.toHomebrewery();
   }
 }
 

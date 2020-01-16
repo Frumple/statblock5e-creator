@@ -1,8 +1,8 @@
 import PropertyListModel from './property-list-model.js';
 
-class Languages extends PropertyListModel {
+export default class Languages extends PropertyListModel {
   constructor() {
-    super('Languages', 
+    super('Languages',
           'Language');
   }
 
@@ -18,5 +18,3 @@ class Languages extends PropertyListModel {
     return text;
   }
 }
-
-export default new Languages();

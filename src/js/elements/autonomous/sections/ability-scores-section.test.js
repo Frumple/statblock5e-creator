@@ -4,8 +4,10 @@ import * as TestCustomElements from '../../../helpers/test/test-custom-elements.
 import { inputValueAndTriggerEvent } from '../../../helpers/element-helpers.js';
 import { formatModifier } from '../../../helpers/string-formatter.js';
 
-import Abilities from '../../../models/abilities.js';
-import ProficiencyBonus from '../../../models/proficiency-bonus.js';
+import CurrentContext from '../../../models/current-context.js';
+
+const abilitiesModel = CurrentContext.creature.abilities;
+const proficiencyBonusModel = CurrentContext.creature.proficiencyBonus;
 
 let abilityScoresSection;
 
@@ -15,8 +17,8 @@ beforeAll(async() => {
 });
 
 beforeEach(() => {
-  Abilities.reset();
-  ProficiencyBonus.reset();
+  abilitiesModel.reset();
+  proficiencyBonusModel.reset();
 
   abilityScoresSection = new AbilityScoresSection();
   TestCustomElements.initializeSection(abilityScoresSection);
@@ -76,7 +78,7 @@ describe('when the show section is clicked', () => {
         inputValueAndTriggerEvent(abilityScoresSection.editElements.score[abilityName], score);
 
         // Verify model
-        const ability = Abilities.abilities[abilityName];
+        const ability = abilitiesModel.abilities[abilityName];
         expect(ability.score).toBe(score);
         expect(ability.modifier).toBe(expectedModifier);
 
@@ -117,7 +119,7 @@ describe('when the show section is clicked', () => {
           receivedEvent = event;
         });
 
-        const ability = Abilities.abilities[abilityName];
+        const ability = abilitiesModel.abilities[abilityName];
         const oldScore = ability.score;
         const oldModifier = ability.modifier;
 
@@ -165,12 +167,12 @@ describe('when the show section is clicked', () => {
 
         inputValueAndTriggerEvent(abilityScoresSection.editElements.proficiencyBonus, proficiencyBonus);
 
-        expect(ProficiencyBonus.proficiencyBonus).toBe(proficiencyBonus);
+        expect(proficiencyBonusModel.proficiencyBonus).toBe(proficiencyBonus);
         expect(receivedEvent).not.toBeNull();
 
         abilityScoresSection.editElements.submitForm();
 
-        expect(ProficiencyBonus.proficiencyBonus).toBe(proficiencyBonus);
+        expect(proficiencyBonusModel.proficiencyBonus).toBe(proficiencyBonus);
         verifyJsonExport(expectedAbilities, proficiencyBonus);
       });
       /* eslint-enable indent, no-unexpected-multiline */
@@ -182,11 +184,11 @@ describe('when the show section is clicked', () => {
         receivedEvent = event;
       });
 
-      const oldProficiencyBonus = ProficiencyBonus.proficiencyBonus;
+      const oldProficiencyBonus = proficiencyBonusModel.proficiencyBonus;
 
       inputValueAndTriggerEvent(abilityScoresSection.editElements.proficiencyBonus, '');
 
-      expect(ProficiencyBonus.proficiencyBonus).toBe(oldProficiencyBonus);
+      expect(proficiencyBonusModel.proficiencyBonus).toBe(oldProficiencyBonus);
       expect(receivedEvent).toBeNull();
 
       abilityScoresSection.editElements.submitForm();
@@ -222,7 +224,7 @@ describe('when the show section is clicked', () => {
 
         // Collect expected values into nested JS object structure
         const expectedAbilities = createDefaultExpectedAbilities();
-        for (const [key, value] of Abilities.entries) {
+        for (const [key, value] of abilitiesModel.entries) {
           const abbreviation = value.abbreviation;
           const score = eval(`${abbreviation}Score`);
           const modifier = eval(`${abbreviation}Mod`);
@@ -233,14 +235,14 @@ describe('when the show section is clicked', () => {
         }
 
         // Input ability scores and proficiency bonus into UI
-        for (const key of Abilities.keys) {
+        for (const key of abilitiesModel.keys) {
           const score = expectedAbilities.get(key).score;
           inputValueAndTriggerEvent(abilityScoresSection.editElements.score[key], score);
         }
         inputValueAndTriggerEvent(abilityScoresSection.editElements.proficiencyBonus, proficiencyBonus);
 
         // Verify model
-        for (const [key, value] of Abilities.entries) {
+        for (const [key, value] of abilitiesModel.entries) {
           const expectedAbility = expectedAbilities.get(key);
 
           expect(value.score).toBe(expectedAbility.score);
@@ -249,7 +251,7 @@ describe('when the show section is clicked', () => {
           const formattedModifier = `(${formatModifier(expectedAbility.modifier)})`;
           expect(abilityScoresSection.editElements.modifier[key]).toHaveTextContent(formattedModifier);
         }
-        expect(ProficiencyBonus.proficiencyBonus).toBe(proficiencyBonus);
+        expect(proficiencyBonusModel.proficiencyBonus).toBe(proficiencyBonus);
 
         // Switch the section to "show" mode
         abilityScoresSection.editElements.submitForm();
@@ -266,7 +268,7 @@ describe('when the show section is clicked', () => {
 
 function createDefaultExpectedAbilities() {
   const expectedAbilities = new Map();
-  for (const key of Abilities.orderedKeys) {
+  for (const key of abilitiesModel.orderedKeys) {
     const expectedAbility = {
       score: 10,
       modifier: 0
@@ -282,7 +284,7 @@ function verifyJsonExport(expectedAbilities, expectedProficiencyBonus) {
   const jsObject = abilityScoresSection.exportToJson();
 
   const expectedAbilityScores = {};
-  for (const key of Abilities.keys) {
+  for (const key of abilitiesModel.keys) {
     expectedAbilityScores[key] = expectedAbilities.get(key).score;
   }
 
@@ -298,7 +300,7 @@ function verifyHtmlExport(expectedAbilities) {
   const htmlExport = abilityScoresSection.exportToHtml();
   expect(htmlExport.tagName).toBe('ABILITIES-BLOCK');
 
-  for (const [key, value] of Abilities.entries) {
+  for (const [key, value] of abilitiesModel.entries) {
     const expectedAbility = expectedAbilities.get(key);
 
     const abbreviation = value.abbreviation;

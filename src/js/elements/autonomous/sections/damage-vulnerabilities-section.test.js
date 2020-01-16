@@ -1,11 +1,13 @@
 import DamageVulnerabilitiesSection from './damage-vulnerabilities-section.js';
-import DamageVulnerabilities from '../../../models/lists/property/damage-vulnerabilities.js';
+import CurrentContext from '../../../models/current-context.js';
 
 import * as TestCustomElements from '../../../helpers/test/test-custom-elements.js';
 import * as sharedSpecs from './property-list-section.specs.js';
 
 const headingName = 'Damage Vulnerabilities';
 const expectedItemType = 'Damage Vulnerability';
+
+const damageVulnerabilities = CurrentContext.creature.damageVulnerabilities;
 
 let damageVulnerabilitiesSection;
 
@@ -15,7 +17,7 @@ beforeAll(async() => {
 });
 
 beforeEach(() => {
-  DamageVulnerabilities.reset();
+  damageVulnerabilities.reset();
 
   damageVulnerabilitiesSection = new DamageVulnerabilitiesSection();
   TestCustomElements.initializeSection(damageVulnerabilitiesSection);

@@ -1,5 +1,7 @@
 import { inputValueAndTriggerEvent } from '../../../helpers/element-helpers.js';
-import Title from '../../../models/title.js';
+import CurrentContext from '../../../models/current-context.js';
+
+const title = CurrentContext.creature.title;
 
 let expectedHeading = null;
 
@@ -90,17 +92,17 @@ export function shouldAddMultipleBlocksThenRemoveOneOfThem(section, blocks, remo
 }
 
 export function shouldReparseNameChanges(section, block, oldNames, newNames) {
-  Title.fullName = oldNames.fullName;
-  Title.shortName = oldNames.shortName;
-  Title.isProperNoun = oldNames.isProperNoun;
+  title.fullName = oldNames.fullName;
+  title.shortName = oldNames.shortName;
+  title.isProperNoun = oldNames.isProperNoun;
 
   addAndPopulateBlock(section, block.name, block.originalText);
 
   section.editElements.submitForm();
 
-  Title.fullName = newNames.fullName;
-  Title.shortName = newNames.shortName;
-  Title.isProperNoun = newNames.isProperNoun;
+  title.fullName = newNames.fullName;
+  title.shortName = newNames.shortName;
+  title.isProperNoun = newNames.isProperNoun;
 
   section.reparse();
 

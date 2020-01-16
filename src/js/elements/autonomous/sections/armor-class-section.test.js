@@ -1,11 +1,13 @@
 import ArmorClassSection from './armor-class-section.js';
 import * as TestCustomElements from '../../../helpers/test/test-custom-elements.js';
 
-import ArmorClass from '../../../models/armor-class.js';
+import CurrentContext from '../../../models/current-context.js';
 
 import { inputValueAndTriggerEvent } from '../../../helpers/element-helpers.js';
 
 const expectedHeading = 'Armor Class';
+
+const armorClassModel = CurrentContext.creature.armorClass;
 
 let armorClassSection;
 
@@ -15,7 +17,7 @@ beforeAll(async() => {
 });
 
 beforeEach(() => {
-  ArmorClass.reset();
+  armorClassModel.reset();
 
   armorClassSection = new ArmorClassSection();
   TestCustomElements.initializeSection(armorClassSection);
@@ -63,9 +65,9 @@ describe('when the show section is clicked', () => {
 
           armorClassSection.editElements.submitForm();
 
-          expect(ArmorClass.useCustomText).toBe(true);
-          expect(ArmorClass.originalCustomText).toBe(customText);
-          expect(ArmorClass.htmlCustomText).toBe(expectedHtmlText);
+          expect(armorClassModel.useCustomText).toBe(true);
+          expect(armorClassModel.originalCustomText).toBe(customText);
+          expect(armorClassModel.htmlCustomText).toBe(expectedHtmlText);
 
           expect(armorClassSection).toBeInMode('show');
           expect(armorClassSection).toShowPropertyLine(expectedHeading, expectedHtmlText);
@@ -89,8 +91,8 @@ describe('when the show section is clicked', () => {
         armorClassSection.editElements.submitForm();
         armorClassSection.showElements.section.click();
 
-        expect(ArmorClass.useCustomText).toBe(false);
-        expect(ArmorClass.originalCustomText).toBe(customText);
+        expect(armorClassModel.useCustomText).toBe(false);
+        expect(armorClassModel.originalCustomText).toBe(customText);
 
         expect(armorClassSection).toBeInMode('edit');
         expect(armorClassSection.editElements.useCustomText).not.toBeChecked();
@@ -174,10 +176,10 @@ describe('when the show section is clicked', () => {
 
           armorClassSection.editElements.submitForm();
 
-          expect(ArmorClass.armorClass).toBe(armorClass);
-          expect(ArmorClass.armorType).toBe(armorType);
-          expect(ArmorClass.hasShield).toBe(hasShield);
-          expect(ArmorClass.useCustomText).toBe(false);
+          expect(armorClassModel.armorClass).toBe(armorClass);
+          expect(armorClassModel.armorType).toBe(armorType);
+          expect(armorClassModel.hasShield).toBe(hasShield);
+          expect(armorClassModel.useCustomText).toBe(false);
 
           expect(armorClassSection).toBeInMode('show');
           expect(armorClassSection).toShowPropertyLine(expectedHeading, expectedText);
@@ -210,10 +212,10 @@ describe('when the show section is clicked', () => {
         armorClassSection.editElements.submitForm();
         armorClassSection.showElements.section.click();
 
-        expect(ArmorClass.armorClass).toBe(armorClass);
-        expect(ArmorClass.armorType).toBe(armorType);
-        expect(ArmorClass.hasShield).toBe(hasShield);
-        expect(ArmorClass.useCustomText).toBe(true);
+        expect(armorClassModel.armorClass).toBe(armorClass);
+        expect(armorClassModel.armorType).toBe(armorType);
+        expect(armorClassModel.hasShield).toBe(hasShield);
+        expect(armorClassModel.useCustomText).toBe(true);
 
         expect(armorClassSection).toBeInMode('edit');
         expect(armorClassSection.editElements.armorClass).toHaveValue(armorClass);

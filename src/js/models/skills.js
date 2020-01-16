@@ -1,31 +1,35 @@
-import Abilities from './abilities.js';
-import ProficiencyBonus from './proficiency-bonus.js';
 import { formatModifier } from '../helpers/string-formatter.js';
 import { createHtmlPropertyLine, createHomebreweryPropertyLine } from '../helpers/export-helpers.js';
 
-class Skills {
-  constructor() {
+export default class Skills {
+  constructor(abilitiesModel, proficiencyBonusModel) {
     this.headingName = 'Skills';
 
+    const strength = abilitiesModel.abilities['strength'];
+    const dexterity = abilitiesModel.abilities['dexterity'];
+    const intelligence = abilitiesModel.abilities['intelligence'];
+    const wisdom = abilitiesModel.abilities['wisdom'];
+    const charisma = abilitiesModel.abilities['charisma'];
+
     this.skills = {
-      'acrobatics' : new Skill('Acrobatics', 'dexterity'),
-      'animal-handling' : new Skill('Animal Handling', 'wisdom'),
-      'arcana' : new Skill('Arcana', 'intelligence'),
-      'athletics' : new Skill('Athletics', 'strength'),
-      'deception' : new Skill('Deception', 'charisma'),
-      'history' : new Skill('History', 'intelligence'),
-      'insight' : new Skill('Insight', 'wisdom'),
-      'intimidation' : new Skill('Intimidation', 'charisma'),
-      'investigation' : new Skill('Investigation', 'intelligence'),
-      'medicine' : new Skill('Medicine', 'wisdom'),
-      'nature' : new Skill('Nature', 'intelligence'),
-      'perception' : new Skill('Perception', 'wisdom'),
-      'performance' : new Skill('Performance', 'charisma'),
-      'persuasion' : new Skill('Persuasion', 'charisma'),
-      'religion' : new Skill('Religion', 'intelligence'),
-      'sleight-of-hand' : new Skill('Sleight of Hand', 'dexterity'),
-      'stealth' : new Skill('Stealth', 'dexterity'),
-      'survival': new Skill('Survival', 'wisdom')
+      'acrobatics' : new Skill('Acrobatics', dexterity, proficiencyBonusModel),
+      'animal-handling' : new Skill('Animal Handling', wisdom, proficiencyBonusModel),
+      'arcana' : new Skill('Arcana', intelligence, proficiencyBonusModel),
+      'athletics' : new Skill('Athletics', strength, proficiencyBonusModel),
+      'deception' : new Skill('Deception', charisma, proficiencyBonusModel),
+      'history' : new Skill('History', intelligence, proficiencyBonusModel),
+      'insight' : new Skill('Insight', wisdom, proficiencyBonusModel),
+      'intimidation' : new Skill('Intimidation', charisma, proficiencyBonusModel),
+      'investigation' : new Skill('Investigation', intelligence, proficiencyBonusModel),
+      'medicine' : new Skill('Medicine', wisdom, proficiencyBonusModel),
+      'nature' : new Skill('Nature', intelligence, proficiencyBonusModel),
+      'perception' : new Skill('Perception', wisdom, proficiencyBonusModel),
+      'performance' : new Skill('Performance', charisma, proficiencyBonusModel),
+      'persuasion' : new Skill('Persuasion', charisma, proficiencyBonusModel),
+      'religion' : new Skill('Religion', intelligence, proficiencyBonusModel),
+      'sleight-of-hand' : new Skill('Sleight of Hand', dexterity, proficiencyBonusModel),
+      'stealth' : new Skill('Stealth', dexterity, proficiencyBonusModel),
+      'survival': new Skill('Survival', wisdom, proficiencyBonusModel)
     };
     Object.freeze(this.skills);
   }
@@ -70,9 +74,10 @@ class Skills {
 }
 
 class Skill {
-  constructor(prettyName, abilityName) {
+  constructor(prettyName, ability, proficiencyBonusModel) {
     this.prettyName = prettyName;
-    this.abilityName = abilityName;
+    this.ability = ability;
+    this.proficiencyBonusModel = proficiencyBonusModel;
     this.reset();
   }
 
@@ -80,10 +85,6 @@ class Skill {
     this.isEnabled = false;
     this.isProficient = false;
     this.override = null;
-  }
-
-  get ability() {
-    return Abilities.abilities[this.abilityName];
   }
 
   get text() {
@@ -99,7 +100,7 @@ class Skill {
       }
 
       if (this.isProficient) {
-        passiveScore += ProficiencyBonus.proficiencyBonus;
+        passiveScore += this.proficiencyBonusModel.proficiencyBonus;
       }
     }
     passiveScore += this.ability.modifier;
@@ -116,7 +117,7 @@ class Skill {
       }
 
       if (this.isProficient) {
-        skillModifier += ProficiencyBonus.proficiencyBonus;
+        skillModifier += this.proficiencyBonusModel.proficiencyBonus;
       }
     }
     skillModifier += this.ability.modifier;
@@ -136,5 +137,3 @@ class Skill {
     };
   }
 }
-
-export default new Skills();

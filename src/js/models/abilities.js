@@ -1,6 +1,6 @@
 import { formatModifier } from '../helpers/string-formatter.js';
 
-class Abilities {
+export default class Abilities {
   constructor() {
     this.abilities = {
       'strength' : new Ability('str'),
@@ -99,5 +99,3 @@ class Ability {
     };
   }
 }
-
-export default new Abilities();

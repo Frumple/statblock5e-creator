@@ -1,8 +1,6 @@
 import LegendaryActionsSection from './legendary-actions-section.js';
-import LegendaryActions from '../../../models/lists/block/legendary-actions.js';
 
-import Title from '../../../models/title.js';
-import Abilities from '../../../models/abilities.js';
+import CurrentContext from '../../../models/current-context.js';
 
 import * as TestCustomElements from '../../../helpers/test/test-custom-elements.js';
 import * as sharedSpecs from './block-list-section.specs.js';
@@ -11,6 +9,10 @@ import { inputValueAndTriggerEvent } from '../../../helpers/element-helpers.js';
 
 const expectedHeading = 'Legendary Actions';
 const expectedItemType = 'Legendary Action';
+
+const title = CurrentContext.creature.title;
+const abilities = CurrentContext.creature.abilities;
+const legendaryActions = CurrentContext.creature.legendaryActions;
 
 let legendaryActionsSection;
 
@@ -22,9 +24,9 @@ beforeAll(async() => {
 });
 
 beforeEach(() => {
-  Title.reset();
-  Abilities.reset();
-  LegendaryActions.reset();
+  title.reset();
+  abilities.reset();
+  legendaryActions.reset();
 
   legendaryActionsSection = new LegendaryActionsSection();
   TestCustomElements.initializeSection(legendaryActionsSection);
@@ -56,8 +58,8 @@ describe('when the show section is clicked', () => {
       const homebreweryDescription = 'The dragon can take 5 legendary actions, choosing from one of the options below. Only one legendary action option can be used at a time and only at the end of another creature\'s turn. The dragon regains spent legendary actions at the start of its turn.';
       const htmlDescription = 'The dragon can take 5 legendary actions, choosing from one of the options below. Only one legendary action option can be used at a time and only at the end of another creature\'s turn. The dragon regains spent legendary actions at the start of its turn.';
 
-      Title.fullName = 'Adult Red Dragon';
-      Title.shortName = 'dragon';
+      title.fullName = 'Adult Red Dragon';
+      title.shortName = 'dragon';
 
       inputValueAndTriggerEvent(legendaryActionsSection.editElements.description, description);
 
@@ -91,8 +93,8 @@ describe('when the show section is clicked', () => {
         htmlText: 'The dragon makes a Wisdom (Perception) check.'
       };
 
-      Title.fullName = 'Adult Red Dragon';
-      Title.shortName = 'dragon';
+      title.fullName = 'Adult Red Dragon';
+      title.shortName = 'dragon';
 
       sharedSpecs.shouldAddASingleBlock(legendaryActionsSection, block);
     });
@@ -105,7 +107,7 @@ describe('when the show section is clicked', () => {
         htmlText: '<strong>Line 1</strong>. The dummy is here.\n  <strong>Line 2</strong>. The dummy is there.\n    <strong>Line 3</strong>. The dummy is everywhere.'
       };
 
-      Title.fullName = 'Dummy';
+      title.fullName = 'Dummy';
 
       sharedSpecs.shouldAddASingleBlock(legendaryActionsSection, block);
     });
@@ -118,13 +120,13 @@ describe('when the show section is clicked', () => {
         htmlText: '&lt;strong&gt;Line 1&lt;/strong&gt;. The dummy is here.'
       };
 
-      Title.fullName = 'Dummy';
+      title.fullName = 'Dummy';
 
       sharedSpecs.shouldAddASingleBlock(legendaryActionsSection, block);
     });
 
     it('should add multiple blocks', () => {
-      Abilities.abilities['strength'].score = 27;
+      abilities.abilities['strength'].score = 27;
 
       const blocks = [
         {
@@ -147,8 +149,8 @@ describe('when the show section is clicked', () => {
         }
       ];
 
-      Title.fullName = 'Adult Red Dragon';
-      Title.shortName = 'dragon';
+      title.fullName = 'Adult Red Dragon';
+      title.shortName = 'dragon';
 
       sharedSpecs.shouldAddMultipleBlocks(legendaryActionsSection, blocks);
     });
@@ -161,14 +163,14 @@ describe('when the show section is clicked', () => {
         htmlText: 'The dragon makes a Wisdom (Perception) check.'
       };
 
-      Title.fullName = 'Adult Red Dragon';
-      Title.shortName = 'dragon';
+      title.fullName = 'Adult Red Dragon';
+      title.shortName = 'dragon';
 
       sharedSpecs.shouldAddASingleBlockThenRemoveIt(legendaryActionsSection, block);
     });
 
     it('should add multiple blocks, then remove one of them', () => {
-      Abilities.abilities['strength'].score = 27;
+      abilities.abilities['strength'].score = 27;
 
       const blocks = [
         {
@@ -191,8 +193,8 @@ describe('when the show section is clicked', () => {
         }
       ];
 
-      Title.fullName = 'Adult Red Dragon';
-      Title.shortName = 'dragon';
+      title.fullName = 'Adult Red Dragon';
+      title.shortName = 'dragon';
 
       sharedSpecs.shouldAddMultipleBlocksThenRemoveOneOfThem(legendaryActionsSection, blocks, 1);
     });
@@ -212,7 +214,7 @@ describe('when the show section is clicked', () => {
       };
 
       it('when the full name is changed', () => {
-        Abilities.abilities['strength'].score = 27;
+        abilities.abilities['strength'].score = 27;
 
         const newNames = {
           fullName: 'Ancient Red Dragon',
@@ -227,7 +229,7 @@ describe('when the show section is clicked', () => {
       });
 
       it('when the short name is changed', () => {
-        Abilities.abilities['strength'].score = 27;
+        abilities.abilities['strength'].score = 27;
 
         const newNames = {
           fullName: 'Adult Red Dragon',
@@ -242,7 +244,7 @@ describe('when the show section is clicked', () => {
       });
 
       it('when the proper noun is changed', () => {
-        Abilities.abilities['strength'].score = 27;
+        abilities.abilities['strength'].score = 27;
 
         const newNames = {
           fullName: 'Adult Red Dragon',

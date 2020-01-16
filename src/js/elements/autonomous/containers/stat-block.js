@@ -6,8 +6,6 @@ import HeadingStats from '../containers/heading-stats.js';
 import TopStats from '../containers/top-stats.js';
 import BottomStats from '../containers/bottom-stats.js';
 
-import Creature from '../../../models/creature.js';
-
 export default class StatBlock extends CustomAutonomousElement {
   static get elementName() { return 'stat-block'; }
   static get templatePaths() {
@@ -18,8 +16,6 @@ export default class StatBlock extends CustomAutonomousElement {
 
   constructor(parent = null) {
     super(StatBlock.templatePaths, parent);
-
-    this.creature = new Creature();
 
     if (isRunningInNode) {
       this.headingStats = new HeadingStats();
@@ -34,10 +30,6 @@ export default class StatBlock extends CustomAutonomousElement {
 
   connectedCallback() {
     if (this.isConnected && ! this.isInitialized) {
-      this.headingStats.creature = this.creature;
-      this.topStats.creature = this.creature;
-      this.bottomStats.creature = this.creature;
-
       this.addEventListener('creatureNameChanged', this.onCreatureNameChanged);
       this.addEventListener('abilityScoreChanged', this.onAbilityScoreChanged);
       this.addEventListener('proficiencyBonusChanged', this.onProficiencyBonusChanged);

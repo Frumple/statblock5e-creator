@@ -1,10 +1,12 @@
 import ChallengeRatingSection from './challenge-rating-section.js';
-import ChallengeRating from '../../../models/challenge-rating.js';
+import CurrentContext from '../../../models/current-context.js';
 
 import * as TestCustomElements from '../../../helpers/test/test-custom-elements.js';
 import { inputValueAndTriggerEvent } from '../../../helpers/element-helpers.js';
 
 const expectedHeading = 'Challenge';
+
+const challengeRating = CurrentContext.creature.challengeRating;
 
 let challengeRatingSection;
 
@@ -14,7 +16,7 @@ beforeAll(async() => {
 });
 
 beforeEach(() => {
-  ChallengeRating.reset();
+  challengeRating.reset();
 
   challengeRatingSection = new ChallengeRatingSection();
   TestCustomElements.initializeSection(challengeRatingSection);

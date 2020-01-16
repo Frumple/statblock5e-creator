@@ -1,5 +1,7 @@
 import * as sectionModule from './section.js';
-import Subtitle from '../../../models/subtitle.js';
+import CurrentContext from '../../../models/current-context.js';
+
+const subtitle = CurrentContext.creature.subtitle;
 
 export default class SubtitleSection extends sectionModule.Section {
   static get elementName() { return 'subtitle-section'; }
@@ -39,29 +41,29 @@ export default class SubtitleSection extends sectionModule.Section {
   }
 
   updateModel() {
-    Subtitle.size = this.editElements.size.value;
-    Subtitle.type = this.editElements.type.value;
-    Subtitle.tags = this.editElements.tags.value;
-    Subtitle.alignment = this.editElements.alignment.value;
+    subtitle.size = this.editElements.size.value;
+    subtitle.type = this.editElements.type.value;
+    subtitle.tags = this.editElements.tags.value;
+    subtitle.alignment = this.editElements.alignment.value;
 
-    Subtitle.useCustomSubtitleText = this.editElements.useCustomText.checked;
-    Subtitle.customSubtitleText = this.editElements.customText.value;
+    subtitle.useCustomSubtitleText = this.editElements.useCustomText.checked;
+    subtitle.customSubtitleText = this.editElements.customText.value;
   }
 
   updateView() {
-    this.showElements.text.textContent = Subtitle.subtitle;
+    this.showElements.text.textContent = subtitle.subtitle;
   }
 
   exportToJson() {
-    return Subtitle.toJson();
+    return subtitle.toJson();
   }
 
   exportToHtml() {
-    return Subtitle.toHtml();
+    return subtitle.toHtml();
   }
 
   exportToHomebrewery() {
-    return Subtitle.toHomebrewery();
+    return subtitle.toHomebrewery();
   }
 }
 

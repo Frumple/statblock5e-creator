@@ -1,6 +1,8 @@
 import * as propertyLineSectionModule from './property-line-section.js';
-import Skills from '../../../models/skills.js';
+import CurrentContext from '../../../models/current-context.js';
 import { inputValueAndTriggerEvent } from '../../../helpers/element-helpers.js';
+
+const skillsModel = CurrentContext.creature.skills;
 
 export default class SkillsSection extends propertyLineSectionModule.PropertyLineSection {
   static get elementName() { return 'skills-section'; }
@@ -20,7 +22,7 @@ export default class SkillsSection extends propertyLineSectionModule.PropertyLin
 
   connectedCallback() {
     if (this.isConnected && ! this.isInitialized) {
-      for (const key of Skills.keys) {
+      for (const key of skillsModel.keys) {
         this.initializeSkillElements(key);
       }
 
@@ -94,7 +96,7 @@ export default class SkillsSection extends propertyLineSectionModule.PropertyLin
   }
 
   updateModel() {
-    for (const key of Skills.keys) {
+    for (const key of skillsModel.keys) {
       this.updateModelSkillEnabled(key);
       this.updateModelSkillProficiency(key);
       this.updateModelSkillOverride(key);
@@ -102,19 +104,19 @@ export default class SkillsSection extends propertyLineSectionModule.PropertyLin
   }
 
   updateModelSkillEnabled(key) {
-    Skills.skills[key].isEnabled = this.editElements.skill[key].enable.checked;
+    skillsModel.skills[key].isEnabled = this.editElements.skill[key].enable.checked;
   }
 
   updateModelSkillProficiency(key) {
-    Skills.skills[key].isProficient = this.editElements.skill[key].proficient.checked;
+    skillsModel.skills[key].isProficient = this.editElements.skill[key].proficient.checked;
   }
 
   updateModelSkillOverride(key) {
-    Skills.skills[key].override = this.editElements.skill[key].override.valueAsInt;
+    skillsModel.skills[key].override = this.editElements.skill[key].override.valueAsInt;
   }
 
   updateView() {
-    for (const key of Skills.keys) {
+    for (const key of skillsModel.keys) {
       this.updateViewSkill(key);
     }
 
@@ -122,7 +124,7 @@ export default class SkillsSection extends propertyLineSectionModule.PropertyLin
   }
 
   updateViewSkillsByAbility(abilityName) {
-    for (const [key, value] of Skills.entries) {
+    for (const [key, value] of skillsModel.entries) {
       if (abilityName === value.abilityName) {
         this.updateViewSkill(key);
       }
@@ -130,12 +132,12 @@ export default class SkillsSection extends propertyLineSectionModule.PropertyLin
   }
 
   updateViewSkill(key) {
-    const skill = Skills.skills[key];
+    const skill = skillsModel.skills[key];
     this.editElements.skill[key].modifier.textContent = skill.formattedModifier;
   }
 
   updateViewText() {
-    const text = Skills.text;
+    const text = skillsModel.text;
 
     if (text === '') {
       this.empty = true;
@@ -147,15 +149,15 @@ export default class SkillsSection extends propertyLineSectionModule.PropertyLin
   }
 
   exportToJson() {
-    return Skills.toJson();
+    return skillsModel.toJson();
   }
 
   exportToHtml() {
-    return Skills.toHtml();
+    return skillsModel.toHtml();
   }
 
   exportToHomebrewery() {
-    return Skills.toHomebrewery();
+    return skillsModel.toHomebrewery();
   }
 }
 
@@ -171,7 +173,7 @@ class SkillsEditElements extends propertyLineSectionModule.PropertyLineEditEleme
 
     this.skill = {};
 
-    for (const key of Skills.keys) {
+    for (const key of skillsModel.keys) {
       this.skill[key] = {
         enable: shadowRoot.getElementById(`${key}-enable`),
         label: shadowRoot.getElementById(`${key}-label`),

@@ -3,7 +3,9 @@ import * as TestCustomElements from '../../../helpers/test/test-custom-elements.
 
 import { inputValueAndTriggerEvent } from '../../../helpers/element-helpers.js';
 
-import Title from '../../../models/title.js';
+import CurrentContext from '../../../models/current-context.js';
+
+const titleModel = CurrentContext.creature.title;
 
 let titleSection;
 
@@ -13,7 +15,7 @@ beforeAll(async() => {
 });
 
 beforeEach(() => {
-  Title.reset();
+  titleModel.reset();
 
   titleSection = new TitleSection();
   TestCustomElements.initializeSection(titleSection);
@@ -68,10 +70,10 @@ describe('when the show section is clicked', () => {
           titleSection.editElements.properNoun.click();
         }
 
-        expect(Title.fullName).toBe(expectedCreatureName);
-        expect(Title.shortName).toBe(expectedShortName);
-        expect(Title.isProperNoun).toBe(isProperNoun);
-        expect(Title.grammaticalName).toBe(expectedGrammaticalName);
+        expect(titleModel.fullName).toBe(expectedCreatureName);
+        expect(titleModel.shortName).toBe(expectedShortName);
+        expect(titleModel.isProperNoun).toBe(isProperNoun);
+        expect(titleModel.grammaticalName).toBe(expectedGrammaticalName);
 
         if (creatureName !== '' || shortName !== '' || isProperNoun) {
           expect(receivedEvent).not.toBeNull();
@@ -105,9 +107,9 @@ describe('when the show section is clicked', () => {
 
         titleSection.editElements.submitForm();
 
-        expect(Title.fullName).toBe(fullName);
-        expect(Title.shortName).toBe(shortName);
-        expect(Title.isProperNoun).toBe(isProperNoun);
+        expect(titleModel.fullName).toBe(fullName);
+        expect(titleModel.shortName).toBe(shortName);
+        expect(titleModel.isProperNoun).toBe(isProperNoun);
 
         expect(titleSection).toBeInMode('show');
         expect(titleSection.showElements.title).toHaveTextContent(fullName);
@@ -133,7 +135,7 @@ describe('when the show section is clicked', () => {
 
         titleSection.editElements.submitForm();
 
-        expect(Title.fullName).toBe(expectedFullName);
+        expect(titleModel.fullName).toBe(expectedFullName);
 
         expect(titleSection).toBeInMode('show');
         expect(titleSection.showElements.title).toHaveTextContent(expectedFullName);

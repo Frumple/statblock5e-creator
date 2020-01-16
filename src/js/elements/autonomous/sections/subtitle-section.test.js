@@ -3,7 +3,9 @@ import * as TestCustomElements from '../../../helpers/test/test-custom-elements.
 
 import { inputValueAndTriggerEvent } from '../../../helpers/element-helpers.js';
 
-import Subtitle from '../../../models/subtitle.js';
+import CurrentContext from '../../../models/current-context.js';
+
+const subtitleModel = CurrentContext.creature.subtitle;
 
 let subtitleSection;
 
@@ -13,7 +15,7 @@ beforeAll(async() => {
 });
 
 beforeEach(() => {
-  Subtitle.reset();
+  subtitleModel.reset();
 
   subtitleSection = new SubtitleSection();
   TestCustomElements.initializeSection(subtitleSection);
@@ -62,8 +64,8 @@ describe('when the show section is clicked', () => {
 
           subtitleSection.editElements.submitForm();
 
-          expect(Subtitle.useCustomSubtitleText).toBe(true);
-          expect(Subtitle.customSubtitleText).toBe(customText);
+          expect(subtitleModel.useCustomSubtitleText).toBe(true);
+          expect(subtitleModel.customSubtitleText).toBe(customText);
 
           expect(subtitleSection).toBeInMode('show');
           expect(subtitleSection.showElements.text).toHaveTextContent(customText);
@@ -87,8 +89,8 @@ describe('when the show section is clicked', () => {
         subtitleSection.editElements.submitForm();
         subtitleSection.showElements.section.click();
 
-        expect(Subtitle.useCustomSubtitleText).toBe(false);
-        expect(Subtitle.customSubtitleText).toBe(customText);
+        expect(subtitleModel.useCustomSubtitleText).toBe(false);
+        expect(subtitleModel.customSubtitleText).toBe(customText);
 
         expect(subtitleSection).toBeInMode('edit');
         expect(subtitleSection.editElements.useCustomText).not.toBeChecked();
@@ -151,10 +153,10 @@ describe('when the show section is clicked', () => {
 
           tags = tags.trim();
 
-          expect(Subtitle.size).toBe(size);
-          expect(Subtitle.type).toBe(type);
-          expect(Subtitle.tags).toBe(tags);
-          expect(Subtitle.alignment).toBe(alignment);
+          expect(subtitleModel.size).toBe(size);
+          expect(subtitleModel.type).toBe(type);
+          expect(subtitleModel.tags).toBe(tags);
+          expect(subtitleModel.alignment).toBe(alignment);
 
           expect(subtitleSection).toBeInMode('show');
           expect(subtitleSection.showElements.text).toHaveTextContent(expectedSubtitle);
@@ -190,11 +192,11 @@ describe('when the show section is clicked', () => {
         subtitleSection.editElements.submitForm();
         subtitleSection.showElements.section.click();
 
-        expect(Subtitle.size).toBe(size);
-        expect(Subtitle.type).toBe(type);
-        expect(Subtitle.tags).toBe(tags);
-        expect(Subtitle.alignment).toBe(alignment);
-        expect(Subtitle.useCustomSubtitleText).toBe(true);
+        expect(subtitleModel.size).toBe(size);
+        expect(subtitleModel.type).toBe(type);
+        expect(subtitleModel.tags).toBe(tags);
+        expect(subtitleModel.alignment).toBe(alignment);
+        expect(subtitleModel.useCustomSubtitleText).toBe(true);
 
         expect(subtitleSection).toBeInMode('edit');
         expect(subtitleSection.editElements.size).toHaveValue(size);

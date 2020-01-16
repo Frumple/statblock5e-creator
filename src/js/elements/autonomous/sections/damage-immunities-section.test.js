@@ -1,11 +1,13 @@
 import DamageImmunitiesSection from './damage-immunities-section.js';
-import DamageImmunities from '../../../models/lists/property/damage-immunities.js';
+import CurrentContext from '../../../models/current-context.js';
 
 import * as TestCustomElements from '../../../helpers/test/test-custom-elements.js';
 import * as sharedSpecs from './property-list-section.specs.js';
 
 const headingName = 'Damage Immunities';
 const expectedItemType = 'Damage Immunity';
+
+const damageImmunities = CurrentContext.creature.damageImmunities;
 
 let damageImmunitiesSection;
 
@@ -15,7 +17,7 @@ beforeAll(async() => {
 });
 
 beforeEach(() => {
-  DamageImmunities.reset();
+  damageImmunities.reset();
 
   damageImmunitiesSection = new DamageImmunitiesSection();
   TestCustomElements.initializeSection(damageImmunitiesSection);

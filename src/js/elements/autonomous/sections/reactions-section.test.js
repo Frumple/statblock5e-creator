@@ -1,12 +1,14 @@
 import ReactionsSection from './reactions-section.js';
-import Reactions from '../../../models/lists/block/reactions.js';
-import Title from '../../../models/title.js';
+import CurrentContext from '../../../models/current-context.js';
 
 import * as TestCustomElements from '../../../helpers/test/test-custom-elements.js';
 import * as sharedSpecs from './block-list-section.specs.js';
 
 const expectedHeading = 'Reactions';
 const expectedItemType = 'Reaction';
+
+const title = CurrentContext.creature.title;
+const reactions = CurrentContext.creature.reactions;
 
 let reactionsSection;
 
@@ -18,8 +20,8 @@ beforeAll(async() => {
 });
 
 beforeEach(() => {
-  Title.reset();
-  Reactions.reset();
+  title.reset();
+  reactions.reset();
 
   reactionsSection = new ReactionsSection();
   TestCustomElements.initializeSection(reactionsSection);
@@ -54,7 +56,7 @@ describe('when the show section is clicked', () => {
         htmlText: 'The knight adds 2 to its AC against one melee attack that would hit it. To do so, the knight must see the attacker and be wielding a melee weapon.'
       };
 
-      Title.fullName = 'Knight';
+      title.fullName = 'Knight';
 
       sharedSpecs.shouldAddASingleBlock(reactionsSection, block);
     });
@@ -67,7 +69,7 @@ describe('when the show section is clicked', () => {
         htmlText: '<strong>Line 1</strong>. The dummy is here.\n  <strong>Line 2</strong>. The dummy is there.\n    <strong>Line 3</strong>. The dummy is everywhere.'
       };
 
-      Title.fullName = 'Dummy';
+      title.fullName = 'Dummy';
 
       sharedSpecs.shouldAddASingleBlock(reactionsSection, block);
     });
@@ -80,7 +82,7 @@ describe('when the show section is clicked', () => {
         htmlText: '&lt;strong&gt;Line 1&lt;/strong&gt;. The dummy is here.'
       };
 
-      Title.fullName = 'Dummy';
+      title.fullName = 'Dummy';
 
       sharedSpecs.shouldAddASingleBlock(reactionsSection, block);
     });

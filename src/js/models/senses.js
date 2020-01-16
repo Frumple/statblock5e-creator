@@ -1,8 +1,9 @@
-import Skills from './skills.js';
 import { createHtmlPropertyLine, createHomebreweryPropertyLine } from '../helpers/export-helpers.js';
 
-class Senses {
-  constructor() {
+export default class Senses {
+  constructor(skills) {
+    this.skills = skills;
+
     this.headingName = 'Senses';
 
     this.reset();
@@ -20,7 +21,7 @@ class Senses {
   }
 
   get passivePerception() {
-    return Skills.skills['perception'].passiveScore;
+    return this.skills.skills['perception'].passiveScore;
   }
 
   get originalText() {
@@ -80,5 +81,3 @@ class Senses {
     return createHomebreweryPropertyLine(this.headingName, this.originalText);
   }
 }
-
-export default new Senses();

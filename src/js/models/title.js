@@ -1,6 +1,6 @@
 import { capitalizeFirstLetter } from '../helpers/string-formatter.js';
 
-class Title {
+export default class Title {
   constructor() {
     this.reset();
   }
@@ -66,5 +66,3 @@ class Title {
     return `> ## ${this.title}`;
   }
 }
-
-export default new Title();

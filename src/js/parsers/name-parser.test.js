@@ -1,8 +1,10 @@
 import { parseNames } from './parser.js';
-import Title from '../models/title.js';
+import CurrentContext from '../models/current-context.js';
+
+const title = CurrentContext.creature.title;
 
 beforeEach(() => {
-  Title.reset();
+  title.reset();
 });
 
 it('should preserve newline characters', () => {
@@ -31,7 +33,7 @@ describe('should parse valid name expressions', () => {
     '[fullname] begins on a new line. [fullname] begins on a new sentence, but [fullname] does not.';
 
   it('when only the full name is defined', () => {
-    Title.fullName = 'Hook Horror';
+    title.fullName = 'Hook Horror';
 
     const expectedOutputText =
       'The hook horror begins on a new line. The hook horror begins on a new sentence, but the hook horror does not.\n' +
@@ -41,8 +43,8 @@ describe('should parse valid name expressions', () => {
   });
 
   it('when the full name and short name are defined', () => {
-    Title.fullName = 'Ancient Red Dragon';
-    Title.shortName = 'dragon';
+    title.fullName = 'Ancient Red Dragon';
+    title.shortName = 'dragon';
 
     const expectedOutputText =
       'The dragon begins on a new line. The dragon begins on a new sentence, but the dragon does not.\n' +
@@ -52,8 +54,8 @@ describe('should parse valid name expressions', () => {
   });
 
   it('when the full name is defined and it is a proper noun', () => {
-    Title.fullName = 'Tiamat';
-    Title.isProperNoun = true;
+    title.fullName = 'Tiamat';
+    title.isProperNoun = true;
 
     const expectedOutputText =
       'Tiamat begins on a new line. Tiamat begins on a new sentence, but Tiamat does not.\n' +
@@ -63,9 +65,9 @@ describe('should parse valid name expressions', () => {
   });
 
   it('when the full name and short name are defined and they are proper nouns', () => {
-    Title.fullName = 'Lady Kima of Vord';
-    Title.shortName = 'Lady Kima';
-    Title.isProperNoun = true;
+    title.fullName = 'Lady Kima of Vord';
+    title.shortName = 'Lady Kima';
+    title.isProperNoun = true;
 
     const expectedOutputText =
       'Lady Kima begins on a new line. Lady Kima begins on a new sentence, but Lady Kima does not.\n' +

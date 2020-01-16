@@ -1,5 +1,7 @@
 import * as propertyLineSectionModule from './property-line-section.js';
-import Senses from '../../../models/senses.js';
+import CurrentContext from '../../../models/current-context.js';
+
+const sensesModel = CurrentContext.creature.senses;
 
 export default class SensesSection extends propertyLineSectionModule.PropertyLineSection {
   static get elementName() { return 'senses-section'; }
@@ -37,36 +39,36 @@ export default class SensesSection extends propertyLineSectionModule.PropertyLin
   }
 
   updateModel() {
-    Senses.blindsight = this.editElements.blindsight.valueAsInt;
-    Senses.darkvision = this.editElements.darkvision.valueAsInt;
-    Senses.tremorsense = this.editElements.tremorsense.valueAsInt;
-    Senses.truesight = this.editElements.truesight.valueAsInt;
+    sensesModel.blindsight = this.editElements.blindsight.valueAsInt;
+    sensesModel.darkvision = this.editElements.darkvision.valueAsInt;
+    sensesModel.tremorsense = this.editElements.tremorsense.valueAsInt;
+    sensesModel.truesight = this.editElements.truesight.valueAsInt;
 
-    Senses.useCustomText = this.editElements.useCustomText.checked;
-    Senses.originalCustomText = this.editElements.customText.value;
-    Senses.htmlCustomText = this.editElements.customText.htmlText;
+    sensesModel.useCustomText = this.editElements.useCustomText.checked;
+    sensesModel.originalCustomText = this.editElements.customText.value;
+    sensesModel.htmlCustomText = this.editElements.customText.htmlText;
   }
 
   updateView() {
-    this.editElements.passivePerception.textContent = Senses.passivePerception;
+    this.editElements.passivePerception.textContent = sensesModel.passivePerception;
 
-    if (Senses.useCustomText) {
-      this.showElements.text.innerHTMLSanitized = Senses.htmlCustomText;
+    if (sensesModel.useCustomText) {
+      this.showElements.text.innerHTMLSanitized = sensesModel.htmlCustomText;
     } else {
-      this.showElements.text.textContent = Senses.nonCustomText;
+      this.showElements.text.textContent = sensesModel.nonCustomText;
     }
   }
 
   exportToJson() {
-    return Senses.toJson();
+    return sensesModel.toJson();
   }
 
   exportToHtml() {
-    return Senses.toHtml();
+    return sensesModel.toHtml();
   }
 
   exportToHomebrewery() {
-    return Senses.toHomebrewery();
+    return sensesModel.toHomebrewery();
   }
 }
 

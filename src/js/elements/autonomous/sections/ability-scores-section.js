@@ -1,7 +1,8 @@
 import * as sectionModule from './section.js';
-import Abilities from '../../../models/abilities.js';
-import ProficiencyBonus from '../../../models/proficiency-bonus.js';
+import CurrentContext from '../../../models/current-context.js';
 
+const abilitiesModel = CurrentContext.creature.abilities;
+const proficiencyBonusModel = CurrentContext.creature.proficiencyBonus;
 
 export default class AbilityScoresSection extends sectionModule.Section {
   static get elementName() { return 'ability-scores-section'; }
@@ -16,7 +17,7 @@ export default class AbilityScoresSection extends sectionModule.Section {
           AbilityScoresShowElements,
           AbilityScoresEditElements);
 
-    for (const key of Abilities.keys) {
+    for (const key of abilitiesModel.keys) {
       this.editElements.score[key].addEventListener('input', this.onInputAbilityScore.bind(this, key));
     }
 
@@ -33,14 +34,14 @@ export default class AbilityScoresSection extends sectionModule.Section {
   }
 
   checkForErrors() {
-    for (const key of Abilities.keys) {
+    for (const key of abilitiesModel.keys) {
       this.editElements.score[key].validate(this.errorMessages);
     }
     this.editElements.proficiencyBonus.validate(this.errorMessages);
   }
 
   updateModel() {
-    for (const key of Abilities.keys) {
+    for (const key of abilitiesModel.keys) {
       this.updateModelAbilityScore(key);
     }
 
@@ -51,7 +52,7 @@ export default class AbilityScoresSection extends sectionModule.Section {
     const score = this.editElements.score[key].valueAsInt;
 
     if (score !== null) {
-      Abilities.abilities[key].score = score;
+      abilitiesModel.abilities[key].score = score;
       this.dispatchAbilityScoreChangedEvent(key);
     }
   }
@@ -71,7 +72,7 @@ export default class AbilityScoresSection extends sectionModule.Section {
     const proficiencyBonus = this.editElements.proficiencyBonus.valueAsInt;
 
     if (proficiencyBonus !== null) {
-      ProficiencyBonus.proficiencyBonus = proficiencyBonus;
+      proficiencyBonusModel.proficiencyBonus = proficiencyBonus;
       this.dispatchProficiencyBonusChangedEvent();
     }
   }
@@ -86,13 +87,13 @@ export default class AbilityScoresSection extends sectionModule.Section {
   }
 
   updateView() {
-    for (const key of Abilities.keys) {
+    for (const key of abilitiesModel.keys) {
       this.updateViewAbility(key);
     }
   }
 
   updateViewAbility(key) {
-    const ability = Abilities.abilities[key];
+    const ability = abilitiesModel.abilities[key];
     const formattedModifier = ability.formattedModifier;
 
     this.editElements.modifier[key].textContent = formattedModifier;
@@ -103,17 +104,17 @@ export default class AbilityScoresSection extends sectionModule.Section {
 
   exportToJson() {
     return {
-      abilityScores: Abilities.toJson(),
-      proficiencyBonus: ProficiencyBonus.toJson()
+      abilityScores: abilitiesModel.toJson(),
+      proficiencyBonus: proficiencyBonusModel.toJson()
     };
   }
 
   exportToHtml() {
-    return Abilities.toHtml();
+    return abilitiesModel.toHtml();
   }
 
   exportToHomebrewery() {
-    return Abilities.toHomebrewery();
+    return abilitiesModel.toHomebrewery();
   }
 }
 
@@ -124,7 +125,7 @@ class AbilityScoresShowElements extends sectionModule.ShowElements {
     this.score = {};
     this.modifier = {};
 
-    for (const key of Abilities.keys) {
+    for (const key of abilitiesModel.keys) {
       this.score[key] = shadowRoot.getElementById(`${key}-score-show`);
       this.modifier[key] = shadowRoot.getElementById(`${key}-modifier-show`);
     }
@@ -138,7 +139,7 @@ class AbilityScoresEditElements extends sectionModule.EditElements {
     this.score = {};
     this.modifier = {};
 
-    for (const key of Abilities.keys) {
+    for (const key of abilitiesModel.keys) {
       this.score[key] = shadowRoot.getElementById(`${key}-score-edit`);
       this.modifier[key] = shadowRoot.getElementById(`${key}-modifier-edit`);
     }

@@ -4,18 +4,7 @@ export default class StatsContainer extends CustomAutonomousElement {
   constructor(templatePaths) {
     super(templatePaths);
 
-    this.creature = null;
     this.sections = new Map();
-  }
-
-  connectedCallback() {
-    if (this.isConnected && ! this.isInitialized) {
-      for (const section of this.sections.values()) {
-        section.creature = this.creature;
-      }
-
-      this.isInitialized = true;
-    }
   }
 
   setEmptyVisibility(visibility) {

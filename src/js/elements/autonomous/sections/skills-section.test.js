@@ -4,15 +4,17 @@ import * as TestCustomElements from '../../../helpers/test/test-custom-elements.
 import { inputValueAndTriggerEvent } from '../../../helpers/element-helpers.js';
 import { formatModifier, nullIfEmptyString } from '../../../helpers/string-formatter.js';
 
-import Abilities from '../../../models/abilities.js';
-import ProficiencyBonus from '../../../models/proficiency-bonus.js';
-import Skills from '../../../models/skills.js';
+import CurrentContext from '../../../models/current-context.js';
 
 const labelDisabledClass = 'section__label_disabled';
 const singleSkillUnderTest = 'investigation';
 const singleAbilityUnderTest = 'intelligence';
 
 const expectedHeading = 'Skills';
+
+const abilitiesModel = CurrentContext.creature.abilities;
+const proficiencyBonusModel = CurrentContext.creature.proficiencyBonus;
+const skillsModel = CurrentContext.creature.skills;
 
 let skillsSection;
 
@@ -22,9 +24,9 @@ beforeAll(async() => {
 });
 
 beforeEach(() => {
-  Abilities.reset();
-  ProficiencyBonus.reset();
-  Skills.reset();
+  abilitiesModel.reset();
+  proficiencyBonusModel.reset();
+  skillsModel.reset();
 
   skillsSection = new SkillsSection();
   TestCustomElements.initializeSection(skillsSection);
@@ -110,8 +112,8 @@ describe('when the show section is clicked', () => {
         expectedJsonSkill.isProficient = skillProficient;
         expectedJsonSkill.override = skillOverride === '' ? null : skillOverride;
 
-        Abilities.abilities[singleAbilityUnderTest].score = abilityScore;
-        ProficiencyBonus.proficiencyBonus = proficiencyBonus;
+        abilitiesModel.abilities[singleAbilityUnderTest].score = abilityScore;
+        proficiencyBonusModel.proficiencyBonus = proficiencyBonus;
 
         if (skillEnabled) {
           skillElements.enable.click();
@@ -131,7 +133,7 @@ describe('when the show section is clicked', () => {
           }
         }
 
-        const skill = Skills.skills[singleSkillUnderTest];
+        const skill = skillsModel.skills[singleSkillUnderTest];
         expect(skill.isEnabled).toBe(skillEnabled);
         expect(skill.isProficient).toBe(skillProficient);
         expect(skill.override).toBe(nullIfEmptyString(skillOverride));
@@ -173,12 +175,12 @@ describe('when the show section is clicked', () => {
       `
       ('$description: {athletics="$athletics", history="$history", insight="$insight", persuasion="$persuasion", sleightOfHand="$sleightOfHand"} => "$expectedText"',
       ({athletics, history, insight, persuasion, sleightOfHand, expectedText}) => {
-        Abilities.abilities['strength'].score = 7;
-        Abilities.abilities['dexterity'].score = 14;
-        Abilities.abilities['intelligence'].score = 13;
-        Abilities.abilities['wisdom'].score = 11;
-        Abilities.abilities['charisma'].score = 20;
-        ProficiencyBonus.proficiencyBonus = 3;
+        abilitiesModel.abilities['strength'].score = 7;
+        abilitiesModel.abilities['dexterity'].score = 14;
+        abilitiesModel.abilities['intelligence'].score = 13;
+        abilitiesModel.abilities['wisdom'].score = 11;
+        abilitiesModel.abilities['charisma'].score = 20;
+        proficiencyBonusModel.proficiencyBonus = 3;
 
         const expectedJson = createDefaultExpectedJson();
 
@@ -263,7 +265,7 @@ function expectSkillChangedEvent(event, skillName) {
 
 function createDefaultExpectedJson() {
   const expectedJson = {};
-  for (const key of Skills.keys) {
+  for (const key of skillsModel.keys) {
     expectedJson[key] = {
       isEnabled: false,
       isProficient: false,

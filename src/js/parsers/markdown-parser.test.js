@@ -1,8 +1,10 @@
 import { parseMarkdown } from './parser.js';
-import Title from '../models/title.js';
+import CurrentContext from '../models/current-context.js';
+
+const title = CurrentContext.creature.title;
 
 beforeEach(() => {
-  Title.reset();
+  title.reset();
 });
 
 it('should preserve newline characters', () => {

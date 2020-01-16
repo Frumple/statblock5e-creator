@@ -1,6 +1,6 @@
 import * as ExportHelpers from '../helpers/export-helpers.js';
 
-class Speed {
+export default class Speed {
   constructor() {
     this.headingName = 'Speed';
 
@@ -81,5 +81,3 @@ class Speed {
     return ExportHelpers.createHomebreweryPropertyLine(this.headingName, this.originalText);
   }
 }
-
-export default new Speed();

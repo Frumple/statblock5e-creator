@@ -2,18 +2,16 @@ import NameParser from './name-parser.js';
 import MathParser from './math-parser.js';
 import MarkdownParser from './markdown-parser.js';
 
-import Title from '../models/title.js';
-import Abilities from '../models/abilities.js';
-import ProficiencyBonus from '../models/proficiency-bonus.js';
+import CurrentContext from '../models/current-context.js';
 
 export function parseNames(inputText, parserOptions = {}) {
-  parserOptions.creature = Title.toParserOptions();
+  parserOptions.creature = CurrentContext.creature.title.toParserOptions();
   return parseText(NameParser, inputText, parserOptions);
 }
 
 export function parseMath(inputText, parserOptions = {}) {
-  parserOptions.abilities = Abilities.toParserOptions();
-  parserOptions.proficiencyBonus = ProficiencyBonus.toParserOptions();
+  parserOptions.abilities = CurrentContext.creature.abilities.toParserOptions();
+  parserOptions.proficiencyBonus = CurrentContext.creature.proficiencyBonus.toParserOptions();
   return parseText(MathParser, inputText, parserOptions);
 }
 

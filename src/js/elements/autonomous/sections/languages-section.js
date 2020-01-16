@@ -1,5 +1,5 @@
 import PropertyListSection from './property-list-section.js';
-import Languages from '../../../models/lists/property/languages.js';
+import CurrentContext from '../../../models/current-context.js';
 import isRunningInNode from '../../../helpers/is-running-in-node.js';
 
 export default class LanguagesSection extends PropertyListSection {
@@ -12,7 +12,7 @@ export default class LanguagesSection extends PropertyListSection {
 
   constructor() {
     super(LanguagesSection.templatePaths,
-          Languages);
+          CurrentContext.creature.languages);
   }
 
   connectedCallback() {
