@@ -58,11 +58,11 @@ export default class Title {
 
   toHtml() {
     const titleElement = document.createElement('h1');
-    titleElement.textContent = this.title;
+    titleElement.textContent = this.fullName;
     return titleElement;
   }
 
   toHomebrewery() {
-    return `> ## ${this.title}`;
+    return `> ## ${this.fullName}`;
   }
 }

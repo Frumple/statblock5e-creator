@@ -13,7 +13,7 @@ export default class Subtitle {
     this.customSubtitleText = '';
   }
 
-  get subtitle() {
+  get text() {
     if (this.useCustomSubtitleText) {
       return this.customSubtitleText;
     }
@@ -38,11 +38,11 @@ export default class Subtitle {
 
   toHtml() {
     const subtitleElement = document.createElement('h2');
-    subtitleElement.textContent = this.subtitle;
+    subtitleElement.textContent = this.text;
     return subtitleElement;
   }
 
   toHomebrewery() {
-    return `>*${this.subtitle}*`;
+    return `>*${this.text}*`;
   }
 }

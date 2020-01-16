@@ -74,7 +74,7 @@ export default class TitleSection extends sectionModule.Section {
 
   updateView() {
     this.editElements.fullName.value = title.fullName;
-    this.showElements.title.textContent = title.title;
+    this.showElements.title.textContent = title.fullName;
   }
 
   exportToJson() {

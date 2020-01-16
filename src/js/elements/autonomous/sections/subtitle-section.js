@@ -51,7 +51,7 @@ export default class SubtitleSection extends sectionModule.Section {
   }
 
   updateView() {
-    this.showElements.text.textContent = subtitle.subtitle;
+    this.showElements.text.textContent = subtitle.text;
   }
 
   exportToJson() {

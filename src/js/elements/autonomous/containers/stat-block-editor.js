@@ -102,7 +102,7 @@ export default class StatBlockEditor extends CustomAutonomousElement {
   }
 
   onPrintAction() {
-    const content = this.exportToHtml(this.title);
+    const content = this.exportToHtml(CurrentContext.creature.title.fullName);
     printHtml(content);
   }
 
