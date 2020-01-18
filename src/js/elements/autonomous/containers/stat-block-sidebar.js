@@ -21,6 +21,8 @@ export default class StatBlockSidebar extends CustomAutonomousElement {
 
   connectedCallback() {
     if (this.isConnected && ! this.isInitialized) {
+      super.connectedCallback();
+
       this.autoHeightModeButton.addEventListener('click', this.onClickAutoHeightModeButton.bind(this));
       this.manualHeightModeButton.addEventListener('click', this.onClickManualHeightModeButton.bind(this));
       this.manualHeightSlider.addEventListener('input', this.onInputSlider.bind(this));

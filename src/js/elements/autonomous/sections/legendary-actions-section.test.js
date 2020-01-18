@@ -33,6 +33,10 @@ beforeEach(() => {
   legendaryActionsSection.connect();
 });
 
+it('section should have default blocks', () => {
+  sharedSpecs.sectionShouldHaveDefaultBlocks(legendaryActionsSection);
+});
+
 describe('when the show section is clicked', () => {
   beforeEach(() => {
     legendaryActionsSection.showElements.section.click();

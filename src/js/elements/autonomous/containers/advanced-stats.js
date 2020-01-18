@@ -23,28 +23,14 @@ export default class AdvancedStats extends DivisibleContainer {
   }
 
   updateSavingThrowsView(abilityName) {
-    const savingThrowsSection = this.sections.get('savingThrows');
-
-    if (abilityName) {
-      savingThrowsSection.updateViewSavingThrow(abilityName);
-      savingThrowsSection.updateViewText();
-    } else {
-      savingThrowsSection.updateView();
-    }
+    this.sections.get('savingThrows').updateViewOnAttributeChange(abilityName);
   }
 
   updateSkillsView(abilityName) {
-    const skillsSection = this.sections.get('skills');
-
-    if (abilityName) {
-      skillsSection.updateViewSkillsByAbility(abilityName);
-      skillsSection.updateViewText();
-    } else {
-      skillsSection.updateView();
-    }
+    this.sections.get('skills').updateViewOnAttributeChange(abilityName);
   }
 
   updateSensesView() {
-    this.sections.get('senses').updateView();
+    this.sections.get('senses').updateViewOnAttributeChange();
   }
 }

@@ -22,6 +22,8 @@ export default class SavingThrowsSection extends propertyLineSectionModule.Prope
 
   connectedCallback() {
     if (this.isConnected && ! this.isInitialized) {
+      super.connectedCallback();
+
       for (const key of savingThrowsModel.keys) {
         this.initializeSavingThrowElements(key);
       }
@@ -61,20 +63,20 @@ export default class SavingThrowsSection extends propertyLineSectionModule.Prope
     }
 
     this.updateModelSavingThrowEnabled(key);
-    this.updateViewSavingThrow(key);
-    this.updateViewText();
+    this.updateEditModeViewSavingThrowModifier(key);
+    this.updateShowModeView();
   }
 
   onInputSavingThrowProficiency(key) {
     this.updateModelSavingThrowProficiency(key);
-    this.updateViewSavingThrow(key);
-    this.updateViewText();
+    this.updateEditModeViewSavingThrowModifier(key);
+    this.updateShowModeView();
   }
 
   onInputSavingThrowOverride(key) {
     this.updateModelSavingThrowOverride(key);
-    this.updateViewSavingThrow(key);
-    this.updateViewText();
+    this.updateEditModeViewSavingThrowModifier(key);
+    this.updateShowModeView();
   }
 
   checkForErrors() {
@@ -101,20 +103,36 @@ export default class SavingThrowsSection extends propertyLineSectionModule.Prope
     savingThrowsModel.savingThrows[key].override = this.editElements.savingThrow[key].override.valueAsInt;
   }
 
-  updateView() {
-    for (const key of savingThrowsModel.keys) {
-      this.updateViewSavingThrow(key);
+  updateViewOnAttributeChange(abilityName) {
+    if (abilityName) {
+      this.updateEditModeViewSavingThrowModifier(abilityName);
+    } else {
+      for (const key of savingThrowsModel.keys) {
+        this.updateEditModeViewSavingThrowModifier(key);
+      }
     }
-
-    this.updateViewText();
+    this.updateShowModeView();
   }
 
-  updateViewSavingThrow(key) {
-    const savingThrow = savingThrowsModel.savingThrows[key];
-    this.editElements.savingThrow[key].modifier.textContent = savingThrow.formattedModifier;
+  updateEditModeView() {
+    for (const key of savingThrowsModel.keys) {
+      this.updateEditModeViewSavingThrow(key);
+    }
   }
 
-  updateViewText() {
+  updateEditModeViewSavingThrow(key) {
+    const savingThrowElements = this.editElements.savingThrow[key];
+    savingThrowElements.enable.checked = savingThrowsModel.savingThrows[key].isEnabled;
+    savingThrowElements.modifier.textContent = savingThrowsModel.savingThrows[key].formattedModifier;
+    savingThrowElements.proficient.checked = savingThrowsModel.savingThrows[key].isProficient;
+    savingThrowElements.override.value = savingThrowsModel.savingThrows[key].override;
+  }
+
+  updateEditModeViewSavingThrowModifier(key) {
+    this.editElements.savingThrow[key].modifier.textContent = savingThrowsModel.savingThrows[key].formattedModifier;
+  }
+
+  updateShowModeView() {
     const text = savingThrowsModel.text;
 
     if (text === '') {

@@ -33,9 +33,25 @@ beforeEach(() => {
   skillsSection.connect();
 });
 
+it('show section should have default values', () => {
+  expect(skillsSection.showElements.heading).toHaveTextContent('Skills');
+  expect(skillsSection.showElements.text).toHaveTextContent('');
+});
+
 describe('when the show section is clicked', () => {
   beforeEach(() => {
     skillsSection.showElements.section.click();
+  });
+
+  it('edit section should have default values', () => {
+    for(const key of skillsModel.keys) {
+      const skillElements = skillsSection.editElements.skill[key];
+      expect(skillElements.enable).not.toBeChecked();
+      expect(skillElements.label).toHaveTextContent(skillsModel.skills[key].prettyName);
+      expect(skillElements.modifier).toHaveTextContent('+0');
+      expect(skillElements.proficient).not.toBeChecked();
+      expect(skillElements.override).toHaveValue(null);
+    }
   });
 
   it('should switch to edit mode and focus on the acrobatics enable checkbox', () => {

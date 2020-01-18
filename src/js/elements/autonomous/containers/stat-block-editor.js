@@ -11,7 +11,6 @@ import StatBlock from './stat-block.js';
 import ExportDialog from '../dialogs/export-dialog.js';
 
 import CurrentContext from '../../../models/current-context.js';
-import Creature from '../../../models/creature.js';
 
 export default class StatBlockEditor extends CustomAutonomousElement {
   static get elementName() { return 'stat-block-editor'; }
@@ -23,8 +22,6 @@ export default class StatBlockEditor extends CustomAutonomousElement {
 
   constructor() {
     super(StatBlockEditor.templatePaths);
-
-    CurrentContext.creature = new Creature();
 
     if (isRunningInNode) {
       this.statBlockMenu = new StatBlockMenu(this);
@@ -47,6 +44,8 @@ export default class StatBlockEditor extends CustomAutonomousElement {
 
   connectedCallback() {
     if (this.isConnected && ! this.isInitialized) {
+      super.connectedCallback();
+
       this.addEventListener('numberOfColumnsChanged', this.onNumberOfColumnsChanged.bind(this));
       this.addEventListener('twoColumnHeightChanged', this.onTwoColumnHeightChanged.bind(this));
       this.addEventListener('emptySectionsVisibilityChanged', this.onEmptySectionsVisiblityChanged.bind(this));

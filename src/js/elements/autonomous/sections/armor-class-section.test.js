@@ -24,9 +24,22 @@ beforeEach(() => {
   armorClassSection.connect();
 });
 
+it('show section should have default values', () => {
+  expect(armorClassSection.showElements.heading).toHaveTextContent('Armor Class');
+  expect(armorClassSection.showElements.text).toHaveTextContent(10);
+});
+
 describe('when the show section is clicked', () => {
   beforeEach(() => {
     armorClassSection.showElements.section.click();
+  });
+
+  it('edit section should have default values', () => {
+    expect(armorClassSection.editElements.armorClass).toHaveValue(10);
+    expect(armorClassSection.editElements.armorType).toHaveValue('');
+    expect(armorClassSection.editElements.hasShield).not.toBeChecked();
+    expect(armorClassSection.editElements.useCustomText).not.toBeChecked();
+    expect(armorClassSection.editElements.customText).toHaveValue('');
   });
 
   it('should switch to edit mode and focus on the armor class field', () => {

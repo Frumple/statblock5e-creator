@@ -17,6 +17,6 @@ export default class BasicStats extends DivisibleContainer {
   }
 
   updateHitPointsView() {
-    this.sections.get('hitPoints').updateView();
+    this.sections.get('hitPoints').updateShowModeView();
   }
 }

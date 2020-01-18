@@ -25,9 +25,25 @@ beforeEach(() => {
   abilityScoresSection.connect();
 });
 
+it('show section should have default values', () => {
+  for(const key of abilitiesModel.keys) {
+    expect(abilityScoresSection.showElements.score[key]).toHaveTextContent(10);
+    expect(abilityScoresSection.showElements.modifier[key]).toHaveTextContent('(+0)');
+  }
+});
+
 describe('when the show section is clicked', () => {
   beforeEach(() => {
     abilityScoresSection.showElements.section.click();
+  });
+
+  it('edit section should have default values', () => {
+    for(const key of abilitiesModel.keys) {
+      expect(abilityScoresSection.editElements.score[key]).toHaveValue(10);
+      expect(abilityScoresSection.editElements.modifier[key]).toHaveTextContent('(+0)');
+    }
+
+    expect(abilityScoresSection.editElements.proficiencyBonus).toHaveValue(2);
   });
 
   it('should switch to edit mode and focus on the strength score field', () => {

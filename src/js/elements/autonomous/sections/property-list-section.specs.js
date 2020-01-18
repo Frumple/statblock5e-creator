@@ -1,5 +1,14 @@
 import { inputValueAndTriggerEvent } from '../../../helpers/element-helpers.js';
 
+export function showSectionShouldHaveDefaultValues(section, headingName, expectedText = '') {
+  expect(section.showElements.heading).toHaveTextContent(headingName);
+  expect(section.showElements.text).toHaveTextContent(expectedText);
+}
+
+export function editSectionShouldHaveDefaultValues(section, expectedItems = []) {
+  expect(section.editElements.propertyList.itemsAsText).toEqual(expectedItems);
+}
+
 export function shouldAddAnItem(section, headingName, itemText) {
   const expectedItems = [itemText];
 
@@ -73,11 +82,11 @@ export function shouldRemoveAndAddSuggestions(section, itemText) {
   inputValueAndTriggerEvent(section.editElements.input, itemText);
   section.editElements.addButton.click();
 
-  let dataList = section.editElements.dataList;
-  let option = dataList.findOption(itemText);
+  const dataList = section.editElements.dataList;
+  const option = dataList.findOption(itemText);
   expect(option).toHaveAttribute('disabled');
 
-  let item = section.editElements.propertyList.findItem(itemText);
+  const item = section.editElements.propertyList.findItem(itemText);
   item.remove();
 
   expect(option).not.toHaveAttribute('disabled');
@@ -90,7 +99,7 @@ export function shouldAddAndRemoveItem(section, headingName, itemText) {
   inputValueAndTriggerEvent(section.editElements.input, itemText);
   section.editElements.addButton.click();
 
-  let item = section.editElements.propertyList.findItem(itemText);
+  const item = section.editElements.propertyList.findItem(itemText);
   item.remove();
 
   expect(section.editElements.propertyList.itemsAsText).toEqual(expectedItems);
@@ -114,7 +123,7 @@ export function shouldDeleteOneOfManyItems(section, headingName, initialItems, i
     section.editElements.addButton.click();
   }
 
-  let item = section.editElements.propertyList.findItem(itemToDelete);
+  const item = section.editElements.propertyList.findItem(itemToDelete);
   item.remove();
 
   expect(section.editElements.propertyList.itemsAsText).toEqual(expectedItems);

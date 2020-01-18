@@ -22,9 +22,19 @@ beforeEach(() => {
   titleSection.connect();
 });
 
+it('show section should have default values', () => {
+  expect(titleSection.showElements.title).toHaveTextContent('Commoner');
+});
+
 describe('when the show section is clicked', () => {
   beforeEach(() => {
     titleSection.showElements.section.click();
+  });
+
+  it('edit section should have default values', () => {
+    expect(titleSection.editElements.fullName).toHaveValue('Commoner');
+    expect(titleSection.editElements.shortName).toHaveValue('');
+    expect(titleSection.editElements.properNoun).not.toBeChecked();
   });
 
   it('should switch to edit mode and focus on the title field', () => {

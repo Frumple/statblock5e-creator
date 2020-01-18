@@ -59,8 +59,8 @@ export default class LegendaryActionsSection extends blockListSectionModule.Bloc
     this.listModel.htmlDescription = this.editElements.description.htmlText;
   }
 
-  updateView() {
-    super.updateView();
+  updateShowModeView() {
+    super.updateShowModeView();
 
     this.showElements.description.innerHTMLSanitized = this.listModel.htmlDescription;
   }

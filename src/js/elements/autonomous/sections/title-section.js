@@ -1,7 +1,7 @@
 import * as sectionModule from './section.js';
 import CurrentContext from '../../../models/current-context.js';
 
-const title = CurrentContext.creature.title;
+const titleModel = CurrentContext.creature.title;
 
 export default class TitleSection extends sectionModule.Section {
   static get elementName() { return 'title-section'; }
@@ -15,10 +15,14 @@ export default class TitleSection extends sectionModule.Section {
     super(TitleSection.templatePaths,
           TitleShowElements,
           TitleEditElements);
+
+    this.classModel = CurrentContext.creature.title;
   }
 
   connectedCallback() {
     if (this.isConnected && ! this.isInitialized) {
+      super.connectedCallback();
+
       this.editElements.fullName.addEventListener('input', this.onInputCreatureName.bind(this));
       this.editElements.shortName.addEventListener('input', this.onInputShortName.bind(this));
       this.editElements.properNoun.addEventListener('input', this.onInputProperNoun.bind(this));
@@ -29,18 +33,18 @@ export default class TitleSection extends sectionModule.Section {
     const fullName = this.editElements.fullName.value;
 
     if (fullName !== '') {
-      title.fullName = fullName;
+      titleModel.fullName = fullName;
       this.dispatchCreatureNameChangedEvent();
     }
   }
 
   onInputShortName() {
-    title.shortName = this.editElements.shortName.value;
+    titleModel.shortName = this.editElements.shortName.value;
     this.dispatchCreatureNameChangedEvent();
   }
 
   onInputProperNoun() {
-    title.isProperNoun = this.editElements.properNoun.checked;
+    titleModel.isProperNoun = this.editElements.properNoun.checked;
     this.dispatchCreatureNameChangedEvent();
   }
 
@@ -53,9 +57,9 @@ export default class TitleSection extends sectionModule.Section {
       bubbles: true,
       composed: true,
       detail: {
-        creatureName: title.fullName,
-        shortName: title.shortName,
-        isProperNoun: title.isProperNoun
+        creatureName: titleModel.fullName,
+        shortName: titleModel.shortName,
+        isProperNoun: titleModel.isProperNoun
       }
     });
     this.dispatchEvent(changeEvent);
@@ -67,26 +71,29 @@ export default class TitleSection extends sectionModule.Section {
   }
 
   updateModel() {
-    title.fullName = this.editElements.fullName.value;
-    title.shortName = this.editElements.shortName.value;
-    title.isProperNoun = this.editElements.properNoun.checked;
+    titleModel.fullName = this.editElements.fullName.value;
+    titleModel.shortName = this.editElements.shortName.value;
+    titleModel.isProperNoun = this.editElements.properNoun.checked;
   }
 
-  updateView() {
-    this.editElements.fullName.value = title.fullName;
-    this.showElements.title.textContent = title.fullName;
+  updateEditModeView() {
+    this.editElements.fullName.value = titleModel.fullName;
+  }
+
+  updateShowModeView() {
+    this.showElements.title.textContent = titleModel.fullName;
   }
 
   exportToJson() {
-    return title.toJson();
+    return titleModel.toJson();
   }
 
   exportToHtml() {
-    return title.toHtml();
+    return titleModel.toHtml();
   }
 
   exportToHomebrewery() {
-    return title.toHomebrewery();
+    return titleModel.toHomebrewery();
   }
 }
 

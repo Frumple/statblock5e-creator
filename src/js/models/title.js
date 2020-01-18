@@ -19,10 +19,6 @@ export default class Title {
     return this._fullName;
   }
 
-  get title() {
-    return this._fullName;
-  }
-
   get grammaticalFullName() {
     return this.grammaticize(this._fullName);
   }

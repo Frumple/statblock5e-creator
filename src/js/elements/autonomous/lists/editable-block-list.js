@@ -22,10 +22,19 @@ export default class EditableBlockList extends DragAndDropList {
     return Array.from(this.children);
   }
 
-  addBlock(itemType) {
+  clear() {
+    for (const block of this.blocks) {
+      block.remove();
+    }
+  }
+
+  addBlock(itemType, name = '', originalText = '') {
     const block = EditableBlockList.createListItem();
     block.list = this;
     block.itemType = itemType;
+    block.name = name;
+    block.originalText = originalText;
+
     if (this.disableBlockNameItalics) {
       block.disableBlockNameItalics();
     }

@@ -15,6 +15,13 @@ export default class PropertyList extends DragAndDropList {
     super(PropertyList.templatePaths, parent);
   }
 
+  set items(itemTexts) {
+    this.clearItems();
+    for (const itemText of itemTexts) {
+      this.addItem(itemText);
+    }
+  }
+
   get items() {
     return Array.from(this.children);
   }
@@ -36,6 +43,12 @@ export default class PropertyList extends DragAndDropList {
     }
 
     this.appendChild(listItem);
+  }
+
+  clearItems() {
+    for(const item in this.items) {
+      item.remove();
+    }
   }
 
   findItem(itemText) {

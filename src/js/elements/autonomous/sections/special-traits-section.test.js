@@ -25,6 +25,10 @@ beforeEach(() => {
   specialTraitsSection.connect();
 });
 
+it('section should have default blocks', () => {
+  sharedSpecs.sectionShouldHaveDefaultBlocks(specialTraitsSection);
+});
+
 describe('when the show section is clicked', () => {
   beforeEach(() => {
     specialTraitsSection.showElements.section.click();

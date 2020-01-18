@@ -30,6 +30,8 @@ export default class StatBlock extends CustomAutonomousElement {
 
   connectedCallback() {
     if (this.isConnected && ! this.isInitialized) {
+      super.connectedCallback();
+
       this.addEventListener('creatureNameChanged', this.onCreatureNameChanged);
       this.addEventListener('abilityScoreChanged', this.onAbilityScoreChanged);
       this.addEventListener('proficiencyBonusChanged', this.onProficiencyBonusChanged);

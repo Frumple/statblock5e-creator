@@ -24,9 +24,18 @@ export default class AbilityScoresSection extends sectionModule.Section {
     this.editElements.proficiencyBonus.addEventListener('input', this.onInputProficiencyBonus.bind(this));
   }
 
+  connectedCallback() {
+    if (this.isConnected && ! this.isInitialized) {
+      super.connectedCallback();
+
+      this.isInitialized = true;
+    }
+  }
+
   onInputAbilityScore(key) {
     this.updateModelAbilityScore(key);
-    this.updateViewAbility(key);
+    this.updateEditModeViewAbilityModifier(key);
+    this.updateShowModeViewAbility(key);
   }
 
   onInputProficiencyBonus() {
@@ -86,20 +95,35 @@ export default class AbilityScoresSection extends sectionModule.Section {
     this.dispatchEvent(changeEvent);
   }
 
-  updateView() {
+  updateEditModeView() {
     for (const key of abilitiesModel.keys) {
-      this.updateViewAbility(key);
+      this.updateEditModeViewAbilityScore(key);
+      this.updateEditModeViewAbilityModifier(key);
+    }
+
+    this.editElements.proficiencyBonus.value = proficiencyBonusModel.proficiencyBonus;
+  }
+
+  updateEditModeViewAbilityScore(key) {
+    this.editElements.score[key].value = abilitiesModel.abilities[key].score;
+
+  }
+
+  updateEditModeViewAbilityModifier(key) {
+    this.editElements.modifier[key].textContent = abilitiesModel.abilities[key].formattedModifier;
+  }
+
+  updateShowModeView() {
+    for (const key of abilitiesModel.keys) {
+      this.updateShowModeViewAbility(key);
     }
   }
 
-  updateViewAbility(key) {
+  updateShowModeViewAbility(key) {
     const ability = abilitiesModel.abilities[key];
-    const formattedModifier = ability.formattedModifier;
-
-    this.editElements.modifier[key].textContent = formattedModifier;
 
     this.showElements.score[key].textContent = ability.score;
-    this.showElements.modifier[key].textContent = formattedModifier;
+    this.showElements.modifier[key].textContent = ability.formattedModifier;
   }
 
   exportToJson() {

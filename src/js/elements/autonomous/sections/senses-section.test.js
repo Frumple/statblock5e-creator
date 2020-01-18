@@ -31,9 +31,24 @@ beforeEach(() => {
   sensesSection.connect();
 });
 
+it('show section should have default values', () => {
+  expect(sensesSection.showElements.heading).toHaveTextContent('Senses');
+  expect(sensesSection.showElements.text).toHaveTextContent('passive Perception 10');
+});
+
 describe('when the show section is clicked', () => {
   beforeEach(() => {
     sensesSection.showElements.section.click();
+  });
+
+  it('edit section should have default values', () => {
+    expect(sensesSection.editElements.blindsight).toHaveValue(null);
+    expect(sensesSection.editElements.darkvision).toHaveValue(null);
+    expect(sensesSection.editElements.tremorsense).toHaveValue(null);
+    expect(sensesSection.editElements.truesight).toHaveValue(null);
+    expect(sensesSection.editElements.passivePerception).toHaveTextContent(10);
+    expect(sensesSection.editElements.useCustomText).not.toBeChecked();
+    expect(sensesSection.editElements.customText).toHaveValue('');
   });
 
   it('should switch to edit mode and focus on the blindsight field', () => {
@@ -288,7 +303,7 @@ describe('should calculate the passive perception based on the following conditi
     skill.isProficient = perceptionProficient;
     skill.override = nullIfEmptyString(perceptionOverride);
 
-    sensesSection.updateView();
+    sensesSection.updateViewOnAttributeChange();
 
     expect(sensesModel.passivePerception).toBe(expectedPassivePerception);
 

@@ -23,9 +23,19 @@ beforeEach(() => {
   challengeRatingSection.connect();
 });
 
+it('show section should have default values', () => {
+  expect(challengeRatingSection.showElements.heading).toHaveTextContent('Challenge');
+  expect(challengeRatingSection.showElements.text).toHaveTextContent('0 (10 XP)');
+});
+
 describe('when the show section is clicked', () => {
   beforeEach(() => {
     challengeRatingSection.showElements.section.click();
+  });
+
+  it('edit section should have default values', () => {
+    expect(challengeRatingSection.editElements.challengeRating).toHaveValue('0');
+    expect(challengeRatingSection.editElements.experiencePoints).toHaveValue(10);
   });
 
   it('should switch to edit mode and focus on the challenge rating field', () => {

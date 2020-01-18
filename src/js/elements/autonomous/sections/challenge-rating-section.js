@@ -31,12 +31,16 @@ export default class ChallengeRatingSection extends propertyLineSectionModule.Pr
   }
 
   updateModel() {
-    const challengeRatingElement = this.editElements.challengeRating;
-    challengeRating.challengeRating = challengeRatingElement.valueAsFloat;
+    challengeRating.challengeRating = this.editElements.challengeRating.valueAsFloat;
     challengeRating.experiencePoints = this.editElements.experiencePoints.valueAsInt;
   }
 
-  updateView() {
+  updateEditModeView() {
+    this.editElements.challengeRating.value = challengeRating.challengeRating;
+    this.editElements.experiencePoints.value = challengeRating.experiencePoints;
+  }
+
+  updateShowModeView() {
     this.showElements.text.textContent = challengeRating.text;
   }
 

@@ -25,9 +25,25 @@ beforeEach(() => {
   speedSection.connect();
 });
 
+it('show section should have default values', () => {
+  expect(speedSection.showElements.heading).toHaveTextContent('Speed');
+  expect(speedSection.showElements.text).toHaveTextContent('30 ft.');
+});
+
 describe('when the show section is clicked', () => {
   beforeEach(() => {
     speedSection.showElements.section.click();
+  });
+
+  it('edit section should have default values', () => {
+    expect(speedSection.editElements.walk).toHaveValue(30);
+    expect(speedSection.editElements.burrow).toHaveValue(null);
+    expect(speedSection.editElements.climb).toHaveValue(null);
+    expect(speedSection.editElements.fly).toHaveValue(null);
+    expect(speedSection.editElements.hover).not.toBeChecked();
+    expect(speedSection.editElements.swim).toHaveValue(null);
+    expect(speedSection.editElements.useCustomText).not.toBeChecked();
+    expect(speedSection.editElements.customText).toHaveValue('');
   });
 
   it('should switch to edit mode and focus on the walk speed field', () => {

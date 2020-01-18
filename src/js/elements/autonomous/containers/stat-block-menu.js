@@ -31,6 +31,8 @@ export default class StatBlockMenu extends CustomAutonomousElement {
 
   connectedCallback() {
     if (this.isConnected && ! this.isInitialized) {
+      super.connectedCallback();
+
       this.oneColumnButton.addEventListener('click', this.onClickOneColumnButton.bind(this));
       this.twoColumnButton.addEventListener('click', this.onClickTwoColumnButton.bind(this));
 

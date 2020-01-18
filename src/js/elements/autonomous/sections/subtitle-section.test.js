@@ -22,9 +22,22 @@ beforeEach(() => {
   subtitleSection.connect();
 });
 
+it('show section should have default values', () => {
+  expect(subtitleSection.showElements.text).toHaveTextContent('Medium humanoid, unaligned');
+});
+
 describe('when the show section is clicked', () => {
   beforeEach(() => {
     subtitleSection.showElements.section.click();
+  });
+
+  it('edit section should have default values', () => {
+    expect(subtitleSection.editElements.size).toHaveValue('Medium');
+    expect(subtitleSection.editElements.type).toHaveValue('humanoid');
+    expect(subtitleSection.editElements.tags).toHaveValue('');
+    expect(subtitleSection.editElements.alignment).toHaveValue('unaligned');
+    expect(subtitleSection.editElements.useCustomText).not.toBeChecked();
+    expect(subtitleSection.editElements.customText).toHaveValue('');
   });
 
   it('should switch to edit mode and focus on the size field', () => {

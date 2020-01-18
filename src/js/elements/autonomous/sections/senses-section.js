@@ -19,6 +19,8 @@ export default class SensesSection extends propertyLineSectionModule.PropertyLin
 
   connectedCallback() {
     if (this.isConnected && ! this.isInitialized) {
+      super.connectedCallback();
+
       this.editElements.useCustomText.disableElementsWhenChecked(
         this.editElements.blindsight,
         this.editElements.darkvision,
@@ -49,9 +51,28 @@ export default class SensesSection extends propertyLineSectionModule.PropertyLin
     sensesModel.htmlCustomText = this.editElements.customText.htmlText;
   }
 
-  updateView() {
-    this.editElements.passivePerception.textContent = sensesModel.passivePerception;
+  updateViewOnAttributeChange() {
+    this.updateEditModeViewPassivePerception();
+    this.updateShowModeView();
+  }
 
+  updateEditModeView() {
+    this.editElements.blindsight.value = sensesModel.blindsight;
+    this.editElements.darkvision.value = sensesModel.darkvision;
+    this.editElements.tremorsense.value = sensesModel.tremorsense;
+    this.editElements.truesight.value = sensesModel.truesight;
+
+    this.editElements.useCustomText.checked = sensesModel.useCustomText;
+    this.editElements.customText.value = sensesModel.originalCustomText;
+
+    this.updateEditModeViewPassivePerception();
+  }
+
+  updateEditModeViewPassivePerception() {
+    this.editElements.passivePerception.textContent = sensesModel.passivePerception;
+  }
+
+  updateShowModeView() {
     if (sensesModel.useCustomText) {
       this.showElements.text.innerHTMLSanitized = sensesModel.htmlCustomText;
     } else {

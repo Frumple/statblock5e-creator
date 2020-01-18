@@ -23,7 +23,7 @@ export default class DisplayBlockList extends CustomAutonomousElement {
 
   clear() {
     for (const block of this.blocks) {
-      block.remove();
+      this.removeChild(block);
     }
   }
 

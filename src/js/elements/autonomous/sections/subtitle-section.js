@@ -19,6 +19,8 @@ export default class SubtitleSection extends sectionModule.Section {
 
   connectedCallback() {
     if (this.isConnected && ! this.isInitialized) {
+      super.connectedCallback();
+
       this.editElements.useCustomText.disableElementsWhenChecked(
         this.editElements.size,
         this.editElements.type,
@@ -50,7 +52,17 @@ export default class SubtitleSection extends sectionModule.Section {
     subtitle.customSubtitleText = this.editElements.customText.value;
   }
 
-  updateView() {
+  updateEditModeView() {
+    this.editElements.size.value = subtitle.size;
+    this.editElements.type.value = subtitle.type;
+    this.editElements.tags.value = subtitle.tags;
+    this.editElements.alignment.value = subtitle.alignment;
+
+    this.editElements.useCustomText.checked = subtitle.useCustomSubtitleText;
+    this.editElements.customText.value = subtitle.customSubtitleText;
+  }
+
+  updateShowModeView() {
     this.showElements.text.textContent = subtitle.text;
   }
 

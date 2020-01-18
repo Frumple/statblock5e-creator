@@ -19,6 +19,8 @@ export default class HitPointsSection extends propertyLineSectionModule.Property
 
   connectedCallback() {
     if (this.isConnected && ! this.isInitialized) {
+      super.connectedCallback();
+
       this.editElements.useHitDie.disableElementsWhenChecked(
         this.editElements.hitPoints);
 
@@ -37,22 +39,22 @@ export default class HitPointsSection extends propertyLineSectionModule.Property
 
   onInputHitPoints() {
     this.updateModelHitPoints();
-    this.updateView();
+    this.updateShowModeView();
   }
 
   onInputUseHitDie() {
     this.updateModelUseHitDie();
-    this.updateView();
+    this.updateShowModeView();
   }
 
   onInputHitDieQuantity() {
     this.updateModelHitDieQuantity();
-    this.updateView();
+    this.updateShowModeView();
   }
 
   onInputHitDieSize() {
     this.updateModelHitDieSize();
-    this.updateView();
+    this.updateShowModeView();
   }
 
   checkForErrors() {
@@ -98,7 +100,14 @@ export default class HitPointsSection extends propertyLineSectionModule.Property
     }
   }
 
-  updateView() {
+  updateEditModeView() {
+    this.editElements.hitPoints.value = hitPointsModel.hitPoints;
+    this.editElements.useHitDie.checked = hitPointsModel.useHitDie;
+    this.editElements.hitDieQuantity.value = hitPointsModel.hitDieQuantity;
+    this.editElements.hitDieSize.value = hitPointsModel.hitDieSize;
+  }
+
+  updateShowModeView() {
     this.editElements.constitutionHitPoints.textContent = hitPointsModel.constitutionHitPointsText;
 
     if (hitPointsModel.useHitDie) {

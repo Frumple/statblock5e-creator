@@ -27,9 +27,22 @@ beforeEach(() => {
   hitPointsSection.connect();
 });
 
+it('show section should have default values', () => {
+  expect(hitPointsSection.showElements.heading).toHaveTextContent('Hit Points');
+  expect(hitPointsSection.showElements.text).toHaveTextContent('4 (1d8)');
+});
+
 describe('when the show section is clicked', () => {
   beforeEach(() => {
     hitPointsSection.showElements.section.click();
+  });
+
+  it('edit section should have default values', () => {
+    expect(hitPointsSection.editElements.hitPoints).toHaveValue(4);
+    expect(hitPointsSection.editElements.useHitDie).toBeChecked();
+    expect(hitPointsSection.editElements.hitDieQuantity).toHaveValue(1);
+    expect(hitPointsSection.editElements.hitDieSize).toHaveValue('8');
+    expect(hitPointsSection.editElements.constitutionHitPoints).toHaveTextContent('+ 0');
   });
 
   it('should switch to edit mode and focus on the hit die quantity field', () => {
@@ -80,7 +93,7 @@ describe('when the show section is clicked', () => {
           inputValueAndTriggerEvent(hitPointsSection.editElements.hitDieSize, hitDieSize);
           abilities.abilities['constitution'].score = constitutionScore;
 
-          hitPointsSection.updateView();
+          hitPointsSection.updateShowModeView();
 
           expect(hitPointsModel.useHitDie).toBe(true);
           expect(hitPointsModel.hitDieQuantity).toBe(hitDieQuantity);
@@ -185,7 +198,7 @@ describe('when the show section is clicked', () => {
         inputValueAndTriggerEvent(hitPointsSection.editElements.hitDieSize, 12);
         abilities.abilities['constitution'].score = 19;
 
-        hitPointsSection.updateView();
+        hitPointsSection.updateShowModeView();
 
         expect(hitPointsModel.useHitDie).toBe(true);
         expect(hitPointsModel.hitDieQuantity).toBe(10);

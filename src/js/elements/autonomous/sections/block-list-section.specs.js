@@ -9,6 +9,10 @@ export function setExpectedHeading(heading) {
   expectedHeading = heading;
 }
 
+export function sectionShouldHaveDefaultBlocks(section, expectedBlocks = []) {
+  verifyBlocks(section, expectedBlocks);
+}
+
 export function shouldSwitchToEditModeAndFocusOnAddButtonIfNoBlocks(section) {
   expect(section).toBeInMode('edit');
   expect(section.editElements.addButton).toHaveFocus();
@@ -276,15 +280,17 @@ function verifyHomebreweryExport(section, expectedBlocks) {
     expect(firstLine).toBe(`> ### ${expectedHeading}`);
   }
 
-  const firstBlockIndex = homebreweryExport.indexOf('> ***');
-  const blocksText = homebreweryExport.slice(firstBlockIndex);
+  if (expectedBlocks.length > 0) {
+    const firstBlockIndex = homebreweryExport.indexOf('> ***');
+    const blocksText = homebreweryExport.slice(firstBlockIndex);
 
-  const expectedBlocksInHomebreweryFormat =
-    expectedBlocks.map(
-      block => `> ***${block.name}.*** ${(block.homebreweryText ? block.homebreweryText : block.originalText)}`);
+    const expectedBlocksInHomebreweryFormat =
+      expectedBlocks.map(
+        block => `> ***${block.name}.*** ${(block.homebreweryText ? block.homebreweryText : block.originalText)}`);
 
-  const expectedBlocksText = expectedBlocksInHomebreweryFormat.join('\n>\n');
-  expect(blocksText).toBe(expectedBlocksText);
+    const expectedBlocksText = expectedBlocksInHomebreweryFormat.join('\n>\n');
+    expect(blocksText).toBe(expectedBlocksText);
+  }
 }
 
 function expectSectionToBeEmpty(section, isEmpty) {

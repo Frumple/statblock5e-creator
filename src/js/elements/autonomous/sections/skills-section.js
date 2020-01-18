@@ -2,6 +2,7 @@ import * as propertyLineSectionModule from './property-line-section.js';
 import CurrentContext from '../../../models/current-context.js';
 import { inputValueAndTriggerEvent } from '../../../helpers/element-helpers.js';
 
+const abilitiesModel = CurrentContext.creature.abilities;
 const skillsModel = CurrentContext.creature.skills;
 
 export default class SkillsSection extends propertyLineSectionModule.PropertyLineSection {
@@ -22,6 +23,8 @@ export default class SkillsSection extends propertyLineSectionModule.PropertyLin
 
   connectedCallback() {
     if (this.isConnected && ! this.isInitialized) {
+      super.connectedCallback();
+
       for (const key of skillsModel.keys) {
         this.initializeSkillElements(key);
       }
@@ -61,22 +64,22 @@ export default class SkillsSection extends propertyLineSectionModule.PropertyLin
     }
 
     this.updateModelSkillEnabled(key);
-    this.updateViewSkill(key);
-    this.updateViewText();
+    this.updateEditModeViewSkillModifier(key);
+    this.updateShowModeView();
     this.dispatchSkillChangedEvent(key);
   }
 
   onInputSkillProficiency(key) {
     this.updateModelSkillProficiency(key);
-    this.updateViewSkill(key);
-    this.updateViewText();
+    this.updateEditModeViewSkillModifier(key);
+    this.updateShowModeView();
     this.dispatchSkillChangedEvent(key);
   }
 
   onInputSkillOverride(key) {
     this.updateModelSkillOverride(key);
-    this.updateViewSkill(key);
-    this.updateViewText();
+    this.updateEditModeViewSkillModifier(key);
+    this.updateShowModeView();
     this.dispatchSkillChangedEvent(key);
   }
 
@@ -115,28 +118,40 @@ export default class SkillsSection extends propertyLineSectionModule.PropertyLin
     skillsModel.skills[key].override = this.editElements.skill[key].override.valueAsInt;
   }
 
-  updateView() {
-    for (const key of skillsModel.keys) {
-      this.updateViewSkill(key);
-    }
-
-    this.updateViewText();
-  }
-
-  updateViewSkillsByAbility(abilityName) {
-    for (const [key, value] of skillsModel.entries) {
-      if (abilityName === value.abilityName) {
-        this.updateViewSkill(key);
+  updateViewOnAttributeChange(abilityName) {
+    if (abilityName) {
+      for (const [key, value] of skillsModel.entries) {
+        if (abilitiesModel.abilities[abilityName] === value.ability) {
+          this.updateEditModeViewSkillModifier(key);
+        }
+      }
+    } else {
+      for (const key of skillsModel.keys) {
+        this.updateEditModeViewSkillModifier(key);
       }
     }
+    this.updateShowModeView();
   }
 
-  updateViewSkill(key) {
-    const skill = skillsModel.skills[key];
-    this.editElements.skill[key].modifier.textContent = skill.formattedModifier;
+  updateEditModeView() {
+    for (const key of skillsModel.keys) {
+      this.updateEditModeViewSkillModifier(key);
+    }
   }
 
-  updateViewText() {
+  updateEditModeViewSkill(key) {
+    const skillElements = skillsModel.skills[key];
+    skillElements.enable.checked = skillsModel.savingThrows[key].isEnabled;
+    skillElements.modifier.textContent = skillsModel.savingThrows[key].formattedModifier;
+    skillElements.proficient.checked = skillsModel.savingThrows[key].isProficient;
+    skillElements.override.value = skillsModel.savingThrows[key].override;
+  }
+
+  updateEditModeViewSkillModifier(key) {
+    this.editElements.skill[key].modifier.textContent = skillsModel.skills[key].formattedModifier;
+  }
+
+  updateShowModeView() {
     const text = skillsModel.text;
 
     if (text === '') {

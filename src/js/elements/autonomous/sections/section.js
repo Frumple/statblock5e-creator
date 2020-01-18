@@ -17,6 +17,11 @@ export class Section extends CustomAutonomousElement {
     this.showElements = new showElementsClass(this.shadowRoot);
     this.editElements = new editElementsClass(this.shadowRoot);
     this.errorMessages = this.shadowRoot.querySelector('error-messages');
+  }
+
+  connectedCallback() {
+    this.updateEditModeView();
+    this.updateShowModeView();
 
     this.showElements.section.addEventListener('click', () => {
       this.edit();
@@ -111,7 +116,7 @@ export class Section extends CustomAutonomousElement {
     }
 
     this.updateModel();
-    this.updateView();
+    this.updateShowModeView();
 
     if (this.empty && ! GlobalOptions.emptySectionsVisibility) {
       this.mode = 'hidden';
@@ -129,12 +134,17 @@ export class Section extends CustomAutonomousElement {
 
   updateModel() {
     throw new Error(
-      `The class '${this.constructor.name}' must implement the updateView() method.`);
+      `The class '${this.constructor.name}' must implement the updateModel() method.`);
   }
 
-  updateView() {
+  updateEditModeView() {
     throw new Error(
-      `The class '${this.constructor.name}' must implement the updateView() method.`);
+      `The class '${this.constructor.name}' must implement the updateEditModeView() method.`);
+  }
+
+  updateShowModeView() {
+    throw new Error(
+      `The class '${this.constructor.name}' must implement the updateShowModeView() method.`);
   }
 
   dispatchModeChangedEvent() {

@@ -19,6 +19,8 @@ export default class PropertyListSection extends propertyLineSectionModule.Prope
   }
 
   connectedCallback() {
+    super.connectedCallback();
+
     this.editElements.input.addEventListener('keydown', this.onEnterKeyDownOnInputField.bind(this));
     this.editElements.addButton.addEventListener('click', this.onClickAddButton.bind(this));
     this.addEventListener('propertyListItemRemoved', this.onPropertyListItemRemoved.bind(this));
@@ -79,9 +81,11 @@ export default class PropertyListSection extends propertyLineSectionModule.Prope
     this.listModel.items = this.editElements.propertyList.itemsAsText;
   }
 
-  updateView() {
-    this.editElements.input.value = '';
+  updateEditModeView() {
+    this.editElements.propertyList.items = this.listModel.items;
+  }
 
+  updateShowModeView() {
     const text = this.listModel.text;
 
     if (text === '') {

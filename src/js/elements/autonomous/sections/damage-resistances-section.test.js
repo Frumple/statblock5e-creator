@@ -24,9 +24,17 @@ beforeEach(() => {
   damageResistancesSection.connect();
 });
 
+it('show section should have default values', () => {
+  sharedSpecs.showSectionShouldHaveDefaultValues(damageResistancesSection, headingName);
+});
+
 describe('when the show section is clicked', () => {
   beforeEach(() => {
     damageResistancesSection.showElements.section.click();
+  });
+
+  it('edit section should have default values', () => {
+    sharedSpecs.editSectionShouldHaveDefaultValues(damageResistancesSection);
   });
 
   it('should switch to edit mode and focus on the text field', () => {

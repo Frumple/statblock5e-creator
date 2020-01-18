@@ -1,7 +1,7 @@
 import * as propertyLineSectionModule from './property-line-section.js';
 import CurrentContext from '../../../models/current-context.js';
 
-const armorClass = CurrentContext.creature.armorClass;
+const armorClassModel = CurrentContext.creature.armorClass;
 
 export default class ArmorClassSection extends propertyLineSectionModule.PropertyLineSection {
   static get elementName() { return 'armor-class-section'; }
@@ -19,6 +19,8 @@ export default class ArmorClassSection extends propertyLineSectionModule.Propert
 
   connectedCallback() {
     if (this.isConnected && ! this.isInitialized) {
+      super.connectedCallback();
+
       this.editElements.useCustomText.disableElementsWhenChecked(
         this.editElements.armorClass,
         this.editElements.armorType,
@@ -43,33 +45,43 @@ export default class ArmorClassSection extends propertyLineSectionModule.Propert
   }
 
   updateModel() {
-    armorClass.armorClass = this.editElements.armorClass.valueAsInt;
-    armorClass.armorType = this.editElements.armorType.value;
-    armorClass.hasShield = this.editElements.hasShield.checked;
+    armorClassModel.armorClass = this.editElements.armorClass.valueAsInt;
+    armorClassModel.armorType = this.editElements.armorType.value;
+    armorClassModel.hasShield = this.editElements.hasShield.checked;
 
-    armorClass.useCustomText = this.editElements.useCustomText.checked;
-    armorClass.originalCustomText = this.editElements.customText.value;
-    armorClass.htmlCustomText = this.editElements.customText.htmlText;
+    armorClassModel.useCustomText = this.editElements.useCustomText.checked;
+    armorClassModel.originalCustomText = this.editElements.customText.value;
+    armorClassModel.htmlCustomText = this.editElements.customText.htmlText;
   }
 
-  updateView() {
-    if (armorClass.useCustomText) {
-      this.showElements.text.innerHTMLSanitized = armorClass.htmlCustomText;
+  updateEditModeView() {
+    this.editElements.armorClass.value = armorClassModel.armorClass;
+    this.editElements.armorType.value = armorClassModel.armorType;
+    this.editElements.hasShield.checked = armorClassModel.hasShield;
+
+    this.editElements.useCustomText.checked = armorClassModel.useCustomText;
+    this.editElements.customText.value = armorClassModel.originalCustomText;
+    this.editElements.customText.htmlText = armorClassModel.htmlCustomText;
+  }
+
+  updateShowModeView() {
+    if (armorClassModel.useCustomText) {
+      this.showElements.text.innerHTMLSanitized = armorClassModel.htmlCustomText;
     } else {
-      this.showElements.text.textContent = armorClass.nonCustomText;
+      this.showElements.text.textContent = armorClassModel.nonCustomText;
     }
   }
 
   exportToJson() {
-    return armorClass.toJson();
+    return armorClassModel.toJson();
   }
 
   exportToHtml() {
-    return armorClass.toHtml();
+    return armorClassModel.toHtml();
   }
 
   exportToHomebrewery() {
-    return armorClass.toHomebrewery();
+    return armorClassModel.toHomebrewery();
   }
 }
 

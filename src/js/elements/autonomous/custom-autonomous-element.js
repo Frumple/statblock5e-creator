@@ -33,6 +33,10 @@ class CustomAutonomousElement extends HTMLElement {
       this.shadowRoot.appendChild(fragment.cloneNode(true));
     }
   }
+
+  connectedCallback() {
+    return;
+  }
 }
 
 class FakeCustomAutonomousElement {

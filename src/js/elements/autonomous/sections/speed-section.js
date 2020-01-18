@@ -19,6 +19,8 @@ export default class SpeedSection extends propertyLineSectionModule.PropertyLine
 
   connectedCallback() {
     if(this.isConnected && ! this.isInitialized) {
+      super.connectedCallback();
+
       this.editElements.useCustomText.disableElementsWhenChecked(
         this.editElements.walk,
         this.editElements.burrow,
@@ -55,7 +57,20 @@ export default class SpeedSection extends propertyLineSectionModule.PropertyLine
     speed.htmlCustomText = this.editElements.customText.htmlText;
   }
 
-  updateView() {
+  updateEditModeView() {
+    this.editElements.walk.value = speed.walk;
+    this.editElements.burrow.value = speed.burrow;
+    this.editElements.climb.value = speed.climb;
+    this.editElements.fly.value = speed.fly;
+    this.editElements.hover.checked = speed.hover;
+    this.editElements.swim.value = speed.swim;
+
+    this.editElements.useCustomText.checked = speed.useCustomText;
+    this.editElements.customText.value = speed.originalCustomText;
+    this.editElements.customText.htmlText = speed.htmlCustomText;
+  }
+
+  updateShowModeView() {
     if (speed.useCustomText) {
       this.showElements.text.innerHTMLSanitized = speed.htmlCustomText;
     } else {

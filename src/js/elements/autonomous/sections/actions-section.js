@@ -1,6 +1,5 @@
 import * as blockListSectionModule from './block-list-section.js';
 import CurrentContext from '../../../models/current-context.js';
-import isRunningInNode from '../../../helpers/is-running-in-node.js';
 
 export default class ActionsSection extends blockListSectionModule.BlockListSection {
   static get elementName() { return 'actions-section'; }
@@ -26,12 +25,6 @@ export default class ActionsSection extends blockListSectionModule.BlockListSect
       this.editElements.generateAttackButton.addEventListener('click', this.onClickGenerateAttackButton.bind(this));
 
       this.addEventListener('generateAttack', this.onGenerateAttackEvent.bind(this));
-
-      if (! isRunningInNode) {
-        this.addBlock('Club', '*Melee Weapon Attack:* mod[strmod + prof] to hit, reach 5 ft., one target. *Hit:* dmg[1d4 + strmod] bludgeoning damage.');
-        this.save();
-        this.reparse();
-      }
 
       this.isInitialized = true;
     }

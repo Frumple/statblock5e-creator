@@ -2,7 +2,7 @@ import SavingThrowsSection from './saving-throws-section.js';
 import * as TestCustomElements from '../../../helpers/test/test-custom-elements.js';
 
 import { inputValueAndTriggerEvent } from '../../../helpers/element-helpers.js';
-import { formatModifier, nullIfEmptyString } from '../../../helpers/string-formatter.js';
+import { capitalizeFirstLetter, formatModifier, nullIfEmptyString } from '../../../helpers/string-formatter.js';
 
 import CurrentContext from '../../../models/current-context.js';
 
@@ -32,9 +32,25 @@ beforeEach(() => {
   savingThrowsSection.connect();
 });
 
+it('show section should have default values', () => {
+  expect(savingThrowsSection.showElements.heading).toHaveTextContent('Saving Throws');
+  expect(savingThrowsSection.showElements.text).toHaveTextContent('');
+});
+
 describe('when the show section is clicked', () => {
   beforeEach(() => {
     savingThrowsSection.showElements.section.click();
+  });
+
+  it('edit section should have default values', () => {
+    for(const key of savingThrowsModel.keys) {
+      const savingThrowElements = savingThrowsSection.editElements.savingThrow[key];
+      expect(savingThrowElements.enable).not.toBeChecked();
+      expect(savingThrowElements.label).toHaveTextContent(capitalizeFirstLetter(key));
+      expect(savingThrowElements.modifier).toHaveTextContent('+0');
+      expect(savingThrowElements.proficient).not.toBeChecked();
+      expect(savingThrowElements.override).toHaveValue(null);
+    }
   });
 
   it('should switch to edit mode and focus on the strength enable checkbox', () => {

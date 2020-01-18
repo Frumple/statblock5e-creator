@@ -28,6 +28,10 @@ beforeEach(() => {
   reactionsSection.connect();
 });
 
+it('section should have default blocks', () => {
+  sharedSpecs.sectionShouldHaveDefaultBlocks(reactionsSection);
+});
+
 describe('when the show section is clicked', () => {
   beforeEach(() => {
     reactionsSection.showElements.section.click();

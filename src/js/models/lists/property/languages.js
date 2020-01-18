@@ -6,6 +6,10 @@ export default class Languages extends PropertyListModel {
           'Language');
   }
 
+  reset() {
+    this.items = ['Common'];
+  }
+
   get text() {
     let text = super.text;
 
