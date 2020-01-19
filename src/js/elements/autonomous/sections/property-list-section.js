@@ -87,13 +87,7 @@ export default class PropertyListSection extends propertyLineSectionModule.Prope
 
   updateShowModeView() {
     const text = this.listModel.text;
-
-    if (text === '') {
-      this.empty = true;
-    } else {
-      this.empty = false;
-    }
-
+    this.empty = (text === '');
     this.showElements.text.textContent = text;
   }
 

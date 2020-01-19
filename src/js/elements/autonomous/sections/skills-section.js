@@ -153,13 +153,7 @@ export default class SkillsSection extends propertyLineSectionModule.PropertyLin
 
   updateShowModeView() {
     const text = skillsModel.text;
-
-    if (text === '') {
-      this.empty = true;
-    } else {
-      this.empty = false;
-    }
-
+    this.empty = (text === '');
     this.showElements.text.textContent = text;
   }
 

@@ -134,13 +134,7 @@ export default class SavingThrowsSection extends propertyLineSectionModule.Prope
 
   updateShowModeView() {
     const text = savingThrowsModel.text;
-
-    if (text === '') {
-      this.empty = true;
-    } else {
-      this.empty = false;
-    }
-
+    this.empty = (text === '');
     this.showElements.text.textContent = text;
   }
 

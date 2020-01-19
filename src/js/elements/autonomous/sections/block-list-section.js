@@ -103,11 +103,7 @@ export class BlockListSection extends sectionModule.Section {
       this.showElements.displayBlockList.addBlock(block.name, block.htmlText);
     }
 
-    if (blocks.length > 0) {
-      this.empty = false;
-    } else {
-      this.empty = true;
-    }
+    this.empty = (blocks.length <= 0);
   }
 
   reparse() {
