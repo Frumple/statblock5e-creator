@@ -47,16 +47,16 @@ export function shouldAddManyItems(section, headingName, items) {
   expect(section).toExportPropertyLineToHomebrewery(headingName, expectedTextContent);
 }
 
-export function shouldDisplayAnErrorIfAddingBlank(section, expectedItemType) {
+export function shouldDisplayAnErrorIfAddingBlank(section, expectedBlockType) {
   inputValueAndTriggerEvent(section.editElements.input, '');
   section.editElements.addButton.click();
 
   expect(section).toHaveError(
     section.editElements.input,
-    `Cannot add a blank ${expectedItemType}.`);
+    `Cannot add a blank ${expectedBlockType}.`);
 }
 
-export function shouldDisplayAnErrorIfAddingDuplicate(section, itemText, expectedItemType) {
+export function shouldDisplayAnErrorIfAddingDuplicate(section, itemText, expectedBlockType) {
   inputValueAndTriggerEvent(section.editElements.input, itemText);
   section.editElements.addButton.click();
 
@@ -65,17 +65,17 @@ export function shouldDisplayAnErrorIfAddingDuplicate(section, itemText, expecte
 
   expect(section).toHaveError(
     section.editElements.input,
-    `Cannot add a duplicate ${expectedItemType}.`);
+    `Cannot add a duplicate ${expectedBlockType}.`);
 }
 
-export function shouldDisplayAnErrorIfSavingWithUnaddedInputText(section, itemText, expectedItemType) {
+export function shouldDisplayAnErrorIfSavingWithUnaddedInputText(section, itemText, expectedBlockType) {
   inputValueAndTriggerEvent(section.editElements.input, itemText);
 
   section.editElements.submitForm();
 
   expect(section).toHaveError(
     section.editElements.input,
-    `Cannot save while the ${expectedItemType} field contains text.\nClear or add the field, then try again.`);
+    `Cannot save while the ${expectedBlockType} field contains text.\nClear or add the field, then try again.`);
 }
 
 export function shouldRemoveAndAddSuggestions(section, itemText) {

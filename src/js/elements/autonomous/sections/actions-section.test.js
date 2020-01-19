@@ -7,7 +7,7 @@ import * as TestCustomElements from '../../../helpers/test/test-custom-elements.
 import * as sharedSpecs from './block-list-section.specs.js';
 
 const expectedHeading = 'Actions';
-const expectedItemType = 'Action';
+const expectedBlockType = 'Action';
 
 const title = CurrentContext.creature.title;
 const abilities = CurrentContext.creature.abilities;
@@ -237,23 +237,23 @@ describe('and the default "Club" attack action is removed, allowing these specs 
       });
 
       it('should display an error if the block name is blank', () => {
-        sharedSpecs.shouldDisplayAnErrorIfBlockNameIsBlank(actionsSection, expectedItemType);
+        sharedSpecs.shouldDisplayAnErrorIfBlockNameIsBlank(actionsSection, expectedBlockType);
       });
 
       it('should display an error if the block text is blank', () => {
-        sharedSpecs.shouldDisplayAnErrorIfBlockTextIsBlank(actionsSection, expectedItemType);
+        sharedSpecs.shouldDisplayAnErrorIfBlockTextIsBlank(actionsSection, expectedBlockType);
       });
 
       it('should display an error if the block text has invalid markdown syntax', () => {
-        sharedSpecs.shouldDisplayAnErrorIfBlockTextHasInvalidMarkdownSyntax(actionsSection, expectedItemType);
+        sharedSpecs.shouldDisplayAnErrorIfBlockTextHasInvalidMarkdownSyntax(actionsSection, expectedBlockType);
       });
 
       it('should display errors if the block name and text are both blank', () => {
-        sharedSpecs.shouldDisplayErrorsIfBlockNameAndTextAreBothBlank(actionsSection, expectedItemType);
+        sharedSpecs.shouldDisplayErrorsIfBlockNameAndTextAreBothBlank(actionsSection, expectedBlockType);
       });
 
       it('should display errors if the block name is blank and block text has invalid markdown syntax', () => {
-        sharedSpecs.shouldDisplayErrorsIfBlockNameIsBlankAndBlockTextHasInvalidMarkdownSyntax(actionsSection, expectedItemType);
+        sharedSpecs.shouldDisplayErrorsIfBlockNameIsBlankAndBlockTextHasInvalidMarkdownSyntax(actionsSection, expectedBlockType);
       });
     });
   });

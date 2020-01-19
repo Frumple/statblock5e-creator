@@ -5,7 +5,7 @@ import * as TestCustomElements from '../../../helpers/test/test-custom-elements.
 import * as sharedSpecs from './property-list-section.specs.js';
 
 const headingName = 'Damage Immunities';
-const expectedItemType = 'Damage Immunity';
+const expectedBlockType = 'Damage Immunity';
 
 const damageImmunities = CurrentContext.creature.damageImmunities;
 
@@ -60,17 +60,17 @@ describe('when the show section is clicked', () => {
     });
 
     it('should display an error after clicking the add button if the input field is blank', () => {
-      sharedSpecs.shouldDisplayAnErrorIfAddingBlank(damageImmunitiesSection, expectedItemType);
+      sharedSpecs.shouldDisplayAnErrorIfAddingBlank(damageImmunitiesSection, expectedBlockType);
     });
 
     it('should display an error after clicking the add button if there is already a duplicate item in the list', () => {
       const itemText = 'lightning';
-      sharedSpecs.shouldDisplayAnErrorIfAddingDuplicate(damageImmunitiesSection, itemText, expectedItemType);
+      sharedSpecs.shouldDisplayAnErrorIfAddingDuplicate(damageImmunitiesSection, itemText, expectedBlockType);
     });
 
     it('should display an error after clicking the save button if the input field is not blank', () => {
       const itemText = 'thunder';
-      sharedSpecs.shouldDisplayAnErrorIfSavingWithUnaddedInputText(damageImmunitiesSection, itemText, expectedItemType);
+      sharedSpecs.shouldDisplayAnErrorIfSavingWithUnaddedInputText(damageImmunitiesSection, itemText, expectedBlockType);
     });
   });
 

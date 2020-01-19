@@ -8,7 +8,7 @@ import * as sharedSpecs from './block-list-section.specs.js';
 import { inputValueAndTriggerEvent } from '../../../helpers/element-helpers.js';
 
 const expectedHeading = 'Legendary Actions';
-const expectedItemType = 'Legendary Action';
+const expectedBlockType = 'Legendary Action';
 
 const title = CurrentContext.creature.title;
 const abilities = CurrentContext.creature.abilities;
@@ -268,23 +268,23 @@ describe('when the show section is clicked', () => {
     });
 
     it('should display an error if the block name is blank', () => {
-      sharedSpecs.shouldDisplayAnErrorIfBlockNameIsBlank(legendaryActionsSection, expectedItemType);
+      sharedSpecs.shouldDisplayAnErrorIfBlockNameIsBlank(legendaryActionsSection, expectedBlockType);
     });
 
     it('should display an error if the block text is blank', () => {
-      sharedSpecs.shouldDisplayAnErrorIfBlockTextIsBlank(legendaryActionsSection, expectedItemType);
+      sharedSpecs.shouldDisplayAnErrorIfBlockTextIsBlank(legendaryActionsSection, expectedBlockType);
     });
 
     it('should display an error if the block text has invalid markdown syntax', () => {
-      sharedSpecs.shouldDisplayAnErrorIfBlockTextHasInvalidMarkdownSyntax(legendaryActionsSection, expectedItemType);
+      sharedSpecs.shouldDisplayAnErrorIfBlockTextHasInvalidMarkdownSyntax(legendaryActionsSection, expectedBlockType);
     });
 
     it('should display errors if the block name and text are both blank', () => {
-      sharedSpecs.shouldDisplayErrorsIfBlockNameAndTextAreBothBlank(legendaryActionsSection, expectedItemType);
+      sharedSpecs.shouldDisplayErrorsIfBlockNameAndTextAreBothBlank(legendaryActionsSection, expectedBlockType);
     });
 
     it('should display errors if the block name is blank and block text has invalid markdown syntax', () => {
-      sharedSpecs.shouldDisplayErrorsIfBlockNameIsBlankAndBlockTextHasInvalidMarkdownSyntax(legendaryActionsSection, expectedItemType);
+      sharedSpecs.shouldDisplayErrorsIfBlockNameIsBlankAndBlockTextHasInvalidMarkdownSyntax(legendaryActionsSection, expectedBlockType);
     });
   });
 });

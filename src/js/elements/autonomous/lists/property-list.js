@@ -35,9 +35,8 @@ export default class PropertyList extends DragAndDropList {
   }
 
   addItem(itemText) {
-    const listItem = PropertyList.createListItem(this);
-    listItem.list = this;
-    listItem.text = itemText;
+    const listItem = PropertyList.createListItem(this, itemText);
+
     if (isRunningInNode) {
       listItem.connect();
     }
@@ -55,10 +54,12 @@ export default class PropertyList extends DragAndDropList {
     return this.items.filter(element => element.text === itemText)[0];
   }
 
-  static createListItem(parent) {
-    if (isRunningInNode) {
-      return new PropertyListItem(parent);
-    }
-    return document.createElement('property-list-item');
+  static createListItem(list, text) {
+    const listItem = isRunningInNode ? new PropertyListItem(list) : document.createElement('property-list-item');
+
+    listItem.list = list;
+    listItem.text = text;
+
+    return listItem;
   }
 }

@@ -5,7 +5,7 @@ import * as TestCustomElements from '../../../helpers/test/test-custom-elements.
 import * as sharedSpecs from './block-list-section.specs.js';
 
 const expectedHeading = 'Reactions';
-const expectedItemType = 'Reaction';
+const expectedBlockType = 'Reaction';
 
 const title = CurrentContext.creature.title;
 const reactions = CurrentContext.creature.reactions;
@@ -197,23 +197,23 @@ describe('when the show section is clicked', () => {
     });
 
     it('should display an error if the block name is blank', () => {
-      sharedSpecs.shouldDisplayAnErrorIfBlockNameIsBlank(reactionsSection, expectedItemType);
+      sharedSpecs.shouldDisplayAnErrorIfBlockNameIsBlank(reactionsSection, expectedBlockType);
     });
 
     it('should display an error if the block text is blank', () => {
-      sharedSpecs.shouldDisplayAnErrorIfBlockTextIsBlank(reactionsSection, expectedItemType);
+      sharedSpecs.shouldDisplayAnErrorIfBlockTextIsBlank(reactionsSection, expectedBlockType);
     });
 
     it('should display an error if the block text has invalid markdown syntax', () => {
-      sharedSpecs.shouldDisplayAnErrorIfBlockTextHasInvalidMarkdownSyntax(reactionsSection, expectedItemType);
+      sharedSpecs.shouldDisplayAnErrorIfBlockTextHasInvalidMarkdownSyntax(reactionsSection, expectedBlockType);
     });
 
     it('should display errors if the block name and text are both blank', () => {
-      sharedSpecs.shouldDisplayErrorsIfBlockNameAndTextAreBothBlank(reactionsSection, expectedItemType);
+      sharedSpecs.shouldDisplayErrorsIfBlockNameAndTextAreBothBlank(reactionsSection, expectedBlockType);
     });
 
     it('should display errors if the block name is blank and block text has invalid markdown syntax', () => {
-      sharedSpecs.shouldDisplayErrorsIfBlockNameIsBlankAndBlockTextHasInvalidMarkdownSyntax(reactionsSection, expectedItemType);
+      sharedSpecs.shouldDisplayErrorsIfBlockNameIsBlankAndBlockTextHasInvalidMarkdownSyntax(reactionsSection, expectedBlockType);
     });
   });
 });

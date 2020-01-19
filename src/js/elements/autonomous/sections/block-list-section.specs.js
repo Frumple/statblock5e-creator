@@ -133,37 +133,37 @@ export function shouldTrimAllTrailingPeriodCharactersInBlockName(section) {
   expect(section.editElements.editableBlockList.blocks[0].name).toBe(expectedBlocks[0].name);
 }
 
-export function shouldDisplayAnErrorIfBlockNameIsBlank(section, expectedItemType) {
+export function shouldDisplayAnErrorIfBlockNameIsBlank(section, expectedBlockType) {
   addAndPopulateBlock(section, '', 'Some text.');
 
   section.editElements.submitForm();
 
   expect(section).toHaveError(
     section.editElements.editableBlockList.blocks[0].nameInput,
-    `${expectedItemType} Name cannot be blank.`);
+    `${expectedBlockType} Name cannot be blank.`);
 }
 
-export function shouldDisplayAnErrorIfBlockTextIsBlank(section, expectedItemType) {
+export function shouldDisplayAnErrorIfBlockTextIsBlank(section, expectedBlockType) {
   addAndPopulateBlock(section, 'Some name', '');
 
   section.editElements.submitForm();
 
   expect(section).toHaveError(
     section.editElements.editableBlockList.blocks[0].textArea,
-    `${expectedItemType} Text cannot be blank.`);
+    `${expectedBlockType} Text cannot be blank.`);
 }
 
-export function shouldDisplayAnErrorIfBlockTextHasInvalidMarkdownSyntax(section, expectedItemType) {
+export function shouldDisplayAnErrorIfBlockTextHasInvalidMarkdownSyntax(section, expectedBlockType) {
   addAndPopulateBlock(section, 'Some name', 'Some *invalid syntax');
 
   section.editElements.submitForm();
 
   expect(section).toHaveError(
     section.editElements.editableBlockList.blocks[0].textArea,
-    `${expectedItemType} Text has invalid markdown syntax.`);
+    `${expectedBlockType} Text has invalid markdown syntax.`);
 }
 
-export function shouldDisplayErrorsIfBlockNameAndTextAreBothBlank(section, expectedItemType) {
+export function shouldDisplayErrorsIfBlockNameAndTextAreBothBlank(section, expectedBlockType) {
   addAndPopulateBlock(section, '', '');
 
   section.editElements.submitForm();
@@ -173,15 +173,15 @@ export function shouldDisplayErrorsIfBlockNameAndTextAreBothBlank(section, expec
   expect(section.errorMessages.errors).toHaveLength(2);
   expect(section).toHaveError(
     editableBlock.nameInput,
-    `${expectedItemType} Name cannot be blank.`,
+    `${expectedBlockType} Name cannot be blank.`,
     0);
   expect(section).toHaveError(
     editableBlock.textArea,
-    `${expectedItemType} Text cannot be blank.`,
+    `${expectedBlockType} Text cannot be blank.`,
     1);
 }
 
-export function shouldDisplayErrorsIfBlockNameIsBlankAndBlockTextHasInvalidMarkdownSyntax(section, expectedItemType) {
+export function shouldDisplayErrorsIfBlockNameIsBlankAndBlockTextHasInvalidMarkdownSyntax(section, expectedBlockType) {
   addAndPopulateBlock(section, '', 'Some __invalid syntax');
 
   section.editElements.submitForm();
@@ -191,11 +191,11 @@ export function shouldDisplayErrorsIfBlockNameIsBlankAndBlockTextHasInvalidMarkd
   expect(section.errorMessages.errors).toHaveLength(2);
   expect(section).toHaveError(
     editableBlock.nameInput,
-    `${expectedItemType} Name cannot be blank.`,
+    `${expectedBlockType} Name cannot be blank.`,
     0);
   expect(section).toHaveError(
     editableBlock.textArea,
-    `${expectedItemType} Text has invalid markdown syntax.`,
+    `${expectedBlockType} Text has invalid markdown syntax.`,
     1);
 }
 

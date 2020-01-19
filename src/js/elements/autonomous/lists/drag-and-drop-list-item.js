@@ -32,7 +32,7 @@ export default class DragAndDropListItem extends CustomAutonomousElement {
     // Drag and Drop on Firefox only works if data is set
     event.dataTransfer.setData('text', '');
 
-    event.dataTransfer.setDragImage(this.dragImage, 0, 0);    
+    event.dataTransfer.setDragImage(this.dragImage, 0, 0);
 
     this.list.draggedItem = event.target;
   }
@@ -42,7 +42,7 @@ export default class DragAndDropListItem extends CustomAutonomousElement {
 
     if (this.list.draggedItem !== null) {
       event.dataTransfer.dropEffect = 'move';
-    
+
       let rect = event.target.getBoundingClientRect();
       let midpointY = rect.y + (rect.height / 2);
 
@@ -53,7 +53,7 @@ export default class DragAndDropListItem extends CustomAutonomousElement {
       }
     } else {
       event.dataTransfer.dropEffect = 'none';
-    }    
+    }
   }
 
   onDragLeaveItem() {
@@ -100,5 +100,5 @@ export default class DragAndDropListItem extends CustomAutonomousElement {
       this.container.classList.remove(dragoverTopClass);
       this.container.classList.remove(dragoverBottomClass);
     }
-  }  
+  }
 }

@@ -5,7 +5,7 @@ import * as TestCustomElements from '../../../helpers/test/test-custom-elements.
 import * as sharedSpecs from './property-list-section.specs.js';
 
 const headingName = 'Languages';
-const expectedItemType = 'Language';
+const expectedBlockType = 'Language';
 const defaultStartingLanguage = 'Common';
 
 const languages = CurrentContext.creature.languages;
@@ -67,17 +67,17 @@ describe('when the show section is clicked', () => {
       });
 
       it('should display an error after clicking the add button if the input field is blank', () => {
-        sharedSpecs.shouldDisplayAnErrorIfAddingBlank(languagesSection, expectedItemType);
+        sharedSpecs.shouldDisplayAnErrorIfAddingBlank(languagesSection, expectedBlockType);
       });
 
       it('should display an error after clicking the add button if there is already a duplicate item in the list', () => {
         const itemText = 'Common';
-        sharedSpecs.shouldDisplayAnErrorIfAddingDuplicate(languagesSection, itemText, expectedItemType);
+        sharedSpecs.shouldDisplayAnErrorIfAddingDuplicate(languagesSection, itemText, expectedBlockType);
       });
 
       it('should display an error after clicking the save button if the input field is not blank', () => {
         const itemText = 'unconscious';
-        sharedSpecs.shouldDisplayAnErrorIfSavingWithUnaddedInputText(languagesSection, itemText, expectedItemType);
+        sharedSpecs.shouldDisplayAnErrorIfSavingWithUnaddedInputText(languagesSection, itemText, expectedBlockType);
       });
     });
 

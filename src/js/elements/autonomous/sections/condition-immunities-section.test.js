@@ -5,7 +5,7 @@ import * as TestCustomElements from '../../../helpers/test/test-custom-elements.
 import * as sharedSpecs from './property-list-section.specs.js';
 
 const headingName = 'Condition Immunities';
-const expectedItemType = 'Condition Immunity';
+const expectedBlockType = 'Condition Immunity';
 
 const conditionImmunities = CurrentContext.creature.conditionImmunities;
 
@@ -60,17 +60,17 @@ describe('when the show section is clicked', () => {
     });
 
     it('should display an error after clicking the add button if the input field is blank', () => {
-      sharedSpecs.shouldDisplayAnErrorIfAddingBlank(conditionImmunitiesSection, expectedItemType);
+      sharedSpecs.shouldDisplayAnErrorIfAddingBlank(conditionImmunitiesSection, expectedBlockType);
     });
 
     it('should display an error after clicking the add button if there is already a duplicate item in the list', () => {
       const itemText = 'restrained';
-      sharedSpecs.shouldDisplayAnErrorIfAddingDuplicate(conditionImmunitiesSection, itemText, expectedItemType);
+      sharedSpecs.shouldDisplayAnErrorIfAddingDuplicate(conditionImmunitiesSection, itemText, expectedBlockType);
     });
 
     it('should display an error after clicking the save button if the input field is not blank', () => {
       const itemText = 'unconscious';
-      sharedSpecs.shouldDisplayAnErrorIfSavingWithUnaddedInputText(conditionImmunitiesSection, itemText, expectedItemType);
+      sharedSpecs.shouldDisplayAnErrorIfSavingWithUnaddedInputText(conditionImmunitiesSection, itemText, expectedBlockType);
     });
   });
 

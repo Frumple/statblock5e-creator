@@ -28,9 +28,8 @@ export default class DisplayBlockList extends CustomAutonomousElement {
   }
 
   addBlock(name, text) {
-    const block = DisplayBlockList.createListItem();
-    block.name = name;
-    block.text = text;
+    const block = DisplayBlockList.createBlock(name, text);
+
     if (this.disableBlockNameItalics) {
       block.disableBlockNameItalics();
     }
@@ -38,10 +37,12 @@ export default class DisplayBlockList extends CustomAutonomousElement {
     this.appendChild(block);
   }
 
-  static createListItem() {
-    if (isRunningInNode) {
-      return new DisplayBlock();
-    }
-    return document.createElement('display-block');
+  static createBlock(name, text) {
+    const block = isRunningInNode ? new DisplayBlock() : document.createElement('display-block');
+
+    block.name = name;
+    block.text = text;
+
+    return block;
   }
 }

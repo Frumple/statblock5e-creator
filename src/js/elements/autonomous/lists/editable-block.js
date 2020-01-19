@@ -15,8 +15,6 @@ export default class EditableBlock extends DragAndDropListItem {
   constructor() {
     super(EditableBlock.templatePaths);
 
-    this._itemType = null;
-
     this.nameInput = this.shadowRoot.getElementById('editable-block-name');
     this.textArea = this.shadowRoot.getElementById('editable-block-textarea');
     this.namePreviewElement = this.shadowRoot.getElementById('editable-block-name-preview');
@@ -57,17 +55,6 @@ export default class EditableBlock extends DragAndDropListItem {
 
   disableBlockNameItalics() {
     this.nameInput.classList.add('editable-block__name_no-italic');
-  }
-
-  set itemType(itemType) {
-    this._itemType = itemType;
-
-    this.nameInput.setAttribute('pretty-name', `${itemType} Name`);
-    this.textArea.setAttribute('pretty-name', `${itemType} Text`);
-  }
-
-  get itemType() {
-    return this._itemType;
   }
 
   set name(name) {

@@ -5,7 +5,7 @@ import * as TestCustomElements from '../../../helpers/test/test-custom-elements.
 import * as sharedSpecs from './property-list-section.specs.js';
 
 const headingName = 'Damage Vulnerabilities';
-const expectedItemType = 'Damage Vulnerability';
+const expectedBlockType = 'Damage Vulnerability';
 
 const damageVulnerabilities = CurrentContext.creature.damageVulnerabilities;
 
@@ -60,17 +60,17 @@ describe('when the show section is clicked', () => {
     });
 
     it('should display an error after clicking the add button if the input field is blank', () => {
-      sharedSpecs.shouldDisplayAnErrorIfAddingBlank(damageVulnerabilitiesSection, expectedItemType);
+      sharedSpecs.shouldDisplayAnErrorIfAddingBlank(damageVulnerabilitiesSection, expectedBlockType);
     });
 
     it('should display an error after clicking the add button if there is already a duplicate item in the list', () => {
       const itemText = 'lightning';
-      sharedSpecs.shouldDisplayAnErrorIfAddingDuplicate(damageVulnerabilitiesSection, itemText, expectedItemType);
+      sharedSpecs.shouldDisplayAnErrorIfAddingDuplicate(damageVulnerabilitiesSection, itemText, expectedBlockType);
     });
 
     it('should display an error after clicking the save button if the input field is not blank', () => {
       const itemText = 'thunder';
-      sharedSpecs.shouldDisplayAnErrorIfSavingWithUnaddedInputText(damageVulnerabilitiesSection, itemText, expectedItemType);
+      sharedSpecs.shouldDisplayAnErrorIfSavingWithUnaddedInputText(damageVulnerabilitiesSection, itemText, expectedBlockType);
     });
   });
 

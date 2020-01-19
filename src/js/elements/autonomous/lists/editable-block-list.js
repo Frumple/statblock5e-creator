@@ -16,6 +16,7 @@ export default class EditableBlockList extends DragAndDropList {
     super(EditableBlockList.templatePaths);
 
     this.disableBlockNameItalics = false;
+    this.blockType = null;
   }
 
   get blocks() {
@@ -28,12 +29,8 @@ export default class EditableBlockList extends DragAndDropList {
     }
   }
 
-  addBlock(itemType, name = '', originalText = '') {
-    const block = EditableBlockList.createListItem();
-    block.list = this;
-    block.itemType = itemType;
-    block.name = name;
-    block.originalText = originalText;
+  addBlock(name = '', originalText = '') {
+    const block = EditableBlockList.createBlock(this, name, originalText);
 
     if (this.disableBlockNameItalics) {
       block.disableBlockNameItalics();
@@ -66,10 +63,16 @@ export default class EditableBlockList extends DragAndDropList {
     return this.blocks.map(block => block.toModel());
   }
 
-  static createListItem() {
-    if (isRunningInNode) {
-      return new EditableBlock();
-    }
-    return document.createElement('editable-block');
+  static createBlock(list, name, originalText) {
+    const block = isRunningInNode ? new EditableBlock() : document.createElement('editable-block');
+
+    block.list = list;
+    block.name = name;
+    block.originalText = originalText;
+
+    block.nameInput.setAttribute('pretty-name', `${list.blockType} Name`);
+    block.textArea.setAttribute('pretty-name', `${list.blockType} Text`);
+
+    return block;
   }
 }

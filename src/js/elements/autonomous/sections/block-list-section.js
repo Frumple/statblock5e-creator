@@ -20,6 +20,8 @@ export class BlockListSection extends sectionModule.Section {
   connectedCallback() {
     super.connectedCallback();
 
+    this.editElements.editableBlockList.blockType = this.listModel.singleName;
+
     this.reparse();
 
     this.editElements.addButton.addEventListener('click', this.onClickAddTextBlockButton.bind(this));
@@ -29,15 +31,8 @@ export class BlockListSection extends sectionModule.Section {
     this.addBlock();
   }
 
-  addBlock(name = null, text = null) {
-    const block = this.editElements.editableBlockList.addBlock(this.listModel.singleName);
-
-    if (name) {
-      block.name = name;
-    }
-    if (text) {
-      block.originalText = text;
-    }
+  addBlock(name = '', text = '') {
+    this.editElements.editableBlockList.addBlock(name, text);
   }
 
   get mode() {
@@ -91,7 +86,7 @@ export class BlockListSection extends sectionModule.Section {
 
     this.editElements.editableBlockList.clear();
     for (const block of blocks) {
-      this.editElements.editableBlockList.addBlock(this.listModel.singleName, block.name, block.originalText);
+      this.editElements.editableBlockList.addBlock(block.name, block.originalText);
     }
   }
 
