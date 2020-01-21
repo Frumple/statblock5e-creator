@@ -1,5 +1,4 @@
 import DivisibleContainer from './divisible-container.js';
-import CurrentContext from '../../../models/current-context.js';
 
 export default class HeadingStats extends DivisibleContainer {
   static get elementName() { return 'heading-stats'; }
@@ -18,15 +17,15 @@ export default class HeadingStats extends DivisibleContainer {
 
   exportToJson() {
     return {
-      title: CurrentContext.creature.title.toJson(),
-      subtitle: CurrentContext.creature.subtitle.toJson()
+      title: this.sections.get('title').exportToJson(),
+      subtitle: this.sections.get('subtitle').exportToJson()
     };
   }
 
   exportToHtml() {
     const creatureHeading = document.createElement('creature-heading');
-    const titleElement = CurrentContext.creature.title.toHtml();
-    const subtitleElement = CurrentContext.creature.subtitle.toHtml();
+    const titleElement = this.sections.get('title').exportToHtml();
+    const subtitleElement = this.sections.get('subtitle').exportToHtml();
 
     creatureHeading.appendChild(titleElement);
     creatureHeading.appendChild(subtitleElement);
@@ -35,6 +34,6 @@ export default class HeadingStats extends DivisibleContainer {
   }
 
   exportToHomebrewery() {
-    return `${CurrentContext.creature.title.toHomebrewery()}\n${CurrentContext.creature.subtitle.toHomebrewery()}`;
+    return `${this.sections.get('title').exportToHomebrewery()}\n${this.sections.get('subtitle').exportToHomebrewery()}`;
   }
 }
