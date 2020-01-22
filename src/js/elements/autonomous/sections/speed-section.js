@@ -1,8 +1,6 @@
 import * as propertyLineSectionModule from './property-line-section.js';
 import CurrentContext from '../../../models/current-context.js';
 
-const speed = CurrentContext.creature.speed;
-
 export default class SpeedSection extends propertyLineSectionModule.PropertyLineSection {
   static get elementName() { return 'speed-section'; }
   static get templatePaths() {
@@ -45,49 +43,55 @@ export default class SpeedSection extends propertyLineSectionModule.PropertyLine
   }
 
   updateModel() {
-    speed.walk = this.editElements.walk.valueAsInt;
-    speed.burrow = this.editElements.burrow.valueAsInt;
-    speed.climb = this.editElements.climb.valueAsInt;
-    speed.fly = this.editElements.fly.valueAsInt;
-    speed.hover = this.editElements.hover.checked;
-    speed.swim = this.editElements.swim.valueAsInt;
+    const speedModel = CurrentContext.creature.speed;
 
-    speed.useCustomText = this.editElements.useCustomText.checked;
-    speed.originalCustomText = this.editElements.customText.value;
-    speed.htmlCustomText = this.editElements.customText.htmlText;
+    speedModel.walk = this.editElements.walk.valueAsInt;
+    speedModel.burrow = this.editElements.burrow.valueAsInt;
+    speedModel.climb = this.editElements.climb.valueAsInt;
+    speedModel.fly = this.editElements.fly.valueAsInt;
+    speedModel.hover = this.editElements.hover.checked;
+    speedModel.swim = this.editElements.swim.valueAsInt;
+
+    speedModel.useCustomText = this.editElements.useCustomText.checked;
+    speedModel.originalCustomText = this.editElements.customText.value;
+    speedModel.htmlCustomText = this.editElements.customText.htmlText;
   }
 
   updateEditModeView() {
-    this.editElements.walk.value = speed.walk;
-    this.editElements.burrow.value = speed.burrow;
-    this.editElements.climb.value = speed.climb;
-    this.editElements.fly.value = speed.fly;
-    this.editElements.hover.checked = speed.hover;
-    this.editElements.swim.value = speed.swim;
+    const speedModel = CurrentContext.creature.speed;
 
-    this.editElements.useCustomText.checked = speed.useCustomText;
-    this.editElements.customText.value = speed.originalCustomText;
-    this.editElements.customText.htmlText = speed.htmlCustomText;
+    this.editElements.walk.value = speedModel.walk;
+    this.editElements.burrow.value = speedModel.burrow;
+    this.editElements.climb.value = speedModel.climb;
+    this.editElements.fly.value = speedModel.fly;
+    this.editElements.hover.checked = speedModel.hover;
+    this.editElements.swim.value = speedModel.swim;
+
+    this.editElements.useCustomText.checked = speedModel.useCustomText;
+    this.editElements.customText.value = speedModel.originalCustomText;
+    this.editElements.customText.htmlText = speedModel.htmlCustomText;
   }
 
   updateShowModeView() {
-    if (speed.useCustomText) {
-      this.showElements.text.innerHTMLSanitized = speed.htmlCustomText;
+    const speedModel = CurrentContext.creature.speed;
+
+    if (speedModel.useCustomText) {
+      this.showElements.text.innerHTMLSanitized = speedModel.htmlCustomText;
     } else {
-      this.showElements.text.textContent = speed.nonCustomText;
+      this.showElements.text.textContent = speedModel.nonCustomText;
     }
   }
 
   exportToJson() {
-    return speed.toJson();
+    return CurrentContext.creature.speed.toJson();
   }
 
   exportToHtml() {
-    return speed.toHtml();
+    return CurrentContext.creature.speed.toHtml();
   }
 
   exportToHomebrewery() {
-    return speed.toHomebrewery();
+    return CurrentContext.creature.speed.toHomebrewery();
   }
 }
 

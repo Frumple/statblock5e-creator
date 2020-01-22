@@ -1,4 +1,5 @@
 import * as sectionModule from './section.js';
+import CurrentContext from '../../../models/current-context.js';
 
 export class BlockListSection extends sectionModule.Section {
   static get templatePaths() {
@@ -8,19 +9,19 @@ export class BlockListSection extends sectionModule.Section {
   }
 
   constructor(templatePaths,
-    listModel,
+    modelPropertyName,
     showElements = BlockListShowSection,
     editElements = BlockListEditSection) {
     super(templatePaths, showElements, editElements);
 
-    this.listModel = listModel;
+    this.modelPropertyName = modelPropertyName;
     this.heading = this.shadowRoot.getElementById('heading');
   }
 
   connectedCallback() {
     super.connectedCallback();
 
-    this.editElements.editableBlockList.blockType = this.listModel.singleName;
+    this.editElements.editableBlockList.blockType = CurrentContext.creature[this.modelPropertyName].singleName;
 
     this.reparse();
 
@@ -78,11 +79,11 @@ export class BlockListSection extends sectionModule.Section {
   }
 
   updateModel() {
-    this.listModel.blocks = this.editElements.editableBlockList.toModel();
+    CurrentContext.creature[this.modelPropertyName].blocks = this.editElements.editableBlockList.toModel();
   }
 
   updateEditModeView() {
-    const blocks = this.listModel.blocks;
+    const blocks = CurrentContext.creature[this.modelPropertyName].blocks;
 
     this.editElements.editableBlockList.clear();
     for (const block of blocks) {
@@ -91,7 +92,7 @@ export class BlockListSection extends sectionModule.Section {
   }
 
   updateShowModeView() {
-    const blocks = this.listModel.blocks;
+    const blocks = CurrentContext.creature[this.modelPropertyName].blocks;
 
     this.showElements.displayBlockList.clear();
     for (const block of blocks) {
@@ -105,7 +106,7 @@ export class BlockListSection extends sectionModule.Section {
     this.editElements.editableBlockList.parse();
     this.updateModel();
 
-    for (const [index, blockModel] of this.listModel.blocks.entries()) {
+    for (const [index, blockModel] of CurrentContext.creature[this.modelPropertyName].blocks.entries()) {
       const editableBlock = this.editElements.editableBlockList.blocks[index];
       editableBlock.previewName = blockModel.name;
       editableBlock.previewText = blockModel.htmlText;
@@ -118,15 +119,15 @@ export class BlockListSection extends sectionModule.Section {
   }
 
   exportToJson() {
-    return this.listModel.toJson();
+    return CurrentContext.creature[this.modelPropertyName].toJson();
   }
 
   exportToHtml() {
-    return this.listModel.toHtml();
+    return CurrentContext.creature[this.modelPropertyName].toHtml();
   }
 
   exportToHomebrewery() {
-    return this.listModel.toHomebrewery();
+    return CurrentContext.creature[this.modelPropertyName].toHomebrewery();
   }
 }
 

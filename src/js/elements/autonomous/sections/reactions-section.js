@@ -1,5 +1,4 @@
 import * as blockListSectionModule from './block-list-section.js';
-import CurrentContext from '../../../models/current-context.js';
 
 export default class ReactionsSection extends blockListSectionModule.BlockListSection {
   static get elementName() { return 'reactions-section'; }
@@ -11,7 +10,7 @@ export default class ReactionsSection extends blockListSectionModule.BlockListSe
 
   constructor() {
     super(ReactionsSection.templatePaths,
-          CurrentContext.creature.reactions);
+          'reactions');
 
     this.empty = true;
   }

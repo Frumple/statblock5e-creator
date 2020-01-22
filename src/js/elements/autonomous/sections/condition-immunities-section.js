@@ -1,5 +1,4 @@
 import PropertyListSection from './property-list-section.js';
-import CurrentContext from '../../../models/current-context.js';
 
 export default class ConditionImmunitiesSection extends PropertyListSection {
   static get elementName() { return 'condition-immunities-section'; }
@@ -11,7 +10,7 @@ export default class ConditionImmunitiesSection extends PropertyListSection {
 
   constructor() {
     super(ConditionImmunitiesSection.templatePaths,
-          CurrentContext.creature.conditionImmunities);
+          'conditionImmunities');
 
     this.empty = true;
   }

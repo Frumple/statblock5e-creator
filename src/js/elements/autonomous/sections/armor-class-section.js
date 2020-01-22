@@ -1,8 +1,6 @@
 import * as propertyLineSectionModule from './property-line-section.js';
 import CurrentContext from '../../../models/current-context.js';
 
-const armorClassModel = CurrentContext.creature.armorClass;
-
 export default class ArmorClassSection extends propertyLineSectionModule.PropertyLineSection {
   static get elementName() { return 'armor-class-section'; }
   static get templatePaths() {
@@ -45,6 +43,7 @@ export default class ArmorClassSection extends propertyLineSectionModule.Propert
   }
 
   updateModel() {
+    const armorClassModel = CurrentContext.creature.armorClass;
     armorClassModel.armorClass = this.editElements.armorClass.valueAsInt;
     armorClassModel.armorType = this.editElements.armorType.value;
     armorClassModel.hasShield = this.editElements.hasShield.checked;
@@ -55,6 +54,7 @@ export default class ArmorClassSection extends propertyLineSectionModule.Propert
   }
 
   updateEditModeView() {
+    const armorClassModel = CurrentContext.creature.armorClass;
     this.editElements.armorClass.value = armorClassModel.armorClass;
     this.editElements.armorType.value = armorClassModel.armorType;
     this.editElements.hasShield.checked = armorClassModel.hasShield;
@@ -65,7 +65,8 @@ export default class ArmorClassSection extends propertyLineSectionModule.Propert
   }
 
   updateShowModeView() {
-    if (armorClassModel.useCustomText) {
+    const armorClassModel = CurrentContext.creature.armorClass;
+    if (CurrentContext.creature.armorClass.useCustomText) {
       this.showElements.text.innerHTMLSanitized = armorClassModel.htmlCustomText;
     } else {
       this.showElements.text.textContent = armorClassModel.nonCustomText;
@@ -73,15 +74,15 @@ export default class ArmorClassSection extends propertyLineSectionModule.Propert
   }
 
   exportToJson() {
-    return armorClassModel.toJson();
+    return CurrentContext.creature.armorClass.toJson();
   }
 
   exportToHtml() {
-    return armorClassModel.toHtml();
+    return CurrentContext.creature.armorClass.toHtml();
   }
 
   exportToHomebrewery() {
-    return armorClassModel.toHomebrewery();
+    return CurrentContext.creature.armorClass.toHomebrewery();
   }
 }
 

@@ -1,5 +1,4 @@
 import * as blockListSectionModule from './block-list-section.js';
-import CurrentContext from '../../../models/current-context.js';
 
 export default class ActionsSection extends blockListSectionModule.BlockListSection {
   static get elementName() { return 'actions-section'; }
@@ -11,7 +10,7 @@ export default class ActionsSection extends blockListSectionModule.BlockListSect
 
   constructor() {
     super(ActionsSection.templatePaths,
-          CurrentContext.creature.actions,
+          'actions',
           ActionsSectionShowElements,
           ActionsSectionEditElements);
 

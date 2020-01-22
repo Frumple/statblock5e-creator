@@ -1,8 +1,6 @@
 import * as sectionModule from './section.js';
 import CurrentContext from '../../../models/current-context.js';
 
-const titleModel = CurrentContext.creature.title;
-
 export default class TitleSection extends sectionModule.Section {
   static get elementName() { return 'title-section'; }
   static get templatePaths() {
@@ -15,8 +13,6 @@ export default class TitleSection extends sectionModule.Section {
     super(TitleSection.templatePaths,
           TitleShowElements,
           TitleEditElements);
-
-    this.classModel = CurrentContext.creature.title;
   }
 
   connectedCallback() {
@@ -33,18 +29,18 @@ export default class TitleSection extends sectionModule.Section {
     const fullName = this.editElements.fullName.value;
 
     if (fullName !== '') {
-      titleModel.fullName = fullName;
+      CurrentContext.creature.title.fullName = fullName;
       this.dispatchCreatureNameChangedEvent();
     }
   }
 
   onInputShortName() {
-    titleModel.shortName = this.editElements.shortName.value;
+    CurrentContext.creature.title.shortName = this.editElements.shortName.value;
     this.dispatchCreatureNameChangedEvent();
   }
 
   onInputProperNoun() {
-    titleModel.isProperNoun = this.editElements.properNoun.checked;
+    CurrentContext.creature.title.isProperNoun = this.editElements.properNoun.checked;
     this.dispatchCreatureNameChangedEvent();
   }
 
@@ -53,6 +49,7 @@ export default class TitleSection extends sectionModule.Section {
   }
 
   dispatchCreatureNameChangedEvent() {
+    const titleModel = CurrentContext.creature.title;
     const changeEvent = new CustomEvent('creatureNameChanged', {
       bubbles: true,
       composed: true,
@@ -71,29 +68,30 @@ export default class TitleSection extends sectionModule.Section {
   }
 
   updateModel() {
-    titleModel.fullName = this.editElements.fullName.value;
-    titleModel.shortName = this.editElements.shortName.value;
-    titleModel.isProperNoun = this.editElements.properNoun.checked;
+    const title = CurrentContext.creature.title;
+    title.fullName = this.editElements.fullName.value;
+    title.shortName = this.editElements.shortName.value;
+    title.isProperNoun = this.editElements.properNoun.checked;
   }
 
   updateEditModeView() {
-    this.editElements.fullName.value = titleModel.fullName;
+    this.editElements.fullName.value = CurrentContext.creature.title.fullName;
   }
 
   updateShowModeView() {
-    this.showElements.title.textContent = titleModel.fullName;
+    this.showElements.title.textContent = CurrentContext.creature.title.fullName;
   }
 
   exportToJson() {
-    return titleModel.toJson();
+    return CurrentContext.creature.title.toJson();
   }
 
   exportToHtml() {
-    return titleModel.toHtml();
+    return CurrentContext.creature.title.toHtml();
   }
 
   exportToHomebrewery() {
-    return titleModel.toHomebrewery();
+    return CurrentContext.creature.title.toHomebrewery();
   }
 }
 

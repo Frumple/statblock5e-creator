@@ -1,5 +1,4 @@
 import PropertyListSection from './property-list-section.js';
-import CurrentContext from '../../../models/current-context.js';
 
 export default class LanguagesSection extends PropertyListSection {
   static get elementName() { return 'languages-section'; }
@@ -11,7 +10,7 @@ export default class LanguagesSection extends PropertyListSection {
 
   constructor() {
     super(LanguagesSection.templatePaths,
-          CurrentContext.creature.languages);
+          'languages');
   }
 
   connectedCallback() {

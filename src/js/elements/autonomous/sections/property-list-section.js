@@ -1,4 +1,5 @@
 import * as propertyLineSectionModule from './property-line-section.js';
+import CurrentContext from '../../../models/current-context.js';
 
 export default class PropertyListSection extends propertyLineSectionModule.PropertyLineSection {
   static get templatePaths() {
@@ -7,15 +8,17 @@ export default class PropertyListSection extends propertyLineSectionModule.Prope
       'src/html/elements/autonomous/sections/property-list-section.html');
   }
 
-  constructor(templatePaths, listModel) {
+  constructor(templatePaths, modelPropertyName) {
     super(templatePaths,
           PropertyListShowElements,
           PropertyListEditElements);
 
-    this.listModel = listModel;
+    this.modelPropertyName = modelPropertyName;
 
-    this.showElements.heading.textContent = listModel.headingName;
-    this.editElements.label.textContent = `${listModel.headingName}:`;
+    const model = CurrentContext.creature[modelPropertyName];
+
+    this.showElements.heading.textContent = model.headingName;
+    this.editElements.label.textContent = `${model.headingName}:`;
   }
 
   connectedCallback() {
@@ -44,14 +47,15 @@ export default class PropertyListSection extends propertyLineSectionModule.Prope
   }
 
   addItemFromInput() {
-    let text = this.editElements.input.value.trim();
+    const model = CurrentContext.creature[this.modelPropertyName];
+    const text = this.editElements.input.value.trim();
     this.editElements.input.value = text;
 
     this.errorMessages.clear();
     if (text === '') {
-      this.errorMessages.add(this.editElements.input, `Cannot add a blank ${this.listModel.singleName}.`);
+      this.errorMessages.add(this.editElements.input, `Cannot add a blank ${model.singleName}.`);
     } else if(this.editElements.propertyList.contains(text)) {
-      this.errorMessages.add(this.editElements.input, `Cannot add a duplicate ${this.listModel.singleName}.`);
+      this.errorMessages.add(this.editElements.input, `Cannot add a duplicate ${model.singleName}.`);
     }
     if (this.errorMessages.any) {
       this.errorMessages.focusOnFirstErrorField();
@@ -72,35 +76,35 @@ export default class PropertyListSection extends propertyLineSectionModule.Prope
   checkForErrors() {
     const input = this.editElements.input;
     if (input.value !== '') {
-      const message = `Cannot save while the ${this.listModel.singleName} field contains text.\nClear or add the field, then try again.`;
+      const message = `Cannot save while the ${CurrentContext.creature[this.modelPropertyName].singleName} field contains text.\nClear or add the field, then try again.`;
       this.errorMessages.add(input, message);
     }
   }
 
   updateModel() {
-    this.listModel.items = this.editElements.propertyList.itemsAsText;
+    CurrentContext.creature[this.modelPropertyName].items = this.editElements.propertyList.itemsAsText;
   }
 
   updateEditModeView() {
-    this.editElements.propertyList.items = this.listModel.items;
+    this.editElements.propertyList.items =CurrentContext.creature[this.modelPropertyName].items;
   }
 
   updateShowModeView() {
-    const text = this.listModel.text;
+    const text = CurrentContext.creature[this.modelPropertyName].text;
     this.empty = (text === '');
     this.showElements.text.textContent = text;
   }
 
   exportToJson() {
-    return this.listModel.toJson();
+    return CurrentContext.creature[this.modelPropertyName].toJson();
   }
 
   exportToHtml() {
-    return this.listModel.toHtml();
+    return CurrentContext.creature[this.modelPropertyName].toHtml();
   }
 
   exportToHomebrewery() {
-    return this.listModel.toHomebrewery();
+    return CurrentContext.creature[this.modelPropertyName].toHomebrewery();
   }
 }
 

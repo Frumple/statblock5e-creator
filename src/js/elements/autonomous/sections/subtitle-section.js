@@ -1,8 +1,6 @@
 import * as sectionModule from './section.js';
 import CurrentContext from '../../../models/current-context.js';
 
-const subtitle = CurrentContext.creature.subtitle;
-
 export default class SubtitleSection extends sectionModule.Section {
   static get elementName() { return 'subtitle-section'; }
   static get templatePaths() {
@@ -43,39 +41,41 @@ export default class SubtitleSection extends sectionModule.Section {
   }
 
   updateModel() {
-    subtitle.size = this.editElements.size.value;
-    subtitle.type = this.editElements.type.value;
-    subtitle.tags = this.editElements.tags.value;
-    subtitle.alignment = this.editElements.alignment.value;
+    const subtitleModel = CurrentContext.creature.subtitle;
+    subtitleModel.size = this.editElements.size.value;
+    subtitleModel.type = this.editElements.type.value;
+    subtitleModel.tags = this.editElements.tags.value;
+    subtitleModel.alignment = this.editElements.alignment.value;
 
-    subtitle.useCustomSubtitleText = this.editElements.useCustomText.checked;
-    subtitle.customSubtitleText = this.editElements.customText.value;
+    subtitleModel.useCustomSubtitleText = this.editElements.useCustomText.checked;
+    subtitleModel.customSubtitleText = this.editElements.customText.value;
   }
 
   updateEditModeView() {
-    this.editElements.size.value = subtitle.size;
-    this.editElements.type.value = subtitle.type;
-    this.editElements.tags.value = subtitle.tags;
-    this.editElements.alignment.value = subtitle.alignment;
+    const subtitleModel = CurrentContext.creature.subtitle;
+    this.editElements.size.value = subtitleModel.size;
+    this.editElements.type.value = subtitleModel.type;
+    this.editElements.tags.value = subtitleModel.tags;
+    this.editElements.alignment.value = subtitleModel.alignment;
 
-    this.editElements.useCustomText.checked = subtitle.useCustomSubtitleText;
-    this.editElements.customText.value = subtitle.customSubtitleText;
+    this.editElements.useCustomText.checked = subtitleModel.useCustomSubtitleText;
+    this.editElements.customText.value = subtitleModel.customSubtitleText;
   }
 
   updateShowModeView() {
-    this.showElements.text.textContent = subtitle.text;
+    this.showElements.text.textContent = CurrentContext.creature.subtitle.text;
   }
 
   exportToJson() {
-    return subtitle.toJson();
+    return CurrentContext.creature.subtitle.toJson();
   }
 
   exportToHtml() {
-    return subtitle.toHtml();
+    return CurrentContext.creature.subtitle.toHtml();
   }
 
   exportToHomebrewery() {
-    return subtitle.toHomebrewery();
+    return CurrentContext.creature.subtitle.toHomebrewery();
   }
 }
 

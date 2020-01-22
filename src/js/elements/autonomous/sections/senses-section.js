@@ -1,8 +1,6 @@
 import * as propertyLineSectionModule from './property-line-section.js';
 import CurrentContext from '../../../models/current-context.js';
 
-const sensesModel = CurrentContext.creature.senses;
-
 export default class SensesSection extends propertyLineSectionModule.PropertyLineSection {
   static get elementName() { return 'senses-section'; }
   static get templatePaths() {
@@ -41,6 +39,8 @@ export default class SensesSection extends propertyLineSectionModule.PropertyLin
   }
 
   updateModel() {
+    const sensesModel = CurrentContext.creature.senses;
+
     sensesModel.blindsight = this.editElements.blindsight.valueAsInt;
     sensesModel.darkvision = this.editElements.darkvision.valueAsInt;
     sensesModel.tremorsense = this.editElements.tremorsense.valueAsInt;
@@ -57,6 +57,8 @@ export default class SensesSection extends propertyLineSectionModule.PropertyLin
   }
 
   updateEditModeView() {
+    const sensesModel = CurrentContext.creature.senses;
+
     this.editElements.blindsight.value = sensesModel.blindsight;
     this.editElements.darkvision.value = sensesModel.darkvision;
     this.editElements.tremorsense.value = sensesModel.tremorsense;
@@ -69,10 +71,12 @@ export default class SensesSection extends propertyLineSectionModule.PropertyLin
   }
 
   updateEditModeViewPassivePerception() {
-    this.editElements.passivePerception.textContent = sensesModel.passivePerception;
+    this.editElements.passivePerception.textContent = CurrentContext.creature.senses.passivePerception;
   }
 
   updateShowModeView() {
+    const sensesModel = CurrentContext.creature.senses;
+
     if (sensesModel.useCustomText) {
       this.showElements.text.innerHTMLSanitized = sensesModel.htmlCustomText;
     } else {
@@ -81,15 +85,15 @@ export default class SensesSection extends propertyLineSectionModule.PropertyLin
   }
 
   exportToJson() {
-    return sensesModel.toJson();
+    return CurrentContext.creature.senses.toJson();
   }
 
   exportToHtml() {
-    return sensesModel.toHtml();
+    return CurrentContext.creature.senses.toHtml();
   }
 
   exportToHomebrewery() {
-    return sensesModel.toHomebrewery();
+    return CurrentContext.creature.senses.toHomebrewery();
   }
 }
 

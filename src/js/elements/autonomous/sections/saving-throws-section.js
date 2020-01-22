@@ -2,8 +2,6 @@ import * as propertyLineSectionModule from './property-line-section.js';
 import CurrentContext from '../../../models/current-context.js';
 import { inputValueAndTriggerEvent } from '../../../helpers/element-helpers.js';
 
-const savingThrowsModel = CurrentContext.creature.savingThrows;
-
 export default class SavingThrowsSection extends propertyLineSectionModule.PropertyLineSection {
   static get elementName() { return 'saving-throws-section'; }
   static get templatePaths() {
@@ -24,7 +22,7 @@ export default class SavingThrowsSection extends propertyLineSectionModule.Prope
     if (this.isConnected && ! this.isInitialized) {
       super.connectedCallback();
 
-      for (const key of savingThrowsModel.keys) {
+      for (const key of CurrentContext.creature.savingThrows.keys) {
         this.initializeSavingThrowElements(key);
       }
 
@@ -84,7 +82,7 @@ export default class SavingThrowsSection extends propertyLineSectionModule.Prope
   }
 
   updateModel() {
-    for (const key of savingThrowsModel.keys) {
+    for (const key of CurrentContext.creature.savingThrows.keys) {
       this.updateModelSavingThrowEnabled(key);
       this.updateModelSavingThrowProficiency(key);
       this.updateModelSavingThrowOverride(key);
@@ -92,22 +90,22 @@ export default class SavingThrowsSection extends propertyLineSectionModule.Prope
   }
 
   updateModelSavingThrowEnabled(key) {
-    savingThrowsModel.savingThrows[key].isEnabled = this.editElements.savingThrow[key].enable.checked;
+    CurrentContext.creature.savingThrows.savingThrows[key].isEnabled = this.editElements.savingThrow[key].enable.checked;
   }
 
   updateModelSavingThrowProficiency(key) {
-    savingThrowsModel.savingThrows[key].isProficient = this.editElements.savingThrow[key].proficient.checked;
+    CurrentContext.creature.savingThrows.savingThrows[key].isProficient = this.editElements.savingThrow[key].proficient.checked;
   }
 
   updateModelSavingThrowOverride(key) {
-    savingThrowsModel.savingThrows[key].override = this.editElements.savingThrow[key].override.valueAsInt;
+    CurrentContext.creature.savingThrows.savingThrows[key].override = this.editElements.savingThrow[key].override.valueAsInt;
   }
 
   updateViewOnAttributeChange(abilityName) {
     if (abilityName) {
       this.updateEditModeViewSavingThrowModifier(abilityName);
     } else {
-      for (const key of savingThrowsModel.keys) {
+      for (const key of CurrentContext.creature.savingThrows.keys) {
         this.updateEditModeViewSavingThrowModifier(key);
       }
     }
@@ -115,13 +113,15 @@ export default class SavingThrowsSection extends propertyLineSectionModule.Prope
   }
 
   updateEditModeView() {
-    for (const key of savingThrowsModel.keys) {
+    for (const key of CurrentContext.creature.savingThrows.keys) {
       this.updateEditModeViewSavingThrow(key);
     }
   }
 
   updateEditModeViewSavingThrow(key) {
     const savingThrowElements = this.editElements.savingThrow[key];
+    const savingThrowsModel = CurrentContext.creature.savingThrows;
+
     savingThrowElements.enable.checked = savingThrowsModel.savingThrows[key].isEnabled;
     savingThrowElements.modifier.textContent = savingThrowsModel.savingThrows[key].formattedModifier;
     savingThrowElements.proficient.checked = savingThrowsModel.savingThrows[key].isProficient;
@@ -129,25 +129,25 @@ export default class SavingThrowsSection extends propertyLineSectionModule.Prope
   }
 
   updateEditModeViewSavingThrowModifier(key) {
-    this.editElements.savingThrow[key].modifier.textContent = savingThrowsModel.savingThrows[key].formattedModifier;
+    this.editElements.savingThrow[key].modifier.textContent = CurrentContext.creature.savingThrows.savingThrows[key].formattedModifier;
   }
 
   updateShowModeView() {
-    const text = savingThrowsModel.text;
+    const text = CurrentContext.creature.savingThrows.text;
     this.empty = (text === '');
     this.showElements.text.textContent = text;
   }
 
   exportToJson() {
-    return savingThrowsModel.toJson();
+    return CurrentContext.creature.savingThrows.toJson();
   }
 
   exportToHtml() {
-    return savingThrowsModel.toHtml();
+    return CurrentContext.creature.savingThrows.toHtml();
   }
 
   exportToHomebrewery() {
-    return savingThrowsModel.toHomebrewery();
+    return CurrentContext.creature.savingThrows.toHomebrewery();
   }
 }
 
@@ -163,7 +163,7 @@ class SavingThrowsEditElements extends propertyLineSectionModule.PropertyLineEdi
 
     this.savingThrow = {};
 
-    for (const key of savingThrowsModel.keys) {
+    for (const key of CurrentContext.creature.savingThrows.keys) {
       this.savingThrow[key] = {
         enable: shadowRoot.getElementById(`${key}-enable`),
         label: shadowRoot.getElementById(`${key}-label`),

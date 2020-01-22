@@ -1,8 +1,6 @@
 import * as propertyLineSectionModule from './property-line-section.js';
 import CurrentContext from '../../../models/current-context.js';
 
-const hitPointsModel = CurrentContext.creature.hitPoints;
-
 export default class HitPointsSection extends propertyLineSectionModule.PropertyLineSection {
   static get elementName() { return 'hit-points-section'; }
   static get templatePaths() {
@@ -58,7 +56,7 @@ export default class HitPointsSection extends propertyLineSectionModule.Property
   }
 
   checkForErrors() {
-    if (hitPointsModel.useHitDie) {
+    if (CurrentContext.creature.hitPoints.useHitDie) {
       this.editElements.hitDieQuantity.validate(this.errorMessages);
     } else {
       this.editElements.hitPoints.validate(this.errorMessages);
@@ -76,19 +74,19 @@ export default class HitPointsSection extends propertyLineSectionModule.Property
     const hitPoints = this.editElements.hitPoints.valueAsInt;
 
     if (hitPoints !== null) {
-      hitPointsModel.hitPoints = hitPoints;
+      CurrentContext.creature.hitPoints.hitPoints = hitPoints;
     }
   }
 
   updateModelUseHitDie() {
-    hitPointsModel.useHitDie = this.editElements.useHitDie.checked;
+    CurrentContext.creature.hitPoints.useHitDie = this.editElements.useHitDie.checked;
   }
 
   updateModelHitDieQuantity() {
     const hitDieQuantity = this.editElements.hitDieQuantity.valueAsInt;
 
     if (hitDieQuantity !== null) {
-      hitPointsModel.hitDieQuantity = hitDieQuantity;
+      CurrentContext.creature.hitPoints.hitDieQuantity = hitDieQuantity;
     }
   }
 
@@ -96,11 +94,12 @@ export default class HitPointsSection extends propertyLineSectionModule.Property
     const hitDieSize = this.editElements.hitDieSize.valueAsInt;
 
     if (hitDieSize !== null) {
-      hitPointsModel.hitDieSize = hitDieSize;
+      CurrentContext.creature.hitPoints.hitDieSize = hitDieSize;
     }
   }
 
   updateEditModeView() {
+    const hitPointsModel = CurrentContext.creature.hitPoints;
     this.editElements.hitPoints.value = hitPointsModel.hitPoints;
     this.editElements.useHitDie.checked = hitPointsModel.useHitDie;
     this.editElements.hitDieQuantity.value = hitPointsModel.hitDieQuantity;
@@ -108,6 +107,7 @@ export default class HitPointsSection extends propertyLineSectionModule.Property
   }
 
   updateShowModeView() {
+    const hitPointsModel = CurrentContext.creature.hitPoints;
     this.editElements.constitutionHitPoints.textContent = hitPointsModel.constitutionHitPointsText;
 
     if (hitPointsModel.useHitDie) {
@@ -118,15 +118,15 @@ export default class HitPointsSection extends propertyLineSectionModule.Property
   }
 
   exportToJson() {
-    return hitPointsModel.toJson();
+    return CurrentContext.creature.hitPoints.toJson();
   }
 
   exportToHtml() {
-    return hitPointsModel.toHtml();
+    return CurrentContext.creature.hitPoints.toHtml();
   }
 
   exportToHomebrewery() {
-    return hitPointsModel.toHomebrewery();
+    return CurrentContext.creature.hitPoints.toHomebrewery();
   }
 }
 

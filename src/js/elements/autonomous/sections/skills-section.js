@@ -2,9 +2,6 @@ import * as propertyLineSectionModule from './property-line-section.js';
 import CurrentContext from '../../../models/current-context.js';
 import { inputValueAndTriggerEvent } from '../../../helpers/element-helpers.js';
 
-const abilitiesModel = CurrentContext.creature.abilities;
-const skillsModel = CurrentContext.creature.skills;
-
 export default class SkillsSection extends propertyLineSectionModule.PropertyLineSection {
   static get elementName() { return 'skills-section'; }
   static get templatePaths() {
@@ -25,7 +22,7 @@ export default class SkillsSection extends propertyLineSectionModule.PropertyLin
     if (this.isConnected && ! this.isInitialized) {
       super.connectedCallback();
 
-      for (const key of skillsModel.keys) {
+      for (const key of CurrentContext.creature.skills.keys) {
         this.initializeSkillElements(key);
       }
 
@@ -99,7 +96,7 @@ export default class SkillsSection extends propertyLineSectionModule.PropertyLin
   }
 
   updateModel() {
-    for (const key of skillsModel.keys) {
+    for (const key of CurrentContext.creature.skills.keys) {
       this.updateModelSkillEnabled(key);
       this.updateModelSkillProficiency(key);
       this.updateModelSkillOverride(key);
@@ -107,21 +104,23 @@ export default class SkillsSection extends propertyLineSectionModule.PropertyLin
   }
 
   updateModelSkillEnabled(key) {
-    skillsModel.skills[key].isEnabled = this.editElements.skill[key].enable.checked;
+    CurrentContext.creature.skills.skills[key].isEnabled = this.editElements.skill[key].enable.checked;
   }
 
   updateModelSkillProficiency(key) {
-    skillsModel.skills[key].isProficient = this.editElements.skill[key].proficient.checked;
+    CurrentContext.creature.skills.skills[key].isProficient = this.editElements.skill[key].proficient.checked;
   }
 
   updateModelSkillOverride(key) {
-    skillsModel.skills[key].override = this.editElements.skill[key].override.valueAsInt;
+    CurrentContext.creature.skills.skills[key].override = this.editElements.skill[key].override.valueAsInt;
   }
 
   updateViewOnAttributeChange(abilityName) {
+    const skillsModel = CurrentContext.creature.skills;
+
     if (abilityName) {
       for (const [key, value] of skillsModel.entries) {
-        if (abilitiesModel.abilities[abilityName] === value.ability) {
+        if (CurrentContext.creature.abilities.abilities[abilityName] === value.ability) {
           this.updateEditModeViewSkillModifier(key);
         }
       }
@@ -134,13 +133,15 @@ export default class SkillsSection extends propertyLineSectionModule.PropertyLin
   }
 
   updateEditModeView() {
-    for (const key of skillsModel.keys) {
+    for (const key of CurrentContext.creature.skills.keys) {
       this.updateEditModeViewSkillModifier(key);
     }
   }
 
   updateEditModeViewSkill(key) {
     const skillElements = skillsModel.skills[key];
+    const skillsModel = CurrentContext.creature.skills;
+
     skillElements.enable.checked = skillsModel.savingThrows[key].isEnabled;
     skillElements.modifier.textContent = skillsModel.savingThrows[key].formattedModifier;
     skillElements.proficient.checked = skillsModel.savingThrows[key].isProficient;
@@ -148,25 +149,25 @@ export default class SkillsSection extends propertyLineSectionModule.PropertyLin
   }
 
   updateEditModeViewSkillModifier(key) {
-    this.editElements.skill[key].modifier.textContent = skillsModel.skills[key].formattedModifier;
+    this.editElements.skill[key].modifier.textContent = CurrentContext.creature.skills.skills[key].formattedModifier;
   }
 
   updateShowModeView() {
-    const text = skillsModel.text;
+    const text = CurrentContext.creature.skills.text;
     this.empty = (text === '');
     this.showElements.text.textContent = text;
   }
 
   exportToJson() {
-    return skillsModel.toJson();
+    return CurrentContext.creature.skills.toJson();
   }
 
   exportToHtml() {
-    return skillsModel.toHtml();
+    return CurrentContext.creature.skills.toHtml();
   }
 
   exportToHomebrewery() {
-    return skillsModel.toHomebrewery();
+    return CurrentContext.creature.skills.toHomebrewery();
   }
 }
 
@@ -182,7 +183,7 @@ class SkillsEditElements extends propertyLineSectionModule.PropertyLineEditEleme
 
     this.skill = {};
 
-    for (const key of skillsModel.keys) {
+    for (const key of CurrentContext.creature.skills.keys) {
       this.skill[key] = {
         enable: shadowRoot.getElementById(`${key}-enable`),
         label: shadowRoot.getElementById(`${key}-label`),

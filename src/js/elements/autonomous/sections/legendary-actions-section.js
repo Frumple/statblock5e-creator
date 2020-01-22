@@ -11,7 +11,7 @@ export default class LegendaryActionsSection extends blockListSectionModule.Bloc
 
   constructor() {
     super(LegendaryActionsSection.templatePaths,
-          CurrentContext.creature.legendaryActions,
+          'legendaryActions',
           LegendaryActionsSectionShowElements,
           LegendaryActionsSectionEditElements);
 
@@ -54,22 +54,24 @@ export default class LegendaryActionsSection extends blockListSectionModule.Bloc
   updateModel() {
     super.updateModel();
 
-    this.listModel.originalDescription = this.editElements.description.value;
-    this.listModel.homebreweryDescription = this.editElements.description.homebreweryText;
-    this.listModel.htmlDescription = this.editElements.description.htmlText;
+    const model = CurrentContext.creature.legendaryActions;
+
+    model.originalDescription = this.editElements.description.value;
+    model.homebreweryDescription = this.editElements.description.homebreweryText;
+    model.htmlDescription = this.editElements.description.htmlText;
   }
 
   updateShowModeView() {
     super.updateShowModeView();
 
-    this.showElements.description.innerHTMLSanitized = this.listModel.htmlDescription;
+    this.showElements.description.innerHTMLSanitized = CurrentContext.creature.legendaryActions.htmlDescription;
   }
 
   reparse() {
     super.reparse();
 
     if (this.mode === 'show') {
-      this.showElements.description.innerHTMLSanitized = this.listModel.htmlDescription;
+      this.showElements.description.innerHTMLSanitized = CurrentContext.creature.legendaryActions.htmlDescription;
     }
   }
 }

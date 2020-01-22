@@ -2,8 +2,6 @@ import * as propertyLineSectionModule from './property-line-section.js';
 import CurrentContext from '../../../models/current-context.js';
 import ExperiencePointsByChallengeRating from '../../../data/experience-points-by-challenge-rating.js';
 
-const challengeRating = CurrentContext.creature.challengeRating;
-
 export default class ChallengeRatingSection extends propertyLineSectionModule.PropertyLineSection {
   static get elementName() { return 'challenge-rating-section'; }
   static get templatePaths() {
@@ -31,29 +29,33 @@ export default class ChallengeRatingSection extends propertyLineSectionModule.Pr
   }
 
   updateModel() {
-    challengeRating.challengeRating = this.editElements.challengeRating.valueAsFloat;
-    challengeRating.experiencePoints = this.editElements.experiencePoints.valueAsInt;
+    const challengeRatingModel = CurrentContext.creature.challengeRating;
+
+    challengeRatingModel.challengeRating = this.editElements.challengeRating.valueAsFloat;
+    challengeRatingModel.experiencePoints = this.editElements.experiencePoints.valueAsInt;
   }
 
   updateEditModeView() {
-    this.editElements.challengeRating.value = challengeRating.challengeRating;
-    this.editElements.experiencePoints.value = challengeRating.experiencePoints;
+    const challengeRatingModel = CurrentContext.creature.challengeRating;
+
+    this.editElements.challengeRating.value = challengeRatingModel.challengeRating;
+    this.editElements.experiencePoints.value = challengeRatingModel.experiencePoints;
   }
 
   updateShowModeView() {
-    this.showElements.text.textContent = challengeRating.text;
+    this.showElements.text.textContent = CurrentContext.creature.challengeRating.text;
   }
 
   exportToJson() {
-    return challengeRating.toJson();
+    return CurrentContext.creature.challengeRating.toJson();
   }
 
   exportToHtml() {
-    return challengeRating.toHtml();
+    return CurrentContext.creature.challengeRating.toHtml();
   }
 
   exportToHomebrewery() {
-    return challengeRating.toHomebrewery();
+    return CurrentContext.creature.challengeRating.toHomebrewery();
   }
 }
 
