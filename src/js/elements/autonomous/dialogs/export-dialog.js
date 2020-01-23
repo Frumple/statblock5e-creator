@@ -15,6 +15,7 @@ export default class ExportDialog extends CustomDialog {
 
     this.copyToClipboardButton = this.shadowRoot.getElementById('copy-to-clipboard-button');
     this.downloadAsFileButton = this.shadowRoot.getElementById('download-as-file-button');
+    this.cancelButton = this.shadowRoot.getElementById('cancel-button');
     this.statusLabel = this.shadowRoot.getElementById('status-label');
 
     this.clipboard = null;
@@ -29,6 +30,7 @@ export default class ExportDialog extends CustomDialog {
       super.connectedCallback();
 
       this.downloadAsFileButton.addEventListener('click', this.onClickDownloadAsFileButton.bind(this));
+      this.cancelButton.addEventListener('click', this.onClickCloseButton.bind(this));
 
       this.isInitialized = true;
     }
