@@ -1,7 +1,6 @@
 import CustomAutonomousElement from '../custom-autonomous-element.js';
+import CurrentContext from '../../../models/current-context.js';
 import isRunningInNode from '../../../helpers/is-running-in-node.js';
-import GlobalOptions from '../../../helpers/global-options.js';
-
 import HeadingStats from '../containers/heading-stats.js';
 import TopStats from '../containers/top-stats.js';
 import BottomStats from '../containers/bottom-stats.js';
@@ -132,6 +131,8 @@ export default class StatBlock extends CustomAutonomousElement {
   }
 
   exportToHtml() {
+    const layoutSettings = CurrentContext.layoutSettings;
+
     const statBlockElement = document.createElement('stat-block');
 
     const headingStats = this.headingStats.exportToHtml();
@@ -142,11 +143,11 @@ export default class StatBlock extends CustomAutonomousElement {
     statBlockElement.appendChild(topStats);
     statBlockElement.appendChild(bottomStats);
 
-    if (GlobalOptions.columns === 2) {
+    if (layoutSettings.columns === 2) {
       statBlockElement.dataset.twoColumn = '';
 
-      if (GlobalOptions.twoColumnMode === 'manual') {
-        statBlockElement.setAttribute('style', `--data-content-height: ${GlobalOptions.twoColumnHeight}px`);
+      if (layoutSettings.twoColumnMode === 'manual') {
+        statBlockElement.setAttribute('style', `--data-content-height: ${layoutSettings.twoColumnHeight}px`);
       }
     }
 
@@ -154,8 +155,10 @@ export default class StatBlock extends CustomAutonomousElement {
   }
 
   exportToHomebrewery() {
+    const layoutSettings = CurrentContext.layoutSettings;
+
     let blockHeader = '___';
-    if (GlobalOptions.columns === 2) {
+    if (layoutSettings.columns === 2) {
       blockHeader += '\n___';
     }
 

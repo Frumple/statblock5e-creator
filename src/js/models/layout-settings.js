@@ -1,4 +1,4 @@
-class GlobalOptions {
+export default class LayoutSettings {
   constructor() {
     this.reset();
   }
@@ -10,5 +10,3 @@ class GlobalOptions {
     this.emptySectionsVisibility = true;
   }
 }
-
-export default new GlobalOptions();

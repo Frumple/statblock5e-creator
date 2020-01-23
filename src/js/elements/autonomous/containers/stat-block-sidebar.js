@@ -46,12 +46,7 @@ export default class StatBlockSidebar extends CustomAutonomousElement {
   }
 
   dispatchHeightChangedEvent(mode) {
-    let height = null;
-
-    if (mode === 'manual') {
-      height = convertToInteger(this.manualHeightSlider.value);
-    }
-
+    const height = convertToInteger(this.manualHeightSlider.value);
     const heightEvent = new CustomEvent('twoColumnHeightChanged', {
       bubbles: true,
       composed: true,

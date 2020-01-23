@@ -1,3 +1,30 @@
+export class ClipboardWrapper {
+  constructor(
+    copiedText,
+    container,
+    targetElement) {
+
+    this.clipboard = new ClipboardJS(targetElement, {
+      container: container,
+      text: function() {
+        return copiedText;
+      }
+    });
+  }
+
+  setSuccessCallback(callback) {
+    this.clipboard.on('success', callback);
+  }
+
+  setErrorCallback(callback) {
+    this.clipboard.on('error', callback);
+  }
+
+  destroy() {
+    this.clipboard.destroy();
+  }
+}
+
 export function startFileDownload(content, contentType, fileName) {
   const blob = new Blob([content], {type: contentType});
   const link = document.createElement('a');

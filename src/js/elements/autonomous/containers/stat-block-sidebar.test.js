@@ -39,7 +39,7 @@ it('should dispatch an event when the "Auto Two-Column Height" button is clicked
 
   expect(receivedEvent).not.toBeNull();
   expect(receivedEvent.detail.mode).toBe('auto');
-  expect(receivedEvent.detail.height).toBeNull();
+  expect(receivedEvent.detail.height).toBe(initialSliderValue);
 
   expect(statBlockSidebar.heightMode).toBe('auto');
   expect(statBlockSidebar.manualHeightSliderContainer).toHaveClass(sliderContainerHiddenClass);

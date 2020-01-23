@@ -1,6 +1,6 @@
 import CustomDialog from './custom-dialog.js';
 
-import { startFileDownload } from '../../../helpers/export-helpers.js';
+import { startFileDownload, ClipboardWrapper } from '../../../helpers/export-helpers.js';
 
 export default class ExportDialog extends CustomDialog {
   static get elementName() { return 'export-dialog'; }
@@ -55,19 +55,18 @@ export default class ExportDialog extends CustomDialog {
     this.statusLabel.textContent = 'Choose one of the following options:';
     this.statusLabel.classList.remove('export-dialog__status-label_complete');
 
-    this.clipboard = new ClipboardJS(this.copyToClipboardButton, {
-      container: this.dialog,
-      text: function() {
-        return content;
-      }
-    });
+    this.clipboard = new ClipboardWrapper(
+      content,
+      this.dialog,
+      this.copyToClipboardButton,
+    );
 
-    this.clipboard.on('success', () => {
+    this.clipboard.setSuccessCallback(() => {
       this.statusLabel.textContent = 'Copied to clipboard.';
       this.statusLabel.classList.add('export-dialog__status-label_complete');
     });
 
-    this.clipboard.on('error', () => {
+    this.clipboard.setErrorCallback(() => {
       this.statusLabel.textContent = 'Press Ctrl+C to copy to clipboard.';
       this.statusLabel.classList.add('export-dialog__status-label_error');
     });

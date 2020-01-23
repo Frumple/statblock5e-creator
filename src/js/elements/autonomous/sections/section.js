@@ -1,6 +1,5 @@
 import CustomAutonomousElement from '../custom-autonomous-element.js';
 import CurrentContext from '../../../models/current-context.js';
-import GlobalOptions from '../../../helpers/global-options.js';
 import { focusAndSelectElement } from '../../../helpers/element-helpers.js';
 
 export class Section extends CustomAutonomousElement {
@@ -119,7 +118,7 @@ export class Section extends CustomAutonomousElement {
     this.updateModel();
     this.updateShowModeView();
 
-    if (this.empty && ! GlobalOptions.emptySectionsVisibility) {
+    if (this.empty && ! CurrentContext.layoutSettings.emptySectionsVisibility) {
       this.mode = 'hidden';
     } else {
       this.mode = 'show';

@@ -1,7 +1,6 @@
 import CustomAutonomousElement from '../custom-autonomous-element.js';
 import * as HtmlExportDocumentFactory from '../../../helpers/html-export-document-factory.js';
 import printHtml from '../../../helpers/print-helpers.js';
-import GlobalOptions from '../../../helpers/global-options.js';
 import isRunningInNode from '../../../helpers/is-running-in-node.js';
 
 import StatBlockMenu from './stat-block-menu.js';
@@ -64,8 +63,10 @@ export default class StatBlockEditor extends CustomAutonomousElement {
   }
 
   onNumberOfColumnsChanged(event) {
+    const layoutSettings = CurrentContext.layoutSettings;
+
     const columns = event.detail.columns;
-    GlobalOptions.columns = columns;
+    layoutSettings.columns = columns;
 
     if (columns === 1) {
       this.statBlockSidebar.visible = false;
@@ -73,25 +74,29 @@ export default class StatBlockEditor extends CustomAutonomousElement {
     } else if (columns === 2) {
       this.statBlockSidebar.visible = true;
       this.statBlock.setColumnHeight(
-        GlobalOptions.twoColumnMode,
-        GlobalOptions.twoColumnHeight);
+        layoutSettings.twoColumnMode,
+        layoutSettings.twoColumnHeight);
     }
 
     this.statBlock.setColumns(columns);
   }
 
   onTwoColumnHeightChanged(event) {
+    const layoutSettings = CurrentContext.layoutSettings;
+
     const mode = event.detail.mode;
     const height = event.detail.height;
-    GlobalOptions.twoColumnMode = mode;
-    GlobalOptions.twoColumnHeight = height;
+    layoutSettings.twoColumnMode = mode;
+    layoutSettings.twoColumnHeight = height;
 
     this.statBlock.setColumnHeight(mode, height);
   }
 
   onEmptySectionsVisiblityChanged(event) {
+    const layoutSettings = CurrentContext.layoutSettings;
+
     const visibility = event.detail.visibility;
-    GlobalOptions.emptySectionsVisibility = visibility;
+    layoutSettings.emptySectionsVisibility = visibility;
 
     this.statBlock.setEmptyVisibility(visibility);
   }
@@ -174,12 +179,20 @@ export default class StatBlockEditor extends CustomAutonomousElement {
   }
 
   exportToJson() {
+    const layoutSettings = CurrentContext.layoutSettings;
     const json = this.statBlock.exportToJson();
 
     json.meta = {
       version: '1.0.0',
       description: 'Created using statblock5e-creator',
       url: 'https://frumple.github.io/statblock5e-creator'
+    };
+
+    json.layout = {
+      columns: layoutSettings.columns,
+      twoColumnMode: layoutSettings.twoColumnMode,
+      twoColumnHeight: layoutSettings.twoColumnHeight,
+      emptySectionsVisibility: layoutSettings.emptySectionsVisibility
     };
 
     return JSON.stringify(json, null, 2);
