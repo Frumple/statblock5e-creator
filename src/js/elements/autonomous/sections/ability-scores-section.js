@@ -11,6 +11,7 @@ export default class AbilityScoresSection extends sectionModule.Section {
 
   constructor() {
     super(AbilityScoresSection.templatePaths,
+          'abilities',
           AbilityScoresShowElements,
           AbilityScoresEditElements);
 
@@ -128,14 +129,6 @@ export default class AbilityScoresSection extends sectionModule.Section {
       abilityScores: CurrentContext.creature.abilities.toJson(),
       proficiencyBonus: CurrentContext.creature.proficiencyBonus.toJson()
     };
-  }
-
-  exportToHtml() {
-    return CurrentContext.creature.abilities.toHtml();
-  }
-
-  exportToHomebrewery() {
-    return CurrentContext.creature.abilities.toHomebrewery();
   }
 }
 

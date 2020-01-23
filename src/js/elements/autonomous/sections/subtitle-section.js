@@ -11,6 +11,7 @@ export default class SubtitleSection extends sectionModule.Section {
 
   constructor() {
     super(SubtitleSection.templatePaths,
+          'subtitle',
           SubtitleShowElements,
           SubtitleEditElements);
   }
@@ -47,8 +48,8 @@ export default class SubtitleSection extends sectionModule.Section {
     subtitleModel.tags = this.editElements.tags.value;
     subtitleModel.alignment = this.editElements.alignment.value;
 
-    subtitleModel.useCustomSubtitleText = this.editElements.useCustomText.checked;
-    subtitleModel.customSubtitleText = this.editElements.customText.value;
+    subtitleModel.useCustomText = this.editElements.useCustomText.checked;
+    subtitleModel.customText = this.editElements.customText.value;
   }
 
   updateEditModeView() {
@@ -58,24 +59,12 @@ export default class SubtitleSection extends sectionModule.Section {
     this.editElements.tags.value = subtitleModel.tags;
     this.editElements.alignment.value = subtitleModel.alignment;
 
-    this.editElements.useCustomText.checked = subtitleModel.useCustomSubtitleText;
-    this.editElements.customText.value = subtitleModel.customSubtitleText;
+    this.editElements.useCustomText.checked = subtitleModel.useCustomText;
+    this.editElements.customText.value = subtitleModel.customText;
   }
 
   updateShowModeView() {
     this.showElements.text.textContent = CurrentContext.creature.subtitle.text;
-  }
-
-  exportToJson() {
-    return CurrentContext.creature.subtitle.toJson();
-  }
-
-  exportToHtml() {
-    return CurrentContext.creature.subtitle.toHtml();
-  }
-
-  exportToHomebrewery() {
-    return CurrentContext.creature.subtitle.toHomebrewery();
   }
 }
 

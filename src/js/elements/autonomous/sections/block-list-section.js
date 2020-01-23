@@ -12,9 +12,8 @@ export class BlockListSection extends sectionModule.Section {
     modelPropertyName,
     showElements = BlockListShowSection,
     editElements = BlockListEditSection) {
-    super(templatePaths, showElements, editElements);
+    super(templatePaths, modelPropertyName, showElements, editElements);
 
-    this.modelPropertyName = modelPropertyName;
     this.heading = this.shadowRoot.getElementById('heading');
   }
 
@@ -116,18 +115,6 @@ export class BlockListSection extends sectionModule.Section {
         displayBlock.text = blockModel.htmlText;
       }
     }
-  }
-
-  exportToJson() {
-    return CurrentContext.creature[this.modelPropertyName].toJson();
-  }
-
-  exportToHtml() {
-    return CurrentContext.creature[this.modelPropertyName].toHtml();
-  }
-
-  exportToHomebrewery() {
-    return CurrentContext.creature[this.modelPropertyName].toHomebrewery();
   }
 }
 

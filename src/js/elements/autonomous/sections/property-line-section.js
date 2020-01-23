@@ -1,8 +1,8 @@
 import * as sectionModule from './section.js';
 
 export class PropertyLineSection extends sectionModule.Section {
-  constructor(templatePaths, showElements, editElements) {
-    super(templatePaths, showElements, editElements);
+  constructor(templatePaths, modelPropertyName, showElements, editElements) {
+    super(templatePaths, modelPropertyName, showElements, editElements);
   }
 }
 

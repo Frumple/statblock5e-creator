@@ -23,6 +23,8 @@ export default class StatBlockEditor extends CustomAutonomousElement {
   constructor() {
     super(StatBlockEditor.templatePaths);
 
+    this.jsonImportDialog = this.shadowRoot.getElementById('json-import-dialog');
+
     if (isRunningInNode) {
       this.statBlockMenu = new StatBlockMenu(this);
       this.statBlockSidebar = new StatBlockSidebar(this);
@@ -51,8 +53,11 @@ export default class StatBlockEditor extends CustomAutonomousElement {
       this.addEventListener('emptySectionsVisibilityChanged', this.onEmptySectionsVisiblityChanged.bind(this));
       this.addEventListener('allSectionsAction', this.onAllSectionsAction.bind(this));
 
-      this.addEventListener('printAction', this.onPrintAction.bind(this));
+      this.jsonImportDialog.addEventListener('change', this.onJsonImportFileSelected.bind(this));
+
+      this.addEventListener('importAction', this.onImportAction.bind(this));
       this.addEventListener('exportAction', this.onExportAction.bind(this));
+      this.addEventListener('printAction', this.onPrintAction.bind(this));
 
       this.isInitialized = true;
     }
@@ -100,9 +105,30 @@ export default class StatBlockEditor extends CustomAutonomousElement {
     }
   }
 
-  onPrintAction() {
-    const content = this.exportToHtml(CurrentContext.creature.title.fullName);
-    printHtml(content);
+  onImportAction(event) {
+    const format = event.detail.format;
+
+    switch(format) {
+    case 'json':
+      this.jsonImportDialog.click();
+      break;
+    default:
+      throw new Error(`Unknown import format: '${format}'.`);
+    }
+  }
+
+  onJsonImportFileSelected(event) {
+    const file = this.jsonImportDialog.files[0];
+
+    const fileReader = new FileReader();
+    fileReader.addEventListener('load', this.onJsonImportSuccessful.bind(this));
+    fileReader.readAsText(file);
+  }
+
+  onJsonImportSuccessful(event) {
+    const jsonString = event.target.result;
+    const json = JSON.parse(jsonString);
+    this.importFromJson(json);
   }
 
   onExportAction(event) {
@@ -123,6 +149,11 @@ export default class StatBlockEditor extends CustomAutonomousElement {
     }
   }
 
+  onPrintAction() {
+    const content = this.exportToHtml(CurrentContext.creature.title.fullName);
+    printHtml(content);
+  }
+
   openJsonExportDialog() {
     const content = this.exportToJson();
     this.jsonExportDialog.launch(content, 'application/json', `${CurrentContext.creature.title.fullName}.json`);
@@ -138,16 +169,20 @@ export default class StatBlockEditor extends CustomAutonomousElement {
     this.homebreweryExportDialog.launch(content, 'text/markdown', `${CurrentContext.creature.title.fullName}.md`);
   }
 
-  exportToJson() {
-    const jsObject = this.statBlock.exportToJson();
+  importFromJson(json) {
+    this.statBlock.importFromJson(json);
+  }
 
-    jsObject.meta = {
+  exportToJson() {
+    const json = this.statBlock.exportToJson();
+
+    json.meta = {
       version: '1.0.0',
       description: 'Created using statblock5e-creator',
       url: 'https://frumple.github.io/statblock5e-creator'
     };
 
-    return JSON.stringify(jsObject, null, 2);
+    return JSON.stringify(json, null, 2);
   }
 
   exportToHtml(title) {

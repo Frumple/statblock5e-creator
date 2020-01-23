@@ -124,9 +124,23 @@ describe('when the show section is clicked', () => {
         expect(titleSection).toBeInMode('show');
         expect(titleSection.showElements.title).toHaveTextContent(fullName);
 
-        verifyJsonExport(fullName, shortName, isProperNoun);
+        const json = verifyJsonExport(fullName, shortName, isProperNoun);
         verifyHtmlExport(fullName);
         verifyHomebreweryExport(fullName);
+
+        reset();
+
+        titleSection.importFromJson(json);
+
+        expect(titleModel.fullName).toBe(fullName);
+        expect(titleModel.shortName).toBe(shortName);
+        expect(titleModel.isProperNoun).toBe(isProperNoun);
+
+        expect(titleSection.editElements.fullName).toHaveValue(fullName);
+        expect(titleSection.editElements.shortName).toHaveValue(shortName);
+        expect(titleSection.editElements.properNoun.checked).toBe(isProperNoun);
+
+        expect(titleSection.showElements.title).toHaveTextContent(fullName);
       });
       /* eslint-enable indent, no-unexpected-multiline */
     });
@@ -150,9 +164,17 @@ describe('when the show section is clicked', () => {
         expect(titleSection).toBeInMode('show');
         expect(titleSection.showElements.title).toHaveTextContent(expectedFullName);
 
-        verifyJsonExport(expectedFullName, '', false);
+        const json = verifyJsonExport(expectedFullName, '', false);
         verifyHtmlExport(expectedFullName);
         verifyHomebreweryExport(expectedFullName);
+
+        reset();
+
+        titleSection.importFromJson(json);
+
+        expect(titleModel.fullName).toBe(expectedFullName);
+        expect(titleSection.editElements.fullName).toHaveValue(expectedFullName);
+        expect(titleSection.showElements.title).toHaveTextContent(expectedFullName);
       });
     /* eslint-enable indent, no-unexpected-multiline */
     });
@@ -170,6 +192,11 @@ describe('when the show section is clicked', () => {
   });
 });
 
+function reset() {
+  titleModel.reset();
+  titleSection.updateView();
+}
+
 function verifyJsonExport(expectedFullName, expectedShortName, expectedIsProperNoun) {
   const json = titleSection.exportToJson();
   const expectedJson = {
@@ -179,6 +206,8 @@ function verifyJsonExport(expectedFullName, expectedShortName, expectedIsProperN
   };
 
   expect(json).toStrictEqual(expectedJson);
+
+  return json;
 }
 
 function verifyHtmlExport(expectedTitle) {

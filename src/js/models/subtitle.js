@@ -9,13 +9,13 @@ export default class Subtitle {
     this.tags = '';
     this.alignment = 'unaligned';
 
-    this.useCustomSubtitleText = false;
-    this.customSubtitleText = '';
+    this.useCustomText = false;
+    this.customText = '';
   }
 
   get text() {
-    if (this.useCustomSubtitleText) {
-      return this.customSubtitleText;
+    if (this.useCustomText) {
+      return this.customText;
     }
 
     if (this.tags === '') {
@@ -25,14 +25,23 @@ export default class Subtitle {
     return `${this.size} ${this.type} (${this.tags}), ${this.alignment}`;
   }
 
+  fromJson(json) {
+    this.size = json.size;
+    this.type = json.type;
+    this.tags = json.tags;
+    this.alignment = json.alignment;
+    this.useCustomText = json.useCustomText;
+    this.customText = json.customText;
+  }
+
   toJson() {
     return {
       size: this.size,
       type: this.type,
       tags: this.tags,
       alignment: this.alignment,
-      useCustomSubtitleText: this.useCustomSubtitleText,
-      customSubtitleText: this.customSubtitleText
+      useCustomText: this.useCustomText,
+      customText: this.customText
     };
   }
 

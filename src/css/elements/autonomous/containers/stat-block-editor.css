@@ -4,6 +4,10 @@
   font-size: 13.5px;
 }
 
+.stat-block-editor__json-import-dialog {
+  display: none;
+}
+
 .stat-block-editor__components {
   display: grid;
   grid-template-columns: auto 1fr;

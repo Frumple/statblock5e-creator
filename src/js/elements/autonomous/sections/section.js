@@ -1,4 +1,5 @@
 import CustomAutonomousElement from '../custom-autonomous-element.js';
+import CurrentContext from '../../../models/current-context.js';
 import GlobalOptions from '../../../helpers/global-options.js';
 import { focusAndSelectElement } from '../../../helpers/element-helpers.js';
 
@@ -9,9 +10,10 @@ export class Section extends CustomAutonomousElement {
       'src/html/elements/autonomous/sections/section.html');
   }
 
-  constructor(templatePaths, showElementsClass, editElementsClass) {
+  constructor(templatePaths, modelPropertyName, showElementsClass, editElementsClass) {
     super(templatePaths);
 
+    this.modelPropertyName = modelPropertyName;
     this.dataset.mode = 'show';
 
     this.showElements = new showElementsClass(this.shadowRoot);
@@ -20,8 +22,7 @@ export class Section extends CustomAutonomousElement {
   }
 
   connectedCallback() {
-    this.updateEditModeView();
-    this.updateShowModeView();
+    this.updateView();
 
     this.showElements.section.addEventListener('click', () => {
       this.edit();
@@ -147,6 +148,11 @@ export class Section extends CustomAutonomousElement {
       `The class '${this.constructor.name}' must implement the updateShowModeView() method.`);
   }
 
+  updateView() {
+    this.updateEditModeView();
+    this.updateShowModeView();
+  }
+
   dispatchModeChangedEvent() {
     const changeEvent = new CustomEvent('sectionModeChanged', {
       bubbles: true,
@@ -155,19 +161,21 @@ export class Section extends CustomAutonomousElement {
     this.dispatchEvent(changeEvent);
   }
 
+  importFromJson(json) {
+    CurrentContext.creature[this.modelPropertyName].fromJson(json);
+    this.updateView();
+  }
+
   exportToJson() {
-    throw new Error(
-      `The class '${this.constructor.name}' must implement the exportToJson() method.`);
+    return CurrentContext.creature[this.modelPropertyName].toJson();
   }
 
   exportToHtml() {
-    throw new Error(
-      `The class '${this.constructor.name}' must implement the exportToHtml() method.`);
+    return CurrentContext.creature[this.modelPropertyName].toHtml();
   }
 
   exportToHomebrewery() {
-    throw new Error(
-      `The class '${this.constructor.name}' must implement the exportToHomebrewery() method.`);
+    return CurrentContext.creature[this.modelPropertyName].toHomebrewery();
   }
 }
 

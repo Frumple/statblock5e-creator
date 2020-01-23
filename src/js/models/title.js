@@ -44,9 +44,15 @@ export default class Title {
     };
   }
 
+  fromJson(json) {
+    this.fullName = json.fullName;
+    this.shortName = json.shortName;
+    this.isProperNoun = json.isProperNoun;
+  }
+
   toJson() {
     return {
-      fullName: this._fullName,
+      fullName: this.fullName,
       shortName: this.shortName,
       isProperNoun: this.isProperNoun
     };

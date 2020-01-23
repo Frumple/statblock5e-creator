@@ -11,6 +11,7 @@ export default class SpeedSection extends propertyLineSectionModule.PropertyLine
 
   constructor() {
     super(SpeedSection.templatePaths,
+          'speed',
           SpeedShowElements,
           SpeedEditElements);
   }
@@ -80,18 +81,6 @@ export default class SpeedSection extends propertyLineSectionModule.PropertyLine
     } else {
       this.showElements.text.textContent = speedModel.nonCustomText;
     }
-  }
-
-  exportToJson() {
-    return CurrentContext.creature.speed.toJson();
-  }
-
-  exportToHtml() {
-    return CurrentContext.creature.speed.toHtml();
-  }
-
-  exportToHomebrewery() {
-    return CurrentContext.creature.speed.toHomebrewery();
   }
 }
 

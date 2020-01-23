@@ -11,6 +11,7 @@ export default class HitPointsSection extends propertyLineSectionModule.Property
 
   constructor() {
     super(HitPointsSection.templatePaths,
+          'hitPoints',
           HitPointsShowElements,
           HitPointsEditElements);
   }
@@ -115,18 +116,6 @@ export default class HitPointsSection extends propertyLineSectionModule.Property
     }
 
     this.showElements.text.textContent = hitPointsModel.text;
-  }
-
-  exportToJson() {
-    return CurrentContext.creature.hitPoints.toJson();
-  }
-
-  exportToHtml() {
-    return CurrentContext.creature.hitPoints.toHtml();
-  }
-
-  exportToHomebrewery() {
-    return CurrentContext.creature.hitPoints.toHomebrewery();
   }
 }
 

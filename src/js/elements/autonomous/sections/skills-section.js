@@ -12,6 +12,7 @@ export default class SkillsSection extends propertyLineSectionModule.PropertyLin
 
   constructor() {
     super(SkillsSection.templatePaths,
+          'skills',
           SkillsShowElements,
           SkillsEditElements);
 
@@ -156,18 +157,6 @@ export default class SkillsSection extends propertyLineSectionModule.PropertyLin
     const text = CurrentContext.creature.skills.text;
     this.empty = (text === '');
     this.showElements.text.textContent = text;
-  }
-
-  exportToJson() {
-    return CurrentContext.creature.skills.toJson();
-  }
-
-  exportToHtml() {
-    return CurrentContext.creature.skills.toHtml();
-  }
-
-  exportToHomebrewery() {
-    return CurrentContext.creature.skills.toHomebrewery();
   }
 }
 

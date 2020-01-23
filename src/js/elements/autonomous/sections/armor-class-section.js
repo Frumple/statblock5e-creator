@@ -11,6 +11,7 @@ export default class ArmorClassSection extends propertyLineSectionModule.Propert
 
   constructor() {
     super(ArmorClassSection.templatePaths,
+          'armorClass',
           ArmorClassShowElements,
           ArmorClassEditElements);
   }
@@ -71,18 +72,6 @@ export default class ArmorClassSection extends propertyLineSectionModule.Propert
     } else {
       this.showElements.text.textContent = armorClassModel.nonCustomText;
     }
-  }
-
-  exportToJson() {
-    return CurrentContext.creature.armorClass.toJson();
-  }
-
-  exportToHtml() {
-    return CurrentContext.creature.armorClass.toHtml();
-  }
-
-  exportToHomebrewery() {
-    return CurrentContext.creature.armorClass.toHomebrewery();
   }
 }
 

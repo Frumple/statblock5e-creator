@@ -11,6 +11,7 @@ export default class TitleSection extends sectionModule.Section {
 
   constructor() {
     super(TitleSection.templatePaths,
+          'title',
           TitleShowElements,
           TitleEditElements);
   }
@@ -75,23 +76,14 @@ export default class TitleSection extends sectionModule.Section {
   }
 
   updateEditModeView() {
-    this.editElements.fullName.value = CurrentContext.creature.title.fullName;
+    const title = CurrentContext.creature.title;
+    this.editElements.fullName.value = title.fullName;
+    this.editElements.shortName.value = title.shortName;
+    this.editElements.properNoun.checked = title.isProperNoun;
   }
 
   updateShowModeView() {
     this.showElements.title.textContent = CurrentContext.creature.title.fullName;
-  }
-
-  exportToJson() {
-    return CurrentContext.creature.title.toJson();
-  }
-
-  exportToHtml() {
-    return CurrentContext.creature.title.toHtml();
-  }
-
-  exportToHomebrewery() {
-    return CurrentContext.creature.title.toHomebrewery();
   }
 }
 

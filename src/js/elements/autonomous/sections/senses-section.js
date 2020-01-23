@@ -11,6 +11,7 @@ export default class SensesSection extends propertyLineSectionModule.PropertyLin
 
   constructor() {
     super(SensesSection.templatePaths,
+          'senses',
           SensesShowElements,
           SensesEditElements);
   }
@@ -82,18 +83,6 @@ export default class SensesSection extends propertyLineSectionModule.PropertyLin
     } else {
       this.showElements.text.textContent = sensesModel.nonCustomText;
     }
-  }
-
-  exportToJson() {
-    return CurrentContext.creature.senses.toJson();
-  }
-
-  exportToHtml() {
-    return CurrentContext.creature.senses.toHtml();
-  }
-
-  exportToHomebrewery() {
-    return CurrentContext.creature.senses.toHomebrewery();
   }
 }
 

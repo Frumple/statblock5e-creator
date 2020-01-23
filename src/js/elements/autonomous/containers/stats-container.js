@@ -26,6 +26,13 @@ export default class StatsContainer extends CustomAutonomousElement {
     }
   }
 
+
+  importFromJson(json) {
+    for (const section of this.sections.values()) {
+      section.importFromJson(json[section.modelPropertyName]);
+    }
+  }
+
   exportToJson() {
     const entries = Array.from(this.sections.entries());
     const transformedEntries = entries.map(([key, section]) => [key, section.exportToJson()]);

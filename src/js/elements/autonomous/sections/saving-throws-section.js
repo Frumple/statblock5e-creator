@@ -12,6 +12,7 @@ export default class SavingThrowsSection extends propertyLineSectionModule.Prope
 
   constructor() {
     super(SavingThrowsSection.templatePaths,
+          'savingThrows',
           SavingThrowsShowElements,
           SavingThrowsEditElements);
 
@@ -136,18 +137,6 @@ export default class SavingThrowsSection extends propertyLineSectionModule.Prope
     const text = CurrentContext.creature.savingThrows.text;
     this.empty = (text === '');
     this.showElements.text.textContent = text;
-  }
-
-  exportToJson() {
-    return CurrentContext.creature.savingThrows.toJson();
-  }
-
-  exportToHtml() {
-    return CurrentContext.creature.savingThrows.toHtml();
-  }
-
-  exportToHomebrewery() {
-    return CurrentContext.creature.savingThrows.toHomebrewery();
   }
 }
 

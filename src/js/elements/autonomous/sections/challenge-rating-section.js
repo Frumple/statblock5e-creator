@@ -12,6 +12,7 @@ export default class ChallengeRatingSection extends propertyLineSectionModule.Pr
 
   constructor() {
     super(ChallengeRatingSection.templatePaths,
+          'challengeRating',
           ChallengeRatingShowElements,
           ChallengeRatingEditElements);
 
@@ -44,18 +45,6 @@ export default class ChallengeRatingSection extends propertyLineSectionModule.Pr
 
   updateShowModeView() {
     this.showElements.text.textContent = CurrentContext.creature.challengeRating.text;
-  }
-
-  exportToJson() {
-    return CurrentContext.creature.challengeRating.toJson();
-  }
-
-  exportToHtml() {
-    return CurrentContext.creature.challengeRating.toHtml();
-  }
-
-  exportToHomebrewery() {
-    return CurrentContext.creature.challengeRating.toHomebrewery();
   }
 }
 

@@ -77,18 +77,30 @@ describe('when the show section is clicked', () => {
 
           subtitleSection.editElements.submitForm();
 
-          expect(subtitleModel.useCustomSubtitleText).toBe(true);
-          expect(subtitleModel.customSubtitleText).toBe(customText);
+          expect(subtitleModel.useCustomText).toBe(true);
+          expect(subtitleModel.customText).toBe(customText);
 
           expect(subtitleSection).toBeInMode('show');
           expect(subtitleSection.showElements.text).toHaveTextContent(customText);
 
-          verifyJsonExport({
-            useCustomSubtitleText: true,
-            customSubtitleText: customText
+          const json = verifyJsonExport({
+            useCustomText: true,
+            customText: customText
           });
           verifyHtmlExport(customText);
           verifyHomebreweryExport(customText);
+
+          reset();
+
+          subtitleSection.importFromJson(json);
+
+          expect(subtitleModel.useCustomText).toBe(true);
+          expect(subtitleModel.customText).toBe(customText);
+
+          expect(subtitleSection.editElements.useCustomText).toBeChecked();
+          expect(subtitleSection.editElements.customText).toHaveValue(customText);
+
+          expect(subtitleSection.showElements.text).toHaveTextContent(customText);
         });
         /* eslint-enable indent, no-unexpected-multiline */
       });
@@ -102,17 +114,27 @@ describe('when the show section is clicked', () => {
         subtitleSection.editElements.submitForm();
         subtitleSection.showElements.section.click();
 
-        expect(subtitleModel.useCustomSubtitleText).toBe(false);
-        expect(subtitleModel.customSubtitleText).toBe(customText);
+        expect(subtitleModel.useCustomText).toBe(false);
+        expect(subtitleModel.customText).toBe(customText);
 
         expect(subtitleSection).toBeInMode('edit');
         expect(subtitleSection.editElements.useCustomText).not.toBeChecked();
         expect(subtitleSection.editElements.customText).toHaveValue(customText);
 
-        verifyJsonExport({
-          useCustomSubtitleText: false,
-          customSubtitleText: customText
+        const json = verifyJsonExport({
+          useCustomText: false,
+          customText: customText
         });
+
+        reset();
+
+        subtitleSection.importFromJson(json);
+
+        expect(subtitleModel.useCustomText).toBe(false);
+        expect(subtitleModel.customText).toBe(customText);
+
+        expect(subtitleSection.editElements.useCustomText).not.toBeChecked();
+        expect(subtitleSection.editElements.customText).toHaveValue(customText);
       });
 
       it('should display an error if the custom text field is blank', () => {
@@ -174,7 +196,7 @@ describe('when the show section is clicked', () => {
           expect(subtitleSection).toBeInMode('show');
           expect(subtitleSection.showElements.text).toHaveTextContent(expectedSubtitle);
 
-          verifyJsonExport({
+          const json = verifyJsonExport({
             size: size,
             type: type,
             tags: tags,
@@ -182,6 +204,22 @@ describe('when the show section is clicked', () => {
           });
           verifyHtmlExport(expectedSubtitle);
           verifyHomebreweryExport(expectedSubtitle);
+
+          reset();
+
+          subtitleSection.importFromJson(json);
+
+          expect(subtitleModel.size).toBe(size);
+          expect(subtitleModel.type).toBe(type);
+          expect(subtitleModel.tags).toBe(tags);
+          expect(subtitleModel.alignment).toBe(alignment);
+
+          expect(subtitleSection.editElements.size).toHaveValue(size);
+          expect(subtitleSection.editElements.type).toHaveValue(type);
+          expect(subtitleSection.editElements.tags).toHaveValue(tags);
+          expect(subtitleSection.editElements.alignment).toHaveValue(alignment);
+
+          expect(subtitleSection.showElements.text).toHaveTextContent(expectedSubtitle);
         });
         /* eslint-enable indent, no-unexpected-multiline */
       });
@@ -209,7 +247,7 @@ describe('when the show section is clicked', () => {
         expect(subtitleModel.type).toBe(type);
         expect(subtitleModel.tags).toBe(tags);
         expect(subtitleModel.alignment).toBe(alignment);
-        expect(subtitleModel.useCustomSubtitleText).toBe(true);
+        expect(subtitleModel.useCustomText).toBe(true);
 
         expect(subtitleSection).toBeInMode('edit');
         expect(subtitleSection.editElements.size).toHaveValue(size);
@@ -218,26 +256,51 @@ describe('when the show section is clicked', () => {
         expect(subtitleSection.editElements.alignment).toHaveValue(alignment);
         expect(subtitleSection.editElements.useCustomText).toBeChecked();
 
-        verifyJsonExport({
+        expect(subtitleSection.showElements.text).toHaveTextContent(customText);
+
+        const json = verifyJsonExport({
           size: size,
           type: type,
           tags: tags,
           alignment: alignment,
-          useCustomSubtitleText: useCustomText,
-          customSubtitleText: customText
+          useCustomText: useCustomText,
+          customText: customText
         });
+
+        reset();
+
+        subtitleSection.importFromJson(json);
+
+        expect(subtitleModel.size).toBe(size);
+        expect(subtitleModel.type).toBe(type);
+        expect(subtitleModel.tags).toBe(tags);
+        expect(subtitleModel.alignment).toBe(alignment);
+        expect(subtitleModel.useCustomText).toBe(true);
+
+        expect(subtitleSection.editElements.size).toHaveValue(size);
+        expect(subtitleSection.editElements.type).toHaveValue(type);
+        expect(subtitleSection.editElements.tags).toHaveValue(tags);
+        expect(subtitleSection.editElements.alignment).toHaveValue(alignment);
+        expect(subtitleSection.editElements.useCustomText).toBeChecked();
+
+        expect(subtitleSection.showElements.text).toHaveTextContent(customText);
       });
     });
   });
 });
+
+function reset() {
+  subtitleModel.reset();
+  subtitleSection.updateView();
+}
 
 function verifyJsonExport({
   size = 'Medium',
   type = 'humanoid',
   tags = '',
   alignment = 'unaligned',
-  useCustomSubtitleText = false,
-  customSubtitleText = ''
+  useCustomText = false,
+  customText = ''
 } = {}) {
 
   const json = subtitleSection.exportToJson();
@@ -246,11 +309,13 @@ function verifyJsonExport({
     type: type,
     tags: tags,
     alignment: alignment,
-    useCustomSubtitleText: useCustomSubtitleText,
-    customSubtitleText: customSubtitleText
+    useCustomText: useCustomText,
+    customText: customText
   };
 
   expect(json).toStrictEqual(expectedJson);
+
+  return json;
 }
 
 function verifyHtmlExport(expectedSubtitle) {

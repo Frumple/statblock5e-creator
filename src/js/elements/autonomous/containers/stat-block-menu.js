@@ -78,8 +78,8 @@ export default class StatBlockMenu extends CustomAutonomousElement {
     this.dispatchMenuEvent('allSectionsAction', { action: 'save' });
   }
 
-  onClickPrintButton() {
-    this.dispatchMenuEvent('printAction');
+  onClickImportJsonButton() {
+    this.dispatchMenuEvent('importAction', { format: 'json' });
   }
 
   onClickExportJsonButton() {
@@ -94,8 +94,8 @@ export default class StatBlockMenu extends CustomAutonomousElement {
     this.dispatchMenuEvent('exportAction', { format: 'homebrewery' });
   }
 
-  onClickImportJsonButton() {
-    // TODO
+  onClickPrintButton() {
+    this.dispatchMenuEvent('printAction');
   }
 
   dispatchMenuEvent(eventType, detail = null) {

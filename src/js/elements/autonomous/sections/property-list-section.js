@@ -10,12 +10,11 @@ export default class PropertyListSection extends propertyLineSectionModule.Prope
 
   constructor(templatePaths, modelPropertyName) {
     super(templatePaths,
+          modelPropertyName,
           PropertyListShowElements,
           PropertyListEditElements);
 
-    this.modelPropertyName = modelPropertyName;
-
-    const model = CurrentContext.creature[modelPropertyName];
+    const model = CurrentContext.creature[this.modelPropertyName];
 
     this.showElements.heading.textContent = model.headingName;
     this.editElements.label.textContent = `${model.headingName}:`;
@@ -93,18 +92,6 @@ export default class PropertyListSection extends propertyLineSectionModule.Prope
     const text = CurrentContext.creature[this.modelPropertyName].text;
     this.empty = (text === '');
     this.showElements.text.textContent = text;
-  }
-
-  exportToJson() {
-    return CurrentContext.creature[this.modelPropertyName].toJson();
-  }
-
-  exportToHtml() {
-    return CurrentContext.creature[this.modelPropertyName].toHtml();
-  }
-
-  exportToHomebrewery() {
-    return CurrentContext.creature[this.modelPropertyName].toHomebrewery();
   }
 }
 

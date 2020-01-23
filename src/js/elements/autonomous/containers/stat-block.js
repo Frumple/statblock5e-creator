@@ -115,14 +115,20 @@ export default class StatBlock extends CustomAutonomousElement {
     this.bottomStats.reparseAllSections();
   }
 
+  importFromJson(json) {
+    this.headingStats.importFromJson(json);
+    // this.topStats.importFromJson(json);
+    // this.bottomStats.importFromJson(json);
+  }
+
   exportToJson() {
-    const jsObject = {};
+    const json = {};
 
-    Object.assign(jsObject, this.headingStats.exportToJson());
-    Object.assign(jsObject, this.topStats.exportToJson());
-    Object.assign(jsObject, this.bottomStats.exportToJson());
+    Object.assign(json, this.headingStats.exportToJson());
+    Object.assign(json, this.topStats.exportToJson());
+    Object.assign(json, this.bottomStats.exportToJson());
 
-    return jsObject;
+    return json;
   }
 
   exportToHtml() {
