@@ -1,5 +1,4 @@
 import OptionDialog from './option-dialog.js';
-import isRunningInNode from '../../../helpers/is-running-in-node.js';
 
 export default class ImportDialog extends OptionDialog {
   static get elementName() { return 'import-dialog'; }
@@ -35,19 +34,7 @@ export default class ImportDialog extends OptionDialog {
 
   async onJsonImportFileSelected() {
     const file = this.fileInput.files[0];
-
-    // JSDOM does not yet support Blob.text()
-    // Workaround is to use Blob.arrayBuffer() and decode it
-    // Github issue: https://github.com/jsdom/jsdom/issues/2555
-    let text;
-
-    if (isRunningInNode) {
-      const buffer = await file.arrayBuffer();
-      text = new TextDecoder('utf-8').decode(buffer);
-    } else {
-      text = await file.text();
-    }
-
+    const text = await file.text();
     const json = JSON.parse(text);
 
     this.statBlockEditor.importFromJson(json);
