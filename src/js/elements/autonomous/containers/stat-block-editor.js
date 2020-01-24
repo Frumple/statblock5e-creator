@@ -7,6 +7,7 @@ import StatBlockMenu from './stat-block-menu.js';
 import StatBlockSidebar from './stat-block-sidebar.js';
 import StatBlock from './stat-block.js';
 
+import ImportDialog from '../dialogs/import-dialog.js';
 import ExportDialog from '../dialogs/export-dialog.js';
 
 import CurrentContext from '../../../models/current-context.js';
@@ -22,13 +23,12 @@ export default class StatBlockEditor extends CustomAutonomousElement {
   constructor() {
     super(StatBlockEditor.templatePaths);
 
-    this.jsonImportDialog = this.shadowRoot.getElementById('json-import-dialog');
-
     if (isRunningInNode) {
       this.statBlockMenu = new StatBlockMenu(this);
       this.statBlockSidebar = new StatBlockSidebar(this);
       this.statBlock = new StatBlock(this);
 
+      this.jsonImportDialog = new ImportDialog();
       this.jsonExportDialog = new ExportDialog();
       this.htmlExportDialog = new ExportDialog();
       this.homebreweryExportDialog = new ExportDialog();
@@ -37,10 +37,13 @@ export default class StatBlockEditor extends CustomAutonomousElement {
       this.statBlockSidebar = document.querySelector('stat-block-sidebar');
       this.statBlock = document.querySelector('stat-block');
 
+      this.jsonImportDialog = this.shadowRoot.getElementById('json-import-dialog');
       this.jsonExportDialog = this.shadowRoot.getElementById('json-export-dialog');
       this.htmlExportDialog = this.shadowRoot.getElementById('html-export-dialog');
       this.homebreweryExportDialog = this.shadowRoot.getElementById('homebrewery-export-dialog');
     }
+
+    this.jsonImportDialog.statBlockEditor = this;
   }
 
   connectedCallback() {
@@ -51,8 +54,6 @@ export default class StatBlockEditor extends CustomAutonomousElement {
       this.addEventListener('twoColumnHeightChanged', this.onTwoColumnHeightChanged.bind(this));
       this.addEventListener('emptySectionsVisibilityChanged', this.onEmptySectionsVisiblityChanged.bind(this));
       this.addEventListener('allSectionsAction', this.onAllSectionsAction.bind(this));
-
-      this.jsonImportDialog.addEventListener('change', this.onJsonImportFileSelected.bind(this));
 
       this.addEventListener('importAction', this.onImportAction.bind(this));
       this.addEventListener('exportAction', this.onExportAction.bind(this));
@@ -115,25 +116,11 @@ export default class StatBlockEditor extends CustomAutonomousElement {
 
     switch(format) {
     case 'json':
-      this.jsonImportDialog.click();
+      this.openJsonImportDialog();
       break;
     default:
       throw new Error(`Unknown import format: '${format}'.`);
     }
-  }
-
-  onJsonImportFileSelected(event) {
-    const file = this.jsonImportDialog.files[0];
-
-    const fileReader = new FileReader();
-    fileReader.addEventListener('load', this.onJsonImportSuccessful.bind(this));
-    fileReader.readAsText(file);
-  }
-
-  onJsonImportSuccessful(event) {
-    const jsonString = event.target.result;
-    const json = JSON.parse(jsonString);
-    this.importFromJson(json);
   }
 
   onExportAction(event) {
@@ -159,6 +146,10 @@ export default class StatBlockEditor extends CustomAutonomousElement {
     printHtml(content);
   }
 
+  openJsonImportDialog() {
+    this.jsonImportDialog.launch();
+  }
+
   openJsonExportDialog() {
     const content = this.exportToJson();
     this.jsonExportDialog.launch(content, 'application/json', `${CurrentContext.creature.title.fullName}.json`);
@@ -175,6 +166,11 @@ export default class StatBlockEditor extends CustomAutonomousElement {
   }
 
   importFromJson(json) {
+    CurrentContext.layoutSettings.fromJson(json.layout);
+
+    this.statBlockMenu.updateControls();
+    this.statBlockSidebar.updateControls();
+
     this.statBlock.importFromJson(json);
   }
 
@@ -188,12 +184,7 @@ export default class StatBlockEditor extends CustomAutonomousElement {
       url: 'https://frumple.github.io/statblock5e-creator'
     };
 
-    json.layout = {
-      columns: layoutSettings.columns,
-      twoColumnMode: layoutSettings.twoColumnMode,
-      twoColumnHeight: layoutSettings.twoColumnHeight,
-      emptySectionsVisibility: layoutSettings.emptySectionsVisibility
-    };
+    json.layout = layoutSettings.toJson();
 
     return JSON.stringify(json, null, 2);
   }

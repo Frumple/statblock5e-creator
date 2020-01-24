@@ -1,7 +1,8 @@
-<link href='src/css/elements/autonomous/dialogs/export-dialog.css' rel='stylesheet' type='text/css'>
+<link href='src/css/elements/autonomous/dialogs/import-dialog.css' rel='stylesheet' type='text/css'>
 
 <dialog id="dialog" class="custom-dialog">
   <form method="dialog">
+    <input id="file-input" class="import-dialog__file-input" type="file" accept=".json" />
     <div class="custom-dialog__title-bar">
       <h3 id="title" class="custom-dialog__title"><slot name="title"></slot></h3>
       <button id="close-button" class="custom-dialog__close-button" type="button"><i class="material-icons">close</i></button>
@@ -10,11 +11,10 @@
     <div class="option-dialog">
       <p class="option-dialog__message"><slot name="message"></slot></p>
       <div class="option-dialog__status-container">
-        <label id="status-label" class="option-dialog__status-label">Choose one of following options:</label>
+        <label id="status-label" class="option-dialog__status-label">Click "Choose File..." to begin.</label>
       </div>
       <div class="option-dialog__actions">
-        <button id="copy-to-clipboard-button" class="default-button option-dialog__action-button" type="button">Copy to Clipboard</button>
-        <button id="download-as-file-button" class="default-button option-dialog__action-button" type="button">Download as File</button>
+        <button id="choose-file-button" class="default-button option-dialog__action-button" type="button">Choose File...</button>
         <button id="cancel-button" class="default-button option-dialog__action-button" type="button">Cancel</button>
       </div>
     </div>

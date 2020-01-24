@@ -1,4 +1,5 @@
 import CustomAutonomousElement from '../custom-autonomous-element.js';
+import CurrentContext from '../../../models/current-context.js';
 
 export default class StatBlockMenu extends CustomAutonomousElement {
   static get elementName() { return 'stat-block-menu'; }
@@ -105,5 +106,21 @@ export default class StatBlockMenu extends CustomAutonomousElement {
       detail: detail
     });
     this.dispatchEvent(menuEvent);
+  }
+
+  updateControls() {
+    const layoutSettings = CurrentContext.layoutSettings;
+
+    if (layoutSettings.columns === 1) {
+      this.oneColumnButton.click();
+    } else if (layoutSettings.columns === 2) {
+      this.twoColumnButton.click();
+    }
+
+    if (layoutSettings.emptySectionsVisibility) {
+      this.showEmptySectionsButton.click();
+    } else {
+      this.hideEmptySectionsButton.click();
+    }
   }
 }

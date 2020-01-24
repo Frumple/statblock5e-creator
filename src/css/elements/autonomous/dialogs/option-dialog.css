@@ -1,0 +1,37 @@
+.option-dialog__message {
+  padding: 1em;
+  margin: 0;
+}
+
+.option-dialog__status-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+}
+
+.option-dialog__status-label {
+  font-weight: bold;
+  padding: 0 1em;
+  margin: 0;
+}
+
+.option-dialog__status-label_success {
+  color: green;
+}
+
+.option-dialog__status-label_error {
+  color: red;
+}
+
+.option-dialog__actions {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  padding: 1em;
+}
+
+.option-dialog__action-button {
+  padding: 5px;
+  margin-left: 5px;
+  margin-right: 5px;
+}

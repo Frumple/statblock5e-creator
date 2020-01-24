@@ -15,6 +15,7 @@ import PropertyLine from './elements/autonomous/property-line.js';
 import SectionDivider from './elements/autonomous/section-divider.js';
 import TaperedRule from './elements/autonomous/tapered-rule.js';
 
+import ImportDialog from './elements/autonomous/dialogs/import-dialog.js';
 import ExportDialog from './elements/autonomous/dialogs/export-dialog.js';
 import GenerateAttackDialog from './elements/autonomous/dialogs/generate-attack-dialog.js';
 
@@ -85,6 +86,7 @@ async function defineElements() {
   elementClasses.push(SectionDivider);
   elementClasses.push(TaperedRule);
 
+  elementClasses.push(ImportDialog);
   elementClasses.push(ExportDialog);
   elementClasses.push(GenerateAttackDialog);
 

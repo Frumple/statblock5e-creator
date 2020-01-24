@@ -7,6 +7,7 @@ import HeadingStats from '../containers/heading-stats.js';
 import TopStats from '../containers/top-stats.js';
 import BottomStats from '../containers/bottom-stats.js';
 
+import ImportDialog from '../dialogs/import-dialog.js';
 import ExportDialog from '../dialogs/export-dialog.js';
 
 import CurrentContext from '../../../models/current-context.js';
@@ -30,13 +31,21 @@ let statBlock;
 
 /* Notes about JSDOM limitations:
 
+   JSDOM does not support Blob.text(), which prevents us from testing file
+   reading. We could fallback to using FileReader in the implementation,
+   but then the test would not be able to easily detect the load event when
+   the FileReader is complete.
+   - GitHub issue: https://github.com/jsdom/jsdom/issues/2555
+
    JSDOM does not support document.execCommand() or any sort of Clipboard API.
    The best that the "Copy to Clipboard" tests can do is check that we are
    calling the ClipboardWrapper with the appropriate parameters.
+   - GitHub issue: https://github.com/jsdom/jsdom/issues/1568
 
-   JSDOM does not support the stepUp() method, so when interacting with the
-   two-column manual height slider, we have to set its value and dispatch
-   a change event manually.
+   JSDOM does not support the stepUp() or stepDown() methods, so when
+   interacting with the two-column manual height slider, we have to set its
+   value and dispatch a change event manually.
+   - This issue was fixed in JSDOM 16.0.0, need to update
 */
 
 beforeAll(async() => {
@@ -72,6 +81,7 @@ beforeAll(async() => {
   await StatBlockSidebar.define();
   await StatBlock.define();
 
+  await ImportDialog.define();
   await ExportDialog.define();
 });
 
@@ -94,44 +104,52 @@ beforeEach(() => {
   statBlockMenu.connect();
   statBlockSidebar.connect();
   statBlock.connect();
-
-  statBlockEditor.jsonExportDialog.connect();
-  statBlockEditor.htmlExportDialog.connect();
-  statBlockEditor.homebreweryExportDialog.connect();
 });
 
-describe('should print', () => {
-  it('one-column version', () => {
-    statBlockMenu.oneColumnButton.click();
-
-    statBlockMenu.printButton.click();
-
-    expect(printHtml).toHaveBeenCalledWith(
-      expect.stringContaining('<stat-block>'));
+describe('should import JSON', () => {
+  beforeEach(() => {
+    statBlockEditor.jsonImportDialog.connect();
   });
 
-  it('two-column version with automatic height', () => {
-    statBlockMenu.twoColumnButton.click();
-    statBlockSidebar.autoHeightModeButton.click();
+  describe('from file', () => {
+    it('successfully', async () => {
+      let fileInputClickEvent = null;
+      statBlockEditor.jsonImportDialog.fileInput.addEventListener('click', (event) => {
+        fileInputClickEvent = event;
+      });
 
-    statBlockMenu.printButton.click();
+      statBlockMenu.importJsonButton.click();
+      statBlockEditor.jsonImportDialog.chooseFileButton.click();
+      expect(fileInputClickEvent).not.toBeNull();
 
-    expect(printHtml).toHaveBeenCalledWith(
-      expect.stringContaining('<stat-block data-two-column="">'));
-  });
+      // See note at top about JSDOM not supporting Blob.text().
 
-  it('two-column version with manual height', () => {
-    statBlockMenu.twoColumnButton.click();
-    statBlockSidebar.manualHeightModeButton.click();
+      /*
+      const json = {
+        layout: {
+          columns: 2,
+          twoColumnMode: 'manual',
+          twoColumnHeight: 700,
+          emptySectionsVisibility: false
+        }
+      };
 
+      const file = new File([json], 'blah.json', {
+        type: 'application/json'
+      });
 
-    statBlockSidebar.manualHeightSlider.value = initialHeightSliderValue + 25;
-    statBlockSidebar.onInputSlider();
+      Object.defineProperty(statBlockEditor.jsonImportDialog.fileInput, 'files', {
+        value: [file]
+      });
 
-    statBlockMenu.printButton.click();
+      await statBlockEditor.jsonImportDialog.onJsonImportFileSelected();
 
-    expect(printHtml).toHaveBeenCalledWith(
-      expect.stringContaining('<stat-block data-two-column="" style="--data-content-height: 625px">'));
+      expect(CurrentContext.layoutSettings.columns).toBe(json.layout.columns);
+      expect(CurrentContext.layoutSettings.twoColumnMode).toBe(json.layout.twoColumnMode);
+      expect(CurrentContext.layoutSettings.twoColumnHeight).toBe(json.layout.twoColumnHeight);
+      expect(CurrentContext.layoutSettings.emptySectionsVisibility).toBe(json.layout.emptySectionsVisibility);
+      */
+    });
   });
 });
 
@@ -168,6 +186,10 @@ describe('should export JSON', () => {
   const oneColumnTextMatcher = expect.stringContaining(oneColumnTextSnippet);
   const twoColumnAutoHeightTextMatcher = expect.stringContaining(twoColumnAutoHeightTextSnippet);
   const twoColumnManualHeightTextMatcher = expect.stringContaining(twoColumnManualHeightTextSnippet);
+
+  beforeEach(() => {
+    statBlockEditor.jsonExportDialog.connect();
+  });
 
   describe('to clipboard', () => {
     it('empty sections hidden', () => {
@@ -301,110 +323,148 @@ describe('should export JSON', () => {
   });
 });
 
-describe('should export HTML', () => {
+describe('HTML-based tests', () => {
   const oneColumnTextMatcher = expect.stringContaining('<stat-block>');
   const twoColumnAutoHeightTextMatcher = expect.stringContaining('<stat-block data-two-column="">');
   const twoColumnManualHeightTextMatcher = expect.stringContaining('<stat-block data-two-column="" style="--data-content-height: 625px">');
 
-  describe('to clipboard', () => {
+  describe('should print', () => {
     it('one-column version', () => {
       statBlockMenu.oneColumnButton.click();
 
-      statBlockMenu.exportHtmlButton.click();
+      statBlockMenu.printButton.click();
 
-      statBlockEditor.htmlExportDialog.copyToClipboardButton.click();
-
-      expect(ClipboardWrapper).toHaveBeenCalledWith(
-        oneColumnTextMatcher,
-        statBlockEditor.htmlExportDialog.dialog,
-        statBlockEditor.htmlExportDialog.copyToClipboardButton,
-      );
+      expect(printHtml).toHaveBeenCalledWith(oneColumnTextMatcher);
     });
 
     it('two-column version with automatic height', () => {
       statBlockMenu.twoColumnButton.click();
       statBlockSidebar.autoHeightModeButton.click();
 
-      statBlockMenu.exportHtmlButton.click();
+      statBlockMenu.printButton.click();
 
-      statBlockEditor.htmlExportDialog.copyToClipboardButton.click();
-
-      expect(ClipboardWrapper).toHaveBeenCalledWith(
-        twoColumnAutoHeightTextMatcher,
-        statBlockEditor.htmlExportDialog.dialog,
-        statBlockEditor.htmlExportDialog.copyToClipboardButton,
-      );
+      expect(printHtml).toHaveBeenCalledWith(twoColumnAutoHeightTextMatcher);
     });
 
     it('two-column version with manual height', () => {
       statBlockMenu.twoColumnButton.click();
       statBlockSidebar.manualHeightModeButton.click();
 
+
       statBlockSidebar.manualHeightSlider.value = initialHeightSliderValue + 25;
       statBlockSidebar.onInputSlider();
 
-      statBlockMenu.exportHtmlButton.click();
-      statBlockEditor.htmlExportDialog.copyToClipboardButton.click();
+      statBlockMenu.printButton.click();
 
-      expect(ClipboardWrapper).toHaveBeenCalledWith(
-        twoColumnManualHeightTextMatcher,
-        statBlockEditor.htmlExportDialog.dialog,
-        statBlockEditor.htmlExportDialog.copyToClipboardButton,
-      );
+      expect(printHtml).toHaveBeenCalledWith(twoColumnManualHeightTextMatcher);
     });
   });
 
-  describe('as file download', () => {
-    const expectedContentType = 'text/html';
-    const expectedFileName = 'Commoner.html';
-
-    it('one-column version', () => {
-      statBlockMenu.oneColumnButton.click();
-
-      statBlockMenu.exportHtmlButton.click();
-
-      statBlockEditor.htmlExportDialog.downloadAsFileButton.click();
-
-      expect(startFileDownload).toHaveBeenCalledWith(
-        oneColumnTextMatcher,
-        expectedContentType,
-        expectedFileName);
-
-      expectFileDownloadStatus(statBlockEditor.htmlExportDialog);
+  describe('should export HTML', () => {
+    beforeEach(() => {
+      statBlockEditor.htmlExportDialog.connect();
     });
 
-    it('two-column version with automatic height', () => {
-      statBlockMenu.twoColumnButton.click();
-      statBlockSidebar.autoHeightModeButton.click();
+    describe('to clipboard', () => {
+      it('one-column version', () => {
+        statBlockMenu.oneColumnButton.click();
 
-      statBlockMenu.exportHtmlButton.click();
+        statBlockMenu.exportHtmlButton.click();
 
-      statBlockEditor.htmlExportDialog.downloadAsFileButton.click();
+        statBlockEditor.htmlExportDialog.copyToClipboardButton.click();
 
-      expect(startFileDownload).toHaveBeenCalledWith(
-        twoColumnAutoHeightTextMatcher,
-        expectedContentType,
-        expectedFileName);
+        expect(ClipboardWrapper).toHaveBeenCalledWith(
+          oneColumnTextMatcher,
+          statBlockEditor.htmlExportDialog.dialog,
+          statBlockEditor.htmlExportDialog.copyToClipboardButton,
+        );
+      });
 
-      expectFileDownloadStatus(statBlockEditor.htmlExportDialog);
+      it('two-column version with automatic height', () => {
+        statBlockMenu.twoColumnButton.click();
+        statBlockSidebar.autoHeightModeButton.click();
+
+        statBlockMenu.exportHtmlButton.click();
+
+        statBlockEditor.htmlExportDialog.copyToClipboardButton.click();
+
+        expect(ClipboardWrapper).toHaveBeenCalledWith(
+          twoColumnAutoHeightTextMatcher,
+          statBlockEditor.htmlExportDialog.dialog,
+          statBlockEditor.htmlExportDialog.copyToClipboardButton,
+        );
+      });
+
+      it('two-column version with manual height', () => {
+        statBlockMenu.twoColumnButton.click();
+        statBlockSidebar.manualHeightModeButton.click();
+
+        statBlockSidebar.manualHeightSlider.value = initialHeightSliderValue + 25;
+        statBlockSidebar.onInputSlider();
+
+        statBlockMenu.exportHtmlButton.click();
+        statBlockEditor.htmlExportDialog.copyToClipboardButton.click();
+
+        expect(ClipboardWrapper).toHaveBeenCalledWith(
+          twoColumnManualHeightTextMatcher,
+          statBlockEditor.htmlExportDialog.dialog,
+          statBlockEditor.htmlExportDialog.copyToClipboardButton,
+        );
+      });
     });
 
-    it('two-column version with manual height', () => {
-      statBlockMenu.twoColumnButton.click();
-      statBlockSidebar.manualHeightModeButton.click();
+    describe('as file download', () => {
+      const expectedContentType = 'text/html';
+      const expectedFileName = 'Commoner.html';
 
-      statBlockSidebar.manualHeightSlider.value = initialHeightSliderValue + 25;
-      statBlockSidebar.onInputSlider();
+      it('one-column version', () => {
+        statBlockMenu.oneColumnButton.click();
 
-      statBlockMenu.exportHtmlButton.click();
-      statBlockEditor.htmlExportDialog.downloadAsFileButton.click();
+        statBlockMenu.exportHtmlButton.click();
 
-      expect(startFileDownload).toHaveBeenCalledWith(
-        twoColumnManualHeightTextMatcher,
-        expectedContentType,
-        expectedFileName);
+        statBlockEditor.htmlExportDialog.downloadAsFileButton.click();
 
-      expectFileDownloadStatus(statBlockEditor.htmlExportDialog);
+        expect(startFileDownload).toHaveBeenCalledWith(
+          oneColumnTextMatcher,
+          expectedContentType,
+          expectedFileName);
+
+        expectFileDownloadStatus(statBlockEditor.htmlExportDialog);
+      });
+
+      it('two-column version with automatic height', () => {
+        statBlockMenu.twoColumnButton.click();
+        statBlockSidebar.autoHeightModeButton.click();
+
+        statBlockMenu.exportHtmlButton.click();
+
+        statBlockEditor.htmlExportDialog.downloadAsFileButton.click();
+
+        expect(startFileDownload).toHaveBeenCalledWith(
+          twoColumnAutoHeightTextMatcher,
+          expectedContentType,
+          expectedFileName);
+
+        expectFileDownloadStatus(statBlockEditor.htmlExportDialog);
+      });
+
+      it('two-column version with manual height', () => {
+        statBlockMenu.twoColumnButton.click();
+        statBlockSidebar.manualHeightModeButton.click();
+
+        statBlockSidebar.manualHeightSlider.value = initialHeightSliderValue + 25;
+        statBlockSidebar.onInputSlider();
+
+        statBlockMenu.exportHtmlButton.click();
+        statBlockEditor.htmlExportDialog.downloadAsFileButton.click();
+
+        expect(startFileDownload).toHaveBeenCalledWith(
+          twoColumnManualHeightTextMatcher,
+          expectedContentType,
+          expectedFileName);
+
+        expectFileDownloadStatus(statBlockEditor.htmlExportDialog);
+      });
     });
   });
 });
@@ -412,6 +472,10 @@ describe('should export HTML', () => {
 describe('should export homebrewery', () => {
   const oneColumnTextMatcher = expect.stringMatching(/^___\n.*/);
   const twoColumnAutoHeightTextMatcher = expect.stringMatching(/^___\n___\n.*/);
+
+  beforeEach(() => {
+    statBlockEditor.homebreweryExportDialog.connect();
+  });
 
   describe('to clipboard', () => {
     it('one-column version', () => {
@@ -484,5 +548,5 @@ describe('should export homebrewery', () => {
 function expectFileDownloadStatus(dialog) {
   const statusLabel = dialog.statusLabel;
   expect(statusLabel).toHaveTextContent('File download initiated.');
-  expect(statusLabel).toHaveClass('export-dialog__status-label_complete');
+  expect(statusLabel).toHaveClass('option-dialog__status-label_success');
 }

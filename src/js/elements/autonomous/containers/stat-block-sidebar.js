@@ -1,4 +1,5 @@
 import CustomAutonomousElement from '../custom-autonomous-element.js';
+import CurrentContext from '../../../models/current-context.js';
 import { convertToInteger } from '../../../helpers/number-helpers.js';
 
 export default class StatBlockSidebar extends CustomAutonomousElement {
@@ -87,6 +88,18 @@ export default class StatBlockSidebar extends CustomAutonomousElement {
     } else if(mode === 'manual') {
       this.dataset.heightMode = 'manual';
       this.manualHeightSliderContainer.classList.remove(sliderContainerHiddenClass);
+    }
+  }
+
+  updateControls() {
+    const layoutSettings = CurrentContext.layoutSettings;
+
+    this.manualHeightSlider.value = layoutSettings.twoColumnHeight;
+
+    if (layoutSettings.twoColumnMode === 'auto') {
+      this.autoHeightModeButton.click();
+    } else if (layoutSettings.twoColumnMode === 'manual') {
+      this.manualHeightModeButton.click();
     }
   }
 }
