@@ -85,12 +85,25 @@ describe('when the show section is clicked', () => {
           expect(armorClassSection).toBeInMode('show');
           expect(armorClassSection).toShowPropertyLine(expectedHeading, expectedHtmlText);
 
-          verifyJsonExport({
+          const json = verifyJsonExport({
             useCustomText: true,
             customText: customText
           });
           expect(armorClassSection).toExportPropertyLineToHtml(expectedHeading, expectedHtmlText);
           expect(armorClassSection).toExportPropertyLineToHomebrewery(expectedHeading, customText);
+
+          reset();
+
+          armorClassSection.importFromJson(json);
+
+          expect(armorClassModel.useCustomText).toBe(true);
+          expect(armorClassModel.originalCustomText).toBe(customText);
+          expect(armorClassModel.htmlCustomText).toBe(expectedHtmlText);
+
+          expect(armorClassSection.editElements.useCustomText).toBeChecked();
+          expect(armorClassSection.editElements.customText).toHaveValue(customText);
+
+          expect(armorClassSection).toShowPropertyLine(expectedHeading, expectedHtmlText);
         });
         /* eslint-enable indent, no-unexpected-multiline */
       });
@@ -111,10 +124,20 @@ describe('when the show section is clicked', () => {
         expect(armorClassSection.editElements.useCustomText).not.toBeChecked();
         expect(armorClassSection.editElements.customText).toHaveValue(customText);
 
-        verifyJsonExport({
+        const json = verifyJsonExport({
           useCustomText: false,
           customText: customText
         });
+
+        reset();
+
+        armorClassSection.importFromJson(json);
+
+        expect(armorClassModel.useCustomText).toBe(false);
+        expect(armorClassModel.originalCustomText).toBe(customText);
+
+        expect(armorClassSection.editElements.useCustomText).not.toBeChecked();
+        expect(armorClassSection.editElements.customText).toHaveValue(customText);
       });
 
       it('should display an error if the custom text field is blank', () => {
@@ -197,13 +220,29 @@ describe('when the show section is clicked', () => {
           expect(armorClassSection).toBeInMode('show');
           expect(armorClassSection).toShowPropertyLine(expectedHeading, expectedText);
 
-          verifyJsonExport({
+          const json = verifyJsonExport({
             armorClass: armorClass,
             armorType : armorType,
             hasShield: hasShield
           });
           expect(armorClassSection).toExportPropertyLineToHtml(expectedHeading, expectedText);
           expect(armorClassSection).toExportPropertyLineToHomebrewery(expectedHeading, expectedText);
+
+          reset();
+
+          armorClassSection.importFromJson(json);
+
+          expect(armorClassModel.armorClass).toBe(armorClass);
+          expect(armorClassModel.armorType).toBe(armorType);
+          expect(armorClassModel.hasShield).toBe(hasShield);
+          expect(armorClassModel.useCustomText).toBe(false);
+
+          expect(armorClassSection.editElements.armorClass).toHaveValue(armorClass);
+          expect(armorClassSection.editElements.armorType).toHaveValue(armorType);
+          expect(armorClassSection.editElements.hasShield.checked).toBe(hasShield);
+          expect(armorClassSection.editElements.useCustomText).not.toBeChecked();
+
+          expect(armorClassSection).toShowPropertyLine(expectedHeading, expectedText);
         });
         /* eslint-enable indent, no-unexpected-multiline */
       });
@@ -236,13 +275,27 @@ describe('when the show section is clicked', () => {
         expect(armorClassSection.editElements.hasShield).toBeChecked();
         expect(armorClassSection.editElements.useCustomText).toBeChecked();
 
-        verifyJsonExport({
+        const json = verifyJsonExport({
           armorClass: armorClass,
           armorType : armorType,
           hasShield: hasShield,
           useCustomText: useCustomText,
           customText: customText
         });
+
+        reset();
+
+        armorClassSection.importFromJson(json);
+
+        expect(armorClassModel.armorClass).toBe(armorClass);
+        expect(armorClassModel.armorType).toBe(armorType);
+        expect(armorClassModel.hasShield).toBe(hasShield);
+        expect(armorClassModel.useCustomText).toBe(true);
+
+        expect(armorClassSection.editElements.armorClass).toHaveValue(armorClass);
+        expect(armorClassSection.editElements.armorType).toHaveValue(armorType);
+        expect(armorClassSection.editElements.hasShield.checked).toBe(hasShield);
+        expect(armorClassSection.editElements.useCustomText).toBeChecked();
       });
 
       it('should display an error if the armor class field is not a valid number', () => {
@@ -271,6 +324,11 @@ describe('when the show section is clicked', () => {
   });
 });
 
+function reset() {
+  armorClassModel.reset();
+  armorClassSection.updateView();
+}
+
 function verifyJsonExport({
   armorClass = 10,
   armorType = '',
@@ -289,4 +347,6 @@ function verifyJsonExport({
   };
 
   expect(json).toStrictEqual(expectedJson);
+
+  return json;
 }

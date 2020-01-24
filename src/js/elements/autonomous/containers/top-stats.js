@@ -32,6 +32,12 @@ export default class TopStats extends StatsContainer {
     this.sections.get('advancedStats').updateSensesView();
   }
 
+  importFromJson(json) {
+    this.sections.get('basicStats').importFromJson(json);
+    // this.sections.get('abilityScores').importFromJson(json);
+    // this.sections.get('advancedStats').importFromJson(json);
+  }
+
   exportToJson() {
     const jsObject = {};
 

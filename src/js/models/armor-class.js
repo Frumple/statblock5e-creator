@@ -49,6 +49,14 @@ export default class ArmorClass {
     }
   }
 
+  fromJson(json) {
+    this.armorClass = json.armorClass;
+    this.armorType = json.armorType;
+    this.hasShield = json.hasShield;
+    this.useCustomText = json.useCustomText;
+    this.originalCustomText = json.customText;
+  }
+
   toJson() {
     return {
       armorClass: this.armorClass,
