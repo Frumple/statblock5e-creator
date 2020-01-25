@@ -70,7 +70,10 @@ export default class SpeedSection extends propertyLineSectionModule.PropertyLine
 
     this.editElements.useCustomText.checked = speedModel.useCustomText;
     this.editElements.customText.value = speedModel.customText;
-    this.editElements.customText.htmlText = speedModel.htmlCustomText;
+    if (speedModel.useCustomText) {
+      this.editElements.customText.parse();
+      speedModel.htmlCustomText = this.editElements.customText.htmlText;
+    }
   }
 
   updateShowModeView() {

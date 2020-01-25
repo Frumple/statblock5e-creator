@@ -8,7 +8,7 @@ import { nullIfEmptyString } from '../../../helpers/string-formatter.js';
 
 const expectedHeading = 'Speed';
 
-const speed = CurrentContext.creature.speed;
+const speedModel = CurrentContext.creature.speed;
 
 let speedSection;
 
@@ -18,7 +18,7 @@ beforeAll(async() => {
 });
 
 beforeEach(() => {
-  speed.reset();
+  speedModel.reset();
 
   speedSection = new SpeedSection();
   TestCustomElements.initializeSection(speedSection);
@@ -36,14 +36,7 @@ describe('when the show section is clicked', () => {
   });
 
   it('edit section should have default values', () => {
-    expect(speedSection.editElements.walk).toHaveValue(30);
-    expect(speedSection.editElements.burrow).toHaveValue(null);
-    expect(speedSection.editElements.climb).toHaveValue(null);
-    expect(speedSection.editElements.fly).toHaveValue(null);
-    expect(speedSection.editElements.hover).not.toBeChecked();
-    expect(speedSection.editElements.swim).toHaveValue(null);
-    expect(speedSection.editElements.useCustomText).not.toBeChecked();
-    expect(speedSection.editElements.customText).toHaveValue('');
+    verifyEditModeView();
   });
 
   it('should switch to edit mode and focus on the walk speed field', () => {
@@ -81,47 +74,56 @@ describe('when the show section is clicked', () => {
         `
         ('$description: $customText => $expectedHtmlText',
         ({customText, expectedHtmlText}) => {
+          const expectedValues = {
+            useCustomText: true,
+            customText: customText,
+            htmlCustomText: expectedHtmlText
+          };
+
           inputValueAndTriggerEvent(speedSection.editElements.customText, customText);
 
           speedSection.editElements.submitForm();
 
-          expect(speed.useCustomText).toBe(true);
-          expect(speed.customText).toBe(customText);
-          expect(speed.htmlCustomText).toBe(expectedHtmlText);
-
+          verifyModel(expectedValues);
+          verifyEditModeView(expectedValues);
           expect(speedSection).toBeInMode('show');
           expect(speedSection).toShowPropertyLine(expectedHeading, expectedHtmlText);
 
-          verifyJsonExport({
-            useCustomText: true,
-            customText: customText
-          });
+          const json = verifyJsonExport(expectedValues);
           expect(speedSection).toExportPropertyLineToHtml(expectedHeading, expectedHtmlText);
           expect(speedSection).toExportPropertyLineToHomebrewery(expectedHeading, customText);
+
+          reset();
+          speedSection.importFromJson(json);
+
+          verifyModel(expectedValues);
+          verifyEditModeView(expectedValues);
+          expect(speedSection).toShowPropertyLine(expectedHeading, expectedHtmlText);
         });
         /* eslint-enable indent, no-unexpected-multiline */
       });
 
       it('should preserve the custom text if submitted with the custom text checkbox unchecked', () => {
-        const customText = '30 ft. (40 ft. in tiger form)';
+        const expectedValues = {
+          useCustomText: false,
+          customText: '30 ft. (40 ft. in tiger form)'
+        };
 
-        inputValueAndTriggerEvent(speedSection.editElements.customText, customText);
+        inputValueAndTriggerEvent(speedSection.editElements.customText, expectedValues.customText);
 
         speedSection.editElements.useCustomText.click();
         speedSection.editElements.submitForm();
-        speedSection.showElements.section.click();
 
-        expect(speed.useCustomText).toBe(false);
-        expect(speed.customText).toBe(customText);
+        verifyModel(expectedValues);
+        verifyEditModeView(expectedValues);
 
-        expect(speedSection).toBeInMode('edit');
-        expect(speedSection.editElements.useCustomText).not.toBeChecked();
-        expect(speedSection.editElements.customText).toHaveValue(customText);
+        const json = verifyJsonExport(expectedValues);
 
-        verifyJsonExport({
-          useCustomText: false,
-          customText: customText
-        });
+        reset();
+        speedSection.importFromJson(json);
+
+        verifyModel(expectedValues);
+        verifyEditModeView(expectedValues);
       });
 
       it('should display an error if the custom text field is blank', () => {
@@ -204,6 +206,15 @@ describe('when the show section is clicked', () => {
         `
         ('$description: {walk="$walk", burrow="$burrow", climb="$climb", fly="$fly", hover="$hover", swim="$swim"} => "$expectedText"',
         ({walk, burrow, climb, fly, hover, swim, expectedText}) => {
+          const expectedValues = {
+            walk: nullIfEmptyString(walk),
+            burrow : nullIfEmptyString(burrow),
+            climb: nullIfEmptyString(climb),
+            fly: nullIfEmptyString(fly),
+            hover: hover,
+            swim: nullIfEmptyString(swim)
+          };
+
           inputValueAndTriggerEvent(speedSection.editElements.walk, walk);
           inputValueAndTriggerEvent(speedSection.editElements.burrow, burrow);
           inputValueAndTriggerEvent(speedSection.editElements.climb, climb);
@@ -216,90 +227,111 @@ describe('when the show section is clicked', () => {
 
           speedSection.editElements.submitForm();
 
-          walk = nullIfEmptyString(walk);
-          burrow = nullIfEmptyString(burrow);
-          climb = nullIfEmptyString(climb);
-          fly = nullIfEmptyString(fly);
-          swim = nullIfEmptyString(swim);
-
-          expect(speed.walk).toBe(walk);
-          expect(speed.burrow).toBe(burrow);
-          expect(speed.climb).toBe(climb);
-          expect(speed.fly).toBe(fly);
-          expect(speed.hover).toBe(hover);
-          expect(speed.swim).toBe(swim);
-          expect(speed.useCustomText).toBe(false);
-
+          verifyModel(expectedValues);
+          verifyEditModeView(expectedValues);
           expect(speedSection).toBeInMode('show');
           expect(speedSection).toShowPropertyLine(expectedHeading, expectedText);
 
-          verifyJsonExport({
-            walk: walk,
-            burrow : burrow,
-            climb: climb,
-            fly: fly,
-            hover: hover,
-            swim: swim});
+          const json = verifyJsonExport(expectedValues);
           expect(speedSection).toExportPropertyLineToHtml(expectedHeading, expectedText);
           expect(speedSection).toExportPropertyLineToHomebrewery(expectedHeading, expectedText);
+
+          reset();
+          speedSection.importFromJson(json);
+
+          verifyModel(expectedValues);
+          verifyEditModeView(expectedValues);
+          expect(speedSection).toShowPropertyLine(expectedHeading, expectedText);
         });
         /* eslint-enable indent, no-unexpected-multiline */
       });
 
       it('should preserve the speeds if submitted with the custom text checkbox checked', () => {
-        const walk = 10;
-        const burrow = 20;
-        const climb = 30;
-        const fly = 40;
-        const hover = true;
-        const swim = 50;
-        const useCustomText = true;
-        const customText = 'This custom text should be saved, but not shown.';
+        const expectedValues = {
+          walk: 10,
+          burrow: 20,
+          climb: 30,
+          fly: 40,
+          hover: true,
+          swim: 50,
+          useCustomText: true,
+          customText: 'This custom text should be __saved__, but not shown.',
+          htmlCustomText: 'This custom text should be <strong>saved</strong>, but not shown.'
+        };
 
-        inputValueAndTriggerEvent(speedSection.editElements.walk, walk);
-        inputValueAndTriggerEvent(speedSection.editElements.burrow, burrow);
-        inputValueAndTriggerEvent(speedSection.editElements.climb, climb);
-        inputValueAndTriggerEvent(speedSection.editElements.fly, fly);
-        inputValueAndTriggerEvent(speedSection.editElements.swim, swim);
+        inputValueAndTriggerEvent(speedSection.editElements.walk, expectedValues.walk);
+        inputValueAndTriggerEvent(speedSection.editElements.burrow, expectedValues.burrow);
+        inputValueAndTriggerEvent(speedSection.editElements.climb, expectedValues.climb);
+        inputValueAndTriggerEvent(speedSection.editElements.fly, expectedValues.fly);
+        inputValueAndTriggerEvent(speedSection.editElements.swim, expectedValues.swim);
         speedSection.editElements.hover.click();
 
         speedSection.editElements.useCustomText.click();
-        inputValueAndTriggerEvent(speedSection.editElements.customText, customText);
+        inputValueAndTriggerEvent(speedSection.editElements.customText, expectedValues.customText);
 
         speedSection.editElements.submitForm();
-        speedSection.showElements.section.click();
 
-        expect(speed.walk).toBe(walk);
-        expect(speed.burrow).toBe(burrow);
-        expect(speed.climb).toBe(climb);
-        expect(speed.fly).toBe(fly);
-        expect(speed.hover).toBe(hover);
-        expect(speed.swim).toBe(swim);
-        expect(speed.useCustomText).toBe(true);
+        verifyModel(expectedValues);
+        verifyEditModeView(expectedValues);
 
-        expect(speedSection).toBeInMode('edit');
-        expect(speedSection.editElements.walk).toHaveValue(walk);
-        expect(speedSection.editElements.burrow).toHaveValue(burrow);
-        expect(speedSection.editElements.climb).toHaveValue(climb);
-        expect(speedSection.editElements.fly).toHaveValue(fly);
-        expect(speedSection.editElements.hover).toBeChecked();
-        expect(speedSection.editElements.swim).toHaveValue(swim);
-        expect(speedSection.editElements.useCustomText).toBeChecked();
+        const json = verifyJsonExport(expectedValues);
 
-        verifyJsonExport({
-          walk: walk,
-          burrow: burrow,
-          climb: climb,
-          fly: fly,
-          hover: hover,
-          swim: swim,
-          useCustomText: useCustomText,
-          customText: customText
-        });
+        reset();
+        speedSection.importFromJson(json);
+
+        verifyModel(expectedValues);
+        verifyEditModeView(expectedValues);
       });
     });
   });
 });
+
+function reset() {
+  speedModel.reset();
+  speedSection.updateView();
+}
+
+function verifyModel({
+  walk = 30,
+  burrow = null,
+  climb = null,
+  fly = null,
+  hover = false,
+  swim = null,
+  useCustomText = false,
+  customText = '',
+  htmlCustomText = ''
+} = {}) {
+  expect(speedModel.walk).toBe(walk);
+  expect(speedModel.burrow).toBe(burrow);
+  expect(speedModel.climb).toBe(climb);
+  expect(speedModel.fly).toBe(fly);
+  expect(speedModel.hover).toBe(hover);
+  expect(speedModel.swim).toBe(swim);
+  expect(speedModel.useCustomText).toBe(useCustomText);
+  expect(speedModel.customText).toBe(customText);
+  expect(speedModel.htmlCustomText).toBe(htmlCustomText);
+}
+
+function verifyEditModeView({
+  walk = 30,
+  burrow = null,
+  climb = null,
+  fly = null,
+  hover = false,
+  swim = null,
+  useCustomText = false,
+  customText = ''
+} = {}) {
+  expect(speedSection.editElements.walk).toHaveValue(walk);
+  expect(speedSection.editElements.burrow).toHaveValue(burrow);
+  expect(speedSection.editElements.climb).toHaveValue(climb);
+  expect(speedSection.editElements.fly).toHaveValue(fly);
+  expect(speedSection.editElements.hover.checked).toBe(hover);
+  expect(speedSection.editElements.swim).toHaveValue(swim);
+  expect(speedSection.editElements.useCustomText.checked).toBe(useCustomText);
+  expect(speedSection.editElements.customText).toHaveValue(customText);
+}
 
 function verifyJsonExport({
   walk = 30,
@@ -311,7 +343,6 @@ function verifyJsonExport({
   useCustomText = false,
   customText = ''
 } = {}) {
-
   const json = speedSection.exportToJson();
   const expectedJson = {
     walk: walk,
@@ -325,4 +356,6 @@ function verifyJsonExport({
   };
 
   expect(json).toStrictEqual(expectedJson);
+
+  return json;
 }

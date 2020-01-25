@@ -32,9 +32,7 @@ describe('when the show section is clicked', () => {
   });
 
   it('edit section should have default values', () => {
-    expect(titleSection.editElements.fullName).toHaveValue('Commoner');
-    expect(titleSection.editElements.shortName).toHaveValue('');
-    expect(titleSection.editElements.properNoun).not.toBeChecked();
+    verifyEditModeView();
   });
 
   it('should switch to edit mode and focus on the title field', () => {

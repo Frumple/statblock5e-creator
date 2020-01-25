@@ -38,11 +38,7 @@ describe('when the show section is clicked', () => {
   });
 
   it('edit section should have default values', () => {
-    expect(hitPointsSection.editElements.hitPoints).toHaveValue(4);
-    expect(hitPointsSection.editElements.useHitDie).toBeChecked();
-    expect(hitPointsSection.editElements.hitDieQuantity).toHaveValue(1);
-    expect(hitPointsSection.editElements.hitDieSize).toHaveValue('8');
-    expect(hitPointsSection.editElements.constitutionHitPoints).toHaveTextContent('+ 0');
+    verifyEditModeView();
   });
 
   it('should switch to edit mode and focus on the hit die quantity field', () => {
@@ -89,69 +85,66 @@ describe('when the show section is clicked', () => {
         `
         ('$description: {hitDieQuantity="$hitDieQuantity", hitDieSize="$hitDieSize", constitutionScore="$constitutionScore"} => {expectedConstitutionHitPoints="$expectedConstitutionHitPoints", expectedHitPoints="$expectedHitPoints", expectedText="$expectedText"}',
         ({hitDieQuantity, hitDieSize, constitutionScore, expectedConstitutionHitPoints, expectedHitPoints, expectedText}) => {
+          const expectedValues = {
+            hitPoints: expectedHitPoints,
+            useHitDie: true,
+            hitDieQuantity: hitDieQuantity,
+            hitDieSize: hitDieSize,
+            constitutionHitPoints: expectedConstitutionHitPoints
+          };
+
           inputValueAndTriggerEvent(hitPointsSection.editElements.hitDieQuantity, hitDieQuantity);
           inputValueAndTriggerEvent(hitPointsSection.editElements.hitDieSize, hitDieSize);
           abilities.abilities['constitution'].score = constitutionScore;
 
           hitPointsSection.updateShowModeView();
 
-          expect(hitPointsModel.useHitDie).toBe(true);
-          expect(hitPointsModel.hitDieQuantity).toBe(hitDieQuantity);
-          expect(hitPointsModel.hitDieSize).toBe(hitDieSize);
-          expect(hitPointsModel.constitutionHitPoints).toBe(expectedConstitutionHitPoints);
-          expect(hitPointsModel.hitPoints).toBe(expectedHitPoints);
-
-          const constitutionHitPointsOperator = formatModifierOperator(expectedConstitutionHitPoints);
-          const constitutionHitPointsNumber = formatModifierNumber(expectedConstitutionHitPoints);
-
-          expect(hitPointsSection.editElements.constitutionHitPoints).toHaveTextContent(`${constitutionHitPointsOperator} ${constitutionHitPointsNumber}`);
-          expect(hitPointsSection.editElements.hitPoints.value).toBe(`${expectedHitPoints}`);
+          verifyModel(expectedValues);
+          verifyEditModeView(expectedValues);
 
           hitPointsSection.editElements.submitForm();
 
           expect(hitPointsSection).toBeInMode('show');
           expect(hitPointsSection).toShowPropertyLine(expectedHeading, expectedText);
 
-          verifyJsonExport({
-            hitPoints: expectedHitPoints,
-            useHitDie: true,
-            hitDieQuantity: hitDieQuantity,
-            hitDieSize: hitDieSize
-          });
+          const json = verifyJsonExport(expectedValues);
           expect(hitPointsSection).toExportPropertyLineToHtml(expectedHeading, expectedText);
           expect(hitPointsSection).toExportPropertyLineToHomebrewery(expectedHeading, expectedText);
+
+          reset();
+          hitPointsSection.importFromJson(json);
+
+          verifyModel(expectedValues);
+          verifyEditModeView(expectedValues);
+          expect(hitPointsSection).toShowPropertyLine(expectedHeading, expectedText);
         });
         /* eslint-enable indent, no-unexpected-multiline */
       });
 
       it('should preserve the hit die quantity and size if submitted with the "Calculate using Hit Die" checkbox unchecked', () => {
-        const hitDieQuantity = 2;
-        const hitDieSize = 6;
-        const expectedHitPoints = 7;
+        const expectedValues = {
+          hitPoints: 7,
+          useHitDie: false,
+          hitDieQuantity: 2,
+          hitDieSize: 6,
+        };
 
-        inputValueAndTriggerEvent(hitPointsSection.editElements.hitDieQuantity, hitDieQuantity);
-        inputValueAndTriggerEvent(hitPointsSection.editElements.hitDieSize, hitDieSize);
+        inputValueAndTriggerEvent(hitPointsSection.editElements.hitDieQuantity, expectedValues.hitDieQuantity);
+        inputValueAndTriggerEvent(hitPointsSection.editElements.hitDieSize, expectedValues.hitDieSize);
 
         hitPointsSection.editElements.useHitDie.click();
         hitPointsSection.editElements.submitForm();
-        hitPointsSection.showElements.section.click();
 
-        expect(hitPointsModel.useHitDie).toBe(false);
-        expect(hitPointsModel.hitDieQuantity).toBe(hitDieQuantity);
-        expect(hitPointsModel.hitDieSize).toBe(hitDieSize);
-        expect(hitPointsModel.hitPoints).toBe(expectedHitPoints);
+        verifyModel(expectedValues);
+        verifyEditModeView(expectedValues);
 
-        expect(hitPointsSection).toBeInMode('edit');
-        expect(hitPointsSection.editElements.useHitDie).not.toBeChecked();
-        expect(hitPointsSection.editElements.hitDieQuantity).toHaveValue(hitDieQuantity);
-        expect(hitPointsSection.editElements.hitDieSize.valueAsInt).toBe(hitDieSize);
+        const json = verifyJsonExport(expectedValues);
 
-        verifyJsonExport({
-          hitPoints: expectedHitPoints,
-          useHitDie: false,
-          hitDieQuantity: hitDieQuantity,
-          hitDieSize: hitDieSize
-        });
+        reset();
+        hitPointsSection.importFromJson(json);
+
+        verifyModel(expectedValues);
+        verifyEditModeView(expectedValues);
       });
     });
 
@@ -159,11 +152,7 @@ describe('when the show section is clicked', () => {
       it('should display an error if the hit die quantity field is not a valid number, and the hit die quantity should not be saved', () => {
         inputValueAndTriggerEvent(hitPointsSection.editElements.hitDieQuantity, '');
 
-        expect(hitPointsModel.useHitDie).toBe(true);
-        expect(hitPointsModel.hitDieQuantity).toBe(1);
-        expect(hitPointsModel.hitDieSize).toBe(8);
-        expect(hitPointsModel.constitutionHitPoints).toBe(0);
-        expect(hitPointsModel.hitPoints).toBe(4);
+        verifyModel();
 
         hitPointsSection.editElements.submitForm();
 
@@ -177,11 +166,7 @@ describe('when the show section is clicked', () => {
         inputValueAndTriggerEvent(hitPointsSection.editElements.hitPoints, '');
         inputValueAndTriggerEvent(hitPointsSection.editElements.hitDieQuantity, '');
 
-        expect(hitPointsModel.useHitDie).toBe(true);
-        expect(hitPointsModel.hitDieQuantity).toBe(1);
-        expect(hitPointsModel.hitDieSize).toBe(8);
-        expect(hitPointsModel.constitutionHitPoints).toBe(0);
-        expect(hitPointsModel.hitPoints).toBe(4);
+        verifyModel();
 
         hitPointsSection.editElements.submitForm();
 
@@ -194,17 +179,22 @@ describe('when the show section is clicked', () => {
 
     describe('and the "Calculate using Hit Die" checkbox is unchecked, the hit points field is changed, then the checkbox is checked again', () => {
       it('should reset the hit points field to the value calculated from hit die', () => {
-        inputValueAndTriggerEvent(hitPointsSection.editElements.hitDieQuantity, 10);
-        inputValueAndTriggerEvent(hitPointsSection.editElements.hitDieSize, 12);
+        const expectedValues = {
+          hitPoints: 105,
+          useHitDie: true,
+          hitDieQuantity: 10,
+          hitDieSize: 12,
+          constitutionHitPoints: 40
+        };
+
+        inputValueAndTriggerEvent(hitPointsSection.editElements.hitDieQuantity, expectedValues.hitDieQuantity);
+        inputValueAndTriggerEvent(hitPointsSection.editElements.hitDieSize, expectedValues.hitDieSize);
         abilities.abilities['constitution'].score = 19;
 
         hitPointsSection.updateShowModeView();
 
-        expect(hitPointsModel.useHitDie).toBe(true);
-        expect(hitPointsModel.hitDieQuantity).toBe(10);
-        expect(hitPointsModel.hitDieSize).toBe(12);
-        expect(hitPointsModel.constitutionHitPoints).toBe(40);
-        expect(hitPointsModel.hitPoints).toBe(105);
+        verifyModel(expectedValues);
+        verifyEditModeView(expectedValues);
 
         hitPointsSection.editElements.useHitDie.click();
 
@@ -212,7 +202,8 @@ describe('when the show section is clicked', () => {
 
         hitPointsSection.editElements.useHitDie.click();
 
-        expect(hitPointsSection.editElements.hitPoints.value).toBe('105');
+        verifyModel(expectedValues);
+        verifyEditModeView(expectedValues);
       });
     });
   });
@@ -233,38 +224,41 @@ describe('when the show section is clicked', () => {
 
     describe('and the hit points field is changed and the edit section is submitted', () => {
       it('should switch to show mode and save the hit points', () => {
-        const hitPoints = 142;
-        const expectedText = '142';
+        const expectedValues = {
+          hitPoints: 142,
+          useHitDie: false
+        };
 
-        inputValueAndTriggerEvent(hitPointsSection.editElements.hitPoints, hitPoints);
+        inputValueAndTriggerEvent(hitPointsSection.editElements.hitPoints, expectedValues.hitPoints);
 
-        expect(hitPointsModel.useHitDie).toBe(false);
-        expect(hitPointsModel.hitDieQuantity).toBe(1);
-        expect(hitPointsModel.hitDieSize).toBe(8);
-        expect(hitPointsModel.constitutionHitPoints).toBe(0);
-        expect(hitPointsModel.hitPoints).toBe(hitPoints);
+        verifyModel(expectedValues);
+        verifyEditModeView(expectedValues);
 
         hitPointsSection.editElements.submitForm();
 
         expect(hitPointsSection).toBeInMode('show');
-        expect(hitPointsSection).toShowPropertyLine(expectedHeading, expectedText);
+        expect(hitPointsSection).toShowPropertyLine(expectedHeading, expectedValues.hitPoints.toString());
 
-        verifyJsonExport({
-          hitPoints: hitPoints,
-          useHitDie: false
-        });
-        expect(hitPointsSection).toExportPropertyLineToHtml(expectedHeading, expectedText);
-        expect(hitPointsSection).toExportPropertyLineToHomebrewery(expectedHeading, expectedText);
+        const json = verifyJsonExport(expectedValues);
+        expect(hitPointsSection).toExportPropertyLineToHtml(expectedHeading, expectedValues.hitPoints.toString());
+        expect(hitPointsSection).toExportPropertyLineToHomebrewery(expectedHeading, expectedValues.hitPoints.toString());
+
+        reset();
+        hitPointsSection.importFromJson(json);
+
+        verifyModel(expectedValues);
+        verifyEditModeView(expectedValues);
+        expect(hitPointsSection).toShowPropertyLine(expectedHeading, expectedValues.hitPoints.toString());
       });
 
       it('should display an error if the hit points field is not a valid number, and the hit points should not be saved', () => {
+        const expectedValues = {
+          useHitDie: false
+        };
+
         inputValueAndTriggerEvent(hitPointsSection.editElements.hitPoints, '');
 
-        expect(hitPointsModel.useHitDie).toBe(false);
-        expect(hitPointsModel.hitDieQuantity).toBe(1);
-        expect(hitPointsModel.hitDieSize).toBe(8);
-        expect(hitPointsModel.constitutionHitPoints).toBe(0);
-        expect(hitPointsModel.hitPoints).toBe(4);
+        verifyModel(expectedValues);
 
         hitPointsSection.editElements.submitForm();
 
@@ -275,14 +269,14 @@ describe('when the show section is clicked', () => {
       });
 
       it('should display only one error if the hit points and hit die quantity fields are both not valid numbers, and neither should be saved', () => {
+        const expectedValues = {
+          useHitDie: false
+        };
+
         inputValueAndTriggerEvent(hitPointsSection.editElements.hitPoints, '');
         inputValueAndTriggerEvent(hitPointsSection.editElements.hitDieQuantity, '');
 
-        expect(hitPointsModel.useHitDie).toBe(false);
-        expect(hitPointsModel.hitDieQuantity).toBe(1);
-        expect(hitPointsModel.hitDieSize).toBe(8);
-        expect(hitPointsModel.constitutionHitPoints).toBe(0);
-        expect(hitPointsModel.hitPoints).toBe(4);
+        verifyModel(expectedValues);
 
         hitPointsSection.editElements.submitForm();
 
@@ -295,12 +289,51 @@ describe('when the show section is clicked', () => {
   });
 });
 
+function reset() {
+  hitPointsModel.reset();
+  hitPointsSection.updateView();
+}
+
+function getExpectedConstitutionHitPointsText(constitutionHitPoints) {
+  const modifierOperator = formatModifierOperator(constitutionHitPoints);
+  const modifierNumber = formatModifierNumber(constitutionHitPoints);
+  return `${modifierOperator} ${modifierNumber}`;
+}
+
+function verifyModel({
+  hitPoints = 4,
+  useHitDie = true,
+  hitDieQuantity = 1,
+  hitDieSize = 8,
+  constitutionHitPoints = 0
+} = {}) {
+  expect(hitPointsModel.hitPoints).toBe(hitPoints);
+  expect(hitPointsModel.useHitDie).toBe(useHitDie);
+  expect(hitPointsModel.hitDieQuantity).toBe(hitDieQuantity);
+  expect(hitPointsModel.hitDieSize).toBe(hitDieSize);
+  expect(hitPointsModel.constitutionHitPoints).toBe(constitutionHitPoints);
+}
+
+function verifyEditModeView({
+  hitPoints = 4,
+  useHitDie = true,
+  hitDieQuantity = 1,
+  hitDieSize = 8,
+  constitutionHitPoints = 0
+} = {}) {
+  expect(hitPointsSection.editElements.hitPoints).toHaveValue(hitPoints);
+  expect(hitPointsSection.editElements.useHitDie.checked).toBe(useHitDie);
+  expect(hitPointsSection.editElements.hitDieQuantity).toHaveValue(hitDieQuantity);
+  expect(hitPointsSection.editElements.hitDieSize).toHaveValue(hitDieSize.toString());
+  expect(hitPointsSection.editElements.constitutionHitPoints).toHaveTextContent(getExpectedConstitutionHitPointsText(constitutionHitPoints));
+}
+
 function verifyJsonExport({
   hitPoints = 4,
   useHitDie = true,
   hitDieQuantity = 1,
-  hitDieSize = 8} = {}) {
-
+  hitDieSize = 8
+} = {}) {
   const json = hitPointsSection.exportToJson();
   const expectedJson = {
     hitPoints: hitPoints,
@@ -310,4 +343,6 @@ function verifyJsonExport({
   };
 
   expect(json).toStrictEqual(expectedJson);
+
+  return json;
 }

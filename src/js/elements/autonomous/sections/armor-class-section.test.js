@@ -35,11 +35,7 @@ describe('when the show section is clicked', () => {
   });
 
   it('edit section should have default values', () => {
-    expect(armorClassSection.editElements.armorClass).toHaveValue(10);
-    expect(armorClassSection.editElements.armorType).toHaveValue('');
-    expect(armorClassSection.editElements.hasShield).not.toBeChecked();
-    expect(armorClassSection.editElements.useCustomText).not.toBeChecked();
-    expect(armorClassSection.editElements.customText).toHaveValue('');
+    verifyEditModeView();
   });
 
   it('should switch to edit mode and focus on the armor class field', () => {
@@ -76,7 +72,8 @@ describe('when the show section is clicked', () => {
         ({customText, expectedHtmlText}) => {
           const expectedValues = {
             useCustomText: true,
-            customText: customText
+            customText: customText,
+            htmlCustomText: expectedHtmlText
           };
 
           inputValueAndTriggerEvent(armorClassSection.editElements.customText, customText);
@@ -84,7 +81,6 @@ describe('when the show section is clicked', () => {
           armorClassSection.editElements.submitForm();
 
           verifyModel(expectedValues);
-          expect(armorClassModel.htmlCustomText).toBe(expectedHtmlText);
           verifyEditModeView(expectedValues);
           expect(armorClassSection).toBeInMode('show');
           expect(armorClassSection).toShowPropertyLine(expectedHeading, expectedHtmlText);
@@ -97,7 +93,6 @@ describe('when the show section is clicked', () => {
           armorClassSection.importFromJson(json);
 
           verifyModel(expectedValues);
-          expect(armorClassModel.htmlCustomText).toBe(expectedHtmlText);
           verifyEditModeView(expectedValues);
           expect(armorClassSection).toShowPropertyLine(expectedHeading, expectedHtmlText);
         });
@@ -107,7 +102,7 @@ describe('when the show section is clicked', () => {
       it('should preserve the custom text if submitted with the custom text checkbox unchecked', () => {
         const expectedValues = {
           useCustomText: false,
-          customText: '17 (19 with shield equipped)'
+          customText: '17 *(19 with shield equipped)*'
         };
 
         inputValueAndTriggerEvent(armorClassSection.editElements.customText, expectedValues.customText);
@@ -208,7 +203,6 @@ describe('when the show section is clicked', () => {
 
           verifyModel(expectedValues);
           verifyEditModeView(expectedValues);
-
           expect(armorClassSection).toBeInMode('show');
           expect(armorClassSection).toShowPropertyLine(expectedHeading, expectedText);
 
@@ -232,7 +226,8 @@ describe('when the show section is clicked', () => {
           armorType: 'studded leather armor',
           hasShield: true,
           useCustomText: true,
-          customText: 'This custom text should be saved, but not shown.'
+          customText: 'This custom text should be __saved__, but not shown.',
+          htmlCustomText: 'This custom text should be <strong>saved</strong>, but not shown.'
         };
 
         inputValueAndTriggerEvent(armorClassSection.editElements.armorClass, expectedValues.armorClass);
@@ -292,13 +287,15 @@ function verifyModel({
   armorType = '',
   hasShield = false,
   useCustomText = false,
-  customText = ''
+  customText = '',
+  htmlCustomText = ''
 } = {}) {
   expect(armorClassModel.armorClass).toBe(armorClass);
   expect(armorClassModel.armorType).toBe(armorType);
   expect(armorClassModel.hasShield).toBe(hasShield);
   expect(armorClassModel.useCustomText).toBe(useCustomText);
   expect(armorClassModel.customText).toBe(customText);
+  expect(armorClassModel.htmlCustomText).toBe(htmlCustomText);
 }
 
 function verifyEditModeView({

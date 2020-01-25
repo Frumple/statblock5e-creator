@@ -13,7 +13,7 @@ export default class TextInput extends CustomBuiltinInputElement {
 
 export let TextInputMixin = {
   initializeMixin() {
-    this.htmlText = null;
+    this.htmlText = '';
   },
 
   get fieldName() {
