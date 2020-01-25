@@ -89,7 +89,7 @@ describe('when the show section is clicked', () => {
           sensesSection.editElements.submitForm();
 
           expect(sensesModel.useCustomText).toBe(true);
-          expect(sensesModel.originalCustomText).toBe(customText);
+          expect(sensesModel.customText).toBe(customText);
           expect(sensesModel.htmlCustomText).toBe(expectedHtmlText);
 
           expect(sensesSection).toBeInMode('show');
@@ -115,7 +115,7 @@ describe('when the show section is clicked', () => {
         sensesSection.showElements.section.click();
 
         expect(sensesModel.useCustomText).toBe(false);
-        expect(sensesModel.originalCustomText).toBe(customText);
+        expect(sensesModel.customText).toBe(customText);
 
         expect(sensesSection).toBeInMode('edit');
         expect(sensesSection.editElements.useCustomText).not.toBeChecked();

@@ -39,7 +39,7 @@ export function shouldFocusOnNameFieldOfNewBlock(section) {
 }
 
 export function shouldAddASingleBlock(section, block) {
-  addAndPopulateBlock(section, block.name, block.originalText);
+  addAndPopulateBlock(section, block.name, block.text);
 
   section.editElements.submitForm();
 
@@ -52,7 +52,7 @@ export function shouldAddASingleBlock(section, block) {
 
 export function shouldAddMultipleBlocks(section, blocks) {
   for (const block of blocks) {
-    addAndPopulateBlock(section, block.name, block.originalText);
+    addAndPopulateBlock(section, block.name, block.text);
   }
 
   section.editElements.submitForm();
@@ -64,7 +64,7 @@ export function shouldAddMultipleBlocks(section, blocks) {
 }
 
 export function shouldAddASingleBlockThenRemoveIt(section, block) {
-  addAndPopulateBlock(section, block.name, block.originalText);
+  addAndPopulateBlock(section, block.name, block.text);
 
   const editableBlock = section.editElements.editableBlockList.blocks[0];
   editableBlock.remove();
@@ -79,7 +79,7 @@ export function shouldAddASingleBlockThenRemoveIt(section, block) {
 
 export function shouldAddMultipleBlocksThenRemoveOneOfThem(section, blocks, removeIndex) {
   for (const block of blocks) {
-    addAndPopulateBlock(section, block.name, block.originalText);
+    addAndPopulateBlock(section, block.name, block.text);
   }
 
   const editableBlock = section.editElements.editableBlockList.blocks[removeIndex];
@@ -100,7 +100,7 @@ export function shouldReparseNameChanges(section, block, oldNames, newNames) {
   title.shortName = oldNames.shortName;
   title.isProperNoun = oldNames.isProperNoun;
 
-  addAndPopulateBlock(section, block.name, block.originalText);
+  addAndPopulateBlock(section, block.name, block.text);
 
   section.editElements.submitForm();
 
@@ -124,7 +124,7 @@ export function shouldTrimAllTrailingPeriodCharactersInBlockName(section) {
 
   const expectedBlocks = [{
     name: 'Cthulhu. fhtag.n',
-    originalText: 'Some text.'
+    text: 'Some text.'
   }];
   verifyBlocks(section, expectedBlocks);
 
@@ -238,12 +238,12 @@ function verifyBlocks(section, expectedBlocks) {
 
 function verifyEditableBlock(editableBlock, expectedBlock) {
   expect(editableBlock.previewName).toBe(expectedBlock.name);
-  expect(editableBlock.previewText).toBe(expectedBlock.htmlText ? expectedBlock.htmlText : expectedBlock.originalText);
+  expect(editableBlock.previewText).toBe(expectedBlock.htmlText ? expectedBlock.htmlText : expectedBlock.text);
 }
 
 function verifyDisplayBlock(displayBlock, expectedBlock) {
   expect(displayBlock.name).toBe(expectedBlock.name);
-  expect(displayBlock.text).toBe(expectedBlock.htmlText ? expectedBlock.htmlText : expectedBlock.originalText);
+  expect(displayBlock.text).toBe(expectedBlock.htmlText ? expectedBlock.htmlText : expectedBlock.text);
 }
 
 function verifyJsonExport(section, expectedBlocks) {
@@ -252,7 +252,7 @@ function verifyJsonExport(section, expectedBlocks) {
   const expectedJson = expectedBlocks.map(block => {
     return {
       name: block.name,
-      text: block.originalText
+      text: block.text
     };
   });
 
@@ -266,7 +266,7 @@ function verifyHtmlExport(section, expectedBlocks) {
     const htmlExportBlock = htmlExportBlocks[index];
     expect(htmlExportBlock).toBeHtmlPropertyBlock(
       `${expectedBlock.name}.`,
-      (expectedBlock.htmlText ? expectedBlock.htmlText : expectedBlock.originalText));
+      (expectedBlock.htmlText ? expectedBlock.htmlText : expectedBlock.text));
   }
 }
 
@@ -286,7 +286,7 @@ function verifyHomebreweryExport(section, expectedBlocks) {
 
     const expectedBlocksInHomebreweryFormat =
       expectedBlocks.map(
-        block => `> ***${block.name}.*** ${(block.homebreweryText ? block.homebreweryText : block.originalText)}`);
+        block => `> ***${block.name}.*** ${(block.homebreweryText ? block.homebreweryText : block.text)}`);
 
     const expectedBlocksText = expectedBlocksInHomebreweryFormat.join('\n>\n');
     expect(blocksText).toBe(expectedBlocksText);

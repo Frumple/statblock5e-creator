@@ -55,7 +55,7 @@ describe('when the show section is clicked', () => {
     it('should add a single block', () => {
       const block = {
         name: 'Parry',
-        originalText: '[name] adds 2 to its AC against one melee attack that would hit it. To do so, [name] must see the attacker and be wielding a melee weapon.',
+        text: '[name] adds 2 to its AC against one melee attack that would hit it. To do so, [name] must see the attacker and be wielding a melee weapon.',
         homebreweryText: 'The knight adds 2 to its AC against one melee attack that would hit it. To do so, the knight must see the attacker and be wielding a melee weapon.',
         htmlText: 'The knight adds 2 to its AC against one melee attack that would hit it. To do so, the knight must see the attacker and be wielding a melee weapon.'
       };
@@ -68,7 +68,7 @@ describe('when the show section is clicked', () => {
     it('should add a single block with multiline text', () => {
       const block = {
         name: 'Multiline Reaction',
-        originalText: '**Line 1**. [name] is here.\n  **Line 2**. [name] is there.\n    **Line 3**. [name] is everywhere.',
+        text: '**Line 1**. [name] is here.\n  **Line 2**. [name] is there.\n    **Line 3**. [name] is everywhere.',
         homebreweryText: '**Line 1**. The dummy is here.  \n>   **Line 2**. The dummy is there.  \n>     **Line 3**. The dummy is everywhere.',
         htmlText: '<strong>Line 1</strong>. The dummy is here.\n  <strong>Line 2</strong>. The dummy is there.\n    <strong>Line 3</strong>. The dummy is everywhere.'
       };
@@ -81,7 +81,7 @@ describe('when the show section is clicked', () => {
     it('should add a single block with html escaped', () => {
       const block = {
         name: 'Escaped Reaction',
-        originalText: '<strong>Line 1</strong>. [name] is here.',
+        text: '<strong>Line 1</strong>. [name] is here.',
         homebreweryText: '&lt;strong&gt;Line 1&lt;/strong&gt;. The dummy is here.',
         htmlText: '&lt;strong&gt;Line 1&lt;/strong&gt;. The dummy is here.'
       };
@@ -95,16 +95,16 @@ describe('when the show section is clicked', () => {
       const blocks = [
         {
           name: 'Reaction 1',
-          originalText: 'Reaction Text 1'
+          text: 'Reaction Text 1'
         },
         {
           name: 'Reaction 2',
-          originalText: 'Reaction __Text__ 2',
+          text: 'Reaction __Text__ 2',
           htmlText: 'Reaction <strong>Text</strong> 2'
         },
         {
           name: 'Reaction 3',
-          originalText: 'Reaction Text 3'
+          text: 'Reaction Text 3'
         }
       ];
       sharedSpecs.shouldAddMultipleBlocks(reactionsSection, blocks);
@@ -113,7 +113,7 @@ describe('when the show section is clicked', () => {
     it('should add a single block, then remove it', () => {
       const block = {
         name: 'Split',
-        originalText: 'When a jelly that is Medium or larger is subjected to lightning or slashing damage, it splits into two new jellies if it has at least 10 hit points. Each new jelly has hit points equal to half the original jelly\'s, rounded down. New jellies are one size smaller than the original jelly.'
+        text: 'When a jelly that is Medium or larger is subjected to lightning or slashing damage, it splits into two new jellies if it has at least 10 hit points. Each new jelly has hit points equal to half the original jelly\'s, rounded down. New jellies are one size smaller than the original jelly.'
       };
 
       sharedSpecs.shouldAddASingleBlockThenRemoveIt(reactionsSection, block);
@@ -123,15 +123,15 @@ describe('when the show section is clicked', () => {
       const blocks = [
         {
           name: 'Reaction 1',
-          originalText: 'Reaction Text 1'
+          text: 'Reaction Text 1'
         },
         {
           name: 'Reaction 2',
-          originalText: 'Reaction Text 2'
+          text: 'Reaction Text 2'
         },
         {
           name: 'Reaction 3',
-          originalText: '**Reaction** Text 3',
+          text: '**Reaction** Text 3',
           htmlText: '<strong>Reaction</strong> Text 3'
         }
       ];
@@ -141,7 +141,7 @@ describe('when the show section is clicked', () => {
     describe('should reparse the block text', () => {
       const block = {
         name: 'Spell Reflection',
-        originalText: 'If [name] makes a successful saving throw against a spell, or a spell attack misses it, [name] can choose another creature (including the spellcaster) it can see within 30 feet of it. The spell targets the chosen creature instead of [name]. If the spell forced a saving throw, the chosen creature makes its own save. If the spell was an attack, the attack roll is rerolled against the chosen creature.',
+        text: 'If [name] makes a successful saving throw against a spell, or a spell attack misses it, [name] can choose another creature (including the spellcaster) it can see within 30 feet of it. The spell targets the chosen creature instead of [name]. If the spell forced a saving throw, the chosen creature makes its own save. If the spell was an attack, the attack roll is rerolled against the chosen creature.',
         homebreweryText: null,
         htmlText: null
       };

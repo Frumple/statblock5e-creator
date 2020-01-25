@@ -1,10 +1,11 @@
+import PropertyLineModel from './property-line-model.js';
 import { formatModifierOperator, formatModifierNumber } from '../helpers/string-formatter.js';
-import { createHtmlPropertyLine, createHomebreweryPropertyLine } from '../helpers/export-helpers.js';
 
-export default class HitPoints {
+export default class HitPoints extends PropertyLineModel {
   constructor(abilities) {
+    super('Hit Points');
+
     this.abilities = abilities;
-    this.headingName = 'Hit Points';
 
     this.reset();
   }
@@ -14,6 +15,15 @@ export default class HitPoints {
     this.useHitDie = true;
     this.hitDieQuantity = 1;
     this.hitDieSize = 8;
+  }
+
+  get jsonPropertyNames() {
+    return [
+      'hitPoints',
+      'useHitDie',
+      'hitDieQuantity',
+      'hitDieSize'
+    ];
   }
 
   get hitDieAverage() {
@@ -46,6 +56,10 @@ export default class HitPoints {
     return this.hitPoints;
   }
 
+  get htmlText() {
+    return this.text;
+  }
+
   get textWithHitDie() {
     if (this.constitutionHitPoints != 0) {
       return `${this.hitPoints} (${this.hitDieQuantity}d${this.hitDieSize} ${this.constitutionHitPointsText})`;
@@ -60,22 +74,5 @@ export default class HitPoints {
     const modifierNumber = formatModifierNumber(constitutionHitPoints);
 
     return `${modifierOperator} ${modifierNumber}`;
-  }
-
-  toJson() {
-    return {
-      hitPoints: this._hitPoints,
-      useHitDie: this.useHitDie,
-      hitDieQuantity: this.hitDieQuantity,
-      hitDieSize: this.hitDieSize
-    };
-  }
-
-  toHtml() {
-    return createHtmlPropertyLine(this.headingName, this.text);
-  }
-
-  toHomebrewery() {
-    return createHomebreweryPropertyLine(this.headingName, this.text);
   }
 }

@@ -1,8 +1,9 @@
-import { createHtmlPropertyLine, createHomebreweryPropertyLine } from '../../../helpers/export-helpers.js';
+import PropertyLineModel from '../../property-line-model.js';
 
-export default class PropertyListModel {
+export default class PropertyListModel extends PropertyLineModel {
   constructor(headingName, singleName) {
-    this.headingName = headingName;
+    super(headingName);
+
     this.singleName = singleName;
 
     this.reset();
@@ -12,21 +13,15 @@ export default class PropertyListModel {
     this.items = [];
   }
 
+  get jsonPropertyNames() {
+    return ['items'];
+  }
+
   get text() {
     return this.items.join(', ');
   }
 
-  toJson() {
-    return {
-      items: this.items
-    };
-  }
-
-  toHtml() {
-    return createHtmlPropertyLine(this.headingName, this.text);
-  }
-
-  toHomebrewery() {
-    return createHomebreweryPropertyLine(this.headingName, this.text);
+  get htmlText() {
+    return this.text;
   }
 }

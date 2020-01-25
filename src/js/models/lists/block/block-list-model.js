@@ -1,5 +1,9 @@
-export default class BlockListModel {
+import Model from '../../model.js';
+
+export default class BlockListModel extends Model {
   constructor(headingName, singleName) {
+    super();
+
     this.headingName = headingName;
     this.singleName = singleName;
 

@@ -1,8 +1,8 @@
-import * as ExportHelpers from '../helpers/export-helpers.js';
+import PropertyLineModel from './property-line-model.js';
 
-export default class ArmorClass {
+export default class ArmorClass extends PropertyLineModel {
   constructor() {
-    this.headingName = 'Armor Class';
+    super('Armor Class');
 
     this.reset();
   }
@@ -17,7 +17,17 @@ export default class ArmorClass {
     this.htmlCustomText = '';
   }
 
-  get originalText() {
+  get jsonPropertyNames() {
+    return [
+      'armorClass',
+      'armorType',
+      'hasShield',
+      'useCustomText',
+      'customText'
+    ];
+  }
+
+  get text() {
     if (this.useCustomText) {
       return this.customText;
     }
@@ -47,31 +57,5 @@ export default class ArmorClass {
         return this.armorClass;
       }
     }
-  }
-
-  fromJson(json) {
-    this.armorClass = json.armorClass;
-    this.armorType = json.armorType;
-    this.hasShield = json.hasShield;
-    this.useCustomText = json.useCustomText;
-    this.customText = json.customText;
-  }
-
-  toJson() {
-    return {
-      armorClass: this.armorClass,
-      armorType: this.armorType,
-      hasShield: this.hasShield,
-      useCustomText: this.useCustomText,
-      customText: this.customText
-    };
-  }
-
-  toHtml() {
-    return ExportHelpers.createHtmlPropertyLine(this.headingName, this.htmlText);
-  }
-
-  toHomebrewery() {
-    return ExportHelpers.createHomebreweryPropertyLine(this.headingName, this.originalText);
   }
 }

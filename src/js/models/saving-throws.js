@@ -1,9 +1,9 @@
+import PropertyLineModel from './property-line-model.js';
 import { capitalizeFirstLetter, formatModifier } from '../helpers/string-formatter.js';
-import { createHtmlPropertyLine, createHomebreweryPropertyLine } from '../helpers/export-helpers.js';
 
-export default class SavingThrows {
+export default class SavingThrows extends PropertyLineModel {
   constructor(abilitiesModel, proficiencyBonusModel) {
-    this.headingName = 'Saving Throws';
+    super('Saving Throws');
 
     const entries = abilitiesModel.keys.map(
       key => [key, new SavingThrow(abilitiesModel.abilities[key], proficiencyBonusModel)]
@@ -37,17 +37,13 @@ export default class SavingThrows {
       .join(', ');
   }
 
+  get htmlText() {
+    return this.text;
+  }
+
   toJson() {
     const transformedEntries = this.entries.map(([key, savingThrow]) => [key, savingThrow.toJson()]);
     return Object.fromEntries(transformedEntries);
-  }
-
-  toHtml() {
-    return createHtmlPropertyLine(this.headingName, this.text);
-  }
-
-  toHomebrewery() {
-    return createHomebreweryPropertyLine(this.headingName, this.text);
   }
 }
 

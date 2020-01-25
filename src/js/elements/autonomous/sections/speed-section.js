@@ -54,7 +54,7 @@ export default class SpeedSection extends propertyLineSectionModule.PropertyLine
     speedModel.swim = this.editElements.swim.valueAsInt;
 
     speedModel.useCustomText = this.editElements.useCustomText.checked;
-    speedModel.originalCustomText = this.editElements.customText.value;
+    speedModel.customText = this.editElements.customText.value;
     speedModel.htmlCustomText = this.editElements.customText.htmlText;
   }
 
@@ -69,7 +69,7 @@ export default class SpeedSection extends propertyLineSectionModule.PropertyLine
     this.editElements.swim.value = speedModel.swim;
 
     this.editElements.useCustomText.checked = speedModel.useCustomText;
-    this.editElements.customText.value = speedModel.originalCustomText;
+    this.editElements.customText.value = speedModel.customText;
     this.editElements.customText.htmlText = speedModel.htmlCustomText;
   }
 

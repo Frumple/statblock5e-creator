@@ -1,10 +1,10 @@
-import { createHtmlPropertyLine, createHomebreweryPropertyLine } from '../helpers/export-helpers.js';
+import PropertyLineModel from './property-line-model.js';
 
-export default class Senses {
+export default class Senses extends PropertyLineModel {
   constructor(skills) {
-    this.skills = skills;
+    super('Senses');
 
-    this.headingName = 'Senses';
+    this.skills = skills;
 
     this.reset();
   }
@@ -16,17 +16,28 @@ export default class Senses {
     this.truesight = null;
 
     this.useCustomText = false;
-    this.originalCustomText = '';
+    this.customText = '';
     this.htmlCustomText = '';
+  }
+
+  get jsonPropertyNames() {
+    return [
+      'blindsight',
+      'darkvision',
+      'tremorsense',
+      'truesight',
+      'useCustomText',
+      'customText'
+    ];
   }
 
   get passivePerception() {
     return this.skills.skills['perception'].passiveScore;
   }
 
-  get originalText() {
+  get text() {
     if (this.useCustomText) {
-      return this.originalCustomText;
+      return this.customText;
     }
 
     return this.nonCustomText;
@@ -60,24 +71,5 @@ export default class Senses {
     list.push(`passive Perception ${this.passivePerception}`);
 
     return list.join(', ');
-  }
-
-  toJson() {
-    return {
-      blindsight: this.blindsight,
-      darkvision: this.darkvision,
-      tremorsense: this.tremorsense,
-      truesight: this.truesight,
-      useCustomText: this.useCustomText,
-      customText: this.originalCustomText
-    };
-  }
-
-  toHtml() {
-    return createHtmlPropertyLine(this.headingName, this.htmlText);
-  }
-
-  toHomebrewery() {
-    return createHomebreweryPropertyLine(this.headingName, this.originalText);
   }
 }

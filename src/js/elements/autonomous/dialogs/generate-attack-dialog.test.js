@@ -577,7 +577,7 @@ function saveDialogAndVerifyActionBlocks(weaponName, expectedGeneratedText, expe
 
   const editableBlock = actionsSection.editElements.editableBlockList.blocks[0];
   expect(editableBlock.name).toBe(weaponName);
-  expect(editableBlock.originalText).toBe(expectedGeneratedText);
+  expect(editableBlock.text).toBe(expectedGeneratedText);
   expect(editableBlock.previewText).toBe(expectedRenderedText);
 
   actionsSection.editElements.submitForm();

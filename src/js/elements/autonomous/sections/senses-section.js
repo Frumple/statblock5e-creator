@@ -48,7 +48,7 @@ export default class SensesSection extends propertyLineSectionModule.PropertyLin
     sensesModel.truesight = this.editElements.truesight.valueAsInt;
 
     sensesModel.useCustomText = this.editElements.useCustomText.checked;
-    sensesModel.originalCustomText = this.editElements.customText.value;
+    sensesModel.customText = this.editElements.customText.value;
     sensesModel.htmlCustomText = this.editElements.customText.htmlText;
   }
 
@@ -66,7 +66,7 @@ export default class SensesSection extends propertyLineSectionModule.PropertyLin
     this.editElements.truesight.value = sensesModel.truesight;
 
     this.editElements.useCustomText.checked = sensesModel.useCustomText;
-    this.editElements.customText.value = sensesModel.originalCustomText;
+    this.editElements.customText.value = sensesModel.customText;
 
     this.updateEditModeViewPassivePerception();
   }

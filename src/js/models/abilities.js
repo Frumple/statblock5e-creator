@@ -1,7 +1,10 @@
+import Model from './model.js';
 import { formatModifier } from '../helpers/string-formatter.js';
 
-export default class Abilities {
+export default class Abilities extends Model {
   constructor() {
+    super();
+
     this.abilities = {
       'strength' : new Ability('str'),
       'dexterity' : new Ability('dex'),
@@ -11,6 +14,8 @@ export default class Abilities {
       'charisma' : new Ability('cha'),
     };
     Object.freeze(this.abilities);
+
+    this.reset();
   }
 
   reset() {

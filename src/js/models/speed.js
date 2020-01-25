@@ -1,8 +1,8 @@
-import * as ExportHelpers from '../helpers/export-helpers.js';
+import PropertyLineModel from './property-line-model.js';
 
-export default class Speed {
+export default class Speed extends PropertyLineModel {
   constructor() {
-    this.headingName = 'Speed';
+    super('Speed');
 
     this.reset();
   }
@@ -16,13 +16,26 @@ export default class Speed {
     this.swim = null;
 
     this.useCustomText = false;
-    this.originalCustomText = '';
+    this.customText = '';
     this.htmlCustomText = '';
   }
 
-  get originalText() {
+  get jsonPropertyNames() {
+    return [
+      'walk',
+      'burrow',
+      'climb',
+      'fly',
+      'hover',
+      'swim',
+      'useCustomText',
+      'customText'
+    ];
+  }
+
+  get text() {
     if (this.useCustomText) {
-      return this.originalCustomText;
+      return this.customText;
     }
 
     return this.nonCustomText;
@@ -58,26 +71,5 @@ export default class Speed {
     }
 
     return list.join(', ');
-  }
-
-  toJson() {
-    return {
-      walk: this.walk,
-      burrow: this.burrow,
-      climb: this.climb,
-      fly: this.fly,
-      hover: this.hover,
-      swim: this.swim,
-      useCustomText: this.useCustomText,
-      customText: this.originalCustomText
-    };
-  }
-
-  toHtml() {
-    return ExportHelpers.createHtmlPropertyLine(this.headingName, this.htmlText);
-  }
-
-  toHomebrewery() {
-    return ExportHelpers.createHomebreweryPropertyLine(this.headingName, this.originalText);
   }
 }

@@ -65,11 +65,11 @@ export default class EditableBlock extends DragAndDropListItem {
     return this.nameInput.value;
   }
 
-  set originalText(text) {
+  set text(text) {
     this.textArea.value = text;
   }
 
-  get originalText() {
+  get text() {
     return this.textArea.value;
   }
 
@@ -113,7 +113,7 @@ export default class EditableBlock extends DragAndDropListItem {
   toModel() {
     return new BlockModel(
       this.name,
-      this.originalText,
+      this.text,
       this.homebreweryText,
       this.htmlText);
   }

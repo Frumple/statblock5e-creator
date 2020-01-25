@@ -86,7 +86,7 @@ export class BlockListSection extends sectionModule.Section {
 
     this.editElements.editableBlockList.clear();
     for (const block of blocks) {
-      this.editElements.editableBlockList.addBlock(block.name, block.originalText);
+      this.editElements.editableBlockList.addBlock(block.name, block.text);
     }
   }
 

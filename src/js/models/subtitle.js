@@ -1,5 +1,9 @@
-export default class Subtitle {
+import Model from './model.js';
+
+export default class Subtitle extends Model{
   constructor() {
+    super();
+
     this.reset();
   }
 
@@ -13,6 +17,17 @@ export default class Subtitle {
     this.customText = '';
   }
 
+  get jsonPropertyNames() {
+    return [
+      'size',
+      'type',
+      'tags',
+      'alignment',
+      'useCustomText',
+      'customText'
+    ];
+  }
+
   get text() {
     if (this.useCustomText) {
       return this.customText;
@@ -23,26 +38,6 @@ export default class Subtitle {
     }
 
     return `${this.size} ${this.type} (${this.tags}), ${this.alignment}`;
-  }
-
-  fromJson(json) {
-    this.size = json.size;
-    this.type = json.type;
-    this.tags = json.tags;
-    this.alignment = json.alignment;
-    this.useCustomText = json.useCustomText;
-    this.customText = json.customText;
-  }
-
-  toJson() {
-    return {
-      size: this.size,
-      type: this.type,
-      tags: this.tags,
-      alignment: this.alignment,
-      useCustomText: this.useCustomText,
-      customText: this.customText
-    };
   }
 
   toHtml() {

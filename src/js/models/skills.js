@@ -1,9 +1,9 @@
+import PropertyLineModel from './property-line-model.js';
 import { formatModifier } from '../helpers/string-formatter.js';
-import { createHtmlPropertyLine, createHomebreweryPropertyLine } from '../helpers/export-helpers.js';
 
-export default class Skills {
+export default class Skills extends PropertyLineModel {
   constructor(abilitiesModel, proficiencyBonusModel) {
-    this.headingName = 'Skills';
+    super('Skills');
 
     const strength = abilitiesModel.abilities['strength'];
     const dexterity = abilitiesModel.abilities['dexterity'];
@@ -59,17 +59,13 @@ export default class Skills {
       .join(', ');
   }
 
+  get htmlText() {
+    return this.text;
+  }
+
   toJson() {
     const transformedEntries = this.entries.map(([key, skill]) => [key, skill.toJson()]);
     return Object.fromEntries(transformedEntries);
-  }
-
-  toHtml() {
-    return createHtmlPropertyLine(this.headingName, this.text);
-  }
-
-  toHomebrewery() {
-    return createHomebreweryPropertyLine(this.headingName, this.text);
   }
 }
 

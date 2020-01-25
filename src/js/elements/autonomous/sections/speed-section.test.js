@@ -86,7 +86,7 @@ describe('when the show section is clicked', () => {
           speedSection.editElements.submitForm();
 
           expect(speed.useCustomText).toBe(true);
-          expect(speed.originalCustomText).toBe(customText);
+          expect(speed.customText).toBe(customText);
           expect(speed.htmlCustomText).toBe(expectedHtmlText);
 
           expect(speedSection).toBeInMode('show');
@@ -112,7 +112,7 @@ describe('when the show section is clicked', () => {
         speedSection.showElements.section.click();
 
         expect(speed.useCustomText).toBe(false);
-        expect(speed.originalCustomText).toBe(customText);
+        expect(speed.customText).toBe(customText);
 
         expect(speedSection).toBeInMode('edit');
         expect(speedSection.editElements.useCustomText).not.toBeChecked();

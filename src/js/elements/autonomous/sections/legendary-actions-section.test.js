@@ -92,7 +92,7 @@ describe('when the show section is clicked', () => {
     it('should add a single block', () => {
       const block = {
         name: 'Detect',
-        originalText: '[name] makes a Wisdom (Perception) check.',
+        text: '[name] makes a Wisdom (Perception) check.',
         homebreweryText: 'The dragon makes a Wisdom (Perception) check.',
         htmlText: 'The dragon makes a Wisdom (Perception) check.'
       };
@@ -106,7 +106,7 @@ describe('when the show section is clicked', () => {
     it('should add a single block with multiline text', () => {
       const block = {
         name: 'Multiline Legendary Action',
-        originalText: '**Line 1**. [name] is here.\n  **Line 2**. [name] is there.\n    **Line 3**. [name] is everywhere.',
+        text: '**Line 1**. [name] is here.\n  **Line 2**. [name] is there.\n    **Line 3**. [name] is everywhere.',
         homebreweryText: '**Line 1**. The dummy is here.  \n>   **Line 2**. The dummy is there.  \n>     **Line 3**. The dummy is everywhere.',
         htmlText: '<strong>Line 1</strong>. The dummy is here.\n  <strong>Line 2</strong>. The dummy is there.\n    <strong>Line 3</strong>. The dummy is everywhere.'
       };
@@ -119,7 +119,7 @@ describe('when the show section is clicked', () => {
     it('should add a single block with html escaped', () => {
       const block = {
         name: 'Escaped Legendary Action',
-        originalText: '<strong>Line 1</strong>. [name] is here.',
+        text: '<strong>Line 1</strong>. [name] is here.',
         homebreweryText: '&lt;strong&gt;Line 1&lt;/strong&gt;. The dummy is here.',
         htmlText: '&lt;strong&gt;Line 1&lt;/strong&gt;. The dummy is here.'
       };
@@ -135,19 +135,19 @@ describe('when the show section is clicked', () => {
       const blocks = [
         {
           name: 'Detect',
-          originalText: '[name] makes a Wisdom (Perception) check.',
+          text: '[name] makes a Wisdom (Perception) check.',
           homebreweryText: 'The dragon makes a Wisdom (Perception) check.',
           htmlText: 'The dragon makes a Wisdom (Perception) check.'
         },
         {
           name: 'Tail Attack',
-          originalText: '[name] makes a tail attack.',
+          text: '[name] makes a tail attack.',
           homebreweryText: 'The dragon makes a tail attack.',
           htmlText: 'The dragon makes a tail attack.'
         },
         {
           name: 'Wing Attack (Costs 2 Actions)',
-          originalText: '[name] beats its wings. Each creature within 10 feet of the dragon must succeed on a DC 22 Dexterity saving throw or take dmg[2d6 + strmod] bludgeoning damage and be knocked prone. [name] can then fly up to half its flying speed.',
+          text: '[name] beats its wings. Each creature within 10 feet of the dragon must succeed on a DC 22 Dexterity saving throw or take dmg[2d6 + strmod] bludgeoning damage and be knocked prone. [name] can then fly up to half its flying speed.',
           homebreweryText: 'The dragon beats its wings. Each creature within 10 feet of the dragon must succeed on a DC 22 Dexterity saving throw or take 15 (2d6 + 8) bludgeoning damage and be knocked prone. The dragon can then fly up to half its flying speed.',
           htmlText: 'The dragon beats its wings. Each creature within 10 feet of the dragon must succeed on a DC 22 Dexterity saving throw or take 15 (2d6 + 8) bludgeoning damage and be knocked prone. The dragon can then fly up to half its flying speed.'
         }
@@ -162,7 +162,7 @@ describe('when the show section is clicked', () => {
     it('should add a single block, then remove it', () => {
       const block = {
         name: 'Detect',
-        originalText: '[name] makes a Wisdom (Perception) check.',
+        text: '[name] makes a Wisdom (Perception) check.',
         homebreweryText: 'The dragon makes a Wisdom (Perception) check.',
         htmlText: 'The dragon makes a Wisdom (Perception) check.'
       };
@@ -179,19 +179,19 @@ describe('when the show section is clicked', () => {
       const blocks = [
         {
           name: 'Detect',
-          originalText: '[name] makes a Wisdom (Perception) check.',
+          text: '[name] makes a Wisdom (Perception) check.',
           homebreweryText: 'The dragon makes a Wisdom (Perception) check.',
           htmlText: 'The dragon makes a Wisdom (Perception) check.'
         },
         {
           name: 'Tail Attack',
-          originalText: '[name] makes a tail attack.',
+          text: '[name] makes a tail attack.',
           homebreweryText: 'The dragon makes a tail attack.',
           htmlText: 'The dragon makes a tail attack.'
         },
         {
           name: 'Wing Attack (Costs 2 Actions)',
-          originalText: '[name] beats its wings. Each creature within 10 feet of the dragon must succeed on a DC 22 Dexterity saving throw or take dmg[2d6 + strmod] bludgeoning damage and be knocked prone. [name] can then fly up to half its flying speed.',
+          text: '[name] beats its wings. Each creature within 10 feet of the dragon must succeed on a DC 22 Dexterity saving throw or take dmg[2d6 + strmod] bludgeoning damage and be knocked prone. [name] can then fly up to half its flying speed.',
           homebreweryText: 'The dragon beats its wings. Each creature within 10 feet of the dragon must succeed on a DC 22 Dexterity saving throw or take 15 (2d6 + 8) bludgeoning damage and be knocked prone. The dragon can then fly up to half its flying speed.',
           htmlText: 'The dragon beats its wings. Each creature within 10 feet of the dragon must succeed on a DC 22 Dexterity saving throw or take 15 (2d6 + 8) bludgeoning damage and be knocked prone. The dragon can then fly up to half its flying speed.'
         }
@@ -206,7 +206,7 @@ describe('when the show section is clicked', () => {
     describe('should reparse the block text', () => {
       const block = {
         name: 'Wing Attack (Costs 2 Actions)',
-        originalText: '[name] beats its wings. Each creature within 10 feet of [name] must succeed on a DC 22 Dexterity saving throw or take dmg[2d6 + strmod] bludgeoning damage and be knocked prone. [name] can then fly up to half its flying speed.',
+        text: '[name] beats its wings. Each creature within 10 feet of [name] must succeed on a DC 22 Dexterity saving throw or take dmg[2d6 + strmod] bludgeoning damage and be knocked prone. [name] can then fly up to half its flying speed.',
         homebreweryText: null,
         htmlText: null
       };

@@ -1,5 +1,9 @@
-export default class Title {
+import Model from './model.js';
+
+export default class Title extends Model {
   constructor() {
+    super();
+
     this.reset();
   }
 
@@ -7,6 +11,14 @@ export default class Title {
     this.fullName = 'Commoner';
     this.shortName = '';
     this.isProperNoun = false;
+  }
+
+  get jsonPropertyNames() {
+    return [
+      'fullName',
+      'shortName',
+      'isProperNoun'
+    ];
   }
 
   get grammaticalFullName() {
@@ -31,20 +43,6 @@ export default class Title {
     return {
       name: this.grammaticalName,
       fullName: this.grammaticalFullName
-    };
-  }
-
-  fromJson(json) {
-    this.fullName = json.fullName;
-    this.shortName = json.shortName;
-    this.isProperNoun = json.isProperNoun;
-  }
-
-  toJson() {
-    return {
-      fullName: this.fullName,
-      shortName: this.shortName,
-      isProperNoun: this.isProperNoun
     };
   }
 

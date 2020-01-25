@@ -29,8 +29,8 @@ export default class EditableBlockList extends DragAndDropList {
     }
   }
 
-  addBlock(name = '', originalText = '') {
-    const block = EditableBlockList.createBlock(this, name, originalText);
+  addBlock(name = '', text = '') {
+    const block = EditableBlockList.createBlock(this, name, text);
 
     if (this.disableBlockNameItalics) {
       block.disableBlockNameItalics();
@@ -63,12 +63,12 @@ export default class EditableBlockList extends DragAndDropList {
     return this.blocks.map(block => block.toModel());
   }
 
-  static createBlock(list, name, originalText) {
+  static createBlock(list, name, text) {
     const block = isRunningInNode ? new EditableBlock() : document.createElement('editable-block');
 
     block.list = list;
     block.name = name;
-    block.originalText = originalText;
+    block.text = text;
 
     block.nameInput.setAttribute('pretty-name', `${list.blockType} Name`);
     block.textArea.setAttribute('pretty-name', `${list.blockType} Text`);

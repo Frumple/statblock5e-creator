@@ -1,8 +1,8 @@
-import { createHtmlPropertyLine, createHomebreweryPropertyLine } from '../helpers/export-helpers.js';
+import PropertyLineModel from './property-line-model.js';
 
-export default class ChallengeRating {
+export default class ChallengeRating extends PropertyLineModel {
   constructor() {
-    this.headingName = 'Challenge';
+    super('Challenge');
 
     this.reset();
   }
@@ -12,22 +12,18 @@ export default class ChallengeRating {
     this.experiencePoints = 10;
   }
 
+  get jsonPropertyNames() {
+    return [
+      'challengeRating',
+      'experiencePoints'
+    ];
+  }
+
   get text() {
     return `${this.challengeRating} (${this.experiencePoints} XP)`;
   }
 
-  toJson() {
-    return {
-      challengeRating: this.challengeRating,
-      experiencePoints: this.experiencePoints
-    };
-  }
-
-  toHtml() {
-    return createHtmlPropertyLine(this.headingName, this.text);
-  }
-
-  toHomebrewery() {
-    return createHomebreweryPropertyLine(this.headingName, this.text);
+  get htmlText() {
+    return this.text;
   }
 }
