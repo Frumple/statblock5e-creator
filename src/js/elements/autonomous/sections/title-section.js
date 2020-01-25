@@ -1,5 +1,6 @@
 import * as sectionModule from './section.js';
 import CurrentContext from '../../../models/current-context.js';
+import { capitalizeFirstLetter } from '../../../helpers/string-formatter.js';
 
 export default class TitleSection extends sectionModule.Section {
   static get elementName() { return 'title-section'; }
@@ -64,7 +65,7 @@ export default class TitleSection extends sectionModule.Section {
   }
 
   checkForErrors() {
-    this.editElements.fullName.value = this.editElements.fullName.value.trim();
+    this.editElements.fullName.value = capitalizeFirstLetter(this.editElements.fullName.value.trim());
     this.editElements.fullName.validate(this.errorMessages);
   }
 

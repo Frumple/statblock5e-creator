@@ -1,26 +1,16 @@
-import { capitalizeFirstLetter } from '../helpers/string-formatter.js';
-
 export default class Title {
   constructor() {
     this.reset();
   }
 
   reset() {
-    this._fullName = 'Commoner';
+    this.fullName = 'Commoner';
     this.shortName = '';
     this.isProperNoun = false;
   }
 
-  set fullName(fullName) {
-    this._fullName = capitalizeFirstLetter(fullName);
-  }
-
-  get fullName() {
-    return this._fullName;
-  }
-
   get grammaticalFullName() {
-    return this.grammaticize(this._fullName);
+    return this.grammaticize(this.fullName);
   }
 
   get grammaticalShortName() {

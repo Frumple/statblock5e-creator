@@ -73,68 +73,55 @@ describe('when the show section is clicked', () => {
         `
         ('$description: $customText',
         ({customText}) => {
+          const expectedValues = {
+            useCustomText: true,
+            customText: customText
+          };
+
           inputValueAndTriggerEvent(subtitleSection.editElements.customText, customText);
 
           subtitleSection.editElements.submitForm();
 
-          expect(subtitleModel.useCustomText).toBe(true);
-          expect(subtitleModel.customText).toBe(customText);
-
+          verifyModel(expectedValues);
+          verifyEditModeView(expectedValues);
           expect(subtitleSection).toBeInMode('show');
           expect(subtitleSection.showElements.text).toHaveTextContent(customText);
 
-          const json = verifyJsonExport({
-            useCustomText: true,
-            customText: customText
-          });
+          const json = verifyJsonExport(expectedValues);
           verifyHtmlExport(customText);
           verifyHomebreweryExport(customText);
 
           reset();
-
           subtitleSection.importFromJson(json);
 
-          expect(subtitleModel.useCustomText).toBe(true);
-          expect(subtitleModel.customText).toBe(customText);
-
-          expect(subtitleSection.editElements.useCustomText).toBeChecked();
-          expect(subtitleSection.editElements.customText).toHaveValue(customText);
-
+          verifyModel(expectedValues);
+          verifyEditModeView(expectedValues);
           expect(subtitleSection.showElements.text).toHaveTextContent(customText);
         });
         /* eslint-enable indent, no-unexpected-multiline */
       });
 
       it('should preserve the custom text if submitted with the custom text checkbox unchecked', () => {
-        const customText = 'Medium swarm of Tiny beasts, unaligned';
+        const expectedValues = {
+          useCustomText: false,
+          customText: 'Medium swarm of Tiny beasts, unaligned'
+        };
 
-        inputValueAndTriggerEvent(subtitleSection.editElements.customText, customText);
+        inputValueAndTriggerEvent(subtitleSection.editElements.customText, expectedValues.customText);
 
         subtitleSection.editElements.useCustomText.click();
         subtitleSection.editElements.submitForm();
-        subtitleSection.showElements.section.click();
 
-        expect(subtitleModel.useCustomText).toBe(false);
-        expect(subtitleModel.customText).toBe(customText);
+        verifyModel(expectedValues);
+        verifyEditModeView(expectedValues);
 
-        expect(subtitleSection).toBeInMode('edit');
-        expect(subtitleSection.editElements.useCustomText).not.toBeChecked();
-        expect(subtitleSection.editElements.customText).toHaveValue(customText);
-
-        const json = verifyJsonExport({
-          useCustomText: false,
-          customText: customText
-        });
+        const json = verifyJsonExport(expectedValues);
 
         reset();
-
         subtitleSection.importFromJson(json);
 
-        expect(subtitleModel.useCustomText).toBe(false);
-        expect(subtitleModel.customText).toBe(customText);
-
-        expect(subtitleSection.editElements.useCustomText).not.toBeChecked();
-        expect(subtitleSection.editElements.customText).toHaveValue(customText);
+        verifyModel(expectedValues);
+        verifyEditModeView(expectedValues);
       });
 
       it('should display an error if the custom text field is blank', () => {
@@ -179,6 +166,13 @@ describe('when the show section is clicked', () => {
         `
         ('$description: {size="$size", type="$type", tags="$tags", alignment="$alignment"} => $expectedSubtitle',
         ({size, type, tags, alignment, expectedSubtitle}) => {
+          const expectedValues = {
+            size: size,
+            type: type,
+            tags: tags.trim(),
+            alignment: alignment
+          };
+
           inputValueAndTriggerEvent(subtitleSection.editElements.size, size);
           inputValueAndTriggerEvent(subtitleSection.editElements.type, type);
           inputValueAndTriggerEvent(subtitleSection.editElements.tags, tags);
@@ -186,104 +180,57 @@ describe('when the show section is clicked', () => {
 
           subtitleSection.editElements.submitForm();
 
-          tags = tags.trim();
-
-          expect(subtitleModel.size).toBe(size);
-          expect(subtitleModel.type).toBe(type);
-          expect(subtitleModel.tags).toBe(tags);
-          expect(subtitleModel.alignment).toBe(alignment);
-
+          verifyModel(expectedValues);
+          verifyEditModeView(expectedValues);
           expect(subtitleSection).toBeInMode('show');
           expect(subtitleSection.showElements.text).toHaveTextContent(expectedSubtitle);
 
-          const json = verifyJsonExport({
-            size: size,
-            type: type,
-            tags: tags,
-            alignment: alignment
-          });
+          const json = verifyJsonExport(expectedValues);
           verifyHtmlExport(expectedSubtitle);
           verifyHomebreweryExport(expectedSubtitle);
 
           reset();
-
           subtitleSection.importFromJson(json);
 
-          expect(subtitleModel.size).toBe(size);
-          expect(subtitleModel.type).toBe(type);
-          expect(subtitleModel.tags).toBe(tags);
-          expect(subtitleModel.alignment).toBe(alignment);
-
-          expect(subtitleSection.editElements.size).toHaveValue(size);
-          expect(subtitleSection.editElements.type).toHaveValue(type);
-          expect(subtitleSection.editElements.tags).toHaveValue(tags);
-          expect(subtitleSection.editElements.alignment).toHaveValue(alignment);
-
+          verifyModel(expectedValues);
+          verifyEditModeView(expectedValues);
           expect(subtitleSection.showElements.text).toHaveTextContent(expectedSubtitle);
         });
         /* eslint-enable indent, no-unexpected-multiline */
       });
 
       it('should preserve the size, type, tags, and alignment if submitted with the custom text checkbox checked', () => {
-        const size = 'Small';
-        const type = 'fey';
-        const tags = 'shapechanger';
-        const alignment = 'chaotic neutral';
-        const useCustomText = true;
-        const customText = 'This custom text should be saved, but not shown.';
+        const expectedValues = {
+          size: 'Small',
+          type: 'fey',
+          tags: 'shapechanger',
+          alignment: 'chaotic neutral',
+          useCustomText: true,
+          customText: 'This custom text should be saved, but not shown.'
+        };
 
-        inputValueAndTriggerEvent(subtitleSection.editElements.size, size);
-        inputValueAndTriggerEvent(subtitleSection.editElements.type, type);
-        inputValueAndTriggerEvent(subtitleSection.editElements.tags, tags);
-        inputValueAndTriggerEvent(subtitleSection.editElements.alignment, alignment);
+        inputValueAndTriggerEvent(subtitleSection.editElements.size, expectedValues.size);
+        inputValueAndTriggerEvent(subtitleSection.editElements.type, expectedValues.type);
+        inputValueAndTriggerEvent(subtitleSection.editElements.tags, expectedValues.tags);
+        inputValueAndTriggerEvent(subtitleSection.editElements.alignment, expectedValues.alignment);
 
         subtitleSection.editElements.useCustomText.click();
-        inputValueAndTriggerEvent(subtitleSection.editElements.customText, customText);
+        inputValueAndTriggerEvent(subtitleSection.editElements.customText, expectedValues.customText);
 
         subtitleSection.editElements.submitForm();
-        subtitleSection.showElements.section.click();
 
-        expect(subtitleModel.size).toBe(size);
-        expect(subtitleModel.type).toBe(type);
-        expect(subtitleModel.tags).toBe(tags);
-        expect(subtitleModel.alignment).toBe(alignment);
-        expect(subtitleModel.useCustomText).toBe(true);
+        verifyModel(expectedValues);
+        verifyEditModeView(expectedValues);
+        expect(subtitleSection.showElements.text).toHaveTextContent(expectedValues.customText);
 
-        expect(subtitleSection).toBeInMode('edit');
-        expect(subtitleSection.editElements.size).toHaveValue(size);
-        expect(subtitleSection.editElements.type).toHaveValue(type);
-        expect(subtitleSection.editElements.tags).toHaveValue(tags);
-        expect(subtitleSection.editElements.alignment).toHaveValue(alignment);
-        expect(subtitleSection.editElements.useCustomText).toBeChecked();
-
-        expect(subtitleSection.showElements.text).toHaveTextContent(customText);
-
-        const json = verifyJsonExport({
-          size: size,
-          type: type,
-          tags: tags,
-          alignment: alignment,
-          useCustomText: useCustomText,
-          customText: customText
-        });
+        const json = verifyJsonExport(expectedValues);
 
         reset();
-
         subtitleSection.importFromJson(json);
 
-        expect(subtitleModel.size).toBe(size);
-        expect(subtitleModel.type).toBe(type);
-        expect(subtitleModel.tags).toBe(tags);
-        expect(subtitleModel.alignment).toBe(alignment);
-        expect(subtitleModel.useCustomText).toBe(true);
-
-        expect(subtitleSection.editElements.size).toHaveValue(size);
-        expect(subtitleSection.editElements.type).toHaveValue(type);
-        expect(subtitleSection.editElements.tags).toHaveValue(tags);
-        expect(subtitleSection.editElements.alignment).toHaveValue(alignment);
-        expect(subtitleSection.editElements.useCustomText).toBeChecked();
-
-        expect(subtitleSection.showElements.text).toHaveTextContent(customText);
+        verifyModel(expectedValues);
+        verifyEditModeView(expectedValues);
+        expect(subtitleSection.showElements.text).toHaveTextContent(expectedValues.customText);
       });
     });
   });
@@ -294,6 +241,38 @@ function reset() {
   subtitleSection.updateView();
 }
 
+function verifyModel({
+  size = 'Medium',
+  type = 'humanoid',
+  tags = '',
+  alignment = 'unaligned',
+  useCustomText = false,
+  customText = ''
+} = {}) {
+  expect(subtitleModel.size).toBe(size);
+  expect(subtitleModel.type).toBe(type);
+  expect(subtitleModel.tags).toBe(tags);
+  expect(subtitleModel.alignment).toBe(alignment);
+  expect(subtitleModel.useCustomText).toBe(useCustomText);
+  expect(subtitleSection.editElements.customText).toHaveValue(customText);
+}
+
+function verifyEditModeView({
+  size = 'Medium',
+  type = 'humanoid',
+  tags = '',
+  alignment = 'unaligned',
+  useCustomText = false,
+  customText = ''
+} = {}) {
+  expect(subtitleSection.editElements.size).toHaveValue(size);
+  expect(subtitleSection.editElements.type).toHaveValue(type);
+  expect(subtitleSection.editElements.tags).toHaveValue(tags);
+  expect(subtitleSection.editElements.alignment).toHaveValue(alignment);
+  expect(subtitleSection.editElements.useCustomText.checked).toBe(useCustomText);
+  expect(subtitleSection.editElements.customText).toHaveValue(customText);
+}
+
 function verifyJsonExport({
   size = 'Medium',
   type = 'humanoid',
@@ -302,7 +281,6 @@ function verifyJsonExport({
   useCustomText = false,
   customText = ''
 } = {}) {
-
   const json = subtitleSection.exportToJson();
   const expectedJson = {
     size: size,

@@ -13,13 +13,13 @@ export default class ArmorClass {
     this.hasShield = false;
 
     this.useCustomText = false;
-    this.originalCustomText = '';
+    this.customText = '';
     this.htmlCustomText = '';
   }
 
   get originalText() {
     if (this.useCustomText) {
-      return this.originalCustomText;
+      return this.customText;
     }
 
     return this.nonCustomText;
@@ -54,7 +54,7 @@ export default class ArmorClass {
     this.armorType = json.armorType;
     this.hasShield = json.hasShield;
     this.useCustomText = json.useCustomText;
-    this.originalCustomText = json.customText;
+    this.customText = json.customText;
   }
 
   toJson() {
@@ -63,7 +63,7 @@ export default class ArmorClass {
       armorType: this.armorType,
       hasShield: this.hasShield,
       useCustomText: this.useCustomText,
-      customText: this.originalCustomText
+      customText: this.customText
     };
   }
 

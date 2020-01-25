@@ -117,10 +117,8 @@ describe('when the show section is clicked', () => {
 
         titleSection.editElements.submitForm();
 
-        expect(titleModel.fullName).toBe(fullName);
-        expect(titleModel.shortName).toBe(shortName);
-        expect(titleModel.isProperNoun).toBe(isProperNoun);
-
+        verifyModel(fullName, shortName, isProperNoun);
+        verifyEditModeView(fullName, shortName, isProperNoun);
         expect(titleSection).toBeInMode('show');
         expect(titleSection.showElements.title).toHaveTextContent(fullName);
 
@@ -129,17 +127,10 @@ describe('when the show section is clicked', () => {
         verifyHomebreweryExport(fullName);
 
         reset();
-
         titleSection.importFromJson(json);
 
-        expect(titleModel.fullName).toBe(fullName);
-        expect(titleModel.shortName).toBe(shortName);
-        expect(titleModel.isProperNoun).toBe(isProperNoun);
-
-        expect(titleSection.editElements.fullName).toHaveValue(fullName);
-        expect(titleSection.editElements.shortName).toHaveValue(shortName);
-        expect(titleSection.editElements.properNoun.checked).toBe(isProperNoun);
-
+        verifyModel(fullName, shortName, isProperNoun);
+        verifyEditModeView(fullName, shortName, isProperNoun);
         expect(titleSection.showElements.title).toHaveTextContent(fullName);
       });
       /* eslint-enable indent, no-unexpected-multiline */
@@ -159,21 +150,20 @@ describe('when the show section is clicked', () => {
 
         titleSection.editElements.submitForm();
 
-        expect(titleModel.fullName).toBe(expectedFullName);
-
+        verifyModel(expectedFullName);
+        verifyEditModeView(expectedFullName);
         expect(titleSection).toBeInMode('show');
         expect(titleSection.showElements.title).toHaveTextContent(expectedFullName);
 
-        const json = verifyJsonExport(expectedFullName, '', false);
+        const json = verifyJsonExport(expectedFullName);
         verifyHtmlExport(expectedFullName);
         verifyHomebreweryExport(expectedFullName);
 
         reset();
-
         titleSection.importFromJson(json);
 
-        expect(titleModel.fullName).toBe(expectedFullName);
-        expect(titleSection.editElements.fullName).toHaveValue(expectedFullName);
+        verifyModel(expectedFullName);
+        verifyEditModeView(expectedFullName);
         expect(titleSection.showElements.title).toHaveTextContent(expectedFullName);
       });
     /* eslint-enable indent, no-unexpected-multiline */
@@ -197,7 +187,19 @@ function reset() {
   titleSection.updateView();
 }
 
-function verifyJsonExport(expectedFullName, expectedShortName, expectedIsProperNoun) {
+function verifyModel(expectedFullName, expectedShortName = '', expectedIsProperNoun = false) {
+  expect(titleModel.fullName).toBe(expectedFullName);
+  expect(titleModel.shortName).toBe(expectedShortName);
+  expect(titleModel.isProperNoun).toBe(expectedIsProperNoun);
+}
+
+function verifyEditModeView(expectedFullName, expectedShortName = '', expectedIsProperNoun = false) {
+  expect(titleSection.editElements.fullName).toHaveValue(expectedFullName);
+  expect(titleSection.editElements.shortName).toHaveValue(expectedShortName);
+  expect(titleSection.editElements.properNoun.checked).toBe(expectedIsProperNoun);
+}
+
+function verifyJsonExport(expectedFullName, expectedShortName = '', expectedIsProperNoun = false) {
   const json = titleSection.exportToJson();
   const expectedJson = {
     fullName: expectedFullName,
