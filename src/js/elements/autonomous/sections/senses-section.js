@@ -67,6 +67,10 @@ export default class SensesSection extends propertyLineSectionModule.PropertyLin
 
     this.editElements.useCustomText.checked = sensesModel.useCustomText;
     this.editElements.customText.value = sensesModel.customText;
+    if (sensesModel.useCustomText) {
+      this.editElements.customText.parse();
+      sensesModel.htmlCustomText = this.editElements.customText.htmlText;
+    }
 
     this.updateEditModeViewPassivePerception();
   }

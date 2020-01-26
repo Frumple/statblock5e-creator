@@ -42,13 +42,7 @@ describe('when the show section is clicked', () => {
   });
 
   it('edit section should have default values', () => {
-    expect(sensesSection.editElements.blindsight).toHaveValue(null);
-    expect(sensesSection.editElements.darkvision).toHaveValue(null);
-    expect(sensesSection.editElements.tremorsense).toHaveValue(null);
-    expect(sensesSection.editElements.truesight).toHaveValue(null);
-    expect(sensesSection.editElements.passivePerception).toHaveTextContent(10);
-    expect(sensesSection.editElements.useCustomText).not.toBeChecked();
-    expect(sensesSection.editElements.customText).toHaveValue('');
+    verifyEditModeView();
   });
 
   it('should switch to edit mode and focus on the blindsight field', () => {
@@ -84,47 +78,56 @@ describe('when the show section is clicked', () => {
         `
         ('$description: $customText => $expectedHtmlText',
         ({customText, expectedHtmlText}) => {
+          const expectedValues = {
+            useCustomText: true,
+            customText: customText,
+            htmlCustomText: expectedHtmlText
+          };
+
           inputValueAndTriggerEvent(sensesSection.editElements.customText, customText);
 
           sensesSection.editElements.submitForm();
 
-          expect(sensesModel.useCustomText).toBe(true);
-          expect(sensesModel.customText).toBe(customText);
-          expect(sensesModel.htmlCustomText).toBe(expectedHtmlText);
-
+          verifyModel(expectedValues);
+          verifyEditModeView(expectedValues);
           expect(sensesSection).toBeInMode('show');
           expect(sensesSection).toShowPropertyLine(expectedHeading, expectedHtmlText);
 
-          verifyJsonExport({
-            useCustomText: true,
-            customText: customText
-          });
+          const json = verifyJsonExport(expectedValues);
           expect(sensesSection).toExportPropertyLineToHtml(expectedHeading, expectedHtmlText);
           expect(sensesSection).toExportPropertyLineToHomebrewery(expectedHeading, customText);
+
+          reset();
+          sensesSection.importFromJson(json);
+
+          verifyModel(expectedValues);
+          verifyEditModeView(expectedValues);
+          expect(sensesSection).toShowPropertyLine(expectedHeading, expectedHtmlText);
         });
         /* eslint-enable indent, no-unexpected-multiline */
       });
 
       it('should preserve the custom text if submitted with the custom text checkbox unchecked', () => {
-        const customText = '30 ft. (40 ft. in tiger form)';
+        const expectedValues = {
+          useCustomText: false,
+          customText: '60 ft. echolocation'
+        };
 
-        inputValueAndTriggerEvent(sensesSection.editElements.customText, customText);
+        inputValueAndTriggerEvent(sensesSection.editElements.customText, expectedValues.customText);
 
         sensesSection.editElements.useCustomText.click();
         sensesSection.editElements.submitForm();
-        sensesSection.showElements.section.click();
 
-        expect(sensesModel.useCustomText).toBe(false);
-        expect(sensesModel.customText).toBe(customText);
+        verifyModel(expectedValues);
+        verifyEditModeView(expectedValues);
 
-        expect(sensesSection).toBeInMode('edit');
-        expect(sensesSection.editElements.useCustomText).not.toBeChecked();
-        expect(sensesSection.editElements.customText).toHaveValue(customText);
+        const json = verifyJsonExport(expectedValues);
 
-        verifyJsonExport({
-          useCustomText: false,
-          customText: customText
-        });
+        reset();
+        sensesSection.importFromJson(json);
+
+        verifyModel(expectedValues);
+        verifyEditModeView(expectedValues);
       });
 
       it('should display an error if the custom text field is blank', () => {
@@ -193,6 +196,13 @@ describe('when the show section is clicked', () => {
         `
         ('$description: {blindsight="$blindsight", darkvision="$darkvision", tremorsense="$tremorsense", truesight="$truesight"} => "$expectedText"',
         ({blindsight, darkvision, tremorsense, truesight, expectedText}) => {
+          const expectedValues = {
+            blindsight: nullIfEmptyString(blindsight),
+            darkvision: nullIfEmptyString(darkvision),
+            tremorsense: nullIfEmptyString(tremorsense),
+            truesight: nullIfEmptyString(truesight)
+          };
+
           inputValueAndTriggerEvent(sensesSection.editElements.blindsight, blindsight);
           inputValueAndTriggerEvent(sensesSection.editElements.darkvision, darkvision);
           inputValueAndTriggerEvent(sensesSection.editElements.tremorsense, tremorsense);
@@ -200,72 +210,55 @@ describe('when the show section is clicked', () => {
 
           sensesSection.editElements.submitForm();
 
-          blindsight = nullIfEmptyString(blindsight);
-          darkvision = nullIfEmptyString(darkvision);
-          tremorsense = nullIfEmptyString(tremorsense);
-          truesight = nullIfEmptyString(truesight);
-
-          expect(sensesModel.blindsight).toBe(blindsight);
-          expect(sensesModel.darkvision).toBe(darkvision);
-          expect(sensesModel.tremorsense).toBe(tremorsense);
-          expect(sensesModel.truesight).toBe(truesight);
-          expect(sensesModel.useCustomText).toBe(false);
-
+          verifyModel(expectedValues);
+          verifyEditModeView(expectedValues);
           expect(sensesSection).toBeInMode('show');
           expect(sensesSection).toShowPropertyLine(expectedHeading, expectedText);
 
-          verifyJsonExport({
-            blindsight: blindsight,
-            darkvision: darkvision,
-            tremorsense: tremorsense,
-            truesight: truesight
-          });
+          const json = verifyJsonExport(expectedValues);
           expect(sensesSection).toExportPropertyLineToHtml(expectedHeading, expectedText);
           expect(sensesSection).toExportPropertyLineToHomebrewery(expectedHeading, expectedText);
+
+          reset();
+          sensesSection.importFromJson(json);
+
+          verifyModel(expectedValues);
+          verifyEditModeView(expectedValues);
+          expect(sensesSection).toShowPropertyLine(expectedHeading, expectedText);
         });
         /* eslint-enable indent, no-unexpected-multiline */
       });
 
       it('should preserve the speeds if submitted with the custom text checkbox checked', () => {
-        const blindsight = 10;
-        const darkvision = 20;
-        const tremorsense = 30;
-        const truesight = 40;
-        const useCustomText = true;
-        const customText = 'This custom text should be saved, but not shown.';
+        const expectedValues = {
+          blindsight: 10,
+          darkvision: 20,
+          tremorsense: 30,
+          truesight: 40,
+          useCustomText: true,
+          customText: 'This custom text should be __saved__, but not shown.',
+          htmlCustomText: 'This custom text should be <strong>saved</strong>, but not shown.'
+        };
 
-        inputValueAndTriggerEvent(sensesSection.editElements.blindsight, blindsight);
-        inputValueAndTriggerEvent(sensesSection.editElements.darkvision, darkvision);
-        inputValueAndTriggerEvent(sensesSection.editElements.tremorsense, tremorsense);
-        inputValueAndTriggerEvent(sensesSection.editElements.truesight, truesight);
-
+        inputValueAndTriggerEvent(sensesSection.editElements.blindsight, expectedValues.blindsight);
+        inputValueAndTriggerEvent(sensesSection.editElements.darkvision, expectedValues.darkvision);
+        inputValueAndTriggerEvent(sensesSection.editElements.tremorsense, expectedValues.tremorsense);
+        inputValueAndTriggerEvent(sensesSection.editElements.truesight, expectedValues.truesight);
         sensesSection.editElements.useCustomText.click();
-        inputValueAndTriggerEvent(sensesSection.editElements.customText, customText);
+        inputValueAndTriggerEvent(sensesSection.editElements.customText, expectedValues.customText);
 
         sensesSection.editElements.submitForm();
-        sensesSection.showElements.section.click();
 
-        expect(sensesModel.blindsight).toBe(blindsight);
-        expect(sensesModel.darkvision).toBe(darkvision);
-        expect(sensesModel.tremorsense).toBe(tremorsense);
-        expect(sensesModel.truesight).toBe(truesight);
-        expect(sensesModel.useCustomText).toBe(true);
+        verifyModel(expectedValues);
+        verifyEditModeView(expectedValues);
 
-        expect(sensesSection).toBeInMode('edit');
-        expect(sensesSection.editElements.blindsight).toHaveValue(blindsight);
-        expect(sensesSection.editElements.darkvision).toHaveValue(darkvision);
-        expect(sensesSection.editElements.tremorsense).toHaveValue(tremorsense);
-        expect(sensesSection.editElements.truesight).toHaveValue(truesight);
-        expect(sensesSection.editElements.useCustomText).toBeChecked();
+        const json = verifyJsonExport(expectedValues);
 
-        verifyJsonExport({
-          blindsight: blindsight,
-          darkvision: darkvision,
-          tremorsense: tremorsense,
-          truesight: truesight,
-          useCustomText: useCustomText,
-          customText: customText
-        });
+        reset();
+        sensesSection.importFromJson(json);
+
+        verifyModel(expectedValues);
+        verifyEditModeView(expectedValues);
       });
     });
   });
@@ -319,6 +312,47 @@ describe('should calculate the passive perception based on the following conditi
   /* eslint-enable indent, no-unexpected-multiline */
 });
 
+function reset() {
+  sensesModel.reset();
+  sensesSection.updateView();
+}
+
+function verifyModel({
+  blindsight = null,
+  darkvision = null,
+  tremorsense = null,
+  truesight = null,
+  useCustomText = false,
+  customText = '',
+  htmlCustomText = ''
+} = {}) {
+  expect(sensesModel.blindsight).toBe(blindsight);
+  expect(sensesModel.darkvision).toBe(darkvision);
+  expect(sensesModel.tremorsense).toBe(tremorsense);
+  expect(sensesModel.truesight).toBe(truesight);
+  expect(sensesModel.useCustomText).toBe(useCustomText);
+  expect(sensesModel.customText).toBe(customText);
+  expect(sensesModel.htmlCustomText).toBe(htmlCustomText);
+}
+
+function verifyEditModeView({
+  blindsight = null,
+  darkvision = null,
+  tremorsense = null,
+  truesight = null,
+  passivePerception = 10,
+  useCustomText = false,
+  customText = ''
+} = {}) {
+  expect(sensesSection.editElements.blindsight).toHaveValue(blindsight);
+  expect(sensesSection.editElements.darkvision).toHaveValue(darkvision);
+  expect(sensesSection.editElements.tremorsense).toHaveValue(tremorsense);
+  expect(sensesSection.editElements.truesight).toHaveValue(truesight);
+  expect(sensesSection.editElements.passivePerception).toHaveTextContent(passivePerception);
+  expect(sensesSection.editElements.useCustomText.checked).toBe(useCustomText);
+  expect(sensesSection.editElements.customText).toHaveValue(customText);
+}
+
 function verifyJsonExport({
   blindsight = null,
   darkvision = null,
@@ -338,4 +372,6 @@ function verifyJsonExport({
   };
 
   expect(json).toStrictEqual(expectedJson);
+
+  return json;
 }

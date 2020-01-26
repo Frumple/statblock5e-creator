@@ -6,7 +6,7 @@ import { inputValueAndTriggerEvent } from '../../../helpers/element-helpers.js';
 
 const expectedHeading = 'Challenge';
 
-const challengeRating = CurrentContext.creature.challengeRating;
+const challengeRatingModel = CurrentContext.creature.challengeRating;
 
 let challengeRatingSection;
 
@@ -16,7 +16,7 @@ beforeAll(async() => {
 });
 
 beforeEach(() => {
-  challengeRating.reset();
+  challengeRatingModel.reset();
 
   challengeRatingSection = new ChallengeRatingSection();
   TestCustomElements.initializeSection(challengeRatingSection);
@@ -34,8 +34,7 @@ describe('when the show section is clicked', () => {
   });
 
   it('edit section should have default values', () => {
-    expect(challengeRatingSection.editElements.challengeRating).toHaveValue('0');
-    expect(challengeRatingSection.editElements.experiencePoints).toHaveValue(10);
+    verifyEditModeView();
   });
 
   it('should switch to edit mode and focus on the challenge rating field', () => {
@@ -45,45 +44,57 @@ describe('when the show section is clicked', () => {
 
   describe('and the challenge rating field is changed, and the edit section is submitted', () => {
     it('should automatically change the experience points to the corresponding amount, and save the fields', () => {
-      const inputtedChallengeRating = 8;
-
-      const expectedChallengeRating = inputtedChallengeRating;
+      const expectedChallengeRating = 8;
       const expectedExperiencePoints = 3900;
       const expectedText = '8 (3900 XP)';
 
-      inputValueAndTriggerEvent(challengeRatingSection.editElements.challengeRating, inputtedChallengeRating);
+      inputValueAndTriggerEvent(challengeRatingSection.editElements.challengeRating, expectedChallengeRating);
 
-      expect(challengeRatingSection.editElements.experiencePoints.value).toBe(`${expectedExperiencePoints}`);
+      verifyEditModeView(expectedChallengeRating, expectedExperiencePoints);
 
       challengeRatingSection.editElements.submitForm();
 
+      verifyModel(expectedChallengeRating, expectedExperiencePoints);
       expect(challengeRatingSection).toBeInMode('show');
       expect(challengeRatingSection).toShowPropertyLine(expectedHeading, expectedText);
 
-      verifyJsonExport(expectedChallengeRating, expectedExperiencePoints);
+      const json = verifyJsonExport(expectedChallengeRating, expectedExperiencePoints);
       expect(challengeRatingSection).toExportPropertyLineToHtml(expectedHeading, expectedText);
       expect(challengeRatingSection).toExportPropertyLineToHomebrewery(expectedHeading, expectedText);
+
+      reset();
+      challengeRatingSection.importFromJson(json);
+
+      verifyModel(expectedChallengeRating, expectedExperiencePoints);
+      verifyEditModeView(expectedChallengeRating, expectedExperiencePoints);
     });
   });
 
   describe('and the experience points field is changed, and the edit section is submitted', () => {
     it('should save the fields', () => {
-      const inputtedExperiencePoints = 234;
-
       const expectedChallengeRating = 0;
-      const expectedExperiencePoints = inputtedExperiencePoints;
+      const expectedExperiencePoints = 234;
       const expectedText = '0 (234 XP)';
 
-      inputValueAndTriggerEvent(challengeRatingSection.editElements.experiencePoints, inputtedExperiencePoints);
+      inputValueAndTriggerEvent(challengeRatingSection.editElements.experiencePoints, expectedExperiencePoints);
+
+      verifyEditModeView(expectedChallengeRating, expectedExperiencePoints);
 
       challengeRatingSection.editElements.submitForm();
 
+      verifyModel(expectedChallengeRating, expectedExperiencePoints);
       expect(challengeRatingSection).toBeInMode('show');
       expect(challengeRatingSection).toShowPropertyLine(expectedHeading, expectedText);
 
-      verifyJsonExport(expectedChallengeRating, expectedExperiencePoints);
+      const json = verifyJsonExport(expectedChallengeRating, expectedExperiencePoints);
       expect(challengeRatingSection).toExportPropertyLineToHtml(expectedHeading, expectedText);
       expect(challengeRatingSection).toExportPropertyLineToHomebrewery(expectedHeading, expectedText);
+
+      reset();
+      challengeRatingSection.importFromJson(json);
+
+      verifyModel(expectedChallengeRating, expectedExperiencePoints);
+      verifyEditModeView(expectedChallengeRating, expectedExperiencePoints);
     });
 
     it('should display an error if the experience points field is not a valid number', () => {
@@ -100,59 +111,88 @@ describe('when the show section is clicked', () => {
 
   describe('and the challenge rating field is changed followed by the experience points field, and the edit section is submitted', () => {
     it('should save the fields', () => {
-      const inputtedChallengeRating = 3;
-      const inputtedExperiencePoints = 888;
-
-      const expectedChallengeRating = inputtedChallengeRating;
-      const expectedExperiencePoints = inputtedExperiencePoints;
+      const expectedChallengeRating = 3;
+      const expectedExperiencePoints = 888;
       const expectedText = '3 (888 XP)';
 
-      inputValueAndTriggerEvent(challengeRatingSection.editElements.challengeRating, inputtedChallengeRating);
-      inputValueAndTriggerEvent(challengeRatingSection.editElements.experiencePoints, inputtedExperiencePoints);
+      inputValueAndTriggerEvent(challengeRatingSection.editElements.challengeRating, expectedChallengeRating);
+      inputValueAndTriggerEvent(challengeRatingSection.editElements.experiencePoints, expectedExperiencePoints);
+
+      verifyEditModeView(expectedChallengeRating, expectedExperiencePoints);
 
       challengeRatingSection.editElements.submitForm();
 
+      verifyModel(expectedChallengeRating, expectedExperiencePoints);
       expect(challengeRatingSection).toBeInMode('show');
       expect(challengeRatingSection).toShowPropertyLine(expectedHeading, expectedText);
 
-      verifyJsonExport(expectedChallengeRating, expectedExperiencePoints);
+      const json = verifyJsonExport(expectedChallengeRating, expectedExperiencePoints);
       expect(challengeRatingSection).toExportPropertyLineToHtml(expectedHeading, expectedText);
       expect(challengeRatingSection).toExportPropertyLineToHomebrewery(expectedHeading, expectedText);
+
+      reset();
+      challengeRatingSection.importFromJson(json);
+
+      verifyModel(expectedChallengeRating, expectedExperiencePoints);
+      verifyEditModeView(expectedChallengeRating, expectedExperiencePoints);
     });
   });
 
   describe('and the experience points field is changed followed by the challenge rating field, and the edit section is submitted', () => {
     it('should automatically change the experience points to the corresponding amount, and save the fields', () => {
       const inputtedExperiencePoints = 1586;
-      const inputtedChallengeRating = 20;
 
       const expectedExperiencePoints = 25000;
-      const expectedChallengeRating = inputtedChallengeRating;
+      const expectedChallengeRating = 20;
       const expectedText = '20 (25000 XP)';
 
       inputValueAndTriggerEvent(challengeRatingSection.editElements.experiencePoints, inputtedExperiencePoints);
-      inputValueAndTriggerEvent(challengeRatingSection.editElements.challengeRating, inputtedChallengeRating);
+      inputValueAndTriggerEvent(challengeRatingSection.editElements.challengeRating, expectedChallengeRating);
 
-      expect(challengeRatingSection.editElements.experiencePoints.value).toBe(`${expectedExperiencePoints}`);
+      verifyEditModeView(expectedChallengeRating, expectedExperiencePoints);
 
       challengeRatingSection.editElements.submitForm();
 
+      verifyModel(expectedChallengeRating, expectedExperiencePoints);
       expect(challengeRatingSection).toBeInMode('show');
       expect(challengeRatingSection).toShowPropertyLine(expectedHeading, expectedText);
 
-      verifyJsonExport(expectedChallengeRating, expectedExperiencePoints);
+      const json = verifyJsonExport(expectedChallengeRating, expectedExperiencePoints);
       expect(challengeRatingSection).toExportPropertyLineToHtml(expectedHeading, expectedText);
       expect(challengeRatingSection).toExportPropertyLineToHomebrewery(expectedHeading, expectedText);
+
+      reset();
+      challengeRatingSection.importFromJson(json);
+
+      verifyModel(expectedChallengeRating, expectedExperiencePoints);
+      verifyEditModeView(expectedChallengeRating, expectedExperiencePoints);
     });
   });
 });
 
-function verifyJsonExport(challengeRating, experiencePoints) {
-  const jsObject = challengeRatingSection.exportToJson();
+function reset() {
+  challengeRatingModel.reset();
+  challengeRatingSection.updateView();
+}
+
+function verifyModel(challengeRating = 0, experiencePoints = 10) {
+  expect(challengeRatingModel.challengeRating).toBe(challengeRating);
+  expect(challengeRatingModel.experiencePoints).toBe(experiencePoints);
+}
+
+function verifyEditModeView(challengeRating = 0, experiencePoints = 10) {
+  expect(challengeRatingSection.editElements.challengeRating.value).toBe(challengeRating.toString());
+  expect(challengeRatingSection.editElements.experiencePoints.value).toBe(experiencePoints.toString());
+}
+
+function verifyJsonExport(challengeRating = 0, experiencePoints = 10) {
+  const json = challengeRatingSection.exportToJson();
   const expectedJson = {
     challengeRating: challengeRating,
     experiencePoints: experiencePoints
   };
 
-  expect(jsObject).toStrictEqual(expectedJson);
+  expect(json).toStrictEqual(expectedJson);
+
+  return json;
 }
