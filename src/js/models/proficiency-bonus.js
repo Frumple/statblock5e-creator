@@ -11,6 +11,10 @@ export default class ProficiencyBonus {
     return this.proficiencyBonus;
   }
 
+  fromJson(proficiencyBonus) {
+    this.proficiencyBonus = proficiencyBonus;
+  }
+
   toJson() {
     return this.proficiencyBonus;
   }

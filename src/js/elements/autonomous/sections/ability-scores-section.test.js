@@ -84,34 +84,36 @@ describe('when the show section is clicked', () => {
           receivedEvent = event;
         });
 
+        const expectedProficiencyBonus = 2;
+
         // Collect expected values into nested JS object structure
         const expectedAbilities = createDefaultExpectedAbilities();
         const expectedAbility = expectedAbilities.get(abilityName);
         expectedAbility.score = score;
         expectedAbility.modifier = expectedModifier;
 
-        // Input ability scores and proficiency bonus into UI
         inputValueAndTriggerEvent(abilityScoresSection.editElements.score[abilityName], score);
 
-        // Verify model
-        const ability = abilitiesModel.abilities[abilityName];
-        expect(ability.score).toBe(score);
-        expect(ability.modifier).toBe(expectedModifier);
-
-        const formattedModifier = `(${formatModifier(expectedModifier)})`;
-        expect(abilityScoresSection.editElements.modifier[abilityName]).toHaveTextContent(formattedModifier);
+        verifyModel(expectedAbilities, expectedProficiencyBonus);
+        verifyEditModeView(expectedAbilities, expectedProficiencyBonus);
 
         expect(receivedEvent).not.toBeNull();
         expect(receivedEvent.detail.abilityName).toBe(abilityName);
 
         abilityScoresSection.editElements.submitForm();
 
-        expect(abilityScoresSection.showElements.modifier[abilityName]).toHaveTextContent(formattedModifier);
+        verifyShowModeView(expectedAbilities);
 
-        // Verify exports
-        verifyJsonExport(expectedAbilities, 2);
+        const json = verifyJsonExport(expectedAbilities, expectedProficiencyBonus);
         verifyHtmlExport(expectedAbilities);
         verifyHomebreweryExport(expectedAbilities);
+
+        reset();
+        abilityScoresSection.importFromJson(json);
+
+        verifyModel(expectedAbilities, expectedProficiencyBonus);
+        verifyEditModeView(expectedAbilities, expectedProficiencyBonus);
+        verifyShowModeView(expectedAbilities);
       });
       /* eslint-enable indent, no-unexpected-multiline */
     });
@@ -183,13 +185,23 @@ describe('when the show section is clicked', () => {
 
         inputValueAndTriggerEvent(abilityScoresSection.editElements.proficiencyBonus, proficiencyBonus);
 
-        expect(proficiencyBonusModel.proficiencyBonus).toBe(proficiencyBonus);
+        verifyModel(expectedAbilities, proficiencyBonus);
+        verifyEditModeView(expectedAbilities, proficiencyBonus);
+
         expect(receivedEvent).not.toBeNull();
 
         abilityScoresSection.editElements.submitForm();
 
-        expect(proficiencyBonusModel.proficiencyBonus).toBe(proficiencyBonus);
-        verifyJsonExport(expectedAbilities, proficiencyBonus);
+        verifyShowModeView(expectedAbilities);
+
+        const json = verifyJsonExport(expectedAbilities, proficiencyBonus);
+
+        reset();
+        abilityScoresSection.importFromJson(json);
+
+        verifyModel(expectedAbilities, proficiencyBonus);
+        verifyEditModeView(expectedAbilities, proficiencyBonus);
+        verifyShowModeView(expectedAbilities);
       });
       /* eslint-enable indent, no-unexpected-multiline */
     });
@@ -250,37 +262,40 @@ describe('when the show section is clicked', () => {
           expectedAbility.modifier = modifier;
         }
 
-        // Input ability scores and proficiency bonus into UI
         for (const key of abilitiesModel.keys) {
           const score = expectedAbilities.get(key).score;
           inputValueAndTriggerEvent(abilityScoresSection.editElements.score[key], score);
         }
         inputValueAndTriggerEvent(abilityScoresSection.editElements.proficiencyBonus, proficiencyBonus);
 
-        // Verify model
-        for (const [key, value] of abilitiesModel.entries) {
-          const expectedAbility = expectedAbilities.get(key);
+        verifyModel(expectedAbilities, proficiencyBonus);
+        verifyEditModeView(expectedAbilities, proficiencyBonus);
 
-          expect(value.score).toBe(expectedAbility.score);
-          expect(value.modifier).toBe(expectedAbility.modifier);
-
-          const formattedModifier = `(${formatModifier(expectedAbility.modifier)})`;
-          expect(abilityScoresSection.editElements.modifier[key]).toHaveTextContent(formattedModifier);
-        }
-        expect(proficiencyBonusModel.proficiencyBonus).toBe(proficiencyBonus);
-
-        // Switch the section to "show" mode
         abilityScoresSection.editElements.submitForm();
 
-        // Verify exports
-        verifyJsonExport(expectedAbilities, proficiencyBonus);
+        verifyShowModeView(expectedAbilities);
+
+        const json = verifyJsonExport(expectedAbilities, proficiencyBonus);
         verifyHtmlExport(expectedAbilities);
         verifyHomebreweryExport(expectedAbilities);
+
+        reset();
+        abilityScoresSection.importFromJson(json);
+
+        verifyModel(expectedAbilities, proficiencyBonus);
+        verifyEditModeView(expectedAbilities, proficiencyBonus);
+        verifyShowModeView(expectedAbilities);
       });
       /* eslint-enable indent, no-unexpected-multiline */
     });
   });
 });
+
+function reset() {
+  abilitiesModel.reset();
+  proficiencyBonusModel.reset();
+  abilityScoresSection.updateView();
+}
 
 function createDefaultExpectedAbilities() {
   const expectedAbilities = new Map();
@@ -296,8 +311,37 @@ function createDefaultExpectedAbilities() {
   return expectedAbilities;
 }
 
+function verifyModel(expectedAbilities, expectedProficiencyBonus) {
+  for (const [key, value] of abilitiesModel.entries) {
+    const expectedAbility = expectedAbilities.get(key);
+
+    expect(value.score).toBe(expectedAbility.score);
+    expect(value.modifier).toBe(expectedAbility.modifier);
+  }
+  expect(proficiencyBonusModel.proficiencyBonus).toBe(expectedProficiencyBonus);
+}
+
+function verifyEditModeView(expectedAbilities, expectedProficiencyBonus) {
+  for (const key of abilitiesModel.keys) {
+    const expectedAbility = expectedAbilities.get(key);
+    const formattedModifier = `(${formatModifier(expectedAbility.modifier)})`;
+
+    expect(abilityScoresSection.editElements.score[key]).toHaveValue(expectedAbility.score);
+    expect(abilityScoresSection.editElements.modifier[key]).toHaveTextContent(formattedModifier);
+  }
+  expect(abilityScoresSection.editElements.proficiencyBonus).toHaveValue(expectedProficiencyBonus);
+}
+
+function verifyShowModeView(expectedAbilities) {
+  for (const key of abilitiesModel.keys) {
+    const expectedAbility = expectedAbilities.get(key);
+    const formattedModifier = `(${formatModifier(expectedAbility.modifier)})`;
+    expect(abilityScoresSection.showElements.modifier[key]).toHaveTextContent(formattedModifier);
+  }
+}
+
 function verifyJsonExport(expectedAbilities, expectedProficiencyBonus) {
-  const jsObject = abilityScoresSection.exportToJson();
+  const json = abilityScoresSection.exportToJson();
 
   const expectedAbilityScores = {};
   for (const key of abilitiesModel.keys) {
@@ -309,7 +353,9 @@ function verifyJsonExport(expectedAbilities, expectedProficiencyBonus) {
     proficiencyBonus: expectedProficiencyBonus
   };
 
-  expect(jsObject).toStrictEqual(expectedJsObject);
+  expect(json).toStrictEqual(expectedJsObject);
+
+  return json;
 }
 
 function verifyHtmlExport(expectedAbilities) {

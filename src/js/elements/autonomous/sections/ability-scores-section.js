@@ -124,6 +124,12 @@ export default class AbilityScoresSection extends sectionModule.Section {
     this.showElements.modifier[key].textContent = ability.formattedModifier;
   }
 
+  importFromJson(json) {
+    CurrentContext.creature.abilities.fromJson(json.abilityScores);
+    CurrentContext.creature.proficiencyBonus.fromJson(json.proficiencyBonus);
+    this.updateView();
+  }
+
   exportToJson() {
     return {
       abilityScores: CurrentContext.creature.abilities.toJson(),

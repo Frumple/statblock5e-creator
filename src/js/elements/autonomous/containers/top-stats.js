@@ -33,19 +33,19 @@ export default class TopStats extends StatsContainer {
   }
 
   importFromJson(json) {
+    this.sections.get('abilityScores').importFromJson(json.attributes);
     this.sections.get('basicStats').importFromJson(json);
-    // this.sections.get('abilityScores').importFromJson(json);
     // this.sections.get('advancedStats').importFromJson(json);
   }
 
   exportToJson() {
-    const jsObject = {};
+    const json = {};
 
-    Object.assign(jsObject, this.sections.get('basicStats').exportToJson());
-    jsObject.attributes = this.sections.get('abilityScores').exportToJson();
-    Object.assign(jsObject, this.sections.get('advancedStats').exportToJson());
+    Object.assign(json, this.sections.get('basicStats').exportToJson());
+    json.attributes = this.sections.get('abilityScores').exportToJson();
+    Object.assign(json, this.sections.get('advancedStats').exportToJson());
 
-    return jsObject;
+    return json;
   }
 
   exportToHtml() {

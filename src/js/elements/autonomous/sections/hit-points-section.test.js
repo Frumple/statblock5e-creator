@@ -97,7 +97,7 @@ describe('when the show section is clicked', () => {
           inputValueAndTriggerEvent(hitPointsSection.editElements.hitDieSize, hitDieSize);
           abilities.abilities['constitution'].score = constitutionScore;
 
-          hitPointsSection.updateShowModeView();
+          hitPointsSection.updateEditModeView();
 
           verifyModel(expectedValues);
           verifyEditModeView(expectedValues);
@@ -191,7 +191,7 @@ describe('when the show section is clicked', () => {
         inputValueAndTriggerEvent(hitPointsSection.editElements.hitDieSize, expectedValues.hitDieSize);
         abilities.abilities['constitution'].score = 19;
 
-        hitPointsSection.updateShowModeView();
+        hitPointsSection.updateEditModeView();
 
         verifyModel(expectedValues);
         verifyEditModeView(expectedValues);

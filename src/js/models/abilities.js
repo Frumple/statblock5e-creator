@@ -41,6 +41,12 @@ export default class Abilities extends Model {
     return Object.fromEntries(transformedEntries);
   }
 
+  fromJson(json) {
+    for (const [key, value] of this.entries) {
+      value.score = json[key];
+    }
+  }
+
   toJson() {
     const transformedEntries = this.entries.map(([key, ability]) => [key, ability.score]);
     return Object.fromEntries(transformedEntries);

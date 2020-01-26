@@ -105,11 +105,11 @@ export default class HitPointsSection extends propertyLineSectionModule.Property
     this.editElements.useHitDie.checked = hitPointsModel.useHitDie;
     this.editElements.hitDieQuantity.value = hitPointsModel.hitDieQuantity;
     this.editElements.hitDieSize.value = hitPointsModel.hitDieSize;
+    this.editElements.constitutionHitPoints.textContent = hitPointsModel.constitutionHitPointsText;
   }
 
   updateShowModeView() {
     const hitPointsModel = CurrentContext.creature.hitPoints;
-    this.editElements.constitutionHitPoints.textContent = hitPointsModel.constitutionHitPointsText;
 
     if (hitPointsModel.useHitDie) {
       this.editElements.hitPoints.value = hitPointsModel.hitPoints;
