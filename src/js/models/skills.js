@@ -13,7 +13,7 @@ export default class Skills extends PropertyLineModel {
 
     this.skills = {
       'acrobatics' : new Skill('Acrobatics', dexterity, proficiencyBonusModel),
-      'animal-handling' : new Skill('Animal Handling', wisdom, proficiencyBonusModel),
+      'animalHandling' : new Skill('Animal Handling', wisdom, proficiencyBonusModel),
       'arcana' : new Skill('Arcana', intelligence, proficiencyBonusModel),
       'athletics' : new Skill('Athletics', strength, proficiencyBonusModel),
       'deception' : new Skill('Deception', charisma, proficiencyBonusModel),
@@ -27,7 +27,7 @@ export default class Skills extends PropertyLineModel {
       'performance' : new Skill('Performance', charisma, proficiencyBonusModel),
       'persuasion' : new Skill('Persuasion', charisma, proficiencyBonusModel),
       'religion' : new Skill('Religion', intelligence, proficiencyBonusModel),
-      'sleight-of-hand' : new Skill('Sleight of Hand', dexterity, proficiencyBonusModel),
+      'sleightOfHand' : new Skill('Sleight of Hand', dexterity, proficiencyBonusModel),
       'stealth' : new Skill('Stealth', dexterity, proficiencyBonusModel),
       'survival': new Skill('Survival', wisdom, proficiencyBonusModel)
     };

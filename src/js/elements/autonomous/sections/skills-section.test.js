@@ -258,12 +258,12 @@ describe('when the show section is clicked', () => {
         }
 
         if (sleightOfHand) {
-          const elements = skillsSection.editElements.skill['sleight-of-hand'];
+          const elements = skillsSection.editElements.skill['sleightOfHand'];
           elements.enable.click();
           elements.proficient.click();
           inputValueAndTriggerEvent(elements.override, 0);
 
-          expectedSkills['sleight-of-hand'] = {
+          expectedSkills['sleightOfHand'] = {
             isEnabled: true,
             isProficient: false,
             override: 0,
