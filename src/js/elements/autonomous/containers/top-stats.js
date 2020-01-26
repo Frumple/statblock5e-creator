@@ -33,6 +33,9 @@ export default class TopStats extends StatsContainer {
   }
 
   importFromJson(json) {
+    // Import ability scores and proficiency bonus first so that stats that
+    // depend on them are updated correctly.
+    // (i.e. CON HP, saving throws, skills, passive perception)
     this.sections.get('abilityScores').importFromJson(json.attributes);
     this.sections.get('basicStats').importFromJson(json);
     // this.sections.get('advancedStats').importFromJson(json);

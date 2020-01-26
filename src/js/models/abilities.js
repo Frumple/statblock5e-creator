@@ -43,12 +43,12 @@ export default class Abilities extends Model {
 
   fromJson(json) {
     for (const [key, value] of this.entries) {
-      value.score = json[key];
+      value.fromJson(json[key]);
     }
   }
 
   toJson() {
-    const transformedEntries = this.entries.map(([key, ability]) => [key, ability.score]);
+    const transformedEntries = this.entries.map(([key, ability]) => [key, ability.toJson()]);
     return Object.fromEntries(transformedEntries);
   }
 
@@ -97,5 +97,14 @@ class Ability {
     return {
       modifier: this.modifier
     };
+  }
+
+  fromJson(score) {
+    this.score = score;
+  }
+
+
+  toJson() {
+    return this.score;
   }
 }

@@ -44,14 +44,8 @@ describe('when the show section is clicked', () => {
   });
 
   it('edit section should have default values', () => {
-    for(const key of skillsModel.keys) {
-      const skillElements = skillsSection.editElements.skill[key];
-      expect(skillElements.enable).not.toBeChecked();
-      expect(skillElements.label).toHaveTextContent(skillsModel.skills[key].prettyName);
-      expect(skillElements.modifier).toHaveTextContent('+0');
-      expect(skillElements.proficient).not.toBeChecked();
-      expect(skillElements.override).toHaveValue(null);
-    }
+    const expectedSkills = createDefaultExpectedSkills();
+    verifyEditModeView(expectedSkills);
   });
 
   it('should switch to edit mode and focus on the acrobatics enable checkbox', () => {
@@ -122,11 +116,21 @@ describe('when the show section is clicked', () => {
         });
 
         const skillElements = skillsSection.editElements.skill[singleSkillUnderTest];
-        const expectedJson = createDefaultExpectedJson();
-        const expectedJsonSkill = expectedJson[singleSkillUnderTest];
-        expectedJsonSkill.isEnabled = skillEnabled;
-        expectedJsonSkill.isProficient = skillProficient;
-        expectedJsonSkill.override = skillOverride === '' ? null : skillOverride;
+        const expectedSkills = createDefaultExpectedSkills();
+        for (const [key, value] of skillsModel.entries) {
+          if (value.ability === abilitiesModel.abilities[singleAbilityUnderTest]) {
+            if (abilityScore === 3) {
+              expectedSkills[key].modifier = -4;
+            } else if (abilityScore === 14) {
+              expectedSkills[key].modifier = 2;
+            }
+          }
+        }
+        const expectedSkill = expectedSkills[singleSkillUnderTest];
+        expectedSkill.isEnabled = skillEnabled;
+        expectedSkill.isProficient = skillProficient;
+        expectedSkill.override = nullIfEmptyString(skillOverride);
+        expectedSkill.modifier = expectedModifier;
 
         abilitiesModel.abilities[singleAbilityUnderTest].score = abilityScore;
         proficiencyBonusModel.proficiencyBonus = proficiencyBonus;
@@ -162,16 +166,24 @@ describe('when the show section is clicked', () => {
 
         expect(skillsSection).toBeInMode('show');
         expect(skillsSection).toShowPropertyLine(expectedHeading, expectedText);
-
-        verifyJsonExport(expectedJson);
-        expect(skillsSection).toExportPropertyLineToHtml(expectedHeading, expectedText);
-        expect(skillsSection).toExportPropertyLineToHomebrewery(expectedHeading, expectedText);
-
         if (expectedText === '') {
           expect(skillsSection.showElements.section).toHaveClass('section_empty');
         } else {
           expect(skillsSection.showElements.section).not.toHaveClass('section_empty');
         }
+
+        const json = verifyJsonExport(expectedSkills);
+        expect(skillsSection).toExportPropertyLineToHtml(expectedHeading, expectedText);
+        expect(skillsSection).toExportPropertyLineToHomebrewery(expectedHeading, expectedText);
+
+        reset();
+        abilitiesModel.abilities[singleAbilityUnderTest].score = abilityScore;
+        proficiencyBonusModel.proficiencyBonus = proficiencyBonus;
+        skillsSection.importFromJson(json);
+
+        verifyModel(expectedSkills);
+        verifyEditModeView(expectedSkills);
+        expect(skillsSection).toShowPropertyLine(expectedHeading, expectedText);
       });
       /* eslint-enable indent, no-unexpected-multiline */
     });
@@ -191,24 +203,19 @@ describe('when the show section is clicked', () => {
       `
       ('$description: {athletics="$athletics", history="$history", insight="$insight", persuasion="$persuasion", sleightOfHand="$sleightOfHand"} => "$expectedText"',
       ({athletics, history, insight, persuasion, sleightOfHand, expectedText}) => {
-        abilitiesModel.abilities['strength'].score = 7;
-        abilitiesModel.abilities['dexterity'].score = 14;
-        abilitiesModel.abilities['intelligence'].score = 13;
-        abilitiesModel.abilities['wisdom'].score = 11;
-        abilitiesModel.abilities['charisma'].score = 20;
-        proficiencyBonusModel.proficiencyBonus = 3;
-
-        const expectedJson = createDefaultExpectedJson();
+        const expectedSkills = createDefaultExpectedSkills();
+        setAbilityScoresAndProficiencyBonus();
 
         if (athletics) {
           const elements = skillsSection.editElements.skill['athletics'];
           elements.enable.click();
           elements.proficient.click();
 
-          expectedJson['athletics'] = {
+          expectedSkills['athletics'] = {
             isEnabled: true,
             isProficient: false,
-            override: null
+            override: null,
+            modifier: -2
           };
         }
 
@@ -217,10 +224,11 @@ describe('when the show section is clicked', () => {
           elements.enable.click();
           elements.proficient.click();
 
-          expectedJson['history'] = {
+          expectedSkills['history'] = {
             isEnabled: true,
             isProficient: false,
-            override: null
+            override: null,
+            modifier: 1
           };
         }
 
@@ -229,10 +237,11 @@ describe('when the show section is clicked', () => {
           elements.enable.click();
           inputValueAndTriggerEvent(elements.override, -3);
 
-          expectedJson['insight'] = {
+          expectedSkills['insight'] = {
             isEnabled: true,
             isProficient: true,
-            override: -3
+            override: -3,
+            modifier: -3
           };
         }
 
@@ -240,10 +249,11 @@ describe('when the show section is clicked', () => {
           const elements = skillsSection.editElements.skill['persuasion'];
           elements.enable.click();
 
-          expectedJson['persuasion'] = {
+          expectedSkills['persuasion'] = {
             isEnabled: true,
             isProficient: true,
-            override: null
+            override: null,
+            modifier: 8
           };
         }
 
@@ -253,10 +263,11 @@ describe('when the show section is clicked', () => {
           elements.proficient.click();
           inputValueAndTriggerEvent(elements.override, 0);
 
-          expectedJson['sleight-of-hand'] = {
+          expectedSkills['sleight-of-hand'] = {
             isEnabled: true,
             isProficient: false,
-            override: 0
+            override: 0,
+            modifier: 0
           };
         }
 
@@ -265,12 +276,27 @@ describe('when the show section is clicked', () => {
         expect(skillsSection).toBeInMode('show');
         expect(skillsSection).toShowPropertyLine(expectedHeading, expectedText);
 
-        verifyJsonExport(expectedJson);
+        const json = verifyJsonExport(expectedSkills);
         expect(skillsSection).toExportPropertyLineToHtml(expectedHeading, expectedText);
         expect(skillsSection).toExportPropertyLineToHomebrewery(expectedHeading, expectedText);
+
+        reset();
+        setAbilityScoresAndProficiencyBonus();
+        skillsSection.importFromJson(json);
+
+        expect(skillsSection).toShowPropertyLine(expectedHeading, expectedText);
       });
       /* eslint-enable indent, no-unexpected-multiline */
     });
+
+    function setAbilityScoresAndProficiencyBonus() {
+      abilitiesModel.abilities['strength'].score = 7;
+      abilitiesModel.abilities['dexterity'].score = 14;
+      abilitiesModel.abilities['intelligence'].score = 13;
+      abilitiesModel.abilities['wisdom'].score = 11;
+      abilitiesModel.abilities['charisma'].score = 20;
+      proficiencyBonusModel.proficiencyBonus = 3;
+    }
   });
 });
 
@@ -279,20 +305,67 @@ function expectSkillChangedEvent(event, skillName) {
   expect(event.detail.skillName).toBe(skillName);
 }
 
-function createDefaultExpectedJson() {
-  const expectedJson = {};
+function reset() {
+  abilitiesModel.reset();
+  proficiencyBonusModel.reset();
+  skillsModel.reset();
+  skillsSection.updateView();
+}
+
+function createDefaultExpectedSkills() {
+  const expectedSkills = {};
   for (const key of skillsModel.keys) {
-    expectedJson[key] = {
+    expectedSkills[key] = {
       isEnabled: false,
       isProficient: false,
-      override: null
+      override: null,
+      modifier: 0
     };
   }
 
-  return expectedJson;
+  return expectedSkills;
 }
 
-function verifyJsonExport(expectedJson) {
-  const jsObject = skillsSection.exportToJson();
-  expect(jsObject).toStrictEqual(expectedJson);
+function verifyModel(expectedSkills) {
+  for (const [key, value] of skillsModel.entries) {
+    const expectedSkill = expectedSkills[key];
+    expect(value.isEnabled).toBe(expectedSkill.isEnabled);
+    expect(value.isProficient).toBe(expectedSkill.isProficient);
+    expect(value.override).toBe(expectedSkill.override);
+    expect(value.modifier).toBe(expectedSkill.modifier);
+  }
+}
+
+function verifyEditModeView(expectedSkills) {
+  for (const [key, value] of skillsModel.entries) {
+    const expectedSkill = expectedSkills[key];
+    const skillElements = skillsSection.editElements.skill[key];
+    const formattedModifier = formatModifier(expectedSkill.modifier);
+
+    expect(skillElements.enable.checked).toBe(expectedSkill.isEnabled);
+    expect(skillElements.label).toHaveTextContent(value.prettyName);
+    expect(skillElements.modifier).toHaveTextContent(formattedModifier);
+    expect(skillElements.proficient.checked).toBe(expectedSkill.isProficient);
+    expect(skillElements.override).toHaveValue(expectedSkill.override);
+  }
+}
+
+function verifyJsonExport(expectedSkills) {
+  const json = skillsSection.exportToJson();
+
+  const expectedJson = {};
+  for (const key of skillsModel.keys) {
+    const expectedSkill = expectedSkills[key];
+
+    expectedJson[key] = {
+      isEnabled: expectedSkill.isEnabled,
+
+      isProficient: expectedSkill.isProficient,
+      override: expectedSkill.override
+    };
+  }
+
+  expect(json).toStrictEqual(expectedJson);
+
+  return json;
 }

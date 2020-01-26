@@ -63,6 +63,12 @@ export default class Skills extends PropertyLineModel {
     return this.text;
   }
 
+  fromJson(json) {
+    for (const [key, value] of this.entries) {
+      value.fromJson(json[key]);
+    }
+  }
+
   toJson() {
     const transformedEntries = this.entries.map(([key, skill]) => [key, skill.toJson()]);
     return Object.fromEntries(transformedEntries);
@@ -123,6 +129,12 @@ class Skill {
 
   get formattedModifier() {
     return formatModifier(this.modifier);
+  }
+
+  fromJson(json) {
+    this.isEnabled = json.isEnabled;
+    this.isProficient = json.isProficient;
+    this.override = json.override;
   }
 
   toJson() {

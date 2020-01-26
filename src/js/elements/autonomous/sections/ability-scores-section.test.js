@@ -348,12 +348,12 @@ function verifyJsonExport(expectedAbilities, expectedProficiencyBonus) {
     expectedAbilityScores[key] = expectedAbilities.get(key).score;
   }
 
-  const expectedJsObject = {
+  const expectedJson = {
     abilityScores: expectedAbilityScores,
     proficiencyBonus: expectedProficiencyBonus
   };
 
-  expect(json).toStrictEqual(expectedJsObject);
+  expect(json).toStrictEqual(expectedJson);
 
   return json;
 }
