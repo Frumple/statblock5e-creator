@@ -38,7 +38,7 @@ export default class TopStats extends StatsContainer {
     // (i.e. CON HP, saving throws, skills, passive perception)
     this.sections.get('abilityScores').importFromJson(json.attributes);
     this.sections.get('basicStats').importFromJson(json);
-    // this.sections.get('advancedStats').importFromJson(json);
+    this.sections.get('advancedStats').importFromJson(json);
   }
 
   exportToJson() {

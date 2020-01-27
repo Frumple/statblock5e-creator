@@ -7,7 +7,7 @@ import * as sharedSpecs from './property-list-section.specs.js';
 const headingName = 'Damage Vulnerabilities';
 const expectedBlockType = 'Damage Vulnerability';
 
-const damageVulnerabilities = CurrentContext.creature.damageVulnerabilities;
+const damageVulnerabilitiesModel = CurrentContext.creature.damageVulnerabilities;
 
 let damageVulnerabilitiesSection;
 
@@ -17,7 +17,7 @@ beforeAll(async() => {
 });
 
 beforeEach(() => {
-  damageVulnerabilities.reset();
+  damageVulnerabilitiesModel.reset();
 
   damageVulnerabilitiesSection = new DamageVulnerabilitiesSection();
   TestCustomElements.initializeSection(damageVulnerabilitiesSection);
@@ -46,17 +46,17 @@ describe('when the show section is clicked', () => {
   describe('and the input field is set, the add button is clicked, and the edit section is submitted', () => {
     it('should add a suggested item, and the show section should have the item', () => {
       const itemText = 'necrotic';
-      sharedSpecs.shouldAddAnItem(damageVulnerabilitiesSection, headingName, itemText);
+      sharedSpecs.shouldAddAnItem(damageVulnerabilitiesSection, damageVulnerabilitiesModel, headingName, itemText);
     });
 
     it('should add a custom item, and the show section should have the item', () => {
       const itemText = 'bludgeoning, piercing, and slashing from nonmagical attacks';
-      sharedSpecs.shouldAddAnItem(damageVulnerabilitiesSection, headingName, itemText);
+      sharedSpecs.shouldAddAnItem(damageVulnerabilitiesSection, damageVulnerabilitiesModel, headingName, itemText);
     });
 
     it('should add many items, and the show section should have the items', () => {
       const itemTexts = ['fire', 'rock', 'cold', 'air'];
-      sharedSpecs.shouldAddManyItems(damageVulnerabilitiesSection, headingName, itemTexts);
+      sharedSpecs.shouldAddManyItems(damageVulnerabilitiesSection, damageVulnerabilitiesModel, headingName, itemTexts);
     });
 
     it('should display an error after clicking the add button if the input field is blank', () => {
@@ -84,7 +84,7 @@ describe('when the show section is clicked', () => {
   describe('and an item is added, then removed, and the edit section is submitted', () => {
     it('should have no items, and the show section should have no items', () => {
       const itemText = 'poison';
-      sharedSpecs.shouldAddAndRemoveItem(damageVulnerabilitiesSection, headingName, itemText);
+      sharedSpecs.shouldAddAndRemoveItem(damageVulnerabilitiesSection, damageVulnerabilitiesModel, headingName, itemText);
     });
   });
 
@@ -101,7 +101,7 @@ describe('when the show section is clicked', () => {
       ('$description: $itemToDelete => $expectedItems',
       ({itemToDelete, expectedItems}) => {
         const initialItems = ['acid', 'force', 'psychic'];
-        sharedSpecs.shouldDeleteOneOfManyItems(damageVulnerabilitiesSection, headingName, initialItems, itemToDelete, expectedItems);
+        sharedSpecs.shouldDeleteOneOfManyItems(damageVulnerabilitiesSection, damageVulnerabilitiesModel, headingName, initialItems, itemToDelete, expectedItems);
       });
       /* eslint-enable indent, no-unexpected-multiline */
     });

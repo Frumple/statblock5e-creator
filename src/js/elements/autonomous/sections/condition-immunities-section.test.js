@@ -7,7 +7,7 @@ import * as sharedSpecs from './property-list-section.specs.js';
 const headingName = 'Condition Immunities';
 const expectedBlockType = 'Condition Immunity';
 
-const conditionImmunities = CurrentContext.creature.conditionImmunities;
+const conditionImmunitiesModel = CurrentContext.creature.conditionImmunities;
 
 let conditionImmunitiesSection;
 
@@ -17,7 +17,7 @@ beforeAll(async() => {
 });
 
 beforeEach(() => {
-  conditionImmunities.reset();
+  conditionImmunitiesModel.reset();
 
   conditionImmunitiesSection = new ConditionImmunitiesSection();
   TestCustomElements.initializeSection(conditionImmunitiesSection);
@@ -46,17 +46,17 @@ describe('when the show section is clicked', () => {
   describe('and the input field is set, the add button is clicked, and the edit section is submitted', () => {
     it('should add a suggested item, and the show section should have the item', () => {
       const itemText = 'charmed';
-      sharedSpecs.shouldAddAnItem(conditionImmunitiesSection, headingName, itemText);
+      sharedSpecs.shouldAddAnItem(conditionImmunitiesSection, conditionImmunitiesModel, headingName, itemText);
     });
 
     it('should add a custom item, and the show section should have the item', () => {
       const itemText = 'disease';
-      sharedSpecs.shouldAddAnItem(conditionImmunitiesSection, headingName, itemText);
+      sharedSpecs.shouldAddAnItem(conditionImmunitiesSection, conditionImmunitiesModel, headingName, itemText);
     });
 
     it('should add many items, and the show section should have the items', () => {
       const itemTexts = ['stunned', 'mesmerized', 'frightened', 'disconnected'];
-      sharedSpecs.shouldAddManyItems(conditionImmunitiesSection, headingName, itemTexts);
+      sharedSpecs.shouldAddManyItems(conditionImmunitiesSection, conditionImmunitiesModel, headingName, itemTexts);
     });
 
     it('should display an error after clicking the add button if the input field is blank', () => {
@@ -84,7 +84,7 @@ describe('when the show section is clicked', () => {
   describe('and an item is added, then removed, and the edit section is submitted', () => {
     it('should have no items, and the show section should have no items', () => {
       const itemText = 'grappled';
-      sharedSpecs.shouldAddAndRemoveItem(conditionImmunitiesSection, headingName, itemText);
+      sharedSpecs.shouldAddAndRemoveItem(conditionImmunitiesSection, conditionImmunitiesModel, headingName, itemText);
     });
   });
 
@@ -101,7 +101,7 @@ describe('when the show section is clicked', () => {
       ('$description: $itemToDelete => $expectedItems',
       ({itemToDelete, expectedItems}) => {
         const initialItems = ['blinded', 'deafened', 'prone'];
-        sharedSpecs.shouldDeleteOneOfManyItems(conditionImmunitiesSection, headingName, initialItems, itemToDelete, expectedItems);
+        sharedSpecs.shouldDeleteOneOfManyItems(conditionImmunitiesSection, conditionImmunitiesModel, headingName, initialItems, itemToDelete, expectedItems);
       });
       /* eslint-enable indent, no-unexpected-multiline */
     });

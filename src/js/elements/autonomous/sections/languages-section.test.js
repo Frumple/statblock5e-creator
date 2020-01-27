@@ -8,7 +8,7 @@ const headingName = 'Languages';
 const expectedBlockType = 'Language';
 const defaultStartingLanguage = 'Common';
 
-const languages = CurrentContext.creature.languages;
+const languagesModel = CurrentContext.creature.languages;
 
 let languagesSection;
 
@@ -18,7 +18,7 @@ beforeAll(async() => {
 });
 
 beforeEach(() => {
-  languages.reset();
+  languagesModel.reset();
 
   languagesSection = new LanguagesSection();
   TestCustomElements.initializeSection(languagesSection);
@@ -53,17 +53,17 @@ describe('when the show section is clicked', () => {
     describe('and the input field is set, the add button is clicked, and the edit section is submitted', () => {
       it('should add a suggested item, and the show section should have the item', () => {
         const itemText = 'Deep Speech';
-        sharedSpecs.shouldAddAnItem(languagesSection, headingName, itemText);
+        sharedSpecs.shouldAddAnItem(languagesSection, languagesModel, headingName, itemText);
       });
 
       it('should add a custom item, and the show section should have the item', () => {
         const itemText = 'understands all languages it knew in life but can\'t speak';
-        sharedSpecs.shouldAddAnItem(languagesSection, headingName, itemText);
+        sharedSpecs.shouldAddAnItem(languagesSection, languagesModel, headingName, itemText);
       });
 
       it('should add many items, and the show section should have the items', () => {
         const itemTexts = ['Undercommon', 'Swahili', 'Thieves\' Cant', 'English'];
-        sharedSpecs.shouldAddManyItems(languagesSection, headingName, itemTexts);
+        sharedSpecs.shouldAddManyItems(languagesSection, languagesModel, headingName, itemTexts);
       });
 
       it('should display an error after clicking the add button if the input field is blank', () => {
@@ -90,17 +90,27 @@ describe('when the show section is clicked', () => {
 
     describe('and the only remaining item is removed, and the edit section is submitted', () => {
       it('should remove the item, and the show section should show a "—" character indicating no items', () => {
+        const expectedItems = [];
         const expectedText = '—';
 
-        expect(languagesSection.editElements.propertyList.itemsAsText).toHaveLength(0);
+        expect(languagesSection.editElements.propertyList.itemsAsText).toStrictEqual(expectedItems);
 
         languagesSection.editElements.submitForm();
 
+        expect(languagesModel.items).toStrictEqual(expectedItems);
         expect(languagesSection).toBeInMode('show');
         expect(languagesSection).toShowPropertyLine(headingName, expectedText);
 
+        const json = sharedSpecs.verifyJsonExport(languagesSection, expectedItems);
         expect(languagesSection).toExportPropertyLineToHtml(headingName, expectedText);
         expect(languagesSection).toExportPropertyLineToHomebrewery(headingName, expectedText);
+
+        reset();
+        languagesSection.importFromJson(json);
+
+        expect(languagesModel.items).toStrictEqual(expectedItems);
+        expect(languagesSection.editElements.propertyList.itemsAsText).toStrictEqual(expectedItems);
+        expect(languagesSection).toShowPropertyLine(headingName, expectedText);
       });
     });
 
@@ -117,10 +127,15 @@ describe('when the show section is clicked', () => {
         ('$description: $itemToDelete => $expectedItems',
         ({itemToDelete, expectedItems}) => {
           const initialItems = ['Common', 'Elvish', 'Orc'];
-          sharedSpecs.shouldDeleteOneOfManyItems(languagesSection, headingName, initialItems, itemToDelete, expectedItems);
+          sharedSpecs.shouldDeleteOneOfManyItems(languagesSection, languagesModel, headingName, initialItems, itemToDelete, expectedItems);
         });
         /* eslint-enable indent, no-unexpected-multiline */
       });
     });
   });
 });
+
+function reset() {
+  languagesModel.reset();
+  languagesSection.updateView();
+}

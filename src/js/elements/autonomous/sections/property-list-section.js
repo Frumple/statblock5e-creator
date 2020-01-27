@@ -85,7 +85,7 @@ export default class PropertyListSection extends propertyLineSectionModule.Prope
   }
 
   updateEditModeView() {
-    this.editElements.propertyList.items =CurrentContext.creature[this.modelPropertyName].items;
+    this.editElements.propertyList.items = CurrentContext.creature[this.modelPropertyName].items;
   }
 
   updateShowModeView() {

@@ -45,7 +45,7 @@ export default class PropertyList extends DragAndDropList {
   }
 
   clearItems() {
-    for(const item in this.items) {
+    for(const item of this.items) {
       item.remove();
     }
   }

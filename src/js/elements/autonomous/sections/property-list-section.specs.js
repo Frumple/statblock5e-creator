@@ -9,25 +9,32 @@ export function editSectionShouldHaveDefaultValues(section, expectedItems = []) 
   expect(section.editElements.propertyList.itemsAsText).toEqual(expectedItems);
 }
 
-export function shouldAddAnItem(section, headingName, itemText) {
+export function shouldAddAnItem(section, model, headingName, itemText) {
   const expectedItems = [itemText];
 
   inputValueAndTriggerEvent(section.editElements.input, itemText);
   section.editElements.addButton.click();
 
-  expect(section.editElements.propertyList.itemsAsText).toEqual(expectedItems);
+  verifyEditModeView(section, expectedItems);
 
   section.editElements.submitForm();
 
+  verifyModel(model, expectedItems);
   expect(section).toBeInMode('show');
-  expect(section).toShowPropertyLine(headingName, itemText);
+  verifyShowModeView(section, headingName, itemText);
 
-  verifyJsonExport(section, expectedItems);
+  const json = verifyJsonExport(section, expectedItems);
   expect(section).toExportPropertyLineToHtml(headingName, itemText);
   expect(section).toExportPropertyLineToHomebrewery(headingName, itemText);
+
+  reset(section, model);
+  section.importFromJson(json);
+
+  verifyModel(model, expectedItems);
+  verifyEditModeView(section, expectedItems);
 }
 
-export function shouldAddManyItems(section, headingName, items) {
+export function shouldAddManyItems(section, model, headingName, items) {
   const expectedTextContent = items.join(', ');
 
   for (const itemText of items) {
@@ -35,16 +42,23 @@ export function shouldAddManyItems(section, headingName, items) {
     section.editElements.addButton.click();
   }
 
-  expect(section.editElements.propertyList.itemsAsText).toEqual(items);
+  verifyEditModeView(section, items);
 
   section.editElements.submitForm();
 
+  verifyModel(model, items);
   expect(section).toBeInMode('show');
-  expect(section).toShowPropertyLine(headingName, expectedTextContent);
+  verifyShowModeView(section, headingName, expectedTextContent);
 
-  verifyJsonExport(section, items);
+  const json = verifyJsonExport(section, items);
   expect(section).toExportPropertyLineToHtml(headingName, expectedTextContent);
   expect(section).toExportPropertyLineToHomebrewery(headingName, expectedTextContent);
+
+  reset(section, model);
+  section.importFromJson(json);
+
+  verifyModel(model, items);
+  verifyEditModeView(section, items);
 }
 
 export function shouldDisplayAnErrorIfAddingBlank(section, expectedBlockType) {
@@ -92,7 +106,7 @@ export function shouldRemoveAndAddSuggestions(section, itemText) {
   expect(option).not.toHaveAttribute('disabled');
 }
 
-export function shouldAddAndRemoveItem(section, headingName, itemText) {
+export function shouldAddAndRemoveItem(section, model, headingName, itemText) {
   const expectedItems = [];
   const expectedTextContent = '';
 
@@ -102,20 +116,27 @@ export function shouldAddAndRemoveItem(section, headingName, itemText) {
   const item = section.editElements.propertyList.findItem(itemText);
   item.remove();
 
-  expect(section.editElements.propertyList.itemsAsText).toEqual(expectedItems);
+  verifyEditModeView(section, expectedItems);
 
   section.editElements.submitForm();
 
+  verifyModel(model, expectedItems);
   expect(section).toBeInMode('show');
   expect(section.showElements.section).toHaveClass('section_empty');
-  expect(section).toShowPropertyLine(headingName, expectedTextContent);
+  verifyShowModeView(section, headingName, expectedTextContent);
 
-  verifyJsonExport(section, expectedItems);
+  const json = verifyJsonExport(section, expectedItems);
   expect(section).toExportPropertyLineToHtml(headingName, expectedTextContent);
   expect(section).toExportPropertyLineToHomebrewery(headingName, expectedTextContent);
+
+  reset(section, model);
+  section.importFromJson(json);
+
+  verifyModel(model, expectedItems);
+  verifyEditModeView(section, expectedItems);
 }
 
-export function shouldDeleteOneOfManyItems(section, headingName, initialItems, itemToDelete, expectedItems) {
+export function shouldDeleteOneOfManyItems(section, model, headingName, initialItems, itemToDelete, expectedItems) {
   const expectedTextContent = expectedItems.join(', ');
 
   for (const item of initialItems) {
@@ -126,23 +147,49 @@ export function shouldDeleteOneOfManyItems(section, headingName, initialItems, i
   const item = section.editElements.propertyList.findItem(itemToDelete);
   item.remove();
 
-  expect(section.editElements.propertyList.itemsAsText).toEqual(expectedItems);
+  verifyEditModeView(section, expectedItems);
 
   section.editElements.submitForm();
 
+  verifyModel(model, expectedItems);
   expect(section).toBeInMode('show');
-  expect(section).toShowPropertyLine(headingName, expectedTextContent);
+  verifyShowModeView(section, headingName, expectedTextContent);
 
-  verifyJsonExport(section, expectedItems);
+  const json = verifyJsonExport(section, expectedItems);
   expect(section).toExportPropertyLineToHtml(headingName, expectedTextContent);
   expect(section).toExportPropertyLineToHomebrewery(headingName, expectedTextContent);
+
+  reset(section, model);
+  section.importFromJson(json);
+
+  verifyModel(model, expectedItems);
+  verifyEditModeView(section, expectedItems);
 }
 
-function verifyJsonExport(section, expectedItems) {
-  const jsObject = section.exportToJson();
-  const expectedJsObject = {
+function reset(section, model) {
+  model.reset();
+  section.updateView();
+}
+
+function verifyModel(model, expectedItems) {
+  expect(model.items).toStrictEqual(expectedItems);
+}
+
+function verifyEditModeView(section, expectedItems) {
+  expect(section.editElements.propertyList.itemsAsText).toStrictEqual(expectedItems);
+}
+
+function verifyShowModeView(section, headingName, expectedText) {
+  expect(section).toShowPropertyLine(headingName, expectedText);
+}
+
+export function verifyJsonExport(section, expectedItems) {
+  const json = section.exportToJson();
+  const expectedJson = {
     items: expectedItems
   };
 
-  expect(jsObject).toStrictEqual(expectedJsObject);
+  expect(json).toStrictEqual(expectedJson);
+
+  return json;
 }
