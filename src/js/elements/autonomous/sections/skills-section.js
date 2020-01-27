@@ -135,18 +135,18 @@ export default class SkillsSection extends propertyLineSectionModule.PropertyLin
 
   updateEditModeView() {
     for (const key of CurrentContext.creature.skills.keys) {
-      this.updateEditModeViewSkillModifier(key);
+      this.updateEditModeViewSkill(key);
     }
   }
 
   updateEditModeViewSkill(key) {
-    const skillElements = skillsModel.skills[key];
+    const skillElements = this.editElements.skill[key];
     const skillsModel = CurrentContext.creature.skills;
 
-    skillElements.enable.checked = skillsModel.savingThrows[key].isEnabled;
-    skillElements.modifier.textContent = skillsModel.savingThrows[key].formattedModifier;
-    skillElements.proficient.checked = skillsModel.savingThrows[key].isProficient;
-    skillElements.override.value = skillsModel.savingThrows[key].override;
+    skillElements.enable.checked = skillsModel.skills[key].isEnabled;
+    skillElements.modifier.textContent = skillsModel.skills[key].formattedModifier;
+    skillElements.proficient.checked = skillsModel.skills[key].isProficient;
+    skillElements.override.value = skillsModel.skills[key].override;
   }
 
   updateEditModeViewSkillModifier(key) {

@@ -135,6 +135,10 @@ describe('when the show section is clicked', () => {
         abilitiesModel.abilities[singleAbilityUnderTest].score = abilityScore;
         proficiencyBonusModel.proficiencyBonus = proficiencyBonus;
 
+        for(const key of skillsModel.keys) {
+          skillsSection.updateEditModeViewSkillModifier(key);
+        }
+
         if (skillEnabled) {
           skillElements.enable.click();
           expectSkillChangedEvent(receivedEvent, singleSkillUnderTest);
@@ -153,14 +157,8 @@ describe('when the show section is clicked', () => {
           }
         }
 
-        const skill = skillsModel.skills[singleSkillUnderTest];
-        expect(skill.isEnabled).toBe(skillEnabled);
-        expect(skill.isProficient).toBe(skillProficient);
-        expect(skill.override).toBe(nullIfEmptyString(skillOverride));
-        expect(skill.modifier).toBe(expectedModifier);
-
-        const formattedModifier = formatModifier(expectedModifier);
-        expect(skillElements.modifier).toHaveTextContent(formattedModifier);
+        verifyModel(expectedSkills);
+        verifyEditModeView(expectedSkills);
 
         skillsSection.editElements.submitForm();
 
@@ -329,6 +327,7 @@ function createDefaultExpectedSkills() {
 function verifyModel(expectedSkills) {
   for (const [key, value] of skillsModel.entries) {
     const expectedSkill = expectedSkills[key];
+
     expect(value.isEnabled).toBe(expectedSkill.isEnabled);
     expect(value.isProficient).toBe(expectedSkill.isProficient);
     expect(value.override).toBe(expectedSkill.override);
