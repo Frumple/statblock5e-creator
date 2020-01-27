@@ -6,7 +6,11 @@
   align-items: center;
   justify-items: center;
 }
- 
+
+.saving-throws-edit-section__label[disabled] {
+  color: Gray
+}
+
 .saving-throws-edit-section__saving-throws-label {
   grid-area: 1 / 1 / 2 / 4;
   justify-self: start;

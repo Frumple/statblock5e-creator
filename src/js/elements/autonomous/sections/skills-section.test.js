@@ -348,16 +348,14 @@ function verifyEditModeView(expectedSkills) {
 }
 
 function verifySkillEditElementsEnabledOrDisabled(skillElements) {
-  const labelDisabledClass = 'section__label_disabled';
-
   if (skillElements.enable.checked) {
-    expect(skillElements.label).not.toHaveClass(labelDisabledClass);
-    expect(skillElements.modifier).not.toHaveClass(labelDisabledClass);
+    expect(skillElements.label).not.toHaveAttribute('disabled');
+    expect(skillElements.modifier).not.toHaveAttribute('disabled');
     expect(skillElements.proficient).not.toHaveAttribute('disabled');
     expect(skillElements.override).not.toHaveAttribute('disabled');
   } else {
-    expect(skillElements.label).toHaveClass(labelDisabledClass);
-    expect(skillElements.modifier).toHaveClass(labelDisabledClass);
+    expect(skillElements.label).toHaveAttribute('disabled');
+    expect(skillElements.modifier).toHaveAttribute('disabled');
     expect(skillElements.proficient).toHaveAttribute('disabled');
     expect(skillElements.override).toHaveAttribute('disabled');
   }

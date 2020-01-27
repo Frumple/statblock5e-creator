@@ -35,6 +35,8 @@ export default class SkillsSection extends propertyLineSectionModule.PropertyLin
     const elements = this.editElements.skill[key];
 
     elements.enable.enableElementsWhenChecked(
+      elements.label,
+      elements.modifier,
       elements.proficient,
       elements.override
     );
@@ -45,18 +47,11 @@ export default class SkillsSection extends propertyLineSectionModule.PropertyLin
   }
 
   onInputSkillEnabled(key) {
-    const labelDisabledClass = 'section__label_disabled';
     const elements = this.editElements.skill[key];
 
     if (elements.enable.checked) {
-      elements.label.classList.remove(labelDisabledClass);
-      elements.modifier.classList.remove(labelDisabledClass);
-
       inputValueAndTriggerEvent(elements.proficient, true);
     } else {
-      elements.label.classList.add(labelDisabledClass);
-      elements.modifier.classList.add(labelDisabledClass);
-
       inputValueAndTriggerEvent(elements.proficient, false);
       inputValueAndTriggerEvent(elements.override, '');
     }

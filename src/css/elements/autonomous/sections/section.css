@@ -48,10 +48,6 @@
   font-weight: bold;
 }
 
-.section__label_disabled {
-  color: Gray;
-}
-
 .section__text-input {
   font-family: inherit;
   font-size: inherit;

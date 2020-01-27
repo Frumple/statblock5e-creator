@@ -332,16 +332,14 @@ function verifyEditModeView(expectedSavingThrows) {
 }
 
 function verifySavingThrowEditElementsEnabledOrDisabled(savingThrowElements) {
-  const labelDisabledClass = 'section__label_disabled';
-
   if (savingThrowElements.enable.checked) {
-    expect(savingThrowElements.label).not.toHaveClass(labelDisabledClass);
-    expect(savingThrowElements.modifier).not.toHaveClass(labelDisabledClass);
+    expect(savingThrowElements.label).not.toHaveAttribute('disabled');
+    expect(savingThrowElements.modifier).not.toHaveAttribute('disabled');
     expect(savingThrowElements.proficient).not.toHaveAttribute('disabled');
     expect(savingThrowElements.override).not.toHaveAttribute('disabled');
   } else {
-    expect(savingThrowElements.label).toHaveClass(labelDisabledClass);
-    expect(savingThrowElements.modifier).toHaveClass(labelDisabledClass);
+    expect(savingThrowElements.label).toHaveAttribute('disabled');
+    expect(savingThrowElements.modifier).toHaveAttribute('disabled');
     expect(savingThrowElements.proficient).toHaveAttribute('disabled');
     expect(savingThrowElements.override).toHaveAttribute('disabled');
   }

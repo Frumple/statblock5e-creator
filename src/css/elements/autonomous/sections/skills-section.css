@@ -7,6 +7,10 @@
   justify-items: center;
 }
 
+.skills-edit-section__label[disabled] {
+  color: Gray
+}
+
 .skills-edit-section__skills-label {
   grid-area: 1 / 1 / 2 / 4;
   justify-self: start;
