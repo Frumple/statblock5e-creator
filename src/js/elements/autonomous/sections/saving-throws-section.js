@@ -116,6 +116,7 @@ export default class SavingThrowsSection extends propertyLineSectionModule.Prope
   updateEditModeView() {
     for (const key of CurrentContext.creature.savingThrows.keys) {
       this.updateEditModeViewSavingThrow(key);
+      this.editElements.savingThrow[key].enable.onInputCheckbox();
     }
   }
 

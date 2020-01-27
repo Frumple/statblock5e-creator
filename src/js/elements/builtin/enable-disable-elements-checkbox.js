@@ -19,14 +19,8 @@ export let EnableDisableElementsCheckboxMixin = {
   },
 
   onInputCheckbox() {
-    let elementsToEnable, elementsToDisable;       
-    if (this.checked) {
-      elementsToEnable = this.enabledElements;
-      elementsToDisable = this.disabledElements;        
-    } else {
-      elementsToEnable = this.disabledElements;
-      elementsToDisable = this.enabledElements;
-    }
+    const elementsToEnable = this.checked ? this.enabledElements : this.disabledElements;
+    const elementsToDisable = this.checked ? this.disabledElements : this.enabledElements;
 
     for (const [index, element] of elementsToEnable.entries()) {
       element.removeAttribute('disabled');

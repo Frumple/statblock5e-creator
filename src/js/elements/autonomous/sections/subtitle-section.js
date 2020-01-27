@@ -61,6 +61,8 @@ export default class SubtitleSection extends sectionModule.Section {
 
     this.editElements.useCustomText.checked = subtitleModel.useCustomText;
     this.editElements.customText.value = subtitleModel.customText;
+
+    this.editElements.useCustomText.onInputCheckbox();
   }
 
   updateShowModeView() {

@@ -6,7 +6,6 @@ import { capitalizeFirstLetter, formatModifier, nullIfEmptyString } from '../../
 
 import CurrentContext from '../../../models/current-context.js';
 
-const labelDisabledClass = 'section__label_disabled';
 const singleSavingThrowUnderTest = 'intelligence';
 
 const expectedHeading = 'Saving Throws';
@@ -33,8 +32,7 @@ beforeEach(() => {
 });
 
 it('show section should have default values', () => {
-  expect(savingThrowsSection.showElements.heading).toHaveTextContent('Saving Throws');
-  expect(savingThrowsSection.showElements.text).toHaveTextContent('');
+  verifyShowModeView();
 });
 
 describe('when the show section is clicked', () => {
@@ -58,8 +56,7 @@ describe('when the show section is clicked', () => {
 
       savingThrowElements.enable.click();
 
-      expect(savingThrowElements.label).not.toHaveClass(labelDisabledClass);
-      expect(savingThrowElements.modifier).not.toHaveClass(labelDisabledClass);
+      verifySavingThrowEditElementsEnabledOrDisabled(savingThrowElements);
 
       expect(savingThrowElements.modifier).toHaveTextContent('+2');
       expect(savingThrowElements.proficient.checked).toBe(true);
@@ -77,8 +74,7 @@ describe('when the show section is clicked', () => {
 
       savingThrowElements.enable.click();
 
-      expect(savingThrowElements.label).toHaveClass(labelDisabledClass);
-      expect(savingThrowElements.modifier).toHaveClass(labelDisabledClass);
+      verifySavingThrowEditElementsEnabledOrDisabled(savingThrowElements);
 
       expect(savingThrowElements.modifier).toHaveTextContent('+0');
       expect(savingThrowElements.proficient.checked).toBe(false);
@@ -138,7 +134,7 @@ describe('when the show section is clicked', () => {
         savingThrowsSection.editElements.submitForm();
 
         expect(savingThrowsSection).toBeInMode('show');
-        expect(savingThrowsSection).toShowPropertyLine(expectedHeading, expectedText);
+        verifyShowModeView(expectedText);
         if (expectedText === '') {
           expect(savingThrowsSection.showElements.section).toHaveClass('section_empty');
         } else {
@@ -156,7 +152,7 @@ describe('when the show section is clicked', () => {
 
         verifyModel(expectedSavingThrows);
         verifyEditModeView(expectedSavingThrows);
-        expect(savingThrowsSection).toShowPropertyLine(expectedHeading, expectedText);
+        verifyShowModeView(expectedText);
       });
       /* eslint-enable indent, no-unexpected-multiline */
     });
@@ -261,7 +257,7 @@ describe('when the show section is clicked', () => {
         savingThrowsSection.editElements.submitForm();
 
         expect(savingThrowsSection).toBeInMode('show');
-        expect(savingThrowsSection).toShowPropertyLine(expectedHeading, expectedText);
+        verifyShowModeView(expectedText);
 
         const json = verifyJsonExport(expectedSavingThrows);
         expect(savingThrowsSection).toExportPropertyLineToHtml(expectedHeading, expectedText);
@@ -271,7 +267,7 @@ describe('when the show section is clicked', () => {
         setAbilityScoresAndProficiencyBonus();
         savingThrowsSection.importFromJson(json);
 
-        expect(savingThrowsSection).toShowPropertyLine(expectedHeading, expectedText);
+        verifyShowModeView(expectedText);
       });
       /* eslint-enable indent, no-unexpected-multiline */
     });
@@ -330,7 +326,29 @@ function verifyEditModeView(expectedSavingThrows) {
     expect(savingThrowElements.modifier).toHaveTextContent(formattedModifier);
     expect(savingThrowElements.proficient.checked).toBe(expectedSavingThrow.isProficient);
     expect(savingThrowElements.override).toHaveValue(expectedSavingThrow.override);
+
+    verifySavingThrowEditElementsEnabledOrDisabled(savingThrowElements);
   }
+}
+
+function verifySavingThrowEditElementsEnabledOrDisabled(savingThrowElements) {
+  const labelDisabledClass = 'section__label_disabled';
+
+  if (savingThrowElements.enable.checked) {
+    expect(savingThrowElements.label).not.toHaveClass(labelDisabledClass);
+    expect(savingThrowElements.modifier).not.toHaveClass(labelDisabledClass);
+    expect(savingThrowElements.proficient).not.toHaveAttribute('disabled');
+    expect(savingThrowElements.override).not.toHaveAttribute('disabled');
+  } else {
+    expect(savingThrowElements.label).toHaveClass(labelDisabledClass);
+    expect(savingThrowElements.modifier).toHaveClass(labelDisabledClass);
+    expect(savingThrowElements.proficient).toHaveAttribute('disabled');
+    expect(savingThrowElements.override).toHaveAttribute('disabled');
+  }
+}
+
+function verifyShowModeView(expectedText = '') {
+  expect(savingThrowsSection).toShowPropertyLine(expectedHeading, expectedText);
 }
 
 function verifyJsonExport(expectedSavingThrows) {

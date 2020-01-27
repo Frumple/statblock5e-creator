@@ -136,6 +136,7 @@ export default class SkillsSection extends propertyLineSectionModule.PropertyLin
   updateEditModeView() {
     for (const key of CurrentContext.creature.skills.keys) {
       this.updateEditModeViewSkill(key);
+      this.editElements.skill[key].enable.onInputCheckbox();
     }
   }
 

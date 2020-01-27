@@ -73,6 +73,7 @@ export default class SensesSection extends propertyLineSectionModule.PropertyLin
     }
 
     this.updateEditModeViewPassivePerception();
+    this.editElements.useCustomText.onInputCheckbox();
   }
 
   updateEditModeViewPassivePerception() {

@@ -32,8 +32,7 @@ beforeEach(() => {
 });
 
 it('show section should have default values', () => {
-  expect(sensesSection.showElements.heading).toHaveTextContent('Senses');
-  expect(sensesSection.showElements.text).toHaveTextContent('passive Perception 10');
+  verifyShowModeView();
 });
 
 describe('when the show section is clicked', () => {
@@ -56,11 +55,11 @@ describe('when the show section is clicked', () => {
     });
 
     it('should enable the custom text field, disable all other fields, and focus on the custom text field', () => {
-      expect(sensesSection.editElements.blindsight).toBeDisabled();
-      expect(sensesSection.editElements.darkvision).toBeDisabled();
-      expect(sensesSection.editElements.tremorsense).toBeDisabled();
-      expect(sensesSection.editElements.truesight).toBeDisabled();
-      expect(sensesSection.editElements.customText).not.toBeDisabled();
+      expect(sensesSection).toHaveEditElementsEnabledOrDisabledBasedOnCheckbox(
+        sensesSection.editElements.useCustomText,
+        ['customText'],
+        ['blindsight', 'darkvision', 'tremorsense', 'truesight']
+      );
 
       expect(sensesSection.editElements.customText).toHaveFocus();
       expect(sensesSection.editElements.customText).toBeSelected();
@@ -88,10 +87,10 @@ describe('when the show section is clicked', () => {
 
           sensesSection.editElements.submitForm();
 
+          expect(sensesSection).toBeInMode('show');
           verifyModel(expectedValues);
           verifyEditModeView(expectedValues);
-          expect(sensesSection).toBeInMode('show');
-          expect(sensesSection).toShowPropertyLine(expectedHeading, expectedHtmlText);
+          verifyShowModeView(expectedHtmlText);
 
           const json = verifyJsonExport(expectedValues);
           expect(sensesSection).toExportPropertyLineToHtml(expectedHeading, expectedHtmlText);
@@ -102,7 +101,7 @@ describe('when the show section is clicked', () => {
 
           verifyModel(expectedValues);
           verifyEditModeView(expectedValues);
-          expect(sensesSection).toShowPropertyLine(expectedHeading, expectedHtmlText);
+          verifyShowModeView(expectedHtmlText);
         });
         /* eslint-enable indent, no-unexpected-multiline */
       });
@@ -120,6 +119,7 @@ describe('when the show section is clicked', () => {
 
         verifyModel(expectedValues);
         verifyEditModeView(expectedValues);
+        verifyShowModeView();
 
         const json = verifyJsonExport(expectedValues);
 
@@ -128,6 +128,7 @@ describe('when the show section is clicked', () => {
 
         verifyModel(expectedValues);
         verifyEditModeView(expectedValues);
+        verifyShowModeView();
       });
 
       it('should display an error if the custom text field is blank', () => {
@@ -161,11 +162,11 @@ describe('when the show section is clicked', () => {
     });
 
     it('should disable the custom text field, enable all other fields, and focus on the blindsight field', () => {
-      expect(sensesSection.editElements.blindsight).not.toBeDisabled();
-      expect(sensesSection.editElements.darkvision).not.toBeDisabled();
-      expect(sensesSection.editElements.tremorsense).not.toBeDisabled();
-      expect(sensesSection.editElements.truesight).not.toBeDisabled();
-      expect(sensesSection.editElements.customText).toBeDisabled();
+      expect(sensesSection).toHaveEditElementsEnabledOrDisabledBasedOnCheckbox(
+        sensesSection.editElements.useCustomText,
+        ['customText'],
+        ['blindsight', 'darkvision', 'tremorsense', 'truesight']
+      );
 
       expect(sensesSection.editElements.blindsight).toHaveFocus();
     });
@@ -210,10 +211,10 @@ describe('when the show section is clicked', () => {
 
           sensesSection.editElements.submitForm();
 
+          expect(sensesSection).toBeInMode('show');
           verifyModel(expectedValues);
           verifyEditModeView(expectedValues);
-          expect(sensesSection).toBeInMode('show');
-          expect(sensesSection).toShowPropertyLine(expectedHeading, expectedText);
+          verifyShowModeView(expectedText);
 
           const json = verifyJsonExport(expectedValues);
           expect(sensesSection).toExportPropertyLineToHtml(expectedHeading, expectedText);
@@ -224,7 +225,7 @@ describe('when the show section is clicked', () => {
 
           verifyModel(expectedValues);
           verifyEditModeView(expectedValues);
-          expect(sensesSection).toShowPropertyLine(expectedHeading, expectedText);
+          verifyShowModeView(expectedText);
         });
         /* eslint-enable indent, no-unexpected-multiline */
       });
@@ -300,7 +301,7 @@ describe('should calculate the passive perception based on the following conditi
 
     expect(sensesModel.passivePerception).toBe(expectedPassivePerception);
 
-    expect(sensesSection).toShowPropertyLine(expectedHeading, expectedText);
+    verifyShowModeView(expectedText);
 
     expect(sensesSection).toExportPropertyLineToHtml(expectedHeading, expectedText);
     expect(sensesSection).toExportPropertyLineToHomebrewery(expectedHeading, expectedText);
@@ -351,6 +352,16 @@ function verifyEditModeView({
   expect(sensesSection.editElements.passivePerception).toHaveTextContent(passivePerception);
   expect(sensesSection.editElements.useCustomText.checked).toBe(useCustomText);
   expect(sensesSection.editElements.customText).toHaveValue(customText);
+
+  expect(sensesSection).toHaveEditElementsEnabledOrDisabledBasedOnCheckbox(
+    sensesSection.editElements.useCustomText,
+    ['customText'],
+    ['blindsight', 'darkvision', 'tremorsense', 'truesight']
+  );
+}
+
+function verifyShowModeView(expectedText = 'passive Perception 10') {
+  expect(sensesSection).toShowPropertyLine(expectedHeading, expectedText);
 }
 
 function verifyJsonExport({

@@ -26,8 +26,7 @@ beforeEach(() => {
 });
 
 it('show section should have default values', () => {
-  expect(speedSection.showElements.heading).toHaveTextContent('Speed');
-  expect(speedSection.showElements.text).toHaveTextContent('30 ft.');
+  verifyShowModeView();
 });
 
 describe('when the show section is clicked', () => {
@@ -50,13 +49,11 @@ describe('when the show section is clicked', () => {
     });
 
     it('should enable the custom text field, disable all other fields, and focus on the custom text field', () => {
-      expect(speedSection.editElements.walk).toBeDisabled();
-      expect(speedSection.editElements.burrow).toBeDisabled();
-      expect(speedSection.editElements.climb).toBeDisabled();
-      expect(speedSection.editElements.fly).toBeDisabled();
-      expect(speedSection.editElements.hover).toBeDisabled();
-      expect(speedSection.editElements.swim).toBeDisabled();
-      expect(speedSection.editElements.customText).not.toBeDisabled();
+      expect(speedSection).toHaveEditElementsEnabledOrDisabledBasedOnCheckbox(
+        speedSection.editElements.useCustomText,
+        ['customText'],
+        ['walk', 'burrow', 'climb', 'fly', 'hover', 'swim']
+      );
 
       expect(speedSection.editElements.customText).toHaveFocus();
       expect(speedSection.editElements.customText).toBeSelected();
@@ -84,10 +81,10 @@ describe('when the show section is clicked', () => {
 
           speedSection.editElements.submitForm();
 
+          expect(speedSection).toBeInMode('show');
           verifyModel(expectedValues);
           verifyEditModeView(expectedValues);
-          expect(speedSection).toBeInMode('show');
-          expect(speedSection).toShowPropertyLine(expectedHeading, expectedHtmlText);
+          verifyShowModeView(expectedHtmlText);
 
           const json = verifyJsonExport(expectedValues);
           expect(speedSection).toExportPropertyLineToHtml(expectedHeading, expectedHtmlText);
@@ -98,7 +95,7 @@ describe('when the show section is clicked', () => {
 
           verifyModel(expectedValues);
           verifyEditModeView(expectedValues);
-          expect(speedSection).toShowPropertyLine(expectedHeading, expectedHtmlText);
+          verifyShowModeView(expectedHtmlText);
         });
         /* eslint-enable indent, no-unexpected-multiline */
       });
@@ -116,6 +113,7 @@ describe('when the show section is clicked', () => {
 
         verifyModel(expectedValues);
         verifyEditModeView(expectedValues);
+        verifyShowModeView();
 
         const json = verifyJsonExport(expectedValues);
 
@@ -124,6 +122,7 @@ describe('when the show section is clicked', () => {
 
         verifyModel(expectedValues);
         verifyEditModeView(expectedValues);
+        verifyShowModeView();
       });
 
       it('should display an error if the custom text field is blank', () => {
@@ -157,13 +156,11 @@ describe('when the show section is clicked', () => {
     });
 
     it('should disable the custom text field, enable all other fields, and focus on the walk speed field', () => {
-      expect(speedSection.editElements.walk).not.toBeDisabled();
-      expect(speedSection.editElements.burrow).not.toBeDisabled();
-      expect(speedSection.editElements.climb).not.toBeDisabled();
-      expect(speedSection.editElements.fly).not.toBeDisabled();
-      expect(speedSection.editElements.hover).not.toBeDisabled();
-      expect(speedSection.editElements.swim).not.toBeDisabled();
-      expect(speedSection.editElements.customText).toBeDisabled();
+      expect(speedSection).toHaveEditElementsEnabledOrDisabledBasedOnCheckbox(
+        speedSection.editElements.useCustomText,
+        ['customText'],
+        ['walk', 'burrow', 'climb', 'fly', 'hover', 'swim']
+      );
 
       expect(speedSection.editElements.walk).toHaveFocus();
     });
@@ -227,10 +224,10 @@ describe('when the show section is clicked', () => {
 
           speedSection.editElements.submitForm();
 
+          expect(speedSection).toBeInMode('show');
           verifyModel(expectedValues);
           verifyEditModeView(expectedValues);
-          expect(speedSection).toBeInMode('show');
-          expect(speedSection).toShowPropertyLine(expectedHeading, expectedText);
+          verifyShowModeView(expectedText);
 
           const json = verifyJsonExport(expectedValues);
           expect(speedSection).toExportPropertyLineToHtml(expectedHeading, expectedText);
@@ -241,7 +238,7 @@ describe('when the show section is clicked', () => {
 
           verifyModel(expectedValues);
           verifyEditModeView(expectedValues);
-          expect(speedSection).toShowPropertyLine(expectedHeading, expectedText);
+          verifyShowModeView(expectedText);
         });
         /* eslint-enable indent, no-unexpected-multiline */
       });
@@ -273,6 +270,7 @@ describe('when the show section is clicked', () => {
 
         verifyModel(expectedValues);
         verifyEditModeView(expectedValues);
+        verifyShowModeView(expectedValues.htmlCustomText);
 
         const json = verifyJsonExport(expectedValues);
 
@@ -281,6 +279,7 @@ describe('when the show section is clicked', () => {
 
         verifyModel(expectedValues);
         verifyEditModeView(expectedValues);
+        verifyShowModeView(expectedValues.htmlCustomText);
       });
     });
   });
@@ -331,6 +330,16 @@ function verifyEditModeView({
   expect(speedSection.editElements.swim).toHaveValue(swim);
   expect(speedSection.editElements.useCustomText.checked).toBe(useCustomText);
   expect(speedSection.editElements.customText).toHaveValue(customText);
+
+  expect(speedSection).toHaveEditElementsEnabledOrDisabledBasedOnCheckbox(
+    speedSection.editElements.useCustomText,
+    ['customText'],
+    ['walk', 'burrow', 'climb', 'fly', 'hover', 'swim']
+  );
+}
+
+function verifyShowModeView(expectedText = '30 ft.') {
+  expect(speedSection).toShowPropertyLine(expectedHeading, expectedText);
 }
 
 function verifyJsonExport({

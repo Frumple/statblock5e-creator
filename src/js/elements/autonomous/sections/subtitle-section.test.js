@@ -23,7 +23,7 @@ beforeEach(() => {
 });
 
 it('show section should have default values', () => {
-  expect(subtitleSection.showElements.text).toHaveTextContent('Medium humanoid, unaligned');
+  verifyShowModeView();
 });
 
 describe('when the show section is clicked', () => {
@@ -46,11 +46,11 @@ describe('when the show section is clicked', () => {
     });
 
     it('should enable the custom text field, disable all other fields, and focus on the custom text field', () => {
-      expect(subtitleSection.editElements.size).toBeDisabled();
-      expect(subtitleSection.editElements.type).toBeDisabled();
-      expect(subtitleSection.editElements.tags).toBeDisabled();
-      expect(subtitleSection.editElements.alignment).toBeDisabled();
-      expect(subtitleSection.editElements.customText).toBeEnabled();
+      expect(subtitleSection).toHaveEditElementsEnabledOrDisabledBasedOnCheckbox(
+        subtitleSection.editElements.useCustomText,
+        ['customText'],
+        ['size', 'type', 'tags', 'alignment']
+      );
 
       expect(subtitleSection.editElements.customText).toHaveFocus();
       expect(subtitleSection.editElements.customText).toBeSelected();
@@ -77,10 +77,10 @@ describe('when the show section is clicked', () => {
 
           subtitleSection.editElements.submitForm();
 
+          expect(subtitleSection).toBeInMode('show');
           verifyModel(expectedValues);
           verifyEditModeView(expectedValues);
-          expect(subtitleSection).toBeInMode('show');
-          expect(subtitleSection.showElements.text).toHaveTextContent(customText);
+          verifyShowModeView(expectedValues.customText);
 
           const json = verifyJsonExport(expectedValues);
           verifyHtmlExport(customText);
@@ -91,7 +91,7 @@ describe('when the show section is clicked', () => {
 
           verifyModel(expectedValues);
           verifyEditModeView(expectedValues);
-          expect(subtitleSection.showElements.text).toHaveTextContent(customText);
+          verifyShowModeView(expectedValues.customText);
         });
         /* eslint-enable indent, no-unexpected-multiline */
       });
@@ -109,6 +109,7 @@ describe('when the show section is clicked', () => {
 
         verifyModel(expectedValues);
         verifyEditModeView(expectedValues);
+        verifyShowModeView();
 
         const json = verifyJsonExport(expectedValues);
 
@@ -117,6 +118,7 @@ describe('when the show section is clicked', () => {
 
         verifyModel(expectedValues);
         verifyEditModeView(expectedValues);
+        verifyShowModeView();
       });
 
       it('should display an error if the custom text field is blank', () => {
@@ -139,11 +141,11 @@ describe('when the show section is clicked', () => {
     });
 
     it('should disable the custom text field, enable all other fields, and focus on the size field', () => {
-      expect(subtitleSection.editElements.size).toBeEnabled();
-      expect(subtitleSection.editElements.type).toBeEnabled();
-      expect(subtitleSection.editElements.tags).toBeEnabled();
-      expect(subtitleSection.editElements.alignment).toBeEnabled();
-      expect(subtitleSection.editElements.customText).toBeDisabled();
+      expect(subtitleSection).toHaveEditElementsEnabledOrDisabledBasedOnCheckbox(
+        subtitleSection.editElements.useCustomText,
+        ['customText'],
+        ['size', 'type', 'tags', 'alignment']
+      );
 
       expect(subtitleSection.editElements.size).toHaveFocus();
     });
@@ -175,10 +177,10 @@ describe('when the show section is clicked', () => {
 
           subtitleSection.editElements.submitForm();
 
+          expect(subtitleSection).toBeInMode('show');
           verifyModel(expectedValues);
           verifyEditModeView(expectedValues);
-          expect(subtitleSection).toBeInMode('show');
-          expect(subtitleSection.showElements.text).toHaveTextContent(expectedSubtitle);
+          verifyShowModeView(expectedSubtitle);
 
           const json = verifyJsonExport(expectedValues);
           verifyHtmlExport(expectedSubtitle);
@@ -189,7 +191,7 @@ describe('when the show section is clicked', () => {
 
           verifyModel(expectedValues);
           verifyEditModeView(expectedValues);
-          expect(subtitleSection.showElements.text).toHaveTextContent(expectedSubtitle);
+          verifyShowModeView(expectedSubtitle);
         });
         /* eslint-enable indent, no-unexpected-multiline */
       });
@@ -216,7 +218,7 @@ describe('when the show section is clicked', () => {
 
         verifyModel(expectedValues);
         verifyEditModeView(expectedValues);
-        expect(subtitleSection.showElements.text).toHaveTextContent(expectedValues.customText);
+        verifyShowModeView(expectedValues.customText);
 
         const json = verifyJsonExport(expectedValues);
 
@@ -225,7 +227,7 @@ describe('when the show section is clicked', () => {
 
         verifyModel(expectedValues);
         verifyEditModeView(expectedValues);
-        expect(subtitleSection.showElements.text).toHaveTextContent(expectedValues.customText);
+        verifyShowModeView(expectedValues.customText);
       });
     });
   });
@@ -266,6 +268,16 @@ function verifyEditModeView({
   expect(subtitleSection.editElements.alignment).toHaveValue(alignment);
   expect(subtitleSection.editElements.useCustomText.checked).toBe(useCustomText);
   expect(subtitleSection.editElements.customText).toHaveValue(customText);
+
+  expect(subtitleSection).toHaveEditElementsEnabledOrDisabledBasedOnCheckbox(
+    subtitleSection.editElements.useCustomText,
+    ['customText'],
+    ['size', 'type', 'tags', 'alignment']
+  );
+}
+
+function verifyShowModeView(expectedText = 'Medium humanoid, unaligned') {
+  expect(subtitleSection.showElements.text).toHaveTextContent(expectedText);
 }
 
 function verifyJsonExport({

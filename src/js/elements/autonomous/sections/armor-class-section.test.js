@@ -25,8 +25,7 @@ beforeEach(() => {
 });
 
 it('show section should have default values', () => {
-  expect(armorClassSection.showElements.heading).toHaveTextContent('Armor Class');
-  expect(armorClassSection.showElements.text).toHaveTextContent(10);
+  verifyShowModeView();
 });
 
 describe('when the show section is clicked', () => {
@@ -49,10 +48,11 @@ describe('when the show section is clicked', () => {
     });
 
     it('should enable the custom text field, disable all other fields, and focus on the custom text field', () => {
-      expect(armorClassSection.editElements.armorClass).toBeDisabled();
-      expect(armorClassSection.editElements.armorType).toBeDisabled();
-      expect(armorClassSection.editElements.hasShield).toBeDisabled();
-      expect(armorClassSection.editElements.customText).not.toBeDisabled();
+      expect(armorClassSection).toHaveEditElementsEnabledOrDisabledBasedOnCheckbox(
+        armorClassSection.editElements.useCustomText,
+        ['customText'],
+        ['armorClass', 'armorType', 'hasShield']
+      );
 
       expect(armorClassSection.editElements.customText).toHaveFocus();
       expect(armorClassSection.editElements.customText).toBeSelected();
@@ -80,10 +80,10 @@ describe('when the show section is clicked', () => {
 
           armorClassSection.editElements.submitForm();
 
+          expect(armorClassSection).toBeInMode('show');
           verifyModel(expectedValues);
           verifyEditModeView(expectedValues);
-          expect(armorClassSection).toBeInMode('show');
-          expect(armorClassSection).toShowPropertyLine(expectedHeading, expectedHtmlText);
+          verifyShowModeView(expectedHtmlText);
 
           const json = verifyJsonExport(expectedValues);
           expect(armorClassSection).toExportPropertyLineToHtml(expectedHeading, expectedHtmlText);
@@ -94,7 +94,7 @@ describe('when the show section is clicked', () => {
 
           verifyModel(expectedValues);
           verifyEditModeView(expectedValues);
-          expect(armorClassSection).toShowPropertyLine(expectedHeading, expectedHtmlText);
+          verifyShowModeView(expectedHtmlText);
         });
         /* eslint-enable indent, no-unexpected-multiline */
       });
@@ -112,6 +112,7 @@ describe('when the show section is clicked', () => {
 
         verifyModel(expectedValues);
         verifyEditModeView(expectedValues);
+        verifyShowModeView();
 
         const json = verifyJsonExport(expectedValues);
 
@@ -120,6 +121,7 @@ describe('when the show section is clicked', () => {
 
         verifyModel(expectedValues);
         verifyEditModeView(expectedValues);
+        verifyShowModeView();
       });
 
       it('should display an error if the custom text field is blank', () => {
@@ -165,10 +167,11 @@ describe('when the show section is clicked', () => {
     });
 
     it('should disable the custom text field, enable all other fields, and focus on the armor class field', () => {
-      expect(armorClassSection.editElements.armorClass).not.toBeDisabled();
-      expect(armorClassSection.editElements.armorType).not.toBeDisabled();
-      expect(armorClassSection.editElements.hasShield).not.toBeDisabled();
-      expect(armorClassSection.editElements.customText).toBeDisabled();
+      expect(armorClassSection).toHaveEditElementsEnabledOrDisabledBasedOnCheckbox(
+        armorClassSection.editElements.useCustomText,
+        ['customText'],
+        ['armorClass', 'armorType', 'hasShield']
+      );
 
       expect(armorClassSection.editElements.armorClass).toHaveFocus();
     });
@@ -201,10 +204,10 @@ describe('when the show section is clicked', () => {
 
           armorClassSection.editElements.submitForm();
 
+          expect(armorClassSection).toBeInMode('show');
           verifyModel(expectedValues);
           verifyEditModeView(expectedValues);
-          expect(armorClassSection).toBeInMode('show');
-          expect(armorClassSection).toShowPropertyLine(expectedHeading, expectedText);
+          verifyShowModeView(expectedText);
 
           const json = verifyJsonExport(expectedValues);
           expect(armorClassSection).toExportPropertyLineToHtml(expectedHeading, expectedText);
@@ -215,7 +218,7 @@ describe('when the show section is clicked', () => {
 
           verifyModel(expectedValues);
           verifyEditModeView(expectedValues);
-          expect(armorClassSection).toShowPropertyLine(expectedHeading, expectedText);
+          verifyShowModeView(expectedText);
         });
         /* eslint-enable indent, no-unexpected-multiline */
       });
@@ -241,6 +244,7 @@ describe('when the show section is clicked', () => {
 
         verifyModel(expectedValues);
         verifyEditModeView(expectedValues);
+        verifyShowModeView(expectedValues.htmlCustomText);
 
         const json = verifyJsonExport(expectedValues);
 
@@ -249,6 +253,7 @@ describe('when the show section is clicked', () => {
 
         verifyModel(expectedValues);
         verifyEditModeView(expectedValues);
+        verifyShowModeView(expectedValues.htmlCustomText);
       });
 
       it('should display an error if the armor class field is not a valid number', () => {
@@ -310,6 +315,16 @@ function verifyEditModeView({
   expect(armorClassSection.editElements.hasShield.checked).toBe(hasShield);
   expect(armorClassSection.editElements.useCustomText.checked).toBe(useCustomText);
   expect(armorClassSection.editElements.customText).toHaveValue(customText);
+
+  expect(armorClassSection).toHaveEditElementsEnabledOrDisabledBasedOnCheckbox(
+    armorClassSection.editElements.useCustomText,
+    ['customText'],
+    ['armorClass', 'armorType', 'hasShield']
+  );
+}
+
+function verifyShowModeView(expectedText = '10') {
+  expect(armorClassSection).toShowPropertyLine(expectedHeading, expectedText);
 }
 
 function verifyJsonExport({

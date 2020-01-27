@@ -6,7 +6,6 @@ import { formatModifier, nullIfEmptyString } from '../../../helpers/string-forma
 
 import CurrentContext from '../../../models/current-context.js';
 
-const labelDisabledClass = 'section__label_disabled';
 const singleSkillUnderTest = 'investigation';
 const singleAbilityUnderTest = 'intelligence';
 
@@ -34,8 +33,7 @@ beforeEach(() => {
 });
 
 it('show section should have default values', () => {
-  expect(skillsSection.showElements.heading).toHaveTextContent('Skills');
-  expect(skillsSection.showElements.text).toHaveTextContent('');
+  verifyShowModeView();
 });
 
 describe('when the show section is clicked', () => {
@@ -59,8 +57,7 @@ describe('when the show section is clicked', () => {
 
       skillElements.enable.click();
 
-      expect(skillElements.label).not.toHaveClass(labelDisabledClass);
-      expect(skillElements.modifier).not.toHaveClass(labelDisabledClass);
+      verifySkillEditElementsEnabledOrDisabled(skillElements);
 
       expect(skillElements.modifier).toHaveTextContent('+2');
       expect(skillElements.proficient.checked).toBe(true);
@@ -78,8 +75,7 @@ describe('when the show section is clicked', () => {
 
       skillElements.enable.click();
 
-      expect(skillElements.label).toHaveClass(labelDisabledClass);
-      expect(skillElements.modifier).toHaveClass(labelDisabledClass);
+      verifySkillEditElementsEnabledOrDisabled(skillElements);
 
       expect(skillElements.modifier).toHaveTextContent('+0');
       expect(skillElements.proficient.checked).toBe(false);
@@ -163,7 +159,7 @@ describe('when the show section is clicked', () => {
         skillsSection.editElements.submitForm();
 
         expect(skillsSection).toBeInMode('show');
-        expect(skillsSection).toShowPropertyLine(expectedHeading, expectedText);
+        verifyShowModeView(expectedText);
         if (expectedText === '') {
           expect(skillsSection.showElements.section).toHaveClass('section_empty');
         } else {
@@ -181,7 +177,7 @@ describe('when the show section is clicked', () => {
 
         verifyModel(expectedSkills);
         verifyEditModeView(expectedSkills);
-        expect(skillsSection).toShowPropertyLine(expectedHeading, expectedText);
+        verifyShowModeView(expectedText);
       });
       /* eslint-enable indent, no-unexpected-multiline */
     });
@@ -272,7 +268,7 @@ describe('when the show section is clicked', () => {
         skillsSection.editElements.submitForm();
 
         expect(skillsSection).toBeInMode('show');
-        expect(skillsSection).toShowPropertyLine(expectedHeading, expectedText);
+        verifyShowModeView(expectedText);
 
         const json = verifyJsonExport(expectedSkills);
         expect(skillsSection).toExportPropertyLineToHtml(expectedHeading, expectedText);
@@ -282,7 +278,7 @@ describe('when the show section is clicked', () => {
         setAbilityScoresAndProficiencyBonus();
         skillsSection.importFromJson(json);
 
-        expect(skillsSection).toShowPropertyLine(expectedHeading, expectedText);
+        verifyShowModeView(expectedText);
       });
       /* eslint-enable indent, no-unexpected-multiline */
     });
@@ -346,7 +342,29 @@ function verifyEditModeView(expectedSkills) {
     expect(skillElements.modifier).toHaveTextContent(formattedModifier);
     expect(skillElements.proficient.checked).toBe(expectedSkill.isProficient);
     expect(skillElements.override).toHaveValue(expectedSkill.override);
+
+    verifySkillEditElementsEnabledOrDisabled(skillElements);
   }
+}
+
+function verifySkillEditElementsEnabledOrDisabled(skillElements) {
+  const labelDisabledClass = 'section__label_disabled';
+
+  if (skillElements.enable.checked) {
+    expect(skillElements.label).not.toHaveClass(labelDisabledClass);
+    expect(skillElements.modifier).not.toHaveClass(labelDisabledClass);
+    expect(skillElements.proficient).not.toHaveAttribute('disabled');
+    expect(skillElements.override).not.toHaveAttribute('disabled');
+  } else {
+    expect(skillElements.label).toHaveClass(labelDisabledClass);
+    expect(skillElements.modifier).toHaveClass(labelDisabledClass);
+    expect(skillElements.proficient).toHaveAttribute('disabled');
+    expect(skillElements.override).toHaveAttribute('disabled');
+  }
+}
+
+function verifyShowModeView(expectedText = '') {
+  expect(skillsSection).toShowPropertyLine(expectedHeading, expectedText);
 }
 
 function verifyJsonExport(expectedSkills) {

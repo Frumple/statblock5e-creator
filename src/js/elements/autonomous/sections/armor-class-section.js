@@ -66,6 +66,8 @@ export default class ArmorClassSection extends propertyLineSectionModule.Propert
       this.editElements.customText.parse();
       armorClassModel.htmlCustomText = this.editElements.customText.htmlText;
     }
+
+    this.editElements.useCustomText.onInputCheckbox();
   }
 
   updateShowModeView() {
