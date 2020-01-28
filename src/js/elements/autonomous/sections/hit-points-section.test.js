@@ -273,8 +273,8 @@ describe('when the show section is clicked', () => {
           useHitDie: false
         };
 
-        inputValueAndTriggerEvent(hitPointsSection.editElements.hitPoints, '');
         inputValueAndTriggerEvent(hitPointsSection.editElements.hitDieQuantity, '');
+        inputValueAndTriggerEvent(hitPointsSection.editElements.hitPoints, '');
 
         verifyModel(expectedValues);
 

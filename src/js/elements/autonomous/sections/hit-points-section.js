@@ -38,22 +38,22 @@ export default class HitPointsSection extends propertyLineSectionModule.Property
 
   onInputHitPoints() {
     this.updateModelHitPoints();
-    this.updateView();
   }
 
   onInputUseHitDie() {
     this.updateModelUseHitDie();
-    this.updateView();
+    this.updateEditModeViewHitPoints();
   }
 
   onInputHitDieQuantity() {
     this.updateModelHitDieQuantity();
-    this.updateView();
+    this.updateEditModeViewHitPoints();
+    this.updateEditModeViewConstitutionHitPoints();
   }
 
   onInputHitDieSize() {
     this.updateModelHitDieSize();
-    this.updateView();
+    this.updateEditModeViewHitPoints();
   }
 
   checkForErrors() {
@@ -106,6 +106,14 @@ export default class HitPointsSection extends propertyLineSectionModule.Property
     this.editElements.hitDieQuantity.value = hitPointsModel.hitDieQuantity;
     this.editElements.hitDieSize.value = hitPointsModel.hitDieSize;
     this.editElements.constitutionHitPoints.textContent = hitPointsModel.constitutionHitPointsText;
+  }
+
+  updateEditModeViewHitPoints() {
+    this.editElements.hitPoints.value = CurrentContext.creature.hitPoints.hitPoints;
+  }
+
+  updateEditModeViewConstitutionHitPoints() {
+    this.editElements.constitutionHitPoints.textContent = CurrentContext.creature.hitPoints.constitutionHitPointsText;
   }
 
   updateShowModeView() {
