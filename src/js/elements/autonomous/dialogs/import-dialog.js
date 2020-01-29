@@ -42,6 +42,7 @@ export default class ImportDialog extends OptionDialog {
   }
 
   launch() {
+    this.fileInput.value = '';
     this.setStatus('Click "Choose File..." to begin.');
     this.showModal();
   }
