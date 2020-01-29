@@ -7,8 +7,8 @@ import * as sharedSpecs from './block-list-section.specs.js';
 const expectedHeading = 'Reactions';
 const expectedBlockType = 'Reaction';
 
-const title = CurrentContext.creature.title;
-const reactions = CurrentContext.creature.reactions;
+const titleModel = CurrentContext.creature.title;
+const reactionsModel = CurrentContext.creature.reactions;
 
 let reactionsSection;
 
@@ -20,8 +20,8 @@ beforeAll(async() => {
 });
 
 beforeEach(() => {
-  title.reset();
-  reactions.reset();
+  titleModel.reset();
+  reactionsModel.reset();
 
   reactionsSection = new ReactionsSection();
   TestCustomElements.initializeSection(reactionsSection);
@@ -29,7 +29,7 @@ beforeEach(() => {
 });
 
 it('section should have default blocks', () => {
-  sharedSpecs.sectionShouldHaveDefaultBlocks(reactionsSection);
+  sharedSpecs.sectionShouldHaveDefaultBlocks(reactionsSection, reactionsModel);
 });
 
 describe('when the show section is clicked', () => {
@@ -60,9 +60,9 @@ describe('when the show section is clicked', () => {
         htmlText: 'The knight adds 2 to its AC against one melee attack that would hit it. To do so, the knight must see the attacker and be wielding a melee weapon.'
       };
 
-      title.fullName = 'Knight';
+      titleModel.fullName = 'Knight';
 
-      sharedSpecs.shouldAddASingleBlock(reactionsSection, block);
+      sharedSpecs.shouldAddASingleBlock(reactionsSection, reactionsModel, block);
     });
 
     it('should add a single block with multiline text', () => {
@@ -73,9 +73,9 @@ describe('when the show section is clicked', () => {
         htmlText: '<strong>Line 1</strong>. The dummy is here.\n  <strong>Line 2</strong>. The dummy is there.\n    <strong>Line 3</strong>. The dummy is everywhere.'
       };
 
-      title.fullName = 'Dummy';
+      titleModel.fullName = 'Dummy';
 
-      sharedSpecs.shouldAddASingleBlock(reactionsSection, block);
+      sharedSpecs.shouldAddASingleBlock(reactionsSection, reactionsModel, block);
     });
 
     it('should add a single block with html escaped', () => {
@@ -86,9 +86,9 @@ describe('when the show section is clicked', () => {
         htmlText: '&lt;strong&gt;Line 1&lt;/strong&gt;. The dummy is here.'
       };
 
-      title.fullName = 'Dummy';
+      titleModel.fullName = 'Dummy';
 
-      sharedSpecs.shouldAddASingleBlock(reactionsSection, block);
+      sharedSpecs.shouldAddASingleBlock(reactionsSection, reactionsModel, block);
     });
 
     it('should add multiple blocks', () => {
@@ -107,7 +107,7 @@ describe('when the show section is clicked', () => {
           text: 'Reaction Text 3'
         }
       ];
-      sharedSpecs.shouldAddMultipleBlocks(reactionsSection, blocks);
+      sharedSpecs.shouldAddMultipleBlocks(reactionsSection, reactionsModel, blocks);
     });
 
     it('should add a single block, then remove it', () => {
@@ -116,7 +116,7 @@ describe('when the show section is clicked', () => {
         text: 'When a jelly that is Medium or larger is subjected to lightning or slashing damage, it splits into two new jellies if it has at least 10 hit points. Each new jelly has hit points equal to half the original jelly\'s, rounded down. New jellies are one size smaller than the original jelly.'
       };
 
-      sharedSpecs.shouldAddASingleBlockThenRemoveIt(reactionsSection, block);
+      sharedSpecs.shouldAddASingleBlockThenRemoveIt(reactionsSection, reactionsModel, block);
     });
 
     it('should add multiple blocks, then remove one of them', () => {
@@ -135,7 +135,7 @@ describe('when the show section is clicked', () => {
           htmlText: '<strong>Reaction</strong> Text 3'
         }
       ];
-      sharedSpecs.shouldAddMultipleBlocksThenRemoveOneOfThem(reactionsSection, blocks, 1);
+      sharedSpecs.shouldAddMultipleBlocksThenRemoveOneOfThem(reactionsSection, reactionsModel, blocks, 1);
     });
 
     describe('should reparse the block text', () => {
@@ -162,7 +162,7 @@ describe('when the show section is clicked', () => {
         block.homebreweryText = 'If the old spectator makes a successful saving throw against a spell, or a spell attack misses it, the old spectator can choose another creature (including the spellcaster) it can see within 30 feet of it. The spell targets the chosen creature instead of the old spectator. If the spell forced a saving throw, the chosen creature makes its own save. If the spell was an attack, the attack roll is rerolled against the chosen creature.';
         block.htmlText = block.homebreweryText;
 
-        sharedSpecs.shouldReparseNameChanges(reactionsSection, block, oldNames, newNames);
+        sharedSpecs.shouldReparseNameChanges(reactionsSection, reactionsModel, block, oldNames, newNames);
       });
 
       it('when the short name is changed', () => {
@@ -175,7 +175,7 @@ describe('when the show section is clicked', () => {
         block.homebreweryText = 'If the spectator makes a successful saving throw against a spell, or a spell attack misses it, the spectator can choose another creature (including the spellcaster) it can see within 30 feet of it. The spell targets the chosen creature instead of the spectator. If the spell forced a saving throw, the chosen creature makes its own save. If the spell was an attack, the attack roll is rerolled against the chosen creature.';
         block.htmlText = block.homebreweryText;
 
-        sharedSpecs.shouldReparseNameChanges(reactionsSection, block, oldNames, newNames);
+        sharedSpecs.shouldReparseNameChanges(reactionsSection, reactionsModel, block, oldNames, newNames);
       });
 
       it('when the proper noun is changed', () => {
@@ -188,12 +188,12 @@ describe('when the show section is clicked', () => {
         block.homebreweryText = 'If Old Spectator makes a successful saving throw against a spell, or a spell attack misses it, Old Spectator can choose another creature (including the spellcaster) it can see within 30 feet of it. The spell targets the chosen creature instead of Old Spectator. If the spell forced a saving throw, the chosen creature makes its own save. If the spell was an attack, the attack roll is rerolled against the chosen creature.';
         block.htmlText = block.homebreweryText;
 
-        sharedSpecs.shouldReparseNameChanges(reactionsSection, block, oldNames, newNames);
+        sharedSpecs.shouldReparseNameChanges(reactionsSection, reactionsModel, block, oldNames, newNames);
       });
     });
 
     it('should trim all trailing period characters in the block name', () => {
-      sharedSpecs.shouldTrimAllTrailingPeriodCharactersInBlockName(reactionsSection);
+      sharedSpecs.shouldTrimAllTrailingPeriodCharactersInBlockName(reactionsSection, reactionsModel);
     });
 
     it('should display an error if the block name is blank', () => {

@@ -6,8 +6,8 @@ import * as sharedSpecs from './block-list-section.specs.js';
 
 const expectedBlockType = 'Special Trait';
 
-const title = CurrentContext.creature.title;
-const specialTraits = CurrentContext.creature.specialTraits;
+const titleModel = CurrentContext.creature.title;
+const specialTraitsModel = CurrentContext.creature.specialTraits;
 
 let specialTraitsSection;
 
@@ -17,8 +17,8 @@ beforeAll(async() => {
 });
 
 beforeEach(() => {
-  title.reset();
-  specialTraits.reset();
+  titleModel.reset();
+  specialTraitsModel.reset();
 
   specialTraitsSection = new SpecialTraitsSection();
   TestCustomElements.initializeSection(specialTraitsSection);
@@ -26,7 +26,7 @@ beforeEach(() => {
 });
 
 it('section should have default blocks', () => {
-  sharedSpecs.sectionShouldHaveDefaultBlocks(specialTraitsSection);
+  sharedSpecs.sectionShouldHaveDefaultBlocks(specialTraitsSection, specialTraitsModel);
 });
 
 describe('when the show section is clicked', () => {
@@ -57,10 +57,10 @@ describe('when the show section is clicked', () => {
         htmlText: 'The armor is incapacitated while in the area of an <em>antimagic field</em>. If targeted by <em>dispel magic</em>, the armor must succeed on a Constitution saving throw against the caster\'s spell save DC or fall unconscious for 1 minute.'
       };
 
-      title.fullName = 'Animated Armor';
-      title.shortName = 'armor';
+      titleModel.fullName = 'Animated Armor';
+      titleModel.shortName = 'armor';
 
-      sharedSpecs.shouldAddASingleBlock(specialTraitsSection, block);
+      sharedSpecs.shouldAddASingleBlock(specialTraitsSection, specialTraitsModel, block);
     });
 
     it('should add a single block with multiline text', () => {
@@ -71,9 +71,9 @@ describe('when the show section is clicked', () => {
         htmlText: 'The hydra has five heads. While it has more than one head, the hydra has advantage on saving throws against being blinded, charmed, deafened, frightened, stunned, and knocked unconscious.\n  Whenever the hydra takes 25 or more damage in a single turn, one of its heads dies. If all its heads die, the hydra dies.\n  At the end of its turn, it grows two heads for each of its heads that died since its last turn, unless it has taken fire damage since its last turn. The hydra regains 10 hit points for each head regrown in this way.'
       };
 
-      title.fullName = 'Hydra';
+      titleModel.fullName = 'Hydra';
 
-      sharedSpecs.shouldAddASingleBlock(specialTraitsSection, block);
+      sharedSpecs.shouldAddASingleBlock(specialTraitsSection, specialTraitsModel, block);
     });
 
     it('should add a single block with html escaped', () => {
@@ -84,10 +84,10 @@ describe('when the show section is clicked', () => {
         htmlText: 'The armor is incapacitated while in the area of an &lt;em&gt;antimagic field&lt;/em&gt;. If targeted by &lt;em&gt;dispel magic&lt;/em&gt;, the armor must succeed on a Constitution saving throw against the caster\'s spell save DC or fall unconscious for 1 minute.'
       };
 
-      title.fullName = 'Animated Armor';
-      title.shortName = 'armor';
+      titleModel.fullName = 'Animated Armor';
+      titleModel.shortName = 'armor';
 
-      sharedSpecs.shouldAddASingleBlock(specialTraitsSection, block);
+      sharedSpecs.shouldAddASingleBlock(specialTraitsSection, specialTraitsModel, block);
     });
 
     it('should add multiple blocks', () => {
@@ -112,10 +112,10 @@ describe('when the show section is clicked', () => {
         }
       ];
 
-      title.fullName = 'Winter Wolf';
-      title.shortName = 'wolf';
+      titleModel.fullName = 'Winter Wolf';
+      titleModel.shortName = 'wolf';
 
-      sharedSpecs.shouldAddMultipleBlocks(specialTraitsSection, blocks);
+      sharedSpecs.shouldAddMultipleBlocks(specialTraitsSection, specialTraitsModel, blocks);
     });
 
     it('should add a single block, then remove it', () => {
@@ -126,8 +126,8 @@ describe('when the show section is clicked', () => {
         htmlText: 'The jelly can climb difficult surfaces, including upside down on ceilings, without needing to make an ability check.'
       };
 
-      title.fullName = 'Ochre Jelly';
-      title.shortName = 'jelly';
+      titleModel.fullName = 'Ochre Jelly';
+      titleModel.shortName = 'jelly';
 
       sharedSpecs.shouldAddASingleBlockThenRemoveIt(specialTraitsSection, block);
     });
@@ -154,9 +154,9 @@ describe('when the show section is clicked', () => {
         }
       ];
 
-      title.fullName = 'Doppelganger';
+      titleModel.fullName = 'Doppelganger';
 
-      sharedSpecs.shouldAddMultipleBlocksThenRemoveOneOfThem(specialTraitsSection, blocks, 1);
+      sharedSpecs.shouldAddMultipleBlocksThenRemoveOneOfThem(specialTraitsSection, specialTraitsModel, blocks, 1);
     });
 
     describe('should reparse the block text', () => {
@@ -183,7 +183,7 @@ describe('when the show section is clicked', () => {
         block.homebreweryText = 'The burrowing kobold has advantage on an attack roll against a creature if at least one of the burrowing kobold\'s allies is within 5 feet of the creature an ally isn\'t incapacitated.';
         block.htmlText = block.homebreweryText;
 
-        sharedSpecs.shouldReparseNameChanges(specialTraitsSection, block, oldNames, newNames);
+        sharedSpecs.shouldReparseNameChanges(specialTraitsSection, specialTraitsModel, block, oldNames, newNames);
       });
 
       it('when the short name is changed', () => {
@@ -196,7 +196,7 @@ describe('when the show section is clicked', () => {
         block.homebreweryText = 'The kobold has advantage on an attack roll against a creature if at least one of the kobold\'s allies is within 5 feet of the creature an ally isn\'t incapacitated.';
         block.htmlText = block.homebreweryText;
 
-        sharedSpecs.shouldReparseNameChanges(specialTraitsSection, block, oldNames, newNames);
+        sharedSpecs.shouldReparseNameChanges(specialTraitsSection, specialTraitsModel, block, oldNames, newNames);
       });
 
       it('when the proper noun is changed', () => {
@@ -209,12 +209,12 @@ describe('when the show section is clicked', () => {
         block.homebreweryText = 'Winged Kobold has advantage on an attack roll against a creature if at least one of Winged Kobold\'s allies is within 5 feet of the creature an ally isn\'t incapacitated.';
         block.htmlText = block.homebreweryText;
 
-        sharedSpecs.shouldReparseNameChanges(specialTraitsSection, block, oldNames, newNames);
+        sharedSpecs.shouldReparseNameChanges(specialTraitsSection, specialTraitsModel, block, oldNames, newNames);
       });
     });
 
     it('should trim all trailing period characters in the block name', () => {
-      sharedSpecs.shouldTrimAllTrailingPeriodCharactersInBlockName(specialTraitsSection);
+      sharedSpecs.shouldTrimAllTrailingPeriodCharactersInBlockName(specialTraitsSection, specialTraitsModel);
     });
 
     it('should display an error if the block name is blank', () => {

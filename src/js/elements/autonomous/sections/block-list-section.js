@@ -116,6 +116,11 @@ export class BlockListSection extends sectionModule.Section {
       }
     }
   }
+
+  importFromJson(json) {
+    super.importFromJson(json);
+    this.reparse();
+  }
 }
 
 export class BlockListShowSection extends sectionModule.ShowElements {

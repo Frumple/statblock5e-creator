@@ -56,9 +56,15 @@ export default class LegendaryActionsSection extends blockListSectionModule.Bloc
 
     const model = CurrentContext.creature.legendaryActions;
 
-    model.originalDescription = this.editElements.description.value;
+    model.description = this.editElements.description.value;
     model.homebreweryDescription = this.editElements.description.homebreweryText;
     model.htmlDescription = this.editElements.description.htmlText;
+  }
+
+  updateEditModeView() {
+    super.updateEditModeView();
+
+    this.editElements.description.value = CurrentContext.creature.legendaryActions.description;
   }
 
   updateShowModeView() {
@@ -69,6 +75,8 @@ export default class LegendaryActionsSection extends blockListSectionModule.Bloc
 
   reparse() {
     super.reparse();
+
+    this.editElements.description.parse();
 
     if (this.mode === 'show') {
       this.showElements.description.innerHTMLSanitized = CurrentContext.creature.legendaryActions.htmlDescription;

@@ -1,4 +1,5 @@
 import Model from '../../model.js';
+import BlockModel from './block-model.js';
 
 export default class BlockListModel extends Model {
   constructor(headingName, singleName) {
@@ -7,11 +8,25 @@ export default class BlockListModel extends Model {
     this.headingName = headingName;
     this.singleName = singleName;
 
+    this.blocks = [];
+
     this.reset();
   }
 
   reset() {
-    this.blocks = [];
+    this.clear();
+  }
+
+  clear() {
+    this.blocks.length = 0;
+  }
+
+  fromJson(json) {
+    this.clear();
+    for (const jsonBlock of json.blocks) {
+      const block = new BlockModel(jsonBlock.name, jsonBlock.text);
+      this.blocks.push(block);
+    }
   }
 
   toJson() {

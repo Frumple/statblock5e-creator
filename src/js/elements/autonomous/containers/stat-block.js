@@ -117,7 +117,7 @@ export default class StatBlock extends CustomAutonomousElement {
   importFromJson(json) {
     this.headingStats.importFromJson(json);
     this.topStats.importFromJson(json);
-    // this.bottomStats.importFromJson(json);
+    this.bottomStats.importFromJson(json);
   }
 
   exportToJson() {

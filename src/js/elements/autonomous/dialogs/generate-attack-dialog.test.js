@@ -30,10 +30,6 @@ beforeEach(() => {
   TestCustomElements.initializeSection(actionsSection);
   actionsSection.connect();
 
-  // Remove the default "Club" attack action to start these specs with no actions
-  const editableBlock = actionsSection.editElements.editableBlockList.blocks[0];
-  editableBlock.remove();
-
   generateAttackDialog = actionsSection.editElements.generateAttackDialog;
   generateAttackDialog.connect();
 });

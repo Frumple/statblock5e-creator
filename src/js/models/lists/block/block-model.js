@@ -1,7 +1,7 @@
 import * as ExportHelpers from '../../../helpers/export-helpers.js';
 
 export default class BlockModel {
-  constructor(name, text, homebreweryText, htmlText) {
+  constructor(name, text, homebreweryText = '', htmlText = '') {
     this.name = name;
     this.text = text;
     this.homebreweryText = homebreweryText;
