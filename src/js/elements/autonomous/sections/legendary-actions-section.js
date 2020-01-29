@@ -74,9 +74,9 @@ export default class LegendaryActionsSection extends blockListSectionModule.Bloc
   }
 
   reparse() {
-    super.reparse();
-
     this.editElements.description.parse();
+
+    super.reparse();
 
     if (this.mode === 'show') {
       this.showElements.description.innerHTMLSanitized = CurrentContext.creature.legendaryActions.htmlDescription;
