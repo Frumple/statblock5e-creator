@@ -6,7 +6,7 @@
   grid-row-gap: 5px;
   align-items: center;
   padding: 5px;
-  margin-top: 5px;
+  margin-bottom: 5px;
 }
 
 .editable-block__drag-handle {
