@@ -19,8 +19,17 @@ export default class ChallengeRating extends PropertyLineModel {
     ];
   }
 
+  get challengeRatingAsFraction() {
+    switch(this.challengeRating) {
+    case 0.125: return '1/8';
+    case 0.25: return '1/4';
+    case 0.5: return '1/2';
+    default: return this.challengeRating;
+    }
+  }
+
   get text() {
-    return `${this.challengeRating} (${this.experiencePoints} XP)`;
+    return `${this.challengeRatingAsFraction} (${this.experiencePoints} XP)`;
   }
 
   get htmlText() {

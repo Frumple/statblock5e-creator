@@ -43,30 +43,69 @@ describe('when the show section is clicked', () => {
   });
 
   describe('and the challenge rating field is changed, and the edit section is submitted', () => {
-    it('should automatically change the experience points to the corresponding amount, and save the fields', () => {
-      const expectedChallengeRating = 8;
-      const expectedExperiencePoints = 3900;
-      const expectedText = '8 (3900 XP)';
+    describe('should automatically change the experience points to the corresponding amount, and save the fields', () => {
+      /* eslint-disable indent, no-unexpected-multiline */
+      it.each
+      `
+        challengeRating | expectedExperiencePoints | expectedText
+        ${0}            | ${10}                    | ${'0 (10 XP)'}
+        ${0.125}        | ${25}                    | ${'1/8 (25 XP)'}
+        ${0.25}         | ${50}                    | ${'1/4 (50 XP)'}
+        ${0.5}          | ${100}                   | ${'1/2 (100 XP)'}
+        ${1}            | ${200}                   | ${'1 (200 XP)'}
+        ${2}            | ${450}                   | ${'2 (450 XP)'}
+        ${3}            | ${700}                   | ${'3 (700 XP)'}
+        ${4}            | ${1100}                  | ${'4 (1100 XP)'}
+        ${5}            | ${1800}                  | ${'5 (1800 XP)'}
+        ${6}            | ${2300}                  | ${'6 (2300 XP)'}
+        ${7}            | ${2900}                  | ${'7 (2900 XP)'}
+        ${8}            | ${3900}                  | ${'8 (3900 XP)'}
+        ${9}            | ${5000}                  | ${'9 (5000 XP)'}
+        ${10}           | ${5900}                  | ${'10 (5900 XP)'}
+        ${11}           | ${7200}                  | ${'11 (7200 XP)'}
+        ${12}           | ${8400}                  | ${'12 (8400 XP)'}
+        ${13}           | ${10000}                 | ${'13 (10000 XP)'}
+        ${14}           | ${11500}                 | ${'14 (11500 XP)'}
+        ${15}           | ${13000}                 | ${'15 (13000 XP)'}
+        ${16}           | ${15000}                 | ${'16 (15000 XP)'}
+        ${17}           | ${18000}                 | ${'17 (18000 XP)'}
+        ${18}           | ${20000}                 | ${'18 (20000 XP)'}
+        ${19}           | ${22000}                 | ${'19 (22000 XP)'}
+        ${20}           | ${25000}                 | ${'20 (25000 XP)'}
+        ${21}           | ${33000}                 | ${'21 (33000 XP)'}
+        ${22}           | ${41000}                 | ${'22 (41000 XP)'}
+        ${23}           | ${50000}                 | ${'23 (50000 XP)'}
+        ${24}           | ${62000}                 | ${'24 (62000 XP)'}
+        ${25}           | ${75000}                 | ${'25 (75000 XP)'}
+        ${26}           | ${90000}                 | ${'26 (90000 XP)'}
+        ${27}           | ${105000}                | ${'27 (105000 XP)'}
+        ${28}           | ${120000}                | ${'28 (120000 XP)'}
+        ${29}           | ${135000}                | ${'29 (135000 XP)'}
+        ${30}           | ${155000}                | ${'30 (155000 XP)'}
+      `
+      ('$challengeRating => {expectedExperiencePoints = $expectedExperiencePoints, expectedText = $expectedText}',
+      ({challengeRating, expectedExperiencePoints, expectedText}) => {
+        inputValueAndTriggerEvent(challengeRatingSection.editElements.challengeRating, challengeRating);
 
-      inputValueAndTriggerEvent(challengeRatingSection.editElements.challengeRating, expectedChallengeRating);
+        verifyEditModeView(challengeRating, expectedExperiencePoints);
 
-      verifyEditModeView(expectedChallengeRating, expectedExperiencePoints);
+        challengeRatingSection.editElements.submitForm();
 
-      challengeRatingSection.editElements.submitForm();
+        verifyModel(challengeRating, expectedExperiencePoints);
+        expect(challengeRatingSection).toBeInMode('show');
+        expect(challengeRatingSection).toShowPropertyLine(expectedHeading, expectedText);
 
-      verifyModel(expectedChallengeRating, expectedExperiencePoints);
-      expect(challengeRatingSection).toBeInMode('show');
-      expect(challengeRatingSection).toShowPropertyLine(expectedHeading, expectedText);
+        const json = verifyJsonExport(challengeRating, expectedExperiencePoints);
+        expect(challengeRatingSection).toExportPropertyLineToHtml(expectedHeading, expectedText);
+        expect(challengeRatingSection).toExportPropertyLineToHomebrewery(expectedHeading, expectedText);
 
-      const json = verifyJsonExport(expectedChallengeRating, expectedExperiencePoints);
-      expect(challengeRatingSection).toExportPropertyLineToHtml(expectedHeading, expectedText);
-      expect(challengeRatingSection).toExportPropertyLineToHomebrewery(expectedHeading, expectedText);
+        reset();
+        challengeRatingSection.importFromJson(json);
 
-      reset();
-      challengeRatingSection.importFromJson(json);
-
-      verifyModel(expectedChallengeRating, expectedExperiencePoints);
-      verifyEditModeView(expectedChallengeRating, expectedExperiencePoints);
+        verifyModel(challengeRating, expectedExperiencePoints);
+        verifyEditModeView(challengeRating, expectedExperiencePoints);
+      });
+      /* eslint-enable indent, no-unexpected-multiline */
     });
   });
 
