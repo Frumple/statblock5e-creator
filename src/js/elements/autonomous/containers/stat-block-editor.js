@@ -52,7 +52,7 @@ export default class StatBlockEditor extends CustomAutonomousElement {
 
       this.addEventListener('numberOfColumnsChanged', this.onNumberOfColumnsChanged.bind(this));
       this.addEventListener('twoColumnHeightChanged', this.onTwoColumnHeightChanged.bind(this));
-      this.addEventListener('emptySectionsVisibilityChanged', this.onEmptySectionsVisiblityChanged.bind(this));
+      this.addEventListener('emptySectionsVisibilityChanged', this.onEmptySectionsVisibilityChanged.bind(this));
       this.addEventListener('allSectionsAction', this.onAllSectionsAction.bind(this));
 
       this.addEventListener('importAction', this.onImportAction.bind(this));
@@ -93,7 +93,7 @@ export default class StatBlockEditor extends CustomAutonomousElement {
     this.statBlock.setColumnHeight(mode, height);
   }
 
-  onEmptySectionsVisiblityChanged(event) {
+  onEmptySectionsVisibilityChanged(event) {
     const layoutSettings = CurrentContext.layoutSettings;
 
     const visibility = event.detail.visibility;
@@ -166,12 +166,12 @@ export default class StatBlockEditor extends CustomAutonomousElement {
   }
 
   importFromJson(json) {
+    this.statBlock.importFromJson(json);
+
     CurrentContext.layoutSettings.fromJson(json.layout);
 
     this.statBlockMenu.updateControls();
     this.statBlockSidebar.updateControls();
-
-    this.statBlock.importFromJson(json);
   }
 
   exportToJson() {
