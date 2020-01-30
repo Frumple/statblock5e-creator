@@ -128,13 +128,13 @@ Operand
   / Integer
 
 AbilityModifier
-  = 'strmod' { return options.abilities.strength.modifier; }
-  / 'dexmod' { return options.abilities.dexterity.modifier; }
-  / 'conmod' { return options.abilities.constitution.modifier; }
-  / 'intmod' { return options.abilities.intelligence.modifier; }
-  / 'wismod' { return options.abilities.wisdom.modifier; }
-  / 'chamod' { return options.abilities.charisma.modifier; }
-  / 'finmod' { return (options.abilities.strength.modifier >= options.abilities.dexterity.modifier) ? options.abilities.strength.modifier : options.abilities.dexterity.modifier}
+  = 'str' { return options.abilities.strength.modifier; }
+  / 'dex' { return options.abilities.dexterity.modifier; }
+  / 'con' { return options.abilities.constitution.modifier; }
+  / 'int' { return options.abilities.intelligence.modifier; }
+  / 'wis' { return options.abilities.wisdom.modifier; }
+  / 'cha' { return options.abilities.charisma.modifier; }
+  / 'fin' { return (options.abilities.strength.modifier >= options.abilities.dexterity.modifier) ? options.abilities.strength.modifier : options.abilities.dexterity.modifier}
 
 ProficiencyBonus
   = 'prof' { return options.proficiencyBonus; }

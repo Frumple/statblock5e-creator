@@ -95,13 +95,13 @@ export default class Attack {
 
   generatedTextParserAbilityModifier(isMeleeEnabled, isRangedEnabled) {
     if (this.isFinesse) {
-      return 'finmod';
+      return 'fin';
     }
 
     if (isMeleeEnabled) {
-      return 'strmod';
+      return 'str';
     } else if (isRangedEnabled) {
-      return 'dexmod';
+      return 'dex';
     }
 
     return '';

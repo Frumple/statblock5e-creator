@@ -41,7 +41,7 @@ In the first section where you specify the creature's full name, you can also op
 
 ### Short Name
 
-The **short name** is typically one or two words used to refer to the creature in the descriptions of its special traits, actions, reactions, and legendary actions. In these descriptions, all instances of **`[name]`** are substituted with the short name when displayed. If the short name is blank, the creature's full name will be used instead. 
+The **short name** is typically one or two words used to refer to the creature in the descriptions of its special traits, actions, reactions, and legendary actions. In these descriptions, all instances of **`[name]`** are substituted with the short name when displayed. If the short name is blank, the creature's full name will be used instead.
 
 Alternatively, you can use **`[fullname]`**, which is always replaced with the creature's full name. However, `[name]` should suffice for almost all use cases.
 
@@ -89,7 +89,7 @@ Please note the use of name expressions is completely optional; you can certainl
 Basic math expressions consist of a series of **operands** and **operators** within square brackets, allowing for the addition and subtraction of such operands.
 
 Supported operands include:
-- **variables** (e.g. ability modifiers represented by `strmod`, `dexmod`, etc., and proficiency bonus represented by `prof`) 
+- **variables** (e.g. ability modifiers represented by `str`, `dex`, etc., and proficiency bonus represented by `prof`)
 - **integers** (e.g. 12, -3, or 0)
 
 Supported operators include:
@@ -98,11 +98,11 @@ Supported operators include:
 
 For example. if the creature's strength modifier is **+4** and its proficiency bonus is **+2**:
 ```
-[strmod + prof - 3]
-``` 
+[str + prof - 3]
+```
 will be calculated as **4 + 2 - 3**, resulting in a final answer of **3**.
 
-Note that whitespace between the operands and operators is optional, meaning that `[strmod+prof-3]` is also a valid and equivalent math expression.
+Note that whitespace between the operands and operators is optional, meaning that `[str+prof-3]` is also a valid and equivalent math expression.
 
 ### Variables
 
@@ -110,26 +110,26 @@ Here are a list of variables that are currently supported in math expressions:
 
 | Variable | Description | Note |
 | -------- | ----------- | ---- |
-| **`strmod`** | Strength Modifier     |
-| **`dexmod`** | Dexterity Modifier    |
-| **`conmod`** | Constitution Modifier |
-| **`intmod`** | Intelligence Modifier |
-| **`wismod`** | Wisdom Modifier       |
-| **`chamod`** | Charisma Modifier     |
-| **`finmod`** | Finesse Modifier      | For use in finesse weapons. Equal to strength or dexterity modifier, whichever is highest. |
+| **`str`** | Strength Modifier     |
+| **`dex`** | Dexterity Modifier    |
+| **`con`** | Constitution Modifier |
+| **`int`** | Intelligence Modifier |
+| **`wis`** | Wisdom Modifier       |
+| **`cha`** | Charisma Modifier     |
+| **`fin`** | Finesse Modifier      | For use in finesse weapons. Equal to strength or dexterity modifier, whichever is highest. |
 | **`prof`**   | Proficiency Bonus     |
 
 ### Modifier Expressions: mod[...]
 
 One limitation of basic math expressions is that resulting positive numbers will appear without a positive sign (e.g. **5** instead of **+5**). The positive sign is needed to accurately show attack roll modifiers, so to make it appear, simply add the word **`mod`** before the square brackets: **`mod[...]`**
 
-For example, assuming again that the creature's strength modifier is **+4** and its proficiency bonus is **+2**: 
+For example, assuming again that the creature's strength modifier is **+4** and its proficiency bonus is **+2**:
 
 ```
-*Melee Weapon Attack:* mod[strmod + prof - 3] to hit
-``` 
+*Melee Weapon Attack:* mod[str + prof - 3] to hit
+```
 
-will appear as 
+will appear as
 
 > _Melee Weapon Attack:_ +3 to hit
 
@@ -140,13 +140,13 @@ For damage rolls, you can use damage expressions to automatically calculate the 
 For example, if the creature's dexterity modifier is **+3**, then:
 
 ```
-dmg[1d8 + dexmod + 2] slashing damage
+dmg[1d8 + dex + 2] slashing damage
 ```
 
-results in 
+results in
 
 > 9 (1d8 + 5) slashing damage
- 
+
 This is because since the average damage of 1d8 is 4.5 (rounded down to 4), then **4 + 3 + 2** equals **9** for the total average damage.
 
 ## Development Setup

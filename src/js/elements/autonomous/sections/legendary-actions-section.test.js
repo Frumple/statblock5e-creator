@@ -183,7 +183,7 @@ describe('when the show section is clicked', () => {
         },
         {
           name: 'Wing Attack (Costs 2 Actions)',
-          text: '[name] beats its wings. Each creature within 10 feet of the dragon must succeed on a DC 22 Dexterity saving throw or take dmg[2d6 + strmod] bludgeoning damage and be knocked prone. [name] can then fly up to half its flying speed.',
+          text: '[name] beats its wings. Each creature within 10 feet of the dragon must succeed on a DC 22 Dexterity saving throw or take dmg[2d6 + str] bludgeoning damage and be knocked prone. [name] can then fly up to half its flying speed.',
           homebreweryText: 'The dragon beats its wings. Each creature within 10 feet of the dragon must succeed on a DC 22 Dexterity saving throw or take 15 (2d6 + 8) bludgeoning damage and be knocked prone. The dragon can then fly up to half its flying speed.',
           htmlText: 'The dragon beats its wings. Each creature within 10 feet of the dragon must succeed on a DC 22 Dexterity saving throw or take 15 (2d6 + 8) bludgeoning damage and be knocked prone. The dragon can then fly up to half its flying speed.'
         }
@@ -227,7 +227,7 @@ describe('when the show section is clicked', () => {
         },
         {
           name: 'Wing Attack (Costs 2 Actions)',
-          text: '[name] beats its wings. Each creature within 10 feet of the dragon must succeed on a DC 22 Dexterity saving throw or take dmg[2d6 + strmod] bludgeoning damage and be knocked prone. [name] can then fly up to half its flying speed.',
+          text: '[name] beats its wings. Each creature within 10 feet of the dragon must succeed on a DC 22 Dexterity saving throw or take dmg[2d6 + str] bludgeoning damage and be knocked prone. [name] can then fly up to half its flying speed.',
           homebreweryText: 'The dragon beats its wings. Each creature within 10 feet of the dragon must succeed on a DC 22 Dexterity saving throw or take 15 (2d6 + 8) bludgeoning damage and be knocked prone. The dragon can then fly up to half its flying speed.',
           htmlText: 'The dragon beats its wings. Each creature within 10 feet of the dragon must succeed on a DC 22 Dexterity saving throw or take 15 (2d6 + 8) bludgeoning damage and be knocked prone. The dragon can then fly up to half its flying speed.'
         }
@@ -242,7 +242,7 @@ describe('when the show section is clicked', () => {
     describe('should reparse the block text', () => {
       const block = {
         name: 'Wing Attack (Costs 2 Actions)',
-        text: '[name] beats its wings. Each creature within 10 feet of [name] must succeed on a DC 22 Dexterity saving throw or take dmg[2d6 + strmod] bludgeoning damage and be knocked prone. [name] can then fly up to half its flying speed.',
+        text: '[name] beats its wings. Each creature within 10 feet of [name] must succeed on a DC 22 Dexterity saving throw or take dmg[2d6 + str] bludgeoning damage and be knocked prone. [name] can then fly up to half its flying speed.',
         homebreweryText: null,
         htmlText: null
       };

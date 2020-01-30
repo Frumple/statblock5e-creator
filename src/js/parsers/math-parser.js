@@ -202,26 +202,26 @@ export default (function() {
               average: totalDieAverage
             };
           },
-        peg$c24 = "strmod",
-        peg$c25 = peg$literalExpectation("strmod", false),
+        peg$c24 = "str",
+        peg$c25 = peg$literalExpectation("str", false),
         peg$c26 = function() { return options.abilities.strength.modifier; },
-        peg$c27 = "dexmod",
-        peg$c28 = peg$literalExpectation("dexmod", false),
+        peg$c27 = "dex",
+        peg$c28 = peg$literalExpectation("dex", false),
         peg$c29 = function() { return options.abilities.dexterity.modifier; },
-        peg$c30 = "conmod",
-        peg$c31 = peg$literalExpectation("conmod", false),
+        peg$c30 = "con",
+        peg$c31 = peg$literalExpectation("con", false),
         peg$c32 = function() { return options.abilities.constitution.modifier; },
-        peg$c33 = "intmod",
-        peg$c34 = peg$literalExpectation("intmod", false),
+        peg$c33 = "int",
+        peg$c34 = peg$literalExpectation("int", false),
         peg$c35 = function() { return options.abilities.intelligence.modifier; },
-        peg$c36 = "wismod",
-        peg$c37 = peg$literalExpectation("wismod", false),
+        peg$c36 = "wis",
+        peg$c37 = peg$literalExpectation("wis", false),
         peg$c38 = function() { return options.abilities.wisdom.modifier; },
-        peg$c39 = "chamod",
-        peg$c40 = peg$literalExpectation("chamod", false),
+        peg$c39 = "cha",
+        peg$c40 = peg$literalExpectation("cha", false),
         peg$c41 = function() { return options.abilities.charisma.modifier; },
-        peg$c42 = "finmod",
-        peg$c43 = peg$literalExpectation("finmod", false),
+        peg$c42 = "fin",
+        peg$c43 = peg$literalExpectation("fin", false),
         peg$c44 = function() { return (options.abilities.strength.modifier >= options.abilities.dexterity.modifier) ? options.abilities.strength.modifier : options.abilities.dexterity.modifier},
         peg$c45 = "prof",
         peg$c46 = peg$literalExpectation("prof", false),
@@ -943,9 +943,9 @@ export default (function() {
       var s0, s1;
 
       s0 = peg$currPos;
-      if (input.substr(peg$currPos, 6) === peg$c24) {
+      if (input.substr(peg$currPos, 3) === peg$c24) {
         s1 = peg$c24;
-        peg$currPos += 6;
+        peg$currPos += 3;
       } else {
         s1 = peg$FAILED;
         if (peg$silentFails === 0) { peg$fail(peg$c25); }
@@ -957,9 +957,9 @@ export default (function() {
       s0 = s1;
       if (s0 === peg$FAILED) {
         s0 = peg$currPos;
-        if (input.substr(peg$currPos, 6) === peg$c27) {
+        if (input.substr(peg$currPos, 3) === peg$c27) {
           s1 = peg$c27;
-          peg$currPos += 6;
+          peg$currPos += 3;
         } else {
           s1 = peg$FAILED;
           if (peg$silentFails === 0) { peg$fail(peg$c28); }
@@ -971,9 +971,9 @@ export default (function() {
         s0 = s1;
         if (s0 === peg$FAILED) {
           s0 = peg$currPos;
-          if (input.substr(peg$currPos, 6) === peg$c30) {
+          if (input.substr(peg$currPos, 3) === peg$c30) {
             s1 = peg$c30;
-            peg$currPos += 6;
+            peg$currPos += 3;
           } else {
             s1 = peg$FAILED;
             if (peg$silentFails === 0) { peg$fail(peg$c31); }
@@ -985,9 +985,9 @@ export default (function() {
           s0 = s1;
           if (s0 === peg$FAILED) {
             s0 = peg$currPos;
-            if (input.substr(peg$currPos, 6) === peg$c33) {
+            if (input.substr(peg$currPos, 3) === peg$c33) {
               s1 = peg$c33;
-              peg$currPos += 6;
+              peg$currPos += 3;
             } else {
               s1 = peg$FAILED;
               if (peg$silentFails === 0) { peg$fail(peg$c34); }
@@ -999,9 +999,9 @@ export default (function() {
             s0 = s1;
             if (s0 === peg$FAILED) {
               s0 = peg$currPos;
-              if (input.substr(peg$currPos, 6) === peg$c36) {
+              if (input.substr(peg$currPos, 3) === peg$c36) {
                 s1 = peg$c36;
-                peg$currPos += 6;
+                peg$currPos += 3;
               } else {
                 s1 = peg$FAILED;
                 if (peg$silentFails === 0) { peg$fail(peg$c37); }
@@ -1013,9 +1013,9 @@ export default (function() {
               s0 = s1;
               if (s0 === peg$FAILED) {
                 s0 = peg$currPos;
-                if (input.substr(peg$currPos, 6) === peg$c39) {
+                if (input.substr(peg$currPos, 3) === peg$c39) {
                   s1 = peg$c39;
-                  peg$currPos += 6;
+                  peg$currPos += 3;
                 } else {
                   s1 = peg$FAILED;
                   if (peg$silentFails === 0) { peg$fail(peg$c40); }
@@ -1027,9 +1027,9 @@ export default (function() {
                 s0 = s1;
                 if (s0 === peg$FAILED) {
                   s0 = peg$currPos;
-                  if (input.substr(peg$currPos, 6) === peg$c42) {
+                  if (input.substr(peg$currPos, 3) === peg$c42) {
                     s1 = peg$c42;
-                    peg$currPos += 6;
+                    peg$currPos += 3;
                   } else {
                     s1 = peg$FAILED;
                     if (peg$silentFails === 0) { peg$fail(peg$c43); }

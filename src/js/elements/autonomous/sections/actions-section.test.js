@@ -65,7 +65,7 @@ describe('when the show section is clicked', () => {
 
       const block = {
         name: 'Greatsword',
-        text: '*Melee Weapon Attack:* mod[strmod + prof] to hit, reach 5 ft., one target. *Hit:* dmg[2d6 + strmod] slashing damage.',
+        text: '*Melee Weapon Attack:* mod[str + prof] to hit, reach 5 ft., one target. *Hit:* dmg[2d6 + str] slashing damage.',
         homebreweryText: '*Melee Weapon Attack:* +5 to hit, reach 5 ft., one target. *Hit:* 10 (2d6 + 3) slashing damage.',
         htmlText: '<em>Melee Weapon Attack:</em> +5 to hit, reach 5 ft., one target. <em>Hit:</em> 10 (2d6 + 3) slashing damage.'
       };
@@ -91,7 +91,7 @@ describe('when the show section is clicked', () => {
 
       const block = {
         name: 'Greatsword',
-        text: '<em>Melee Weapon Attack:</em> mod[strmod + prof] to hit, reach 5 ft., one target. <em>Hit:</em> dmg[2d6 + strmod] slashing damage.',
+        text: '<em>Melee Weapon Attack:</em> mod[str + prof] to hit, reach 5 ft., one target. <em>Hit:</em> dmg[2d6 + str] slashing damage.',
         homebreweryText: '&lt;em&gt;Melee Weapon Attack:&lt;/em&gt; +5 to hit, reach 5 ft., one target. &lt;em&gt;Hit:&lt;/em&gt; 10 (2d6 + 3) slashing damage.',
         htmlText: '&lt;em&gt;Melee Weapon Attack:&lt;/em&gt; +5 to hit, reach 5 ft., one target. &lt;em&gt;Hit:&lt;/em&gt; 10 (2d6 + 3) slashing damage.'
       };
@@ -111,13 +111,13 @@ describe('when the show section is clicked', () => {
         },
         {
           name: 'Scimitar',
-          text: '*Melee Weapon Attack:* mod[dexmod + prof] to hit, reach 5 ft., one target. *Hit:* dmg[1d6 + dexmod] slashing damage.',
+          text: '*Melee Weapon Attack:* mod[dex + prof] to hit, reach 5 ft., one target. *Hit:* dmg[1d6 + dex] slashing damage.',
           homebreweryText: '*Melee Weapon Attack:* +4 to hit, reach 5 ft., one target. *Hit:* 5 (1d6 + 2) slashing damage.',
           htmlText: '<em>Melee Weapon Attack:</em> +4 to hit, reach 5 ft., one target. <em>Hit:</em> 5 (1d6 + 2) slashing damage.'
         },
         {
           name: 'Javelin',
-          text: '*Melee or Ranged Weapon Attack:* mod[dexmod] to hit, reach 5 ft. or range 30/120 ft., one target. *Hit:* dmg[1d6] piercing damage.',
+          text: '*Melee or Ranged Weapon Attack:* mod[dex] to hit, reach 5 ft. or range 30/120 ft., one target. *Hit:* dmg[1d6] piercing damage.',
           homebreweryText: '*Melee or Ranged Weapon Attack:* +2 to hit, reach 5 ft. or range 30/120 ft., one target. *Hit:* 3 (1d6) piercing damage.',
           htmlText: '<em>Melee or Ranged Weapon Attack:</em> +2 to hit, reach 5 ft. or range 30/120 ft., one target. <em>Hit:</em> 3 (1d6) piercing damage.'
         }
@@ -148,13 +148,13 @@ describe('when the show section is clicked', () => {
         },
         {
           name: 'Greatsword',
-          text: '<em>Melee Weapon Attack:</em> mod[strmod + prof] to hit, reach 5 ft., one target. <em>Hit:</em> dmg[2d6 + strmod] slashing damage.',
+          text: '<em>Melee Weapon Attack:</em> mod[str + prof] to hit, reach 5 ft., one target. <em>Hit:</em> dmg[2d6 + str] slashing damage.',
           homebreweryText: '&lt;em&gt;Melee Weapon Attack:&lt;/em&gt; +5 to hit, reach 5 ft., one target. &lt;em&gt;Hit:&lt;/em&gt; 10 (2d6 + 3) slashing damage.',
           htmlText: '&lt;em&gt;Melee Weapon Attack:&lt;/em&gt; +5 to hit, reach 5 ft., one target. &lt;em&gt;Hit:&lt;/em&gt; 10 (2d6 + 3) slashing damage.'
         },
         {
           name: 'Heavy Crossbow',
-          text: '*Ranged Weapon Attack:* mod[dexmod + prof] to hit, range 100/400 ft., one target. *Hit:* dmg[1d10 + dexmod] piercing damage.',
+          text: '*Ranged Weapon Attack:* mod[dex + prof] to hit, range 100/400 ft., one target. *Hit:* dmg[1d10 + dex] piercing damage.',
           homebreweryText: '*Ranged Weapon Attack:* +2 to hit, range 100/400 ft., one target. *Hit:* 5 (1d10) piercing damage.',
           htmlText: '<em>Ranged Weapon Attack:</em> +2 to hit, range 100/400 ft., one target. <em>Hit:</em> 5 (1d10) piercing damage.'
         }

@@ -80,29 +80,29 @@ describe('should parse valid math expressions', () => {
     it.each
     `
       description                                               | inputText                                                         | expectedText
-      ${'modifier + modifier'}                                  | ${'[conmod + wismod]'}                                            | ${'8'}
-      ${'modifier + proficiency bonus'}                         | ${'[dexmod + prof]'}                                              | ${'7'}
-      ${'proficiency bonus + modifier'}                         | ${'[prof + strmod]'}                                              | ${'1'}
+      ${'modifier + modifier'}                                  | ${'[con + wis]'}                                            | ${'8'}
+      ${'modifier + proficiency bonus'}                         | ${'[dex + prof]'}                                              | ${'7'}
+      ${'proficiency bonus + modifier'}                         | ${'[prof + str]'}                                              | ${'1'}
       ${'proficiency bonus + proficiency bonus'}                | ${'[prof + prof]'}                                                | ${'6'}
-      ${'modifier - modifier'}                                  | ${'[conmod - wismod]'}                                            | ${'6'}
-      ${'modifier - proficiency bonus'}                         | ${'[dexmod - prof]'}                                              | ${'1'}
-      ${'proficiency bonus - modifier'}                         | ${'[prof - strmod]'}                                              | ${'5'}
+      ${'modifier - modifier'}                                  | ${'[con - wis]'}                                            | ${'6'}
+      ${'modifier - proficiency bonus'}                         | ${'[dex - prof]'}                                              | ${'1'}
+      ${'proficiency bonus - modifier'}                         | ${'[prof - str]'}                                              | ${'5'}
       ${'proficiency bonus - proficiency bonus'}                | ${'[prof - prof]'}                                                | ${'0'}
-      ${'3 modifiers added'}                                    | ${'[strmod + dexmod + conmod]'}                                   | ${'9'}
-      ${'4 modifiers added'}                                    | ${'[strmod + dexmod + conmod + intmod]'}                          | ${'9'}
-      ${'5 modifiers added'}                                    | ${'[strmod + dexmod + conmod + intmod + wismod]'}                 | ${'10'}
-      ${'6 modifiers added'}                                    | ${'[strmod + dexmod + conmod + intmod + wismod + chamod]'}        | ${'5'}
-      ${'6 modifiers added + proficiency bonus'}                | ${'[strmod + dexmod + conmod + intmod + wismod + chamod + prof]'} | ${'8'}
-      ${'3 modifiers subtracted'}                               | ${'[strmod - dexmod - conmod]'}                                   | ${'–13'}
-      ${'4 modifiers subtracted'}                               | ${'[strmod - dexmod - conmod - intmod]'}                          | ${'–13'}
-      ${'5 modifiers subtracted'}                               | ${'[strmod - dexmod - conmod - intmod - wismod]'}                 | ${'–14'}
-      ${'6 modifiers subtracted'}                               | ${'[strmod - dexmod - conmod - intmod - wismod - chamod]'}        | ${'–9'}
-      ${'6 modifiers subtracted - proficiency bonus'}           | ${'[strmod - dexmod - conmod - intmod - wismod - chamod - prof]'} | ${'–12'}
-      ${'3 modifiers added and subtracted'}                     | ${'[strmod + dexmod - conmod]'}                                   | ${'–5'}
-      ${'4 modifiers added and subtracted'}                     | ${'[strmod + dexmod - conmod + intmod]'}                          | ${'–5'}
-      ${'5 modifiers added and subtracted'}                     | ${'[strmod + dexmod - conmod + intmod - wismod]'}                 | ${'–6'}
-      ${'6 modifiers added and subtracted'}                     | ${'[strmod + dexmod - conmod + intmod - wismod + chamod]'}        | ${'–11'}
-      ${'6 modifiers added and subtracted - proficiency bonus'} | ${'[strmod + dexmod - conmod + intmod - wismod + chamod - prof]'} | ${'–14'}
+      ${'3 modifiers added'}                                    | ${'[str + dex + con]'}                                   | ${'9'}
+      ${'4 modifiers added'}                                    | ${'[str + dex + con + int]'}                          | ${'9'}
+      ${'5 modifiers added'}                                    | ${'[str + dex + con + int + wis]'}                 | ${'10'}
+      ${'6 modifiers added'}                                    | ${'[str + dex + con + int + wis + cha]'}        | ${'5'}
+      ${'6 modifiers added + proficiency bonus'}                | ${'[str + dex + con + int + wis + cha + prof]'} | ${'8'}
+      ${'3 modifiers subtracted'}                               | ${'[str - dex - con]'}                                   | ${'–13'}
+      ${'4 modifiers subtracted'}                               | ${'[str - dex - con - int]'}                          | ${'–13'}
+      ${'5 modifiers subtracted'}                               | ${'[str - dex - con - int - wis]'}                 | ${'–14'}
+      ${'6 modifiers subtracted'}                               | ${'[str - dex - con - int - wis - cha]'}        | ${'–9'}
+      ${'6 modifiers subtracted - proficiency bonus'}           | ${'[str - dex - con - int - wis - cha - prof]'} | ${'–12'}
+      ${'3 modifiers added and subtracted'}                     | ${'[str + dex - con]'}                                   | ${'–5'}
+      ${'4 modifiers added and subtracted'}                     | ${'[str + dex - con + int]'}                          | ${'–5'}
+      ${'5 modifiers added and subtracted'}                     | ${'[str + dex - con + int - wis]'}                 | ${'–6'}
+      ${'6 modifiers added and subtracted'}                     | ${'[str + dex - con + int - wis + cha]'}        | ${'–11'}
+      ${'6 modifiers added and subtracted - proficiency bonus'} | ${'[str + dex - con + int - wis + cha - prof]'} | ${'–14'}
     `
     ('$description: "$inputText" => $expectedText',
     ({inputText, expectedText}) => {
@@ -129,23 +129,23 @@ describe('should parse valid math expressions', () => {
     it.each
     `
       description                          | inputText                                | expectedText
-      ${'modifier + integer'}              | ${'[chamod + 6]'}                        | ${'9'}
+      ${'modifier + integer'}              | ${'[cha + 6]'}                        | ${'9'}
       ${'proficiency bonus + integer'}     | ${'[prof + 6]'}                          | ${'10'}
-      ${'integer + modifier'}              | ${'[-2 + intmod]'}                       | ${'3'}
+      ${'integer + modifier'}              | ${'[-2 + int]'}                       | ${'3'}
       ${'integer + proficiency bonus'}     | ${'[-2 + prof]'}                         | ${'2'}
-      ${'modifier - integer'}              | ${'[chamod - 6]'}                        | ${'–3'}
+      ${'modifier - integer'}              | ${'[cha - 6]'}                        | ${'–3'}
       ${'proficiency bonus - integer'}     | ${'[prof - 6]'}                          | ${'–2'}
-      ${'integer - modifier'}              | ${'[-2 - intmod]'}                       | ${'–7'}
+      ${'integer - modifier'}              | ${'[-2 - int]'}                       | ${'–7'}
       ${'integer - proficiency bonus'}     | ${'[-2 - prof]'}                         | ${'–6'}
-      ${'3 operands added'}                | ${'[strmod + 4 + dexmod]'}               | ${'13'}
-      ${'4 operands added'}                | ${'[-8 + strmod + 4 + dexmod]'}          | ${'5'}
-      ${'5 operands added'}                | ${'[-8 + strmod + 4 + dexmod + wismod]'} | ${'1'}
-      ${'3 operands subtracted'}           | ${'[strmod - 4 - dexmod]'}               | ${'7'}
-      ${'4 operands subtracted'}           | ${'[-8 - strmod - 4 - dexmod]'}          | ${'–21'}
-      ${'5 operands subtracted'}           | ${'[-8 - strmod - 4 - dexmod - wismod]'} | ${'–17'}
-      ${'3 operands added and subtracted'} | ${'[strmod + 4 - dexmod]'}               | ${'15'}
-      ${'4 operands added and subtracted'} | ${'[-8 - strmod + 4 - dexmod]'}          | ${'–13'}
-      ${'5 operands added and subtracted'} | ${'[-8 - strmod + 4 - dexmod + wismod]'} | ${'–17'}
+      ${'3 operands added'}                | ${'[str + 4 + dex]'}               | ${'13'}
+      ${'4 operands added'}                | ${'[-8 + str + 4 + dex]'}          | ${'5'}
+      ${'5 operands added'}                | ${'[-8 + str + 4 + dex + wis]'} | ${'1'}
+      ${'3 operands subtracted'}           | ${'[str - 4 - dex]'}               | ${'7'}
+      ${'4 operands subtracted'}           | ${'[-8 - str - 4 - dex]'}          | ${'–21'}
+      ${'5 operands subtracted'}           | ${'[-8 - str - 4 - dex - wis]'} | ${'–17'}
+      ${'3 operands added and subtracted'} | ${'[str + 4 - dex]'}               | ${'15'}
+      ${'4 operands added and subtracted'} | ${'[-8 - str + 4 - dex]'}          | ${'–13'}
+      ${'5 operands added and subtracted'} | ${'[-8 - str + 4 - dex + wis]'} | ${'–17'}
     `
     ('$description: "$inputText" => $expectedText',
     ({inputText, expectedText}) => {
@@ -172,14 +172,14 @@ describe('should parse valid math expressions', () => {
     it.each
     `
       description                      | strScore | dexScore | inputText              | expectedText
-      ${'finmod only, str > dex'}      | ${16}    | ${12}    | ${'[finmod]'}          | ${'3'}
-      ${'finmod + mod, str > dex'}     | ${16}    | ${12}    | ${'[finmod + strmod]'} | ${'6'}
-      ${'finmod + prof, str > dex'}    | ${16}    | ${12}    | ${'[finmod + prof]'}   | ${'5'}
-      ${'finmod + integer, str > dex'} | ${16}    | ${12}    | ${'[finmod + -4]'}     | ${'–1'}
-      ${'finmod only, dex > str'}      | ${14}    | ${20}    | ${'[finmod]'}          | ${'5'}
-      ${'finmod + mod, dex > str'}     | ${14}    | ${20}    | ${'[finmod + strmod]'} | ${'7'}
-      ${'finmod + prof, dex > str'}    | ${14}    | ${20}    | ${'[finmod + prof]'}   | ${'7'}
-      ${'finmod + integer, dex > str'} | ${14}    | ${20}    | ${'[finmod + -4]'}     | ${'1'}
+      ${'fin only, str > dex'}      | ${16}    | ${12}    | ${'[fin]'}          | ${'3'}
+      ${'fin + mod, str > dex'}     | ${16}    | ${12}    | ${'[fin + str]'} | ${'6'}
+      ${'fin + prof, str > dex'}    | ${16}    | ${12}    | ${'[fin + prof]'}   | ${'5'}
+      ${'fin + integer, str > dex'} | ${16}    | ${12}    | ${'[fin + -4]'}     | ${'–1'}
+      ${'fin only, dex > str'}      | ${14}    | ${20}    | ${'[fin]'}          | ${'5'}
+      ${'fin + mod, dex > str'}     | ${14}    | ${20}    | ${'[fin + str]'} | ${'7'}
+      ${'fin + prof, dex > str'}    | ${14}    | ${20}    | ${'[fin + prof]'}   | ${'7'}
+      ${'fin + integer, dex > str'} | ${14}    | ${20}    | ${'[fin + -4]'}     | ${'1'}
     `
     ('$description: {strScore="$strScore", dexScore="$dexScore", inputText=${inputText}} => $expectedText',
     ({strScore, dexScore, inputText, expectedText}) => {
@@ -275,29 +275,29 @@ describe('should parse valid modifier expressions', () => {
     it.each
     `
       description                                               | inputText                                                            | expectedText
-      ${'modifier + modifier'}                                  | ${'mod[conmod + wismod]'}                                            | ${'+8'}
-      ${'modifier + proficiency bonus'}                         | ${'mod[dexmod + prof]'}                                              | ${'+7'}
-      ${'proficiency bonus + modifier'}                         | ${'mod[prof + strmod]'}                                              | ${'+1'}
+      ${'modifier + modifier'}                                  | ${'mod[con + wis]'}                                            | ${'+8'}
+      ${'modifier + proficiency bonus'}                         | ${'mod[dex + prof]'}                                              | ${'+7'}
+      ${'proficiency bonus + modifier'}                         | ${'mod[prof + str]'}                                              | ${'+1'}
       ${'proficiency bonus + proficiency bonus'}                | ${'mod[prof + prof]'}                                                | ${'+6'}
-      ${'modifier - modifier'}                                  | ${'mod[conmod - wismod]'}                                            | ${'+6'}
-      ${'modifier - proficiency bonus'}                         | ${'mod[dexmod - prof]'}                                              | ${'+1'}
-      ${'proficiency bonus - modifier'}                         | ${'mod[prof - strmod]'}                                              | ${'+5'}
+      ${'modifier - modifier'}                                  | ${'mod[con - wis]'}                                            | ${'+6'}
+      ${'modifier - proficiency bonus'}                         | ${'mod[dex - prof]'}                                              | ${'+1'}
+      ${'proficiency bonus - modifier'}                         | ${'mod[prof - str]'}                                              | ${'+5'}
       ${'proficiency bonus - proficiency bonus'}                | ${'mod[prof - prof]'}                                                | ${'+0'}
-      ${'3 modifiers added'}                                    | ${'mod[strmod + dexmod + conmod]'}                                   | ${'+9'}
-      ${'4 modifiers added'}                                    | ${'mod[strmod + dexmod + conmod + intmod]'}                          | ${'+9'}
-      ${'5 modifiers added'}                                    | ${'mod[strmod + dexmod + conmod + intmod + wismod]'}                 | ${'+10'}
-      ${'6 modifiers added'}                                    | ${'mod[strmod + dexmod + conmod + intmod + wismod + chamod]'}        | ${'+5'}
-      ${'6 modifiers added + proficiency bonus'}                | ${'mod[strmod + dexmod + conmod + intmod + wismod + chamod + prof]'} | ${'+8'}
-      ${'3 modifiers subtracted'}                               | ${'mod[strmod - dexmod - conmod]'}                                   | ${'–13'}
-      ${'4 modifiers subtracted'}                               | ${'mod[strmod - dexmod - conmod - intmod]'}                          | ${'–13'}
-      ${'5 modifiers subtracted'}                               | ${'mod[strmod - dexmod - conmod - intmod - wismod]'}                 | ${'–14'}
-      ${'6 modifiers subtracted'}                               | ${'mod[strmod - dexmod - conmod - intmod - wismod - chamod]'}        | ${'–9'}
-      ${'6 modifiers subtracted - proficiency bonus'}           | ${'mod[strmod - dexmod - conmod - intmod - wismod - chamod - prof]'} | ${'–12'}
-      ${'3 modifiers added and subtracted'}                     | ${'mod[strmod + dexmod - conmod]'}                                   | ${'–5'}
-      ${'4 modifiers added and subtracted'}                     | ${'mod[strmod + dexmod - conmod + intmod]'}                          | ${'–5'}
-      ${'5 modifiers added and subtracted'}                     | ${'mod[strmod + dexmod - conmod + intmod - wismod]'}                 | ${'–6'}
-      ${'6 modifiers added and subtracted'}                     | ${'mod[strmod + dexmod - conmod + intmod - wismod + chamod]'}        | ${'–11'}
-      ${'6 modifiers added and subtracted - proficiency bonus'} | ${'mod[strmod + dexmod - conmod + intmod - wismod + chamod - prof]'} | ${'–14'}
+      ${'3 modifiers added'}                                    | ${'mod[str + dex + con]'}                                   | ${'+9'}
+      ${'4 modifiers added'}                                    | ${'mod[str + dex + con + int]'}                          | ${'+9'}
+      ${'5 modifiers added'}                                    | ${'mod[str + dex + con + int + wis]'}                 | ${'+10'}
+      ${'6 modifiers added'}                                    | ${'mod[str + dex + con + int + wis + cha]'}        | ${'+5'}
+      ${'6 modifiers added + proficiency bonus'}                | ${'mod[str + dex + con + int + wis + cha + prof]'} | ${'+8'}
+      ${'3 modifiers subtracted'}                               | ${'mod[str - dex - con]'}                                   | ${'–13'}
+      ${'4 modifiers subtracted'}                               | ${'mod[str - dex - con - int]'}                          | ${'–13'}
+      ${'5 modifiers subtracted'}                               | ${'mod[str - dex - con - int - wis]'}                 | ${'–14'}
+      ${'6 modifiers subtracted'}                               | ${'mod[str - dex - con - int - wis - cha]'}        | ${'–9'}
+      ${'6 modifiers subtracted - proficiency bonus'}           | ${'mod[str - dex - con - int - wis - cha - prof]'} | ${'–12'}
+      ${'3 modifiers added and subtracted'}                     | ${'mod[str + dex - con]'}                                   | ${'–5'}
+      ${'4 modifiers added and subtracted'}                     | ${'mod[str + dex - con + int]'}                          | ${'–5'}
+      ${'5 modifiers added and subtracted'}                     | ${'mod[str + dex - con + int - wis]'}                 | ${'–6'}
+      ${'6 modifiers added and subtracted'}                     | ${'mod[str + dex - con + int - wis + cha]'}        | ${'–11'}
+      ${'6 modifiers added and subtracted - proficiency bonus'} | ${'mod[str + dex - con + int - wis + cha - prof]'} | ${'–14'}
     `
     ('$description: "$inputText" => $expectedText',
     ({inputText, expectedText}) => {
@@ -324,23 +324,23 @@ describe('should parse valid modifier expressions', () => {
     it.each
     `
       description                          | inputText                                   | expectedText
-      ${'modifier + integer'}              | ${'mod[chamod + 6]'}                        | ${'+9'}
+      ${'modifier + integer'}              | ${'mod[cha + 6]'}                        | ${'+9'}
       ${'proficiency bonus + integer'}     | ${'mod[prof + 6]'}                          | ${'+10'}
-      ${'integer + modifier'}              | ${'mod[-2 + intmod]'}                       | ${'+3'}
+      ${'integer + modifier'}              | ${'mod[-2 + int]'}                       | ${'+3'}
       ${'integer + proficiency bonus'}     | ${'mod[-2 + prof]'}                         | ${'+2'}
-      ${'modifier - integer'}              | ${'mod[chamod - 6]'}                        | ${'–3'}
+      ${'modifier - integer'}              | ${'mod[cha - 6]'}                        | ${'–3'}
       ${'proficiency bonus - integer'}     | ${'mod[prof - 6]'}                          | ${'–2'}
-      ${'integer - modifier'}              | ${'mod[-2 - intmod]'}                       | ${'–7'}
+      ${'integer - modifier'}              | ${'mod[-2 - int]'}                       | ${'–7'}
       ${'integer - proficiency bonus'}     | ${'mod[-2 - prof]'}                         | ${'–6'}
-      ${'3 operands added'}                | ${'mod[strmod + 4 + dexmod]'}               | ${'+13'}
-      ${'4 operands added'}                | ${'mod[-8 + strmod + 4 + dexmod]'}          | ${'+5'}
-      ${'5 operands added'}                | ${'mod[-8 + strmod + 4 + dexmod + wismod]'} | ${'+1'}
-      ${'3 operands subtracted'}           | ${'mod[strmod - 4 - dexmod]'}               | ${'+7'}
-      ${'4 operands subtracted'}           | ${'mod[-8 - strmod - 4 - dexmod]'}          | ${'–21'}
-      ${'5 operands subtracted'}           | ${'mod[-8 - strmod - 4 - dexmod - wismod]'} | ${'–17'}
-      ${'3 operands added and subtracted'} | ${'mod[strmod + 4 - dexmod]'}               | ${'+15'}
-      ${'4 operands added and subtracted'} | ${'mod[-8 - strmod + 4 - dexmod]'}          | ${'–13'}
-      ${'5 operands added and subtracted'} | ${'mod[-8 - strmod + 4 - dexmod + wismod]'} | ${'–17'}
+      ${'3 operands added'}                | ${'mod[str + 4 + dex]'}               | ${'+13'}
+      ${'4 operands added'}                | ${'mod[-8 + str + 4 + dex]'}          | ${'+5'}
+      ${'5 operands added'}                | ${'mod[-8 + str + 4 + dex + wis]'} | ${'+1'}
+      ${'3 operands subtracted'}           | ${'mod[str - 4 - dex]'}               | ${'+7'}
+      ${'4 operands subtracted'}           | ${'mod[-8 - str - 4 - dex]'}          | ${'–21'}
+      ${'5 operands subtracted'}           | ${'mod[-8 - str - 4 - dex - wis]'} | ${'–17'}
+      ${'3 operands added and subtracted'} | ${'mod[str + 4 - dex]'}               | ${'+15'}
+      ${'4 operands added and subtracted'} | ${'mod[-8 - str + 4 - dex]'}          | ${'–13'}
+      ${'5 operands added and subtracted'} | ${'mod[-8 - str + 4 - dex + wis]'} | ${'–17'}
     `
     ('$description: "$inputText" => $expectedText',
     ({inputText, expectedText}) => {
@@ -367,14 +367,14 @@ describe('should parse valid modifier expressions', () => {
     it.each
     `
       description                      | strScore | dexScore | inputText                 | expectedText
-      ${'finmod only, str > dex'}      | ${16}    | ${12}    | ${'mod[finmod]'}          | ${'+3'}
-      ${'finmod + mod, str > dex'}     | ${16}    | ${12}    | ${'mod[finmod + strmod]'} | ${'+6'}
-      ${'finmod + prof, str > dex'}    | ${16}    | ${12}    | ${'mod[finmod + prof]'}   | ${'+5'}
-      ${'finmod + integer, str > dex'} | ${16}    | ${12}    | ${'mod[finmod + -4]'}     | ${'–1'}
-      ${'finmod only, dex > str'}      | ${14}    | ${20}    | ${'mod[finmod]'}          | ${'+5'}
-      ${'finmod + mod, dex > str'}     | ${14}    | ${20}    | ${'mod[finmod + strmod]'} | ${'+7'}
-      ${'finmod + prof, dex > str'}    | ${14}    | ${20}    | ${'mod[finmod + prof]'}   | ${'+7'}
-      ${'finmod + integer, dex > str'} | ${14}    | ${20}    | ${'mod[finmod + -4]'}     | ${'+1'}
+      ${'fin only, str > dex'}      | ${16}    | ${12}    | ${'mod[fin]'}          | ${'+3'}
+      ${'fin + mod, str > dex'}     | ${16}    | ${12}    | ${'mod[fin + str]'} | ${'+6'}
+      ${'fin + prof, str > dex'}    | ${16}    | ${12}    | ${'mod[fin + prof]'}   | ${'+5'}
+      ${'fin + integer, str > dex'} | ${16}    | ${12}    | ${'mod[fin + -4]'}     | ${'–1'}
+      ${'fin only, dex > str'}      | ${14}    | ${20}    | ${'mod[fin]'}          | ${'+5'}
+      ${'fin + mod, dex > str'}     | ${14}    | ${20}    | ${'mod[fin + str]'} | ${'+7'}
+      ${'fin + prof, dex > str'}    | ${14}    | ${20}    | ${'mod[fin + prof]'}   | ${'+7'}
+      ${'fin + integer, dex > str'} | ${14}    | ${20}    | ${'mod[fin + -4]'}     | ${'+1'}
     `
     ('$description: {strScore="$strScore", dexScore="$dexScore", inputText=${inputText}} => $expectedText',
     ({strScore, dexScore, inputText, expectedText}) => {
@@ -434,18 +434,18 @@ describe('should parse valid damage expressions', () => {
       ${'die - positive'}              | ${'dmg[3d12 - 3]'}              | ${'16 (3d12 – 3)'}
       ${'die - zero'}                  | ${'dmg[3d12 - 0]'}              | ${'19 (3d12)'}
       ${'die - negative'}              | ${'dmg[3d12 - -4]'}             | ${'23 (3d12 + 4)'}
-      ${'die + modifier'}              | ${'dmg[1d10 + strmod]'}         | ${'10 (1d10 + 5)'}
+      ${'die + modifier'}              | ${'dmg[1d10 + str]'}         | ${'10 (1d10 + 5)'}
       ${'die + proficiency bonus'}     | ${'dmg[1d10 + prof]'}           | ${'7 (1d10 + 2)'}
-      ${'die - modifier'}              | ${'dmg[1d10 - strmod]'}         | ${'0 (1d10 – 5)'}
+      ${'die - modifier'}              | ${'dmg[1d10 - str]'}         | ${'0 (1d10 – 5)'}
       ${'die - proficiency bonus'}     | ${'dmg[1d10 - prof]'}           | ${'3 (1d10 – 2)'}
       ${'die + integer + integer'}     | ${'dmg[5d4 + -1 + 12]'}         | ${'23 (5d4 + 11)'}
       ${'die - integer - integer'}     | ${'dmg[5d4 - -1 - 12]'}         | ${'1 (5d4 – 11)'}
-      ${'die + modifier + modifier'}   | ${'dmg[6d8 + strmod + dexmod]'} | ${'35 (6d8 + 8)'}
-      ${'die - modifier - modifier'}   | ${'dmg[6d8 - strmod - dexmod]'} | ${'19 (6d8 – 8)'}
-      ${'die + modifier + integer'}    | ${'dmg[3d6 + dexmod + 7]'}      | ${'20 (3d6 + 10)'}
-      ${'die - modifier - integer'}    | ${'dmg[3d6 - dexmod - 7]'}      | ${'0 (3d6 – 10)'}
-      ${'die + integer + modifier'}    | ${'dmg[2d20 + 8 + strmod]'}     | ${'34 (2d20 + 13)'}
-      ${'die - integer - modifier'}    | ${'dmg[2d20 - 8 - strmod]'}     | ${'8 (2d20 – 13)'}
+      ${'die + modifier + modifier'}   | ${'dmg[6d8 + str + dex]'} | ${'35 (6d8 + 8)'}
+      ${'die - modifier - modifier'}   | ${'dmg[6d8 - str - dex]'} | ${'19 (6d8 – 8)'}
+      ${'die + modifier + integer'}    | ${'dmg[3d6 + dex + 7]'}      | ${'20 (3d6 + 10)'}
+      ${'die - modifier - integer'}    | ${'dmg[3d6 - dex - 7]'}      | ${'0 (3d6 – 10)'}
+      ${'die + integer + modifier'}    | ${'dmg[2d20 + 8 + str]'}     | ${'34 (2d20 + 13)'}
+      ${'die - integer - modifier'}    | ${'dmg[2d20 - 8 - str]'}     | ${'8 (2d20 – 13)'}
     `
     ('$description: {param1="$param1"} => $expected',
     ({inputText, expectedText}) => {
@@ -468,14 +468,14 @@ describe('should parse valid damage expressions', () => {
     it.each
     `
       description                            | strScore | dexScore | inputText                       | expectedText
-      ${'die + finmod, str > dex'}           | ${16}    | ${12}    | ${'dmg[2d8 + finmod]'}          | ${'12 (2d8 + 3)'}
-      ${'die + finmod + mod, str > dex'}     | ${16}    | ${12}    | ${'dmg[2d8 + finmod + strmod]'} | ${'15 (2d8 + 6)'}
-      ${'die + finmod + prof, str > dex'}    | ${16}    | ${12}    | ${'dmg[2d8 + finmod + prof]'}   | ${'14 (2d8 + 5)'}
-      ${'die + finmod + integer, str > dex'} | ${16}    | ${12}    | ${'dmg[2d8 + finmod + -4]'}     | ${'8 (2d8 – 1)'}
-      ${'die + finmod, dex > str'}           | ${14}    | ${20}    | ${'dmg[2d8 + finmod]'}          | ${'14 (2d8 + 5)'}
-      ${'die + finmod + mod, dex > str'}     | ${14}    | ${20}    | ${'dmg[2d8 + finmod + strmod]'} | ${'16 (2d8 + 7)'}
-      ${'die + finmod + prof, dex > str'}    | ${14}    | ${20}    | ${'dmg[2d8 + finmod + prof]'}   | ${'16 (2d8 + 7)'}
-      ${'die + finmod + integer, dex > str'} | ${14}    | ${20}    | ${'dmg[2d8 + finmod + -4]'}     | ${'10 (2d8 + 1)'}
+      ${'die + fin, str > dex'}           | ${16}    | ${12}    | ${'dmg[2d8 + fin]'}          | ${'12 (2d8 + 3)'}
+      ${'die + fin + mod, str > dex'}     | ${16}    | ${12}    | ${'dmg[2d8 + fin + str]'} | ${'15 (2d8 + 6)'}
+      ${'die + fin + prof, str > dex'}    | ${16}    | ${12}    | ${'dmg[2d8 + fin + prof]'}   | ${'14 (2d8 + 5)'}
+      ${'die + fin + integer, str > dex'} | ${16}    | ${12}    | ${'dmg[2d8 + fin + -4]'}     | ${'8 (2d8 – 1)'}
+      ${'die + fin, dex > str'}           | ${14}    | ${20}    | ${'dmg[2d8 + fin]'}          | ${'14 (2d8 + 5)'}
+      ${'die + fin + mod, dex > str'}     | ${14}    | ${20}    | ${'dmg[2d8 + fin + str]'} | ${'16 (2d8 + 7)'}
+      ${'die + fin + prof, dex > str'}    | ${14}    | ${20}    | ${'dmg[2d8 + fin + prof]'}   | ${'16 (2d8 + 7)'}
+      ${'die + fin + integer, dex > str'} | ${14}    | ${20}    | ${'dmg[2d8 + fin + -4]'}     | ${'10 (2d8 + 1)'}
     `
     ('$description: {strScore="$strScore", dexScore="$dexScore", inputText=${inputText}} => $expectedText',
     ({strScore, dexScore, inputText, expectedText}) => {
