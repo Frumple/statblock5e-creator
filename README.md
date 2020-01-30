@@ -86,23 +86,21 @@ Please note the use of name expressions is completely optional; you can certainl
 
 ### Basic Math Expressions
 
-Basic math expressions consist of a series of **operands** and **operators** within square brackets, allowing for the addition and subtraction of such operands.
+Basic math expressions consist of a series of **operands** that can be added with **plus signs (+)**, or subtracted with **minus signs (-)**.
 
-Supported operands include:
-- **variables** (e.g. ability modifiers represented by `str`, `dex`, etc., and proficiency bonus represented by `prof`)
+Operands can be:
+- **variables** (e.g. ability modifiers represented by `str`, `dex`, `int`, etc., and proficiency bonus represented by `prof`)
 - **integers** (e.g. 12, -3, or 0)
 
-Supported operators include:
-- **`+` plus sign** for addition
-- **`-` minus sign** for subtraction
+##### Example
 
-For example. if the creature's strength modifier is **+4** and its proficiency bonus is **+2**:
+If the creature's strength modifier is **+5** and its proficiency bonus is **+2**:
 ```
 [str + prof - 3]
 ```
-will be calculated as **4 + 2 - 3**, resulting in a final answer of **3**.
+will be calculated as **5 + 2 - 3**, resulting in a final answer of **4**.
 
-Note that whitespace between the operands and operators is optional, meaning that `[str+prof-3]` is also a valid and equivalent math expression.
+Note that whitespace between the operands and operators is optional, meaning that `[str+prof-3]` is a valid and equivalent math expression.
 
 ### Variables
 
@@ -110,40 +108,55 @@ Here are a list of variables that are currently supported in math expressions:
 
 | Variable | Description | Note |
 | -------- | ----------- | ---- |
-| **`str`** | Strength Modifier     |
-| **`dex`** | Dexterity Modifier    |
-| **`con`** | Constitution Modifier |
-| **`int`** | Intelligence Modifier |
-| **`wis`** | Wisdom Modifier       |
-| **`cha`** | Charisma Modifier     |
-| **`fin`** | Finesse Modifier      | For use in finesse weapons. Equal to strength or dexterity modifier, whichever is highest. |
-| **`prof`**   | Proficiency Bonus     |
+| **`str`**  | Strength Modifier     |
+| **`dex`**  | Dexterity Modifier    |
+| **`con`**  | Constitution Modifier |
+| **`int`**  | Intelligence Modifier |
+| **`wis`**  | Wisdom Modifier       |
+| **`cha`**  | Charisma Modifier     |
+| **`fin`**  | Finesse Modifier      | For use in finesse weapons. Equal to strength or dexterity modifier, whichever is highest. |
+| **`prof`** | Proficiency Bonus     |
 
 ### Modifier Expressions: mod[...]
 
-One limitation of basic math expressions is that resulting positive numbers will appear without a positive sign (e.g. **5** instead of **+5**). The positive sign is needed to accurately show attack roll modifiers, so to make it appear, simply add the word **`mod`** before the square brackets: **`mod[...]`**
+One limitation of basic math expressions is that positive number results will appear without a positive sign (e.g. **5** instead of **+5**). The positive sign is needed to accurately show some modifiers, so to make it appear, simply add the word **`mod`** before the square brackets: **`mod[...]`**
 
-For example, assuming again that the creature's strength modifier is **+4** and its proficiency bonus is **+2**:
+##### Example
 
+Assuming again that the creature's strength modifier is **+5** and its proficiency bonus is **+2**:
 ```
 *Melee Weapon Attack:* mod[str + prof - 3] to hit
 ```
+will appear as:
 
-will appear as
+> _Melee Weapon Attack:_ +4 to hit
 
-> _Melee Weapon Attack:_ +3 to hit
+### Attack Expressions: atk[...]
+
+To show attack roll modifiers, you can use attack expressions as a useful shorthand. Attack expressions begin with the word **`atk`** before the square brackets, and the **first operand within the square brackets must be an ability modifier (`str`, `dex`, etc.).** The attack expression will automatically add the ability modifier with the proficiency bonus without needing to add the `prof` variable in the expression. Subsequent operands can be variables or integers that are added or subtracted from the modifier.
+
+##### Example
+
+Assuming again that the creature's strength modifier is **+5** and its proficiency bonus is **+2**:
+```
+*Melee Weapon Attack:* atk[str - 3] to hit
+```
+is effectively equivalent to the previous modifier expression example and will also appear as:
+
+> _Melee Weapon Attack:_ +4 to hit
 
 ### Damage Expressions: dmg[...]
 
-For damage rolls, you can use damage expressions to automatically calculate the average damage. All damage expressions begin with the word **`dmg`** before the square brackets, and the **first operand within the square brackets must be a dice operand (d8, 2d6, etc.).** Subsequent operands can be variables or integers that are added or subtracted from the dice result.
+For damage rolls, you can use damage expressions to automatically calculate the average damage. Damage expressions begin with the word **`dmg`** before the square brackets, and the **first operand within the square brackets must be a dice operand (`d8`, `2d6`, etc.).** Subsequent operands can be variables or integers that are added or subtracted from the dice result.
 
-For example, if the creature's dexterity modifier is **+3**, then:
+##### Example
 
+If the creature's dexterity modifier is **+3**, then:
 ```
 dmg[1d8 + dex + 2] slashing damage
 ```
 
-results in
+will appear as:
 
 > 9 (1d8 + 5) slashing damage
 

@@ -120,7 +120,7 @@ export default class Attack {
   }
 
   generatedTextToHit(parserAbilityModifier) {
-    return `mod[${parserAbilityModifier} + prof] to hit`;
+    return `atk[${parserAbilityModifier}] to hit`;
   }
 
   generatedTextReachOrRange(isMeleeEnabled, isRangedEnabled) {

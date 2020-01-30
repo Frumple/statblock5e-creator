@@ -62,6 +62,7 @@ NormalLine = inline:Inline+ end:EndOfLine { return `${inline.join('')}${end ? en
 
 Inline
   = DamageExpression
+  / AttackExpression
   / ModifierExpression
   / MathExpression
   / Text
@@ -83,6 +84,20 @@ DamageExpression
     const diceNotation = `${head.text}${formattedModifier}`;
 
     return `${formattedAverageDamage} (${diceNotation})`
+  }
+
+AttackExpression
+  = 'atk' '[' SpaceChar* head:AbilityModifier tail:(SpaceChar* Operator SpaceChar* Operand)* SpaceChar* ']' {
+    const tailModifier = tail.reduce((result, element) => {
+      const operator = element[1];
+      const operand = element[3];
+      if (operator === '+') { return result + operand; }
+      if (operator === '-') { return result - operand; }
+    }, 0);
+
+    const modifier = head + options.proficiencyBonus + tailModifier;
+
+    return formatModifierExpression(modifier);
   }
 
 ModifierExpression

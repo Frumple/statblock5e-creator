@@ -12,7 +12,7 @@ export default class Actions extends BlockListModel {
     } else {
       this.blocks = [{
         name: 'Club',
-        text: '*Melee Weapon Attack:* mod[str + prof] to hit, reach 5 ft., one target. *Hit:* dmg[1d4 + str] bludgeoning damage.',
+        text: '*Melee Weapon Attack:* atk[str] to hit, reach 5 ft., one target. *Hit:* dmg[1d4 + str] bludgeoning damage.',
         homebreweryText: '*Melee Weapon Attack:* +2 to hit, reach 5 ft., one target. *Hit:* 2 (1d4) bludgeoning damage.',
         htmlText: '<em>Melee Weapon Attack:</em> +2 to hit, reach 5 ft., one target. <em>Hit:</em> 2 (1d4) bludgeoning damage.'
       }];

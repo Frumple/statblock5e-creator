@@ -209,7 +209,7 @@ describe('should parse invalid math expressions unchanged', () => {
     ${'Missing operator'}                     | ${'[42 19]'}
     ${'Dangling preceding operator'}          | ${'[+ 42 + 19]'}
     ${'Dangling trailing operator'}           | ${'[42 + 19 +]'}
-    ${'Invalid modifier'}                     | ${'[daxmod]'}
+    ${'Invalid modifier'}                     | ${'[dax]'}
     ${'Invalid proficiency bonus'}            | ${'[profbonus]'}
   `
   ('$description: {inputText="$inputText"} => $expectedText',
@@ -404,8 +404,140 @@ describe('should parse invalid modifier expressions unchanged', () => {
     ${'Missing operator'}                     | ${'mod[42 19]'}
     ${'Dangling preceding operator'}          | ${'mod[+ 42 + 19]'}
     ${'Dangling trailing operator'}           | ${'mod[42 + 19 +]'}
-    ${'Invalid modifier'}                     | ${'mod[daxmod]'}
+    ${'Invalid modifier'}                     | ${'mod[dax]'}
     ${'Invalid proficiency bonus'}            | ${'mod[profbonus]'}
+  `
+  ('$description: {inputText="$inputText"} => $expectedText',
+  ({inputText}) => {
+    const parserResults = parseMath(inputText);
+
+    expect(parserResults).not.toBeNull();
+    expect(parserResults.inputText).toBe(inputText);
+    expect(parserResults.outputText).toBe(inputText);
+    expect(parserResults.error).toBeNull();
+  });
+  /* eslint-enable indent, no-unexpected-multiline */
+});
+
+describe('should parse valid attack roll modifier expressions', () => {
+  describe('with single ability modifier only', () => {
+    /* eslint-disable indent, no-unexpected-multiline */
+    it.each
+    `
+      description       | inputText     | expectedText
+      ${'strength'}     | ${'atk[str]'} | ${'+1'}
+      ${'dexterity'}    | ${'atk[dex]'} | ${'+7'}
+      ${'intelligence'} | ${'atk[int]'} | ${'+3'}
+      ${'constitution'} | ${'atk[con]'} | ${'+10'}
+      ${'wisdom'}       | ${'atk[wis]'} | ${'+4'}
+      ${'charisma'}     | ${'atk[cha]'} | ${'–2'}
+    `
+    ('$description: "$inputText" => $expectedText',
+    ({inputText, expectedText}) => {
+      abilities.abilities['strength'].score = 7;      // -2 modifier
+      abilities.abilities['dexterity'].score = 18;    // +4 modifier
+      abilities.abilities['constitution'].score = 25; // +7 modifier
+      abilities.abilities['intelligence'].score = 11; // +0 modifier
+      abilities.abilities['wisdom'].score = 12;       // +1 modifier
+      abilities.abilities['charisma'].score = 1;      // -5 modifier
+      proficiencyBonus.proficiencyBonus = 3;
+
+      const parserResults = parseMath(inputText);
+
+      expect(parserResults).not.toBeNull();
+      expect(parserResults.inputText).toBe(inputText);
+      expect(parserResults.outputText).toBe(expectedText);
+      expect(parserResults.error).toBeNull();
+    });
+    /* eslint-enable indent, no-unexpected-multiline */
+  });
+
+  describe('with integers, ability modifiers, and proficiency bonus', () => {
+    /* eslint-disable indent, no-unexpected-multiline */
+    it.each
+    `
+      description                        | inputText                 | expectedText
+      ${'ability + positive'}            | ${'atk[str + 3]'}         | ${'+10'}
+      ${'ability + zero'}                | ${'atk[str + 0]'}         | ${'+7'}
+      ${'ability + negative'}            | ${'atk[str + -4]'}        | ${'+3'}
+      ${'ability - positive'}            | ${'atk[str - 3]'}         | ${'+4'}
+      ${'ability - zero'}                | ${'atk[str - 0]'}         | ${'+7'}
+      ${'ability - negative'}            | ${'atk[str - -4]'}        | ${'+11'}
+      ${'ability + proficiency bonus'}   | ${'atk[str + prof]'}      | ${'+9'}
+      ${'ability + modifier'}            | ${'atk[str + dex]'}       | ${'+10'}
+      ${'ability - proficiency bonus'}   | ${'atk[str - prof]'}      | ${'+5'}
+      ${'ability - modifier'}            | ${'atk[str - dex]'}       | ${'+4'}
+      ${'ability + integer + integer'}   | ${'atk[str + -1 + 12]'}   | ${'+18'}
+      ${'ability - integer - integer'}   | ${'atk[str - -1 - 12]'}   | ${'–4'}
+      ${'ability + modifier + modifier'} | ${'atk[str + str + dex]'} | ${'+15'}
+      ${'ability - modifier - modifier'} | ${'atk[str - str - dex]'} | ${'–1'}
+      ${'ability + modifier + integer'}  | ${'atk[str + dex + 7]'}   | ${'+17'}
+      ${'ability - modifier - integer'}  | ${'atk[str - dex - 7]'}   | ${'–3'}
+      ${'ability + integer + modifier'}  | ${'atk[str + 8 + str]'}   | ${'+20'}
+      ${'ability - integer - modifier'}  | ${'atk[str - 8 - str]'}   | ${'–6'}
+    `
+    ('$description: "$inputText" => $expectedText',
+    ({inputText, expectedText}) => {
+      abilities.abilities['strength'].score = 20;     // +5 modifier
+      abilities.abilities['dexterity'].score = 17;    // +3 modifier
+      proficiencyBonus.proficiencyBonus = 2;
+
+      const parserResults = parseMath(inputText);
+
+      expect(parserResults).not.toBeNull();
+      expect(parserResults.inputText).toBe(inputText);
+      expect(parserResults.outputText).toBe(expectedText);
+      expect(parserResults.error).toBeNull();
+    });
+    /* eslint-enable indent, no-unexpected-multiline */
+  });
+
+  describe('with finesse modifier', () => {
+    /* eslint-disable indent, no-unexpected-multiline */
+    it.each
+    `
+      description                             | strScore | dexScore | inputText            | expectedText
+      ${'fin only, str > dex'}                | ${16}    | ${12}    | ${'atk[fin]'}        | ${'+5'}
+      ${'fin + modifier, str > dex'}          | ${16}    | ${12}    | ${'atk[fin + str]'}  | ${'+8'}
+      ${'fin + proficiency bonus, str > dex'} | ${16}    | ${12}    | ${'atk[fin + prof]'} | ${'+7'}
+      ${'fin + integer, str > dex'}           | ${16}    | ${12}    | ${'atk[fin + -4]'}   | ${'+1'}
+      ${'fin only, dex > str'}                | ${14}    | ${20}    | ${'atk[fin]'}        | ${'+7'}
+      ${'fin + modifier, dex > str'}          | ${14}    | ${20}    | ${'atk[fin + str]'}  | ${'+9'}
+      ${'fin + proficiency bonus, dex > str'} | ${14}    | ${20}    | ${'atk[fin + prof]'} | ${'+9'}
+      ${'fin + integer, dex > str'}           | ${14}    | ${20}    | ${'atk[fin + -4]'}   | ${'+3'}
+    `
+    ('$description: {strScore="$strScore", dexScore="$dexScore", inputText=${inputText}} => $expectedText',
+    ({strScore, dexScore, inputText, expectedText}) => {
+      abilities.abilities['strength'].score = strScore;
+      abilities.abilities['dexterity'].score = dexScore;
+      proficiencyBonus.proficiencyBonus = 2;
+
+      const parserResults = parseMath(inputText);
+
+      expect(parserResults).not.toBeNull();
+      expect(parserResults.inputText).toBe(inputText);
+      expect(parserResults.outputText).toBe(expectedText);
+      expect(parserResults.error).toBeNull();
+    });
+    /* eslint-enable indent, no-unexpected-multiline */
+  });
+});
+
+describe('should parse invalid attack roll modifier expression unchanged', () => {
+  /* eslint-disable indent, no-unexpected-multiline */
+  it.each
+  `
+    description                                            | inputText
+    ${'Unclosed brackets'}                                 | ${'atk[str + 19'}
+    ${'Decimal numbers'}                                   | ${'atk[str - 19.11]'}
+    ${'Missing operand'}                                   | ${'atk[str - - 19]'}
+    ${'Missing operator'}                                  | ${'atk[str 19]'}
+    ${'Dangling preceding operator'}                       | ${'atk[+ str + 19]'}
+    ${'Dangling trailing operator'}                        | ${'atk[str + 19 +]'}
+    ${'Invalid modifier'}                                  | ${'atk[dax]'}
+    ${'Invalid proficiency bonus'}                         | ${'atk[profbonus]'}
+    ${'Integer cannot be used as first operand'}           | ${'atk[19]'}
+    ${'Proficiency bonus cannot be used as first operand'} | ${'atk[prof]'}
   `
   ('$description: {inputText="$inputText"} => $expectedText',
   ({inputText}) => {
@@ -498,15 +630,18 @@ describe('should parse invalid damage expressions unchanged', () => {
   /* eslint-disable indent, no-unexpected-multiline */
   it.each
   `
-    description                               | inputText
-    ${'Unclosed brackets'}                    | ${'dmg[2d8 + 19'}
-    ${'Decimal numbers'}                      | ${'dmg[2d8 - 19.11]'}
-    ${'Missing operand'}                      | ${'dmg[2d8 - - 19]'}
-    ${'Missing operator'}                     | ${'dmg[2d8 19]'}
-    ${'Dangling preceding operator'}          | ${'dmg[+ 2d8 + 19]'}
-    ${'Dangling trailing operator'}           | ${'dmg[2d8 + 19 +]'}
-    ${'Invalid modifier'}                     | ${'dmg[daxmod]'}
-    ${'Invalid proficiency bonus'}            | ${'dmg[profbonus]'}
+    description                                            | inputText
+    ${'Unclosed brackets'}                                 | ${'dmg[2d8 + 19'}
+    ${'Decimal numbers'}                                   | ${'dmg[2d8 - 19.11]'}
+    ${'Missing operand'}                                   | ${'dmg[2d8 - - 19]'}
+    ${'Missing operator'}                                  | ${'dmg[2d8 19]'}
+    ${'Dangling preceding operator'}                       | ${'dmg[+ 2d8 + 19]'}
+    ${'Dangling trailing operator'}                        | ${'dmg[2d8 + 19 +]'}
+    ${'Invalid modifier'}                                  | ${'dmg[dax]'}
+    ${'Invalid proficiency bonus'}                         | ${'dmg[profbonus]'}
+    ${'Integer cannot be used as first operand'}           | ${'dmg[19]'}
+    ${'Ability modifier cannot be used as first operand'}  | ${'dmg[str]'}
+    ${'Proficiency bonus cannot be used as first operand'} | ${'dmg[prof]'}
   `
   ('$description: {inputText="$inputText"} => $expectedText',
   ({inputText}) => {
