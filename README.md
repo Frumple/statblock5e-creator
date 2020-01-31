@@ -1,20 +1,36 @@
 # Interactive Creature Statblock Creator for D&D 5th Edition
 
+**TODO: Image here**
+
 ### Live Demo: [https://frumple.github.io/statblock5e-creator][demo]
 
 A visual web interface for creating creature statblocks that are similar in appearance to the official blocks from the Dungeons and Dragons 5th Edition Monster Manual.
 
 ## Features
 
-- Supports **one-column** or **two-column** formats. Two-column statblock heights can also be adjusted manually.
-- Automatically calculates hit points based on hit die and constitution, or allows you to enter your own custom hit points.
-- Automatically calculates saving throws and skills based on ability modifiers and proficiency bonus, or allows you to enter your own custom modifiers.
+- **One-column** or **Two-column** formats. Two-column statblock heights can also be adjusted manually.
+- Hit points are automatically calculated from hit die and constitution, or enter your own custom hit points.
+- Saving throws and skills are automatically calculated from ability modifiers and proficiency bonus, or enter your own custom modifiers.
 - In the descriptions for Special Traits, Actions, Reactions, and Legendary Actions:
-  - **[Markdown Emphasis](#markdown-emphasis)** can be used to make text **bold** and/or *italic*.
-  - **[Name Expressions](#name-expressions)** can be used to inject the creature's full or short name into the description where needed.
-  - **[Math Expressions](#math-expressions)** can be used to automatically calculate attack roll modifiers, and average damage from damage rolls.
-- Weapon attack actions can be easily created using the **Generate Attack** dialog.
-- Statblocks can be printed, exported to an HTML file, or exported to a Markdown format for use in [Homebrewery][homebrewery].
+  - **[Markdown Emphasis](#markdown-emphasis)** to make text **bold** and/or *italic*.
+  - **[Name Expressions](#name-expressions)** to inject the creature's name into the description where needed.
+  - **[Math Expressions](#math-expressions)** to automatically calculate attack roll modifiers, and average damage from damage rolls.
+- **Generate Attack** dialog to easily create weapon attacks.
+- Export your statblock into a JSON file, and re-import it at a later time.
+- Export your statblock into an HTML file, or a Markdown format for use in **[Homebrewery][homebrewery]**.
+- Print your statblock to paper.
+
+## Future Improvements
+
+- Generate Spellcasting (currently disabled under Special Traits)
+- Get suggested proficiency bonus from Challenge Rating
+- Buttons to toggle bold/italic text and add expressions to Special Trait/Action/Reaction/Legendary Action descriptions
+- Autofill common Special Traits and Actions
+- Import monster stats from the [Open5e][open5e] API
+- Export to [Improved Initiative][improved-initiative] (JSON format)
+- Export as Image
+- Offline/Local Storage
+- Additional printing options, including printing 2 one-column statblocks side-by-side
 
 ## Markdown Emphasis
 
@@ -54,7 +70,9 @@ If the proper noun box is **NOT** checked:
 - The word "The" will begin with a capital letter if `[name]` or `[fullname]` is used at the beginning of a sentence.
 - Any capitalization in the short name or full name will be removed.
 
-For example, if the creature's short name is "**Mind Flayer**":
+##### Example
+
+If the creature's short name is "**Mind Flayer**":
 
 | Original Text | Displayed Text |
 | ------------- | -------------- |
@@ -71,8 +89,8 @@ Otherwise, if the proper noun box **IS** checked:
 | --------- | ---------- | ------------ | -------------------------------- |
 | Ancient Red Dragon | dragon | No | `[name] can take 3 legendary actions...`<br /><br />The dragon can take 3 legendary actions... |
 | Gelatinous Cube | cube | No | `...a creature that does so is subjected to [name]'s Engulf...`<br /><br />...a creature that does so is subjected to the cube's Engulf... |
-| Orc War Chief | orc | No | `As a bonus action, [name] can move up to its speed...`<br /><br />As a bonus action, the orc can move up to its speed... |
-| Rust Monster | rust monster | No | `Nonmagical ammunition made of metal that hits [name] is destroyed after dealing damage.`<br /><br />Nonmagical ammunition made of metal that hits the rust monster is destroyed after dealing damage. |
+| Orc War Chief | orc<br /><br />OR<br /><br />war chief | No | `As a bonus action, [name] can move up to its speed...`<br /><br />As a bonus action, the orc can move up to its speed...<br /><br />As a bonus action, the war chief can move up to its speed... |
+| Rust Monster | *(blank)* | No | `Nonmagical ammunition made of metal that hits [name] is destroyed after dealing damage.`<br /><br />Nonmagical ammunition made of metal that hits the rust monster is destroyed after dealing damage. |
 | Casper the Friendly Ghost | Casper | Yes | `...the target is immune to [name]'s Horrifying Visage...`<br /><br />...the target is immune to Casper's Horrifying Visage... |
 | Drizzt Do'urden | Drizzt | Yes | `...within 30 feet of [name].`<br /><br />...within 30 feet of Drizzt. |
 | Lady Kima of Vord | Lady Kima | Yes | `[name] can invoke her Divine Smite...`<br /><br />Lady Kima can invoke her Divine Smite... |
@@ -176,14 +194,6 @@ Run all the tests with:
 
 	npm test
 
-
-## Future Improvements
-
-- Generate Spellcasting (currently disabled under Special Traits)
-- Export as Image
-- Import/Export as JSON
-- HTML5 Offline Storage
-
 ## Dependencies
 
 - [PEG.js][pegjs] - Parsing for Markdown emphasis, creature names, ability score modifiers, and mathematical expressions
@@ -191,15 +201,17 @@ Run all the tests with:
 - [JSBeautify][jsbeautify] - Beautify HTML Export
 - [Clipboard.js][clipboardjs] - Copy to clipboard functionality
 
-## Credits and Background
+## Credits
 
 Statblock5e-creator is a fork of Valloric's awesome [statblock5e][statblock5e] template. It is also heavily inspired by [CritterDB][critterdb], another great tool for creating statblocks.
 
-I wrote this project in pure Javascript as a means of learning basic web technologies. While I could have gone with a typical framework like Angular or React, instead I wanted to build things from scratch and learn how they work behind the scenes.
+Some help popups in this application link to useful resources in [Open5e][open5e].
 
-## License
+## Licensing
 
-This project is licensed under the [Apache License, Version 2.0][apache2].
+Statblock5e-creator is licensed under the [Apache License, Version 2.0][apache2].
+
+All example monsters and stats used in this application are from the [Dungeons and Dragons Systems Reference Document (SRD) v5.1][srd], available through the Open Gaming License (OGL).
 
 [demo]: https://frumple.github.io/statblock5e-creator
 
@@ -212,5 +224,8 @@ This project is licensed under the [Apache License, Version 2.0][apache2].
 [statblock5e]: https://github.com/valloric/statblock5e
 [critterdb]: https://critterdb.com
 [homebrewery]: https://homebrewery.naturalcrit.com
+[improved-initiative]: https://www.improved-initiative.com
+[open5e]: https://open5e.com
 
 [apache2]: http://www.apache.org/licenses/LICENSE-2.0.html
+[srd]: https://media.wizards.com/2016/downloads/DND/SRD-OGL_V5.1.pdf
