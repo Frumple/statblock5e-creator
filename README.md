@@ -1,10 +1,12 @@
 # Interactive Creature Statblock Creator for D&D 5th Edition
 
-**TODO: Image here**
-
 ### Live Demo: [https://frumple.github.io/statblock5e-creator][demo]
 
-A visual web interface for creating creature statblocks that are similar in appearance to the official blocks from the Dungeons and Dragons 5th Edition Monster Manual.
+A frontend web application for creating creature statblocks that are similar in appearance to the official blocks from the Dungeons and Dragons 5th Edition Monster Manual.
+
+<div align="center">
+  <img src="images/statblock.png" />
+</div>
 
 ## Features
 
@@ -14,8 +16,8 @@ A visual web interface for creating creature statblocks that are similar in appe
 - In the descriptions for Special Traits, Actions, Reactions, and Legendary Actions:
   - **[Markdown Emphasis](#markdown-emphasis)** to make text **bold** and/or *italic*.
   - **[Name Expressions](#name-expressions)** to inject the creature's name into the description where needed.
-  - **[Math Expressions](#math-expressions)** to automatically calculate attack roll modifiers, and average damage from damage rolls.
-- **Generate Attack** dialog to easily create weapon attacks.
+  - **[Math Expressions](#math-expressions)** to automatically calculate attack roll modifiers, average damage from damage rolls, and spell save DCs.
+- **[Generate Attack Dialog](#generate-attack-dialog)** to easily create weapon attack actions.
 - Export your statblock into a JSON file, and re-import it at a later time.
 - Export your statblock into an HTML file, or a Markdown format for use in **[Homebrewery][homebrewery]**.
 - Print your statblock to paper.
@@ -31,6 +33,12 @@ A visual web interface for creating creature statblocks that are similar in appe
 - Export as Image
 - Offline/Local Storage
 - Additional printing options, including printing 2 one-column statblocks side-by-side
+
+## JSON Examples
+
+Some example JSON files are available in the **[examples subdirectory][examples]**. Download these files to your local computer, then under the "Import" drop-down menu, click "Import from JSON" and select the file to import.
+
+----------
 
 ## Markdown Emphasis
 
@@ -51,9 +59,11 @@ You can surround text with asterisks and/or underscores to make it **bold** and/
 
 *Available only in descriptions for Special Traits, Actions, Reactions, and Legendary Actions.*
 
-In the first section where you specify the creature's full name, you can also optionally specify a **short name**, and indicate whether the creature's name is a **proper noun**.
+In the topmost section where you specify the creature's full name, you can also optionally specify a **short name**, and indicate whether the creature's name is a **proper noun**.
 
-**TODO: Image of first section here**
+<div align="center">
+  <img src="images/title-section.png" />
+</div>
 
 ### Short Name
 
@@ -101,6 +111,10 @@ Please note the use of name expressions is completely optional; you can certainl
 ## Math Expressions
 
 *Available only in descriptions for Special Traits, Actions, Reactions, and Legendary Actions.*
+
+<div align="center">
+  <img src="images/attack-action.png" />
+</div>
 
 Five different types of math expressions are supported. This table summarizes the usage of each:
 
@@ -202,9 +216,19 @@ sdc[int]
 ```
 will be calculated as **8 + 4 + 2**, totalling to a final result of **14**.
 
+## Generate Attack Dialog
+
+<div align="center">
+  <img src="images/generate-attack.png" />
+</div>
+
+In the **Actions** section, click **Generate Attack** to open this dialog. In the Weapon Name field, you can provide your own custom name, or you can select a predefined weapon, which will automatically populate the weapon details below. Previews will be shown for the attack action's generated text (using the appropriate markdown emphasis, and attack and damage expressions), and rendered text (how it will be displayed on the statblock). After you've made any changes, click Generate Attack to add the weapon attack action to the statblock.
+
+----------
+
 ## Development Setup
 
-First, install all dependencies:
+Install all development dependencies with:
 
     npm install
 
@@ -214,7 +238,7 @@ This application has an extensive suite of automated [Jest](jest) test cases tha
 
 Run all the tests with:
 
-	npm test
+    npm test
 
 ## Dependencies
 
@@ -236,6 +260,7 @@ Statblock5e-creator is licensed under the [Apache License, Version 2.0][apache2]
 All example monsters and stats used in this application are from the [Dungeons and Dragons Systems Reference Document (SRD) v5.1][srd], available through the Open Gaming License (OGL).
 
 [demo]: https://frumple.github.io/statblock5e-creator
+[examples]: https://github.com/Frumple/statblock5e-creator/tree/master/examples
 
 [jest]: https://jestjs.io
 [pegjs]: https://pegjs.org
