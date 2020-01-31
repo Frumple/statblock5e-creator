@@ -21,13 +21,16 @@ export default class StatBlockMenu extends CustomAutonomousElement {
     this.editAllSectionsButton = this.shadowRoot.getElementById('edit-all-sections-button');
     this.saveAllSectionsButton = this.shadowRoot.getElementById('save-all-sections-button');
 
-    this.printButton = this.shadowRoot.getElementById('print-button');
-
     this.exportJsonButton = this.shadowRoot.getElementById('export-json-button');
     this.exportHtmlButton = this.shadowRoot.getElementById('export-html-button');
     this.exportHomebreweryButton = this.shadowRoot.getElementById('export-homebrewery-button');
 
     this.importJsonButton = this.shadowRoot.getElementById('import-json-button');
+
+    this.printButton = this.shadowRoot.getElementById('print-button');
+
+    this.githubButton = this.shadowRoot.getElementById('github-button');
+
   }
 
   connectedCallback() {
@@ -43,13 +46,15 @@ export default class StatBlockMenu extends CustomAutonomousElement {
       this.editAllSectionsButton.addEventListener('click', this.onClickEditAllSectionsButton.bind(this));
       this.saveAllSectionsButton.addEventListener('click', this.onClickSaveAllSectionsButton.bind(this));
 
-      this.printButton.addEventListener('click', this.onClickPrintButton.bind(this));
-
       this.exportJsonButton.addEventListener('click', this.onClickExportJsonButton.bind(this));
       this.exportHtmlButton.addEventListener('click', this.onClickExportHtmlButton.bind(this));
       this.exportHomebreweryButton.addEventListener('click', this.onClickExportHomebreweryButton.bind(this));
 
       this.importJsonButton.addEventListener('click', this.onClickImportJsonButton.bind(this));
+
+      this.printButton.addEventListener('click', this.onClickPrintButton.bind(this));
+
+      this.githubButton.addEventListener('click', this.onClickGithubButton.bind(this));
 
       this.isInitialized = true;
     }
@@ -97,6 +102,10 @@ export default class StatBlockMenu extends CustomAutonomousElement {
 
   onClickPrintButton() {
     this.dispatchMenuEvent('printAction');
+  }
+
+  onClickGithubButton() {
+    window.open('https://github.com/Frumple/statblock5e-creator');
   }
 
   dispatchMenuEvent(eventType, detail = null) {
