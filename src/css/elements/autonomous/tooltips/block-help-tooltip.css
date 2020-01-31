@@ -1,0 +1,15 @@
+.block-help-tooltip {
+  --help-tooltip-icon-color: #7A200D;
+  --help-tooltip-width: 50em;
+}
+
+table {
+  margin-left: 2em;
+}
+
+code {
+  background: white;
+  border-radius: 3px;
+  font-family: monospace;
+  padding: 0 3px;
+}

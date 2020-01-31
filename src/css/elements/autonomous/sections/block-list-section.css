@@ -6,7 +6,7 @@
   font-weight: normal;
   letter-spacing: 1px;
   overflow: hidden;
-  
+
   break-inside: avoid-column;
   break-after: avoid-column;
 
@@ -18,8 +18,8 @@
   animation: show-block-section-heading var(--section-animation-duration) ease-out;
 }
 
-.block-list-section__heading_hidden {  
-  opacity: 0;  
+.block-list-section__heading_hidden {
+  opacity: 0;
   max-height: 0;
   margin: 0;
   visibility: hidden;
@@ -41,8 +41,12 @@
   flex-direction: row;
 }
 
+.block-list-section__block-help-tooltip {
+  align-self: center;
+  margin-right: 5px;
+}
+
 .block-list-section__add-button {
   flex: 1 1 auto;
   padding: 5px;
 }
-

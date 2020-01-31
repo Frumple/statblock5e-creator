@@ -1,0 +1,36 @@
+<link href='src/css/elements/autonomous/tooltips/block-help-tooltip.css' rel='stylesheet' type='text/css'>
+
+<help-tooltip class="block-help-tooltip">
+  <p>These <slot name="name"></slot> descriptions support:</p>
+  <ul>
+    <li><strong><a href="https://github.com/frumple/statblock5e-creator#name-expressions" target="_blank">Name Expressions</a></strong>
+      <ul>
+        <li><code>[name]</code> : Shows the creature's full name, or short name if available.</li>
+      </ul>
+    </li>
+    <li><strong><a href="https://github.com/frumple/statblock5e-creator#math-expressions" target="_blank">Math Expressions</a></strong>
+      <ul>
+        <li><code>mod[int - 2]</code> : Calculates the intelligence modifier minus 2.</li>
+        <li><code>atk[str]</code> : Calculates the attack roll modifier for a strength-based attack.</li>
+        <li><code>dmg[2d6 + dex]</code> : Calculates the damage roll for a dexterity-based attack with 2d6 dice.</li>
+        <li><code>sdc[cha]</code> : Calculates the spell save DC with charisma as the spellcasting ability modifier.</li>
+      </ul>
+    </li>
+  </ul>
+  <br />
+  <p>Make text italic and/or bold in these descriptions using <strong><a href="https://github.com/frumple/statblock5e-creator#markdown-emphasis" target="_blank">Markdown Emphasis</a></strong>:</p>
+  <table>
+    <tr>
+      <td><em>Italic:</em></td>
+      <td><code>*single asterisks* or _single underscores_</code></td>
+    </tr>
+    <tr>
+      <td><strong>Bold:</strong></td>
+      <td><code>**double asterisks** or __double underscores__</code></td>
+    </tr>
+    <tr>
+      <td><strong><em>Combined:</em></strong></td>
+      <td><code>__*asterisks* in underscores__ or **vice _versa_**</code></td>
+    </tr>
+  </table>
+</help-tooltip>

@@ -20,6 +20,7 @@ import ExportDialog from './elements/autonomous/dialogs/export-dialog.js';
 import GenerateAttackDialog from './elements/autonomous/dialogs/generate-attack-dialog.js';
 
 import HelpTooltip from './elements/autonomous/tooltips/help-tooltip.js';
+import BlockHelpTooltip from './elements/autonomous/tooltips/block-help-tooltip.js';
 import CustomTextHelpTooltip from './elements/autonomous/tooltips/custom-text-help-tooltip.js';
 
 import DisplayBlockList from './elements/autonomous/lists/display-block-list.js';
@@ -91,6 +92,7 @@ async function defineElements() {
   elementClasses.push(GenerateAttackDialog);
 
   elementClasses.push(HelpTooltip);
+  elementClasses.push(BlockHelpTooltip);
   elementClasses.push(CustomTextHelpTooltip);
 
   elementClasses.push(DisplayBlockList);

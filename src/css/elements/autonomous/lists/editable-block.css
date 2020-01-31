@@ -36,19 +36,6 @@
   align-items: center;
 }
 
-.editable-block__help-tooltip {
-  --help-tooltip-icon-color: #7A200D;
-  --help-tooltip-width: 50em;
-}
-
-.editable-block__help-tooltip code {
-  background: white;
-}
-
-.editable-block__help-tooltip table {
-  margin-left: 2em;
-}
-
 .editable-block__textarea {
   grid-area: 2 / 2 / 3 / 4;
   resize: none;
