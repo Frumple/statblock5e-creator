@@ -1,0 +1,249 @@
+{
+  "title": {
+    "fullName": "Dragonborn Slaver",
+    "shortName": "slaver",
+    "isProperNoun": false
+  },
+  "subtitle": {
+    "size": "Medium",
+    "type": "humanoid",
+    "tags": "dragonborn",
+    "alignment": "neutral evil",
+    "useCustomText": false,
+    "customText": ""
+  },
+  "armorClass": {
+    "armorClass": 14,
+    "armorType": "padded armor",
+    "hasShield": false,
+    "useCustomText": false,
+    "customText": ""
+  },
+  "hitPoints": {
+    "hitPoints": 26,
+    "useHitDie": true,
+    "hitDieQuantity": 4,
+    "hitDieSize": 8
+  },
+  "speed": {
+    "walk": 30,
+    "burrow": null,
+    "climb": null,
+    "fly": null,
+    "hover": false,
+    "swim": null,
+    "useCustomText": false,
+    "customText": ""
+  },
+  "attributes": {
+    "abilityScores": {
+      "strength": 13,
+      "dexterity": 16,
+      "constitution": 14,
+      "intelligence": 10,
+      "wisdom": 10,
+      "charisma": 13
+    },
+    "proficiencyBonus": 2
+  },
+  "savingThrows": {
+    "strength": {
+      "isEnabled": false,
+      "isProficient": false,
+      "override": null
+    },
+    "dexterity": {
+      "isEnabled": false,
+      "isProficient": false,
+      "override": null
+    },
+    "constitution": {
+      "isEnabled": false,
+      "isProficient": false,
+      "override": null
+    },
+    "intelligence": {
+      "isEnabled": false,
+      "isProficient": false,
+      "override": null
+    },
+    "wisdom": {
+      "isEnabled": false,
+      "isProficient": false,
+      "override": null
+    },
+    "charisma": {
+      "isEnabled": false,
+      "isProficient": false,
+      "override": null
+    }
+  },
+  "skills": {
+    "acrobatics": {
+      "isEnabled": false,
+      "isProficient": false,
+      "override": null
+    },
+    "animalHandling": {
+      "isEnabled": false,
+      "isProficient": false,
+      "override": null
+    },
+    "arcana": {
+      "isEnabled": false,
+      "isProficient": false,
+      "override": null
+    },
+    "athletics": {
+      "isEnabled": true,
+      "isProficient": true,
+      "override": null
+    },
+    "deception": {
+      "isEnabled": false,
+      "isProficient": false,
+      "override": null
+    },
+    "history": {
+      "isEnabled": false,
+      "isProficient": false,
+      "override": null
+    },
+    "insight": {
+      "isEnabled": false,
+      "isProficient": false,
+      "override": null
+    },
+    "intimidation": {
+      "isEnabled": true,
+      "isProficient": true,
+      "override": null
+    },
+    "investigation": {
+      "isEnabled": false,
+      "isProficient": false,
+      "override": null
+    },
+    "medicine": {
+      "isEnabled": false,
+      "isProficient": false,
+      "override": null
+    },
+    "nature": {
+      "isEnabled": false,
+      "isProficient": false,
+      "override": null
+    },
+    "perception": {
+      "isEnabled": false,
+      "isProficient": false,
+      "override": null
+    },
+    "performance": {
+      "isEnabled": false,
+      "isProficient": false,
+      "override": null
+    },
+    "persuasion": {
+      "isEnabled": false,
+      "isProficient": false,
+      "override": null
+    },
+    "religion": {
+      "isEnabled": false,
+      "isProficient": false,
+      "override": null
+    },
+    "sleightOfHand": {
+      "isEnabled": false,
+      "isProficient": false,
+      "override": null
+    },
+    "stealth": {
+      "isEnabled": false,
+      "isProficient": false,
+      "override": null
+    },
+    "survival": {
+      "isEnabled": false,
+      "isProficient": false,
+      "override": null
+    }
+  },
+  "damageVulnerabilities": {
+    "items": []
+  },
+  "damageResistances": {
+    "items": []
+  },
+  "damageImmunities": {
+    "items": []
+  },
+  "conditionImmunities": {
+    "items": []
+  },
+  "senses": {
+    "blindsight": null,
+    "darkvision": null,
+    "tremorsense": null,
+    "truesight": null,
+    "useCustomText": false,
+    "customText": ""
+  },
+  "languages": {
+    "items": [
+      "Common",
+      "Draconic"
+    ]
+  },
+  "challengeRating": {
+    "challengeRating": 0.5,
+    "experiencePoints": 100
+  },
+  "specialTraits": {
+    "blocks": [
+      {
+        "name": "Draconic Ancestry",
+        "text": "[name] has resistance to a specific type of damage depending on its ancestry."
+      },
+      {
+        "name": "Breath Weapon",
+        "text": "[name] exhales a breath in a 15 ft. cone, or a 6 ft. by 30 ft. line, that deals damage corresponding to [name]'s draconic ancestry. Each creature within the cone must make a DC 13 Dexterity or Constitution saving throw, taking dmg[2d6] damage on a failed save, or half as much damage on a successful one."
+      }
+    ]
+  },
+  "actions": {
+    "blocks": [
+      {
+        "name": "Multiattack",
+        "text": "[name] makes two weapon melee attacks or two ranged attacks."
+      },
+      {
+        "name": "Whip",
+        "text": "*Melee Weapon Attack:* atk[fin] to hit, reach 10 ft., one target. *Hit:* dmg[1d4 + fin] slashing damage."
+      },
+      {
+        "name": "Net",
+        "text": "*Special Weapon Attack:* +5 to hit, range 5 ft./15 ft., one target. *Hit:* A Large or smaller creature is restrained until it is freed. A net has no effect on creature that are formless, or creatures that are Huge or larger. A creature can use its action to make a DC 10 Strength check to free itself or another creature within its reach on a success. Dealing 5 slashing damage to the net (AC 10) also frees the creature without harming it, ending the effect and destroying the net. [name] can make only one attack with the net regardless of the number of attacks it can normally take."
+      }
+    ]
+  },
+  "reactions": {
+    "blocks": []
+  },
+  "legendaryActions": {
+    "blocks": [],
+    "description": "[name] can take 3 legendary actions, choosing from the options below. Only one legendary action option can be used at a time and only at the end of another creature's turn. [name] regains spent legendary actions at the start of its turn."
+  },
+  "meta": {
+    "version": "0.0.1",
+    "description": "Created using statblock5e-creator",
+    "url": "https://frumple.github.io/statblock5e-creator"
+  },
+  "layout": {
+    "columns": 1,
+    "twoColumnMode": "auto",
+    "twoColumnHeight": 600,
+    "emptySectionsVisibility": true
+  }
+}

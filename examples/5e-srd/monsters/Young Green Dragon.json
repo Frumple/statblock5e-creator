@@ -1,0 +1,253 @@
+{
+  "title": {
+    "fullName": "Young Green Dragon",
+    "shortName": "dragon",
+    "isProperNoun": false
+  },
+  "subtitle": {
+    "size": "Large",
+    "type": "dragon",
+    "tags": "",
+    "alignment": "lawful evil",
+    "useCustomText": false,
+    "customText": ""
+  },
+  "armorClass": {
+    "armorClass": 18,
+    "armorType": "natural armor",
+    "hasShield": false,
+    "useCustomText": false,
+    "customText": ""
+  },
+  "hitPoints": {
+    "hitPoints": 136,
+    "useHitDie": true,
+    "hitDieQuantity": 16,
+    "hitDieSize": 10
+  },
+  "speed": {
+    "walk": 40,
+    "burrow": null,
+    "climb": null,
+    "fly": 80,
+    "hover": false,
+    "swim": 40,
+    "useCustomText": false,
+    "customText": ""
+  },
+  "attributes": {
+    "abilityScores": {
+      "strength": 19,
+      "dexterity": 12,
+      "constitution": 17,
+      "intelligence": 16,
+      "wisdom": 13,
+      "charisma": 15
+    },
+    "proficiencyBonus": 3
+  },
+  "savingThrows": {
+    "strength": {
+      "isEnabled": false,
+      "isProficient": false,
+      "override": null
+    },
+    "dexterity": {
+      "isEnabled": true,
+      "isProficient": true,
+      "override": null
+    },
+    "constitution": {
+      "isEnabled": true,
+      "isProficient": true,
+      "override": null
+    },
+    "intelligence": {
+      "isEnabled": false,
+      "isProficient": false,
+      "override": null
+    },
+    "wisdom": {
+      "isEnabled": true,
+      "isProficient": true,
+      "override": null
+    },
+    "charisma": {
+      "isEnabled": true,
+      "isProficient": true,
+      "override": null
+    }
+  },
+  "skills": {
+    "acrobatics": {
+      "isEnabled": false,
+      "isProficient": false,
+      "override": null
+    },
+    "animalHandling": {
+      "isEnabled": false,
+      "isProficient": false,
+      "override": null
+    },
+    "arcana": {
+      "isEnabled": false,
+      "isProficient": false,
+      "override": null
+    },
+    "athletics": {
+      "isEnabled": false,
+      "isProficient": false,
+      "override": null
+    },
+    "deception": {
+      "isEnabled": true,
+      "isProficient": true,
+      "override": null
+    },
+    "history": {
+      "isEnabled": false,
+      "isProficient": false,
+      "override": null
+    },
+    "insight": {
+      "isEnabled": false,
+      "isProficient": false,
+      "override": null
+    },
+    "intimidation": {
+      "isEnabled": false,
+      "isProficient": false,
+      "override": null
+    },
+    "investigation": {
+      "isEnabled": false,
+      "isProficient": false,
+      "override": null
+    },
+    "medicine": {
+      "isEnabled": false,
+      "isProficient": false,
+      "override": null
+    },
+    "nature": {
+      "isEnabled": false,
+      "isProficient": false,
+      "override": null
+    },
+    "perception": {
+      "isEnabled": true,
+      "isProficient": true,
+      "override": 7
+    },
+    "performance": {
+      "isEnabled": false,
+      "isProficient": false,
+      "override": null
+    },
+    "persuasion": {
+      "isEnabled": false,
+      "isProficient": false,
+      "override": null
+    },
+    "religion": {
+      "isEnabled": false,
+      "isProficient": false,
+      "override": null
+    },
+    "sleightOfHand": {
+      "isEnabled": false,
+      "isProficient": false,
+      "override": null
+    },
+    "stealth": {
+      "isEnabled": true,
+      "isProficient": true,
+      "override": null
+    },
+    "survival": {
+      "isEnabled": false,
+      "isProficient": false,
+      "override": null
+    }
+  },
+  "damageVulnerabilities": {
+    "items": []
+  },
+  "damageResistances": {
+    "items": []
+  },
+  "damageImmunities": {
+    "items": [
+      "poison"
+    ]
+  },
+  "conditionImmunities": {
+    "items": [
+      "poisoned"
+    ]
+  },
+  "senses": {
+    "blindsight": 30,
+    "darkvision": 120,
+    "tremorsense": null,
+    "truesight": null,
+    "useCustomText": false,
+    "customText": ""
+  },
+  "languages": {
+    "items": [
+      "Common",
+      "Draconic"
+    ]
+  },
+  "challengeRating": {
+    "challengeRating": 8,
+    "experiencePoints": 3900
+  },
+  "specialTraits": {
+    "blocks": [
+      {
+        "name": "Amphibious",
+        "text": "[name] can breathe air and water."
+      }
+    ]
+  },
+  "actions": {
+    "blocks": [
+      {
+        "name": "Multiattack",
+        "text": "[name] makes three attacks: one with its bite and two with its claws."
+      },
+      {
+        "name": "Bite",
+        "text": "*Melee Weapon Attack:* atk[str] to hit, reach 10 ft., one target. *Hit:* dmg[2d10 + str] piercing damage plus dmg[2d6] poison damage."
+      },
+      {
+        "name": "Claw",
+        "text": "*Melee Weapon Attack:* atk[str] to hit, reach 5 ft., one target. *Hit:* dmg[2d6 + str] slashing damage."
+      },
+      {
+        "name": "Poison Breath (Recharge 5-6)",
+        "text": "[name] exhales poisonous gas in a 30-foot cone. Each creature in that area must make a DC 14 Constitution saving throw, taking dmg[12d6] poison damage on a failed save, or half as much damage on a successful one."
+      }
+    ]
+  },
+  "reactions": {
+    "blocks": []
+  },
+  "legendaryActions": {
+    "blocks": [],
+    "description": "[name] can take 3 legendary actions, choosing from the options below. Only one legendary action option can be used at a time and only at the end of another creature's turn. [name] regains spent legendary actions at the start of its turn."
+  },
+  "meta": {
+    "version": "0.0.1",
+    "description": "Created using statblock5e-creator",
+    "url": "https://frumple.github.io/statblock5e-creator"
+  },
+  "layout": {
+    "columns": 1,
+    "twoColumnMode": "auto",
+    "twoColumnHeight": 600,
+    "emptySectionsVisibility": false
+  }
+}

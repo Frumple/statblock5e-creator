@@ -1,0 +1,245 @@
+{
+  "title": {
+    "fullName": "Giant Eagle",
+    "shortName": "eagle",
+    "isProperNoun": false
+  },
+  "subtitle": {
+    "size": "Large",
+    "type": "beast",
+    "tags": "",
+    "alignment": "neutral good",
+    "useCustomText": false,
+    "customText": ""
+  },
+  "armorClass": {
+    "armorClass": 13,
+    "armorType": "",
+    "hasShield": false,
+    "useCustomText": false,
+    "customText": ""
+  },
+  "hitPoints": {
+    "hitPoints": 26,
+    "useHitDie": true,
+    "hitDieQuantity": 4,
+    "hitDieSize": 10
+  },
+  "speed": {
+    "walk": 10,
+    "burrow": null,
+    "climb": null,
+    "fly": 80,
+    "hover": false,
+    "swim": null,
+    "useCustomText": false,
+    "customText": ""
+  },
+  "attributes": {
+    "abilityScores": {
+      "strength": 16,
+      "dexterity": 17,
+      "constitution": 13,
+      "intelligence": 8,
+      "wisdom": 14,
+      "charisma": 10
+    },
+    "proficiencyBonus": 2
+  },
+  "savingThrows": {
+    "strength": {
+      "isEnabled": false,
+      "isProficient": false,
+      "override": null
+    },
+    "dexterity": {
+      "isEnabled": false,
+      "isProficient": false,
+      "override": null
+    },
+    "constitution": {
+      "isEnabled": false,
+      "isProficient": false,
+      "override": null
+    },
+    "intelligence": {
+      "isEnabled": false,
+      "isProficient": false,
+      "override": null
+    },
+    "wisdom": {
+      "isEnabled": false,
+      "isProficient": false,
+      "override": null
+    },
+    "charisma": {
+      "isEnabled": false,
+      "isProficient": false,
+      "override": null
+    }
+  },
+  "skills": {
+    "acrobatics": {
+      "isEnabled": false,
+      "isProficient": false,
+      "override": null
+    },
+    "animalHandling": {
+      "isEnabled": false,
+      "isProficient": false,
+      "override": null
+    },
+    "arcana": {
+      "isEnabled": false,
+      "isProficient": false,
+      "override": null
+    },
+    "athletics": {
+      "isEnabled": false,
+      "isProficient": false,
+      "override": null
+    },
+    "deception": {
+      "isEnabled": false,
+      "isProficient": false,
+      "override": null
+    },
+    "history": {
+      "isEnabled": false,
+      "isProficient": false,
+      "override": null
+    },
+    "insight": {
+      "isEnabled": false,
+      "isProficient": false,
+      "override": null
+    },
+    "intimidation": {
+      "isEnabled": false,
+      "isProficient": false,
+      "override": null
+    },
+    "investigation": {
+      "isEnabled": false,
+      "isProficient": false,
+      "override": null
+    },
+    "medicine": {
+      "isEnabled": false,
+      "isProficient": false,
+      "override": null
+    },
+    "nature": {
+      "isEnabled": false,
+      "isProficient": false,
+      "override": null
+    },
+    "perception": {
+      "isEnabled": true,
+      "isProficient": true,
+      "override": null
+    },
+    "performance": {
+      "isEnabled": false,
+      "isProficient": false,
+      "override": null
+    },
+    "persuasion": {
+      "isEnabled": false,
+      "isProficient": false,
+      "override": null
+    },
+    "religion": {
+      "isEnabled": false,
+      "isProficient": false,
+      "override": null
+    },
+    "sleightOfHand": {
+      "isEnabled": false,
+      "isProficient": false,
+      "override": null
+    },
+    "stealth": {
+      "isEnabled": false,
+      "isProficient": false,
+      "override": null
+    },
+    "survival": {
+      "isEnabled": false,
+      "isProficient": false,
+      "override": null
+    }
+  },
+  "damageVulnerabilities": {
+    "items": []
+  },
+  "damageResistances": {
+    "items": []
+  },
+  "damageImmunities": {
+    "items": []
+  },
+  "conditionImmunities": {
+    "items": []
+  },
+  "senses": {
+    "blindsight": null,
+    "darkvision": null,
+    "tremorsense": null,
+    "truesight": null,
+    "useCustomText": false,
+    "customText": ""
+  },
+  "languages": {
+    "items": [
+      "Giant Eagle",
+      "understands Common and Auran but can’t speak them"
+    ]
+  },
+  "challengeRating": {
+    "challengeRating": 1,
+    "experiencePoints": 200
+  },
+  "specialTraits": {
+    "blocks": [
+      {
+        "name": "Keen Sight",
+        "text": "[name] has advantage on Wisdom (Perception) checks that rely on sight."
+      }
+    ]
+  },
+  "actions": {
+    "blocks": [
+      {
+        "name": "Multiattack",
+        "text": "[name] makes two attacks: one with its beak and one with its talons."
+      },
+      {
+        "name": "Beak",
+        "text": "*Melee Weapon Attack:* atk[str] to hit, reach 5 ft., one target. *Hit:* dmg[1d6 + str] piercing damage."
+      },
+      {
+        "name": "Talons",
+        "text": "*Melee Weapon Attack:* atk[str] to hit, reach 5 ft., one target. *Hit:* dmg[2d6 + str] slashing damage."
+      }
+    ]
+  },
+  "reactions": {
+    "blocks": []
+  },
+  "legendaryActions": {
+    "blocks": [],
+    "description": "[name] can take 3 legendary actions, choosing from the options below. Only one legendary action option can be used at a time and only at the end of another creature's turn. [name] regains spent legendary actions at the start of its turn."
+  },
+  "meta": {
+    "version": "0.0.1",
+    "description": "Created using statblock5e-creator",
+    "url": "https://frumple.github.io/statblock5e-creator"
+  },
+  "layout": {
+    "columns": 1,
+    "twoColumnMode": "auto",
+    "twoColumnHeight": 600,
+    "emptySectionsVisibility": true
+  }
+}

@@ -1,0 +1,235 @@
+{
+  "title": {
+    "fullName": "Order of the Falcon Knight",
+    "shortName": "knight",
+    "isProperNoun": false
+  },
+  "subtitle": {
+    "size": "Medium",
+    "type": "humanoid",
+    "tags": "any race",
+    "alignment": "lawful good",
+    "useCustomText": false,
+    "customText": ""
+  },
+  "armorClass": {
+    "armorClass": 18,
+    "armorType": "chain mail",
+    "hasShield": true,
+    "useCustomText": false,
+    "customText": ""
+  },
+  "hitPoints": {
+    "hitPoints": 6,
+    "useHitDie": true,
+    "hitDieQuantity": 1,
+    "hitDieSize": 8
+  },
+  "speed": {
+    "walk": 30,
+    "burrow": null,
+    "climb": null,
+    "fly": null,
+    "hover": false,
+    "swim": null,
+    "useCustomText": false,
+    "customText": ""
+  },
+  "attributes": {
+    "abilityScores": {
+      "strength": 16,
+      "dexterity": 11,
+      "constitution": 15,
+      "intelligence": 9,
+      "wisdom": 14,
+      "charisma": 13
+    },
+    "proficiencyBonus": 2
+  },
+  "savingThrows": {
+    "strength": {
+      "isEnabled": false,
+      "isProficient": false,
+      "override": null
+    },
+    "dexterity": {
+      "isEnabled": false,
+      "isProficient": false,
+      "override": null
+    },
+    "constitution": {
+      "isEnabled": false,
+      "isProficient": false,
+      "override": null
+    },
+    "intelligence": {
+      "isEnabled": false,
+      "isProficient": false,
+      "override": null
+    },
+    "wisdom": {
+      "isEnabled": false,
+      "isProficient": false,
+      "override": null
+    },
+    "charisma": {
+      "isEnabled": false,
+      "isProficient": false,
+      "override": null
+    }
+  },
+  "skills": {
+    "acrobatics": {
+      "isEnabled": false,
+      "isProficient": false,
+      "override": null
+    },
+    "animalHandling": {
+      "isEnabled": false,
+      "isProficient": false,
+      "override": null
+    },
+    "arcana": {
+      "isEnabled": false,
+      "isProficient": false,
+      "override": null
+    },
+    "athletics": {
+      "isEnabled": true,
+      "isProficient": true,
+      "override": null
+    },
+    "deception": {
+      "isEnabled": false,
+      "isProficient": false,
+      "override": null
+    },
+    "history": {
+      "isEnabled": false,
+      "isProficient": false,
+      "override": null
+    },
+    "insight": {
+      "isEnabled": false,
+      "isProficient": false,
+      "override": null
+    },
+    "intimidation": {
+      "isEnabled": true,
+      "isProficient": true,
+      "override": null
+    },
+    "investigation": {
+      "isEnabled": false,
+      "isProficient": false,
+      "override": null
+    },
+    "medicine": {
+      "isEnabled": false,
+      "isProficient": false,
+      "override": null
+    },
+    "nature": {
+      "isEnabled": false,
+      "isProficient": false,
+      "override": null
+    },
+    "perception": {
+      "isEnabled": true,
+      "isProficient": true,
+      "override": null
+    },
+    "performance": {
+      "isEnabled": false,
+      "isProficient": false,
+      "override": null
+    },
+    "persuasion": {
+      "isEnabled": false,
+      "isProficient": false,
+      "override": null
+    },
+    "religion": {
+      "isEnabled": false,
+      "isProficient": false,
+      "override": null
+    },
+    "sleightOfHand": {
+      "isEnabled": false,
+      "isProficient": false,
+      "override": null
+    },
+    "stealth": {
+      "isEnabled": false,
+      "isProficient": false,
+      "override": null
+    },
+    "survival": {
+      "isEnabled": false,
+      "isProficient": false,
+      "override": null
+    }
+  },
+  "damageVulnerabilities": {
+    "items": []
+  },
+  "damageResistances": {
+    "items": []
+  },
+  "damageImmunities": {
+    "items": []
+  },
+  "conditionImmunities": {
+    "items": []
+  },
+  "senses": {
+    "blindsight": null,
+    "darkvision": null,
+    "tremorsense": null,
+    "truesight": null,
+    "useCustomText": false,
+    "customText": ""
+  },
+  "languages": {
+    "items": [
+      "Common"
+    ]
+  },
+  "challengeRating": {
+    "challengeRating": 1,
+    "experiencePoints": 200
+  },
+  "specialTraits": {
+    "blocks": []
+  },
+  "actions": {
+    "blocks": [
+      {
+        "name": "Warhammer",
+        "text": "*Melee Weapon Attack:* atk[str] to hit, reach 5 ft., one target. *Hit:* dmg[1d8 + str] bludgeoning damage, or dmg[1d10 + str] bludgeoning damage if used with two hands."
+      },
+      {
+        "name": "Hand Crossbow",
+        "text": "*Ranged Weapon Attack:* atk[dex] to hit, range 30/120 ft., one target. *Hit:* dmg[1d6 + dex] piercing damage."
+      }
+    ]
+  },
+  "reactions": {
+    "blocks": []
+  },
+  "legendaryActions": {
+    "blocks": [],
+    "description": "[name] can take 3 legendary actions, choosing from the options below. Only one legendary action option can be used at a time and only at the end of another creature's turn. [name] regains spent legendary actions at the start of its turn."
+  },
+  "meta": {
+    "version": "0.0.1",
+    "description": "Created using statblock5e-creator",
+    "url": "https://frumple.github.io/statblock5e-creator"
+  },
+  "layout": {
+    "columns": 1,
+    "twoColumnMode": "auto",
+    "twoColumnHeight": 600,
+    "emptySectionsVisibility": true
+  }
+}
