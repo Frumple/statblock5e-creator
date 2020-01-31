@@ -5,7 +5,7 @@
 A frontend web application for creating creature statblocks that are similar in appearance to the official blocks from the Dungeons and Dragons 5th Edition Monster Manual.
 
 <div align="center">
-  <img src="images/statblock.png" />
+  <img src="https://github.com/Frumple/statblock5e-creator/blob/master/images/statblock.png" />
 </div>
 
 ## Features
@@ -62,7 +62,7 @@ You can surround text with asterisks and/or underscores to make it **bold** and/
 In the topmost section where you specify the creature's full name, you can also optionally specify a **short name**, and indicate whether the creature's name is a **proper noun**.
 
 <div align="center">
-  <img src="images/title-section.png" />
+  <img src="https://github.com/Frumple/statblock5e-creator/blob/master/images/title-section.png" />
 </div>
 
 ### Short Name
@@ -113,7 +113,7 @@ Please note the use of name expressions is completely optional; you can certainl
 *Available only in descriptions for Special Traits, Actions, Reactions, and Legendary Actions.*
 
 <div align="center">
-  <img src="images/attack-action.png" />
+  <img src="https://github.com/Frumple/statblock5e-creator/blob/master/images/attack-action.png" />
 </div>
 
 Five different types of math expressions are supported. This table summarizes the usage of each:
@@ -219,7 +219,7 @@ will be calculated as **8 + 4 + 2**, totalling to a final result of **14**.
 ## Generate Attack Dialog
 
 <div align="center">
-  <img src="images/generate-attack.png" />
+  <img src="https://github.com/Frumple/statblock5e-creator/blob/master/images/generate-attack.png" />
 </div>
 
 In the **Actions** section, click **Generate Attack** to open this dialog. In the Weapon Name field, you can provide your own custom name, or you can select a predefined weapon, which will automatically populate the weapon details below. Previews will be shown for the attack action's generated text (using the appropriate markdown emphasis, and attack and damage expressions), and rendered text (how it will be displayed on the statblock). After you've made any changes, click Generate Attack to add the weapon attack action to the statblock.
