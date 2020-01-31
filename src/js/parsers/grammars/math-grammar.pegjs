@@ -1,4 +1,13 @@
 {
+  function totalSubsequentOperands(tail, initialValue = 0) {
+    return tail.reduce((result, element) => {
+      const operator = element[1];
+      const operand = element[3];
+      if (operator === '+') { return result + operand; }
+      if (operator === '-') { return result - operand; }
+    }, initialValue);
+  }
+
   // The modifier portion of a damage expression shows an EN dash for negative values, a plus sign for positive values,
   // and nothing for zero values. There is also a space between the operator and the number.
   function formatDamageExpressionModifier(value) {
@@ -61,21 +70,23 @@ BlankLine
 NormalLine = inline:Inline+ end:EndOfLine { return `${inline.join('')}${end ? end : ''}`; }
 
 Inline
-  = DamageExpression
+  = SpellSaveDCExpression
+  / DamageExpression
   / AttackExpression
   / ModifierExpression
   / MathExpression
   / Text
   / Whitespace
 
+SpellSaveDCExpression
+  = 'sdc' '[' SpaceChar* head:AbilityModifier tail:(SpaceChar* Operator SpaceChar* Operand)* SpaceChar* ']' {
+    const tailModifier = totalSubsequentOperands(tail);
+    return 8 + head + options.proficiencyBonus + tailModifier;
+  }
+
 DamageExpression
   = 'dmg' '[' SpaceChar* head:DiceOperand tail:(SpaceChar* Operator SpaceChar* Operand)* SpaceChar* ']' {
-    const modifier = tail.reduce((result, element) => {
-      const operator = element[1];
-      const operand = element[3];
-      if (operator === '+') { return result + operand; }
-      if (operator === '-') { return result - operand; }
-    }, 0);
+    const modifier = totalSubsequentOperands(tail);
     const formattedModifier = formatDamageExpressionModifier(modifier);
 
     const averageDamage = head.average + modifier;
@@ -87,16 +98,9 @@ DamageExpression
   }
 
 AttackExpression
-  = 'atk' '[' SpaceChar* head:AbilityModifier tail:(SpaceChar* Operator SpaceChar* Operand)* SpaceChar* ']' {
-    const tailModifier = tail.reduce((result, element) => {
-      const operator = element[1];
-      const operand = element[3];
-      if (operator === '+') { return result + operand; }
-      if (operator === '-') { return result - operand; }
-    }, 0);
-
+  = 'atk' '[' SpaceChar* head:AbilityModifierIncludingFinesse tail:(SpaceChar* Operator SpaceChar* Operand)* SpaceChar* ']' {
+    const tailModifier = totalSubsequentOperands(tail);
     const modifier = head + options.proficiencyBonus + tailModifier;
-
     return formatModifierExpression(modifier);
   }
 
@@ -108,12 +112,7 @@ MathExpression
 
 MathExpressionCommon
   = '[' SpaceChar* head:Operand tail:(SpaceChar* Operator SpaceChar* Operand)* SpaceChar* ']' {
-    return tail.reduce((result, element) => {
-      const operator = element[1];
-      const operand = element[3];
-      if (operator === '+') { return result + operand; }
-      if (operator === '-') { return result - operand; }
-    }, head);
+    return totalSubsequentOperands(tail, head);
   }
 
 Operator
@@ -138,9 +137,13 @@ DiceOperand
   }
 
 Operand
-  = AbilityModifier
+  = AbilityModifierIncludingFinesse
   / ProficiencyBonus
   / Integer
+
+AbilityModifierIncludingFinesse
+  = AbilityModifier
+  / 'fin' { return (options.abilities.strength.modifier >= options.abilities.dexterity.modifier) ? options.abilities.strength.modifier : options.abilities.dexterity.modifier}
 
 AbilityModifier
   = 'str' { return options.abilities.strength.modifier; }
@@ -149,7 +152,6 @@ AbilityModifier
   / 'int' { return options.abilities.intelligence.modifier; }
   / 'wis' { return options.abilities.wisdom.modifier; }
   / 'cha' { return options.abilities.charisma.modifier; }
-  / 'fin' { return (options.abilities.strength.modifier >= options.abilities.dexterity.modifier) ? options.abilities.strength.modifier : options.abilities.dexterity.modifier}
 
 ProficiencyBonus
   = 'prof' { return options.proficiencyBonus; }

@@ -102,12 +102,22 @@ Please note the use of name expressions is completely optional; you can certainl
 
 *Available only in descriptions for Special Traits, Actions, Reactions, and Legendary Actions.*
 
+Five different types of math expressions are supported. This table summarizes the usage of each:
+
+| Type | Prefix | Usage | Example |
+| ---- | ------ | ----- | ------- |
+| Basic Math Expression | *(none)* | Add and subtract variables and integers | `[dex + prof + 1]`
+| Modifier Expression | mod | Prepends "+" plus sign for resulting positive numbers | `mod[dex + prof + 1]`
+| Attack Expression | atk | Calculates attack roll modifiers | `atk[dex]`
+| Damage Expression | dmg |Calculates average damage for damage rolls | `dmg[1d10 + str]`
+| Spell Save DC Expression | sdc | Calculates spell save DC | `sdc[wis]`
+
 ### Basic Math Expressions
 
-Basic math expressions consist of a series of **operands** that can be added with **plus signs (+)**, or subtracted with **minus signs (-)**.
+Basic math expressions consist of a series of **operands** that can be added with **plus signs (+)** or subtracted with **minus signs (-)**, all within a pair of **square brackets []**.
 
 Operands can be:
-- **variables** (e.g. ability modifiers represented by `str`, `dex`, `int`, etc., and proficiency bonus represented by `prof`)
+- **variables** (e.g. ability modifiers represented by `str`, `dex`, `int`, etc., and proficiency bonus represented by `prof`), or
 - **integers** (e.g. 12, -3, or 0)
 
 ##### Example
@@ -137,7 +147,7 @@ Here are a list of variables that are currently supported in math expressions:
 
 ### Modifier Expressions: mod[...]
 
-One limitation of basic math expressions is that positive number results will appear without a positive sign (e.g. **5** instead of **+5**). The positive sign is needed to accurately show some modifiers, so to make it appear, simply add the word **`mod`** before the square brackets: **`mod[...]`**
+One limitation of basic math expressions is that positive number results will appear without a positive sign (e.g. **5** instead of **+5**). The positive sign is needed to accurately show some modifiers, so to make it appear, simply add the prefix **`mod`** before the square brackets: **`mod[...]`**
 
 ##### Example
 
@@ -151,7 +161,7 @@ will appear as:
 
 ### Attack Expressions: atk[...]
 
-To show attack roll modifiers, you can use attack expressions as a useful shorthand. Attack expressions begin with the word **`atk`** before the square brackets, and the **first operand within the square brackets must be an ability modifier (`str`, `dex`, etc.).** The attack expression will automatically add the ability modifier with the proficiency bonus without needing to add the `prof` variable in the expression. Subsequent operands can be variables or integers that are added or subtracted from the modifier.
+Attack expressions are a useful shorthand for calculating attack roll modifiers. They begin with the prefix **`atk`** before the square brackets, and the **first operand must be the ability modifier (usually `str` or `dex`) on which the attack is based on.** Attack expressions will automatically add the proficiency bonus to the ability modifier without requiring the `prof` variable to be added to the expression. Subsequent operands can then added or subtracted from the first operand.
 
 ##### Example
 
@@ -165,7 +175,7 @@ is effectively equivalent to the previous modifier expression example and will a
 
 ### Damage Expressions: dmg[...]
 
-For damage rolls, you can use damage expressions to automatically calculate the average damage. Damage expressions begin with the word **`dmg`** before the square brackets, and the **first operand within the square brackets must be a dice operand (`d8`, `2d6`, etc.).** Subsequent operands can be variables or integers that are added or subtracted from the dice result.
+Damage expressions calculate the average damage for a given damage roll. They begin with the prefix **`dmg`** before the square brackets, and the **first operand must be a special dice operand (`d8`, `2d6`, etc.).** Subsequent operands can then be added or subtracted from the dice operand.
 
 ##### Example
 
@@ -179,6 +189,18 @@ will appear as:
 > 9 (1d8 + 5) slashing damage
 
 This is because since the average damage of 1d8 is 4.5 (rounded down to 4), then **4 + 3 + 2** equals **9** for the total average damage.
+
+### Spell Save DC Expressions: sdc[...]
+
+Spell save DC expressions are another useful shorthand. They begin with the prefix **`sdc`** before the square brackets, and the **first operand must be the creature's spellcasting ability modifier (usually `int`, `wis`, or `cha`).** These expressions calculate the spell save DC, which is equal to 8 + proficiency bonus + spellcasting ability modifier. Subsequent operands can then be added or subtracted from the first operand.
+
+##### Example
+
+If the creature's intelligence modifier is **+4** and its proficiency bonus is **+2**:
+```
+sdc[int]
+```
+will be calculated as **8 + 4 + 2**, totalling to a final result of **14**.
 
 ## Development Setup
 

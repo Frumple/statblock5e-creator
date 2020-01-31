@@ -427,8 +427,8 @@ describe('should parse valid attack roll modifier expressions', () => {
       description       | inputText     | expectedText
       ${'strength'}     | ${'atk[str]'} | ${'+1'}
       ${'dexterity'}    | ${'atk[dex]'} | ${'+7'}
-      ${'intelligence'} | ${'atk[int]'} | ${'+3'}
       ${'constitution'} | ${'atk[con]'} | ${'+10'}
+      ${'intelligence'} | ${'atk[int]'} | ${'+3'}
       ${'wisdom'}       | ${'atk[wis]'} | ${'+4'}
       ${'charisma'}     | ${'atk[cha]'} | ${'–2'}
     `
@@ -653,4 +653,108 @@ describe('should parse invalid damage expressions unchanged', () => {
     expect(parserResults.error).toBeNull();
   });
   /* eslint-enable indent, no-unexpected-multiline */
+});
+
+describe('should parse valid spell save DC expressions', () => {
+  describe('with single ability modifier only', () => {
+    /* eslint-disable indent, no-unexpected-multiline */
+    it.each
+    `
+      description       | inputText     | expectedText
+      ${'strength'}     | ${'sdc[str]'} | ${'9'}
+      ${'dexterity'}    | ${'sdc[dex]'} | ${'15'}
+      ${'constitution'} | ${'sdc[con]'} | ${'18'}
+      ${'intelligence'} | ${'sdc[int]'} | ${'11'}
+      ${'wisdom'}       | ${'sdc[wis]'} | ${'12'}
+      ${'charisma'}     | ${'sdc[cha]'} | ${'6'}
+    `
+    ('$description: "$inputText" => $expectedText',
+    ({inputText, expectedText}) => {
+      abilities.abilities['strength'].score = 7;      // -2 modifier
+      abilities.abilities['dexterity'].score = 18;    // +4 modifier
+      abilities.abilities['constitution'].score = 25; // +7 modifier
+      abilities.abilities['intelligence'].score = 11; // +0 modifier
+      abilities.abilities['wisdom'].score = 12;       // +1 modifier
+      abilities.abilities['charisma'].score = 1;      // -5 modifier
+      proficiencyBonus.proficiencyBonus = 3;
+
+      const parserResults = parseMath(inputText);
+
+      expect(parserResults).not.toBeNull();
+      expect(parserResults.inputText).toBe(inputText);
+      expect(parserResults.outputText).toBe(expectedText);
+      expect(parserResults.error).toBeNull();
+    });
+    /* eslint-enable indent, no-unexpected-multiline */
+  });
+
+  describe('with integers, ability modifiers, and proficiency bonus', () => {
+    /* eslint-disable indent, no-unexpected-multiline */
+    it.each
+    `
+      description                        | inputText                 | expectedText
+      ${'ability + positive'}            | ${'sdc[cha + 3]'}         | ${'20'}
+      ${'ability + zero'}                | ${'sdc[cha + 0]'}         | ${'17'}
+      ${'ability + negative'}            | ${'sdc[cha + -4]'}        | ${'13'}
+      ${'ability - positive'}            | ${'sdc[cha - 3]'}         | ${'14'}
+      ${'ability - zero'}                | ${'sdc[cha - 0]'}         | ${'17'}
+      ${'ability - negative'}            | ${'sdc[cha - -4]'}        | ${'21'}
+      ${'ability + proficiency bonus'}   | ${'sdc[cha + prof]'}      | ${'22'}
+      ${'ability + modifier'}            | ${'sdc[cha + wis]'}       | ${'19'}
+      ${'ability - proficiency bonus'}   | ${'sdc[cha - prof]'}      | ${'12'}
+      ${'ability - modifier'}            | ${'sdc[cha - wis]'}       | ${'15'}
+      ${'ability + integer + integer'}   | ${'sdc[cha + -1 + 12]'}   | ${'28'}
+      ${'ability - integer - integer'}   | ${'sdc[cha - -1 - 12]'}   | ${'6'}
+      ${'ability + modifier + modifier'} | ${'sdc[cha + cha + wis]'} | ${'23'}
+      ${'ability - modifier - modifier'} | ${'sdc[cha - cha - wis]'} | ${'11'}
+      ${'ability + modifier + integer'}  | ${'sdc[cha + wis + 7]'}   | ${'26'}
+      ${'ability - modifier - integer'}  | ${'sdc[cha - wis - 7]'}   | ${'8'}
+      ${'ability + integer + modifier'}  | ${'sdc[cha + 8 + cha]'}   | ${'29'}
+      ${'ability - integer - modifier'}  | ${'sdc[cha - 8 - cha]'}   | ${'5'}
+    `
+    ('$description: "$inputText" => $expectedText',
+    ({inputText, expectedText}) => {
+      abilities.abilities['charisma'].score = 18;    // +4 modifier
+      abilities.abilities['wisdom'].score = 14;      // +2 modifier
+
+      proficiencyBonus.proficiencyBonus = 5;
+
+      const parserResults = parseMath(inputText);
+
+      expect(parserResults).not.toBeNull();
+      expect(parserResults.inputText).toBe(inputText);
+      expect(parserResults.outputText).toBe(expectedText);
+      expect(parserResults.error).toBeNull();
+    });
+    /* eslint-enable indent, no-unexpected-multiline */
+  });
+
+  describe('should parse invalid spell save DC expression unchanged', () => {
+    /* eslint-disable indent, no-unexpected-multiline */
+    it.each
+    `
+      description                                            | inputText
+      ${'Unclosed brackets'}                                 | ${'sdc[cha + 19'}
+      ${'Decimal numbers'}                                   | ${'sdc[cha - 19.11]'}
+      ${'Missing operand'}                                   | ${'sdc[cha - - 19]'}
+      ${'Missing operator'}                                  | ${'sdc[cha 19]'}
+      ${'Dangling preceding operator'}                       | ${'sdc[+ cha + 19]'}
+      ${'Dangling trailing operator'}                        | ${'sdc[cha + 19 +]'}
+      ${'Invalid modifier'}                                  | ${'sdc[dax]'}
+      ${'Invalid proficiency bonus'}                         | ${'sdc[profbonus]'}
+      ${'Integer cannot be used as first operand'}           | ${'sdc[19]'}
+      ${'Finesse modifier cannot be used as first operand'}  | ${'sdc[fin]'}
+      ${'Proficiency bonus cannot be used as first operand'} | ${'sdc[prof]'}
+    `
+    ('$description: {inputText="$inputText"} => $expectedText',
+    ({inputText}) => {
+      const parserResults = parseMath(inputText);
+
+      expect(parserResults).not.toBeNull();
+      expect(parserResults.inputText).toBe(inputText);
+      expect(parserResults.outputText).toBe(inputText);
+      expect(parserResults.error).toBeNull();
+    });
+    /* eslint-enable indent, no-unexpected-multiline */
+  });
 });
