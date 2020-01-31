@@ -1,6 +1,7 @@
 import CustomDialog from './custom-dialog.js';
 import Attack from '../../../models/attack.js';
 import PredefinedWeapons from '../../../data/predefined-weapons.js';
+import { focusAndSelectElement } from '../../../helpers/element-helpers.js';
 
 export default class GenerateAttackDialog extends CustomDialog {
   static get elementName() { return 'generate-attack-dialog'; }
@@ -161,12 +162,14 @@ export default class GenerateAttackDialog extends CustomDialog {
 
   launch() {
     this.showModal();
+    focusAndSelectElement(this.weaponNameInput);
   }
 
   reset(isMeleeEnabled = true) {
     this.attackModel.reset(isMeleeEnabled);
     this.populateFieldsFromModel(this.attackModel);
     this.update();
+    focusAndSelectElement(this.weaponNameInput);
   }
 
   checkForErrors() {

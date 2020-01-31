@@ -40,12 +40,13 @@ describe('when the generate attack dialog is opened', () => {
     actionsSection.editElements.generateAttackButton.click();
   });
 
-  it('should initially have its model and controls set to their defaults', () => {
+  it('should initially have its model and controls set to their defaults, and focus on the weapon name field', () => {
     verifyDialogResetToDefaults();
+    expect(generateAttackDialog.weaponNameInput).toHaveFocus();
   });
 
   describe('and the dialog is filled out and the reset button is clicked', () => {
-    it('should reset the dialog model and controls back to their defaults', () => {
+    it('should reset the dialog model and controls back to their defaults, and focus on the weapon name field', () => {
       const attackModel = new Attack();
       const meleeCategory = attackModel.damageCategories['melee'];
       meleeCategory.isEnabled = false;
@@ -79,6 +80,7 @@ describe('when the generate attack dialog is opened', () => {
       generateAttackDialog.resetButton.click();
 
       verifyDialogResetToDefaults();
+      expect(generateAttackDialog.weaponNameInput).toHaveFocus();
     });
   });
 
