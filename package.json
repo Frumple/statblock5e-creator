@@ -1,18 +1,17 @@
 {
-  "name": "statblock5e",
-  "version": "1.0.0",
-  "description": "A Web Component statblock for D&D 5E\r ====================================",
+  "name": "statblock5e-creator",
+  "version": "0.0.1",
+  "description": "A frontend web application for creating D&D 5th Edition Creature Statblocks",
   "main": "index.js",
-  "dependencies": {
-    "pegjs": "^0.10.0"
-  },
+  "dependencies": {},
   "devDependencies": {
     "@babel/cli": "^7.7.4",
     "@babel/core": "^7.7.4",
     "@babel/polyfill": "^7.7.0",
     "@testing-library/jest-dom": "^4.2.4",
     "babel-plugin-transform-es2015-modules-commonjs": "^6.26.2",
-    "jest": "^24.9.0"
+    "jest": "^24.9.0",
+    "pegjs": "^0.10.0"
   },
   "scripts": {
     "test": "jest"
@@ -35,12 +34,12 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/Frumple/statblock5e.git"
+    "url": "git+https://github.com/Frumple/statblock5e-creator.git"
   },
   "author": "",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/Frumple/statblock5e/issues"
+    "url": "https://github.com/Frumple/statblock5e-creator/issues"
   },
-  "homepage": "https://github.com/Frumple/statblock5e#readme"
+  "homepage": "https://github.com/Frumple/statblock5e-creator#readme"
 }
