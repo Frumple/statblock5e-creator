@@ -27,7 +27,7 @@ body {
 
 .loading-screen_hidden {
   opacity: 0;
-  visibility: 0;
+  visibility: hidden;
   height: 0;
 
   animation: hide-loading-screen 1s linear;
