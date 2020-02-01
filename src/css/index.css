@@ -46,19 +46,19 @@ body {
 @keyframes hide-loading-screen {
   from {
     opacity: 1;
-    visibility: 1;
+    visibility: visible;
     height: 100vh;
   }
 
   50% {
     opacity: 1;
-    visibility: 1;
+    visibility: visible;
     height: 100vh;
   }
 
   to {
     opacity: 0;
-    visibility: 0;
+    visibility: hidden;
     height: 100vh;
   }
 }
