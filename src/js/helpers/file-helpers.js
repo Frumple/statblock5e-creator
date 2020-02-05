@@ -1,7 +1,7 @@
-import isRunningInNode from './is-running-in-node.js';
+import isRunningInJsdom from './is-running-in-jsdom.js';
 
 export async function fetchFromFile(path) {
-  if (isRunningInNode) {
+  if (isRunningInJsdom) {
     const fs = require('fs');
     const util = require('util');
     const readFile = util.promisify(fs.readFile);

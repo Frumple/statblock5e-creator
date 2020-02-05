@@ -1,5 +1,5 @@
 import BlockListModel from './block-list-model.js';
-import isRunningInNode from '../../../helpers/is-running-in-node.js';
+import isRunningInJsdom from '../../../helpers/is-running-in-jsdom.js';
 
 export default class Actions extends BlockListModel {
   constructor() {
@@ -7,7 +7,7 @@ export default class Actions extends BlockListModel {
   }
 
   reset() {
-    if (isRunningInNode) {
+    if (isRunningInJsdom) {
       this.blocks = [];
     } else {
       this.blocks = [{

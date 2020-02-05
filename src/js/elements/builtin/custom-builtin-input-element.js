@@ -1,5 +1,5 @@
 import CustomBuiltinElementMixins from '../../helpers/custom-builtin-element-mixins.js';
-import isRunningInNode from '../../helpers/is-running-in-node.js';
+import isRunningInJsdom from '../../helpers/is-running-in-jsdom.js';
 import { copyObjectProperties } from '../../helpers/object-helpers.js';
 
 export default class CustomBuiltinInputElement extends HTMLInputElement {
@@ -16,7 +16,7 @@ export default class CustomBuiltinInputElement extends HTMLInputElement {
   static define() {
     CustomBuiltinElementMixins.define(this.elementName, this.mixin);
 
-    if (! isRunningInNode) {
+    if (! isRunningInJsdom) {
       customElements.define(this.elementName, this, { extends: 'input' });
     }
   }

@@ -1,7 +1,7 @@
 import CustomAutonomousElement from '../custom-autonomous-element.js';
 import * as HtmlExportDocumentFactory from '../../../helpers/html-export-document-factory.js';
 import printHtml from '../../../helpers/print-helpers.js';
-import isRunningInNode from '../../../helpers/is-running-in-node.js';
+import IsRunningInJsdom from '../../../helpers/is-running-in-jsdom.js';
 
 import StatBlockMenu from './stat-block-menu.js';
 import StatBlockSidebar from './stat-block-sidebar.js';
@@ -23,7 +23,7 @@ export default class StatBlockEditor extends CustomAutonomousElement {
   constructor() {
     super(StatBlockEditor.templatePaths);
 
-    if (isRunningInNode) {
+    if (IsRunningInJsdom) {
       this.statBlockMenu = new StatBlockMenu(this);
       this.statBlockSidebar = new StatBlockSidebar(this);
       this.statBlock = new StatBlock(this);

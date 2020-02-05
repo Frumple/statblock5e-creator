@@ -1,6 +1,6 @@
 import CustomAutonomousElement from '../custom-autonomous-element.js';
 import CurrentContext from '../../../models/current-context.js';
-import isRunningInNode from '../../../helpers/is-running-in-node.js';
+import isRunningInJsdom from '../../../helpers/is-running-in-jsdom.js';
 import HeadingStats from '../containers/heading-stats.js';
 import TopStats from '../containers/top-stats.js';
 import BottomStats from '../containers/bottom-stats.js';
@@ -16,7 +16,7 @@ export default class StatBlock extends CustomAutonomousElement {
   constructor(parent = null) {
     super(StatBlock.templatePaths, parent);
 
-    if (isRunningInNode) {
+    if (isRunningInJsdom) {
       this.headingStats = new HeadingStats();
       this.topStats = new TopStats();
       this.bottomStats = new BottomStats();

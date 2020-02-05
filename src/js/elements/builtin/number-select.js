@@ -1,5 +1,5 @@
 import CustomBuiltinElementMixins from '../../helpers/custom-builtin-element-mixins.js';
-import isRunningInNode from '../../helpers/is-running-in-node.js';
+import isRunningInJsdom from '../../helpers/is-running-in-jsdom.js';
 import { copyObjectProperties } from '../../helpers/object-helpers.js';
 import { convertToInteger } from '../../helpers/number-helpers.js';
 
@@ -8,7 +8,7 @@ export default class NumberSelect extends HTMLSelectElement {
     const elementName = 'number-select';
     CustomBuiltinElementMixins.define(elementName, NumberSelectMixin);
 
-    if (! isRunningInNode) {
+    if (! isRunningInJsdom) {
       customElements.define(elementName, this, { extends: 'select' });
     }
   }

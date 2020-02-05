@@ -1,5 +1,5 @@
 import CustomBuiltinElementMixins from '../../helpers/custom-builtin-element-mixins.js';
-import isRunningInNode from '../../helpers/is-running-in-node.js';
+import isRunningInJsdom from '../../helpers/is-running-in-jsdom.js';
 import { copyObjectProperties } from '../../helpers/object-helpers.js';
 
 export default class PropertyDataList extends HTMLDataListElement {
@@ -7,9 +7,9 @@ export default class PropertyDataList extends HTMLDataListElement {
     const elementName = 'property-datalist';
     CustomBuiltinElementMixins.define(elementName, PropertyDataListMixin);
 
-    if (! isRunningInNode) {
+    if (! isRunningInJsdom) {
       customElements.define(elementName, this, { extends: 'datalist' });
-    }    
+    }
   }
 
   constructor() {
@@ -30,11 +30,11 @@ const PropertyDataListMixin = {
 
     // JSDOM's implementation of HTMLDataListElement lacks the 'options'
     // property, so we have to find the matching option element manually.
-    if (isRunningInNode) {      
+    if (isRunningInJsdom) {
       item = this.findOption(optionText);
     } else {
       item = this.options.namedItem(optionText);
-    }    
+    }
 
     if (item !== null) {
       if (isEnabled) {

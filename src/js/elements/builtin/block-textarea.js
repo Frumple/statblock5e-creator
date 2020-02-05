@@ -1,5 +1,5 @@
 import CustomBuiltinElementMixins from '../../helpers/custom-builtin-element-mixins.js';
-import isRunningInNode from '../../helpers/is-running-in-node.js';
+import isRunningInJsdom from '../../helpers/is-running-in-jsdom.js';
 import { copyObjectProperties } from '../../helpers/object-helpers.js';
 import { escapeHtml } from '../../helpers/string-formatter.js';
 import * as Parser from '../../parsers/parser.js';
@@ -9,7 +9,7 @@ export default class BlockTextArea extends HTMLTextAreaElement {
     const elementName = 'block-textarea';
     CustomBuiltinElementMixins.define(elementName, BlockTextAreaMixin);
 
-    if (! isRunningInNode) {
+    if (! isRunningInJsdom) {
       customElements.define(elementName, this, { extends: 'textarea' });
     }
   }
