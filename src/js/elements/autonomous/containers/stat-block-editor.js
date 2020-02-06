@@ -12,6 +12,8 @@ import ExportDialog from '../dialogs/export-dialog.js';
 
 import CurrentContext from '../../../models/current-context.js';
 
+const html_beautify = require('js-beautify').html;
+
 export default class StatBlockEditor extends CustomAutonomousElement {
   static get elementName() { return 'stat-block-editor'; }
   static get templatePaths() {

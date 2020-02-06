@@ -1,3 +1,5 @@
+const ClipboardJS = require('clipboard');
+
 export class ClipboardWrapper {
   constructor(
     copiedText,
