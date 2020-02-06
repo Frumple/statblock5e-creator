@@ -233,9 +233,19 @@ After you've made any changes, click **Generate Attack** to add the weapon attac
 
 ## Development Setup
 
-Install all development dependencies with:
+Install all dependencies with:
 
     npm install
+
+Create a development webpack bundle with:
+
+    npm start
+
+Or create a production webpack bundle with:
+
+    npm run build
+
+All bundles will be outputted to the `dist/` directory.
 
 ### Tests
 
