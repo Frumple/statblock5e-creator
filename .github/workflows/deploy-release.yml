@@ -1,9 +1,8 @@
-name: Node.js CI
+name: Deploy Release to GitHub Pages
 
 on:
-  push:
-    tags:
-      - '*.*.*'
+  release:
+    types: [published]
 
 jobs:
   build:
