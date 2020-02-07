@@ -6,6 +6,7 @@ on:
 
 jobs:
   build:
+
     runs-on: ubuntu-latest
 
     strategy:
@@ -26,4 +27,4 @@ jobs:
     - name: Create production bundle
       run: npm run build
     - name: Remove dist from .gitignore
-      run: sed -i '/dist\//d' .gitignore
+      run: echo "hello world"
