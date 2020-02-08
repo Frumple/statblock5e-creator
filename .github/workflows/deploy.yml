@@ -1,9 +1,8 @@
 name: Deploy
 
 on:
-  push:
-    tags:
-      - '*.*.*'
+  release:
+    types: [published]
 
 jobs:
   build:
@@ -28,7 +27,7 @@ jobs:
     - name: Create production bundle
       run: npm run build
     - name: Remove dist/ from .gitignore
-      run: sed '/dist\//d' ./.gitignore
+      run: sed -i '/dist\//d' ./.gitignore
     - name: Install SSH Client
       uses: webfactory/ssh-agent@v0.2.0
       with:
