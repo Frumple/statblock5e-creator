@@ -1,4 +1,4 @@
-name: Deploy Release to GitHub Pages
+name: Deploy
 
 on:
   release:
