@@ -1,7 +1,7 @@
 import DragAndDropList from './drag-and-drop-list.js';
 import { focusAndSelectElement } from '../../../helpers/element-helpers.js';
 
-import isRunningInNode from '../../../helpers/is-running-in-node.js';
+import isRunningInJsdom from '../../../helpers/is-running-in-jsdom.js';
 import EditableBlock from './editable-block.js';
 
 export default class EditableBlockList extends DragAndDropList {
@@ -36,7 +36,7 @@ export default class EditableBlockList extends DragAndDropList {
       block.disableBlockNameItalics();
     }
 
-    if (isRunningInNode) {
+    if (isRunningInJsdom) {
       block.connect();
     }
 
@@ -64,7 +64,7 @@ export default class EditableBlockList extends DragAndDropList {
   }
 
   static createBlock(list, name, text) {
-    const block = isRunningInNode ? new EditableBlock() : document.createElement('editable-block');
+    const block = isRunningInJsdom ? new EditableBlock() : document.createElement('editable-block');
 
     block.list = list;
     block.name = name;

@@ -1,6 +1,6 @@
 import DragAndDropList from './drag-and-drop-list.js';
 
-import isRunningInNode from '../../../helpers/is-running-in-node.js';
+import isRunningInJsdom from '../../../helpers/is-running-in-jsdom.js';
 import PropertyListItem from './property-list-item.js';
 
 export default class PropertyList extends DragAndDropList {
@@ -37,7 +37,7 @@ export default class PropertyList extends DragAndDropList {
   addItem(itemText) {
     const listItem = PropertyList.createListItem(this, itemText);
 
-    if (isRunningInNode) {
+    if (isRunningInJsdom) {
       listItem.connect();
     }
 
@@ -55,7 +55,7 @@ export default class PropertyList extends DragAndDropList {
   }
 
   static createListItem(list, text) {
-    const listItem = isRunningInNode ? new PropertyListItem(list) : document.createElement('property-list-item');
+    const listItem = isRunningInJsdom ? new PropertyListItem(list) : document.createElement('property-list-item');
 
     listItem.list = list;
     listItem.text = text;

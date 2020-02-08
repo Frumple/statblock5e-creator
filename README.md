@@ -1,6 +1,6 @@
 # Interactive Creature Statblock Creator for D&D 5th Edition
 
-### Live Demo: [https://frumple.github.io/statblock5e-creator][demo]
+### Live Demo (currently only works in Chrome): [https://frumple.github.io/statblock5e-creator][demo]
 
 A frontend web application for creating creature statblocks that are similar in appearance to the official blocks from the Dungeons and Dragons 5th Edition Monster Manual.
 
@@ -20,10 +20,11 @@ A frontend web application for creating creature statblocks that are similar in 
 - **[Generate Attack Dialog](#generate-attack-dialog)** to easily create weapon attack actions.
 - Export your statblock into a JSON file, and re-import it at a later time.
 - Export your statblock into an HTML file, or a Markdown format for use in **[Homebrewery][homebrewery]**.
-- Print your statblock to paper.
+- Print your statblock.
 
 ## Future Improvements
 
+- Support for additional browsers (Firefox, Safari, etc.)
 - Generate Spellcasting (currently disabled under Special Traits)
 - Get suggested proficiency bonus from Challenge Rating
 - Buttons to toggle bold/italic text and add expressions to Special Trait/Action/Reaction/Legendary Action descriptions
@@ -99,7 +100,7 @@ Otherwise, if the proper noun box **IS** checked:
 | --------- | ---------- | ------------ | -------------------------------- |
 | Ancient Red Dragon | dragon | No | `[name] can take 3 legendary actions...`<br /><br />The dragon can take 3 legendary actions... |
 | Gelatinous Cube | cube | No | `...a creature that does so is subjected to [name]'s Engulf...`<br /><br />...a creature that does so is subjected to the cube's Engulf... |
-| Orc War Chief | orc<br /><br />OR<br /><br />war chief | No | `As a bonus action, [name] can move up to its speed...`<br /><br />As a bonus action, the orc can move up to its speed...<br /><br />As a bonus action, the war chief can move up to its speed... |
+| Orc War Chief | orc / war chief | No | `As a bonus action, [name] can move up to its speed...`<br /><br />As a bonus action, the orc can move up to its speed...<br /><br />As a bonus action, the war chief can move up to its speed... |
 | Rust Monster | *(blank)* | No | `Nonmagical ammunition made of metal that hits [name] is destroyed after dealing damage.`<br /><br />Nonmagical ammunition made of metal that hits the rust monster is destroyed after dealing damage. |
 | Casper the Friendly Ghost | Casper | Yes | `...the target is immune to [name]'s Horrifying Visage...`<br /><br />...the target is immune to Casper's Horrifying Visage... |
 | Drizzt Do'urden | Drizzt | Yes | `...within 30 feet of [name].`<br /><br />...within 30 feet of Drizzt. |
@@ -222,15 +223,29 @@ will be calculated as **8 + 4 + 2**, totalling to a final result of **14**.
   <img src="https://github.com/Frumple/statblock5e-creator/blob/master/images/generate-attack.png" />
 </div>
 
-In the **Actions** section, click **Generate Attack** to open this dialog. In the Weapon Name field, you can provide your own custom name, or you can select a predefined weapon, which will automatically populate the weapon details below. Previews will be shown for the attack action's generated text (using the appropriate markdown emphasis, and attack and damage expressions), and rendered text (how it will be displayed on the statblock). After you've made any changes, click Generate Attack to add the weapon attack action to the statblock.
+Open this dialog by going to the **Actions** section and clicking **Generate Attack**.
+
+In the **Weapon Name** field, you can provide your own custom name, or you can select a predefined weapon, which will automatically populate the weapon details below. Previews will be shown for the attack action's generated text (using the appropriate markdown emphasis, and attack and damage expressions), and rendered text (how it will be displayed on the statblock). 
+
+After you've made any changes, click **Generate Attack** to add the weapon attack action to the statblock.
 
 ----------
 
 ## Development Setup
 
-Install all development dependencies with:
+Install all dependencies with:
 
     npm install
+
+Create a development webpack bundle with:
+
+    npm start
+
+Or create a production webpack bundle with:
+
+    npm run build
+
+All bundles will be outputted to the `dist/` directory.
 
 ### Tests
 

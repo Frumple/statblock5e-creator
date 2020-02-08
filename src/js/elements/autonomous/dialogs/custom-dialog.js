@@ -1,5 +1,5 @@
 import CustomAutonomousElement from '../custom-autonomous-element.js';
-import isRunningInNode from '../../../helpers/is-running-in-node.js';
+import isRunningInJsdom from '../../../helpers/is-running-in-jsdom.js';
 
 export default class CustomDialog extends CustomAutonomousElement {
   static get elementName() { return 'custom-dialog'; }
@@ -37,7 +37,7 @@ export default class CustomDialog extends CustomAutonomousElement {
   }
 
   showModal() {
-    if (isRunningInNode) {
+    if (isRunningInJsdom) {
       this.open = true;
     } else {
       this.dialog.showModal();
@@ -45,7 +45,7 @@ export default class CustomDialog extends CustomAutonomousElement {
   }
 
   closeModal() {
-    if (isRunningInNode) {
+    if (isRunningInJsdom) {
       this.open = false;
     } else {
       this.dialog.close();

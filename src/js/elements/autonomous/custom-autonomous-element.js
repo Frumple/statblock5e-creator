@@ -1,5 +1,5 @@
 import HtmlTemplates from '../../helpers/html-templates.js';
-import isRunningInNode from '../../helpers/is-running-in-node.js';
+import isRunningInJsdom from '../../helpers/is-running-in-jsdom.js';
 
 class CustomAutonomousElement extends HTMLElement {
   static get elementName() {
@@ -142,7 +142,7 @@ class FakeCustomAutonomousElement {
 
 let elementClass;
 
-if (isRunningInNode) {
+if (isRunningInJsdom) {
   elementClass = FakeCustomAutonomousElement;
 } else {
   elementClass = CustomAutonomousElement;
