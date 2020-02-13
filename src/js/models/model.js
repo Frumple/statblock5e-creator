@@ -13,14 +13,18 @@ export default class Model {
 
   fromJson(json) {
     for (const propertyName of this.jsonPropertyNames) {
-      this[propertyName] = json[propertyName];
+      if (propertyName in json) {
+        this[propertyName] = json[propertyName];
+      }
     }
   }
 
   toJson() {
     const json = {};
     for (const propertyName of this.jsonPropertyNames) {
-      json[propertyName] = this[propertyName];
+      if (propertyName in this) {
+        json[propertyName] = this[propertyName];
+      }
     }
     return json;
   }
