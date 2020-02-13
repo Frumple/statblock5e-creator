@@ -11,7 +11,7 @@ export function parseNames(inputText, parserOptions = {}) {
 
 export function parseMath(inputText, parserOptions = {}) {
   parserOptions.abilities = CurrentContext.creature.abilities.toParserOptions();
-  parserOptions.proficiencyBonus = CurrentContext.creature.proficiencyBonus.toParserOptions();
+  parserOptions.proficiencyBonus = CurrentContext.creature.challengeRating.toParserOptions();
   return parseText(MathParser, inputText, parserOptions);
 }
 

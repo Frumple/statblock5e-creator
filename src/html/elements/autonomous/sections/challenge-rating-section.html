@@ -16,7 +16,7 @@
 
 <form id="edit-section" class="section section_hidden" novalidate>
   <div class="challenge-rating-edit-section section__content">
-    <label id="challenge-rating-label" class="challenge-rating-edit-section__challenge-rating-label section__heading-label">Challenge Rating:</label>
+    <label id="challenge-rating-label" class="challenge-rating-edit-section__challenge-rating-label section__heading-label" for="challenge-rating-input">Challenge Rating:</label>
     <select id="challenge-rating-input" class="challenge-rating-edit-section__challenge-rating-input section__select" is="number-select" name="challenge-rating" pretty-name="Challenge Rating">
       <option value="0">0</option>
       <option value="0.125">1/8</option>
@@ -54,8 +54,11 @@
       <option value="30">30</option>
     </select>
 
-    <label id="experience-points-label" class="challenge-rating-edit-section__experience-points-label">Experience Points:</label>
+    <label id="experience-points-label" class="challenge-rating-edit-section__experience-points-label" for="experience-points-input">Experience Points:</label>
     <input id="experience-points-input" class="challenge-rating-edit-section__experience-points-input section__number-input" is="number-input" type="number" name="experience-points" pretty-name="Experience Points" min="0" max="999999" value="" required />
+
+    <label id="proficiency-bonus-label" class="challenge-rating-edit-section__proficiency-bonus-label" for="proficiency-bonus-input">Proficiency Bonus:</label>
+    <input id="proficiency-bonus-input" class="challenge-rating-edit-section__proficiency-bonus-input section__number-input section__number-input" is="number-input" type="number" name="proficiency-bonus" pretty-name="Proficiency Bonus" value="" min="-999" max="999" required />
   </div>
   <div class="section__save-button-container">
     <button id="save-button" class="default-button section__save-button"><i class="material-icons">done</i></button>

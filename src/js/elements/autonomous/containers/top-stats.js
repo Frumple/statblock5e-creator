@@ -33,19 +33,19 @@ export default class TopStats extends StatsContainer {
   }
 
   importFromJson(json) {
-    // Import ability scores and proficiency bonus first so that stats that
-    // depend on them are updated correctly.
+    // Import ability scores and proficiency bonus first before other stats
+    // that depend on them.
     // (i.e. CON HP, saving throws, skills, passive perception)
-    this.sections.get('abilityScores').importFromJson(json.attributes);
-    this.sections.get('basicStats').importFromJson(json);
+    this.sections.get('abilityScores').importFromJson(json.abilityScores);
     this.sections.get('advancedStats').importFromJson(json);
+    this.sections.get('basicStats').importFromJson(json);
   }
 
   exportToJson() {
     const json = {};
 
     Object.assign(json, this.sections.get('basicStats').exportToJson());
-    json.attributes = this.sections.get('abilityScores').exportToJson();
+    json.abilityScores = this.sections.get('abilityScores').exportToJson();
     Object.assign(json, this.sections.get('advancedStats').exportToJson());
 
     return json;

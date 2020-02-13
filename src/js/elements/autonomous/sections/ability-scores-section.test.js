@@ -7,7 +7,6 @@ import { formatModifier } from '../../../helpers/string-formatter.js';
 import CurrentContext from '../../../models/current-context.js';
 
 const abilitiesModel = CurrentContext.creature.abilities;
-const proficiencyBonusModel = CurrentContext.creature.proficiencyBonus;
 
 let abilityScoresSection;
 
@@ -18,7 +17,6 @@ beforeAll(async() => {
 
 beforeEach(() => {
   abilitiesModel.reset();
-  proficiencyBonusModel.reset();
 
   abilityScoresSection = new AbilityScoresSection();
   TestCustomElements.initializeSection(abilityScoresSection);
@@ -42,8 +40,6 @@ describe('when the show section is clicked', () => {
       expect(abilityScoresSection.editElements.score[key]).toHaveValue(10);
       expect(abilityScoresSection.editElements.modifier[key]).toHaveTextContent('(+0)');
     }
-
-    expect(abilityScoresSection.editElements.proficiencyBonus).toHaveValue(2);
   });
 
   it('should switch to edit mode and focus on the strength score field', () => {
@@ -84,8 +80,6 @@ describe('when the show section is clicked', () => {
           receivedEvent = event;
         });
 
-        const expectedProficiencyBonus = 2;
-
         // Collect expected values into nested JS object structure
         const expectedAbilities = createDefaultExpectedAbilities();
         const expectedAbility = expectedAbilities.get(abilityName);
@@ -94,8 +88,8 @@ describe('when the show section is clicked', () => {
 
         inputValueAndTriggerEvent(abilityScoresSection.editElements.score[abilityName], score);
 
-        verifyModel(expectedAbilities, expectedProficiencyBonus);
-        verifyEditModeView(expectedAbilities, expectedProficiencyBonus);
+        verifyModel(expectedAbilities);
+        verifyEditModeView(expectedAbilities);
 
         expect(receivedEvent).not.toBeNull();
         expect(receivedEvent.detail.abilityName).toBe(abilityName);
@@ -104,15 +98,15 @@ describe('when the show section is clicked', () => {
 
         verifyShowModeView(expectedAbilities);
 
-        const json = verifyJsonExport(expectedAbilities, expectedProficiencyBonus);
+        const json = verifyJsonExport(expectedAbilities);
         verifyHtmlExport(expectedAbilities);
         verifyHomebreweryExport(expectedAbilities);
 
         reset();
         abilityScoresSection.importFromJson(json);
 
-        verifyModel(expectedAbilities, expectedProficiencyBonus);
-        verifyEditModeView(expectedAbilities, expectedProficiencyBonus);
+        verifyModel(expectedAbilities);
+        verifyEditModeView(expectedAbilities);
         verifyShowModeView(expectedAbilities);
       });
       /* eslint-enable indent, no-unexpected-multiline */
@@ -164,91 +158,27 @@ describe('when the show section is clicked', () => {
     });
   });
 
-  describe('and the proficiency bonus is changed and the edit section is submitted', () => {
-    describe('should save the proficiency bonus', () => {
-      /* eslint-disable indent, no-unexpected-multiline */
-      it.each
-      `
-        description  | proficiencyBonus
-        ${'+ bonus'} | ${5}
-        ${'0 bonus'} | ${0}
-        ${'- bonus'} | ${-2}
-      `
-      ('$description: $proficiencyBonus',
-      ({proficiencyBonus}) => {
-        let receivedEvent = null;
-        abilityScoresSection.addEventListener('proficiencyBonusChanged', (event) => {
-          receivedEvent = event;
-        });
-
-        const expectedAbilities = createDefaultExpectedAbilities();
-
-        inputValueAndTriggerEvent(abilityScoresSection.editElements.proficiencyBonus, proficiencyBonus);
-
-        verifyModel(expectedAbilities, proficiencyBonus);
-        verifyEditModeView(expectedAbilities, proficiencyBonus);
-
-        expect(receivedEvent).not.toBeNull();
-
-        abilityScoresSection.editElements.submitForm();
-
-        verifyShowModeView(expectedAbilities);
-
-        const json = verifyJsonExport(expectedAbilities, proficiencyBonus);
-
-        reset();
-        abilityScoresSection.importFromJson(json);
-
-        verifyModel(expectedAbilities, proficiencyBonus);
-        verifyEditModeView(expectedAbilities, proficiencyBonus);
-        verifyShowModeView(expectedAbilities);
-      });
-      /* eslint-enable indent, no-unexpected-multiline */
-    });
-
-    it('should display an error if the proficiency bonus is not a valid number, and the proficiency bonus is not saved', () => {
-      let receivedEvent = null;
-      abilityScoresSection.addEventListener('proficiencyBonusChanged', (event) => {
-        receivedEvent = event;
-      });
-
-      const oldProficiencyBonus = proficiencyBonusModel.proficiencyBonus;
-
-      inputValueAndTriggerEvent(abilityScoresSection.editElements.proficiencyBonus, '');
-
-      expect(proficiencyBonusModel.proficiencyBonus).toBe(oldProficiencyBonus);
-      expect(receivedEvent).toBeNull();
-
-      abilityScoresSection.editElements.submitForm();
-
-      expect(abilityScoresSection).toBeInMode('edit');
-      expect(abilityScoresSection).toHaveError(
-        abilityScoresSection.editElements.proficiencyBonus,
-        'Proficiency Bonus must be a valid number.');
-    });
-  });
-
   describe('and all of the fields are populated and the edit section is submitted', () => {
     describe('should switch to show mode, save the fields, and update the ability score modifiers on both edit and show mode', () => {
       /* eslint-disable indent, no-unexpected-multiline */
       it.each
       `
-        description             | strScore | dexScore | conScore | intScore | wisScore | chaScore | proficiencyBonus | strMod  | dexMod  | conMod  | intMod  | wisMod  | chaMod
-        ${'ancient red dragon'} | ${30}    | ${10}    | ${29}    | ${18}    | ${15}    | ${23}    | ${7}             | ${10}   | ${0}    | ${9}    | ${4}    | ${2}    | ${6}
-        ${'basilisk'}           | ${16}    | ${8}     | ${15}    | ${2}     | ${8}     | ${7}     | ${2}             | ${3}    | ${-1}   | ${2}    | ${-4}   | ${-1}   | ${-2}
-        ${'commoner'}           | ${10}    | ${10}    | ${10}    | ${10}    | ${10}    | ${10}    | ${2}             | ${0}    | ${0}    | ${0}    | ${0}    | ${0}    | ${0}
-        ${'gelatinous cube'}    | ${14}    | ${3}     | ${20}    | ${1}     | ${6}     | ${1}     | ${2}             | ${2}    | ${-4}   | ${5}    | ${-5}   | ${-2}   | ${-5}
-        ${'lich'}               | ${11}    | ${16}    | ${16}    | ${20}    | ${14}    | ${16}    | ${7}             | ${0}    | ${3}    | ${3}    | ${5}    | ${2}    | ${3}
-        ${'mage'}               | ${9}     | ${14}    | ${11}    | ${17}    | ${12}    | ${11}    | ${3}             | ${-1}   | ${2}    | ${0}    | ${3}    | ${1}    | ${0}
-        ${'phase spider'}       | ${15}    | ${15}    | ${12}    | ${6}     | ${10}    | ${6}     | ${2}             | ${2}    | ${2}    | ${1}    | ${-2}   | ${0}    | ${-2}
-        ${'priest'}             | ${10}    | ${10}    | ${12}    | ${13}    | ${16}    | ${13}    | ${2}             | ${0}    | ${0}    | ${1}    | ${1}    | ${3}    | ${1}
-        ${'treant'}             | ${23}    | ${8}     | ${21}    | ${12}    | ${16}    | ${12}    | ${4}             | ${6}    | ${-1}   | ${5}    | ${1}    | ${3}    | ${1}
-        ${'vampire'}            | ${18}    | ${18}    | ${18}    | ${17}    | ${15}    | ${18}    | ${5}             | ${4}    | ${4}    | ${4}    | ${3}    | ${2}    | ${4}
-        ${'minimum values'}     | ${1}     | ${1}     | ${1}     | ${1}     | ${1}     | ${1}     | ${-999}          | ${-5}   | ${-5}   | ${-5}   | ${-5}   | ${-5}   | ${-5}
-        ${'maximum values'}     | ${999}   | ${999}   | ${999}   | ${999}   | ${999}   | ${999}   | ${999}           | ${494}  | ${494}  | ${494}  | ${494}  | ${494}  | ${494}
+        description             | strScore | dexScore | conScore | intScore | wisScore | chaScore | strMod  | dexMod  | conMod  | intMod  | wisMod  | chaMod
+        ${'ancient red dragon'} | ${30}    | ${10}    | ${29}    | ${18}    | ${15}    | ${23}    | ${10}   | ${0}    | ${9}    | ${4}    | ${2}    | ${6}
+        ${'basilisk'}           | ${16}    | ${8}     | ${15}    | ${2}     | ${8}     | ${7}     | ${3}    | ${-1}   | ${2}    | ${-4}   | ${-1}   | ${-2}
+        ${'commoner'}           | ${10}    | ${10}    | ${10}    | ${10}    | ${10}    | ${10}    | ${0}    | ${0}    | ${0}    | ${0}    | ${0}    | ${0}
+        ${'gelatinous cube'}    | ${14}    | ${3}     | ${20}    | ${1}     | ${6}     | ${1}     | ${2}    | ${-4}   | ${5}    | ${-5}   | ${-2}   | ${-5}
+        ${'lich'}               | ${11}    | ${16}    | ${16}    | ${20}    | ${14}    | ${16}    | ${0}    | ${3}    | ${3}    | ${5}    | ${2}    | ${3}
+        ${'mage'}               | ${9}     | ${14}    | ${11}    | ${17}    | ${12}    | ${11}    | ${-1}   | ${2}    | ${0}    | ${3}    | ${1}    | ${0}
+        ${'phase spider'}       | ${15}    | ${15}    | ${12}    | ${6}     | ${10}    | ${6}     | ${2}    | ${2}    | ${1}    | ${-2}   | ${0}    | ${-2}
+        ${'priest'}             | ${10}    | ${10}    | ${12}    | ${13}    | ${16}    | ${13}    | ${0}    | ${0}    | ${1}    | ${1}    | ${3}    | ${1}
+        ${'treant'}             | ${23}    | ${8}     | ${21}    | ${12}    | ${16}    | ${12}    | ${6}    | ${-1}   | ${5}    | ${1}    | ${3}    | ${1}
+        ${'vampire'}            | ${18}    | ${18}    | ${18}    | ${17}    | ${15}    | ${18}    | ${4}    | ${4}    | ${4}    | ${3}    | ${2}    | ${4}
+        ${'minimum values'}     | ${1}     | ${1}     | ${1}     | ${1}     | ${1}     | ${1}     | ${-5}   | ${-5}   | ${-5}   | ${-5}   | ${-5}   | ${-5}
+        ${'maximum values'}     | ${999}   | ${999}   | ${999}   | ${999}   | ${999}   | ${999}   | ${494}  | ${494}  | ${494}  | ${494}  | ${494}  | ${494}
       `
-      ('$description: {strScore="$strScore", dexScore="$dexScore", conScore="$conScore", intScore="$intScore", wisScore="$wisScore", chaScore="$chaScore", proficiencyBonus="$proficiencyBonus"} => {strMod="$strMod", dexMod="$dexMod", conMod="$conMod", intMod="$intMod", wisMod="$wisMod", chaMod="$chaMod"}',
-      ({strScore, dexScore, conScore, intScore, wisScore, chaScore, proficiencyBonus, strMod, dexMod, conMod, intMod, wisMod, chaMod}) => { // eslint-disable-line no-unused-vars
+      ('$description: {strScore="$strScore", dexScore="$dexScore", conScore="$conScore", intScore="$intScore", wisScore="$wisScore", chaScore="$chaScore"} => {strMod="$strMod", dexMod="$dexMod", conMod="$conMod", intMod="$intMod", wisMod="$wisMod", chaMod="$chaMod"}',
+      ({strScore, dexScore, conScore, intScore, wisScore, chaScore, strMod, dexMod, conMod, intMod, wisMod, chaMod}) => { // eslint-disable-line no-unused-vars
 
         // Collect expected values into nested JS object structure
         const expectedAbilities = createDefaultExpectedAbilities();
@@ -266,24 +196,22 @@ describe('when the show section is clicked', () => {
           const score = expectedAbilities.get(key).score;
           inputValueAndTriggerEvent(abilityScoresSection.editElements.score[key], score);
         }
-        inputValueAndTriggerEvent(abilityScoresSection.editElements.proficiencyBonus, proficiencyBonus);
-
-        verifyModel(expectedAbilities, proficiencyBonus);
-        verifyEditModeView(expectedAbilities, proficiencyBonus);
+        verifyModel(expectedAbilities);
+        verifyEditModeView(expectedAbilities);
 
         abilityScoresSection.editElements.submitForm();
 
         verifyShowModeView(expectedAbilities);
 
-        const json = verifyJsonExport(expectedAbilities, proficiencyBonus);
+        const json = verifyJsonExport(expectedAbilities);
         verifyHtmlExport(expectedAbilities);
         verifyHomebreweryExport(expectedAbilities);
 
         reset();
         abilityScoresSection.importFromJson(json);
 
-        verifyModel(expectedAbilities, proficiencyBonus);
-        verifyEditModeView(expectedAbilities, proficiencyBonus);
+        verifyModel(expectedAbilities);
+        verifyEditModeView(expectedAbilities);
         verifyShowModeView(expectedAbilities);
       });
       /* eslint-enable indent, no-unexpected-multiline */
@@ -293,7 +221,6 @@ describe('when the show section is clicked', () => {
 
 function reset() {
   abilitiesModel.reset();
-  proficiencyBonusModel.reset();
   abilityScoresSection.updateView();
 }
 
@@ -311,17 +238,16 @@ function createDefaultExpectedAbilities() {
   return expectedAbilities;
 }
 
-function verifyModel(expectedAbilities, expectedProficiencyBonus) {
+function verifyModel(expectedAbilities) {
   for (const [key, value] of abilitiesModel.entries) {
     const expectedAbility = expectedAbilities.get(key);
 
     expect(value.score).toBe(expectedAbility.score);
     expect(value.modifier).toBe(expectedAbility.modifier);
   }
-  expect(proficiencyBonusModel.proficiencyBonus).toBe(expectedProficiencyBonus);
 }
 
-function verifyEditModeView(expectedAbilities, expectedProficiencyBonus) {
+function verifyEditModeView(expectedAbilities) {
   for (const key of abilitiesModel.keys) {
     const expectedAbility = expectedAbilities.get(key);
     const formattedModifier = `(${formatModifier(expectedAbility.modifier)})`;
@@ -329,7 +255,6 @@ function verifyEditModeView(expectedAbilities, expectedProficiencyBonus) {
     expect(abilityScoresSection.editElements.score[key]).toHaveValue(expectedAbility.score);
     expect(abilityScoresSection.editElements.modifier[key]).toHaveTextContent(formattedModifier);
   }
-  expect(abilityScoresSection.editElements.proficiencyBonus).toHaveValue(expectedProficiencyBonus);
 }
 
 function verifyShowModeView(expectedAbilities) {
@@ -340,18 +265,13 @@ function verifyShowModeView(expectedAbilities) {
   }
 }
 
-function verifyJsonExport(expectedAbilities, expectedProficiencyBonus) {
+function verifyJsonExport(expectedAbilities) {
   const json = abilityScoresSection.exportToJson();
 
-  const expectedAbilityScores = {};
+  const expectedJson = {};
   for (const key of abilitiesModel.keys) {
-    expectedAbilityScores[key] = expectedAbilities.get(key).score;
+    expectedJson[key] = expectedAbilities.get(key).score;
   }
-
-  const expectedJson = {
-    abilityScores: expectedAbilityScores,
-    proficiencyBonus: expectedProficiencyBonus
-  };
 
   expect(json).toStrictEqual(expectedJson);
 
