@@ -1,6 +1,6 @@
 {
   "name": "statblock5e-creator",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "description": "A frontend web application for creating D&D 5th Edition Creature Statblocks",
   "main": "index.js",
   "dependencies": {

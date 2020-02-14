@@ -178,10 +178,11 @@ export default class StatBlockEditor extends CustomAutonomousElement {
 
   exportToJson() {
     const layoutSettings = CurrentContext.layoutSettings;
+    const version = CurrentContext.version;
     const json = this.statBlock.exportToJson();
 
     json.meta = {
-      version: '0.1.1',
+      version: version,
       description: 'Created using statblock5e-creator',
       url: 'https://frumple.github.io/statblock5e-creator'
     };

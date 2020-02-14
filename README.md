@@ -24,13 +24,12 @@ A frontend web application for creating creature statblocks that are similar in 
 
 ## Future Improvements
 
-- Support for additional browsers (Firefox, Safari, etc.)
+- Import monster stats from the [Open5e][open5e] API
 - Generate Spellcasting (currently disabled under Special Traits)
-- Get suggested proficiency bonus from Challenge Rating
 - Buttons to toggle bold/italic text and add expressions to Special Trait/Action/Reaction/Legendary Action descriptions
 - Autofill common Special Traits and Actions
-- Import monster stats from the [Open5e][open5e] API
 - Export to [Improved Initiative][improved-initiative] (JSON format)
+- Support for additional browsers (Firefox, Safari, etc.)
 - Export as Image
 - Offline/Local Storage
 - Additional printing options, including printing 2 one-column statblocks side-by-side
