@@ -30,7 +30,7 @@ export default class StatBlockMenu extends CustomAutonomousElement {
     this.printButton = this.shadowRoot.getElementById('print-button');
 
     this.githubButton = this.shadowRoot.getElementById('github-button');
-
+    this.wikiButton = this.shadowRoot.getElementById('wiki-button');
   }
 
   connectedCallback() {
@@ -55,6 +55,7 @@ export default class StatBlockMenu extends CustomAutonomousElement {
       this.printButton.addEventListener('click', this.onClickPrintButton.bind(this));
 
       this.githubButton.addEventListener('click', this.onClickGithubButton.bind(this));
+      this.wikiButton.addEventListener('click', this.onClickWikiButton.bind(this));
 
       this.isInitialized = true;
     }
@@ -106,6 +107,10 @@ export default class StatBlockMenu extends CustomAutonomousElement {
 
   onClickGithubButton() {
     window.open('https://github.com/Frumple/statblock5e-creator');
+  }
+
+  onClickWikiButton() {
+    window.open('https://github.com/Frumple/statblock5e-creator/wiki');
   }
 
   dispatchMenuEvent(eventType, detail = null) {
