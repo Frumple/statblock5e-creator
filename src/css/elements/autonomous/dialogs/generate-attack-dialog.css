@@ -26,7 +26,7 @@
 
 .generate-attack-dialog__finesse-help-tooltip {
   --help-tooltip-icon-color: black;
-  --help-tooltip-width: 35em;
+  --help-tooltip-width: 40em;
 }
 
 .generate-attack-dialog__finesse-help-tooltip code {
