@@ -154,7 +154,7 @@ export default class StatBlock extends CustomAutonomousElement {
     return statBlockElement;
   }
 
-  exportToHomebrewery() {
+  exportToMarkdown() {
     const layoutSettings = CurrentContext.layoutSettings;
 
     let blockHeader = '___';
@@ -162,9 +162,9 @@ export default class StatBlock extends CustomAutonomousElement {
       blockHeader += '\n___';
     }
 
-    const headingStats = this.headingStats.exportToHomebrewery();
-    const topStats = this.topStats.exportToHomebrewery();
-    const bottomStats = this.bottomStats.exportToHomebrewery();
+    const headingStats = this.headingStats.exportToMarkdown();
+    const topStats = this.topStats.exportToMarkdown();
+    const bottomStats = this.bottomStats.exportToMarkdown();
 
     return `${blockHeader}\n${headingStats}\n${topStats}\n${bottomStats}`;
   }

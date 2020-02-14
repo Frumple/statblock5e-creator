@@ -51,13 +51,13 @@ export default class BlockListModel extends Model {
     return fragment;
   }
 
-  toHomebrewery() {
+  toMarkdown() {
     const heading = (this.headingName ? `> ### ${this.headingName}\n` : '');
-    const homebreweryBlocks =
-      this.blocks.map(block => block.toHomebrewery());
-    const homebreweryBlocksAsText =
-      homebreweryBlocks.join('\n>\n');
+    const markdownBlocks =
+      this.blocks.map(block => block.toMarkdown());
+    const markdownBlocksAsText =
+      markdownBlocks.join('\n>\n');
 
-    return `${heading}${homebreweryBlocksAsText}`;
+    return `${heading}${markdownBlocksAsText}`;
   }
 }

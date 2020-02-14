@@ -54,7 +54,7 @@ beforeAll(async() => {
       setEmptyVisibility: () => {},
       exportToJson: () => { return {}; },
       exportToHtml: () => { return document.createElement('heading-stats'); },
-      exportToHomebrewery: () => { return ''; }
+      exportToMarkdown: () => { return ''; }
     };
   });
   TopStats.mockImplementation(() => {
@@ -62,7 +62,7 @@ beforeAll(async() => {
       setEmptyVisibility: () => {},
       exportToJson: () => { return {}; },
       exportToHtml: () => { return document.createElement('top-stats'); },
-      exportToHomebrewery: () => { return ''; }
+      exportToMarkdown: () => { return ''; }
     };
   });
   BottomStats.mockImplementation(() => {
@@ -70,7 +70,7 @@ beforeAll(async() => {
       setEmptyVisibility: () => {},
       exportToJson: () => { return {}; },
       exportToHtml: () => { return document.createElement('bottom-stats'); },
-      exportToHomebrewery: () => { return ''; }
+      exportToMarkdown: () => { return ''; }
     };
   });
 
@@ -469,26 +469,26 @@ describe('HTML-based tests', () => {
   });
 });
 
-describe('should export homebrewery', () => {
+describe('should export markdown', () => {
   const oneColumnTextMatcher = expect.stringMatching(/^___\n.*/);
   const twoColumnAutoHeightTextMatcher = expect.stringMatching(/^___\n___\n.*/);
 
   beforeEach(() => {
-    statBlockEditor.homebreweryExportDialog.connect();
+    statBlockEditor.markdownExportDialog.connect();
   });
 
   describe('to clipboard', () => {
     it('one-column version', () => {
       statBlockMenu.oneColumnButton.click();
 
-      statBlockMenu.exportHomebreweryButton.click();
+      statBlockMenu.exportMarkdownButton.click();
 
-      statBlockEditor.homebreweryExportDialog.copyToClipboardButton.click();
+      statBlockEditor.markdownExportDialog.copyToClipboardButton.click();
 
       expect(ClipboardWrapper).toHaveBeenCalledWith(
         oneColumnTextMatcher,
-        statBlockEditor.homebreweryExportDialog.dialog,
-        statBlockEditor.homebreweryExportDialog.copyToClipboardButton,
+        statBlockEditor.markdownExportDialog.dialog,
+        statBlockEditor.markdownExportDialog.copyToClipboardButton,
       );
     });
 
@@ -496,14 +496,14 @@ describe('should export homebrewery', () => {
       statBlockMenu.twoColumnButton.click();
       statBlockSidebar.autoHeightModeButton.click();
 
-      statBlockMenu.exportHomebreweryButton.click();
+      statBlockMenu.exportMarkdownButton.click();
 
-      statBlockEditor.homebreweryExportDialog.copyToClipboardButton.click();
+      statBlockEditor.markdownExportDialog.copyToClipboardButton.click();
 
       expect(ClipboardWrapper).toHaveBeenCalledWith(
         twoColumnAutoHeightTextMatcher,
-        statBlockEditor.homebreweryExportDialog.dialog,
-        statBlockEditor.homebreweryExportDialog.copyToClipboardButton,
+        statBlockEditor.markdownExportDialog.dialog,
+        statBlockEditor.markdownExportDialog.copyToClipboardButton,
       );
     });
   });
@@ -515,32 +515,32 @@ describe('should export homebrewery', () => {
     it('one-column version', () => {
       statBlockMenu.oneColumnButton.click();
 
-      statBlockMenu.exportHomebreweryButton.click();
+      statBlockMenu.exportMarkdownButton.click();
 
-      statBlockEditor.homebreweryExportDialog.downloadAsFileButton.click();
+      statBlockEditor.markdownExportDialog.downloadAsFileButton.click();
 
       expect(startFileDownload).toHaveBeenCalledWith(
         oneColumnTextMatcher,
         expectedContentType,
         expectedFileName);
 
-      expectFileDownloadStatus(statBlockEditor.homebreweryExportDialog);
+      expectFileDownloadStatus(statBlockEditor.markdownExportDialog);
     });
 
     it('two-column version', () => {
       statBlockMenu.twoColumnButton.click();
       statBlockSidebar.autoHeightModeButton.click();
 
-      statBlockMenu.exportHomebreweryButton.click();
+      statBlockMenu.exportMarkdownButton.click();
 
-      statBlockEditor.homebreweryExportDialog.downloadAsFileButton.click();
+      statBlockEditor.markdownExportDialog.downloadAsFileButton.click();
 
       expect(startFileDownload).toHaveBeenCalledWith(
         twoColumnAutoHeightTextMatcher,
         expectedContentType,
         expectedFileName);
 
-      expectFileDownloadStatus(statBlockEditor.homebreweryExportDialog);
+      expectFileDownloadStatus(statBlockEditor.markdownExportDialog);
     });
   });
 });

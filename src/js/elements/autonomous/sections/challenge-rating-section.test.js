@@ -103,7 +103,7 @@ describe('when the show section is clicked', () => {
 
         const json = verifyJsonExport(expectedValues);
         expect(challengeRatingSection).toExportPropertyLineToHtml(expectedHeading, expectedText);
-        expect(challengeRatingSection).toExportPropertyLineToHomebrewery(expectedHeading, expectedText);
+        expect(challengeRatingSection).toExportPropertyLineToMarkdown(expectedHeading, expectedText);
 
         reset();
         challengeRatingSection.importFromJson(json);
@@ -135,7 +135,7 @@ describe('when the show section is clicked', () => {
 
       const json = verifyJsonExport(expectedValues);
       expect(challengeRatingSection).toExportPropertyLineToHtml(expectedHeading, expectedText);
-      expect(challengeRatingSection).toExportPropertyLineToHomebrewery(expectedHeading, expectedText);
+      expect(challengeRatingSection).toExportPropertyLineToMarkdown(expectedHeading, expectedText);
 
       reset();
       challengeRatingSection.importFromJson(json);
@@ -245,7 +245,7 @@ describe('when the show section is clicked', () => {
 
       const json = verifyJsonExport(expectedValues);
       expect(challengeRatingSection).toExportPropertyLineToHtml(expectedHeading, expectedText);
-      expect(challengeRatingSection).toExportPropertyLineToHomebrewery(expectedHeading, expectedText);
+      expect(challengeRatingSection).toExportPropertyLineToMarkdown(expectedHeading, expectedText);
 
       reset();
       challengeRatingSection.importFromJson(json);
@@ -280,7 +280,7 @@ describe('when the show section is clicked', () => {
 
       const json = verifyJsonExport(expectedValues);
       expect(challengeRatingSection).toExportPropertyLineToHtml(expectedHeading, expectedText);
-      expect(challengeRatingSection).toExportPropertyLineToHomebrewery(expectedHeading, expectedText);
+      expect(challengeRatingSection).toExportPropertyLineToMarkdown(expectedHeading, expectedText);
 
       reset();
       challengeRatingSection.importFromJson(json);
@@ -313,7 +313,7 @@ describe('when the show section is clicked', () => {
 
       const json = verifyJsonExport(expectedValues);
       expect(challengeRatingSection).toExportPropertyLineToHtml(expectedHeading, expectedText);
-      expect(challengeRatingSection).toExportPropertyLineToHomebrewery(expectedHeading, expectedText);
+      expect(challengeRatingSection).toExportPropertyLineToMarkdown(expectedHeading, expectedText);
 
       reset();
       challengeRatingSection.importFromJson(json);
@@ -348,7 +348,7 @@ describe('when the show section is clicked', () => {
 
       const json = verifyJsonExport(expectedValues);
       expect(challengeRatingSection).toExportPropertyLineToHtml(expectedHeading, expectedText);
-      expect(challengeRatingSection).toExportPropertyLineToHomebrewery(expectedHeading, expectedText);
+      expect(challengeRatingSection).toExportPropertyLineToMarkdown(expectedHeading, expectedText);
 
       reset();
       challengeRatingSection.importFromJson(json);

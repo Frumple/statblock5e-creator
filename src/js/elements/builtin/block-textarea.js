@@ -63,7 +63,7 @@ const BlockTextAreaMixin = {
       return;
     }
 
-    this.homebreweryText = mathParserResults.outputText.replace(/\n/g, '  \n> ');
+    this.markdownText = mathParserResults.outputText.replace(/\n/g, '  \n> ');
     this.htmlText = markdownParserResults.outputText;
   }
 };

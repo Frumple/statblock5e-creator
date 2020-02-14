@@ -14,7 +14,7 @@ export function sectionShouldHaveDefaultBlocks(section, listModel, expectedBlock
 
   const json = verifyJsonExport(section, expectedBlocks);
   verifyHtmlExport(section, expectedBlocks);
-  verifyHomebreweryExport(section, expectedBlocks);
+  verifyMarkdownExport(section, expectedBlocks);
 
   reset(section, listModel);
   section.importFromJson(json);
@@ -60,7 +60,7 @@ export function shouldAddASingleBlock(section, listModel, block) {
 
   const json = verifyJsonExport(section, blocks);
   verifyHtmlExport(section, blocks);
-  verifyHomebreweryExport(section, blocks);
+  verifyMarkdownExport(section, blocks);
 
   reset(section, listModel);
   section.importFromJson(json);
@@ -82,7 +82,7 @@ export function shouldAddMultipleBlocks(section, listModel, blocks) {
 
   const json = verifyJsonExport(section, blocks);
   verifyHtmlExport(section, blocks);
-  verifyHomebreweryExport(section, blocks);
+  verifyMarkdownExport(section, blocks);
 
   reset(section, listModel);
   section.importFromJson(json);
@@ -123,7 +123,7 @@ export function shouldAddMultipleBlocksThenRemoveOneOfThem(section, listModel, b
 
   const json = verifyJsonExport(section, blocks);
   verifyHtmlExport(section, blocks);
-  verifyHomebreweryExport(section, blocks);
+  verifyMarkdownExport(section, blocks);
 
   reset(section, listModel);
   section.importFromJson(json);
@@ -151,7 +151,7 @@ export function shouldReparseNameChanges(section, listModel, block, oldNames, ne
 
   const json = verifyJsonExport(section, blocks);
   verifyHtmlExport(section, blocks);
-  verifyHomebreweryExport(section, blocks);
+  verifyMarkdownExport(section, blocks);
 
   reset(section, listModel);
   section.importFromJson(json);
@@ -175,7 +175,7 @@ export function shouldTrimAllTrailingPeriodCharactersInBlockName(section, listMo
 
   const json = verifyJsonExport(section, expectedBlocks);
   verifyHtmlExport(section, expectedBlocks);
-  verifyHomebreweryExport(section, expectedBlocks);
+  verifyMarkdownExport(section, expectedBlocks);
 
   reset(section, listModel);
   section.importFromJson(json);
@@ -307,7 +307,7 @@ function verifyShowModeView(section, expectedBlocks) {
 function verifyBlockModel(blockModel, expectedBlock) {
   expect(blockModel.name).toBe(expectedBlock.name);
   expect(blockModel.text).toBe(expectedBlock.text);
-  expect(blockModel.homebreweryText).toBe(expectedBlock.homebreweryText ? expectedBlock.homebreweryText : expectedBlock.text);
+  expect(blockModel.markdownText).toBe(expectedBlock.markdownText ? expectedBlock.markdownText : expectedBlock.text);
   expect(blockModel.htmlText).toBe(expectedBlock.htmlText ? expectedBlock.htmlText : expectedBlock.text);
 }
 
@@ -347,25 +347,25 @@ function verifyHtmlExport(section, expectedBlocks) {
   }
 }
 
-function verifyHomebreweryExport(section, expectedBlocks) {
-  const homebreweryExport = section.exportToHomebrewery();
+function verifyMarkdownExport(section, expectedBlocks) {
+  const markdownExport = section.exportToMarkdown();
 
   if (expectedHeading !== null) {
-    const firstNewLineIndex = homebreweryExport.indexOf('\n');
-    const firstLine = homebreweryExport.slice(0, firstNewLineIndex);
+    const firstNewLineIndex = markdownExport.indexOf('\n');
+    const firstLine = markdownExport.slice(0, firstNewLineIndex);
 
     expect(firstLine).toBe(`> ### ${expectedHeading}`);
   }
 
   if (expectedBlocks.length > 0) {
-    const firstBlockIndex = homebreweryExport.indexOf('> ***');
-    const blocksText = homebreweryExport.slice(firstBlockIndex);
+    const firstBlockIndex = markdownExport.indexOf('> ***');
+    const blocksText = markdownExport.slice(firstBlockIndex);
 
-    const expectedBlocksInHomebreweryFormat =
+    const expectedBlocksInMarkdownFormat =
       expectedBlocks.map(
-        block => `> ***${block.name}.*** ${(block.homebreweryText ? block.homebreweryText : block.text)}`);
+        block => `> ***${block.name}.*** ${(block.markdownText ? block.markdownText : block.text)}`);
 
-    const expectedBlocksText = expectedBlocksInHomebreweryFormat.join('\n>\n');
+    const expectedBlocksText = expectedBlocksInMarkdownFormat.join('\n>\n');
     expect(blocksText).toBe(expectedBlocksText);
   }
 }

@@ -58,7 +58,7 @@ describe('when the show section is clicked', () => {
 
   describe('and the description is changed and the edit section is submitted', () => {
     const description = '[name] can take 5 legendary actions, choosing from one of the options below. Only one legendary action option can be used at a time and only at the end of another creature\'s turn. [name] regains spent legendary actions at the start of its turn.';
-    const homebreweryDescription = 'The dragon can take 5 legendary actions, choosing from one of the options below. Only one legendary action option can be used at a time and only at the end of another creature\'s turn. The dragon regains spent legendary actions at the start of its turn.';
+    const markdownDescription = 'The dragon can take 5 legendary actions, choosing from one of the options below. Only one legendary action option can be used at a time and only at the end of another creature\'s turn. The dragon regains spent legendary actions at the start of its turn.';
     const htmlDescription = 'The dragon can take 5 legendary actions, choosing from one of the options below. Only one legendary action option can be used at a time and only at the end of another creature\'s turn. The dragon regains spent legendary actions at the start of its turn.';
 
     it('should switch to mode and update the description, but the description is not shown if there are no legendary actions', () => {
@@ -70,18 +70,18 @@ describe('when the show section is clicked', () => {
       legendaryActionsSection.editElements.submitForm();
 
       expect(legendaryActionsSection).toBeInMode('show');
-      verifyModelDescription(description, homebreweryDescription, htmlDescription);
+      verifyModelDescription(description, markdownDescription, htmlDescription);
       verifyEditModeDescription(description);
       verifyShowModeDescription(htmlDescription, false);
 
       const json = verifyJsonExportDescription(description);
       verifyHtmlExportDescription(htmlDescription);
-      verifyHomebreweryExportDescription(homebreweryDescription);
+      verifyMarkdownExportDescription(markdownDescription);
 
       sharedSpecs.reset(legendaryActionsSection, legendaryActionsModel);
       legendaryActionsSection.importFromJson(json);
 
-      verifyModelDescription(description, homebreweryDescription, htmlDescription);
+      verifyModelDescription(description, markdownDescription, htmlDescription);
       verifyEditModeDescription(description);
       verifyShowModeDescription(htmlDescription, false);
     });
@@ -96,18 +96,18 @@ describe('when the show section is clicked', () => {
       legendaryActionsSection.editElements.submitForm();
 
       expect(legendaryActionsSection).toBeInMode('show');
-      verifyModelDescription(description, homebreweryDescription, htmlDescription);
+      verifyModelDescription(description, markdownDescription, htmlDescription);
       verifyEditModeDescription(description);
       verifyShowModeDescription(htmlDescription, true);
 
       const json = verifyJsonExportDescription(description);
       verifyHtmlExportDescription(htmlDescription);
-      verifyHomebreweryExportDescription(homebreweryDescription);
+      verifyMarkdownExportDescription(markdownDescription);
 
       sharedSpecs.reset(legendaryActionsSection, legendaryActionsModel);
       legendaryActionsSection.importFromJson(json);
 
-      verifyModelDescription(description, homebreweryDescription, htmlDescription);
+      verifyModelDescription(description, markdownDescription, htmlDescription);
       verifyEditModeDescription(description);
       verifyShowModeDescription(htmlDescription, true);
     });
@@ -129,7 +129,7 @@ describe('when the show section is clicked', () => {
       const block = {
         name: 'Detect',
         text: '[name] makes a Wisdom (Perception) check.',
-        homebreweryText: 'The dragon makes a Wisdom (Perception) check.',
+        markdownText: 'The dragon makes a Wisdom (Perception) check.',
         htmlText: 'The dragon makes a Wisdom (Perception) check.'
       };
 
@@ -143,7 +143,7 @@ describe('when the show section is clicked', () => {
       const block = {
         name: 'Multiline Legendary Action',
         text: '**Line 1**. [name] is here.\n  **Line 2**. [name] is there.\n    **Line 3**. [name] is everywhere.',
-        homebreweryText: '**Line 1**. The dummy is here.  \n>   **Line 2**. The dummy is there.  \n>     **Line 3**. The dummy is everywhere.',
+        markdownText: '**Line 1**. The dummy is here.  \n>   **Line 2**. The dummy is there.  \n>     **Line 3**. The dummy is everywhere.',
         htmlText: '<strong>Line 1</strong>. The dummy is here.\n  <strong>Line 2</strong>. The dummy is there.\n    <strong>Line 3</strong>. The dummy is everywhere.'
       };
 
@@ -156,7 +156,7 @@ describe('when the show section is clicked', () => {
       const block = {
         name: 'Escaped Legendary Action',
         text: '<strong>Line 1</strong>. [name] is here.',
-        homebreweryText: '&lt;strong&gt;Line 1&lt;/strong&gt;. The dummy is here.',
+        markdownText: '&lt;strong&gt;Line 1&lt;/strong&gt;. The dummy is here.',
         htmlText: '&lt;strong&gt;Line 1&lt;/strong&gt;. The dummy is here.'
       };
 
@@ -172,19 +172,19 @@ describe('when the show section is clicked', () => {
         {
           name: 'Detect',
           text: '[name] makes a Wisdom (Perception) check.',
-          homebreweryText: 'The dragon makes a Wisdom (Perception) check.',
+          markdownText: 'The dragon makes a Wisdom (Perception) check.',
           htmlText: 'The dragon makes a Wisdom (Perception) check.'
         },
         {
           name: 'Tail Attack',
           text: '[name] makes a tail attack.',
-          homebreweryText: 'The dragon makes a tail attack.',
+          markdownText: 'The dragon makes a tail attack.',
           htmlText: 'The dragon makes a tail attack.'
         },
         {
           name: 'Wing Attack (Costs 2 Actions)',
           text: '[name] beats its wings. Each creature within 10 feet of the dragon must succeed on a DC 22 Dexterity saving throw or take dmg[2d6 + str] bludgeoning damage and be knocked prone. [name] can then fly up to half its flying speed.',
-          homebreweryText: 'The dragon beats its wings. Each creature within 10 feet of the dragon must succeed on a DC 22 Dexterity saving throw or take 15 (2d6 + 8) bludgeoning damage and be knocked prone. The dragon can then fly up to half its flying speed.',
+          markdownText: 'The dragon beats its wings. Each creature within 10 feet of the dragon must succeed on a DC 22 Dexterity saving throw or take 15 (2d6 + 8) bludgeoning damage and be knocked prone. The dragon can then fly up to half its flying speed.',
           htmlText: 'The dragon beats its wings. Each creature within 10 feet of the dragon must succeed on a DC 22 Dexterity saving throw or take 15 (2d6 + 8) bludgeoning damage and be knocked prone. The dragon can then fly up to half its flying speed.'
         }
       ];
@@ -199,7 +199,7 @@ describe('when the show section is clicked', () => {
       const block = {
         name: 'Detect',
         text: '[name] makes a Wisdom (Perception) check.',
-        homebreweryText: 'The dragon makes a Wisdom (Perception) check.',
+        markdownText: 'The dragon makes a Wisdom (Perception) check.',
         htmlText: 'The dragon makes a Wisdom (Perception) check.'
       };
 
@@ -216,19 +216,19 @@ describe('when the show section is clicked', () => {
         {
           name: 'Detect',
           text: '[name] makes a Wisdom (Perception) check.',
-          homebreweryText: 'The dragon makes a Wisdom (Perception) check.',
+          markdownText: 'The dragon makes a Wisdom (Perception) check.',
           htmlText: 'The dragon makes a Wisdom (Perception) check.'
         },
         {
           name: 'Tail Attack',
           text: '[name] makes a tail attack.',
-          homebreweryText: 'The dragon makes a tail attack.',
+          markdownText: 'The dragon makes a tail attack.',
           htmlText: 'The dragon makes a tail attack.'
         },
         {
           name: 'Wing Attack (Costs 2 Actions)',
           text: '[name] beats its wings. Each creature within 10 feet of the dragon must succeed on a DC 22 Dexterity saving throw or take dmg[2d6 + str] bludgeoning damage and be knocked prone. [name] can then fly up to half its flying speed.',
-          homebreweryText: 'The dragon beats its wings. Each creature within 10 feet of the dragon must succeed on a DC 22 Dexterity saving throw or take 15 (2d6 + 8) bludgeoning damage and be knocked prone. The dragon can then fly up to half its flying speed.',
+          markdownText: 'The dragon beats its wings. Each creature within 10 feet of the dragon must succeed on a DC 22 Dexterity saving throw or take 15 (2d6 + 8) bludgeoning damage and be knocked prone. The dragon can then fly up to half its flying speed.',
           htmlText: 'The dragon beats its wings. Each creature within 10 feet of the dragon must succeed on a DC 22 Dexterity saving throw or take 15 (2d6 + 8) bludgeoning damage and be knocked prone. The dragon can then fly up to half its flying speed.'
         }
       ];
@@ -243,7 +243,7 @@ describe('when the show section is clicked', () => {
       const block = {
         name: 'Wing Attack (Costs 2 Actions)',
         text: '[name] beats its wings. Each creature within 10 feet of [name] must succeed on a DC 22 Dexterity saving throw or take dmg[2d6 + str] bludgeoning damage and be knocked prone. [name] can then fly up to half its flying speed.',
-        homebreweryText: null,
+        markdownText: null,
         htmlText: null
       };
 
@@ -262,8 +262,8 @@ describe('when the show section is clicked', () => {
           isProperNoun: false
         };
 
-        block.homebreweryText = 'The ancient red dragon beats its wings. Each creature within 10 feet of the ancient red dragon must succeed on a DC 22 Dexterity saving throw or take 15 (2d6 + 8) bludgeoning damage and be knocked prone. The ancient red dragon can then fly up to half its flying speed.';
-        block.htmlText = block.homebreweryText;
+        block.markdownText = 'The ancient red dragon beats its wings. Each creature within 10 feet of the ancient red dragon must succeed on a DC 22 Dexterity saving throw or take 15 (2d6 + 8) bludgeoning damage and be knocked prone. The ancient red dragon can then fly up to half its flying speed.';
+        block.htmlText = block.markdownText;
 
         sharedSpecs.shouldReparseNameChanges(legendaryActionsSection, legendaryActionsModel, block, oldNames, newNames);
       });
@@ -277,8 +277,8 @@ describe('when the show section is clicked', () => {
           isProperNoun: false
         };
 
-        block.homebreweryText = 'The dragon beats its wings. Each creature within 10 feet of the dragon must succeed on a DC 22 Dexterity saving throw or take 15 (2d6 + 8) bludgeoning damage and be knocked prone. The dragon can then fly up to half its flying speed.';
-        block.htmlText = block.homebreweryText;
+        block.markdownText = 'The dragon beats its wings. Each creature within 10 feet of the dragon must succeed on a DC 22 Dexterity saving throw or take 15 (2d6 + 8) bludgeoning damage and be knocked prone. The dragon can then fly up to half its flying speed.';
+        block.htmlText = block.markdownText;
 
         sharedSpecs.shouldReparseNameChanges(legendaryActionsSection, legendaryActionsModel, block, oldNames, newNames);
       });
@@ -292,8 +292,8 @@ describe('when the show section is clicked', () => {
           isProperNoun: true
         };
 
-        block.homebreweryText = 'Adult Red Dragon beats its wings. Each creature within 10 feet of Adult Red Dragon must succeed on a DC 22 Dexterity saving throw or take 15 (2d6 + 8) bludgeoning damage and be knocked prone. Adult Red Dragon can then fly up to half its flying speed.';
-        block.htmlText = block.homebreweryText;
+        block.markdownText = 'Adult Red Dragon beats its wings. Each creature within 10 feet of Adult Red Dragon must succeed on a DC 22 Dexterity saving throw or take 15 (2d6 + 8) bludgeoning damage and be knocked prone. Adult Red Dragon can then fly up to half its flying speed.';
+        block.htmlText = block.markdownText;
 
         sharedSpecs.shouldReparseNameChanges(legendaryActionsSection, legendaryActionsModel, block, oldNames, newNames);
       });
@@ -325,9 +325,9 @@ describe('when the show section is clicked', () => {
   });
 });
 
-function verifyModelDescription(description, homebreweryDescription, htmlDescription) {
+function verifyModelDescription(description, markdownDescription, htmlDescription) {
   expect(legendaryActionsModel.description).toBe(description);
-  expect(legendaryActionsModel.homebreweryDescription).toBe(homebreweryDescription);
+  expect(legendaryActionsModel.markdownDescription).toBe(markdownDescription);
   expect(legendaryActionsModel.htmlDescription).toBe(htmlDescription);
 }
 
@@ -360,9 +360,9 @@ function verifyHtmlExportDescription(expectedText) {
   expect(description).toContainHTML(expectedText);
 }
 
-function verifyHomebreweryExportDescription(expectedText) {
-  const homebreweryExport = legendaryActionsSection.exportToHomebrewery();
-  const description = homebreweryExport.split('\n')[1];
+function verifyMarkdownExportDescription(expectedText) {
+  const markdownExport = legendaryActionsSection.exportToMarkdown();
+  const description = markdownExport.split('\n')[1];
 
   expect(description).toBe(`> ${expectedText}`);
 }

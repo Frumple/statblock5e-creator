@@ -22,7 +22,7 @@ export default class PropertyLineModel extends Model {
     return ExportHelpers.createHtmlPropertyLine(this.headingName, this.htmlText);
   }
 
-  toHomebrewery() {
-    return ExportHelpers.createHomebreweryPropertyLine(this.headingName, this.text);
+  toMarkdown() {
+    return ExportHelpers.createMarkdownPropertyLine(this.headingName, this.text);
   }
 }

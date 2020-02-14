@@ -56,7 +56,7 @@ describe('when the show section is clicked', () => {
       const block = {
         name: 'Parry',
         text: '[name] adds 2 to its AC against one melee attack that would hit it. To do so, [name] must see the attacker and be wielding a melee weapon.',
-        homebreweryText: 'The knight adds 2 to its AC against one melee attack that would hit it. To do so, the knight must see the attacker and be wielding a melee weapon.',
+        markdownText: 'The knight adds 2 to its AC against one melee attack that would hit it. To do so, the knight must see the attacker and be wielding a melee weapon.',
         htmlText: 'The knight adds 2 to its AC against one melee attack that would hit it. To do so, the knight must see the attacker and be wielding a melee weapon.'
       };
 
@@ -69,7 +69,7 @@ describe('when the show section is clicked', () => {
       const block = {
         name: 'Multiline Reaction',
         text: '**Line 1**. [name] is here.\n  **Line 2**. [name] is there.\n    **Line 3**. [name] is everywhere.',
-        homebreweryText: '**Line 1**. The dummy is here.  \n>   **Line 2**. The dummy is there.  \n>     **Line 3**. The dummy is everywhere.',
+        markdownText: '**Line 1**. The dummy is here.  \n>   **Line 2**. The dummy is there.  \n>     **Line 3**. The dummy is everywhere.',
         htmlText: '<strong>Line 1</strong>. The dummy is here.\n  <strong>Line 2</strong>. The dummy is there.\n    <strong>Line 3</strong>. The dummy is everywhere.'
       };
 
@@ -82,7 +82,7 @@ describe('when the show section is clicked', () => {
       const block = {
         name: 'Escaped Reaction',
         text: '<strong>Line 1</strong>. [name] is here.',
-        homebreweryText: '&lt;strong&gt;Line 1&lt;/strong&gt;. The dummy is here.',
+        markdownText: '&lt;strong&gt;Line 1&lt;/strong&gt;. The dummy is here.',
         htmlText: '&lt;strong&gt;Line 1&lt;/strong&gt;. The dummy is here.'
       };
 
@@ -142,7 +142,7 @@ describe('when the show section is clicked', () => {
       const block = {
         name: 'Spell Reflection',
         text: 'If [name] makes a successful saving throw against a spell, or a spell attack misses it, [name] can choose another creature (including the spellcaster) it can see within 30 feet of it. The spell targets the chosen creature instead of [name]. If the spell forced a saving throw, the chosen creature makes its own save. If the spell was an attack, the attack roll is rerolled against the chosen creature.',
-        homebreweryText: null,
+        markdownText: null,
         htmlText: null
       };
 
@@ -159,8 +159,8 @@ describe('when the show section is clicked', () => {
           isProperNoun: false
         };
 
-        block.homebreweryText = 'If the old spectator makes a successful saving throw against a spell, or a spell attack misses it, the old spectator can choose another creature (including the spellcaster) it can see within 30 feet of it. The spell targets the chosen creature instead of the old spectator. If the spell forced a saving throw, the chosen creature makes its own save. If the spell was an attack, the attack roll is rerolled against the chosen creature.';
-        block.htmlText = block.homebreweryText;
+        block.markdownText = 'If the old spectator makes a successful saving throw against a spell, or a spell attack misses it, the old spectator can choose another creature (including the spellcaster) it can see within 30 feet of it. The spell targets the chosen creature instead of the old spectator. If the spell forced a saving throw, the chosen creature makes its own save. If the spell was an attack, the attack roll is rerolled against the chosen creature.';
+        block.htmlText = block.markdownText;
 
         sharedSpecs.shouldReparseNameChanges(reactionsSection, reactionsModel, block, oldNames, newNames);
       });
@@ -172,8 +172,8 @@ describe('when the show section is clicked', () => {
           isProperNoun: false
         };
 
-        block.homebreweryText = 'If the spectator makes a successful saving throw against a spell, or a spell attack misses it, the spectator can choose another creature (including the spellcaster) it can see within 30 feet of it. The spell targets the chosen creature instead of the spectator. If the spell forced a saving throw, the chosen creature makes its own save. If the spell was an attack, the attack roll is rerolled against the chosen creature.';
-        block.htmlText = block.homebreweryText;
+        block.markdownText = 'If the spectator makes a successful saving throw against a spell, or a spell attack misses it, the spectator can choose another creature (including the spellcaster) it can see within 30 feet of it. The spell targets the chosen creature instead of the spectator. If the spell forced a saving throw, the chosen creature makes its own save. If the spell was an attack, the attack roll is rerolled against the chosen creature.';
+        block.htmlText = block.markdownText;
 
         sharedSpecs.shouldReparseNameChanges(reactionsSection, reactionsModel, block, oldNames, newNames);
       });
@@ -185,8 +185,8 @@ describe('when the show section is clicked', () => {
           isProperNoun: true
         };
 
-        block.homebreweryText = 'If Old Spectator makes a successful saving throw against a spell, or a spell attack misses it, Old Spectator can choose another creature (including the spellcaster) it can see within 30 feet of it. The spell targets the chosen creature instead of Old Spectator. If the spell forced a saving throw, the chosen creature makes its own save. If the spell was an attack, the attack roll is rerolled against the chosen creature.';
-        block.htmlText = block.homebreweryText;
+        block.markdownText = 'If Old Spectator makes a successful saving throw against a spell, or a spell attack misses it, Old Spectator can choose another creature (including the spellcaster) it can see within 30 feet of it. The spell targets the chosen creature instead of Old Spectator. If the spell forced a saving throw, the chosen creature makes its own save. If the spell was an attack, the attack roll is rerolled against the chosen creature.';
+        block.htmlText = block.markdownText;
 
         sharedSpecs.shouldReparseNameChanges(reactionsSection, reactionsModel, block, oldNames, newNames);
       });

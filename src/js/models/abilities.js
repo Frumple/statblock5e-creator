@@ -62,7 +62,7 @@ export default class Abilities extends Model {
     return abilitiesBlock;
   }
 
-  toHomebrewery() {
+  toMarkdown() {
     const abilityStrings = this.values.map(ability => `${ability.score} ${ability.formattedModifier}`);
     const abilityLine = abilityStrings.join('|');
 

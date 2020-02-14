@@ -173,8 +173,8 @@ export class Section extends CustomAutonomousElement {
     return CurrentContext.creature[this.modelPropertyName].toHtml();
   }
 
-  exportToHomebrewery() {
-    return CurrentContext.creature[this.modelPropertyName].toHomebrewery();
+  exportToMarkdown() {
+    return CurrentContext.creature[this.modelPropertyName].toMarkdown();
   }
 }
 

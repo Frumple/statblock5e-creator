@@ -94,7 +94,7 @@ describe('when the show section is clicked', () => {
 
           const json = verifyJsonExport(expectedValues);
           expect(sensesSection).toExportPropertyLineToHtml(expectedHeading, expectedHtmlText);
-          expect(sensesSection).toExportPropertyLineToHomebrewery(expectedHeading, customText);
+          expect(sensesSection).toExportPropertyLineToMarkdown(expectedHeading, customText);
 
           reset();
           sensesSection.importFromJson(json);
@@ -218,7 +218,7 @@ describe('when the show section is clicked', () => {
 
           const json = verifyJsonExport(expectedValues);
           expect(sensesSection).toExportPropertyLineToHtml(expectedHeading, expectedText);
-          expect(sensesSection).toExportPropertyLineToHomebrewery(expectedHeading, expectedText);
+          expect(sensesSection).toExportPropertyLineToMarkdown(expectedHeading, expectedText);
 
           reset();
           sensesSection.importFromJson(json);
@@ -304,7 +304,7 @@ describe('should calculate the passive perception based on the following conditi
     verifyShowModeView(expectedText);
 
     expect(sensesSection).toExportPropertyLineToHtml(expectedHeading, expectedText);
-    expect(sensesSection).toExportPropertyLineToHomebrewery(expectedHeading, expectedText);
+    expect(sensesSection).toExportPropertyLineToMarkdown(expectedHeading, expectedText);
 
     sensesSection.showElements.section.click();
 

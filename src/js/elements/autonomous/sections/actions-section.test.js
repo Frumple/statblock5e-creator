@@ -66,7 +66,7 @@ describe('when the show section is clicked', () => {
       const block = {
         name: 'Greatsword',
         text: '*Melee Weapon Attack:* atk[str] to hit, reach 5 ft., one target. *Hit:* dmg[2d6 + str] slashing damage.',
-        homebreweryText: '*Melee Weapon Attack:* +5 to hit, reach 5 ft., one target. *Hit:* 10 (2d6 + 3) slashing damage.',
+        markdownText: '*Melee Weapon Attack:* +5 to hit, reach 5 ft., one target. *Hit:* 10 (2d6 + 3) slashing damage.',
         htmlText: '<em>Melee Weapon Attack:</em> +5 to hit, reach 5 ft., one target. <em>Hit:</em> 10 (2d6 + 3) slashing damage.'
       };
       sharedSpecs.shouldAddASingleBlock(actionsSection, actionsModel, block);
@@ -76,7 +76,7 @@ describe('when the show section is clicked', () => {
       const block = {
         name: 'Multiline Action',
         text: '**Line 1**. [name] is hot.\n  **Line 2**. [name] is cold.\n    **Line 3**. [name] is warm.',
-        homebreweryText: '**Line 1**. The dummy is hot.  \n>   **Line 2**. The dummy is cold.  \n>     **Line 3**. The dummy is warm.',
+        markdownText: '**Line 1**. The dummy is hot.  \n>   **Line 2**. The dummy is cold.  \n>     **Line 3**. The dummy is warm.',
         htmlText: '<strong>Line 1</strong>. The dummy is hot.\n  <strong>Line 2</strong>. The dummy is cold.\n    <strong>Line 3</strong>. The dummy is warm.'
       };
 
@@ -92,7 +92,7 @@ describe('when the show section is clicked', () => {
       const block = {
         name: 'Greatsword',
         text: '<em>Melee Weapon Attack:</em> atk[str] to hit, reach 5 ft., one target. <em>Hit:</em> dmg[2d6 + str] slashing damage.',
-        homebreweryText: '&lt;em&gt;Melee Weapon Attack:&lt;/em&gt; +5 to hit, reach 5 ft., one target. &lt;em&gt;Hit:&lt;/em&gt; 10 (2d6 + 3) slashing damage.',
+        markdownText: '&lt;em&gt;Melee Weapon Attack:&lt;/em&gt; +5 to hit, reach 5 ft., one target. &lt;em&gt;Hit:&lt;/em&gt; 10 (2d6 + 3) slashing damage.',
         htmlText: '&lt;em&gt;Melee Weapon Attack:&lt;/em&gt; +5 to hit, reach 5 ft., one target. &lt;em&gt;Hit:&lt;/em&gt; 10 (2d6 + 3) slashing damage.'
       };
       sharedSpecs.shouldAddASingleBlock(actionsSection, actionsModel, block);
@@ -106,19 +106,19 @@ describe('when the show section is clicked', () => {
         {
           name: 'Multiattack',
           text: '[name] makes two attacks with its scimitar. The second attack has disadvantage.',
-          homebreweryText: 'The goblin makes two attacks with its scimitar. The second attack has disadvantage.',
+          markdownText: 'The goblin makes two attacks with its scimitar. The second attack has disadvantage.',
           htmlText: 'The goblin makes two attacks with its scimitar. The second attack has disadvantage.'
         },
         {
           name: 'Scimitar',
           text: '*Melee Weapon Attack:* atk[dex] to hit, reach 5 ft., one target. *Hit:* dmg[1d6 + dex] slashing damage.',
-          homebreweryText: '*Melee Weapon Attack:* +4 to hit, reach 5 ft., one target. *Hit:* 5 (1d6 + 2) slashing damage.',
+          markdownText: '*Melee Weapon Attack:* +4 to hit, reach 5 ft., one target. *Hit:* 5 (1d6 + 2) slashing damage.',
           htmlText: '<em>Melee Weapon Attack:</em> +4 to hit, reach 5 ft., one target. <em>Hit:</em> 5 (1d6 + 2) slashing damage.'
         },
         {
           name: 'Javelin',
           text: '*Melee or Ranged Weapon Attack:* mod[dex] to hit, reach 5 ft. or range 30/120 ft., one target. *Hit:* dmg[1d6] piercing damage.',
-          homebreweryText: '*Melee or Ranged Weapon Attack:* +2 to hit, reach 5 ft. or range 30/120 ft., one target. *Hit:* 3 (1d6) piercing damage.',
+          markdownText: '*Melee or Ranged Weapon Attack:* +2 to hit, reach 5 ft. or range 30/120 ft., one target. *Hit:* 3 (1d6) piercing damage.',
           htmlText: '<em>Melee or Ranged Weapon Attack:</em> +2 to hit, reach 5 ft. or range 30/120 ft., one target. <em>Hit:</em> 3 (1d6) piercing damage.'
         }
       ];
@@ -143,19 +143,19 @@ describe('when the show section is clicked', () => {
         {
           name: 'Multiattack',
           text: '[name] makes two melee attacks.',
-          homebreweryText: 'The knight makes two melee attacks.',
+          markdownText: 'The knight makes two melee attacks.',
           htmlText: 'The knight makes two melee attacks.'
         },
         {
           name: 'Greatsword',
           text: '<em>Melee Weapon Attack:</em> atk[str] to hit, reach 5 ft., one target. <em>Hit:</em> dmg[2d6 + str] slashing damage.',
-          homebreweryText: '&lt;em&gt;Melee Weapon Attack:&lt;/em&gt; +5 to hit, reach 5 ft., one target. &lt;em&gt;Hit:&lt;/em&gt; 10 (2d6 + 3) slashing damage.',
+          markdownText: '&lt;em&gt;Melee Weapon Attack:&lt;/em&gt; +5 to hit, reach 5 ft., one target. &lt;em&gt;Hit:&lt;/em&gt; 10 (2d6 + 3) slashing damage.',
           htmlText: '&lt;em&gt;Melee Weapon Attack:&lt;/em&gt; +5 to hit, reach 5 ft., one target. &lt;em&gt;Hit:&lt;/em&gt; 10 (2d6 + 3) slashing damage.'
         },
         {
           name: 'Heavy Crossbow',
           text: '*Ranged Weapon Attack:* atk[dex] to hit, range 100/400 ft., one target. *Hit:* dmg[1d10 + dex] piercing damage.',
-          homebreweryText: '*Ranged Weapon Attack:* +2 to hit, range 100/400 ft., one target. *Hit:* 5 (1d10) piercing damage.',
+          markdownText: '*Ranged Weapon Attack:* +2 to hit, range 100/400 ft., one target. *Hit:* 5 (1d10) piercing damage.',
           htmlText: '<em>Ranged Weapon Attack:</em> +2 to hit, range 100/400 ft., one target. <em>Hit:</em> 5 (1d10) piercing damage.'
         }
       ];
@@ -169,7 +169,7 @@ describe('when the show section is clicked', () => {
       const block = {
         name: 'Teleport (Recharge 4-6)',
         text: '[name] magically teleports, along with any equipment it is wearing or carrying, up to 40 feet to an unoccupied space it can see. Before or after teleporting, [name] can make one bite attack.',
-        homebreweryText: null,
+        markdownText: null,
         htmlText: null
       };
 
@@ -186,8 +186,8 @@ describe('when the show section is clicked', () => {
           isProperNoun: false
         };
 
-        block.homebreweryText = 'The blink doggo magically teleports, along with any equipment it is wearing or carrying, up to 40 feet to an unoccupied space it can see. Before or after teleporting, the blink doggo can make one bite attack.';
-        block.htmlText = block.homebreweryText;
+        block.markdownText = 'The blink doggo magically teleports, along with any equipment it is wearing or carrying, up to 40 feet to an unoccupied space it can see. Before or after teleporting, the blink doggo can make one bite attack.';
+        block.htmlText = block.markdownText;
 
         sharedSpecs.shouldReparseNameChanges(actionsSection, actionsModel, block, oldNames, newNames);
       });
@@ -199,8 +199,8 @@ describe('when the show section is clicked', () => {
           isProperNoun: false
         };
 
-        block.homebreweryText = 'The dog magically teleports, along with any equipment it is wearing or carrying, up to 40 feet to an unoccupied space it can see. Before or after teleporting, the dog can make one bite attack.';
-        block.htmlText = block.homebreweryText;
+        block.markdownText = 'The dog magically teleports, along with any equipment it is wearing or carrying, up to 40 feet to an unoccupied space it can see. Before or after teleporting, the dog can make one bite attack.';
+        block.htmlText = block.markdownText;
 
         sharedSpecs.shouldReparseNameChanges(actionsSection, actionsModel, block, oldNames, newNames);
       });
@@ -212,8 +212,8 @@ describe('when the show section is clicked', () => {
           isProperNoun: true
         };
 
-        block.homebreweryText = 'Blink Dog magically teleports, along with any equipment it is wearing or carrying, up to 40 feet to an unoccupied space it can see. Before or after teleporting, Blink Dog can make one bite attack.';
-        block.htmlText = block.homebreweryText;
+        block.markdownText = 'Blink Dog magically teleports, along with any equipment it is wearing or carrying, up to 40 feet to an unoccupied space it can see. Before or after teleporting, Blink Dog can make one bite attack.';
+        block.htmlText = block.markdownText;
 
         sharedSpecs.shouldReparseNameChanges(actionsSection, actionsModel, block, oldNames, newNames);
       });

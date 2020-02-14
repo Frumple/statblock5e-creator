@@ -25,7 +25,7 @@ export function shouldAddAnItem(section, model, headingName, itemText) {
 
   const json = verifyJsonExport(section, expectedItems);
   expect(section).toExportPropertyLineToHtml(headingName, itemText);
-  expect(section).toExportPropertyLineToHomebrewery(headingName, itemText);
+  expect(section).toExportPropertyLineToMarkdown(headingName, itemText);
 
   reset(section, model);
   section.importFromJson(json);
@@ -52,7 +52,7 @@ export function shouldAddManyItems(section, model, headingName, items) {
 
   const json = verifyJsonExport(section, items);
   expect(section).toExportPropertyLineToHtml(headingName, expectedTextContent);
-  expect(section).toExportPropertyLineToHomebrewery(headingName, expectedTextContent);
+  expect(section).toExportPropertyLineToMarkdown(headingName, expectedTextContent);
 
   reset(section, model);
   section.importFromJson(json);
@@ -127,7 +127,7 @@ export function shouldAddAndRemoveItem(section, model, headingName, itemText) {
 
   const json = verifyJsonExport(section, expectedItems);
   expect(section).toExportPropertyLineToHtml(headingName, expectedTextContent);
-  expect(section).toExportPropertyLineToHomebrewery(headingName, expectedTextContent);
+  expect(section).toExportPropertyLineToMarkdown(headingName, expectedTextContent);
 
   reset(section, model);
   section.importFromJson(json);
@@ -157,7 +157,7 @@ export function shouldDeleteOneOfManyItems(section, model, headingName, initialI
 
   const json = verifyJsonExport(section, expectedItems);
   expect(section).toExportPropertyLineToHtml(headingName, expectedTextContent);
-  expect(section).toExportPropertyLineToHomebrewery(headingName, expectedTextContent);
+  expect(section).toExportPropertyLineToMarkdown(headingName, expectedTextContent);
 
   reset(section, model);
   section.importFromJson(json);

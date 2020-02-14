@@ -50,11 +50,11 @@ export default class StatsContainer extends CustomAutonomousElement {
     return fragment;
   }
 
-  exportToHomebrewery() {
+  exportToMarkdown() {
     const sections = Array.from(this.sections.values());
     return sections
       .filter(section => ! section.empty)
-      .map(section => section.exportToHomebrewery())
+      .map(section => section.exportToMarkdown())
       .join('\n');
   }
 }

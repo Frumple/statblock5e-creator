@@ -14,12 +14,13 @@ A frontend web application for creating creature statblocks that are similar in 
 - Hit points are automatically calculated from hit die and constitution, or enter your own custom hit points.
 - Saving throws and skills are automatically calculated from ability modifiers and proficiency bonus, or enter your own custom modifiers.
 - In the descriptions for Special Traits, Actions, Reactions, and Legendary Actions:
-  - **[Markdown Emphasis](#markdown-emphasis)** to make text **bold** and/or *italic*.
-  - **[Name Expressions](#name-expressions)** to inject the creature's name into the description where needed.
-  - **[Math Expressions](#math-expressions)** to automatically calculate attack roll modifiers, average damage from damage rolls, and spell save DCs.
-- **[Generate Attack Dialog](#generate-attack-dialog)** to easily create weapon attack actions.
-- Export your statblock into a JSON file, and re-import it at a later time.
-- Export your statblock into an HTML file, or a Markdown format for use in **[Homebrewery][homebrewery]**.
+  - **[Markdown Emphasis](#markdown-emphasis)**: Make text **bold** and/or *italic*.
+  - **[Name Expressions](#name-expressions)**: Inject the creature's name into the description where needed.
+  - **[Math Expressions](#math-expressions)**: Automatically calculate attack roll modifiers, average damage from damage rolls, and spell save DCs.
+- **[Generate Attack Dialog](#generate-attack-dialog)**: Create weapon attack actions easily.
+- Export your statblock to a JSON file and re-import it at a later time.
+- Export your statblock to an HTML file based on the original **[statblock5e][statblock5e]** template.
+- Export your statblock to a Markdown format for use in homebrew content tools such as **[Homebrewery][homebrewery]** and **[GM Binder][gmbinder]**.
 - Print your statblock.
 
 ## Future Improvements
@@ -293,6 +294,7 @@ All example monsters and stats used in this application are from the [Dungeons a
 [statblock5e]: https://github.com/valloric/statblock5e
 [critterdb]: https://critterdb.com
 [homebrewery]: https://homebrewery.naturalcrit.com
+[gmbinder]: https://www.gmbinder.com
 [improved-initiative]: https://www.improved-initiative.com
 [open5e]: https://open5e.com
 

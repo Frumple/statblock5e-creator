@@ -1,10 +1,10 @@
 import * as ExportHelpers from '../../../helpers/export-helpers.js';
 
 export default class BlockModel {
-  constructor(name, text, homebreweryText = '', htmlText = '') {
+  constructor(name, text, markdownText = '', htmlText = '') {
     this.name = name;
     this.text = text;
-    this.homebreweryText = homebreweryText;
+    this.markdownText = markdownText;
     this.htmlText = htmlText;
   }
 
@@ -19,7 +19,7 @@ export default class BlockModel {
     return ExportHelpers.createHtmlPropertyBlock(this.name, this.htmlText);
   }
 
-  toHomebrewery() {
-    return ExportHelpers.createHomebreweryPropertyBlock(this.name, this.homebreweryText);
+  toMarkdown() {
+    return ExportHelpers.createMarkdownPropertyBlock(this.name, this.markdownText);
   }
 }

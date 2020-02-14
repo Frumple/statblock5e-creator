@@ -10,23 +10,26 @@
   <export-dialog id="json-export-dialog">
     <span slot="title">Export to JSON</span>
     <span slot="message">
-      Export your statblock into a specific JSON format that can be re-imported back into statblock5e-creator at a later time.
+      Export your statblock to a special JSON format that can be re-imported back into statblock5e-creator at a later time.
     </span>
   </export-dialog>
   <export-dialog id="html-export-dialog">
     <span slot="title">Export to HTML</span>
     <span slot="message">
-      Export your statblock into a standalone HTML document, based on <a href="https://github.com/Valloric/statblock5e" target="_blank">Valloric's statblock5e template</a>.<br />
+      Export your statblock as a standalone HTML document, based on <a href="https://github.com/Valloric/statblock5e" target="_blank">Valloric's statblock5e template</a>.<br />
       <br />
-      This document works best in Chrome.
+      This HTML document works best in Chrome.
     </span>
   </export-dialog>
-  <export-dialog id="homebrewery-export-dialog">
-    <span slot="title">Export to Homebrewery</span>
+  <export-dialog id="markdown-export-dialog">
+    <span slot="title">Export to Markdown</span>
     <span slot="message">
-      Export your statblock into a special Markdown format for use in <a href="https://homebrewery.naturalcrit.com" target="_blank">NaturalCrit's Homebrewery</a>, a tool for creating authentic-looking DnD 5th Edition homebrew content.<br />
+      Export your statblock to a special Markdown format for use in the following homebrew content tools:
       <br />
-      The Homebrewery works best in Chrome.
+      <ul class="stat-block-editor__dialog-list">
+        <li><a href="https://homebrewery.naturalcrit.com" target="_blank">Homebrewery</a></li>
+        <li><a href="https://www.gmbinder.com/" target="_blank">GM Binder</a></li>
+      </ul>
     </span>
   </export-dialog>
 </div>

@@ -33,7 +33,7 @@ export default class StatBlockEditor extends CustomAutonomousElement {
       this.jsonImportDialog = new ImportDialog();
       this.jsonExportDialog = new ExportDialog();
       this.htmlExportDialog = new ExportDialog();
-      this.homebreweryExportDialog = new ExportDialog();
+      this.markdownExportDialog = new ExportDialog();
     } else {
       this.statBlockMenu = document.querySelector('stat-block-menu');
       this.statBlockSidebar = document.querySelector('stat-block-sidebar');
@@ -42,7 +42,7 @@ export default class StatBlockEditor extends CustomAutonomousElement {
       this.jsonImportDialog = this.shadowRoot.getElementById('json-import-dialog');
       this.jsonExportDialog = this.shadowRoot.getElementById('json-export-dialog');
       this.htmlExportDialog = this.shadowRoot.getElementById('html-export-dialog');
-      this.homebreweryExportDialog = this.shadowRoot.getElementById('homebrewery-export-dialog');
+      this.markdownExportDialog = this.shadowRoot.getElementById('markdown-export-dialog');
     }
 
     this.jsonImportDialog.statBlockEditor = this;
@@ -135,8 +135,8 @@ export default class StatBlockEditor extends CustomAutonomousElement {
     case 'html':
       this.openHtmlExportDialog();
       break;
-    case 'homebrewery':
-      this.openHomebreweryExportDialog();
+    case 'markdown':
+      this.openMarkdownExportDialog();
       break;
     default:
       throw new Error(`Unknown export format: '${format}'.`);
@@ -162,9 +162,9 @@ export default class StatBlockEditor extends CustomAutonomousElement {
     this.htmlExportDialog.launch(content, 'text/html', `${CurrentContext.creature.title.fullName}.html`);
   }
 
-  openHomebreweryExportDialog() {
-    const content = this.exportToHomebrewery();
-    this.homebreweryExportDialog.launch(content, 'text/markdown', `${CurrentContext.creature.title.fullName}.md`);
+  openMarkdownExportDialog() {
+    const content = this.exportToMarkdown();
+    this.markdownExportDialog.launch(content, 'text/markdown', `${CurrentContext.creature.title.fullName}.md`);
   }
 
   importFromJson(json) {
@@ -208,7 +208,7 @@ export default class StatBlockEditor extends CustomAutonomousElement {
     return beautified_content;
   }
 
-  exportToHomebrewery() {
-    return this.statBlock.exportToHomebrewery();
+  exportToMarkdown() {
+    return this.statBlock.exportToMarkdown();
   }
 }

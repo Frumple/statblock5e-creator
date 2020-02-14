@@ -84,7 +84,7 @@ describe('when the show section is clicked', () => {
 
           const json = verifyJsonExport(expectedValues);
           verifyHtmlExport(customText);
-          verifyHomebreweryExport(customText);
+          verifyMarkdownExport(customText);
 
           reset();
           subtitleSection.importFromJson(json);
@@ -184,7 +184,7 @@ describe('when the show section is clicked', () => {
 
           const json = verifyJsonExport(expectedValues);
           verifyHtmlExport(expectedSubtitle);
-          verifyHomebreweryExport(expectedSubtitle);
+          verifyMarkdownExport(expectedSubtitle);
 
           reset();
           subtitleSection.importFromJson(json);
@@ -309,8 +309,8 @@ function verifyHtmlExport(expectedSubtitle) {
   expect(subtitleElement).toHaveTextContent(expectedSubtitle);
 }
 
-function verifyHomebreweryExport(expectedSubtitle) {
-  const text = subtitleSection.exportToHomebrewery();
+function verifyMarkdownExport(expectedSubtitle) {
+  const text = subtitleSection.exportToMarkdown();
   const expectedText =
     `>*${expectedSubtitle}*`;
 

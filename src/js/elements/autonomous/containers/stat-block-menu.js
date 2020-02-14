@@ -23,7 +23,7 @@ export default class StatBlockMenu extends CustomAutonomousElement {
 
     this.exportJsonButton = this.shadowRoot.getElementById('export-json-button');
     this.exportHtmlButton = this.shadowRoot.getElementById('export-html-button');
-    this.exportHomebreweryButton = this.shadowRoot.getElementById('export-homebrewery-button');
+    this.exportMarkdownButton = this.shadowRoot.getElementById('export-markdown-button');
 
     this.importJsonButton = this.shadowRoot.getElementById('import-json-button');
 
@@ -48,7 +48,7 @@ export default class StatBlockMenu extends CustomAutonomousElement {
 
       this.exportJsonButton.addEventListener('click', this.onClickExportJsonButton.bind(this));
       this.exportHtmlButton.addEventListener('click', this.onClickExportHtmlButton.bind(this));
-      this.exportHomebreweryButton.addEventListener('click', this.onClickExportHomebreweryButton.bind(this));
+      this.exportMarkdownButton.addEventListener('click', this.onClickExportMarkdownButton.bind(this));
 
       this.importJsonButton.addEventListener('click', this.onClickImportJsonButton.bind(this));
 
@@ -96,8 +96,8 @@ export default class StatBlockMenu extends CustomAutonomousElement {
     this.dispatchMenuEvent('exportAction', { format: 'html' });
   }
 
-  onClickExportHomebreweryButton() {
-    this.dispatchMenuEvent('exportAction', { format: 'homebrewery' });
+  onClickExportMarkdownButton() {
+    this.dispatchMenuEvent('exportAction', { format: 'markdown' });
   }
 
   onClickPrintButton() {

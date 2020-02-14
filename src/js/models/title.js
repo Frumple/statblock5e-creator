@@ -52,7 +52,7 @@ export default class Title extends Model {
     return titleElement;
   }
 
-  toHomebrewery() {
+  toMarkdown() {
     return `> ## ${this.fullName}`;
   }
 }
