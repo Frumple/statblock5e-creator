@@ -11,7 +11,7 @@ const singleSavingThrowUnderTest = 'intelligence';
 const expectedHeading = 'Saving Throws';
 
 const abilitiesModel = CurrentContext.creature.abilities;
-const proficiencyBonusModel = CurrentContext.creature.proficiencyBonus;
+const challengeRatingModel = CurrentContext.creature.challengeRating;
 const savingThrowsModel = CurrentContext.creature.savingThrows;
 
 let savingThrowsSection;
@@ -23,7 +23,7 @@ beforeAll(async() => {
 
 beforeEach(() => {
   abilitiesModel.reset();
-  proficiencyBonusModel.reset();
+  challengeRatingModel.reset();
   savingThrowsModel.reset();
 
   savingThrowsSection = new SavingThrowsSection();
@@ -114,7 +114,7 @@ describe('when the show section is clicked', () => {
         expectedSavingThrow.modifier = expectedModifier;
 
         abilitiesModel.abilities[singleSavingThrowUnderTest].score = abilityScore;
-        proficiencyBonusModel.proficiencyBonus = proficiencyBonus;
+        challengeRatingModel.proficiencyBonus = proficiencyBonus;
 
         if (savingThrowEnabled) {
           savingThrowElements.enable.click();
@@ -147,7 +147,7 @@ describe('when the show section is clicked', () => {
 
         reset();
         abilitiesModel.abilities[singleSavingThrowUnderTest].score = abilityScore;
-        proficiencyBonusModel.proficiencyBonus = proficiencyBonus;
+        challengeRatingModel.proficiencyBonus = proficiencyBonus;
         savingThrowsSection.importFromJson(json);
 
         verifyModel(expectedSavingThrows);
@@ -279,14 +279,14 @@ describe('when the show section is clicked', () => {
       abilitiesModel.abilities['intelligence'].score = 1;
       abilitiesModel.abilities['wisdom'].score = 4;
       abilitiesModel.abilities['charisma'].score = 12;
-      proficiencyBonusModel.proficiencyBonus = 5;
+      challengeRatingModel.proficiencyBonus = 5;
     }
   });
 });
 
 function reset() {
   abilitiesModel.reset();
-  proficiencyBonusModel.reset();
+  challengeRatingModel.reset();
   savingThrowsModel.reset();
   savingThrowsSection.updateView();
 }

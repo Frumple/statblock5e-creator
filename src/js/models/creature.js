@@ -6,7 +6,6 @@ import HitPoints from './hit-points.js';
 import Speed from './speed.js';
 
 import Abilities from './abilities.js';
-import ProficiencyBonus from './proficiency-bonus.js';
 
 import SavingThrows from './saving-throws.js';
 import Skills from './skills.js';
@@ -26,7 +25,7 @@ import LegendaryActions from './lists/block/legendary-actions.js';
 export default class Creature {
   constructor() {
     this.abilities = new Abilities();
-    this.proficiencyBonus = new ProficiencyBonus();
+    this.challengeRating = new ChallengeRating();
 
     this.title = new Title();
     this.subtitle = new Subtitle();
@@ -35,15 +34,14 @@ export default class Creature {
     this.hitPoints = new HitPoints(this.abilities);
     this.speed = new Speed();
 
-    this.savingThrows = new SavingThrows(this.abilities, this.proficiencyBonus);
-    this.skills = new Skills(this.abilities, this.proficiencyBonus);
+    this.savingThrows = new SavingThrows(this.abilities, this.challengeRating);
+    this.skills = new Skills(this.abilities, this.challengeRating);
     this.damageVulnerabilities = new DamageVulnerabilities();
     this.damageResistances = new DamageResistances();
     this.damageImmunities = new DamageImmunities();
     this.conditionImmunities = new ConditionImmunities();
     this.senses = new Senses(this.skills);
     this.languages = new Languages();
-    this.challengeRating = new ChallengeRating();
 
     this.specialTraits = new SpecialTraits();
     this.actions = new Actions();
@@ -60,7 +58,6 @@ export default class Creature {
     this.speed.reset();
 
     this.abilities.reset();
-    this.proficiencyBonus.reset();
 
     this.savingThrows.reset();
     this.skills.reset();

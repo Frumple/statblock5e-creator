@@ -33,4 +33,13 @@ export default class AdvancedStats extends DivisibleContainer {
   updateSensesView() {
     this.sections.get('senses').updateViewOnAttributeChange();
   }
+
+  // Import in reverse order so that the Proficiency Bonus in the
+  // Challenge Rating section is imported before other stats that depend on it.
+  // (i.e. CON HP, saving throws, skills, passive perception)
+  importFromJson(json) {
+    for (const section of Array.from(this.sections.values()).reverse()) {
+      section.importFromJson(json[section.modelPropertyName]);
+    }
+  }
 }

@@ -1,4 +1,6 @@
 import * as HtmlExportDocumentFactory from './helpers/html-export-document-factory.js';
+import { fetchFromFile } from './helpers/file-helpers.js';
+import CurrentContext from './models/current-context.js';
 
 import BlockTextArea from './elements/builtin/block-textarea.js';
 import EnableDisableElementsCheckbox from './elements/builtin/enable-disable-elements-checkbox.js';
@@ -61,12 +63,20 @@ import BasicStats from './elements/autonomous/containers/basic-stats.js';
 import AdvancedStats from './elements/autonomous/containers/advanced-stats.js';
 
 async function init() {
+  CurrentContext.version = await getVersion();
   await HtmlExportDocumentFactory.init();
   await defineElements();
   await onBodyLoaded(() => {
     document.getElementById('stat-block-editor').classList.remove('stat-block-editor_hidden');
     document.getElementById('loading-screen').classList.add('loading-screen_hidden');
   });
+}
+
+async function getVersion() {
+  const packageJsonText = await fetchFromFile('package.json');
+  const packageJson = JSON.parse(packageJsonText);
+
+  return packageJson.version;
 }
 
 async function defineElements() {

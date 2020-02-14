@@ -11,7 +11,7 @@ const expectedBlockType = 'Action';
 
 const titleModel = CurrentContext.creature.title;
 const abilitiesModel = CurrentContext.creature.abilities;
-const proficiencyBonusModel = CurrentContext.creature.proficiencyBonus;
+const challengeRatingModel = CurrentContext.creature.challengeRating;
 const actionsModel = CurrentContext.creature.actions;
 
 let actionsSection;
@@ -27,7 +27,7 @@ beforeAll(async() => {
 beforeEach(() => {
   titleModel.reset();
   abilitiesModel.reset();
-  proficiencyBonusModel.reset();
+  challengeRatingModel.reset();
   actionsModel.reset();
 
   actionsSection = new ActionsSection();
@@ -61,7 +61,7 @@ describe('when the show section is clicked', () => {
   describe('and blocks are added and/or removed, and the edit section is submitted', () => {
     it('should add a single block', () => {
       abilitiesModel.abilities['strength'].score = 16;
-      proficiencyBonusModel.proficiencyBonus = 2;
+      challengeRatingModel.proficiencyBonus = 2;
 
       const block = {
         name: 'Greatsword',
@@ -87,7 +87,7 @@ describe('when the show section is clicked', () => {
 
     it('should add a single block with html escaped', () => {
       abilitiesModel.abilities['strength'].score = 16;
-      proficiencyBonusModel.proficiencyBonus = 2;
+      challengeRatingModel.proficiencyBonus = 2;
 
       const block = {
         name: 'Greatsword',
@@ -100,7 +100,7 @@ describe('when the show section is clicked', () => {
 
     it('should add multiple blocks', () => {
       abilitiesModel.abilities['dexterity'].score = 14;
-      proficiencyBonusModel.proficiencyBonus = 2;
+      challengeRatingModel.proficiencyBonus = 2;
 
       const blocks = [
         {
@@ -137,7 +137,7 @@ describe('when the show section is clicked', () => {
     it('should add multiple blocks, then remove one of them', () => {
       abilitiesModel.abilities['strength'].score = 16;
       abilitiesModel.abilities['dexterity'].score = 11;
-      proficiencyBonusModel.proficiencyBonus = 2;
+      challengeRatingModel.proficiencyBonus = 2;
 
       const blocks = [
         {

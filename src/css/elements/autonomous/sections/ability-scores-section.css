@@ -10,7 +10,7 @@
 .ability-scores-edit-section {
   display: grid;
   grid-template-columns: auto auto auto auto auto auto;
-  grid-template-rows: auto auto 5px auto;
+  grid-template-rows: auto auto;
   grid-column-gap: 5px;
   justify-items: center;
   align-items: center;
@@ -51,6 +51,3 @@
 .ability-scores-section__intelligence-values { grid-area: 2 / 4; }
 .ability-scores-section__wisdom-values { grid-area: 2 / 5; }
 .ability-scores-section__charisma-values { grid-area: 2 / 6; }
-
-.ability-scores-section__proficiency-bonus-label { grid-area: 4 / 2 / 5 / 5; }
-.ability-scores-section__proficiency-bonus-input { grid-area: 4 / 5; }

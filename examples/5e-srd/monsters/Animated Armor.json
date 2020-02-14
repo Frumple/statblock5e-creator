@@ -35,16 +35,13 @@
     "useCustomText": false,
     "customText": ""
   },
-  "attributes": {
-    "abilityScores": {
-      "strength": 14,
-      "dexterity": 11,
-      "constitution": 13,
-      "intelligence": 1,
-      "wisdom": 3,
-      "charisma": 1
-    },
-    "proficiencyBonus": 2
+  "abilityScores": {
+    "strength": 14,
+    "dexterity": 11,
+    "constitution": 13,
+    "intelligence": 1,
+    "wisdom": 3,
+    "charisma": 1
   },
   "savingThrows": {
     "strength": {
@@ -207,7 +204,8 @@
   },
   "challengeRating": {
     "challengeRating": 1,
-    "experiencePoints": 200
+    "experiencePoints": 200,
+    "proficiencyBonus": 2
   },
   "specialTraits": {
     "blocks": [
@@ -249,6 +247,6 @@
     "columns": 1,
     "twoColumnMode": "auto",
     "twoColumnHeight": 600,
-    "emptySectionsVisibility": true
+    "emptySectionsVisibility": false
   }
 }

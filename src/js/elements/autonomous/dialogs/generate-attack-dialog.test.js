@@ -8,8 +8,8 @@ import { inputValueAndTriggerEvent } from '../../../helpers/element-helpers.js';
 import { nullIfEmptyString } from '../../../helpers/string-formatter.js';
 import Attack from '../../../models/attack.js';
 
-const abilities = CurrentContext.creature.abilities;
-const proficiencyBonus = CurrentContext.creature.proficiencyBonus;
+const abilitiesModel = CurrentContext.creature.abilities;
+const challengeRatingModel = CurrentContext.creature.challengeRating;
 const actions = CurrentContext.creature.actions;
 
 let actionsSection;
@@ -22,8 +22,8 @@ beforeAll(async() => {
 });
 
 beforeEach(() => {
-  abilities.reset();
-  proficiencyBonus.reset();
+  abilitiesModel.reset();
+  challengeRatingModel.reset();
   actions.reset();
 
   actionsSection = new ActionsSection();
@@ -167,9 +167,9 @@ describe('when the generate attack dialog is opened', () => {
     `
     ('$description: {isFinesse="$isFinesse", isVersatile="$isVersatile", hasBonus="$hasBonus"} => {generatedText="$generatedText", renderedText="$renderedText"}',
     ({isFinesse, isVersatile, hasBonus, generatedText, renderedText}) => {
-      abilities.abilities['strength'].score = 12;
-      abilities.abilities['dexterity'].score = 18;
-      proficiencyBonus.proficiencyBonus = 2;
+      abilitiesModel.abilities['strength'].score = 12;
+      abilitiesModel.abilities['dexterity'].score = 18;
+      challengeRatingModel.proficiencyBonus = 2;
 
       const attackModel = new Attack();
       attackModel.weaponName = 'Claws';
@@ -222,9 +222,9 @@ describe('when the generate attack dialog is opened', () => {
     `
     ('$description: {isFinesse="$isFinesse", isVersatile="$isVersatile", hasBonus="$hasBonus"} => {generatedText="$generatedText", renderedText="$renderedText"}',
     ({isFinesse, isVersatile, hasBonus, generatedText, renderedText}) => {
-      abilities.abilities['strength'].score = 20;
-      abilities.abilities['dexterity'].score = 14;
-      proficiencyBonus.proficiencyBonus = 3;
+      abilitiesModel.abilities['strength'].score = 20;
+      abilitiesModel.abilities['dexterity'].score = 14;
+      challengeRatingModel.proficiencyBonus = 3;
 
       const attackModel = new Attack();
       attackModel.weaponName = 'Spikes';
@@ -286,9 +286,9 @@ describe('when the generate attack dialog is opened', () => {
     `
     ('$description: {isFinesse="$isFinesse", isVersatile="$isVersatile", hasBonus="$hasBonus"} => {generatedText="$generatedText", renderedText="$renderedText"}',
     ({meleeDieQuantity, meleeDieSize, rangedDieQuantity, rangedDieSize, isFinesse, isVersatile, hasBonus, generatedText, renderedText}) => {
-      abilities.abilities['strength'].score = 14;
-      abilities.abilities['dexterity'].score = 16;
-      proficiencyBonus.proficiencyBonus = 4;
+      abilitiesModel.abilities['strength'].score = 14;
+      abilitiesModel.abilities['dexterity'].score = 16;
+      challengeRatingModel.proficiencyBonus = 4;
 
       const attackModel = new Attack();
       attackModel.weaponName = 'Spear of Lightning';
@@ -339,8 +339,8 @@ describe('when the generate attack dialog is opened', () => {
     `
     ('$description: {damageDieQuantity="$damageDieQuantity"} => {generatedText="$generatedText", renderedText="$renderedText"}',
     ({damageDieQuantity, generatedText, renderedText}) => {
-      abilities.abilities['strength'].score = 14;
-      proficiencyBonus.proficiencyBonus = 2;
+      abilitiesModel.abilities['strength'].score = 14;
+      challengeRatingModel.proficiencyBonus = 2;
 
       const attackModel = new Attack();
       attackModel.weaponName = 'Machete';
@@ -431,13 +431,13 @@ describe('when the generate attack dialog is opened', () => {
       versatileCategory.damageDieSize =nullIfEmptyString( versatileDamageDieSize);
 
       if (meleeEnabled) {
-        abilities.abilities['strength'].score = 16;
-        abilities.abilities['dexterity'].score = 18;
+        abilitiesModel.abilities['strength'].score = 16;
+        abilitiesModel.abilities['dexterity'].score = 18;
       } else if (rangedEnabled) {
-        abilities.abilities['strength'].score = 18;
-        abilities.abilities['dexterity'].score = 16;
+        abilitiesModel.abilities['strength'].score = 18;
+        abilitiesModel.abilities['dexterity'].score = 16;
       }
-      proficiencyBonus.proficiencyBonus = 2;
+      challengeRatingModel.proficiencyBonus = 2;
 
       inputValueAndTriggerEvent(generateAttackDialog.weaponNameInput, weaponName);
 

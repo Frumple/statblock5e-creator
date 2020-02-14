@@ -10,12 +10,14 @@ export default class ChallengeRating extends PropertyLineModel {
   reset() {
     this.challengeRating = 0;
     this.experiencePoints = 10;
+    this.proficiencyBonus = 2;
   }
 
   get jsonPropertyNames() {
     return [
       'challengeRating',
-      'experiencePoints'
+      'experiencePoints',
+      'proficiencyBonus'
     ];
   }
 
@@ -34,5 +36,9 @@ export default class ChallengeRating extends PropertyLineModel {
 
   get htmlText() {
     return this.text;
+  }
+
+  toParserOptions() {
+    return this.proficiencyBonus;
   }
 }

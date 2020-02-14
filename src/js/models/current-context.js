@@ -3,6 +3,8 @@ import LayoutSettings from './layout-settings.js';
 
 class CurrentContext {
   constructor() {
+    this.version = '0.0.0';
+
     this.creature = new Creature();
     this.layoutSettings = new LayoutSettings();
   }

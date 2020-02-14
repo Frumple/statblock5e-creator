@@ -12,7 +12,7 @@ const singleAbilityUnderTest = 'intelligence';
 const expectedHeading = 'Skills';
 
 const abilitiesModel = CurrentContext.creature.abilities;
-const proficiencyBonusModel = CurrentContext.creature.proficiencyBonus;
+const challengeRatingModel = CurrentContext.creature.challengeRating;
 const skillsModel = CurrentContext.creature.skills;
 
 let skillsSection;
@@ -24,7 +24,7 @@ beforeAll(async() => {
 
 beforeEach(() => {
   abilitiesModel.reset();
-  proficiencyBonusModel.reset();
+  challengeRatingModel.reset();
   skillsModel.reset();
 
   skillsSection = new SkillsSection();
@@ -129,7 +129,7 @@ describe('when the show section is clicked', () => {
         expectedSkill.modifier = expectedModifier;
 
         abilitiesModel.abilities[singleAbilityUnderTest].score = abilityScore;
-        proficiencyBonusModel.proficiencyBonus = proficiencyBonus;
+        challengeRatingModel.proficiencyBonus = proficiencyBonus;
 
         for(const key of skillsModel.keys) {
           skillsSection.updateEditModeViewSkillModifier(key);
@@ -172,7 +172,7 @@ describe('when the show section is clicked', () => {
 
         reset();
         abilitiesModel.abilities[singleAbilityUnderTest].score = abilityScore;
-        proficiencyBonusModel.proficiencyBonus = proficiencyBonus;
+        challengeRatingModel.proficiencyBonus = proficiencyBonus;
         skillsSection.importFromJson(json);
 
         verifyModel(expectedSkills);
@@ -289,7 +289,7 @@ describe('when the show section is clicked', () => {
       abilitiesModel.abilities['intelligence'].score = 13;
       abilitiesModel.abilities['wisdom'].score = 11;
       abilitiesModel.abilities['charisma'].score = 20;
-      proficiencyBonusModel.proficiencyBonus = 3;
+      challengeRatingModel.proficiencyBonus = 3;
     }
   });
 });
@@ -301,7 +301,7 @@ function expectSkillChangedEvent(event, skillName) {
 
 function reset() {
   abilitiesModel.reset();
-  proficiencyBonusModel.reset();
+  challengeRatingModel.reset();
   skillsModel.reset();
   skillsSection.updateView();
 }

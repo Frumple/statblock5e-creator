@@ -2,11 +2,11 @@ import PropertyLineModel from './property-line-model.js';
 import { capitalizeFirstLetter, formatModifier } from '../helpers/string-formatter.js';
 
 export default class SavingThrows extends PropertyLineModel {
-  constructor(abilitiesModel, proficiencyBonusModel) {
+  constructor(abilitiesModel, challengeRatingModel) {
     super('Saving Throws');
 
     const entries = abilitiesModel.keys.map(
-      key => [key, new SavingThrow(abilitiesModel.abilities[key], proficiencyBonusModel)]
+      key => [key, new SavingThrow(abilitiesModel.abilities[key], challengeRatingModel)]
     );
     this.savingThrows = Object.fromEntries(entries);
     Object.freeze(this.savingThrows);
@@ -54,9 +54,9 @@ export default class SavingThrows extends PropertyLineModel {
 }
 
 class SavingThrow {
-  constructor(ability, proficiencyBonusModel) {
+  constructor(ability, challengeRatingModel) {
     this.ability = ability;
-    this.proficiencyBonusModel = proficiencyBonusModel;
+    this.challengeRatingModel = challengeRatingModel;
     this.reset();
   }
 
@@ -81,7 +81,7 @@ class SavingThrow {
       }
 
       if (this.isProficient) {
-        savingThrowModifier += this.proficiencyBonusModel.proficiencyBonus;
+        savingThrowModifier += this.challengeRatingModel.proficiencyBonus;
       }
     }
     savingThrowModifier += this.ability.modifier;

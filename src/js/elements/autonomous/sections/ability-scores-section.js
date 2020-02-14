@@ -18,8 +18,6 @@ export default class AbilityScoresSection extends sectionModule.Section {
     for (const key of CurrentContext.creature.abilities.keys) {
       this.editElements.score[key].addEventListener('input', this.onInputAbilityScore.bind(this, key));
     }
-
-    this.editElements.proficiencyBonus.addEventListener('input', this.onInputProficiencyBonus.bind(this));
   }
 
   connectedCallback() {
@@ -36,23 +34,16 @@ export default class AbilityScoresSection extends sectionModule.Section {
     this.updateShowModeViewAbility(key);
   }
 
-  onInputProficiencyBonus() {
-    this.updateModelProficiencyBonus();
-  }
-
   checkForErrors() {
     for (const key of CurrentContext.creature.abilities.keys) {
       this.editElements.score[key].validate(this.errorMessages);
     }
-    this.editElements.proficiencyBonus.validate(this.errorMessages);
   }
 
   updateModel() {
     for (const key of CurrentContext.creature.abilities.keys) {
       this.updateModelAbilityScore(key);
     }
-
-    this.updateModelProficiencyBonus();
   }
 
   updateModelAbilityScore(key) {
@@ -75,31 +66,11 @@ export default class AbilityScoresSection extends sectionModule.Section {
     this.dispatchEvent(changeEvent);
   }
 
-  updateModelProficiencyBonus() {
-    const proficiencyBonus = this.editElements.proficiencyBonus.valueAsInt;
-
-    if (proficiencyBonus !== null) {
-      CurrentContext.creature.proficiencyBonus.proficiencyBonus = proficiencyBonus;
-      this.dispatchProficiencyBonusChangedEvent();
-    }
-  }
-
-  dispatchProficiencyBonusChangedEvent() {
-    const changeEvent = new CustomEvent('proficiencyBonusChanged', {
-      bubbles: true,
-      composed: true,
-      detail: {}
-    });
-    this.dispatchEvent(changeEvent);
-  }
-
   updateEditModeView() {
     for (const key of CurrentContext.creature.abilities.keys) {
       this.updateEditModeViewAbilityScore(key);
       this.updateEditModeViewAbilityModifier(key);
     }
-
-    this.editElements.proficiencyBonus.value = CurrentContext.creature.proficiencyBonus.proficiencyBonus;
   }
 
   updateEditModeViewAbilityScore(key) {
@@ -125,16 +96,9 @@ export default class AbilityScoresSection extends sectionModule.Section {
   }
 
   importFromJson(json) {
-    CurrentContext.creature.abilities.fromJson(json.abilityScores);
-    CurrentContext.creature.proficiencyBonus.fromJson(json.proficiencyBonus);
+    // TODO: Backwards compatiblity
+    CurrentContext.creature.abilities.fromJson(json);
     this.updateView();
-  }
-
-  exportToJson() {
-    return {
-      abilityScores: CurrentContext.creature.abilities.toJson(),
-      proficiencyBonus: CurrentContext.creature.proficiencyBonus.toJson()
-    };
   }
 }
 
@@ -163,8 +127,6 @@ class AbilityScoresEditElements extends sectionModule.EditElements {
       this.score[key] = shadowRoot.getElementById(`${key}-score-edit`);
       this.modifier[key] = shadowRoot.getElementById(`${key}-modifier-edit`);
     }
-
-    this.proficiencyBonus = shadowRoot.getElementById('proficiency-bonus-input');
   }
 
   get initiallySelectedElement() {

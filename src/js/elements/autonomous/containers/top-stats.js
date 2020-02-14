@@ -1,4 +1,5 @@
 import StatsContainer from './stats-container.js';
+import currentContext from '../../../models/current-context.js';
 
 export default class TopStats extends StatsContainer {
   static get elementName() { return 'top-stats'; }
@@ -33,19 +34,27 @@ export default class TopStats extends StatsContainer {
   }
 
   importFromJson(json) {
-    // Import ability scores and proficiency bonus first so that stats that
-    // depend on them are updated correctly.
+    // Import ability scores and proficiency bonus first before other stats
+    // that depend on them.
     // (i.e. CON HP, saving throws, skills, passive perception)
-    this.sections.get('abilityScores').importFromJson(json.attributes);
-    this.sections.get('basicStats').importFromJson(json);
+
+    // Special path to import JSON files created with version 0.1.1 or earlier
+    if ('attributes' in json) {
+      this.sections.get('abilityScores').importFromJson(json.attributes.abilityScores);
+      currentContext.creature.challengeRating.proficiencyBonus = json.attributes.proficiencyBonus;
+    } else {
+      this.sections.get('abilityScores').importFromJson(json.abilityScores);
+    }
+
     this.sections.get('advancedStats').importFromJson(json);
+    this.sections.get('basicStats').importFromJson(json);
   }
 
   exportToJson() {
     const json = {};
 
     Object.assign(json, this.sections.get('basicStats').exportToJson());
-    json.attributes = this.sections.get('abilityScores').exportToJson();
+    json.abilityScores = this.sections.get('abilityScores').exportToJson();
     Object.assign(json, this.sections.get('advancedStats').exportToJson());
 
     return json;

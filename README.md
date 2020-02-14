@@ -24,13 +24,12 @@ A frontend web application for creating creature statblocks that are similar in 
 
 ## Future Improvements
 
-- Support for additional browsers (Firefox, Safari, etc.)
+- Import monster stats from the [Open5e][open5e] API
 - Generate Spellcasting (currently disabled under Special Traits)
-- Get suggested proficiency bonus from Challenge Rating
 - Buttons to toggle bold/italic text and add expressions to Special Trait/Action/Reaction/Legendary Action descriptions
 - Autofill common Special Traits and Actions
-- Import monster stats from the [Open5e][open5e] API
 - Export to [Improved Initiative][improved-initiative] (JSON format)
+- Support for additional browsers (Firefox, Safari, etc.)
 - Export as Image
 - Offline/Local Storage
 - Additional printing options, including printing 2 one-column statblocks side-by-side
@@ -138,9 +137,9 @@ Operands can be:
 ##### Example
 
 If the creature's strength modifier is **+5** and its proficiency bonus is **+2**:
-```
-[str + prof - 3]
-```
+
+    [str + prof - 3]
+
 will be calculated as **5 + 2 - 3**, resulting in a final answer of **4**.
 
 Note that whitespace between the operands and operators is optional, meaning that `[str+prof-3]` is a valid and equivalent math expression.
@@ -167,9 +166,9 @@ One limitation of basic math expressions is that positive number results will ap
 ##### Example
 
 Assuming again that the creature's strength modifier is **+5** and its proficiency bonus is **+2**:
-```
-*Melee Weapon Attack:* mod[str + prof - 3] to hit
-```
+
+    *Melee Weapon Attack:* mod[str + prof - 3] to hit
+
 will appear as:
 
 > _Melee Weapon Attack:_ +4 to hit
@@ -181,9 +180,9 @@ Attack expressions are a useful shorthand for calculating attack roll modifiers.
 ##### Example
 
 Assuming again that the creature's strength modifier is **+5** and its proficiency bonus is **+2**:
-```
-*Melee Weapon Attack:* atk[str - 3] to hit
-```
+
+    *Melee Weapon Attack:* atk[str - 3] to hit
+
 is effectively equivalent to the previous modifier expression example and will also appear as:
 
 > _Melee Weapon Attack:_ +4 to hit
@@ -195,9 +194,9 @@ Damage expressions calculate the average damage for a given damage roll. They be
 ##### Example
 
 If the creature's dexterity modifier is **+3**, then:
-```
-dmg[1d8 + dex + 2] slashing damage
-```
+
+    dmg[1d8 + dex + 2] slashing damage
+
 
 will appear as:
 
@@ -212,9 +211,9 @@ Spell save DC expressions are another useful shorthand. They begin with the pref
 ##### Example
 
 If the creature's intelligence modifier is **+4** and its proficiency bonus is **+2**:
-```
-sdc[int]
-```
+
+    sdc[int]
+
 will be calculated as **8 + 4 + 2**, totalling to a final result of **14**.
 
 ## Generate Attack Dialog
@@ -254,6 +253,14 @@ This application has an extensive suite of automated [Jest](jest) test cases tha
 Run all the tests with:
 
     npm test
+
+### Parsers
+
+Parsers can be generated from their respective grammars with:
+
+    npm generate-markdown-parser
+    npm generate-math-parser
+    npm generate-name-parser
 
 ## Dependencies
 

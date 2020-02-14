@@ -1,12 +1,12 @@
 import { parseMath } from './parser.js';
 import CurrentContext from '../models/current-context.js';
 
-const abilities = CurrentContext.creature.abilities;
-const proficiencyBonus = CurrentContext.creature.proficiencyBonus;
+const abilitiesModel = CurrentContext.creature.abilities;
+const challengeRatingModel = CurrentContext.creature.challengeRating;
 
 beforeEach(() => {
-  abilities.reset();
-  proficiencyBonus.reset();
+  abilitiesModel.reset();
+  challengeRatingModel.reset();
 });
 
 it('should preserve newline characters', () => {
@@ -106,13 +106,13 @@ describe('should parse valid math expressions', () => {
     `
     ('$description: "$inputText" => $expectedText',
     ({inputText, expectedText}) => {
-      abilities.abilities['strength'].score = 7;      // -2 modifier
-      abilities.abilities['dexterity'].score = 18;    // +4 modifier
-      abilities.abilities['constitution'].score = 25; // +7 modifier
-      abilities.abilities['intelligence'].score = 11; // +0 modifier
-      abilities.abilities['wisdom'].score = 12;       // +1 modifier
-      abilities.abilities['charisma'].score = 1;      // -5 modifier
-      proficiencyBonus.proficiencyBonus = 3;
+      abilitiesModel.abilities['strength'].score = 7;      // -2 modifier
+      abilitiesModel.abilities['dexterity'].score = 18;    // +4 modifier
+      abilitiesModel.abilities['constitution'].score = 25; // +7 modifier
+      abilitiesModel.abilities['intelligence'].score = 11; // +0 modifier
+      abilitiesModel.abilities['wisdom'].score = 12;       // +1 modifier
+      abilitiesModel.abilities['charisma'].score = 1;      // -5 modifier
+      challengeRatingModel.proficiencyBonus = 3;
 
       const parserResults = parseMath(inputText);
 
@@ -149,13 +149,13 @@ describe('should parse valid math expressions', () => {
     `
     ('$description: "$inputText" => $expectedText',
     ({inputText, expectedText}) => {
-      abilities.abilities['strength'].score = 30;     // +10 modifier
-      abilities.abilities['dexterity'].score = 9;     // -1 modifier
-      abilities.abilities['constitution'].score = 12; // +2 modifier
-      abilities.abilities['intelligence'].score = 21; // +5 modifier
-      abilities.abilities['wisdom'].score = 3;        // -4 modifier
-      abilities.abilities['charisma'].score = 16;     // +3 modifier
-      proficiencyBonus.proficiencyBonus = 4;
+      abilitiesModel.abilities['strength'].score = 30;     // +10 modifier
+      abilitiesModel.abilities['dexterity'].score = 9;     // -1 modifier
+      abilitiesModel.abilities['constitution'].score = 12; // +2 modifier
+      abilitiesModel.abilities['intelligence'].score = 21; // +5 modifier
+      abilitiesModel.abilities['wisdom'].score = 3;        // -4 modifier
+      abilitiesModel.abilities['charisma'].score = 16;     // +3 modifier
+      challengeRatingModel.proficiencyBonus = 4;
 
       const parserResults = parseMath(inputText);
 
@@ -183,9 +183,9 @@ describe('should parse valid math expressions', () => {
     `
     ('$description: {strScore="$strScore", dexScore="$dexScore", inputText=${inputText}} => $expectedText',
     ({strScore, dexScore, inputText, expectedText}) => {
-      abilities.abilities['strength'].score = strScore;
-      abilities.abilities['dexterity'].score = dexScore;
-      proficiencyBonus.proficiencyBonus = 2;
+      abilitiesModel.abilities['strength'].score = strScore;
+      abilitiesModel.abilities['dexterity'].score = dexScore;
+      challengeRatingModel.proficiencyBonus = 2;
 
       const parserResults = parseMath(inputText);
 
@@ -301,13 +301,13 @@ describe('should parse valid modifier expressions', () => {
     `
     ('$description: "$inputText" => $expectedText',
     ({inputText, expectedText}) => {
-      abilities.abilities['strength'].score = 7;      // -2 modifier
-      abilities.abilities['dexterity'].score = 18;    // +4 modifier
-      abilities.abilities['constitution'].score = 25; // +7 modifier
-      abilities.abilities['intelligence'].score = 11; // +0 modifier
-      abilities.abilities['wisdom'].score = 12;       // +1 modifier
-      abilities.abilities['charisma'].score = 1;      // -5 modifier
-      proficiencyBonus.proficiencyBonus = 3;
+      abilitiesModel.abilities['strength'].score = 7;      // -2 modifier
+      abilitiesModel.abilities['dexterity'].score = 18;    // +4 modifier
+      abilitiesModel.abilities['constitution'].score = 25; // +7 modifier
+      abilitiesModel.abilities['intelligence'].score = 11; // +0 modifier
+      abilitiesModel.abilities['wisdom'].score = 12;       // +1 modifier
+      abilitiesModel.abilities['charisma'].score = 1;      // -5 modifier
+      challengeRatingModel.proficiencyBonus = 3;
 
       const parserResults = parseMath(inputText);
 
@@ -344,13 +344,13 @@ describe('should parse valid modifier expressions', () => {
     `
     ('$description: "$inputText" => $expectedText',
     ({inputText, expectedText}) => {
-      abilities.abilities['strength'].score = 30;     // +10 modifier
-      abilities.abilities['dexterity'].score = 9;     // -1 modifier
-      abilities.abilities['constitution'].score = 12; // +2 modifier
-      abilities.abilities['intelligence'].score = 21; // +5 modifier
-      abilities.abilities['wisdom'].score = 3;        // -4 modifier
-      abilities.abilities['charisma'].score = 16;     // +3 modifier
-      proficiencyBonus.proficiencyBonus = 4;
+      abilitiesModel.abilities['strength'].score = 30;     // +10 modifier
+      abilitiesModel.abilities['dexterity'].score = 9;     // -1 modifier
+      abilitiesModel.abilities['constitution'].score = 12; // +2 modifier
+      abilitiesModel.abilities['intelligence'].score = 21; // +5 modifier
+      abilitiesModel.abilities['wisdom'].score = 3;        // -4 modifier
+      abilitiesModel.abilities['charisma'].score = 16;     // +3 modifier
+      challengeRatingModel.proficiencyBonus = 4;
 
       const parserResults = parseMath(inputText);
 
@@ -378,9 +378,9 @@ describe('should parse valid modifier expressions', () => {
     `
     ('$description: {strScore="$strScore", dexScore="$dexScore", inputText=${inputText}} => $expectedText',
     ({strScore, dexScore, inputText, expectedText}) => {
-      abilities.abilities['strength'].score = strScore;
-      abilities.abilities['dexterity'].score = dexScore;
-      proficiencyBonus.proficiencyBonus = 2;
+      abilitiesModel.abilities['strength'].score = strScore;
+      abilitiesModel.abilities['dexterity'].score = dexScore;
+      challengeRatingModel.proficiencyBonus = 2;
 
       const parserResults = parseMath(inputText);
 
@@ -434,13 +434,13 @@ describe('should parse valid attack roll modifier expressions', () => {
     `
     ('$description: "$inputText" => $expectedText',
     ({inputText, expectedText}) => {
-      abilities.abilities['strength'].score = 7;      // -2 modifier
-      abilities.abilities['dexterity'].score = 18;    // +4 modifier
-      abilities.abilities['constitution'].score = 25; // +7 modifier
-      abilities.abilities['intelligence'].score = 11; // +0 modifier
-      abilities.abilities['wisdom'].score = 12;       // +1 modifier
-      abilities.abilities['charisma'].score = 1;      // -5 modifier
-      proficiencyBonus.proficiencyBonus = 3;
+      abilitiesModel.abilities['strength'].score = 7;      // -2 modifier
+      abilitiesModel.abilities['dexterity'].score = 18;    // +4 modifier
+      abilitiesModel.abilities['constitution'].score = 25; // +7 modifier
+      abilitiesModel.abilities['intelligence'].score = 11; // +0 modifier
+      abilitiesModel.abilities['wisdom'].score = 12;       // +1 modifier
+      abilitiesModel.abilities['charisma'].score = 1;      // -5 modifier
+      challengeRatingModel.proficiencyBonus = 3;
 
       const parserResults = parseMath(inputText);
 
@@ -478,9 +478,9 @@ describe('should parse valid attack roll modifier expressions', () => {
     `
     ('$description: "$inputText" => $expectedText',
     ({inputText, expectedText}) => {
-      abilities.abilities['strength'].score = 20;     // +5 modifier
-      abilities.abilities['dexterity'].score = 17;    // +3 modifier
-      proficiencyBonus.proficiencyBonus = 2;
+      abilitiesModel.abilities['strength'].score = 20;     // +5 modifier
+      abilitiesModel.abilities['dexterity'].score = 17;    // +3 modifier
+      challengeRatingModel.proficiencyBonus = 2;
 
       const parserResults = parseMath(inputText);
 
@@ -508,9 +508,9 @@ describe('should parse valid attack roll modifier expressions', () => {
     `
     ('$description: {strScore="$strScore", dexScore="$dexScore", inputText=${inputText}} => $expectedText',
     ({strScore, dexScore, inputText, expectedText}) => {
-      abilities.abilities['strength'].score = strScore;
-      abilities.abilities['dexterity'].score = dexScore;
-      proficiencyBonus.proficiencyBonus = 2;
+      abilitiesModel.abilities['strength'].score = strScore;
+      abilitiesModel.abilities['dexterity'].score = dexScore;
+      challengeRatingModel.proficiencyBonus = 2;
 
       const parserResults = parseMath(inputText);
 
@@ -581,9 +581,9 @@ describe('should parse valid damage expressions', () => {
     `
     ('$description: {param1="$param1"} => $expected',
     ({inputText, expectedText}) => {
-      abilities.abilities['strength'].score = 20;     // +5 modifier
-      abilities.abilities['dexterity'].score = 17;    // +3 modifier
-      proficiencyBonus.proficiencyBonus = 2;
+      abilitiesModel.abilities['strength'].score = 20;     // +5 modifier
+      abilitiesModel.abilities['dexterity'].score = 17;    // +3 modifier
+      challengeRatingModel.proficiencyBonus = 2;
 
       const parserResults = parseMath(inputText);
 
@@ -611,9 +611,9 @@ describe('should parse valid damage expressions', () => {
     `
     ('$description: {strScore="$strScore", dexScore="$dexScore", inputText=${inputText}} => $expectedText',
     ({strScore, dexScore, inputText, expectedText}) => {
-      abilities.abilities['strength'].score = strScore;
-      abilities.abilities['dexterity'].score = dexScore;
-      proficiencyBonus.proficiencyBonus = 2;
+      abilitiesModel.abilities['strength'].score = strScore;
+      abilitiesModel.abilities['dexterity'].score = dexScore;
+      challengeRatingModel.proficiencyBonus = 2;
 
       const parserResults = parseMath(inputText);
 
@@ -670,13 +670,13 @@ describe('should parse valid spell save DC expressions', () => {
     `
     ('$description: "$inputText" => $expectedText',
     ({inputText, expectedText}) => {
-      abilities.abilities['strength'].score = 7;      // -2 modifier
-      abilities.abilities['dexterity'].score = 18;    // +4 modifier
-      abilities.abilities['constitution'].score = 25; // +7 modifier
-      abilities.abilities['intelligence'].score = 11; // +0 modifier
-      abilities.abilities['wisdom'].score = 12;       // +1 modifier
-      abilities.abilities['charisma'].score = 1;      // -5 modifier
-      proficiencyBonus.proficiencyBonus = 3;
+      abilitiesModel.abilities['strength'].score = 7;      // -2 modifier
+      abilitiesModel.abilities['dexterity'].score = 18;    // +4 modifier
+      abilitiesModel.abilities['constitution'].score = 25; // +7 modifier
+      abilitiesModel.abilities['intelligence'].score = 11; // +0 modifier
+      abilitiesModel.abilities['wisdom'].score = 12;       // +1 modifier
+      abilitiesModel.abilities['charisma'].score = 1;      // -5 modifier
+      challengeRatingModel.proficiencyBonus = 3;
 
       const parserResults = parseMath(inputText);
 
@@ -714,10 +714,10 @@ describe('should parse valid spell save DC expressions', () => {
     `
     ('$description: "$inputText" => $expectedText',
     ({inputText, expectedText}) => {
-      abilities.abilities['charisma'].score = 18;    // +4 modifier
-      abilities.abilities['wisdom'].score = 14;      // +2 modifier
+      abilitiesModel.abilities['charisma'].score = 18;    // +4 modifier
+      abilitiesModel.abilities['wisdom'].score = 14;      // +2 modifier
 
-      proficiencyBonus.proficiencyBonus = 5;
+      challengeRatingModel.proficiencyBonus = 5;
 
       const parserResults = parseMath(inputText);
 

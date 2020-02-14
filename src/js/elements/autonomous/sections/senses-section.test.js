@@ -9,7 +9,7 @@ import CurrentContext from '../../../models/current-context.js';
 const expectedHeading = 'Senses';
 
 const abilitiesModel = CurrentContext.creature.abilities;
-const proficiencyBonusModel = CurrentContext.creature.proficiencyBonus;
+const challengeRatingModel = CurrentContext.creature.challengeRating;
 const skillsModel = CurrentContext.creature.skills;
 const sensesModel = CurrentContext.creature.senses;
 
@@ -22,7 +22,7 @@ beforeAll(async() => {
 
 beforeEach(() => {
   abilitiesModel.reset();
-  proficiencyBonusModel.reset();
+  challengeRatingModel.reset();
   skillsModel.reset();
   sensesModel.reset();
 
@@ -290,7 +290,7 @@ describe('should calculate the passive perception based on the following conditi
     const expectedText = `passive Perception ${expectedPassivePerception}`;
 
     abilitiesModel.abilities['wisdom'].score = wisdomScore;
-    proficiencyBonusModel.proficiencyBonus = proficiencyBonus;
+    challengeRatingModel.proficiencyBonus = proficiencyBonus;
 
     const skill = skillsModel.skills['perception'];
     skill.isEnabled = perceptionEnabled;

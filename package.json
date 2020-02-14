@@ -1,6 +1,6 @@
 {
   "name": "statblock5e-creator",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "description": "A frontend web application for creating D&D 5th Edition Creature Statblocks",
   "main": "index.js",
   "dependencies": {
@@ -23,7 +23,10 @@
   "scripts": {
     "test": "jest",
     "start": "webpack -d --watch --config webpack.dev.js",
-    "build": "webpack --config webpack.prod.js"
+    "build": "webpack --config webpack.prod.js",
+    "generate-markdown-parser": "node src/js/parsers/scripts/generate-parser-script.js src/js/parsers/grammars/markdown-grammar.pegjs src/js/parsers/markdown-parser.js",
+    "generate-math-parser": "node src/js/parsers/scripts/generate-parser-script.js src/js/parsers/grammars/math-grammar.pegjs src/js/parsers/math-parser.js",
+    "generate-name-parser": "node src/js/parsers/scripts/generate-parser-script.js src/js/parsers/grammars/name-grammar.pegjs src/js/parsers/name-parser.js"
   },
   "jest": {
     "collectCoverage": false,
