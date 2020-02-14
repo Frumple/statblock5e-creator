@@ -4,7 +4,6 @@
   grid-template-rows: auto auto;
   grid-row-gap: 5px;
   align-items: center;
-  justify-items: center;
 }
 
 .challenge-rating-edit-section__challenge-rating-label {
@@ -32,4 +31,10 @@
 .challenge-rating-edit-section__proficiency-bonus-input {
   grid-area: 2 / 4;
   width: 70px;
+}
+
+.challenge-rating-edit-section__challenge-rating-help-tooltip {
+  grid-area: 2 / 1;
+  --help-tooltip-icon-color: #7A200D;
+  --help-tooltip-width: 40em;
 }
