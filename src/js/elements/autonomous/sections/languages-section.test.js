@@ -103,7 +103,7 @@ describe('when the show section is clicked', () => {
 
         const json = sharedSpecs.verifyJsonExport(languagesSection, expectedItems);
         expect(languagesSection).toExportPropertyLineToHtml(headingName, expectedText);
-        expect(languagesSection).toExportPropertyLineToHomebrewery(headingName, expectedText);
+        expect(languagesSection).toExportPropertyLineToMarkdown(headingName, expectedText);
 
         reset();
         languagesSection.importFromJson(json);

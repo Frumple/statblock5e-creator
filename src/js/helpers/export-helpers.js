@@ -58,10 +58,10 @@ function populatePropertyElement(element, heading, text) {
   return element;
 }
 
-export function createHomebreweryPropertyLine(heading, text) {
+export function createMarkdownPropertyLine(heading, text) {
   return `> - **${heading}** ${text}`;
 }
 
-export function createHomebreweryPropertyBlock(heading, text) {
+export function createMarkdownPropertyBlock(heading, text) {
   return `> ***${heading}.*** ${text}`;
 }

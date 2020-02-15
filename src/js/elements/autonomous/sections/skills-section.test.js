@@ -168,7 +168,7 @@ describe('when the show section is clicked', () => {
 
         const json = verifyJsonExport(expectedSkills);
         expect(skillsSection).toExportPropertyLineToHtml(expectedHeading, expectedText);
-        expect(skillsSection).toExportPropertyLineToHomebrewery(expectedHeading, expectedText);
+        expect(skillsSection).toExportPropertyLineToMarkdown(expectedHeading, expectedText);
 
         reset();
         abilitiesModel.abilities[singleAbilityUnderTest].score = abilityScore;
@@ -272,7 +272,7 @@ describe('when the show section is clicked', () => {
 
         const json = verifyJsonExport(expectedSkills);
         expect(skillsSection).toExportPropertyLineToHtml(expectedHeading, expectedText);
-        expect(skillsSection).toExportPropertyLineToHomebrewery(expectedHeading, expectedText);
+        expect(skillsSection).toExportPropertyLineToMarkdown(expectedHeading, expectedText);
 
         reset();
         setAbilityScoresAndProficiencyBonus();

@@ -109,7 +109,7 @@ describe('when the show section is clicked', () => {
 
           const json = verifyJsonExport(expectedValues);
           expect(hitPointsSection).toExportPropertyLineToHtml(expectedHeading, expectedText);
-          expect(hitPointsSection).toExportPropertyLineToHomebrewery(expectedHeading, expectedText);
+          expect(hitPointsSection).toExportPropertyLineToMarkdown(expectedHeading, expectedText);
 
           reset();
           hitPointsSection.importFromJson(json);
@@ -241,7 +241,7 @@ describe('when the show section is clicked', () => {
 
         const json = verifyJsonExport(expectedValues);
         expect(hitPointsSection).toExportPropertyLineToHtml(expectedHeading, expectedValues.hitPoints.toString());
-        expect(hitPointsSection).toExportPropertyLineToHomebrewery(expectedHeading, expectedValues.hitPoints.toString());
+        expect(hitPointsSection).toExportPropertyLineToMarkdown(expectedHeading, expectedValues.hitPoints.toString());
 
         reset();
         hitPointsSection.importFromJson(json);

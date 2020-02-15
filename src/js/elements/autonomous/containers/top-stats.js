@@ -74,10 +74,10 @@ export default class TopStats extends StatsContainer {
     return topStats;
   }
 
-  exportToHomebrewery() {
-    const basicStatsExport = this.sections.get('basicStats').exportToHomebrewery();
-    const abilityScoresExport = this.sections.get('abilityScores').exportToHomebrewery();
-    const advancedStatsExport = this.sections.get('advancedStats').exportToHomebrewery();
+  exportToMarkdown() {
+    const basicStatsExport = this.sections.get('basicStats').exportToMarkdown();
+    const abilityScoresExport = this.sections.get('abilityScores').exportToMarkdown();
+    const advancedStatsExport = this.sections.get('advancedStats').exportToMarkdown();
 
     const text =
 `>___

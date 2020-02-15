@@ -23,14 +23,15 @@ export default class StatBlockMenu extends CustomAutonomousElement {
 
     this.exportJsonButton = this.shadowRoot.getElementById('export-json-button');
     this.exportHtmlButton = this.shadowRoot.getElementById('export-html-button');
-    this.exportHomebreweryButton = this.shadowRoot.getElementById('export-homebrewery-button');
+    this.exportMarkdownButton = this.shadowRoot.getElementById('export-markdown-button');
 
     this.importJsonButton = this.shadowRoot.getElementById('import-json-button');
 
     this.printButton = this.shadowRoot.getElementById('print-button');
 
     this.githubButton = this.shadowRoot.getElementById('github-button');
-
+    this.wikiButton = this.shadowRoot.getElementById('wiki-button');
+    this.versionButton = this.shadowRoot.getElementById('version-button');
   }
 
   connectedCallback() {
@@ -48,13 +49,17 @@ export default class StatBlockMenu extends CustomAutonomousElement {
 
       this.exportJsonButton.addEventListener('click', this.onClickExportJsonButton.bind(this));
       this.exportHtmlButton.addEventListener('click', this.onClickExportHtmlButton.bind(this));
-      this.exportHomebreweryButton.addEventListener('click', this.onClickExportHomebreweryButton.bind(this));
+      this.exportMarkdownButton.addEventListener('click', this.onClickExportMarkdownButton.bind(this));
 
       this.importJsonButton.addEventListener('click', this.onClickImportJsonButton.bind(this));
 
       this.printButton.addEventListener('click', this.onClickPrintButton.bind(this));
 
       this.githubButton.addEventListener('click', this.onClickGithubButton.bind(this));
+      this.wikiButton.addEventListener('click', this.onClickWikiButton.bind(this));
+      this.versionButton.addEventListener('click', this.onClickVersionButton.bind(this));
+
+      this.versionButton.textContent = `Version: ${CurrentContext.version}`;
 
       this.isInitialized = true;
     }
@@ -96,8 +101,8 @@ export default class StatBlockMenu extends CustomAutonomousElement {
     this.dispatchMenuEvent('exportAction', { format: 'html' });
   }
 
-  onClickExportHomebreweryButton() {
-    this.dispatchMenuEvent('exportAction', { format: 'homebrewery' });
+  onClickExportMarkdownButton() {
+    this.dispatchMenuEvent('exportAction', { format: 'markdown' });
   }
 
   onClickPrintButton() {
@@ -106,6 +111,14 @@ export default class StatBlockMenu extends CustomAutonomousElement {
 
   onClickGithubButton() {
     window.open('https://github.com/Frumple/statblock5e-creator');
+  }
+
+  onClickWikiButton() {
+    window.open('https://github.com/Frumple/statblock5e-creator/wiki');
+  }
+
+  onClickVersionButton() {
+    window.open('https://github.com/Frumple/statblock5e-creator/releases');
   }
 
   dispatchMenuEvent(eventType, detail = null) {

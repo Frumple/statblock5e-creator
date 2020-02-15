@@ -87,7 +87,7 @@ describe('when the show section is clicked', () => {
 
           const json = verifyJsonExport(expectedValues);
           expect(armorClassSection).toExportPropertyLineToHtml(expectedHeading, expectedHtmlText);
-          expect(armorClassSection).toExportPropertyLineToHomebrewery(expectedHeading, customText);
+          expect(armorClassSection).toExportPropertyLineToMarkdown(expectedHeading, customText);
 
           reset();
           armorClassSection.importFromJson(json);
@@ -211,7 +211,7 @@ describe('when the show section is clicked', () => {
 
           const json = verifyJsonExport(expectedValues);
           expect(armorClassSection).toExportPropertyLineToHtml(expectedHeading, expectedText);
-          expect(armorClassSection).toExportPropertyLineToHomebrewery(expectedHeading, expectedText);
+          expect(armorClassSection).toExportPropertyLineToMarkdown(expectedHeading, expectedText);
 
           reset();
           armorClassSection.importFromJson(json);

@@ -143,7 +143,7 @@ describe('when the show section is clicked', () => {
 
         const json = verifyJsonExport(expectedSavingThrows);
         expect(savingThrowsSection).toExportPropertyLineToHtml(expectedHeading, expectedText);
-        expect(savingThrowsSection).toExportPropertyLineToHomebrewery(expectedHeading, expectedText);
+        expect(savingThrowsSection).toExportPropertyLineToMarkdown(expectedHeading, expectedText);
 
         reset();
         abilitiesModel.abilities[singleSavingThrowUnderTest].score = abilityScore;
@@ -261,7 +261,7 @@ describe('when the show section is clicked', () => {
 
         const json = verifyJsonExport(expectedSavingThrows);
         expect(savingThrowsSection).toExportPropertyLineToHtml(expectedHeading, expectedText);
-        expect(savingThrowsSection).toExportPropertyLineToHomebrewery(expectedHeading, expectedText);
+        expect(savingThrowsSection).toExportPropertyLineToMarkdown(expectedHeading, expectedText);
 
         reset();
         setAbilityScoresAndProficiencyBonus();

@@ -34,8 +34,8 @@ export default class Model {
       `The class '${this.constructor.name}' must implement the toHtml() method.`);
   }
 
-  toHomebrewery() {
+  toMarkdown() {
     throw new Error(
-      `The class '${this.constructor.name}' must implement the toHomebrewery() method.`);
+      `The class '${this.constructor.name}' must implement the toMarkdown() method.`);
   }
 }

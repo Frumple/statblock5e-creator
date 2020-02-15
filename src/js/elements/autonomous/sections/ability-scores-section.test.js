@@ -100,7 +100,7 @@ describe('when the show section is clicked', () => {
 
         const json = verifyJsonExport(expectedAbilities);
         verifyHtmlExport(expectedAbilities);
-        verifyHomebreweryExport(expectedAbilities);
+        verifyMarkdownExport(expectedAbilities);
 
         reset();
         abilityScoresSection.importFromJson(json);
@@ -205,7 +205,7 @@ describe('when the show section is clicked', () => {
 
         const json = verifyJsonExport(expectedAbilities);
         verifyHtmlExport(expectedAbilities);
-        verifyHomebreweryExport(expectedAbilities);
+        verifyMarkdownExport(expectedAbilities);
 
         reset();
         abilityScoresSection.importFromJson(json);
@@ -296,8 +296,8 @@ function verifyHtmlExport(expectedAbilities) {
   }
 }
 
-function verifyHomebreweryExport(expectedAbilities) {
-  const homebreweryExport = abilityScoresSection.exportToHomebrewery();
+function verifyMarkdownExport(expectedAbilities) {
+  const markdownExport = abilityScoresSection.exportToMarkdown();
 
   const expectedAbilitiesArray = Array.from(expectedAbilities.values());
   const abilityStrings = expectedAbilitiesArray.map(ability => `${ability.score} (${formatModifier(ability.modifier)})`);
@@ -308,5 +308,5 @@ function verifyHomebreweryExport(expectedAbilities) {
 >|:---:|:---:|:---:|:---:|:---:|:---:|
 >|${abilityLine}|`;
 
-  expect(homebreweryExport).toBe(expectedText);
+  expect(markdownExport).toBe(expectedText);
 }

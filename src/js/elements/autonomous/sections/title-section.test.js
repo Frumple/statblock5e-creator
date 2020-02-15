@@ -122,7 +122,7 @@ describe('when the show section is clicked', () => {
 
         const json = verifyJsonExport(fullName, shortName, isProperNoun);
         verifyHtmlExport(fullName);
-        verifyHomebreweryExport(fullName);
+        verifyMarkdownExport(fullName);
 
         reset();
         titleSection.importFromJson(json);
@@ -155,7 +155,7 @@ describe('when the show section is clicked', () => {
 
         const json = verifyJsonExport(expectedFullName);
         verifyHtmlExport(expectedFullName);
-        verifyHomebreweryExport(expectedFullName);
+        verifyMarkdownExport(expectedFullName);
 
         reset();
         titleSection.importFromJson(json);
@@ -216,8 +216,8 @@ function verifyHtmlExport(expectedTitle) {
   expect(titleElement).toHaveTextContent(expectedTitle);
 }
 
-function verifyHomebreweryExport(expectedTitle) {
-  const text = titleSection.exportToHomebrewery();
+function verifyMarkdownExport(expectedTitle) {
+  const text = titleSection.exportToMarkdown();
   const expectedText =
     `> ## ${expectedTitle}`;
 

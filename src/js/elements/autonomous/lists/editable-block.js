@@ -73,8 +73,8 @@ export default class EditableBlock extends DragAndDropListItem {
     return this.textArea.value;
   }
 
-  get homebreweryText() {
-    return this.textArea.homebreweryText;
+  get markdownText() {
+    return this.textArea.markdownText;
   }
 
   get htmlText() {
@@ -114,7 +114,7 @@ export default class EditableBlock extends DragAndDropListItem {
     return new BlockModel(
       this.name,
       this.text,
-      this.homebreweryText,
+      this.markdownText,
       this.htmlText);
   }
 }

@@ -46,7 +46,7 @@ export default class Subtitle extends Model{
     return subtitleElement;
   }
 
-  toHomebrewery() {
+  toMarkdown() {
     return `>*${this.text}*`;
   }
 }

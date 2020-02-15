@@ -57,7 +57,7 @@ export default class LegendaryActionsSection extends blockListSectionModule.Bloc
     const model = CurrentContext.creature.legendaryActions;
 
     model.description = this.editElements.description.value;
-    model.homebreweryDescription = this.editElements.description.homebreweryText;
+    model.markdownDescription = this.editElements.description.markdownText;
     model.htmlDescription = this.editElements.description.htmlText;
   }
 

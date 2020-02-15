@@ -170,12 +170,12 @@ expect.extend({
     return matchPropertyLineOrBlock(headingElement.textContent, textElement.innerHTML, expectedHeading, expectedText);
   },
 
-  toExportPropertyLineToHomebrewery(section, expectedHeading, expectedText) {
+  toExportPropertyLineToMarkdown(section, expectedHeading, expectedText) {
     if (this.isNot) {
-      throw new Error('The matcher toExportPropertyLineToHomebrewery cannot be used with the not modifier.');
+      throw new Error('The matcher toExportPropertyLineToMarkdown cannot be used with the not modifier.');
     }
 
-    const propertyLine = section.exportToHomebrewery();
+    const propertyLine = section.exportToMarkdown();
     const expectedPropertyLine = `> - **${expectedHeading}** ${expectedText}`;
 
     let message = '';

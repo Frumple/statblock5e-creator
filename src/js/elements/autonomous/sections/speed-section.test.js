@@ -88,7 +88,7 @@ describe('when the show section is clicked', () => {
 
           const json = verifyJsonExport(expectedValues);
           expect(speedSection).toExportPropertyLineToHtml(expectedHeading, expectedHtmlText);
-          expect(speedSection).toExportPropertyLineToHomebrewery(expectedHeading, customText);
+          expect(speedSection).toExportPropertyLineToMarkdown(expectedHeading, customText);
 
           reset();
           speedSection.importFromJson(json);
@@ -231,7 +231,7 @@ describe('when the show section is clicked', () => {
 
           const json = verifyJsonExport(expectedValues);
           expect(speedSection).toExportPropertyLineToHtml(expectedHeading, expectedText);
-          expect(speedSection).toExportPropertyLineToHomebrewery(expectedHeading, expectedText);
+          expect(speedSection).toExportPropertyLineToMarkdown(expectedHeading, expectedText);
 
           reset();
           speedSection.importFromJson(json);

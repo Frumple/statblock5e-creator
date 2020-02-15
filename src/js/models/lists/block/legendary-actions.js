@@ -9,7 +9,7 @@ export default class LegendaryActions extends BlockListModel {
     super.reset();
 
     this.description = '[name] can take 3 legendary actions, choosing from the options below. Only one legendary action option can be used at a time and only at the end of another creature\'s turn. [name] regains spent legendary actions at the start of its turn.';
-    this.homebreweryDescription = '';
+    this.markdownDescription = '';
     this.htmlDescription = '';
   }
 
@@ -36,14 +36,14 @@ export default class LegendaryActions extends BlockListModel {
     return fragment;
   }
 
-  toHomebrewery() {
+  toMarkdown() {
     const heading = `> ### ${this.headingName}\n`;
-    const description = `> ${this.homebreweryDescription}\n`;
-    const homebreweryBlocks =
-      this.blocks.map(block => block.toHomebrewery());
-    const homebreweryBlocksAsText =
-      homebreweryBlocks.join('\n>\n');
+    const description = `> ${this.markdownDescription}\n`;
+    const markdownBlocks =
+      this.blocks.map(block => block.toMarkdown());
+    const markdownBlocksAsText =
+      markdownBlocks.join('\n>\n');
 
-    return `${heading}${description}${homebreweryBlocksAsText}`;
+    return `${heading}${description}${markdownBlocksAsText}`;
   }
 }

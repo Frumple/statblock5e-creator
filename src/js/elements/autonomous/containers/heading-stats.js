@@ -33,7 +33,7 @@ export default class HeadingStats extends DivisibleContainer {
     return creatureHeading;
   }
 
-  exportToHomebrewery() {
-    return `${this.sections.get('title').exportToHomebrewery()}\n${this.sections.get('subtitle').exportToHomebrewery()}`;
+  exportToMarkdown() {
+    return `${this.sections.get('title').exportToMarkdown()}\n${this.sections.get('subtitle').exportToMarkdown()}`;
   }
 }
