@@ -12,6 +12,7 @@ import TextInput from './elements/builtin/text-input.js';
 
 import DropDownMenu from './elements/autonomous/drop-down-menu.js';
 import ErrorMessages from './elements/autonomous/error-messages.js';
+import LoadingScreen from './elements/autonomous/loading-screen.js';
 import PropertyBlock from './elements/autonomous/property-block.js';
 import PropertyLine from './elements/autonomous/property-line.js';
 import SectionDivider from './elements/autonomous/section-divider.js';
@@ -63,13 +64,22 @@ import BasicStats from './elements/autonomous/containers/basic-stats.js';
 import AdvancedStats from './elements/autonomous/containers/advanced-stats.js';
 
 async function init() {
-  CurrentContext.version = await getVersion();
-  await HtmlExportDocumentFactory.init();
   await defineElements();
-  await onBodyLoaded(() => {
-    document.getElementById('stat-block-editor').classList.remove('stat-block-editor_hidden');
-    document.getElementById('loading-screen').classList.add('loading-screen_hidden');
-  });
+
+  const loadingScreen = document.querySelector('loading-screen');
+  const statBlockEditor = document.querySelector('stat-block-editor');
+
+  loadingScreen.status = 'Retrieving current version...';
+  CurrentContext.version = await getVersion();
+
+  loadingScreen.status = 'Initializing HTML export template...';
+  await HtmlExportDocumentFactory.init();
+
+  loadingScreen.status = 'Waiting for elements to load...';
+  await waitForBodyLoaded();
+
+  statBlockEditor.classList.remove('stat-block-editor_hidden');
+  loadingScreen.isVisible = false;
 }
 
 async function getVersion() {
@@ -80,82 +90,85 @@ async function getVersion() {
 }
 
 async function defineElements() {
-  const elementClasses = [];
+  const elementClasses = [
+    BlockTextArea,
+    EnableDisableElementsCheckbox,
+    NumberInput,
+    NumberSelect,
+    PropertyDataList,
+    SanitizedParagraph,
+    TextInput,
 
-  elementClasses.push(BlockTextArea);
-  elementClasses.push(EnableDisableElementsCheckbox);
-  elementClasses.push(NumberInput);
-  elementClasses.push(NumberSelect);
-  elementClasses.push(PropertyDataList);
-  elementClasses.push(SanitizedParagraph);
-  elementClasses.push(TextInput);
+    DropDownMenu,
+    ErrorMessages,
+    LoadingScreen,
+    PropertyBlock,
+    PropertyLine,
+    SectionDivider,
+    TaperedRule,
 
-  elementClasses.push(DropDownMenu);
-  elementClasses.push(ErrorMessages);
-  elementClasses.push(PropertyBlock);
-  elementClasses.push(PropertyLine);
-  elementClasses.push(SectionDivider);
-  elementClasses.push(TaperedRule);
+    ImportDialog,
+    ExportDialog,
+    GenerateAttackDialog,
 
-  elementClasses.push(ImportDialog);
-  elementClasses.push(ExportDialog);
-  elementClasses.push(GenerateAttackDialog);
+    HelpTooltip,
+    BlockHelpTooltip,
+    CustomTextHelpTooltip,
 
-  elementClasses.push(HelpTooltip);
-  elementClasses.push(BlockHelpTooltip);
-  elementClasses.push(CustomTextHelpTooltip);
+    DisplayBlockList,
+    DisplayBlock,
+    EditableBlock,
+    EditableBlockList,
+    PropertyListItem,
+    PropertyList,
 
-  elementClasses.push(DisplayBlockList);
-  elementClasses.push(DisplayBlock);
-  elementClasses.push(EditableBlock);
-  elementClasses.push(EditableBlockList);
-  elementClasses.push(PropertyListItem);
-  elementClasses.push(PropertyList);
+    TitleSection,
+    SubtitleSection,
+    ArmorClassSection,
+    HitPointsSection,
+    SpeedSection,
+    AbilityScoresSection,
+    SavingThrowsSection,
+    SkillsSection,
+    DamageVulnerabilitiesSection,
+    DamageResistancesSection,
+    DamageImmunitiesSection,
+    ConditionImmunitiesSection,
+    SensesSection,
+    LanguagesSection,
+    ChallengeRatingSection,
+    SpecialTraitsSection,
+    ActionsSection,
+    ReactionsSection,
+    LegendaryActionsSection,
 
-  elementClasses.push(TitleSection);
-  elementClasses.push(SubtitleSection);
-  elementClasses.push(ArmorClassSection);
-  elementClasses.push(HitPointsSection);
-  elementClasses.push(SpeedSection);
-  elementClasses.push(AbilityScoresSection);
-  elementClasses.push(SavingThrowsSection);
-  elementClasses.push(SkillsSection);
-  elementClasses.push(DamageVulnerabilitiesSection);
-  elementClasses.push(DamageResistancesSection);
-  elementClasses.push(DamageImmunitiesSection);
-  elementClasses.push(ConditionImmunitiesSection);
-  elementClasses.push(SensesSection);
-  elementClasses.push(LanguagesSection);
-  elementClasses.push(ChallengeRatingSection);
-  elementClasses.push(SpecialTraitsSection);
-  elementClasses.push(ActionsSection);
-  elementClasses.push(ReactionsSection);
-  elementClasses.push(LegendaryActionsSection);
-
-  elementClasses.push(StatBlockEditor);
-  elementClasses.push(StatBlockMenu);
-  elementClasses.push(StatBlockSidebar);
-  elementClasses.push(StatBlock);
-  elementClasses.push(HeadingStats);
-  elementClasses.push(TopStats);
-  elementClasses.push(BottomStats);
-  elementClasses.push(BasicStats);
-  elementClasses.push(AdvancedStats);
+    StatBlockEditor,
+    StatBlockMenu,
+    StatBlockSidebar,
+    StatBlock,
+    HeadingStats,
+    TopStats,
+    BottomStats,
+    BasicStats,
+    AdvancedStats
+  ];
 
   for (const elementClass of elementClasses) {
     await elementClass.define();
   }
 }
 
-async function onBodyLoaded(callback) {
-  const intervalId = window.setInterval(checkBodyLoaded, 1000);
+async function waitForBodyLoaded() {
+  return new Promise((resolve) => {
+    const intervalId = window.setInterval(checkBodyLoaded, 1000);
 
-  function checkBodyLoaded() {
-    if (document.getElementsByTagName('body')[0] !== undefined) {
-      window.clearInterval(intervalId);
-      callback.call(this);
+    function checkBodyLoaded() {
+      if (document.getElementsByTagName('body')[0] !== undefined) {
+        window.clearInterval(intervalId);
+        resolve();
+      }
     }
-  }
+  });
 }
 
 init();

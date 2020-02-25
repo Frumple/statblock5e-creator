@@ -1,7 +1,5 @@
 :host {
-  font-family: 'Noto Sans', 'Myriad Pro', Calibri, Helvetica, Arial,
-               sans-serif;
-  font-size: 13.5px;
+  font-family: inherit;
 }
 
 .stat-block-editor__components {
