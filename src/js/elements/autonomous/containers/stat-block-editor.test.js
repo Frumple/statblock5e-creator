@@ -7,7 +7,7 @@ import HeadingStats from '../containers/heading-stats.js';
 import TopStats from '../containers/top-stats.js';
 import BottomStats from '../containers/bottom-stats.js';
 
-import ImportJsonDialog from '../dialogs/import-json-dialog.js';
+import ImportFileDialog from '../dialogs/import-file-dialog.js';
 import ExportDialog from '../dialogs/export-dialog.js';
 
 import CurrentContext from '../../../models/current-context.js';
@@ -81,7 +81,7 @@ beforeAll(async() => {
   await StatBlockSidebar.define();
   await StatBlock.define();
 
-  await ImportJsonDialog.define();
+  await ImportFileDialog.define();
   await ExportDialog.define();
 });
 
@@ -108,18 +108,18 @@ beforeEach(() => {
 
 describe('should import JSON', () => {
   beforeEach(() => {
-    statBlockEditor.importJsonDialog.connect();
+    statBlockEditor.ImportFileDialog.connect();
   });
 
   describe('from file', () => {
     it('successfully', async () => {
       let fileInputClickEvent = null;
-      statBlockEditor.importJsonDialog.fileInput.addEventListener('click', (event) => {
+      statBlockEditor.ImportFileDialog.fileInput.addEventListener('click', (event) => {
         fileInputClickEvent = event;
       });
 
       statBlockMenu.importJsonButton.click();
-      statBlockEditor.importJsonDialog.chooseFileButton.click();
+      statBlockEditor.ImportFileDialog.chooseFileButton.click();
       expect(fileInputClickEvent).not.toBeNull();
 
       // See note at top about JSDOM not supporting Blob.text().
@@ -138,11 +138,11 @@ describe('should import JSON', () => {
         type: 'application/json'
       });
 
-      Object.defineProperty(statBlockEditor.importJsonDialog.fileInput, 'files', {
+      Object.defineProperty(statBlockEditor.ImportFileDialog.fileInput, 'files', {
         value: [file]
       });
 
-      await statBlockEditor.importJsonDialog.onJsonImportFileSelected();
+      await statBlockEditor.ImportFileDialog.onJsonImportFileSelected();
 
       expect(CurrentContext.layoutSettings.columns).toBe(json.layout.columns);
       expect(CurrentContext.layoutSettings.twoColumnMode).toBe(json.layout.twoColumnMode);

@@ -7,7 +7,7 @@ import StatBlockMenu from './stat-block-menu.js';
 import StatBlockSidebar from './stat-block-sidebar.js';
 import StatBlock from './stat-block.js';
 
-import ImportJsonDialog from '../dialogs/import-json-dialog.js';
+import ImportFileDialog from '../dialogs/import-file-dialog.js';
 import ExportDialog from '../dialogs/export-dialog.js';
 
 import CurrentContext from '../../../models/current-context.js';
@@ -30,7 +30,7 @@ export default class StatBlockEditor extends CustomAutonomousElement {
       this.statBlockSidebar = new StatBlockSidebar(this);
       this.statBlock = new StatBlock(this);
 
-      this.importJsonDialog = new ImportJsonDialog();
+      this.ImportFileDialog = new ImportFileDialog();
       this.exportJsonDialog = new ExportDialog();
       this.exportHtmlDialog = new ExportDialog();
       this.exportMarkdownDialog = new ExportDialog();
@@ -39,13 +39,11 @@ export default class StatBlockEditor extends CustomAutonomousElement {
       this.statBlockSidebar = document.querySelector('stat-block-sidebar');
       this.statBlock = document.querySelector('stat-block');
 
-      this.importJsonDialog = this.shadowRoot.getElementById('import-json-dialog');
+      this.ImportFileDialog = this.shadowRoot.getElementById('import-file-dialog');
       this.exportJsonDialog = this.shadowRoot.getElementById('export-json-dialog');
       this.exportHtmlDialog = this.shadowRoot.getElementById('export-html-dialog');
       this.exportMarkdownDialog = this.shadowRoot.getElementById('export-markdown-dialog');
     }
-
-    this.importJsonDialog.statBlockEditor = this;
   }
 
   connectedCallback() {
@@ -118,7 +116,7 @@ export default class StatBlockEditor extends CustomAutonomousElement {
 
     switch(format) {
     case 'json':
-      this.openImportJsonDialog();
+      this.openImportFileDialog();
       break;
     default:
       throw new Error(`Unknown import format: '${format}'.`);
@@ -148,8 +146,8 @@ export default class StatBlockEditor extends CustomAutonomousElement {
     printHtml(content);
   }
 
-  openImportJsonDialog() {
-    this.importJsonDialog.launch();
+  openImportFileDialog() {
+    this.ImportFileDialog.launch(this.importFromJson.bind(this));
   }
 
   openExportJsonDialog() {
@@ -167,7 +165,8 @@ export default class StatBlockEditor extends CustomAutonomousElement {
     this.exportMarkdownDialog.launch(content, 'text/markdown', `${CurrentContext.creature.title.fullName}.md`);
   }
 
-  importFromJson(json) {
+  importFromJson(text) {
+    const json = JSON.parse(text);
     this.statBlock.importFromJson(json);
 
     CurrentContext.layoutSettings.fromJson(json.layout);

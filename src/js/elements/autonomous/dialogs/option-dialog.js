@@ -16,13 +16,9 @@ export default class OptionDialog extends CustomDialog {
   }
 
   connectedCallback() {
-    if (this.isConnected && ! this.isInitialized) {
-      super.connectedCallback();
+    super.connectedCallback();
 
-      this.cancelButton.addEventListener('click', this.onClickCloseButton.bind(this));
-
-      this.isInitialized = true;
-    }
+    this.cancelButton.addEventListener('click', this.onClickCloseButton.bind(this));
   }
 
   setStatus(text, type = null) {

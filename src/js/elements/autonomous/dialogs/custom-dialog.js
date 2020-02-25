@@ -17,6 +17,8 @@ export default class CustomDialog extends CustomAutonomousElement {
   }
 
   connectedCallback() {
+    super.connectedCallback();
+
     this.closeButton.addEventListener('click', this.onClickCloseButton.bind(this));
   }
 

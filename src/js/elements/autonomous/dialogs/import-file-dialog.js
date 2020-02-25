@@ -1,17 +1,15 @@
-import OptionDialog from './option-dialog.js';
+import ImportDialog from './import-dialog.js';
 
-export default class ImportJsonDialog extends OptionDialog {
-  static get elementName() { return 'import-json-dialog'; }
+export default class ImportFileDialog extends ImportDialog {
+  static get elementName() { return 'import-file-dialog'; }
   static get templatePaths() {
     return super.templatePaths.set(
-      'import-json-dialog',
-      'src/html/elements/autonomous/dialogs/import-json-dialog.html');
+      'import-file-dialog',
+      'src/html/elements/autonomous/dialogs/import-file-dialog.html');
   }
 
   constructor() {
-    super(ImportJsonDialog.templatePaths);
-
-    this.statBlockEditor = null;
+    super(ImportFileDialog.templatePaths);
 
     this.chooseFileButton = this.shadowRoot.getElementById('choose-file-button');
     this.fileInput = this.shadowRoot.getElementById('file-input');
@@ -22,7 +20,7 @@ export default class ImportJsonDialog extends OptionDialog {
       super.connectedCallback();
 
       this.chooseFileButton.addEventListener('click', this.onClickChooseFileButton.bind(this));
-      this.fileInput.addEventListener('change', this.onJsonImportFileSelected.bind(this));
+      this.fileInput.addEventListener('change', this.onFileSelected.bind(this));
 
       this.isInitialized = true;
     }
@@ -32,16 +30,17 @@ export default class ImportJsonDialog extends OptionDialog {
     this.fileInput.click();
   }
 
-  async onJsonImportFileSelected() {
+  async onFileSelected() {
     const file = this.fileInput.files[0];
     const text = await file.text();
-    const json = JSON.parse(text);
 
-    this.statBlockEditor.importFromJson(json);
+    this.importCallback(text);
     this.closeModal();
   }
 
-  launch() {
+  launch(importCallback) {
+    super.launch(importCallback);
+
     this.fileInput.value = '';
     this.setStatus('Click "Choose File..." to begin.');
     this.showModal();

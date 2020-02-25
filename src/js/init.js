@@ -18,7 +18,7 @@ import PropertyLine from './elements/autonomous/property-line.js';
 import SectionDivider from './elements/autonomous/section-divider.js';
 import TaperedRule from './elements/autonomous/tapered-rule.js';
 
-import ImportJsonDialog from './elements/autonomous/dialogs/import-json-dialog.js';
+import ImportFileDialog from './elements/autonomous/dialogs/import-file-dialog.js';
 import ExportDialog from './elements/autonomous/dialogs/export-dialog.js';
 import GenerateAttackDialog from './elements/autonomous/dialogs/generate-attack-dialog.js';
 
@@ -106,7 +106,7 @@ async function defineElements() {
     SectionDivider,
     TaperedRule,
 
-    ImportJsonDialog,
+    ImportFileDialog,
     ExportDialog,
     GenerateAttackDialog,
 
