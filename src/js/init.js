@@ -64,13 +64,12 @@ import BasicStats from './elements/autonomous/containers/basic-stats.js';
 import AdvancedStats from './elements/autonomous/containers/advanced-stats.js';
 
 async function init() {
+  CurrentContext.version = await getVersion();
+
   await defineElements();
 
   const loadingScreen = document.querySelector('loading-screen');
   const statBlockEditor = document.querySelector('stat-block-editor');
-
-  loadingScreen.status = 'Retrieving current version...';
-  CurrentContext.version = await getVersion();
 
   loadingScreen.status = 'Initializing HTML export template...';
   await HtmlExportDocumentFactory.init();
