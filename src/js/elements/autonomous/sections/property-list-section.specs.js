@@ -166,6 +166,19 @@ export function shouldDeleteOneOfManyItems(section, model, headingName, initialI
   verifyEditModeView(section, expectedItems);
 }
 
+export function shouldShowItemsImportedFromJsonIfSectionWasInitiallyEmptyAndNotVisible(section, headingName, itemsToImport) {
+  const expectedText = itemsToImport.join(', ');
+  const json = {
+    items: itemsToImport
+  };
+
+  section.mode = 'hidden';
+  section.importFromJson(json);
+
+  expect(section).toBeInMode('show');
+  verifyShowModeView(section, headingName, expectedText);
+}
+
 function reset(section, model) {
   model.reset();
   section.updateView();

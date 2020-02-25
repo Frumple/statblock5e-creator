@@ -217,3 +217,21 @@ describe('when the show section is clicked', () => {
     });
   });
 });
+
+describe('when the section is empty and not visible', () => {
+  describe('and a creature with blocks is imported from JSON', () => {
+    it('should show the new blocks', () => {
+      const blocksToImport = [
+        {
+          name: 'Parry',
+          text: '[name] adds 2 to its AC against one melee attack that would hit it. To do so, [name] must see the attacker and be wielding a melee weapon.',
+          htmlText: 'The knight adds 2 to its AC against one melee attack that would hit it. To do so, the knight must see the attacker and be wielding a melee weapon.'
+        }
+      ];
+
+      titleModel.fullName = 'Knight';
+
+      sharedSpecs.shouldShowBlocksImportedFromJsonIfSectionWasInitiallyEmptyAndNotVisible(reactionsSection, blocksToImport);
+    });
+  });
+});

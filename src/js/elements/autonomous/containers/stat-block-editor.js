@@ -167,9 +167,8 @@ export default class StatBlockEditor extends CustomAutonomousElement {
 
   importFromJson(text) {
     const json = JSON.parse(text);
-    this.statBlock.importFromJson(json);
-
     CurrentContext.layoutSettings.fromJson(json.layout);
+    this.statBlock.importFromJson(json);
 
     this.statBlockMenu.updateControls();
     this.statBlockSidebar.updateControls();

@@ -294,6 +294,23 @@ describe('when the show section is clicked', () => {
   });
 });
 
+describe('when the section is empty and not visible', () => {
+  describe('and a creature with skills is imported from JSON', () => {
+    it('should show the new skills', () => {
+      const expectedText = 'Animal Handling +2';
+      const json = createDefaultExpectedSkills();
+      json.animalHandling.isEnabled = true;
+      json.animalHandling.isProficient = true;
+
+      skillsSection.mode = 'hidden';
+      skillsSection.importFromJson(json);
+
+      expect(skillsSection).toBeInMode('show');
+      verifyShowModeView(expectedText);
+    });
+  });
+});
+
 function expectSkillChangedEvent(event, skillName) {
   expect(event).not.toBeNull();
   expect(event.detail.skillName).toBe(skillName);

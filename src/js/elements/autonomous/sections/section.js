@@ -94,6 +94,8 @@ export class Section extends CustomAutonomousElement {
           this.mode = 'hidden';
         }
       }
+    } else {
+      this.mode = 'show';
     }
   }
 
@@ -163,6 +165,7 @@ export class Section extends CustomAutonomousElement {
   importFromJson(json) {
     CurrentContext.creature[this.modelPropertyName].fromJson(json);
     this.updateView();
+    this.setEmptyVisibility(CurrentContext.layoutSettings.emptySectionsVisibility);
   }
 
   exportToJson() {

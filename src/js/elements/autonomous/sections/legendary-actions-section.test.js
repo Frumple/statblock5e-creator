@@ -325,6 +325,25 @@ describe('when the show section is clicked', () => {
   });
 });
 
+describe('when the section is empty and not visible', () => {
+  describe('and a creature with blocks is imported from JSON', () => {
+    it('should show the new blocks', () => {
+      const blocksToImport = [
+        {
+          name: 'Detect',
+          text: '[name] makes a Wisdom (Perception) check.',
+          htmlText: 'The dragon makes a Wisdom (Perception) check.'
+        }
+      ];
+
+      titleModel.fullName = 'Adult Red Dragon';
+      titleModel.shortName = 'dragon';
+
+      sharedSpecs.shouldShowBlocksImportedFromJsonIfSectionWasInitiallyEmptyAndNotVisible(legendaryActionsSection, blocksToImport);
+    });
+  });
+});
+
 function verifyModelDescription(description, markdownDescription, htmlDescription) {
   expect(legendaryActionsModel.description).toBe(description);
   expect(legendaryActionsModel.markdownDescription).toBe(markdownDescription);

@@ -249,6 +249,18 @@ export function shouldDisplayErrorsIfBlockNameIsBlankAndBlockTextHasInvalidMarkd
     1);
 }
 
+export function shouldShowBlocksImportedFromJsonIfSectionWasInitiallyEmptyAndNotVisible(section, blocksToImport) {
+  const json = {
+    blocks: blocksToImport
+  };
+
+  section.mode = 'hidden';
+  section.importFromJson(json);
+
+  expect(section).toBeInMode('show');
+  verifyShowModeView(section, blocksToImport);
+}
+
 export function addAndPopulateBlock(section, blockName, blockText) {
   section.editElements.addButton.click();
 

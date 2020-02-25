@@ -238,3 +238,22 @@ describe('when the show section is clicked', () => {
     });
   });
 });
+
+describe('when the section is empty and not visible', () => {
+  describe('and a creature with blocks is imported from JSON', () => {
+    it('should show the new blocks', () => {
+      const blocksToImport = [
+        {
+          name: 'Legendary Resistance (3/Day)',
+          text: 'If [name] fails a saving throw, it can choose to succeed instead.',
+          htmlText: 'If the dragon fails a saving throw, it can choose to succeed instead.'
+        }
+      ];
+
+      titleModel.fullName = 'Adult Red Dragon';
+      titleModel.shortName = 'dragon';
+
+      sharedSpecs.shouldShowBlocksImportedFromJsonIfSectionWasInitiallyEmptyAndNotVisible(specialTraitsSection, blocksToImport);
+    });
+  });
+});

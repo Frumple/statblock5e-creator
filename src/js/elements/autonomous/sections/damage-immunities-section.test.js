@@ -107,3 +107,12 @@ describe('when the show section is clicked', () => {
     });
   });
 });
+
+describe('when the section is empty and not visible', () => {
+  describe('and a creature with items is imported from JSON', () => {
+    it('should show the new items', () => {
+      const itemsToImport = ['bludgeoning'];
+      sharedSpecs.shouldShowItemsImportedFromJsonIfSectionWasInitiallyEmptyAndNotVisible(damageImmunitiesSection, headingName, itemsToImport);
+    });
+  });
+});

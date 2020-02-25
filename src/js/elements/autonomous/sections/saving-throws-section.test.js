@@ -284,6 +284,23 @@ describe('when the show section is clicked', () => {
   });
 });
 
+describe('when the section is empty and not visible', () => {
+  describe('and a creature with saving throws is imported from JSON', () => {
+    it('should show the new saving throws', () => {
+      const expectedText = 'Con +2';
+      const json = createDefaultExpectedSavingThrows();
+      json.constitution.isEnabled = true;
+      json.constitution.isProficient = true;
+
+      savingThrowsSection.mode = 'hidden';
+      savingThrowsSection.importFromJson(json);
+
+      expect(savingThrowsSection).toBeInMode('show');
+      verifyShowModeView(expectedText);
+    });
+  });
+});
+
 function reset() {
   abilitiesModel.reset();
   challengeRatingModel.reset();
