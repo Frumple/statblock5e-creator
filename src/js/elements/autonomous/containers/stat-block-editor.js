@@ -7,7 +7,7 @@ import StatBlockMenu from './stat-block-menu.js';
 import StatBlockSidebar from './stat-block-sidebar.js';
 import StatBlock from './stat-block.js';
 
-import ImportDialog from '../dialogs/import-dialog.js';
+import ImportJsonDialog from '../dialogs/import-json-dialog.js';
 import ExportDialog from '../dialogs/export-dialog.js';
 
 import CurrentContext from '../../../models/current-context.js';
@@ -30,22 +30,22 @@ export default class StatBlockEditor extends CustomAutonomousElement {
       this.statBlockSidebar = new StatBlockSidebar(this);
       this.statBlock = new StatBlock(this);
 
-      this.jsonImportDialog = new ImportDialog();
-      this.jsonExportDialog = new ExportDialog();
-      this.htmlExportDialog = new ExportDialog();
-      this.markdownExportDialog = new ExportDialog();
+      this.importJsonDialog = new ImportJsonDialog();
+      this.exportJsonDialog = new ExportDialog();
+      this.exportHtmlDialog = new ExportDialog();
+      this.exportMarkdownDialog = new ExportDialog();
     } else {
       this.statBlockMenu = document.querySelector('stat-block-menu');
       this.statBlockSidebar = document.querySelector('stat-block-sidebar');
       this.statBlock = document.querySelector('stat-block');
 
-      this.jsonImportDialog = this.shadowRoot.getElementById('json-import-dialog');
-      this.jsonExportDialog = this.shadowRoot.getElementById('json-export-dialog');
-      this.htmlExportDialog = this.shadowRoot.getElementById('html-export-dialog');
-      this.markdownExportDialog = this.shadowRoot.getElementById('markdown-export-dialog');
+      this.importJsonDialog = this.shadowRoot.getElementById('import-json-dialog');
+      this.exportJsonDialog = this.shadowRoot.getElementById('export-json-dialog');
+      this.exportHtmlDialog = this.shadowRoot.getElementById('export-html-dialog');
+      this.exportMarkdownDialog = this.shadowRoot.getElementById('export-markdown-dialog');
     }
 
-    this.jsonImportDialog.statBlockEditor = this;
+    this.importJsonDialog.statBlockEditor = this;
   }
 
   connectedCallback() {
@@ -118,7 +118,7 @@ export default class StatBlockEditor extends CustomAutonomousElement {
 
     switch(format) {
     case 'json':
-      this.openJsonImportDialog();
+      this.openImportJsonDialog();
       break;
     default:
       throw new Error(`Unknown import format: '${format}'.`);
@@ -130,13 +130,13 @@ export default class StatBlockEditor extends CustomAutonomousElement {
 
     switch(format) {
     case 'json':
-      this.openJsonExportDialog();
+      this.openExportJsonDialog();
       break;
     case 'html':
-      this.openHtmlExportDialog();
+      this.openExportHtmlDialog();
       break;
     case 'markdown':
-      this.openMarkdownExportDialog();
+      this.openExportMarkdownDialog();
       break;
     default:
       throw new Error(`Unknown export format: '${format}'.`);
@@ -148,23 +148,23 @@ export default class StatBlockEditor extends CustomAutonomousElement {
     printHtml(content);
   }
 
-  openJsonImportDialog() {
-    this.jsonImportDialog.launch();
+  openImportJsonDialog() {
+    this.importJsonDialog.launch();
   }
 
-  openJsonExportDialog() {
+  openExportJsonDialog() {
     const content = this.exportToJson();
-    this.jsonExportDialog.launch(content, 'application/json', `${CurrentContext.creature.title.fullName}.json`);
+    this.exportJsonDialog.launch(content, 'application/json', `${CurrentContext.creature.title.fullName}.json`);
   }
 
-  openHtmlExportDialog() {
+  openExportHtmlDialog() {
     const content = this.exportToHtml(`Statblock5e - ${CurrentContext.creature.title.fullName}`);
-    this.htmlExportDialog.launch(content, 'text/html', `${CurrentContext.creature.title.fullName}.html`);
+    this.exportHtmlDialog.launch(content, 'text/html', `${CurrentContext.creature.title.fullName}.html`);
   }
 
-  openMarkdownExportDialog() {
+  openExportMarkdownDialog() {
     const content = this.exportToMarkdown();
-    this.markdownExportDialog.launch(content, 'text/markdown', `${CurrentContext.creature.title.fullName}.md`);
+    this.exportMarkdownDialog.launch(content, 'text/markdown', `${CurrentContext.creature.title.fullName}.md`);
   }
 
   importFromJson(json) {

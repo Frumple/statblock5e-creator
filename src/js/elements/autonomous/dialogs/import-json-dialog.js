@@ -1,15 +1,15 @@
 import OptionDialog from './option-dialog.js';
 
-export default class ImportDialog extends OptionDialog {
-  static get elementName() { return 'import-dialog'; }
+export default class ImportJsonDialog extends OptionDialog {
+  static get elementName() { return 'import-json-dialog'; }
   static get templatePaths() {
     return super.templatePaths.set(
-      'import-dialog',
-      'src/html/elements/autonomous/dialogs/import-dialog.html');
+      'import-json-dialog',
+      'src/html/elements/autonomous/dialogs/import-json-dialog.html');
   }
 
   constructor() {
-    super(ImportDialog.templatePaths);
+    super(ImportJsonDialog.templatePaths);
 
     this.statBlockEditor = null;
 

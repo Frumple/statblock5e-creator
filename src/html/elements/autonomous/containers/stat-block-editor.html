@@ -1,19 +1,19 @@
 <link href='src/css/elements/autonomous/containers/stat-block-editor.css' rel='stylesheet' type='text/css'>
 
 <div class="stat-block-editor__dialogs">
-  <import-dialog id="json-import-dialog">
+  <import-json-dialog id="import-json-dialog">
     <span slot="title">Import from JSON</span>
     <span slot="message">
       Import your statblock from a JSON file that was previously exported from statblock5e-creator.
     </span>
-  </import-dialog>
-  <export-dialog id="json-export-dialog">
+  </import-json-dialog>
+  <export-dialog id="export-json-dialog">
     <span slot="title">Export to JSON</span>
     <span slot="message">
       Export your statblock to a special JSON format that can be re-imported back into statblock5e-creator at a later time.
     </span>
   </export-dialog>
-  <export-dialog id="html-export-dialog">
+  <export-dialog id="export-html-dialog">
     <span slot="title">Export to HTML</span>
     <span slot="message">
       Export your statblock as a standalone HTML document, based on <a href="https://github.com/Valloric/statblock5e" target="_blank">Valloric's statblock5e template</a>.<br />
@@ -21,7 +21,7 @@
       This HTML document works best in Chrome.
     </span>
   </export-dialog>
-  <export-dialog id="markdown-export-dialog">
+  <export-dialog id="export-markdown-dialog">
     <span slot="title">Export to Markdown</span>
     <span slot="message">
       Export your statblock to a special Markdown format for use in the following homebrew content tools:
