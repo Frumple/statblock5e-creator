@@ -1,7 +1,13 @@
 <link href='src/css/elements/autonomous/containers/stat-block-editor.css' rel='stylesheet' type='text/css'>
 
 <div class="stat-block-editor__dialogs">
-  <import-file-dialog id="import-file-dialog">
+  <import-api-dialog id="import-open5e-dialog">
+    <span slot="title">Import from Open5e</span>
+    <span slot="message">
+      Import your statblock from a creature provided by the <a href="https://open5e.com/monsters/monster-list" target="_blank">Open5e API</a>.
+    </span>
+  </import-api-dialog>
+  <import-file-dialog id="import-json-dialog">
     <span slot="title">Import from JSON</span>
     <span slot="message">
       Import your statblock from a JSON file that was previously exported from statblock5e-creator.

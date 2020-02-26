@@ -7,6 +7,7 @@ import HeadingStats from '../containers/heading-stats.js';
 import TopStats from '../containers/top-stats.js';
 import BottomStats from '../containers/bottom-stats.js';
 
+import ImportApiDialog from '../dialogs/import-api-dialog.js';
 import ImportFileDialog from '../dialogs/import-file-dialog.js';
 import ExportDialog from '../dialogs/export-dialog.js';
 
@@ -81,6 +82,7 @@ beforeAll(async() => {
   await StatBlockSidebar.define();
   await StatBlock.define();
 
+  await ImportApiDialog.define();
   await ImportFileDialog.define();
   await ExportDialog.define();
 });
@@ -106,20 +108,28 @@ beforeEach(() => {
   statBlock.connect();
 });
 
+describe('should import from Open5e', () => {
+  beforeEach(() => {
+    statBlockEditor.importOpen5eDialog.connect();
+  });
+
+  // TODO
+});
+
 describe('should import JSON', () => {
   beforeEach(() => {
-    statBlockEditor.ImportFileDialog.connect();
+    statBlockEditor.importJsonDialog.connect();
   });
 
   describe('from file', () => {
     it('successfully', async () => {
       let fileInputClickEvent = null;
-      statBlockEditor.ImportFileDialog.fileInput.addEventListener('click', (event) => {
+      statBlockEditor.importJsonDialog.fileInput.addEventListener('click', (event) => {
         fileInputClickEvent = event;
       });
 
       statBlockMenu.importJsonButton.click();
-      statBlockEditor.ImportFileDialog.chooseFileButton.click();
+      statBlockEditor.importJsonDialog.chooseFileButton.click();
       expect(fileInputClickEvent).not.toBeNull();
 
       // See note at top about JSDOM not supporting Blob.text().
@@ -138,11 +148,11 @@ describe('should import JSON', () => {
         type: 'application/json'
       });
 
-      Object.defineProperty(statBlockEditor.ImportFileDialog.fileInput, 'files', {
+      Object.defineProperty(statBlockEditor.importJsonDialog.fileInput, 'files', {
         value: [file]
       });
 
-      await statBlockEditor.ImportFileDialog.onJsonImportFileSelected();
+      await statBlockEditor.importJsonDialog.onJsonImportFileSelected();
 
       expect(CurrentContext.layoutSettings.columns).toBe(json.layout.columns);
       expect(CurrentContext.layoutSettings.twoColumnMode).toBe(json.layout.twoColumnMode);
