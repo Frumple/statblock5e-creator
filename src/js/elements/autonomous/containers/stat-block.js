@@ -114,6 +114,10 @@ export default class StatBlock extends CustomAutonomousElement {
     this.bottomStats.reparseAllSections();
   }
 
+  importFromOpen5e(json) {
+    // TODO
+  }
+
   importFromJson(json) {
     this.headingStats.importFromJson(json);
     this.topStats.importFromJson(json);

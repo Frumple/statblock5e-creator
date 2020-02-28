@@ -1,3 +1,15 @@
 .import-api-dialog__creature-select {
   margin: 1em;
 }
+
+.import-api-dialog__source-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  padding-top: 0.5em;
+}
+
+.import-api-dialog__source-label {
+  padding: 5px;
+  margin: 5px;
+}

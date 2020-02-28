@@ -175,8 +175,8 @@ export default class StatBlockEditor extends CustomAutonomousElement {
     this.exportMarkdownDialog.launch(content, 'text/markdown', `${CurrentContext.creature.title.fullName}.md`);
   }
 
-  importFromOpen5e(text) {
-    // TODO
+  importFromOpen5e(json) {
+    this.statBlock.importFromOpen5e(json);
   }
 
   importFromJson(text) {
