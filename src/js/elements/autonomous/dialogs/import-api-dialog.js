@@ -39,6 +39,7 @@ export default class ImportApiDialog extends ImportDialog {
 
   async onChangeSource() {
     const documentSlug = this.shadowRoot.querySelector('input[name="source"]:checked').value;
+    let creatureList;
 
     this.setStatus('Retrieving creature list from Open5e...');
     this.creatureSelect.setAttribute('disabled', '');
@@ -47,7 +48,12 @@ export default class ImportApiDialog extends ImportDialog {
       this.creatureSelect.remove(0);
     }
 
-    const creatureList = await this.client.loadCreatureList(documentSlug);
+    try {
+      creatureList = await this.client.loadCreatureList(documentSlug);
+    } catch (error) {
+      this.setStatus('Error: Unable to load creature list.', 'error');
+      return;
+    }
 
     for (const creature of creatureList) {
       this.creatureSelect.add(new Option(creature.name, creature.slug));
@@ -59,7 +65,13 @@ export default class ImportApiDialog extends ImportDialog {
 
   async onClickImportButton() {
     const creatureSlug = this.creatureSelect.value;
-    const creatureJson = await this.client.loadCreature(creatureSlug);
+    let creatureJson;
+
+    try {
+      creatureJson = await this.client.loadCreature(creatureSlug);
+    } catch (error) {
+      this.setStatus('Error: Unable to load creature.', 'error');
+    }
 
     this.importCallback(creatureJson);
     this.closeModal();

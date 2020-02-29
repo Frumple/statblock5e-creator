@@ -69,7 +69,6 @@ describe('should import a creature from Open5e (stub)', () => {
       break;
     }
 
-
     await waitForExpect(() => {
       expect(importOpen5eDialog.statusText).toBe('Choose a creature:');
       expect(importOpen5eDialog.statusType).toBeNull();
@@ -88,4 +87,61 @@ describe('should import a creature from Open5e (stub)', () => {
     expect(statBlock.importFromOpen5e).toHaveBeenCalledWith(expectedJson);
   });
   /* eslint-enable indent, no-unexpected-multiline */
+});
+
+
+describe('when loading a creature list fails', () => {
+  beforeAll(() => {
+    Open5eClient.mockImplementation(() => {
+      return {
+        loadCreatureList: () => {
+          throw new Error();
+        },
+        loadCreature: mockLoadCreature
+      };
+    });
+  });
+
+  it('should display an error', async () => {
+    statBlockMenu.importOpen5eButton.click();
+    importOpen5eDialog.srdRadioButton.click();
+
+    await waitForExpect(() => {
+      expect(importOpen5eDialog.statusText).toBe('Error: Unable to load creature list.');
+      expect(importOpen5eDialog.statusType).toBe('error');
+    });
+  });
+});
+
+describe('when loading a creature fails', () => {
+  beforeAll(() => {
+    Open5eClient.mockImplementation(() => {
+      return {
+        loadCreatureList: mockLoadCreatureList,
+        loadCreature: () => {
+          throw new Error();
+        }
+      };
+    });
+  });
+
+  it('should display an error', async () => {
+    const creatureSlug = 'adult-black-dragon';
+
+    statBlockMenu.importOpen5eButton.click();
+    importOpen5eDialog.srdRadioButton.click();
+
+    await waitForExpect(() => {
+      expect(importOpen5eDialog.statusText).toBe('Choose a creature:');
+      expect(importOpen5eDialog.statusType).toBeNull();
+    });
+
+    inputValueAndTriggerEvent(importOpen5eDialog.creatureSelect, creatureSlug);
+    importOpen5eDialog.importButton.click();
+
+    await waitForExpect(() => {
+      expect(importOpen5eDialog.statusText).toBe('Error: Unable to load creature.');
+      expect(importOpen5eDialog.statusType).toBe('error');
+    });
+  });
 });
