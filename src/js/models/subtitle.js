@@ -1,5 +1,9 @@
 import Model from './model.js';
 
+import creatureSizes from '../data/creature-sizes.js';
+import creatureTypes from '../data/creature-types.js';
+import creatureAlignments from '../data/creature-alignments.js';
+
 export default class Subtitle extends Model{
   constructor() {
     super();
@@ -38,6 +42,28 @@ export default class Subtitle extends Model{
     }
 
     return `${this.size} ${this.type} (${this.tags}), ${this.alignment}`;
+  }
+
+  fromOpen5e(json) {
+    this.reset();
+
+    // If the size, type, or alignment does not match the dropdown options, fallback to using custom text
+    if (! (creatureSizes.includes(json.size) &&
+           creatureTypes.includes(json.type) &&
+           creatureAlignments.includes(json.alignment))) {
+      this.useCustomText = true;
+      if (json.subtype === '') {
+        this.customText = `${json.size} ${json.type}, ${json.alignment}`;
+      } else {
+        this.customText = `${json.size} ${json.type} (${json.subtype.trim()}), ${json.alignment}`;
+      }
+    // Otherwise, set the size, type, tags, and alignment as normal
+    } else {
+      this.size = json.size;
+      this.type = json.type;
+      this.tags = json.subtype.trim();
+      this.alignment = json.alignment;
+    }
   }
 
   toHtml() {

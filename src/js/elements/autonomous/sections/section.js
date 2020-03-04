@@ -88,14 +88,19 @@ export class Section extends CustomAutonomousElement {
       if (visibility) {
         if (this.mode === 'hidden') {
           this.mode = 'show';
+          this.dispatchModeChangedEvent();
         }
       } else {
         if (this.mode === 'show') {
           this.mode = 'hidden';
+          this.dispatchModeChangedEvent();
         }
       }
     } else {
-      this.mode = 'show';
+      if (this.mode === 'hidden') {
+        this.mode = 'show';
+        this.dispatchModeChangedEvent();
+      }
     }
   }
 
@@ -160,6 +165,12 @@ export class Section extends CustomAutonomousElement {
       composed: true
     });
     this.dispatchEvent(changeEvent);
+  }
+
+  importFromOpen5e(json) {
+    CurrentContext.creature[this.modelPropertyName].fromOpen5e(json);
+    this.updateView();
+    this.setEmptyVisibility(CurrentContext.layoutSettings.emptySectionsVisibility);
   }
 
   importFromJson(json) {

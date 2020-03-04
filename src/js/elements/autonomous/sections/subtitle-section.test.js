@@ -233,6 +233,75 @@ describe('when the show section is clicked', () => {
   });
 });
 
+describe('when importing from Open5e', () => {
+  describe('should import valid size, type, tags, and alignment', () => {
+    /* eslint-disable indent, no-unexpected-multiline */
+    it.each
+    `
+      description        | size            | type             | tags                     | alignment           | expectedSubtitle
+      ${'no tags'}       | ${'Gargantuan'} | ${'monstrosity'} | ${''}                    | ${'neutral'}        | ${'Gargantuan monstrosity, neutral'}
+      ${'single tag'}    | ${'Small'}      | ${'humanoid'}    | ${'halfling'}            | ${'lawful good'}    | ${'Small humanoid (halfling), lawful good'}
+      ${'multiple tags'} | ${'Tiny'}       | ${'fiend'}       | ${'demon, shapechanger'} | ${'chaotic evil'}   | ${'Tiny fiend (demon, shapechanger), chaotic evil'}
+      ${'trimmed tags'}  | ${'Large'}      | ${'giant'}       | ${'    titan '}          | ${'lawful neutral'} | ${'Large giant (titan), lawful neutral'}
+    `
+    ('$description: {size="$size", type="$type", tags="$tags", alignment="$alignment"} => $expectedSubtitle',
+    ({size, type, tags, alignment, expectedSubtitle}) => {
+      const expectedValues = {
+        size: size,
+        type: type,
+        tags: tags.trim(),
+        alignment: alignment
+      };
+
+      const json = {
+        size: size,
+        type: type,
+        subtype: tags,
+        alignment: alignment
+      };
+
+      subtitleSection.importFromOpen5e(json);
+
+      verifyModel(expectedValues);
+      verifyEditModeView(expectedValues);
+      verifyShowModeView(expectedSubtitle);
+    });
+    /* eslint-enable indent, no-unexpected-multiline */
+  });
+
+  describe('should import invalid size, type, and alignment as custom text', () => {
+    /* eslint-disable indent, no-unexpected-multiline */
+    it.each
+    `
+      description            | size          | type                      | tags          | alignment                     | expectedSubtitle
+      ${'invalid size'}      | ${'Colossal'} | ${'construct'}            | ${''}         | ${'neutral evil'}             | ${'Colossal construct, neutral evil'}
+      ${'invalid type'}      | ${'Medium'}   | ${'swarm of Tiny beasts'} | ${''}         | ${'unaligned'}                | ${'Medium swarm of Tiny beasts, unaligned'}
+      ${'invalid alignment'} | ${'Medium'}   | ${'humanoid'}             | ${'any race'} | ${'any non-lawful alignment'} | ${'Medium humanoid (any race), any non-lawful alignment'}
+    `
+    ('$description: {size="$size", type="$type", tags="$tags", alignment="$alignment"} => $expectedSubtitle',
+    ({size, type, tags, alignment, expectedSubtitle}) => {
+      const expectedValues = {
+        useCustomText: true,
+        customText: expectedSubtitle
+      };
+
+      const json = {
+        size: size,
+        type: type,
+        subtype: tags,
+        alignment: alignment
+      };
+
+      subtitleSection.importFromOpen5e(json);
+
+      verifyModel(expectedValues);
+      verifyEditModeView(expectedValues);
+      verifyShowModeView(expectedSubtitle);
+    });
+    /* eslint-enable indent, no-unexpected-multiline */
+  });
+});
+
 function reset() {
   subtitleModel.reset();
   subtitleSection.updateView();
