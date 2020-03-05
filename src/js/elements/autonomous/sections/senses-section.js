@@ -86,7 +86,7 @@ export default class SensesSection extends propertyLineSectionModule.PropertyLin
     if (sensesModel.useCustomText) {
       this.showElements.text.innerHTMLSanitized = sensesModel.htmlCustomText;
     } else {
-      this.showElements.text.textContent = sensesModel.nonCustomText;
+      this.showElements.text.textContent = sensesModel.normalText;
     }
   }
 }

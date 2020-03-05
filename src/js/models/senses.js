@@ -40,7 +40,7 @@ export default class Senses extends PropertyLineModel {
       return this.customText;
     }
 
-    return this.nonCustomText;
+    return this.normalText;
   }
 
   get htmlText() {
@@ -48,10 +48,10 @@ export default class Senses extends PropertyLineModel {
       return this.htmlCustomText;
     }
 
-    return this.nonCustomText;
+    return this.normalText;
   }
 
-  get nonCustomText() {
+  get normalText() {
     const unit = 'ft.';
     const list = [];
 

@@ -42,6 +42,126 @@ describe('when the show section is clicked', () => {
     expect(armorClassSection.editElements.armorClass).toHaveFocus();
   });
 
+  describe('and the custom text checkbox is unchecked', () => {
+    beforeEach(() => {
+      armorClassSection.editElements.useCustomText.click();
+      armorClassSection.editElements.useCustomText.click();
+    });
+
+    it('should disable the custom text field, enable all other fields, and focus on the armor class field', () => {
+      expect(armorClassSection).toHaveEditElementsEnabledOrDisabledBasedOnCheckbox(
+        armorClassSection.editElements.useCustomText,
+        ['customText'],
+        ['armorClass', 'armorType', 'hasShield']
+      );
+
+      expect(armorClassSection.editElements.armorClass).toHaveFocus();
+    });
+
+    describe('and the edit section is submitted', () => {
+      describe('should switch to show mode and save the desired fields', () => {
+        /* eslint-disable indent, no-unexpected-multiline */
+        it.each
+        `
+          description                              | armorClass | armorType          | hasShield | expectedText
+          ${'armor class only'}                    | ${7}       | ${''}              | ${false}  | ${'7'}
+          ${'armor class and armor type'}          | ${21}      | ${'natural armor'} | ${false}  | ${'21 (natural armor)'}
+          ${'armor class and shield'}              | ${12}      | ${''}              | ${true}   | ${'12 (shield)'}
+          ${'armor class, armor type, and shield'} | ${16}      | ${'chain shirt'}   | ${true}   | ${'16 (chain shirt, shield)'}
+        `
+        ('$description: {armorClass="$armorClass", armorType="$armorType", hasShield="$hasShield"} => $expectedText',
+        ({armorClass, armorType, hasShield, expectedText}) => {
+          const expectedValues = {
+            armorClass: armorClass,
+            armorType : armorType,
+            hasShield: hasShield
+          };
+
+          inputValueAndTriggerEvent(armorClassSection.editElements.armorClass, armorClass);
+          inputValueAndTriggerEvent(armorClassSection.editElements.armorType, armorType);
+          if (hasShield) {
+            armorClassSection.editElements.hasShield.click();
+          }
+
+          armorClassSection.editElements.submitForm();
+
+          expect(armorClassSection).toBeInMode('show');
+          verifyModel(expectedValues);
+          verifyEditModeView(expectedValues);
+          verifyShowModeView(expectedText);
+
+          const json = verifyJsonExport(expectedValues);
+          expect(armorClassSection).toExportPropertyLineToHtml(expectedHeading, expectedText);
+          expect(armorClassSection).toExportPropertyLineToMarkdown(expectedHeading, expectedText);
+
+          reset();
+          armorClassSection.importFromJson(json);
+
+          verifyModel(expectedValues);
+          verifyEditModeView(expectedValues);
+          verifyShowModeView(expectedText);
+        });
+        /* eslint-enable indent, no-unexpected-multiline */
+      });
+
+      it('should preserve the armor class, armor type, and shield if submitted with the custom text checkbox checked', () => {
+        const expectedValues = {
+          armorClass: 13,
+          armorType: 'studded leather armor',
+          hasShield: true,
+          useCustomText: true,
+          customText: 'This custom text should be __saved__, but not shown.',
+          htmlCustomText: 'This custom text should be <strong>saved</strong>, but not shown.'
+        };
+
+        inputValueAndTriggerEvent(armorClassSection.editElements.armorClass, expectedValues.armorClass);
+        inputValueAndTriggerEvent(armorClassSection.editElements.armorType, expectedValues.armorType);
+        armorClassSection.editElements.hasShield.click();
+
+        armorClassSection.editElements.useCustomText.click();
+        inputValueAndTriggerEvent(armorClassSection.editElements.customText, expectedValues.customText);
+
+        armorClassSection.editElements.submitForm();
+
+        verifyModel(expectedValues);
+        verifyEditModeView(expectedValues);
+        verifyShowModeView(expectedValues.htmlCustomText);
+
+        const json = verifyJsonExport(expectedValues);
+
+        reset();
+        armorClassSection.importFromJson(json);
+
+        verifyModel(expectedValues);
+        verifyEditModeView(expectedValues);
+        verifyShowModeView(expectedValues.htmlCustomText);
+      });
+
+      it('should display an error if the armor class field is not a valid number', () => {
+        inputValueAndTriggerEvent(armorClassSection.editElements.armorClass, '');
+
+        armorClassSection.editElements.submitForm();
+
+        expect(armorClassSection).toBeInMode('edit');
+        expect(armorClassSection).toHaveError(
+          armorClassSection.editElements.armorClass,
+          'Armor Class must be a valid number.');
+      });
+
+      it('should display only one error if the armor class is not a valid number and custom text field is blank', () => {
+        inputValueAndTriggerEvent(armorClassSection.editElements.armorClass, '');
+        inputValueAndTriggerEvent(armorClassSection.editElements.customText, '');
+
+        armorClassSection.editElements.submitForm();
+
+        expect(armorClassSection).toBeInMode('edit');
+        expect(armorClassSection).toHaveError(
+          armorClassSection.editElements.armorClass,
+          'Armor Class must be a valid number.');
+      });
+    });
+  });
+
   describe('and the custom text checkbox is checked', () => {
     beforeEach(() => {
       armorClassSection.editElements.useCustomText.click();
@@ -159,126 +279,71 @@ describe('when the show section is clicked', () => {
       });
     });
   });
+});
 
-  describe('and the custom text checkbox is unchecked', () => {
-    beforeEach(() => {
-      armorClassSection.editElements.useCustomText.click();
-      armorClassSection.editElements.useCustomText.click();
+describe('when importing from Open5e', () => {
+  describe('should import as normal', () => {
+    /* eslint-disable indent, no-unexpected-multiline */
+    it.each
+    `
+      description                | armorClass | armorDesc                | expectedArmorType  | expectedHasShield | expectedText
+      ${'blank desc'}            | ${7}       | ${''}                    | ${''}              | ${false}          | ${'7'}
+      ${'null desc'}             | ${8}       | ${null}                  | ${''}              | ${false}          | ${'8'}
+      ${'armor type'}            | ${21}      | ${'natural armor'}       | ${'natural armor'} | ${false}          | ${'21 (natural armor)'}
+      ${'shield'}                | ${12}      | ${'shield'}              | ${''}              | ${true}           | ${'12 (shield)'}
+      ${'armor type, shield'}    | ${16}      | ${'chain shirt, shield'} | ${'chain shirt'}   | ${true}           | ${'16 (chain shirt, shield)'}
+      ${'armor type and shield'} | ${18}      | ${'plate and shield'}    | ${'plate'}         | ${true}           | ${'18 (plate, shield)'}
+    `
+    ('$description: {armorClass="$armorClass", armorDesc="$armorDesc"} => {expectedArmorType="$expectedArmorType", expectedHasShield="$expectedHasShield", expectedText="$expectedText"}',
+    ({armorClass, armorDesc, expectedArmorType, expectedHasShield, expectedText}) => {
+      const expectedValues = {
+        armorClass: armorClass,
+        armorType : expectedArmorType,
+        hasShield: expectedHasShield
+      };
+
+      const json = {
+        'armor_class': armorClass,
+        'armor_desc': armorDesc
+      };
+
+      armorClassSection.importFromOpen5e(json);
+
+      verifyModel(expectedValues);
+      verifyEditModeView(expectedValues);
+      verifyShowModeView(expectedText);
     });
+    /* eslint-enable indent, no-unexpected-multiline */
+  });
 
-    it('should disable the custom text field, enable all other fields, and focus on the armor class field', () => {
-      expect(armorClassSection).toHaveEditElementsEnabledOrDisabledBasedOnCheckbox(
-        armorClassSection.editElements.useCustomText,
-        ['customText'],
-        ['armorClass', 'armorType', 'hasShield']
-      );
+  describe('should import as custom text if the armor type contains markdown emphasis characters', () => {
+    /* eslint-disable indent, no-unexpected-multiline */
+    it.each
+    `
+      description                     | armorClass | armorDesc                 | expectedCustomText             | expectedHtmlText
+      ${'armor desc has asterisks'}   | ${12}      | ${'15 with *mage armor*'} | ${'12 (15 with *mage armor*)'} | ${'12 (15 with <em>mage armor</em>)'}
+      ${'armor desc has underscores'} | ${11}      | ${'16 with _barkskin_'}   | ${'11 (16 with _barkskin_)'}   | ${'11 (16 with <em>barkskin</em>)'}
+    `
+    ('$description: {armorClass="$armorClass", armorDesc="$armorDesc"} => {expectedCustomText="$expectedCustomText", expectedText="$expectedText"}',
+    ({armorClass, armorDesc, expectedCustomText, expectedHtmlText}) => {
+      const expectedValues = {
+        useCustomText: true,
+        customText: expectedCustomText,
+        htmlCustomText: expectedHtmlText
+      };
 
-      expect(armorClassSection.editElements.armorClass).toHaveFocus();
+      const json = {
+        'armor_class': armorClass,
+        'armor_desc': armorDesc
+      };
+
+      armorClassSection.importFromOpen5e(json);
+
+      verifyModel(expectedValues);
+      verifyEditModeView(expectedValues);
+      verifyShowModeView(expectedHtmlText);
     });
-
-    describe('and the edit section is submitted', () => {
-      describe('should switch to show mode and save the desired fields', () => {
-        /* eslint-disable indent, no-unexpected-multiline */
-        it.each
-        `
-          description                              | armorClass | armorType          | hasShield | expectedText
-          ${'armor class only'}                    | ${7}       | ${''}              | ${false}  | ${'7'}
-          ${'armor class and armor type'}          | ${21}      | ${'natural armor'} | ${false}  | ${'21 (natural armor)'}
-          ${'armor class and shield'}              | ${12}      | ${''}              | ${true}   | ${'12 (shield)'}
-          ${'armor class, armor type, and shield'} | ${16}      | ${'chain shirt'}   | ${true}   | ${'16 (chain shirt, shield)'}
-        `
-        ('$description: {armorClass="$armorClass", armorType="$armorType", hasShield="$hasShield"} => $expectedText',
-        ({armorClass, armorType, hasShield, expectedText}) => {
-          const expectedValues = {
-            armorClass: armorClass,
-            armorType : armorType,
-            hasShield: hasShield,
-            useCustomText: false
-          };
-
-          inputValueAndTriggerEvent(armorClassSection.editElements.armorClass, armorClass);
-          inputValueAndTriggerEvent(armorClassSection.editElements.armorType, armorType);
-          if (hasShield) {
-            armorClassSection.editElements.hasShield.click();
-          }
-
-          armorClassSection.editElements.submitForm();
-
-          expect(armorClassSection).toBeInMode('show');
-          verifyModel(expectedValues);
-          verifyEditModeView(expectedValues);
-          verifyShowModeView(expectedText);
-
-          const json = verifyJsonExport(expectedValues);
-          expect(armorClassSection).toExportPropertyLineToHtml(expectedHeading, expectedText);
-          expect(armorClassSection).toExportPropertyLineToMarkdown(expectedHeading, expectedText);
-
-          reset();
-          armorClassSection.importFromJson(json);
-
-          verifyModel(expectedValues);
-          verifyEditModeView(expectedValues);
-          verifyShowModeView(expectedText);
-        });
-        /* eslint-enable indent, no-unexpected-multiline */
-      });
-
-      it('should preserve the armor class, armor type, and shield if submitted with the custom text checkbox checked', () => {
-        const expectedValues = {
-          armorClass: 13,
-          armorType: 'studded leather armor',
-          hasShield: true,
-          useCustomText: true,
-          customText: 'This custom text should be __saved__, but not shown.',
-          htmlCustomText: 'This custom text should be <strong>saved</strong>, but not shown.'
-        };
-
-        inputValueAndTriggerEvent(armorClassSection.editElements.armorClass, expectedValues.armorClass);
-        inputValueAndTriggerEvent(armorClassSection.editElements.armorType, expectedValues.armorType);
-        armorClassSection.editElements.hasShield.click();
-
-        armorClassSection.editElements.useCustomText.click();
-        inputValueAndTriggerEvent(armorClassSection.editElements.customText, expectedValues.customText);
-
-        armorClassSection.editElements.submitForm();
-
-        verifyModel(expectedValues);
-        verifyEditModeView(expectedValues);
-        verifyShowModeView(expectedValues.htmlCustomText);
-
-        const json = verifyJsonExport(expectedValues);
-
-        reset();
-        armorClassSection.importFromJson(json);
-
-        verifyModel(expectedValues);
-        verifyEditModeView(expectedValues);
-        verifyShowModeView(expectedValues.htmlCustomText);
-      });
-
-      it('should display an error if the armor class field is not a valid number', () => {
-        inputValueAndTriggerEvent(armorClassSection.editElements.armorClass, '');
-
-        armorClassSection.editElements.submitForm();
-
-        expect(armorClassSection).toBeInMode('edit');
-        expect(armorClassSection).toHaveError(
-          armorClassSection.editElements.armorClass,
-          'Armor Class must be a valid number.');
-      });
-
-      it('should display only one error if the armor class is not a valid number and custom text field is blank', () => {
-        inputValueAndTriggerEvent(armorClassSection.editElements.armorClass, '');
-        inputValueAndTriggerEvent(armorClassSection.editElements.customText, '');
-
-        armorClassSection.editElements.submitForm();
-
-        expect(armorClassSection).toBeInMode('edit');
-        expect(armorClassSection).toHaveError(
-          armorClassSection.editElements.armorClass,
-          'Armor Class must be a valid number.');
-      });
-    });
+    /* eslint-enable indent, no-unexpected-multiline */
   });
 });
 

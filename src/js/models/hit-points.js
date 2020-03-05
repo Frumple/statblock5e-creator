@@ -1,5 +1,6 @@
 import PropertyLineModel from './property-line-model.js';
 import { formatModifierOperator, formatModifierNumber } from '../helpers/string-formatter.js';
+import { convertToInteger } from '../helpers/number-helpers.js';
 
 export default class HitPoints extends PropertyLineModel {
   constructor(abilities) {
@@ -74,5 +75,16 @@ export default class HitPoints extends PropertyLineModel {
     const modifierNumber = formatModifierNumber(constitutionHitPoints);
 
     return `${modifierOperator} ${modifierNumber}`;
+  }
+
+  fromOpen5e(json) {
+    this.reset();
+
+    const hitDice = json['hit_dice'];
+    const hitDiceTokens = hitDice.split(/[+d]/);
+
+    this.useHitDie = true;
+    this.hitDieQuantity = convertToInteger(hitDiceTokens[0]);
+    this.hitDieSize = convertToInteger(hitDiceTokens[1]);
   }
 }

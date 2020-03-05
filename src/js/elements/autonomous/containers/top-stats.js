@@ -33,6 +33,17 @@ export default class TopStats extends StatsContainer {
     this.sections.get('advancedStats').updateSensesView();
   }
 
+  importFromOpen5e(json) {
+    // Import ability scores and proficiency bonus first before other stats
+    // that depend on them.
+    // (i.e. CON HP, saving throws, skills, passive perception)
+
+    // TODO
+    // this.sections.get('abilityScores').importFromOpen5e(json.abilityScores);
+    // this.sections.get('advancedStats').importFromOpen5e(json);
+    this.sections.get('basicStats').importFromOpen5e(json);
+  }
+
   importFromJson(json) {
     // Import ability scores and proficiency bonus first before other stats
     // that depend on them.

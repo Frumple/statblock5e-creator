@@ -84,7 +84,7 @@ export default class SpeedSection extends propertyLineSectionModule.PropertyLine
     if (speedModel.useCustomText) {
       this.showElements.text.innerHTMLSanitized = speedModel.htmlCustomText;
     } else {
-      this.showElements.text.textContent = speedModel.nonCustomText;
+      this.showElements.text.textContent = speedModel.normalText;
     }
   }
 }

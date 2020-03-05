@@ -75,7 +75,7 @@ export default class ArmorClassSection extends propertyLineSectionModule.Propert
     if (CurrentContext.creature.armorClass.useCustomText) {
       this.showElements.text.innerHTMLSanitized = armorClassModel.htmlCustomText;
     } else {
-      this.showElements.text.textContent = armorClassModel.nonCustomText;
+      this.showElements.text.textContent = armorClassModel.normalText;
     }
   }
 }
