@@ -6,8 +6,7 @@
   "dependencies": {
     "clipboard": "^2.0.4",
     "dompurify": "^2.0.8",
-    "js-beautify": "^1.10.3",
-    "unfetch": "^4.1.0"
+    "js-beautify": "^1.10.3"
   },
   "devDependencies": {
     "@babel/cli": "^7.7.4",

@@ -1,5 +1,3 @@
-import fetch from 'unfetch';
-
 export default class Open5eClient {
   constructor() {
     this.cachedCreatureLists = new Map();
