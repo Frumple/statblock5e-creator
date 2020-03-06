@@ -54,20 +54,19 @@ export default class SavingThrows extends PropertyLineModel {
 }
 
 class SavingThrow {
-  constructor(ability, challengeRatingModel) {
-    this.ability = ability;
+  constructor(abilityModel, challengeRatingModel) {
+    this.abilityModel = abilityModel;
     this.challengeRatingModel = challengeRatingModel;
     this.reset();
   }
 
   reset() {
     this.isEnabled = false;
-    this.isProficient = false;
     this.override = null;
   }
 
   get text() {
-    const abbreviation = capitalizeFirstLetter(this.ability.abbreviation);
+    const abbreviation = capitalizeFirstLetter(this.abilityModel.abbreviation);
 
     return `${abbreviation} ${this.formattedModifier}`;
   }
@@ -80,11 +79,9 @@ class SavingThrow {
         return this.override;
       }
 
-      if (this.isProficient) {
-        savingThrowModifier += this.challengeRatingModel.proficiencyBonus;
-      }
+      savingThrowModifier += this.challengeRatingModel.proficiencyBonus;
     }
-    savingThrowModifier += this.ability.modifier;
+    savingThrowModifier += this.abilityModel.modifier;
 
     return savingThrowModifier;
   }
@@ -95,14 +92,12 @@ class SavingThrow {
 
   fromJson(json) {
     this.isEnabled = json.isEnabled;
-    this.isProficient = json.isProficient;
     this.override = json.override;
   }
 
   toJson() {
     return {
       isEnabled: this.isEnabled,
-      isProficient: this.isProficient,
       override: this.override
     };
   }
