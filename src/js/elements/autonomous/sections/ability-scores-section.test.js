@@ -178,19 +178,9 @@ describe('when the show section is clicked', () => {
         ${'maximum values'}     | ${999}   | ${999}   | ${999}   | ${999}   | ${999}   | ${999}   | ${494}  | ${494}  | ${494}  | ${494}  | ${494}  | ${494}
       `
       ('$description: {strScore="$strScore", dexScore="$dexScore", conScore="$conScore", intScore="$intScore", wisScore="$wisScore", chaScore="$chaScore"} => {strMod="$strMod", dexMod="$dexMod", conMod="$conMod", intMod="$intMod", wisMod="$wisMod", chaMod="$chaMod"}',
-      ({strScore, dexScore, conScore, intScore, wisScore, chaScore, strMod, dexMod, conMod, intMod, wisMod, chaMod}) => { // eslint-disable-line no-unused-vars
-
-        // Collect expected values into nested JS object structure
+      ({strScore, dexScore, conScore, intScore, wisScore, chaScore, strMod, dexMod, conMod, intMod, wisMod, chaMod}) => {
         const expectedAbilities = createDefaultExpectedAbilities();
-        for (const [key, value] of abilitiesModel.entries) {
-          const abbreviation = value.abbreviation;
-          const score = eval(`${abbreviation}Score`);
-          const modifier = eval(`${abbreviation}Mod`);
-
-          const expectedAbility = expectedAbilities.get(key);
-          expectedAbility.score = score;
-          expectedAbility.modifier = modifier;
-        }
+        populateExpectedAbilities(expectedAbilities, strScore, dexScore, conScore, intScore, wisScore, chaScore, strMod, dexMod, conMod, intMod, wisMod, chaMod);
 
         for (const key of abilitiesModel.keys) {
           const score = expectedAbilities.get(key).score;
@@ -219,6 +209,48 @@ describe('when the show section is clicked', () => {
   });
 });
 
+describe('when importing from Open5e', () => {
+  describe('should import as normal', () => {
+    /* eslint-disable indent, no-unexpected-multiline */
+    it.each
+    `
+      description             | strScore | dexScore | conScore | intScore | wisScore | chaScore | strMod  | dexMod  | conMod  | intMod  | wisMod  | chaMod
+      ${'ancient red dragon'} | ${30}    | ${10}    | ${29}    | ${18}    | ${15}    | ${23}    | ${10}   | ${0}    | ${9}    | ${4}    | ${2}    | ${6}
+      ${'basilisk'}           | ${16}    | ${8}     | ${15}    | ${2}     | ${8}     | ${7}     | ${3}    | ${-1}   | ${2}    | ${-4}   | ${-1}   | ${-2}
+      ${'commoner'}           | ${10}    | ${10}    | ${10}    | ${10}    | ${10}    | ${10}    | ${0}    | ${0}    | ${0}    | ${0}    | ${0}    | ${0}
+      ${'gelatinous cube'}    | ${14}    | ${3}     | ${20}    | ${1}     | ${6}     | ${1}     | ${2}    | ${-4}   | ${5}    | ${-5}   | ${-2}   | ${-5}
+      ${'lich'}               | ${11}    | ${16}    | ${16}    | ${20}    | ${14}    | ${16}    | ${0}    | ${3}    | ${3}    | ${5}    | ${2}    | ${3}
+      ${'mage'}               | ${9}     | ${14}    | ${11}    | ${17}    | ${12}    | ${11}    | ${-1}   | ${2}    | ${0}    | ${3}    | ${1}    | ${0}
+      ${'phase spider'}       | ${15}    | ${15}    | ${12}    | ${6}     | ${10}    | ${6}     | ${2}    | ${2}    | ${1}    | ${-2}   | ${0}    | ${-2}
+      ${'priest'}             | ${10}    | ${10}    | ${12}    | ${13}    | ${16}    | ${13}    | ${0}    | ${0}    | ${1}    | ${1}    | ${3}    | ${1}
+      ${'treant'}             | ${23}    | ${8}     | ${21}    | ${12}    | ${16}    | ${12}    | ${6}    | ${-1}   | ${5}    | ${1}    | ${3}    | ${1}
+      ${'vampire'}            | ${18}    | ${18}    | ${18}    | ${17}    | ${15}    | ${18}    | ${4}    | ${4}    | ${4}    | ${3}    | ${2}    | ${4}
+      ${'minimum values'}     | ${1}     | ${1}     | ${1}     | ${1}     | ${1}     | ${1}     | ${-5}   | ${-5}   | ${-5}   | ${-5}   | ${-5}   | ${-5}
+      ${'maximum values'}     | ${999}   | ${999}   | ${999}   | ${999}   | ${999}   | ${999}   | ${494}  | ${494}  | ${494}  | ${494}  | ${494}  | ${494}
+    `
+    ('$description: {strScore="$strScore", dexScore="$dexScore", conScore="$conScore", intScore="$intScore", wisScore="$wisScore", chaScore="$chaScore"} => {strMod="$strMod", dexMod="$dexMod", conMod="$conMod", intMod="$intMod", wisMod="$wisMod", chaMod="$chaMod"}',
+    ({strScore, dexScore, conScore, intScore, wisScore, chaScore, strMod, dexMod, conMod, intMod, wisMod, chaMod}) => {
+      const expectedAbilities = createDefaultExpectedAbilities();
+      populateExpectedAbilities(expectedAbilities, strScore, dexScore, conScore, intScore, wisScore, chaScore, strMod, dexMod, conMod, intMod, wisMod, chaMod);
+
+      const json = {
+        strength: strScore,
+        dexterity: dexScore,
+        constitution: conScore,
+        intelligence: intScore,
+        wisdom: wisScore,
+        charisma: chaScore
+      };
+
+      abilityScoresSection.importFromOpen5e(json);
+
+      verifyModel(expectedAbilities);
+      verifyEditModeView(expectedAbilities);
+      verifyShowModeView(expectedAbilities);
+    });
+  });
+});
+
 function reset() {
   abilitiesModel.reset();
   abilityScoresSection.updateView();
@@ -236,6 +268,19 @@ function createDefaultExpectedAbilities() {
   }
 
   return expectedAbilities;
+}
+
+// eslint-disable-next-line no-unused-vars
+function populateExpectedAbilities(expectedAbilities, strScore, dexScore, conScore, intScore, wisScore, chaScore, strMod, dexMod, conMod, intMod, wisMod, chaMod) {
+  for (const [key, value] of abilitiesModel.entries) {
+    const abbreviation = value.abbreviation;
+    const score = eval(`${abbreviation}Score`);
+    const modifier = eval(`${abbreviation}Mod`);
+
+    const expectedAbility = expectedAbilities.get(key);
+    expectedAbility.score = score;
+    expectedAbility.modifier = modifier;
+  }
 }
 
 function verifyModel(expectedAbilities) {

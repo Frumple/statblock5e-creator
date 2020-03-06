@@ -41,6 +41,12 @@ export default class Abilities extends Model {
     return Object.fromEntries(transformedEntries);
   }
 
+  fromOpen5e(json) {
+    for (const [key, value] of this.entries) {
+      value.fromOpen5e(json[key]);
+    }
+  }
+
   fromJson(json) {
     for (const [key, value] of this.entries) {
       value.fromJson(json[key]);
@@ -99,10 +105,13 @@ class Ability {
     };
   }
 
-  fromJson(score) {
+  fromOpen5e(score) {
     this.score = score;
   }
 
+  fromJson(score) {
+    this.score = score;
+  }
 
   toJson() {
     return this.score;

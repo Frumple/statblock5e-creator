@@ -39,7 +39,7 @@ export default class TopStats extends StatsContainer {
     // (i.e. CON HP, saving throws, skills, passive perception)
 
     // TODO
-    // this.sections.get('abilityScores').importFromOpen5e(json.abilityScores);
+    this.sections.get('abilityScores').importFromOpen5e(json);
     // this.sections.get('advancedStats').importFromOpen5e(json);
     this.sections.get('basicStats').importFromOpen5e(json);
   }
