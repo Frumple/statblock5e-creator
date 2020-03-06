@@ -72,4 +72,20 @@ export default class Speed extends PropertyLineModel {
 
     return list.join(', ');
   }
+
+  fromOpen5e(json) {
+    this.reset();
+
+    if ('walk' in json.speed) {
+      this.walk = json.speed.walk;
+    } else {
+      this.walk = null;
+    }
+
+    if ('burrow' in json.speed) this.burrow = json.speed.burrow;
+    if ('climb' in json.speed) this.climb = json.speed.climb;
+    if ('fly' in json.speed) this.fly = json.speed.fly;
+    if ('hover' in json.speed) this.hover = json.speed.hover;
+    if ('swim' in json.speed) this.swim = json.speed.swim;
+  }
 }
