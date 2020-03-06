@@ -41,6 +41,14 @@ export default class SavingThrows extends PropertyLineModel {
     return this.text;
   }
 
+  fromOpen5e(json) {
+    this.reset();
+
+    for (const value of this.values) {
+      value.fromOpen5e(json);
+    }
+  }
+
   fromJson(json) {
     for (const [key, value] of this.entries) {
       value.fromJson(json[key]);
@@ -72,7 +80,7 @@ class SavingThrow {
   }
 
   get modifier() {
-    let savingThrowModifier = 0;
+    let savingThrowModifier = this.abilityModel.modifier;
 
     if (this.isEnabled) {
       if (this.override !== null) {
@@ -81,13 +89,28 @@ class SavingThrow {
 
       savingThrowModifier += this.challengeRatingModel.proficiencyBonus;
     }
-    savingThrowModifier += this.abilityModel.modifier;
 
     return savingThrowModifier;
   }
 
   get formattedModifier() {
     return formatModifier(this.modifier);
+  }
+
+  fromOpen5e(json) {
+    const key = `${this.abilityModel.name}_save`;
+
+    if (json[key] !== null) {
+      this.isEnabled = true;
+
+      // The Open5e saving throw value should match the calculated ability modifier + proficiency bonus.
+      // If it doesn't, set the value as an override.
+      if (json[key] !== this.abilityModel.modifier + this.challengeRatingModel.proficiencyBonus) {
+        this.override = json[key];
+      }
+    } else {
+      this.isEnabled = false;
+    }
   }
 
   fromJson(json) {

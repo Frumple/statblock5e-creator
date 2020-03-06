@@ -6,12 +6,12 @@ export default class Abilities extends Model {
     super();
 
     this.abilities = {
-      'strength' : new Ability('str'),
-      'dexterity' : new Ability('dex'),
-      'constitution' : new Ability('con'),
-      'intelligence' : new Ability('int'),
-      'wisdom' : new Ability('wis'),
-      'charisma' : new Ability('cha'),
+      'strength' : new Ability('strength', 'str'),
+      'dexterity' : new Ability('dexterity', 'dex'),
+      'constitution' : new Ability('constitution', 'con'),
+      'intelligence' : new Ability('intelligence', 'int'),
+      'wisdom' : new Ability('wisdom', 'wis'),
+      'charisma' : new Ability('charisma', 'cha'),
     };
     Object.freeze(this.abilities);
 
@@ -82,7 +82,8 @@ export default class Abilities extends Model {
 }
 
 class Ability {
-  constructor(abbreviation) {
+  constructor(name, abbreviation) {
+    this.name = name;
     this.abbreviation = abbreviation;
     this.reset();
   }

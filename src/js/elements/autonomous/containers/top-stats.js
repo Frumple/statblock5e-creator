@@ -1,5 +1,4 @@
 import StatsContainer from './stats-container.js';
-import currentContext from '../../../models/current-context.js';
 
 export default class TopStats extends StatsContainer {
   static get elementName() { return 'top-stats'; }
@@ -38,9 +37,8 @@ export default class TopStats extends StatsContainer {
     // that depend on them.
     // (i.e. CON HP, saving throws, skills, passive perception)
 
-    // TODO
     this.sections.get('abilityScores').importFromOpen5e(json);
-    // this.sections.get('advancedStats').importFromOpen5e(json);
+    this.sections.get('advancedStats').importFromOpen5e(json);
     this.sections.get('basicStats').importFromOpen5e(json);
   }
 
@@ -49,14 +47,7 @@ export default class TopStats extends StatsContainer {
     // that depend on them.
     // (i.e. CON HP, saving throws, skills, passive perception)
 
-    // Special path to import JSON files created with version 0.1.1 or earlier
-    if ('attributes' in json) {
-      this.sections.get('abilityScores').importFromJson(json.attributes.abilityScores);
-      currentContext.creature.challengeRating.proficiencyBonus = json.attributes.proficiencyBonus;
-    } else {
-      this.sections.get('abilityScores').importFromJson(json.abilityScores);
-    }
-
+    this.sections.get('abilityScores').importFromJson(json.abilityScores);
     this.sections.get('advancedStats').importFromJson(json);
     this.sections.get('basicStats').importFromJson(json);
   }

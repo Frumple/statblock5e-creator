@@ -168,7 +168,7 @@ describe('when the show section is clicked', () => {
         populateAbilityScoresAndProficiencyBonus(strScore, dexScore, conScore, intScore, wisScore, chaScore, profBonus);
 
         const expectedSavingThrows = createDefaultExpectedSavingThrows();
-        populateExpectedSavingThrows(expectedSavingThrows, strEnabled, dexEnabled, conEnabled, intEnabled, wisEnabled, chaEnabled, strOverride, dexOverride, conOverride, intOverride, wisOverride, chaOverride);
+        populateExpectedSavingThrows(expectedSavingThrows, profBonus, strEnabled, dexEnabled, conEnabled, intEnabled, wisEnabled, chaEnabled, strOverride, dexOverride, conOverride, intOverride, wisOverride, chaOverride);
 
         for (const [key, value] of savingThrowsModel.entries) {
           const abbreviation = value.abilityModel.abbreviation;
@@ -179,12 +179,15 @@ describe('when the show section is clicked', () => {
 
           if (enabled) {
             elements.enable.click();
-          }
 
-          if (override !== '') {
-            inputValueAndTriggerEvent(elements.override, override);
+            if (override !== '') {
+              inputValueAndTriggerEvent(elements.override, override);
+            }
           }
         }
+
+        verifyModel(expectedSavingThrows);
+        verifyEditModeView(expectedSavingThrows);
 
         savingThrowsSection.editElements.submitForm();
 
@@ -199,9 +202,56 @@ describe('when the show section is clicked', () => {
         populateAbilityScoresAndProficiencyBonus(strScore, dexScore, conScore, intScore, wisScore, chaScore, profBonus);
         savingThrowsSection.importFromJson(json);
 
+        verifyModel(expectedSavingThrows);
+        verifyEditModeView(expectedSavingThrows);
         verifyShowModeView(expectedText);
       });
       /* eslint-enable indent, no-unexpected-multiline */
+    });
+  });
+});
+
+describe('when importing from Open5e', () => {
+  describe('should import as normal', () => {
+    /* eslint-disable indent, no-unexpected-multiline */
+    it.each
+    `
+      description              | strScore | dexScore | conScore | intScore | wisScore | chaScore | profBonus | strSave | dexSave | conSave | intSave | wisSave | chaSave | expectedText
+      ${'ancient gold dragon'} | ${30}    | ${14}    | ${29}    | ${18}    | ${17}    | ${28}    | ${7}      | ${null} | ${9}    | ${16}   | ${null} | ${10}   | ${16}   | ${'Dex +9, Con +16, Wis +10, Cha +16'}
+      ${'gladiator'}           | ${18}    | ${15}    | ${16}    | ${10}    | ${12}    | ${15}    | ${3}      | ${7}    | ${5}    | ${6}    | ${null} | ${null} | ${null} | ${'Str +7, Dex +5, Con +6'}
+      ${'lich'}                | ${11}    | ${16}    | ${16}    | ${20}    | ${14}    | ${16}    | ${7}      | ${null} | ${null} | ${10}   | ${12}   | ${9}    | ${null} | ${'Con +10, Int +12, Wis +9'}
+      ${'mage'}                | ${9}     | ${14}    | ${11}    | ${17}    | ${12}    | ${11}    | ${3}      | ${null} | ${null} | ${null} | ${6}    | ${4}    | ${null} | ${'Int +6, Wis +4'}
+      ${'mummy lord'}          | ${18}    | ${10}    | ${17}    | ${11}    | ${18}    | ${16}    | ${5}      | ${null} | ${null} | ${8}    | ${5}    | ${9}    | ${8}    | ${'Con +8, Int +5, Wis +9, Cha +8'}
+      ${'storm giant'}         | ${29}    | ${14}    | ${20}    | ${16}    | ${18}    | ${18}    | ${5}      | ${14}   | ${null} | ${10}   | ${null} | ${9}    | ${9}    | ${'Str +14, Con +10, Wis +9, Cha +9'}
+    `
+    ('$description',
+    ({strScore, dexScore, conScore, intScore, wisScore, chaScore, profBonus, strSave, dexSave, conSave, intSave, wisSave, chaSave, expectedText}) => {
+      populateAbilityScoresAndProficiencyBonus(strScore, dexScore, conScore, intScore, wisScore, chaScore, profBonus);
+
+      const expectedSavingThrows = createDefaultExpectedSavingThrows();
+      populateExpectedSavingThrows(expectedSavingThrows,
+        profBonus,
+        (strSave !== null),
+        (dexSave !== null),
+        (conSave !== null),
+        (intSave !== null),
+        (wisSave !== null),
+        (chaSave !== null));
+
+      const json = {
+        strength_save: strSave,
+        dexterity_save: dexSave,
+        constitution_save: conSave,
+        intelligence_save: intSave,
+        wisdom_save: wisSave,
+        charisma_save: chaSave,
+      };
+
+      savingThrowsSection.importFromOpen5e(json);
+
+      verifyModel(expectedSavingThrows);
+      verifyEditModeView(expectedSavingThrows);
+      verifyShowModeView(expectedText);
     });
   });
 });
@@ -230,13 +280,15 @@ function reset() {
 }
 
 function populateAbilityScoresAndProficiencyBonus(strScore, dexScore, conScore, intScore, wisScore, chaScore, profBonus) {
-  challengeRatingModel.proficiencyBonus = profBonus;
-
   for (const [key, value] of savingThrowsModel.entries) {
     const abbreviation = value.abilityModel.abbreviation;
     const score = eval(`${abbreviation}Score`);
     abilitiesModel.abilities[key].score = score;
   }
+
+  challengeRatingModel.proficiencyBonus = profBonus;
+
+  savingThrowsSection.updateView();
 }
 
 function createDefaultExpectedSavingThrows() {
@@ -253,16 +305,27 @@ function createDefaultExpectedSavingThrows() {
 }
 
 // eslint-disable-next-line no-unused-vars
-function populateExpectedSavingThrows(expectedSavingThrows, strEnabled, dexEnabled, conEnabled, intEnabled, wisEnabled, chaEnabled, strOverride, dexOverride, conOverride, intOverride, wisOverride, chaOverride) {
+function populateExpectedSavingThrows(expectedSavingThrows, profBonus, strEnabled, dexEnabled, conEnabled, intEnabled, wisEnabled, chaEnabled, strOverride = '', dexOverride = '', conOverride = '', intOverride = '', wisOverride = '', chaOverride = '') {
   for (const [key, value] of savingThrowsModel.entries) {
     const abbreviation = value.abilityModel.abbreviation;
-    const modifier = value.abilityModel.modifier;
     const enabled = eval(`${abbreviation}Enabled`);
-    const override = eval(`${abbreviation}Override`);
+    const override = nullIfEmptyString(eval(`${abbreviation}Override`));
+
+    let modifier;
+
+    if (override) {
+      modifier = override;
+    } else {
+      modifier = value.abilityModel.modifier;
+
+      if (enabled) {
+        modifier += profBonus;
+      }
+    }
 
     expectedSavingThrows[key] = {
       isEnabled: enabled,
-      override: nullIfEmptyString(override),
+      override: override,
       modifier: modifier
     };
   }
