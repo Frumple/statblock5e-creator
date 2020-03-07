@@ -13,7 +13,7 @@ export default class SavingThrows extends PropertyLineModel {
   }
 
   reset() {
-    for(const savingThrow of Object.values(this.savingThrows)) {
+    for(const savingThrow of this.values) {
       savingThrow.reset();
     }
   }
@@ -50,6 +50,8 @@ export default class SavingThrows extends PropertyLineModel {
   }
 
   fromJson(json) {
+    this.reset();
+
     for (const [key, value] of this.entries) {
       value.fromJson(json[key]);
     }

@@ -42,12 +42,16 @@ export default class Abilities extends Model {
   }
 
   fromOpen5e(json) {
+    this.reset();
+
     for (const [key, value] of this.entries) {
       value.fromOpen5e(json[key]);
     }
   }
 
   fromJson(json) {
+    this.reset();
+
     for (const [key, value] of this.entries) {
       value.fromJson(json[key]);
     }

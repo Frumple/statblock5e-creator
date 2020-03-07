@@ -72,6 +72,8 @@ export default class Skills extends PropertyLineModel {
   }
 
   fromJson(json) {
+    this.reset();
+
     for (const [key, value] of this.entries) {
       value.fromJson(json[key]);
     }
