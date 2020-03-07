@@ -76,16 +76,16 @@ export default class Skills extends PropertyLineModel {
 }
 
 class Skill {
-  constructor(prettyName, ability, challengeRatingModel) {
+  constructor(prettyName, abilityModel, challengeRatingModel) {
     this.prettyName = prettyName;
-    this.ability = ability;
+    this.abilityModel = abilityModel;
     this.challengeRatingModel = challengeRatingModel;
     this.reset();
   }
 
   reset() {
     this.isEnabled = false;
-    this.isProficient = false;
+    this.hasExpertise = false;
     this.override = null;
   }
 
@@ -94,35 +94,37 @@ class Skill {
   }
 
   get passiveScore() {
-    let passiveScore = 10;
+    let passiveScore = 10 + this.abilityModel.modifier;
 
     if (this.isEnabled) {
       if (this.override !== null) {
         return passiveScore + this.override;
       }
 
-      if (this.isProficient) {
+      passiveScore += this.challengeRatingModel.proficiencyBonus;
+
+      if (this.hasExpertise) {
         passiveScore += this.challengeRatingModel.proficiencyBonus;
       }
     }
-    passiveScore += this.ability.modifier;
 
     return passiveScore;
   }
 
   get modifier() {
-    let skillModifier = 0;
+    let skillModifier = this.abilityModel.modifier;
 
     if (this.isEnabled) {
       if (this.override !== null) {
         return this.override;
       }
 
-      if (this.isProficient) {
+      skillModifier += this.challengeRatingModel.proficiencyBonus;
+
+      if (this.hasExpertise) {
         skillModifier += this.challengeRatingModel.proficiencyBonus;
       }
     }
-    skillModifier += this.ability.modifier;
 
     return skillModifier;
   }
@@ -133,14 +135,14 @@ class Skill {
 
   fromJson(json) {
     this.isEnabled = json.isEnabled;
-    this.isProficient = json.isProficient;
+    this.hasExpertise = json.hasExpertise;
     this.override = json.override;
   }
 
   toJson() {
     return {
       isEnabled: this.isEnabled,
-      isProficient: this.isProficient,
+      hasExpertise: this.hasExpertise,
       override: this.override
     };
   }

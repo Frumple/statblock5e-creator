@@ -161,7 +161,7 @@ describe('when the show section is clicked', () => {
         ${'mage'}                | ${9}     | ${14}    | ${11}    | ${17}    | ${12}    | ${11}    | ${3}      | ${false}   | ${false}   | ${false}   | ${true}    | ${true}    | ${false}   | ${''}       | ${''}       | ${''}       | ${''}       | ${''}       | ${''}       | ${'Int +6, Wis +4'}
         ${'mummy lord'}          | ${18}    | ${10}    | ${17}    | ${11}    | ${18}    | ${16}    | ${5}      | ${false}   | ${false}   | ${true}    | ${true}    | ${true}    | ${true}    | ${''}       | ${''}       | ${''}       | ${''}       | ${''}       | ${''}       | ${'Con +8, Int +5, Wis +9, Cha +8'}
         ${'storm giant'}         | ${29}    | ${14}    | ${20}    | ${16}    | ${18}    | ${18}    | ${5}      | ${true}    | ${false}   | ${true}    | ${false}   | ${true}    | ${true}    | ${''}       | ${''}       | ${''}       | ${''}       | ${''}       | ${''}       | ${'Str +14, Con +10, Wis +9, Cha +9'}
-        ${'override test'}       | ${10}    | ${10}    | ${10}    | ${10}    | ${10}    | ${10}    | ${2}      | ${true}    | ${true}    | ${true}    | ${true}    | ${true}    | ${true}    | ${1}        | ${2}        | ${3}        | ${4}        | ${5}        | ${6}        | ${'Str +1, Dex +2, Con +3, Int +4, Wis +5, Cha +6'}
+        ${'override test'}       | ${10}    | ${10}    | ${10}    | ${10}    | ${10}    | ${10}    | ${2}      | ${true}    | ${true}    | ${true}    | ${true}    | ${true}    | ${true}    | ${-2}       | ${-1}       | ${0}        | ${1}        | ${2}        | ${3}        | ${'Str –2, Dex –1, Con +0, Int +1, Wis +2, Cha +3'}
       `
       ('$description',
       ({strScore, dexScore, conScore, intScore, wisScore, chaScore, profBonus, strEnabled, dexEnabled, conEnabled, intEnabled, wisEnabled, chaEnabled, strOverride, dexOverride, conOverride, intOverride, wisOverride, chaOverride, expectedText}) => {
@@ -311,14 +311,12 @@ function populateExpectedSavingThrows(expectedSavingThrows, profBonus, strEnable
     const enabled = eval(`${abbreviation}Enabled`);
     const override = nullIfEmptyString(eval(`${abbreviation}Override`));
 
-    let modifier;
+    let modifier = value.abilityModel.modifier;
 
-    if (override) {
-      modifier = override;
-    } else {
-      modifier = value.abilityModel.modifier;
-
-      if (enabled) {
+    if (enabled) {
+      if (override !== null) {
+        modifier = override;
+      } else {
         modifier += profBonus;
       }
     }

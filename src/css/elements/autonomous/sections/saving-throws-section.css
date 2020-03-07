@@ -1,6 +1,6 @@
 .saving-throws-edit-section {
   display: grid;
-  grid-template-columns: 20px 150px 40px auto auto;
+  grid-template-columns: 20px auto 40px 60px 80px;
   grid-template-rows: auto 5px auto auto auto auto auto auto;
   grid-column-gap: 5px;
   align-items: center;

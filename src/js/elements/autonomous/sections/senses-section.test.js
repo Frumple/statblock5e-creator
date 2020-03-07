@@ -269,24 +269,24 @@ describe('should calculate the passive perception based on the following conditi
   /* eslint-disable indent, no-unexpected-multiline */
   it.each
   `
-    description                                           | wisdomScore | proficiencyBonus | perceptionEnabled | perceptionProficient | perceptionOverride | expectedPassivePerception
-    ${'perception disabled, not proficient, no override'} | ${10}       | ${2}             | ${false}          | ${false}             | ${''}              | ${10}
-    ${'perception enabled, not proficient, no override'}  | ${10}       | ${2}             | ${true}           | ${false}             | ${''}              | ${10}
-    ${'perception enabled, proficient, no override'}      | ${10}       | ${2}             | ${true}           | ${true}              | ${''}              | ${12}
-    ${'perception enabled, not proficient, override'}     | ${10}       | ${2}             | ${true}           | ${false}             | ${7}               | ${17}
-    ${'perception enabled, proficient, override'}         | ${10}       | ${2}             | ${true}           | ${true}              | ${8}               | ${18}
-    ${'- wisdom score and - proficiency bonus'}           | ${3}        | ${-1}            | ${true}           | ${true}              | ${''}              | ${5}
-    ${'- wisdom score and 0 proficiency bonus'}           | ${3}        | ${0}             | ${true}           | ${true}              | ${''}              | ${6}
-    ${'- wisdom score and + proficiency bonus'}           | ${3}        | ${3}             | ${true}           | ${true}              | ${''}              | ${9}
-    ${'0 wisdom score and - proficiency bonus'}           | ${10}       | ${-1}            | ${true}           | ${true}              | ${''}              | ${9}
-    ${'0 wisdom score and 0 proficiency bonus'}           | ${10}       | ${0}             | ${true}           | ${true}              | ${''}              | ${10}
-    ${'0 wisdom score and + proficiency bonus'}           | ${10}       | ${3}             | ${true}           | ${true}              | ${''}              | ${13}
-    ${'+ wisdom score and - proficiency bonus'}           | ${14}       | ${-1}            | ${true}           | ${true}              | ${''}              | ${11}
-    ${'+ wisdom score and 0 proficiency bonus'}           | ${14}       | ${0}             | ${true}           | ${true}              | ${''}              | ${12}
-    ${'+ wisdom score and + proficiency bonus'}           | ${14}       | ${3}             | ${true}           | ${true}              | ${''}              | ${15}
+    description                                       | wisdomScore | proficiencyBonus | perceptionEnabled | perceptionExpertise | perceptionOverride | expectedPassivePerception
+    ${'perception disabled, not expert, no override'} | ${10}       | ${2}             | ${false}          | ${false}            | ${''}              | ${10}
+    ${'perception enabled, not expert, no override'}  | ${10}       | ${2}             | ${true}           | ${false}            | ${''}              | ${12}
+    ${'perception enabled, expert, no override'}      | ${10}       | ${2}             | ${true}           | ${true}             | ${''}              | ${14}
+    ${'perception enabled, not expert, override'}     | ${10}       | ${2}             | ${true}           | ${false}            | ${7}               | ${17}
+    ${'perception enabled, expert, override'}         | ${10}       | ${2}             | ${true}           | ${true}             | ${8}               | ${18}
+    ${'- wisdom score and - proficiency bonus'}       | ${3}        | ${-1}            | ${true}           | ${false}            | ${''}              | ${5}
+    ${'- wisdom score and 0 proficiency bonus'}       | ${3}        | ${0}             | ${true}           | ${false}            | ${''}              | ${6}
+    ${'- wisdom score and + proficiency bonus'}       | ${3}        | ${3}             | ${true}           | ${false}            | ${''}              | ${9}
+    ${'0 wisdom score and - proficiency bonus'}       | ${10}       | ${-1}            | ${true}           | ${false}            | ${''}              | ${9}
+    ${'0 wisdom score and 0 proficiency bonus'}       | ${10}       | ${0}             | ${true}           | ${false}            | ${''}              | ${10}
+    ${'0 wisdom score and + proficiency bonus'}       | ${10}       | ${3}             | ${true}           | ${false}            | ${''}              | ${13}
+    ${'+ wisdom score and - proficiency bonus'}       | ${14}       | ${-1}            | ${true}           | ${false}            | ${''}              | ${11}
+    ${'+ wisdom score and 0 proficiency bonus'}       | ${14}       | ${0}             | ${true}           | ${false}            | ${''}              | ${12}
+    ${'+ wisdom score and + proficiency bonus'}       | ${14}       | ${3}             | ${true}           | ${false}            | ${''}              | ${15}
   `
-  ('$description: {wisdomScore="$wisdomScore", proficiencyBonus="$proficiencyBonus", perceptionEnabled="$perceptionEnabled", perceptionProficient="$perceptionProficient", perceptionOverride="$perceptionOverride"} => $expectedPassivePerception',
-  ({wisdomScore, proficiencyBonus, perceptionEnabled, perceptionProficient, perceptionOverride, expectedPassivePerception}) => {
+  ('$description: {wisdomScore="$wisdomScore", proficiencyBonus="$proficiencyBonus", perceptionEnabled="$perceptionEnabled", perceptionExpertise="$perceptionExpertise", perceptionOverride="$perceptionOverride"} => $expectedPassivePerception',
+  ({wisdomScore, proficiencyBonus, perceptionEnabled, perceptionExpertise, perceptionOverride, expectedPassivePerception}) => {
     const expectedText = `passive Perception ${expectedPassivePerception}`;
 
     abilitiesModel.abilities['wisdom'].score = wisdomScore;
@@ -294,7 +294,7 @@ describe('should calculate the passive perception based on the following conditi
 
     const skill = skillsModel.skills['perception'];
     skill.isEnabled = perceptionEnabled;
-    skill.isProficient = perceptionProficient;
+    skill.hasExpertise = perceptionExpertise;
     skill.override = nullIfEmptyString(perceptionOverride);
 
     sensesSection.updateViewOnAttributeChange();
