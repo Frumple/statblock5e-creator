@@ -249,6 +249,60 @@ describe('when the show section is clicked', () => {
   });
 });
 
+describe('when importing from Open5e', () => {
+  describe('should import as normal', () => {
+    /* eslint-disable indent, no-unexpected-multiline */
+    it.each
+    `
+      description              | strScore | dexScore | conScore | intScore | wisScore | chaScore | profBonus | skills                                                       | expectedText
+      ${'ancient gold dragon'} | ${30}    | ${14}    | ${29}    | ${18}    | ${17}    | ${28}    | ${7}      | ${{insight: 10, perception: 17, persuasion: 16, stealth: 9}} | ${'Insight +10, Perception +17, Persuasion +16, Stealth +9'}
+      ${'gladiator'}           | ${18}    | ${15}    | ${16}    | ${10}    | ${12}    | ${15}    | ${3}      | ${{athletics: 10, intimidation: 5}}                          | ${'Athletics +10, Intimidation +5'}
+      ${'lich'}                | ${11}    | ${16}    | ${16}    | ${20}    | ${14}    | ${16}    | ${7}      | ${{arcana: 18, history: 12, insight: 9, perception: 9}}      | ${'Arcana +18, History +12, Insight +9, Perception +9'}
+      ${'mage'}                | ${9}     | ${14}    | ${11}    | ${17}    | ${12}    | ${11}    | ${3}      | ${{arcana: 6, history: 6}}                                   | ${'Arcana +6, History +6'}
+      ${'mummy lord'}          | ${18}    | ${10}    | ${17}    | ${11}    | ${18}    | ${16}    | ${5}      | ${{history: 5, religion: 5}}                                 | ${'History +5, Religion +5'}
+      ${'storm giant'}         | ${29}    | ${14}    | ${20}    | ${16}    | ${18}    | ${18}    | ${5}      | ${{arcana: 8, athletics: 14, history: 8, perception: 9}}     | ${'Arcana +8, Athletics +14, History +8, Perception +9'}
+    `
+    ('$description',
+    ({strScore, dexScore, conScore, intScore, wisScore, chaScore, profBonus, skills, expectedText}) => {
+      populateAbilityScoresAndProficiencyBonus(strScore, dexScore, conScore, intScore, wisScore, chaScore, profBonus);
+
+      const expectedSkills = createDefaultExpectedSkills();
+
+      const skillsEnabled = [];
+      const skillsExpertise = [];
+      const skillsOverride = {};
+
+      for (const [key, value] of Object.entries(skills)) {
+        const enabledModifier = skillsModel.skills[key].abilityModel.modifier + challengeRatingModel.proficiencyBonus;
+        const expertModifier = enabledModifier + challengeRatingModel.proficiencyBonus;
+
+        skillsEnabled.push(key);
+
+        if (value === enabledModifier) {
+          continue;
+        } else if (value === expertModifier) {
+          skillsExpertise.push(key);
+        } else {
+          skillsOverride[key] = value;
+        }
+      }
+
+      populateExpectedSkills(expectedSkills, profBonus, skillsEnabled, skillsExpertise, skillsOverride);
+
+      // TODO: Determine what the Open5e skill keys are for Animal Handling and Sleight of Hand, and use those keys instead.
+      const json = {
+        skills: skills
+      };
+
+      skillsSection.importFromOpen5e(json);
+
+      verifyModel(expectedSkills);
+      verifyEditModeView(expectedSkills);
+      verifyShowModeView(expectedText);
+    });
+  });
+});
+
 describe('when the section is empty and not visible', () => {
   describe('and a creature with skills is imported from JSON', () => {
     it('should show the new skills', () => {

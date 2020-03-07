@@ -12,24 +12,24 @@ export default class Skills extends PropertyLineModel {
     const charisma = abilitiesModel.abilities['charisma'];
 
     this.skills = {
-      'acrobatics' : new Skill('Acrobatics', dexterity, challengeRatingModel),
-      'animalHandling' : new Skill('Animal Handling', wisdom, challengeRatingModel),
-      'arcana' : new Skill('Arcana', intelligence, challengeRatingModel),
-      'athletics' : new Skill('Athletics', strength, challengeRatingModel),
-      'deception' : new Skill('Deception', charisma, challengeRatingModel),
-      'history' : new Skill('History', intelligence, challengeRatingModel),
-      'insight' : new Skill('Insight', wisdom, challengeRatingModel),
-      'intimidation' : new Skill('Intimidation', charisma, challengeRatingModel),
-      'investigation' : new Skill('Investigation', intelligence, challengeRatingModel),
-      'medicine' : new Skill('Medicine', wisdom, challengeRatingModel),
-      'nature' : new Skill('Nature', intelligence, challengeRatingModel),
-      'perception' : new Skill('Perception', wisdom, challengeRatingModel),
-      'performance' : new Skill('Performance', charisma, challengeRatingModel),
-      'persuasion' : new Skill('Persuasion', charisma, challengeRatingModel),
-      'religion' : new Skill('Religion', intelligence, challengeRatingModel),
-      'sleightOfHand' : new Skill('Sleight of Hand', dexterity, challengeRatingModel),
-      'stealth' : new Skill('Stealth', dexterity, challengeRatingModel),
-      'survival': new Skill('Survival', wisdom, challengeRatingModel)
+      'acrobatics' : new Skill('acrobatics', 'Acrobatics', dexterity, challengeRatingModel),
+      'animalHandling' : new Skill('animalHandling', 'Animal Handling', wisdom, challengeRatingModel),
+      'arcana' : new Skill('arcana', 'Arcana', intelligence, challengeRatingModel),
+      'athletics' : new Skill('athletics', 'Athletics', strength, challengeRatingModel),
+      'deception' : new Skill('deception', 'Deception', charisma, challengeRatingModel),
+      'history' : new Skill('history', 'History', intelligence, challengeRatingModel),
+      'insight' : new Skill('insight', 'Insight', wisdom, challengeRatingModel),
+      'intimidation' : new Skill('intimidation', 'Intimidation', charisma, challengeRatingModel),
+      'investigation' : new Skill('investigation', 'Investigation', intelligence, challengeRatingModel),
+      'medicine' : new Skill('medicine', 'Medicine', wisdom, challengeRatingModel),
+      'nature' : new Skill('nature', 'Nature', intelligence, challengeRatingModel),
+      'perception' : new Skill('perception', 'Perception', wisdom, challengeRatingModel),
+      'performance' : new Skill('performance', 'Performance', charisma, challengeRatingModel),
+      'persuasion' : new Skill('persuasion', 'Persuasion', charisma, challengeRatingModel),
+      'religion' : new Skill('religion', 'Religion', intelligence, challengeRatingModel),
+      'sleightOfHand' : new Skill('sleightOfHand', 'Sleight of Hand', dexterity, challengeRatingModel),
+      'stealth' : new Skill('stealth', 'Stealth', dexterity, challengeRatingModel),
+      'survival': new Skill('survival', 'Survival', wisdom, challengeRatingModel)
     };
     Object.freeze(this.skills);
   }
@@ -63,6 +63,14 @@ export default class Skills extends PropertyLineModel {
     return this.text;
   }
 
+  fromOpen5e(json) {
+    this.reset();
+
+    for (const value of this.values) {
+      value.fromOpen5e(json);
+    }
+  }
+
   fromJson(json) {
     for (const [key, value] of this.entries) {
       value.fromJson(json[key]);
@@ -76,7 +84,8 @@ export default class Skills extends PropertyLineModel {
 }
 
 class Skill {
-  constructor(prettyName, abilityModel, challengeRatingModel) {
+  constructor(name, prettyName, abilityModel, challengeRatingModel) {
+    this.name = name;
     this.prettyName = prettyName;
     this.abilityModel = abilityModel;
     this.challengeRatingModel = challengeRatingModel;
@@ -131,6 +140,31 @@ class Skill {
 
   get formattedModifier() {
     return formatModifier(this.modifier);
+  }
+
+  fromOpen5e(json) {
+    // TODO: Determine what the Open5e skill keys are for Animal Handling and Sleight of Hand, and use those keys instead.
+    if (this.name in json.skills) {
+      this.isEnabled = true;
+
+      const skillValue = json.skills[this.name];
+      const proficientValue = this.abilityModel.modifier + this.challengeRatingModel.proficiencyBonus;
+      const expertiseValue = proficientValue + this.challengeRatingModel.proficiencyBonus;
+
+      // The Open5e skill should match either:
+      // Proficient value: Ability modifier + proficiency bonus
+      // Expertise value:  Ability modifier + (2 * proficiency bonus)
+      // If it doesn't match either, set the value as an override.
+      if (skillValue === proficientValue) {
+        return;
+      } else if (skillValue === expertiseValue) {
+        this.hasExpertise = true;
+      } else {
+        this.override = skillValue;
+      }
+    } else {
+      this.isEnabled = false;
+    }
   }
 
   fromJson(json) {
