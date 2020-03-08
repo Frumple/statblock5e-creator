@@ -16,8 +16,15 @@
 
 <form id="edit-section" class="section section_hidden" novalidate>
   <div class="skills-edit-section section__content">
-    <label id="skills-label" class="skills-edit-section__skills-label section__heading-label">Skills:</label>
-    <label id="expert-label" class="saving-throws-edit-section__expert-label">Expert</label>
+    <label id="skills-label" class="skills-edit-section__skills-label section__heading-label">Skill Proficiencies:</label>
+    <help-tooltip class="skills-edit-section__skills-help-tooltip">
+      <p>A creature's <strong>skill bonus</strong> is calculated using the following formula:</p>
+      <blockquote><strong>Ability Modifier + Proficiency Bonus [if proficient in skill]</strong></blockquote>
+      <p>If the creature has <strong>expertise</strong> in a skill, it adds double its proficiency bonus instead.</p>
+      <blockquote><strong>Ability Modifier + (2 x Proficiency Bonus)</strong></blockquote>
+      <cite>For more details, see "Skills" on page 8 of the D&D 5th Edition Monster Manual.</cite>
+    </help-tooltip>
+    <label id="expert-label" class="skills-edit-section__expert-label">Expertise</label>
     <label id="override-label" class="saving-throws-edit-section__override-label">Override</label>
 
     <input id="acrobatics-enable" class="skills-edit-section__acrobatics-enable" is="enable-disable-elements-checkbox" type="checkbox" />

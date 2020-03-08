@@ -16,7 +16,12 @@
 
 <form id="edit-section" class="section section_hidden" novalidate>
   <div class="saving-throws-edit-section section__content">
-    <label id="saving-throws-label" class="saving-throws-edit-section__saving-throws-label section__heading-label">Saving Throws:</label>
+    <label id="saving-throws-label" class="saving-throws-edit-section__saving-throws-label section__heading-label">Saving Throw Proficiencies:</label>
+    <help-tooltip class="saving-throws-edit-section__saving-throws-help-tooltip">
+      <p>A creature's <strong>saving throw bonus</strong> is calculated using the following formula:</p>
+      <blockquote><strong>Ability Modifier + Proficiency Bonus [if proficient in saving throw]</strong></blockquote>
+      <cite>For more details, see "Saving Throws" on page 8 of the D&D 5th Edition Monster Manual.</cite>
+    </help-tooltip>
     <label id="override-label" class="saving-throws-edit-section__override-label">Override</label>
 
     <input id="strength-enable" class="saving-throws-edit-section__strength-enable" is="enable-disable-elements-checkbox" type="checkbox" />

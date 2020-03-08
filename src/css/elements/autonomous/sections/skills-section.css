@@ -1,6 +1,6 @@
 .skills-edit-section {
   display: grid;
-  grid-template-columns: 20px auto 40px 60px 80px;
+  grid-template-columns: 20px auto 30px 70px 70px;
   grid-template-rows: auto 5px auto auto auto auto auto auto auto auto auto auto auto auto auto auto auto auto auto auto;
   grid-column-gap: 5px;
   align-items: center;
@@ -14,6 +14,12 @@
 .skills-edit-section__skills-label {
   grid-area: 1 / 1 / 2 / 4;
   justify-self: start;
+}
+.skills-edit-section__skills-help-tooltip {
+  grid-area: 1 / 3;
+  align-self: center;
+  --help-tooltip-icon-color: #7A200D;
+  --help-tooltip-width: 40em;
 }
 .skills-edit-section__expert-label { grid-area: 1 / 4; }
 .skills-edit-section__override-label { grid-area: 1 / 5; }
