@@ -2,6 +2,8 @@
 
 ### Live Demo (currently only works in Chrome): [https://frumple.github.io/statblock5e-creator][demo]
 
+### NOTE: statblock5e-creator is currently in early alpha development and is highly subject to change. Exported JSON files created at this time are NOT guaranteed to work in future versions.
+
 A frontend web application for creating creature statblocks that are similar in appearance to the official blocks from the Dungeons and Dragons 5th Edition Monster Manual.
 
 <div align="center">
