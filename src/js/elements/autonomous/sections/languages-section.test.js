@@ -63,7 +63,27 @@ describe('when the show section is clicked', () => {
 
       it('should add many items, and the show section should have the items', () => {
         const itemTexts = ['Undercommon', 'Swahili', 'Thieves\' Cant', 'English'];
-        sharedSpecs.shouldAddManyItems(languagesSection, languagesModel, headingName, itemTexts);
+        const expectedText = 'Undercommon, Swahili, Thieves\' Cant, English';
+        sharedSpecs.shouldAddManyItems(languagesSection, languagesModel, headingName, itemTexts, expectedText);
+      });
+
+      describe('should add item that contains commas, and if there are other items before or after this item, semicolon separators instead of commas should be shown', () => {
+        /* eslint-disable indent, no-unexpected-multiline */
+        it.each
+        `
+          description                                    | itemTexts                               | expectedText
+          ${'comma item only'}                           | ${['A, B']}                             | ${'A, B'}
+          ${'items before comma item'}                   | ${['1', '2', 'A, B']}                   | ${'1, 2; A, B'}
+          ${'items after comma item'}                    | ${['A, B', '3', '4']}                   | ${'A, B; 3, 4'}
+          ${'items before and after comma item'}         | ${['1', '2', 'A, B', '3', '4']}         | ${'1, 2; A, B; 3, 4'}
+          ${'two comma items adjacent to each other'}    | ${['1', '2', 'A, B', 'C, D', '3', '4']} | ${'1, 2; A, B; C, D; 3, 4'}
+          ${'two comma items separated from each other'} | ${['1', '2', 'A, B', '3', '4', 'C, D']} | ${'1, 2; A, B; 3, 4; C, D'}
+        `
+        ('$description: $itemTexts => $expectedText',
+        ({itemTexts, expectedText}) => {
+          sharedSpecs.shouldAddManyItems(languagesSection, languagesModel, headingName, itemTexts, expectedText);
+        });
+        /* eslint-enable indent, no-unexpected-multiline */
       });
 
       it('should display an error after clicking the add button if the input field is blank', () => {

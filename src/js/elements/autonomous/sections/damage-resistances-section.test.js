@@ -50,13 +50,33 @@ describe('when the show section is clicked', () => {
     });
 
     it('should add a custom item, and the show section should have the item', () => {
-      const itemText = 'bludgeoning, piercing, and slashing from nonmagical attacks';
+      const itemText = 'dark';
       sharedSpecs.shouldAddAnItem(damageResistancesSection, damageResistancesModel, headingName, itemText);
     });
 
     it('should add many items, and the show section should have the items', () => {
       const itemTexts = ['fire', 'rock', 'cold', 'air'];
-      sharedSpecs.shouldAddManyItems(damageResistancesSection, damageResistancesModel, headingName, itemTexts);
+      const expectedText = 'fire, rock, cold, air';
+      sharedSpecs.shouldAddManyItems(damageResistancesSection, damageResistancesModel, headingName, itemTexts, expectedText);
+    });
+
+    describe('should add item that contains commas, and if there are other items before or after this item, semicolon separators instead of commas should be shown', () => {
+      /* eslint-disable indent, no-unexpected-multiline */
+      it.each
+      `
+        description                                    | itemTexts                                                                                                                                  | expectedText
+        ${'comma item only'}                           | ${['bludgeoning, piercing, and slashing from nonmagical attacks']}                                                                         | ${'bludgeoning, piercing, and slashing from nonmagical attacks'}
+        ${'items before comma item'}                   | ${['fire', 'rock', 'bludgeoning, piercing, and slashing from nonmagical attacks']}                                                         | ${'fire, rock; bludgeoning, piercing, and slashing from nonmagical attacks'}
+        ${'items after comma item'}                    | ${['bludgeoning, piercing, and slashing from nonmagical attacks', 'cold', 'air']}                                                          | ${'bludgeoning, piercing, and slashing from nonmagical attacks; cold, air'}
+        ${'items before and after comma item'}         | ${['fire', 'rock', 'bludgeoning, piercing, and slashing from nonmagical attacks', 'cold', 'air']}                                          | ${'fire, rock; bludgeoning, piercing, and slashing from nonmagical attacks; cold, air'}
+        ${'two comma items adjacent to each other'}    | ${['fire', 'rock', 'bludgeoning, piercing, and slashing from nonmagical attacks', 'lightning, thunder damage from spells', 'cold', 'air']} | ${'fire, rock; bludgeoning, piercing, and slashing from nonmagical attacks; lightning, thunder damage from spells; cold, air'}
+        ${'two comma items separated from each other'} | ${['fire', 'rock', 'bludgeoning, piercing, and slashing from nonmagical attacks', 'cold', 'air', 'lightning, thunder damage from spells']} | ${'fire, rock; bludgeoning, piercing, and slashing from nonmagical attacks; cold, air; lightning, thunder damage from spells'}
+      `
+      ('$description: $itemTexts => $expectedText',
+      ({itemTexts, expectedText}) => {
+        sharedSpecs.shouldAddManyItems(damageResistancesSection, damageResistancesModel, headingName, itemTexts, expectedText);
+      });
+      /* eslint-enable indent, no-unexpected-multiline */
     });
 
     it('should display an error after clicking the add button if the input field is blank', () => {

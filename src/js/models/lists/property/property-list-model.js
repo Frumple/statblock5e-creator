@@ -18,7 +18,26 @@ export default class PropertyListModel extends PropertyLineModel {
   }
 
   get text() {
-    return this.items.join(', ');
+    let text = '';
+    let isFirstItem = true;
+    let previousItemHasCommas = false;
+
+    for (const item of this.items) {
+      const currentItemHasCommas = item.includes(',');
+
+      if (isFirstItem) {
+        text = item;
+        isFirstItem = false;
+      } else if (previousItemHasCommas || currentItemHasCommas) {
+        text += `; ${item}`;
+      } else {
+        text += `, ${item}`;
+      }
+
+      previousItemHasCommas = currentItemHasCommas;
+    }
+
+    return text;
   }
 
   get htmlText() {

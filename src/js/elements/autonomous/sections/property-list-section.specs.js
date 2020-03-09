@@ -19,8 +19,9 @@ export function shouldAddAnItem(section, model, headingName, itemText) {
 
   section.editElements.submitForm();
 
-  verifyModel(model, expectedItems);
   expect(section).toBeInMode('show');
+
+  verifyModel(model, expectedItems);
   verifyShowModeView(section, headingName, itemText);
 
   const json = verifyJsonExport(section, expectedItems);
@@ -32,33 +33,34 @@ export function shouldAddAnItem(section, model, headingName, itemText) {
 
   verifyModel(model, expectedItems);
   verifyEditModeView(section, expectedItems);
+  verifyShowModeView(section, headingName, itemText);
 }
 
-export function shouldAddManyItems(section, model, headingName, items) {
-  const expectedTextContent = items.join(', ');
-
-  for (const itemText of items) {
+export function shouldAddManyItems(section, model, headingName, itemTexts, expectedText) {
+  for (const itemText of itemTexts) {
     inputValueAndTriggerEvent(section.editElements.input, itemText);
     section.editElements.addButton.click();
   }
 
-  verifyEditModeView(section, items);
+  verifyEditModeView(section, itemTexts);
 
   section.editElements.submitForm();
 
-  verifyModel(model, items);
   expect(section).toBeInMode('show');
-  verifyShowModeView(section, headingName, expectedTextContent);
 
-  const json = verifyJsonExport(section, items);
-  expect(section).toExportPropertyLineToHtml(headingName, expectedTextContent);
-  expect(section).toExportPropertyLineToMarkdown(headingName, expectedTextContent);
+  verifyModel(model, itemTexts);
+  verifyShowModeView(section, headingName, expectedText);
+
+  const json = verifyJsonExport(section, itemTexts);
+  expect(section).toExportPropertyLineToHtml(headingName, expectedText);
+  expect(section).toExportPropertyLineToMarkdown(headingName, expectedText);
 
   reset(section, model);
   section.importFromJson(json);
 
-  verifyModel(model, items);
-  verifyEditModeView(section, items);
+  verifyModel(model, itemTexts);
+  verifyEditModeView(section, itemTexts);
+  verifyShowModeView(section, headingName, expectedText);
 }
 
 export function shouldDisplayAnErrorIfAddingBlank(section, expectedBlockType) {
@@ -108,7 +110,7 @@ export function shouldRemoveAndAddSuggestions(section, itemText) {
 
 export function shouldAddAndRemoveItem(section, model, headingName, itemText) {
   const expectedItems = [];
-  const expectedTextContent = '';
+  const expectedText = '';
 
   inputValueAndTriggerEvent(section.editElements.input, itemText);
   section.editElements.addButton.click();
@@ -120,24 +122,26 @@ export function shouldAddAndRemoveItem(section, model, headingName, itemText) {
 
   section.editElements.submitForm();
 
-  verifyModel(model, expectedItems);
   expect(section).toBeInMode('show');
+
+  verifyModel(model, expectedItems);
   expect(section.showElements.section).toHaveClass('section_empty');
-  verifyShowModeView(section, headingName, expectedTextContent);
+  verifyShowModeView(section, headingName, expectedText);
 
   const json = verifyJsonExport(section, expectedItems);
-  expect(section).toExportPropertyLineToHtml(headingName, expectedTextContent);
-  expect(section).toExportPropertyLineToMarkdown(headingName, expectedTextContent);
+  expect(section).toExportPropertyLineToHtml(headingName, expectedText);
+  expect(section).toExportPropertyLineToMarkdown(headingName, expectedText);
 
   reset(section, model);
   section.importFromJson(json);
 
   verifyModel(model, expectedItems);
   verifyEditModeView(section, expectedItems);
+  verifyShowModeView(section, headingName, expectedText);
 }
 
 export function shouldDeleteOneOfManyItems(section, model, headingName, initialItems, itemToDelete, expectedItems) {
-  const expectedTextContent = expectedItems.join(', ');
+  const expectedText = expectedItems.join(', ');
 
   for (const item of initialItems) {
     inputValueAndTriggerEvent(section.editElements.input, item);
@@ -151,19 +155,21 @@ export function shouldDeleteOneOfManyItems(section, model, headingName, initialI
 
   section.editElements.submitForm();
 
-  verifyModel(model, expectedItems);
   expect(section).toBeInMode('show');
-  verifyShowModeView(section, headingName, expectedTextContent);
+
+  verifyModel(model, expectedItems);
+  verifyShowModeView(section, headingName, expectedText);
 
   const json = verifyJsonExport(section, expectedItems);
-  expect(section).toExportPropertyLineToHtml(headingName, expectedTextContent);
-  expect(section).toExportPropertyLineToMarkdown(headingName, expectedTextContent);
+  expect(section).toExportPropertyLineToHtml(headingName, expectedText);
+  expect(section).toExportPropertyLineToMarkdown(headingName, expectedText);
 
   reset(section, model);
   section.importFromJson(json);
 
   verifyModel(model, expectedItems);
   verifyEditModeView(section, expectedItems);
+  verifyShowModeView(section, headingName, expectedText);
 }
 
 export function shouldShowItemsImportedFromJsonIfSectionWasInitiallyEmptyAndNotVisible(section, headingName, itemsToImport) {
