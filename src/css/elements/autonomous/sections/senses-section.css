@@ -33,7 +33,7 @@
   justify-self: end;
   align-self: center;
   --help-tooltip-icon-color: #7A200D;
-  --help-tooltip-width: 58em;
+  --help-tooltip-width: 55em;
 }
 
 .senses-edit-section__passive-perception-label { grid-area: 6 / 2; }

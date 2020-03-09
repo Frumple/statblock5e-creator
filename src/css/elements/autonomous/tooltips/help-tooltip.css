@@ -41,11 +41,15 @@
 }
 
 ::slotted(blockquote) {
+  display: inline-block;
   background: white;
-  border-radius: 3px;
+  border: 1px solid #aaaaaa;
   font-family: monospace;
-  padding: 0 3px;
   white-space: pre-wrap;
+  margin-top: 0.5em;
+  margin-bottom: 0.5em;
+  margin-right: 0;
+  padding: 0.5em;
 }
 
 ::slotted(cite) {
