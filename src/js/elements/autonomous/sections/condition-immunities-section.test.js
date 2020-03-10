@@ -6,6 +6,7 @@ import * as sharedSpecs from './property-list-section.specs.js';
 
 const headingName = 'Condition Immunities';
 const expectedBlockType = 'Condition Immunity';
+const open5eJsonKey = 'condition_immunities';
 
 const conditionImmunitiesModel = CurrentContext.creature.conditionImmunities;
 
@@ -125,6 +126,23 @@ describe('when the show section is clicked', () => {
       });
       /* eslint-enable indent, no-unexpected-multiline */
     });
+  });
+});
+
+describe('when import from Open5e', () => {
+  describe('should import as normal', () => {
+    /* eslint-disable indent, no-unexpected-multiline */
+    it.each
+    `
+      description                | inputText                            | expectedItems
+      ${'single simple item'}    | ${'charmed'}                         | ${['charmed']}
+      ${'multiple simple items'} | ${'stunned, mesmerized, frightened'} | ${['stunned', 'mesmerized', 'frightened']}
+    `
+    ('$description: $inputText => $expectedItems',
+    ({inputText, expectedItems}) => {
+      sharedSpecs.shouldImportFromOpen5e(conditionImmunitiesSection, conditionImmunitiesModel, headingName, open5eJsonKey, inputText, expectedItems);
+    });
+    /* eslint-enable indent, no-unexpected-multiline */
   });
 });
 

@@ -3,7 +3,8 @@ import PropertyListModel from './property-list-model.js';
 export default class Languages extends PropertyListModel {
   constructor() {
     super('Languages',
-          'Language');
+          'Language',
+          'languages');
   }
 
   reset() {

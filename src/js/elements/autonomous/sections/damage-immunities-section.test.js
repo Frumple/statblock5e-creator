@@ -6,6 +6,7 @@ import * as sharedSpecs from './property-list-section.specs.js';
 
 const headingName = 'Damage Immunities';
 const expectedBlockType = 'Damage Immunity';
+const open5eJsonKey = 'damage_immunities';
 
 const damageImmunitiesModel = CurrentContext.creature.damageImmunities;
 
@@ -64,13 +65,13 @@ describe('when the show section is clicked', () => {
       /* eslint-disable indent, no-unexpected-multiline */
       it.each
       `
-        description                                    | itemTexts                                                                                                                                  | expectedText
-        ${'comma item only'}                           | ${['bludgeoning, piercing, and slashing from nonmagical attacks']}                                                                         | ${'bludgeoning, piercing, and slashing from nonmagical attacks'}
-        ${'items before comma item'}                   | ${['fire', 'rock', 'bludgeoning, piercing, and slashing from nonmagical attacks']}                                                         | ${'fire, rock; bludgeoning, piercing, and slashing from nonmagical attacks'}
-        ${'items after comma item'}                    | ${['bludgeoning, piercing, and slashing from nonmagical attacks', 'cold', 'air']}                                                          | ${'bludgeoning, piercing, and slashing from nonmagical attacks; cold, air'}
-        ${'items before and after comma item'}         | ${['fire', 'rock', 'bludgeoning, piercing, and slashing from nonmagical attacks', 'cold', 'air']}                                          | ${'fire, rock; bludgeoning, piercing, and slashing from nonmagical attacks; cold, air'}
-        ${'two comma items adjacent to each other'}    | ${['fire', 'rock', 'bludgeoning, piercing, and slashing from nonmagical attacks', 'lightning, thunder damage from spells', 'cold', 'air']} | ${'fire, rock; bludgeoning, piercing, and slashing from nonmagical attacks; lightning, thunder damage from spells; cold, air'}
-        ${'two comma items separated from each other'} | ${['fire', 'rock', 'bludgeoning, piercing, and slashing from nonmagical attacks', 'cold', 'air', 'lightning, thunder damage from spells']} | ${'fire, rock; bludgeoning, piercing, and slashing from nonmagical attacks; cold, air; lightning, thunder damage from spells'}
+        description                                    | itemTexts                                                                                                                           | expectedText
+        ${'comma item only'}                           | ${['bludgeoning, piercing, and slashing from nonmagical attacks']}                                                                  | ${'bludgeoning, piercing, and slashing from nonmagical attacks'}
+        ${'items before comma item'}                   | ${['fire', 'rock', 'bludgeoning, piercing, and slashing from nonmagical attacks']}                                                  | ${'fire, rock; bludgeoning, piercing, and slashing from nonmagical attacks'}
+        ${'items after comma item'}                    | ${['bludgeoning, piercing, and slashing from nonmagical attacks', 'cold', 'air']}                                                   | ${'bludgeoning, piercing, and slashing from nonmagical attacks; cold, air'}
+        ${'items before and after comma item'}         | ${['fire', 'rock', 'bludgeoning, piercing, and slashing from nonmagical attacks', 'cold', 'air']}                                   | ${'fire, rock; bludgeoning, piercing, and slashing from nonmagical attacks; cold, air'}
+        ${'two comma items adjacent to each other'}    | ${['fire', 'rock', 'bludgeoning, piercing, and slashing from nonmagical attacks', 'lightning, thunder from spells', 'cold', 'air']} | ${'fire, rock; bludgeoning, piercing, and slashing from nonmagical attacks; lightning, thunder from spells; cold, air'}
+        ${'two comma items separated from each other'} | ${['fire', 'rock', 'bludgeoning, piercing, and slashing from nonmagical attacks', 'cold', 'air', 'lightning, thunder from spells']} | ${'fire, rock; bludgeoning, piercing, and slashing from nonmagical attacks; cold, air; lightning, thunder from spells'}
       `
       ('$description: $itemTexts => $expectedText',
       ({itemTexts, expectedText}) => {
@@ -125,6 +126,27 @@ describe('when the show section is clicked', () => {
       });
       /* eslint-enable indent, no-unexpected-multiline */
     });
+  });
+});
+
+describe('when import from Open5e', () => {
+  describe('should import as normal', () => {
+    /* eslint-disable indent, no-unexpected-multiline */
+    it.each
+    `
+      description                                         | inputText                                                                               | expectedItems
+      ${'single simple item'}                             | ${'force'}                                                                              | ${['force']}
+      ${'multiple simple items'}                          | ${'radiant, necrotic, acid'}                                                            | ${['radiant', 'necrotic', 'acid']}
+      ${'bludgeoning, piercing, and slashing (BPS) only'} | ${'bludgeoning, piercing, and slashing from nonmagical attacks'}                        | ${['bludgeoning, piercing, and slashing from nonmagical attacks']}
+      ${'simple items before BPS'}                        | ${'fire, rock; bludgeoning, piercing, and slashing from nonmagical attacks'}            | ${['fire', 'rock', 'bludgeoning, piercing, and slashing from nonmagical attacks']}
+      ${'simple items after BPS'}                         | ${'bludgeoning, piercing, and slashing from nonmagical attacks; cold, air'}             | ${['bludgeoning, piercing, and slashing from nonmagical attacks', 'cold', 'air']}
+      ${'simple items before and after BPS'}              | ${'fire, rock; bludgeoning, piercing, and slashing from nonmagical attacks; cold, air'} | ${['fire', 'rock', 'bludgeoning, piercing, and slashing from nonmagical attacks', 'cold', 'air']}
+    `
+    ('$description: $inputText => $expectedItems',
+    ({inputText, expectedItems}) => {
+      sharedSpecs.shouldImportFromOpen5e(damageImmunitiesSection, damageImmunitiesModel, headingName, open5eJsonKey, inputText, expectedItems);
+    });
+    /* eslint-enable indent, no-unexpected-multiline */
   });
 });
 

@@ -6,6 +6,7 @@ import * as sharedSpecs from './property-list-section.specs.js';
 
 const headingName = 'Languages';
 const expectedBlockType = 'Language';
+const open5eJsonKey = 'languages';
 const defaultStartingLanguage = 'Common';
 
 const languagesModel = CurrentContext.creature.languages;
@@ -96,7 +97,7 @@ describe('when the show section is clicked', () => {
       });
 
       it('should display an error after clicking the save button if the input field is not blank', () => {
-        const itemText = 'unconscious';
+        const itemText = 'Dwarvish';
         sharedSpecs.shouldDisplayAnErrorIfSavingWithUnaddedInputText(languagesSection, itemText, expectedBlockType);
       });
     });
@@ -152,6 +153,25 @@ describe('when the show section is clicked', () => {
         /* eslint-enable indent, no-unexpected-multiline */
       });
     });
+  });
+});
+
+describe('when import from Open5e', () => {
+  describe('should import as normal', () => {
+    /* eslint-disable indent, no-unexpected-multiline */
+    it.each
+    `
+      description                           | inputText                                 | expectedItems                                   | expectedText
+      ${'single simple item'}               | ${'Deep Speech'}                          | ${['Deep Speech']}                              | ${null}
+      ${'multiple simple items'}            | ${'Undercommon, Swahili, Thieves\' Cant'} | ${['Undercommon', 'Swahili', 'Thieves\' Cant']} | ${null}
+      ${'telepathy delimited by comma'}     | ${'Gnomish, Sylvan, telepathy 60 ft.'}    | ${['Gnomish', 'Sylvan', 'telepathy 60 ft.']}    | ${null}
+      ${'telepathy delimited by semicolon'} | ${'Gnomish, Sylvan; telepathy 60 ft.'}    | ${['Gnomish', 'Sylvan', 'telepathy 60 ft.']}    | ${'Gnomish, Sylvan, telepathy 60 ft.'}
+    `
+    ('$description: $inputText => {expectedItems=$expectedItems,expectedText=$expectedText}',
+    ({inputText, expectedItems, expectedText}) => {
+      sharedSpecs.shouldImportFromOpen5e(languagesSection, languagesModel, headingName, open5eJsonKey, inputText, expectedItems, expectedText);
+    });
+    /* eslint-enable indent, no-unexpected-multiline */
   });
 });
 

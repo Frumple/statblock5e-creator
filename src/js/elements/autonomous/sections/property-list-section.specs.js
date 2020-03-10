@@ -172,6 +172,21 @@ export function shouldDeleteOneOfManyItems(section, model, headingName, initialI
   verifyShowModeView(section, headingName, expectedText);
 }
 
+export function shouldImportFromOpen5e(section, model, headingName, open5eJsonKey, inputText, expectedItems, expectedText = null) {
+  if (expectedText === null) {
+    expectedText = inputText;
+  }
+
+  const json = {};
+  json[open5eJsonKey] = inputText;
+
+  section.importFromOpen5e(json);
+
+  verifyModel(model, expectedItems);
+  verifyEditModeView(section, expectedItems);
+  verifyShowModeView(section, headingName, expectedText);
+}
+
 export function shouldShowItemsImportedFromJsonIfSectionWasInitiallyEmptyAndNotVisible(section, headingName, itemsToImport) {
   const expectedText = itemsToImport.join(', ');
   const json = {

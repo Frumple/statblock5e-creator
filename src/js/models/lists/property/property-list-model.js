@@ -1,10 +1,11 @@
 import PropertyLineModel from '../../property-line-model.js';
 
 export default class PropertyListModel extends PropertyLineModel {
-  constructor(headingName, singleName) {
+  constructor(headingName, singleName, open5eJsonKey) {
     super(headingName);
 
     this.singleName = singleName;
+    this.open5eJsonKey = open5eJsonKey;
 
     this.reset();
   }
@@ -42,5 +43,28 @@ export default class PropertyListModel extends PropertyLineModel {
 
   get htmlText() {
     return this.text;
+  }
+
+  fromOpen5e(json) {
+    this.items = [];
+
+    const open5eJsonKey = this.open5eJsonKey;
+    const inputText = json[open5eJsonKey];
+
+    // Begin by splitting the incoming text by semicolon delimiters
+    const semicolonTokens = inputText.split(';').map(token => token.trim());
+    for (const semicolonToken of semicolonTokens) {
+      // If the token starts with 'bludgeoning, piercing, and slashing',
+      // treat it as one item and do not split it by commas.
+      if (semicolonToken.startsWith('bludgeoning, piercing, and slashing')) {
+        this.items.push(semicolonToken);
+
+      // Otherwise, split the token further by commas
+      // and add the resulting tokens as items.
+      } else {
+        const commaTokens = semicolonToken.split(',').map(token => token.trim());
+        Array.prototype.push.apply(this.items, commaTokens);
+      }
+    }
   }
 }
