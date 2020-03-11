@@ -4,7 +4,7 @@
 
 .senses-edit-section {
   display: grid;
-  grid-template-columns: 110px auto auto auto;
+  grid-template-columns: 60px auto auto auto auto;
   grid-template-rows: auto auto auto auto 5px auto 5px auto auto;
   grid-column-gap: 5px;
   align-items: center;
@@ -15,6 +15,12 @@
 .senses-edit-section__blindsight-label { grid-area: 1 / 2; }
 .senses-edit-section__blindsight-input { grid-area: 1 / 3; }
 .senses-edit-section__blindsight-unit { grid-area: 1 / 4; }
+.senses-edit-section__blind-beyond-this-radius-container {
+  grid-area: 1 / 5;
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
+}
 
 .senses-edit-section__darkvision-label { grid-area: 2 / 2; }
 .senses-edit-section__darkvision-input { grid-area: 2 / 3; }
@@ -43,10 +49,10 @@
   grid-area: 8 / 1;
   justify-self: end;
 }
-.senses-edit-section__use-custom-text-label { grid-area: 8 / 2 / 9 / 5; }
+.senses-edit-section__use-custom-text-label { grid-area: 8 / 2 / 9 / 6; }
 .senses-edit-section__custom-text-help-tooltip {
   grid-area: 9 / 1;
   justify-self: end;
   align-self: end;
 }
-.senses-edit-section__custom-text-input { grid-area: 9 / 2 / 10 / 5; }
+.senses-edit-section__custom-text-input { grid-area: 9 / 2 / 10 / 6; }

@@ -11,6 +11,7 @@ export default class Senses extends PropertyLineModel {
 
   reset() {
     this.blindsight = null;
+    this.blindBeyondThisRadius = false;
     this.darkvision = null;
     this.tremorsense = null;
     this.truesight = null;
@@ -23,6 +24,7 @@ export default class Senses extends PropertyLineModel {
   get jsonPropertyNames() {
     return [
       'blindsight',
+      'blindBeyondThisRadius',
       'darkvision',
       'tremorsense',
       'truesight',
@@ -56,7 +58,8 @@ export default class Senses extends PropertyLineModel {
     const list = [];
 
     if (this.blindsight != null) {
-      list.push(`blindsight ${this.blindsight} ${unit}`);
+      const blindBeyondThisRadius = (this.blindBeyondThisRadius ? ' (blind beyond this radius)' : '');
+      list.push(`blindsight ${this.blindsight} ${unit}${blindBeyondThisRadius}`);
     }
     if (this.darkvision != null) {
       list.push(`darkvision ${this.darkvision} ${unit}`);
