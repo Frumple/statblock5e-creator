@@ -324,7 +324,7 @@ describe('when importing from Open5e', () => {
       ${'armor desc has asterisks'}   | ${12}      | ${'15 with *mage armor*'} | ${'12 (15 with *mage armor*)'} | ${'12 (15 with <em>mage armor</em>)'}
       ${'armor desc has underscores'} | ${11}      | ${'16 with _barkskin_'}   | ${'11 (16 with _barkskin_)'}   | ${'11 (16 with <em>barkskin</em>)'}
     `
-    ('$description: {armorClass="$armorClass", armorDesc="$armorDesc"} => {expectedCustomText="$expectedCustomText", expectedText="$expectedText"}',
+    ('$description: {armorClass="$armorClass", armorDesc="$armorDesc"} => {expectedCustomText="$expectedCustomText", expectedHtmlText="$expectedHtmlText"}',
     ({armorClass, armorDesc, expectedCustomText, expectedHtmlText}) => {
       const expectedValues = {
         useCustomText: true,

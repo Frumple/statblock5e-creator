@@ -324,6 +324,91 @@ describe('should calculate the passive perception based on the following conditi
   /* eslint-enable indent, no-unexpected-multiline */
 });
 
+describe('when importing from Open5e', () => {
+  describe('should import as normal', () => {
+    /* eslint-disable indent, no-unexpected-multiline */
+    it.each
+    `
+      description                                | blindsight | blindBeyondThisRadius | darkvision | tremorsense | truesight | text
+      ${'all blank'}                             | ${''}      | ${false}              | ${''}      | ${''}       | ${''}     | ${'passive Perception 10'}
+      ${'blindsight only'}                       | ${30}      | ${false}              | ${''}      | ${''}       | ${''}     | ${'blindsight 30 ft., passive Perception 10'}
+      ${'blindsight + blind beyond this radius'} | ${40}      | ${true}               | ${''}      | ${''}       | ${''}     | ${'blindsight 40 ft. (blind beyond this radius), passive Perception 10'}
+      ${'darkvision only'}                       | ${''}      | ${false}              | ${60}      | ${''}       | ${''}     | ${'darkvision 60 ft., passive Perception 10'}
+      ${'tremorsense only'}                      | ${''}      | ${false}              | ${''}      | ${90}       | ${''}     | ${'tremorsense 90 ft., passive Perception 10'}
+      ${'truesight only'}                        | ${''}      | ${false}              | ${''}      | ${''}       | ${120}    | ${'truesight 120 ft., passive Perception 10'}
+      ${'blindsight + darkvision'}               | ${15}      | ${false}              | ${40}      | ${''}       | ${''}     | ${'blindsight 15 ft., darkvision 40 ft., passive Perception 10'}
+      ${'blindsight + tremorsense'}              | ${50}      | ${false}              | ${''}      | ${35}       | ${''}     | ${'blindsight 50 ft., tremorsense 35 ft., passive Perception 10'}
+      ${'blindsight + truesight'}                | ${25}      | ${false}              | ${''}      | ${''}       | ${80}     | ${'blindsight 25 ft., truesight 80 ft., passive Perception 10'}
+      ${'darkvision + tremorsense'}              | ${''}      | ${false}              | ${45}      | ${100}      | ${''}     | ${'darkvision 45 ft., tremorsense 100 ft., passive Perception 10'}
+      ${'darkvision + truesight'}                | ${''}      | ${false}              | ${180}     | ${''}       | ${20}     | ${'darkvision 180 ft., truesight 20 ft., passive Perception 10'}
+      ${'tremorsense + truesight'}               | ${''}      | ${false}              | ${''}      | ${75}       | ${35}     | ${'tremorsense 75 ft., truesight 35 ft., passive Perception 10'}
+      ${'blindsight + darkvision + tremorsense'} | ${150}     | ${false}              | ${55}      | ${5}        | ${''}     | ${'blindsight 150 ft., darkvision 55 ft., tremorsense 5 ft., passive Perception 10'}
+      ${'blindsight + darkvision + truesight'}   | ${65}      | ${false}              | ${10}      | ${''}       | ${0}      | ${'blindsight 65 ft., darkvision 10 ft., truesight 0 ft., passive Perception 10'}
+      ${'blindsight + tremorsense + truesight'}  | ${85}      | ${false}              | ${''}      | ${70}       | ${95}     | ${'blindsight 85 ft., tremorsense 70 ft., truesight 95 ft., passive Perception 10'}
+      ${'darkvision + tremorsense + truesight'}  | ${''}      | ${false}              | ${105}     | ${110}      | ${115}    | ${'darkvision 105 ft., tremorsense 110 ft., truesight 115 ft., passive Perception 10'}
+      ${'all senses'}                            | ${125}     | ${false}              | ${130}     | ${135}      | ${140}    | ${'blindsight 125 ft., darkvision 130 ft., tremorsense 135 ft., truesight 140 ft., passive Perception 10'}
+      ${'all senses + blind beyond this radius'} | ${125}     | ${true}               | ${130}     | ${135}      | ${140}    | ${'blindsight 125 ft. (blind beyond this radius), darkvision 130 ft., tremorsense 135 ft., truesight 140 ft., passive Perception 10'}
+      ${'maximum values'}                        | ${999}     | ${true}               | ${999}     | ${999}      | ${999}    | ${'blindsight 999 ft. (blind beyond this radius), darkvision 999 ft., tremorsense 999 ft., truesight 999 ft., passive Perception 10'}
+    `
+    ('$description: "$text"',
+    ({blindsight, blindBeyondThisRadius, darkvision, tremorsense, truesight, text}) => {
+      const expectedValues = {
+        blindsight: nullIfEmptyString(blindsight),
+        blindBeyondThisRadius: blindBeyondThisRadius,
+        darkvision: nullIfEmptyString(darkvision),
+        tremorsense: nullIfEmptyString(tremorsense),
+        truesight: nullIfEmptyString(truesight)
+      };
+
+      const json = {
+        senses: text
+      };
+
+      sensesSection.importFromOpen5e(json);
+
+      verifyModel(expectedValues);
+      verifyEditModeView(expectedValues);
+      verifyShowModeView(text);
+    });
+    /* eslint-enable indent, no-unexpected-multiline */
+  });
+
+  describe('should import as custom text if any custom or markdown syntax is encountered', () => {
+    /* eslint-disable indent, no-unexpected-multiline */
+    it.each
+    `
+      description                 | customText                                                                   | expectedHtmlText
+      ${'additional text'}        | ${'darkvision 120 ft. (penetrates magical darkness), passive Perception 13'} | ${'darkvision 120 ft. (penetrates magical darkness), passive Perception 13'}
+      ${'incorrect order'}        | ${'30 ft. truesight, passive Perception 20'}                                 | ${'30 ft. truesight, passive Perception 20'}
+      ${'custom category'}        | ${'echolocation 60 ft., passive Perception 8'}                               | ${'echolocation 60 ft., passive Perception 8'}
+      ${'custom range'}           | ${'blindsight 12 m., passive Perception 7'}                                  | ${'blindsight 12 m., passive Perception 7'}
+      ${'category without range'} | ${'tremorsense, passive Perception 11'}                                      | ${'tremorsense, passive Perception 11'}
+      ${'range without category'} | ${'90 ft., passive Perception 16'}                                           | ${'90 ft., passive Perception 16'}
+      ${'asterisks present'}      | ${'**darkvision 60 ft.**, passive Perception 23'}                            | ${'<strong>darkvision 60 ft.</strong>, passive Perception 23'}
+      ${'underscores present'}    | ${'blindsight 5 ft. (_when hiding_), passive Perception 4'}                  | ${'blindsight 5 ft. (<em>when hiding</em>), passive Perception 4'}
+    `
+    ('$description: "$CustomText" => "$expectedHtmlText"}',
+    ({customText, expectedHtmlText}) => {
+      const expectedValues = {
+        useCustomText: true,
+        customText: customText,
+        htmlCustomText: expectedHtmlText
+      };
+
+      const json = {
+        senses: customText,
+      };
+
+      sensesSection.importFromOpen5e(json);
+
+      verifyModel(expectedValues);
+      verifyEditModeView(expectedValues);
+      verifyShowModeView(expectedHtmlText);
+    });
+    /* eslint-enable indent, no-unexpected-multiline */
+  });
+});
+
 function reset() {
   sensesModel.reset();
   sensesSection.updateView();
