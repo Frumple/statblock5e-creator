@@ -25,27 +25,14 @@ export default class SpeedSection extends propertyLineSectionModule.PropertyLine
         this.editElements.burrow,
         this.editElements.climb,
         this.editElements.fly,
+        this.editElements.hover,
         this.editElements.swim);
 
       this.editElements.useCustomText.enableElementsWhenChecked(
         this.editElements.customText);
 
-      this.editElements.fly.addEventListener('input', this.onInputFlySpeed.bind(this));
-      this.editElements.useCustomText.addEventListener('input', this.onInputFlySpeed.bind(this));
-
       this.isInitialized = true;
     }
-  }
-
-  onInputFlySpeed() {
-    if (this.editElements.fly.valueAsInt !== null &&
-      ! this.editElements.useCustomText.checked) {
-      this.editElements.hover.removeAttribute('disabled');
-    } else {
-      this.editElements.hover.setAttribute('disabled', '');
-    }
-
-    // console.log(`${this.editElements.hover.getAttribute('disabled')}`);
   }
 
   checkForErrors() {
@@ -89,7 +76,6 @@ export default class SpeedSection extends propertyLineSectionModule.PropertyLine
     }
 
     this.editElements.useCustomText.onInputCheckbox();
-    this.onInputFlySpeed();
   }
 
   updateShowModeView() {
