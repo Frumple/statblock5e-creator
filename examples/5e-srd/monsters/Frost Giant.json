@@ -177,6 +177,7 @@
   },
   "senses": {
     "blindsight": null,
+    "blindBeyondThisRadius": false,
     "darkvision": null,
     "tremorsense": null,
     "truesight": null,
