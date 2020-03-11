@@ -53,10 +53,24 @@ describe('when the show section is clicked', () => {
       expect(speedSection).toHaveEditElementsEnabledOrDisabledBasedOnCheckbox(
         speedSection.editElements.useCustomText,
         ['customText'],
-        ['walk', 'burrow', 'climb', 'fly', 'hover', 'swim']
+        ['walk', 'burrow', 'climb', 'fly', 'swim']
       );
-
+      expect(speedSection.editElements.hover).toBeDisabled();
       expect(speedSection.editElements.walk).toHaveFocus();
+    });
+
+    describe('and the fly speed field is changed', () => {
+      it('should enable the hover checkbox if the field is not blank, and disable the hover checkbox if the field is blank', () => {
+        expect(speedSection.editElements.hover).toBeDisabled();
+
+        inputValueAndTriggerEvent(speedSection.editElements.fly, 30);
+
+        expect(speedSection.editElements.hover).toBeEnabled();
+
+        inputValueAndTriggerEvent(speedSection.editElements.fly, '');
+
+        expect(speedSection.editElements.hover).toBeDisabled();
+      });
     });
 
     describe('and the speed fields are populated and the edit section is submitted', () => {
@@ -99,7 +113,7 @@ describe('when the show section is clicked', () => {
         ({walk, burrow, climb, fly, hover, swim, expectedText}) => {
           const expectedValues = {
             walk: nullIfEmptyString(walk),
-            burrow : nullIfEmptyString(burrow),
+            burrow: nullIfEmptyString(burrow),
             climb: nullIfEmptyString(climb),
             fly: nullIfEmptyString(fly),
             hover: hover,
@@ -113,7 +127,13 @@ describe('when the show section is clicked', () => {
           inputValueAndTriggerEvent(speedSection.editElements.swim, swim);
 
           if (hover) {
-            speedSection.editElements.hover.click();
+            if (fly === '') {
+              inputValueAndTriggerEvent(speedSection.editElements.fly, 60);
+              speedSection.editElements.hover.click();
+              inputValueAndTriggerEvent(speedSection.editElements.fly, '');
+            } else {
+              speedSection.editElements.hover.click();
+            }
           }
 
           speedSection.editElements.submitForm();
@@ -187,9 +207,9 @@ describe('when the show section is clicked', () => {
       expect(speedSection).toHaveEditElementsEnabledOrDisabledBasedOnCheckbox(
         speedSection.editElements.useCustomText,
         ['customText'],
-        ['walk', 'burrow', 'climb', 'fly', 'hover', 'swim']
+        ['walk', 'burrow', 'climb', 'fly', 'swim']
       );
-
+      expect(speedSection.editElements.hover).toBeDisabled();
       expect(speedSection.editElements.customText).toHaveFocus();
       expect(speedSection.editElements.customText).toBeSelected();
     });
@@ -402,8 +422,15 @@ function verifyEditModeView({
   expect(speedSection).toHaveEditElementsEnabledOrDisabledBasedOnCheckbox(
     speedSection.editElements.useCustomText,
     ['customText'],
-    ['walk', 'burrow', 'climb', 'fly', 'hover', 'swim']
+    ['walk', 'burrow', 'climb', 'fly', 'swim']
   );
+
+  if (speedSection.editElements.fly.valueAsInt !== null &&
+    ! speedSection.editElements.useCustomText.checked) {
+    expect(speedSection.editElements.hover).toBeEnabled();
+  } else {
+    expect(speedSection.editElements.hover).toBeDisabled();
+  }
 }
 
 function verifyShowModeView(expectedText = '30 ft.') {
