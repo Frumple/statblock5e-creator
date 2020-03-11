@@ -19,7 +19,7 @@
   grid-area: 1 / 3;
   align-self: center;
   --help-tooltip-icon-color: #7A200D;
-  --help-tooltip-width: 45em;
+  --help-tooltip-width: 55em;
 }
 .saving-throws-edit-section__override-label { grid-area: 1 / 5; }
 
