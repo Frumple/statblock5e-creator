@@ -186,7 +186,7 @@
     "items": []
   },
   "challengeRating": {
-    "challengeRating": 0,
+    "challengeRating": "0",
     "experiencePoints": 10,
     "proficiencyBonus": 2
   },

@@ -202,7 +202,7 @@
     ]
   },
   "challengeRating": {
-    "challengeRating": 5,
+    "challengeRating": "5",
     "experiencePoints": 1800,
     "proficiencyBonus": 3
   },

@@ -48,40 +48,40 @@ describe('when the show section is clicked', () => {
       it.each
       `
         challengeRating | expectedExperiencePoints | expectedProficiencyBonus | expectedText
-        ${0}            | ${10}                    | ${2}                     | ${'0 (10 XP)'}
-        ${0.125}        | ${25}                    | ${2}                     | ${'1/8 (25 XP)'}
-        ${0.25}         | ${50}                    | ${2}                     | ${'1/4 (50 XP)'}
-        ${0.5}          | ${100}                   | ${2}                     | ${'1/2 (100 XP)'}
-        ${1}            | ${200}                   | ${2}                     | ${'1 (200 XP)'}
-        ${2}            | ${450}                   | ${2}                     | ${'2 (450 XP)'}
-        ${3}            | ${700}                   | ${2}                     | ${'3 (700 XP)'}
-        ${4}            | ${1100}                  | ${2}                     | ${'4 (1100 XP)'}
-        ${5}            | ${1800}                  | ${3}                     | ${'5 (1800 XP)'}
-        ${6}            | ${2300}                  | ${3}                     | ${'6 (2300 XP)'}
-        ${7}            | ${2900}                  | ${3}                     | ${'7 (2900 XP)'}
-        ${8}            | ${3900}                  | ${3}                     | ${'8 (3900 XP)'}
-        ${9}            | ${5000}                  | ${4}                     | ${'9 (5000 XP)'}
-        ${10}           | ${5900}                  | ${4}                     | ${'10 (5900 XP)'}
-        ${11}           | ${7200}                  | ${4}                     | ${'11 (7200 XP)'}
-        ${12}           | ${8400}                  | ${4}                     | ${'12 (8400 XP)'}
-        ${13}           | ${10000}                 | ${5}                     | ${'13 (10000 XP)'}
-        ${14}           | ${11500}                 | ${5}                     | ${'14 (11500 XP)'}
-        ${15}           | ${13000}                 | ${5}                     | ${'15 (13000 XP)'}
-        ${16}           | ${15000}                 | ${5}                     | ${'16 (15000 XP)'}
-        ${17}           | ${18000}                 | ${6}                     | ${'17 (18000 XP)'}
-        ${18}           | ${20000}                 | ${6}                     | ${'18 (20000 XP)'}
-        ${19}           | ${22000}                 | ${6}                     | ${'19 (22000 XP)'}
-        ${20}           | ${25000}                 | ${6}                     | ${'20 (25000 XP)'}
-        ${21}           | ${33000}                 | ${7}                     | ${'21 (33000 XP)'}
-        ${22}           | ${41000}                 | ${7}                     | ${'22 (41000 XP)'}
-        ${23}           | ${50000}                 | ${7}                     | ${'23 (50000 XP)'}
-        ${24}           | ${62000}                 | ${7}                     | ${'24 (62000 XP)'}
-        ${25}           | ${75000}                 | ${8}                     | ${'25 (75000 XP)'}
-        ${26}           | ${90000}                 | ${8}                     | ${'26 (90000 XP)'}
-        ${27}           | ${105000}                | ${8}                     | ${'27 (105000 XP)'}
-        ${28}           | ${120000}                | ${8}                     | ${'28 (120000 XP)'}
-        ${29}           | ${135000}                | ${9}                     | ${'29 (135000 XP)'}
-        ${30}           | ${155000}                | ${9}                     | ${'30 (155000 XP)'}
+        ${'0'}          | ${10}                    | ${2}                     | ${'0 (10 XP)'}
+        ${'1/8'}        | ${25}                    | ${2}                     | ${'1/8 (25 XP)'}
+        ${'1/4'}        | ${50}                    | ${2}                     | ${'1/4 (50 XP)'}
+        ${'1/2'}        | ${100}                   | ${2}                     | ${'1/2 (100 XP)'}
+        ${'1'}          | ${200}                   | ${2}                     | ${'1 (200 XP)'}
+        ${'2'}          | ${450}                   | ${2}                     | ${'2 (450 XP)'}
+        ${'3'}          | ${700}                   | ${2}                     | ${'3 (700 XP)'}
+        ${'4'}          | ${1100}                  | ${2}                     | ${'4 (1100 XP)'}
+        ${'5'}          | ${1800}                  | ${3}                     | ${'5 (1800 XP)'}
+        ${'6'}          | ${2300}                  | ${3}                     | ${'6 (2300 XP)'}
+        ${'7'}          | ${2900}                  | ${3}                     | ${'7 (2900 XP)'}
+        ${'8'}          | ${3900}                  | ${3}                     | ${'8 (3900 XP)'}
+        ${'9'}          | ${5000}                  | ${4}                     | ${'9 (5000 XP)'}
+        ${'10'}         | ${5900}                  | ${4}                     | ${'10 (5900 XP)'}
+        ${'11'}         | ${7200}                  | ${4}                     | ${'11 (7200 XP)'}
+        ${'12'}         | ${8400}                  | ${4}                     | ${'12 (8400 XP)'}
+        ${'13'}         | ${10000}                 | ${5}                     | ${'13 (10000 XP)'}
+        ${'14'}         | ${11500}                 | ${5}                     | ${'14 (11500 XP)'}
+        ${'15'}         | ${13000}                 | ${5}                     | ${'15 (13000 XP)'}
+        ${'16'}         | ${15000}                 | ${5}                     | ${'16 (15000 XP)'}
+        ${'17'}         | ${18000}                 | ${6}                     | ${'17 (18000 XP)'}
+        ${'18'}         | ${20000}                 | ${6}                     | ${'18 (20000 XP)'}
+        ${'19'}         | ${22000}                 | ${6}                     | ${'19 (22000 XP)'}
+        ${'20'}         | ${25000}                 | ${6}                     | ${'20 (25000 XP)'}
+        ${'21'}         | ${33000}                 | ${7}                     | ${'21 (33000 XP)'}
+        ${'22'}         | ${41000}                 | ${7}                     | ${'22 (41000 XP)'}
+        ${'23'}         | ${50000}                 | ${7}                     | ${'23 (50000 XP)'}
+        ${'24'}         | ${62000}                 | ${7}                     | ${'24 (62000 XP)'}
+        ${'25'}         | ${75000}                 | ${8}                     | ${'25 (75000 XP)'}
+        ${'26'}         | ${90000}                 | ${8}                     | ${'26 (90000 XP)'}
+        ${'27'}         | ${105000}                | ${8}                     | ${'27 (105000 XP)'}
+        ${'28'}         | ${120000}                | ${8}                     | ${'28 (120000 XP)'}
+        ${'29'}         | ${135000}                | ${9}                     | ${'29 (135000 XP)'}
+        ${'30'}         | ${155000}                | ${9}                     | ${'30 (155000 XP)'}
       `
       ('$challengeRating => {expectedExperiencePoints = $expectedExperiencePoints, expectedProficiencyBonus = $expectedProficiencyBonus, expectedText = $expectedText}',
       ({challengeRating, expectedExperiencePoints, expectedProficiencyBonus, expectedText}) => {
@@ -227,13 +227,13 @@ describe('when the show section is clicked', () => {
   describe('and the challenge rating field is changed, then the experience points field is changed, and the edit section is submitted', () => {
     it('should save the fields', () => {
       const expectedValues = {
-        challengeRating: 3,
+        challengeRating: '3',
         experiencePoints: 888
       };
       const expectedText = '3 (888 XP)';
 
       inputValueAndTriggerEvent(challengeRatingSection.editElements.challengeRating, expectedValues.challengeRating);
-      inputValueAndTriggerEvent(challengeRatingSection.editElements.experiencePoints,expectedValues.experiencePoints);
+      inputValueAndTriggerEvent(challengeRatingSection.editElements.experiencePoints, expectedValues.experiencePoints);
 
       verifyModel(expectedValues);
       verifyEditModeView(expectedValues);
@@ -261,7 +261,7 @@ describe('when the show section is clicked', () => {
       const initialExperiencePoints = 1586;
 
       const expectedValues = {
-        challengeRating: 20,
+        challengeRating: '20',
         experiencePoints: 25000,
         proficiencyBonus: 6
       };
@@ -294,7 +294,7 @@ describe('when the show section is clicked', () => {
   describe('and the challenge rating field is changed, then the proficiency bonus field is changed, and the edit section is submitted', () => {
     it('should save the fields', () => {
       const expectedValues = {
-        challengeRating: 14,
+        challengeRating: '14',
         experiencePoints: 11500,
         proficiencyBonus: 5
       };
@@ -329,7 +329,7 @@ describe('when the show section is clicked', () => {
       const initialProficiencyBonus = 7;
 
       const expectedValues = {
-        challengeRating: 8,
+        challengeRating: '8',
         experiencePoints: 3900,
         proficiencyBonus: 3
       };
@@ -360,13 +360,75 @@ describe('when the show section is clicked', () => {
   });
 });
 
+describe('when importing from Open5e', () => {
+  describe('should import as normal', () => {
+    /* eslint-disable indent, no-unexpected-multiline */
+    it.each
+    `
+      challengeRating | expectedExperiencePoints | expectedProficiencyBonus | expectedText
+      ${'0'}          | ${10}                    | ${2}                     | ${'0 (10 XP)'}
+      ${'1/8'}        | ${25}                    | ${2}                     | ${'1/8 (25 XP)'}
+      ${'1/4'}        | ${50}                    | ${2}                     | ${'1/4 (50 XP)'}
+      ${'1/2'}        | ${100}                   | ${2}                     | ${'1/2 (100 XP)'}
+      ${'1'}          | ${200}                   | ${2}                     | ${'1 (200 XP)'}
+      ${'2'}          | ${450}                   | ${2}                     | ${'2 (450 XP)'}
+      ${'3'}          | ${700}                   | ${2}                     | ${'3 (700 XP)'}
+      ${'4'}          | ${1100}                  | ${2}                     | ${'4 (1100 XP)'}
+      ${'5'}          | ${1800}                  | ${3}                     | ${'5 (1800 XP)'}
+      ${'6'}          | ${2300}                  | ${3}                     | ${'6 (2300 XP)'}
+      ${'7'}          | ${2900}                  | ${3}                     | ${'7 (2900 XP)'}
+      ${'8'}          | ${3900}                  | ${3}                     | ${'8 (3900 XP)'}
+      ${'9'}          | ${5000}                  | ${4}                     | ${'9 (5000 XP)'}
+      ${'10'}         | ${5900}                  | ${4}                     | ${'10 (5900 XP)'}
+      ${'11'}         | ${7200}                  | ${4}                     | ${'11 (7200 XP)'}
+      ${'12'}         | ${8400}                  | ${4}                     | ${'12 (8400 XP)'}
+      ${'13'}         | ${10000}                 | ${5}                     | ${'13 (10000 XP)'}
+      ${'14'}         | ${11500}                 | ${5}                     | ${'14 (11500 XP)'}
+      ${'15'}         | ${13000}                 | ${5}                     | ${'15 (13000 XP)'}
+      ${'16'}         | ${15000}                 | ${5}                     | ${'16 (15000 XP)'}
+      ${'17'}         | ${18000}                 | ${6}                     | ${'17 (18000 XP)'}
+      ${'18'}         | ${20000}                 | ${6}                     | ${'18 (20000 XP)'}
+      ${'19'}         | ${22000}                 | ${6}                     | ${'19 (22000 XP)'}
+      ${'20'}         | ${25000}                 | ${6}                     | ${'20 (25000 XP)'}
+      ${'21'}         | ${33000}                 | ${7}                     | ${'21 (33000 XP)'}
+      ${'22'}         | ${41000}                 | ${7}                     | ${'22 (41000 XP)'}
+      ${'23'}         | ${50000}                 | ${7}                     | ${'23 (50000 XP)'}
+      ${'24'}         | ${62000}                 | ${7}                     | ${'24 (62000 XP)'}
+      ${'25'}         | ${75000}                 | ${8}                     | ${'25 (75000 XP)'}
+      ${'26'}         | ${90000}                 | ${8}                     | ${'26 (90000 XP)'}
+      ${'27'}         | ${105000}                | ${8}                     | ${'27 (105000 XP)'}
+      ${'28'}         | ${120000}                | ${8}                     | ${'28 (120000 XP)'}
+      ${'29'}         | ${135000}                | ${9}                     | ${'29 (135000 XP)'}
+      ${'30'}         | ${155000}                | ${9}                     | ${'30 (155000 XP)'}
+    `
+    ('$challengeRating => {expectedExperiencePoints = $expectedExperiencePoints, expectedProficiencyBonus = $expectedProficiencyBonus, expectedText = $expectedText}',
+    ({challengeRating, expectedExperiencePoints, expectedProficiencyBonus, expectedText}) => {
+      const expectedValues = {
+        challengeRating: challengeRating,
+        experiencePoints: expectedExperiencePoints,
+        proficiencyBonus: expectedProficiencyBonus
+      };
+
+      const json = {
+        'challenge_rating': challengeRating
+      };
+
+      challengeRatingSection.importFromOpen5e(json);
+
+      verifyModel(expectedValues);
+      verifyEditModeView(expectedValues);
+      verifyShowModeView(expectedText);
+    });
+  });
+});
+
 function reset() {
   challengeRatingModel.reset();
   challengeRatingSection.updateView();
 }
 
 function verifyModel({
-  challengeRating = 0,
+  challengeRating = '0',
   experiencePoints = 10,
   proficiencyBonus = 2
 } = {}) {
@@ -376,13 +438,13 @@ function verifyModel({
 }
 
 function verifyEditModeView({
-  challengeRating = 0,
+  challengeRating = '0',
   experiencePoints = 10,
   proficiencyBonus = 2
 } = {}) {
-  expect(challengeRatingSection.editElements.challengeRating.value).toBe(challengeRating.toString());
-  expect(challengeRatingSection.editElements.experiencePoints.value).toBe(experiencePoints.toString());
-  expect(challengeRatingSection.editElements.proficiencyBonus.value).toBe(proficiencyBonus.toString());
+  expect(challengeRatingSection.editElements.challengeRating.value).toBe(challengeRating);
+  expect(challengeRatingSection.editElements.experiencePoints.valueAsInt).toBe(experiencePoints);
+  expect(challengeRatingSection.editElements.proficiencyBonus.valueAsInt).toBe(proficiencyBonus);
 }
 
 function verifyShowModeView(expectedText) {
@@ -390,7 +452,7 @@ function verifyShowModeView(expectedText) {
 }
 
 function verifyJsonExport({
-  challengeRating = 0,
+  challengeRating = '0',
   experiencePoints = 10,
   proficiencyBonus = 2
 } = {}) {

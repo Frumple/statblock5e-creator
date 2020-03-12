@@ -1,4 +1,6 @@
 import PropertyLineModel from './property-line-model.js';
+import ExperiencePointsByChallengeRating from '../data/experience-points-by-challenge-rating.js';
+import ProficiencyBonusByChallengeRating from '../data/proficiency-bonus-by-challenge-rating.js';
 
 export default class ChallengeRating extends PropertyLineModel {
   constructor() {
@@ -8,7 +10,7 @@ export default class ChallengeRating extends PropertyLineModel {
   }
 
   reset() {
-    this.challengeRating = 0;
+    this.challengeRating = '0';
     this.experiencePoints = 10;
     this.proficiencyBonus = 2;
   }
@@ -21,17 +23,13 @@ export default class ChallengeRating extends PropertyLineModel {
     ];
   }
 
-  get challengeRatingAsFraction() {
-    switch(this.challengeRating) {
-    case 0.125: return '1/8';
-    case 0.25: return '1/4';
-    case 0.5: return '1/2';
-    default: return this.challengeRating;
-    }
+  updateExperiencePointsAndProficiencyBonusFromChallengeRating() {
+    this.experiencePoints = ExperiencePointsByChallengeRating[this.challengeRating];
+    this.proficiencyBonus = ProficiencyBonusByChallengeRating[this.challengeRating];
   }
 
   get text() {
-    return `${this.challengeRatingAsFraction} (${this.experiencePoints} XP)`;
+    return `${this.challengeRating} (${this.experiencePoints} XP)`;
   }
 
   get htmlText() {
@@ -40,5 +38,12 @@ export default class ChallengeRating extends PropertyLineModel {
 
   toParserOptions() {
     return this.proficiencyBonus;
+  }
+
+  fromOpen5e(json) {
+    this.reset();
+
+    this.challengeRating = json['challenge_rating'];
+    this.updateExperiencePointsAndProficiencyBonusFromChallengeRating();
   }
 }
