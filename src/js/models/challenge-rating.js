@@ -1,6 +1,9 @@
 import PropertyLineModel from './property-line-model.js';
+
 import ExperiencePointsByChallengeRating from '../data/experience-points-by-challenge-rating.js';
 import ProficiencyBonusByChallengeRating from '../data/proficiency-bonus-by-challenge-rating.js';
+
+import { formatIntegerWithCommas } from '../helpers/number-helpers.js';
 
 export default class ChallengeRating extends PropertyLineModel {
   constructor() {
@@ -29,7 +32,8 @@ export default class ChallengeRating extends PropertyLineModel {
   }
 
   get text() {
-    return `${this.challengeRating} (${this.experiencePoints} XP)`;
+    const formattedExperiencePoints = formatIntegerWithCommas(this.experiencePoints);
+    return `${this.challengeRating} (${formattedExperiencePoints} XP)`;
   }
 
   get htmlText() {
