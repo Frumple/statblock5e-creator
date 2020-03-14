@@ -29,15 +29,15 @@ it('should preserve newline characters', () => {
 
 describe('should parse valid name expressions', () => {
   const inputText =
-    '[name] begins on a new line. [name] begins on a new sentence, but [name] does not.\n' +
-    '[fullname] begins on a new line. [fullname] begins on a new sentence, but [fullname] does not.';
+    '[name] begins on a new line. [name] begins on a new sentence, but [name] does not. **Header.** [name] begins after a header.\n' +
+    '[fullname] begins on a new line. [fullname] begins on a new sentence, but [fullname] does not. **Header.** [fullname] begins after a header.';
 
   it('when only the full name is defined', () => {
     title.fullName = 'Hook Horror';
 
     const expectedOutputText =
-      'The hook horror begins on a new line. The hook horror begins on a new sentence, but the hook horror does not.\n' +
-      'The hook horror begins on a new line. The hook horror begins on a new sentence, but the hook horror does not.';
+      'The hook horror begins on a new line. The hook horror begins on a new sentence, but the hook horror does not. **Header.** The hook horror begins after a header.\n' +
+      'The hook horror begins on a new line. The hook horror begins on a new sentence, but the hook horror does not. **Header.** The hook horror begins after a header.';
 
     parseAndVerifyNameExpressions(expectedOutputText);
   });
@@ -47,8 +47,8 @@ describe('should parse valid name expressions', () => {
     title.shortName = 'dragon';
 
     const expectedOutputText =
-      'The dragon begins on a new line. The dragon begins on a new sentence, but the dragon does not.\n' +
-      'The ancient red dragon begins on a new line. The ancient red dragon begins on a new sentence, but the ancient red dragon does not.';
+      'The dragon begins on a new line. The dragon begins on a new sentence, but the dragon does not. **Header.** The dragon begins after a header.\n' +
+      'The ancient red dragon begins on a new line. The ancient red dragon begins on a new sentence, but the ancient red dragon does not. **Header.** The ancient red dragon begins after a header.';
 
     parseAndVerifyNameExpressions(expectedOutputText);
   });
@@ -58,8 +58,8 @@ describe('should parse valid name expressions', () => {
     title.isProperNoun = true;
 
     const expectedOutputText =
-      'Tiamat begins on a new line. Tiamat begins on a new sentence, but Tiamat does not.\n' +
-      'Tiamat begins on a new line. Tiamat begins on a new sentence, but Tiamat does not.';
+      'Tiamat begins on a new line. Tiamat begins on a new sentence, but Tiamat does not. **Header.** Tiamat begins after a header.\n' +
+      'Tiamat begins on a new line. Tiamat begins on a new sentence, but Tiamat does not. **Header.** Tiamat begins after a header.';
 
     parseAndVerifyNameExpressions(expectedOutputText);
   });
@@ -70,8 +70,8 @@ describe('should parse valid name expressions', () => {
     title.isProperNoun = true;
 
     const expectedOutputText =
-      'Lady Kima begins on a new line. Lady Kima begins on a new sentence, but Lady Kima does not.\n' +
-      'Lady Kima of Vord begins on a new line. Lady Kima of Vord begins on a new sentence, but Lady Kima of Vord does not.';
+      'Lady Kima begins on a new line. Lady Kima begins on a new sentence, but Lady Kima does not. **Header.** Lady Kima begins after a header.\n' +
+      'Lady Kima of Vord begins on a new line. Lady Kima of Vord begins on a new sentence, but Lady Kima of Vord does not. **Header.** Lady Kima of Vord begins after a header.';
 
     parseAndVerifyNameExpressions(expectedOutputText);
   });

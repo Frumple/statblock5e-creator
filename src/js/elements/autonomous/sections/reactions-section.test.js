@@ -6,6 +6,7 @@ import * as sharedSpecs from './block-list-section.specs.js';
 
 const expectedHeading = 'Reactions';
 const expectedBlockType = 'Reaction';
+const open5eJsonKey = 'reactions';
 
 const titleModel = CurrentContext.creature.title;
 const reactionsModel = CurrentContext.creature.reactions;
@@ -215,6 +216,28 @@ describe('when the show section is clicked', () => {
     it('should display errors if the block name is blank and block text has invalid markdown syntax', () => {
       sharedSpecs.shouldDisplayErrorsIfBlockNameIsBlankAndBlockTextHasInvalidMarkdownSyntax(reactionsSection, expectedBlockType);
     });
+  });
+});
+
+describe('when import from Open5e', () => {
+  it('should import single block', () => {
+    const block = {
+      name: 'Parry',
+      text: 'The knight adds 2 to its AC against one melee attack that would hit it. To do so, the knight must see the attacker and be wielding a melee weapon.'
+    };
+
+    sharedSpecs.shouldImportFromOpen5e(reactionsSection, reactionsModel, open5eJsonKey, [block]);
+  });
+
+  it('should import single block with multiline text', () => {
+    const block = {
+      name: 'Multiline Reaction',
+      text: '**Line 1**. The dummy is here.\n  **Line 2**. The dummy is there.\n    **Line 3**. The dummy is everywhere.',
+      markdownText: '**Line 1**. The dummy is here.  \n>   **Line 2**. The dummy is there.  \n>     **Line 3**. The dummy is everywhere.',
+      htmlText: '<strong>Line 1</strong>. The dummy is here.\n  <strong>Line 2</strong>. The dummy is there.\n    <strong>Line 3</strong>. The dummy is everywhere.'
+    };
+
+    sharedSpecs.shouldImportFromOpen5e(reactionsSection, reactionsModel, open5eJsonKey, [block]);
   });
 });
 

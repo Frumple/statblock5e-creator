@@ -2,7 +2,9 @@ import BlockListModel from './block-list-model.js';
 
 export default class LegendaryActions extends BlockListModel {
   constructor() {
-    super('Legendary Actions', 'Legendary Action');
+    super('Legendary Actions',
+          'Legendary Action',
+          'legendary_actions');
   }
 
   reset() {

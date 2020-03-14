@@ -117,6 +117,11 @@ export class BlockListSection extends sectionModule.Section {
     }
   }
 
+  importFromOpen5e(json) {
+    super.importFromOpen5e(json);
+    this.reparse();
+  }
+
   importFromJson(json) {
     super.importFromJson(json);
     this.reparse();

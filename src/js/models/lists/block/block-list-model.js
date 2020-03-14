@@ -2,11 +2,12 @@ import Model from '../../model.js';
 import BlockModel from './block-model.js';
 
 export default class BlockListModel extends Model {
-  constructor(headingName, singleName) {
+  constructor(headingName, singleName, open5eJsonKey) {
     super();
 
     this.headingName = headingName;
     this.singleName = singleName;
+    this.open5eJsonKey = open5eJsonKey;
 
     this.blocks = [];
 
@@ -19,6 +20,35 @@ export default class BlockListModel extends Model {
 
   clear() {
     this.blocks.length = 0;
+  }
+
+  fromOpen5e(json) {
+    this.clear();
+
+    const input = json[this.open5eJsonKey];
+
+    if (input !== '') {
+      for (const inputItem of input) {
+        const name = inputItem.name;
+        const desc = BlockListModel.parseOpen5eBlockDescription(inputItem.desc);
+
+        const block = new BlockModel(name, desc);
+        this.blocks.push(block);
+      }
+    }
+  }
+
+  static parseOpen5eBlockDescription(desc) {
+    const newLineIndentRegex = /(?<=\S)(?!(\*|_))\n(?=\S)(?!(\*|_))/g;
+    const bulletRemovalRegex = / *• */g;
+
+    // For each single newline '\n' character surrounded by whitespace characters but not any markdown characters, add an indent of 2 spaces following it
+    desc = desc.replace(newLineIndentRegex, '\n  ');
+
+    // Remove all bullet character '•' and any space characters (not whitespace) surrounding it
+    desc = desc.replace(bulletRemovalRegex, '');
+
+    return desc;
   }
 
   fromJson(json) {

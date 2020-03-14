@@ -8,6 +8,7 @@ import * as sharedSpecs from './block-list-section.specs.js';
 
 const expectedHeading = 'Actions';
 const expectedBlockType = 'Action';
+const open5eJsonKey = 'actions';
 
 const titleModel = CurrentContext.creature.title;
 const abilitiesModel = CurrentContext.creature.abilities;
@@ -74,13 +75,14 @@ describe('when the show section is clicked', () => {
 
     it('should add a single block with multiline text', () => {
       const block = {
-        name: 'Multiline Action',
-        text: '**Line 1**. [name] is hot.\n  **Line 2**. [name] is cold.\n    **Line 3**. [name] is warm.',
-        markdownText: '**Line 1**. The dummy is hot.  \n>   **Line 2**. The dummy is cold.  \n>     **Line 3**. The dummy is warm.',
-        htmlText: '<strong>Line 1</strong>. The dummy is hot.\n  <strong>Line 2</strong>. The dummy is cold.\n    <strong>Line 3</strong>. The dummy is warm.'
+        name: 'Breath Weapons (Recharge 5-6)',
+        text: '[name] uses one of the following breath weapons.\n**Fire Breath.** [name] exhales fire in an 60-foot line that is 5 feet wide. Each creature in that line must make a DC 18 Dexterity saving throw, taking dmg[13d6] fire damage on a failed save, or half as much damage on a successful one.\n**Sleep Breath.** [name] exhales sleep gas in a 60-foot cone. Each creature in that area must succeed on a DC 18 Constitution saving throw or fall unconscious for 10 minutes. This effect ends for a creature if the creature takes damage or someone uses an action to wake it.',
+        markdownText: 'The dragon uses one of the following breath weapons.  \n> **Fire Breath.** The dragon exhales fire in an 60-foot line that is 5 feet wide. Each creature in that line must make a DC 18 Dexterity saving throw, taking 45 (13d6) fire damage on a failed save, or half as much damage on a successful one.  \n> **Sleep Breath.** The dragon exhales sleep gas in a 60-foot cone. Each creature in that area must succeed on a DC 18 Constitution saving throw or fall unconscious for 10 minutes. This effect ends for a creature if the creature takes damage or someone uses an action to wake it.',
+        htmlText: 'The dragon uses one of the following breath weapons.\n<strong>Fire Breath.</strong> The dragon exhales fire in an 60-foot line that is 5 feet wide. Each creature in that line must make a DC 18 Dexterity saving throw, taking 45 (13d6) fire damage on a failed save, or half as much damage on a successful one.\n<strong>Sleep Breath.</strong> The dragon exhales sleep gas in a 60-foot cone. Each creature in that area must succeed on a DC 18 Constitution saving throw or fall unconscious for 10 minutes. This effect ends for a creature if the creature takes damage or someone uses an action to wake it.'
       };
 
-      titleModel.fullName = 'Dummy';
+      titleModel.fullName = 'Adult Brass Dragon';
+      titleModel.shortName = 'dragon';
 
       sharedSpecs.shouldAddASingleBlock(actionsSection, actionsModel, block);
     });
@@ -242,6 +244,28 @@ describe('when the show section is clicked', () => {
     it('should display errors if the block name is blank and block text has invalid markdown syntax', () => {
       sharedSpecs.shouldDisplayErrorsIfBlockNameIsBlankAndBlockTextHasInvalidMarkdownSyntax(actionsSection, expectedBlockType);
     });
+  });
+});
+
+describe('when import from Open5e', () => {
+  it('should import single block', () => {
+    const block = {
+      name: 'Greatsword',
+      text: 'Melee Weapon Attack: +5 to hit, reach 5 ft., one target. Hit: 10 (2d6 + 3) slashing damage.'
+    };
+
+    sharedSpecs.shouldImportFromOpen5e(actionsSection, actionsModel, open5eJsonKey, [block]);
+  });
+
+  it('should import single block with multiline text', () => {
+    const block = {
+      name: 'Breath Weapons (Recharge 5-6)',
+      text: 'The dragon uses one of the following breath weapons.\n**Fire Breath.** The dragon exhales fire in an 60-foot line that is 5 feet wide. Each creature in that line must make a DC 18 Dexterity saving throw, taking dmg[13d6] fire damage on a failed save, or half as much damage on a successful one.\n**Sleep Breath.** The dragon exhales sleep gas in a 60-foot cone. Each creature in that area must succeed on a DC 18 Constitution saving throw or fall unconscious for 10 minutes. This effect ends for a creature if the creature takes damage or someone uses an action to wake it.',
+      markdownText: 'The dragon uses one of the following breath weapons.  \n> **Fire Breath.** The dragon exhales fire in an 60-foot line that is 5 feet wide. Each creature in that line must make a DC 18 Dexterity saving throw, taking 45 (13d6) fire damage on a failed save, or half as much damage on a successful one.  \n> **Sleep Breath.** The dragon exhales sleep gas in a 60-foot cone. Each creature in that area must succeed on a DC 18 Constitution saving throw or fall unconscious for 10 minutes. This effect ends for a creature if the creature takes damage or someone uses an action to wake it.',
+      htmlText: 'The dragon uses one of the following breath weapons.\n<strong>Fire Breath.</strong> The dragon exhales fire in an 60-foot line that is 5 feet wide. Each creature in that line must make a DC 18 Dexterity saving throw, taking 45 (13d6) fire damage on a failed save, or half as much damage on a successful one.\n<strong>Sleep Breath.</strong> The dragon exhales sleep gas in a 60-foot cone. Each creature in that area must succeed on a DC 18 Constitution saving throw or fall unconscious for 10 minutes. This effect ends for a creature if the creature takes damage or someone uses an action to wake it.'
+    };
+
+    sharedSpecs.shouldImportFromOpen5e(actionsSection, actionsModel, open5eJsonKey, [block]);
   });
 });
 

@@ -11,6 +11,10 @@ export default class PropertyListModel extends PropertyLineModel {
   }
 
   reset() {
+    this.clear();
+  }
+
+  clear() {
     this.items = [];
   }
 
@@ -46,10 +50,9 @@ export default class PropertyListModel extends PropertyLineModel {
   }
 
   fromOpen5e(json) {
-    this.items = [];
+    this.clear();
 
-    const open5eJsonKey = this.open5eJsonKey;
-    const inputText = json[open5eJsonKey];
+    const inputText = json[this.open5eJsonKey];
 
     // Begin by splitting the incoming text by semicolon delimiters
     const semicolonTokens = inputText.split(';').map(token => token.trim());

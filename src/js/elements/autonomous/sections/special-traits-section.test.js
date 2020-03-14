@@ -5,6 +5,7 @@ import * as TestCustomElements from '../../../helpers/test/test-custom-elements.
 import * as sharedSpecs from './block-list-section.specs.js';
 
 const expectedBlockType = 'Special Trait';
+const open5eJsonKey = 'special_abilities';
 
 const titleModel = CurrentContext.creature.title;
 const specialTraitsModel = CurrentContext.creature.specialTraits;
@@ -162,9 +163,7 @@ describe('when the show section is clicked', () => {
     describe('should reparse the block text', () => {
       const block = {
         name: 'Pack Tactics',
-        text: '[name] has advantage on an attack roll against a creature if at least one of [name]\'s allies is within 5 feet of the creature an ally isn\'t incapacitated.',
-        markdownText: null,
-        htmlText: null
+        text: '[name] has advantage on an attack roll against a creature if at least one of [name]\'s allies is within 5 feet of the creature an ally isn\'t incapacitated.'
       };
 
       const oldNames = {
@@ -236,6 +235,60 @@ describe('when the show section is clicked', () => {
     it('should display errors if the block name is blank and block text has invalid markdown syntax', () => {
       sharedSpecs.shouldDisplayErrorsIfBlockNameIsBlankAndBlockTextHasInvalidMarkdownSyntax(specialTraitsSection, expectedBlockType);
     });
+  });
+});
+
+describe('when import from Open5e', () => {
+  it('should import single block', () => {
+    const block = {
+      name: 'Antimagic Susceptibility',
+      text: 'The armor is incapacitated while in the area of an antimagic field. If targeted by dispel magic, the armor must succeed on a Constitution saving throw against the caster\'s spell save DC or fall unconscious for 1 minute.'
+    };
+
+    sharedSpecs.shouldImportFromOpen5e(specialTraitsSection, specialTraitsModel, open5eJsonKey, [block]);
+  });
+
+  it('should import single block with multiline text', () => {
+    const block = {
+      name: 'Multiple Heads',
+      text: 'The hydra has five heads. While it has more than one head, the hydra has advantage on saving throws against being blinded, charmed, deafened, frightened, stunned, and knocked unconscious.\nWhenever the hydra takes 25 or more damage in a single turn, one of its heads dies. If all its heads die, the hydra dies.\nAt the end of its turn, it grows two heads for each of its heads that died since its last turn, unless it has taken fire damage since its last turn. The hydra regains 10 hit points for each head regrown in this way.',
+      expectedText: 'The hydra has five heads. While it has more than one head, the hydra has advantage on saving throws against being blinded, charmed, deafened, frightened, stunned, and knocked unconscious.\n  Whenever the hydra takes 25 or more damage in a single turn, one of its heads dies. If all its heads die, the hydra dies.\n  At the end of its turn, it grows two heads for each of its heads that died since its last turn, unless it has taken fire damage since its last turn. The hydra regains 10 hit points for each head regrown in this way.',
+      markdownText: 'The hydra has five heads. While it has more than one head, the hydra has advantage on saving throws against being blinded, charmed, deafened, frightened, stunned, and knocked unconscious.  \n>   Whenever the hydra takes 25 or more damage in a single turn, one of its heads dies. If all its heads die, the hydra dies.  \n>   At the end of its turn, it grows two heads for each of its heads that died since its last turn, unless it has taken fire damage since its last turn. The hydra regains 10 hit points for each head regrown in this way.',
+      htmlText: 'The hydra has five heads. While it has more than one head, the hydra has advantage on saving throws against being blinded, charmed, deafened, frightened, stunned, and knocked unconscious.\n  Whenever the hydra takes 25 or more damage in a single turn, one of its heads dies. If all its heads die, the hydra dies.\n  At the end of its turn, it grows two heads for each of its heads that died since its last turn, unless it has taken fire damage since its last turn. The hydra regains 10 hit points for each head regrown in this way.'
+    };
+
+    sharedSpecs.shouldImportFromOpen5e(specialTraitsSection, specialTraitsModel, open5eJsonKey, [block]);
+  });
+
+  it('should import single spellcasting block with bullet characters', () => {
+    const block = {
+      name: 'Spellcasting',
+      text: 'The mage is a 9th-level spellcaster. Its spellcasting ability is Intelligence (spell save DC 14, +6 to hit with spell attacks). The mage has the following wizard spells prepared:\n\n• Cantrips (at will): fire bolt, light, mage hand, prestidigitation\n• 1st level (4 slots): detect magic, mage armor, magic missile, shield\n• 2nd level (3 slots): misty step, suggestion\n• 3rd level (3 slots): counterspell, fireball, fly\n• 4th level (3 slots): greater invisibility, ice storm\n• 5th level (1 slot): cone of cold',
+      expectedText: 'The mage is a 9th-level spellcaster. Its spellcasting ability is Intelligence (spell save DC 14, +6 to hit with spell attacks). The mage has the following wizard spells prepared:\n\nCantrips (at will): fire bolt, light, mage hand, prestidigitation\n1st level (4 slots): detect magic, mage armor, magic missile, shield\n2nd level (3 slots): misty step, suggestion\n3rd level (3 slots): counterspell, fireball, fly\n4th level (3 slots): greater invisibility, ice storm\n5th level (1 slot): cone of cold',
+      markdownText: 'The mage is a 9th-level spellcaster. Its spellcasting ability is Intelligence (spell save DC 14, +6 to hit with spell attacks). The mage has the following wizard spells prepared:  \n>   \n> Cantrips (at will): fire bolt, light, mage hand, prestidigitation  \n> 1st level (4 slots): detect magic, mage armor, magic missile, shield  \n> 2nd level (3 slots): misty step, suggestion  \n> 3rd level (3 slots): counterspell, fireball, fly  \n> 4th level (3 slots): greater invisibility, ice storm  \n> 5th level (1 slot): cone of cold',
+      htmlText: 'The mage is a 9th-level spellcaster. Its spellcasting ability is Intelligence (spell save DC 14, +6 to hit with spell attacks). The mage has the following wizard spells prepared:\n\nCantrips (at will): fire bolt, light, mage hand, prestidigitation\n1st level (4 slots): detect magic, mage armor, magic missile, shield\n2nd level (3 slots): misty step, suggestion\n3rd level (3 slots): counterspell, fireball, fly\n4th level (3 slots): greater invisibility, ice storm\n5th level (1 slot): cone of cold'
+    };
+
+    sharedSpecs.shouldImportFromOpen5e(specialTraitsSection, specialTraitsModel, open5eJsonKey, [block]);
+  });
+
+  it('should import multiple blocks', () => {
+    const blocks = [
+      {
+        name: 'Shapechanger',
+        text: 'The doppelganger can use its action to polymorph into a Small or Medium humanoid it has seen, or back into its true form. Its statistics, other than its size, are the same in each form. Any equipment it is wearing or carrying isn\'t transformed. It reverts to its true form if it dies.'
+      },
+      {
+        name: 'Ambusher',
+        text: 'The doppelganger has advantage on attack rolls against any creature it has surprised.'
+      },
+      {
+        name: 'Surprise Attack',
+        text: 'If the doppelganger surprises a creature and hits it with an attack during the first round of combat, the target takes an extra 10 (3d6) damage from the attack.'
+      }
+    ];
+
+    sharedSpecs.shouldImportFromOpen5e(specialTraitsSection, specialTraitsModel, open5eJsonKey, blocks);
   });
 });
 
