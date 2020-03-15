@@ -15,6 +15,11 @@ export default class LegendaryActions extends BlockListModel {
     this.htmlDescription = '';
   }
 
+  fromOpen5e(json) {
+    super.fromOpen5e(json);
+    this.description = json['legendary_desc'];
+  }
+
   fromJson(json) {
     super.fromJson(json);
     this.description = json.description;

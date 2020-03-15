@@ -107,25 +107,25 @@ describe('when the show section is clicked', () => {
       const blocks = [
         {
           name: 'Multiattack',
-          text: '[name] makes two attacks with its scimitar. The second attack has disadvantage.',
-          markdownText: 'The goblin makes two attacks with its scimitar. The second attack has disadvantage.',
-          htmlText: 'The goblin makes two attacks with its scimitar. The second attack has disadvantage.'
+          text: '[name] makes two melee attacks or two ranged attacks.',
+          markdownText: 'The scout makes two melee attacks or two ranged attacks.',
+          htmlText: 'The scout makes two melee attacks or two ranged attacks.'
         },
         {
-          name: 'Scimitar',
-          text: '*Melee Weapon Attack:* atk[dex] to hit, reach 5 ft., one target. *Hit:* dmg[1d6 + dex] slashing damage.',
-          markdownText: '*Melee Weapon Attack:* +4 to hit, reach 5 ft., one target. *Hit:* 5 (1d6 + 2) slashing damage.',
-          htmlText: '<em>Melee Weapon Attack:</em> +4 to hit, reach 5 ft., one target. <em>Hit:</em> 5 (1d6 + 2) slashing damage.'
+          name: 'Shortsword',
+          text: '*Melee Weapon Attack:* atk[dex] to hit, reach 5 ft., one target. *Hit:* dmg[1d6 + dex] piercing damage.',
+          markdownText: '*Melee Weapon Attack:* +4 to hit, reach 5 ft., one target. *Hit:* 5 (1d6 + 2) piercing damage.',
+          htmlText: '<em>Melee Weapon Attack:</em> +4 to hit, reach 5 ft., one target. <em>Hit:</em> 5 (1d6 + 2) piercing damage.'
         },
         {
-          name: 'Javelin',
-          text: '*Melee or Ranged Weapon Attack:* mod[dex] to hit, reach 5 ft. or range 30/120 ft., one target. *Hit:* dmg[1d6] piercing damage.',
-          markdownText: '*Melee or Ranged Weapon Attack:* +2 to hit, reach 5 ft. or range 30/120 ft., one target. *Hit:* 3 (1d6) piercing damage.',
-          htmlText: '<em>Melee or Ranged Weapon Attack:</em> +2 to hit, reach 5 ft. or range 30/120 ft., one target. <em>Hit:</em> 3 (1d6) piercing damage.'
+          name: 'Longbow',
+          text: '*Ranged Weapon Attack:* atk[dex] to hit, ranged 150/600 ft., one target. *Hit:* dmg[1d8 + dex] piercing damage.',
+          markdownText: '*Ranged Weapon Attack:* +4 to hit, ranged 150/600 ft., one target. *Hit:* 6 (1d8 + 2) piercing damage.',
+          htmlText: '<em>Ranged Weapon Attack:</em> +4 to hit, ranged 150/600 ft., one target. <em>Hit:</em> 6 (1d8 + 2) piercing damage.'
         }
       ];
 
-      titleModel.fullName = 'Goblin';
+      titleModel.fullName = 'Scout';
 
       sharedSpecs.shouldAddMultipleBlocks(actionsSection, actionsModel, blocks);
     });
@@ -266,6 +266,25 @@ describe('when import from Open5e', () => {
     };
 
     sharedSpecs.shouldImportFromOpen5e(actionsSection, actionsModel, open5eJsonKey, [block]);
+  });
+
+  it('should import multiple blocks', () => {
+    const blocks = [
+      {
+        name: 'Multiattack',
+        text: 'The scout makes two melee attacks or two ranged attacks.'
+      },
+      {
+        name: 'Shortsword',
+        text: 'Melee Weapon Attack: +4 to hit, reach 5 ft., one target. Hit: 5 (1d6 + 2) piercing damage.'
+      },
+      {
+        name: 'Longbow',
+        text: 'Ranged Weapon Attack: +4 to hit, ranged 150/600 ft., one target. Hit: 6 (1d8 + 2) piercing damage.'
+      }
+    ];
+
+    sharedSpecs.shouldImportFromOpen5e(actionsSection, actionsModel, open5eJsonKey, blocks);
   });
 });
 

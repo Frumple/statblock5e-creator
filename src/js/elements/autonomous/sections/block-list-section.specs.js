@@ -249,7 +249,7 @@ export function shouldDisplayErrorsIfBlockNameIsBlankAndBlockTextHasInvalidMarkd
     1);
 }
 
-export function shouldImportFromOpen5e(section, model, open5eJsonKey, blocks) {
+export function shouldImportFromOpen5e(section, model, open5eJsonKey, blocks, legendaryDescription = null) {
   const json = {};
   json[open5eJsonKey] = blocks.map(block => {
     return {
@@ -257,6 +257,10 @@ export function shouldImportFromOpen5e(section, model, open5eJsonKey, blocks) {
       desc: block.text
     };
   });
+
+  if (legendaryDescription !== null) {
+    json['legendary_desc'] = legendaryDescription;
+  }
 
   section.importFromOpen5e(json);
 

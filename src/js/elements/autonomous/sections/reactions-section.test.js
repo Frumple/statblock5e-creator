@@ -239,6 +239,26 @@ describe('when import from Open5e', () => {
 
     sharedSpecs.shouldImportFromOpen5e(reactionsSection, reactionsModel, open5eJsonKey, [block]);
   });
+
+  it('should import multiple blocks', () => {
+    const blocks = [
+      {
+        name: 'Reaction 1',
+        text: 'Reaction Text 1'
+      },
+      {
+        name: 'Reaction 2',
+        text: 'Reaction __Text__ 2',
+        htmlText: 'Reaction <strong>Text</strong> 2'
+      },
+      {
+        name: 'Reaction 3',
+        text: 'Reaction Text 3'
+      }
+    ];
+
+    sharedSpecs.shouldImportFromOpen5e(reactionsSection, reactionsModel, open5eJsonKey, blocks);
+  });
 });
 
 describe('when the section is empty and not visible', () => {
