@@ -42,11 +42,9 @@ export default class ImportApiDialog extends ImportDialog {
     let creatureList;
 
     this.setStatus('Retrieving creature list from Open5e...');
-    this.creatureSelect.setAttribute('disabled', '');
 
-    while (this.creatureSelect.options.length > 0) {
-      this.creatureSelect.remove(0);
-    }
+    this.creatureSelect.disable();
+    this.creatureSelect.clear();
 
     try {
       creatureList = await this.client.loadCreatureList(documentSlug);
@@ -55,12 +53,11 @@ export default class ImportApiDialog extends ImportDialog {
       return;
     }
 
-    for (const creature of creatureList) {
-      this.creatureSelect.add(new Option(creature.name, creature.slug));
-    }
+    this.creatureSelect.populate(
+      creatureList.map(creature => new Option(creature.name, creature.slug)));
 
+    this.creatureSelect.enable();
     this.setStatus('Choose a creature:');
-    this.creatureSelect.removeAttribute('disabled');
   }
 
   async onClickImportButton() {

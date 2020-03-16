@@ -5,6 +5,7 @@ import ImportApiDialog from './import-api-dialog.js';
 
 import Open5eClient, { mockLoadCreatureList, mockLoadCreature } from '../../../api/open5e-client.js';
 
+import * as TestCustomElements from '../../../helpers/test/test-custom-elements.js';
 import { inputValueAndTriggerEvent } from '../../../helpers/element-helpers.js';
 import waitForExpect from 'wait-for-expect';
 
@@ -17,6 +18,7 @@ let statBlock;
 let importOpen5eDialog;
 
 beforeAll(async() => {
+  await TestCustomElements.define();
   await StatBlockEditor.define();
   await StatBlockMenu.define();
   await ImportApiDialog.define();
@@ -27,6 +29,7 @@ beforeEach(() => {
   statBlockMenu = statBlockEditor.statBlockMenu;
   statBlock = statBlockEditor.statBlock;
   importOpen5eDialog = statBlockEditor.importOpen5eDialog;
+  TestCustomElements.initializeContainer(importOpen5eDialog);
 
   statBlock.importFromOpen5e.mockClear();
 

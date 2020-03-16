@@ -3,6 +3,7 @@ import { fetchFromFile } from './helpers/file-helpers.js';
 import CurrentContext from './models/current-context.js';
 
 import BlockTextArea from './elements/builtin/block-textarea.js';
+import DynamicSelect from './elements/builtin/dynamic-select.js';
 import EnableDisableElementsCheckbox from './elements/builtin/enable-disable-elements-checkbox.js';
 import NumberInput from './elements/builtin/number-input.js';
 import NumberSelect from './elements/builtin/number-select.js';
@@ -92,6 +93,7 @@ async function getVersion() {
 async function defineElements() {
   const elementClasses = [
     BlockTextArea,
+    DynamicSelect,
     EnableDisableElementsCheckbox,
     NumberInput,
     NumberSelect,
