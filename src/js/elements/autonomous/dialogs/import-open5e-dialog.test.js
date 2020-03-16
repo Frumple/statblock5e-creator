@@ -1,7 +1,7 @@
 import StatBlockEditor from '../containers/stat-block-editor.js';
 import StatBlockMenu from '../containers/stat-block-menu.js';
 
-import ImportApiDialog from './import-api-dialog.js';
+import ImportOpen5eDialog from './import-open5e-dialog.js';
 
 import Open5eClient, { mockLoadCreatureList, mockLoadCreature } from '../../../api/open5e-client.js';
 
@@ -21,7 +21,7 @@ beforeAll(async() => {
   await TestCustomElements.define();
   await StatBlockEditor.define();
   await StatBlockMenu.define();
-  await ImportApiDialog.define();
+  await ImportOpen5eDialog.define();
 });
 
 beforeEach(() => {

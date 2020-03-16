@@ -7,7 +7,7 @@ import StatBlockMenu from './stat-block-menu.js';
 import StatBlockSidebar from './stat-block-sidebar.js';
 import StatBlock from './stat-block.js';
 
-import ImportApiDialog from '../dialogs/import-api-dialog.js';
+import ImportOpen5eDialog from '../dialogs/import-open5e-dialog.js';
 import ImportFileDialog from '../dialogs/import-file-dialog.js';
 import ExportDialog from '../dialogs/export-dialog.js';
 
@@ -31,7 +31,7 @@ export default class StatBlockEditor extends CustomAutonomousElement {
       this.statBlockSidebar = new StatBlockSidebar(this);
       this.statBlock = new StatBlock(this);
 
-      this.importOpen5eDialog = new ImportApiDialog();
+      this.importOpen5eDialog = new ImportOpen5eDialog();
       this.importJsonDialog = new ImportFileDialog();
       this.exportJsonDialog = new ExportDialog();
       this.exportHtmlDialog = new ExportDialog();

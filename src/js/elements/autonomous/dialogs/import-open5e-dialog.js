@@ -2,16 +2,16 @@ import ImportDialog from './import-dialog.js';
 
 import Open5eClient from '../../../api/open5e-client.js';
 
-export default class ImportApiDialog extends ImportDialog {
-  static get elementName() { return 'import-api-dialog'; }
+export default class ImportOpen5eDialog extends ImportDialog {
+  static get elementName() { return 'import-open5e-dialog'; }
   static get templatePaths() {
     return super.templatePaths.set(
-      'import-api-dialog',
-      'src/html/elements/autonomous/dialogs/import-api-dialog.html');
+      'import-open5e-dialog',
+      'src/html/elements/autonomous/dialogs/import-open5e-dialog.html');
   }
 
   constructor() {
-    super(ImportApiDialog.templatePaths);
+    super(ImportOpen5eDialog.templatePaths);
 
     this.client = new Open5eClient();
 

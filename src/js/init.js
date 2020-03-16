@@ -19,7 +19,7 @@ import PropertyLine from './elements/autonomous/property-line.js';
 import SectionDivider from './elements/autonomous/section-divider.js';
 import TaperedRule from './elements/autonomous/tapered-rule.js';
 
-import ImportApiDialog from './elements/autonomous/dialogs/import-api-dialog.js';
+import ImportOpen5eDialog from './elements/autonomous/dialogs/import-open5e-dialog.js';
 import ImportFileDialog from './elements/autonomous/dialogs/import-file-dialog.js';
 import ExportDialog from './elements/autonomous/dialogs/export-dialog.js';
 import GenerateAttackDialog from './elements/autonomous/dialogs/generate-attack-dialog.js';
@@ -109,7 +109,7 @@ async function defineElements() {
     SectionDivider,
     TaperedRule,
 
-    ImportApiDialog,
+    ImportOpen5eDialog,
     ImportFileDialog,
     ExportDialog,
     GenerateAttackDialog,
