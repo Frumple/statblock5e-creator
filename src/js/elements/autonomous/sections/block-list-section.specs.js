@@ -249,6 +249,24 @@ export function shouldDisplayErrorsIfBlockNameIsBlankAndBlockTextHasInvalidMarkd
     1);
 }
 
+export function shouldImportFromOpen5e(section, model, open5eJsonKey, blocks, legendaryDescription = null) {
+  const json = {};
+  json[open5eJsonKey] = blocks.map(block => {
+    return {
+      name: block.name,
+      desc: block.text
+    };
+  });
+
+  if (legendaryDescription !== null) {
+    json['legendary_desc'] = legendaryDescription;
+  }
+
+  section.importFromOpen5e(json);
+
+  verifyBlocks(section, model, blocks);
+}
+
 export function shouldShowBlocksImportedFromJsonIfSectionWasInitiallyEmptyAndNotVisible(section, blocksToImport) {
   const json = {
     blocks: blocksToImport
@@ -318,7 +336,7 @@ function verifyShowModeView(section, expectedBlocks) {
 
 function verifyBlockModel(blockModel, expectedBlock) {
   expect(blockModel.name).toBe(expectedBlock.name);
-  expect(blockModel.text).toBe(expectedBlock.text);
+  expect(blockModel.text).toBe(expectedBlock.expectedText ? expectedBlock.expectedText : expectedBlock.text);
   expect(blockModel.markdownText).toBe(expectedBlock.markdownText ? expectedBlock.markdownText : expectedBlock.text);
   expect(blockModel.htmlText).toBe(expectedBlock.htmlText ? expectedBlock.htmlText : expectedBlock.text);
 }

@@ -96,7 +96,6 @@ export default class AbilityScoresSection extends sectionModule.Section {
   }
 
   importFromJson(json) {
-    // TODO: Backwards compatiblity
     CurrentContext.creature.abilities.fromJson(json);
     this.updateView();
   }

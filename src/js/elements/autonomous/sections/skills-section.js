@@ -37,22 +37,20 @@ export default class SkillsSection extends propertyLineSectionModule.PropertyLin
     elements.enable.enableElementsWhenChecked(
       elements.label,
       elements.modifier,
-      elements.proficient,
+      elements.expert,
       elements.override
     );
 
     elements.enable.addEventListener('input', this.onInputSkillEnabled.bind(this, key));
-    elements.proficient.addEventListener('input', this.onInputSkillProficiency.bind(this, key));
+    elements.expert.addEventListener('input', this.onInputSkillExpertise.bind(this, key));
     elements.override.addEventListener('input', this.onInputSkillOverride.bind(this, key));
   }
 
   onInputSkillEnabled(key) {
     const elements = this.editElements.skill[key];
 
-    if (elements.enable.checked) {
-      inputValueAndTriggerEvent(elements.proficient, true);
-    } else {
-      inputValueAndTriggerEvent(elements.proficient, false);
+    if (! elements.enable.checked) {
+      inputValueAndTriggerEvent(elements.expert, false);
       inputValueAndTriggerEvent(elements.override, '');
     }
 
@@ -62,8 +60,8 @@ export default class SkillsSection extends propertyLineSectionModule.PropertyLin
     this.dispatchSkillChangedEvent(key);
   }
 
-  onInputSkillProficiency(key) {
-    this.updateModelSkillProficiency(key);
+  onInputSkillExpertise(key) {
+    this.updateModelSkillExpertise(key);
     this.updateEditModeViewSkillModifier(key);
     this.updateShowModeView();
     this.dispatchSkillChangedEvent(key);
@@ -94,7 +92,7 @@ export default class SkillsSection extends propertyLineSectionModule.PropertyLin
   updateModel() {
     for (const key of CurrentContext.creature.skills.keys) {
       this.updateModelSkillEnabled(key);
-      this.updateModelSkillProficiency(key);
+      this.updateModelSkillExpertise(key);
       this.updateModelSkillOverride(key);
     }
   }
@@ -103,8 +101,8 @@ export default class SkillsSection extends propertyLineSectionModule.PropertyLin
     CurrentContext.creature.skills.skills[key].isEnabled = this.editElements.skill[key].enable.checked;
   }
 
-  updateModelSkillProficiency(key) {
-    CurrentContext.creature.skills.skills[key].isProficient = this.editElements.skill[key].proficient.checked;
+  updateModelSkillExpertise(key) {
+    CurrentContext.creature.skills.skills[key].hasExpertise = this.editElements.skill[key].expert.checked;
   }
 
   updateModelSkillOverride(key) {
@@ -116,7 +114,7 @@ export default class SkillsSection extends propertyLineSectionModule.PropertyLin
 
     if (abilityName) {
       for (const [key, value] of skillsModel.entries) {
-        if (CurrentContext.creature.abilities.abilities[abilityName] === value.ability) {
+        if (CurrentContext.creature.abilities.abilities[abilityName] === value.abilityModel) {
           this.updateEditModeViewSkillModifier(key);
         }
       }
@@ -141,7 +139,7 @@ export default class SkillsSection extends propertyLineSectionModule.PropertyLin
 
     skillElements.enable.checked = skillsModel.skills[key].isEnabled;
     skillElements.modifier.textContent = skillsModel.skills[key].formattedModifier;
-    skillElements.proficient.checked = skillsModel.skills[key].isProficient;
+    skillElements.expert.checked = skillsModel.skills[key].hasExpertise;
     skillElements.override.value = skillsModel.skills[key].override;
   }
 
@@ -173,7 +171,7 @@ class SkillsEditElements extends propertyLineSectionModule.PropertyLineEditEleme
         enable: shadowRoot.getElementById(`${key}-enable`),
         label: shadowRoot.getElementById(`${key}-label`),
         modifier: shadowRoot.getElementById(`${key}-skill-modifier`),
-        proficient: shadowRoot.getElementById(`${key}-proficient`),
+        expert: shadowRoot.getElementById(`${key}-expert`),
         override: shadowRoot.getElementById(`${key}-override`)
       };
     }

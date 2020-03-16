@@ -1,34 +1,34 @@
 {
   "title": {
-    "fullName": "Panther",
-    "shortName": "",
+    "fullName": "Blink Dog",
+    "shortName": "dog",
     "isProperNoun": false
   },
   "subtitle": {
     "size": "Medium",
-    "type": "beast",
+    "type": "fey",
     "tags": "",
-    "alignment": "unaligned",
+    "alignment": "lawful good",
     "useCustomText": false,
     "customText": ""
   },
   "armorClass": {
-    "armorClass": 12,
+    "armorClass": 13,
     "armorType": "",
     "hasShield": false,
     "useCustomText": false,
     "customText": ""
   },
   "hitPoints": {
-    "hitPoints": 13,
+    "hitPoints": 22,
     "useHitDie": true,
-    "hitDieQuantity": 3,
+    "hitDieQuantity": 4,
     "hitDieSize": 8
   },
   "speed": {
-    "walk": 50,
+    "walk": 40,
     "burrow": null,
-    "climb": 40,
+    "climb": null,
     "fly": null,
     "hover": false,
     "swim": null,
@@ -36,134 +36,128 @@
     "customText": ""
   },
   "abilityScores": {
-    "strength": 14,
-    "dexterity": 15,
-    "constitution": 10,
-    "intelligence": 3,
-    "wisdom": 14,
-    "charisma": 7
+    "strength": 12,
+    "dexterity": 17,
+    "constitution": 12,
+    "intelligence": 10,
+    "wisdom": 13,
+    "charisma": 11
   },
   "savingThrows": {
     "strength": {
       "isEnabled": false,
-      "isProficient": false,
       "override": null
     },
     "dexterity": {
       "isEnabled": false,
-      "isProficient": false,
       "override": null
     },
     "constitution": {
       "isEnabled": false,
-      "isProficient": false,
       "override": null
     },
     "intelligence": {
       "isEnabled": false,
-      "isProficient": false,
       "override": null
     },
     "wisdom": {
       "isEnabled": false,
-      "isProficient": false,
       "override": null
     },
     "charisma": {
       "isEnabled": false,
-      "isProficient": false,
       "override": null
     }
   },
   "skills": {
     "acrobatics": {
       "isEnabled": false,
-      "isProficient": false,
+      "hasExpertise": false,
       "override": null
     },
     "animalHandling": {
       "isEnabled": false,
-      "isProficient": false,
+      "hasExpertise": false,
       "override": null
     },
     "arcana": {
       "isEnabled": false,
-      "isProficient": false,
+      "hasExpertise": false,
       "override": null
     },
     "athletics": {
       "isEnabled": false,
-      "isProficient": false,
+      "hasExpertise": false,
       "override": null
     },
     "deception": {
       "isEnabled": false,
-      "isProficient": false,
+      "hasExpertise": false,
       "override": null
     },
     "history": {
       "isEnabled": false,
-      "isProficient": false,
+      "hasExpertise": false,
       "override": null
     },
     "insight": {
       "isEnabled": false,
-      "isProficient": false,
+      "hasExpertise": false,
       "override": null
     },
     "intimidation": {
       "isEnabled": false,
-      "isProficient": false,
+      "hasExpertise": false,
       "override": null
     },
     "investigation": {
       "isEnabled": false,
-      "isProficient": false,
+      "hasExpertise": false,
       "override": null
     },
     "medicine": {
       "isEnabled": false,
-      "isProficient": false,
+      "hasExpertise": false,
       "override": null
     },
     "nature": {
       "isEnabled": false,
-      "isProficient": false,
+      "hasExpertise": false,
       "override": null
     },
     "perception": {
       "isEnabled": true,
-      "isProficient": true,
+      "hasExpertise": false,
       "override": null
     },
     "performance": {
       "isEnabled": false,
-      "isProficient": false,
+      "hasExpertise": false,
       "override": null
     },
     "persuasion": {
       "isEnabled": false,
-      "isProficient": false,
+      "hasExpertise": false,
       "override": null
     },
     "religion": {
       "isEnabled": false,
-      "isProficient": false,
+      "hasExpertise": false,
       "override": null
     },
     "sleightOfHand": {
       "isEnabled": false,
-      "isProficient": false,
+      "hasExpertise": false,
       "override": null
     },
     "stealth": {
       "isEnabled": true,
-      "isProficient": true,
-      "override": 6
+      "hasExpertise": false,
+      "override": null
     },
     "survival": {
       "isEnabled": false,
-      "isProficient": false,
+      "hasExpertise": false,
       "override": null
     }
   },
@@ -181,6 +175,7 @@
   },
   "senses": {
     "blindsight": null,
+    "blindBeyondThisRadius": false,
     "darkvision": null,
     "tremorsense": null,
     "truesight": null,
@@ -188,22 +183,21 @@
     "customText": ""
   },
   "languages": {
-    "items": []
+    "items": [
+      "Blink Dog",
+      "understands Sylvan but can't speak it"
+    ]
   },
   "challengeRating": {
-    "challengeRating": 0.25,
+    "challengeRating": "1/4",
     "experiencePoints": 50,
     "proficiencyBonus": 2
   },
   "specialTraits": {
     "blocks": [
       {
-        "name": "Keen Smell",
-        "text": "[name] has advantage on Wisdom (Perception) checks that rely on smell."
-      },
-      {
-        "name": "Pounce",
-        "text": "If [name] moves at least 20 feet straight toward a creature and then hits it with a claw attack on the same turn, that target must succeed on a DC 12 Strength saving throw or be knocked prone. If the target is prone, [name] can make one bite attack against it as a bonus action."
+        "name": "Keen Hearing and Smell",
+        "text": "[name] has advantage on Wisdom (Perception) checks that rely on hearing or smell."
       }
     ]
   },
@@ -214,8 +208,8 @@
         "text": "*Melee Weapon Attack:* atk[str] to hit, reach 5 ft., one target. *Hit:* dmg[1d6 + str] piercing damage."
       },
       {
-        "name": "Claw",
-        "text": "*Melee Weapon Attack:* atk[str] to hit, reach 5 ft., one target. *Hit:* dmg[1d4 + str] slashing damage."
+        "name": "Teleport (Recharge 4-6)",
+        "text": "[name] magically teleports, along with any equipment it is wearing or carrying, up to 40 feet to an unoccupied space it can see. Before or after teleporting, [name] can make one bite attack."
       }
     ]
   },

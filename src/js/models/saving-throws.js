@@ -13,7 +13,7 @@ export default class SavingThrows extends PropertyLineModel {
   }
 
   reset() {
-    for(const savingThrow of Object.values(this.savingThrows)) {
+    for(const savingThrow of this.values) {
       savingThrow.reset();
     }
   }
@@ -41,7 +41,17 @@ export default class SavingThrows extends PropertyLineModel {
     return this.text;
   }
 
+  fromOpen5e(json) {
+    this.reset();
+
+    for (const value of this.values) {
+      value.fromOpen5e(json);
+    }
+  }
+
   fromJson(json) {
+    this.reset();
+
     for (const [key, value] of this.entries) {
       value.fromJson(json[key]);
     }
@@ -54,37 +64,33 @@ export default class SavingThrows extends PropertyLineModel {
 }
 
 class SavingThrow {
-  constructor(ability, challengeRatingModel) {
-    this.ability = ability;
+  constructor(abilityModel, challengeRatingModel) {
+    this.abilityModel = abilityModel;
     this.challengeRatingModel = challengeRatingModel;
     this.reset();
   }
 
   reset() {
     this.isEnabled = false;
-    this.isProficient = false;
     this.override = null;
   }
 
   get text() {
-    const abbreviation = capitalizeFirstLetter(this.ability.abbreviation);
+    const abbreviation = capitalizeFirstLetter(this.abilityModel.abbreviation);
 
     return `${abbreviation} ${this.formattedModifier}`;
   }
 
   get modifier() {
-    let savingThrowModifier = 0;
+    let savingThrowModifier = this.abilityModel.modifier;
 
     if (this.isEnabled) {
       if (this.override !== null) {
         return this.override;
       }
 
-      if (this.isProficient) {
-        savingThrowModifier += this.challengeRatingModel.proficiencyBonus;
-      }
+      savingThrowModifier += this.challengeRatingModel.proficiencyBonus;
     }
-    savingThrowModifier += this.ability.modifier;
 
     return savingThrowModifier;
   }
@@ -93,16 +99,30 @@ class SavingThrow {
     return formatModifier(this.modifier);
   }
 
+  fromOpen5e(json) {
+    const key = `${this.abilityModel.name}_save`;
+
+    if (json[key] !== null) {
+      this.isEnabled = true;
+
+      // The Open5e saving throw value should match the calculated ability modifier + proficiency bonus.
+      // If it doesn't, set the value as an override.
+      if (json[key] !== this.abilityModel.modifier + this.challengeRatingModel.proficiencyBonus) {
+        this.override = json[key];
+      }
+    } else {
+      this.isEnabled = false;
+    }
+  }
+
   fromJson(json) {
     this.isEnabled = json.isEnabled;
-    this.isProficient = json.isProficient;
     this.override = json.override;
   }
 
   toJson() {
     return {
       isEnabled: this.isEnabled,
-      isProficient: this.isProficient,
       override: this.override
     };
   }

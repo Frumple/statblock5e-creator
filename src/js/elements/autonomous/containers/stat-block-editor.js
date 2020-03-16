@@ -7,6 +7,7 @@ import StatBlockMenu from './stat-block-menu.js';
 import StatBlockSidebar from './stat-block-sidebar.js';
 import StatBlock from './stat-block.js';
 
+import ImportApiDialog from '../dialogs/import-api-dialog.js';
 import ImportFileDialog from '../dialogs/import-file-dialog.js';
 import ExportDialog from '../dialogs/export-dialog.js';
 
@@ -30,7 +31,8 @@ export default class StatBlockEditor extends CustomAutonomousElement {
       this.statBlockSidebar = new StatBlockSidebar(this);
       this.statBlock = new StatBlock(this);
 
-      this.ImportFileDialog = new ImportFileDialog();
+      this.importOpen5eDialog = new ImportApiDialog();
+      this.importJsonDialog = new ImportFileDialog();
       this.exportJsonDialog = new ExportDialog();
       this.exportHtmlDialog = new ExportDialog();
       this.exportMarkdownDialog = new ExportDialog();
@@ -39,7 +41,8 @@ export default class StatBlockEditor extends CustomAutonomousElement {
       this.statBlockSidebar = document.querySelector('stat-block-sidebar');
       this.statBlock = document.querySelector('stat-block');
 
-      this.ImportFileDialog = this.shadowRoot.getElementById('import-file-dialog');
+      this.importOpen5eDialog = this.shadowRoot.getElementById('import-open5e-dialog');
+      this.importJsonDialog = this.shadowRoot.getElementById('import-json-dialog');
       this.exportJsonDialog = this.shadowRoot.getElementById('export-json-dialog');
       this.exportHtmlDialog = this.shadowRoot.getElementById('export-html-dialog');
       this.exportMarkdownDialog = this.shadowRoot.getElementById('export-markdown-dialog');
@@ -115,6 +118,9 @@ export default class StatBlockEditor extends CustomAutonomousElement {
     const format = event.detail.format;
 
     switch(format) {
+    case 'open5e':
+      this.openImportOpen5eDialog();
+      break;
     case 'json':
       this.openImportFileDialog();
       break;
@@ -146,8 +152,12 @@ export default class StatBlockEditor extends CustomAutonomousElement {
     printHtml(content);
   }
 
+  openImportOpen5eDialog() {
+    this.importOpen5eDialog.launch(this.importFromOpen5e.bind(this));
+  }
+
   openImportFileDialog() {
-    this.ImportFileDialog.launch(this.importFromJson.bind(this));
+    this.importJsonDialog.launch(this.importFromJson.bind(this));
   }
 
   openExportJsonDialog() {
@@ -163,6 +173,10 @@ export default class StatBlockEditor extends CustomAutonomousElement {
   openExportMarkdownDialog() {
     const content = this.exportToMarkdown();
     this.exportMarkdownDialog.launch(content, 'text/markdown', `${CurrentContext.creature.title.fullName}.md`);
+  }
+
+  importFromOpen5e(json) {
+    this.statBlock.importFromOpen5e(json);
   }
 
   importFromJson(text) {

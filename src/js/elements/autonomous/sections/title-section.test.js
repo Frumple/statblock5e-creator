@@ -115,10 +115,11 @@ describe('when the show section is clicked', () => {
 
         titleSection.editElements.submitForm();
 
+        expect(titleSection).toBeInMode('show');
+
         verifyModel(fullName, shortName, isProperNoun);
         verifyEditModeView(fullName, shortName, isProperNoun);
-        expect(titleSection).toBeInMode('show');
-        expect(titleSection.showElements.title).toHaveTextContent(fullName);
+        verifyShowModeView(fullName);
 
         const json = verifyJsonExport(fullName, shortName, isProperNoun);
         verifyHtmlExport(fullName);
@@ -129,7 +130,7 @@ describe('when the show section is clicked', () => {
 
         verifyModel(fullName, shortName, isProperNoun);
         verifyEditModeView(fullName, shortName, isProperNoun);
-        expect(titleSection.showElements.title).toHaveTextContent(fullName);
+        verifyShowModeView(fullName);
       });
       /* eslint-enable indent, no-unexpected-multiline */
     });
@@ -148,10 +149,11 @@ describe('when the show section is clicked', () => {
 
         titleSection.editElements.submitForm();
 
+        expect(titleSection).toBeInMode('show');
+
         verifyModel(expectedFullName);
         verifyEditModeView(expectedFullName);
-        expect(titleSection).toBeInMode('show');
-        expect(titleSection.showElements.title).toHaveTextContent(expectedFullName);
+        verifyShowModeView(expectedFullName);
 
         const json = verifyJsonExport(expectedFullName);
         verifyHtmlExport(expectedFullName);
@@ -162,7 +164,7 @@ describe('when the show section is clicked', () => {
 
         verifyModel(expectedFullName);
         verifyEditModeView(expectedFullName);
-        expect(titleSection.showElements.title).toHaveTextContent(expectedFullName);
+        verifyShowModeView(expectedFullName);
       });
     /* eslint-enable indent, no-unexpected-multiline */
     });
@@ -177,6 +179,20 @@ describe('when the show section is clicked', () => {
         titleSection.editElements.fullName,
         'Creature Name cannot be blank.');
     });
+  });
+});
+
+describe('when importing from Open5e', () => {
+  it('should import the title', () => {
+    const json = {
+      'name': 'Adult Black Dragon'
+    };
+
+    titleSection.importFromOpen5e(json);
+
+    verifyModel(json.name);
+    verifyEditModeView(json.name);
+    verifyShowModeView(json.name);
   });
 });
 
@@ -195,6 +211,10 @@ function verifyEditModeView(expectedFullName, expectedShortName = '', expectedIs
   expect(titleSection.editElements.fullName).toHaveValue(expectedFullName);
   expect(titleSection.editElements.shortName).toHaveValue(expectedShortName);
   expect(titleSection.editElements.properNoun.checked).toBe(expectedIsProperNoun);
+}
+
+function verifyShowModeView(expectedFullName) {
+  expect(titleSection.showElements.title).toHaveTextContent(expectedFullName);
 }
 
 function verifyJsonExport(expectedFullName, expectedShortName = '', expectedIsProperNoun = false) {

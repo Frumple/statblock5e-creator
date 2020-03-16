@@ -21,6 +21,10 @@
     <label id="blindsight-label" class="senses-edit-section__blindsight-label" for="blindsight-input">blindsight</label>
     <input id="blindsight-input" class="senses-edit-section__blindsight-input section__number-input section__small-number-input" is="number-input" type="number" name="senses-blindsight" pretty-name="Blindsight Range" value="" min="0" max="999" step="5" />
     <label class="senses-edit-section__blindsight-unit">ft.</label>
+    <div class="senses-edit-section__blind-beyond-this-radius-container">
+      <input id="blind-beyond-this-radius-input" class="speed-edit-section__blind-beyond-this-radius-input" type="checkbox" name="senses-blind-beyond-this-radius" />
+      <label id="blind-beyond-this-radius-label" class="speed-edit-section__blind-beyond-this-radius-label" for="blind-beyond-this-radius-input">(blind beyond...)</label>
+    </div>
 
     <label id="darkvision-label" class="senses-edit-section__darkvision-label" for="darkvision-input">darkvision</label>
     <input id="darkvision-input" class="senses-edit-section__darkvision-input section__number-input section__small-number-input" is="number-input" type="number" name="senses-darkvision" pretty-name="Blindsight Range" value="" min="0" max="999" step="5" />
@@ -38,7 +42,8 @@
     <label id="passive-perception-value" class="senses-edit-section__passive-perception-value"></label>
     <help-tooltip class="senses-edit-section__passive-perception-help-tooltip">
       <p>A creature's <strong>Passive Perception</strong> is calculated using the following formula:</p>
-      <blockquote><strong>Passive Perception = 10 + WIS Modifier + Proficiency Bonus (if proficient in Perception)</strong></blockquote>
+      <blockquote><strong>Passive Perception = 10 + WIS Modifier [+ Proficiency Bonus if proficient in Perception]</strong></blockquote>
+      <br />
       <p>Note: If you specify an override value for the Perception skill, the Passive Perception is 10 + the override instead.</p>
       <br />
       <cite>For more details, see <a href="https://open5e.com/gameplay-mechanics/ability-scores#passivechecks" target="_blank">Passive Checks</a> on Open5e, or on page 175 of the D&D 5th Edition Player's Handbook.</cite>

@@ -39,6 +39,11 @@ export default class Title extends Model {
     return (this.isProperNoun ? name : `the ${name.toLowerCase()}`);
   }
 
+  fromOpen5e(json) {
+    this.reset();
+    this.fullName = json.name;
+  }
+
   toParserOptions() {
     return {
       name: this.grammaticalName,

@@ -1,7 +1,5 @@
 import * as propertyLineSectionModule from './property-line-section.js';
 import CurrentContext from '../../../models/current-context.js';
-import ExperiencePointsByChallengeRating from '../../../data/experience-points-by-challenge-rating.js';
-import ProficiencyBonusByChallengeRating from '../../../data/proficiency-bonus-by-challenge-rating.js';
 
 export default class ChallengeRatingSection extends propertyLineSectionModule.PropertyLineSection {
   static get elementName() { return 'challenge-rating-section'; }
@@ -23,14 +21,9 @@ export default class ChallengeRatingSection extends propertyLineSectionModule.Pr
   }
 
   onInputChallengeRating() {
-    const challengeRating = this.editElements.challengeRating.valueAsFloat;
-    const experiencePoints = ExperiencePointsByChallengeRating[challengeRating];
-    const proficiencyBonus = ProficiencyBonusByChallengeRating[challengeRating];
-
-    this.editElements.experiencePoints.value = experiencePoints;
-    this.editElements.proficiencyBonus.value = proficiencyBonus;
-
     this.updateModel();
+    CurrentContext.creature.challengeRating.updateExperiencePointsAndProficiencyBonusFromChallengeRating();
+    this.updateEditModeView();
   }
 
   onInputExperiencePoints() {
@@ -49,7 +42,7 @@ export default class ChallengeRatingSection extends propertyLineSectionModule.Pr
   updateModel() {
     const challengeRatingModel = CurrentContext.creature.challengeRating;
 
-    const challengeRating = this.editElements.challengeRating.valueAsFloat;
+    const challengeRating = this.editElements.challengeRating.value;
     const experiencePoints = this.editElements.experiencePoints.valueAsInt;
     const proficiencyBonus = this.editElements.proficiencyBonus.valueAsInt;
 

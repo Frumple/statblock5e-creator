@@ -3,7 +3,9 @@ import isRunningInJsdom from '../../../helpers/is-running-in-jsdom.js';
 
 export default class Actions extends BlockListModel {
   constructor() {
-    super('Actions', 'Action');
+    super('Actions',
+          'Action',
+          'actions');
   }
 
   reset() {

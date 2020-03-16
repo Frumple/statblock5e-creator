@@ -26,6 +26,11 @@ export default class StatsContainer extends CustomAutonomousElement {
     }
   }
 
+  importFromOpen5e(json) {
+    for (const section of this.sections.values()) {
+      section.importFromOpen5e(json);
+    }
+  }
 
   importFromJson(json) {
     for (const section of this.sections.values()) {

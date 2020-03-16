@@ -1,14 +1,13 @@
-import StatBlockEditor from './stat-block-editor.js';
-import StatBlockMenu from './stat-block-menu.js';
-import StatBlockSidebar from './stat-block-sidebar.js';
-import StatBlock from './stat-block.js';
+import StatBlockEditor from '../containers/stat-block-editor.js';
+import StatBlockMenu from '../containers/stat-block-menu.js';
+import StatBlockSidebar from '../containers/stat-block-sidebar.js';
+import StatBlock from '../containers/stat-block.js';
 
 import HeadingStats from '../containers/heading-stats.js';
 import TopStats from '../containers/top-stats.js';
 import BottomStats from '../containers/bottom-stats.js';
 
-import ImportFileDialog from '../dialogs/import-file-dialog.js';
-import ExportDialog from '../dialogs/export-dialog.js';
+import ExportDialog from './export-dialog.js';
 
 import CurrentContext from '../../../models/current-context.js';
 
@@ -30,12 +29,6 @@ let statBlockSidebar;
 let statBlock;
 
 /* Notes about JSDOM limitations:
-
-   JSDOM does not support Blob.text(), which prevents us from testing file
-   reading. We could fallback to using FileReader in the implementation,
-   but then the test would not be able to easily detect the load event when
-   the FileReader is complete.
-   - GitHub issue: https://github.com/jsdom/jsdom/issues/2555
 
    JSDOM does not support document.execCommand() or any sort of Clipboard API.
    The best that the "Copy to Clipboard" tests can do is check that we are
@@ -81,7 +74,6 @@ beforeAll(async() => {
   await StatBlockSidebar.define();
   await StatBlock.define();
 
-  await ImportFileDialog.define();
   await ExportDialog.define();
 });
 
@@ -104,53 +96,6 @@ beforeEach(() => {
   statBlockMenu.connect();
   statBlockSidebar.connect();
   statBlock.connect();
-});
-
-describe('should import JSON', () => {
-  beforeEach(() => {
-    statBlockEditor.ImportFileDialog.connect();
-  });
-
-  describe('from file', () => {
-    it('successfully', async () => {
-      let fileInputClickEvent = null;
-      statBlockEditor.ImportFileDialog.fileInput.addEventListener('click', (event) => {
-        fileInputClickEvent = event;
-      });
-
-      statBlockMenu.importJsonButton.click();
-      statBlockEditor.ImportFileDialog.chooseFileButton.click();
-      expect(fileInputClickEvent).not.toBeNull();
-
-      // See note at top about JSDOM not supporting Blob.text().
-
-      /*
-      const json = {
-        layout: {
-          columns: 2,
-          twoColumnMode: 'manual',
-          twoColumnHeight: 700,
-          emptySectionsVisibility: false
-        }
-      };
-
-      const file = new File([json], 'blah.json', {
-        type: 'application/json'
-      });
-
-      Object.defineProperty(statBlockEditor.ImportFileDialog.fileInput, 'files', {
-        value: [file]
-      });
-
-      await statBlockEditor.ImportFileDialog.onJsonImportFileSelected();
-
-      expect(CurrentContext.layoutSettings.columns).toBe(json.layout.columns);
-      expect(CurrentContext.layoutSettings.twoColumnMode).toBe(json.layout.twoColumnMode);
-      expect(CurrentContext.layoutSettings.twoColumnHeight).toBe(json.layout.twoColumnHeight);
-      expect(CurrentContext.layoutSettings.emptySectionsVisibility).toBe(json.layout.emptySectionsVisibility);
-      */
-    });
-  });
 });
 
 describe('should export JSON', () => {

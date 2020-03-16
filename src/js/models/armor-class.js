@@ -32,7 +32,7 @@ export default class ArmorClass extends PropertyLineModel {
       return this.customText;
     }
 
-    return this.nonCustomText;
+    return this.normalText;
   }
 
   get htmlText() {
@@ -40,10 +40,10 @@ export default class ArmorClass extends PropertyLineModel {
       return this.htmlCustomText;
     }
 
-    return this.nonCustomText;
+    return this.normalText;
   }
 
-  get nonCustomText() {
+  get normalText() {
     if (this.armorType) {
       if (this.hasShield) {
         return `${this.armorClass} (${this.armorType}, shield)`;
@@ -56,6 +56,36 @@ export default class ArmorClass extends PropertyLineModel {
       } else {
         return this.armorClass;
       }
+    }
+  }
+
+  fromOpen5e(json) {
+    this.reset();
+
+    const armorClass = json['armor_class'];
+    const armorDesc = json['armor_desc'] === null ? '' : json['armor_desc'];
+
+    // If the armor_desc includes markdown emphasis characters, use custom text
+    if (armorDesc.includes('*') || armorDesc.includes('_')) {
+      this.useCustomText = true;
+      this.customText = `${armorClass} (${armorDesc})`;
+
+    // Otherwise, set armor class as normal. Armor type and shield are determined by parsing the armor_desc.
+    } else {
+      const shieldRegex = /,*\s*[and]*\s*shield/;
+      const matches = armorDesc.match(shieldRegex);
+
+      if (matches !== null) {
+        const matchIndex = matches['index'];
+
+        this.armorType = armorDesc.slice(0, matchIndex);
+        this.hasShield = true;
+      } else {
+        this.armorType = armorDesc;
+        this.hasShield = false;
+      }
+
+      this.armorClass = armorClass;
     }
   }
 }

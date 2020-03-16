@@ -6,6 +6,7 @@ import * as sharedSpecs from './property-list-section.specs.js';
 
 const headingName = 'Languages';
 const expectedBlockType = 'Language';
+const open5eJsonKey = 'languages';
 const defaultStartingLanguage = 'Common';
 
 const languagesModel = CurrentContext.creature.languages;
@@ -63,7 +64,27 @@ describe('when the show section is clicked', () => {
 
       it('should add many items, and the show section should have the items', () => {
         const itemTexts = ['Undercommon', 'Swahili', 'Thieves\' Cant', 'English'];
-        sharedSpecs.shouldAddManyItems(languagesSection, languagesModel, headingName, itemTexts);
+        const expectedText = 'Undercommon, Swahili, Thieves\' Cant, English';
+        sharedSpecs.shouldAddManyItems(languagesSection, languagesModel, headingName, itemTexts, expectedText);
+      });
+
+      describe('should add item that contains commas, and if there are other items before or after this item, semicolon separators instead of commas should be shown', () => {
+        /* eslint-disable indent, no-unexpected-multiline */
+        it.each
+        `
+          description                                    | itemTexts                               | expectedText
+          ${'comma item only'}                           | ${['A, B']}                             | ${'A, B'}
+          ${'items before comma item'}                   | ${['1', '2', 'A, B']}                   | ${'1, 2; A, B'}
+          ${'items after comma item'}                    | ${['A, B', '3', '4']}                   | ${'A, B; 3, 4'}
+          ${'items before and after comma item'}         | ${['1', '2', 'A, B', '3', '4']}         | ${'1, 2; A, B; 3, 4'}
+          ${'two comma items adjacent to each other'}    | ${['1', '2', 'A, B', 'C, D', '3', '4']} | ${'1, 2; A, B; C, D; 3, 4'}
+          ${'two comma items separated from each other'} | ${['1', '2', 'A, B', '3', '4', 'C, D']} | ${'1, 2; A, B; 3, 4; C, D'}
+        `
+        ('$description: $itemTexts => $expectedText',
+        ({itemTexts, expectedText}) => {
+          sharedSpecs.shouldAddManyItems(languagesSection, languagesModel, headingName, itemTexts, expectedText);
+        });
+        /* eslint-enable indent, no-unexpected-multiline */
       });
 
       it('should display an error after clicking the add button if the input field is blank', () => {
@@ -76,7 +97,7 @@ describe('when the show section is clicked', () => {
       });
 
       it('should display an error after clicking the save button if the input field is not blank', () => {
-        const itemText = 'unconscious';
+        const itemText = 'Dwarvish';
         sharedSpecs.shouldDisplayAnErrorIfSavingWithUnaddedInputText(languagesSection, itemText, expectedBlockType);
       });
     });
@@ -132,6 +153,25 @@ describe('when the show section is clicked', () => {
         /* eslint-enable indent, no-unexpected-multiline */
       });
     });
+  });
+});
+
+describe('when import from Open5e', () => {
+  describe('should import as normal', () => {
+    /* eslint-disable indent, no-unexpected-multiline */
+    it.each
+    `
+      description                           | inputText                                 | expectedItems                                   | expectedText
+      ${'single simple item'}               | ${'Deep Speech'}                          | ${['Deep Speech']}                              | ${null}
+      ${'multiple simple items'}            | ${'Undercommon, Swahili, Thieves\' Cant'} | ${['Undercommon', 'Swahili', 'Thieves\' Cant']} | ${null}
+      ${'telepathy delimited by comma'}     | ${'Gnomish, Sylvan, telepathy 60 ft.'}    | ${['Gnomish', 'Sylvan', 'telepathy 60 ft.']}    | ${null}
+      ${'telepathy delimited by semicolon'} | ${'Gnomish, Sylvan; telepathy 60 ft.'}    | ${['Gnomish', 'Sylvan', 'telepathy 60 ft.']}    | ${'Gnomish, Sylvan, telepathy 60 ft.'}
+    `
+    ('$description: $inputText => {expectedItems=$expectedItems,expectedText=$expectedText}',
+    ({inputText, expectedItems, expectedText}) => {
+      sharedSpecs.shouldImportFromOpen5e(languagesSection, languagesModel, headingName, open5eJsonKey, inputText, expectedItems, expectedText);
+    });
+    /* eslint-enable indent, no-unexpected-multiline */
   });
 });
 

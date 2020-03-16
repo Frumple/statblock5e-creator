@@ -28,7 +28,7 @@
   justify-self: end;
   align-self: end;
   --help-tooltip-icon-color: #7A200D;
-  --help-tooltip-width: 45em;
+  --help-tooltip-width: 40em;
 }
 
 .hit-points-edit-section__hit-die-calculation-container {

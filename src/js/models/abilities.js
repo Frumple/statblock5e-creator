@@ -6,12 +6,12 @@ export default class Abilities extends Model {
     super();
 
     this.abilities = {
-      'strength' : new Ability('str'),
-      'dexterity' : new Ability('dex'),
-      'constitution' : new Ability('con'),
-      'intelligence' : new Ability('int'),
-      'wisdom' : new Ability('wis'),
-      'charisma' : new Ability('cha'),
+      'strength' : new Ability('strength', 'str'),
+      'dexterity' : new Ability('dexterity', 'dex'),
+      'constitution' : new Ability('constitution', 'con'),
+      'intelligence' : new Ability('intelligence', 'int'),
+      'wisdom' : new Ability('wisdom', 'wis'),
+      'charisma' : new Ability('charisma', 'cha'),
     };
     Object.freeze(this.abilities);
 
@@ -41,7 +41,17 @@ export default class Abilities extends Model {
     return Object.fromEntries(transformedEntries);
   }
 
+  fromOpen5e(json) {
+    this.reset();
+
+    for (const [key, value] of this.entries) {
+      value.fromOpen5e(json[key]);
+    }
+  }
+
   fromJson(json) {
+    this.reset();
+
     for (const [key, value] of this.entries) {
       value.fromJson(json[key]);
     }
@@ -76,7 +86,8 @@ export default class Abilities extends Model {
 }
 
 class Ability {
-  constructor(abbreviation) {
+  constructor(name, abbreviation) {
+    this.name = name;
     this.abbreviation = abbreviation;
     this.reset();
   }
@@ -99,10 +110,13 @@ class Ability {
     };
   }
 
-  fromJson(score) {
+  fromOpen5e(score) {
     this.score = score;
   }
 
+  fromJson(score) {
+    this.score = score;
+  }
 
   toJson() {
     return this.score;

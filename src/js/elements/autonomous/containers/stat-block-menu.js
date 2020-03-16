@@ -21,11 +21,12 @@ export default class StatBlockMenu extends CustomAutonomousElement {
     this.editAllSectionsButton = this.shadowRoot.getElementById('edit-all-sections-button');
     this.saveAllSectionsButton = this.shadowRoot.getElementById('save-all-sections-button');
 
+    this.importOpen5eButton = this.shadowRoot.getElementById('import-open5e-button');
+    this.importJsonButton = this.shadowRoot.getElementById('import-json-button');
+
     this.exportJsonButton = this.shadowRoot.getElementById('export-json-button');
     this.exportHtmlButton = this.shadowRoot.getElementById('export-html-button');
     this.exportMarkdownButton = this.shadowRoot.getElementById('export-markdown-button');
-
-    this.importJsonButton = this.shadowRoot.getElementById('import-json-button');
 
     this.printButton = this.shadowRoot.getElementById('print-button');
 
@@ -47,11 +48,12 @@ export default class StatBlockMenu extends CustomAutonomousElement {
       this.editAllSectionsButton.addEventListener('click', this.onClickEditAllSectionsButton.bind(this));
       this.saveAllSectionsButton.addEventListener('click', this.onClickSaveAllSectionsButton.bind(this));
 
+      this.importOpen5eButton.addEventListener('click', this.onClickImportOpen5eButton.bind(this));
+      this.importJsonButton.addEventListener('click', this.onClickImportJsonButton.bind(this));
+
       this.exportJsonButton.addEventListener('click', this.onClickExportJsonButton.bind(this));
       this.exportHtmlButton.addEventListener('click', this.onClickExportHtmlButton.bind(this));
       this.exportMarkdownButton.addEventListener('click', this.onClickExportMarkdownButton.bind(this));
-
-      this.importJsonButton.addEventListener('click', this.onClickImportJsonButton.bind(this));
 
       this.printButton.addEventListener('click', this.onClickPrintButton.bind(this));
 
@@ -91,6 +93,10 @@ export default class StatBlockMenu extends CustomAutonomousElement {
 
   onClickImportJsonButton() {
     this.dispatchMenuEvent('importAction', { format: 'json' });
+  }
+
+  onClickImportOpen5eButton() {
+    this.dispatchMenuEvent('importAction', { format: 'open5e' });
   }
 
   onClickExportJsonButton() {

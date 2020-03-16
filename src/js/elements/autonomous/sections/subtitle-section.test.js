@@ -40,100 +40,6 @@ describe('when the show section is clicked', () => {
     expect(subtitleSection.editElements.size).toHaveFocus();
   });
 
-  describe('and the custom text checkbox is checked', () => {
-    beforeEach(() => {
-      subtitleSection.editElements.useCustomText.click();
-    });
-
-    it('should enable the custom text field, disable all other fields, and focus on the custom text field', () => {
-      expect(subtitleSection).toHaveEditElementsEnabledOrDisabledBasedOnCheckbox(
-        subtitleSection.editElements.useCustomText,
-        ['customText'],
-        ['size', 'type', 'tags', 'alignment']
-      );
-
-      expect(subtitleSection.editElements.customText).toHaveFocus();
-      expect(subtitleSection.editElements.customText).toBeSelected();
-    });
-
-    describe('and the edit section is submitted', () => {
-      describe('should switch to show mode and save the custom text', () => {
-        /* eslint-disable indent, no-unexpected-multiline */
-        it.each
-        `
-          description                     | customText
-          ${'custom alignment'}           | ${'Medium humanoid (any race), any non-lawful alignment'}
-          ${'alignment with percentages'} | ${'Huge giant, neutral good (50%) or neutral evil (50%)'}
-          ${'swarm'}                      | ${'Medium swarm of Tiny beasts, unaligned'}
-        `
-        ('$description: $customText',
-        ({customText}) => {
-          const expectedValues = {
-            useCustomText: true,
-            customText: customText
-          };
-
-          inputValueAndTriggerEvent(subtitleSection.editElements.customText, customText);
-
-          subtitleSection.editElements.submitForm();
-
-          expect(subtitleSection).toBeInMode('show');
-          verifyModel(expectedValues);
-          verifyEditModeView(expectedValues);
-          verifyShowModeView(expectedValues.customText);
-
-          const json = verifyJsonExport(expectedValues);
-          verifyHtmlExport(customText);
-          verifyMarkdownExport(customText);
-
-          reset();
-          subtitleSection.importFromJson(json);
-
-          verifyModel(expectedValues);
-          verifyEditModeView(expectedValues);
-          verifyShowModeView(expectedValues.customText);
-        });
-        /* eslint-enable indent, no-unexpected-multiline */
-      });
-
-      it('should preserve the custom text if submitted with the custom text checkbox unchecked', () => {
-        const expectedValues = {
-          useCustomText: false,
-          customText: 'Medium swarm of Tiny beasts, unaligned'
-        };
-
-        inputValueAndTriggerEvent(subtitleSection.editElements.customText, expectedValues.customText);
-
-        subtitleSection.editElements.useCustomText.click();
-        subtitleSection.editElements.submitForm();
-
-        verifyModel(expectedValues);
-        verifyEditModeView(expectedValues);
-        verifyShowModeView();
-
-        const json = verifyJsonExport(expectedValues);
-
-        reset();
-        subtitleSection.importFromJson(json);
-
-        verifyModel(expectedValues);
-        verifyEditModeView(expectedValues);
-        verifyShowModeView();
-      });
-
-      it('should display an error if the custom text field is blank', () => {
-        inputValueAndTriggerEvent(subtitleSection.editElements.customText, '');
-
-        subtitleSection.editElements.submitForm();
-
-        expect(subtitleSection).toBeInMode('edit');
-        expect(subtitleSection).toHaveError(
-          subtitleSection.editElements.customText,
-          'Subtitle Custom Text cannot be blank.');
-      });
-    });
-  });
-
   describe('and the custom text checkbox is unchecked', () => {
     beforeEach(() => {
       subtitleSection.editElements.useCustomText.click();
@@ -230,6 +136,169 @@ describe('when the show section is clicked', () => {
         verifyShowModeView(expectedValues.customText);
       });
     });
+  });
+
+  describe('and the custom text checkbox is checked', () => {
+    beforeEach(() => {
+      subtitleSection.editElements.useCustomText.click();
+    });
+
+    it('should enable the custom text field, disable all other fields, and focus on the custom text field', () => {
+      expect(subtitleSection).toHaveEditElementsEnabledOrDisabledBasedOnCheckbox(
+        subtitleSection.editElements.useCustomText,
+        ['customText'],
+        ['size', 'type', 'tags', 'alignment']
+      );
+
+      expect(subtitleSection.editElements.customText).toHaveFocus();
+      expect(subtitleSection.editElements.customText).toBeSelected();
+    });
+
+    describe('and the edit section is submitted', () => {
+      describe('should switch to show mode and save the custom text', () => {
+        /* eslint-disable indent, no-unexpected-multiline */
+        it.each
+        `
+          description                     | customText
+          ${'custom alignment'}           | ${'Medium humanoid (any race), any non-lawful alignment'}
+          ${'alignment with percentages'} | ${'Huge giant, neutral good (50%) or neutral evil (50%)'}
+          ${'swarm'}                      | ${'Medium swarm of Tiny beasts, unaligned'}
+        `
+        ('$description: $customText',
+        ({customText}) => {
+          const expectedValues = {
+            useCustomText: true,
+            customText: customText
+          };
+
+          inputValueAndTriggerEvent(subtitleSection.editElements.customText, customText);
+
+          subtitleSection.editElements.submitForm();
+
+          expect(subtitleSection).toBeInMode('show');
+          verifyModel(expectedValues);
+          verifyEditModeView(expectedValues);
+          verifyShowModeView(expectedValues.customText);
+
+          const json = verifyJsonExport(expectedValues);
+          verifyHtmlExport(customText);
+          verifyMarkdownExport(customText);
+
+          reset();
+          subtitleSection.importFromJson(json);
+
+          verifyModel(expectedValues);
+          verifyEditModeView(expectedValues);
+          verifyShowModeView(expectedValues.customText);
+        });
+        /* eslint-enable indent, no-unexpected-multiline */
+      });
+
+      it('should preserve the custom text if submitted with the custom text checkbox unchecked', () => {
+        const expectedValues = {
+          useCustomText: false,
+          customText: 'Medium swarm of Tiny beasts, unaligned'
+        };
+
+        inputValueAndTriggerEvent(subtitleSection.editElements.customText, expectedValues.customText);
+
+        subtitleSection.editElements.useCustomText.click();
+        subtitleSection.editElements.submitForm();
+
+        verifyModel(expectedValues);
+        verifyEditModeView(expectedValues);
+        verifyShowModeView();
+
+        const json = verifyJsonExport(expectedValues);
+
+        reset();
+        subtitleSection.importFromJson(json);
+
+        verifyModel(expectedValues);
+        verifyEditModeView(expectedValues);
+        verifyShowModeView();
+      });
+
+      it('should display an error if the custom text field is blank', () => {
+        inputValueAndTriggerEvent(subtitleSection.editElements.customText, '');
+
+        subtitleSection.editElements.submitForm();
+
+        expect(subtitleSection).toBeInMode('edit');
+        expect(subtitleSection).toHaveError(
+          subtitleSection.editElements.customText,
+          'Subtitle Custom Text cannot be blank.');
+      });
+    });
+  });
+});
+
+describe('when importing from Open5e', () => {
+  describe('should import as normal', () => {
+    /* eslint-disable indent, no-unexpected-multiline */
+    it.each
+    `
+      description           | size            | type             | subtype                  | alignment           | expectedSubtitle
+      ${'no subtype'}       | ${'Gargantuan'} | ${'monstrosity'} | ${''}                    | ${'neutral'}        | ${'Gargantuan monstrosity, neutral'}
+      ${'single subtype'}   | ${'Small'}      | ${'humanoid'}    | ${'halfling'}            | ${'lawful good'}    | ${'Small humanoid (halfling), lawful good'}
+      ${'multiple subtype'} | ${'Tiny'}       | ${'fiend'}       | ${'demon, shapechanger'} | ${'chaotic evil'}   | ${'Tiny fiend (demon, shapechanger), chaotic evil'}
+      ${'trimmed subtype'}  | ${'Large'}      | ${'giant'}       | ${'    titan '}          | ${'lawful neutral'} | ${'Large giant (titan), lawful neutral'}
+    `
+    ('$description: {size="$size", type="$type", subtype="$subtype", alignment="$alignment"} => $expectedSubtitle',
+    ({size, type, subtype, alignment, expectedSubtitle}) => {
+      const expectedValues = {
+        size: size,
+        type: type,
+        tags: subtype.trim(),
+        alignment: alignment
+      };
+
+      const json = {
+        size: size,
+        type: type,
+        subtype: subtype,
+        alignment: alignment
+      };
+
+      subtitleSection.importFromOpen5e(json);
+
+      verifyModel(expectedValues);
+      verifyEditModeView(expectedValues);
+      verifyShowModeView(expectedSubtitle);
+    });
+    /* eslint-enable indent, no-unexpected-multiline */
+  });
+
+  describe('should import as custom text if size, type, or alignment are not one of the available options', () => {
+    /* eslint-disable indent, no-unexpected-multiline */
+    it.each
+    `
+      description           | size          | type                      | subtype       | alignment                     | expectedSubtitle
+      ${'custom size'}      | ${'Colossal'} | ${'construct'}            | ${''}         | ${'neutral evil'}             | ${'Colossal construct, neutral evil'}
+      ${'custom type'}      | ${'Medium'}   | ${'swarm of Tiny beasts'} | ${''}         | ${'unaligned'}                | ${'Medium swarm of Tiny beasts, unaligned'}
+      ${'custom alignment'} | ${'Medium'}   | ${'humanoid'}             | ${'any race'} | ${'any non-lawful alignment'} | ${'Medium humanoid (any race), any non-lawful alignment'}
+    `
+    ('$description: {size="$size", type="$type", subtype="$subtype", alignment="$alignment"} => $expectedSubtitle',
+    ({size, type, subtype, alignment, expectedSubtitle}) => {
+      const expectedValues = {
+        useCustomText: true,
+        customText: expectedSubtitle
+      };
+
+      const json = {
+        size: size,
+        type: type,
+        subtype: subtype,
+        alignment: alignment
+      };
+
+      subtitleSection.importFromOpen5e(json);
+
+      verifyModel(expectedValues);
+      verifyEditModeView(expectedValues);
+      verifyShowModeView(expectedSubtitle);
+    });
+    /* eslint-enable indent, no-unexpected-multiline */
   });
 });
 

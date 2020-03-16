@@ -7,3 +7,5 @@ global.ClipboardJS = require('clipboard');
 global.html_beautify = function(content) {
   return content;
 };
+
+global.waitForExpect = require('wait-for-expect');

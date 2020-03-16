@@ -11,7 +11,15 @@ export default class Model {
     return [];
   }
 
+  // eslint-disable-next-line no-unused-vars
+  fromOpen5e(json) {
+    throw new Error(
+      `The class '${this.constructor.name}' must implement the fromOpen5e() method.`);
+  }
+
   fromJson(json) {
+    this.reset();
+
     for (const propertyName of this.jsonPropertyNames) {
       if (propertyName in json) {
         this[propertyName] = json[propertyName];

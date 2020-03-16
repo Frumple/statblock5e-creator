@@ -33,7 +33,7 @@ InlineCommon
   / PeriodChar
 
 SentenceBeginningNameExpression
-  = period:PeriodChar whitespace:Whitespace expression:BeginningNameExpression { return `${period}${whitespace}${expression}`; }
+  = period:PeriodChar markdown:MarkdownOptional whitespace:Whitespace expression:BeginningNameExpression { return `${period}${markdown}${whitespace}${expression}`; }
 
 BeginningNameExpression
   = BeginningName
@@ -61,11 +61,17 @@ Text
 Whitespace
   = $(SpaceChar+)
 
+MarkdownOptional
+  = $(MarkdownChar*)
+
 EndOfLine
   = NewLineChar / End
 
 NormalChar
   = !( PeriodChar / SpaceChar / NewLineChar ) .
+
+MarkdownChar
+  = '*' / '_'
 
 NewLineChar
   = '\n' / $('\r' '\n'?)

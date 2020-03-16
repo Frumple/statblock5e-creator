@@ -22,6 +22,7 @@ export default class SensesSection extends propertyLineSectionModule.PropertyLin
 
       this.editElements.useCustomText.disableElementsWhenChecked(
         this.editElements.blindsight,
+        this.editElements.blindBeyondThisRadius,
         this.editElements.darkvision,
         this.editElements.tremorsense,
         this.editElements.truesight);
@@ -43,6 +44,7 @@ export default class SensesSection extends propertyLineSectionModule.PropertyLin
     const sensesModel = CurrentContext.creature.senses;
 
     sensesModel.blindsight = this.editElements.blindsight.valueAsInt;
+    sensesModel.blindBeyondThisRadius = this.editElements.blindBeyondThisRadius.checked;
     sensesModel.darkvision = this.editElements.darkvision.valueAsInt;
     sensesModel.tremorsense = this.editElements.tremorsense.valueAsInt;
     sensesModel.truesight = this.editElements.truesight.valueAsInt;
@@ -61,6 +63,7 @@ export default class SensesSection extends propertyLineSectionModule.PropertyLin
     const sensesModel = CurrentContext.creature.senses;
 
     this.editElements.blindsight.value = sensesModel.blindsight;
+    this.editElements.blindBeyondThisRadius.checked = sensesModel.blindBeyondThisRadius;
     this.editElements.darkvision.value = sensesModel.darkvision;
     this.editElements.tremorsense.value = sensesModel.tremorsense;
     this.editElements.truesight.value = sensesModel.truesight;
@@ -86,7 +89,7 @@ export default class SensesSection extends propertyLineSectionModule.PropertyLin
     if (sensesModel.useCustomText) {
       this.showElements.text.innerHTMLSanitized = sensesModel.htmlCustomText;
     } else {
-      this.showElements.text.textContent = sensesModel.nonCustomText;
+      this.showElements.text.textContent = sensesModel.normalText;
     }
   }
 }
@@ -101,6 +104,7 @@ class SensesEditElements extends propertyLineSectionModule.PropertyLineEditEleme
   constructor(shadowRoot) {
     super(shadowRoot);
     this.blindsight = shadowRoot.getElementById('blindsight-input');
+    this.blindBeyondThisRadius = shadowRoot.getElementById('blind-beyond-this-radius-input');
     this.darkvision = shadowRoot.getElementById('darkvision-input');
     this.tremorsense = shadowRoot.getElementById('tremorsense-input');
     this.truesight = shadowRoot.getElementById('truesight-input');

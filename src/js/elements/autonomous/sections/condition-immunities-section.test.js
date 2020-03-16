@@ -6,6 +6,7 @@ import * as sharedSpecs from './property-list-section.specs.js';
 
 const headingName = 'Condition Immunities';
 const expectedBlockType = 'Condition Immunity';
+const open5eJsonKey = 'condition_immunities';
 
 const conditionImmunitiesModel = CurrentContext.creature.conditionImmunities;
 
@@ -56,7 +57,27 @@ describe('when the show section is clicked', () => {
 
     it('should add many items, and the show section should have the items', () => {
       const itemTexts = ['stunned', 'mesmerized', 'frightened', 'disconnected'];
-      sharedSpecs.shouldAddManyItems(conditionImmunitiesSection, conditionImmunitiesModel, headingName, itemTexts);
+      const expectedText = 'stunned, mesmerized, frightened, disconnected';
+      sharedSpecs.shouldAddManyItems(conditionImmunitiesSection, conditionImmunitiesModel, headingName, itemTexts, expectedText);
+    });
+
+    describe('should add item that contains commas, and if there are other items before or after this item, semicolon separators instead of commas should be shown', () => {
+      /* eslint-disable indent, no-unexpected-multiline */
+      it.each
+      `
+        description                                    | itemTexts                               | expectedText
+        ${'comma item only'}                           | ${['A, B']}                             | ${'A, B'}
+        ${'items before comma item'}                   | ${['1', '2', 'A, B']}                   | ${'1, 2; A, B'}
+        ${'items after comma item'}                    | ${['A, B', '3', '4']}                   | ${'A, B; 3, 4'}
+        ${'items before and after comma item'}         | ${['1', '2', 'A, B', '3', '4']}         | ${'1, 2; A, B; 3, 4'}
+        ${'two comma items adjacent to each other'}    | ${['1', '2', 'A, B', 'C, D', '3', '4']} | ${'1, 2; A, B; C, D; 3, 4'}
+        ${'two comma items separated from each other'} | ${['1', '2', 'A, B', '3', '4', 'C, D']} | ${'1, 2; A, B; 3, 4; C, D'}
+      `
+      ('$description: $itemTexts => $expectedText',
+      ({itemTexts, expectedText}) => {
+        sharedSpecs.shouldAddManyItems(conditionImmunitiesSection, conditionImmunitiesModel, headingName, itemTexts, expectedText);
+      });
+      /* eslint-enable indent, no-unexpected-multiline */
     });
 
     it('should display an error after clicking the add button if the input field is blank', () => {
@@ -105,6 +126,23 @@ describe('when the show section is clicked', () => {
       });
       /* eslint-enable indent, no-unexpected-multiline */
     });
+  });
+});
+
+describe('when import from Open5e', () => {
+  describe('should import as normal', () => {
+    /* eslint-disable indent, no-unexpected-multiline */
+    it.each
+    `
+      description                | inputText                            | expectedItems
+      ${'single simple item'}    | ${'charmed'}                         | ${['charmed']}
+      ${'multiple simple items'} | ${'stunned, mesmerized, frightened'} | ${['stunned', 'mesmerized', 'frightened']}
+    `
+    ('$description: $inputText => $expectedItems',
+    ({inputText, expectedItems}) => {
+      sharedSpecs.shouldImportFromOpen5e(conditionImmunitiesSection, conditionImmunitiesModel, headingName, open5eJsonKey, inputText, expectedItems);
+    });
+    /* eslint-enable indent, no-unexpected-multiline */
   });
 });
 

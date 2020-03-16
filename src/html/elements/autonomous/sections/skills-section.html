@@ -16,116 +16,125 @@
 
 <form id="edit-section" class="section section_hidden" novalidate>
   <div class="skills-edit-section section__content">
-    <label id="skills-label" class="skills-edit-section__skills-label section__heading-label">Skills:</label>
-    <label id="proficient-label" class="saving-throws-edit-section__proficient-label">Proficient</label>
+    <label id="skills-label" class="skills-edit-section__skills-label section__heading-label">Skill Proficiencies:</label>
+    <help-tooltip class="skills-edit-section__skills-help-tooltip">
+      <p>A creature's <strong>skill bonus</strong> is calculated using the following formula:</p>
+      <blockquote><strong>Skill Bonus = Ability Modifier [+ Proficiency Bonus if proficient in skill]</strong></blockquote>
+      <br />
+      <p>If the creature has <strong>expertise</strong> in a skill, it adds double its proficiency bonus instead:</p>
+      <blockquote><strong>Skill Bonus = Ability Modifier [+ (Proficiency Bonus x 2) if expert in skill]</strong></blockquote>
+      <br />
+      <cite>For more details, see "Skills" on page 8 of the D&D 5th Edition Monster Manual.</cite>
+    </help-tooltip>
+    <label id="expert-label" class="skills-edit-section__expert-label">Expertise</label>
     <label id="override-label" class="saving-throws-edit-section__override-label">Override</label>
 
     <input id="acrobatics-enable" class="skills-edit-section__acrobatics-enable" is="enable-disable-elements-checkbox" type="checkbox" />
     <label id="acrobatics-label" class="skills-edit-section__acrobatics-label skills-edit-section__label" for="acrobatics-enable" disabled>Acrobatics (Dex)</label>
-    <label id="acrobatics-skill-modifier" class="skills-edit-section__acrobatics-skill-modifier skills-edit-section__label" for="acrobatics-proficient" disabled></label>
-    <input id="acrobatics-proficient" class="skills-edit-section__acrobatics-proficient" type="checkbox" disabled />
+    <label id="acrobatics-skill-modifier" class="skills-edit-section__acrobatics-skill-modifier skills-edit-section__label" for="acrobatics-expert" disabled></label>
+    <input id="acrobatics-expert" class="skills-edit-section__acrobatics-expert" type="checkbox" disabled />
     <input id="acrobatics-override" class="skills-edit-section__acrobatics-override section__number-input section__small-number-input" is="number-input" type="number" name="skills-acrobatics-override" pretty-name="Acrobatics Skill" min="-999" max="999" value="" disabled />
 
     <input id="animalHandling-enable" class="skills-edit-section__animal-handling-enable" is="enable-disable-elements-checkbox" type="checkbox" />
     <label id="animalHandling-label" class="skills-edit-section__animal-handling-label skills-edit-section__label" for="animalHandling-enable" disabled>Animal Handling (Wis)</label>
-    <label id="animalHandling-skill-modifier" class="skills-edit-section__animal-handling-skill-modifier skills-edit-section__label" for="animalHandling-proficient" disabled></label>
-    <input id="animalHandling-proficient" class="skills-edit-section__animal-handling-proficient" type="checkbox" disabled />
+    <label id="animalHandling-skill-modifier" class="skills-edit-section__animal-handling-skill-modifier skills-edit-section__label" for="animalHandling-expert" disabled></label>
+    <input id="animalHandling-expert" class="skills-edit-section__animal-handling-expert" type="checkbox" disabled />
     <input id="animalHandling-override" class="skills-edit-section__animal-handling-override section__number-input section__small-number-input" is="number-input" type="number" name="skills-animalHandling-override" pretty-name="Animal Handling Skill" min="-999" max="999" value="" disabled />
 
     <input id="arcana-enable" class="skills-edit-section__arcana-enable" is="enable-disable-elements-checkbox" type="checkbox" />
     <label id="arcana-label" class="skills-edit-section__arcana-label skills-edit-section__label" for="arcana-enable" disabled>Arcana (Int)</label>
-    <label id="arcana-skill-modifier" class="skills-edit-section__arcana-skill-modifier skills-edit-section__label" for="arcana-proficient" disabled></label>
-    <input id="arcana-proficient" class="skills-edit-section__arcana-proficient" type="checkbox" disabled />
+    <label id="arcana-skill-modifier" class="skills-edit-section__arcana-skill-modifier skills-edit-section__label" for="arcana-expert" disabled></label>
+    <input id="arcana-expert" class="skills-edit-section__arcana-expert" type="checkbox" disabled />
     <input id="arcana-override" class="skills-edit-section__arcana-override section__number-input section__small-number-input" is="number-input" type="number" name="skills-arcana-override" pretty-name="Arcana Skill" min="-999" max="999" value="" disabled />
 
     <input id="athletics-enable" class="skills-edit-section__athletics-enable" is="enable-disable-elements-checkbox" type="checkbox" />
     <label id="athletics-label" class="skills-edit-section__athletics-label skills-edit-section__label" for="athletics-enable" disabled>Athletics (Str)</label>
-    <label id="athletics-skill-modifier" class="skills-edit-section__athletics-skill-modifier skills-edit-section__label" for="athletics-proficient" disabled></label>
-    <input id="athletics-proficient" class="skills-edit-section__athletics-proficient" type="checkbox" disabled />
+    <label id="athletics-skill-modifier" class="skills-edit-section__athletics-skill-modifier skills-edit-section__label" for="athletics-expert" disabled></label>
+    <input id="athletics-expert" class="skills-edit-section__athletics-expert" type="checkbox" disabled />
     <input id="athletics-override" class="skills-edit-section__athletics-override section__number-input section__small-number-input" is="number-input" type="number" name="skills-athletics-override" pretty-name="Athletics Skill" min="-999" max="999" value="" disabled />
 
     <input id="deception-enable" class="skills-edit-section__deception-enable" is="enable-disable-elements-checkbox" type="checkbox" />
     <label id="deception-label" class="skills-edit-section__deception-label skills-edit-section__label" for="deception-enable" disabled>Deception (Cha)</label>
-    <label id="deception-skill-modifier" class="skills-edit-section__deception-skill-modifier skills-edit-section__label" for="deception-proficient" disabled></label>
-    <input id="deception-proficient" class="skills-edit-section__deception-proficient" type="checkbox" disabled />
+    <label id="deception-skill-modifier" class="skills-edit-section__deception-skill-modifier skills-edit-section__label" for="deception-expert" disabled></label>
+    <input id="deception-expert" class="skills-edit-section__deception-expert" type="checkbox" disabled />
     <input id="deception-override" class="skills-edit-section__deception-override section__number-input section__small-number-input" is="number-input" type="number" name="skills-deception-override" pretty-name="Deception Skill" min="-999" max="999" value="" disabled />
 
     <input id="history-enable" class="skills-edit-section__history-enable" is="enable-disable-elements-checkbox" type="checkbox" />
     <label id="history-label" class="skills-edit-section__history-label skills-edit-section__label" for="history-enable" disabled>History (Int)</label>
-    <label id="history-skill-modifier" class="skills-edit-section__history-skill-modifier skills-edit-section__label" for="history-proficient" disabled></label>
-    <input id="history-proficient" class="skills-edit-section__history-proficient" type="checkbox" disabled />
+    <label id="history-skill-modifier" class="skills-edit-section__history-skill-modifier skills-edit-section__label" for="history-expert" disabled></label>
+    <input id="history-expert" class="skills-edit-section__history-expert" type="checkbox" disabled />
     <input id="history-override" class="skills-edit-section__history-override section__number-input section__small-number-input" is="number-input" type="number" name="skills-history-override" pretty-name="History Skill" min="-999" max="999" value="" disabled />
 
     <input id="insight-enable" class="skills-edit-section__insight-enable" is="enable-disable-elements-checkbox" type="checkbox" />
     <label id="insight-label" class="skills-edit-section__insight-label skills-edit-section__label" for="insight-enable" disabled>Insight (Wis)</label>
-    <label id="insight-skill-modifier" class="skills-edit-section__insight-skill-modifier skills-edit-section__label" for="insight-proficient" disabled></label>
-    <input id="insight-proficient" class="skills-edit-section__insight-proficient" type="checkbox" disabled />
+    <label id="insight-skill-modifier" class="skills-edit-section__insight-skill-modifier skills-edit-section__label" for="insight-expert" disabled></label>
+    <input id="insight-expert" class="skills-edit-section__insight-expert" type="checkbox" disabled />
     <input id="insight-override" class="skills-edit-section__insight-override section__number-input section__small-number-input" is="number-input" type="number" name="skills-insight-override" pretty-name="Insight Skill" min="-999" max="999" value="" disabled />
 
     <input id="intimidation-enable" class="skills-edit-section__intimidation-enable" is="enable-disable-elements-checkbox" type="checkbox" />
     <label id="intimidation-label" class="skills-edit-section__intimidation-label skills-edit-section__label" for="intimidation-enable" disabled>Intimidation (Cha)</label>
-    <label id="intimidation-skill-modifier" class="skills-edit-section__intimidation-skill-modifier skills-edit-section__label" for="intimidation-proficient" disabled></label>
-    <input id="intimidation-proficient" class="skills-edit-section__intimidation-proficient" type="checkbox" disabled />
+    <label id="intimidation-skill-modifier" class="skills-edit-section__intimidation-skill-modifier skills-edit-section__label" for="intimidation-expert" disabled></label>
+    <input id="intimidation-expert" class="skills-edit-section__intimidation-expert" type="checkbox" disabled />
     <input id="intimidation-override" class="skills-edit-section__intimidation-override section__number-input section__small-number-input" is="number-input" type="number" name="skills-intimidation-override" pretty-name="Intimidation Skill" min="-999" max="999" value="" disabled />
 
     <input id="investigation-enable" class="skills-edit-section__investigation-enable" is="enable-disable-elements-checkbox" type="checkbox" />
     <label id="investigation-label" class="skills-edit-section__investigation-label skills-edit-section__label" for="investigation-enable" disabled>Investigation (Int)</label>
-    <label id="investigation-skill-modifier" class="skills-edit-section__investigation-skill-modifier skills-edit-section__label" for="investigation-proficient" disabled></label>
-    <input id="investigation-proficient" class="skills-edit-section__investigation-proficient" type="checkbox" disabled />
+    <label id="investigation-skill-modifier" class="skills-edit-section__investigation-skill-modifier skills-edit-section__label" for="investigation-expert" disabled></label>
+    <input id="investigation-expert" class="skills-edit-section__investigation-expert" type="checkbox" disabled />
     <input id="investigation-override" class="skills-edit-section__investigation-override section__number-input section__small-number-input" is="number-input" type="number" name="skills-investigation-override" pretty-name="Investigation Skill" min="-999" max="999" value="" disabled />
 
     <input id="medicine-enable" class="skills-edit-section__medicine-enable" is="enable-disable-elements-checkbox" type="checkbox" />
     <label id="medicine-label" class="skills-edit-section__medicine-label skills-edit-section__label" for="medicine-enable" disabled>Medicine (Wis)</label>
-    <label id="medicine-skill-modifier" class="skills-edit-section__medicine-skill-modifier skills-edit-section__label" for="medicine-proficient" disabled></label>
-    <input id="medicine-proficient" class="skills-edit-section__medicine-proficient" type="checkbox" disabled />
+    <label id="medicine-skill-modifier" class="skills-edit-section__medicine-skill-modifier skills-edit-section__label" for="medicine-expert" disabled></label>
+    <input id="medicine-expert" class="skills-edit-section__medicine-expert" type="checkbox" disabled />
     <input id="medicine-override" class="skills-edit-section__medicine-override section__number-input section__small-number-input" is="number-input" type="number" name="skills-medicine-override" pretty-name="Medicine Skill" min="-999" max="999" value="" disabled />
 
     <input id="nature-enable" class="skills-edit-section__nature-enable" is="enable-disable-elements-checkbox" type="checkbox" />
     <label id="nature-label" class="skills-edit-section__nature-label skills-edit-section__label" for="nature-enable" disabled>Nature (Int)</label>
-    <label id="nature-skill-modifier" class="skills-edit-section__nature-skill-modifier skills-edit-section__label" for="nature-proficient" disabled></label>
-    <input id="nature-proficient" class="skills-edit-section__nature-proficient" type="checkbox" disabled />
+    <label id="nature-skill-modifier" class="skills-edit-section__nature-skill-modifier skills-edit-section__label" for="nature-expert" disabled></label>
+    <input id="nature-expert" class="skills-edit-section__nature-expert" type="checkbox" disabled />
     <input id="nature-override" class="skills-edit-section__nature-override section__number-input section__small-number-input" is="number-input" type="number" name="skills-nature-override" pretty-name="Nature Skill" min="-999" max="999" value="" disabled />
 
     <input id="perception-enable" class="skills-edit-section__perception-enable" is="enable-disable-elements-checkbox" type="checkbox" />
     <label id="perception-label" class="skills-edit-section__perception-label skills-edit-section__label" for="perception-enable" disabled>Perception (Wis)</label>
-    <label id="perception-skill-modifier" class="skills-edit-section__perception-skill-modifier skills-edit-section__label" for="perception-proficient" disabled></label>
-    <input id="perception-proficient" class="skills-edit-section__perception-proficient" type="checkbox" disabled />
+    <label id="perception-skill-modifier" class="skills-edit-section__perception-skill-modifier skills-edit-section__label" for="perception-expert" disabled></label>
+    <input id="perception-expert" class="skills-edit-section__perception-expert" type="checkbox" disabled />
     <input id="perception-override" class="skills-edit-section__perception-override section__number-input section__small-number-input" is="number-input" type="number" name="skills-perception-override" pretty-name="Perception Skill" min="-999" max="999" value="" disabled />
 
     <input id="performance-enable" class="skills-edit-section__performance-enable" is="enable-disable-elements-checkbox" type="checkbox" />
     <label id="performance-label" class="skills-edit-section__performance-label skills-edit-section__label" for="performance-enable" disabled>Performance (Cha)</label>
-    <label id="performance-skill-modifier" class="skills-edit-section__performance-skill-modifier skills-edit-section__label" for="performance-proficient" disabled></label>
-    <input id="performance-proficient" class="skills-edit-section__performance-proficient" type="checkbox" disabled />
+    <label id="performance-skill-modifier" class="skills-edit-section__performance-skill-modifier skills-edit-section__label" for="performance-expert" disabled></label>
+    <input id="performance-expert" class="skills-edit-section__performance-expert" type="checkbox" disabled />
     <input id="performance-override" class="skills-edit-section__performance-override section__number-input section__small-number-input" is="number-input" type="number" name="skills-performance-override" pretty-name="Performance Skill" min="-999" max="999" value="" disabled />
 
     <input id="persuasion-enable" class="skills-edit-section__persuasion-enable" is="enable-disable-elements-checkbox" type="checkbox" />
     <label id="persuasion-label" class="skills-edit-section__persuasion-label skills-edit-section__label" for="persuasion-enable" disabled>Persuasion (Cha)</label>
-    <label id="persuasion-skill-modifier" class="skills-edit-section__persuasion-skill-modifier skills-edit-section__label" for="persuasion-proficient" disabled></label>
-    <input id="persuasion-proficient" class="skills-edit-section__persuasion-proficient" type="checkbox" disabled />
+    <label id="persuasion-skill-modifier" class="skills-edit-section__persuasion-skill-modifier skills-edit-section__label" for="persuasion-expert" disabled></label>
+    <input id="persuasion-expert" class="skills-edit-section__persuasion-expert" type="checkbox" disabled />
     <input id="persuasion-override" class="skills-edit-section__persuasion-override section__number-input section__small-number-input" is="number-input" type="number" name="skills-persuasion-override" pretty-name="Persuasion Skill" min="-999" max="999" value="" disabled />
 
     <input id="religion-enable" class="skills-edit-section__religion-enable" is="enable-disable-elements-checkbox" type="checkbox" />
     <label id="religion-label" class="skills-edit-section__religion-label skills-edit-section__label" for="religion-enable" disabled>Religion (Int)</label>
-    <label id="religion-skill-modifier" class="skills-edit-section__religion-skill-modifier skills-edit-section__label" for="religion-proficient" disabled></label>
-    <input id="religion-proficient" class="skills-edit-section__religion-proficient" type="checkbox" disabled />
+    <label id="religion-skill-modifier" class="skills-edit-section__religion-skill-modifier skills-edit-section__label" for="religion-expert" disabled></label>
+    <input id="religion-expert" class="skills-edit-section__religion-expert" type="checkbox" disabled />
     <input id="religion-override" class="skills-edit-section__religion-override section__number-input section__small-number-input" is="number-input" type="number" name="skills-religion-override" pretty-name="Religion Skill" min="-999" max="999" value="" disabled />
 
     <input id="sleightOfHand-enable" class="skills-edit-section__sleight-of-hand-enable" is="enable-disable-elements-checkbox" type="checkbox" />
     <label id="sleightOfHand-label" class="skills-edit-section__sleight-of-hand-label skills-edit-section__label" for="sleightOfHand-enable" disabled>Sleight of Hand (Dex)</label>
-    <label id="sleightOfHand-skill-modifier" class="skills-edit-section__sleight-of-hand-skill-modifier skills-edit-section__label" for="sleightOfHand-proficient" disabled></label>
-    <input id="sleightOfHand-proficient" class="skills-edit-section__sleight-of-hand-proficient" type="checkbox" disabled />
+    <label id="sleightOfHand-skill-modifier" class="skills-edit-section__sleight-of-hand-skill-modifier skills-edit-section__label" for="sleightOfHand-expert" disabled></label>
+    <input id="sleightOfHand-expert" class="skills-edit-section__sleight-of-hand-expert" type="checkbox" disabled />
     <input id="sleightOfHand-override" class="skills-edit-section__sleight-of-hand-override section__number-input section__small-number-input" is="number-input" type="number" name="skills-sleightOfHand-override" pretty-name="Sleight of Hand Skill" min="-999" max="999" value="" disabled />
 
     <input id="stealth-enable" class="skills-edit-section__stealth-enable" is="enable-disable-elements-checkbox" type="checkbox" />
     <label id="stealth-label" class="skills-edit-section__stealth-label skills-edit-section__label" for="stealth-enable" disabled>Stealth (Dex)</label>
-    <label id="stealth-skill-modifier" class="skills-edit-section__stealth-skill-modifier skills-edit-section__label" for="stealth-proficient" disabled></label>
-    <input id="stealth-proficient" class="skills-edit-section__stealth-proficient" type="checkbox" disabled />
+    <label id="stealth-skill-modifier" class="skills-edit-section__stealth-skill-modifier skills-edit-section__label" for="stealth-expert" disabled></label>
+    <input id="stealth-expert" class="skills-edit-section__stealth-expert" type="checkbox" disabled />
     <input id="stealth-override" class="skills-edit-section__stealth-override section__number-input section__small-number-input" is="number-input" type="number" name="skills-stealth-override" pretty-name="Stealth Skill" min="-999" max="999" value="" disabled />
 
     <input id="survival-enable" class="skills-edit-section__survival-enable" is="enable-disable-elements-checkbox" type="checkbox" />
     <label id="survival-label" class="skills-edit-section__survival-label skills-edit-section__label" for="survival-enable" disabled>Survival (Wis)</label>
-    <label id="survival-skill-modifier" class="skills-edit-section__survival-skill-modifier skills-edit-section__label" for="survival-proficient" disabled></label>
-    <input id="survival-proficient" class="skills-edit-section__survival-proficient" type="checkbox" disabled />
+    <label id="survival-skill-modifier" class="skills-edit-section__survival-skill-modifier skills-edit-section__label" for="survival-expert" disabled></label>
+    <input id="survival-expert" class="skills-edit-section__survival-expert" type="checkbox" disabled />
     <input id="survival-override" class="skills-edit-section__survival-override section__number-input section__small-number-input" is="number-input" type="number" name="skills-survival-override" pretty-name="Survival Skill" min="-999" max="999" value="" disabled />
 
   </div>

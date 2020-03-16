@@ -46,124 +46,118 @@
   "savingThrows": {
     "strength": {
       "isEnabled": false,
-      "isProficient": false,
       "override": null
     },
     "dexterity": {
       "isEnabled": true,
-      "isProficient": true,
       "override": null
     },
     "constitution": {
       "isEnabled": true,
-      "isProficient": true,
       "override": null
     },
     "intelligence": {
       "isEnabled": false,
-      "isProficient": false,
       "override": null
     },
     "wisdom": {
       "isEnabled": true,
-      "isProficient": true,
       "override": null
     },
     "charisma": {
       "isEnabled": true,
-      "isProficient": true,
       "override": null
     }
   },
   "skills": {
     "acrobatics": {
       "isEnabled": false,
-      "isProficient": false,
+      "hasExpertise": false,
       "override": null
     },
     "animalHandling": {
       "isEnabled": false,
-      "isProficient": false,
+      "hasExpertise": false,
       "override": null
     },
     "arcana": {
       "isEnabled": false,
-      "isProficient": false,
+      "hasExpertise": false,
       "override": null
     },
     "athletics": {
       "isEnabled": false,
-      "isProficient": false,
+      "hasExpertise": false,
       "override": null
     },
     "deception": {
       "isEnabled": true,
-      "isProficient": true,
+      "hasExpertise": false,
       "override": null
     },
     "history": {
       "isEnabled": false,
-      "isProficient": false,
+      "hasExpertise": false,
       "override": null
     },
     "insight": {
       "isEnabled": false,
-      "isProficient": false,
+      "hasExpertise": false,
       "override": null
     },
     "intimidation": {
       "isEnabled": false,
-      "isProficient": false,
+      "hasExpertise": false,
       "override": null
     },
     "investigation": {
       "isEnabled": false,
-      "isProficient": false,
+      "hasExpertise": false,
       "override": null
     },
     "medicine": {
       "isEnabled": false,
-      "isProficient": false,
+      "hasExpertise": false,
       "override": null
     },
     "nature": {
       "isEnabled": false,
-      "isProficient": false,
+      "hasExpertise": false,
       "override": null
     },
     "perception": {
       "isEnabled": true,
-      "isProficient": true,
-      "override": 7
+      "hasExpertise": true,
+      "override": null
     },
     "performance": {
       "isEnabled": false,
-      "isProficient": false,
+      "hasExpertise": false,
       "override": null
     },
     "persuasion": {
       "isEnabled": false,
-      "isProficient": false,
+      "hasExpertise": false,
       "override": null
     },
     "religion": {
       "isEnabled": false,
-      "isProficient": false,
+      "hasExpertise": false,
       "override": null
     },
     "sleightOfHand": {
       "isEnabled": false,
-      "isProficient": false,
+      "hasExpertise": false,
       "override": null
     },
     "stealth": {
       "isEnabled": true,
-      "isProficient": true,
+      "hasExpertise": false,
       "override": null
     },
     "survival": {
       "isEnabled": false,
-      "isProficient": false,
+      "hasExpertise": false,
       "override": null
     }
   },
@@ -185,6 +179,7 @@
   },
   "senses": {
     "blindsight": 30,
+    "blindBeyondThisRadius": false,
     "darkvision": 120,
     "tremorsense": null,
     "truesight": null,
@@ -198,7 +193,7 @@
     ]
   },
   "challengeRating": {
-    "challengeRating": 8,
+    "challengeRating": "8",
     "experiencePoints": 3900,
     "proficiencyBonus": 3
   },

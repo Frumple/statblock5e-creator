@@ -75,11 +75,11 @@ describe('when the show section is clicked', () => {
           ${'size + con modifier changed'}            | ${1}           | ${4}       | ${8}              | ${-1}                         | ${1}              | ${'1 (1d4 – 1)'}
           ${'quantity + size + con modifier changed'} | ${17}          | ${10}      | ${21}             | ${85}                         | ${178}            | ${'178 (17d10 + 85)'}
           ${'air elemental'}                          | ${12}          | ${10}      | ${14}             | ${24}                         | ${90}             | ${'90 (12d10 + 24)'}
-          ${'ankylosaurus'}                           | ${8}           | ${12}      | ${15}             | ${16}                         | ${68}             | ${'68 (8d12 + 16)'}
+          ${'doppelganger'}                           | ${8}           | ${8}       | ${14}             | ${16}                         | ${52}             | ${'52 (8d8 + 16)'}
           ${'hill giant'}                             | ${10}          | ${12}      | ${19}             | ${40}                         | ${105}            | ${'105 (10d12 + 40)'}
+          ${'kobold'}                                 | ${2}           | ${6}       | ${9}              | ${-2}                         | ${5}              | ${'5 (2d6 – 2)'}
           ${'swarm of rats'}                          | ${7}           | ${8}       | ${9}              | ${-7}                         | ${24}             | ${'24 (7d8 – 7)'}
           ${'tarrasque'}                              | ${33}          | ${20}      | ${30}             | ${330}                        | ${676}            | ${'676 (33d20 + 330)'}
-          ${'winged kobold'}                          | ${3}           | ${6}       | ${9}              | ${-3}                         | ${7}              | ${'7 (3d6 – 3)'}
           ${'minimum values'}                         | ${1}           | ${4}       | ${1}              | ${-5}                         | ${0}              | ${'0 (1d4 – 5)'}
           ${'maximum values'}                         | ${999}         | ${20}      | ${999}            | ${493506}                     | ${503995}         | ${'503995 (999d20 + 493506)'}
         `
@@ -105,7 +105,7 @@ describe('when the show section is clicked', () => {
           hitPointsSection.editElements.submitForm();
 
           expect(hitPointsSection).toBeInMode('show');
-          expect(hitPointsSection).toShowPropertyLine(expectedHeading, expectedText);
+          verifyShowModeView(expectedText);
 
           const json = verifyJsonExport(expectedValues);
           expect(hitPointsSection).toExportPropertyLineToHtml(expectedHeading, expectedText);
@@ -116,7 +116,7 @@ describe('when the show section is clicked', () => {
 
           verifyModel(expectedValues);
           verifyEditModeView(expectedValues);
-          expect(hitPointsSection).toShowPropertyLine(expectedHeading, expectedText);
+          verifyShowModeView(expectedText);
         });
         /* eslint-enable indent, no-unexpected-multiline */
       });
@@ -237,7 +237,7 @@ describe('when the show section is clicked', () => {
         hitPointsSection.editElements.submitForm();
 
         expect(hitPointsSection).toBeInMode('show');
-        expect(hitPointsSection).toShowPropertyLine(expectedHeading, expectedValues.hitPoints.toString());
+        verifyShowModeView(expectedValues.hitPoints.toString());
 
         const json = verifyJsonExport(expectedValues);
         expect(hitPointsSection).toExportPropertyLineToHtml(expectedHeading, expectedValues.hitPoints.toString());
@@ -248,7 +248,7 @@ describe('when the show section is clicked', () => {
 
         verifyModel(expectedValues);
         verifyEditModeView(expectedValues);
-        expect(hitPointsSection).toShowPropertyLine(expectedHeading, expectedValues.hitPoints.toString());
+        verifyShowModeView(expectedValues.hitPoints.toString());
       });
 
       it('should display an error if the hit points field is not a valid number, and the hit points should not be saved', () => {
@@ -289,6 +289,45 @@ describe('when the show section is clicked', () => {
   });
 });
 
+describe('when importing from Open5e', () => {
+  describe('should import as normal', () => {
+    /* eslint-disable indent, no-unexpected-multiline */
+    it.each
+    `
+      description        | hitDice        | constitutionScore | expectedHitDieQuantity | expectedHitDieSize | expectedConstitutionHitPoints | expectedHitPoints | expectedText
+      ${'air elemental'} | ${'12d10+24'}  | ${14}             | ${12}                  | ${10}              | ${24}                         | ${90}             | ${'90 (12d10 + 24)'}
+      ${'doppelganger'}  | ${'8d8+16'}    | ${14}             | ${8}                   | ${8}               | ${16}                         | ${52}             | ${'52 (8d8 + 16)'}
+      ${'hill giant'}    | ${'10d12+40'}  | ${19}             | ${10}                  | ${12}              | ${40}                         | ${105}            | ${'105 (10d12 + 40)'}
+      ${'kobold'}        | ${'2d6-2'}     | ${9}              | ${2}                   | ${6}               | ${-2}                         | ${5}              | ${'5 (2d6 – 2)'}
+      ${'swarm of rats'} | ${'7d8'}       | ${9}              | ${7}                   | ${8}               | ${-7}                         | ${24}             | ${'24 (7d8 – 7)'}
+      ${'tarrasque'}     | ${'33d20+330'} | ${30}             | ${33}                  | ${20}              | ${330}                        | ${676}            | ${'676 (33d20 + 330)'}
+    `
+    ('$description: {hitDice="$hitDice", constitutionScore="$constitutionScore"} => {expectedHitDieQuantity="$expectedHitDieQuantity", expectedHitDieSize="$expectedHitDieSize", expectedConstitutionHitPoints="$expectedConstitutionHitPoints", expectedHitPoints="$expectedHitPoints", expectedText="$expectedText"}',
+    ({hitDice, constitutionScore, expectedHitDieQuantity, expectedHitDieSize, expectedConstitutionHitPoints, expectedHitPoints, expectedText}) => {
+      const expectedValues = {
+        hitPoints: expectedHitPoints,
+        useHitDie: true,
+        hitDieQuantity: expectedHitDieQuantity,
+        hitDieSize: expectedHitDieSize,
+        constitutionHitPoints: expectedConstitutionHitPoints
+      };
+
+      const json = {
+        'hit_dice': hitDice
+      };
+
+      abilities.abilities['constitution'].score = constitutionScore;
+
+      hitPointsSection.importFromOpen5e(json);
+
+      verifyModel(expectedValues);
+      verifyEditModeView(expectedValues);
+      verifyShowModeView(expectedText);
+    });
+    /* eslint-enable indent, no-unexpected-multiline */
+  });
+});
+
 function reset() {
   hitPointsModel.reset();
   hitPointsSection.updateView();
@@ -326,6 +365,10 @@ function verifyEditModeView({
   expect(hitPointsSection.editElements.hitDieQuantity).toHaveValue(hitDieQuantity);
   expect(hitPointsSection.editElements.hitDieSize).toHaveValue(hitDieSize.toString());
   expect(hitPointsSection.editElements.constitutionHitPoints).toHaveTextContent(getExpectedConstitutionHitPointsText(constitutionHitPoints));
+}
+
+function verifyShowModeView(expectedText) {
+  expect(hitPointsSection).toShowPropertyLine(expectedHeading, expectedText);
 }
 
 function verifyJsonExport({
