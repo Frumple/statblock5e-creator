@@ -260,6 +260,16 @@ describe('when import from Open5e', () => {
     sharedSpecs.shouldImportFromOpen5e(specialTraitsSection, specialTraitsModel, open5eJsonKey, [block]);
   });
 
+  it('should import single spellcasting block without bullet characters', () => {
+    const block = {
+      name: 'Innate Spellcasting',
+      text: 'The djinni\'s innate spellcasting ability is Charisma (spell save DC 17, +9 to hit with spell attacks). It can innately cast the following spells, requiring no material components:\n\nAt will: detect evil and good, detect magic, thunderwave\n3/day each: create food and water (can create wine instead of water), tongues, wind walk\n1/day each: conjure elemental (air elemental only), creation, gaseous form, invisibility, major image, plane shift',
+      markdownText: 'The djinni\'s innate spellcasting ability is Charisma (spell save DC 17, +9 to hit with spell attacks). It can innately cast the following spells, requiring no material components:  \n>   \n> At will: detect evil and good, detect magic, thunderwave  \n> 3/day each: create food and water (can create wine instead of water), tongues, wind walk  \n> 1/day each: conjure elemental (air elemental only), creation, gaseous form, invisibility, major image, plane shift',
+    };
+
+    sharedSpecs.shouldImportFromOpen5e(specialTraitsSection, specialTraitsModel, open5eJsonKey, [block]);
+  });
+
   it('should import single spellcasting block with bullet characters', () => {
     const block = {
       name: 'Spellcasting',

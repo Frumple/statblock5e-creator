@@ -39,10 +39,12 @@ export default class BlockListModel extends Model {
   }
 
   static parseOpen5eBlockDescription(desc) {
-    const newLineIndentRegex = /(?<=\S)(?!(\*|_))\n(?=\S)(?!(\*|_))/g;
+    const newLineIndentRegex = /(?<=\.)\s*\n(?=\w)/g;
     const bulletRemovalRegex = / *• */g;
 
-    // For each single newline '\n' character surrounded by whitespace characters but not any markdown characters, add an indent of 2 spaces following it
+    // Add an indent of 2 spaces after a newline character ("\n") if it satisfies the following conditions:
+    // - Preceded by a period character (".") and optional whitespace
+    // - Followed by a word character (a-zA-Z0-9_)
     desc = desc.replace(newLineIndentRegex, '\n  ');
 
     // Remove all bullet character '•' and any space characters (not whitespace) surrounding it
