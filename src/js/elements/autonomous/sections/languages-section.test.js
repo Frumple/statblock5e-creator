@@ -162,6 +162,7 @@ describe('when import from Open5e', () => {
     it.each
     `
       description                           | inputText                                 | expectedItems                                   | expectedText
+      ${'no items'}                         | ${''}                                     | ${[]}                                           | ${'—'}
       ${'single simple item'}               | ${'Deep Speech'}                          | ${['Deep Speech']}                              | ${null}
       ${'multiple simple items'}            | ${'Undercommon, Swahili, Thieves\' Cant'} | ${['Undercommon', 'Swahili', 'Thieves\' Cant']} | ${null}
       ${'telepathy delimited by comma'}     | ${'Gnomish, Sylvan, telepathy 60 ft.'}    | ${['Gnomish', 'Sylvan', 'telepathy 60 ft.']}    | ${null}

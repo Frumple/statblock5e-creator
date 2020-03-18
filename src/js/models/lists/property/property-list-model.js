@@ -54,19 +54,21 @@ export default class PropertyListModel extends PropertyLineModel {
 
     const inputText = json[this.open5eJsonKey];
 
-    // Begin by splitting the incoming text by semicolon delimiters
-    const semicolonTokens = inputText.split(';').map(token => token.trim());
-    for (const semicolonToken of semicolonTokens) {
-      // If the token contains the phrase 'bludgeoning, piercing, and slashing',
-      // treat it as one item and do not split it by commas.
-      if (semicolonToken.includes('bludgeoning, piercing, and slashing')) {
-        this.items.push(semicolonToken);
+    if (inputText !== '') {
+      // Begin by splitting the incoming text by semicolon delimiters
+      const semicolonTokens = inputText.split(';').map(token => token.trim());
+      for (const semicolonToken of semicolonTokens) {
+        // If the token contains the phrase 'bludgeoning, piercing, and slashing',
+        // treat it as one item and do not split it by commas.
+        if (semicolonToken.includes('bludgeoning, piercing, and slashing')) {
+          this.items.push(semicolonToken);
 
-      // Otherwise, split the token further by commas
-      // and add the resulting tokens as items.
-      } else {
-        const commaTokens = semicolonToken.split(',').map(token => token.trim());
-        Array.prototype.push.apply(this.items, commaTokens);
+        // Otherwise, split the token further by commas
+        // and add the resulting tokens as items.
+        } else {
+          const commaTokens = semicolonToken.split(',').map(token => token.trim());
+          Array.prototype.push.apply(this.items, commaTokens);
+        }
       }
     }
   }

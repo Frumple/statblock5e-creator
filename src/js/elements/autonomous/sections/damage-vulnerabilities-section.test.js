@@ -135,6 +135,7 @@ describe('when import from Open5e', () => {
     it.each
     `
       description                                         | inputText                                                                               | expectedItems
+      ${'no items'}                                       | ${''}                                                                                   | ${[]}
       ${'single simple item'}                             | ${'force'}                                                                              | ${['force']}
       ${'multiple simple items'}                          | ${'radiant, necrotic, acid'}                                                            | ${['radiant', 'necrotic', 'acid']}
       ${'bludgeoning, piercing, and slashing (BPS) only'} | ${'bludgeoning, piercing, and slashing from nonmagical attacks'}                        | ${['bludgeoning, piercing, and slashing from nonmagical attacks']}

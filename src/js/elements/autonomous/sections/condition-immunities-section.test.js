@@ -135,6 +135,7 @@ describe('when import from Open5e', () => {
     it.each
     `
       description                | inputText                            | expectedItems
+      ${'no items'}              | ${''}                                | ${[]}
       ${'single simple item'}    | ${'charmed'}                         | ${['charmed']}
       ${'multiple simple items'} | ${'stunned, mesmerized, frightened'} | ${['stunned', 'mesmerized', 'frightened']}
     `
