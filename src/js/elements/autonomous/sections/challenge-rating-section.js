@@ -21,17 +21,27 @@ export default class ChallengeRatingSection extends propertyLineSectionModule.Pr
   }
 
   onInputChallengeRating() {
-    this.updateModel();
+    const challengeRating = this.editElements.challengeRating.value;
+    CurrentContext.creature.challengeRating.challengeRating = challengeRating;
+
     CurrentContext.creature.challengeRating.updateExperiencePointsAndProficiencyBonusFromChallengeRating();
     this.updateEditModeView();
+    this.dispatchProficiencyBonusChangedEvent();
   }
 
   onInputExperiencePoints() {
-    this.updateModel();
+    const experiencePoints = this.editElements.experiencePoints.valueAsInt;
+    if (experiencePoints !== null) {
+      CurrentContext.creature.challengeRating.experiencePoints = experiencePoints;
+    }
   }
 
   onInputProficiencyBonus() {
-    this.updateModel();
+    const proficiencyBonus = this.editElements.proficiencyBonus.valueAsInt;
+    if (proficiencyBonus !== null) {
+      CurrentContext.creature.challengeRating.proficiencyBonus = proficiencyBonus;
+      this.dispatchProficiencyBonusChangedEvent();
+    }
   }
 
   checkForErrors() {
@@ -40,22 +50,7 @@ export default class ChallengeRatingSection extends propertyLineSectionModule.Pr
   }
 
   updateModel() {
-    const challengeRatingModel = CurrentContext.creature.challengeRating;
-
-    const challengeRating = this.editElements.challengeRating.value;
-    const experiencePoints = this.editElements.experiencePoints.valueAsInt;
-    const proficiencyBonus = this.editElements.proficiencyBonus.valueAsInt;
-
-    challengeRatingModel.challengeRating = challengeRating;
-
-    if (experiencePoints !== null) {
-      challengeRatingModel.experiencePoints = experiencePoints;
-    }
-
-    if (proficiencyBonus != null) {
-      challengeRatingModel.proficiencyBonus = proficiencyBonus;
-      this.dispatchProficiencyBonusChangedEvent();
-    }
+    // Intentionally empty: models are updated in onInput callbacks
   }
 
   updateEditModeView() {

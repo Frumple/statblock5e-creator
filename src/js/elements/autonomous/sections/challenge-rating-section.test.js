@@ -91,10 +91,17 @@ describe('when the show section is clicked', () => {
           proficiencyBonus: expectedProficiencyBonus
         };
 
+        let receivedEvent = null;
+        challengeRatingSection.addEventListener('proficiencyBonusChanged', (event) => {
+          receivedEvent = event;
+        });
+
         inputValueAndTriggerEvent(challengeRatingSection.editElements.challengeRating, challengeRating);
 
         verifyModel(expectedValues);
         verifyEditModeView(expectedValues);
+
+        expect(receivedEvent).not.toBeNull();
 
         challengeRatingSection.editElements.submitForm();
 
@@ -232,11 +239,18 @@ describe('when the show section is clicked', () => {
       };
       const expectedText = '3 (888 XP)';
 
+      let receivedEvent = null;
+      challengeRatingSection.addEventListener('proficiencyBonusChanged', (event) => {
+        receivedEvent = event;
+      });
+
       inputValueAndTriggerEvent(challengeRatingSection.editElements.challengeRating, expectedValues.challengeRating);
       inputValueAndTriggerEvent(challengeRatingSection.editElements.experiencePoints, expectedValues.experiencePoints);
 
       verifyModel(expectedValues);
       verifyEditModeView(expectedValues);
+
+      expect(receivedEvent).not.toBeNull();
 
       challengeRatingSection.editElements.submitForm();
 
@@ -267,11 +281,18 @@ describe('when the show section is clicked', () => {
       };
       const expectedText = '20 (25,000 XP)';
 
+      let receivedEvent = null;
+      challengeRatingSection.addEventListener('proficiencyBonusChanged', (event) => {
+        receivedEvent = event;
+      });
+
       inputValueAndTriggerEvent(challengeRatingSection.editElements.experiencePoints, initialExperiencePoints);
       inputValueAndTriggerEvent(challengeRatingSection.editElements.challengeRating, expectedValues.challengeRating);
 
       verifyModel(expectedValues);
       verifyEditModeView(expectedValues);
+
+      expect(receivedEvent).not.toBeNull();
 
       challengeRatingSection.editElements.submitForm();
 
@@ -300,11 +321,18 @@ describe('when the show section is clicked', () => {
       };
       const expectedText = '14 (11,500 XP)';
 
+      let receivedEvent = null;
+      challengeRatingSection.addEventListener('proficiencyBonusChanged', (event) => {
+        receivedEvent = event;
+      });
+
       inputValueAndTriggerEvent(challengeRatingSection.editElements.challengeRating, expectedValues.challengeRating);
       inputValueAndTriggerEvent(challengeRatingSection.editElements.proficiencyBonus, expectedValues.proficiencyBonus);
 
       verifyModel(expectedValues);
       verifyEditModeView(expectedValues);
+
+      expect(receivedEvent).not.toBeNull();
 
       challengeRatingSection.editElements.submitForm();
 
@@ -335,11 +363,18 @@ describe('when the show section is clicked', () => {
       };
       const expectedText = '8 (3,900 XP)';
 
+      let receivedEvent = null;
+      challengeRatingSection.addEventListener('proficiencyBonusChanged', (event) => {
+        receivedEvent = event;
+      });
+
       inputValueAndTriggerEvent(challengeRatingSection.editElements.proficiencyBonus, initialProficiencyBonus);
       inputValueAndTriggerEvent(challengeRatingSection.editElements.challengeRating, expectedValues.challengeRating);
 
       verifyModel(expectedValues);
       verifyEditModeView(expectedValues);
+
+      expect(receivedEvent).not.toBeNull();
 
       challengeRatingSection.editElements.submitForm();
 
