@@ -14,8 +14,8 @@ export default class Subtitle extends Model{
   reset() {
     this.size = 'Medium';
     this.type = 'humanoid';
-    this.tags = '';
-    this.alignment = 'unaligned';
+    this.tags = 'any race';
+    this.alignment = 'any alignment';
 
     this.useCustomText = false;
     this.customText = '';

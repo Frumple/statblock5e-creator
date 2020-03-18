@@ -7,7 +7,7 @@ import * as sharedSpecs from './property-list-section.specs.js';
 const headingName = 'Languages';
 const expectedBlockType = 'Language';
 const open5eJsonKey = 'languages';
-const defaultStartingLanguage = 'Common';
+const defaultStartingLanguage = 'any one language (usually Common)';
 
 const languagesModel = CurrentContext.creature.languages;
 

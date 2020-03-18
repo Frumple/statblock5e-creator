@@ -310,8 +310,8 @@ function reset() {
 function verifyModel({
   size = 'Medium',
   type = 'humanoid',
-  tags = '',
-  alignment = 'unaligned',
+  tags = 'any race',
+  alignment = 'any alignment',
   useCustomText = false,
   customText = ''
 } = {}) {
@@ -326,8 +326,8 @@ function verifyModel({
 function verifyEditModeView({
   size = 'Medium',
   type = 'humanoid',
-  tags = '',
-  alignment = 'unaligned',
+  tags = 'any race',
+  alignment = 'any alignment',
   useCustomText = false,
   customText = ''
 } = {}) {
@@ -345,15 +345,15 @@ function verifyEditModeView({
   );
 }
 
-function verifyShowModeView(expectedText = 'Medium humanoid, unaligned') {
+function verifyShowModeView(expectedText = 'Medium humanoid (any race), any alignment') {
   expect(subtitleSection.showElements.text).toHaveTextContent(expectedText);
 }
 
 function verifyJsonExport({
   size = 'Medium',
   type = 'humanoid',
-  tags = '',
-  alignment = 'unaligned',
+  tags = 'any race',
+  alignment = 'any alignment',
   useCustomText = false,
   customText = ''
 } = {}) {

@@ -8,7 +8,7 @@ export default class Languages extends PropertyListModel {
   }
 
   reset() {
-    this.items = ['Common'];
+    this.items = ['any one language (usually Common)'];
   }
 
   get text() {
