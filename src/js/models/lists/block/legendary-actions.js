@@ -17,7 +17,11 @@ export default class LegendaryActions extends BlockListModel {
 
   fromOpen5e(json) {
     super.fromOpen5e(json);
-    this.description = json['legendary_desc'];
+
+    const legendaryDesc = json['legendary_desc'];
+    if (legendaryDesc !== '') {
+      this.description = json['legendary_desc'];
+    }
   }
 
   fromJson(json) {

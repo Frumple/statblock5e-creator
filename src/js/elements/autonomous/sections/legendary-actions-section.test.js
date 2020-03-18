@@ -60,7 +60,7 @@ describe('when the show section is clicked', () => {
   describe('and the description is changed and the edit section is submitted', () => {
     const description = '[name] can take 5 legendary actions, choosing from one of the options below. Only one legendary action option can be used at a time and only at the end of another creature\'s turn. [name] regains spent legendary actions at the start of its turn.';
     const markdownDescription = 'The dragon can take 5 legendary actions, choosing from one of the options below. Only one legendary action option can be used at a time and only at the end of another creature\'s turn. The dragon regains spent legendary actions at the start of its turn.';
-    const htmlDescription = 'The dragon can take 5 legendary actions, choosing from one of the options below. Only one legendary action option can be used at a time and only at the end of another creature\'s turn. The dragon regains spent legendary actions at the start of its turn.';
+    const htmlDescription = markdownDescription;
 
     it('should switch to mode and update the description, but the description is not shown if there are no legendary actions', () => {
       titleModel.fullName = 'Adult Red Dragon';
@@ -326,14 +326,18 @@ describe('when the show section is clicked', () => {
 });
 
 describe('when import from Open5e', () => {
-  it('should import no blocks and the description should not be visible', () => {
-    const description = '';
+  it('should import no blocks, and the description should be kept to the default and should not be visible', () => {
+    const inputtedDescription = '';
 
-    sharedSpecs.shouldImportFromOpen5e(legendaryActionsSection, legendaryActionsModel, open5eJsonKey, [], description);
+    const description = '[name] can take 3 legendary actions, choosing from the options below. Only one legendary action option can be used at a time and only at the end of another creature\'s turn. [name] regains spent legendary actions at the start of its turn.';
+    const markdownDescription = 'The commoner can take 3 legendary actions, choosing from the options below. Only one legendary action option can be used at a time and only at the end of another creature\'s turn. The commoner regains spent legendary actions at the start of its turn.';
+    const htmlDescription = markdownDescription;
 
-    verifyModelDescription(description, description, description);
+    sharedSpecs.shouldImportFromOpen5e(legendaryActionsSection, legendaryActionsModel, open5eJsonKey, [], inputtedDescription);
+
+    verifyModelDescription(description, markdownDescription, htmlDescription);
     verifyEditModeDescription(description);
-    verifyShowModeDescription(description, false);
+    verifyShowModeDescription(htmlDescription, false);
   });
 
   it('should import single block', () => {
