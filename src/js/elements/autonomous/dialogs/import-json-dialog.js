@@ -1,15 +1,15 @@
 import ImportDialog from './import-dialog.js';
 
-export default class ImportFileDialog extends ImportDialog {
-  static get elementName() { return 'import-file-dialog'; }
+export default class ImportJsonDialog extends ImportDialog {
+  static get elementName() { return 'import-json-dialog'; }
   static get templatePaths() {
     return super.templatePaths.set(
-      'import-file-dialog',
-      'src/html/elements/autonomous/dialogs/import-file-dialog.html');
+      'import-json-dialog',
+      'src/html/elements/autonomous/dialogs/import-json-dialog.html');
   }
 
   constructor() {
-    super(ImportFileDialog.templatePaths);
+    super(ImportJsonDialog.templatePaths);
 
     this.chooseFileButton = this.shadowRoot.getElementById('choose-file-button');
     this.fileInput = this.shadowRoot.getElementById('file-input');

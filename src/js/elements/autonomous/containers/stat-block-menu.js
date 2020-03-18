@@ -21,8 +21,9 @@ export default class StatBlockMenu extends CustomAutonomousElement {
     this.editAllSectionsButton = this.shadowRoot.getElementById('edit-all-sections-button');
     this.saveAllSectionsButton = this.shadowRoot.getElementById('save-all-sections-button');
 
-    this.importOpen5eButton = this.shadowRoot.getElementById('import-open5e-button');
     this.importJsonButton = this.shadowRoot.getElementById('import-json-button');
+    this.importSrdButton = this.shadowRoot.getElementById('import-srd-button');
+    this.importOpen5eButton = this.shadowRoot.getElementById('import-open5e-button');
 
     this.exportJsonButton = this.shadowRoot.getElementById('export-json-button');
     this.exportHtmlButton = this.shadowRoot.getElementById('export-html-button');
@@ -48,8 +49,9 @@ export default class StatBlockMenu extends CustomAutonomousElement {
       this.editAllSectionsButton.addEventListener('click', this.onClickEditAllSectionsButton.bind(this));
       this.saveAllSectionsButton.addEventListener('click', this.onClickSaveAllSectionsButton.bind(this));
 
-      this.importOpen5eButton.addEventListener('click', this.onClickImportOpen5eButton.bind(this));
       this.importJsonButton.addEventListener('click', this.onClickImportJsonButton.bind(this));
+      this.importSrdButton.addEventListener('click', this.onClickImportSrdButton.bind(this));
+      this.importOpen5eButton.addEventListener('click', this.onClickImportOpen5eButton.bind(this));
 
       this.exportJsonButton.addEventListener('click', this.onClickExportJsonButton.bind(this));
       this.exportHtmlButton.addEventListener('click', this.onClickExportHtmlButton.bind(this));
@@ -93,6 +95,10 @@ export default class StatBlockMenu extends CustomAutonomousElement {
 
   onClickImportJsonButton() {
     this.dispatchMenuEvent('importAction', { format: 'json' });
+  }
+
+  onClickImportSrdButton() {
+    this.dispatchMenuEvent('importAction', { format: 'srd' });
   }
 
   onClickImportOpen5eButton() {

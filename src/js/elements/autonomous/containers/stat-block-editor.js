@@ -8,10 +8,11 @@ import StatBlockSidebar from './stat-block-sidebar.js';
 import StatBlock from './stat-block.js';
 
 import ImportOpen5eDialog from '../dialogs/import-open5e-dialog.js';
-import ImportFileDialog from '../dialogs/import-file-dialog.js';
+import ImportJsonDialog from '../dialogs/import-json-dialog.js';
 import ExportDialog from '../dialogs/export-dialog.js';
 
 import CurrentContext from '../../../models/current-context.js';
+import ImportSrdDialog from '../dialogs/import-srd-dialog.js';
 
 const html_beautify = require('js-beautify').html;
 
@@ -31,8 +32,10 @@ export default class StatBlockEditor extends CustomAutonomousElement {
       this.statBlockSidebar = new StatBlockSidebar(this);
       this.statBlock = new StatBlock(this);
 
+      this.importJsonDialog = new ImportJsonDialog();
+      this.importSrdDialog = new ImportSrdDialog();
       this.importOpen5eDialog = new ImportOpen5eDialog();
-      this.importJsonDialog = new ImportFileDialog();
+
       this.exportJsonDialog = new ExportDialog();
       this.exportHtmlDialog = new ExportDialog();
       this.exportMarkdownDialog = new ExportDialog();
@@ -41,8 +44,10 @@ export default class StatBlockEditor extends CustomAutonomousElement {
       this.statBlockSidebar = document.querySelector('stat-block-sidebar');
       this.statBlock = document.querySelector('stat-block');
 
-      this.importOpen5eDialog = this.shadowRoot.getElementById('import-open5e-dialog');
       this.importJsonDialog = this.shadowRoot.getElementById('import-json-dialog');
+      this.importSrdDialog = this.shadowRoot.getElementById('import-srd-dialog');
+      this.importOpen5eDialog = this.shadowRoot.getElementById('import-open5e-dialog');
+
       this.exportJsonDialog = this.shadowRoot.getElementById('export-json-dialog');
       this.exportHtmlDialog = this.shadowRoot.getElementById('export-html-dialog');
       this.exportMarkdownDialog = this.shadowRoot.getElementById('export-markdown-dialog');
@@ -118,11 +123,14 @@ export default class StatBlockEditor extends CustomAutonomousElement {
     const format = event.detail.format;
 
     switch(format) {
+    case 'json':
+      this.openImportJsonDialog();
+      break;
+    case 'srd':
+      this.openImportSrdDialog();
+      break;
     case 'open5e':
       this.openImportOpen5eDialog();
-      break;
-    case 'json':
-      this.openImportFileDialog();
       break;
     default:
       throw new Error(`Unknown import format: '${format}'.`);
@@ -152,12 +160,16 @@ export default class StatBlockEditor extends CustomAutonomousElement {
     printHtml(content);
   }
 
-  openImportOpen5eDialog() {
-    this.importOpen5eDialog.launch(this.importFromOpen5e.bind(this));
+  openImportJsonDialog() {
+    this.importJsonDialog.launch(this.importFromJson.bind(this));
   }
 
-  openImportFileDialog() {
-    this.importJsonDialog.launch(this.importFromJson.bind(this));
+  openImportSrdDialog() {
+    this.importSrdDialog.launch(this.importFromJson.bind(this));
+  }
+
+  openImportOpen5eDialog() {
+    this.importOpen5eDialog.launch(this.importFromOpen5e.bind(this));
   }
 
   openExportJsonDialog() {

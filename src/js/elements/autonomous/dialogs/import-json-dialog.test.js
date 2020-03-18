@@ -1,7 +1,7 @@
 import StatBlockEditor from '../containers/stat-block-editor.js';
 import StatBlockMenu from '../containers/stat-block-menu.js';
 
-import ImportFileDialog from './import-file-dialog.js';
+import ImportJsonDialog from './import-json-dialog.js';
 
 jest.mock('../containers/stat-block.js');
 
@@ -21,7 +21,7 @@ beforeAll(async() => {
   await StatBlockEditor.define();
   await StatBlockMenu.define();
 
-  await ImportFileDialog.define();
+  await ImportJsonDialog.define();
 });
 
 
