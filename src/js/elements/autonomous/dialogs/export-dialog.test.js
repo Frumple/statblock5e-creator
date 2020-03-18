@@ -102,29 +102,25 @@ describe('should export JSON', () => {
   const emptySectionsHiddenTextSnippet = `"layout": {
     "columns": 1,
     "twoColumnMode": "auto",
-    "twoColumnHeight": 600,
-    "emptySectionsVisibility": false
+    "twoColumnHeight": 600
   }`;
 
   const oneColumnTextSnippet = `"layout": {
     "columns": 1,
     "twoColumnMode": "auto",
-    "twoColumnHeight": 600,
-    "emptySectionsVisibility": true
+    "twoColumnHeight": 600
   }`;
 
   const twoColumnAutoHeightTextSnippet = `"layout": {
     "columns": 2,
     "twoColumnMode": "auto",
-    "twoColumnHeight": 600,
-    "emptySectionsVisibility": true
+    "twoColumnHeight": 600
   }`;
 
   const twoColumnManualHeightTextSnippet = `"layout": {
     "columns": 2,
     "twoColumnMode": "manual",
-    "twoColumnHeight": 625,
-    "emptySectionsVisibility": true
+    "twoColumnHeight": 625
   }`;
 
   const emptySectionsHiddenTextMatcher = expect.stringContaining(emptySectionsHiddenTextSnippet);

@@ -14,7 +14,6 @@ export default class LayoutSettings {
     this.columns = json.columns;
     this.twoColumnMode = json.twoColumnMode;
     this.twoColumnHeight = json.twoColumnHeight;
-    this.emptySectionsVisibility = json.emptySectionsVisibility;
   }
 
   toJson() {
@@ -22,7 +21,6 @@ export default class LayoutSettings {
       columns: this.columns,
       twoColumnMode: this.twoColumnMode,
       twoColumnHeight: this.twoColumnHeight,
-      emptySectionsVisibility: this.emptySectionsVisibility
     };
   }
 }
