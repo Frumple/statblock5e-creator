@@ -54,7 +54,7 @@ export default class BlockListModel extends Model {
   }
 
   fromJson(json) {
-    this.reset();
+    this.clear();
 
     for (const jsonBlock of json.blocks) {
       const block = new BlockModel(jsonBlock.name, jsonBlock.text);
