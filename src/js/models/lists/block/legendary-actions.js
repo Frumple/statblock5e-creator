@@ -10,6 +10,10 @@ export default class LegendaryActions extends BlockListModel {
   reset() {
     super.reset();
 
+    this.resetDescription();
+  }
+
+  resetDescription() {
     this.description = '[name] can take 3 legendary actions, choosing from the options below. Only one legendary action option can be used at a time and only at the end of another creature\'s turn. [name] regains spent legendary actions at the start of its turn.';
     this.markdownDescription = '';
     this.htmlDescription = '';
@@ -18,9 +22,11 @@ export default class LegendaryActions extends BlockListModel {
   fromOpen5e(json) {
     super.fromOpen5e(json);
 
+    this.resetDescription();
+
     const legendaryDesc = json['legendary_desc'];
     if (legendaryDesc !== '') {
-      this.description = json['legendary_desc'];
+      this.description = legendaryDesc;
     }
   }
 
