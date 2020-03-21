@@ -121,4 +121,4 @@ Statblock5e Creator is a not-for-profit personal project, and is not officially 
 
 [apache2]: http://www.apache.org/licenses/LICENSE-2.0.html
 [srd]: https://media.wizards.com/2016/downloads/DND/SRD-OGL_V5.1.pdf
-[ogl]: https://github.com/Frumple/statblock5e-creator/OGL-LICENSE.txt
+[ogl]: https://github.com/Frumple/statblock5e-creator/blob/master/OGL-LICENSE.txt
