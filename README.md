@@ -1,10 +1,10 @@
-# Interactive Creature Statblock Creator for D&D 5th Edition
+# Interactive Monster Statblock Creator for D&D 5th Edition
 
 ### Live Demo (currently only works in Chrome): [https://frumple.github.io/statblock5e-creator][demo]
 
-### NOTE: statblock5e-creator is currently in early alpha development and is highly subject to change. Exported JSON files created at this time are NOT guaranteed to work in future versions.
+### NOTE: Statblock5e Creator is currently in early alpha development and is highly subject to change. Exported JSON files created at this time are NOT guaranteed to work in future versions.
 
-A frontend web application for creating creature statblocks that are similar in appearance to the official blocks from the Dungeons and Dragons 5th Edition Monster Manual.
+A frontend web application for creating monster statblocks that are similar in appearance to the official blocks from the Dungeons and Dragons 5th Edition Monster Manual.
 
 <div align="center">
   <img src="https://github.com/Frumple/statblock5e-creator/blob/master/images/statblock.png" />
@@ -86,15 +86,17 @@ Parsers can be generated from their respective grammars with:
 
 ## Credits
 
-Statblock5e-creator is a fork of Valloric's awesome [statblock5e][statblock5e] template. It is also heavily inspired by [CritterDB][critterdb], another great tool for creating statblocks.
+Statblock5e Creator is a fork of Valloric's awesome [statblock5e][statblock5e] template. It is also heavily inspired by [CritterDB][critterdb], another great tool for creating statblocks.
 
 Some help popups in this application link to useful resources in [Open5e][open5e].
 
 ## Licensing
 
-Statblock5e-creator is licensed under the [Apache License, Version 2.0][apache2].
+All source code in Statblock5e Creator is licensed under the [Apache License, Version 2.0][apache2].
 
-All example monsters and stats used in this application are from the [Dungeons and Dragons Systems Reference Document (SRD) v5.1][srd], available through the Open Gaming License (OGL).
+All example monster statblocks and data used in this application are from the [Dungeons and Dragons Systems Reference Document (SRD) v5.1][srd], available through the [Open Gaming License (OGL)][ogl].
+
+Statblock5e Creator is a not-for-profit personal project, and is not officially affiliated in any way with Wizards of the Coast.
 
 [demo]: https://frumple.github.io/statblock5e-creator
 [examples]: https://github.com/Frumple/statblock5e-creator/tree/master/examples
@@ -119,3 +121,4 @@ All example monsters and stats used in this application are from the [Dungeons a
 
 [apache2]: http://www.apache.org/licenses/LICENSE-2.0.html
 [srd]: https://media.wizards.com/2016/downloads/DND/SRD-OGL_V5.1.pdf
+[ogl]: https://github.com/Frumple/statblock5e-creator/OGL-LICENSE.txt
