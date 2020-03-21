@@ -7,10 +7,10 @@
   "subtitle": {
     "size": "Medium",
     "type": "humanoid",
-    "tags": "",
-    "alignment": "unaligned",
-    "useCustomText": true,
-    "customText": "Medium humanoid (any race), any alignment"
+    "tags": "any race",
+    "alignment": "any alignment",
+    "useCustomText": false,
+    "customText": ""
   },
   "armorClass": {
     "armorClass": 16,

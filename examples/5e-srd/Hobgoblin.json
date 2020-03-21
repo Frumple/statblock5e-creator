@@ -197,7 +197,7 @@
     "blocks": [
       {
         "name": "Martial Advantage",
-        "text": "Once per turn, [name] can deal an extra 7 (2d6) damage to a creature it hits with a weapon attack if that creature is within 5 feet of an ally of [name] that isn’t incapacitated."
+        "text": "Once per turn, [name] can deal an extra dmg[2d6] damage to a creature it hits with a weapon attack if that creature is within 5 feet of an ally of [name] that isn’t incapacitated."
       }
     ]
   },

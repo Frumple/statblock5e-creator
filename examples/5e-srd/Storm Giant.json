@@ -1,0 +1,250 @@
+{
+  "title": {
+    "fullName": "Storm Giant",
+    "shortName": "giant",
+    "isProperNoun": false
+  },
+  "subtitle": {
+    "size": "Huge",
+    "type": "giant",
+    "tags": "",
+    "alignment": "chaotic good",
+    "useCustomText": false,
+    "customText": ""
+  },
+  "armorClass": {
+    "armorClass": 16,
+    "armorType": "scale mail",
+    "hasShield": false,
+    "useCustomText": false,
+    "customText": ""
+  },
+  "hitPoints": {
+    "hitPoints": 230,
+    "useHitDie": true,
+    "hitDieQuantity": 20,
+    "hitDieSize": 12
+  },
+  "speed": {
+    "walk": 50,
+    "burrow": null,
+    "climb": null,
+    "fly": null,
+    "hover": false,
+    "swim": 50,
+    "useCustomText": false,
+    "customText": ""
+  },
+  "abilityScores": {
+    "strength": 29,
+    "dexterity": 14,
+    "constitution": 20,
+    "intelligence": 16,
+    "wisdom": 18,
+    "charisma": 18
+  },
+  "savingThrows": {
+    "strength": {
+      "isEnabled": true,
+      "override": null
+    },
+    "dexterity": {
+      "isEnabled": false,
+      "override": null
+    },
+    "constitution": {
+      "isEnabled": true,
+      "override": null
+    },
+    "intelligence": {
+      "isEnabled": false,
+      "override": null
+    },
+    "wisdom": {
+      "isEnabled": true,
+      "override": null
+    },
+    "charisma": {
+      "isEnabled": true,
+      "override": null
+    }
+  },
+  "skills": {
+    "acrobatics": {
+      "isEnabled": false,
+      "hasExpertise": false,
+      "override": null
+    },
+    "animalHandling": {
+      "isEnabled": false,
+      "hasExpertise": false,
+      "override": null
+    },
+    "arcana": {
+      "isEnabled": true,
+      "hasExpertise": false,
+      "override": null
+    },
+    "athletics": {
+      "isEnabled": true,
+      "hasExpertise": false,
+      "override": null
+    },
+    "deception": {
+      "isEnabled": false,
+      "hasExpertise": false,
+      "override": null
+    },
+    "history": {
+      "isEnabled": true,
+      "hasExpertise": false,
+      "override": null
+    },
+    "insight": {
+      "isEnabled": false,
+      "hasExpertise": false,
+      "override": null
+    },
+    "intimidation": {
+      "isEnabled": false,
+      "hasExpertise": false,
+      "override": null
+    },
+    "investigation": {
+      "isEnabled": false,
+      "hasExpertise": false,
+      "override": null
+    },
+    "medicine": {
+      "isEnabled": false,
+      "hasExpertise": false,
+      "override": null
+    },
+    "nature": {
+      "isEnabled": false,
+      "hasExpertise": false,
+      "override": null
+    },
+    "perception": {
+      "isEnabled": true,
+      "hasExpertise": false,
+      "override": null
+    },
+    "performance": {
+      "isEnabled": false,
+      "hasExpertise": false,
+      "override": null
+    },
+    "persuasion": {
+      "isEnabled": false,
+      "hasExpertise": false,
+      "override": null
+    },
+    "religion": {
+      "isEnabled": false,
+      "hasExpertise": false,
+      "override": null
+    },
+    "sleightOfHand": {
+      "isEnabled": false,
+      "hasExpertise": false,
+      "override": null
+    },
+    "stealth": {
+      "isEnabled": false,
+      "hasExpertise": false,
+      "override": null
+    },
+    "survival": {
+      "isEnabled": false,
+      "hasExpertise": false,
+      "override": null
+    }
+  },
+  "damageVulnerabilities": {
+    "items": []
+  },
+  "damageResistances": {
+    "items": [
+      "cold"
+    ]
+  },
+  "damageImmunities": {
+    "items": [
+      "lightning",
+      "thunder"
+    ]
+  },
+  "conditionImmunities": {
+    "items": []
+  },
+  "senses": {
+    "blindsight": null,
+    "blindBeyondThisRadius": false,
+    "darkvision": null,
+    "tremorsense": null,
+    "truesight": null,
+    "useCustomText": false,
+    "customText": ""
+  },
+  "languages": {
+    "items": [
+      "Common",
+      "Giant"
+    ]
+  },
+  "challengeRating": {
+    "challengeRating": "13",
+    "experiencePoints": 10000,
+    "proficiencyBonus": 5
+  },
+  "specialTraits": {
+    "blocks": [
+      {
+        "name": "Amphibious",
+        "text": "[name] can breathe air and water."
+      },
+      {
+        "name": "Innate Spellcasting",
+        "text": "[name]'s innate spellcasting ability is Charisma (spell save DC sdc[cha]). It can innately cast the following spells, requiring no material components:\n\nAt will: *detect magic*, *feather fall*, *levitate*, *light*\n3/day each: *control weather*, *water breathing*"
+      }
+    ]
+  },
+  "actions": {
+    "blocks": [
+      {
+        "name": "Multiattack",
+        "text": "[name] makes two greatsword attacks."
+      },
+      {
+        "name": "Greatsword",
+        "text": "*Melee Weapon Attack:* atk[str] to hit, reach 10 ft., one target. *Hit:* dmg[6d6 + str] slashing damage."
+      },
+      {
+        "name": "Rock",
+        "text": "*Ranged Weapon Attack:* atk[str] to hit, range 60/240 ft., one target. *Hit:* dmg[4d12 + str] bludgeoning damage."
+      },
+      {
+        "name": "Lightning Strike (Recharge 5-6)",
+        "text": "[name] hurls a magical lightning bolt at a point it can see within 500 feet of it. Each creature within 10 feet of that point must make a DC 17 Dexterity saving throw, taking dmg[12d8] lightning damage on a failed save, or half as much damage on a successful one."
+      }
+    ]
+  },
+  "reactions": {
+    "blocks": []
+  },
+  "legendaryActions": {
+    "blocks": [],
+    "description": "[name] can take 3 legendary actions, choosing from the options below. Only one legendary action option can be used at a time and only at the end of another creature's turn. [name] regains spent legendary actions at the start of its turn."
+  },
+  "layout": {
+    "columns": 1,
+    "twoColumnMode": "auto",
+    "twoColumnHeight": 600
+  },
+  "meta": {
+    "version": "1.0.0",
+    "description": "Created using statblock5e-creator",
+    "url": "https://frumple.github.io/statblock5e-creator"
+  }
+}

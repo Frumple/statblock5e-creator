@@ -13,22 +13,22 @@
     "customText": ""
   },
   "armorClass": {
-    "armorClass": 10,
-    "armorType": "",
+    "armorClass": 13,
+    "armorType": "natural armor",
     "hasShield": false,
     "useCustomText": false,
     "customText": ""
   },
   "hitPoints": {
-    "hitPoints": 5,
+    "hitPoints": 32,
     "useHitDie": true,
-    "hitDieQuantity": 1,
-    "hitDieSize": 8
+    "hitDieQuantity": 5,
+    "hitDieSize": 10
   },
   "speed": {
     "walk": 30,
     "burrow": null,
-    "climb": null,
+    "climb": 30,
     "fly": null,
     "hover": false,
     "swim": null,

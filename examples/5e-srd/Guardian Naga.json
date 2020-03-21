@@ -1,0 +1,242 @@
+{
+  "title": {
+    "fullName": "Guardian Naga",
+    "shortName": "naga",
+    "isProperNoun": false
+  },
+  "subtitle": {
+    "size": "Large",
+    "type": "monstrosity",
+    "tags": "",
+    "alignment": "lawful good",
+    "useCustomText": false,
+    "customText": ""
+  },
+  "armorClass": {
+    "armorClass": 18,
+    "armorType": "natural armor",
+    "hasShield": false,
+    "useCustomText": false,
+    "customText": ""
+  },
+  "hitPoints": {
+    "hitPoints": 127,
+    "useHitDie": true,
+    "hitDieQuantity": 15,
+    "hitDieSize": 10
+  },
+  "speed": {
+    "walk": 40,
+    "burrow": null,
+    "climb": null,
+    "fly": null,
+    "hover": false,
+    "swim": null,
+    "useCustomText": false,
+    "customText": ""
+  },
+  "abilityScores": {
+    "strength": 19,
+    "dexterity": 18,
+    "constitution": 16,
+    "intelligence": 16,
+    "wisdom": 19,
+    "charisma": 18
+  },
+  "savingThrows": {
+    "strength": {
+      "isEnabled": false,
+      "override": null
+    },
+    "dexterity": {
+      "isEnabled": true,
+      "override": null
+    },
+    "constitution": {
+      "isEnabled": true,
+      "override": null
+    },
+    "intelligence": {
+      "isEnabled": true,
+      "override": null
+    },
+    "wisdom": {
+      "isEnabled": true,
+      "override": null
+    },
+    "charisma": {
+      "isEnabled": true,
+      "override": null
+    }
+  },
+  "skills": {
+    "acrobatics": {
+      "isEnabled": false,
+      "hasExpertise": false,
+      "override": null
+    },
+    "animalHandling": {
+      "isEnabled": false,
+      "hasExpertise": false,
+      "override": null
+    },
+    "arcana": {
+      "isEnabled": false,
+      "hasExpertise": false,
+      "override": null
+    },
+    "athletics": {
+      "isEnabled": false,
+      "hasExpertise": false,
+      "override": null
+    },
+    "deception": {
+      "isEnabled": false,
+      "hasExpertise": false,
+      "override": null
+    },
+    "history": {
+      "isEnabled": false,
+      "hasExpertise": false,
+      "override": null
+    },
+    "insight": {
+      "isEnabled": false,
+      "hasExpertise": false,
+      "override": null
+    },
+    "intimidation": {
+      "isEnabled": false,
+      "hasExpertise": false,
+      "override": null
+    },
+    "investigation": {
+      "isEnabled": false,
+      "hasExpertise": false,
+      "override": null
+    },
+    "medicine": {
+      "isEnabled": false,
+      "hasExpertise": false,
+      "override": null
+    },
+    "nature": {
+      "isEnabled": false,
+      "hasExpertise": false,
+      "override": null
+    },
+    "perception": {
+      "isEnabled": false,
+      "hasExpertise": false,
+      "override": null
+    },
+    "performance": {
+      "isEnabled": false,
+      "hasExpertise": false,
+      "override": null
+    },
+    "persuasion": {
+      "isEnabled": false,
+      "hasExpertise": false,
+      "override": null
+    },
+    "religion": {
+      "isEnabled": false,
+      "hasExpertise": false,
+      "override": null
+    },
+    "sleightOfHand": {
+      "isEnabled": false,
+      "hasExpertise": false,
+      "override": null
+    },
+    "stealth": {
+      "isEnabled": false,
+      "hasExpertise": false,
+      "override": null
+    },
+    "survival": {
+      "isEnabled": false,
+      "hasExpertise": false,
+      "override": null
+    }
+  },
+  "damageVulnerabilities": {
+    "items": []
+  },
+  "damageResistances": {
+    "items": []
+  },
+  "damageImmunities": {
+    "items": [
+      "poison"
+    ]
+  },
+  "conditionImmunities": {
+    "items": [
+      "charmed",
+      "poisoned"
+    ]
+  },
+  "senses": {
+    "blindsight": null,
+    "blindBeyondThisRadius": false,
+    "darkvision": 60,
+    "tremorsense": null,
+    "truesight": null,
+    "useCustomText": false,
+    "customText": ""
+  },
+  "languages": {
+    "items": [
+      "Celestial",
+      "Common"
+    ]
+  },
+  "challengeRating": {
+    "challengeRating": "10",
+    "experiencePoints": 5900,
+    "proficiencyBonus": 4
+  },
+  "specialTraits": {
+    "blocks": [
+      {
+        "name": "Rejuvenation",
+        "text": "If it dies, [name] returns to life in 1d6 days and regains all its hit points. Only a wish spell can prevent this trait from functioning."
+      },
+      {
+        "name": "Spellcasting",
+        "text": "[name] is an 11th-level spellcaster. Its spellcasting ability is Wisdom (spell save DC sdc[wis], atk[wis] to hit with spell attacks), and it needs only verbal components to cast its spells. It has the following cleric spells prepared:\n\nCantrips (at will): *mending*, *sacred flame*, *thaumaturgy*\n1st level (4 slots): *command*, *cure wounds*, *shield of faith*\n2nd level (3 slots): *calm emotions*, *hold person*\n3rd level (3 slots): *bestow curse*, *clairvoyance*\n4th level (3 slots): *banishment*, *freedom of movement*\n5th level (2 slots): *flame strike*, *geas*\n6th level (1 slot): *true seeing*"
+      }
+    ]
+  },
+  "actions": {
+    "blocks": [
+      {
+        "name": "Bite",
+        "text": "*Melee Weapon Attack:* atk[str] to hit, reach 10 ft., one creature. *Hit:* dmg[1d8 + str] piercing damage, and the target must make a DC 15 Constitution saving throw, taking dmg[10d8] poison damage on a failed save, or half as much damage on a successful one."
+      },
+      {
+        "name": "Spit Poison",
+        "text": "*Ranged Weapon Attack:* atk[dex] to hit, range 15/30 ft., one creature. *Hit:* The target must make a DC 15 Constitution saving throw, taking dmg[10d8] poison damage on a failed save, or half as much damage on a successful one."
+      }
+    ]
+  },
+  "reactions": {
+    "blocks": []
+  },
+  "legendaryActions": {
+    "blocks": [],
+    "description": "[name] can take 3 legendary actions, choosing from the options below. Only one legendary action option can be used at a time and only at the end of another creature's turn. [name] regains spent legendary actions at the start of its turn."
+  },
+  "layout": {
+    "columns": 1,
+    "twoColumnMode": "auto",
+    "twoColumnHeight": 600
+  },
+  "meta": {
+    "version": "1.0.0",
+    "description": "Created using statblock5e-creator",
+    "url": "https://frumple.github.io/statblock5e-creator"
+  }
+}

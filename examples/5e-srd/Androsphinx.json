@@ -1,0 +1,264 @@
+{
+  "title": {
+    "fullName": "Androsphinx",
+    "shortName": "sphinx",
+    "isProperNoun": false
+  },
+  "subtitle": {
+    "size": "Large",
+    "type": "monstrosity",
+    "tags": "",
+    "alignment": "lawful neutral",
+    "useCustomText": false,
+    "customText": ""
+  },
+  "armorClass": {
+    "armorClass": 17,
+    "armorType": "natural armor",
+    "hasShield": false,
+    "useCustomText": false,
+    "customText": ""
+  },
+  "hitPoints": {
+    "hitPoints": 199,
+    "useHitDie": true,
+    "hitDieQuantity": 19,
+    "hitDieSize": 10
+  },
+  "speed": {
+    "walk": 40,
+    "burrow": null,
+    "climb": null,
+    "fly": 60,
+    "hover": false,
+    "swim": null,
+    "useCustomText": false,
+    "customText": ""
+  },
+  "abilityScores": {
+    "strength": 22,
+    "dexterity": 10,
+    "constitution": 20,
+    "intelligence": 16,
+    "wisdom": 18,
+    "charisma": 23
+  },
+  "savingThrows": {
+    "strength": {
+      "isEnabled": false,
+      "override": null
+    },
+    "dexterity": {
+      "isEnabled": true,
+      "override": null
+    },
+    "constitution": {
+      "isEnabled": true,
+      "override": null
+    },
+    "intelligence": {
+      "isEnabled": true,
+      "override": null
+    },
+    "wisdom": {
+      "isEnabled": true,
+      "override": null
+    },
+    "charisma": {
+      "isEnabled": false,
+      "override": null
+    }
+  },
+  "skills": {
+    "acrobatics": {
+      "isEnabled": false,
+      "hasExpertise": false,
+      "override": null
+    },
+    "animalHandling": {
+      "isEnabled": false,
+      "hasExpertise": false,
+      "override": null
+    },
+    "arcana": {
+      "isEnabled": true,
+      "hasExpertise": false,
+      "override": null
+    },
+    "athletics": {
+      "isEnabled": false,
+      "hasExpertise": false,
+      "override": null
+    },
+    "deception": {
+      "isEnabled": false,
+      "hasExpertise": false,
+      "override": null
+    },
+    "history": {
+      "isEnabled": false,
+      "hasExpertise": false,
+      "override": null
+    },
+    "insight": {
+      "isEnabled": false,
+      "hasExpertise": false,
+      "override": null
+    },
+    "intimidation": {
+      "isEnabled": false,
+      "hasExpertise": false,
+      "override": null
+    },
+    "investigation": {
+      "isEnabled": false,
+      "hasExpertise": false,
+      "override": null
+    },
+    "medicine": {
+      "isEnabled": false,
+      "hasExpertise": false,
+      "override": null
+    },
+    "nature": {
+      "isEnabled": false,
+      "hasExpertise": false,
+      "override": null
+    },
+    "perception": {
+      "isEnabled": true,
+      "hasExpertise": false,
+      "override": null
+    },
+    "performance": {
+      "isEnabled": false,
+      "hasExpertise": false,
+      "override": null
+    },
+    "persuasion": {
+      "isEnabled": false,
+      "hasExpertise": false,
+      "override": null
+    },
+    "religion": {
+      "isEnabled": true,
+      "hasExpertise": true,
+      "override": null
+    },
+    "sleightOfHand": {
+      "isEnabled": false,
+      "hasExpertise": false,
+      "override": null
+    },
+    "stealth": {
+      "isEnabled": false,
+      "hasExpertise": false,
+      "override": null
+    },
+    "survival": {
+      "isEnabled": false,
+      "hasExpertise": false,
+      "override": null
+    }
+  },
+  "damageVulnerabilities": {
+    "items": []
+  },
+  "damageResistances": {
+    "items": []
+  },
+  "damageImmunities": {
+    "items": [
+      "psychic",
+      "bludgeoning, piercing, and slashing from nonmagical weapons"
+    ]
+  },
+  "conditionImmunities": {
+    "items": [
+      "charmed",
+      "frightened"
+    ]
+  },
+  "senses": {
+    "blindsight": null,
+    "blindBeyondThisRadius": false,
+    "darkvision": null,
+    "tremorsense": null,
+    "truesight": 120,
+    "useCustomText": false,
+    "customText": ""
+  },
+  "languages": {
+    "items": [
+      "Common",
+      "Sphinx"
+    ]
+  },
+  "challengeRating": {
+    "challengeRating": "17",
+    "experiencePoints": 18000,
+    "proficiencyBonus": 6
+  },
+  "specialTraits": {
+    "blocks": [
+      {
+        "name": "Inscrutable",
+        "text": "[name] is immune to any effect that would sense its emotions or read its thoughts, as well as any divination spell that it refuses. Wisdom (Insight) checks made to ascertain [name]'s intentions or sincerity have disadvantage."
+      },
+      {
+        "name": "Magic Weapons",
+        "text": "[name]'s weapon attacks are magical."
+      },
+      {
+        "name": "Spellcasting",
+        "text": "[name] is a 12th-level spellcaster. Its spellcasting ability is Wisdom (spell save DC sdc[wis], atk[wis] to hit with spell attacks). It requires no material components to cast its spells. [name] has the following cleric spells prepared:\n\nCantrips (at will): *sacred flame*, *spare the dying*, *thaumaturgy*\n1st level (4 slots): *command*, *detect evil and good*, *detect magic*\n2nd level (3 slots): *lesser restoration*, *zone of truth*\n3rd level (3 slots): *dispel magic*, *tongues*\n4th level (3 slots): *banishment*, *freedom of movement*\n5th level (2 slots): *flame strike*, *greater restoration*\n6th level (1 slot): *heroes' feast*"
+      }
+    ]
+  },
+  "actions": {
+    "blocks": [
+      {
+        "name": "Multiattack",
+        "text": "[name] makes two claw attacks."
+      },
+      {
+        "name": "Claw",
+        "text": "*Melee Weapon Attack:* atk[str] to hit, reach 5 ft., one target. *Hit:* dmg[2d10 + str] slashing damage."
+      },
+      {
+        "name": "Roar (3/Day)",
+        "text": "[name] emits a magical roar. Each time it roars before finishing a long rest, the roar is louder and the effect is different, as detailed below. Each creature within 500 feet of [name] and able to hear the roar must make a saving throw.\n\n**First Roar.** Each creature that fails a DC 18 Wisdom saving throw is frightened for 1 minute. A frightened creature can repeat the saving throw at the end of each of its turns, ending the effect on itself on a success.\n**Second Roar.** Each creature that fails a DC 18 Wisdom saving throw is deafened and frightened for 1 minute. A frightened creature is paralyzed and can repeat the saving throw at the end of each of its turns, ending the effect on itself on a success.\n**Third Roar.** Each creature makes a DC 18 Constitution saving throw. On a failed save, a creature takes dmg[8d10] thunder damage and is knocked prone. On a successful save, the creature takes half as much damage and isn't knocked prone."
+      }
+    ]
+  },
+  "reactions": {
+    "blocks": []
+  },
+  "legendaryActions": {
+    "blocks": [
+      {
+        "name": "Claw Attack",
+        "text": "[name] makes one claw attack."
+      },
+      {
+        "name": "Teleport (Costs 2 Actions)",
+        "text": "[name] magically teleports, along with any equipment it is wearing or carrying, up to 120 feet to an unoccupied space it can see."
+      },
+      {
+        "name": "Cast a Spell (Costs 3 Actions)",
+        "text": "[name] casts a spell from its list of prepared spells, using a spell slot as normal."
+      }
+    ],
+    "description": "[name] can take 3 legendary actions, choosing from the options below. Only one legendary action option can be used at a time and only at the end of another creature's turn. [name] regains spent legendary actions at the start of its turn."
+  },
+  "layout": {
+    "columns": 1,
+    "twoColumnMode": "auto",
+    "twoColumnHeight": 600
+  },
+  "meta": {
+    "version": "1.0.0",
+    "description": "Created using statblock5e-creator",
+    "url": "https://frumple.github.io/statblock5e-creator"
+  }
+}

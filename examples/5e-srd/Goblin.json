@@ -152,7 +152,7 @@
     },
     "stealth": {
       "isEnabled": true,
-      "hasExpertise": false,
+      "hasExpertise": true,
       "override": null
     },
     "survival": {
