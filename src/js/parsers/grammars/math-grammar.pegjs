@@ -70,13 +70,19 @@ BlankLine
 NormalLine = inline:Inline+ end:EndOfLine { return `${inline.join('')}${end ? end : ''}`; }
 
 Inline
+  = ExpressionWithOptionalRoundBrackets
+  / Text
+  / Whitespace
+
+ExpressionWithOptionalRoundBrackets
+  = open:OpeningRoundBracketOptional expression:Expression close:ClosingRoundBracketOptional { return `${open}${expression}${close}`; }
+
+Expression
   = SpellSaveDCExpression
   / DamageExpression
   / AttackExpression
   / ModifierExpression
   / MathExpression
-  / Text
-  / Whitespace
 
 SpellSaveDCExpression
   = 'sdc' '[' SpaceChar* head:AbilityModifier tail:(SpaceChar* Operator SpaceChar* Operand)* SpaceChar* ']' {
@@ -165,11 +171,23 @@ Text
 Whitespace
   = $(SpaceChar+)
 
+OpeningRoundBracketOptional
+  = $(OpeningRoundBracketChar?)
+
+ClosingRoundBracketOptional
+  = $(ClosingRoundBracketChar?)
+
 EndOfLine
   = NewLineChar / End
 
 NormalChar
   = !( SpaceChar / NewLineChar ) .
+
+OpeningRoundBracketChar
+  = '(';
+
+ClosingRoundBracketChar
+  = ')'
 
 NewLineChar
   = '\n' / $('\r' '\n'?)

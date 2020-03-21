@@ -6,7 +6,7 @@
 
 start
   = line:Line+ { return line.join(''); }
-  / End { return ""; }
+  / End { return ''; }
 
 Line
   = BlankLine
@@ -36,12 +36,10 @@ SentenceBeginningNameExpression
   = period:PeriodChar markdown:MarkdownOptional whitespace:Whitespace expression:BeginningNameExpression { return `${period}${markdown}${whitespace}${expression}`; }
 
 BeginningNameExpression
-  = BeginningName
-  / BeginningFullName
+  = open:OpeningRoundBracketOptional expression:(BeginningName / BeginningFullName) close:ClosingRoundBracketOptional { return `${open}${expression}${close}`; }
 
 NameExpression
-  = Name
-  / FullName
+  = open:OpeningRoundBracketOptional expression:(Name / FullName) close:ClosingRoundBracketOptional { return `${open}${expression}${close}`; }
 
 BeginningName
   = '[name]' { return capitalizeFirstLetter(options.creature.name); }
@@ -64,11 +62,23 @@ Whitespace
 MarkdownOptional
   = $(MarkdownChar*)
 
+OpeningRoundBracketOptional
+  = $(OpeningRoundBracketChar?)
+
+ClosingRoundBracketOptional
+  = $(ClosingRoundBracketChar?)
+
 EndOfLine
   = NewLineChar / End
 
 NormalChar
   = !( PeriodChar / SpaceChar / NewLineChar ) .
+
+OpeningRoundBracketChar
+  = '(';
+
+ClosingRoundBracketChar
+  = ')'
 
 MarkdownChar
   = '*' / '_'
