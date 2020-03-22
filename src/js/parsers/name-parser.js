@@ -143,7 +143,7 @@ export default (function() {
 
         peg$c0 = function(line) { return line.join(''); },
         peg$c1 = function() { return ''; },
-        peg$c2 = function(beginningInline, inline, end) { return `${beginningInline}${inline.join('')}${end ? end : ''}`; },
+        peg$c2 = function(whitespace, beginningInline, inline, end) { return `${whitespace}${beginningInline}${inline.join('')}${end ? end : ''}`; },
         peg$c3 = function(period, markdown, whitespace, expression) { return `${period}${markdown}${whitespace}${expression}`; },
         peg$c4 = function(open, expression, close) { return `${open}${expression}${close}`; },
         peg$c5 = "[name]",
@@ -354,23 +354,29 @@ export default (function() {
     }
 
     function peg$parseNormalLine() {
-      var s0, s1, s2, s3;
+      var s0, s1, s2, s3, s4;
 
       s0 = peg$currPos;
-      s1 = peg$parseBeginningInline();
+      s1 = peg$parseWhitespaceOptional();
       if (s1 !== peg$FAILED) {
-        s2 = [];
-        s3 = peg$parseInline();
-        while (s3 !== peg$FAILED) {
-          s2.push(s3);
-          s3 = peg$parseInline();
-        }
+        s2 = peg$parseBeginningInline();
         if (s2 !== peg$FAILED) {
-          s3 = peg$parseEndOfLine();
+          s3 = [];
+          s4 = peg$parseInline();
+          while (s4 !== peg$FAILED) {
+            s3.push(s4);
+            s4 = peg$parseInline();
+          }
           if (s3 !== peg$FAILED) {
-            peg$savedPos = s0;
-            s1 = peg$c2(s1, s2, s3);
-            s0 = s1;
+            s4 = peg$parseEndOfLine();
+            if (s4 !== peg$FAILED) {
+              peg$savedPos = s0;
+              s1 = peg$c2(s1, s2, s3, s4);
+              s0 = s1;
+            } else {
+              peg$currPos = s0;
+              s0 = peg$FAILED;
+            }
           } else {
             peg$currPos = s0;
             s0 = peg$FAILED;
@@ -641,6 +647,25 @@ export default (function() {
         }
       } else {
         s1 = peg$FAILED;
+      }
+      if (s1 !== peg$FAILED) {
+        s0 = input.substring(s0, peg$currPos);
+      } else {
+        s0 = s1;
+      }
+
+      return s0;
+    }
+
+    function peg$parseWhitespaceOptional() {
+      var s0, s1, s2;
+
+      s0 = peg$currPos;
+      s1 = [];
+      s2 = peg$parseSpaceChar();
+      while (s2 !== peg$FAILED) {
+        s1.push(s2);
+        s2 = peg$parseSpaceChar();
       }
       if (s1 !== peg$FAILED) {
         s0 = input.substring(s0, peg$currPos);

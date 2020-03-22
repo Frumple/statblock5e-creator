@@ -16,7 +16,7 @@ BlankLine
   = NewLineChar
 
 NormalLine
-  = beginningInline:BeginningInline inline:Inline* end:EndOfLine { return `${beginningInline}${inline.join('')}${end ? end : ''}`; }
+  = whitespace:WhitespaceOptional beginningInline:BeginningInline inline:Inline* end:EndOfLine { return `${whitespace}${beginningInline}${inline.join('')}${end ? end : ''}`; }
 
 BeginningInline
   = BeginningNameExpression
@@ -58,6 +58,9 @@ Text
 
 Whitespace
   = $(SpaceChar+)
+
+WhitespaceOptional
+  = $(SpaceChar*)
 
 MarkdownOptional
   = $(MarkdownChar*)
