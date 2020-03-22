@@ -1,6 +1,11 @@
-.display-block {
+:host {
   margin-top: 0.3em;
   margin-bottom: 0.9em;
+}
+
+.display-block {
+  margin-top: inherit;
+  margin-bottom: inherit;
   line-height: 1.5;
   display: block;
 }
