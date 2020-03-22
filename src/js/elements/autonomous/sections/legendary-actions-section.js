@@ -22,8 +22,8 @@ export default class LegendaryActionsSection extends blockListSectionModule.Bloc
     if (this.isConnected && ! this.isInitialized) {
       super.connectedCallback();
 
-      this.showElements.displayBlockList.disableBlockNameItalics = true;
-      this.editElements.editableBlockList.disableBlockNameItalics = true;
+      this.showElements.displayBlockList.isLegendaryActionBlock = true;
+      this.editElements.editableBlockList.isLegendaryActionBlock = true;
 
       this.isInitialized = true;
     }

@@ -1,8 +1,13 @@
-:host {
+.display-block {
   margin-top: 0.3em;
   margin-bottom: 0.9em;
   line-height: 1.5;
   display: block;
+}
+
+.display-block_no-spacing {
+  margin-top: 0;
+  margin-bottom: 0;
 }
 
 .display-block__name {

@@ -14,7 +14,7 @@ export default class DisplayBlockList extends CustomAutonomousElement {
   constructor() {
     super(DisplayBlockList.templatePaths);
 
-    this.disableBlockNameItalics = false;
+    this.isLegendaryActionBlock = false;
   }
 
   get blocks() {
@@ -30,8 +30,8 @@ export default class DisplayBlockList extends CustomAutonomousElement {
   addBlock(name, text) {
     const block = DisplayBlockList.createBlock(name, text);
 
-    if (this.disableBlockNameItalics) {
-      block.disableBlockNameItalics();
+    if (this.isLegendaryActionBlock) {
+      block.applyLegendaryActionStyles();
     }
 
     this.appendChild(block);

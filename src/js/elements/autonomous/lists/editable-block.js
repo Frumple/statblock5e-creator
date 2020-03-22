@@ -53,7 +53,7 @@ export default class EditableBlock extends DragAndDropListItem {
     this.remove();
   }
 
-  disableBlockNameItalics() {
+  applyLegendaryActionStyles() {
     this.nameInput.classList.add('editable-block__name_no-italic');
     this.namePreviewElement.classList.add('editable-block__name-preview_no-italic');
   }
