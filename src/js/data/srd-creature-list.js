@@ -99,7 +99,6 @@ export default [
   'Erinyes',
   'Ettercap',
   'Ettin',
-  'files.txt',
   'Fire Elemental',
   'Fire Giant',
   'Flesh Golem',
