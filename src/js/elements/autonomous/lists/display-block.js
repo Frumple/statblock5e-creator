@@ -18,6 +18,7 @@ export default class DisplayBlock extends CustomAutonomousElement {
 
   applyLegendaryActionStyles() {
     this.blockElement.classList.add('display-block_no-spacing');
+    this.blockElement.classList.add('display-block_hanging-indent');
     this.nameElement.classList.add('display-block__name_no-italic');
   }
 

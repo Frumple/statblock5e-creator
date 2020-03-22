@@ -46,6 +46,11 @@
   margin: 0;
 }
 
+.editable-block__preview_hanging-indent {
+  padding-left: 1em;
+  text-indent: -1em;
+}
+
 .editable-block__name-preview {
   margin: 0;
   display: inline;

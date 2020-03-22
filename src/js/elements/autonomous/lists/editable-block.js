@@ -17,6 +17,7 @@ export default class EditableBlock extends DragAndDropListItem {
 
     this.nameInput = this.shadowRoot.getElementById('editable-block-name');
     this.textArea = this.shadowRoot.getElementById('editable-block-textarea');
+    this.previewContainer = this.shadowRoot.getElementById('editable-block-preview-container');
     this.namePreviewElement = this.shadowRoot.getElementById('editable-block-name-preview');
     this.textPreviewElement = this.shadowRoot.getElementById('editable-block-text-preview');
     this.removeButton = this.shadowRoot.getElementById('editable-block-remove-button');
@@ -54,6 +55,7 @@ export default class EditableBlock extends DragAndDropListItem {
   }
 
   applyLegendaryActionStyles() {
+    this.previewContainer.classList.add('editable-block__preview_hanging-indent');
     this.nameInput.classList.add('editable-block__name_no-italic');
     this.namePreviewElement.classList.add('editable-block__name-preview_no-italic');
   }

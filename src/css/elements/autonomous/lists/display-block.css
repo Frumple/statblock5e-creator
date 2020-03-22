@@ -10,6 +10,11 @@
   margin-bottom: 0;
 }
 
+.display-block_hanging-indent {
+  padding-left: 1em;
+  text-indent: -1em;
+}
+
 .display-block__name {
   margin: 0;
   display: inline;
