@@ -1,7 +1,7 @@
-import * as propertyLineSectionModule from './property-line-section.js';
+import { PropertyLineSection, PropertyLineShowElements, PropertyLineEditElements } from './property-line-section.js';
 import CurrentContext from '../../../models/current-context.js';
 
-export default class SensesSection extends propertyLineSectionModule.PropertyLineSection {
+export default class SensesSection extends PropertyLineSection {
   static get elementName() { return 'senses-section'; }
   static get templatePaths() {
     return super.templatePaths.set(
@@ -94,13 +94,13 @@ export default class SensesSection extends propertyLineSectionModule.PropertyLin
   }
 }
 
-class SensesShowElements extends propertyLineSectionModule.PropertyLineShowElements {
+class SensesShowElements extends PropertyLineShowElements {
   constructor(shadowRoot) {
     super(shadowRoot);
   }
 }
 
-class SensesEditElements extends propertyLineSectionModule.PropertyLineEditElements {
+class SensesEditElements extends PropertyLineEditElements {
   constructor(shadowRoot) {
     super(shadowRoot);
     this.blindsight = shadowRoot.getElementById('blindsight-input');

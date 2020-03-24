@@ -185,7 +185,8 @@
   "languages": {
     "items": [
       "Gnoll"
-    ]
+    ],
+    "telepathy": null
   },
   "challengeRating": {
     "challengeRating": "1/2",

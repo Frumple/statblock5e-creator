@@ -1,7 +1,7 @@
-import * as propertyLineSectionModule from './property-line-section.js';
+import { PropertyLineSection, PropertyLineShowElements, PropertyLineEditElements } from './property-line-section.js';
 import CurrentContext from '../../../models/current-context.js';
 
-export default class SpeedSection extends propertyLineSectionModule.PropertyLineSection {
+export default class SpeedSection extends PropertyLineSection {
   static get elementName() { return 'speed-section'; }
   static get templatePaths() {
     return super.templatePaths.set(
@@ -89,13 +89,13 @@ export default class SpeedSection extends propertyLineSectionModule.PropertyLine
   }
 }
 
-class SpeedShowElements extends propertyLineSectionModule.PropertyLineShowElements {
+class SpeedShowElements extends PropertyLineShowElements {
   constructor(shadowRoot) {
     super(shadowRoot);
   }
 }
 
-class SpeedEditElements extends propertyLineSectionModule.PropertyLineEditElements {
+class SpeedEditElements extends PropertyLineEditElements {
   constructor(shadowRoot) {
     super(shadowRoot);
     this.walk = shadowRoot.getElementById('walk-input');

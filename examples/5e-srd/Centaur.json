@@ -186,7 +186,8 @@
     "items": [
       "Elvish",
       "Sylvan"
-    ]
+    ],
+    "telepathy": null
   },
   "challengeRating": {
     "challengeRating": "2",

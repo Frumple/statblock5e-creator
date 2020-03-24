@@ -188,7 +188,8 @@
     "items": [
       "Dwarvish",
       "Undercommon"
-    ]
+    ],
+    "telepathy": null
   },
   "challengeRating": {
     "challengeRating": "1",

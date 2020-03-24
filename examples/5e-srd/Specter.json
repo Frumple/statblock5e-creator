@@ -205,7 +205,8 @@
   "languages": {
     "items": [
       "understands all languages it knew in life but can't speak"
-    ]
+    ],
+    "telepathy": null
   },
   "challengeRating": {
     "challengeRating": "1",

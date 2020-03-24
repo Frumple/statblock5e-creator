@@ -191,7 +191,8 @@
     "items": [
       "Celestial",
       "Common"
-    ]
+    ],
+    "telepathy": null
   },
   "challengeRating": {
     "challengeRating": "10",

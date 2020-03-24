@@ -45,13 +45,13 @@ export default class ActionsSection extends blockListSectionModule.BlockListSect
   }
 }
 
-class ActionsSectionShowElements extends blockListSectionModule.BlockListShowSection {
+class ActionsSectionShowElements extends blockListSectionModule.BlockListShowElements {
   constructor(shadowRoot) {
     super(shadowRoot);
   }
 }
 
-class ActionsSectionEditElements extends blockListSectionModule.BlockListEditSection {
+class ActionsSectionEditElements extends blockListSectionModule.BlockListEditElements {
   constructor(shadowRoot) {
     super(shadowRoot);
 

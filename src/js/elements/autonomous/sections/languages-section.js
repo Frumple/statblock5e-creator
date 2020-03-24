@@ -1,4 +1,5 @@
-import PropertyListSection from './property-list-section.js';
+import { PropertyListSection, PropertyListShowElements, PropertyListEditElements } from './property-list-section.js';
+import CurrentContext from '../../../models/current-context.js';
 
 export default class LanguagesSection extends PropertyListSection {
   static get elementName() { return 'languages-section'; }
@@ -10,7 +11,9 @@ export default class LanguagesSection extends PropertyListSection {
 
   constructor() {
     super(LanguagesSection.templatePaths,
-          'languages');
+          'languages',
+          LanguagesSectionShowElements,
+          LanguagesSectionEditElements);
   }
 
   connectedCallback() {
@@ -19,5 +22,31 @@ export default class LanguagesSection extends PropertyListSection {
 
       this.isInitialized = true;
     }
+  }
+
+  updateModel() {
+    super.updateModel();
+
+    CurrentContext.creature.languages.telepathy = this.editElements.telepathy.valueAsInt;
+  }
+
+  updateEditModeView() {
+    super.updateEditModeView();
+
+    this.editElements.telepathy.value = CurrentContext.creature.languages.telepathy;
+  }
+}
+
+class LanguagesSectionShowElements extends PropertyListShowElements {
+  constructor(shadowRoot) {
+    super(shadowRoot);
+  }
+}
+
+class LanguagesSectionEditElements extends PropertyListEditElements {
+  constructor(shadowRoot) {
+    super(shadowRoot);
+
+    this.telepathy = shadowRoot.getElementById('telepathy-input');
   }
 }

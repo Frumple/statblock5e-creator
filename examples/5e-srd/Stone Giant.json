@@ -185,7 +185,8 @@
   "languages": {
     "items": [
       "Giant"
-    ]
+    ],
+    "telepathy": null
   },
   "challengeRating": {
     "challengeRating": "7",

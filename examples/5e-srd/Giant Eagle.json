@@ -186,7 +186,8 @@
     "items": [
       "Giant Eagle",
       "understands Common and Auran but can't speak"
-    ]
+    ],
+    "telepathy": null
   },
   "challengeRating": {
     "challengeRating": "1",

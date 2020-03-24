@@ -197,7 +197,8 @@
   "languages": {
     "items": [
       "understands the languages of its creator but can't speak"
-    ]
+    ],
+    "telepathy": null
   },
   "challengeRating": {
     "challengeRating": "16",

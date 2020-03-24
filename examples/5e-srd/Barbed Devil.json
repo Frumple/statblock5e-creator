@@ -192,9 +192,9 @@
   },
   "languages": {
     "items": [
-      "Infernal",
-      "telepathy 120 ft."
-    ]
+      "Infernal"
+    ],
+    "telepathy": 120
   },
   "challengeRating": {
     "challengeRating": "5",

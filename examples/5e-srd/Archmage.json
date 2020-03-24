@@ -188,7 +188,8 @@
   "languages": {
     "items": [
       "any six languages"
-    ]
+    ],
+    "telepathy": null
   },
   "challengeRating": {
     "challengeRating": "12",

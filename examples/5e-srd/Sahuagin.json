@@ -185,7 +185,8 @@
   "languages": {
     "items": [
       "Sahuagin"
-    ]
+    ],
+    "telepathy": null
   },
   "challengeRating": {
     "challengeRating": "1/2",

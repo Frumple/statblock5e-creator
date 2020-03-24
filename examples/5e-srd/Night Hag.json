@@ -194,7 +194,8 @@
       "Common",
       "Infernal",
       "Primordial"
-    ]
+    ],
+    "telepathy": null
   },
   "challengeRating": {
     "challengeRating": "5",

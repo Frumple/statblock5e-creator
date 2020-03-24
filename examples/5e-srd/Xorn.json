@@ -193,7 +193,8 @@
   "languages": {
     "items": [
       "Terran"
-    ]
+    ],
+    "telepathy": null
   },
   "challengeRating": {
     "challengeRating": "5",

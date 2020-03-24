@@ -188,7 +188,8 @@
     "items": [
       "Common",
       "Draconic"
-    ]
+    ],
+    "telepathy": null
   },
   "challengeRating": {
     "challengeRating": "17",

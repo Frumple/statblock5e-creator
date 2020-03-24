@@ -194,7 +194,8 @@
     "items": [
       "Aquan",
       "Auran"
-    ]
+    ],
+    "telepathy": null
   },
   "challengeRating": {
     "challengeRating": "1/2",

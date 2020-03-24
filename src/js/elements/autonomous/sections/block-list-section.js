@@ -1,7 +1,7 @@
-import * as sectionModule from './section.js';
+import { Section, ShowElements, EditElements } from './section.js';
 import CurrentContext from '../../../models/current-context.js';
 
-export class BlockListSection extends sectionModule.Section {
+export class BlockListSection extends Section {
   static get templatePaths() {
     return super.templatePaths.set(
       'block-list-section',
@@ -10,9 +10,12 @@ export class BlockListSection extends sectionModule.Section {
 
   constructor(templatePaths,
     modelPropertyName,
-    showElements = BlockListShowSection,
-    editElements = BlockListEditSection) {
-    super(templatePaths, modelPropertyName, showElements, editElements);
+    showElements = BlockListShowElements,
+    editElements = BlockListEditElements) {
+    super(templatePaths,
+          modelPropertyName,
+          showElements,
+          editElements);
 
     this.heading = this.shadowRoot.getElementById('heading');
   }
@@ -128,7 +131,7 @@ export class BlockListSection extends sectionModule.Section {
   }
 }
 
-export class BlockListShowSection extends sectionModule.ShowElements {
+export class BlockListShowElements extends ShowElements {
   constructor(shadowRoot) {
     super(shadowRoot);
 
@@ -137,7 +140,7 @@ export class BlockListShowSection extends sectionModule.ShowElements {
   }
 }
 
-export class BlockListEditSection extends sectionModule.EditElements {
+export class BlockListEditElements extends EditElements {
   constructor(shadowRoot) {
     super(shadowRoot);
 

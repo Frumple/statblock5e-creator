@@ -185,7 +185,8 @@
   "languages": {
     "items": [
       "Draconic"
-    ]
+    ],
+    "telepathy": null
   },
   "challengeRating": {
     "challengeRating": "1/2",

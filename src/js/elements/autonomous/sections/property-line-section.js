@@ -1,12 +1,12 @@
-import * as sectionModule from './section.js';
+import { Section, ShowElements, EditElements } from './section.js';
 
-export class PropertyLineSection extends sectionModule.Section {
+export class PropertyLineSection extends Section {
   constructor(templatePaths, modelPropertyName, showElements, editElements) {
     super(templatePaths, modelPropertyName, showElements, editElements);
   }
 }
 
-export class PropertyLineShowElements extends sectionModule.ShowElements {
+export class PropertyLineShowElements extends ShowElements {
   constructor(shadowRoot) {
     super(shadowRoot);
     this.heading = shadowRoot.getElementById('show-section-heading');
@@ -14,7 +14,7 @@ export class PropertyLineShowElements extends sectionModule.ShowElements {
   }
 }
 
-export class PropertyLineEditElements extends sectionModule.EditElements {
+export class PropertyLineEditElements extends EditElements {
   constructor(shadowRoot) {
     super(shadowRoot);
   }

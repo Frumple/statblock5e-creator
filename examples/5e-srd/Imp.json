@@ -194,7 +194,8 @@
     "items": [
       "Infernal",
       "Common"
-    ]
+    ],
+    "telepathy": null
   },
   "challengeRating": {
     "challengeRating": "1",

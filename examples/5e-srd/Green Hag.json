@@ -187,7 +187,8 @@
       "Common",
       "Draconic",
       "Sylvan"
-    ]
+    ],
+    "telepathy": null
   },
   "challengeRating": {
     "challengeRating": "3",

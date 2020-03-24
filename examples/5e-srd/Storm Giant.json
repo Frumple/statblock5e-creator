@@ -191,7 +191,8 @@
     "items": [
       "Common",
       "Giant"
-    ]
+    ],
+    "telepathy": null
   },
   "challengeRating": {
     "challengeRating": "13",

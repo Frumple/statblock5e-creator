@@ -187,7 +187,8 @@
   "languages": {
     "items": [
       "understands Infernal but can't speak it"
-    ]
+    ],
+    "telepathy": null
   },
   "challengeRating": {
     "challengeRating": "3",

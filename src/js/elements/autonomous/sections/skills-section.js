@@ -1,8 +1,8 @@
-import * as propertyLineSectionModule from './property-line-section.js';
+import { PropertyLineSection, PropertyLineShowElements, PropertyLineEditElements } from './property-line-section.js';
 import CurrentContext from '../../../models/current-context.js';
 import { inputValueAndTriggerEvent } from '../../../helpers/element-helpers.js';
 
-export default class SkillsSection extends propertyLineSectionModule.PropertyLineSection {
+export default class SkillsSection extends PropertyLineSection {
   static get elementName() { return 'skills-section'; }
   static get templatePaths() {
     return super.templatePaths.set(
@@ -154,13 +154,13 @@ export default class SkillsSection extends propertyLineSectionModule.PropertyLin
   }
 }
 
-class SkillsShowElements extends propertyLineSectionModule.PropertyLineShowElements {
+class SkillsShowElements extends PropertyLineShowElements {
   constructor(shadowRoot) {
     super(shadowRoot);
   }
 }
 
-class SkillsEditElements extends propertyLineSectionModule.PropertyLineEditElements {
+class SkillsEditElements extends PropertyLineEditElements {
   constructor(shadowRoot) {
     super(shadowRoot);
 

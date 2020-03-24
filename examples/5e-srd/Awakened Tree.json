@@ -190,7 +190,8 @@
   "languages": {
     "items": [
       "one language known by its creator"
-    ]
+    ],
+    "telepathy": null
   },
   "challengeRating": {
     "challengeRating": "2",

@@ -188,7 +188,8 @@
   "languages": {
     "items": [
       "the languages it knew in life"
-    ]
+    ],
+    "telepathy": null
   },
   "challengeRating": {
     "challengeRating": "13",

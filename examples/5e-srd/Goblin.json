@@ -186,7 +186,8 @@
     "items": [
       "Common",
       "Goblin"
-    ]
+    ],
+    "telepathy": null
   },
   "challengeRating": {
     "challengeRating": "1/4",

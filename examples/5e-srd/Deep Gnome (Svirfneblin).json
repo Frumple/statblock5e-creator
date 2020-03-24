@@ -187,7 +187,8 @@
       "Gnomish",
       "Terran",
       "Undercommon"
-    ]
+    ],
+    "telepathy": null
   },
   "challengeRating": {
     "challengeRating": "1/2",

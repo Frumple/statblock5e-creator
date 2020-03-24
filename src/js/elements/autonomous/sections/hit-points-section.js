@@ -1,7 +1,7 @@
-import * as propertyLineSectionModule from './property-line-section.js';
+import { PropertyLineSection, PropertyLineShowElements, PropertyLineEditElements } from './property-line-section.js';
 import CurrentContext from '../../../models/current-context.js';
 
-export default class HitPointsSection extends propertyLineSectionModule.PropertyLineSection {
+export default class HitPointsSection extends PropertyLineSection {
   static get elementName() { return 'hit-points-section'; }
   static get templatePaths() {
     return super.templatePaths.set(
@@ -121,13 +121,13 @@ export default class HitPointsSection extends propertyLineSectionModule.Property
   }
 }
 
-class HitPointsShowElements extends propertyLineSectionModule.PropertyLineShowElements {
+class HitPointsShowElements extends PropertyLineShowElements {
   constructor(shadowRoot) {
     super(shadowRoot);
   }
 }
 
-class HitPointsEditElements extends propertyLineSectionModule.PropertyLineEditElements {
+class HitPointsEditElements extends PropertyLineEditElements {
   constructor(shadowRoot) {
     super(shadowRoot);
     this.hitPoints = shadowRoot.getElementById('hit-points-input');

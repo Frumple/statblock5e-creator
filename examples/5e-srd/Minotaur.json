@@ -185,7 +185,8 @@
   "languages": {
     "items": [
       "Abyssal"
-    ]
+    ],
+    "telepathy": null
   },
   "challengeRating": {
     "challengeRating": "3",

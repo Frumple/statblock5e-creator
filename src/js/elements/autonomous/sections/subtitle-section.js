@@ -1,4 +1,4 @@
-import * as sectionModule from './section.js';
+import { Section, ShowElements, EditElements } from './section.js';
 import CurrentContext from '../../../models/current-context.js';
 
 import creatureSizes from '../../../data/creature-sizes.js';
@@ -8,7 +8,7 @@ import creatureAlignments from '../../../data/creature-alignments.js';
 
 import { addOptionsToSelectElement, addOptionsToDataListElement } from '../../../helpers/element-helpers.js';
 
-export default class SubtitleSection extends sectionModule.Section {
+export default class SubtitleSection extends Section {
   static get elementName() { return 'subtitle-section'; }
   static get templatePaths() {
     return super.templatePaths.set(
@@ -82,14 +82,14 @@ export default class SubtitleSection extends sectionModule.Section {
   }
 }
 
-class SubtitleShowElements extends sectionModule.ShowElements {
+class SubtitleShowElements extends ShowElements {
   constructor(shadowRoot) {
     super(shadowRoot);
     this.text = shadowRoot.getElementById('subtitle-text');
   }
 }
 
-class SubtitleEditElements extends sectionModule.EditElements {
+class SubtitleEditElements extends EditElements {
   constructor(shadowRoot) {
     super(shadowRoot);
     this.size = shadowRoot.getElementById('size-input');

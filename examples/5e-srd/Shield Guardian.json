@@ -193,7 +193,8 @@
   "languages": {
     "items": [
       "understands commands given in any language but can't speak"
-    ]
+    ],
+    "telepathy": null
   },
   "challengeRating": {
     "challengeRating": "7",

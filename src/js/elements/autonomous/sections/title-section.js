@@ -1,8 +1,8 @@
-import * as sectionModule from './section.js';
+import { Section, ShowElements, EditElements } from './section.js';
 import CurrentContext from '../../../models/current-context.js';
 import { capitalizeFirstLetter } from '../../../helpers/string-formatter.js';
 
-export default class TitleSection extends sectionModule.Section {
+export default class TitleSection extends Section {
   static get elementName() { return 'title-section'; }
   static get templatePaths() {
     return super.templatePaths.set(
@@ -88,14 +88,14 @@ export default class TitleSection extends sectionModule.Section {
   }
 }
 
-class TitleShowElements extends sectionModule.ShowElements {
+class TitleShowElements extends ShowElements {
   constructor(shadowRoot) {
     super(shadowRoot);
     this.title = shadowRoot.getElementById('title-text');
   }
 }
 
-class TitleEditElements extends sectionModule.EditElements {
+class TitleEditElements extends EditElements {
   constructor(shadowRoot) {
     super(shadowRoot);
     this.fullName = shadowRoot.getElementById('full-name-input');

@@ -185,7 +185,8 @@
   "languages": {
     "items": [
       "any one language"
-    ]
+    ],
+    "telepathy": null
   },
   "challengeRating": {
     "challengeRating": "1/8",

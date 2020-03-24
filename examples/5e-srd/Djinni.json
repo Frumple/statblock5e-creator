@@ -188,7 +188,8 @@
   "languages": {
     "items": [
       "Auran"
-    ]
+    ],
+    "telepathy": null
   },
   "challengeRating": {
     "challengeRating": "11",

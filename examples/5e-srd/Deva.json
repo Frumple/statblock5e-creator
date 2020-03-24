@@ -191,9 +191,9 @@
   },
   "languages": {
     "items": [
-      "all",
-      "telepathy 120 ft."
-    ]
+      "all"
+    ],
+    "telepathy": 120
   },
   "challengeRating": {
     "challengeRating": "10",

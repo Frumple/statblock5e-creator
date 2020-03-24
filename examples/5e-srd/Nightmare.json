@@ -187,7 +187,8 @@
   "languages": {
     "items": [
       "understands Abyssal, Common, and Infernal but can't speak"
-    ]
+    ],
+    "telepathy": null
   },
   "challengeRating": {
     "challengeRating": "3",

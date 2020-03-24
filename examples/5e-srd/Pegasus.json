@@ -185,7 +185,8 @@
   "languages": {
     "items": [
       "understands Celestial, Common, Elvish, and Sylvan but can't speak"
-    ]
+    ],
+    "telepathy": null
   },
   "challengeRating": {
     "challengeRating": "2",

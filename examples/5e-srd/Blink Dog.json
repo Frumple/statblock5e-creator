@@ -186,7 +186,8 @@
     "items": [
       "Blink Dog",
       "understands Sylvan but can't speak it"
-    ]
+    ],
+    "telepathy": null
   },
   "challengeRating": {
     "challengeRating": "1/4",

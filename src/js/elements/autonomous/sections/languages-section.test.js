@@ -3,6 +3,7 @@ import CurrentContext from '../../../models/current-context.js';
 
 import * as TestCustomElements from '../../../helpers/test/test-custom-elements.js';
 import * as sharedSpecs from './property-list-section.specs.js';
+import { inputValueAndTriggerEvent } from '../../../helpers/element-helpers.js';
 
 const headingName = 'Languages';
 const expectedBlockType = 'Language';
@@ -53,19 +54,22 @@ describe('when the show section is clicked', () => {
 
     describe('and the input field is set, the add button is clicked, and the edit section is submitted', () => {
       it('should add a suggested item, and the show section should have the item', () => {
-        const itemText = 'Deep Speech';
-        sharedSpecs.shouldAddAnItem(languagesSection, languagesModel, headingName, itemText);
+        const itemTexts = ['Deep Speech'];
+
+        shouldAddItems(itemTexts, null, itemTexts[0]);
       });
 
       it('should add a custom item, and the show section should have the item', () => {
-        const itemText = 'understands all languages it knew in life but can\'t speak';
-        sharedSpecs.shouldAddAnItem(languagesSection, languagesModel, headingName, itemText);
+        const itemTexts = ['understands all languages it knew in life but can\'t speak'];
+
+        shouldAddItems(itemTexts, null, itemTexts[0]);
       });
 
       it('should add many items, and the show section should have the items', () => {
         const itemTexts = ['Undercommon', 'Swahili', 'Thieves\' Cant', 'English'];
         const expectedText = 'Undercommon, Swahili, Thieves\' Cant, English';
-        sharedSpecs.shouldAddManyItems(languagesSection, languagesModel, headingName, itemTexts, expectedText);
+
+        shouldAddItems(itemTexts, null, expectedText);
       });
 
       describe('should add item that contains commas, and if there are other items before or after this item, semicolon separators instead of commas should be shown', () => {
@@ -82,9 +86,35 @@ describe('when the show section is clicked', () => {
         `
         ('$description: $itemTexts => $expectedText',
         ({itemTexts, expectedText}) => {
-          sharedSpecs.shouldAddManyItems(languagesSection, languagesModel, headingName, itemTexts, expectedText);
+          shouldAddItems(itemTexts, null, expectedText);
         });
         /* eslint-enable indent, no-unexpected-multiline */
+      });
+
+      describe('and telepathy is set', () => {
+        it('and no items are added, and the show section should only show telepathy', () => {
+          const itemTexts = [];
+          const telepathy = 30;
+          const expectedText = 'telepathy 30 ft.';
+
+          shouldAddItems(itemTexts, telepathy, expectedText);
+        });
+
+        it('and a single item is added, and the show section should have the item and telepathy', () => {
+          const itemTexts = ['Celestial'];
+          const telepathy = 45;
+          const expectedText = 'Celestial, telepathy 45 ft.';
+
+          shouldAddItems(itemTexts, telepathy, expectedText);
+        });
+
+        it('and multiple items are added, and the show section should have the items and telepathy', () => {
+          const itemTexts = ['Celestial', 'Infernal', 'Draconic'];
+          const telepathy = 20;
+          const expectedText = 'Celestial, Infernal, Draconic, telepathy 20 ft.';
+
+          shouldAddItems(itemTexts, telepathy, expectedText);
+        });
       });
 
       it('should display an error after clicking the add button if the input field is blank', () => {
@@ -112,26 +142,28 @@ describe('when the show section is clicked', () => {
     describe('and the only remaining item is removed, and the edit section is submitted', () => {
       it('should remove the item, and the show section should show a "—" character indicating no items', () => {
         const expectedItems = [];
+        const expectedTelepathy = null;
         const expectedText = '—';
 
-        expect(languagesSection.editElements.propertyList.itemsAsText).toStrictEqual(expectedItems);
+        verifyEditModeView(expectedItems, expectedTelepathy);
 
         languagesSection.editElements.submitForm();
 
-        expect(languagesModel.items).toStrictEqual(expectedItems);
         expect(languagesSection).toBeInMode('show');
-        expect(languagesSection).toShowPropertyLine(headingName, expectedText);
 
-        const json = sharedSpecs.verifyJsonExport(languagesSection, expectedItems);
+        verifyModel(expectedItems, expectedTelepathy);
+        verifyShowModeView(expectedText, expectedTelepathy);
+
+        const json = verifyJsonExport(expectedItems, expectedTelepathy);
         expect(languagesSection).toExportPropertyLineToHtml(headingName, expectedText);
         expect(languagesSection).toExportPropertyLineToMarkdown(headingName, expectedText);
 
         reset();
         languagesSection.importFromJson(json);
 
-        expect(languagesModel.items).toStrictEqual(expectedItems);
-        expect(languagesSection.editElements.propertyList.itemsAsText).toStrictEqual(expectedItems);
-        expect(languagesSection).toShowPropertyLine(headingName, expectedText);
+        verifyModel(expectedItems, expectedTelepathy);
+        verifyEditModeView(expectedItems, expectedTelepathy);
+        verifyShowModeView(expectedText);
       });
     });
 
@@ -148,7 +180,36 @@ describe('when the show section is clicked', () => {
         ('$description: $itemToDelete => $expectedItems',
         ({itemToDelete, expectedItems}) => {
           const initialItems = ['Common', 'Elvish', 'Orc'];
-          sharedSpecs.shouldDeleteOneOfManyItems(languagesSection, languagesModel, headingName, initialItems, itemToDelete, expectedItems);
+          const expectedTelepathy = null;
+          const expectedText = expectedItems.join(', ');
+
+          for (const item of initialItems) {
+            inputValueAndTriggerEvent(languagesSection.editElements.input, item);
+            languagesSection.editElements.addButton.click();
+          }
+
+          const item = languagesSection.editElements.propertyList.findItem(itemToDelete);
+          item.remove();
+
+          verifyEditModeView(expectedItems, expectedTelepathy);
+
+          languagesSection.editElements.submitForm();
+
+          expect(languagesSection).toBeInMode('show');
+
+          verifyModel(expectedItems, expectedTelepathy);
+          verifyShowModeView(expectedText);
+
+          const json = verifyJsonExport(expectedItems, expectedTelepathy);
+          expect(languagesSection).toExportPropertyLineToHtml(headingName, expectedText);
+          expect(languagesSection).toExportPropertyLineToMarkdown(headingName, expectedText);
+
+          reset();
+          languagesSection.importFromJson(json);
+
+          verifyModel(expectedItems, expectedTelepathy);
+          verifyEditModeView(expectedItems, expectedTelepathy);
+          verifyShowModeView(expectedText);
         });
         /* eslint-enable indent, no-unexpected-multiline */
       });
@@ -161,16 +222,17 @@ describe('when import from Open5e', () => {
     /* eslint-disable indent, no-unexpected-multiline */
     it.each
     `
-      description                           | inputText                                 | expectedItems                                   | expectedText
-      ${'no items'}                         | ${''}                                     | ${[]}                                           | ${'—'}
-      ${'single simple item'}               | ${'Deep Speech'}                          | ${['Deep Speech']}                              | ${null}
-      ${'multiple simple items'}            | ${'Undercommon, Swahili, Thieves\' Cant'} | ${['Undercommon', 'Swahili', 'Thieves\' Cant']} | ${null}
-      ${'telepathy delimited by comma'}     | ${'Gnomish, Sylvan, telepathy 60 ft.'}    | ${['Gnomish', 'Sylvan', 'telepathy 60 ft.']}    | ${null}
-      ${'telepathy delimited by semicolon'} | ${'Gnomish, Sylvan; telepathy 60 ft.'}    | ${['Gnomish', 'Sylvan', 'telepathy 60 ft.']}    | ${'Gnomish, Sylvan, telepathy 60 ft.'}
+      description                           | inputText                                                                          | expectedItems                                                                          | expectedTelepathy | expectedText
+      ${'no items'}                         | ${''}                                                                              | ${[]}                                                                                  | ${null}           | ${'—'}
+      ${'single simple item'}               | ${'Deep Speech'}                                                                   | ${['Deep Speech']}                                                                     | ${null}           | ${'Deep Speech'}
+      ${'multiple simple items'}            | ${'Undercommon, Swahili, Thieves\' Cant'}                                          | ${['Undercommon', 'Swahili', 'Thieves\' Cant']}                                        | ${null}           | ${'Undercommon, Swahili, Thieves\' Cant'}
+      ${'telepathy delimited by comma'}     | ${'Gnomish, Sylvan, telepathy 60 ft.'}                                             | ${['Gnomish', 'Sylvan']}                                                               | ${60}             | ${'Gnomish, Sylvan, telepathy 60 ft.'}
+      ${'telepathy delimited by semicolon'} | ${'Gnomish, Sylvan; telepathy 60 ft.'}                                             | ${['Gnomish', 'Sylvan']}                                                               | ${60}             | ${'Gnomish, Sylvan, telepathy 60 ft.'}
+      ${'telepathy with note'}              | ${'Abyssal, telepathy 60 ft. (works only with creatures that understand Abyssal)'} | ${['Abyssal', 'telepathy 60 ft. (works only with creatures that understand Abyssal)']} | ${null}           | ${'Abyssal, telepathy 60 ft. (works only with creatures that understand Abyssal)'}
     `
-    ('$description: $inputText => {expectedItems=$expectedItems,expectedText=$expectedText}',
-    ({inputText, expectedItems, expectedText}) => {
-      sharedSpecs.shouldImportFromOpen5e(languagesSection, languagesModel, headingName, open5eJsonKey, inputText, expectedItems, expectedText);
+    ('$description: $inputText => {expectedItems="$expectedItems", expectedTelepathy="$expectedTelepathy", expectedText="$expectedText"}',
+    ({inputText, expectedItems, expectedTelepathy, expectedText}) => {
+      shouldImportFromOpen5e(inputText, expectedItems, expectedTelepathy, expectedText);
     });
     /* eslint-enable indent, no-unexpected-multiline */
   });
@@ -179,8 +241,17 @@ describe('when import from Open5e', () => {
 describe('when the section is empty and not visible', () => {
   describe('and a creature with items is imported from JSON', () => {
     it('should show the new items', () => {
-      const itemsToImport = ['Giant'];
-      sharedSpecs.shouldShowItemsImportedFromJsonIfSectionWasInitiallyEmptyAndNotVisible(languagesSection, headingName, itemsToImport);
+      const expectedText = 'Giant, telepathy 120 ft.';
+      const json = {
+        items: ['Giant'],
+        telepathy: 120
+      };
+
+      languagesSection.mode = 'hidden';
+      languagesSection.importFromJson(json);
+
+      expect(languagesSection).toBeInMode('show');
+      verifyShowModeView(expectedText);
     });
   });
 });
@@ -188,4 +259,69 @@ describe('when the section is empty and not visible', () => {
 function reset() {
   languagesModel.reset();
   languagesSection.updateView();
+}
+
+function shouldAddItems(itemTexts, telepathy, expectedText) {
+  for (const itemText of itemTexts) {
+    inputValueAndTriggerEvent(languagesSection.editElements.input, itemText);
+    languagesSection.editElements.addButton.click();
+  }
+  inputValueAndTriggerEvent(languagesSection.editElements.telepathy, telepathy);
+
+  verifyEditModeView(itemTexts, telepathy);
+
+  languagesSection.editElements.submitForm();
+
+  expect(languagesSection).toBeInMode('show');
+
+  verifyModel(itemTexts, telepathy);
+  verifyShowModeView(expectedText);
+
+  const json = verifyJsonExport(itemTexts, telepathy);
+  expect(languagesSection).toExportPropertyLineToHtml(headingName, expectedText);
+  expect(languagesSection).toExportPropertyLineToMarkdown(headingName, expectedText);
+
+  reset();
+  languagesSection.importFromJson(json);
+
+  verifyModel(itemTexts, telepathy);
+  verifyEditModeView(itemTexts, telepathy);
+  verifyShowModeView(expectedText);
+}
+
+function shouldImportFromOpen5e(inputText, expectedItems, expectedTelepathy, expectedText) {
+  const json = {};
+  json[open5eJsonKey] = inputText;
+
+  languagesSection.importFromOpen5e(json);
+
+  verifyModel(expectedItems, expectedTelepathy);
+  verifyEditModeView(expectedItems, expectedTelepathy);
+  verifyShowModeView(expectedText);
+}
+
+function verifyModel(expectedItems, expectedTelepathy) {
+  expect(languagesModel.items).toStrictEqual(expectedItems);
+  expect(languagesModel.telepathy).toBe(expectedTelepathy);
+}
+
+function verifyEditModeView(expectedItems, expectedTelepathy) {
+  expect(languagesSection.editElements.propertyList.itemsAsText).toStrictEqual(expectedItems);
+  expect(languagesSection.editElements.telepathy.valueAsInt).toBe(expectedTelepathy);
+}
+
+function verifyShowModeView(expectedText) {
+  expect(languagesSection).toShowPropertyLine(headingName, expectedText);
+}
+
+function verifyJsonExport(expectedItems, expectedTelepathy) {
+  const json = languagesSection.exportToJson();
+  const expectedJson = {
+    items: expectedItems,
+    telepathy: expectedTelepathy
+  };
+
+  expect(json).toStrictEqual(expectedJson);
+
+  return json;
 }

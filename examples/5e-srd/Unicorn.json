@@ -192,9 +192,9 @@
     "items": [
       "Celestial",
       "Elvish",
-      "Sylvan",
-      "telepathy 60 ft."
-    ]
+      "Sylvan"
+    ],
+    "telepathy": 60
   },
   "challengeRating": {
     "challengeRating": "5",

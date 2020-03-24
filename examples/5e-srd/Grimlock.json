@@ -187,7 +187,8 @@
   "languages": {
     "items": [
       "Undercommon"
-    ]
+    ],
+    "telepathy": null
   },
   "challengeRating": {
     "challengeRating": "1/4",

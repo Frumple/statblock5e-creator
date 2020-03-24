@@ -192,9 +192,9 @@
     "items": [
       "Abyssal",
       "Common",
-      "Infernal",
-      "telepathy 60 ft."
-    ]
+      "Infernal"
+    ],
+    "telepathy": 60
   },
   "challengeRating": {
     "challengeRating": "4",

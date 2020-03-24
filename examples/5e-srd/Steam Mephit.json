@@ -191,7 +191,8 @@
     "items": [
       "Aquan",
       "Ignan"
-    ]
+    ],
+    "telepathy": null
   },
   "challengeRating": {
     "challengeRating": "1/4",

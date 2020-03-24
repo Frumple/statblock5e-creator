@@ -191,7 +191,8 @@
   "languages": {
     "items": [
       "Common"
-    ]
+    ],
+    "telepathy": null
   },
   "challengeRating": {
     "challengeRating": "1",

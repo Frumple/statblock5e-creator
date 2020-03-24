@@ -192,7 +192,8 @@
   "languages": {
     "items": [
       "understands Abyssal but can't speak"
-    ]
+    ],
+    "telepathy": null
   },
   "challengeRating": {
     "challengeRating": "2",

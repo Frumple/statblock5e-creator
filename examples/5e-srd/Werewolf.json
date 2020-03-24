@@ -187,7 +187,8 @@
   "languages": {
     "items": [
       "Common (can't speak in wolf form)"
-    ]
+    ],
+    "telepathy": null
   },
   "challengeRating": {
     "challengeRating": "3",

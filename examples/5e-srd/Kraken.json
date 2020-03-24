@@ -190,9 +190,9 @@
   },
   "languages": {
     "items": [
-      "understands Abyssal, Celestial, Infernal, and Primordial but can't speak",
-      "telepathy 120 ft."
-    ]
+      "understands Abyssal, Celestial, Infernal, and Primordial but can't speak"
+    ],
+    "telepathy": 120
   },
   "challengeRating": {
     "challengeRating": "23",

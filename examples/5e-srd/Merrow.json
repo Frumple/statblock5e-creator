@@ -186,7 +186,8 @@
     "items": [
       "Abyssal",
       "Aquan"
-    ]
+    ],
+    "telepathy": null
   },
   "challengeRating": {
     "challengeRating": "2",

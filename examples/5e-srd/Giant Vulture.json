@@ -185,7 +185,8 @@
   "languages": {
     "items": [
       "understands Common but can't speak"
-    ]
+    ],
+    "telepathy": null
   },
   "challengeRating": {
     "challengeRating": "1",

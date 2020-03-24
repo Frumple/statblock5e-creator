@@ -193,7 +193,8 @@
     "items": [
       "Ignan",
       "Terran"
-    ]
+    ],
+    "telepathy": null
   },
   "challengeRating": {
     "challengeRating": "1/2",

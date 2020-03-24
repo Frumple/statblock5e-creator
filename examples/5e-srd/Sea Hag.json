@@ -187,7 +187,8 @@
       "Aquan",
       "Common",
       "Giant"
-    ]
+    ],
+    "telepathy": null
   },
   "challengeRating": {
     "challengeRating": "2",

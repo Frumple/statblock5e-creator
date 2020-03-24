@@ -198,7 +198,8 @@
   "languages": {
     "items": [
       "Common plus up to five other languages"
-    ]
+    ],
+    "telepathy": null
   },
   "challengeRating": {
     "challengeRating": "21",

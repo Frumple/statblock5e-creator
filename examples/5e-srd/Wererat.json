@@ -187,7 +187,8 @@
   "languages": {
     "items": [
       "Common (can't speak in rat form)"
-    ]
+    ],
+    "telepathy": null
   },
   "challengeRating": {
     "challengeRating": "2",

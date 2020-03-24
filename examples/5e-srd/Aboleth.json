@@ -184,9 +184,9 @@
   },
   "languages": {
     "items": [
-      "Deep Speech",
-      "telepathy 120 ft."
-    ]
+      "Deep Speech"
+    ],
+    "telepathy": 120
   },
   "challengeRating": {
     "challengeRating": "10",

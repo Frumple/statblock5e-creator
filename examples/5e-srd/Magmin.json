@@ -189,7 +189,8 @@
   "languages": {
     "items": [
       "Ignan"
-    ]
+    ],
+    "telepathy": null
   },
   "challengeRating": {
     "challengeRating": "1/2",

@@ -1,8 +1,8 @@
-import * as propertyLineSectionModule from './property-line-section.js';
+import { PropertyLineSection, PropertyLineShowElements, PropertyLineEditElements } from './property-line-section.js';
 import CurrentContext from '../../../models/current-context.js';
 import { inputValueAndTriggerEvent } from '../../../helpers/element-helpers.js';
 
-export default class SavingThrowsSection extends propertyLineSectionModule.PropertyLineSection {
+export default class SavingThrowsSection extends PropertyLineSection {
   static get elementName() { return 'saving-throws-section'; }
   static get templatePaths() {
     return super.templatePaths.set(
@@ -119,13 +119,13 @@ export default class SavingThrowsSection extends propertyLineSectionModule.Prope
   }
 }
 
-class SavingThrowsShowElements extends propertyLineSectionModule.PropertyLineShowElements {
+class SavingThrowsShowElements extends PropertyLineShowElements {
   constructor(shadowRoot) {
     super(shadowRoot);
   }
 }
 
-class SavingThrowsEditElements extends propertyLineSectionModule.PropertyLineEditElements {
+class SavingThrowsEditElements extends PropertyLineEditElements {
   constructor(shadowRoot) {
     super(shadowRoot);
 

@@ -9,8 +9,11 @@ export function editSectionShouldHaveDefaultValues(section, expectedItems = []) 
   expect(section.editElements.propertyList.itemsAsText).toEqual(expectedItems);
 }
 
-export function shouldAddAnItem(section, model, headingName, itemText) {
+export function shouldAddAnItem(section, model, headingName, itemText, expectedText = null) {
   const expectedItems = [itemText];
+  if (expectedText === null) {
+    expectedText = itemText;
+  }
 
   inputValueAndTriggerEvent(section.editElements.input, itemText);
   section.editElements.addButton.click();
@@ -22,18 +25,18 @@ export function shouldAddAnItem(section, model, headingName, itemText) {
   expect(section).toBeInMode('show');
 
   verifyModel(model, expectedItems);
-  verifyShowModeView(section, headingName, itemText);
+  verifyShowModeView(section, headingName, expectedText);
 
   const json = verifyJsonExport(section, expectedItems);
-  expect(section).toExportPropertyLineToHtml(headingName, itemText);
-  expect(section).toExportPropertyLineToMarkdown(headingName, itemText);
+  expect(section).toExportPropertyLineToHtml(headingName, expectedText);
+  expect(section).toExportPropertyLineToMarkdown(headingName, expectedText);
 
   reset(section, model);
   section.importFromJson(json);
 
   verifyModel(model, expectedItems);
   verifyEditModeView(section, expectedItems);
-  verifyShowModeView(section, headingName, itemText);
+  verifyShowModeView(section, headingName, expectedText);
 }
 
 export function shouldAddManyItems(section, model, headingName, itemTexts, expectedText) {

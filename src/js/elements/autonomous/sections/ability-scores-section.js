@@ -1,7 +1,7 @@
-import * as sectionModule from './section.js';
+import { Section, ShowElements, EditElements } from './section.js';
 import CurrentContext from '../../../models/current-context.js';
 
-export default class AbilityScoresSection extends sectionModule.Section {
+export default class AbilityScoresSection extends Section {
   static get elementName() { return 'ability-scores-section'; }
   static get templatePaths() {
     return super.templatePaths.set(
@@ -101,7 +101,7 @@ export default class AbilityScoresSection extends sectionModule.Section {
   }
 }
 
-class AbilityScoresShowElements extends sectionModule.ShowElements {
+class AbilityScoresShowElements extends ShowElements {
   constructor(shadowRoot) {
     super(shadowRoot);
 
@@ -115,7 +115,7 @@ class AbilityScoresShowElements extends sectionModule.ShowElements {
   }
 }
 
-class AbilityScoresEditElements extends sectionModule.EditElements {
+class AbilityScoresEditElements extends EditElements {
   constructor(shadowRoot) {
     super(shadowRoot);
 

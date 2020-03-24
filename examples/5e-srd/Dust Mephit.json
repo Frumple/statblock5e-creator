@@ -192,7 +192,8 @@
     "items": [
       "Auran",
       "Terran"
-    ]
+    ],
+    "telepathy": null
   },
   "challengeRating": {
     "challengeRating": "1/2",

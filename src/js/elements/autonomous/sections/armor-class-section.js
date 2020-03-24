@@ -1,7 +1,7 @@
-import * as propertyLineSectionModule from './property-line-section.js';
+import { PropertyLineSection, PropertyLineShowElements, PropertyLineEditElements } from './property-line-section.js';
 import CurrentContext from '../../../models/current-context.js';
 
-export default class ArmorClassSection extends propertyLineSectionModule.PropertyLineSection {
+export default class ArmorClassSection extends PropertyLineSection {
   static get elementName() { return 'armor-class-section'; }
   static get templatePaths() {
     return super.templatePaths.set(
@@ -80,13 +80,13 @@ export default class ArmorClassSection extends propertyLineSectionModule.Propert
   }
 }
 
-class ArmorClassShowElements extends propertyLineSectionModule.PropertyLineShowElements {
+class ArmorClassShowElements extends PropertyLineShowElements {
   constructor(shadowRoot) {
     super(shadowRoot);
   }
 }
 
-class ArmorClassEditElements extends propertyLineSectionModule.PropertyLineEditElements {
+class ArmorClassEditElements extends PropertyLineEditElements {
   constructor(shadowRoot) {
     super(shadowRoot);
     this.armorClass = shadowRoot.getElementById('armor-class-input');

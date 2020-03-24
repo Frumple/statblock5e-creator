@@ -194,7 +194,8 @@
     "items": [
       "Abyssal",
       "telepathy 60 ft. (works only with creatures that understand Abyssal)"
-    ]
+    ],
+    "telepathy": null
   },
   "challengeRating": {
     "challengeRating": "1/4",

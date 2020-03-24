@@ -185,7 +185,8 @@
   "languages": {
     "items": [
       "understands Draconic but can't speak"
-    ]
+    ],
+    "telepathy": null
   },
   "challengeRating": {
     "challengeRating": "6",

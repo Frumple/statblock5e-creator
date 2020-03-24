@@ -185,7 +185,8 @@
     "customText": ""
   },
   "languages": {
-    "items": []
+    "items": [],
+    "telepathy": null
   },
   "challengeRating": {
     "challengeRating": "2",

@@ -191,7 +191,8 @@
     "items": [
       "Abyssal",
       "Common"
-    ]
+    ],
+    "telepathy": null
   },
   "challengeRating": {
     "challengeRating": "8",

@@ -186,7 +186,8 @@
     "items": [
       "Aquan",
       "Common"
-    ]
+    ],
+    "telepathy": null
   },
   "challengeRating": {
     "challengeRating": "1/8",

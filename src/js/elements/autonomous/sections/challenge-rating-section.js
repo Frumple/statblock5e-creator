@@ -1,7 +1,7 @@
-import * as propertyLineSectionModule from './property-line-section.js';
+import { PropertyLineSection, PropertyLineShowElements, PropertyLineEditElements } from './property-line-section.js';
 import CurrentContext from '../../../models/current-context.js';
 
-export default class ChallengeRatingSection extends propertyLineSectionModule.PropertyLineSection {
+export default class ChallengeRatingSection extends PropertyLineSection {
   static get elementName() { return 'challenge-rating-section'; }
   static get templatePaths() {
     return super.templatePaths.set(
@@ -75,13 +75,13 @@ export default class ChallengeRatingSection extends propertyLineSectionModule.Pr
   }
 }
 
-class ChallengeRatingShowElements extends propertyLineSectionModule.PropertyLineShowElements {
+class ChallengeRatingShowElements extends PropertyLineShowElements {
   constructor(shadowRoot) {
     super(shadowRoot);
   }
 }
 
-class ChallengeRatingEditElements extends propertyLineSectionModule.PropertyLineEditElements {
+class ChallengeRatingEditElements extends PropertyLineEditElements {
   constructor(shadowRoot) {
     super(shadowRoot);
     this.challengeRating = shadowRoot.getElementById('challenge-rating-input');

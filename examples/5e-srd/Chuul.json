@@ -189,7 +189,8 @@
   "languages": {
     "items": [
       "understands Deep Speech but can't speak"
-    ]
+    ],
+    "telepathy": null
   },
   "challengeRating": {
     "challengeRating": "4",

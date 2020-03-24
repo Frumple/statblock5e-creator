@@ -186,7 +186,8 @@
     "items": [
       "Elvish",
       "Undercommon"
-    ]
+    ],
+    "telepathy": null
   },
   "challengeRating": {
     "challengeRating": "6",

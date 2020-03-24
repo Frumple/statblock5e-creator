@@ -186,7 +186,8 @@
     "items": [
       "Deep Speech",
       "Undercommon"
-    ]
+    ],
+    "telepathy": null
   },
   "challengeRating": {
     "challengeRating": "8",

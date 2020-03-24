@@ -193,9 +193,9 @@
   },
   "languages": {
     "items": [
-      "Abyssal",
-      "telepathy 120 ft."
-    ]
+      "Abyssal"
+    ],
+    "telepathy": 120
   },
   "challengeRating": {
     "challengeRating": "19",

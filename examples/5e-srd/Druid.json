@@ -185,7 +185,8 @@
   "languages": {
     "items": [
       "Druidic plus any two languages"
-    ]
+    ],
+    "telepathy": null
   },
   "challengeRating": {
     "challengeRating": "2",
