@@ -1,0 +1,242 @@
+{
+  "title": {
+    "fullName": "Drow",
+    "shortName": "",
+    "isProperNoun": false
+  },
+  "subtitle": {
+    "size": "Medium",
+    "type": "humanoid",
+    "tags": "elf",
+    "alignment": "neutral evil",
+    "useCustomText": false,
+    "customText": ""
+  },
+  "armorClass": {
+    "armorClass": 15,
+    "armorType": "chain shirt",
+    "hasShield": false,
+    "useCustomText": false,
+    "customText": ""
+  },
+  "hitPoints": {
+    "hitPoints": 13,
+    "useHitDie": true,
+    "hitDieQuantity": 3,
+    "hitDieSize": 8
+  },
+  "speed": {
+    "walk": 30,
+    "burrow": null,
+    "climb": null,
+    "fly": null,
+    "hover": false,
+    "swim": null,
+    "useCustomText": false,
+    "customText": ""
+  },
+  "abilityScores": {
+    "strength": 10,
+    "dexterity": 14,
+    "constitution": 10,
+    "intelligence": 11,
+    "wisdom": 11,
+    "charisma": 12
+  },
+  "savingThrows": {
+    "strength": {
+      "isEnabled": false,
+      "override": null
+    },
+    "dexterity": {
+      "isEnabled": false,
+      "override": null
+    },
+    "constitution": {
+      "isEnabled": false,
+      "override": null
+    },
+    "intelligence": {
+      "isEnabled": false,
+      "override": null
+    },
+    "wisdom": {
+      "isEnabled": false,
+      "override": null
+    },
+    "charisma": {
+      "isEnabled": false,
+      "override": null
+    }
+  },
+  "skills": {
+    "acrobatics": {
+      "isEnabled": false,
+      "hasExpertise": false,
+      "override": null
+    },
+    "animalHandling": {
+      "isEnabled": false,
+      "hasExpertise": false,
+      "override": null
+    },
+    "arcana": {
+      "isEnabled": false,
+      "hasExpertise": false,
+      "override": null
+    },
+    "athletics": {
+      "isEnabled": false,
+      "hasExpertise": false,
+      "override": null
+    },
+    "deception": {
+      "isEnabled": false,
+      "hasExpertise": false,
+      "override": null
+    },
+    "history": {
+      "isEnabled": false,
+      "hasExpertise": false,
+      "override": null
+    },
+    "insight": {
+      "isEnabled": false,
+      "hasExpertise": false,
+      "override": null
+    },
+    "intimidation": {
+      "isEnabled": false,
+      "hasExpertise": false,
+      "override": null
+    },
+    "investigation": {
+      "isEnabled": false,
+      "hasExpertise": false,
+      "override": null
+    },
+    "medicine": {
+      "isEnabled": false,
+      "hasExpertise": false,
+      "override": null
+    },
+    "nature": {
+      "isEnabled": false,
+      "hasExpertise": false,
+      "override": null
+    },
+    "perception": {
+      "isEnabled": true,
+      "hasExpertise": false,
+      "override": null
+    },
+    "performance": {
+      "isEnabled": false,
+      "hasExpertise": false,
+      "override": null
+    },
+    "persuasion": {
+      "isEnabled": false,
+      "hasExpertise": false,
+      "override": null
+    },
+    "religion": {
+      "isEnabled": false,
+      "hasExpertise": false,
+      "override": null
+    },
+    "sleightOfHand": {
+      "isEnabled": false,
+      "hasExpertise": false,
+      "override": null
+    },
+    "stealth": {
+      "isEnabled": true,
+      "hasExpertise": false,
+      "override": null
+    },
+    "survival": {
+      "isEnabled": false,
+      "hasExpertise": false,
+      "override": null
+    }
+  },
+  "damageVulnerabilities": {
+    "items": []
+  },
+  "damageResistances": {
+    "items": []
+  },
+  "damageImmunities": {
+    "items": []
+  },
+  "conditionImmunities": {
+    "items": []
+  },
+  "senses": {
+    "blindsight": null,
+    "blindBeyondThisRadius": false,
+    "darkvision": 120,
+    "tremorsense": null,
+    "truesight": null,
+    "useCustomText": false,
+    "customText": ""
+  },
+  "languages": {
+    "items": [
+      "Elvish",
+      "Undercommon"
+    ],
+    "telepathy": null
+  },
+  "challengeRating": {
+    "challengeRating": "1/4",
+    "experiencePoints": 50,
+    "proficiencyBonus": 2
+  },
+  "specialTraits": {
+    "blocks": [
+      {
+        "name": "Fey Ancestry",
+        "text": "[name] has advantage on saving throws against being charmed, and magic can't put [name] to sleep."
+      },
+      {
+        "name": "Innate Spellcasting",
+        "text": "[name]'s spellcasting ability is Charisma (spell save DC sdc[cha]). It can innately cast the following spells, requiring no material components:\n\nAt will: *dancing lights*\n1/day each: *darkness*, *faerie fire*"
+      },
+      {
+        "name": "Sunlight Sensitivity",
+        "text": "While in sunlight, [name] has disadvantage on attack rolls, as well as on Wisdom (Perception) checks that rely on sight."
+      }
+    ]
+  },
+  "actions": {
+    "blocks": [
+      {
+        "name": "Shortsword",
+        "text": "*Melee Weapon Attack:* atk[fin] to hit, reach 5 ft., one target. *Hit:* dmg[1d6 + fin] piercing damage."
+      },
+      {
+        "name": "Hand Crossbow",
+        "text": "*Ranged Weapon Attack:* atk[dex] to hit, range 30/120 ft., one target. *Hit:* dmg[1d6 + dex] piercing damage, and the target must succeed on a DC 13 Constitution saving throw or be poisoned for 1 hour. If the saving throw fails by 5 or more, the target is also unconscious while poisoned in this way. The target wakes up if it takes damage or if another creature takes an action to shake it awake."
+      }
+    ]
+  },
+  "reactions": {
+    "blocks": []
+  },
+  "legendaryActions": {
+    "blocks": [],
+    "description": "[name] can take 3 legendary actions, choosing from the options below. Only one legendary action option can be used at a time and only at the end of another creature's turn. [name] regains spent legendary actions at the start of its turn."
+  },
+  "layout": {
+    "columns": 1,
+    "twoColumnMode": "auto",
+    "twoColumnHeight": 600
+  },
+  "meta": {
+    "version": "1.0.0",
+    "description": "Created using statblock5e-creator",
+    "url": "https://frumple.github.io/statblock5e-creator"
+  }
+}

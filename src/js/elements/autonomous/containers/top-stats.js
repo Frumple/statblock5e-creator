@@ -1,5 +1,4 @@
 import StatsContainer from './stats-container.js';
-import currentContext from '../../../models/current-context.js';
 
 export default class TopStats extends StatsContainer {
   static get elementName() { return 'top-stats'; }
@@ -33,19 +32,17 @@ export default class TopStats extends StatsContainer {
     this.sections.get('advancedStats').updateSensesView();
   }
 
+  // Ability scores and proficiency bonus must be imported before other stats
+  // that depend on them, such as:
+  // Constitution hit points, saving throws, skills, and passive perception
+  importFromOpen5e(json) {
+    this.sections.get('abilityScores').importFromOpen5e(json);
+    this.sections.get('advancedStats').importFromOpen5e(json);
+    this.sections.get('basicStats').importFromOpen5e(json);
+  }
+
   importFromJson(json) {
-    // Import ability scores and proficiency bonus first before other stats
-    // that depend on them.
-    // (i.e. CON HP, saving throws, skills, passive perception)
-
-    // Special path to import JSON files created with version 0.1.1 or earlier
-    if ('attributes' in json) {
-      this.sections.get('abilityScores').importFromJson(json.attributes.abilityScores);
-      currentContext.creature.challengeRating.proficiencyBonus = json.attributes.proficiencyBonus;
-    } else {
-      this.sections.get('abilityScores').importFromJson(json.abilityScores);
-    }
-
+    this.sections.get('abilityScores').importFromJson(json.abilityScores);
     this.sections.get('advancedStats').importFromJson(json);
     this.sections.get('basicStats').importFromJson(json);
   }

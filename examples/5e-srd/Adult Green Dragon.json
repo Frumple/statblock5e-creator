@@ -1,0 +1,271 @@
+{
+  "title": {
+    "fullName": "Adult Green Dragon",
+    "shortName": "dragon",
+    "isProperNoun": false
+  },
+  "subtitle": {
+    "size": "Huge",
+    "type": "dragon",
+    "tags": "",
+    "alignment": "lawful evil",
+    "useCustomText": false,
+    "customText": ""
+  },
+  "armorClass": {
+    "armorClass": 19,
+    "armorType": "natural armor",
+    "hasShield": false,
+    "useCustomText": false,
+    "customText": ""
+  },
+  "hitPoints": {
+    "hitPoints": 207,
+    "useHitDie": true,
+    "hitDieQuantity": 18,
+    "hitDieSize": 12
+  },
+  "speed": {
+    "walk": 40,
+    "burrow": null,
+    "climb": null,
+    "fly": 80,
+    "hover": false,
+    "swim": 40,
+    "useCustomText": false,
+    "customText": ""
+  },
+  "abilityScores": {
+    "strength": 23,
+    "dexterity": 12,
+    "constitution": 21,
+    "intelligence": 18,
+    "wisdom": 15,
+    "charisma": 17
+  },
+  "savingThrows": {
+    "strength": {
+      "isEnabled": false,
+      "override": null
+    },
+    "dexterity": {
+      "isEnabled": true,
+      "override": null
+    },
+    "constitution": {
+      "isEnabled": true,
+      "override": null
+    },
+    "intelligence": {
+      "isEnabled": false,
+      "override": null
+    },
+    "wisdom": {
+      "isEnabled": true,
+      "override": null
+    },
+    "charisma": {
+      "isEnabled": true,
+      "override": null
+    }
+  },
+  "skills": {
+    "acrobatics": {
+      "isEnabled": false,
+      "hasExpertise": false,
+      "override": null
+    },
+    "animalHandling": {
+      "isEnabled": false,
+      "hasExpertise": false,
+      "override": null
+    },
+    "arcana": {
+      "isEnabled": false,
+      "hasExpertise": false,
+      "override": null
+    },
+    "athletics": {
+      "isEnabled": false,
+      "hasExpertise": false,
+      "override": null
+    },
+    "deception": {
+      "isEnabled": true,
+      "hasExpertise": false,
+      "override": null
+    },
+    "history": {
+      "isEnabled": false,
+      "hasExpertise": false,
+      "override": null
+    },
+    "insight": {
+      "isEnabled": true,
+      "hasExpertise": false,
+      "override": null
+    },
+    "intimidation": {
+      "isEnabled": false,
+      "hasExpertise": false,
+      "override": null
+    },
+    "investigation": {
+      "isEnabled": false,
+      "hasExpertise": false,
+      "override": null
+    },
+    "medicine": {
+      "isEnabled": false,
+      "hasExpertise": false,
+      "override": null
+    },
+    "nature": {
+      "isEnabled": false,
+      "hasExpertise": false,
+      "override": null
+    },
+    "perception": {
+      "isEnabled": true,
+      "hasExpertise": true,
+      "override": null
+    },
+    "performance": {
+      "isEnabled": false,
+      "hasExpertise": false,
+      "override": null
+    },
+    "persuasion": {
+      "isEnabled": true,
+      "hasExpertise": false,
+      "override": null
+    },
+    "religion": {
+      "isEnabled": false,
+      "hasExpertise": false,
+      "override": null
+    },
+    "sleightOfHand": {
+      "isEnabled": false,
+      "hasExpertise": false,
+      "override": null
+    },
+    "stealth": {
+      "isEnabled": true,
+      "hasExpertise": false,
+      "override": null
+    },
+    "survival": {
+      "isEnabled": false,
+      "hasExpertise": false,
+      "override": null
+    }
+  },
+  "damageVulnerabilities": {
+    "items": []
+  },
+  "damageResistances": {
+    "items": []
+  },
+  "damageImmunities": {
+    "items": [
+      "poison"
+    ]
+  },
+  "conditionImmunities": {
+    "items": [
+      "poisoned"
+    ]
+  },
+  "senses": {
+    "blindsight": 60,
+    "blindBeyondThisRadius": false,
+    "darkvision": 120,
+    "tremorsense": null,
+    "truesight": null,
+    "useCustomText": false,
+    "customText": ""
+  },
+  "languages": {
+    "items": [
+      "Common",
+      "Draconic"
+    ],
+    "telepathy": null
+  },
+  "challengeRating": {
+    "challengeRating": "15",
+    "experiencePoints": 13000,
+    "proficiencyBonus": 5
+  },
+  "specialTraits": {
+    "blocks": [
+      {
+        "name": "Amphibious",
+        "text": "[name] can breathe air and water."
+      },
+      {
+        "name": "Legendary Resistance (3/Day)",
+        "text": "If [name] fails a saving throw, it can choose to succeed instead."
+      }
+    ]
+  },
+  "actions": {
+    "blocks": [
+      {
+        "name": "Multiattack",
+        "text": "[name] can use its Frightful Presence. It then makes three attacks: one with its bite and two with its claws."
+      },
+      {
+        "name": "Bite",
+        "text": "*Melee Weapon Attack:* atk[str] to hit, reach 10 ft., one target. *Hit:* dmg[2d10 + str] piercing damage plus dmg[2d6] poison damage."
+      },
+      {
+        "name": "Claw",
+        "text": "*Melee Weapon Attack:* atk[str] to hit, reach 5 ft., one target. *Hit:* dmg[2d6 + str] slashing damage."
+      },
+      {
+        "name": "Tail",
+        "text": "*Melee Weapon Attack:* atk[str] to hit, reach 15 ft., one target. *Hit:* dmg[2d8 + str] bludgeoning damage."
+      },
+      {
+        "name": "Frightful Presence",
+        "text": "Each creature of [name]'s choice that is within 120 feet of [name] and aware of it must succeed on a DC 16 Wisdom saving throw or become frightened for 1 minute. A creature can repeat the saving throw at the end of each of its turns, ending the effect on itself on a success. If a creature's saving throw is successful or the effect ends for it, the creature is immune to [name]'s Frightful Presence for the next 24 hours ."
+      },
+      {
+        "name": "Poison Breath (Recharge 5-6)",
+        "text": "[name] exhales poisonous gas in a 60-foot cone. Each creature in that area must make a DC 18 Constitution saving throw, taking dmg[16d6] poison damage on a failed save, or half as much damage on a successful one."
+      }
+    ]
+  },
+  "reactions": {
+    "blocks": []
+  },
+  "legendaryActions": {
+    "blocks": [
+      {
+        "name": "Detect",
+        "text": "[name] makes a Wisdom (Perception) check."
+      },
+      {
+        "name": "Tail Attack",
+        "text": "[name] makes a tail attack."
+      },
+      {
+        "name": "Wing Attack (Costs 2 Actions)",
+        "text": "[name] beats its wings. Each creature within 10 ft. of [name] must succeed on a DC 19 Dexterity saving throw or take dmg[2d6 + str] bludgeoning damage and be knocked prone. [name] can then fly up to half its flying speed."
+      }
+    ],
+    "description": "[name] can take 3 legendary actions, choosing from the options below. Only one legendary action option can be used at a time and only at the end of another creature's turn. [name] regains spent legendary actions at the start of its turn."
+  },
+  "layout": {
+    "columns": 1,
+    "twoColumnMode": "auto",
+    "twoColumnHeight": 600
+  },
+  "meta": {
+    "version": "1.0.0",
+    "description": "Created using statblock5e-creator",
+    "url": "https://frumple.github.io/statblock5e-creator"
+  }
+}

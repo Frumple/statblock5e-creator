@@ -27,7 +27,7 @@
 .speed-edit-section__fly-label { grid-area: 4 / 2; }
 .speed-edit-section__fly-input { grid-area: 4 / 3; }
 .speed-edit-section__fly-unit { grid-area: 4 / 4; }
-.speed-edit-section__hover-container { 
+.speed-edit-section__hover-container {
   grid-area: 4 / 5;
   display: flex;
   align-items: center;

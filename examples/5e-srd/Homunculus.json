@@ -1,0 +1,234 @@
+{
+  "title": {
+    "fullName": "Homunculus",
+    "shortName": "",
+    "isProperNoun": false
+  },
+  "subtitle": {
+    "size": "Tiny",
+    "type": "construct",
+    "tags": "",
+    "alignment": "neutral",
+    "useCustomText": false,
+    "customText": ""
+  },
+  "armorClass": {
+    "armorClass": 13,
+    "armorType": "natural armor",
+    "hasShield": false,
+    "useCustomText": false,
+    "customText": ""
+  },
+  "hitPoints": {
+    "hitPoints": 5,
+    "useHitDie": true,
+    "hitDieQuantity": 2,
+    "hitDieSize": 4
+  },
+  "speed": {
+    "walk": 20,
+    "burrow": null,
+    "climb": null,
+    "fly": 40,
+    "hover": false,
+    "swim": null,
+    "useCustomText": false,
+    "customText": ""
+  },
+  "abilityScores": {
+    "strength": 4,
+    "dexterity": 15,
+    "constitution": 11,
+    "intelligence": 10,
+    "wisdom": 10,
+    "charisma": 7
+  },
+  "savingThrows": {
+    "strength": {
+      "isEnabled": false,
+      "override": null
+    },
+    "dexterity": {
+      "isEnabled": false,
+      "override": null
+    },
+    "constitution": {
+      "isEnabled": false,
+      "override": null
+    },
+    "intelligence": {
+      "isEnabled": false,
+      "override": null
+    },
+    "wisdom": {
+      "isEnabled": false,
+      "override": null
+    },
+    "charisma": {
+      "isEnabled": false,
+      "override": null
+    }
+  },
+  "skills": {
+    "acrobatics": {
+      "isEnabled": false,
+      "hasExpertise": false,
+      "override": null
+    },
+    "animalHandling": {
+      "isEnabled": false,
+      "hasExpertise": false,
+      "override": null
+    },
+    "arcana": {
+      "isEnabled": false,
+      "hasExpertise": false,
+      "override": null
+    },
+    "athletics": {
+      "isEnabled": false,
+      "hasExpertise": false,
+      "override": null
+    },
+    "deception": {
+      "isEnabled": false,
+      "hasExpertise": false,
+      "override": null
+    },
+    "history": {
+      "isEnabled": false,
+      "hasExpertise": false,
+      "override": null
+    },
+    "insight": {
+      "isEnabled": false,
+      "hasExpertise": false,
+      "override": null
+    },
+    "intimidation": {
+      "isEnabled": false,
+      "hasExpertise": false,
+      "override": null
+    },
+    "investigation": {
+      "isEnabled": false,
+      "hasExpertise": false,
+      "override": null
+    },
+    "medicine": {
+      "isEnabled": false,
+      "hasExpertise": false,
+      "override": null
+    },
+    "nature": {
+      "isEnabled": false,
+      "hasExpertise": false,
+      "override": null
+    },
+    "perception": {
+      "isEnabled": false,
+      "hasExpertise": false,
+      "override": null
+    },
+    "performance": {
+      "isEnabled": false,
+      "hasExpertise": false,
+      "override": null
+    },
+    "persuasion": {
+      "isEnabled": false,
+      "hasExpertise": false,
+      "override": null
+    },
+    "religion": {
+      "isEnabled": false,
+      "hasExpertise": false,
+      "override": null
+    },
+    "sleightOfHand": {
+      "isEnabled": false,
+      "hasExpertise": false,
+      "override": null
+    },
+    "stealth": {
+      "isEnabled": false,
+      "hasExpertise": false,
+      "override": null
+    },
+    "survival": {
+      "isEnabled": false,
+      "hasExpertise": false,
+      "override": null
+    }
+  },
+  "damageVulnerabilities": {
+    "items": []
+  },
+  "damageResistances": {
+    "items": []
+  },
+  "damageImmunities": {
+    "items": [
+      "poison"
+    ]
+  },
+  "conditionImmunities": {
+    "items": [
+      "charmed",
+      "poisoned"
+    ]
+  },
+  "senses": {
+    "blindsight": null,
+    "blindBeyondThisRadius": false,
+    "darkvision": 60,
+    "tremorsense": null,
+    "truesight": null,
+    "useCustomText": false,
+    "customText": ""
+  },
+  "languages": {
+    "items": [
+      "understands the languages of its creator but can't speak"
+    ],
+    "telepathy": null
+  },
+  "challengeRating": {
+    "challengeRating": "0",
+    "experiencePoints": 10,
+    "proficiencyBonus": 2
+  },
+  "specialTraits": {
+    "blocks": [
+      {
+        "name": "Telepathic Bond",
+        "text": "While [name] is on the same plane of existence as its master, it can magically convey what it senses to its master, and the two can communicate telepathically."
+      }
+    ]
+  },
+  "actions": {
+    "blocks": [
+      {
+        "name": "Bite",
+        "text": "*Melee Weapon Attack:* atk[dex] to hit, reach 5 ft., one creature. *Hit:* 1 piercing damage, and the target must succeed on a DC 10 Constitution saving throw or be poisoned for 1 minute. If the saving throw fails by 5 or more, the target is instead poisoned for dmg[1d10] minutes and unconscious while poisoned in this way."
+      }
+    ]
+  },
+  "reactions": {
+    "blocks": []
+  },
+  "legendaryActions": {
+    "blocks": [],
+    "description": "[name] can take 3 legendary actions, choosing from the options below. Only one legendary action option can be used at a time and only at the end of another creature's turn. [name] regains spent legendary actions at the start of its turn."
+  },
+  "layout": {
+    "columns": 1,
+    "twoColumnMode": "auto",
+    "twoColumnHeight": 600
+  },
+  "meta": {
+    "version": "1.0.0",
+    "description": "Created using statblock5e-creator",
+    "url": "https://frumple.github.io/statblock5e-creator"
+  }
+}

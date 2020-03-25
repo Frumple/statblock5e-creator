@@ -1,0 +1,246 @@
+{
+  "title": {
+    "fullName": "Dryad",
+    "shortName": "",
+    "isProperNoun": false
+  },
+  "subtitle": {
+    "size": "Medium",
+    "type": "fey",
+    "tags": "",
+    "alignment": "neutral",
+    "useCustomText": false,
+    "customText": ""
+  },
+  "armorClass": {
+    "armorClass": 10,
+    "armorType": "",
+    "hasShield": false,
+    "useCustomText": true,
+    "customText": "11 (16 with _barkskin_)"
+  },
+  "hitPoints": {
+    "hitPoints": 22,
+    "useHitDie": true,
+    "hitDieQuantity": 5,
+    "hitDieSize": 8
+  },
+  "speed": {
+    "walk": 30,
+    "burrow": null,
+    "climb": null,
+    "fly": null,
+    "hover": false,
+    "swim": null,
+    "useCustomText": false,
+    "customText": ""
+  },
+  "abilityScores": {
+    "strength": 10,
+    "dexterity": 12,
+    "constitution": 11,
+    "intelligence": 14,
+    "wisdom": 15,
+    "charisma": 18
+  },
+  "savingThrows": {
+    "strength": {
+      "isEnabled": false,
+      "override": null
+    },
+    "dexterity": {
+      "isEnabled": false,
+      "override": null
+    },
+    "constitution": {
+      "isEnabled": false,
+      "override": null
+    },
+    "intelligence": {
+      "isEnabled": false,
+      "override": null
+    },
+    "wisdom": {
+      "isEnabled": false,
+      "override": null
+    },
+    "charisma": {
+      "isEnabled": false,
+      "override": null
+    }
+  },
+  "skills": {
+    "acrobatics": {
+      "isEnabled": false,
+      "hasExpertise": false,
+      "override": null
+    },
+    "animalHandling": {
+      "isEnabled": false,
+      "hasExpertise": false,
+      "override": null
+    },
+    "arcana": {
+      "isEnabled": false,
+      "hasExpertise": false,
+      "override": null
+    },
+    "athletics": {
+      "isEnabled": false,
+      "hasExpertise": false,
+      "override": null
+    },
+    "deception": {
+      "isEnabled": false,
+      "hasExpertise": false,
+      "override": null
+    },
+    "history": {
+      "isEnabled": false,
+      "hasExpertise": false,
+      "override": null
+    },
+    "insight": {
+      "isEnabled": false,
+      "hasExpertise": false,
+      "override": null
+    },
+    "intimidation": {
+      "isEnabled": false,
+      "hasExpertise": false,
+      "override": null
+    },
+    "investigation": {
+      "isEnabled": false,
+      "hasExpertise": false,
+      "override": null
+    },
+    "medicine": {
+      "isEnabled": false,
+      "hasExpertise": false,
+      "override": null
+    },
+    "nature": {
+      "isEnabled": false,
+      "hasExpertise": false,
+      "override": null
+    },
+    "perception": {
+      "isEnabled": true,
+      "hasExpertise": false,
+      "override": null
+    },
+    "performance": {
+      "isEnabled": false,
+      "hasExpertise": false,
+      "override": null
+    },
+    "persuasion": {
+      "isEnabled": false,
+      "hasExpertise": false,
+      "override": null
+    },
+    "religion": {
+      "isEnabled": false,
+      "hasExpertise": false,
+      "override": null
+    },
+    "sleightOfHand": {
+      "isEnabled": false,
+      "hasExpertise": false,
+      "override": null
+    },
+    "stealth": {
+      "isEnabled": true,
+      "hasExpertise": true,
+      "override": null
+    },
+    "survival": {
+      "isEnabled": false,
+      "hasExpertise": false,
+      "override": null
+    }
+  },
+  "damageVulnerabilities": {
+    "items": []
+  },
+  "damageResistances": {
+    "items": []
+  },
+  "damageImmunities": {
+    "items": []
+  },
+  "conditionImmunities": {
+    "items": []
+  },
+  "senses": {
+    "blindsight": null,
+    "blindBeyondThisRadius": false,
+    "darkvision": 60,
+    "tremorsense": null,
+    "truesight": null,
+    "useCustomText": false,
+    "customText": ""
+  },
+  "languages": {
+    "items": [
+      "Elvish",
+      "Sylvan"
+    ],
+    "telepathy": null
+  },
+  "challengeRating": {
+    "challengeRating": "1",
+    "experiencePoints": 200,
+    "proficiencyBonus": 2
+  },
+  "specialTraits": {
+    "blocks": [
+      {
+        "name": "Innate Spellcasting",
+        "text": "[name]'s innate spellcasting ability is Charisma (spell save DC sdc[cha]). [name] can innately cast the following spells, requiring no material components:\n\nAt will: *druidcraft*\n3/day each: *entangle*, *goodberry*\n1/day each: *barkskin*, *pass without trace*, *shillelagh*"
+      },
+      {
+        "name": "Magic Resistance",
+        "text": "[name] has advantage on saving throws against spells and other magical effects."
+      },
+      {
+        "name": "Speak with Beasts and Plants",
+        "text": "[name] can communicate with beasts and plants as if they shared a language."
+      },
+      {
+        "name": "Tree Stride",
+        "text": "Once on her turn, [name] can use 10 ft. of her movement to step magically into one living tree within her reach and emerge from a second living tree within 60 ft. of the first tree, appearing in an unoccupied space within 5 ft. of the second tree. Both trees must be large or bigger."
+      }
+    ]
+  },
+  "actions": {
+    "blocks": [
+      {
+        "name": "Club",
+        "text": "*Melee Weapon Attack:* atk[str] to hit (atk[cha] to hit with shillelagh), reach 5 ft., one target. Hit: dmg[1d4] bludgeoning damage, or dmg[1d8 + cha] bludgeoning damage with shillelagh."
+      },
+      {
+        "name": "Fey Charm",
+        "text": "[name] targets one humanoid or beast that she can see within 30 feet of her. If the target can see [name], it must succeed on a DC 14 Wisdom saving throw or be magically charmed. The charmed creature regards [name] as a trusted friend to be heeded and protected. Although the target isn't under [name]'s control, it takes [name]'s requests or actions in the most favorable way it can.\n  Each time [name] or its allies do anything harmful to the target, it can repeat the saving throw, ending the effect on itself on a success. Otherwise, the effect lasts 24 hours or until [name] dies, is on a different plane of existence from the target, or ends the effect as a bonus action. If a target's saving throw is successful, the target is immune to [name]'s Fey Charm for the next 24 hours.\n  [name] can have no more than one humanoid and up to three beasts charmed at a time."
+      }
+    ]
+  },
+  "reactions": {
+    "blocks": []
+  },
+  "legendaryActions": {
+    "blocks": [],
+    "description": "[name] can take 3 legendary actions, choosing from the options below. Only one legendary action option can be used at a time and only at the end of another creature's turn. [name] regains spent legendary actions at the start of its turn."
+  },
+  "layout": {
+    "columns": 1,
+    "twoColumnMode": "auto",
+    "twoColumnHeight": 600
+  },
+  "meta": {
+    "version": "1.0.0",
+    "description": "Created using statblock5e-creator",
+    "url": "https://frumple.github.io/statblock5e-creator"
+  }
+}

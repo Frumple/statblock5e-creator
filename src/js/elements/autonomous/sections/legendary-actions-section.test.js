@@ -9,6 +9,7 @@ import { inputValueAndTriggerEvent } from '../../../helpers/element-helpers.js';
 
 const expectedHeading = 'Legendary Actions';
 const expectedBlockType = 'Legendary Action';
+const open5eJsonKey = 'legendary_actions';
 
 const titleModel = CurrentContext.creature.title;
 const abilitiesModel = CurrentContext.creature.abilities;
@@ -59,7 +60,7 @@ describe('when the show section is clicked', () => {
   describe('and the description is changed and the edit section is submitted', () => {
     const description = '[name] can take 5 legendary actions, choosing from one of the options below. Only one legendary action option can be used at a time and only at the end of another creature\'s turn. [name] regains spent legendary actions at the start of its turn.';
     const markdownDescription = 'The dragon can take 5 legendary actions, choosing from one of the options below. Only one legendary action option can be used at a time and only at the end of another creature\'s turn. The dragon regains spent legendary actions at the start of its turn.';
-    const htmlDescription = 'The dragon can take 5 legendary actions, choosing from one of the options below. Only one legendary action option can be used at a time and only at the end of another creature\'s turn. The dragon regains spent legendary actions at the start of its turn.';
+    const htmlDescription = markdownDescription;
 
     it('should switch to mode and update the description, but the description is not shown if there are no legendary actions', () => {
       titleModel.fullName = 'Adult Red Dragon';
@@ -127,14 +128,13 @@ describe('when the show section is clicked', () => {
   describe('and blocks are added and/or removed, and the edit section is submitted', () => {
     it('should add a single block', () => {
       const block = {
-        name: 'Detect',
-        text: '[name] makes a Wisdom (Perception) check.',
-        markdownText: 'The dragon makes a Wisdom (Perception) check.',
-        htmlText: 'The dragon makes a Wisdom (Perception) check.'
+        name: 'Disrupt Life (Costs 3 Actions)',
+        text: 'Each living creature within 20 feet of [name] must make a DC 18 Constitution saving throw against this magic, taking dmg[6d6] necrotic damage on a failed save, or half as much damage on a successful one.',
+        markdownText: 'Each living creature within 20 feet of the lich must make a DC 18 Constitution saving throw against this magic, taking 21 (6d6) necrotic damage on a failed save, or half as much damage on a successful one.',
+        htmlText: 'Each living creature within 20 feet of the lich must make a DC 18 Constitution saving throw against this magic, taking 21 (6d6) necrotic damage on a failed save, or half as much damage on a successful one.'
       };
 
-      titleModel.fullName = 'Adult Red Dragon';
-      titleModel.shortName = 'dragon';
+      titleModel.fullName = 'Lich';
 
       sharedSpecs.shouldAddASingleBlock(legendaryActionsSection, legendaryActionsModel, block);
     });
@@ -321,6 +321,100 @@ describe('when the show section is clicked', () => {
 
     it('should display errors if the block name is blank and block text has invalid markdown syntax', () => {
       sharedSpecs.shouldDisplayErrorsIfBlockNameIsBlankAndBlockTextHasInvalidMarkdownSyntax(legendaryActionsSection, expectedBlockType);
+    });
+  });
+});
+
+describe('when import from Open5e', () => {
+  it('should import no blocks, and the description should be kept to the default and should not be visible', () => {
+    const inputtedDescription = '';
+
+    const description = '[name] can take 3 legendary actions, choosing from the options below. Only one legendary action option can be used at a time and only at the end of another creature\'s turn. [name] regains spent legendary actions at the start of its turn.';
+    const markdownDescription = 'The commoner can take 3 legendary actions, choosing from the options below. Only one legendary action option can be used at a time and only at the end of another creature\'s turn. The commoner regains spent legendary actions at the start of its turn.';
+    const htmlDescription = markdownDescription;
+
+    sharedSpecs.shouldImportFromOpen5e(legendaryActionsSection, legendaryActionsModel, open5eJsonKey, [], inputtedDescription);
+
+    verifyModelDescription(description, markdownDescription, htmlDescription);
+    verifyEditModeDescription(description);
+    verifyShowModeDescription(htmlDescription, false);
+  });
+
+  it('should import single block', () => {
+    const block = {
+      name: 'Disrupt Life (Costs 3 Actions)',
+      text: 'Each living creature within 20 feet of the lich must make a DC 18 Constitution saving throw against this magic, taking 21 (6d6) necrotic damage on a failed save, or half as much damage on a successful one.'
+    };
+
+    const description = 'The lich can take 3 legendary actions, choosing from the options below. Only one legendary action option can be used at a time and only at the end of another creature\'s turn. The lich regains spent legendary actions at the start of its turn.';
+
+    sharedSpecs.shouldImportFromOpen5e(legendaryActionsSection, legendaryActionsModel, open5eJsonKey, [block], description);
+
+    verifyModelDescription(description, description, description);
+    verifyEditModeDescription(description);
+    verifyShowModeDescription(description, true);
+  });
+
+  it('should import single block with multiline text', () => {
+    const block = {
+      name: 'Multiline Legendary Action',
+      text: '**Line 1**. The dummy is here.\n  **Line 2**. The dummy is there.\n    **Line 3**. The dummy is everywhere.',
+      markdownText: '**Line 1**. The dummy is here.  \n>   **Line 2**. The dummy is there.  \n>     **Line 3**. The dummy is everywhere.',
+      htmlText: '<strong>Line 1</strong>. The dummy is here.\n  <strong>Line 2</strong>. The dummy is there.\n    <strong>Line 3</strong>. The dummy is everywhere.'
+    };
+
+    const description = '**Line 1**. The dummy is here.\n  **Line 2**. The dummy is there.\n    **Line 3**. The dummy is everywhere.';
+    const markdownDescription = '**Line 1**. The dummy is here.  \n>   **Line 2**. The dummy is there.  \n>     **Line 3**. The dummy is everywhere.';
+    const htmlDescription = '<strong>Line 1</strong>. The dummy is here.\n  <strong>Line 2</strong>. The dummy is there.\n    <strong>Line 3</strong>. The dummy is everywhere.';
+
+    sharedSpecs.shouldImportFromOpen5e(legendaryActionsSection, legendaryActionsModel, open5eJsonKey, [block], description);
+
+    verifyModelDescription(description, markdownDescription, htmlDescription);
+    verifyEditModeDescription(description);
+    verifyShowModeDescription(htmlDescription, true);
+  });
+
+  it('should import multiple blocks', () => {
+    const blocks = [
+      {
+        name: 'Detect',
+        text: 'The dragon makes a Wisdom (Perception) check.'
+      },
+      {
+        name: 'Tail Attack',
+        text: 'The dragon makes a tail attack.'
+      },
+      {
+        name: 'Wing Attack (Costs 2 Actions)',
+        text: 'The dragon beats its wings. Each creature within 10 ft. of the dragon must succeed on a DC 22 Dexterity saving throw or take 15 (2d6 + 8) bludgeoning damage and be knocked prone. The dragon can then fly up to half its flying speed.'
+      }
+    ];
+
+    const description = 'The dragon can take 3 legendary actions, choosing from the options below. Only one legendary action option can be used at a time and only at the end of another creature\'s turn. The dragon regains spent legendary actions at the start of its turn.';
+
+    sharedSpecs.shouldImportFromOpen5e(legendaryActionsSection, legendaryActionsModel, open5eJsonKey, blocks, description);
+
+    verifyModelDescription(description, description, description);
+    verifyEditModeDescription(description);
+    verifyShowModeDescription(description, true);
+  });
+});
+
+describe('when the section is empty and not visible', () => {
+  describe('and a creature with blocks is imported from JSON', () => {
+    it('should show the new blocks', () => {
+      const blocksToImport = [
+        {
+          name: 'Detect',
+          text: '[name] makes a Wisdom (Perception) check.',
+          htmlText: 'The dragon makes a Wisdom (Perception) check.'
+        }
+      ];
+
+      titleModel.fullName = 'Adult Red Dragon';
+      titleModel.shortName = 'dragon';
+
+      sharedSpecs.shouldShowBlocksImportedFromJsonIfSectionWasInitiallyEmptyAndNotVisible(legendaryActionsSection, blocksToImport);
     });
   });
 });

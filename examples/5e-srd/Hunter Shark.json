@@ -1,0 +1,231 @@
+{
+  "title": {
+    "fullName": "Hunter Shark",
+    "shortName": "shark",
+    "isProperNoun": false
+  },
+  "subtitle": {
+    "size": "Large",
+    "type": "beast",
+    "tags": "",
+    "alignment": "unaligned",
+    "useCustomText": false,
+    "customText": ""
+  },
+  "armorClass": {
+    "armorClass": 12,
+    "armorType": "natural armor",
+    "hasShield": false,
+    "useCustomText": false,
+    "customText": ""
+  },
+  "hitPoints": {
+    "hitPoints": 45,
+    "useHitDie": true,
+    "hitDieQuantity": 6,
+    "hitDieSize": 10
+  },
+  "speed": {
+    "walk": null,
+    "burrow": null,
+    "climb": null,
+    "fly": null,
+    "hover": false,
+    "swim": 40,
+    "useCustomText": false,
+    "customText": ""
+  },
+  "abilityScores": {
+    "strength": 18,
+    "dexterity": 13,
+    "constitution": 15,
+    "intelligence": 1,
+    "wisdom": 10,
+    "charisma": 4
+  },
+  "savingThrows": {
+    "strength": {
+      "isEnabled": false,
+      "override": null
+    },
+    "dexterity": {
+      "isEnabled": false,
+      "override": null
+    },
+    "constitution": {
+      "isEnabled": false,
+      "override": null
+    },
+    "intelligence": {
+      "isEnabled": false,
+      "override": null
+    },
+    "wisdom": {
+      "isEnabled": false,
+      "override": null
+    },
+    "charisma": {
+      "isEnabled": false,
+      "override": null
+    }
+  },
+  "skills": {
+    "acrobatics": {
+      "isEnabled": false,
+      "hasExpertise": false,
+      "override": null
+    },
+    "animalHandling": {
+      "isEnabled": false,
+      "hasExpertise": false,
+      "override": null
+    },
+    "arcana": {
+      "isEnabled": false,
+      "hasExpertise": false,
+      "override": null
+    },
+    "athletics": {
+      "isEnabled": false,
+      "hasExpertise": false,
+      "override": null
+    },
+    "deception": {
+      "isEnabled": false,
+      "hasExpertise": false,
+      "override": null
+    },
+    "history": {
+      "isEnabled": false,
+      "hasExpertise": false,
+      "override": null
+    },
+    "insight": {
+      "isEnabled": false,
+      "hasExpertise": false,
+      "override": null
+    },
+    "intimidation": {
+      "isEnabled": false,
+      "hasExpertise": false,
+      "override": null
+    },
+    "investigation": {
+      "isEnabled": false,
+      "hasExpertise": false,
+      "override": null
+    },
+    "medicine": {
+      "isEnabled": false,
+      "hasExpertise": false,
+      "override": null
+    },
+    "nature": {
+      "isEnabled": false,
+      "hasExpertise": false,
+      "override": null
+    },
+    "perception": {
+      "isEnabled": true,
+      "hasExpertise": false,
+      "override": null
+    },
+    "performance": {
+      "isEnabled": false,
+      "hasExpertise": false,
+      "override": null
+    },
+    "persuasion": {
+      "isEnabled": false,
+      "hasExpertise": false,
+      "override": null
+    },
+    "religion": {
+      "isEnabled": false,
+      "hasExpertise": false,
+      "override": null
+    },
+    "sleightOfHand": {
+      "isEnabled": false,
+      "hasExpertise": false,
+      "override": null
+    },
+    "stealth": {
+      "isEnabled": false,
+      "hasExpertise": false,
+      "override": null
+    },
+    "survival": {
+      "isEnabled": false,
+      "hasExpertise": false,
+      "override": null
+    }
+  },
+  "damageVulnerabilities": {
+    "items": []
+  },
+  "damageResistances": {
+    "items": []
+  },
+  "damageImmunities": {
+    "items": []
+  },
+  "conditionImmunities": {
+    "items": []
+  },
+  "senses": {
+    "blindsight": null,
+    "blindBeyondThisRadius": false,
+    "darkvision": 30,
+    "tremorsense": null,
+    "truesight": null,
+    "useCustomText": false,
+    "customText": ""
+  },
+  "languages": {
+    "items": [],
+    "telepathy": null
+  },
+  "challengeRating": {
+    "challengeRating": "2",
+    "experiencePoints": 450,
+    "proficiencyBonus": 2
+  },
+  "specialTraits": {
+    "blocks": [
+      {
+        "name": "Blood Frenzy",
+        "text": "[name] has advantage on melee attack rolls against any creature that doesn't have all its hit points."
+      },
+      {
+        "name": "Water Breathing",
+        "text": "[name] can breathe only underwater."
+      }
+    ]
+  },
+  "actions": {
+    "blocks": [
+      {
+        "name": "Bite",
+        "text": "*Melee Weapon Attack:* atk[str] to hit, reach 5 ft., one target. *Hit:* dmg[2d8 + str] piercing damage."
+      }
+    ]
+  },
+  "reactions": {
+    "blocks": []
+  },
+  "legendaryActions": {
+    "blocks": [],
+    "description": "[name] can take 3 legendary actions, choosing from the options below. Only one legendary action option can be used at a time and only at the end of another creature's turn. [name] regains spent legendary actions at the start of its turn."
+  },
+  "layout": {
+    "columns": 1,
+    "twoColumnMode": "auto",
+    "twoColumnHeight": 600
+  },
+  "meta": {
+    "version": "1.0.0",
+    "description": "Created using statblock5e-creator",
+    "url": "https://frumple.github.io/statblock5e-creator"
+  }
+}

@@ -15,7 +15,7 @@ export default class EditableBlockList extends DragAndDropList {
   constructor() {
     super(EditableBlockList.templatePaths);
 
-    this.disableBlockNameItalics = false;
+    this.isLegendaryActionBlock = false;
     this.blockType = null;
   }
 
@@ -32,8 +32,8 @@ export default class EditableBlockList extends DragAndDropList {
   addBlock(name = '', text = '') {
     const block = EditableBlockList.createBlock(this, name, text);
 
-    if (this.disableBlockNameItalics) {
-      block.disableBlockNameItalics();
+    if (this.isLegendaryActionBlock) {
+      block.applyLegendaryActionStyles();
     }
 
     if (isRunningInJsdom) {

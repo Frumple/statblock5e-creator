@@ -2,15 +2,32 @@ import BlockListModel from './block-list-model.js';
 
 export default class LegendaryActions extends BlockListModel {
   constructor() {
-    super('Legendary Actions', 'Legendary Action');
+    super('Legendary Actions',
+          'Legendary Action',
+          'legendary_actions');
   }
 
   reset() {
     super.reset();
 
+    this.resetDescription();
+  }
+
+  resetDescription() {
     this.description = '[name] can take 3 legendary actions, choosing from the options below. Only one legendary action option can be used at a time and only at the end of another creature\'s turn. [name] regains spent legendary actions at the start of its turn.';
     this.markdownDescription = '';
     this.htmlDescription = '';
+  }
+
+  fromOpen5e(json) {
+    super.fromOpen5e(json);
+
+    this.resetDescription();
+
+    const legendaryDesc = json['legendary_desc'];
+    if (legendaryDesc !== '') {
+      this.description = legendaryDesc;
+    }
   }
 
   fromJson(json) {

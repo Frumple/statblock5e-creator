@@ -6,7 +6,7 @@
 
 start
   = line:Line+ { return line.join(''); }
-  / End { return ""; }
+  / End { return ''; }
 
 Line
   = BlankLine
@@ -16,7 +16,7 @@ BlankLine
   = NewLineChar
 
 NormalLine
-  = beginningInline:BeginningInline inline:Inline* end:EndOfLine { return `${beginningInline}${inline.join('')}${end ? end : ''}`; }
+  = whitespace:WhitespaceOptional beginningInline:BeginningInline inline:Inline* end:EndOfLine { return `${whitespace}${beginningInline}${inline.join('')}${end ? end : ''}`; }
 
 BeginningInline
   = BeginningNameExpression
@@ -33,15 +33,13 @@ InlineCommon
   / PeriodChar
 
 SentenceBeginningNameExpression
-  = period:PeriodChar whitespace:Whitespace expression:BeginningNameExpression { return `${period}${whitespace}${expression}`; }
+  = period:PeriodChar markdown:MarkdownOptional whitespace:Whitespace expression:BeginningNameExpression { return `${period}${markdown}${whitespace}${expression}`; }
 
 BeginningNameExpression
-  = BeginningName
-  / BeginningFullName
+  = open:OpeningRoundBracketOptional expression:(BeginningName / BeginningFullName) close:ClosingRoundBracketOptional { return `${open}${expression}${close}`; }
 
 NameExpression
-  = Name
-  / FullName
+  = open:OpeningRoundBracketOptional expression:(Name / FullName) close:ClosingRoundBracketOptional { return `${open}${expression}${close}`; }
 
 BeginningName
   = '[name]' { return capitalizeFirstLetter(options.creature.name); }
@@ -61,11 +59,32 @@ Text
 Whitespace
   = $(SpaceChar+)
 
+WhitespaceOptional
+  = $(SpaceChar*)
+
+MarkdownOptional
+  = $(MarkdownChar*)
+
+OpeningRoundBracketOptional
+  = $(OpeningRoundBracketChar?)
+
+ClosingRoundBracketOptional
+  = $(ClosingRoundBracketChar?)
+
 EndOfLine
   = NewLineChar / End
 
 NormalChar
   = !( PeriodChar / SpaceChar / NewLineChar ) .
+
+OpeningRoundBracketChar
+  = '(';
+
+ClosingRoundBracketChar
+  = ')'
+
+MarkdownChar
+  = '*' / '_'
 
 NewLineChar
   = '\n' / $('\r' '\n'?)

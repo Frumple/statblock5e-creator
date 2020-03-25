@@ -46,11 +46,20 @@
   margin: 0;
 }
 
+.editable-block__preview_hanging-indent {
+  padding-left: 1em;
+  text-indent: -1em;
+}
+
 .editable-block__name-preview {
   margin: 0;
   display: inline;
   font-weight: bold;
   font-style: italic;
+}
+
+.editable-block__name-preview_no-italic {
+  font-style: normal;
 }
 
 .editable-block__text-preview {

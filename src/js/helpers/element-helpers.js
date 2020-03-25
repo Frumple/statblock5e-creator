@@ -32,6 +32,18 @@ export function inputValueAndTriggerEvent(element, value) {
   element.dispatchEvent(new Event('input'));
 }
 
+export function addOptionsToSelectElement(element, optionValues) {
+  for (const optionValue of optionValues) {
+    element.add(new Option(optionValue, optionValue));
+  }
+}
+
+export function addOptionsToDataListElement(element, optionValues) {
+  for (const optionValue of optionValues) {
+    element.appendChild(new Option('', optionValue));
+  }
+}
+
 // Traverses the properties of an object and its descendant objects for HTMLElements
 // maxDepth is how many levels deep to search for elements
 // Example: maxDepth = 3 will search the object, its children, and its grandchildren only

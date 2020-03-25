@@ -1,7 +1,7 @@
-import * as sectionModule from './section.js';
+import { Section, ShowElements, EditElements } from './section.js';
 import CurrentContext from '../../../models/current-context.js';
 
-export class BlockListSection extends sectionModule.Section {
+export class BlockListSection extends Section {
   static get templatePaths() {
     return super.templatePaths.set(
       'block-list-section',
@@ -10,17 +10,20 @@ export class BlockListSection extends sectionModule.Section {
 
   constructor(templatePaths,
     modelPropertyName,
-    showElements = BlockListShowSection,
-    editElements = BlockListEditSection) {
-    super(templatePaths, modelPropertyName, showElements, editElements);
+    showElements = BlockListShowElements,
+    editElements = BlockListEditElements) {
+    super(templatePaths,
+          modelPropertyName,
+          showElements,
+          editElements);
 
     this.heading = this.shadowRoot.getElementById('heading');
   }
 
   connectedCallback() {
-    super.connectedCallback();
-
     this.editElements.editableBlockList.blockType = CurrentContext.creature[this.modelPropertyName].singleName;
+
+    super.connectedCallback();
 
     this.reparse();
 
@@ -117,13 +120,18 @@ export class BlockListSection extends sectionModule.Section {
     }
   }
 
+  importFromOpen5e(json) {
+    super.importFromOpen5e(json);
+    this.reparse();
+  }
+
   importFromJson(json) {
     super.importFromJson(json);
     this.reparse();
   }
 }
 
-export class BlockListShowSection extends sectionModule.ShowElements {
+export class BlockListShowElements extends ShowElements {
   constructor(shadowRoot) {
     super(shadowRoot);
 
@@ -132,7 +140,7 @@ export class BlockListShowSection extends sectionModule.ShowElements {
   }
 }
 
-export class BlockListEditSection extends sectionModule.EditElements {
+export class BlockListEditElements extends EditElements {
   constructor(shadowRoot) {
     super(shadowRoot);
 

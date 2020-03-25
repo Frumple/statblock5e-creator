@@ -1,8 +1,8 @@
-import * as propertyLineSectionModule from './property-line-section.js';
+import { PropertyLineSection, PropertyLineShowElements, PropertyLineEditElements } from './property-line-section.js';
 import CurrentContext from '../../../models/current-context.js';
 import { inputValueAndTriggerEvent } from '../../../helpers/element-helpers.js';
 
-export default class SavingThrowsSection extends propertyLineSectionModule.PropertyLineSection {
+export default class SavingThrowsSection extends PropertyLineSection {
   static get elementName() { return 'saving-throws-section'; }
   static get templatePaths() {
     return super.templatePaths.set(
@@ -37,32 +37,21 @@ export default class SavingThrowsSection extends propertyLineSectionModule.Prope
     elements.enable.enableElementsWhenChecked(
       elements.label,
       elements.modifier,
-      elements.proficient,
       elements.override
     );
 
     elements.enable.addEventListener('input', this.onInputSavingThrowEnabled.bind(this, key));
-    elements.proficient.addEventListener('input', this.onInputSavingThrowProficiency.bind(this, key));
     elements.override.addEventListener('input', this.onInputSavingThrowOverride.bind(this, key));
   }
 
   onInputSavingThrowEnabled(key) {
     const elements = this.editElements.savingThrow[key];
 
-    if (elements.enable.checked) {
-      inputValueAndTriggerEvent(elements.proficient, true);
-    } else {
-      inputValueAndTriggerEvent(elements.proficient, false);
+    if (! elements.enable.checked) {
       inputValueAndTriggerEvent(elements.override, '');
     }
 
     this.updateModelSavingThrowEnabled(key);
-    this.updateEditModeViewSavingThrowModifier(key);
-    this.updateShowModeView();
-  }
-
-  onInputSavingThrowProficiency(key) {
-    this.updateModelSavingThrowProficiency(key);
     this.updateEditModeViewSavingThrowModifier(key);
     this.updateShowModeView();
   }
@@ -80,17 +69,12 @@ export default class SavingThrowsSection extends propertyLineSectionModule.Prope
   updateModel() {
     for (const key of CurrentContext.creature.savingThrows.keys) {
       this.updateModelSavingThrowEnabled(key);
-      this.updateModelSavingThrowProficiency(key);
       this.updateModelSavingThrowOverride(key);
     }
   }
 
   updateModelSavingThrowEnabled(key) {
     CurrentContext.creature.savingThrows.savingThrows[key].isEnabled = this.editElements.savingThrow[key].enable.checked;
-  }
-
-  updateModelSavingThrowProficiency(key) {
-    CurrentContext.creature.savingThrows.savingThrows[key].isProficient = this.editElements.savingThrow[key].proficient.checked;
   }
 
   updateModelSavingThrowOverride(key) {
@@ -121,7 +105,6 @@ export default class SavingThrowsSection extends propertyLineSectionModule.Prope
 
     savingThrowElements.enable.checked = savingThrowsModel.savingThrows[key].isEnabled;
     savingThrowElements.modifier.textContent = savingThrowsModel.savingThrows[key].formattedModifier;
-    savingThrowElements.proficient.checked = savingThrowsModel.savingThrows[key].isProficient;
     savingThrowElements.override.value = savingThrowsModel.savingThrows[key].override;
   }
 
@@ -136,13 +119,13 @@ export default class SavingThrowsSection extends propertyLineSectionModule.Prope
   }
 }
 
-class SavingThrowsShowElements extends propertyLineSectionModule.PropertyLineShowElements {
+class SavingThrowsShowElements extends PropertyLineShowElements {
   constructor(shadowRoot) {
     super(shadowRoot);
   }
 }
 
-class SavingThrowsEditElements extends propertyLineSectionModule.PropertyLineEditElements {
+class SavingThrowsEditElements extends PropertyLineEditElements {
   constructor(shadowRoot) {
     super(shadowRoot);
 
@@ -153,7 +136,6 @@ class SavingThrowsEditElements extends propertyLineSectionModule.PropertyLineEdi
         enable: shadowRoot.getElementById(`${key}-enable`),
         label: shadowRoot.getElementById(`${key}-label`),
         modifier: shadowRoot.getElementById(`${key}-saving-throw-modifier`),
-        proficient: shadowRoot.getElementById(`${key}-proficient`),
         override: shadowRoot.getElementById(`${key}-override`)
       };
     }

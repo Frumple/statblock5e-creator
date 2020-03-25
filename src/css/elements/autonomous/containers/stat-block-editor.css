@@ -1,18 +1,11 @@
 :host {
-  font-family: 'Noto Sans', 'Myriad Pro', Calibri, Helvetica, Arial,
-               sans-serif;
-  font-size: 13.5px;
+  font-family: inherit;
 }
 
 .stat-block-editor__components {
   display: grid;
   grid-template-columns: auto 1fr;
   grid-template-rows: auto 1fr;
-}
-
-.stat-block-editor__dialog-list {
-  margin-top: 0;
-  margin-bottom: 0;
 }
 
 ::slotted(stat-block-menu) {

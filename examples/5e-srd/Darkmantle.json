@@ -1,0 +1,235 @@
+{
+  "title": {
+    "fullName": "Darkmantle",
+    "shortName": "",
+    "isProperNoun": false
+  },
+  "subtitle": {
+    "size": "Small",
+    "type": "monstrosity",
+    "tags": "",
+    "alignment": "unaligned",
+    "useCustomText": false,
+    "customText": ""
+  },
+  "armorClass": {
+    "armorClass": 11,
+    "armorType": "",
+    "hasShield": false,
+    "useCustomText": false,
+    "customText": ""
+  },
+  "hitPoints": {
+    "hitPoints": 22,
+    "useHitDie": true,
+    "hitDieQuantity": 5,
+    "hitDieSize": 6
+  },
+  "speed": {
+    "walk": 10,
+    "burrow": null,
+    "climb": null,
+    "fly": 30,
+    "hover": false,
+    "swim": null,
+    "useCustomText": false,
+    "customText": ""
+  },
+  "abilityScores": {
+    "strength": 16,
+    "dexterity": 12,
+    "constitution": 13,
+    "intelligence": 2,
+    "wisdom": 10,
+    "charisma": 5
+  },
+  "savingThrows": {
+    "strength": {
+      "isEnabled": false,
+      "override": null
+    },
+    "dexterity": {
+      "isEnabled": false,
+      "override": null
+    },
+    "constitution": {
+      "isEnabled": false,
+      "override": null
+    },
+    "intelligence": {
+      "isEnabled": false,
+      "override": null
+    },
+    "wisdom": {
+      "isEnabled": false,
+      "override": null
+    },
+    "charisma": {
+      "isEnabled": false,
+      "override": null
+    }
+  },
+  "skills": {
+    "acrobatics": {
+      "isEnabled": false,
+      "hasExpertise": false,
+      "override": null
+    },
+    "animalHandling": {
+      "isEnabled": false,
+      "hasExpertise": false,
+      "override": null
+    },
+    "arcana": {
+      "isEnabled": false,
+      "hasExpertise": false,
+      "override": null
+    },
+    "athletics": {
+      "isEnabled": false,
+      "hasExpertise": false,
+      "override": null
+    },
+    "deception": {
+      "isEnabled": false,
+      "hasExpertise": false,
+      "override": null
+    },
+    "history": {
+      "isEnabled": false,
+      "hasExpertise": false,
+      "override": null
+    },
+    "insight": {
+      "isEnabled": false,
+      "hasExpertise": false,
+      "override": null
+    },
+    "intimidation": {
+      "isEnabled": false,
+      "hasExpertise": false,
+      "override": null
+    },
+    "investigation": {
+      "isEnabled": false,
+      "hasExpertise": false,
+      "override": null
+    },
+    "medicine": {
+      "isEnabled": false,
+      "hasExpertise": false,
+      "override": null
+    },
+    "nature": {
+      "isEnabled": false,
+      "hasExpertise": false,
+      "override": null
+    },
+    "perception": {
+      "isEnabled": false,
+      "hasExpertise": false,
+      "override": null
+    },
+    "performance": {
+      "isEnabled": false,
+      "hasExpertise": false,
+      "override": null
+    },
+    "persuasion": {
+      "isEnabled": false,
+      "hasExpertise": false,
+      "override": null
+    },
+    "religion": {
+      "isEnabled": false,
+      "hasExpertise": false,
+      "override": null
+    },
+    "sleightOfHand": {
+      "isEnabled": false,
+      "hasExpertise": false,
+      "override": null
+    },
+    "stealth": {
+      "isEnabled": true,
+      "hasExpertise": false,
+      "override": null
+    },
+    "survival": {
+      "isEnabled": false,
+      "hasExpertise": false,
+      "override": null
+    }
+  },
+  "damageVulnerabilities": {
+    "items": []
+  },
+  "damageResistances": {
+    "items": []
+  },
+  "damageImmunities": {
+    "items": []
+  },
+  "conditionImmunities": {
+    "items": []
+  },
+  "senses": {
+    "blindsight": 60,
+    "blindBeyondThisRadius": false,
+    "darkvision": null,
+    "tremorsense": null,
+    "truesight": null,
+    "useCustomText": false,
+    "customText": ""
+  },
+  "languages": {
+    "items": [],
+    "telepathy": null
+  },
+  "challengeRating": {
+    "challengeRating": "1/2",
+    "experiencePoints": 100,
+    "proficiencyBonus": 2
+  },
+  "specialTraits": {
+    "blocks": [
+      {
+        "name": "Echolocation",
+        "text": "[name] can't use its blindsight while deafened."
+      },
+      {
+        "name": "False Appearance",
+        "text": "While [name] remains motionless, it is indistinguishable from a cave formation such as a stalactite or stalagmite."
+      }
+    ]
+  },
+  "actions": {
+    "blocks": [
+      {
+        "name": "Crush",
+        "text": "*Melee Weapon Attack:* atk[str] to hit, reach 5 ft., one creature. *Hit:* dmg[1d6 + str] bludgeoning damage, and [name] attaches to the target. If the target is Medium or smaller and [name] has advantage on the attack roll, it attaches by engulfing the target's head, and the target is also blinded and unable to breathe while [name] is attached in this way.\n  While attached to the target, [name] can attack no other creature except the target but has advantage on its attack rolls. [name]'s speed also becomes 0, it can't benefit from any bonus to its speed, and it moves with the target.\n  A creature can detach [name] by making a successful DC 13 Strength check as an action. On its turn, [name] can detach itself from the target by using 5 feet of movement."
+      },
+      {
+        "name": "Darkness Aura (1/day)",
+        "text": "A 15-foot radius of magical darkness extends out from [name], moves with it, and spreads around corners. The darkness lasts as long as [name] maintains concentration, up to 10 minutes (as if concentrating on a spell). Darkvision can't penetrate this darkness, and no natural light can illuminate it. If any of the darkness overlaps with an area of light created by a spell of 2nd level or lower, the spell creating the light is dispelled."
+      }
+    ]
+  },
+  "reactions": {
+    "blocks": []
+  },
+  "legendaryActions": {
+    "blocks": [],
+    "description": "[name] can take 3 legendary actions, choosing from the options below. Only one legendary action option can be used at a time and only at the end of another creature's turn. [name] regains spent legendary actions at the start of its turn."
+  },
+  "layout": {
+    "columns": 1,
+    "twoColumnMode": "auto",
+    "twoColumnHeight": 600
+  },
+  "meta": {
+    "version": "1.0.0",
+    "description": "Created using statblock5e-creator",
+    "url": "https://frumple.github.io/statblock5e-creator"
+  }
+}

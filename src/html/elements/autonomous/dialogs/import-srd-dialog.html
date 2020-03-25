@@ -1,0 +1,23 @@
+<link href='src/css/elements/radio-button.css' rel='stylesheet' type='text/css'>
+<link href='src/css/elements/autonomous/dialogs/import-srd-dialog.css' rel='stylesheet' type='text/css'>
+
+<dialog id="dialog" class="custom-dialog">
+  <form id="form" method="dialog">
+    <div class="custom-dialog__title-bar">
+      <h3 id="title" class="custom-dialog__title"><slot name="title"></slot></h3>
+      <button id="close-button" class="custom-dialog__close-button" type="button"><i class="material-icons">close</i></button>
+    </div>
+
+    <div class="option-dialog">
+      <p class="option-dialog__message"><slot name="message"></slot></p>
+      <div class="option-dialog__status-container">
+        <label id="status-label" class="option-dialog__status-label">Choose a creature:</label>
+      </div>
+      <select id="creature-select" class="import-srd-dialog__creature-select" is="dynamic-select"></select>
+      <div class="option-dialog__actions">
+        <button id="import-button" class="default-button option-dialog__action-button" type="button">Import</button>
+        <button id="cancel-button" class="default-button option-dialog__action-button" type="button">Cancel</button>
+      </div>
+    </div>
+  </form>
+</dialog>

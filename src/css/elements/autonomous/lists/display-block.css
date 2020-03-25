@@ -1,8 +1,23 @@
 :host {
   margin-top: 0.3em;
   margin-bottom: 0.9em;
+}
+
+.display-block {
+  margin-top: inherit;
+  margin-bottom: inherit;
   line-height: 1.5;
   display: block;
+}
+
+.display-block_no-spacing {
+  margin-top: 0;
+  margin-bottom: 0;
+}
+
+.display-block_hanging-indent {
+  padding-left: 1em;
+  text-indent: -1em;
 }
 
 .display-block__name {

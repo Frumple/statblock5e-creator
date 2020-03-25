@@ -1,7 +1,14 @@
-import * as sectionModule from './section.js';
+import { Section, ShowElements, EditElements } from './section.js';
 import CurrentContext from '../../../models/current-context.js';
 
-export default class SubtitleSection extends sectionModule.Section {
+import creatureSizes from '../../../data/creature-sizes.js';
+import creatureTypes from '../../../data/creature-types.js';
+import creatureTags from '../../../data/creature-tags.js';
+import creatureAlignments from '../../../data/creature-alignments.js';
+
+import { addOptionsToSelectElement, addOptionsToDataListElement } from '../../../helpers/element-helpers.js';
+
+export default class SubtitleSection extends Section {
   static get elementName() { return 'subtitle-section'; }
   static get templatePaths() {
     return super.templatePaths.set(
@@ -14,6 +21,11 @@ export default class SubtitleSection extends sectionModule.Section {
           'subtitle',
           SubtitleShowElements,
           SubtitleEditElements);
+
+    addOptionsToSelectElement(this.editElements.size, creatureSizes);
+    addOptionsToSelectElement(this.editElements.type, creatureTypes);
+    addOptionsToDataListElement(this.editElements.tagsDataList, creatureTags);
+    addOptionsToSelectElement(this.editElements.alignment, creatureAlignments);
   }
 
   connectedCallback() {
@@ -70,19 +82,20 @@ export default class SubtitleSection extends sectionModule.Section {
   }
 }
 
-class SubtitleShowElements extends sectionModule.ShowElements {
+class SubtitleShowElements extends ShowElements {
   constructor(shadowRoot) {
     super(shadowRoot);
     this.text = shadowRoot.getElementById('subtitle-text');
   }
 }
 
-class SubtitleEditElements extends sectionModule.EditElements {
+class SubtitleEditElements extends EditElements {
   constructor(shadowRoot) {
     super(shadowRoot);
     this.size = shadowRoot.getElementById('size-input');
     this.type = shadowRoot.getElementById('type-input');
     this.tags = shadowRoot.getElementById('tags-input');
+    this.tagsDataList = shadowRoot.getElementById('tags-list');
     this.alignment = shadowRoot.getElementById('alignment-input');
     this.useCustomText = shadowRoot.getElementById('use-custom-text-input');
     this.customText = shadowRoot.getElementById('custom-text-input');

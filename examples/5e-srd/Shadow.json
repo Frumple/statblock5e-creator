@@ -1,0 +1,256 @@
+{
+  "title": {
+    "fullName": "Shadow",
+    "shortName": "",
+    "isProperNoun": false
+  },
+  "subtitle": {
+    "size": "Medium",
+    "type": "undead",
+    "tags": "",
+    "alignment": "chaotic evil",
+    "useCustomText": false,
+    "customText": ""
+  },
+  "armorClass": {
+    "armorClass": 12,
+    "armorType": "",
+    "hasShield": false,
+    "useCustomText": false,
+    "customText": ""
+  },
+  "hitPoints": {
+    "hitPoints": 16,
+    "useHitDie": true,
+    "hitDieQuantity": 3,
+    "hitDieSize": 8
+  },
+  "speed": {
+    "walk": 40,
+    "burrow": null,
+    "climb": null,
+    "fly": null,
+    "hover": false,
+    "swim": null,
+    "useCustomText": false,
+    "customText": ""
+  },
+  "abilityScores": {
+    "strength": 6,
+    "dexterity": 14,
+    "constitution": 13,
+    "intelligence": 6,
+    "wisdom": 10,
+    "charisma": 8
+  },
+  "savingThrows": {
+    "strength": {
+      "isEnabled": false,
+      "override": null
+    },
+    "dexterity": {
+      "isEnabled": false,
+      "override": null
+    },
+    "constitution": {
+      "isEnabled": false,
+      "override": null
+    },
+    "intelligence": {
+      "isEnabled": false,
+      "override": null
+    },
+    "wisdom": {
+      "isEnabled": false,
+      "override": null
+    },
+    "charisma": {
+      "isEnabled": false,
+      "override": null
+    }
+  },
+  "skills": {
+    "acrobatics": {
+      "isEnabled": false,
+      "hasExpertise": false,
+      "override": null
+    },
+    "animalHandling": {
+      "isEnabled": false,
+      "hasExpertise": false,
+      "override": null
+    },
+    "arcana": {
+      "isEnabled": false,
+      "hasExpertise": false,
+      "override": null
+    },
+    "athletics": {
+      "isEnabled": false,
+      "hasExpertise": false,
+      "override": null
+    },
+    "deception": {
+      "isEnabled": false,
+      "hasExpertise": false,
+      "override": null
+    },
+    "history": {
+      "isEnabled": false,
+      "hasExpertise": false,
+      "override": null
+    },
+    "insight": {
+      "isEnabled": false,
+      "hasExpertise": false,
+      "override": null
+    },
+    "intimidation": {
+      "isEnabled": false,
+      "hasExpertise": false,
+      "override": null
+    },
+    "investigation": {
+      "isEnabled": false,
+      "hasExpertise": false,
+      "override": null
+    },
+    "medicine": {
+      "isEnabled": false,
+      "hasExpertise": false,
+      "override": null
+    },
+    "nature": {
+      "isEnabled": false,
+      "hasExpertise": false,
+      "override": null
+    },
+    "perception": {
+      "isEnabled": false,
+      "hasExpertise": false,
+      "override": null
+    },
+    "performance": {
+      "isEnabled": false,
+      "hasExpertise": false,
+      "override": null
+    },
+    "persuasion": {
+      "isEnabled": false,
+      "hasExpertise": false,
+      "override": null
+    },
+    "religion": {
+      "isEnabled": false,
+      "hasExpertise": false,
+      "override": null
+    },
+    "sleightOfHand": {
+      "isEnabled": false,
+      "hasExpertise": false,
+      "override": null
+    },
+    "stealth": {
+      "isEnabled": true,
+      "hasExpertise": false,
+      "override": null
+    },
+    "survival": {
+      "isEnabled": false,
+      "hasExpertise": false,
+      "override": null
+    }
+  },
+  "damageVulnerabilities": {
+    "items": [
+      "radiant"
+    ]
+  },
+  "damageResistances": {
+    "items": [
+      "acid",
+      "cold",
+      "fire",
+      "lightning",
+      "thunder",
+      "bludgeoning, piercing, and slashing from nonmagical weapons"
+    ]
+  },
+  "damageImmunities": {
+    "items": [
+      "necrotic",
+      "poison"
+    ]
+  },
+  "conditionImmunities": {
+    "items": [
+      "exhaustion",
+      "frightened",
+      "grappled",
+      "paralyzed",
+      "petrified",
+      "poisoned",
+      "prone",
+      "restrained"
+    ]
+  },
+  "senses": {
+    "blindsight": null,
+    "blindBeyondThisRadius": false,
+    "darkvision": 60,
+    "tremorsense": null,
+    "truesight": null,
+    "useCustomText": false,
+    "customText": ""
+  },
+  "languages": {
+    "items": [],
+    "telepathy": null
+  },
+  "challengeRating": {
+    "challengeRating": "1/2",
+    "experiencePoints": 100,
+    "proficiencyBonus": 2
+  },
+  "specialTraits": {
+    "blocks": [
+      {
+        "name": "Amorphous",
+        "text": "[name] can move through a space as narrow as 1 inch wide without squeezing."
+      },
+      {
+        "name": "Shadow Stealth",
+        "text": "While in dim light or darkness, [name] can take the Hide action as a bonus action."
+      },
+      {
+        "name": "Sunlight Weakness",
+        "text": "While in sunlight, [name] has disadvantage on attack rolls, ability checks, and saving throws."
+      }
+    ]
+  },
+  "actions": {
+    "blocks": [
+      {
+        "name": "Strength Drain",
+        "text": "*Melee Weapon Attack:* atk[dex] to hit, reach 5 ft., one creature. *Hit:* dmg[2d6 + dex] necrotic damage, and the target's Strength score is reduced by 1d4. The target dies if this reduces its Strength to 0. Otherwise, the reduction lasts until the target finishes a short or long rest.\n  If a non-evil humanoid dies from this attack, a new shadow rises from the corpse 1d4 hours later."
+      }
+    ]
+  },
+  "reactions": {
+    "blocks": []
+  },
+  "legendaryActions": {
+    "blocks": [],
+    "description": "[name] can take 3 legendary actions, choosing from the options below. Only one legendary action option can be used at a time and only at the end of another creature's turn. [name] regains spent legendary actions at the start of its turn."
+  },
+  "layout": {
+    "columns": 1,
+    "twoColumnMode": "auto",
+    "twoColumnHeight": 600
+  },
+  "meta": {
+    "version": "1.0.0",
+    "description": "Created using statblock5e-creator",
+    "url": "https://frumple.github.io/statblock5e-creator"
+  }
+}

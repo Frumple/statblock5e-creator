@@ -1,0 +1,254 @@
+{
+  "title": {
+    "fullName": "Chain Devil",
+    "shortName": "devil",
+    "isProperNoun": false
+  },
+  "subtitle": {
+    "size": "Medium",
+    "type": "fiend",
+    "tags": "devil",
+    "alignment": "lawful evil",
+    "useCustomText": false,
+    "customText": ""
+  },
+  "armorClass": {
+    "armorClass": 16,
+    "armorType": "natural armor",
+    "hasShield": false,
+    "useCustomText": false,
+    "customText": ""
+  },
+  "hitPoints": {
+    "hitPoints": 85,
+    "useHitDie": true,
+    "hitDieQuantity": 10,
+    "hitDieSize": 8
+  },
+  "speed": {
+    "walk": 30,
+    "burrow": null,
+    "climb": null,
+    "fly": null,
+    "hover": false,
+    "swim": null,
+    "useCustomText": false,
+    "customText": ""
+  },
+  "abilityScores": {
+    "strength": 18,
+    "dexterity": 15,
+    "constitution": 18,
+    "intelligence": 11,
+    "wisdom": 12,
+    "charisma": 14
+  },
+  "savingThrows": {
+    "strength": {
+      "isEnabled": false,
+      "override": null
+    },
+    "dexterity": {
+      "isEnabled": false,
+      "override": null
+    },
+    "constitution": {
+      "isEnabled": false,
+      "override": null
+    },
+    "intelligence": {
+      "isEnabled": false,
+      "override": null
+    },
+    "wisdom": {
+      "isEnabled": false,
+      "override": null
+    },
+    "charisma": {
+      "isEnabled": false,
+      "override": null
+    }
+  },
+  "skills": {
+    "acrobatics": {
+      "isEnabled": false,
+      "hasExpertise": false,
+      "override": null
+    },
+    "animalHandling": {
+      "isEnabled": false,
+      "hasExpertise": false,
+      "override": null
+    },
+    "arcana": {
+      "isEnabled": false,
+      "hasExpertise": false,
+      "override": null
+    },
+    "athletics": {
+      "isEnabled": false,
+      "hasExpertise": false,
+      "override": null
+    },
+    "deception": {
+      "isEnabled": false,
+      "hasExpertise": false,
+      "override": null
+    },
+    "history": {
+      "isEnabled": false,
+      "hasExpertise": false,
+      "override": null
+    },
+    "insight": {
+      "isEnabled": false,
+      "hasExpertise": false,
+      "override": null
+    },
+    "intimidation": {
+      "isEnabled": false,
+      "hasExpertise": false,
+      "override": null
+    },
+    "investigation": {
+      "isEnabled": false,
+      "hasExpertise": false,
+      "override": null
+    },
+    "medicine": {
+      "isEnabled": false,
+      "hasExpertise": false,
+      "override": null
+    },
+    "nature": {
+      "isEnabled": false,
+      "hasExpertise": false,
+      "override": null
+    },
+    "perception": {
+      "isEnabled": false,
+      "hasExpertise": false,
+      "override": null
+    },
+    "performance": {
+      "isEnabled": false,
+      "hasExpertise": false,
+      "override": null
+    },
+    "persuasion": {
+      "isEnabled": false,
+      "hasExpertise": false,
+      "override": null
+    },
+    "religion": {
+      "isEnabled": false,
+      "hasExpertise": false,
+      "override": null
+    },
+    "sleightOfHand": {
+      "isEnabled": false,
+      "hasExpertise": false,
+      "override": null
+    },
+    "stealth": {
+      "isEnabled": false,
+      "hasExpertise": false,
+      "override": null
+    },
+    "survival": {
+      "isEnabled": false,
+      "hasExpertise": false,
+      "override": null
+    }
+  },
+  "damageVulnerabilities": {
+    "items": []
+  },
+  "damageResistances": {
+    "items": [
+      "cold",
+      "bludgeoning, piercing, and slashing from nonmagical weapons that aren't silvered"
+    ]
+  },
+  "damageImmunities": {
+    "items": [
+      "fire",
+      "poison"
+    ]
+  },
+  "conditionImmunities": {
+    "items": [
+      "poisoned"
+    ]
+  },
+  "senses": {
+    "blindsight": null,
+    "blindBeyondThisRadius": false,
+    "darkvision": 120,
+    "tremorsense": null,
+    "truesight": null,
+    "useCustomText": false,
+    "customText": ""
+  },
+  "languages": {
+    "items": [
+      "Infernal"
+    ],
+    "telepathy": 120
+  },
+  "challengeRating": {
+    "challengeRating": "11",
+    "experiencePoints": 7200,
+    "proficiencyBonus": 4
+  },
+  "specialTraits": {
+    "blocks": [
+      {
+        "name": "Devil's Sight",
+        "text": "Magical darkness doesn't impede [name]'s darkvision."
+      },
+      {
+        "name": "Magic Resistance",
+        "text": "[name] has advantage on saving throws against spells and other magical effects."
+      }
+    ]
+  },
+  "actions": {
+    "blocks": [
+      {
+        "name": "Multiattack",
+        "text": "[name] makes two attacks with its chains."
+      },
+      {
+        "name": "Chain",
+        "text": "*Melee Weapon Attack:* atk[str] to hit, reach 10 ft., one target. *Hit:* dmg[2d6 + str] slashing damage. The target is grappled (escape DC 14) if [name] isn't already grappling a creature. Until this grapple ends, the target is restrained and takes dmg[2d6] piercing damage at the start of each of its turns."
+      },
+      {
+        "name": "Animate Chains (Recharges after a Short or Long Rest)",
+        "text": "Up to four chains [name] can see within 60 feet of it magically sprout razor-edged barbs and animate under [name]'s control, provided that the chains aren't being worn or carried.\n  Each animated chain is an object with AC 20, 20 hit points, resistance to piercing damage, and immunity to psychic and thunder damage. When [name] uses Multiattack on its turn, it can use each animated chain to make one additional chain attack. An animated chain can grapple one creature of its own but can't make attacks while grappling. An animated chain reverts to its inanimate state if reduced to 0 hit points or if [name] is incapacitated or dies."
+      }
+    ]
+  },
+  "reactions": {
+    "blocks": [
+      {
+        "name": "Unnerving Mask",
+        "text": "When a creature [name] can see starts its turn within 30 feet of [name], [name] can create the illusion that it looks like one of the creature's departed loved ones or bitter enemies. If the creature can see [name], it must succeed on a DC 14 Wisdom saving throw or be frightened until the end of its turn."
+      }
+    ]
+  },
+  "legendaryActions": {
+    "blocks": [],
+    "description": "[name] can take 3 legendary actions, choosing from the options below. Only one legendary action option can be used at a time and only at the end of another creature's turn. [name] regains spent legendary actions at the start of its turn."
+  },
+  "layout": {
+    "columns": 1,
+    "twoColumnMode": "auto",
+    "twoColumnHeight": 600
+  },
+  "meta": {
+    "version": "1.0.0",
+    "description": "Created using statblock5e-creator",
+    "url": "https://frumple.github.io/statblock5e-creator"
+  }
+}

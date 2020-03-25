@@ -1,19 +1,37 @@
 <link href='src/css/elements/autonomous/containers/stat-block-editor.css' rel='stylesheet' type='text/css'>
 
 <div class="stat-block-editor__dialogs">
-  <import-dialog id="json-import-dialog">
+  <import-json-dialog id="import-json-dialog">
     <span slot="title">Import from JSON</span>
     <span slot="message">
-      Import your statblock from a JSON file that was previously exported from statblock5e-creator.
+      Import a JSON file that was previously exported from this application.
     </span>
-  </import-dialog>
-  <export-dialog id="json-export-dialog">
+  </import-json-dialog>
+  <import-srd-dialog id="import-srd-dialog">
+    <span slot="title">Import from 5th Edition SRD</span>
+    <span slot="message">
+      Import a statblock from the Official D&D 5th Edition <a href="https://dnd.wizards.com/articles/features/systems-reference-document-srd" target="_blank">Systems Reference Document (SRD)</a> from Wizards of the Coast.
+    </span>
+  </import-srd-dialog>
+  <import-open5e-dialog id="import-open5e-dialog">
+    <span slot="title">Import from Open5e</span>
+    <span slot="message">
+      Import a statblock from the <a href="https://open5e.com/monsters/monster-list" target="_blank">Open5e API</a>, which provides creatures from the following sourcebooks using the <a href="https://open5e.com/legal" target="_blank">Open Game License</a>:
+      <ul>
+        <li><a href="https://dnd.wizards.com/articles/features/systems-reference-document-srd" target="_blank">Official 5th Edition SRD</a> from Wizards of the Coast</li>
+        <li><a href="https://koboldpress.com/kpstore/product/tome-of-beasts-for-5th-edition" target="_blank">Tome of Beasts</a> from Kobold Press</li>
+        <li><a href="https://koboldpress.com/kpstore/product/creature-codex-for-5th-edition-dnd" target="_blank">Creature Codex</a> from Kobold Press</li>
+      </ul>
+      <em>Note: All text from Open5e will be imported as-is, and will not include any Markdown Emphasis, Name Expressions, or Math Expressions.</em>
+    </span>
+  </import-open5e-dialog>
+  <export-dialog id="export-json-dialog">
     <span slot="title">Export to JSON</span>
     <span slot="message">
-      Export your statblock to a special JSON format that can be re-imported back into statblock5e-creator at a later time.
+      Export your statblock to a JSON file that can be re-imported back at a later time.
     </span>
   </export-dialog>
-  <export-dialog id="html-export-dialog">
+  <export-dialog id="export-html-dialog">
     <span slot="title">Export to HTML</span>
     <span slot="message">
       Export your statblock as a standalone HTML document, based on <a href="https://github.com/Valloric/statblock5e" target="_blank">Valloric's statblock5e template</a>.<br />
@@ -21,12 +39,11 @@
       This HTML document works best in Chrome.
     </span>
   </export-dialog>
-  <export-dialog id="markdown-export-dialog">
+  <export-dialog id="export-markdown-dialog">
     <span slot="title">Export to Markdown</span>
     <span slot="message">
       Export your statblock to a special Markdown format for use in the following homebrew content tools:
-      <br />
-      <ul class="stat-block-editor__dialog-list">
+      <ul>
         <li><a href="https://homebrewery.naturalcrit.com" target="_blank">Homebrewery</a></li>
         <li><a href="https://www.gmbinder.com/" target="_blank">GM Binder</a></li>
       </ul>

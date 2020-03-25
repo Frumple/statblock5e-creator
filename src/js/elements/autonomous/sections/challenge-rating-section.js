@@ -1,9 +1,7 @@
-import * as propertyLineSectionModule from './property-line-section.js';
+import { PropertyLineSection, PropertyLineShowElements, PropertyLineEditElements } from './property-line-section.js';
 import CurrentContext from '../../../models/current-context.js';
-import ExperiencePointsByChallengeRating from '../../../data/experience-points-by-challenge-rating.js';
-import ProficiencyBonusByChallengeRating from '../../../data/proficiency-bonus-by-challenge-rating.js';
 
-export default class ChallengeRatingSection extends propertyLineSectionModule.PropertyLineSection {
+export default class ChallengeRatingSection extends PropertyLineSection {
   static get elementName() { return 'challenge-rating-section'; }
   static get templatePaths() {
     return super.templatePaths.set(
@@ -23,22 +21,27 @@ export default class ChallengeRatingSection extends propertyLineSectionModule.Pr
   }
 
   onInputChallengeRating() {
-    const challengeRating = this.editElements.challengeRating.valueAsFloat;
-    const experiencePoints = ExperiencePointsByChallengeRating[challengeRating];
-    const proficiencyBonus = ProficiencyBonusByChallengeRating[challengeRating];
+    const challengeRating = this.editElements.challengeRating.value;
+    CurrentContext.creature.challengeRating.challengeRating = challengeRating;
 
-    this.editElements.experiencePoints.value = experiencePoints;
-    this.editElements.proficiencyBonus.value = proficiencyBonus;
-
-    this.updateModel();
+    CurrentContext.creature.challengeRating.updateExperiencePointsAndProficiencyBonusFromChallengeRating();
+    this.updateEditModeView();
+    this.dispatchProficiencyBonusChangedEvent();
   }
 
   onInputExperiencePoints() {
-    this.updateModel();
+    const experiencePoints = this.editElements.experiencePoints.valueAsInt;
+    if (experiencePoints !== null) {
+      CurrentContext.creature.challengeRating.experiencePoints = experiencePoints;
+    }
   }
 
   onInputProficiencyBonus() {
-    this.updateModel();
+    const proficiencyBonus = this.editElements.proficiencyBonus.valueAsInt;
+    if (proficiencyBonus !== null) {
+      CurrentContext.creature.challengeRating.proficiencyBonus = proficiencyBonus;
+      this.dispatchProficiencyBonusChangedEvent();
+    }
   }
 
   checkForErrors() {
@@ -47,22 +50,7 @@ export default class ChallengeRatingSection extends propertyLineSectionModule.Pr
   }
 
   updateModel() {
-    const challengeRatingModel = CurrentContext.creature.challengeRating;
-
-    const challengeRating = this.editElements.challengeRating.valueAsFloat;
-    const experiencePoints = this.editElements.experiencePoints.valueAsInt;
-    const proficiencyBonus = this.editElements.proficiencyBonus.valueAsInt;
-
-    challengeRatingModel.challengeRating = challengeRating;
-
-    if (experiencePoints !== null) {
-      challengeRatingModel.experiencePoints = experiencePoints;
-    }
-
-    if (proficiencyBonus != null) {
-      challengeRatingModel.proficiencyBonus = proficiencyBonus;
-      this.dispatchProficiencyBonusChangedEvent();
-    }
+    // Intentionally empty: models are updated in onInput callbacks
   }
 
   updateEditModeView() {
@@ -87,13 +75,13 @@ export default class ChallengeRatingSection extends propertyLineSectionModule.Pr
   }
 }
 
-class ChallengeRatingShowElements extends propertyLineSectionModule.PropertyLineShowElements {
+class ChallengeRatingShowElements extends PropertyLineShowElements {
   constructor(shadowRoot) {
     super(shadowRoot);
   }
 }
 
-class ChallengeRatingEditElements extends propertyLineSectionModule.PropertyLineEditElements {
+class ChallengeRatingEditElements extends PropertyLineEditElements {
   constructor(shadowRoot) {
     super(shadowRoot);
     this.challengeRating = shadowRoot.getElementById('challenge-rating-input');

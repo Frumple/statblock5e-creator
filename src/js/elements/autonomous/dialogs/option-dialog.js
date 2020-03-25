@@ -1,5 +1,8 @@
 import CustomDialog from './custom-dialog.js';
 
+const labelSuccessClass = 'option-dialog__status-label_success';
+const labelErrorClass = 'option-dialog__status-label_error';
+
 export default class OptionDialog extends CustomDialog {
   static get elementName() { return 'option-dialog'; }
   static get templatePaths() {
@@ -16,27 +19,38 @@ export default class OptionDialog extends CustomDialog {
   }
 
   connectedCallback() {
-    if (this.isConnected && ! this.isInitialized) {
-      super.connectedCallback();
+    super.connectedCallback();
 
-      this.cancelButton.addEventListener('click', this.onClickCloseButton.bind(this));
+    this.cancelButton.addEventListener('click', this.onClickCloseButton.bind(this));
+  }
 
-      this.isInitialized = true;
+  get statusText() {
+    return this.statusLabel.textContent;
+  }
+
+  get statusType() {
+    if (this.statusLabel.classList.contains(labelSuccessClass)) {
+      return 'success';
     }
+    else if (this.statusLabel.classList.contains(labelErrorClass)) {
+      return 'error';
+    }
+
+    return null;
   }
 
   setStatus(text, type = null) {
     this.statusLabel.textContent = text;
 
-    this.statusLabel.classList.remove('option-dialog__status-label_success');
-    this.statusLabel.classList.remove('option-dialog__status-label_error');
+    this.statusLabel.classList.remove(labelSuccessClass);
+    this.statusLabel.classList.remove(labelErrorClass);
 
     switch(type) {
     case 'success':
-      this.statusLabel.classList.add('option-dialog__status-label_success');
+      this.statusLabel.classList.add(labelSuccessClass);
       break;
     case 'error':
-      this.statusLabel.classList.add('option-dialog__status-label_error');
+      this.statusLabel.classList.add(labelErrorClass);
       break;
     }
   }

@@ -1,0 +1,242 @@
+{
+  "title": {
+    "fullName": "Behir",
+    "shortName": "",
+    "isProperNoun": false
+  },
+  "subtitle": {
+    "size": "Huge",
+    "type": "monstrosity",
+    "tags": "",
+    "alignment": "neutral evil",
+    "useCustomText": false,
+    "customText": ""
+  },
+  "armorClass": {
+    "armorClass": 17,
+    "armorType": "natural armor",
+    "hasShield": false,
+    "useCustomText": false,
+    "customText": ""
+  },
+  "hitPoints": {
+    "hitPoints": 168,
+    "useHitDie": true,
+    "hitDieQuantity": 16,
+    "hitDieSize": 12
+  },
+  "speed": {
+    "walk": 50,
+    "burrow": null,
+    "climb": 40,
+    "fly": null,
+    "hover": false,
+    "swim": null,
+    "useCustomText": false,
+    "customText": ""
+  },
+  "abilityScores": {
+    "strength": 23,
+    "dexterity": 16,
+    "constitution": 18,
+    "intelligence": 7,
+    "wisdom": 14,
+    "charisma": 12
+  },
+  "savingThrows": {
+    "strength": {
+      "isEnabled": false,
+      "override": null
+    },
+    "dexterity": {
+      "isEnabled": false,
+      "override": null
+    },
+    "constitution": {
+      "isEnabled": false,
+      "override": null
+    },
+    "intelligence": {
+      "isEnabled": false,
+      "override": null
+    },
+    "wisdom": {
+      "isEnabled": false,
+      "override": null
+    },
+    "charisma": {
+      "isEnabled": false,
+      "override": null
+    }
+  },
+  "skills": {
+    "acrobatics": {
+      "isEnabled": false,
+      "hasExpertise": false,
+      "override": null
+    },
+    "animalHandling": {
+      "isEnabled": false,
+      "hasExpertise": false,
+      "override": null
+    },
+    "arcana": {
+      "isEnabled": false,
+      "hasExpertise": false,
+      "override": null
+    },
+    "athletics": {
+      "isEnabled": false,
+      "hasExpertise": false,
+      "override": null
+    },
+    "deception": {
+      "isEnabled": false,
+      "hasExpertise": false,
+      "override": null
+    },
+    "history": {
+      "isEnabled": false,
+      "hasExpertise": false,
+      "override": null
+    },
+    "insight": {
+      "isEnabled": false,
+      "hasExpertise": false,
+      "override": null
+    },
+    "intimidation": {
+      "isEnabled": false,
+      "hasExpertise": false,
+      "override": null
+    },
+    "investigation": {
+      "isEnabled": false,
+      "hasExpertise": false,
+      "override": null
+    },
+    "medicine": {
+      "isEnabled": false,
+      "hasExpertise": false,
+      "override": null
+    },
+    "nature": {
+      "isEnabled": false,
+      "hasExpertise": false,
+      "override": null
+    },
+    "perception": {
+      "isEnabled": true,
+      "hasExpertise": false,
+      "override": null
+    },
+    "performance": {
+      "isEnabled": false,
+      "hasExpertise": false,
+      "override": null
+    },
+    "persuasion": {
+      "isEnabled": false,
+      "hasExpertise": false,
+      "override": null
+    },
+    "religion": {
+      "isEnabled": false,
+      "hasExpertise": false,
+      "override": null
+    },
+    "sleightOfHand": {
+      "isEnabled": false,
+      "hasExpertise": false,
+      "override": null
+    },
+    "stealth": {
+      "isEnabled": true,
+      "hasExpertise": false,
+      "override": null
+    },
+    "survival": {
+      "isEnabled": false,
+      "hasExpertise": false,
+      "override": null
+    }
+  },
+  "damageVulnerabilities": {
+    "items": []
+  },
+  "damageResistances": {
+    "items": []
+  },
+  "damageImmunities": {
+    "items": [
+      "lightning"
+    ]
+  },
+  "conditionImmunities": {
+    "items": []
+  },
+  "senses": {
+    "blindsight": null,
+    "blindBeyondThisRadius": false,
+    "darkvision": 90,
+    "tremorsense": null,
+    "truesight": null,
+    "useCustomText": false,
+    "customText": ""
+  },
+  "languages": {
+    "items": [
+      "Draconic"
+    ],
+    "telepathy": null
+  },
+  "challengeRating": {
+    "challengeRating": "11",
+    "experiencePoints": 7200,
+    "proficiencyBonus": 4
+  },
+  "specialTraits": {
+    "blocks": []
+  },
+  "actions": {
+    "blocks": [
+      {
+        "name": "Multiattack",
+        "text": "[name] makes two attacks: one with its bite and one to constrict."
+      },
+      {
+        "name": "Bite",
+        "text": "*Melee Weapon Attack:* atk[str] to hit, reach 10 ft., one target. *Hit:* dmg[3d10 + str] piercing damage."
+      },
+      {
+        "name": "Constrict",
+        "text": "*Melee Weapon Attack:* atk[str] to hit, reach 5 ft., one Large or smaller creature. *Hit:* dmg[2d10 + str] bludgeoning damage plus dmg[2d10 + str] slashing damage. The target is grappled (escape DC 16) if [name] isn't already constricting a creature, and the target is restrained until this grapple ends."
+      },
+      {
+        "name": "Lightning Breath (Recharge 5-6)",
+        "text": "[name] exhales a line of lightning that is 20 ft. long and 5 ft. wide. Each creature in that line must make a DC 16 Dexterity saving throw, taking dmg[12d10] lightning damage on a failed save, or half as much damage on a successful one."
+      },
+      {
+        "name": "Swallow",
+        "text": "[name] makes one bite attack against a Medium or smaller target it is grappling. If the attack hits, the target is also swallowed, and the grapple ends. While swallowed, the target is blinded and restrained, it has total cover against attacks and other effects outside [name], and it takes dmg[6d6] acid damage at the start of each of [name]'s turns. A behir can have only one creature swallowed at a time.\n  If [name] takes 30 damage or more on a single turn from the swallowed creature, [name] must succeed on a DC 14 Constitution saving throw at the end of that turn or regurgitate the creature, which falls prone in a space within 10 ft. of [name]. If [name] dies, a swallowed creature is no longer restrained by it and can escape from the corpse by using 15 ft. of movement, exiting prone."
+      }
+    ]
+  },
+  "reactions": {
+    "blocks": []
+  },
+  "legendaryActions": {
+    "blocks": [],
+    "description": "[name] can take 3 legendary actions, choosing from the options below. Only one legendary action option can be used at a time and only at the end of another creature's turn. [name] regains spent legendary actions at the start of its turn."
+  },
+  "layout": {
+    "columns": 1,
+    "twoColumnMode": "auto",
+    "twoColumnHeight": 600
+  },
+  "meta": {
+    "version": "1.0.0",
+    "description": "Created using statblock5e-creator",
+    "url": "https://frumple.github.io/statblock5e-creator"
+  }
+}

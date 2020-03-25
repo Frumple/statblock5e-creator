@@ -1,0 +1,264 @@
+{
+  "title": {
+    "fullName": "Flesh Golem",
+    "shortName": "golem",
+    "isProperNoun": false
+  },
+  "subtitle": {
+    "size": "Medium",
+    "type": "construct",
+    "tags": "",
+    "alignment": "neutral",
+    "useCustomText": false,
+    "customText": ""
+  },
+  "armorClass": {
+    "armorClass": 9,
+    "armorType": "",
+    "hasShield": false,
+    "useCustomText": false,
+    "customText": ""
+  },
+  "hitPoints": {
+    "hitPoints": 93,
+    "useHitDie": true,
+    "hitDieQuantity": 11,
+    "hitDieSize": 8
+  },
+  "speed": {
+    "walk": 30,
+    "burrow": null,
+    "climb": null,
+    "fly": null,
+    "hover": false,
+    "swim": null,
+    "useCustomText": false,
+    "customText": ""
+  },
+  "abilityScores": {
+    "strength": 19,
+    "dexterity": 9,
+    "constitution": 18,
+    "intelligence": 6,
+    "wisdom": 10,
+    "charisma": 5
+  },
+  "savingThrows": {
+    "strength": {
+      "isEnabled": false,
+      "override": null
+    },
+    "dexterity": {
+      "isEnabled": false,
+      "override": null
+    },
+    "constitution": {
+      "isEnabled": false,
+      "override": null
+    },
+    "intelligence": {
+      "isEnabled": false,
+      "override": null
+    },
+    "wisdom": {
+      "isEnabled": false,
+      "override": null
+    },
+    "charisma": {
+      "isEnabled": false,
+      "override": null
+    }
+  },
+  "skills": {
+    "acrobatics": {
+      "isEnabled": false,
+      "hasExpertise": false,
+      "override": null
+    },
+    "animalHandling": {
+      "isEnabled": false,
+      "hasExpertise": false,
+      "override": null
+    },
+    "arcana": {
+      "isEnabled": false,
+      "hasExpertise": false,
+      "override": null
+    },
+    "athletics": {
+      "isEnabled": false,
+      "hasExpertise": false,
+      "override": null
+    },
+    "deception": {
+      "isEnabled": false,
+      "hasExpertise": false,
+      "override": null
+    },
+    "history": {
+      "isEnabled": false,
+      "hasExpertise": false,
+      "override": null
+    },
+    "insight": {
+      "isEnabled": false,
+      "hasExpertise": false,
+      "override": null
+    },
+    "intimidation": {
+      "isEnabled": false,
+      "hasExpertise": false,
+      "override": null
+    },
+    "investigation": {
+      "isEnabled": false,
+      "hasExpertise": false,
+      "override": null
+    },
+    "medicine": {
+      "isEnabled": false,
+      "hasExpertise": false,
+      "override": null
+    },
+    "nature": {
+      "isEnabled": false,
+      "hasExpertise": false,
+      "override": null
+    },
+    "perception": {
+      "isEnabled": false,
+      "hasExpertise": false,
+      "override": null
+    },
+    "performance": {
+      "isEnabled": false,
+      "hasExpertise": false,
+      "override": null
+    },
+    "persuasion": {
+      "isEnabled": false,
+      "hasExpertise": false,
+      "override": null
+    },
+    "religion": {
+      "isEnabled": false,
+      "hasExpertise": false,
+      "override": null
+    },
+    "sleightOfHand": {
+      "isEnabled": false,
+      "hasExpertise": false,
+      "override": null
+    },
+    "stealth": {
+      "isEnabled": false,
+      "hasExpertise": false,
+      "override": null
+    },
+    "survival": {
+      "isEnabled": false,
+      "hasExpertise": false,
+      "override": null
+    }
+  },
+  "damageVulnerabilities": {
+    "items": []
+  },
+  "damageResistances": {
+    "items": []
+  },
+  "damageImmunities": {
+    "items": [
+      "lightning",
+      "poison",
+      "bludgeoning, piercing, and slashing from nonmagical weapons that aren't adamantine"
+    ]
+  },
+  "conditionImmunities": {
+    "items": [
+      "charmed",
+      "exhaustion",
+      "frightened",
+      "paralyzed",
+      "petrified",
+      "poisoned"
+    ]
+  },
+  "senses": {
+    "blindsight": null,
+    "blindBeyondThisRadius": false,
+    "darkvision": 60,
+    "tremorsense": null,
+    "truesight": null,
+    "useCustomText": false,
+    "customText": ""
+  },
+  "languages": {
+    "items": [
+      "understands the languages of its creator but can't speak"
+    ],
+    "telepathy": null
+  },
+  "challengeRating": {
+    "challengeRating": "5",
+    "experiencePoints": 1800,
+    "proficiencyBonus": 3
+  },
+  "specialTraits": {
+    "blocks": [
+      {
+        "name": "Berserk",
+        "text": "Whenever [name] starts its turn with 40 hit points or fewer, roll a d6. On a 6, [name] goes berserk. On each of its turns while berserk, [name] attacks the nearest creature it can see. If no creature is near enough to move to and attack, [name] attacks an object, with preference for an object smaller than itself. Once [name] goes berserk, it continues to do so until it is destroyed or regains all its hit points.\n  [name]'s creator, if within 60 feet of the berserk golem, can try to calm it by speaking firmly and persuasively. [name] must be able to hear its creator, who must take an action to make a DC 15 Charisma (Persuasion) check. If the check succeeds, [name] ceases being berserk. If it takes damage while still at 40 hit points or fewer, [name] might go berserk again."
+      },
+      {
+        "name": "Aversion of Fire",
+        "text": "If [name] takes fire damage, it has disadvantage on attack rolls and ability checks until the end of its next turn."
+      },
+      {
+        "name": "Immutable Form",
+        "text": "[name] is immune to any spell or effect that would alter its form."
+      },
+      {
+        "name": "Lightning Absorption",
+        "text": "Whenever [name] is subjected to lightning damage, it takes no damage and instead regains a number of hit points equal to the lightning damage dealt."
+      },
+      {
+        "name": "Magic Resistance",
+        "text": "[name] has advantage on saving throws against spells and other magical effects."
+      },
+      {
+        "name": "Magic Weapons",
+        "text": "[name]'s weapon attacks are magical."
+      }
+    ]
+  },
+  "actions": {
+    "blocks": [
+      {
+        "name": "Multiattack",
+        "text": "[name] makes two slam attacks."
+      },
+      {
+        "name": "Slam",
+        "text": "*Melee Weapon Attack:* atk[str] to hit, reach 5 ft., one target. *Hit:* dmg[2d8 + str] bludgeoning damage."
+      }
+    ]
+  },
+  "reactions": {
+    "blocks": []
+  },
+  "legendaryActions": {
+    "blocks": [],
+    "description": "[name] can take 3 legendary actions, choosing from the options below. Only one legendary action option can be used at a time and only at the end of another creature's turn. [name] regains spent legendary actions at the start of its turn."
+  },
+  "layout": {
+    "columns": 1,
+    "twoColumnMode": "auto",
+    "twoColumnHeight": 600
+  },
+  "meta": {
+    "version": "1.0.0",
+    "description": "Created using statblock5e-creator",
+    "url": "https://frumple.github.io/statblock5e-creator"
+  }
+}

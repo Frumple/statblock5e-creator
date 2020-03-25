@@ -29,15 +29,19 @@ it('should preserve newline characters', () => {
 
 describe('should parse valid name expressions', () => {
   const inputText =
-    '[name] begins on a new line. [name] begins on a new sentence, but [name] does not.\n' +
-    '[fullname] begins on a new line. [fullname] begins on a new sentence, but [fullname] does not.';
+    '[name] begins on a new line. [name] begins on a new sentence, but [name] does not. **Header.** [name] begins after a header. ([name] is surrounded by brackets with [name])\n' +
+    '  [name] begins on an indented line.\n' +
+    '[fullname] begins on a new line. [fullname] begins on a new sentence, but [fullname] does not. **Header.** [fullname] begins after a header. ([fullname] is surrounded by brackets with [fullname])\n' +
+    '  [fullname] begins on an indented line.';
 
   it('when only the full name is defined', () => {
     title.fullName = 'Hook Horror';
 
     const expectedOutputText =
-      'The hook horror begins on a new line. The hook horror begins on a new sentence, but the hook horror does not.\n' +
-      'The hook horror begins on a new line. The hook horror begins on a new sentence, but the hook horror does not.';
+      'The hook horror begins on a new line. The hook horror begins on a new sentence, but the hook horror does not. **Header.** The hook horror begins after a header. (The hook horror is surrounded by brackets with the hook horror)\n' +
+      '  The hook horror begins on an indented line.\n' +
+      'The hook horror begins on a new line. The hook horror begins on a new sentence, but the hook horror does not. **Header.** The hook horror begins after a header. (The hook horror is surrounded by brackets with the hook horror)\n' +
+      '  The hook horror begins on an indented line.';
 
     parseAndVerifyNameExpressions(expectedOutputText);
   });
@@ -47,8 +51,10 @@ describe('should parse valid name expressions', () => {
     title.shortName = 'dragon';
 
     const expectedOutputText =
-      'The dragon begins on a new line. The dragon begins on a new sentence, but the dragon does not.\n' +
-      'The ancient red dragon begins on a new line. The ancient red dragon begins on a new sentence, but the ancient red dragon does not.';
+      'The dragon begins on a new line. The dragon begins on a new sentence, but the dragon does not. **Header.** The dragon begins after a header. (The dragon is surrounded by brackets with the dragon)\n' +
+      '  The dragon begins on an indented line.\n' +
+      'The ancient red dragon begins on a new line. The ancient red dragon begins on a new sentence, but the ancient red dragon does not. **Header.** The ancient red dragon begins after a header. (The ancient red dragon is surrounded by brackets with the ancient red dragon)\n' +
+      '  The ancient red dragon begins on an indented line.';
 
     parseAndVerifyNameExpressions(expectedOutputText);
   });
@@ -58,8 +64,10 @@ describe('should parse valid name expressions', () => {
     title.isProperNoun = true;
 
     const expectedOutputText =
-      'Tiamat begins on a new line. Tiamat begins on a new sentence, but Tiamat does not.\n' +
-      'Tiamat begins on a new line. Tiamat begins on a new sentence, but Tiamat does not.';
+      'Tiamat begins on a new line. Tiamat begins on a new sentence, but Tiamat does not. **Header.** Tiamat begins after a header. (Tiamat is surrounded by brackets with Tiamat)\n' +
+      '  Tiamat begins on an indented line.\n' +
+      'Tiamat begins on a new line. Tiamat begins on a new sentence, but Tiamat does not. **Header.** Tiamat begins after a header. (Tiamat is surrounded by brackets with Tiamat)\n' +
+      '  Tiamat begins on an indented line.';
 
     parseAndVerifyNameExpressions(expectedOutputText);
   });
@@ -70,8 +78,10 @@ describe('should parse valid name expressions', () => {
     title.isProperNoun = true;
 
     const expectedOutputText =
-      'Lady Kima begins on a new line. Lady Kima begins on a new sentence, but Lady Kima does not.\n' +
-      'Lady Kima of Vord begins on a new line. Lady Kima of Vord begins on a new sentence, but Lady Kima of Vord does not.';
+      'Lady Kima begins on a new line. Lady Kima begins on a new sentence, but Lady Kima does not. **Header.** Lady Kima begins after a header. (Lady Kima is surrounded by brackets with Lady Kima)\n' +
+      '  Lady Kima begins on an indented line.\n' +
+      'Lady Kima of Vord begins on a new line. Lady Kima of Vord begins on a new sentence, but Lady Kima of Vord does not. **Header.** Lady Kima of Vord begins after a header. (Lady Kima of Vord is surrounded by brackets with Lady Kima of Vord)\n' +
+      '  Lady Kima of Vord begins on an indented line.';
 
     parseAndVerifyNameExpressions(expectedOutputText);
   });

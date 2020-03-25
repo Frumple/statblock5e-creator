@@ -6,6 +6,7 @@ import * as sharedSpecs from './property-list-section.specs.js';
 
 const headingName = 'Damage Vulnerabilities';
 const expectedBlockType = 'Damage Vulnerability';
+const open5eJsonKey = 'damage_vulnerabilities';
 
 const damageVulnerabilitiesModel = CurrentContext.creature.damageVulnerabilities;
 
@@ -50,13 +51,33 @@ describe('when the show section is clicked', () => {
     });
 
     it('should add a custom item, and the show section should have the item', () => {
-      const itemText = 'bludgeoning, piercing, and slashing from nonmagical attacks';
+      const itemText = 'dark';
       sharedSpecs.shouldAddAnItem(damageVulnerabilitiesSection, damageVulnerabilitiesModel, headingName, itemText);
     });
 
     it('should add many items, and the show section should have the items', () => {
       const itemTexts = ['fire', 'rock', 'cold', 'air'];
-      sharedSpecs.shouldAddManyItems(damageVulnerabilitiesSection, damageVulnerabilitiesModel, headingName, itemTexts);
+      const expectedText = 'fire, rock, cold, air';
+      sharedSpecs.shouldAddManyItems(damageVulnerabilitiesSection, damageVulnerabilitiesModel, headingName, itemTexts, expectedText);
+    });
+
+    describe('should add item that contains commas, and if there are other items before or after this item, semicolon separators instead of commas should be shown', () => {
+      /* eslint-disable indent, no-unexpected-multiline */
+      it.each
+      `
+        description                                    | itemTexts                                                                                                                           | expectedText
+        ${'comma item only'}                           | ${['bludgeoning, piercing, and slashing from nonmagical attacks']}                                                                  | ${'bludgeoning, piercing, and slashing from nonmagical attacks'}
+        ${'items before comma item'}                   | ${['fire', 'rock', 'bludgeoning, piercing, and slashing from nonmagical attacks']}                                                  | ${'fire, rock; bludgeoning, piercing, and slashing from nonmagical attacks'}
+        ${'items after comma item'}                    | ${['bludgeoning, piercing, and slashing from nonmagical attacks', 'cold', 'air']}                                                   | ${'bludgeoning, piercing, and slashing from nonmagical attacks; cold, air'}
+        ${'items before and after comma item'}         | ${['fire', 'rock', 'bludgeoning, piercing, and slashing from nonmagical attacks', 'cold', 'air']}                                   | ${'fire, rock; bludgeoning, piercing, and slashing from nonmagical attacks; cold, air'}
+        ${'two comma items adjacent to each other'}    | ${['fire', 'rock', 'bludgeoning, piercing, and slashing from nonmagical attacks', 'lightning, thunder from spells', 'cold', 'air']} | ${'fire, rock; bludgeoning, piercing, and slashing from nonmagical attacks; lightning, thunder from spells; cold, air'}
+        ${'two comma items separated from each other'} | ${['fire', 'rock', 'bludgeoning, piercing, and slashing from nonmagical attacks', 'cold', 'air', 'lightning, thunder from spells']} | ${'fire, rock; bludgeoning, piercing, and slashing from nonmagical attacks; cold, air; lightning, thunder from spells'}
+      `
+      ('$description: $itemTexts => $expectedText',
+      ({itemTexts, expectedText}) => {
+        sharedSpecs.shouldAddManyItems(damageVulnerabilitiesSection, damageVulnerabilitiesModel, headingName, itemTexts, expectedText);
+      });
+      /* eslint-enable indent, no-unexpected-multiline */
     });
 
     it('should display an error after clicking the add button if the input field is blank', () => {
@@ -104,6 +125,37 @@ describe('when the show section is clicked', () => {
         sharedSpecs.shouldDeleteOneOfManyItems(damageVulnerabilitiesSection, damageVulnerabilitiesModel, headingName, initialItems, itemToDelete, expectedItems);
       });
       /* eslint-enable indent, no-unexpected-multiline */
+    });
+  });
+});
+
+describe('when import from Open5e', () => {
+  describe('should import as normal', () => {
+    /* eslint-disable indent, no-unexpected-multiline */
+    it.each
+    `
+      description                                         | inputText                                                                               | expectedItems
+      ${'no items'}                                       | ${''}                                                                                   | ${[]}
+      ${'single simple item'}                             | ${'force'}                                                                              | ${['force']}
+      ${'multiple simple items'}                          | ${'radiant, necrotic, acid'}                                                            | ${['radiant', 'necrotic', 'acid']}
+      ${'bludgeoning, piercing, and slashing (BPS) only'} | ${'bludgeoning, piercing, and slashing from nonmagical attacks'}                        | ${['bludgeoning, piercing, and slashing from nonmagical attacks']}
+      ${'simple items before BPS'}                        | ${'fire, rock; bludgeoning, piercing, and slashing from nonmagical attacks'}            | ${['fire', 'rock', 'bludgeoning, piercing, and slashing from nonmagical attacks']}
+      ${'simple items after BPS'}                         | ${'bludgeoning, piercing, and slashing from nonmagical attacks; cold, air'}             | ${['bludgeoning, piercing, and slashing from nonmagical attacks', 'cold', 'air']}
+      ${'simple items before and after BPS'}              | ${'fire, rock; bludgeoning, piercing, and slashing from nonmagical attacks; cold, air'} | ${['fire', 'rock', 'bludgeoning, piercing, and slashing from nonmagical attacks', 'cold', 'air']}
+    `
+    ('$description: $inputText => $expectedItems',
+    ({inputText, expectedItems}) => {
+      sharedSpecs.shouldImportFromOpen5e(damageVulnerabilitiesSection, damageVulnerabilitiesModel, headingName, open5eJsonKey, inputText, expectedItems);
+    });
+    /* eslint-enable indent, no-unexpected-multiline */
+  });
+});
+
+describe('when the section is empty and not visible', () => {
+  describe('and a creature with items is imported from JSON', () => {
+    it('should show the new items', () => {
+      const itemsToImport = ['bludgeoning'];
+      sharedSpecs.shouldShowItemsImportedFromJsonIfSectionWasInitiallyEmptyAndNotVisible(damageVulnerabilitiesSection, headingName, itemsToImport);
     });
   });
 });

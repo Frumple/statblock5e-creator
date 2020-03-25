@@ -1,18 +1,21 @@
-import * as propertyLineSectionModule from './property-line-section.js';
+import { PropertyLineSection, PropertyLineShowElements, PropertyLineEditElements } from './property-line-section.js';
 import CurrentContext from '../../../models/current-context.js';
 
-export default class PropertyListSection extends propertyLineSectionModule.PropertyLineSection {
+export class PropertyListSection extends PropertyLineSection {
   static get templatePaths() {
     return super.templatePaths.set(
       'property-list-section',
       'src/html/elements/autonomous/sections/property-list-section.html');
   }
 
-  constructor(templatePaths, modelPropertyName) {
+  constructor(templatePaths,
+    modelPropertyName,
+    showElements = PropertyListShowElements,
+    editElements = PropertyListEditElements) {
     super(templatePaths,
           modelPropertyName,
-          PropertyListShowElements,
-          PropertyListEditElements);
+          showElements,
+          editElements);
 
     const model = CurrentContext.creature[this.modelPropertyName];
 
@@ -95,13 +98,13 @@ export default class PropertyListSection extends propertyLineSectionModule.Prope
   }
 }
 
-class PropertyListShowElements extends propertyLineSectionModule.PropertyLineShowElements {
+export class PropertyListShowElements extends PropertyLineShowElements {
   constructor(shadowRoot) {
     super(shadowRoot);
   }
 }
 
-class PropertyListEditElements extends propertyLineSectionModule.PropertyLineEditElements {
+export class PropertyListEditElements extends PropertyLineEditElements {
   constructor(shadowRoot) {
     super(shadowRoot);
 

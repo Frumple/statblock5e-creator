@@ -1,7 +1,7 @@
-import * as blockListSectionModule from './block-list-section.js';
+import { BlockListSection, BlockListShowElements, BlockListEditElements } from './block-list-section.js';
 import CurrentContext from '../../../models/current-context.js';
 
-export default class LegendaryActionsSection extends blockListSectionModule.BlockListSection {
+export default class LegendaryActionsSection extends BlockListSection {
   static get elementName() { return 'legendary-actions-section'; }
   static get templatePaths() {
     return super.templatePaths.set(
@@ -22,8 +22,8 @@ export default class LegendaryActionsSection extends blockListSectionModule.Bloc
     if (this.isConnected && ! this.isInitialized) {
       super.connectedCallback();
 
-      this.showElements.displayBlockList.disableBlockNameItalics = true;
-      this.editElements.editableBlockList.disableBlockNameItalics = true;
+      this.showElements.displayBlockList.isLegendaryActionBlock = true;
+      this.editElements.editableBlockList.isLegendaryActionBlock = true;
 
       this.isInitialized = true;
     }
@@ -84,7 +84,7 @@ export default class LegendaryActionsSection extends blockListSectionModule.Bloc
   }
 }
 
-class LegendaryActionsSectionShowElements extends blockListSectionModule.BlockListShowSection {
+class LegendaryActionsSectionShowElements extends BlockListShowElements {
   constructor(shadowRoot) {
     super(shadowRoot);
 
@@ -92,7 +92,7 @@ class LegendaryActionsSectionShowElements extends blockListSectionModule.BlockLi
   }
 }
 
-class LegendaryActionsSectionEditElements extends blockListSectionModule.BlockListEditSection {
+class LegendaryActionsSectionEditElements extends BlockListEditElements {
   constructor(shadowRoot) {
     super(shadowRoot);
 

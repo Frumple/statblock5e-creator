@@ -11,15 +11,39 @@ export default class AdvancedStats extends DivisibleContainer {
   constructor() {
     super(AdvancedStats.templatePaths);
 
-    this.sections.set('savingThrows', document.querySelector('saving-throws-section'));
-    this.sections.set('skills', document.querySelector('skills-section'));
-    this.sections.set('damageVulnerabilities', document.querySelector('damage-vulnerabilities-section'));
-    this.sections.set('damageResistances', document.querySelector('damage-resistances-section'));
-    this.sections.set('damageImmunities', document.querySelector('damage-immunities-section'));
-    this.sections.set('conditionImmunities', document.querySelector('condition-immunities-section'));
-    this.sections.set('senses', document.querySelector('senses-section'));
-    this.sections.set('languages', document.querySelector('languages-section'));
-    this.sections.set('challengeRating', document.querySelector('challenge-rating-section'));
+    const savingThrowsSection = document.querySelector('saving-throws-section');
+    const skillsSection = document.querySelector('skills-section');
+    const damageVulnerabilitiesSection = document.querySelector('damage-vulnerabilities-section');
+    const damageResistancesSection = document.querySelector('damage-resistances-section');
+    const damageImmunitiesSection = document.querySelector('damage-immunities-section');
+    const conditionImmunitiesSection = document.querySelector('condition-immunities-section');
+    const sensesSection = document.querySelector('senses-section');
+    const languagesSection = document.querySelector('languages-section');
+    const challengeRatingSection =  document.querySelector('challenge-rating-section');
+
+    this.sections.set('savingThrows', savingThrowsSection);
+    this.sections.set('skills', skillsSection);
+    this.sections.set('damageVulnerabilities', damageVulnerabilitiesSection);
+    this.sections.set('damageResistances', damageResistancesSection);
+    this.sections.set('damageImmunities', damageImmunitiesSection);
+    this.sections.set('conditionImmunities', conditionImmunitiesSection);
+    this.sections.set('senses', sensesSection);
+    this.sections.set('languages', languagesSection);
+    this.sections.set('challengeRating', challengeRatingSection);
+
+    // Proficiency bonus from the challenge rating section must be imported before saving throws and skills.
+    // Skills must be imported before senses in order to calculate passive perception.
+    this.importOrder = [
+      challengeRatingSection,
+      savingThrowsSection,
+      skillsSection,
+      damageVulnerabilitiesSection,
+      damageResistancesSection,
+      damageImmunitiesSection,
+      conditionImmunitiesSection,
+      sensesSection,
+      languagesSection
+    ];
   }
 
   updateSavingThrowsView(abilityName) {
@@ -34,11 +58,14 @@ export default class AdvancedStats extends DivisibleContainer {
     this.sections.get('senses').updateViewOnAttributeChange();
   }
 
-  // Import in reverse order so that the Proficiency Bonus in the
-  // Challenge Rating section is imported before other stats that depend on it.
-  // (i.e. CON HP, saving throws, skills, passive perception)
+  importFromOpen5e(json) {
+    for (const section of this.importOrder) {
+      section.importFromOpen5e(json);
+    }
+  }
+
   importFromJson(json) {
-    for (const section of Array.from(this.sections.values()).reverse()) {
+    for (const section of this.importOrder) {
       section.importFromJson(json[section.modelPropertyName]);
     }
   }

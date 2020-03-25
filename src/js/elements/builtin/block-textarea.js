@@ -44,26 +44,36 @@ const BlockTextAreaMixin = {
 
     const nameParserResults = Parser.parseNames(escapedText);
 
-    if (errorMessages && nameParserResults.error) {
-      errorMessages.add(this, `${this.fieldName} has at least one invalid name expression.`);
+    if (nameParserResults.error) {
+      if (errorMessages) {
+        errorMessages.add(this, `${this.fieldName} has at least one invalid name expression.`);
+      }
       return;
     }
 
     const mathParserResults = Parser.parseMath(nameParserResults.outputText);
 
     if (errorMessages && mathParserResults.error) {
-      errorMessages.add(this, `${this.fieldName} has at least one invalid math expression.`);
+      if (errorMessages) {
+        errorMessages.add(this, `${this.fieldName} has at least one invalid math expression.`);
+      }
       return;
     }
 
-    const markdownParserResults = Parser.parseMarkdown(mathParserResults.outputText);
+    const mathParserOutputText = mathParserResults.outputText;
 
-    if (errorMessages && markdownParserResults.error) {
-      errorMessages.add(this, `${this.fieldName} has invalid markdown syntax.`);
-      return;
+    this.markdownText = mathParserOutputText.replace(/\n/g, '  \n> ');
+
+    const markdownParserResults = Parser.parseMarkdown(mathParserOutputText);
+
+    if (markdownParserResults.error) {
+      if (errorMessages) {
+        errorMessages.add(this, `${this.fieldName} has invalid markdown syntax.`);
+      }
+
+      this.htmlText = mathParserOutputText;
+    } else {
+      this.htmlText = markdownParserResults.outputText;
     }
-
-    this.markdownText = mathParserResults.outputText.replace(/\n/g, '  \n> ');
-    this.htmlText = markdownParserResults.outputText;
   }
 };

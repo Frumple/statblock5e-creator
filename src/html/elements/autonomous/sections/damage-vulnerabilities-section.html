@@ -1,5 +1,35 @@
 <link href='src/css/elements/autonomous/sections/damage-vulnerabilities-section.css' rel='stylesheet' type='text/css'>
 
+<error-messages></error-messages>
+
+<div id="show-section" class="section section_selectable">
+  <div class="property-list-show-section section__content">
+    <property-line>
+      <h4 id="show-section-heading"></h4>
+      <p id="show-section-text"></p>
+    </property-line>
+  </div>
+  <div class="section__edit-label-container">
+    <label id="edit-label" class="section__edit-label section__edit-label_hidden"><i class="material-icons">edit</i></label>
+  </div>
+</div>
+
+<form id="edit-section" class="section section_hidden" novalidate>
+  <div class="property-list-edit-section section__content">
+    <label id="property-list-label" class="property-list-edit-section__heading-label section__heading-label" for="property-list-input">:</label>
+    <div class="property-list-edit-section__content">
+      <div class="property-list-edit-section__input-container">
+        <input id="property-list-input" class="property-list-edit-section__input section__text-input" type="text" list="property-list-datalist" />
+        <button id="property-list-add-button" class="default-button property-list-edit-section__add-button" type="button"><i class="material-icons">add</i></button>
+      </div>
+      <property-list id="property-list" class="property-list-edit-section__list"></property-list>
+    </div>
+  </div>
+  <div class="section__save-button-container">
+    <button id="save-button" class="default-button section__save-button"><i class="material-icons">done</i></button>
+  </div>
+</form>
+
 <datalist id="property-list-datalist" is="property-datalist">
   <option id="acid" value="acid" />
   <option id="bludgeoning" value="bludgeoning" />
@@ -13,5 +43,5 @@
   <option id="psychic" value="psychic" />
   <option id="radiant" value="radiant" />
   <option id="slashing" value="slashing" />
-  <option id="thunder" value="thunder" />  
+  <option id="thunder" value="thunder" />
 </datalist>

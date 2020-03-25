@@ -11,11 +11,14 @@ export default class DisplayBlock extends CustomAutonomousElement {
   constructor() {
     super(DisplayBlock.templatePaths);
 
+    this.blockElement = this.shadowRoot.getElementById('display-block');
     this.nameElement = this.shadowRoot.getElementById('display-block-name');
     this.textElement = this.shadowRoot.getElementById('display-block-text');
   }
 
-  disableBlockNameItalics() {
+  applyLegendaryActionStyles() {
+    this.blockElement.classList.add('display-block_no-spacing');
+    this.blockElement.classList.add('display-block_hanging-indent');
     this.nameElement.classList.add('display-block__name_no-italic');
   }
 

@@ -757,4 +757,31 @@ describe('should parse valid spell save DC expressions', () => {
     });
     /* eslint-enable indent, no-unexpected-multiline */
   });
+
+  describe('should parse math expressions surrounded by round brackets', () => {
+    /* eslint-disable indent, no-unexpected-multiline */
+      it.each
+      `
+        description                   | inputText             | expectedText
+        ${'basic math expression'}    | ${'([int])'}          | ${'(3)'}
+        ${'modifier expression'}      | ${'(mod[int])'}       | ${'(+3)'}
+        ${'attack expression'}        | ${'(atk[int])'}       | ${'(+7)'}
+        ${'damage expression'}        | ${'(dmg[2d6 + int])'} | ${'(10 (2d6 + 3))'}
+        ${'spell save DC expression'} | ${'(sdc[int])'}       | ${'(15)'}
+      `
+      ('$description: "$inputText" => $expectedText',
+      ({inputText, expectedText}) => {
+        abilitiesModel.abilities['intelligence'].score = 16;    // +3 modifier
+
+        challengeRatingModel.proficiencyBonus = 4;
+
+        const parserResults = parseMath(inputText);
+
+        expect(parserResults).not.toBeNull();
+        expect(parserResults.inputText).toBe(inputText);
+        expect(parserResults.outputText).toBe(expectedText);
+        expect(parserResults.error).toBeNull();
+      });
+    /* eslint-enable indent, no-unexpected-multiline */
+  });
 });

@@ -1,6 +1,6 @@
 .saving-throws-edit-section {
   display: grid;
-  grid-template-columns: 20px 150px 40px auto auto;
+  grid-template-columns: 20px auto 30px 70px 70px;
   grid-template-rows: auto 5px auto auto auto auto auto auto;
   grid-column-gap: 5px;
   align-items: center;
@@ -15,41 +15,40 @@
   grid-area: 1 / 1 / 2 / 4;
   justify-self: start;
 }
-.saving-throws-edit-section__proficient-label { grid-area: 1 / 4; }
+.saving-throws-edit-section__saving-throws-help-tooltip {
+  grid-area: 1 / 3;
+  align-self: center;
+  --help-tooltip-icon-color: #7A200D;
+  --help-tooltip-width: 55em;
+}
 .saving-throws-edit-section__override-label { grid-area: 1 / 5; }
 
 .saving-throws-edit-section__strength-enable { grid-area: 3 / 1; }
 .saving-throws-edit-section__strength-label { grid-area: 3 / 2; }
 .saving-throws-edit-section__strength-saving-throw-modifier { grid-area: 3 / 3; }
-.saving-throws-edit-section__strength-proficient { grid-area: 3 / 4; }
 .saving-throws-edit-section__strength-override { grid-area: 3 / 5; }
 
 .saving-throws-edit-section__dexterity-enable { grid-area: 4 / 1; }
 .saving-throws-edit-section__dexterity-label { grid-area: 4 / 2; }
 .saving-throws-edit-section__dexterity-saving-throw-modifier { grid-area: 4 / 3; }
-.saving-throws-edit-section__dexterity-proficient { grid-area: 4 / 4; }
 .saving-throws-edit-section__dexterity-override { grid-area: 4 / 5; }
 
 .saving-throws-edit-section__constitution-enable { grid-area: 5 / 1; }
 .saving-throws-edit-section__constitution-label { grid-area: 5 / 2; }
 .saving-throws-edit-section__constitution-saving-throw-modifier { grid-area: 5 / 3; }
-.saving-throws-edit-section__constitution-proficient { grid-area: 5 / 4; }
 .saving-throws-edit-section__constitution-override { grid-area: 5 / 5; }
 
 .saving-throws-edit-section__intelligence-enable { grid-area: 6 / 1; }
 .saving-throws-edit-section__intelligence-label { grid-area: 6 / 2; }
 .saving-throws-edit-section__intelligence-saving-throw-modifier { grid-area: 6 / 3; }
-.saving-throws-edit-section__intelligence-proficient { grid-area: 6 / 4; }
 .saving-throws-edit-section__intelligence-override { grid-area: 6 / 5; }
 
 .saving-throws-edit-section__wisdom-enable { grid-area: 7 / 1; }
 .saving-throws-edit-section__wisdom-label { grid-area: 7 / 2; }
 .saving-throws-edit-section__wisdom-saving-throw-modifier { grid-area: 7 / 3; }
-.saving-throws-edit-section__wisdom-proficient { grid-area: 7 / 4; }
 .saving-throws-edit-section__wisdom-override { grid-area: 7 / 5; }
 
 .saving-throws-edit-section__charisma-enable { grid-area: 8 / 1; }
 .saving-throws-edit-section__charisma-label { grid-area: 8 / 2; }
 .saving-throws-edit-section__charisma-saving-throw-modifier { grid-area: 8 / 3; }
-.saving-throws-edit-section__charisma-proficient { grid-area: 8 / 4; }
 .saving-throws-edit-section__charisma-override { grid-area: 8 / 5; }

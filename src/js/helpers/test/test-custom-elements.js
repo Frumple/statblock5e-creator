@@ -2,6 +2,7 @@ import CustomBuiltinElementMixins from '/src/js/helpers/custom-builtin-element-m
 import { traverseElements } from '/src/js/helpers/element-helpers.js';
 
 import BlockTextArea from '/src/js/elements/builtin/block-textarea.js';
+import DynamicSelect from '/src/js/elements/builtin/dynamic-select.js';
 import EnableDisableElementsCheckbox from '/src/js/elements/builtin/enable-disable-elements-checkbox.js';
 import NumberInput from '/src/js/elements/builtin/number-input.js';
 import NumberSelect from '/src/js/elements/builtin/number-select.js';
@@ -16,26 +17,27 @@ import DisplayBlockList from '/src/js/elements/autonomous/lists/display-block-li
 import DisplayBlock from '/src/js/elements/autonomous/lists/display-block.js';
 import EditableBlockList from '/src/js/elements/autonomous/lists/editable-block-list.js';
 import EditableBlock from '/src/js/elements/autonomous/lists/editable-block.js';
-import GenerateAttackDialog from '../../elements/autonomous/dialogs/generate-attack-dialog';
+import GenerateAttackDialog from '../../elements/autonomous/dialogs/generate-attack-dialog.js';
 
 export async function define() {
-  const customElements = [];
+  const customElements = [
+    BlockTextArea,
+    DynamicSelect,
+    EnableDisableElementsCheckbox,
+    NumberInput,
+    NumberSelect,
+    PropertyDataList,
+    SanitizedParagraph,
+    TextInput,
 
-  customElements.push(BlockTextArea);
-  customElements.push(EnableDisableElementsCheckbox);
-  customElements.push(NumberInput);
-  customElements.push(NumberSelect);
-  customElements.push(PropertyDataList);
-  customElements.push(SanitizedParagraph);
-  customElements.push(TextInput);
-
-  customElements.push(ErrorMessages);
-  customElements.push(PropertyList);
-  customElements.push(PropertyListItem);
-  customElements.push(DisplayBlockList);
-  customElements.push(DisplayBlock);
-  customElements.push(EditableBlockList);
-  customElements.push(EditableBlock);
+    ErrorMessages,
+    PropertyList,
+    PropertyListItem,
+    DisplayBlockList,
+    DisplayBlock,
+    EditableBlockList,
+    EditableBlock
+  ];
 
   for (const element of customElements) {
     await element.define();
@@ -45,13 +47,12 @@ export async function define() {
 export function initializeSection(section) {
   replaceWithFakes(section);
 
-  const maxTraversalDepth = 5;
+  initializeContainer(section.showElements);
+  initializeContainer(section.editElements);
+}
 
-  traverseElements(section.showElements, maxTraversalDepth, (element) => {
-    CustomBuiltinElementMixins.applyToElement(element);
-  });
-
-  traverseElements(section.editElements, maxTraversalDepth, (element) => {
+export function initializeContainer(container, maxTraversalDepth = 5) {
+  traverseElements(container, maxTraversalDepth, (element) => {
     CustomBuiltinElementMixins.applyToElement(element);
   });
 }

@@ -1,4 +1,4 @@
-import PropertyListSection from './property-list-section.js';
+import { PropertyListSection } from './property-list-section.js';
 
 export default class DamageVulnerabilitiesSection extends PropertyListSection {
   static get elementName() { return 'damage-vulnerabilities-section'; }

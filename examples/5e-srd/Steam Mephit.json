@@ -1,0 +1,247 @@
+{
+  "title": {
+    "fullName": "Steam Mephit",
+    "shortName": "mephit",
+    "isProperNoun": false
+  },
+  "subtitle": {
+    "size": "Small",
+    "type": "elemental",
+    "tags": "",
+    "alignment": "neutral evil",
+    "useCustomText": false,
+    "customText": ""
+  },
+  "armorClass": {
+    "armorClass": 10,
+    "armorType": "",
+    "hasShield": false,
+    "useCustomText": false,
+    "customText": ""
+  },
+  "hitPoints": {
+    "hitPoints": 21,
+    "useHitDie": true,
+    "hitDieQuantity": 6,
+    "hitDieSize": 6
+  },
+  "speed": {
+    "walk": 30,
+    "burrow": null,
+    "climb": null,
+    "fly": 30,
+    "hover": false,
+    "swim": null,
+    "useCustomText": false,
+    "customText": ""
+  },
+  "abilityScores": {
+    "strength": 5,
+    "dexterity": 11,
+    "constitution": 10,
+    "intelligence": 11,
+    "wisdom": 10,
+    "charisma": 12
+  },
+  "savingThrows": {
+    "strength": {
+      "isEnabled": false,
+      "override": null
+    },
+    "dexterity": {
+      "isEnabled": false,
+      "override": null
+    },
+    "constitution": {
+      "isEnabled": false,
+      "override": null
+    },
+    "intelligence": {
+      "isEnabled": false,
+      "override": null
+    },
+    "wisdom": {
+      "isEnabled": false,
+      "override": null
+    },
+    "charisma": {
+      "isEnabled": false,
+      "override": null
+    }
+  },
+  "skills": {
+    "acrobatics": {
+      "isEnabled": false,
+      "hasExpertise": false,
+      "override": null
+    },
+    "animalHandling": {
+      "isEnabled": false,
+      "hasExpertise": false,
+      "override": null
+    },
+    "arcana": {
+      "isEnabled": false,
+      "hasExpertise": false,
+      "override": null
+    },
+    "athletics": {
+      "isEnabled": false,
+      "hasExpertise": false,
+      "override": null
+    },
+    "deception": {
+      "isEnabled": false,
+      "hasExpertise": false,
+      "override": null
+    },
+    "history": {
+      "isEnabled": false,
+      "hasExpertise": false,
+      "override": null
+    },
+    "insight": {
+      "isEnabled": false,
+      "hasExpertise": false,
+      "override": null
+    },
+    "intimidation": {
+      "isEnabled": false,
+      "hasExpertise": false,
+      "override": null
+    },
+    "investigation": {
+      "isEnabled": false,
+      "hasExpertise": false,
+      "override": null
+    },
+    "medicine": {
+      "isEnabled": false,
+      "hasExpertise": false,
+      "override": null
+    },
+    "nature": {
+      "isEnabled": false,
+      "hasExpertise": false,
+      "override": null
+    },
+    "perception": {
+      "isEnabled": false,
+      "hasExpertise": false,
+      "override": null
+    },
+    "performance": {
+      "isEnabled": false,
+      "hasExpertise": false,
+      "override": null
+    },
+    "persuasion": {
+      "isEnabled": false,
+      "hasExpertise": false,
+      "override": null
+    },
+    "religion": {
+      "isEnabled": false,
+      "hasExpertise": false,
+      "override": null
+    },
+    "sleightOfHand": {
+      "isEnabled": false,
+      "hasExpertise": false,
+      "override": null
+    },
+    "stealth": {
+      "isEnabled": false,
+      "hasExpertise": false,
+      "override": null
+    },
+    "survival": {
+      "isEnabled": false,
+      "hasExpertise": false,
+      "override": null
+    }
+  },
+  "damageVulnerabilities": {
+    "items": []
+  },
+  "damageResistances": {
+    "items": []
+  },
+  "damageImmunities": {
+    "items": [
+      "fire",
+      "poison"
+    ]
+  },
+  "conditionImmunities": {
+    "items": [
+      "poisoned"
+    ]
+  },
+  "senses": {
+    "blindsight": null,
+    "blindBeyondThisRadius": false,
+    "darkvision": 60,
+    "tremorsense": null,
+    "truesight": null,
+    "useCustomText": false,
+    "customText": ""
+  },
+  "languages": {
+    "items": [
+      "Aquan",
+      "Ignan"
+    ],
+    "telepathy": null
+  },
+  "challengeRating": {
+    "challengeRating": "1/4",
+    "experiencePoints": 50,
+    "proficiencyBonus": 2
+  },
+  "specialTraits": {
+    "blocks": [
+      {
+        "name": "Death Burst",
+        "text": "When [name] dies, it explodes in a cloud of steam. Each creature within 5 ft. of [name] must succeed on a DC 10 Dexterity saving throw or take dmg[1d8] fire damage."
+      },
+      {
+        "name": "Innate Spellcasting (1/Day)",
+        "text": "[name] can innately cast _blur_, requiring no material components. Its innate spellcasting ability is Charisma."
+      }
+    ]
+  },
+  "actions": {
+    "blocks": [
+      {
+        "name": "Claws",
+        "text": "*Melee Weapon Attack:* atk[dex] to hit, reach 5 ft., one creature. *Hit:* dmg[1d4 + dex] slashing damage plus dmg[1d4] fire damage."
+      },
+      {
+        "name": "Steam Breath (Recharge 6)",
+        "text": "[name] exhales a 15-foot cone of scalding steam. Each creature in that area must succeed on a DC 10 Dexterity saving throw, taking dmg[1d8] fire damage on a failed save, or half as much damage on a successful one."
+      },
+      {
+        "name": "Variant: Summon Mephits (1/Day)",
+        "text": "[name] has a 25 percent chance of summoning 1d4 mephits of its kind. A summoned mephit appears in an unoccupied space within 60 feet of its summoner, acts as an ally of its summoner, and can't summon other mephits. It remains for 1 minute, until it or its summoner dies, or until its summoner dismisses it as an action."
+      }
+    ]
+  },
+  "reactions": {
+    "blocks": []
+  },
+  "legendaryActions": {
+    "blocks": [],
+    "description": "[name] can take 3 legendary actions, choosing from the options below. Only one legendary action option can be used at a time and only at the end of another creature's turn. [name] regains spent legendary actions at the start of its turn."
+  },
+  "layout": {
+    "columns": 1,
+    "twoColumnMode": "auto",
+    "twoColumnHeight": 600
+  },
+  "meta": {
+    "version": "1.0.0",
+    "description": "Created using statblock5e-creator",
+    "url": "https://frumple.github.io/statblock5e-creator"
+  }
+}
