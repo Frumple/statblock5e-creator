@@ -114,6 +114,7 @@ export default class StatBlockEditor extends CustomAutonomousElement {
     layoutSettings.emptySectionsVisibility = visibility;
 
     this.statBlock.setEmptyVisibility(visibility);
+    this.saveToLocalStorage();
   }
 
   onAllSectionsAction(event) {
