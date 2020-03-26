@@ -1,6 +1,7 @@
 import StatBlockEditor from '../containers/stat-block-editor.js';
 import StatBlockMenu from '../containers/stat-block-menu.js';
 import StatBlockSidebar from '../containers/stat-block-sidebar.js';
+import StatBlock from '../containers/stat-block.js';
 
 import ImportSrdDialog from './import-srd-dialog.js';
 
@@ -18,6 +19,17 @@ let statBlock;
 let importSrdDialog;
 
 beforeAll(async() => {
+  StatBlock.mockImplementation(() => {
+    return {
+      setColumns: () => {},
+      setColumnHeight: () => {},
+      setEmptyVisibility: () => {},
+      importFromJson: jest.fn(),
+      importFromOpen5e: () => {},
+      exportToJson: () => { return {}; }
+    };
+  });
+
   await TestCustomElements.define();
   await StatBlockEditor.define();
   await StatBlockMenu.define();
@@ -33,7 +45,7 @@ beforeEach(() => {
   importSrdDialog = statBlockEditor.importSrdDialog;
   TestCustomElements.initializeContainer(importSrdDialog);
 
-  statBlock.importFromOpen5e.mockClear();
+  StatBlock.mockClear();
 
   statBlockEditor.connect();
   statBlockMenu.connect();

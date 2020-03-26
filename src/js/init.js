@@ -78,6 +78,9 @@ async function init() {
   loadingScreen.status = 'Initializing HTML export template...';
   await HtmlExportDocumentFactory.init();
 
+  loadingScreen.status = 'Loading last saved state from local storage...';
+  statBlockEditor.loadFromLocalStorage();
+
   loadingScreen.status = 'Waiting for elements to load...';
   await waitForBodyLoaded();
 

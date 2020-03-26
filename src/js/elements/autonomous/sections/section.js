@@ -132,6 +132,7 @@ export class Section extends CustomAutonomousElement {
     }
 
     this.dispatchModeChangedEvent();
+    this.dispatchSectionSavedEvent();
   }
 
   checkForErrors() {
@@ -165,6 +166,14 @@ export class Section extends CustomAutonomousElement {
       composed: true
     });
     this.dispatchEvent(changeEvent);
+  }
+
+  dispatchSectionSavedEvent() {
+    const saveEvent = new CustomEvent('sectionSaved', {
+      bubbles: true,
+      composed: true
+    });
+    this.dispatchEvent(saveEvent);
   }
 
   importFromOpen5e(json) {

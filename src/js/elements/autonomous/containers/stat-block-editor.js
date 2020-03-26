@@ -7,12 +7,14 @@ import StatBlockMenu from './stat-block-menu.js';
 import StatBlockSidebar from './stat-block-sidebar.js';
 import StatBlock from './stat-block.js';
 
-import ImportOpen5eDialog from '../dialogs/import-open5e-dialog.js';
 import ImportJsonDialog from '../dialogs/import-json-dialog.js';
+import ImportSrdDialog from '../dialogs/import-srd-dialog.js';
+import ImportOpen5eDialog from '../dialogs/import-open5e-dialog.js';
+
 import ExportDialog from '../dialogs/export-dialog.js';
 
 import CurrentContext from '../../../models/current-context.js';
-import ImportSrdDialog from '../dialogs/import-srd-dialog.js';
+import LocalStorageProxy from '../../../helpers/local-storage-proxy.js';
 
 const html_beautify = require('js-beautify').html;
 
@@ -67,6 +69,8 @@ export default class StatBlockEditor extends CustomAutonomousElement {
       this.addEventListener('exportAction', this.onExportAction.bind(this));
       this.addEventListener('printAction', this.onPrintAction.bind(this));
 
+      this.addEventListener('sectionSaved', this.onSectionSaved.bind(this));
+
       this.isInitialized = true;
     }
   }
@@ -88,6 +92,7 @@ export default class StatBlockEditor extends CustomAutonomousElement {
     }
 
     this.statBlock.setColumns(columns);
+    this.saveToLocalStorage();
   }
 
   onTwoColumnHeightChanged(event) {
@@ -99,6 +104,7 @@ export default class StatBlockEditor extends CustomAutonomousElement {
     layoutSettings.twoColumnHeight = height;
 
     this.statBlock.setColumnHeight(mode, height);
+    this.saveToLocalStorage();
   }
 
   onEmptySectionsVisibilityChanged(event) {
@@ -160,6 +166,27 @@ export default class StatBlockEditor extends CustomAutonomousElement {
     printHtml(content);
   }
 
+  onSectionSaved() {
+    this.saveToLocalStorage();
+  }
+
+  loadFromLocalStorage() {
+    const jsonString = LocalStorageProxy.load();
+
+    if (jsonString !== null) {
+      const json = JSON.parse(jsonString);
+
+      if (json.meta.version === CurrentContext.version) {
+        this.importFromJson(json);
+      }
+    }
+  }
+
+  saveToLocalStorage() {
+    const jsonString = this.exportToJson();
+    LocalStorageProxy.save(jsonString);
+  }
+
   openImportJsonDialog() {
     this.importJsonDialog.launch(this.importFromJson.bind(this));
   }
@@ -189,15 +216,18 @@ export default class StatBlockEditor extends CustomAutonomousElement {
 
   importFromOpen5e(json) {
     this.statBlock.importFromOpen5e(json);
+
+    this.saveToLocalStorage();
   }
 
-  importFromJson(text) {
-    const json = JSON.parse(text);
+  importFromJson(json) {
     CurrentContext.layoutSettings.fromJson(json.layout);
     this.statBlock.importFromJson(json);
 
     this.statBlockMenu.updateControls();
     this.statBlockSidebar.updateControls();
+
+    this.saveToLocalStorage();
   }
 
   exportToJson() {
