@@ -23,6 +23,7 @@ import ImportJsonDialog from './elements/autonomous/dialogs/import-json-dialog.j
 import ImportSrdDialog from './elements/autonomous/dialogs/import-srd-dialog.js';
 import ImportOpen5eDialog from './elements/autonomous/dialogs/import-open5e-dialog.js';
 
+import ResetDialog from './elements/autonomous/dialogs/reset-dialog.js';
 import ExportDialog from './elements/autonomous/dialogs/export-dialog.js';
 import GenerateAttackDialog from './elements/autonomous/dialogs/generate-attack-dialog.js';
 
@@ -118,6 +119,7 @@ async function defineElements() {
     ImportSrdDialog,
     ImportOpen5eDialog,
 
+    ResetDialog,
     ExportDialog,
     GenerateAttackDialog,
 

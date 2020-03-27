@@ -7,6 +7,8 @@ import StatBlockMenu from './stat-block-menu.js';
 import StatBlockSidebar from './stat-block-sidebar.js';
 import StatBlock from './stat-block.js';
 
+import ResetDialog from '../dialogs/reset-dialog.js';
+
 import ImportJsonDialog from '../dialogs/import-json-dialog.js';
 import ImportSrdDialog from '../dialogs/import-srd-dialog.js';
 import ImportOpen5eDialog from '../dialogs/import-open5e-dialog.js';
@@ -34,6 +36,8 @@ export default class StatBlockEditor extends CustomAutonomousElement {
       this.statBlockSidebar = new StatBlockSidebar(this);
       this.statBlock = new StatBlock(this);
 
+      this.resetDialog = new ResetDialog();
+
       this.importJsonDialog = new ImportJsonDialog();
       this.importSrdDialog = new ImportSrdDialog();
       this.importOpen5eDialog = new ImportOpen5eDialog();
@@ -45,6 +49,8 @@ export default class StatBlockEditor extends CustomAutonomousElement {
       this.statBlockMenu = document.querySelector('stat-block-menu');
       this.statBlockSidebar = document.querySelector('stat-block-sidebar');
       this.statBlock = document.querySelector('stat-block');
+
+      this.resetDialog = this.shadowRoot.getElementById('reset-dialog');
 
       this.importJsonDialog = this.shadowRoot.getElementById('import-json-dialog');
       this.importSrdDialog = this.shadowRoot.getElementById('import-srd-dialog');
@@ -65,6 +71,7 @@ export default class StatBlockEditor extends CustomAutonomousElement {
       this.addEventListener('emptySectionsVisibilityChanged', this.onEmptySectionsVisibilityChanged.bind(this));
       this.addEventListener('allSectionsAction', this.onAllSectionsAction.bind(this));
 
+      this.addEventListener('resetAction', this.onResetAction.bind(this));
       this.addEventListener('importAction', this.onImportAction.bind(this));
       this.addEventListener('exportAction', this.onExportAction.bind(this));
       this.addEventListener('printAction', this.onPrintAction.bind(this));
@@ -126,6 +133,10 @@ export default class StatBlockEditor extends CustomAutonomousElement {
     }
   }
 
+  onResetAction() {
+    this.openResetDialog();
+  }
+
   onImportAction(event) {
     const format = event.detail.format;
 
@@ -171,21 +182,8 @@ export default class StatBlockEditor extends CustomAutonomousElement {
     this.saveToLocalStorage();
   }
 
-  loadFromLocalStorage() {
-    const jsonString = LocalStorageProxy.load();
-
-    if (jsonString !== null) {
-      const json = JSON.parse(jsonString);
-
-      if (json.meta.version === CurrentContext.version) {
-        this.importFromJson(json);
-      }
-    }
-  }
-
-  saveToLocalStorage() {
-    const jsonString = this.exportToJson();
-    LocalStorageProxy.save(jsonString);
+  openResetDialog() {
+    this.resetDialog.launch(this.reset.bind(this));
   }
 
   openImportJsonDialog() {
@@ -213,6 +211,32 @@ export default class StatBlockEditor extends CustomAutonomousElement {
   openExportMarkdownDialog() {
     const content = this.exportToMarkdown();
     this.exportMarkdownDialog.launch(content, 'text/markdown', `${CurrentContext.creature.title.fullName}.md`);
+  }
+
+  loadFromLocalStorage() {
+    const jsonString = LocalStorageProxy.load();
+
+    if (jsonString !== null) {
+      const json = JSON.parse(jsonString);
+
+      if (json.meta.version === CurrentContext.version) {
+        this.importFromJson(json);
+      }
+    }
+  }
+
+  saveToLocalStorage() {
+    const jsonString = this.exportToJson();
+    LocalStorageProxy.save(jsonString);
+  }
+
+  reset() {
+    CurrentContext.reset();
+    LocalStorageProxy.clear();
+
+    this.statBlockMenu.updateControls();
+    this.statBlockSidebar.updateControls();
+    this.statBlock.updateView();
   }
 
   importFromOpen5e(json) {

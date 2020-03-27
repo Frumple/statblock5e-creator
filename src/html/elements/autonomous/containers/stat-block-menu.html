@@ -22,9 +22,9 @@
       <label class="stat-block-menu__label stat-block-menu__empty-sections-label">Empty Sections</label>
 
       <div class="stat-block-menu__radio-container">
-        <input id="show-empty-sections-radio" class="radio-button__input" type="radio" name="empty-sections" value="1" checked />
+        <input id="show-empty-sections-radio" class="radio-button__input" type="radio" name="empty-section-visibility" value="true" checked />
         <label id="show-empty-sections-label" for="show-empty-sections-radio" class="default-button radio-button__label stat-block-menu__radio-label"><i class="material-icons">visibility</i></label>
-        <input id="hide-empty-sections-radio" class="radio-button__input" type="radio" name="empty-sections" value="2" />
+        <input id="hide-empty-sections-radio" class="radio-button__input" type="radio" name="empty-section-visibility" value="false" />
         <label id="hide-empty-sections-label" for="hide-empty-sections-radio" class="default-button radio-button__label stat-block-menu__radio-label"><i class="material-icons">visibility_off</i></label>
       </div>
     </div>
@@ -39,6 +39,11 @@
     </div>
   </div>
   <div class="stat-block-menu__dropdowns">
+    <drop-down-menu class="stat-block-menu__menu-items">
+      <span slot="name">Reset</span>
+      <span slot="icon-name">settings_backup_restore</span>
+      <button id="reset-button">Reset Statblock</button>
+    </drop-down-menu>
     <drop-down-menu class="stat-block-menu__menu-items">
       <span slot="name">Import</span>
       <span slot="icon-name">open_in_browser</span>

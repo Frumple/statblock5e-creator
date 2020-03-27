@@ -21,6 +21,8 @@ export default class StatBlockMenu extends CustomAutonomousElement {
     this.editAllSectionsButton = this.shadowRoot.getElementById('edit-all-sections-button');
     this.saveAllSectionsButton = this.shadowRoot.getElementById('save-all-sections-button');
 
+    this.resetButton = this.shadowRoot.getElementById('reset-button');
+
     this.importJsonButton = this.shadowRoot.getElementById('import-json-button');
     this.importSrdButton = this.shadowRoot.getElementById('import-srd-button');
     this.importOpen5eButton = this.shadowRoot.getElementById('import-open5e-button');
@@ -48,6 +50,8 @@ export default class StatBlockMenu extends CustomAutonomousElement {
 
       this.editAllSectionsButton.addEventListener('click', this.onClickEditAllSectionsButton.bind(this));
       this.saveAllSectionsButton.addEventListener('click', this.onClickSaveAllSectionsButton.bind(this));
+
+      this.resetButton.addEventListener('click', this.onClickResetButton.bind(this));
 
       this.importJsonButton.addEventListener('click', this.onClickImportJsonButton.bind(this));
       this.importSrdButton.addEventListener('click', this.onClickImportSrdButton.bind(this));
@@ -91,6 +95,10 @@ export default class StatBlockMenu extends CustomAutonomousElement {
 
   onClickSaveAllSectionsButton() {
     this.dispatchMenuEvent('allSectionsAction', { action: 'save' });
+  }
+
+  onClickResetButton() {
+    this.dispatchMenuEvent('resetAction');
   }
 
   onClickImportJsonButton() {
