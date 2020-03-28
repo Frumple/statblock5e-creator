@@ -21,6 +21,11 @@
   animation: hide-loading-screen 1s linear;
 }
 
+.loading-screen__title {
+  margin-top: 0;
+  margin-bottom: 50px;
+}
+
 .loading-screen__animation {
   border: 20px solid lightgray;
   border-top: 20px solid #7A200D;
