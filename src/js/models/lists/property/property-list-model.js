@@ -67,9 +67,29 @@ export default class PropertyListModel extends PropertyLineModel {
         // and add the resulting tokens as items.
         } else {
           const commaTokens = semicolonToken.split(',').map(token => token.trim());
-          Array.prototype.push.apply(this.items, commaTokens);
+
+          // If the phrase 'understands <language>, <language> ... but' is
+          // present across consecutive tokens, merge these tokens together
+          const commaTokensWithMerge = PropertyListModel.mergeUnderstandsButTokens(commaTokens);
+
+          Array.prototype.push.apply(this.items, commaTokensWithMerge);
         }
       }
     }
+  }
+
+  static mergeUnderstandsButTokens(commaTokens) {
+    let firstIndex = null;
+    for (const [index, token] of commaTokens.entries()) {
+      if(firstIndex === null && token.startsWith('understands')) {
+        firstIndex = index;
+      } else if (firstIndex !== null && token.includes('but')) {
+        const subsetTokens = commaTokens.slice(firstIndex, index + 1);
+        const mergedTokens = subsetTokens.join(', ');
+        commaTokens.splice(firstIndex, index - firstIndex + 1, mergedTokens);
+      }
+    }
+
+    return commaTokens;
   }
 }
