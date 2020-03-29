@@ -87,5 +87,10 @@ export default class Speed extends PropertyLineModel {
     if ('fly' in json.speed) this.fly = json.speed.fly;
     if ('hover' in json.speed) this.hover = json.speed.hover;
     if ('swim' in json.speed) this.swim = json.speed.swim;
+
+    if ('notes' in json.speed) {
+      this.useCustomText = true;
+      this.customText = `${this.normalText} (${json.speed.notes})`;
+    }
   }
 }

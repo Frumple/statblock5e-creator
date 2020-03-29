@@ -298,31 +298,33 @@ describe('when importing from Open5e', () => {
     // - Walk + Climb + Fly + Swim
     it.each
     `
-      description                        | walk   | burrow | climb  | fly    | hover    | swim   | expectedText
-      ${'all blank'}                     | ${''}  | ${''}  | ${''}  | ${''}  | ${false} | ${''}  | ${'0 ft.'}
-      ${'walk only'}                     | ${30}  | ${''}  | ${''}  | ${''}  | ${false} | ${''}  | ${'30 ft.'}
-      ${'burrow only'}                   | ${''}  | ${20}  | ${''}  | ${''}  | ${false} | ${''}  | ${'0 ft., burrow 20 ft.'}
-      ${'climb only'}                    | ${''}  | ${''}  | ${15}  | ${''}  | ${false} | ${''}  | ${'0 ft., climb 15 ft.'}
-      ${'fly only'}                      | ${''}  | ${''}  | ${''}  | ${60}  | ${false} | ${''}  | ${'0 ft., fly 60 ft.'}
-      ${'fly + hover only'}              | ${''}  | ${''}  | ${''}  | ${90}  | ${true}  | ${''}  | ${'0 ft., fly 90 ft. (hover)'}
-      ${'hover not visible without fly'} | ${40}  | ${''}  | ${''}  | ${''}  | ${true}  | ${''}  | ${'40 ft.'}
-      ${'swim only'}                     | ${''}  | ${''}  | ${''}  | ${''}  | ${false} | ${45}  | ${'0 ft., swim 45 ft.'}
-      ${'walk + burrow'}                 | ${50}  | ${30}  | ${''}  | ${''}  | ${false} | ${''}  | ${'50 ft., burrow 30 ft.'}
-      ${'walk + climb'}                  | ${10}  | ${''}  | ${10}  | ${''}  | ${false} | ${''}  | ${'10 ft., climb 10 ft.'}
-      ${'walk + fly'}                    | ${20}  | ${''}  | ${''}  | ${120} | ${false} | ${''}  | ${'20 ft., fly 120 ft.'}
-      ${'walk + fly + hover'}            | ${10}  | ${''}  | ${''}  | ${25}  | ${true}  | ${''}  | ${'10 ft., fly 25 ft. (hover)'}
-      ${'walk + swim'}                   | ${30}  | ${''}  | ${''}  | ${''}  | ${false} | ${50}  | ${'30 ft., swim 50 ft.'}
-      ${'walk + burrow + fly'}           | ${30}  | ${15}  | ${''}  | ${60}  | ${false} | ${''}  | ${'30 ft., burrow 15 ft., fly 60 ft.'}
-      ${'walk + climb + fly'}            | ${40}  | ${''}  | ${40}  | ${80}  | ${false} | ${''}  | ${'40 ft., climb 40 ft., fly 80 ft.'}
-      ${'walk + fly + swim'}             | ${30}  | ${''}  | ${''}  | ${60}  | ${false} | ${30}  | ${'30 ft., fly 60 ft., swim 30 ft.'}
-      ${'walk + climb + fly + swim'}     | ${50}  | ${''}  | ${25}  | ${100} | ${false} | ${75}  | ${'50 ft., climb 25 ft., fly 100 ft., swim 75 ft.'}
-      ${'walk + burrow + fly + swim'}    | ${40}  | ${30}  | ${''}  | ${80}  | ${false} | ${40}  | ${'40 ft., burrow 30 ft., fly 80 ft., swim 40 ft.'}
-      ${'all speeds'}                    | ${0}   | ${5}   | ${10}  | ${15}  | ${false} | ${20}  | ${'0 ft., burrow 5 ft., climb 10 ft., fly 15 ft., swim 20 ft.'}
-      ${'all speeds + hover'}            | ${150} | ${0}   | ${100} | ${240} | ${true}  | ${185} | ${'150 ft., burrow 0 ft., climb 100 ft., fly 240 ft. (hover), swim 185 ft.'}
-      ${'maximum values'}                | ${999} | ${999} | ${999} | ${999} | ${true}  | ${999} | ${'999 ft., burrow 999 ft., climb 999 ft., fly 999 ft. (hover), swim 999 ft.'}
+      description                        | walk   | burrow | climb  | fly    | hover    | swim   | notes                                            | expectedText
+      ${'all blank'}                     | ${''}  | ${''}  | ${''}  | ${''}  | ${false} | ${''}  | ${''}                                            | ${'0 ft.'}
+      ${'walk only'}                     | ${30}  | ${''}  | ${''}  | ${''}  | ${false} | ${''}  | ${''}                                            | ${'30 ft.'}
+      ${'burrow only'}                   | ${''}  | ${20}  | ${''}  | ${''}  | ${false} | ${''}  | ${''}                                            | ${'0 ft., burrow 20 ft.'}
+      ${'climb only'}                    | ${''}  | ${''}  | ${15}  | ${''}  | ${false} | ${''}  | ${''}                                            | ${'0 ft., climb 15 ft.'}
+      ${'fly only'}                      | ${''}  | ${''}  | ${''}  | ${60}  | ${false} | ${''}  | ${''}                                            | ${'0 ft., fly 60 ft.'}
+      ${'fly + hover only'}              | ${''}  | ${''}  | ${''}  | ${90}  | ${true}  | ${''}  | ${''}                                            | ${'0 ft., fly 90 ft. (hover)'}
+      ${'hover not visible without fly'} | ${40}  | ${''}  | ${''}  | ${''}  | ${true}  | ${''}  | ${''}                                            | ${'40 ft.'}
+      ${'swim only'}                     | ${''}  | ${''}  | ${''}  | ${''}  | ${false} | ${45}  | ${''}                                            | ${'0 ft., swim 45 ft.'}
+      ${'walk + burrow'}                 | ${50}  | ${30}  | ${''}  | ${''}  | ${false} | ${''}  | ${''}                                            | ${'50 ft., burrow 30 ft.'}
+      ${'walk + climb'}                  | ${10}  | ${''}  | ${10}  | ${''}  | ${false} | ${''}  | ${''}                                            | ${'10 ft., climb 10 ft.'}
+      ${'walk + fly'}                    | ${20}  | ${''}  | ${''}  | ${120} | ${false} | ${''}  | ${''}                                            | ${'20 ft., fly 120 ft.'}
+      ${'walk + fly + hover'}            | ${10}  | ${''}  | ${''}  | ${25}  | ${true}  | ${''}  | ${''}                                            | ${'10 ft., fly 25 ft. (hover)'}
+      ${'walk + swim'}                   | ${30}  | ${''}  | ${''}  | ${''}  | ${false} | ${50}  | ${''}                                            | ${'30 ft., swim 50 ft.'}
+      ${'walk + burrow + fly'}           | ${30}  | ${15}  | ${''}  | ${60}  | ${false} | ${''}  | ${''}                                            | ${'30 ft., burrow 15 ft., fly 60 ft.'}
+      ${'walk + climb + fly'}            | ${40}  | ${''}  | ${40}  | ${80}  | ${false} | ${''}  | ${''}                                            | ${'40 ft., climb 40 ft., fly 80 ft.'}
+      ${'walk + fly + swim'}             | ${30}  | ${''}  | ${''}  | ${60}  | ${false} | ${30}  | ${''}                                            | ${'30 ft., fly 60 ft., swim 30 ft.'}
+      ${'walk + climb + fly + swim'}     | ${50}  | ${''}  | ${25}  | ${100} | ${false} | ${75}  | ${''}                                            | ${'50 ft., climb 25 ft., fly 100 ft., swim 75 ft.'}
+      ${'walk + burrow + fly + swim'}    | ${40}  | ${30}  | ${''}  | ${80}  | ${false} | ${40}  | ${''}                                            | ${'40 ft., burrow 30 ft., fly 80 ft., swim 40 ft.'}
+      ${'all speeds'}                    | ${0}   | ${5}   | ${10}  | ${15}  | ${false} | ${20}  | ${''}                                            | ${'0 ft., burrow 5 ft., climb 10 ft., fly 15 ft., swim 20 ft.'}
+      ${'all speeds + hover'}            | ${150} | ${0}   | ${100} | ${240} | ${true}  | ${185} | ${''}                                            | ${'150 ft., burrow 0 ft., climb 100 ft., fly 240 ft. (hover), swim 185 ft.'}
+      ${'maximum values'}                | ${999} | ${999} | ${999} | ${999} | ${true}  | ${999} | ${''}                                            | ${'999 ft., burrow 999 ft., climb 999 ft., fly 999 ft. (hover), swim 999 ft.'}
+      ${'werebear with notes'}           | ${30}  | ${''}  | ${''}  | ${''}  | ${false} | ${''}  | ${'40 ft., climb 30 ft. in bear or hybrid form'} | ${'30 ft. (40 ft., climb 30 ft. in bear or hybrid form)'}
+      ${'werewolf with notes'}           | ${30}  | ${''}  | ${''}  | ${''}  | ${false} | ${''}  | ${'40 ft. in wolf form'}                         | ${'30 ft. (40 ft. in wolf form)'}
     `
-    ('$description: {walk="$walk", burrow="$burrow", climb="$climb", fly="$fly", hover="$hover", swim="$swim"} => "$expectedText"',
-    ({walk, burrow, climb, fly, hover, swim, expectedText}) => {
+    ('$description: {walk="$walk", burrow="$burrow", climb="$climb", fly="$fly", hover="$hover", swim="$swim", notes="$notes"} => "$expectedText"',
+    ({walk, burrow, climb, fly, hover, swim, notes, expectedText}) => {
       const expectedValues = {
         walk: nullIfEmptyString(walk),
         burrow : nullIfEmptyString(burrow),
@@ -331,6 +333,12 @@ describe('when importing from Open5e', () => {
         hover: hover,
         swim: nullIfEmptyString(swim)
       };
+
+      if (notes !== '') {
+        expectedValues.useCustomText = true;
+        expectedValues.customText = expectedText;
+        expectedValues.htmlCustomText = expectedText;
+      }
 
       const json = {
         speed: {}
@@ -342,6 +350,7 @@ describe('when importing from Open5e', () => {
       if (fly !== '') json.speed.fly = fly;
       if (hover) json.speed.hover = true;
       if (swim !== '') json.speed.swim = swim;
+      if (notes !== '') json.speed.notes = notes;
 
       speedSection.importFromOpen5e(json);
 
