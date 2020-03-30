@@ -1,416 +1,419 @@
 import { inputValueAndTriggerEvent } from '../../../helpers/element-helpers.js';
 import CurrentContext from '../../../models/current-context.js';
 
-const title = CurrentContext.creature.title;
-
-let expectedHeading = null;
-
-export function setExpectedHeading(heading) {
-  expectedHeading = heading;
-}
-
-export function sectionShouldHaveDefaultBlocks(section, listModel, expectedBlocks = []) {
-  verifyBlocks(section, listModel, expectedBlocks);
-
-  const json = verifyJsonExport(section, expectedBlocks);
-  verifyHtmlExport(section, expectedBlocks);
-  verifyMarkdownExport(section, expectedBlocks);
-
-  reset(section, listModel);
-  section.importFromJson(json);
-
-  verifyBlocks(section, listModel, expectedBlocks);
-}
-
-export function shouldSwitchToEditModeAndFocusOnAddButtonIfNoBlocks(section) {
-  expect(section).toBeInMode('edit');
-  expect(section.editElements.addButton).toHaveFocus();
-}
-
-export function shouldSwitchToEditModeAndFocusOnNameFieldOfFirstBlockIfExists(section) {
-  addAndPopulateBlock(section, 'Some name', 'Some text.');
-
-  section.editElements.submitForm();
-  section.showElements.section.click();
-
-  expect(section).toBeInMode('edit');
-  expect(section.editElements.editableBlockList.blocks[0].nameInput).toHaveFocus();
-  expect(section.editElements.editableBlockList.blocks[0].nameInput).toBeSelected();
-}
-
-export function shouldFocusOnNameFieldOfNewBlock(section) {
-  for (let index = 0; index <= 2; index++) {
-    section.editElements.addButton.click();
-    const blocks = section.editElements.editableBlockList.blocks;
-    expect(blocks[index].nameInput).toHaveFocus();
-    expect(blocks[index].nameInput).toBeSelected();
-  }
-}
-
-export function shouldAddASingleBlock(section, listModel, block) {
-  addAndPopulateBlock(section, block.name, block.text);
-
-  section.editElements.submitForm();
-
-  expect(section).toBeInMode('show');
-  expectSectionToBeEmpty(section, false);
-
-  const blocks = [block];
-  verifyBlocks(section, listModel, blocks);
-
-  const json = verifyJsonExport(section, blocks);
-  verifyHtmlExport(section, blocks);
-  verifyMarkdownExport(section, blocks);
-
-  reset(section, listModel);
-  section.importFromJson(json);
-
-  verifyBlocks(section, listModel, blocks);
-}
-
-export function shouldAddMultipleBlocks(section, listModel, blocks) {
-  for (const block of blocks) {
-    addAndPopulateBlock(section, block.name, block.text);
+export default class BlockListSectionSpecs {
+  constructor(section, listModel, headingName, open5eJsonKey) {
+    this.section = section;
+    this.listModel = listModel;
+    this.headingName = headingName;
+    this.open5eJsonKey = open5eJsonKey;
   }
 
-  section.editElements.submitForm();
+  sectionShouldHaveDefaultBlocks(expectedBlocks = []) {
+    this.verifyBlocks(expectedBlocks);
 
-  expect(section).toBeInMode('show');
-  expectSectionToBeEmpty(section, false);
+    const json = this.verifyJsonExport(expectedBlocks);
+    this.verifyHtmlExport(expectedBlocks);
+    this.verifyMarkdownExport(expectedBlocks);
 
-  verifyBlocks(section, listModel, blocks);
+    this.reset();
+    this.section.importFromJson(json);
 
-  const json = verifyJsonExport(section, blocks);
-  verifyHtmlExport(section, blocks);
-  verifyMarkdownExport(section, blocks);
-
-  reset(section, listModel);
-  section.importFromJson(json);
-
-  verifyBlocks(section, listModel, blocks);
-}
-
-export function shouldAddASingleBlockThenRemoveIt(section, block) {
-  addAndPopulateBlock(section, block.name, block.text);
-
-  const editableBlock = section.editElements.editableBlockList.blocks[0];
-  editableBlock.remove();
-
-  section.editElements.submitForm();
-
-  expect(section).toBeInMode('show');
-  expectSectionToBeEmpty(section, true);
-
-  expect(section.showElements.displayBlockList.blocks).toHaveLength(0);
-}
-
-export function shouldAddMultipleBlocksThenRemoveOneOfThem(section, listModel, blocks, removeIndex) {
-  for (const block of blocks) {
-    addAndPopulateBlock(section, block.name, block.text);
+    this.verifyBlocks(expectedBlocks);
   }
 
-  const editableBlock = section.editElements.editableBlockList.blocks[removeIndex];
-  editableBlock.remove();
+  shouldSwitchToEditModeAndFocusOnAddButtonIfNoBlocks() {
+    expect(this.section).toBeInMode('edit');
+    expect(this.section.editElements.addButton).toHaveFocus();
+  }
 
-  section.editElements.submitForm();
+  shouldSwitchToEditModeAndFocusOnNameFieldOfFirstBlockIfExists() {
+    this.addAndPopulateBlock('Some name', 'Some text.');
 
-  expect(section).toBeInMode('show');
-  expectSectionToBeEmpty(section, false);
+    this.section.editElements.submitForm();
+    this.section.showElements.section.click();
 
-  blocks.splice(removeIndex, 1);
+    expect(this.section).toBeInMode('edit');
+    expect(this.section.editElements.editableBlockList.blocks[0].nameInput).toHaveFocus();
+    expect(this.section.editElements.editableBlockList.blocks[0].nameInput).toBeSelected();
+  }
 
-  verifyBlocks(section, listModel, blocks);
+  shouldFocusOnNameFieldOfNewBlock() {
+    for (let index = 0; index <= 2; index++) {
+      this.section.editElements.addButton.click();
+      const blocks = this.section.editElements.editableBlockList.blocks;
+      expect(blocks[index].nameInput).toHaveFocus();
+      expect(blocks[index].nameInput).toBeSelected();
+    }
+  }
 
-  const json = verifyJsonExport(section, blocks);
-  verifyHtmlExport(section, blocks);
-  verifyMarkdownExport(section, blocks);
+  shouldAddASingleBlock(block) {
+    this.addAndPopulateBlock(block.name, block.text);
 
-  reset(section, listModel);
-  section.importFromJson(json);
+    this.section.editElements.submitForm();
 
-  verifyBlocks(section, listModel, blocks);
-}
+    expect(this.section).toBeInMode('show');
+    this.expectSectionToBeEmpty(false);
 
-export function shouldReparseNameChanges(section, listModel, block, oldNames, newNames) {
-  title.fullName = oldNames.fullName;
-  title.shortName = oldNames.shortName;
-  title.isProperNoun = oldNames.isProperNoun;
+    const blocks = [block];
+    this.verifyBlocks(blocks);
 
-  addAndPopulateBlock(section, block.name, block.text);
+    const json = this.verifyJsonExport(blocks);
+    this.verifyHtmlExport(blocks);
+    this.verifyMarkdownExport(blocks);
 
-  section.editElements.submitForm();
+    this.reset();
+    this.section.importFromJson(json);
 
-  title.fullName = newNames.fullName;
-  title.shortName = newNames.shortName;
-  title.isProperNoun = newNames.isProperNoun;
+    this.verifyBlocks(blocks);
+  }
 
-  section.reparse();
+  shouldAddMultipleBlocks(blocks) {
+    for (const block of blocks) {
+      this.addAndPopulateBlock(block.name, block.text);
+    }
 
-  const blocks = [block];
-  verifyBlocks(section, listModel, blocks);
+    this.section.editElements.submitForm();
 
-  const json = verifyJsonExport(section, blocks);
-  verifyHtmlExport(section, blocks);
-  verifyMarkdownExport(section, blocks);
+    expect(this.section).toBeInMode('show');
+    this. expectSectionToBeEmpty(false);
 
-  reset(section, listModel);
-  section.importFromJson(json);
+    this.verifyBlocks(blocks);
 
-  verifyBlocks(section, listModel, blocks);
-}
+    const json = this.verifyJsonExport(blocks);
+    this.verifyHtmlExport(blocks);
+    this.verifyMarkdownExport(blocks);
 
-export function shouldTrimAllTrailingPeriodCharactersInBlockName(section, listModel) {
-  addAndPopulateBlock(section, 'Cthulhu. fhtag.n........', 'Some text.');
+    this.reset();
+    this.section.importFromJson(json);
 
-  section.editElements.submitForm();
+    this.verifyBlocks(blocks);
+  }
 
-  expect(section).toBeInMode('show');
-  expectSectionToBeEmpty(section, false);
-
-  const expectedBlocks = [{
-    name: 'Cthulhu. fhtag.n',
-    text: 'Some text.'
-  }];
-  verifyBlocks(section, listModel, expectedBlocks);
-
-  const json = verifyJsonExport(section, expectedBlocks);
-  verifyHtmlExport(section, expectedBlocks);
-  verifyMarkdownExport(section, expectedBlocks);
-
-  reset(section, listModel);
-  section.importFromJson(json);
-
-  verifyBlocks(section, listModel, expectedBlocks);
-}
-
-export function shouldDisplayAnErrorIfBlockNameIsBlank(section, expectedBlockType) {
-  addAndPopulateBlock(section, '', 'Some text.');
-
-  section.editElements.submitForm();
-
-  expect(section).toHaveError(
-    section.editElements.editableBlockList.blocks[0].nameInput,
-    `${expectedBlockType} Name cannot be blank.`);
-}
-
-export function shouldDisplayAnErrorIfBlockTextIsBlank(section, expectedBlockType) {
-  addAndPopulateBlock(section, 'Some name', '');
-
-  section.editElements.submitForm();
-
-  expect(section).toHaveError(
-    section.editElements.editableBlockList.blocks[0].textArea,
-    `${expectedBlockType} Text cannot be blank.`);
-}
-
-export function shouldDisplayAnErrorIfBlockTextHasInvalidMarkdownSyntax(section, expectedBlockType) {
-  addAndPopulateBlock(section, 'Some name', 'Some *invalid syntax');
-
-  section.editElements.submitForm();
-
-  expect(section).toHaveError(
-    section.editElements.editableBlockList.blocks[0].textArea,
-    `${expectedBlockType} Text has invalid markdown syntax.`);
-}
-
-export function shouldDisplayErrorsIfBlockNameAndTextAreBothBlank(section, expectedBlockType) {
-  addAndPopulateBlock(section, '', '');
-
-  section.editElements.submitForm();
-
-  const editableBlock = section.editElements.editableBlockList.blocks[0];
-
-  expect(section.errorMessages.errors).toHaveLength(2);
-  expect(section).toHaveError(
-    editableBlock.nameInput,
-    `${expectedBlockType} Name cannot be blank.`,
-    0);
-  expect(section).toHaveError(
-    editableBlock.textArea,
-    `${expectedBlockType} Text cannot be blank.`,
-    1);
-}
-
-export function shouldDisplayErrorsIfBlockNameIsBlankAndBlockTextHasInvalidMarkdownSyntax(section, expectedBlockType) {
-  addAndPopulateBlock(section, '', 'Some __invalid syntax');
-
-  section.editElements.submitForm();
-
-  const editableBlock = section.editElements.editableBlockList.blocks[0];
-
-  expect(section.errorMessages.errors).toHaveLength(2);
-  expect(section).toHaveError(
-    editableBlock.nameInput,
-    `${expectedBlockType} Name cannot be blank.`,
-    0);
-  expect(section).toHaveError(
-    editableBlock.textArea,
-    `${expectedBlockType} Text has invalid markdown syntax.`,
-    1);
-}
-
-export function shouldImportFromOpen5e(section, model, open5eJsonKey, blocks, legendaryDescription = null) {
-  const json = {};
-  json[open5eJsonKey] = blocks.map(block => {
-    return {
-      name: block.name,
-      desc: block.text
+  shouldShowBlocksImportedFromJsonIfSectionWasInitiallyEmptyAndNotVisible(blocksToImport) {
+    const json = {
+      blocks: blocksToImport
     };
-  });
 
-  if (legendaryDescription !== null) {
-    json['legendary_desc'] = legendaryDescription;
+    this.section.mode = 'hidden';
+    this.section.importFromJson(json);
+
+    expect(this.section).toBeInMode('show');
+    this.verifyShowModeView(blocksToImport);
   }
 
-  section.importFromOpen5e(json);
+  shouldAddASingleBlockThenRemoveIt(block) {
+    this.addAndPopulateBlock(block.name, block.text);
 
-  verifyBlocks(section, model, blocks);
-}
+    const editableBlock = this.section.editElements.editableBlockList.blocks[0];
+    editableBlock.remove();
 
-export function shouldShowBlocksImportedFromJsonIfSectionWasInitiallyEmptyAndNotVisible(section, blocksToImport) {
-  const json = {
-    blocks: blocksToImport
-  };
+    this.section.editElements.submitForm();
 
-  section.mode = 'hidden';
-  section.importFromJson(json);
+    expect(this.section).toBeInMode('show');
+    this.expectSectionToBeEmpty(true);
 
-  expect(section).toBeInMode('show');
-  verifyShowModeView(section, blocksToImport);
-}
-
-export function addAndPopulateBlock(section, blockName, blockText) {
-  section.editElements.addButton.click();
-
-  const blocks = section.editElements.editableBlockList.blocks;
-  const editableBlock = blocks[blocks.length - 1];
-
-  inputValueAndTriggerEvent(editableBlock.nameInput, blockName);
-  inputValueAndTriggerEvent(editableBlock.textArea, blockText);
-}
-
-function getHtmlExportBlocks(section) {
-  const htmlExport = section.exportToHtml();
-  const children = htmlExport.children;
-
-  if (expectedHeading !== null) {
-    expect(children[0].tagName).toBe('H3');
-    expect(children[0]).toHaveTextContent(expectedHeading);
+    expect(this.section.showElements.displayBlockList.blocks).toHaveLength(0);
   }
 
-  return Array.from(children)
-    .filter(element => element.tagName === 'PROPERTY-BLOCK');
-}
+  shouldAddMultipleBlocksThenRemoveOneOfThem(blocks, removeIndex) {
+    for (const block of blocks) {
+      this.addAndPopulateBlock(block.name, block.text);
+    }
 
-export function reset(section, listModel) {
-  listModel.reset();
-  section.updateView();
-}
+    const editableBlock = this.section.editElements.editableBlockList.blocks[removeIndex];
+    editableBlock.remove();
 
-function verifyBlocks(section, listModel, expectedBlocks) {
-  verifyModel(listModel, expectedBlocks);
-  verifyEditModeView(section, expectedBlocks);
-  verifyShowModeView(section, expectedBlocks);
-}
+    this.section.editElements.submitForm();
 
-function verifyModel(listModel, expectedBlocks) {
-  for (const [index, expectedBlock] of expectedBlocks.entries()) {
-    const blockModel = listModel.blocks[index];
-    verifyBlockModel(blockModel, expectedBlock);
-  }
-}
+    expect(this.section).toBeInMode('show');
+    this.expectSectionToBeEmpty(false);
 
-function verifyEditModeView(section, expectedBlocks) {
-  for (const [index, expectedBlock] of expectedBlocks.entries()) {
-    const editableBlock = section.editElements.editableBlockList.blocks[index];
-    verifyEditableBlock(editableBlock, expectedBlock);
-  }
-}
+    blocks.splice(removeIndex, 1);
 
-function verifyShowModeView(section, expectedBlocks) {
-  for (const [index, expectedBlock] of expectedBlocks.entries()) {
-    const displayBlock = section.showElements.displayBlockList.blocks[index];
-    verifyDisplayBlock(displayBlock, expectedBlock);
-  }
-}
+    this.verifyBlocks(blocks);
 
-function verifyBlockModel(blockModel, expectedBlock) {
-  expect(blockModel.name).toBe(expectedBlock.name);
-  expect(blockModel.text).toBe(expectedBlock.expectedText ? expectedBlock.expectedText : expectedBlock.text);
-  expect(blockModel.markdownText).toBe(expectedBlock.markdownText ? expectedBlock.markdownText : expectedBlock.text);
-  expect(blockModel.htmlText).toBe(expectedBlock.htmlText ? expectedBlock.htmlText : expectedBlock.text);
-}
+    const json = this.verifyJsonExport(blocks);
+    this.verifyHtmlExport(blocks);
+    this.verifyMarkdownExport(blocks);
 
-function verifyEditableBlock(editableBlock, expectedBlock) {
-  expect(editableBlock.previewName).toBe(expectedBlock.name);
-  expect(editableBlock.previewText).toBe(expectedBlock.htmlText ? expectedBlock.htmlText : expectedBlock.text);
-}
+    this.reset();
+    this.section.importFromJson(json);
 
-function verifyDisplayBlock(displayBlock, expectedBlock) {
-  expect(displayBlock.name).toBe(expectedBlock.name);
-  expect(displayBlock.text).toBe(expectedBlock.htmlText ? expectedBlock.htmlText : expectedBlock.text);
-}
-
-function verifyJsonExport(section, expectedBlocks) {
-  const json = section.exportToJson();
-
-  const expectedJson = expectedBlocks.map(block => {
-    return {
-      name: block.name,
-      text: block.text
-    };
-  });
-
-  expect(json.blocks).toStrictEqual(expectedJson);
-
-  return json;
-}
-
-function verifyHtmlExport(section, expectedBlocks) {
-  const htmlExportBlocks = getHtmlExportBlocks(section);
-
-  for (const [index, expectedBlock] of expectedBlocks.entries()) {
-    const htmlExportBlock = htmlExportBlocks[index];
-    expect(htmlExportBlock).toBeHtmlPropertyBlock(
-      `${expectedBlock.name}.`,
-      (expectedBlock.htmlText ? expectedBlock.htmlText : expectedBlock.text));
-  }
-}
-
-function verifyMarkdownExport(section, expectedBlocks) {
-  const markdownExport = section.exportToMarkdown();
-
-  if (expectedHeading !== null) {
-    const firstNewLineIndex = markdownExport.indexOf('\n');
-    const firstLine = markdownExport.slice(0, firstNewLineIndex);
-
-    expect(firstLine).toBe(`> ### ${expectedHeading}`);
+    this.verifyBlocks(blocks);
   }
 
-  if (expectedBlocks.length > 0) {
-    const firstBlockIndex = markdownExport.indexOf('> ***');
-    const blocksText = markdownExport.slice(firstBlockIndex);
+  shouldReparseNameChanges(block, oldNames, newNames) {
+    const title = CurrentContext.creature.title;
 
-    const expectedBlocksInMarkdownFormat =
-      expectedBlocks.map(
-        block => `> ***${block.name}.*** ${(block.markdownText ? block.markdownText : block.text)}`);
+    title.fullName = oldNames.fullName;
+    title.shortName = oldNames.shortName;
+    title.isProperNoun = oldNames.isProperNoun;
 
-    const expectedBlocksText = expectedBlocksInMarkdownFormat.join('\n>\n');
-    expect(blocksText).toBe(expectedBlocksText);
+    this.addAndPopulateBlock(block.name, block.text);
+
+    this.section.editElements.submitForm();
+
+    title.fullName = newNames.fullName;
+    title.shortName = newNames.shortName;
+    title.isProperNoun = newNames.isProperNoun;
+
+    this.section.reparse();
+
+    const blocks = [block];
+    this.verifyBlocks(blocks);
+
+    const json = this.verifyJsonExport(blocks);
+    this.verifyHtmlExport(blocks);
+    this.verifyMarkdownExport(blocks);
+
+    this.reset();
+    this.section.importFromJson(json);
+
+    this.verifyBlocks(blocks);
   }
-}
 
-function expectSectionToBeEmpty(section, isEmpty) {
-  const emptySectionClass = 'section_empty';
-  const emptyLabelHiddenClass = 'block-list-section__empty-label_hidden';
+  shouldTrimAllTrailingPeriodCharactersInBlockName() {
+    this.addAndPopulateBlock('Cthulhu. fhtag.n........', 'Some text.');
 
-  expect(section.empty).toBe(isEmpty);
+    this.section.editElements.submitForm();
 
-  if (isEmpty) {
-    expect(section.showElements.section).toHaveClass(emptySectionClass);
-    expect(section.showElements.emptyLabel).not.toHaveClass(emptyLabelHiddenClass);
-  } else {
-    expect(section.showElements.section).not.toHaveClass(emptySectionClass);
-    expect(section.showElements.emptyLabel).toHaveClass(emptyLabelHiddenClass);
+    expect(this.section).toBeInMode('show');
+    this.expectSectionToBeEmpty(false);
+
+    const expectedBlocks = [{
+      name: 'Cthulhu. fhtag.n',
+      text: 'Some text.'
+    }];
+    this.verifyBlocks(expectedBlocks);
+
+    const json = this.verifyJsonExport(expectedBlocks);
+    this.verifyHtmlExport(expectedBlocks);
+    this.verifyMarkdownExport(expectedBlocks);
+
+    this.reset();
+    this.section.importFromJson(json);
+
+    this.verifyBlocks(expectedBlocks);
+  }
+
+  shouldDisplayAnErrorIfBlockNameIsBlank(expectedBlockType) {
+    this.addAndPopulateBlock('', 'Some text.');
+
+    this.section.editElements.submitForm();
+
+    expect(this.section).toHaveError(
+      this.section.editElements.editableBlockList.blocks[0].nameInput,
+      `${expectedBlockType} Name cannot be blank.`);
+  }
+
+  shouldDisplayAnErrorIfBlockTextIsBlank(expectedBlockType) {
+    this.addAndPopulateBlock('Some name', '');
+
+    this.section.editElements.submitForm();
+
+    expect(this.section).toHaveError(
+      this.section.editElements.editableBlockList.blocks[0].textArea,
+      `${expectedBlockType} Text cannot be blank.`);
+  }
+
+  shouldDisplayAnErrorIfBlockTextHasInvalidMarkdownSyntax(expectedBlockType) {
+    this.addAndPopulateBlock('Some name', 'Some *invalid syntax');
+
+    this.section.editElements.submitForm();
+
+    expect(this.section).toHaveError(
+      this.section.editElements.editableBlockList.blocks[0].textArea,
+      `${expectedBlockType} Text has invalid markdown syntax.`);
+  }
+
+  shouldDisplayErrorsIfBlockNameAndTextAreBothBlank(expectedBlockType) {
+    this.addAndPopulateBlock('', '');
+
+    this.section.editElements.submitForm();
+
+    const editableBlock = this.section.editElements.editableBlockList.blocks[0];
+
+    expect(this.section.errorMessages.errors).toHaveLength(2);
+    expect(this.section).toHaveError(
+      editableBlock.nameInput,
+      `${expectedBlockType} Name cannot be blank.`,
+      0);
+    expect(this.section).toHaveError(
+      editableBlock.textArea,
+      `${expectedBlockType} Text cannot be blank.`,
+      1);
+  }
+
+  shouldDisplayErrorsIfBlockNameIsBlankAndBlockTextHasInvalidMarkdownSyntax(expectedBlockType) {
+    this.addAndPopulateBlock('', 'Some __invalid syntax');
+
+    this.section.editElements.submitForm();
+
+    const editableBlock = this.section.editElements.editableBlockList.blocks[0];
+
+    expect(this.section.errorMessages.errors).toHaveLength(2);
+    expect(this.section).toHaveError(
+      editableBlock.nameInput,
+      `${expectedBlockType} Name cannot be blank.`,
+      0);
+    expect(this.section).toHaveError(
+      editableBlock.textArea,
+      `${expectedBlockType} Text has invalid markdown syntax.`,
+      1);
+  }
+
+  shouldImportFromOpen5e(blocks, legendaryDescription = null) {
+    const json = {};
+    json[this.open5eJsonKey] = blocks.map(block => {
+      return {
+        name: block.name,
+        desc: block.text
+      };
+    });
+
+    if (legendaryDescription !== null) {
+      json['legendary_desc'] = legendaryDescription;
+    }
+
+    this.section.importFromOpen5e(json);
+
+    this.verifyBlocks(blocks);
+  }
+
+  addAndPopulateBlock(blockName, blockText) {
+    this.section.editElements.addButton.click();
+
+    const blocks = this.section.editElements.editableBlockList.blocks;
+    const editableBlock = blocks[blocks.length - 1];
+
+    inputValueAndTriggerEvent(editableBlock.nameInput, blockName);
+    inputValueAndTriggerEvent(editableBlock.textArea, blockText);
+  }
+
+  getHtmlExportBlocks() {
+    const htmlExport = this.section.exportToHtml();
+    const children = htmlExport.children;
+
+    if (this.headingName !== null) {
+      expect(children[0].tagName).toBe('H3');
+      expect(children[0]).toHaveTextContent(this.headingName);
+    }
+
+    return Array.from(children)
+      .filter(element => element.tagName === 'PROPERTY-BLOCK');
+  }
+
+  reset() {
+    this.listModel.reset();
+    this.section.updateView();
+  }
+
+  verifyBlocks(expectedBlocks) {
+    this.verifyModel(expectedBlocks);
+    this.verifyEditModeView(expectedBlocks);
+    this.verifyShowModeView(expectedBlocks);
+  }
+
+  verifyModel(expectedBlocks) {
+    for (const [index, expectedBlock] of expectedBlocks.entries()) {
+      const blockModel = this.listModel.blocks[index];
+      BlockListSectionSpecs.verifyBlockModel(blockModel, expectedBlock);
+    }
+  }
+
+  verifyEditModeView(expectedBlocks) {
+    for (const [index, expectedBlock] of expectedBlocks.entries()) {
+      const editableBlock = this.section.editElements.editableBlockList.blocks[index];
+      BlockListSectionSpecs.verifyEditableBlock(editableBlock, expectedBlock);
+    }
+  }
+
+  verifyShowModeView(expectedBlocks) {
+    for (const [index, expectedBlock] of expectedBlocks.entries()) {
+      const displayBlock = this.section.showElements.displayBlockList.blocks[index];
+      BlockListSectionSpecs.verifyDisplayBlock(displayBlock, expectedBlock);
+    }
+  }
+
+  static verifyBlockModel(blockModel, expectedBlock) {
+    expect(blockModel.name).toBe(expectedBlock.name);
+    expect(blockModel.text).toBe(expectedBlock.expectedText ? expectedBlock.expectedText : expectedBlock.text);
+    expect(blockModel.markdownText).toBe(expectedBlock.markdownText ? expectedBlock.markdownText : expectedBlock.text);
+    expect(blockModel.htmlText).toBe(expectedBlock.htmlText ? expectedBlock.htmlText : expectedBlock.text);
+  }
+
+  static verifyEditableBlock(editableBlock, expectedBlock) {
+    expect(editableBlock.previewName).toBe(expectedBlock.name);
+    expect(editableBlock.previewText).toBe(expectedBlock.htmlText ? expectedBlock.htmlText : expectedBlock.text);
+  }
+
+  static verifyDisplayBlock(displayBlock, expectedBlock) {
+    expect(displayBlock.name).toBe(expectedBlock.name);
+    expect(displayBlock.text).toBe(expectedBlock.htmlText ? expectedBlock.htmlText : expectedBlock.text);
+  }
+
+  verifyJsonExport(expectedBlocks) {
+    const json = this.section.exportToJson();
+
+    const expectedJson = expectedBlocks.map(block => {
+      return {
+        name: block.name,
+        text: block.text
+      };
+    });
+
+    expect(json.blocks).toStrictEqual(expectedJson);
+
+    return json;
+  }
+
+  verifyHtmlExport(expectedBlocks) {
+    const htmlExportBlocks = this.getHtmlExportBlocks();
+
+    for (const [index, expectedBlock] of expectedBlocks.entries()) {
+      const htmlExportBlock = htmlExportBlocks[index];
+      expect(htmlExportBlock).toBeHtmlPropertyBlock(
+        `${expectedBlock.name}.`,
+        (expectedBlock.htmlText ? expectedBlock.htmlText : expectedBlock.text));
+    }
+  }
+
+  verifyMarkdownExport(expectedBlocks) {
+    const markdownExport = this.section.exportToMarkdown();
+
+    if (this.headingName !== null) {
+      const firstNewLineIndex = markdownExport.indexOf('\n');
+      const firstLine = markdownExport.slice(0, firstNewLineIndex);
+
+      expect(firstLine).toBe(`> ### ${this.headingName}`);
+    }
+
+    if (expectedBlocks.length > 0) {
+      const firstBlockIndex = markdownExport.indexOf('> ***');
+      const blocksText = markdownExport.slice(firstBlockIndex);
+
+      const expectedBlocksInMarkdownFormat =
+        expectedBlocks.map(
+          block => `> ***${block.name}.*** ${(block.markdownText ? block.markdownText : block.text)}`);
+
+      const expectedBlocksText = expectedBlocksInMarkdownFormat.join('\n>\n');
+      expect(blocksText).toBe(expectedBlocksText);
+    }
+  }
+
+  expectSectionToBeEmpty(isEmpty) {
+    const emptySectionClass = 'section_empty';
+    const emptyLabelHiddenClass = 'block-list-section__empty-label_hidden';
+
+    expect(this.section.empty).toBe(isEmpty);
+
+    if (isEmpty) {
+      expect(this.section.showElements.section).toHaveClass(emptySectionClass);
+      expect(this.section.showElements.emptyLabel).not.toHaveClass(emptyLabelHiddenClass);
+    } else {
+      expect(this.section.showElements.section).not.toHaveClass(emptySectionClass);
+      expect(this.section.showElements.emptyLabel).toHaveClass(emptyLabelHiddenClass);
+    }
   }
 }

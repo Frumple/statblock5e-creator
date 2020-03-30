@@ -4,9 +4,9 @@ import GenerateAttackDialog from '../dialogs/generate-attack-dialog.js';
 import CurrentContext from '../../../models/current-context.js';
 
 import * as TestCustomElements from '../../../helpers/test/test-custom-elements.js';
-import * as sharedSpecs from './block-list-section.specs.js';
+import BlockListSectionSpecs from './block-list-section.specs.js';
 
-const expectedHeading = 'Actions';
+const headingName = 'Actions';
 const expectedBlockType = 'Action';
 const open5eJsonKey = 'actions';
 
@@ -16,13 +16,12 @@ const challengeRatingModel = CurrentContext.creature.challengeRating;
 const actionsModel = CurrentContext.creature.actions;
 
 let actionsSection;
+let sharedSpecs;
 
 beforeAll(async() => {
   await TestCustomElements.define();
   await ActionsSection.define();
   await GenerateAttackDialog.define();
-
-  sharedSpecs.setExpectedHeading(expectedHeading);
 });
 
 beforeEach(() => {
@@ -34,10 +33,12 @@ beforeEach(() => {
   actionsSection = new ActionsSection();
   TestCustomElements.initializeSection(actionsSection);
   actionsSection.connect();
+
+  sharedSpecs = new BlockListSectionSpecs(actionsSection, actionsModel, headingName, open5eJsonKey);
 });
 
 it('section should have default blocks', () => {
-  sharedSpecs.sectionShouldHaveDefaultBlocks(actionsSection, actionsModel);
+  sharedSpecs.sectionShouldHaveDefaultBlocks();
 });
 
 describe('when the show section is clicked', () => {
@@ -46,16 +47,16 @@ describe('when the show section is clicked', () => {
   });
 
   it('should switch to edit mode and focus on the add button if there are no blocks', () => {
-    sharedSpecs.shouldSwitchToEditModeAndFocusOnAddButtonIfNoBlocks(actionsSection);
+    sharedSpecs.shouldSwitchToEditModeAndFocusOnAddButtonIfNoBlocks();
   });
 
   it('should switch to edit mode and focus on the name field of the first block if there is at least one block', () => {
-    sharedSpecs.shouldSwitchToEditModeAndFocusOnNameFieldOfFirstBlockIfExists(actionsSection);
+    sharedSpecs.shouldSwitchToEditModeAndFocusOnNameFieldOfFirstBlockIfExists();
   });
 
   describe('when the add block button is clicked', () => {
     it('should focus on the name field of the newly created block', () => {
-      sharedSpecs.shouldFocusOnNameFieldOfNewBlock(actionsSection);
+      sharedSpecs.shouldFocusOnNameFieldOfNewBlock();
     });
   });
 
@@ -70,7 +71,7 @@ describe('when the show section is clicked', () => {
         markdownText: '*Melee Weapon Attack:* +5 to hit, reach 5 ft., one target. *Hit:* 10 (2d6 + 3) slashing damage.',
         htmlText: '<em>Melee Weapon Attack:</em> +5 to hit, reach 5 ft., one target. <em>Hit:</em> 10 (2d6 + 3) slashing damage.'
       };
-      sharedSpecs.shouldAddASingleBlock(actionsSection, actionsModel, block);
+      sharedSpecs.shouldAddASingleBlock(block);
     });
 
     it('should add a single block with multiline text', () => {
@@ -84,7 +85,7 @@ describe('when the show section is clicked', () => {
       titleModel.fullName = 'Adult Brass Dragon';
       titleModel.shortName = 'dragon';
 
-      sharedSpecs.shouldAddASingleBlock(actionsSection, actionsModel, block);
+      sharedSpecs.shouldAddASingleBlock(block);
     });
 
     it('should add a single block with html escaped', () => {
@@ -97,7 +98,7 @@ describe('when the show section is clicked', () => {
         markdownText: '&lt;em&gt;Melee Weapon Attack:&lt;/em&gt; +5 to hit, reach 5 ft., one target. &lt;em&gt;Hit:&lt;/em&gt; 10 (2d6 + 3) slashing damage.',
         htmlText: '&lt;em&gt;Melee Weapon Attack:&lt;/em&gt; +5 to hit, reach 5 ft., one target. &lt;em&gt;Hit:&lt;/em&gt; 10 (2d6 + 3) slashing damage.'
       };
-      sharedSpecs.shouldAddASingleBlock(actionsSection, actionsModel, block);
+      sharedSpecs.shouldAddASingleBlock(block);
     });
 
     it('should add multiple blocks', () => {
@@ -127,13 +128,13 @@ describe('when the show section is clicked', () => {
 
       titleModel.fullName = 'Scout';
 
-      sharedSpecs.shouldAddMultipleBlocks(actionsSection, actionsModel, blocks);
+      sharedSpecs.shouldAddMultipleBlocks(blocks);
     });
 
     it('should add a single block, then remove it', () => {
       const blockName = 'Greataxe';
       const blockText = '*Melee Weapon Attack:* +5 to hit, reach 5 ft., one target. *Hit:* 9 (1d12 + 3) slashing damage.';
-      sharedSpecs.shouldAddASingleBlockThenRemoveIt(actionsSection, blockName, blockText);
+      sharedSpecs.shouldAddASingleBlockThenRemoveIt(blockName, blockText);
     });
 
     it('should add multiple blocks, then remove one of them', () => {
@@ -164,7 +165,7 @@ describe('when the show section is clicked', () => {
 
       titleModel.fullName = 'Knight';
 
-      sharedSpecs.shouldAddMultipleBlocksThenRemoveOneOfThem(actionsSection, actionsModel, blocks, 1);
+      sharedSpecs.shouldAddMultipleBlocksThenRemoveOneOfThem(blocks, 1);
     });
 
     describe('should reparse the block text', () => {
@@ -191,7 +192,7 @@ describe('when the show section is clicked', () => {
         block.markdownText = 'The blink doggo magically teleports, along with any equipment it is wearing or carrying, up to 40 feet to an unoccupied space it can see. Before or after teleporting, the blink doggo can make one bite attack.';
         block.htmlText = block.markdownText;
 
-        sharedSpecs.shouldReparseNameChanges(actionsSection, actionsModel, block, oldNames, newNames);
+        sharedSpecs.shouldReparseNameChanges(block, oldNames, newNames);
       });
 
       it('when the short name is changed', () => {
@@ -204,7 +205,7 @@ describe('when the show section is clicked', () => {
         block.markdownText = 'The dog magically teleports, along with any equipment it is wearing or carrying, up to 40 feet to an unoccupied space it can see. Before or after teleporting, the dog can make one bite attack.';
         block.htmlText = block.markdownText;
 
-        sharedSpecs.shouldReparseNameChanges(actionsSection, actionsModel, block, oldNames, newNames);
+        sharedSpecs.shouldReparseNameChanges(block, oldNames, newNames);
       });
 
       it('when the proper noun is changed', () => {
@@ -217,32 +218,32 @@ describe('when the show section is clicked', () => {
         block.markdownText = 'Blink Dog magically teleports, along with any equipment it is wearing or carrying, up to 40 feet to an unoccupied space it can see. Before or after teleporting, Blink Dog can make one bite attack.';
         block.htmlText = block.markdownText;
 
-        sharedSpecs.shouldReparseNameChanges(actionsSection, actionsModel, block, oldNames, newNames);
+        sharedSpecs.shouldReparseNameChanges(block, oldNames, newNames);
       });
     });
 
     it('should trim all trailing period characters in the block name', () => {
-      sharedSpecs.shouldTrimAllTrailingPeriodCharactersInBlockName(actionsSection, actionsModel);
+      sharedSpecs.shouldTrimAllTrailingPeriodCharactersInBlockName();
     });
 
     it('should display an error if the block name is blank', () => {
-      sharedSpecs.shouldDisplayAnErrorIfBlockNameIsBlank(actionsSection, expectedBlockType);
+      sharedSpecs.shouldDisplayAnErrorIfBlockNameIsBlank(expectedBlockType);
     });
 
     it('should display an error if the block text is blank', () => {
-      sharedSpecs.shouldDisplayAnErrorIfBlockTextIsBlank(actionsSection, expectedBlockType);
+      sharedSpecs.shouldDisplayAnErrorIfBlockTextIsBlank(expectedBlockType);
     });
 
     it('should display an error if the block text has invalid markdown syntax', () => {
-      sharedSpecs.shouldDisplayAnErrorIfBlockTextHasInvalidMarkdownSyntax(actionsSection, expectedBlockType);
+      sharedSpecs.shouldDisplayAnErrorIfBlockTextHasInvalidMarkdownSyntax(expectedBlockType);
     });
 
     it('should display errors if the block name and text are both blank', () => {
-      sharedSpecs.shouldDisplayErrorsIfBlockNameAndTextAreBothBlank(actionsSection, expectedBlockType);
+      sharedSpecs.shouldDisplayErrorsIfBlockNameAndTextAreBothBlank(expectedBlockType);
     });
 
     it('should display errors if the block name is blank and block text has invalid markdown syntax', () => {
-      sharedSpecs.shouldDisplayErrorsIfBlockNameIsBlankAndBlockTextHasInvalidMarkdownSyntax(actionsSection, expectedBlockType);
+      sharedSpecs.shouldDisplayErrorsIfBlockNameIsBlankAndBlockTextHasInvalidMarkdownSyntax(expectedBlockType);
     });
   });
 });
@@ -254,7 +255,7 @@ describe('when import from Open5e', () => {
       text: 'Melee Weapon Attack: +5 to hit, reach 5 ft., one target. Hit: 10 (2d6 + 3) slashing damage.'
     };
 
-    sharedSpecs.shouldImportFromOpen5e(actionsSection, actionsModel, open5eJsonKey, [block]);
+    sharedSpecs.shouldImportFromOpen5e([block]);
   });
 
   it('should import single block with multiline text', () => {
@@ -265,7 +266,7 @@ describe('when import from Open5e', () => {
       htmlText: 'The dragon uses one of the following breath weapons.\n<strong>Fire Breath.</strong> The dragon exhales fire in an 60-foot line that is 5 feet wide. Each creature in that line must make a DC 18 Dexterity saving throw, taking 45 (13d6) fire damage on a failed save, or half as much damage on a successful one.\n<strong>Sleep Breath.</strong> The dragon exhales sleep gas in a 60-foot cone. Each creature in that area must succeed on a DC 18 Constitution saving throw or fall unconscious for 10 minutes. This effect ends for a creature if the creature takes damage or someone uses an action to wake it.'
     };
 
-    sharedSpecs.shouldImportFromOpen5e(actionsSection, actionsModel, open5eJsonKey, [block]);
+    sharedSpecs.shouldImportFromOpen5e([block]);
   });
 
   it('should import multiple blocks', () => {
@@ -284,7 +285,7 @@ describe('when import from Open5e', () => {
       }
     ];
 
-    sharedSpecs.shouldImportFromOpen5e(actionsSection, actionsModel, open5eJsonKey, blocks);
+    sharedSpecs.shouldImportFromOpen5e(blocks);
   });
 });
 
@@ -301,7 +302,7 @@ describe('when the section is empty and not visible', () => {
 
       titleModel.fullName = 'Nothic';
 
-      sharedSpecs.shouldShowBlocksImportedFromJsonIfSectionWasInitiallyEmptyAndNotVisible(actionsSection, blocksToImport);
+      sharedSpecs.shouldShowBlocksImportedFromJsonIfSectionWasInitiallyEmptyAndNotVisible(blocksToImport);
     });
   });
 });

@@ -2,7 +2,7 @@ import SpecialTraitsSection from './special-traits-section.js';
 import CurrentContext from '../../../models/current-context.js';
 
 import * as TestCustomElements from '../../../helpers/test/test-custom-elements.js';
-import * as sharedSpecs from './block-list-section.specs.js';
+import BlockListSectionSpecs from './block-list-section.specs.js';
 
 const expectedBlockType = 'Special Trait';
 const open5eJsonKey = 'special_abilities';
@@ -11,6 +11,7 @@ const titleModel = CurrentContext.creature.title;
 const specialTraitsModel = CurrentContext.creature.specialTraits;
 
 let specialTraitsSection;
+let sharedSpecs;
 
 beforeAll(async() => {
   await TestCustomElements.define();
@@ -24,10 +25,12 @@ beforeEach(() => {
   specialTraitsSection = new SpecialTraitsSection();
   TestCustomElements.initializeSection(specialTraitsSection);
   specialTraitsSection.connect();
+
+  sharedSpecs = new BlockListSectionSpecs(specialTraitsSection, specialTraitsModel, null, open5eJsonKey);
 });
 
 it('section should have default blocks', () => {
-  sharedSpecs.sectionShouldHaveDefaultBlocks(specialTraitsSection, specialTraitsModel);
+  sharedSpecs.sectionShouldHaveDefaultBlocks();
 });
 
 describe('when the show section is clicked', () => {
@@ -36,16 +39,16 @@ describe('when the show section is clicked', () => {
   });
 
   it('should switch to edit mode and focus on the add button if there are no blocks', () => {
-    sharedSpecs.shouldSwitchToEditModeAndFocusOnAddButtonIfNoBlocks(specialTraitsSection);
+    sharedSpecs.shouldSwitchToEditModeAndFocusOnAddButtonIfNoBlocks();
   });
 
   it('should switch to edit mode and focus on the name field of the first block if there is at least one block', () => {
-    sharedSpecs.shouldSwitchToEditModeAndFocusOnNameFieldOfFirstBlockIfExists(specialTraitsSection);
+    sharedSpecs.shouldSwitchToEditModeAndFocusOnNameFieldOfFirstBlockIfExists();
   });
 
   describe('when the add block button is clicked', () => {
     it('should focus on the name field of the newly created block', () => {
-      sharedSpecs.shouldFocusOnNameFieldOfNewBlock(specialTraitsSection);
+      sharedSpecs.shouldFocusOnNameFieldOfNewBlock();
     });
   });
 
@@ -61,7 +64,7 @@ describe('when the show section is clicked', () => {
       titleModel.fullName = 'Animated Armor';
       titleModel.shortName = 'armor';
 
-      sharedSpecs.shouldAddASingleBlock(specialTraitsSection, specialTraitsModel, block);
+      sharedSpecs.shouldAddASingleBlock(block);
     });
 
     it('should add a single block with multiline text', () => {
@@ -74,7 +77,7 @@ describe('when the show section is clicked', () => {
 
       titleModel.fullName = 'Hydra';
 
-      sharedSpecs.shouldAddASingleBlock(specialTraitsSection, specialTraitsModel, block);
+      sharedSpecs.shouldAddASingleBlock(block);
     });
 
     it('should add a single block with html escaped', () => {
@@ -88,7 +91,7 @@ describe('when the show section is clicked', () => {
       titleModel.fullName = 'Animated Armor';
       titleModel.shortName = 'armor';
 
-      sharedSpecs.shouldAddASingleBlock(specialTraitsSection, specialTraitsModel, block);
+      sharedSpecs.shouldAddASingleBlock(block);
     });
 
     it('should add multiple blocks', () => {
@@ -116,7 +119,7 @@ describe('when the show section is clicked', () => {
       titleModel.fullName = 'Winter Wolf';
       titleModel.shortName = 'wolf';
 
-      sharedSpecs.shouldAddMultipleBlocks(specialTraitsSection, specialTraitsModel, blocks);
+      sharedSpecs.shouldAddMultipleBlocks(blocks);
     });
 
     it('should add a single block, then remove it', () => {
@@ -130,7 +133,7 @@ describe('when the show section is clicked', () => {
       titleModel.fullName = 'Ochre Jelly';
       titleModel.shortName = 'jelly';
 
-      sharedSpecs.shouldAddASingleBlockThenRemoveIt(specialTraitsSection, block);
+      sharedSpecs.shouldAddASingleBlockThenRemoveIt(block);
     });
 
     it('should add multiple blocks, then remove one of them', () => {
@@ -157,7 +160,7 @@ describe('when the show section is clicked', () => {
 
       titleModel.fullName = 'Doppelganger';
 
-      sharedSpecs.shouldAddMultipleBlocksThenRemoveOneOfThem(specialTraitsSection, specialTraitsModel, blocks, 1);
+      sharedSpecs.shouldAddMultipleBlocksThenRemoveOneOfThem(blocks, 1);
     });
 
     describe('should reparse the block text', () => {
@@ -182,7 +185,7 @@ describe('when the show section is clicked', () => {
         block.markdownText = 'The burrowing kobold has advantage on an attack roll against a creature if at least one of the burrowing kobold\'s allies is within 5 feet of the creature an ally isn\'t incapacitated.';
         block.htmlText = block.markdownText;
 
-        sharedSpecs.shouldReparseNameChanges(specialTraitsSection, specialTraitsModel, block, oldNames, newNames);
+        sharedSpecs.shouldReparseNameChanges(block, oldNames, newNames);
       });
 
       it('when the short name is changed', () => {
@@ -195,7 +198,7 @@ describe('when the show section is clicked', () => {
         block.markdownText = 'The kobold has advantage on an attack roll against a creature if at least one of the kobold\'s allies is within 5 feet of the creature an ally isn\'t incapacitated.';
         block.htmlText = block.markdownText;
 
-        sharedSpecs.shouldReparseNameChanges(specialTraitsSection, specialTraitsModel, block, oldNames, newNames);
+        sharedSpecs.shouldReparseNameChanges(block, oldNames, newNames);
       });
 
       it('when the proper noun is changed', () => {
@@ -208,32 +211,32 @@ describe('when the show section is clicked', () => {
         block.markdownText = 'Winged Kobold has advantage on an attack roll against a creature if at least one of Winged Kobold\'s allies is within 5 feet of the creature an ally isn\'t incapacitated.';
         block.htmlText = block.markdownText;
 
-        sharedSpecs.shouldReparseNameChanges(specialTraitsSection, specialTraitsModel, block, oldNames, newNames);
+        sharedSpecs.shouldReparseNameChanges(block, oldNames, newNames);
       });
     });
 
     it('should trim all trailing period characters in the block name', () => {
-      sharedSpecs.shouldTrimAllTrailingPeriodCharactersInBlockName(specialTraitsSection, specialTraitsModel);
+      sharedSpecs.shouldTrimAllTrailingPeriodCharactersInBlockName();
     });
 
     it('should display an error if the block name is blank', () => {
-      sharedSpecs.shouldDisplayAnErrorIfBlockNameIsBlank(specialTraitsSection, expectedBlockType);
+      sharedSpecs.shouldDisplayAnErrorIfBlockNameIsBlank(expectedBlockType);
     });
 
     it('should display an error if the block text is blank', () => {
-      sharedSpecs.shouldDisplayAnErrorIfBlockTextIsBlank(specialTraitsSection, expectedBlockType);
+      sharedSpecs.shouldDisplayAnErrorIfBlockTextIsBlank(expectedBlockType);
     });
 
     it('should display an error if the block text has invalid markdown syntax', () => {
-      sharedSpecs.shouldDisplayAnErrorIfBlockTextHasInvalidMarkdownSyntax(specialTraitsSection, expectedBlockType);
+      sharedSpecs.shouldDisplayAnErrorIfBlockTextHasInvalidMarkdownSyntax(expectedBlockType);
     });
 
     it('should display errors if the block name and text are both blank', () => {
-      sharedSpecs.shouldDisplayErrorsIfBlockNameAndTextAreBothBlank(specialTraitsSection, expectedBlockType);
+      sharedSpecs.shouldDisplayErrorsIfBlockNameAndTextAreBothBlank(expectedBlockType);
     });
 
     it('should display errors if the block name is blank and block text has invalid markdown syntax', () => {
-      sharedSpecs.shouldDisplayErrorsIfBlockNameIsBlankAndBlockTextHasInvalidMarkdownSyntax(specialTraitsSection, expectedBlockType);
+      sharedSpecs.shouldDisplayErrorsIfBlockNameIsBlankAndBlockTextHasInvalidMarkdownSyntax(expectedBlockType);
     });
   });
 });
@@ -245,7 +248,7 @@ describe('when import from Open5e', () => {
       text: 'The armor is incapacitated while in the area of an antimagic field. If targeted by dispel magic, the armor must succeed on a Constitution saving throw against the caster\'s spell save DC or fall unconscious for 1 minute.'
     };
 
-    sharedSpecs.shouldImportFromOpen5e(specialTraitsSection, specialTraitsModel, open5eJsonKey, [block]);
+    sharedSpecs.shouldImportFromOpen5e([block]);
   });
 
   it('should import single block with multiline text', () => {
@@ -257,7 +260,7 @@ describe('when import from Open5e', () => {
       htmlText: 'The hydra has five heads. While it has more than one head, the hydra has advantage on saving throws against being blinded, charmed, deafened, frightened, stunned, and knocked unconscious.\n  Whenever the hydra takes 25 or more damage in a single turn, one of its heads dies. If all its heads die, the hydra dies.\n  At the end of its turn, it grows two heads for each of its heads that died since its last turn, unless it has taken fire damage since its last turn. The hydra regains 10 hit points for each head regrown in this way.'
     };
 
-    sharedSpecs.shouldImportFromOpen5e(specialTraitsSection, specialTraitsModel, open5eJsonKey, [block]);
+    sharedSpecs.shouldImportFromOpen5e([block]);
   });
 
   it('should import single spellcasting block without bullet characters', () => {
@@ -267,7 +270,7 @@ describe('when import from Open5e', () => {
       markdownText: 'The djinni\'s innate spellcasting ability is Charisma (spell save DC 17, +9 to hit with spell attacks). It can innately cast the following spells, requiring no material components:  \n>   \n> At will: detect evil and good, detect magic, thunderwave  \n> 3/day each: create food and water (can create wine instead of water), tongues, wind walk  \n> 1/day each: conjure elemental (air elemental only), creation, gaseous form, invisibility, major image, plane shift',
     };
 
-    sharedSpecs.shouldImportFromOpen5e(specialTraitsSection, specialTraitsModel, open5eJsonKey, [block]);
+    sharedSpecs.shouldImportFromOpen5e([block]);
   });
 
   it('should import single spellcasting block with bullet characters', () => {
@@ -279,7 +282,7 @@ describe('when import from Open5e', () => {
       htmlText: 'The mage is a 9th-level spellcaster. Its spellcasting ability is Intelligence (spell save DC 14, +6 to hit with spell attacks). The mage has the following wizard spells prepared:\n\nCantrips (at will): fire bolt, light, mage hand, prestidigitation\n1st level (4 slots): detect magic, mage armor, magic missile, shield\n2nd level (3 slots): misty step, suggestion\n3rd level (3 slots): counterspell, fireball, fly\n4th level (3 slots): greater invisibility, ice storm\n5th level (1 slot): cone of cold'
     };
 
-    sharedSpecs.shouldImportFromOpen5e(specialTraitsSection, specialTraitsModel, open5eJsonKey, [block]);
+    sharedSpecs.shouldImportFromOpen5e([block]);
   });
 
   it('should import multiple blocks', () => {
@@ -298,7 +301,7 @@ describe('when import from Open5e', () => {
       }
     ];
 
-    sharedSpecs.shouldImportFromOpen5e(specialTraitsSection, specialTraitsModel, open5eJsonKey, blocks);
+    sharedSpecs.shouldImportFromOpen5e(blocks);
   });
 });
 
@@ -316,7 +319,7 @@ describe('when the section is empty and not visible', () => {
       titleModel.fullName = 'Adult Red Dragon';
       titleModel.shortName = 'dragon';
 
-      sharedSpecs.shouldShowBlocksImportedFromJsonIfSectionWasInitiallyEmptyAndNotVisible(specialTraitsSection, blocksToImport);
+      sharedSpecs.shouldShowBlocksImportedFromJsonIfSectionWasInitiallyEmptyAndNotVisible(blocksToImport);
     });
   });
 });

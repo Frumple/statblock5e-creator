@@ -1,232 +1,241 @@
 import { inputValueAndTriggerEvent } from '../../../helpers/element-helpers.js';
 
-export function showSectionShouldHaveDefaultValues(section, headingName, expectedText = '') {
-  expect(section.showElements.heading).toHaveTextContent(headingName);
-  expect(section.showElements.text).toHaveTextContent(expectedText);
-}
-
-export function editSectionShouldHaveDefaultValues(section, expectedItems = []) {
-  expect(section.editElements.propertyList.itemsAsText).toEqual(expectedItems);
-}
-
-export function shouldAddAnItem(section, model, headingName, itemText, expectedText = null) {
-  const expectedItems = [itemText];
-  if (expectedText === null) {
-    expectedText = itemText;
+export default class PropertyListSectionSpecs {
+  constructor(section, model, headingName, open5eJsonKey) {
+    this.section = section;
+    this.model = model;
+    this.headingName = headingName;
+    this.open5eJsonKey = open5eJsonKey;
   }
 
-  inputValueAndTriggerEvent(section.editElements.input, itemText);
-  section.editElements.addButton.click();
-
-  verifyEditModeView(section, expectedItems);
-
-  section.editElements.submitForm();
-
-  expect(section).toBeInMode('show');
-
-  verifyModel(model, expectedItems);
-  verifyShowModeView(section, headingName, expectedText);
-
-  const json = verifyJsonExport(section, expectedItems);
-  expect(section).toExportPropertyLineToHtml(headingName, expectedText);
-  expect(section).toExportPropertyLineToMarkdown(headingName, expectedText);
-
-  reset(section, model);
-  section.importFromJson(json);
-
-  verifyModel(model, expectedItems);
-  verifyEditModeView(section, expectedItems);
-  verifyShowModeView(section, headingName, expectedText);
-}
-
-export function shouldAddManyItems(section, model, headingName, itemTexts, expectedText) {
-  for (const itemText of itemTexts) {
-    inputValueAndTriggerEvent(section.editElements.input, itemText);
-    section.editElements.addButton.click();
+  showSectionShouldHaveDefaultValues(expectedText = '') {
+    expect(this.section.showElements.heading).toHaveTextContent(this.headingName);
+    expect(this.section.showElements.text).toHaveTextContent(expectedText);
   }
 
-  verifyEditModeView(section, itemTexts);
-
-  section.editElements.submitForm();
-
-  expect(section).toBeInMode('show');
-
-  verifyModel(model, itemTexts);
-  verifyShowModeView(section, headingName, expectedText);
-
-  const json = verifyJsonExport(section, itemTexts);
-  expect(section).toExportPropertyLineToHtml(headingName, expectedText);
-  expect(section).toExportPropertyLineToMarkdown(headingName, expectedText);
-
-  reset(section, model);
-  section.importFromJson(json);
-
-  verifyModel(model, itemTexts);
-  verifyEditModeView(section, itemTexts);
-  verifyShowModeView(section, headingName, expectedText);
-}
-
-export function shouldDisplayAnErrorIfAddingBlank(section, expectedBlockType) {
-  inputValueAndTriggerEvent(section.editElements.input, '');
-  section.editElements.addButton.click();
-
-  expect(section).toHaveError(
-    section.editElements.input,
-    `Cannot add a blank ${expectedBlockType}.`);
-}
-
-export function shouldDisplayAnErrorIfAddingDuplicate(section, itemText, expectedBlockType) {
-  inputValueAndTriggerEvent(section.editElements.input, itemText);
-  section.editElements.addButton.click();
-
-  inputValueAndTriggerEvent(section.editElements.input, itemText);
-  section.editElements.addButton.click();
-
-  expect(section).toHaveError(
-    section.editElements.input,
-    `Cannot add a duplicate ${expectedBlockType}.`);
-}
-
-export function shouldDisplayAnErrorIfSavingWithUnaddedInputText(section, itemText, expectedBlockType) {
-  inputValueAndTriggerEvent(section.editElements.input, itemText);
-
-  section.editElements.submitForm();
-
-  expect(section).toHaveError(
-    section.editElements.input,
-    `Cannot save while the ${expectedBlockType} field contains text.\nClear or add the field, then try again.`);
-}
-
-export function shouldRemoveAndAddSuggestions(section, itemText) {
-  inputValueAndTriggerEvent(section.editElements.input, itemText);
-  section.editElements.addButton.click();
-
-  const dataList = section.editElements.dataList;
-  const option = dataList.findOption(itemText);
-  expect(option).toHaveAttribute('disabled');
-
-  const item = section.editElements.propertyList.findItem(itemText);
-  item.remove();
-
-  expect(option).not.toHaveAttribute('disabled');
-}
-
-export function shouldAddAndRemoveItem(section, model, headingName, itemText) {
-  const expectedItems = [];
-  const expectedText = '';
-
-  inputValueAndTriggerEvent(section.editElements.input, itemText);
-  section.editElements.addButton.click();
-
-  const item = section.editElements.propertyList.findItem(itemText);
-  item.remove();
-
-  verifyEditModeView(section, expectedItems);
-
-  section.editElements.submitForm();
-
-  expect(section).toBeInMode('show');
-
-  verifyModel(model, expectedItems);
-  expect(section.showElements.section).toHaveClass('section_empty');
-  verifyShowModeView(section, headingName, expectedText);
-
-  const json = verifyJsonExport(section, expectedItems);
-  expect(section).toExportPropertyLineToHtml(headingName, expectedText);
-  expect(section).toExportPropertyLineToMarkdown(headingName, expectedText);
-
-  reset(section, model);
-  section.importFromJson(json);
-
-  verifyModel(model, expectedItems);
-  verifyEditModeView(section, expectedItems);
-  verifyShowModeView(section, headingName, expectedText);
-}
-
-export function shouldDeleteOneOfManyItems(section, model, headingName, initialItems, itemToDelete, expectedItems) {
-  const expectedText = expectedItems.join(', ');
-
-  for (const item of initialItems) {
-    inputValueAndTriggerEvent(section.editElements.input, item);
-    section.editElements.addButton.click();
+  editSectionShouldHaveDefaultValues(expectedItems = []) {
+    expect(this.section.editElements.propertyList.itemsAsText).toEqual(expectedItems);
   }
 
-  const item = section.editElements.propertyList.findItem(itemToDelete);
-  item.remove();
+  shouldAddAnItem(itemText, expectedText = null) {
+    const expectedItems = [itemText];
+    if (expectedText === null) {
+      expectedText = itemText;
+    }
 
-  verifyEditModeView(section, expectedItems);
+    inputValueAndTriggerEvent(this.section.editElements.input, itemText);
+    this.section.editElements.addButton.click();
 
-  section.editElements.submitForm();
+    this.verifyEditModeView(expectedItems);
 
-  expect(section).toBeInMode('show');
+    this.section.editElements.submitForm();
 
-  verifyModel(model, expectedItems);
-  verifyShowModeView(section, headingName, expectedText);
+    expect(this.section).toBeInMode('show');
 
-  const json = verifyJsonExport(section, expectedItems);
-  expect(section).toExportPropertyLineToHtml(headingName, expectedText);
-  expect(section).toExportPropertyLineToMarkdown(headingName, expectedText);
+    this.verifyModel(expectedItems);
+    this.verifyShowModeView(expectedText);
 
-  reset(section, model);
-  section.importFromJson(json);
+    const json = this.verifyJsonExport(expectedItems);
+    expect(this.section).toExportPropertyLineToHtml(this.headingName, expectedText);
+    expect(this.section).toExportPropertyLineToMarkdown(this.headingName, expectedText);
 
-  verifyModel(model, expectedItems);
-  verifyEditModeView(section, expectedItems);
-  verifyShowModeView(section, headingName, expectedText);
-}
+    this.reset();
+    this.section.importFromJson(json);
 
-export function shouldImportFromOpen5e(section, model, headingName, open5eJsonKey, inputText, expectedItems, expectedText = null) {
-  if (expectedText === null) {
-    expectedText = inputText;
+    this.verifyModel(expectedItems);
+    this.verifyEditModeView(expectedItems);
+    this.verifyShowModeView(expectedText);
   }
 
-  const json = {};
-  json[open5eJsonKey] = inputText;
+  shouldAddManyItems(itemTexts, expectedText) {
+    for (const itemText of itemTexts) {
+      inputValueAndTriggerEvent(this.section.editElements.input, itemText);
+      this.section.editElements.addButton.click();
+    }
 
-  section.importFromOpen5e(json);
+    this.verifyEditModeView(itemTexts);
 
-  verifyModel(model, expectedItems);
-  verifyEditModeView(section, expectedItems);
-  verifyShowModeView(section, headingName, expectedText);
-}
+    this.section.editElements.submitForm();
 
-export function shouldShowItemsImportedFromJsonIfSectionWasInitiallyEmptyAndNotVisible(section, headingName, itemsToImport) {
-  const expectedText = itemsToImport.join(', ');
-  const json = {
-    items: itemsToImport
-  };
+    expect(this.section).toBeInMode('show');
 
-  section.mode = 'hidden';
-  section.importFromJson(json);
+    this.verifyModel(itemTexts);
+    this.verifyShowModeView(expectedText);
 
-  expect(section).toBeInMode('show');
-  verifyShowModeView(section, headingName, expectedText);
-}
+    const json = this.verifyJsonExport(itemTexts);
+    expect(this.section).toExportPropertyLineToHtml(this.headingName, expectedText);
+    expect(this.section).toExportPropertyLineToMarkdown(this.headingName, expectedText);
 
-function reset(section, model) {
-  model.reset();
-  section.updateView();
-}
+    this.reset();
+    this.section.importFromJson(json);
 
-function verifyModel(model, expectedItems) {
-  expect(model.items).toStrictEqual(expectedItems);
-}
+    this.verifyModel(itemTexts);
+    this.verifyEditModeView(itemTexts);
+    this.verifyShowModeView(expectedText);
+  }
 
-function verifyEditModeView(section, expectedItems) {
-  expect(section.editElements.propertyList.itemsAsText).toStrictEqual(expectedItems);
-}
+  shouldDisplayAnErrorIfAddingBlank(expectedBlockType) {
+    inputValueAndTriggerEvent(this.section.editElements.input, '');
+    this.section.editElements.addButton.click();
 
-function verifyShowModeView(section, headingName, expectedText) {
-  expect(section).toShowPropertyLine(headingName, expectedText);
-}
+    expect(this.section).toHaveError(
+      this.section.editElements.input,
+      `Cannot add a blank ${expectedBlockType}.`);
+  }
 
-export function verifyJsonExport(section, expectedItems) {
-  const json = section.exportToJson();
-  const expectedJson = {
-    items: expectedItems
-  };
+  shouldDisplayAnErrorIfAddingDuplicate(itemText, expectedBlockType) {
+    inputValueAndTriggerEvent(this.section.editElements.input, itemText);
+    this.section.editElements.addButton.click();
 
-  expect(json).toStrictEqual(expectedJson);
+    inputValueAndTriggerEvent(this.section.editElements.input, itemText);
+    this.section.editElements.addButton.click();
 
-  return json;
+    expect(this.section).toHaveError(
+      this.section.editElements.input,
+      `Cannot add a duplicate ${expectedBlockType}.`);
+  }
+
+  shouldDisplayAnErrorIfSavingWithUnaddedInputText(itemText, expectedBlockType) {
+    inputValueAndTriggerEvent(this.section.editElements.input, itemText);
+
+    this.section.editElements.submitForm();
+
+    expect(this.section).toHaveError(
+      this.section.editElements.input,
+      `Cannot save while the ${expectedBlockType} field contains text.\nClear or add the field, then try again.`);
+  }
+
+  shouldRemoveAndAddSuggestions(itemText) {
+    inputValueAndTriggerEvent(this.section.editElements.input, itemText);
+    this.section.editElements.addButton.click();
+
+    const dataList = this.section.editElements.dataList;
+    const option = dataList.findOption(itemText);
+    expect(option).toHaveAttribute('disabled');
+
+    const item = this.section.editElements.propertyList.findItem(itemText);
+    item.remove();
+
+    expect(option).not.toHaveAttribute('disabled');
+  }
+
+  shouldAddAndRemoveItem(itemText) {
+    const expectedItems = [];
+    const expectedText = '';
+
+    inputValueAndTriggerEvent(this.section.editElements.input, itemText);
+    this.section.editElements.addButton.click();
+
+    const item = this.section.editElements.propertyList.findItem(itemText);
+    item.remove();
+
+    this.verifyEditModeView(expectedItems);
+
+    this.section.editElements.submitForm();
+
+    expect(this.section).toBeInMode('show');
+
+    this.verifyModel(expectedItems);
+    expect(this.section.showElements.section).toHaveClass('section_empty');
+    this.verifyShowModeView(expectedText);
+
+    const json = this.verifyJsonExport(expectedItems);
+    expect(this.section).toExportPropertyLineToHtml(this.headingName, expectedText);
+    expect(this.section).toExportPropertyLineToMarkdown(this.headingName, expectedText);
+
+    this.reset();
+    this.section.importFromJson(json);
+
+    this.verifyModel(expectedItems);
+    this.verifyEditModeView(expectedItems);
+    this.verifyShowModeView(expectedText);
+  }
+
+  shouldDeleteOneOfManyItems(initialItems, itemToDelete, expectedItems) {
+    const expectedText = expectedItems.join(', ');
+
+    for (const item of initialItems) {
+      inputValueAndTriggerEvent(this.section.editElements.input, item);
+      this.section.editElements.addButton.click();
+    }
+
+    const item = this.section.editElements.propertyList.findItem(itemToDelete);
+    item.remove();
+
+    this.verifyEditModeView(expectedItems);
+
+    this.section.editElements.submitForm();
+
+    expect(this.section).toBeInMode('show');
+
+    this.verifyModel(expectedItems);
+    this.verifyShowModeView(expectedText);
+
+    const json = this.verifyJsonExport(expectedItems);
+    expect(this.section).toExportPropertyLineToHtml(this.headingName, expectedText);
+    expect(this.section).toExportPropertyLineToMarkdown(this.headingName, expectedText);
+
+    this.reset();
+    this.section.importFromJson(json);
+
+    this.verifyModel(expectedItems);
+    this.verifyEditModeView(expectedItems);
+    this.verifyShowModeView(expectedText);
+  }
+
+  shouldImportFromOpen5e(inputText, expectedItems, expectedText = null) {
+    if (expectedText === null) {
+      expectedText = inputText;
+    }
+
+    const json = {};
+    json[this.open5eJsonKey] = inputText;
+
+    this.section.importFromOpen5e(json);
+
+    this.verifyModel(expectedItems);
+    this.verifyEditModeView(expectedItems);
+    this.verifyShowModeView(expectedText);
+  }
+
+  shouldShowItemsImportedFromJsonIfSectionWasInitiallyEmptyAndNotVisible(itemsToImport) {
+    const expectedText = itemsToImport.join(', ');
+    const json = {
+      items: itemsToImport
+    };
+
+    this.section.mode = 'hidden';
+    this.section.importFromJson(json);
+
+    expect(this.section).toBeInMode('show');
+    this.verifyShowModeView(expectedText);
+  }
+
+  reset() {
+    this.model.reset();
+    this.section.updateView();
+  }
+
+  verifyModel(expectedItems) {
+    expect(this.model.items).toStrictEqual(expectedItems);
+  }
+
+  verifyEditModeView(expectedItems) {
+    expect(this.section.editElements.propertyList.itemsAsText).toStrictEqual(expectedItems);
+  }
+
+  verifyShowModeView(expectedText) {
+    expect(this.section).toShowPropertyLine(this.headingName, expectedText);
+  }
+
+  verifyJsonExport(expectedItems) {
+    const json = this.section.exportToJson();
+    const expectedJson = {
+      items: expectedItems
+    };
+
+    expect(json).toStrictEqual(expectedJson);
+
+    return json;
+  }
 }
