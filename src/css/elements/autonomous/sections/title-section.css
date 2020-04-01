@@ -37,7 +37,7 @@
 
 .title-edit-section__short-name-help-tooltip {
   --help-tooltip-icon-color: #7A200D;
-  --help-tooltip-width: 35em;
+  --help-tooltip-width: 30em;
   margin-left: 5px;
 }
 
@@ -53,6 +53,7 @@
 
 .title-edit-section__short-name-help-tooltip-table-container table {
   background: white;
+  border: 1px solid #aaaaaa;
 }
 
 .title-edit-section__short-name-help-tooltip-table-container th {
@@ -60,7 +61,7 @@
 }
 
 .title-edit-section__short-name-help-tooltip-table-container th, td {
-  text-align: left;
+  text-align: center;
   padding-left: 10px;
   padding-right: 10px;
 }
@@ -81,7 +82,7 @@
 
 .title-edit-section__proper-noun-help-tooltip {
   --help-tooltip-icon-color: #7A200D;
-  --help-tooltip-width: 35em;
+  --help-tooltip-width: 30em;
   margin-left: 5px;
 }
 

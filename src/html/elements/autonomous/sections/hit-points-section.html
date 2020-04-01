@@ -21,11 +21,52 @@
     <input id="use-hit-die-input" class="hit-points-edit-section__use-hit-die-input" is="enable-disable-elements-checkbox" type="checkbox" name="use-hit-die" checked />
     <label id="use-hit-die-label" class="hit-points-edit-section__use-hit-die-label" for="use-hit-die-input">Calculate using Hit Die:</label>
     <help-tooltip class="hit-points-edit-section__help-tooltip">
+      <p>The creature's <strong>size</strong> determines its <strong>hit die size</strong> and <strong>hit die average</strong>:</p>
+      <br />
+      <div class="hit-points-edit-section__help-tooltip-table-container">
+        <table>
+          <tr>
+            <th>Creature Size</th>
+            <th>Hit Die Size</th>
+            <th>Hit Die Average</th>
+          </tr>
+          <tr>
+            <td>Tiny</td>
+            <td>d4</td>
+            <td>2.5</td>
+          </tr>
+          <tr>
+            <td>Small</td>
+            <td>d6</td>
+            <td>3.5</td>
+          </tr>
+          <tr>
+            <td>Medium</td>
+            <td>d8</td>
+            <td>4.5</td>
+          </tr>
+          <tr>
+            <td>Large</td>
+            <td>d10</td>
+            <td>5.5</td>
+          </tr>
+          <tr>
+            <td>Huge</td>
+            <td>d12</td>
+            <td>6.5</td>
+          </tr>
+          <tr>
+            <td>Gargantuan</td>
+            <td>d20</td>
+            <td>10.5</td>
+          </tr>
+        </table>
+      </div>
+      <br />
       <p>A creature's <strong>hit points</strong> can be calculated using the following formula:</p>
       <blockquote><strong>HP = (Hit Die Quantity * Hit Die Average) rounded down + CON HP</strong>
 
-  where   Hit Die Average = (Hit Die Size / 2) + 0.5
-    and   CON HP          = (Hit Die Quantity * CON Modifier)</blockquote>
+  where CON HP = Hit Die Quantity * CON Modifier</blockquote>
       <br />
       <cite>For more details, see "Hit Points" on page 7 of the D&D 5th Edition Monster Manual.</cite>
     </help-tooltip>
