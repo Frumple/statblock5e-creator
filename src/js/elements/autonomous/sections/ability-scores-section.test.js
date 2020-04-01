@@ -3,6 +3,7 @@ import * as TestCustomElements from '../../../helpers/test/test-custom-elements.
 
 import { inputValueAndTriggerEvent } from '../../../helpers/element-helpers.js';
 import { formatModifier } from '../../../helpers/string-formatter.js';
+import EventInterceptor from '../../../helpers/test/event-interceptor.js';
 
 import CurrentContext from '../../../models/current-context.js';
 
@@ -75,10 +76,7 @@ describe('when the show section is clicked', () => {
       `
       ('$description: {abilityName="$abilityName", score="$score"} => $expectedModifier',
       ({abilityName, score, expectedModifier}) => {
-        let receivedEvent = null;
-        abilityScoresSection.addEventListener('abilityScoreChanged', (event) => {
-          receivedEvent = event;
-        });
+        const eventInterceptor = new EventInterceptor(abilityScoresSection, 'abilityScoreChanged');
 
         // Collect expected values into nested JS object structure
         const expectedAbilities = createDefaultExpectedAbilities();
@@ -91,8 +89,9 @@ describe('when the show section is clicked', () => {
         verifyModel(expectedAbilities);
         verifyEditModeView(expectedAbilities);
 
-        expect(receivedEvent).not.toBeNull();
-        expect(receivedEvent.detail.abilityName).toBe(abilityName);
+        const event = eventInterceptor.popEvent();
+        expect(event).not.toBeNull();
+        expect(event.detail.abilityName).toBe(abilityName);
 
         abilityScoresSection.editElements.submitForm();
 
@@ -126,10 +125,7 @@ describe('when the show section is clicked', () => {
       `
       ('$description: $abilityName => $expectedErrorMessage',
       ({abilityName, expectedErrorMessage}) => {
-        let receivedEvent = null;
-        abilityScoresSection.addEventListener('abilityScoreChanged', (event) => {
-          receivedEvent = event;
-        });
+        const eventInterceptor = new EventInterceptor(abilityScoresSection, 'abilityScoreChanged');
 
         const ability = abilitiesModel.abilities[abilityName];
         const oldScore = ability.score;
@@ -143,7 +139,8 @@ describe('when the show section is clicked', () => {
         const formattedOldModifier = `(${formatModifier(oldModifier)})`;
         expect(abilityScoresSection.editElements.modifier[abilityName]).toHaveTextContent(formattedOldModifier);
 
-        expect(receivedEvent).toBeNull();
+        const event = eventInterceptor.popEvent();
+        expect(event).toBeNull();
 
         abilityScoresSection.editElements.submitForm();
 
