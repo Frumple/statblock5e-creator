@@ -20,13 +20,21 @@
   font-style: italic;
 }
 
+.generate-attack-dialog__finesse-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+}
+
 .generate-attack-dialog__finesse-label {
   font-weight: bold;
+  margin-left: 5px;
 }
 
 .generate-attack-dialog__finesse-help-tooltip {
   --help-tooltip-icon-color: black;
   --help-tooltip-width: 40em;
+  margin-left: 5px;
 }
 
 .generate-attack-dialog__finesse-help-tooltip code {
