@@ -31,10 +31,11 @@ export default class StatBlock extends CustomAutonomousElement {
     if (this.isConnected && ! this.isInitialized) {
       super.connectedCallback();
 
-      this.addEventListener('creatureNameChanged', this.onCreatureNameChanged);
-      this.addEventListener('abilityScoreChanged', this.onAbilityScoreChanged);
-      this.addEventListener('proficiencyBonusChanged', this.onProficiencyBonusChanged);
-      this.addEventListener('skillChanged', this.onSkillChanged);
+      this.addEventListener('creatureNameChanged', this.onCreatureNameChanged.bind(this));
+      this.addEventListener('creatureSizeChanged', this.onCreatureSizeChanged.bind(this));
+      this.addEventListener('abilityScoreChanged', this.onAbilityScoreChanged.bind(this));
+      this.addEventListener('proficiencyBonusChanged', this.onProficiencyBonusChanged.bind(this));
+      this.addEventListener('skillChanged', this.onSkillChanged.bind(this));
 
       this.isInitialized = true;
     }
@@ -42,6 +43,10 @@ export default class StatBlock extends CustomAutonomousElement {
 
   onCreatureNameChanged() {
     this.reparseBlockSections();
+  }
+
+  onCreatureSizeChanged() {
+    this.topStats.updateHitPointsView();
   }
 
   onAbilityScoreChanged() {

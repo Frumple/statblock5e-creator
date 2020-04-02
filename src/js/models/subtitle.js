@@ -1,6 +1,6 @@
 import Model from './model.js';
 
-import creatureSizes from '../data/creature-sizes.js';
+import creatureSizesToHitDieSizes from '../data/creature-sizes-to-hit-die-sizes.js';
 import creatureTypes from '../data/creature-types.js';
 import creatureAlignments from '../data/creature-alignments.js';
 
@@ -57,7 +57,7 @@ export default class Subtitle extends Model{
     const alignment = json.alignment;
 
     // If the size, type, or alignment does not match the dropdown options, fallback to using custom text
-    if (! (creatureSizes.includes(size) &&
+    if (! (Object.keys(creatureSizesToHitDieSizes).includes(size) &&
            creatureTypes.includes(type) &&
            creatureAlignments.includes(alignment))) {
       this.useCustomText = true;
