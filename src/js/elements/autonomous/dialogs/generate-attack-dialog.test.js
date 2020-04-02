@@ -172,7 +172,7 @@ describe('when the generate attack dialog is opened', () => {
       challengeRatingModel.proficiencyBonus = 2;
 
       const attackModel = new Attack();
-      attackModel.weaponName = 'Claws';
+      attackModel.name = 'Claws';
       attackModel.isFinesse = isFinesse;
       attackModel.reach = 10;
 
@@ -201,7 +201,7 @@ describe('when the generate attack dialog is opened', () => {
 
       verifyDialogModel(attackModel);
       verifyDialogControls(attackModel, generatedText, renderedText);
-      saveDialogAndVerifyActionBlocks(attackModel.weaponName, generatedText, renderedText);
+      saveDialogAndVerifyActionBlocks(attackModel.name, generatedText, renderedText);
     });
     /* eslint-enable indent, no-unexpected-multiline */
   });
@@ -227,7 +227,7 @@ describe('when the generate attack dialog is opened', () => {
       challengeRatingModel.proficiencyBonus = 3;
 
       const attackModel = new Attack();
-      attackModel.weaponName = 'Spikes';
+      attackModel.name = 'Spikes';
       attackModel.isFinesse = isFinesse;
       attackModel.normalRange = 30;
       attackModel.longRange = 120;
@@ -257,7 +257,7 @@ describe('when the generate attack dialog is opened', () => {
 
       verifyDialogModel(attackModel);
       verifyDialogControls(attackModel, generatedText, renderedText);
-      saveDialogAndVerifyActionBlocks(attackModel.weaponName, generatedText, renderedText);
+      saveDialogAndVerifyActionBlocks(attackModel.name, generatedText, renderedText);
     });
     /* eslint-enable indent, no-unexpected-multiline */
   });
@@ -291,7 +291,7 @@ describe('when the generate attack dialog is opened', () => {
       challengeRatingModel.proficiencyBonus = 4;
 
       const attackModel = new Attack();
-      attackModel.weaponName = 'Spear of Lightning';
+      attackModel.name = 'Spear of Lightning';
       attackModel.isFinesse = isFinesse;
       attackModel.normalRange = 20;
       attackModel.longRange = 60;
@@ -324,7 +324,7 @@ describe('when the generate attack dialog is opened', () => {
 
       verifyDialogModel(attackModel);
       verifyDialogControls(attackModel, generatedText, renderedText);
-      saveDialogAndVerifyActionBlocks(attackModel.weaponName, generatedText, renderedText);
+      saveDialogAndVerifyActionBlocks(attackModel.name, generatedText, renderedText);
     });
     /* eslint-enable indent, no-unexpected-multiline */
   });
@@ -333,7 +333,7 @@ describe('when the generate attack dialog is opened', () => {
     /* eslint-disable indent, no-unexpected-multiline */
     it.each
     `
-      description                   | damageDieQuantity | generatedText                                                                                              | renderedText
+      description                   | damageDieQuantity | generatedText                                                                                    | renderedText
       ${'weapon dealing 1 damage'}  | ${1}              | ${'*Melee Weapon Attack:* atk[str] to hit, reach 5 ft., one target. *Hit:* 1 slashing damage.'}  | ${'<em>Melee Weapon Attack:</em> +4 to hit, reach 5 ft., one target. <em>Hit:</em> 1 slashing damage.'}
       ${'weapon dealing 25 damage'} | ${25}             | ${'*Melee Weapon Attack:* atk[str] to hit, reach 5 ft., one target. *Hit:* 25 slashing damage.'} | ${'<em>Melee Weapon Attack:</em> +4 to hit, reach 5 ft., one target. <em>Hit:</em> 25 slashing damage.'}
     `
@@ -343,7 +343,7 @@ describe('when the generate attack dialog is opened', () => {
       challengeRatingModel.proficiencyBonus = 2;
 
       const attackModel = new Attack();
-      attackModel.weaponName = 'Machete';
+      attackModel.name = 'Machete';
       attackModel.reach = 5;
 
       const meleeCategory = attackModel.damageCategories['melee'];
@@ -356,7 +356,7 @@ describe('when the generate attack dialog is opened', () => {
 
       verifyDialogModel(attackModel);
       verifyDialogControls(attackModel, generatedText, renderedText);
-      saveDialogAndVerifyActionBlocks(attackModel.weaponName, generatedText, renderedText);
+      saveDialogAndVerifyActionBlocks(attackModel.name, generatedText, renderedText);
     });
     /* eslint-enable indent, no-unexpected-multiline */
   });
@@ -365,7 +365,7 @@ describe('when the generate attack dialog is opened', () => {
     /* eslint-disable indent, no-unexpected-multiline */
     it.each
     `
-      weaponName          | isFinesse | reach  | normalRange | longRange | damageType       | meleeEnabled | meleeDamageDieQuantity | meleeDamageDieSize | rangedEnabled | rangedDamageDieQuantity | rangedDamageDieSize | versatileEnabled | versatileDamageDieQuantity | versatileDamageDieSize | generatedText                                                                                                                                                                                                                              | renderedText
+      name                | isFinesse | reach  | normalRange | longRange | damageType       | meleeEnabled | meleeDamageDieQuantity | meleeDamageDieSize | rangedEnabled | rangedDamageDieQuantity | rangedDamageDieSize | versatileEnabled | versatileDamageDieQuantity | versatileDamageDieSize | generatedText                                                                                                                                                                                                                              | renderedText
       ${'Club'}           | ${false}  | ${5}   | ${''}       | ${''}     | ${'bludgeoning'} | ${true}      | ${1}                   | ${4}               | ${false}      | ${''}                   | ${''}               | ${false}         | ${''}                      | ${''}                  | ${'*Melee Weapon Attack:* atk[str] to hit, reach 5 ft., one target. *Hit:* dmg[1d4 + str] bludgeoning damage.'}                                                                                                               | ${'<em>Melee Weapon Attack:</em> +5 to hit, reach 5 ft., one target. <em>Hit:</em> 5 (1d4 + 3) bludgeoning damage.'}
       ${'Dagger'}         | ${true}   | ${5}   | ${20}       | ${60}     | ${'piercing'}    | ${true}      | ${1}                   | ${4}               | ${true}       | ${1}                    | ${4}                | ${false}         | ${''}                      | ${''}                  | ${'*Melee or Ranged Weapon Attack:* atk[fin] to hit, reach 5 ft. or range 20/60 ft., one target. *Hit:* dmg[1d4 + fin] piercing damage.'}                                                                                     | ${'<em>Melee or Ranged Weapon Attack:</em> +6 to hit, reach 5 ft. or range 20/60 ft., one target. <em>Hit:</em> 6 (1d4 + 4) piercing damage.'}
       ${'Greatclub'}      | ${false}  | ${5}   | ${''}       | ${''}     | ${'bludgeoning'} | ${true}      | ${1}                   | ${8}               | ${false}      | ${''}                   | ${''}               | ${false}         | ${''}                      | ${''}                  | ${'*Melee Weapon Attack:* atk[str] to hit, reach 5 ft., one target. *Hit:* dmg[1d8 + str] bludgeoning damage.'}                                                                                                               | ${'<em>Melee Weapon Attack:</em> +5 to hit, reach 5 ft., one target. <em>Hit:</em> 7 (1d8 + 3) bludgeoning damage.'}
@@ -403,10 +403,10 @@ describe('when the generate attack dialog is opened', () => {
       ${'Heavy Crossbow'} | ${false}  | ${''}  | ${100}      | ${400}    | ${'piercing'}    | ${false}     | ${''}                  | ${''}              | ${true}       | ${1}                    | ${10}               | ${false}         | ${''}                      | ${''}                  | ${'*Ranged Weapon Attack:* atk[dex] to hit, range 100/400 ft., one target. *Hit:* dmg[1d10 + dex] piercing damage.'}                                                                                                          | ${'<em>Ranged Weapon Attack:</em> +5 to hit, range 100/400 ft., one target. <em>Hit:</em> 8 (1d10 + 3) piercing damage.'}
       ${'Longbow'}        | ${false}  | ${''}  | ${150}      | ${600}    | ${'piercing'}    | ${false}     | ${''}                  | ${''}              | ${true}       | ${1}                    | ${8}                | ${false}         | ${''}                      | ${''}                  | ${'*Ranged Weapon Attack:* atk[dex] to hit, range 150/600 ft., one target. *Hit:* dmg[1d8 + dex] piercing damage.'}                                                                                                           | ${'<em>Ranged Weapon Attack:</em> +5 to hit, range 150/600 ft., one target. <em>Hit:</em> 7 (1d8 + 3) piercing damage.'}
     `
-    ('$weaponName => {isFinesse="$isFinesse", reach="$reach", normalRange="$normalRange", longRange="$longRange", damageType="$damageType", meleeEnabled="$meleeEnabled", meleeDamageDieQuantity="$meleeDamageDieQuantity", meleeDamageDieSize="$meleeDamageDieSize", rangedEnabled="$rangedEnabled", rangedDamageDieQuantity="$rangedDamageDieQuantity", rangedDamageDieSize="$rangedDamageDieSize", versatileEnabled="$versatileEnabled", versatileDamageDieQuantity="$versatileDamageDieQuantity", versatileDamageDieSize="$versatileDamageDieSize", generatedText="$generatedText", renderedText="$renderedText"}',
-    ({weaponName, isFinesse, reach, normalRange, longRange, damageType, meleeEnabled, meleeDamageDieQuantity, meleeDamageDieSize, rangedEnabled, rangedDamageDieQuantity, rangedDamageDieSize, versatileEnabled, versatileDamageDieQuantity, versatileDamageDieSize, generatedText, renderedText}) => {
+    ('$name => {isFinesse="$isFinesse", reach="$reach", normalRange="$normalRange", longRange="$longRange", damageType="$damageType", meleeEnabled="$meleeEnabled", meleeDamageDieQuantity="$meleeDamageDieQuantity", meleeDamageDieSize="$meleeDamageDieSize", rangedEnabled="$rangedEnabled", rangedDamageDieQuantity="$rangedDamageDieQuantity", rangedDamageDieSize="$rangedDamageDieSize", versatileEnabled="$versatileEnabled", versatileDamageDieQuantity="$versatileDamageDieQuantity", versatileDamageDieSize="$versatileDamageDieSize", generatedText="$generatedText", renderedText="$renderedText"}',
+    ({name, isFinesse, reach, normalRange, longRange, damageType, meleeEnabled, meleeDamageDieQuantity, meleeDamageDieSize, rangedEnabled, rangedDamageDieQuantity, rangedDamageDieSize, versatileEnabled, versatileDamageDieQuantity, versatileDamageDieSize, generatedText, renderedText}) => {
       const attackModel = new Attack();
-      attackModel.weaponName = weaponName;
+      attackModel.name = name;
       attackModel.isFinesse = isFinesse;
       attackModel.reach = nullIfEmptyString(reach);
       attackModel.normalRange = nullIfEmptyString(normalRange);
@@ -439,18 +439,18 @@ describe('when the generate attack dialog is opened', () => {
       }
       challengeRatingModel.proficiencyBonus = 2;
 
-      inputValueAndTriggerEvent(generateAttackDialog.weaponNameInput, weaponName);
+      inputValueAndTriggerEvent(generateAttackDialog.weaponNameInput, name);
 
       verifyDialogModel(attackModel);
       verifyDialogControls(attackModel, generatedText, renderedText);
-      saveDialogAndVerifyActionBlocks(attackModel.weaponName, generatedText, renderedText);
+      saveDialogAndVerifyActionBlocks(attackModel.name, generatedText, renderedText);
     });
     /* eslint-enable indent, no-unexpected-multiline */
   });
 });
 
 function setDialogControls(attackModel) {
-  inputValueAndTriggerEvent(generateAttackDialog.weaponNameInput, attackModel.weaponName);
+  inputValueAndTriggerEvent(generateAttackDialog.weaponNameInput, attackModel.name);
 
   if (attackModel.isFinesse) {
     generateAttackDialog.finesseInput.click();
@@ -486,7 +486,7 @@ function setDamageCategoryControls(categoryKey, categoryModel) {
 function verifyDialogModel(expectedModel) {
   const attackModel = generateAttackDialog.attackModel;
 
-  expect(attackModel.weaponName).toBe(expectedModel.weaponName);
+  expect(attackModel.name).toBe(expectedModel.name);
   expect(attackModel.isFinesse).toBe(expectedModel.isFinesse);
 
   for (const [categoryKey, expectedCategoryModel] of Object.entries(expectedModel.damageCategories)) {
@@ -502,7 +502,7 @@ function verifyDialogModel(expectedModel) {
 }
 
 function verifyDialogControls(expectedModel, expectedGeneratedText, expectedRenderedText) {
-  expect(generateAttackDialog.weaponNameInput.value).toBe(expectedModel.weaponName);
+  expect(generateAttackDialog.weaponNameInput.value).toBe(expectedModel.name);
   expect(generateAttackDialog.finesseInput.checked).toBe(expectedModel.isFinesse);
 
   if (expectedModel.damageCategories['melee'].isEnabled) {
@@ -570,17 +570,17 @@ function verifyDialogControlsResetToDefaults() {
   verifyDialogControls(new Attack(), expectedGeneratedText, expectedRenderedText);
 }
 
-function saveDialogAndVerifyActionBlocks(weaponName, expectedGeneratedText, expectedRenderedText) {
+function saveDialogAndVerifyActionBlocks(name, expectedGeneratedText, expectedRenderedText) {
   generateAttackDialog.generateAttackButton.click();
 
   const editableBlock = actionsSection.editElements.editableBlockList.blocks[0];
-  expect(editableBlock.name).toBe(weaponName);
+  expect(editableBlock.name).toBe(name);
   expect(editableBlock.text).toBe(expectedGeneratedText);
   expect(editableBlock.previewText).toBe(expectedRenderedText);
 
   actionsSection.editElements.submitForm();
 
   const displayBlock = actionsSection.showElements.displayBlockList.blocks[0];
-  expect(displayBlock.name).toBe(weaponName);
+  expect(displayBlock.name).toBe(name);
   expect(displayBlock.text).toBe(expectedRenderedText);
 }

@@ -10,7 +10,7 @@ export default class Attack {
   }
 
   reset(isMeleeEnabled = true) {
-    this.weaponName = '';
+    this.name = '';
     this.isFinesse = false;
 
     this._reach = 5;
@@ -26,7 +26,7 @@ export default class Attack {
   }
 
   populateFromJsObject(jsObject) {
-    if (jsObject.weaponName) { this.weaponName = jsObject.weaponName; }
+    if (jsObject.name) { this.name = jsObject.name; }
     if (jsObject.isFinesse) { this.isFinesse = jsObject.isFinesse; }
 
     if (jsObject.reach) { this.reach = jsObject.reach; }
