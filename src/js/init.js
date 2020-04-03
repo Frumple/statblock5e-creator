@@ -86,7 +86,7 @@ async function init() {
   await waitForBodyLoaded();
 
   statBlockEditor.classList.remove('stat-block-editor_hidden');
-  loadingScreen.isVisible = false;
+  loadingScreen.visible = false;
 }
 
 async function getVersion() {

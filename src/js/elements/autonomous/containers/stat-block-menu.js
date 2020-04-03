@@ -33,8 +33,10 @@ export default class StatBlockMenu extends CustomAutonomousElement {
 
     this.printButton = this.shadowRoot.getElementById('print-button');
 
-    this.githubButton = this.shadowRoot.getElementById('github-button');
+    this.gettingStartedButton = this.shadowRoot.getElementById('getting-started-button');
     this.wikiButton = this.shadowRoot.getElementById('wiki-button');
+
+    this.githubButton = this.shadowRoot.getElementById('github-button');
     this.versionButton = this.shadowRoot.getElementById('version-button');
   }
 
@@ -63,8 +65,10 @@ export default class StatBlockMenu extends CustomAutonomousElement {
 
       this.printButton.addEventListener('click', this.onClickPrintButton.bind(this));
 
-      this.githubButton.addEventListener('click', this.onClickGithubButton.bind(this));
+      this.gettingStartedButton.addEventListener('click', this.onClickGettingStartedButton.bind(this));
       this.wikiButton.addEventListener('click', this.onClickWikiButton.bind(this));
+
+      this.githubButton.addEventListener('click', this.onClickGithubButton.bind(this));
       this.versionButton.addEventListener('click', this.onClickVersionButton.bind(this));
 
       this.versionButton.textContent = `Version: ${CurrentContext.version}`;
@@ -129,12 +133,16 @@ export default class StatBlockMenu extends CustomAutonomousElement {
     this.dispatchMenuEvent('printAction');
   }
 
-  onClickGithubButton() {
-    window.open('https://github.com/Frumple/statblock5e-creator');
+  onClickGettingStartedButton() {
+    this.dispatchMenuEvent('toggleGettingStartedAction');
   }
 
   onClickWikiButton() {
     window.open('https://github.com/Frumple/statblock5e-creator/wiki');
+  }
+
+  onClickGithubButton() {
+    window.open('https://github.com/Frumple/statblock5e-creator');
   }
 
   onClickVersionButton() {

@@ -3,26 +3,26 @@
 
 <link href='src/css/elements/autonomous/getting-started-help-box.css' rel='stylesheet' type='text/css'>
 
-<div class="getting-started-help-box">
+<div id="container" class="getting-started-help-box">
   <h3>Getting Started with Statblock5e Creator</h2>
+  <button id="close-button" class="getting-started-help-box__close-button"><i class="material-icons">close</i></button>
 
-  <p>Start from the default Commoner template, or use the <strong>Import</strong> menu to import a creature from the 5th Edition SRD or <a href="https://open5e.com/monsters/monster-list" target="_blank">Open5e</a>.</p>
+  <p>Start with the default Commoner template, or use the <strong>Import</strong> menu to import a creature from the 5th Edition SRD or <a href="https://open5e.com/monsters/monster-list" target="_blank">Open5e</a>.</p>
   <p>Click any section to start editing. To save your changes, click the [<i class="material-icons material-icons__align-middle">done</i>] button to the right. Pressing the <strong>Enter key</strong> on most fields will also save the section.</p>
-  <p>Some fields, when changed, will automatically update other parts of the statblock:</p>
+  <p>Some fields will automatically update other parts of the statblock when changed. For example, changing ability scores will affect hit points, saving throws, skills, passive perception, and math expressions.</p>
+
+  <p>Use the <strong>Export</strong> menu to export your statblock to the following formats:</p>
   <ul>
-    <li>Creature Name, Short Name, Proper Noun => Name Expressions</li>
-    <li>Creature Size => Hit Die Size in Hit Points</li>
-    <li>Ability Scores => CON HP in Hit Points, Saving Throws, Skills, Passive Perception in Senses, Math Expressions</li>
-    <li>Perception Skill => Passive Perception in Senses</li>
-    <li>Challenge Rating and Proficiency Bonus => Math Expressions</li>
+    <li><strong>JSON</strong>, which can be re-imported back at a later time.</li>
+    <li><strong>HTML</strong>, based on the original <a href="https://github.com/Valloric/statblock5e" target="_blank">statblock5e</a> template.</li>
+    <li><strong>Markdown</strong>, for use in other homebrew content tools.</li>
   </ul>
-  <p>Use the <strong>Export</strong> menu to export your statblock to JSON to be re-imported back later, or to an HTML document or Markdown format.</p>
 
   <h3>Advanced Syntax for Special Traits, Actions, Reactions, and Legendary Actions</h1>
 
   <h4><a href="https://github.com/Frumple/statblock5e-creator/wiki/Name-Expressions" target="_blank">Name Expressions</a></h2>
   <ul>
-    <li><strong><code>[name]</code></strong> - Shows the creature's full name, or short name if available.<br /><br />If the creature's name is NOT a proper noun, the word "the" will precede the name.<br /><br />For example, given these conditions:
+    <li><strong><code>[name]</code></strong> - Shows the creature's full name, or short name if defined.<br /><br />If the creature's name is NOT a proper noun, the word "the" will precede the name.<br /><br />For example, given these conditions:
       <ul>
         <li>Full Name = "Adult Red Dragon",</li>
         <li>Short Name = "dragon",</li>
@@ -43,15 +43,15 @@
   <table>
     <tr>
       <td><em>Italic:</em></td>
-      <td><code>*single asterisks* or _single underscores_</code></td>
+      <td><code>*single asterisks*</h3></code> or <code>_single underscores_</code></td>
     </tr>
     <tr>
       <td><strong>Bold:</strong></td>
-      <td><code>**double asterisks** or __double underscores__</code></td>
+      <td><code>**double asterisks**</code> or <code>__double underscores__</code></td>
     </tr>
     <tr>
       <td><strong><em>Combined:</em></strong></td>
-      <td><code>__*asterisks* in underscores__ or **vice _versa_**</code></td>
+      <td><code>__*asterisks* in underscores__</code> or <code>**vice _versa_**</code></td>
     </tr>
   </table>
 </div>

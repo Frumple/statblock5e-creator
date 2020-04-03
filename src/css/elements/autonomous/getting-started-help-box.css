@@ -1,4 +1,5 @@
 .getting-started-help-box {
+  position: relative;
   background: #eeeeee;
   color: black;
   border: 1px solid black;
@@ -7,6 +8,24 @@
   margin-top: 60px;
   margin-left: 5px;
   padding: 5px;
+}
+
+.getting-started-help-box_hidden {
+  display: none;
+}
+
+.getting-started-help-box__close-button {
+  position: absolute;
+  top: 0px;
+  right: 0px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background: transparent;
+  color: black;
+  border: none;
+  padding: 0.5em;
+  cursor: pointer;
 }
 
 .getting-started-help-box h3:first-child {

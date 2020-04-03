@@ -25,6 +25,8 @@ export default class StatBlock extends CustomAutonomousElement {
       this.topStats = document.querySelector('top-stats');
       this.bottomStats = document.querySelector('bottom-stats');
     }
+
+    this.gettingStartedHelpBox = this.shadowRoot.getElementById('getting-started-help-box');
   }
 
   connectedCallback() {
@@ -100,6 +102,10 @@ export default class StatBlock extends CustomAutonomousElement {
     this.headingStats.setEmptyVisibility(visibility);
     this.topStats.setEmptyVisibility(visibility);
     this.bottomStats.setEmptyVisibility(visibility);
+  }
+
+  toggleGettingStartedHelpBox() {
+    this.gettingStartedHelpBox.toggleVisibility();
   }
 
   edit() {

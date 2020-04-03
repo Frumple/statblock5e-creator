@@ -17,7 +17,7 @@ export default class LoadingScreen extends CustomAutonomousElement {
     this.statusElement = this.shadowRoot.getElementById('status');
   }
 
-  set isVisible(isVisible) {
+  set visible(isVisible) {
     if(isVisible) {
       this.container.classList.remove(hiddenClass);
     } else {
@@ -25,7 +25,7 @@ export default class LoadingScreen extends CustomAutonomousElement {
     }
   }
 
-  get isVisible() {
+  get visible() {
     return ! this.container.classList.contains(hiddenClass);
   }
 

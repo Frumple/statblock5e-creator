@@ -75,6 +75,7 @@ export default class StatBlockEditor extends CustomAutonomousElement {
       this.addEventListener('importAction', this.onImportAction.bind(this));
       this.addEventListener('exportAction', this.onExportAction.bind(this));
       this.addEventListener('printAction', this.onPrintAction.bind(this));
+      this.addEventListener('toggleGettingStartedAction', this.onToggleGettingStartedAction.bind(this));
 
       this.addEventListener('sectionSaved', this.onSectionSaved.bind(this));
 
@@ -176,6 +177,10 @@ export default class StatBlockEditor extends CustomAutonomousElement {
   onPrintAction() {
     const content = this.exportToHtml(CurrentContext.creature.title.fullName);
     printHtml(content);
+  }
+
+  onToggleGettingStartedAction() {
+    this.statBlock.toggleGettingStartedHelpBox();
   }
 
   onSectionSaved() {

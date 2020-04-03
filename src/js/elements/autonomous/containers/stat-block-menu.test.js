@@ -71,3 +71,12 @@ it('should dispatch an event when the "Save All Sections" button is clicked', ()
   expect(event).not.toBeNull();
   expect(event.detail.action).toBe('save');
 });
+
+it('should dispatch an event when the "Getting Started" help menu option is clicked', () => {
+  const eventInterceptor = new EventInterceptor(statBlockMenu, 'toggleGettingStartedAction');
+
+  statBlockMenu.gettingStartedButton.click();
+
+  const event = eventInterceptor.popEvent();
+  expect(event).not.toBeNull();
+});
