@@ -13,6 +13,7 @@ import TextInput from './elements/builtin/text-input.js';
 
 import DropDownMenu from './elements/autonomous/drop-down-menu.js';
 import ErrorMessages from './elements/autonomous/error-messages.js';
+import GettingStartedHelpBox from './elements/autonomous/getting-started-help-box.js';
 import LoadingScreen from './elements/autonomous/loading-screen.js';
 import PropertyBlock from './elements/autonomous/property-block.js';
 import PropertyLine from './elements/autonomous/property-line.js';
@@ -28,7 +29,6 @@ import ExportDialog from './elements/autonomous/dialogs/export-dialog.js';
 import GenerateAttackDialog from './elements/autonomous/dialogs/generate-attack-dialog.js';
 
 import HelpTooltip from './elements/autonomous/tooltips/help-tooltip.js';
-import BlockHelpTooltip from './elements/autonomous/tooltips/block-help-tooltip.js';
 import CustomTextHelpTooltip from './elements/autonomous/tooltips/custom-text-help-tooltip.js';
 
 import DisplayBlockList from './elements/autonomous/lists/display-block-list.js';
@@ -109,6 +109,7 @@ async function defineElements() {
 
     DropDownMenu,
     ErrorMessages,
+    GettingStartedHelpBox,
     LoadingScreen,
     PropertyBlock,
     PropertyLine,
@@ -124,7 +125,6 @@ async function defineElements() {
     GenerateAttackDialog,
 
     HelpTooltip,
-    BlockHelpTooltip,
     CustomTextHelpTooltip,
 
     DisplayBlockList,
