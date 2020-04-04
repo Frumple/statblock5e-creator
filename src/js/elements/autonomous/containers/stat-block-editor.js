@@ -75,7 +75,7 @@ export default class StatBlockEditor extends CustomAutonomousElement {
       this.addEventListener('importAction', this.onImportAction.bind(this));
       this.addEventListener('exportAction', this.onExportAction.bind(this));
       this.addEventListener('printAction', this.onPrintAction.bind(this));
-      this.addEventListener('toggleGettingStartedAction', this.onToggleGettingStartedAction.bind(this));
+      this.addEventListener('toggleGettingStarted', this.onToggleGettingStarted.bind(this));
 
       this.addEventListener('sectionSaved', this.onSectionSaved.bind(this));
 
@@ -100,7 +100,7 @@ export default class StatBlockEditor extends CustomAutonomousElement {
     }
 
     this.statBlock.setColumns(columns);
-    this.saveToLocalStorage();
+    this.saveJsonToLocalStorage();
   }
 
   onTwoColumnHeightChanged(event) {
@@ -112,7 +112,7 @@ export default class StatBlockEditor extends CustomAutonomousElement {
     layoutSettings.twoColumnHeight = height;
 
     this.statBlock.setColumnHeight(mode, height);
-    this.saveToLocalStorage();
+    this.saveJsonToLocalStorage();
   }
 
   onEmptySectionsVisibilityChanged(event) {
@@ -122,7 +122,7 @@ export default class StatBlockEditor extends CustomAutonomousElement {
     layoutSettings.emptySectionsVisibility = visibility;
 
     this.statBlock.setEmptyVisibility(visibility);
-    this.saveToLocalStorage();
+    this.saveJsonToLocalStorage();
   }
 
   onAllSectionsAction(event) {
@@ -179,12 +179,16 @@ export default class StatBlockEditor extends CustomAutonomousElement {
     printHtml(content);
   }
 
-  onToggleGettingStartedAction() {
-    this.statBlock.toggleGettingStartedHelpBox();
+  onToggleGettingStarted() {
+    const localSettings = CurrentContext.localSettings;
+
+    localSettings.gettingStartedVisibility = ! localSettings.gettingStartedVisibility;
+    this.saveLocalSettingsToLocalStorage();
+    this.statBlock.setGettingStartedVisibility(localSettings.gettingStartedVisibility);
   }
 
   onSectionSaved() {
-    this.saveToLocalStorage();
+    this.saveJsonToLocalStorage();
   }
 
   openResetDialog() {
@@ -218,8 +222,8 @@ export default class StatBlockEditor extends CustomAutonomousElement {
     this.exportMarkdownDialog.launch(content, 'text/markdown', `${CurrentContext.creature.title.fullName}.md`);
   }
 
-  loadFromLocalStorage() {
-    const jsonString = LocalStorageProxy.load();
+  loadJsonFromLocalStorage() {
+    const jsonString = LocalStorageProxy.loadJson();
 
     if (jsonString !== null) {
       const json = JSON.parse(jsonString);
@@ -230,14 +234,30 @@ export default class StatBlockEditor extends CustomAutonomousElement {
     }
   }
 
-  saveToLocalStorage() {
+  saveJsonToLocalStorage() {
     const jsonString = this.exportToJson();
-    LocalStorageProxy.save(jsonString);
+    LocalStorageProxy.saveJson(jsonString);
+  }
+
+  loadLocalSettingsFromLocalStorage() {
+    const localSettingsString = LocalStorageProxy.loadLocalSettings();
+
+    if (localSettingsString !== null) {
+      const localSettings = JSON.parse(localSettingsString);
+
+      Object.assign(CurrentContext.localSettings, localSettings);
+      this.statBlock.setGettingStartedVisibility(localSettings.gettingStartedVisibility);
+    }
+  }
+
+  saveLocalSettingsToLocalStorage() {
+    const localSettingsString = JSON.stringify(CurrentContext.localSettings);
+    LocalStorageProxy.saveLocalSettings(localSettingsString);
   }
 
   reset() {
     CurrentContext.reset();
-    LocalStorageProxy.clear();
+    LocalStorageProxy.clearJson();
 
     this.statBlockMenu.updateControls();
     this.statBlockSidebar.updateControls();
@@ -247,7 +267,7 @@ export default class StatBlockEditor extends CustomAutonomousElement {
   importFromOpen5e(json) {
     this.statBlock.importFromOpen5e(json);
 
-    this.saveToLocalStorage();
+    this.saveJsonToLocalStorage();
   }
 
   importFromJson(json) {
@@ -257,7 +277,7 @@ export default class StatBlockEditor extends CustomAutonomousElement {
     this.statBlockMenu.updateControls();
     this.statBlockSidebar.updateControls();
 
-    this.saveToLocalStorage();
+    this.saveJsonToLocalStorage();
   }
 
   exportToJson() {

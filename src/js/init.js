@@ -80,7 +80,8 @@ async function init() {
   await HtmlExportDocumentFactory.init();
 
   loadingScreen.status = 'Loading last saved state from local storage...';
-  statBlockEditor.loadFromLocalStorage();
+  statBlockEditor.loadJsonFromLocalStorage();
+  statBlockEditor.loadLocalSettingsFromLocalStorage();
 
   loadingScreen.status = 'Waiting for elements to load...';
   await waitForBodyLoaded();

@@ -1,18 +1,31 @@
 class LocalStorageProxy {
   constructor() {
-    this.localStorageKey = 'json';
+    this.jsonKey = 'json';
+    this.localSettingsKey = 'localSettings';
   }
 
-  save(json) {
-    localStorage.setItem(this.localStorageKey, json);
+  loadJson() {
+    return localStorage.getItem(this.jsonKey);
   }
 
-  load() {
-    return localStorage.getItem(this.localStorageKey);
+  saveJson(json) {
+    localStorage.setItem(this.jsonKey, json);
   }
 
-  clear() {
-    localStorage.removeItem(this.localStorageKey);
+  clearJson() {
+    localStorage.removeItem(this.jsonKey);
+  }
+
+  loadLocalSettings() {
+    return localStorage.getItem(this.localSettingsKey);
+  }
+
+  saveLocalSettings(localSettings) {
+    localStorage.setItem(this.localSettingsKey, localSettings);
+  }
+
+  clearLocalSettings() {
+    localStorage.removeItem(this.localSettingsKey);
   }
 }
 

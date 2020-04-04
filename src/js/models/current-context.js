@@ -1,5 +1,6 @@
 import Creature from './creature.js';
-import LayoutSettings from './layout-settings.js';
+import LayoutSettings from './settings/layout-settings.js';
+import LocalSettings from './settings/local-settings.js';
 
 class CurrentContext {
   constructor() {
@@ -7,6 +8,7 @@ class CurrentContext {
 
     this.creature = new Creature();
     this.layoutSettings = new LayoutSettings();
+    this.localSettings = new LocalSettings();
   }
 
   reset() {

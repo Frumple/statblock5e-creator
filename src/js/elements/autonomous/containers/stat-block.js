@@ -104,8 +104,8 @@ export default class StatBlock extends CustomAutonomousElement {
     this.bottomStats.setEmptyVisibility(visibility);
   }
 
-  toggleGettingStartedHelpBox() {
-    this.gettingStartedHelpBox.toggleVisibility();
+  setGettingStartedVisibility(visibility) {
+    this.gettingStartedHelpBox.visible = visibility;
   }
 
   edit() {

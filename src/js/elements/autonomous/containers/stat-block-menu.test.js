@@ -73,7 +73,7 @@ it('should dispatch an event when the "Save All Sections" button is clicked', ()
 });
 
 it('should dispatch an event when the "Getting Started" help menu option is clicked', () => {
-  const eventInterceptor = new EventInterceptor(statBlockMenu, 'toggleGettingStartedAction');
+  const eventInterceptor = new EventInterceptor(statBlockMenu, 'toggleGettingStarted');
 
   statBlockMenu.gettingStartedButton.click();
 

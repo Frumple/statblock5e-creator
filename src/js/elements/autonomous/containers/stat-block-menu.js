@@ -134,7 +134,7 @@ export default class StatBlockMenu extends CustomAutonomousElement {
   }
 
   onClickGettingStartedButton() {
-    this.dispatchMenuEvent('toggleGettingStartedAction');
+    this.dispatchMenuEvent('toggleGettingStarted');
   }
 
   onClickWikiButton() {

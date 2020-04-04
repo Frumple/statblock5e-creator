@@ -28,11 +28,11 @@ export default class GettingStartedHelpBox extends CustomAutonomousElement {
   }
 
   onClickCloseButton() {
-    this.visible = false;
-  }
-
-  toggleVisibility() {
-    this.visible = ! this.visible;
+    const event = new CustomEvent('toggleGettingStarted', {
+      bubbles: true,
+      composed: true
+    });
+    this.dispatchEvent(event);
   }
 
   set visible(isVisible) {
