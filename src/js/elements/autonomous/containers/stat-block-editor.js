@@ -228,7 +228,7 @@ export default class StatBlockEditor extends CustomAutonomousElement {
     if (jsonString !== null) {
       const json = JSON.parse(jsonString);
 
-      if (json.meta.version === CurrentContext.version) {
+      if (json.meta.version === CurrentContext.localSettings.version) {
         this.importFromJson(json);
       }
     }
@@ -245,8 +245,10 @@ export default class StatBlockEditor extends CustomAutonomousElement {
     if (localSettingsString !== null) {
       const localSettings = JSON.parse(localSettingsString);
 
-      Object.assign(CurrentContext.localSettings, localSettings);
-      this.statBlock.setGettingStartedVisibility(localSettings.gettingStartedVisibility);
+      if (localSettings.version === CurrentContext.localSettings.version) {
+        Object.assign(CurrentContext.localSettings, localSettings);
+        this.statBlock.setGettingStartedVisibility(localSettings.gettingStartedVisibility);
+      }
     }
   }
 
@@ -282,7 +284,7 @@ export default class StatBlockEditor extends CustomAutonomousElement {
 
   exportToJson() {
     const layoutSettings = CurrentContext.layoutSettings;
-    const version = CurrentContext.version;
+    const version = CurrentContext.localSettings.version;
     const json = this.statBlock.exportToJson();
 
     json.layout = layoutSettings.toJson();

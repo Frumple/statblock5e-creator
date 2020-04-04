@@ -71,7 +71,7 @@ export default class StatBlockMenu extends CustomAutonomousElement {
       this.githubButton.addEventListener('click', this.onClickGithubButton.bind(this));
       this.versionButton.addEventListener('click', this.onClickVersionButton.bind(this));
 
-      this.versionButton.textContent = `Version: ${CurrentContext.version}`;
+      this.versionButton.textContent = `Version: ${CurrentContext.localSettings.version}`;
 
       this.isInitialized = true;
     }

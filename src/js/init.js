@@ -69,7 +69,7 @@ import BasicStats from './elements/autonomous/containers/basic-stats.js';
 import AdvancedStats from './elements/autonomous/containers/advanced-stats.js';
 
 async function init() {
-  CurrentContext.version = await getVersion();
+  CurrentContext.localSettings.version = await getVersion();
 
   await defineElements();
 
@@ -79,8 +79,10 @@ async function init() {
   loadingScreen.status = 'Initializing HTML export template...';
   await HtmlExportDocumentFactory.init();
 
-  loadingScreen.status = 'Loading last saved state from local storage...';
+  loadingScreen.status = 'Loading JSON from local storage...';
   statBlockEditor.loadJsonFromLocalStorage();
+
+  loadingScreen.status = 'Loading local settings from local storage...';
   statBlockEditor.loadLocalSettingsFromLocalStorage();
 
   loadingScreen.status = 'Waiting for elements to load...';

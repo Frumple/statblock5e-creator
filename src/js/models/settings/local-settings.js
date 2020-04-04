@@ -2,6 +2,7 @@
 
 export default class LocalSettings {
   constructor() {
+    this.version = '0.0.0';
     this.gettingStartedVisibility = true;
   }
 }
