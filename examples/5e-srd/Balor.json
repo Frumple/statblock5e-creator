@@ -256,8 +256,7 @@
   "layout": {
     "columns": 1,
     "twoColumnMode": "auto",
-    "twoColumnHeight": 600,
-    "emptySectionsVisibility": true
+    "twoColumnHeight": 600
   },
   "meta": {
     "version": "1.0.0",

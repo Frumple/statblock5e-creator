@@ -56,8 +56,7 @@ describe('should import JSON', () => {
         layout: {
           columns: 2,
           twoColumnMode: 'manual',
-          twoColumnHeight: 700,
-          emptySectionsVisibility: false
+          twoColumnHeight: 700
         }
       };
 
@@ -74,7 +73,6 @@ describe('should import JSON', () => {
       expect(CurrentContext.layoutSettings.columns).toBe(json.layout.columns);
       expect(CurrentContext.layoutSettings.twoColumnMode).toBe(json.layout.twoColumnMode);
       expect(CurrentContext.layoutSettings.twoColumnHeight).toBe(json.layout.twoColumnHeight);
-      expect(CurrentContext.layoutSettings.emptySectionsVisibility).toBe(json.layout.emptySectionsVisibility);
       */
     });
   });

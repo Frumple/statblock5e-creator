@@ -158,7 +158,7 @@ export default class StatBlockMenu extends CustomAutonomousElement {
     this.dispatchEvent(menuEvent);
   }
 
-  updateControls() {
+  updateColumnControls() {
     const layoutSettings = CurrentContext.layoutSettings;
 
     if (layoutSettings.columns === 1) {
@@ -166,8 +166,12 @@ export default class StatBlockMenu extends CustomAutonomousElement {
     } else if (layoutSettings.columns === 2) {
       this.twoColumnButton.click();
     }
+  }
 
-    if (layoutSettings.emptySectionsVisibility) {
+  updateEmptySectionControls() {
+    const localSettings = CurrentContext.localSettings;
+
+    if (localSettings.emptySectionsVisibility) {
       this.showEmptySectionsButton.click();
     } else {
       this.hideEmptySectionsButton.click();

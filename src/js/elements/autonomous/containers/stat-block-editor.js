@@ -116,13 +116,13 @@ export default class StatBlockEditor extends CustomAutonomousElement {
   }
 
   onEmptySectionsVisibilityChanged(event) {
-    const layoutSettings = CurrentContext.layoutSettings;
+    const localSettings = CurrentContext.localSettings;
 
     const visibility = event.detail.visibility;
-    layoutSettings.emptySectionsVisibility = visibility;
+    localSettings.emptySectionsVisibility = visibility;
 
     this.statBlock.setEmptyVisibility(visibility);
-    this.saveJsonToLocalStorage();
+    this.saveLocalSettingsToLocalStorage();
   }
 
   onAllSectionsAction(event) {
@@ -247,6 +247,7 @@ export default class StatBlockEditor extends CustomAutonomousElement {
 
       if (localSettings.version === CurrentContext.localSettings.version) {
         Object.assign(CurrentContext.localSettings, localSettings);
+        this.statBlockMenu.updateEmptySectionControls();
         this.statBlock.setGettingStartedVisibility(localSettings.gettingStartedVisibility);
       }
     }
@@ -261,7 +262,8 @@ export default class StatBlockEditor extends CustomAutonomousElement {
     CurrentContext.reset();
     LocalStorageProxy.clearJson();
 
-    this.statBlockMenu.updateControls();
+    this.statBlockMenu.updateColumnControls();
+    this.statBlockMenu.updateEmptySectionControls();
     this.statBlockSidebar.updateControls();
     this.statBlock.updateView();
   }
@@ -276,7 +278,7 @@ export default class StatBlockEditor extends CustomAutonomousElement {
     CurrentContext.layoutSettings.fromJson(json.layout);
     this.statBlock.importFromJson(json);
 
-    this.statBlockMenu.updateControls();
+    this.statBlockMenu.updateColumnControls();
     this.statBlockSidebar.updateControls();
 
     this.saveJsonToLocalStorage();
