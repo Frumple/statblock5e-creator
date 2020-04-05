@@ -311,7 +311,11 @@ export default class StatBlockEditor extends CustomAutonomousElement {
 
     const doctype = '<!DOCTYPE html>';
     const content = `${doctype}${exportDocument.documentElement.outerHTML}`;
-    const beautified_content = html_beautify(content, { indent_size: 2 });
+
+    const beautified_content = html_beautify(content, {
+      indent_size: 2,
+      content_unformatted: 'p'
+    });
 
     return beautified_content;
   }
