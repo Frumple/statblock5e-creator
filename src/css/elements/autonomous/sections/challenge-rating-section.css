@@ -35,6 +35,7 @@
 
 .challenge-rating-edit-section__challenge-rating-help-tooltip {
   grid-area: 2 / 1;
+  justify-self: start;
   --help-tooltip-icon-color: #7A200D;
   --help-tooltip-width: 40em;
 }
