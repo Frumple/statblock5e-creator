@@ -1,10 +1,12 @@
 import BlockListModel from './block-list-model.js';
+import LegendaryBlockModel from './legendary-block-model.js';
 
 export default class LegendaryActions extends BlockListModel {
   constructor() {
     super('Legendary Actions',
           'Legendary Action',
-          'legendary_actions');
+          'legendary_actions',
+          LegendaryBlockModel);
   }
 
   reset() {
@@ -44,7 +46,7 @@ export default class LegendaryActions extends BlockListModel {
   toHtml() {
     const fragment = super.toHtml();
 
-    const firstBlockElement = fragment.querySelector('property-block');
+    const firstBlockElement = fragment.querySelector('legendary-property-block');
 
     const descriptionElement = document.createElement('p');
     descriptionElement.innerHTML = this.htmlDescription;

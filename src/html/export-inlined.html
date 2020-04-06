@@ -9,7 +9,7 @@
     body {
       margin: 0;
     }
-    
+
     stat-block {
       /* A bit of margin for presentation purposes, to show off the drop
       shadow. */
@@ -45,11 +45,11 @@
         position: relative;
         z-index: 1;
       }
-      
+
       :host {
         display: inline-block;
       }
-      
+
       #content-wrap {
         font-family: 'Noto Sans', 'Myriad Pro', Calibri, Helvetica, Arial,
                       sans-serif;
@@ -59,40 +59,40 @@
         padding-bottom: 0.5em;
         border: 1px #DDD solid;
         box-shadow: 0 0 1.5em #867453;
-      
+
         /* We don't want the box-shadow in front of the bar divs. */
         position: relative;
         z-index: 0;
-      
+
         /* Leaving room for the two bars to protrude outwards */
         margin-left: 2px;
         margin-right: 2px;
-      
+
         /* This is possibly overriden by next CSS rule. */
         width: 400px;
-      
+
         -webkit-columns: 400px;
            -moz-columns: 400px;
                 columns: 400px;
         -webkit-column-gap: 40px;
            -moz-column-gap: 40px;
                 column-gap: 40px;
-      
+
         /* We can't use CSS3 attr() here because no browser currently supports it,
            but we can use a CSS custom property instead. */
         height: var(--data-content-height);
-      
+
         /* When height is constrained, we want sequential filling of columns. */
         -webkit-column-fill: auto;
            -moz-column-fill: auto;
                 column-fill: auto;
       }
-      
+
       :host([data-two-column]) #content-wrap {
         /* One column is 400px and the gap between them is 40px. */
         width: 840px;
       }
-      
+
       ::slotted(h3) {
         border-bottom: 1px solid #7A200D;
         color: #7A200D;
@@ -102,18 +102,18 @@
         letter-spacing: 1px;
         margin: 0;
         margin-bottom: 0.3em;
-      
+
         break-inside: avoid-column;
         break-after: avoid-column;
       }
-      
+
       /* For user-level p elems. */
       ::slotted(p) {
         margin-top: 0.3em;
         margin-bottom: 0.9em;
         line-height: 1.5;
       }
-      
+
       /* Last child shouldn't have bottom margin, too much white space. */
       ::slotted(*:last-child) {
         margin-bottom: 0;
@@ -145,7 +145,7 @@
         letter-spacing: 1px;
         font-variant: small-caps;
       }
-      
+
       ::slotted(h2) {
         font-weight: normal;
         font-style: italic;
@@ -237,7 +237,7 @@
       let score = parseInt(abilityScore, 10);
       return Math.floor((score - 10) / 2);
     }
-    
+
     function formattedModifier(abilityModifier) {
       if (abilityModifier >= 0) {
         return '+' + abilityModifier;
@@ -246,14 +246,14 @@
       // visible.
       return '–' + Math.abs(abilityModifier);
     }
-    
+
     function abilityText(abilityScore) {
       return [String(abilityScore),
               ' (',
               formattedModifier(abilityModifier(abilityScore)),
               ')'].join('');
     }
-    
+
     function elementClass(contentNode) {
       return class extends HTMLElement {
         constructor() {
@@ -272,7 +272,7 @@
         }
       }
     }
-    
+
       let templateElement = document.getElementById('abilities-block');
       createCustomElement('abilities-block', templateElement.content, elementClass);
     }
@@ -285,18 +285,18 @@
         text-indent: -1em;
         padding-left: 1em;
       }
-      
+
       ::slotted(h4) {
         margin: 0;
         display: inline;
         font-weight: bold;
       }
-      
+
       ::slotted(p:first-of-type) {
         display: inline;
         text-indent: 0;
       }
-      
+
       ::slotted(p) {
         text-indent: 1em;
         margin: 0;
@@ -318,20 +318,20 @@
         line-height: 1.5;
         display: block;
       }
-      
+
       ::slotted(h4) {
         margin: 0;
         display: inline;
         font-weight: bold;
         font-style: italic;
       }
-      
+
       ::slotted(p:first-of-type) {
         display: inline;
         text-indent: 0;
         white-space: pre-wrap;
       }
-      
+
       ::slotted(p) {
         text-indent: 1em;
         margin: 0;
@@ -343,6 +343,40 @@
     {
       let templateElement = document.getElementById('property-block');
       createCustomElement('property-block', templateElement.content);
+    }
+  </script>
+  <template id="legendary-property-block">
+    <style>
+      :host {
+        margin-top: 0;
+        margin-bottom: 0;
+        line-height: 1.5;
+        display: block;
+      }
+
+      ::slotted(h4) {
+        margin: 0;
+        display: inline;
+        font-weight: bold;
+      }
+
+      ::slotted(p:first-of-type) {
+        display: inline;
+        text-indent: 0;
+        white-space: pre-wrap;
+      }
+
+      ::slotted(p) {
+        text-indent: 1em;
+        margin: 0;
+      }
+    </style>
+    <slot></slot>
+  </template>
+  <script>
+    {
+      let templateElement = document.getElementById('legendary-property-block');
+      createCustomElement('legendary-property-block', templateElement.content);
     }
   </script>
 </body>

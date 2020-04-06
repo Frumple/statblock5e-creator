@@ -1,6 +1,7 @@
 import DragAndDropListItem from './drag-and-drop-list-item.js';
 import CustomBuiltinElementMixins from '../../../helpers/custom-builtin-element-mixins.js';
 import BlockModel from '../../../models/lists/block/block-model.js';
+import LegendaryBlockModel from '../../../models/lists/block/legendary-block-model.js';
 
 import { trimTrailingPeriods } from '../../../helpers/string-formatter.js';
 
@@ -23,6 +24,8 @@ export default class EditableBlock extends DragAndDropListItem {
     this.removeButton = this.shadowRoot.getElementById('editable-block-remove-button');
 
     this.dragImage = this.nameInput;
+
+    this.isLegendaryActionBlock = false;
 
     CustomBuiltinElementMixins.applyToElement(this.nameInput);
     CustomBuiltinElementMixins.applyToElement(this.textArea);
@@ -54,7 +57,10 @@ export default class EditableBlock extends DragAndDropListItem {
     this.remove();
   }
 
-  applyLegendaryActionStyles() {
+  // TODO: Refactor legendary action behaviour into subclass instead
+  convertToLegendaryActionBlock() {
+    this.isLegendaryActionBlock = true;
+
     this.previewContainer.classList.add('editable-block__preview_hanging-indent');
     this.nameInput.classList.add('editable-block__name_no-italic');
     this.namePreviewElement.classList.add('editable-block__name-preview_no-italic');
@@ -114,7 +120,10 @@ export default class EditableBlock extends DragAndDropListItem {
   }
 
   toModel() {
-    return new BlockModel(
+    // TODO: Refactor legendary action behaviour into subclass instead
+    const blockModel = this.isLegendaryActionBlock ? LegendaryBlockModel : BlockModel;
+
+    return new blockModel(
       this.name,
       this.text,
       this.markdownText,

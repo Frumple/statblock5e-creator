@@ -33,6 +33,7 @@ beforeEach(() => {
   legendaryActionsSection.connect();
 
   sharedSpecs = new BlockListSectionSpecs(legendaryActionsSection, legendaryActionsModel, headingName, open5eJsonKey);
+  sharedSpecs.htmlExportPropertyBlockTag = 'LEGENDARY-PROPERTY-BLOCK';
 });
 
 it('section should have default blocks', () => {

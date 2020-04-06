@@ -1,8 +1,8 @@
 import DragAndDropList from './drag-and-drop-list.js';
-import { focusAndSelectElement } from '../../../helpers/element-helpers.js';
-
-import isRunningInJsdom from '../../../helpers/is-running-in-jsdom.js';
 import EditableBlock from './editable-block.js';
+
+import { focusAndSelectElement } from '../../../helpers/element-helpers.js';
+import isRunningInJsdom from '../../../helpers/is-running-in-jsdom.js';
 
 export default class EditableBlockList extends DragAndDropList {
   static get elementName() { return 'editable-block-list'; }
@@ -15,8 +15,8 @@ export default class EditableBlockList extends DragAndDropList {
   constructor() {
     super(EditableBlockList.templatePaths);
 
-    this.isLegendaryActionBlock = false;
-    this.blockType = null;
+    this.singleName = null;
+    this.isLegendaryActionList = false;
   }
 
   get blocks() {
@@ -30,10 +30,11 @@ export default class EditableBlockList extends DragAndDropList {
   }
 
   addBlock(name = '', text = '') {
-    const block = EditableBlockList.createBlock(this, name, text);
+    const block = this.createBlock(name, text);
 
-    if (this.isLegendaryActionBlock) {
-      block.applyLegendaryActionStyles();
+    // TODO: Refactor legendary action behaviour into subclass instead
+    if (this.isLegendaryActionList) {
+      block.convertToLegendaryActionBlock();
     }
 
     if (isRunningInJsdom) {
@@ -43,6 +44,19 @@ export default class EditableBlockList extends DragAndDropList {
     this.appendChild(block);
 
     focusAndSelectElement(block.nameInput);
+
+    return block;
+  }
+
+  createBlock(name, text) {
+    const block = isRunningInJsdom ? new EditableBlock() : document.createElement('editable-block');
+
+    block.list = this;
+    block.name = name;
+    block.text = text;
+
+    block.nameInput.setAttribute('pretty-name', `${this.singleName} Name`);
+    block.textArea.setAttribute('pretty-name', `${this.singleName} Text`);
 
     return block;
   }
@@ -61,18 +75,5 @@ export default class EditableBlockList extends DragAndDropList {
 
   toModel() {
     return this.blocks.map(block => block.toModel());
-  }
-
-  static createBlock(list, name, text) {
-    const block = isRunningInJsdom ? new EditableBlock() : document.createElement('editable-block');
-
-    block.list = list;
-    block.name = name;
-    block.text = text;
-
-    block.nameInput.setAttribute('pretty-name', `${list.blockType} Name`);
-    block.textArea.setAttribute('pretty-name', `${list.blockType} Text`);
-
-    return block;
   }
 }

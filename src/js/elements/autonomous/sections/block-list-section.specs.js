@@ -7,6 +7,8 @@ export default class BlockListSectionSpecs {
     this.listModel = listModel;
     this.headingName = headingName;
     this.open5eJsonKey = open5eJsonKey;
+
+    this.htmlExportPropertyBlockTag = 'PROPERTY-BLOCK';
   }
 
   sectionShouldHaveDefaultBlocks(expectedBlocks = []) {
@@ -301,7 +303,7 @@ export default class BlockListSectionSpecs {
     }
 
     return Array.from(children)
-      .filter(element => element.tagName === 'PROPERTY-BLOCK');
+      .filter(element => element.tagName === this.htmlExportPropertyBlockTag);
   }
 
   reset() {
@@ -375,7 +377,8 @@ export default class BlockListSectionSpecs {
       const htmlExportBlock = htmlExportBlocks[index];
       expect(htmlExportBlock).toBeHtmlPropertyBlock(
         `${expectedBlock.name}.`,
-        (expectedBlock.htmlText ? expectedBlock.htmlText : expectedBlock.text));
+        (expectedBlock.htmlText ? expectedBlock.htmlText : expectedBlock.text),
+        this.htmlExportPropertyBlockTag);
     }
   }
 

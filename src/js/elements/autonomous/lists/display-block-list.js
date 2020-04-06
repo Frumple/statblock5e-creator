@@ -14,7 +14,7 @@ export default class DisplayBlockList extends CustomAutonomousElement {
   constructor() {
     super(DisplayBlockList.templatePaths);
 
-    this.isLegendaryActionBlock = false;
+    this.isLegendaryActionList = false;
   }
 
   get blocks() {
@@ -30,7 +30,8 @@ export default class DisplayBlockList extends CustomAutonomousElement {
   addBlock(name, text) {
     const block = DisplayBlockList.createBlock(name, text);
 
-    if (this.isLegendaryActionBlock) {
+    // TODO: Refactor legendary action behaviour into subclass instead
+    if (this.isLegendaryActionList) {
       block.applyLegendaryActionStyles();
     }
 
