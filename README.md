@@ -29,7 +29,6 @@ A web application for creating creature statblocks that are similar in appearanc
 
 ## Future Improvements
 
-- Use Offline/Local Storage to reload last saved statblock
 - Generate Spellcasting Dialog (currently disabled under Special Traits)
 - Buttons to toggle bold/italic text and add expressions to Special Trait/Action/Reaction/Legendary Action descriptions
 - Autofill common Special Traits and Actions
