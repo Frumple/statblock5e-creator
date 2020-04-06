@@ -125,13 +125,14 @@ export class Section extends CustomAutonomousElement {
     this.updateModel();
     this.updateShowModeView();
 
-    if (this.empty && ! CurrentContext.layoutSettings.emptySectionsVisibility) {
+    if (this.empty && ! CurrentContext.localSettings.emptySectionsVisibility) {
       this.mode = 'hidden';
     } else {
       this.mode = 'show';
     }
 
     this.dispatchModeChangedEvent();
+    this.dispatchSectionSavedEvent();
   }
 
   checkForErrors() {
@@ -167,16 +168,24 @@ export class Section extends CustomAutonomousElement {
     this.dispatchEvent(changeEvent);
   }
 
+  dispatchSectionSavedEvent() {
+    const saveEvent = new CustomEvent('sectionSaved', {
+      bubbles: true,
+      composed: true
+    });
+    this.dispatchEvent(saveEvent);
+  }
+
   importFromOpen5e(json) {
     CurrentContext.creature[this.modelPropertyName].fromOpen5e(json);
     this.updateView();
-    this.setEmptyVisibility(CurrentContext.layoutSettings.emptySectionsVisibility);
+    this.setEmptyVisibility(CurrentContext.localSettings.emptySectionsVisibility);
   }
 
   importFromJson(json) {
     CurrentContext.creature[this.modelPropertyName].fromJson(json);
     this.updateView();
-    this.setEmptyVisibility(CurrentContext.layoutSettings.emptySectionsVisibility);
+    this.setEmptyVisibility(CurrentContext.localSettings.emptySectionsVisibility);
   }
 
   exportToJson() {

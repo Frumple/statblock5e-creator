@@ -2,9 +2,9 @@ import ReactionsSection from './reactions-section.js';
 import CurrentContext from '../../../models/current-context.js';
 
 import * as TestCustomElements from '../../../helpers/test/test-custom-elements.js';
-import * as sharedSpecs from './block-list-section.specs.js';
+import BlockListSectionSpecs from './block-list-section.specs.js';
 
-const expectedHeading = 'Reactions';
+const headingName = 'Reactions';
 const expectedBlockType = 'Reaction';
 const open5eJsonKey = 'reactions';
 
@@ -12,12 +12,11 @@ const titleModel = CurrentContext.creature.title;
 const reactionsModel = CurrentContext.creature.reactions;
 
 let reactionsSection;
+let sharedSpecs;
 
 beforeAll(async() => {
   await TestCustomElements.define();
   await ReactionsSection.define();
-
-  sharedSpecs.setExpectedHeading(expectedHeading);
 });
 
 beforeEach(() => {
@@ -27,10 +26,12 @@ beforeEach(() => {
   reactionsSection = new ReactionsSection();
   TestCustomElements.initializeSection(reactionsSection);
   reactionsSection.connect();
+
+  sharedSpecs = new BlockListSectionSpecs(reactionsSection, reactionsModel, headingName, open5eJsonKey);
 });
 
 it('section should have default blocks', () => {
-  sharedSpecs.sectionShouldHaveDefaultBlocks(reactionsSection, reactionsModel);
+  sharedSpecs.sectionShouldHaveDefaultBlocks();
 });
 
 describe('when the show section is clicked', () => {
@@ -39,16 +40,16 @@ describe('when the show section is clicked', () => {
   });
 
   it('should switch to edit mode and focus on the add button if there are no blocks', () => {
-    sharedSpecs.shouldSwitchToEditModeAndFocusOnAddButtonIfNoBlocks(reactionsSection);
+    sharedSpecs.shouldSwitchToEditModeAndFocusOnAddButtonIfNoBlocks();
   });
 
   it('should switch to edit mode and focus on the name field of the first block if there is at least one block', () => {
-    sharedSpecs.shouldSwitchToEditModeAndFocusOnNameFieldOfFirstBlockIfExists(reactionsSection);
+    sharedSpecs.shouldSwitchToEditModeAndFocusOnNameFieldOfFirstBlockIfExists();
   });
 
   describe('when the add block button is clicked', () => {
     it('should focus on the name field of the newly created block', () => {
-      sharedSpecs.shouldFocusOnNameFieldOfNewBlock(reactionsSection);
+      sharedSpecs.shouldFocusOnNameFieldOfNewBlock();
     });
   });
 
@@ -63,7 +64,7 @@ describe('when the show section is clicked', () => {
 
       titleModel.fullName = 'Knight';
 
-      sharedSpecs.shouldAddASingleBlock(reactionsSection, reactionsModel, block);
+      sharedSpecs.shouldAddASingleBlock(block);
     });
 
     it('should add a single block with multiline text', () => {
@@ -76,7 +77,7 @@ describe('when the show section is clicked', () => {
 
       titleModel.fullName = 'Dummy';
 
-      sharedSpecs.shouldAddASingleBlock(reactionsSection, reactionsModel, block);
+      sharedSpecs.shouldAddASingleBlock(block);
     });
 
     it('should add a single block with html escaped', () => {
@@ -89,7 +90,7 @@ describe('when the show section is clicked', () => {
 
       titleModel.fullName = 'Dummy';
 
-      sharedSpecs.shouldAddASingleBlock(reactionsSection, reactionsModel, block);
+      sharedSpecs.shouldAddASingleBlock(block);
     });
 
     it('should add multiple blocks', () => {
@@ -108,7 +109,7 @@ describe('when the show section is clicked', () => {
           text: 'Reaction Text 3'
         }
       ];
-      sharedSpecs.shouldAddMultipleBlocks(reactionsSection, reactionsModel, blocks);
+      sharedSpecs.shouldAddMultipleBlocks(blocks);
     });
 
     it('should add a single block, then remove it', () => {
@@ -117,7 +118,7 @@ describe('when the show section is clicked', () => {
         text: 'When a jelly that is Medium or larger is subjected to lightning or slashing damage, it splits into two new jellies if it has at least 10 hit points. Each new jelly has hit points equal to half the original jelly\'s, rounded down. New jellies are one size smaller than the original jelly.'
       };
 
-      sharedSpecs.shouldAddASingleBlockThenRemoveIt(reactionsSection, reactionsModel, block);
+      sharedSpecs.shouldAddASingleBlockThenRemoveIt(block);
     });
 
     it('should add multiple blocks, then remove one of them', () => {
@@ -136,7 +137,7 @@ describe('when the show section is clicked', () => {
           htmlText: '<strong>Reaction</strong> Text 3'
         }
       ];
-      sharedSpecs.shouldAddMultipleBlocksThenRemoveOneOfThem(reactionsSection, reactionsModel, blocks, 1);
+      sharedSpecs.shouldAddMultipleBlocksThenRemoveOneOfThem(blocks, 1);
     });
 
     describe('should reparse the block text', () => {
@@ -163,7 +164,7 @@ describe('when the show section is clicked', () => {
         block.markdownText = 'If the old spectator makes a successful saving throw against a spell, or a spell attack misses it, the old spectator can choose another creature (including the spellcaster) it can see within 30 feet of it. The spell targets the chosen creature instead of the old spectator. If the spell forced a saving throw, the chosen creature makes its own save. If the spell was an attack, the attack roll is rerolled against the chosen creature.';
         block.htmlText = block.markdownText;
 
-        sharedSpecs.shouldReparseNameChanges(reactionsSection, reactionsModel, block, oldNames, newNames);
+        sharedSpecs.shouldReparseNameChanges(block, oldNames, newNames);
       });
 
       it('when the short name is changed', () => {
@@ -176,7 +177,7 @@ describe('when the show section is clicked', () => {
         block.markdownText = 'If the spectator makes a successful saving throw against a spell, or a spell attack misses it, the spectator can choose another creature (including the spellcaster) it can see within 30 feet of it. The spell targets the chosen creature instead of the spectator. If the spell forced a saving throw, the chosen creature makes its own save. If the spell was an attack, the attack roll is rerolled against the chosen creature.';
         block.htmlText = block.markdownText;
 
-        sharedSpecs.shouldReparseNameChanges(reactionsSection, reactionsModel, block, oldNames, newNames);
+        sharedSpecs.shouldReparseNameChanges(block, oldNames, newNames);
       });
 
       it('when the proper noun is changed', () => {
@@ -189,32 +190,32 @@ describe('when the show section is clicked', () => {
         block.markdownText = 'If Old Spectator makes a successful saving throw against a spell, or a spell attack misses it, Old Spectator can choose another creature (including the spellcaster) it can see within 30 feet of it. The spell targets the chosen creature instead of Old Spectator. If the spell forced a saving throw, the chosen creature makes its own save. If the spell was an attack, the attack roll is rerolled against the chosen creature.';
         block.htmlText = block.markdownText;
 
-        sharedSpecs.shouldReparseNameChanges(reactionsSection, reactionsModel, block, oldNames, newNames);
+        sharedSpecs.shouldReparseNameChanges(block, oldNames, newNames);
       });
     });
 
     it('should trim all trailing period characters in the block name', () => {
-      sharedSpecs.shouldTrimAllTrailingPeriodCharactersInBlockName(reactionsSection, reactionsModel);
+      sharedSpecs.shouldTrimAllTrailingPeriodCharactersInBlockName();
     });
 
     it('should display an error if the block name is blank', () => {
-      sharedSpecs.shouldDisplayAnErrorIfBlockNameIsBlank(reactionsSection, expectedBlockType);
+      sharedSpecs.shouldDisplayAnErrorIfBlockNameIsBlank(expectedBlockType);
     });
 
     it('should display an error if the block text is blank', () => {
-      sharedSpecs.shouldDisplayAnErrorIfBlockTextIsBlank(reactionsSection, expectedBlockType);
+      sharedSpecs.shouldDisplayAnErrorIfBlockTextIsBlank(expectedBlockType);
     });
 
     it('should display an error if the block text has invalid markdown syntax', () => {
-      sharedSpecs.shouldDisplayAnErrorIfBlockTextHasInvalidMarkdownSyntax(reactionsSection, expectedBlockType);
+      sharedSpecs.shouldDisplayAnErrorIfBlockTextHasInvalidMarkdownSyntax(expectedBlockType);
     });
 
     it('should display errors if the block name and text are both blank', () => {
-      sharedSpecs.shouldDisplayErrorsIfBlockNameAndTextAreBothBlank(reactionsSection, expectedBlockType);
+      sharedSpecs.shouldDisplayErrorsIfBlockNameAndTextAreBothBlank(expectedBlockType);
     });
 
     it('should display errors if the block name is blank and block text has invalid markdown syntax', () => {
-      sharedSpecs.shouldDisplayErrorsIfBlockNameIsBlankAndBlockTextHasInvalidMarkdownSyntax(reactionsSection, expectedBlockType);
+      sharedSpecs.shouldDisplayErrorsIfBlockNameIsBlankAndBlockTextHasInvalidMarkdownSyntax(expectedBlockType);
     });
   });
 });
@@ -226,7 +227,7 @@ describe('when import from Open5e', () => {
       text: 'The knight adds 2 to its AC against one melee attack that would hit it. To do so, the knight must see the attacker and be wielding a melee weapon.'
     };
 
-    sharedSpecs.shouldImportFromOpen5e(reactionsSection, reactionsModel, open5eJsonKey, [block]);
+    sharedSpecs.shouldImportFromOpen5e([block]);
   });
 
   it('should import single block with multiline text', () => {
@@ -237,7 +238,7 @@ describe('when import from Open5e', () => {
       htmlText: '<strong>Line 1</strong>. The dummy is here.\n  <strong>Line 2</strong>. The dummy is there.\n    <strong>Line 3</strong>. The dummy is everywhere.'
     };
 
-    sharedSpecs.shouldImportFromOpen5e(reactionsSection, reactionsModel, open5eJsonKey, [block]);
+    sharedSpecs.shouldImportFromOpen5e([block]);
   });
 
   it('should import multiple blocks', () => {
@@ -257,7 +258,7 @@ describe('when import from Open5e', () => {
       }
     ];
 
-    sharedSpecs.shouldImportFromOpen5e(reactionsSection, reactionsModel, open5eJsonKey, blocks);
+    sharedSpecs.shouldImportFromOpen5e(blocks);
   });
 });
 
@@ -274,7 +275,7 @@ describe('when the section is empty and not visible', () => {
 
       titleModel.fullName = 'Knight';
 
-      sharedSpecs.shouldShowBlocksImportedFromJsonIfSectionWasInitiallyEmptyAndNotVisible(reactionsSection, blocksToImport);
+      sharedSpecs.shouldShowBlocksImportedFromJsonIfSectionWasInitiallyEmptyAndNotVisible(blocksToImport);
     });
   });
 });

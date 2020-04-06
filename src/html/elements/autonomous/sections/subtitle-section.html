@@ -14,7 +14,12 @@
 <form id="edit-section" class="section section_hidden" novalidate>
   <div class="subtitle-edit-section section__content">
     <div class="subtitle-edit-section__subtitle-container">
-      <label id="size-label" class="subtitle-edit-section__size-label subtitle-edit-section__heading-label subtitle-edit-section__label" for="size-input">Size:</label>
+      <div class="subtitle-edit-section__size-label-container">
+        <label id="size-label" class="subtitle-edit-section__size-label subtitle-edit-section__heading-label subtitle-edit-section__label" for="size-input">Size:</label>
+        <help-tooltip class="subtitle-edit-section__size-help-tooltip">
+          <p><em>Note: Changing the creature's <strong>size</strong> will also automatically change the creature's <strong>hit die size</strong>, located in the Hit Points section.</em></p>
+        </help-tooltip>
+      </div>
       <select id="size-input" class="subtitle-edit-section__size-input subtitle-show-section__subtitle-text section__select">
       </select>
 

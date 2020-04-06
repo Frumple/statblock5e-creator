@@ -1,7 +1,7 @@
 import PropertyLineModel from './property-line-model.js';
 
-import ExperiencePointsByChallengeRating from '../data/experience-points-by-challenge-rating.js';
-import ProficiencyBonusByChallengeRating from '../data/proficiency-bonus-by-challenge-rating.js';
+import ChallengeRatingToExperiencePoints from '../data/challenge-rating-to-experience-points.js';
+import ChallengeRatingToProficiencyBonus from '../data/challenge-rating-to-proficiency-bonus.js';
 
 import { formatIntegerWithCommas } from '../helpers/number-helpers.js';
 
@@ -27,8 +27,8 @@ export default class ChallengeRating extends PropertyLineModel {
   }
 
   updateExperiencePointsAndProficiencyBonusFromChallengeRating() {
-    this.experiencePoints = ExperiencePointsByChallengeRating[this.challengeRating];
-    this.proficiencyBonus = ProficiencyBonusByChallengeRating[this.challengeRating];
+    this.experiencePoints = ChallengeRatingToExperiencePoints[this.challengeRating];
+    this.proficiencyBonus = ChallengeRatingToProficiencyBonus[this.challengeRating];
   }
 
   get text() {

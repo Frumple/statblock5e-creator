@@ -1,16 +1,28 @@
 <link href='src/css/elements/autonomous/containers/stat-block-editor.css' rel='stylesheet' type='text/css'>
 
 <div class="stat-block-editor__dialogs">
+  <reset-dialog id="reset-dialog">
+    <span slot="title">Reset Statblock</span>
+    <span slot="message">
+      Reset your statblock to the default Commoner template.<br />
+      <br />
+      <em>Note: All unexported changes in your current statblock will be lost.</em>
+    </span>
+  </reset-dialog>
   <import-json-dialog id="import-json-dialog">
     <span slot="title">Import from JSON</span>
     <span slot="message">
-      Import a JSON file that was previously exported from this application.
+      Import a JSON file that was previously exported from Statblock5e Creator.<br />
+      <br />
+      <em>Note: All unexported changes in your current statblock will be lost.</em>
     </span>
   </import-json-dialog>
   <import-srd-dialog id="import-srd-dialog">
     <span slot="title">Import from 5th Edition SRD</span>
     <span slot="message">
-      Import a statblock from the Official D&D 5th Edition <a href="https://dnd.wizards.com/articles/features/systems-reference-document-srd" target="_blank">Systems Reference Document (SRD)</a> from Wizards of the Coast.
+      Import a statblock from the Official D&D 5th Edition <a href="https://dnd.wizards.com/articles/features/systems-reference-document-srd" target="_blank">Systems Reference Document (SRD)</a> from Wizards of the Coast.<br />
+      <br />
+      <em>Note: All unexported changes in your current statblock will be lost.</em>
     </span>
   </import-srd-dialog>
   <import-open5e-dialog id="import-open5e-dialog">
@@ -22,13 +34,15 @@
         <li><a href="https://koboldpress.com/kpstore/product/tome-of-beasts-for-5th-edition" target="_blank">Tome of Beasts</a> from Kobold Press</li>
         <li><a href="https://koboldpress.com/kpstore/product/creature-codex-for-5th-edition-dnd" target="_blank">Creature Codex</a> from Kobold Press</li>
       </ul>
-      <em>Note: All text from Open5e will be imported as-is, and will not include any Markdown Emphasis, Name Expressions, or Math Expressions.</em>
+      <em>Note: All unexported changes in your current statblock will be lost.</em><br />
+      <br />
+      <em>All text from Open5e will be imported as-is, and will not include any Markdown Emphasis, Name Expressions, or Math Expressions.</em>
     </span>
   </import-open5e-dialog>
   <export-dialog id="export-json-dialog">
     <span slot="title">Export to JSON</span>
     <span slot="message">
-      Export your statblock to a JSON file that can be re-imported back at a later time.
+      Export your statblock to a JSON file that can be re-imported back into Statblock5e Creator at a later time.
     </span>
   </export-dialog>
   <export-dialog id="export-html-dialog">
@@ -36,7 +50,7 @@
     <span slot="message">
       Export your statblock as a standalone HTML document, based on <a href="https://github.com/Valloric/statblock5e" target="_blank">Valloric's statblock5e template</a>.<br />
       <br />
-      This HTML document works best in Chrome.
+      <em>Note: This HTML document works best in Chrome.</em>
     </span>
   </export-dialog>
   <export-dialog id="export-markdown-dialog">

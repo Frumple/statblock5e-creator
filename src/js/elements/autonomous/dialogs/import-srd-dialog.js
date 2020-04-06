@@ -29,9 +29,10 @@ export default class ImportSrdDialog extends ImportDialog {
   async onClickImportButton() {
     const creatureName = this.creatureSelect.value;
     const path = `examples/5e-srd/${creatureName}.json`;
-    const creatureJson = await fetchFromFile(path);
+    const text = await fetchFromFile(path);
+    const json = JSON.parse(text);
 
-    this.importCallback(creatureJson);
+    this.importCallback(json);
     this.closeModal();
   }
 

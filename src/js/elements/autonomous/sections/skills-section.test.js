@@ -3,6 +3,7 @@ import * as TestCustomElements from '../../../helpers/test/test-custom-elements.
 
 import { inputValueAndTriggerEvent } from '../../../helpers/element-helpers.js';
 import { formatModifier, nullIfEmptyString } from '../../../helpers/string-formatter.js';
+import EventInterceptor from '../../../helpers/test/event-interceptor.js';
 
 import CurrentContext from '../../../models/current-context.js';
 
@@ -106,10 +107,7 @@ describe('when the show section is clicked', () => {
       `
       ('$description: {abilityScore="$abilityScore", proficiencyBonus="$proficiencyBonus", skillEnabled="$skillEnabled", skillExpertise="$skillExpertise", skillOverride="$skillOverride"} => {expectedModifier="$expectedModifier", expectedText="$expectedText"}',
       ({abilityScore, proficiencyBonus, skillEnabled, skillExpertise, skillOverride, expectedModifier, expectedText}) => {
-        let receivedEvent = null;
-        skillsSection.addEventListener('skillChanged', (event) => {
-          receivedEvent = event;
-        });
+        const eventInterceptor = new EventInterceptor(skillsSection, 'skillChanged');
 
         const skillElements = skillsSection.editElements.skill[singleSkillUnderTest];
         const expectedSkills = createDefaultExpectedSkills();
@@ -137,19 +135,19 @@ describe('when the show section is clicked', () => {
 
         if (skillEnabled) {
           skillElements.enable.click();
-          expectSkillChangedEvent(receivedEvent, singleSkillUnderTest);
-          receivedEvent = null;
+          const enableEvent = eventInterceptor.popEvent();
+          expectSkillChangedEvent(enableEvent, singleSkillUnderTest);
 
           if (skillExpertise) {
             skillElements.expert.click();
-            expectSkillChangedEvent(receivedEvent, singleSkillUnderTest);
-            receivedEvent = null;
+            const expertiseEvent = eventInterceptor.popEvent();
+            expectSkillChangedEvent(expertiseEvent, singleSkillUnderTest);
           }
 
           if (skillOverride !== '') {
             inputValueAndTriggerEvent(skillElements.override, skillOverride);
-            expectSkillChangedEvent(receivedEvent, singleSkillUnderTest);
-            receivedEvent = null;
+            const overrideEvent = eventInterceptor.popEvent();
+            expectSkillChangedEvent(overrideEvent, singleSkillUnderTest);
           }
         }
 

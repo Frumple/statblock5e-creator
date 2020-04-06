@@ -1,5 +1,6 @@
 import StatBlockEditor from '../containers/stat-block-editor.js';
 import StatBlockMenu from '../containers/stat-block-menu.js';
+import StatBlock from '../containers/stat-block.js';
 
 import ImportOpen5eDialog from './import-open5e-dialog.js';
 
@@ -18,6 +19,17 @@ let statBlock;
 let importOpen5eDialog;
 
 beforeAll(async() => {
+  StatBlock.mockImplementation(() => {
+    return {
+      setColumns: () => {},
+      setColumnHeight: () => {},
+      setEmptyVisibility: () => {},
+      importFromJson: () => {},
+      importFromOpen5e: jest.fn(),
+      exportToJson: () => { return {}; }
+    };
+  });
+
   await TestCustomElements.define();
   await StatBlockEditor.define();
   await StatBlockMenu.define();
@@ -31,8 +43,7 @@ beforeEach(() => {
   importOpen5eDialog = statBlockEditor.importOpen5eDialog;
   TestCustomElements.initializeContainer(importOpen5eDialog);
 
-  statBlock.importFromOpen5e.mockClear();
-
+  StatBlock.mockClear();
   Open5eClient.mockClear();
   mockLoadCreatureList.mockClear();
   mockLoadCreature.mockClear();

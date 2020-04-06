@@ -2,6 +2,7 @@ import TitleSection from './title-section.js';
 import * as TestCustomElements from '../../../helpers/test/test-custom-elements.js';
 
 import { inputValueAndTriggerEvent } from '../../../helpers/element-helpers.js';
+import EventInterceptor from '../../../helpers/test/event-interceptor.js';
 
 import CurrentContext from '../../../models/current-context.js';
 
@@ -58,13 +59,10 @@ describe('when the show section is clicked', () => {
       `
       ('$description: {creatureName="$creatureName", shortName="$shortName", isProperNoun="$isProperNoun"} => expectedGrammaticalName',
       ({creatureName, shortName, isProperNoun, expectedGrammaticalName}) => {
+        const eventInterceptor = new EventInterceptor(titleSection, 'creatureNameChanged');
+
         let expectedCreatureName = 'Commoner';
         let expectedShortName = '';
-
-        let receivedEvent = null;
-        titleSection.addEventListener('creatureNameChanged', (event) => {
-          receivedEvent = event;
-        });
 
         if (creatureName !== '') {
           expectedCreatureName = creatureName;
@@ -83,13 +81,14 @@ describe('when the show section is clicked', () => {
         expect(titleModel.isProperNoun).toBe(isProperNoun);
         expect(titleModel.grammaticalName).toBe(expectedGrammaticalName);
 
+        const event = eventInterceptor.popEvent();
         if (creatureName !== '' || shortName !== '' || isProperNoun) {
-          expect(receivedEvent).not.toBeNull();
-          expect(receivedEvent.detail.creatureName).toBe(expectedCreatureName);
-          expect(receivedEvent.detail.shortName).toBe(expectedShortName);
-          expect(receivedEvent.detail.isProperNoun).toBe(isProperNoun);
+          expect(event).not.toBeNull();
+          expect(event.detail.creatureName).toBe(expectedCreatureName);
+          expect(event.detail.shortName).toBe(expectedShortName);
+          expect(event.detail.isProperNoun).toBe(isProperNoun);
         } else {
-          expect(receivedEvent).toBeNull();
+          expect(event).toBeNull();
         }
       });
       /* eslint-enable indent, no-unexpected-multiline */

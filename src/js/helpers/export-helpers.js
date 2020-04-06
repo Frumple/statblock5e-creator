@@ -45,6 +45,11 @@ export function createHtmlPropertyBlock(heading, text) {
   return populatePropertyElement(propertyBlock, `${heading}.`, text);
 }
 
+export function createHtmlLegendaryPropertyBlock(heading, text) {
+  const propertyBlock = document.createElement('legendary-property-block');
+  return populatePropertyElement(propertyBlock, `${heading}.`, text);
+}
+
 function populatePropertyElement(element, heading, text) {
   const headingElement = document.createElement('h4');
   const textElement = document.createElement('p');

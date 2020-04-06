@@ -21,6 +21,8 @@ export default class GenerateAttackDialog extends CustomDialog {
     this.weaponNameInput = this.shadowRoot.getElementById('weapon-name-input');
     this.finesseInput = this.shadowRoot.getElementById('finesse-input');
 
+    this.predefinedWeaponsDatalist = this.shadowRoot.getElementById('predefined-weapons');
+
     this.damageCategoryInputs = {};
 
     for (const key of this.attackModel.damageCategoryKeys) {
@@ -83,6 +85,11 @@ export default class GenerateAttackDialog extends CustomDialog {
       this.resetButton.addEventListener('click', this.onClickResetButton.bind(this));
       this.generateAttackButton.addEventListener('click', this.onClickGenerateAttackButton.bind(this));
 
+      for (const weapon of Object.values(PredefinedWeapons)) {
+        const option = new Option(weapon.description, weapon.name);
+        this.predefinedWeaponsDatalist.appendChild(option);
+      }
+
       this.isInitialized = true;
 
       this.update();
@@ -90,15 +97,15 @@ export default class GenerateAttackDialog extends CustomDialog {
   }
 
   onInputWeaponName() {
-    const weaponName = this.weaponNameInput.value;
-    const weapon = PredefinedWeapons[weaponName];
+    const name = this.weaponNameInput.value;
+    const weapon = PredefinedWeapons[name];
 
     if (weapon) {
       this.reset(false);
       this.attackModel.populateFromJsObject(weapon);
       this.populateFieldsFromModel(this.attackModel);
     } else {
-      this.attackModel.weaponName = weaponName;
+      this.attackModel.name = name;
     }
 
     this.update();
@@ -195,7 +202,7 @@ export default class GenerateAttackDialog extends CustomDialog {
       bubbles: true,
       composed: true,
       detail: {
-        name: this.attackModel.weaponName,
+        name: this.attackModel.name,
         text: this.attackModel.generatedText
       }
     });
@@ -206,7 +213,7 @@ export default class GenerateAttackDialog extends CustomDialog {
   }
 
   populateFieldsFromModel(model) {
-    this.weaponNameInput.value = model.weaponName;
+    this.weaponNameInput.value = model.name;
     this.finesseInput.checked = model.isFinesse;
 
     for (const key of model.damageCategoryKeys) {

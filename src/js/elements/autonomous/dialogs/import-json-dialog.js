@@ -33,8 +33,9 @@ export default class ImportJsonDialog extends ImportDialog {
   async onFileSelected() {
     const file = this.fileInput.files[0];
     const text = await file.text();
+    const json = JSON.parse(text);
 
-    this.importCallback(text);
+    this.importCallback(json);
     this.closeModal();
   }
 

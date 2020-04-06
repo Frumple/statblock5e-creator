@@ -3,11 +3,11 @@ import LegendaryActionsSection from './legendary-actions-section.js';
 import CurrentContext from '../../../models/current-context.js';
 
 import * as TestCustomElements from '../../../helpers/test/test-custom-elements.js';
-import * as sharedSpecs from './block-list-section.specs.js';
+import BlockListSectionSpecs from './block-list-section.specs.js';
 
 import { inputValueAndTriggerEvent } from '../../../helpers/element-helpers.js';
 
-const expectedHeading = 'Legendary Actions';
+const headingName = 'Legendary Actions';
 const expectedBlockType = 'Legendary Action';
 const open5eJsonKey = 'legendary_actions';
 
@@ -16,12 +16,11 @@ const abilitiesModel = CurrentContext.creature.abilities;
 const legendaryActionsModel = CurrentContext.creature.legendaryActions;
 
 let legendaryActionsSection;
+let sharedSpecs;
 
 beforeAll(async() => {
   await TestCustomElements.define();
   await LegendaryActionsSection.define();
-
-  sharedSpecs.setExpectedHeading(expectedHeading);
 });
 
 beforeEach(() => {
@@ -32,10 +31,13 @@ beforeEach(() => {
   legendaryActionsSection = new LegendaryActionsSection();
   TestCustomElements.initializeSection(legendaryActionsSection);
   legendaryActionsSection.connect();
+
+  sharedSpecs = new BlockListSectionSpecs(legendaryActionsSection, legendaryActionsModel, headingName, open5eJsonKey);
+  sharedSpecs.htmlExportPropertyBlockTag = 'LEGENDARY-PROPERTY-BLOCK';
 });
 
 it('section should have default blocks', () => {
-  sharedSpecs.sectionShouldHaveDefaultBlocks(legendaryActionsSection, legendaryActionsModel);
+  sharedSpecs.sectionShouldHaveDefaultBlocks();
 });
 
 describe('when the show section is clicked', () => {
@@ -44,16 +46,16 @@ describe('when the show section is clicked', () => {
   });
 
   it('should switch to edit mode and focus on the add button if there are no blocks', () => {
-    sharedSpecs.shouldSwitchToEditModeAndFocusOnAddButtonIfNoBlocks(legendaryActionsSection);
+    sharedSpecs.shouldSwitchToEditModeAndFocusOnAddButtonIfNoBlocks();
   });
 
   it('should switch to edit mode and focus on the name field of the first block if there is at least one block', () => {
-    sharedSpecs.shouldSwitchToEditModeAndFocusOnNameFieldOfFirstBlockIfExists(legendaryActionsSection);
+    sharedSpecs.shouldSwitchToEditModeAndFocusOnNameFieldOfFirstBlockIfExists();
   });
 
   describe('and the add block button is clicked', () => {
     it('should focus on the name field of the newly created block', () => {
-      sharedSpecs.shouldFocusOnNameFieldOfNewBlock(legendaryActionsSection);
+      sharedSpecs.shouldFocusOnNameFieldOfNewBlock();
     });
   });
 
@@ -79,7 +81,7 @@ describe('when the show section is clicked', () => {
       verifyHtmlExportDescription(htmlDescription);
       verifyMarkdownExportDescription(markdownDescription);
 
-      sharedSpecs.reset(legendaryActionsSection, legendaryActionsModel);
+      sharedSpecs.reset();
       legendaryActionsSection.importFromJson(json);
 
       verifyModelDescription(description, markdownDescription, htmlDescription);
@@ -92,7 +94,7 @@ describe('when the show section is clicked', () => {
       titleModel.shortName = 'dragon';
 
       inputValueAndTriggerEvent(legendaryActionsSection.editElements.description, description);
-      sharedSpecs.addAndPopulateBlock(legendaryActionsSection, 'Some name', 'Some text');
+      sharedSpecs.addAndPopulateBlock('Some name', 'Some text');
 
       legendaryActionsSection.editElements.submitForm();
 
@@ -105,7 +107,7 @@ describe('when the show section is clicked', () => {
       verifyHtmlExportDescription(htmlDescription);
       verifyMarkdownExportDescription(markdownDescription);
 
-      sharedSpecs.reset(legendaryActionsSection, legendaryActionsModel);
+      sharedSpecs.reset();
       legendaryActionsSection.importFromJson(json);
 
       verifyModelDescription(description, markdownDescription, htmlDescription);
@@ -136,7 +138,7 @@ describe('when the show section is clicked', () => {
 
       titleModel.fullName = 'Lich';
 
-      sharedSpecs.shouldAddASingleBlock(legendaryActionsSection, legendaryActionsModel, block);
+      sharedSpecs.shouldAddASingleBlock(block);
     });
 
     it('should add a single block with multiline text', () => {
@@ -149,7 +151,7 @@ describe('when the show section is clicked', () => {
 
       titleModel.fullName = 'Dummy';
 
-      sharedSpecs.shouldAddASingleBlock(legendaryActionsSection, legendaryActionsModel, block);
+      sharedSpecs.shouldAddASingleBlock(block);
     });
 
     it('should add a single block with html escaped', () => {
@@ -162,7 +164,7 @@ describe('when the show section is clicked', () => {
 
       titleModel.fullName = 'Dummy';
 
-      sharedSpecs.shouldAddASingleBlock(legendaryActionsSection, legendaryActionsModel, block);
+      sharedSpecs.shouldAddASingleBlock(block);
     });
 
     it('should add multiple blocks', () => {
@@ -192,7 +194,7 @@ describe('when the show section is clicked', () => {
       titleModel.fullName = 'Adult Red Dragon';
       titleModel.shortName = 'dragon';
 
-      sharedSpecs.shouldAddMultipleBlocks(legendaryActionsSection, legendaryActionsModel, blocks);
+      sharedSpecs.shouldAddMultipleBlocks(blocks);
     });
 
     it('should add a single block, then remove it', () => {
@@ -206,7 +208,7 @@ describe('when the show section is clicked', () => {
       titleModel.fullName = 'Adult Red Dragon';
       titleModel.shortName = 'dragon';
 
-      sharedSpecs.shouldAddASingleBlockThenRemoveIt(legendaryActionsSection, block);
+      sharedSpecs.shouldAddASingleBlockThenRemoveIt(block);
     });
 
     it('should add multiple blocks, then remove one of them', () => {
@@ -236,7 +238,7 @@ describe('when the show section is clicked', () => {
       titleModel.fullName = 'Adult Red Dragon';
       titleModel.shortName = 'dragon';
 
-      sharedSpecs.shouldAddMultipleBlocksThenRemoveOneOfThem(legendaryActionsSection, legendaryActionsModel, blocks, 1);
+      sharedSpecs.shouldAddMultipleBlocksThenRemoveOneOfThem(blocks, 1);
     });
 
     describe('should reparse the block text', () => {
@@ -265,7 +267,7 @@ describe('when the show section is clicked', () => {
         block.markdownText = 'The ancient red dragon beats its wings. Each creature within 10 feet of the ancient red dragon must succeed on a DC 22 Dexterity saving throw or take 15 (2d6 + 8) bludgeoning damage and be knocked prone. The ancient red dragon can then fly up to half its flying speed.';
         block.htmlText = block.markdownText;
 
-        sharedSpecs.shouldReparseNameChanges(legendaryActionsSection, legendaryActionsModel, block, oldNames, newNames);
+        sharedSpecs.shouldReparseNameChanges(block, oldNames, newNames);
       });
 
       it('when the short name is changed', () => {
@@ -280,7 +282,7 @@ describe('when the show section is clicked', () => {
         block.markdownText = 'The dragon beats its wings. Each creature within 10 feet of the dragon must succeed on a DC 22 Dexterity saving throw or take 15 (2d6 + 8) bludgeoning damage and be knocked prone. The dragon can then fly up to half its flying speed.';
         block.htmlText = block.markdownText;
 
-        sharedSpecs.shouldReparseNameChanges(legendaryActionsSection, legendaryActionsModel, block, oldNames, newNames);
+        sharedSpecs.shouldReparseNameChanges(block, oldNames, newNames);
       });
 
       it('when the proper noun is changed', () => {
@@ -295,32 +297,32 @@ describe('when the show section is clicked', () => {
         block.markdownText = 'Adult Red Dragon beats its wings. Each creature within 10 feet of Adult Red Dragon must succeed on a DC 22 Dexterity saving throw or take 15 (2d6 + 8) bludgeoning damage and be knocked prone. Adult Red Dragon can then fly up to half its flying speed.';
         block.htmlText = block.markdownText;
 
-        sharedSpecs.shouldReparseNameChanges(legendaryActionsSection, legendaryActionsModel, block, oldNames, newNames);
+        sharedSpecs.shouldReparseNameChanges(block, oldNames, newNames);
       });
     });
 
     it('should trim all trailing period characters in the block name', () => {
-      sharedSpecs.shouldTrimAllTrailingPeriodCharactersInBlockName(legendaryActionsSection, legendaryActionsModel);
+      sharedSpecs.shouldTrimAllTrailingPeriodCharactersInBlockName();
     });
 
     it('should display an error if the block name is blank', () => {
-      sharedSpecs.shouldDisplayAnErrorIfBlockNameIsBlank(legendaryActionsSection, expectedBlockType);
+      sharedSpecs.shouldDisplayAnErrorIfBlockNameIsBlank(expectedBlockType);
     });
 
     it('should display an error if the block text is blank', () => {
-      sharedSpecs.shouldDisplayAnErrorIfBlockTextIsBlank(legendaryActionsSection, expectedBlockType);
+      sharedSpecs.shouldDisplayAnErrorIfBlockTextIsBlank(expectedBlockType);
     });
 
     it('should display an error if the block text has invalid markdown syntax', () => {
-      sharedSpecs.shouldDisplayAnErrorIfBlockTextHasInvalidMarkdownSyntax(legendaryActionsSection, expectedBlockType);
+      sharedSpecs.shouldDisplayAnErrorIfBlockTextHasInvalidMarkdownSyntax(expectedBlockType);
     });
 
     it('should display errors if the block name and text are both blank', () => {
-      sharedSpecs.shouldDisplayErrorsIfBlockNameAndTextAreBothBlank(legendaryActionsSection, expectedBlockType);
+      sharedSpecs.shouldDisplayErrorsIfBlockNameAndTextAreBothBlank(expectedBlockType);
     });
 
     it('should display errors if the block name is blank and block text has invalid markdown syntax', () => {
-      sharedSpecs.shouldDisplayErrorsIfBlockNameIsBlankAndBlockTextHasInvalidMarkdownSyntax(legendaryActionsSection, expectedBlockType);
+      sharedSpecs.shouldDisplayErrorsIfBlockNameIsBlankAndBlockTextHasInvalidMarkdownSyntax(expectedBlockType);
     });
   });
 });
@@ -333,7 +335,7 @@ describe('when import from Open5e', () => {
     const markdownDescription = 'The commoner can take 3 legendary actions, choosing from the options below. Only one legendary action option can be used at a time and only at the end of another creature\'s turn. The commoner regains spent legendary actions at the start of its turn.';
     const htmlDescription = markdownDescription;
 
-    sharedSpecs.shouldImportFromOpen5e(legendaryActionsSection, legendaryActionsModel, open5eJsonKey, [], inputtedDescription);
+    sharedSpecs.shouldImportFromOpen5e([], inputtedDescription);
 
     verifyModelDescription(description, markdownDescription, htmlDescription);
     verifyEditModeDescription(description);
@@ -348,7 +350,7 @@ describe('when import from Open5e', () => {
 
     const description = 'The lich can take 3 legendary actions, choosing from the options below. Only one legendary action option can be used at a time and only at the end of another creature\'s turn. The lich regains spent legendary actions at the start of its turn.';
 
-    sharedSpecs.shouldImportFromOpen5e(legendaryActionsSection, legendaryActionsModel, open5eJsonKey, [block], description);
+    sharedSpecs.shouldImportFromOpen5e([block], description);
 
     verifyModelDescription(description, description, description);
     verifyEditModeDescription(description);
@@ -367,7 +369,7 @@ describe('when import from Open5e', () => {
     const markdownDescription = '**Line 1**. The dummy is here.  \n>   **Line 2**. The dummy is there.  \n>     **Line 3**. The dummy is everywhere.';
     const htmlDescription = '<strong>Line 1</strong>. The dummy is here.\n  <strong>Line 2</strong>. The dummy is there.\n    <strong>Line 3</strong>. The dummy is everywhere.';
 
-    sharedSpecs.shouldImportFromOpen5e(legendaryActionsSection, legendaryActionsModel, open5eJsonKey, [block], description);
+    sharedSpecs.shouldImportFromOpen5e([block], description);
 
     verifyModelDescription(description, markdownDescription, htmlDescription);
     verifyEditModeDescription(description);
@@ -392,7 +394,7 @@ describe('when import from Open5e', () => {
 
     const description = 'The dragon can take 3 legendary actions, choosing from the options below. Only one legendary action option can be used at a time and only at the end of another creature\'s turn. The dragon regains spent legendary actions at the start of its turn.';
 
-    sharedSpecs.shouldImportFromOpen5e(legendaryActionsSection, legendaryActionsModel, open5eJsonKey, blocks, description);
+    sharedSpecs.shouldImportFromOpen5e(blocks, description);
 
     verifyModelDescription(description, description, description);
     verifyEditModeDescription(description);
@@ -414,7 +416,7 @@ describe('when the section is empty and not visible', () => {
       titleModel.fullName = 'Adult Red Dragon';
       titleModel.shortName = 'dragon';
 
-      sharedSpecs.shouldShowBlocksImportedFromJsonIfSectionWasInitiallyEmptyAndNotVisible(legendaryActionsSection, blocksToImport);
+      sharedSpecs.shouldShowBlocksImportedFromJsonIfSectionWasInitiallyEmptyAndNotVisible(blocksToImport);
     });
   });
 });

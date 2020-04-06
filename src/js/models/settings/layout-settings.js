@@ -7,7 +7,6 @@ export default class LayoutSettings {
     this.columns = 1;
     this.twoColumnMode = 'auto';
     this.twoColumnHeight = 600;
-    this.emptySectionsVisibility = true;
   }
 
   fromJson(json) {

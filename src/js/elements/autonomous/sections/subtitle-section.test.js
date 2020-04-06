@@ -2,6 +2,7 @@ import SubtitleSection from './subtitle-section.js';
 import * as TestCustomElements from '../../../helpers/test/test-custom-elements.js';
 
 import { inputValueAndTriggerEvent } from '../../../helpers/element-helpers.js';
+import EventInterceptor from '../../../helpers/test/event-interceptor.js';
 
 import CurrentContext from '../../../models/current-context.js';
 
@@ -75,11 +76,15 @@ describe('when the show section is clicked', () => {
             tags: tags.trim(),
             alignment: alignment
           };
+          const eventInterceptor = new EventInterceptor(subtitleSection, 'creatureSizeChanged');
 
           inputValueAndTriggerEvent(subtitleSection.editElements.size, size);
           inputValueAndTriggerEvent(subtitleSection.editElements.type, type);
           inputValueAndTriggerEvent(subtitleSection.editElements.tags, tags);
           inputValueAndTriggerEvent(subtitleSection.editElements.alignment, alignment);
+
+          const event = eventInterceptor.popEvent();
+          expect(event).not.toBeNull();
 
           subtitleSection.editElements.submitForm();
 

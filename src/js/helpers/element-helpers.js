@@ -44,6 +44,10 @@ export function addOptionsToDataListElement(element, optionValues) {
   }
 }
 
+export function getCheckedRadioButton(parentElement, radioGroupName) {
+  return parentElement.shadowRoot.querySelector(`input[name="${radioGroupName}"]:checked`);
+}
+
 // Traverses the properties of an object and its descendant objects for HTMLElements
 // maxDepth is how many levels deep to search for elements
 // Example: maxDepth = 3 will search the object, its children, and its grandchildren only

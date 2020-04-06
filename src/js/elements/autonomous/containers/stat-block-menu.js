@@ -21,6 +21,8 @@ export default class StatBlockMenu extends CustomAutonomousElement {
     this.editAllSectionsButton = this.shadowRoot.getElementById('edit-all-sections-button');
     this.saveAllSectionsButton = this.shadowRoot.getElementById('save-all-sections-button');
 
+    this.resetButton = this.shadowRoot.getElementById('reset-button');
+
     this.importJsonButton = this.shadowRoot.getElementById('import-json-button');
     this.importSrdButton = this.shadowRoot.getElementById('import-srd-button');
     this.importOpen5eButton = this.shadowRoot.getElementById('import-open5e-button');
@@ -31,8 +33,10 @@ export default class StatBlockMenu extends CustomAutonomousElement {
 
     this.printButton = this.shadowRoot.getElementById('print-button');
 
-    this.githubButton = this.shadowRoot.getElementById('github-button');
+    this.gettingStartedButton = this.shadowRoot.getElementById('getting-started-button');
     this.wikiButton = this.shadowRoot.getElementById('wiki-button');
+
+    this.githubButton = this.shadowRoot.getElementById('github-button');
     this.versionButton = this.shadowRoot.getElementById('version-button');
   }
 
@@ -49,6 +53,8 @@ export default class StatBlockMenu extends CustomAutonomousElement {
       this.editAllSectionsButton.addEventListener('click', this.onClickEditAllSectionsButton.bind(this));
       this.saveAllSectionsButton.addEventListener('click', this.onClickSaveAllSectionsButton.bind(this));
 
+      this.resetButton.addEventListener('click', this.onClickResetButton.bind(this));
+
       this.importJsonButton.addEventListener('click', this.onClickImportJsonButton.bind(this));
       this.importSrdButton.addEventListener('click', this.onClickImportSrdButton.bind(this));
       this.importOpen5eButton.addEventListener('click', this.onClickImportOpen5eButton.bind(this));
@@ -59,11 +65,13 @@ export default class StatBlockMenu extends CustomAutonomousElement {
 
       this.printButton.addEventListener('click', this.onClickPrintButton.bind(this));
 
-      this.githubButton.addEventListener('click', this.onClickGithubButton.bind(this));
+      this.gettingStartedButton.addEventListener('click', this.onClickGettingStartedButton.bind(this));
       this.wikiButton.addEventListener('click', this.onClickWikiButton.bind(this));
+
+      this.githubButton.addEventListener('click', this.onClickGithubButton.bind(this));
       this.versionButton.addEventListener('click', this.onClickVersionButton.bind(this));
 
-      this.versionButton.textContent = `Version: ${CurrentContext.version}`;
+      this.versionButton.textContent = `Version: ${CurrentContext.localSettings.version}`;
 
       this.isInitialized = true;
     }
@@ -91,6 +99,10 @@ export default class StatBlockMenu extends CustomAutonomousElement {
 
   onClickSaveAllSectionsButton() {
     this.dispatchMenuEvent('allSectionsAction', { action: 'save' });
+  }
+
+  onClickResetButton() {
+    this.dispatchMenuEvent('resetAction');
   }
 
   onClickImportJsonButton() {
@@ -121,12 +133,16 @@ export default class StatBlockMenu extends CustomAutonomousElement {
     this.dispatchMenuEvent('printAction');
   }
 
-  onClickGithubButton() {
-    window.open('https://github.com/Frumple/statblock5e-creator');
+  onClickGettingStartedButton() {
+    this.dispatchMenuEvent('toggleGettingStarted');
   }
 
   onClickWikiButton() {
     window.open('https://github.com/Frumple/statblock5e-creator/wiki');
+  }
+
+  onClickGithubButton() {
+    window.open('https://github.com/Frumple/statblock5e-creator');
   }
 
   onClickVersionButton() {
@@ -142,7 +158,7 @@ export default class StatBlockMenu extends CustomAutonomousElement {
     this.dispatchEvent(menuEvent);
   }
 
-  updateControls() {
+  updateColumnControls() {
     const layoutSettings = CurrentContext.layoutSettings;
 
     if (layoutSettings.columns === 1) {
@@ -150,8 +166,12 @@ export default class StatBlockMenu extends CustomAutonomousElement {
     } else if (layoutSettings.columns === 2) {
       this.twoColumnButton.click();
     }
+  }
 
-    if (layoutSettings.emptySectionsVisibility) {
+  updateEmptySectionControls() {
+    const localSettings = CurrentContext.localSettings;
+
+    if (localSettings.emptySectionsVisibility) {
       this.showEmptySectionsButton.click();
     } else {
       this.hideEmptySectionsButton.click();

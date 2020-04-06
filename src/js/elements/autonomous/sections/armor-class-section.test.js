@@ -316,13 +316,14 @@ describe('when importing from Open5e', () => {
     /* eslint-enable indent, no-unexpected-multiline */
   });
 
-  describe('should import as custom text if the armor type contains markdown emphasis characters', () => {
+  describe('should import as custom text if the armor type contains markdown emphasis or round bracket characters', () => {
     /* eslint-disable indent, no-unexpected-multiline */
     it.each
     `
-      description                     | armorClass | armorDesc                 | expectedCustomText             | expectedHtmlText
-      ${'armor desc has asterisks'}   | ${12}      | ${'15 with *mage armor*'} | ${'12 (15 with *mage armor*)'} | ${'12 (15 with <em>mage armor</em>)'}
-      ${'armor desc has underscores'} | ${11}      | ${'16 with _barkskin_'}   | ${'11 (16 with _barkskin_)'}   | ${'11 (16 with <em>barkskin</em>)'}
+      description                        | armorClass | armorDesc                               | expectedCustomText                      | expectedHtmlText
+      ${'armor desc has asterisks'}      | ${12}      | ${'15 with *mage armor*'}               | ${'12 (15 with *mage armor*)'}          | ${'12 (15 with <em>mage armor</em>)'}
+      ${'armor desc has underscores'}    | ${11}      | ${'16 with _barkskin_'}                 | ${'11 (16 with _barkskin_)'}            | ${'11 (16 with <em>barkskin</em>)'}
+      ${'armor desc has round brackets'} | ${14}      | ${'14 (natural armor), 11 while prone'} | ${'14 (natural armor), 11 while prone'} | ${'14 (natural armor), 11 while prone'}
     `
     ('$description: {armorClass="$armorClass", armorDesc="$armorDesc"} => {expectedCustomText="$expectedCustomText", expectedHtmlText="$expectedHtmlText"}',
     ({armorClass, armorDesc, expectedCustomText, expectedHtmlText}) => {

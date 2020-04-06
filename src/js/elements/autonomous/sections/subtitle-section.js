@@ -1,7 +1,7 @@
 import { Section, ShowElements, EditElements } from './section.js';
 import CurrentContext from '../../../models/current-context.js';
 
-import creatureSizes from '../../../data/creature-sizes.js';
+import creatureSizesToHitDieSizes from '../../../data/creature-sizes-to-hit-die-sizes.js';
 import creatureTypes from '../../../data/creature-types.js';
 import creatureTags from '../../../data/creature-tags.js';
 import creatureAlignments from '../../../data/creature-alignments.js';
@@ -22,7 +22,7 @@ export default class SubtitleSection extends Section {
           SubtitleShowElements,
           SubtitleEditElements);
 
-    addOptionsToSelectElement(this.editElements.size, creatureSizes);
+    addOptionsToSelectElement(this.editElements.size, Object.keys(creatureSizesToHitDieSizes));
     addOptionsToSelectElement(this.editElements.type, creatureTypes);
     addOptionsToDataListElement(this.editElements.tagsDataList, creatureTags);
     addOptionsToSelectElement(this.editElements.alignment, creatureAlignments);
@@ -41,8 +41,29 @@ export default class SubtitleSection extends Section {
       this.editElements.useCustomText.enableElementsWhenChecked(
         this.editElements.customText);
 
+      this.editElements.size.addEventListener('input', this.onInputCreatureSize.bind(this));
+
       this.isInitialized = true;
     }
+  }
+
+  onInputCreatureSize() {
+    const creatureSize = this.editElements.size.value;
+    CurrentContext.creature.subtitle.size = creatureSize;
+    CurrentContext.creature.hitPoints.hitDieSize = creatureSizesToHitDieSizes[creatureSize];
+    this.dispatchCreatureSizeChangedEvent();
+  }
+
+  dispatchCreatureSizeChangedEvent() {
+    const subtitleModel = CurrentContext.creature.subtitle;
+    const changeEvent = new CustomEvent('creatureSizeChanged', {
+      bubbles: true,
+      composed: true,
+      detail: {
+        creatureSize: subtitleModel.size
+      }
+    });
+    this.dispatchEvent(changeEvent);
   }
 
   checkForErrors() {

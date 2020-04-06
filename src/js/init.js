@@ -13,6 +13,7 @@ import TextInput from './elements/builtin/text-input.js';
 
 import DropDownMenu from './elements/autonomous/drop-down-menu.js';
 import ErrorMessages from './elements/autonomous/error-messages.js';
+import GettingStartedHelpBox from './elements/autonomous/getting-started-help-box.js';
 import LoadingScreen from './elements/autonomous/loading-screen.js';
 import PropertyBlock from './elements/autonomous/property-block.js';
 import PropertyLine from './elements/autonomous/property-line.js';
@@ -23,11 +24,11 @@ import ImportJsonDialog from './elements/autonomous/dialogs/import-json-dialog.j
 import ImportSrdDialog from './elements/autonomous/dialogs/import-srd-dialog.js';
 import ImportOpen5eDialog from './elements/autonomous/dialogs/import-open5e-dialog.js';
 
+import ResetDialog from './elements/autonomous/dialogs/reset-dialog.js';
 import ExportDialog from './elements/autonomous/dialogs/export-dialog.js';
 import GenerateAttackDialog from './elements/autonomous/dialogs/generate-attack-dialog.js';
 
 import HelpTooltip from './elements/autonomous/tooltips/help-tooltip.js';
-import BlockHelpTooltip from './elements/autonomous/tooltips/block-help-tooltip.js';
 import CustomTextHelpTooltip from './elements/autonomous/tooltips/custom-text-help-tooltip.js';
 
 import DisplayBlockList from './elements/autonomous/lists/display-block-list.js';
@@ -68,7 +69,7 @@ import BasicStats from './elements/autonomous/containers/basic-stats.js';
 import AdvancedStats from './elements/autonomous/containers/advanced-stats.js';
 
 async function init() {
-  CurrentContext.version = await getVersion();
+  CurrentContext.localSettings.version = await getVersion();
 
   await defineElements();
 
@@ -78,11 +79,17 @@ async function init() {
   loadingScreen.status = 'Initializing HTML export template...';
   await HtmlExportDocumentFactory.init();
 
+  loadingScreen.status = 'Loading JSON from local storage...';
+  statBlockEditor.loadJsonFromLocalStorage();
+
+  loadingScreen.status = 'Loading local settings from local storage...';
+  statBlockEditor.loadLocalSettingsFromLocalStorage();
+
   loadingScreen.status = 'Waiting for elements to load...';
   await waitForBodyLoaded();
 
   statBlockEditor.classList.remove('stat-block-editor_hidden');
-  loadingScreen.isVisible = false;
+  loadingScreen.visible = false;
 }
 
 async function getVersion() {
@@ -105,6 +112,7 @@ async function defineElements() {
 
     DropDownMenu,
     ErrorMessages,
+    GettingStartedHelpBox,
     LoadingScreen,
     PropertyBlock,
     PropertyLine,
@@ -115,11 +123,11 @@ async function defineElements() {
     ImportSrdDialog,
     ImportOpen5eDialog,
 
+    ResetDialog,
     ExportDialog,
     GenerateAttackDialog,
 
     HelpTooltip,
-    BlockHelpTooltip,
     CustomTextHelpTooltip,
 
     DisplayBlockList,

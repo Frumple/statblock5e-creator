@@ -21,7 +21,7 @@ export class BlockListSection extends Section {
   }
 
   connectedCallback() {
-    this.editElements.editableBlockList.blockType = CurrentContext.creature[this.modelPropertyName].singleName;
+    this.editElements.editableBlockList.singleName = CurrentContext.creature[this.modelPropertyName].singleName;
 
     super.connectedCallback();
 

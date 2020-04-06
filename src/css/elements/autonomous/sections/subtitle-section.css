@@ -30,7 +30,18 @@
   margin-top: 5px;
 }
 
-.subtitle-edit-section__size-label { grid-area: 1 / 1; }
+.subtitle-edit-section__size-label-container {
+   grid-area: 1 / 1;
+   display: flex;
+   flex-direction: row;
+}
+
+.subtitle-edit-section__size-help-tooltip {
+  --help-tooltip-icon-color: #7A200D;
+  --help-tooltip-width: 35em;
+  margin-left: 5px;
+}
+
 .subtitle-edit-section__type-label { grid-area: 1 / 2; }
 .subtitle-edit-section__tags-label { grid-area: 1 / 3; }
 .subtitle-edit-section__alignment-label { grid-area: 1 / 4; }

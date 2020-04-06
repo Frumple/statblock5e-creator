@@ -2,12 +2,13 @@ import Model from '../../model.js';
 import BlockModel from './block-model.js';
 
 export default class BlockListModel extends Model {
-  constructor(headingName, singleName, open5eJsonKey) {
+  constructor(headingName, singleName, open5eJsonKey, blockModel = BlockModel) {
     super();
 
     this.headingName = headingName;
     this.singleName = singleName;
     this.open5eJsonKey = open5eJsonKey;
+    this.blockModel = blockModel;
 
     this.blocks = [];
 
@@ -32,7 +33,7 @@ export default class BlockListModel extends Model {
         const name = inputItem.name;
         const desc = BlockListModel.parseOpen5eBlockDescription(inputItem.desc);
 
-        const block = new BlockModel(name, desc);
+        const block = new this.blockModel(name, desc);
         this.blocks.push(block);
       }
     }
@@ -57,7 +58,7 @@ export default class BlockListModel extends Model {
     this.clear();
 
     for (const jsonBlock of json.blocks) {
-      const block = new BlockModel(jsonBlock.name, jsonBlock.text);
+      const block = new this.blockModel(jsonBlock.name, jsonBlock.text);
       this.blocks.push(block);
     }
   }

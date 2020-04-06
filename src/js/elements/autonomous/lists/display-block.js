@@ -16,6 +16,7 @@ export default class DisplayBlock extends CustomAutonomousElement {
     this.textElement = this.shadowRoot.getElementById('display-block-text');
   }
 
+  // TODO: Refactor legendary action behaviour into subclass instead
   applyLegendaryActionStyles() {
     this.blockElement.classList.add('display-block_no-spacing');
     this.blockElement.classList.add('display-block_hanging-indent');

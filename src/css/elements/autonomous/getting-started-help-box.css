@@ -1,0 +1,52 @@
+.getting-started-help-box {
+  position: relative;
+  background: #eeeeee;
+  color: black;
+  border: 1px solid black;
+  white-space: normal;
+  width: 500px;
+  margin-top: 60px;
+  margin-left: 5px;
+  padding: 5px;
+}
+
+.getting-started-help-box_hidden {
+  display: none;
+}
+
+.getting-started-help-box__close-button {
+  position: absolute;
+  top: 0px;
+  right: 0px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background: transparent;
+  color: black;
+  border: none;
+  padding: 0.5em;
+  cursor: pointer;
+}
+
+.getting-started-help-box h3:first-child {
+  margin-top: 0;
+}
+
+.getting-started-help-box h4 {
+  margin-bottom: 0;
+}
+
+.getting-started-help-box ul {
+  margin: 0;
+}
+
+.getting-started-help-box table {
+  margin-left: 2em;
+}
+
+.getting-started-help-box code {
+  background: white;
+  border-radius: 3px;
+  font-family: monospace;
+  padding: 0 3px;
+}

@@ -25,16 +25,19 @@ export default class StatBlock extends CustomAutonomousElement {
       this.topStats = document.querySelector('top-stats');
       this.bottomStats = document.querySelector('bottom-stats');
     }
+
+    this.gettingStartedHelpBox = this.shadowRoot.getElementById('getting-started-help-box');
   }
 
   connectedCallback() {
     if (this.isConnected && ! this.isInitialized) {
       super.connectedCallback();
 
-      this.addEventListener('creatureNameChanged', this.onCreatureNameChanged);
-      this.addEventListener('abilityScoreChanged', this.onAbilityScoreChanged);
-      this.addEventListener('proficiencyBonusChanged', this.onProficiencyBonusChanged);
-      this.addEventListener('skillChanged', this.onSkillChanged);
+      this.addEventListener('creatureNameChanged', this.onCreatureNameChanged.bind(this));
+      this.addEventListener('creatureSizeChanged', this.onCreatureSizeChanged.bind(this));
+      this.addEventListener('abilityScoreChanged', this.onAbilityScoreChanged.bind(this));
+      this.addEventListener('proficiencyBonusChanged', this.onProficiencyBonusChanged.bind(this));
+      this.addEventListener('skillChanged', this.onSkillChanged.bind(this));
 
       this.isInitialized = true;
     }
@@ -42,6 +45,10 @@ export default class StatBlock extends CustomAutonomousElement {
 
   onCreatureNameChanged() {
     this.reparseBlockSections();
+  }
+
+  onCreatureSizeChanged() {
+    this.topStats.updateHitPointsView();
   }
 
   onAbilityScoreChanged() {
@@ -97,6 +104,10 @@ export default class StatBlock extends CustomAutonomousElement {
     this.bottomStats.setEmptyVisibility(visibility);
   }
 
+  setGettingStartedVisibility(visibility) {
+    this.gettingStartedHelpBox.visible = visibility;
+  }
+
   edit() {
     // Edit in reverse order so that the title section is the last to gain focus
     this.bottomStats.edit();
@@ -108,6 +119,12 @@ export default class StatBlock extends CustomAutonomousElement {
     this.bottomStats.save();
     this.topStats.save();
     this.headingStats.save();
+  }
+
+  updateView() {
+    this.headingStats.updateView();
+    this.topStats.updateView();
+    this.bottomStats.updateView();
   }
 
   reparseBlockSections() {

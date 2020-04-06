@@ -2,7 +2,7 @@ import LanguagesSection from './languages-section.js';
 import CurrentContext from '../../../models/current-context.js';
 
 import * as TestCustomElements from '../../../helpers/test/test-custom-elements.js';
-import * as sharedSpecs from './property-list-section.specs.js';
+import PropertyListSectionSpecs from './property-list-section.specs.js';
 import { inputValueAndTriggerEvent } from '../../../helpers/element-helpers.js';
 
 const headingName = 'Languages';
@@ -13,6 +13,7 @@ const defaultStartingLanguage = 'any one language (usually Common)';
 const languagesModel = CurrentContext.creature.languages;
 
 let languagesSection;
+let sharedSpecs;
 
 beforeAll(async() => {
   await TestCustomElements.define();
@@ -25,10 +26,12 @@ beforeEach(() => {
   languagesSection = new LanguagesSection();
   TestCustomElements.initializeSection(languagesSection);
   languagesSection.connect();
+
+  sharedSpecs = new PropertyListSectionSpecs(languagesSection, languagesModel, headingName, open5eJsonKey);
 });
 
 it('show section should have default values', () => {
-  sharedSpecs.showSectionShouldHaveDefaultValues(languagesSection, headingName, defaultStartingLanguage);
+  sharedSpecs.showSectionShouldHaveDefaultValues(defaultStartingLanguage);
 });
 
 describe('when the show section is clicked', () => {
@@ -37,7 +40,7 @@ describe('when the show section is clicked', () => {
   });
 
   it('edit section should have default values', () => {
-    sharedSpecs.editSectionShouldHaveDefaultValues(languagesSection, [defaultStartingLanguage]);
+    sharedSpecs.editSectionShouldHaveDefaultValues([defaultStartingLanguage]);
   });
 
   it('should switch to edit mode and focus on the text field', () => {
@@ -118,24 +121,24 @@ describe('when the show section is clicked', () => {
       });
 
       it('should display an error after clicking the add button if the input field is blank', () => {
-        sharedSpecs.shouldDisplayAnErrorIfAddingBlank(languagesSection, expectedBlockType);
+        sharedSpecs.shouldDisplayAnErrorIfAddingBlank(expectedBlockType);
       });
 
       it('should display an error after clicking the add button if there is already a duplicate item in the list', () => {
         const itemText = 'Common';
-        sharedSpecs.shouldDisplayAnErrorIfAddingDuplicate(languagesSection, itemText, expectedBlockType);
+        sharedSpecs.shouldDisplayAnErrorIfAddingDuplicate(itemText, expectedBlockType);
       });
 
       it('should display an error after clicking the save button if the input field is not blank', () => {
         const itemText = 'Dwarvish';
-        sharedSpecs.shouldDisplayAnErrorIfSavingWithUnaddedInputText(languagesSection, itemText, expectedBlockType);
+        sharedSpecs.shouldDisplayAnErrorIfSavingWithUnaddedInputText(itemText, expectedBlockType);
       });
     });
 
     describe('and a suggested item is added, and then removed', () => {
       it('should remove the item from the list of suggestions, and then re-add the item', () => {
         const itemText = 'Abyssal';
-        sharedSpecs.shouldRemoveAndAddSuggestions(languagesSection, itemText);
+        sharedSpecs.shouldRemoveAndAddSuggestions(itemText);
       });
     });
 
@@ -222,13 +225,16 @@ describe('when import from Open5e', () => {
     /* eslint-disable indent, no-unexpected-multiline */
     it.each
     `
-      description                           | inputText                                                                          | expectedItems                                                                          | expectedTelepathy | expectedText
-      ${'no items'}                         | ${''}                                                                              | ${[]}                                                                                  | ${null}           | ${'—'}
-      ${'single simple item'}               | ${'Deep Speech'}                                                                   | ${['Deep Speech']}                                                                     | ${null}           | ${'Deep Speech'}
-      ${'multiple simple items'}            | ${'Undercommon, Swahili, Thieves\' Cant'}                                          | ${['Undercommon', 'Swahili', 'Thieves\' Cant']}                                        | ${null}           | ${'Undercommon, Swahili, Thieves\' Cant'}
-      ${'telepathy delimited by comma'}     | ${'Gnomish, Sylvan, telepathy 60 ft.'}                                             | ${['Gnomish', 'Sylvan']}                                                               | ${60}             | ${'Gnomish, Sylvan, telepathy 60 ft.'}
-      ${'telepathy delimited by semicolon'} | ${'Gnomish, Sylvan; telepathy 60 ft.'}                                             | ${['Gnomish', 'Sylvan']}                                                               | ${60}             | ${'Gnomish, Sylvan, telepathy 60 ft.'}
-      ${'telepathy with note'}              | ${'Abyssal, telepathy 60 ft. (works only with creatures that understand Abyssal)'} | ${['Abyssal', 'telepathy 60 ft. (works only with creatures that understand Abyssal)']} | ${null}           | ${'Abyssal, telepathy 60 ft. (works only with creatures that understand Abyssal)'}
+      description                                              | inputText                                                                                         | expectedItems                                                                          | expectedTelepathy | expectedText
+      ${'no items'}                                            | ${''}                                                                                             | ${[]}                                                                                  | ${null}           | ${'—'}
+      ${'single simple item'}                                  | ${'Deep Speech'}                                                                                  | ${['Deep Speech']}                                                                     | ${null}           | ${'Deep Speech'}
+      ${'multiple simple items'}                               | ${'Undercommon, Swahili, Thieves\' Cant'}                                                         | ${['Undercommon', 'Swahili', 'Thieves\' Cant']}                                        | ${null}           | ${'Undercommon, Swahili, Thieves\' Cant'}
+      ${'understands ... but'}                                 | ${'understands Infernal but can\'t speak'}                                                        | ${['understands Infernal but can\'t speak']}                                           | ${null}           | ${'understands Infernal but can\'t speak'}
+      ${'understands ... but (includes commas)'}               | ${'Giant Owl, understands Common, Elvish, Sylvan but can\'t speak'}                               | ${['Giant Owl', 'understands Common, Elvish, Sylvan but can\'t speak']}                | ${null}           | ${'Giant Owl; understands Common, Elvish, Sylvan but can\'t speak'}
+      ${'understands ... but (includes commas and telepathy)'} | ${'understands Abyssal, Celestial, Infernal, and Primordial but can\'t speak, telepathy 120 ft.'} | ${['understands Abyssal, Celestial, Infernal, and Primordial but can\'t speak']}       | ${120}            | ${'understands Abyssal, Celestial, Infernal, and Primordial but can\'t speak, telepathy 120 ft.'}
+      ${'telepathy delimited by comma'}                        | ${'Gnomish, Sylvan, telepathy 60 ft.'}                                                            | ${['Gnomish', 'Sylvan']}                                                               | ${60}             | ${'Gnomish, Sylvan, telepathy 60 ft.'}
+      ${'telepathy delimited by semicolon'}                    | ${'Gnomish, Sylvan; telepathy 60 ft.'}                                                            | ${['Gnomish', 'Sylvan']}                                                               | ${60}             | ${'Gnomish, Sylvan, telepathy 60 ft.'}
+      ${'telepathy with note'}                                 | ${'Abyssal, telepathy 60 ft. (works only with creatures that understand Abyssal)'}                | ${['Abyssal', 'telepathy 60 ft. (works only with creatures that understand Abyssal)']} | ${null}           | ${'Abyssal, telepathy 60 ft. (works only with creatures that understand Abyssal)'}
     `
     ('$description: $inputText => {expectedItems="$expectedItems", expectedTelepathy="$expectedTelepathy", expectedText="$expectedText"}',
     ({inputText, expectedItems, expectedTelepathy, expectedText}) => {

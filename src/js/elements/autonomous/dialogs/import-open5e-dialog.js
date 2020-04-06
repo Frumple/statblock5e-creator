@@ -2,6 +2,8 @@ import ImportDialog from './import-dialog.js';
 
 import Open5eClient from '../../../api/open5e-client.js';
 
+import { getCheckedRadioButton } from '../../../helpers/element-helpers.js';
+
 export default class ImportOpen5eDialog extends ImportDialog {
   static get elementName() { return 'import-open5e-dialog'; }
   static get templatePaths() {
@@ -38,7 +40,7 @@ export default class ImportOpen5eDialog extends ImportDialog {
   }
 
   async onChangeSource() {
-    const documentSlug = this.shadowRoot.querySelector('input[name="source"]:checked').value;
+    const documentSlug = getCheckedRadioButton(this, 'source').value;
     let creatureList;
 
     this.setStatus('Retrieving creature list from Open5e...');

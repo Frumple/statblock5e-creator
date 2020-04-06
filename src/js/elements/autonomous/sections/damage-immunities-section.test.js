@@ -2,7 +2,7 @@ import DamageImmunitiesSection from './damage-immunities-section.js';
 import CurrentContext from '../../../models/current-context.js';
 
 import * as TestCustomElements from '../../../helpers/test/test-custom-elements.js';
-import * as sharedSpecs from './property-list-section.specs.js';
+import PropertyListSectionSpecs from './property-list-section.specs.js';
 
 const headingName = 'Damage Immunities';
 const expectedBlockType = 'Damage Immunity';
@@ -11,6 +11,7 @@ const open5eJsonKey = 'damage_immunities';
 const damageImmunitiesModel = CurrentContext.creature.damageImmunities;
 
 let damageImmunitiesSection;
+let sharedSpecs;
 
 beforeAll(async() => {
   await TestCustomElements.define();
@@ -23,10 +24,12 @@ beforeEach(() => {
   damageImmunitiesSection = new DamageImmunitiesSection();
   TestCustomElements.initializeSection(damageImmunitiesSection);
   damageImmunitiesSection.connect();
+
+  sharedSpecs = new PropertyListSectionSpecs(damageImmunitiesSection, damageImmunitiesModel, headingName, open5eJsonKey);
 });
 
 it('show section should have default values', () => {
-  sharedSpecs.showSectionShouldHaveDefaultValues(damageImmunitiesSection, headingName);
+  sharedSpecs.showSectionShouldHaveDefaultValues();
 });
 
 describe('when the show section is clicked', () => {
@@ -35,7 +38,7 @@ describe('when the show section is clicked', () => {
   });
 
   it('edit section should have default values', () => {
-    sharedSpecs.editSectionShouldHaveDefaultValues(damageImmunitiesSection);
+    sharedSpecs.editSectionShouldHaveDefaultValues();
   });
 
   it('should switch to edit mode and focus on the text field', () => {
@@ -47,18 +50,18 @@ describe('when the show section is clicked', () => {
   describe('and the input field is set, the add button is clicked, and the edit section is submitted', () => {
     it('should add a suggested item, and the show section should have the item', () => {
       const itemText = 'necrotic';
-      sharedSpecs.shouldAddAnItem(damageImmunitiesSection, damageImmunitiesModel, headingName, itemText);
+      sharedSpecs.shouldAddAnItem(itemText);
     });
 
     it('should add a custom item, and the show section should have the item', () => {
       const itemText = 'dark';
-      sharedSpecs.shouldAddAnItem(damageImmunitiesSection, damageImmunitiesModel, headingName, itemText);
+      sharedSpecs.shouldAddAnItem(itemText);
     });
 
     it('should add many items, and the show section should have the items', () => {
       const itemTexts = ['fire', 'rock', 'cold', 'air'];
       const expectedText = 'fire, rock, cold, air';
-      sharedSpecs.shouldAddManyItems(damageImmunitiesSection, damageImmunitiesModel, headingName, itemTexts, expectedText);
+      sharedSpecs.shouldAddManyItems(itemTexts, expectedText);
     });
 
     describe('should add item that contains commas, and if there are other items before or after this item, semicolon separators instead of commas should be shown', () => {
@@ -75,37 +78,37 @@ describe('when the show section is clicked', () => {
       `
       ('$description: $itemTexts => $expectedText',
       ({itemTexts, expectedText}) => {
-        sharedSpecs.shouldAddManyItems(damageImmunitiesSection, damageImmunitiesModel, headingName, itemTexts, expectedText);
+        sharedSpecs.shouldAddManyItems(itemTexts, expectedText);
       });
       /* eslint-enable indent, no-unexpected-multiline */
     });
 
     it('should display an error after clicking the add button if the input field is blank', () => {
-      sharedSpecs.shouldDisplayAnErrorIfAddingBlank(damageImmunitiesSection, expectedBlockType);
+      sharedSpecs.shouldDisplayAnErrorIfAddingBlank(expectedBlockType);
     });
 
     it('should display an error after clicking the add button if there is already a duplicate item in the list', () => {
       const itemText = 'lightning';
-      sharedSpecs.shouldDisplayAnErrorIfAddingDuplicate(damageImmunitiesSection, itemText, expectedBlockType);
+      sharedSpecs.shouldDisplayAnErrorIfAddingDuplicate(itemText, expectedBlockType);
     });
 
     it('should display an error after clicking the save button if the input field is not blank', () => {
       const itemText = 'thunder';
-      sharedSpecs.shouldDisplayAnErrorIfSavingWithUnaddedInputText(damageImmunitiesSection, itemText, expectedBlockType);
+      sharedSpecs.shouldDisplayAnErrorIfSavingWithUnaddedInputText(itemText, expectedBlockType);
     });
   });
 
   describe('and a suggested item is added, and then removed', () => {
     it('should remove the item from the list of suggestions, and then re-add the item', () => {
       const itemText = 'radiant';
-      sharedSpecs.shouldRemoveAndAddSuggestions(damageImmunitiesSection, itemText);
+      sharedSpecs.shouldRemoveAndAddSuggestions(itemText);
     });
   });
 
   describe('and an item is added, then removed, and the edit section is submitted', () => {
     it('should have no items, and the show section should have no items', () => {
       const itemText = 'poison';
-      sharedSpecs.shouldAddAndRemoveItem(damageImmunitiesSection, damageImmunitiesModel, headingName, itemText);
+      sharedSpecs.shouldAddAndRemoveItem(itemText);
     });
   });
 
@@ -122,7 +125,7 @@ describe('when the show section is clicked', () => {
       ('$description: $itemToDelete => $expectedItems',
       ({itemToDelete, expectedItems}) => {
         const initialItems = ['acid', 'force', 'psychic'];
-        sharedSpecs.shouldDeleteOneOfManyItems(damageImmunitiesSection, damageImmunitiesModel, headingName, initialItems, itemToDelete, expectedItems);
+        sharedSpecs.shouldDeleteOneOfManyItems(initialItems, itemToDelete, expectedItems);
       });
       /* eslint-enable indent, no-unexpected-multiline */
     });
@@ -145,7 +148,7 @@ describe('when import from Open5e', () => {
     `
     ('$description: $inputText => $expectedItems',
     ({inputText, expectedItems}) => {
-      sharedSpecs.shouldImportFromOpen5e(damageImmunitiesSection, damageImmunitiesModel, headingName, open5eJsonKey, inputText, expectedItems);
+      sharedSpecs.shouldImportFromOpen5e(inputText, expectedItems);
     });
     /* eslint-enable indent, no-unexpected-multiline */
   });
@@ -155,7 +158,7 @@ describe('when the section is empty and not visible', () => {
   describe('and a creature with items is imported from JSON', () => {
     it('should show the new items', () => {
       const itemsToImport = ['bludgeoning'];
-      sharedSpecs.shouldShowItemsImportedFromJsonIfSectionWasInitiallyEmptyAndNotVisible(damageImmunitiesSection, headingName, itemsToImport);
+      sharedSpecs.shouldShowItemsImportedFromJsonIfSectionWasInitiallyEmptyAndNotVisible(itemsToImport);
     });
   });
 });

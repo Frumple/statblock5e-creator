@@ -65,10 +65,17 @@ export default class ArmorClass extends PropertyLineModel {
     const armorClass = json['armor_class'];
     const armorDesc = json['armor_desc'] === null ? '' : json['armor_desc'];
 
-    // If the armor_desc includes markdown emphasis characters, use custom text
+    // If the armor_desc includes markdown emphasis characters,
+    // set the custom text using the armor_class and armor_desc.
     if (armorDesc.includes('*') || armorDesc.includes('_')) {
       this.useCustomText = true;
       this.customText = `${armorClass} (${armorDesc})`;
+
+    // If the armor_desc includes round bracket characters,
+    // set the custom text to the armor_desc only.
+    } else if (armorDesc.includes('(') || armorDesc.includes(')')) {
+      this.useCustomText = true;
+      this.customText = armorDesc;
 
     // Otherwise, set armor class as normal. Armor type and shield are determined by parsing the armor_desc.
     } else {

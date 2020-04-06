@@ -191,7 +191,7 @@ expect.extend({
     };
   },
 
-  toBeHtmlPropertyBlock(propertyBlock, expectedHeading, expectedText) {
+  toBeHtmlPropertyBlock(propertyBlock, expectedHeading, expectedText, expectedTagName) {
     if (this.isNot) {
       throw new Error('The matcher toBeHtmlPropertyBlock cannot be used with the not modifier.');
     }
@@ -199,7 +199,7 @@ expect.extend({
     const headingElement = propertyBlock.querySelector('h4');
     const textElement = propertyBlock.querySelector('p');
 
-    if (propertyBlock.tagName !== 'PROPERTY-BLOCK') {
+    if (propertyBlock.tagName !== expectedTagName) {
       return {
         message: () => `expected tag name to be 'property-block', but was ${propertyBlock.tagName}`,
         pass: false
