@@ -15,6 +15,12 @@ export default class HeadingStats extends DivisibleContainer {
     this.sections.set('subtitle', document.querySelector('subtitle-section'));
   }
 
+  edit() {
+    // Make sure title section gets the last focus
+    this.sections.get('subtitle').edit();
+    this.sections.get('title').edit();
+  }
+
   exportToJson() {
     return {
       title: this.sections.get('title').exportToJson(),
