@@ -262,10 +262,10 @@ export default class StatBlockEditor extends CustomAutonomousElement {
     CurrentContext.reset();
     LocalStorageProxy.clearJson();
 
+    this.statBlock.updateView();
     this.statBlockMenu.updateColumnControls();
     this.statBlockMenu.updateEmptySectionControls();
     this.statBlockSidebar.updateControls();
-    this.statBlock.updateView();
   }
 
   importFromOpen5e(json) {
