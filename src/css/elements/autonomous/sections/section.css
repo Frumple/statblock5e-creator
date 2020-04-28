@@ -22,9 +22,12 @@
   animation: hide-section var(--section-animation-duration) ease-in;
 }
 
+.section_selectable {
+  cursor: pointer;
+}
+
 .section_selectable:hover {
   background: #FFCCCC;
-  cursor: pointer;
 }
 
 .section_selectable:active {

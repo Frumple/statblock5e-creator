@@ -18,7 +18,7 @@
 
 .ability-scores-section__score-label {
   font-weight: bold;
-  cursor: pointer;
+  cursor: inherit;
 }
 
 .ability-scores-section__strength-label { grid-area: 1 / 1; }
@@ -32,6 +32,7 @@
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
+  cursor: inherit;
 }
 
 .ability-scores-show-section__score-show {
