@@ -27,6 +27,7 @@ import ImportOpen5eDialog from './elements/autonomous/dialogs/import-open5e-dial
 import ResetDialog from './elements/autonomous/dialogs/reset-dialog.js';
 import ExportDialog from './elements/autonomous/dialogs/export-dialog.js';
 import GenerateAttackDialog from './elements/autonomous/dialogs/generate-attack-dialog.js';
+import GenerateSpellcastingDialog from './elements/autonomous/dialogs/generate-spellcasting-dialog.js';
 
 import HelpTooltip from './elements/autonomous/tooltips/help-tooltip.js';
 import CustomTextHelpTooltip from './elements/autonomous/tooltips/custom-text-help-tooltip.js';
@@ -126,6 +127,7 @@ async function defineElements() {
     ResetDialog,
     ExportDialog,
     GenerateAttackDialog,
+    GenerateSpellcastingDialog,
 
     HelpTooltip,
     CustomTextHelpTooltip,

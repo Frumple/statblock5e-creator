@@ -18,6 +18,7 @@ import DisplayBlock from '/src/js/elements/autonomous/lists/display-block.js';
 import EditableBlockList from '/src/js/elements/autonomous/lists/editable-block-list.js';
 import EditableBlock from '/src/js/elements/autonomous/lists/editable-block.js';
 import GenerateAttackDialog from '../../elements/autonomous/dialogs/generate-attack-dialog.js';
+import GenerateSpellcastingDialog from '../../elements/autonomous/dialogs/generate-spellcasting-dialog.js';
 
 export async function define() {
   const customElements = [
@@ -79,6 +80,14 @@ function replaceWithFakes(section) {
 
     if (section.editElements.generateAttackDialog.errorMessages && section.editElements.generateAttackDialog.errorMessages.tagName === 'ERROR-MESSAGES') {
       section.editElements.generateAttackDialog.errorMessages = new ErrorMessages();
+    }
+  }
+
+  if (section.editElements.generateSpellcastingDialog && section.editElements.generateSpellcastingDialog.tagName === 'GENERATE-SPELLCASTING-DIALOG') {
+    section.editElements.generateSpellcastingDialog = new GenerateSpellcastingDialog(section);
+
+    if (section.editElements.generateSpellcastingDialog.errorMessages && section.editElements.generateSpellcastingDialog.errorMessages.tagName === 'ERROR-MESSAGES') {
+      section.editElements.generateSpellcastingDialog.errorMessages = new ErrorMessages();
     }
   }
 }
