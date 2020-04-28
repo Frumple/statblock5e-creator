@@ -16,10 +16,10 @@
 .senses-edit-section__blindsight-input { grid-area: 1 / 3; }
 .senses-edit-section__blindsight-unit { grid-area: 1 / 4; }
 .senses-edit-section__blind-beyond-this-radius-container {
-  grid-area: 1 / 5;
+  grid-area: 1 / 5 / 3 / 6;
+  align-self: start;
   display: flex;
-  align-items: center;
-  justify-content: space-evenly;
+  margin-top: 3px;
 }
 
 .senses-edit-section__darkvision-label { grid-area: 2 / 2; }
