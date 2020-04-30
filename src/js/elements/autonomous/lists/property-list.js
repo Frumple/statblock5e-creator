@@ -15,33 +15,20 @@ export default class PropertyList extends DragAndDropList {
     super(PropertyList.templatePaths, parent);
   }
 
-  set items(itemTexts) {
-    this.clearItems();
-    for (const itemText of itemTexts) {
-      this.addItem(itemText);
-    }
-  }
-
   get items() {
     return Array.from(this.children);
   }
 
   get itemsAsText() {
-    return this.items.map(element => element.text);
+    return this.items.map(item => item.text);
   }
 
   contains(itemText) {
     return this.itemsAsText.includes(itemText);
   }
 
-  addItem(itemText) {
-    const listItem = PropertyList.createListItem(this, itemText);
-
-    if (isRunningInJsdom) {
-      listItem.connect();
-    }
-
-    this.appendChild(listItem);
+  findItem(itemText) {
+    return this.items.filter(element => element.text === itemText)[0];
   }
 
   clearItems() {
@@ -50,16 +37,25 @@ export default class PropertyList extends DragAndDropList {
     }
   }
 
-  findItem(itemText) {
-    return this.items.filter(element => element.text === itemText)[0];
+  addItem(itemText) {
+    let listItem;
+
+    if (isRunningInJsdom) {
+      listItem = new PropertyListItem(this, itemText);
+      listItem.connect();
+    } else {
+      listItem = document.createElement('property-list-item');
+      listItem.list = this;
+      listItem.text = itemText;
+    }
+
+    this.appendChild(listItem);
   }
 
-  static createListItem(list, text) {
-    const listItem = isRunningInJsdom ? new PropertyListItem(list) : document.createElement('property-list-item');
-
-    listItem.list = list;
-    listItem.text = text;
-
-    return listItem;
+  setItems(itemTexts) {
+    this.clearItems();
+    for (const itemText of itemTexts) {
+      this.addItem(itemText);
+    }
   }
 }

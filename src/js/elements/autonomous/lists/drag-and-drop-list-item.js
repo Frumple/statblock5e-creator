@@ -10,7 +10,7 @@ export default class DragAndDropListItem extends CustomAutonomousElement {
   constructor(templatePaths, parent) {
     super(templatePaths, parent);
 
-    this.list = null;
+    this.list = parent;
     this.dragImage = null;
 
     this.container = this.shadowRoot.getElementById('drag-and-drop-list-item-container');

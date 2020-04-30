@@ -8,13 +8,15 @@ export default class PropertyListItem extends DragAndDropListItem {
       'src/html/elements/autonomous/lists/property-list-item.html');
   }
 
-  constructor(parent) {
+  constructor(parent, text) {
     super(PropertyListItem.templatePaths, parent);
 
     this.label = this.shadowRoot.getElementById('property-list-item-label');
     this.removeButton = this.shadowRoot.getElementById('property-list-item-remove-button');
 
     this.dragImage = this.label;
+
+    this.text = text;
   }
 
   connectedCallback() {

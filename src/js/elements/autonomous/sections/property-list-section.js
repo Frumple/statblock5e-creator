@@ -88,7 +88,8 @@ export class PropertyListSection extends PropertyLineSection {
   }
 
   updateEditModeView() {
-    this.editElements.propertyList.items = CurrentContext.creature[this.modelPropertyName].items;
+    const items = CurrentContext.creature[this.modelPropertyName].items;
+    this.editElements.propertyList.setItems(items);
   }
 
   updateShowModeView() {
