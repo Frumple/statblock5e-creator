@@ -168,7 +168,7 @@
     "items": [
       "cold",
       "fire",
-      "bludgeoning, piercing, and slashing from nonmagical weapons that aren't silvered"
+      "bludgeoning, piercing, and slashing from nonmagical attacks that aren't silvered"
     ]
   },
   "damageImmunities": {

@@ -166,7 +166,7 @@
   },
   "damageResistances": {
     "items": [
-      "bludgeoning, piercing, and slashing damage from nonmagical weapons"
+      "bludgeoning, piercing, and slashing damage from nonmagical attacks"
     ]
   },
   "damageImmunities": {

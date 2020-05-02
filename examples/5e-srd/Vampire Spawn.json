@@ -167,7 +167,7 @@
   "damageResistances": {
     "items": [
       "necrotic",
-      "bludgeoning, piercing, and slashing from nonmagical weapons"
+      "bludgeoning, piercing, and slashing from nonmagical attacks"
     ]
   },
   "damageImmunities": {

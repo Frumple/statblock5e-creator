@@ -168,7 +168,7 @@
   },
   "damageResistances": {
     "items": [
-      "piercing and slashing from nonmagical weapons that aren't adamantine"
+      "piercing and slashing from nonmagical attacks that aren't adamantine"
     ]
   },
   "damageImmunities": {

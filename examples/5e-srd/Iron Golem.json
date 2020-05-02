@@ -172,7 +172,7 @@
       "fire",
       "poison",
       "psychic",
-      "bludgeoning, piercing, and slashing from nonmagical weapons that aren't adamantine"
+      "bludgeoning, piercing, and slashing from nonmagical attacks that aren't adamantine"
     ]
   },
   "conditionImmunities": {

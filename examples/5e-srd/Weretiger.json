@@ -169,7 +169,7 @@
   },
   "damageImmunities": {
     "items": [
-      "bludgeoning, piercing, and slashing damage from nonmagical weapons that aren't silvered"
+      "bludgeoning, piercing, and slashing damage from nonmagical attacks that aren't silvered"
     ]
   },
   "conditionImmunities": {
