@@ -1,6 +1,7 @@
 import DragAndDropList from './drag-and-drop-list.js';
 
 import isRunningInJsdom from '../../../helpers/is-running-in-jsdom.js';
+import { addOptionsToDataListElement } from '../../../helpers/element-helpers.js';
 import PropertyListItem from './property-list-item.js';
 
 export default class PropertyList extends DragAndDropList {
@@ -13,6 +14,36 @@ export default class PropertyList extends DragAndDropList {
 
   constructor(parent) {
     super(PropertyList.templatePaths, parent);
+
+    this.input = this.shadowRoot.getElementById('input');
+    this.addButton = this.shadowRoot.getElementById('add-button');
+    this.dataList = this.shadowRoot.getElementById('datalist');
+
+    this.errorMessages = null;
+    this.singleItemName = 'item';
+  }
+
+  connectedCallback() {
+    if (this.isConnected && ! this.isInitialized) {
+      super.connectedCallback();
+
+      this.input.addEventListener('keydown', this.onEnterKeyDownOnInputField.bind(this));
+      this.addButton.addEventListener('click', this.onClickAddButton.bind(this));
+
+      this.isInitialized = true;
+    }
+  }
+
+  onEnterKeyDownOnInputField(keyEvent) {
+    if (keyEvent.key === 'Enter') {
+      keyEvent.preventDefault();
+
+      this.addItemFromInput();
+    }
+  }
+
+  onClickAddButton() {
+    this.addItemFromInput();
   }
 
   get items() {
@@ -37,6 +68,27 @@ export default class PropertyList extends DragAndDropList {
     }
   }
 
+  addItemFromInput() {
+    const text = this.input.value.trim();
+    this.input.value = text;
+
+    this.errorMessages.clear();
+    if (text === '') {
+      this.errorMessages.add(this.input, `Cannot add a blank ${this.singleItemName}.`);
+    } else if (this.contains(text)) {
+      this.errorMessages.add(this.input, `Cannot add a duplicate ${this.singleItemName}.`);
+    }
+    if (this.errorMessages.any) {
+      this.errorMessages.focusOnFirstErrorField();
+      return;
+    }
+
+    this.addItem(text);
+
+    this.input.value = '';
+    this.input.select();
+  }
+
   addItem(itemText) {
     let listItem;
 
@@ -50,6 +102,7 @@ export default class PropertyList extends DragAndDropList {
     }
 
     this.appendChild(listItem);
+    this.dataList.setOptionEnabled(itemText, false);
   }
 
   setItems(itemTexts) {
@@ -57,5 +110,9 @@ export default class PropertyList extends DragAndDropList {
     for (const itemText of itemTexts) {
       this.addItem(itemText);
     }
+  }
+
+  setDataList(itemTexts) {
+    addOptionsToDataListElement(this.dataList, itemTexts);
   }
 }

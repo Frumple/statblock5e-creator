@@ -1,4 +1,5 @@
 import { PropertyListSection } from './property-list-section.js';
+import Conditions from '../../../data/conditions.js';
 
 export default class ConditionImmunitiesSection extends PropertyListSection {
   static get elementName() { return 'condition-immunities-section'; }
@@ -13,5 +14,15 @@ export default class ConditionImmunitiesSection extends PropertyListSection {
           'conditionImmunities');
 
     this.empty = true;
+  }
+
+  connectedCallback() {
+    if (this.isConnected && ! this.isInitialized) {
+      super.connectedCallback();
+
+      this.editElements.propertyList.setDataList(Conditions);
+
+      this.isInitialized = true;
+    }
   }
 }

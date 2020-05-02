@@ -1,5 +1,6 @@
 import { PropertyListSection, PropertyListShowElements, PropertyListEditElements } from './property-list-section.js';
 import CurrentContext from '../../../models/current-context.js';
+import Languages from '../../../data/languages.js';
 
 export default class LanguagesSection extends PropertyListSection {
   static get elementName() { return 'languages-section'; }
@@ -19,6 +20,8 @@ export default class LanguagesSection extends PropertyListSection {
   connectedCallback() {
     if (this.isConnected && ! this.isInitialized) {
       super.connectedCallback();
+
+      this.editElements.propertyList.setDataList(Languages);
 
       this.isInitialized = true;
     }

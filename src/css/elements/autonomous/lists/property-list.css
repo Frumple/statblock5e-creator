@@ -2,3 +2,19 @@
   display: flex;
   flex-direction: column;
 }
+
+.property-list__input-container {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  margin-bottom: 5px;
+}
+
+.property-list__input {
+  flex: 1 1 auto;
+}
+
+.property-list__add-button {
+  padding: 0 12px;
+  margin: 0 4px 0 5px;
+}

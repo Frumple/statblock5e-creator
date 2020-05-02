@@ -42,15 +42,7 @@ export default class PropertyListItem extends DragAndDropListItem {
   }
 
   remove() {
-    const removeEvent = new CustomEvent('propertyListItemRemoved', {
-      bubbles: true,
-      composed: true,
-      detail: {
-        itemText: this.text
-      }
-    });
-    this.dispatchEvent(removeEvent);
-
     this.list.removeChild(this);
+    this.list.dataList.setOptionEnabled(this.text, true);
   }
 }

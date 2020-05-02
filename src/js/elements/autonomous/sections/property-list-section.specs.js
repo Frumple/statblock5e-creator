@@ -23,8 +23,8 @@ export default class PropertyListSectionSpecs {
       expectedText = itemText;
     }
 
-    inputValueAndTriggerEvent(this.section.editElements.input, itemText);
-    this.section.editElements.addButton.click();
+    inputValueAndTriggerEvent(this.section.editElements.propertyList.input, itemText);
+    this.section.editElements.propertyList.addButton.click();
 
     this.verifyEditModeView(expectedItems);
 
@@ -49,8 +49,8 @@ export default class PropertyListSectionSpecs {
 
   shouldAddManyItems(itemTexts, expectedText) {
     for (const itemText of itemTexts) {
-      inputValueAndTriggerEvent(this.section.editElements.input, itemText);
-      this.section.editElements.addButton.click();
+      inputValueAndTriggerEvent(this.section.editElements.propertyList.input, itemText);
+      this.section.editElements.propertyList.addButton.click();
     }
 
     this.verifyEditModeView(itemTexts);
@@ -75,41 +75,41 @@ export default class PropertyListSectionSpecs {
   }
 
   shouldDisplayAnErrorIfAddingBlank(expectedBlockType) {
-    inputValueAndTriggerEvent(this.section.editElements.input, '');
-    this.section.editElements.addButton.click();
+    inputValueAndTriggerEvent(this.section.editElements.propertyList.input, '');
+    this.section.editElements.propertyList.addButton.click();
 
     expect(this.section).toHaveError(
-      this.section.editElements.input,
+      this.section.editElements.propertyList.input,
       `Cannot add a blank ${expectedBlockType}.`);
   }
 
   shouldDisplayAnErrorIfAddingDuplicate(itemText, expectedBlockType) {
-    inputValueAndTriggerEvent(this.section.editElements.input, itemText);
-    this.section.editElements.addButton.click();
+    inputValueAndTriggerEvent(this.section.editElements.propertyList.input, itemText);
+    this.section.editElements.propertyList.addButton.click();
 
-    inputValueAndTriggerEvent(this.section.editElements.input, itemText);
-    this.section.editElements.addButton.click();
+    inputValueAndTriggerEvent(this.section.editElements.propertyList.input, itemText);
+    this.section.editElements.propertyList.addButton.click();
 
     expect(this.section).toHaveError(
-      this.section.editElements.input,
+      this.section.editElements.propertyList.input,
       `Cannot add a duplicate ${expectedBlockType}.`);
   }
 
   shouldDisplayAnErrorIfSavingWithUnaddedInputText(itemText, expectedBlockType) {
-    inputValueAndTriggerEvent(this.section.editElements.input, itemText);
+    inputValueAndTriggerEvent(this.section.editElements.propertyList.input, itemText);
 
     this.section.editElements.submitForm();
 
     expect(this.section).toHaveError(
-      this.section.editElements.input,
+      this.section.editElements.propertyList.input,
       `Cannot save while the ${expectedBlockType} field contains text.\nClear or add the field, then try again.`);
   }
 
   shouldRemoveAndAddSuggestions(itemText) {
-    inputValueAndTriggerEvent(this.section.editElements.input, itemText);
-    this.section.editElements.addButton.click();
+    inputValueAndTriggerEvent(this.section.editElements.propertyList.input, itemText);
+    this.section.editElements.propertyList.addButton.click();
 
-    const dataList = this.section.editElements.dataList;
+    const dataList = this.section.editElements.propertyList.dataList;
     const option = dataList.findOption(itemText);
     expect(option).toHaveAttribute('disabled');
 
@@ -123,8 +123,8 @@ export default class PropertyListSectionSpecs {
     const expectedItems = [];
     const expectedText = '';
 
-    inputValueAndTriggerEvent(this.section.editElements.input, itemText);
-    this.section.editElements.addButton.click();
+    inputValueAndTriggerEvent(this.section.editElements.propertyList.input, itemText);
+    this.section.editElements.propertyList.addButton.click();
 
     const item = this.section.editElements.propertyList.findItem(itemText);
     item.remove();
@@ -155,8 +155,8 @@ export default class PropertyListSectionSpecs {
     const expectedText = expectedItems.join(', ');
 
     for (const item of initialItems) {
-      inputValueAndTriggerEvent(this.section.editElements.input, item);
-      this.section.editElements.addButton.click();
+      inputValueAndTriggerEvent(this.section.editElements.propertyList.input, item);
+      this.section.editElements.propertyList.addButton.click();
     }
 
     const item = this.section.editElements.propertyList.findItem(itemToDelete);
