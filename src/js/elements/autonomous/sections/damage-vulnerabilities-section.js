@@ -1,5 +1,5 @@
 import { PropertyListSection } from './property-list-section.js';
-import DamageTypes from '../../../data/damage-types.js';
+import DamageTypesForPropertyLists from '../../../data/damage-types-for-property-lists.js';
 
 export default class DamageVulnerabilitiesSection extends PropertyListSection {
   static get elementName() { return 'damage-vulnerabilities-section'; }
@@ -20,7 +20,7 @@ export default class DamageVulnerabilitiesSection extends PropertyListSection {
     if (this.isConnected && ! this.isInitialized) {
       super.connectedCallback();
 
-      this.editElements.propertyList.setDataList(DamageTypes);
+      this.editElements.propertyList.setDataList(DamageTypesForPropertyLists);
 
       this.isInitialized = true;
     }
