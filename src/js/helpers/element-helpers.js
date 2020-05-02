@@ -32,15 +32,24 @@ export function inputValueAndTriggerEvent(element, value) {
   element.dispatchEvent(new Event('input'));
 }
 
-export function addOptionsToSelectElement(element, optionValues) {
+export function addOptionsToSelectElement(selectElement, optionValues) {
   for (const optionValue of optionValues) {
-    element.add(new Option(optionValue, optionValue));
+    const option = new Option(optionValue, optionValue);
+    selectElement.add(option);
   }
 }
 
-export function addOptionsToDataListElement(element, optionValues) {
+export function addOptionsToDataListElement(dataListElement, optionValues) {
   for (const optionValue of optionValues) {
-    element.appendChild(new Option('', optionValue));
+    const option = new Option('', optionValue);
+    dataListElement.appendChild(option);
+  }
+}
+
+export function addOptionsWithLabelsToDataListElement(dataListElement, objects, valuePropertyName, labelPropertyName) {
+  for (const obj of objects) {
+    const option = new Option(obj[labelPropertyName], obj[valuePropertyName]);
+    dataListElement.appendChild(option);
   }
 }
 
