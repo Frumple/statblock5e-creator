@@ -19,6 +19,16 @@ export default class GenerateSpellcastingDialog extends CustomDialog {
     this.spellcasterAbilitySelect = this.shadowRoot.getElementById('spellcaster-ability-select');
     this.spellcasterLevelInput = this.shadowRoot.getElementById('spellcaster-level-input');
 
+    this.spellCategories = [];
+
+    const cantripsAtWillCategory = this.shadowRoot.getElementById('cantrips-at-will-spell-category');
+    this.spellCategories.push(cantripsAtWillCategory);
+
+    for (let spellLevel = 1; spellLevel < 10; spellLevel++) {
+      const spellCategory = this.shadowRoot.getElementById(`level-${spellLevel}-spell-category`);
+      this.spellCategories.push(spellCategory);
+    }
+
     this.cancelButton = this.shadowRoot.getElementById('cancel-button');
     this.resetButton = this.shadowRoot.getElementById('reset-button');
     this.generateSpellcastingButton = this.shadowRoot.getElementById('generate-spellcasting-button');
@@ -27,6 +37,10 @@ export default class GenerateSpellcastingDialog extends CustomDialog {
   connectedCallback() {
     if (this.isConnected && ! this.isInitialized) {
       super.connectedCallback();
+
+      for (const spellCategory of this.spellCategories) {
+        spellCategory.propertyList.errorMessages = this.errorMessages;
+      }
 
       this.cancelButton.addEventListener('click', this.onClickCloseButton.bind(this));
       this.resetButton.addEventListener('click', this.onClickResetButton.bind(this));
@@ -53,7 +67,7 @@ export default class GenerateSpellcastingDialog extends CustomDialog {
 
   }
 
-  generateSpellCasting() {
+  generateSpellcasting() {
 
   }
 

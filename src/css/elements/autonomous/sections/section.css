@@ -55,14 +55,14 @@
   font-family: inherit;
   font-size: inherit;
   box-sizing: border-box;
-  height: 24px;
+  height: 26px;
 }
 
 .section__number-input {
   font-family: inherit;
   font-size: inherit;
   box-sizing: border-box;
-  height: 24px;
+  height: 26px;
 }
 
 .section__small-number-input {
@@ -73,7 +73,7 @@
   font-family: inherit;
   font-size: inherit;
   box-sizing: border-box;
-  height: 24px;
+  height: 26px;
 }
 
 .section__textarea {

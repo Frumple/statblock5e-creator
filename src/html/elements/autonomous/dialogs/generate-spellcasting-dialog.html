@@ -9,34 +9,67 @@
     </div>
 
     <div class="generate-spellcasting-dialog__content">
-      <error-messages id="error-messages"></error-messages>
-
       <div class="generate-spellcasting-dialog__main-container">
-        <div class="generate-spellcasting-dialog__settings-container">
-          <label class="generate-spellcasting-dialog__spellcaster-type-label generate-spellcasting-dialog__label" for="spellcaster-type-select">Spellcaster Type:</label>
-          <select id="spellcaster-type-select" class="generate-spellcasting-dialog__spellcaster-type-select section__select" name="spellcaster-type-select">
-            <option value="Innate">Innate</option>
-            <option value="Bard">Bard</option>
-            <option value="Cleric">Cleric</option>
-            <option value="Druid">Druid</option>
-            <option value="Paladin">Paladin</option>
-            <option value="Ranger">Ranger</option>
-            <option value="Sorcerer">Sorcerer</option>
-            <option value="Warlock">Warlock</option>
-            <option value="Wizard">Wizard</option>
-          </select>
-          <label class="generate-spellcasting-dialog__spellcaster-ability-label generate-spellcasting-dialog__label" for="spellcaster-ability-select">Spellcaster Ability:</label>
-          <select id="spellcaster-ability-select" class="generate-spellcasting-dialog__spellcaster-ability-select section__select" name="spellcaster-ability-select">
-            <option value="Strength">Strength</option>
-            <option value="Dexterity">Dexterity</option>
-            <option value="Constitution">Constitution</option>
-            <option value="Intelligence">Intelligence</option>
-            <option value="Wisdom">Wisdom</option>
-            <option value="Charisma">Charisma</option>
-          </select>
-          <label class="generate-spellcasting-dialog__spellcaster-level-label generate-spellcasting-dialog__label" for="spellcaster-level-input">Spellcaster Level:</label>
-          <input id="spellcaster-level-input" class="generate-spellcasting-dialog__spellcaster-level-input section__number-input section__small-number-input" is="number-input" type="number" name="spellcaster-level-input" pretty-name="Spellcaster Level" value="1" min="1" max="999" />
+        <div class="generate-spellcasting-dialog__heading-container">
+          <error-messages id="error-messages" class="generate-spellcasting-dialog__error-messages"></error-messages>
+          <div class="generate-spellcasting-dialog__settings-container">
+            <label class="generate-spellcasting-dialog__spellcaster-type-label generate-spellcasting-dialog__label" for="spellcaster-type-select">Spellcaster Type:</label>
+            <select id="spellcaster-type-select" class="generate-spellcasting-dialog__spellcaster-type-select section__select" name="spellcaster-type-select">
+              <option value="Innate">Innate</option>
+              <option value="Bard">Bard</option>
+              <option value="Cleric">Cleric</option>
+              <option value="Druid">Druid</option>
+              <option value="Paladin">Paladin</option>
+              <option value="Ranger">Ranger</option>
+              <option value="Sorcerer">Sorcerer</option>
+              <option value="Warlock">Warlock</option>
+              <option value="Wizard">Wizard</option>
+            </select>
+            <label class="generate-spellcasting-dialog__spellcaster-ability-label generate-spellcasting-dialog__label" for="spellcaster-ability-select">Spellcaster Ability:</label>
+            <select id="spellcaster-ability-select" class="generate-spellcasting-dialog__spellcaster-ability-select section__select" name="spellcaster-ability-select">
+              <option value="Strength">Strength</option>
+              <option value="Dexterity">Dexterity</option>
+              <option value="Constitution">Constitution</option>
+              <option value="Intelligence">Intelligence</option>
+              <option value="Wisdom">Wisdom</option>
+              <option value="Charisma">Charisma</option>
+            </select>
+            <label class="generate-spellcasting-dialog__spellcaster-level-label generate-spellcasting-dialog__label" for="spellcaster-level-input">Spellcaster Level:</label>
+            <input id="spellcaster-level-input" class="generate-spellcasting-dialog__spellcaster-level-input section__number-input" is="number-input" type="number" name="spellcaster-level-input" pretty-name="Spellcaster Level" value="1" min="1" max="999" />
+          </div>
         </div>
+
+
+        <spell-category id="cantrips-at-will-spell-category" class="generate-spellcasting-dialog__cantrips-at-will-spell-category generate-spellcasting-dialog__spell-category">
+          <span slot="heading">At-will</span>
+        </spell-category>
+        <spell-category id="level-1-spell-category" class="generate-spellcasting-dialog__level-1-spell-category generate-spellcasting-dialog__spell-category">
+          <span slot="heading">Level 1</span>
+        </spell-category>
+        <spell-category id="level-2-spell-category" class="generate-spellcasting-dialog__level-2-spell-category generate-spellcasting-dialog__spell-category">
+          <span slot="heading">Level 2</span>
+        </spell-category>
+        <spell-category id="level-3-spell-category" class="generate-spellcasting-dialog__level-3-spell-category generate-spellcasting-dialog__spell-category">
+          <span slot="heading">Level 3</span>
+        </spell-category>
+        <spell-category id="level-4-spell-category" class="generate-spellcasting-dialog__level-4-spell-category generate-spellcasting-dialog__spell-category">
+          <span slot="heading">Level 4</span>
+        </spell-category>
+        <spell-category id="level-5-spell-category" class="generate-spellcasting-dialog__level-5-spell-category generate-spellcasting-dialog__spell-category">
+          <span slot="heading">Level 5</span>
+        </spell-category>
+        <spell-category id="level-6-spell-category" class="generate-spellcasting-dialog__level-6-spell-category generate-spellcasting-dialog__spell-category">
+          <span slot="heading">Level 6</span>
+        </spell-category>
+        <spell-category id="level-7-spell-category" class="generate-spellcasting-dialog__level-7-spell-category generate-spellcasting-dialog__spell-category">
+          <span slot="heading">Level 7</span>
+        </spell-category>
+        <spell-category id="level-8-spell-category" class="generate-spellcasting-dialog__level-8-spell-category generate-spellcasting-dialog__spell-category">
+          <span slot="heading">Level 8</span>
+        </spell-category>
+        <spell-category id="level-9-spell-category" class="generate-spellcasting-dialog__level-9-spell-category generate-spellcasting-dialog__spell-category">
+          <span slot="heading">Level 9</span>
+        </spell-category>
 
         <div class="generate-spellcasting-dialog__preview-container">
           <label class="generate-spellcasting-dialog__preview-label generate-spellcasting-dialog__label">Preview</label>
