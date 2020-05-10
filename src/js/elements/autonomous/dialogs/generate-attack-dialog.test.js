@@ -10,7 +10,7 @@ import Attack from '../../../models/attack.js';
 
 const abilitiesModel = CurrentContext.creature.abilities;
 const challengeRatingModel = CurrentContext.creature.challengeRating;
-const actions = CurrentContext.creature.actions;
+const actionsModel = CurrentContext.creature.actions;
 
 let actionsSection;
 let generateAttackDialog;
@@ -24,7 +24,7 @@ beforeAll(async() => {
 beforeEach(() => {
   abilitiesModel.reset();
   challengeRatingModel.reset();
-  actions.reset();
+  actionsModel.reset();
 
   actionsSection = new ActionsSection();
   TestCustomElements.initializeSection(actionsSection);

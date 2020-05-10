@@ -18,7 +18,7 @@ import LoadingScreen from './elements/autonomous/loading-screen.js';
 import PropertyBlock from './elements/autonomous/property-block.js';
 import PropertyLine from './elements/autonomous/property-line.js';
 import SectionDivider from './elements/autonomous/section-divider.js';
-import SpellCategory from './elements/autonomous/spell-category.js';
+import SpellCategoryBox from './elements/autonomous/spell-category-box.js';
 import TaperedRule from './elements/autonomous/tapered-rule.js';
 
 import ImportJsonDialog from './elements/autonomous/dialogs/import-json-dialog.js';
@@ -119,7 +119,7 @@ async function defineElements() {
     PropertyBlock,
     PropertyLine,
     SectionDivider,
-    SpellCategory,
+    SpellCategoryBox,
     TaperedRule,
 
     ImportJsonDialog,

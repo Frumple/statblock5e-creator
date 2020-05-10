@@ -52,16 +52,16 @@
 .generate-spellcasting-dialog__spellcaster-ability-select { grid-area: 2 / 2; }
 .generate-spellcasting-dialog__spellcaster-level-input { grid-area: 3 / 2; }
 
-.generate-spellcasting-dialog__cantrips-at-will-spell-category { grid-area: 1 / 3; }
-.generate-spellcasting-dialog__level-1-spell-category { grid-area: 2 / 1; }
-.generate-spellcasting-dialog__level-2-spell-category { grid-area: 2 / 2; }
-.generate-spellcasting-dialog__level-3-spell-category { grid-area: 2 / 3; }
-.generate-spellcasting-dialog__level-4-spell-category { grid-area: 3 / 1; }
-.generate-spellcasting-dialog__level-5-spell-category { grid-area: 3 / 2; }
-.generate-spellcasting-dialog__level-6-spell-category { grid-area: 3 / 3; }
-.generate-spellcasting-dialog__level-7-spell-category { grid-area: 4 / 1; }
-.generate-spellcasting-dialog__level-8-spell-category { grid-area: 4 / 2; }
-.generate-spellcasting-dialog__level-9-spell-category { grid-area: 4 / 3; }
+.generate-spellcasting-dialog__cantrips-at-will-spell-category-box { grid-area: 1 / 3; }
+.generate-spellcasting-dialog__level-1-spell-category-box { grid-area: 2 / 1; }
+.generate-spellcasting-dialog__level-2-spell-category-box { grid-area: 2 / 2; }
+.generate-spellcasting-dialog__level-3-spell-category-box { grid-area: 2 / 3; }
+.generate-spellcasting-dialog__level-4-spell-category-box { grid-area: 3 / 1; }
+.generate-spellcasting-dialog__level-5-spell-category-box { grid-area: 3 / 2; }
+.generate-spellcasting-dialog__level-6-spell-category-box { grid-area: 3 / 3; }
+.generate-spellcasting-dialog__level-7-spell-category-box { grid-area: 4 / 1; }
+.generate-spellcasting-dialog__level-8-spell-category-box { grid-area: 4 / 2; }
+.generate-spellcasting-dialog__level-9-spell-category-box { grid-area: 4 / 3; }
 
 .generate-spellcasting-dialog__preview-container {
   grid-area: 1 / 4 / 5 / 5;
