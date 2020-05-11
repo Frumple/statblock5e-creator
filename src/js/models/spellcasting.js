@@ -5,7 +5,7 @@ export default class Spellcasting {
 
   reset() {
     this.spellcasterType = 'innate';
-    this.spellcasterAbility = 'intelligence';
+    this.spellcasterAbility = 'charisma';
     this.spellcasterLevel = 1;
 
     this.spellCategories = [];

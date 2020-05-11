@@ -6,6 +6,9 @@ import Spellcasting from '../../../models/spellcasting.js';
 
 import * as TestCustomElements from '../../../helpers/test/test-custom-elements.js';
 import { inputValueAndTriggerEvent } from '../../../helpers/element-helpers.js';
+import { formatSpellSlotQuantity } from '../../../helpers/string-formatter.js';
+
+import SpellcasterTypes from '../../../data/spellcaster-types.js';
 
 const abilitiesModel = CurrentContext.creature.abilities;
 const challengeRatingModel = CurrentContext.creature.challengeRating;
@@ -63,24 +66,67 @@ describe('when the generate spellcasting dialog is opened', () => {
   });
 
   describe('and the dialog is submitted for an innate spellcaster, it should add a new spellcasting block under special traits', () => {
+    /* eslint-disable indent, no-unexpected-multiline */
+    it.each
+    `
+      description                   | level | abilityName       | abilityScore | proficiencyBonus | cantrips | level1Spells | level2Spells | level3Spells | level4Spells | level5Spells | level6Spells | level7Spells | level8Spells | level9Spells | expectedGeneratedText | expectedRenderedText
+      ${'Deep Gnome (Svirfneblin)'} | ${1}  | ${'intelligence'} | ${12}        | ${2}             | ${[]}    | ${[]}        | ${[]}        | ${[]}        | ${[]}        | ${[]}        | ${[]}        | ${[]}        | ${[]}        | ${[]}        | ${''}                 | ${''}
+    `
+    ('$description',
+    ({level, abilityName, abilityScore, proficiencyBonus, cantrips, level1Spells, level2Spells, level3Spells, level4Spells, level5Spells, level6Spells, level7Spells, level8Spells, level9Spells, expectedGeneratedText, expectedRenderedText}) => {
+      abilitiesModel.abilities[abilityName].score = abilityScore;
+      challengeRatingModel.proficiencyBonus = proficiencyBonus;
 
+      const spellcastingModel = new Spellcasting();
+      spellcastingModel.spellcasterType = 'innate';
+      spellcastingModel.spellcasterAbility = abilityName;
+      spellcastingModel.spellcasterLevel = level;
+
+      setDialogControls(spellcastingModel, true);
+
+      verifyDialogModel(spellcastingModel);
+      verifyDialogControls(spellcastingModel, expectedRenderedText);
+      saveDialogAndVerifySpecialTraitBlocks(expectedGeneratedText, expectedRenderedText);
+    });
+    /* eslint-enable indent, no-unexpected-multiline */
   });
 
   describe('and the dialog is submitted for a bard spellcaster, it should add a new spellcasting block under special traits', () => {
     /* eslint-disable indent, no-unexpected-multiline */
     it.each
     `
-      description       | level | abilityScore | proficiencyBonus | cantrips | level1Spells | level2Spells | level3Spells | level4Spells | level5Spells | level6Spells | level7Spells | level8Spells | level9Spells | expectedGeneratedText | expectedRenderedText
-      ${'Level 1 Bard'} | ${1}  | ${12}        | ${2}             | ${[]}    | ${[]}        | ${[]}        | ${[]}        | ${[]}        | ${[]}        | ${[]}        | ${[]}        | ${[]}        | ${[]}        | ${''}                 | ${''}
+      description        | level | abilityScore | proficiencyBonus | cantrips | level1Spells | level2Spells | level3Spells | level4Spells | level5Spells | level6Spells | level7Spells | level8Spells | level9Spells | expectedGeneratedText | expectedRenderedText
+      ${'Level 1 Bard'}  | ${1}  | ${12}        | ${2}             | ${[]}    | ${[]}        | ${[]}        | ${[]}        | ${[]}        | ${[]}        | ${[]}        | ${[]}        | ${[]}        | ${[]}        | ${''}                 | ${''}
+      ${'Level 2 Bard'}  | ${2}  | ${12}        | ${2}             | ${[]}    | ${[]}        | ${[]}        | ${[]}        | ${[]}        | ${[]}        | ${[]}        | ${[]}        | ${[]}        | ${[]}        | ${''}                 | ${''}
+      ${'Level 3 Bard'}  | ${3}  | ${12}        | ${2}             | ${[]}    | ${[]}        | ${[]}        | ${[]}        | ${[]}        | ${[]}        | ${[]}        | ${[]}        | ${[]}        | ${[]}        | ${''}                 | ${''}
+      ${'Level 4 Bard'}  | ${4}  | ${14}        | ${2}             | ${[]}    | ${[]}        | ${[]}        | ${[]}        | ${[]}        | ${[]}        | ${[]}        | ${[]}        | ${[]}        | ${[]}        | ${''}                 | ${''}
+      ${'Level 5 Bard'}  | ${5}  | ${14}        | ${3}             | ${[]}    | ${[]}        | ${[]}        | ${[]}        | ${[]}        | ${[]}        | ${[]}        | ${[]}        | ${[]}        | ${[]}        | ${''}                 | ${''}
+      ${'Level 6 Bard'}  | ${6}  | ${14}        | ${3}             | ${[]}    | ${[]}        | ${[]}        | ${[]}        | ${[]}        | ${[]}        | ${[]}        | ${[]}        | ${[]}        | ${[]}        | ${''}                 | ${''}
+      ${'Level 7 Bard'}  | ${7}  | ${14}        | ${3}             | ${[]}    | ${[]}        | ${[]}        | ${[]}        | ${[]}        | ${[]}        | ${[]}        | ${[]}        | ${[]}        | ${[]}        | ${''}                 | ${''}
+      ${'Level 8 Bard'}  | ${8}  | ${16}        | ${3}             | ${[]}    | ${[]}        | ${[]}        | ${[]}        | ${[]}        | ${[]}        | ${[]}        | ${[]}        | ${[]}        | ${[]}        | ${''}                 | ${''}
+      ${'Level 9 Bard'}  | ${9}  | ${16}        | ${4}             | ${[]}    | ${[]}        | ${[]}        | ${[]}        | ${[]}        | ${[]}        | ${[]}        | ${[]}        | ${[]}        | ${[]}        | ${''}                 | ${''}
+      ${'Level 10 Bard'} | ${10} | ${16}        | ${4}             | ${[]}    | ${[]}        | ${[]}        | ${[]}        | ${[]}        | ${[]}        | ${[]}        | ${[]}        | ${[]}        | ${[]}        | ${''}                 | ${''}
+      ${'Level 11 Bard'} | ${11} | ${16}        | ${4}             | ${[]}    | ${[]}        | ${[]}        | ${[]}        | ${[]}        | ${[]}        | ${[]}        | ${[]}        | ${[]}        | ${[]}        | ${''}                 | ${''}
+      ${'Level 12 Bard'} | ${12} | ${18}        | ${4}             | ${[]}    | ${[]}        | ${[]}        | ${[]}        | ${[]}        | ${[]}        | ${[]}        | ${[]}        | ${[]}        | ${[]}        | ${''}                 | ${''}
+      ${'Level 13 Bard'} | ${13} | ${18}        | ${5}             | ${[]}    | ${[]}        | ${[]}        | ${[]}        | ${[]}        | ${[]}        | ${[]}        | ${[]}        | ${[]}        | ${[]}        | ${''}                 | ${''}
+      ${'Level 14 Bard'} | ${14} | ${18}        | ${5}             | ${[]}    | ${[]}        | ${[]}        | ${[]}        | ${[]}        | ${[]}        | ${[]}        | ${[]}        | ${[]}        | ${[]}        | ${''}                 | ${''}
+      ${'Level 15 Bard'} | ${15} | ${18}        | ${5}             | ${[]}    | ${[]}        | ${[]}        | ${[]}        | ${[]}        | ${[]}        | ${[]}        | ${[]}        | ${[]}        | ${[]}        | ${''}                 | ${''}
+      ${'Level 16 Bard'} | ${16} | ${18}        | ${5}             | ${[]}    | ${[]}        | ${[]}        | ${[]}        | ${[]}        | ${[]}        | ${[]}        | ${[]}        | ${[]}        | ${[]}        | ${''}                 | ${''}
+      ${'Level 17 Bard'} | ${17} | ${20}        | ${6}             | ${[]}    | ${[]}        | ${[]}        | ${[]}        | ${[]}        | ${[]}        | ${[]}        | ${[]}        | ${[]}        | ${[]}        | ${''}                 | ${''}
+      ${'Level 18 Bard'} | ${18} | ${20}        | ${6}             | ${[]}    | ${[]}        | ${[]}        | ${[]}        | ${[]}        | ${[]}        | ${[]}        | ${[]}        | ${[]}        | ${[]}        | ${''}                 | ${''}
+      ${'Level 19 Bard'} | ${19} | ${22}        | ${6}             | ${[]}    | ${[]}        | ${[]}        | ${[]}        | ${[]}        | ${[]}        | ${[]}        | ${[]}        | ${[]}        | ${[]}        | ${''}                 | ${''}
+      ${'Level 20 Bard'} | ${20} | ${22}        | ${6}             | ${[]}    | ${[]}        | ${[]}        | ${[]}        | ${[]}        | ${[]}        | ${[]}        | ${[]}        | ${[]}        | ${[]}        | ${''}                 | ${''}
     `
     ('$description',
     ({level, abilityScore, proficiencyBonus, cantrips, level1Spells, level2Spells, level3Spells, level4Spells, level5Spells, level6Spells, level7Spells, level8Spells, level9Spells, expectedGeneratedText, expectedRenderedText}) => {
-      abilitiesModel.abilities['charisma'].score = abilityScore;
+      const abilityName = 'charisma';
+
+      abilitiesModel.abilities[abilityName].score = abilityScore;
       challengeRatingModel.proficiencyBonus = proficiencyBonus;
 
       const spellcastingModel = new Spellcasting();
       spellcastingModel.spellcasterType = 'bard';
-      spellcastingModel.spellcasterAbility = 'charisma';
+      spellcastingModel.spellcasterAbility = abilityName;
       spellcastingModel.spellcasterLevel = level;
 
       setDialogControls(spellcastingModel);
@@ -124,9 +170,9 @@ describe('when the generate spellcasting dialog is opened', () => {
 function setDialogControls(spellcastingModel, setSpellcasterAbility) {
   inputValueAndTriggerEvent(generateSpellcastingDialog.spellcasterTypeSelect, spellcastingModel.spellcasterType);
 
-  // The Spellcaster Ability should automatically be set when we change the
-  // Spellcaster Type. If we need to set it to some other ability, set
-  // 'setSpellcasterAbility' to true.
+  // When the Spellcaster Type is changed, the Spellcaster Ability is
+  // automatically set to the corresponding value. If we need to manually set
+  // it to some other ability, set 'setSpellcasterAbility' to true.
   if (setSpellcasterAbility) {
     inputValueAndTriggerEvent(generateSpellcastingDialog.spellcasterAbilitySelect, spellcastingModel.spellcasterAbility);
   }
@@ -146,6 +192,34 @@ function verifyDialogControls(expectedModel, expectedPreviewText) {
   expect(generateSpellcastingDialog.spellcasterTypeSelect.value).toBe(expectedModel.spellcasterType);
   expect(generateSpellcastingDialog.spellcasterAbilitySelect.value).toBe(expectedModel.spellcasterAbility);
   expect(generateSpellcastingDialog.spellcasterLevelInput.valueAsInt).toBe(expectedModel.spellcasterLevel);
+
+  if (expectedModel.spellcasterType === 'innate') {
+    expect(generateSpellcastingDialog.spellCategoryBoxes[0].heading).toHaveTextContent('At-will');
+    expect(generateSpellcastingDialog.spellCategoryBoxes[1].heading).toHaveTextContent('3/day');
+    expect(generateSpellcastingDialog.spellCategoryBoxes[2].heading).toHaveTextContent('2/day');
+    expect(generateSpellcastingDialog.spellCategoryBoxes[3].heading).toHaveTextContent('1/day');
+
+    for (let spellLevel = 4; spellLevel <= 9; spellLevel++) {
+      expect(generateSpellcastingDialog.spellCategoryBoxes[spellLevel].heading).toHaveTextContent('');
+    }
+  } else {
+    expect(generateSpellcastingDialog.spellCategoryBoxes[0].heading).toHaveTextContent('Cantrips');
+
+    const expectedSpellSlots = SpellcasterTypes[expectedModel.spellcasterType].levels[expectedModel.spellcasterLevel].spellSlots;
+
+    for (let spellLevel = 1; spellLevel <= 9; spellLevel++) {
+      const heading = generateSpellcastingDialog.spellCategoryBoxes[spellLevel].heading;
+
+      if (spellLevel <= expectedSpellSlots.length) {
+        const expectedSlotQuantity = expectedSpellSlots[spellLevel - 1];
+        const formattedSlotQuantity = formatSpellSlotQuantity(expectedSlotQuantity);
+
+        expect(heading).toHaveTextContent(`Level ${spellLevel} (${formattedSlotQuantity})`);
+      } else {
+        expect(heading).toHaveTextContent('');
+      }
+    }
+  }
 }
 
 function verifyDialogResetToDefaults() {

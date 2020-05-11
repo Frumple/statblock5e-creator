@@ -32,6 +32,10 @@ export function formatModifierNumber(modifier) {
   return modifier.toString();
 }
 
+export function formatSpellSlotQuantity(spellSlotQuantity) {
+  return (spellSlotQuantity === 1) ? `${spellSlotQuantity} slot` : `${spellSlotQuantity} slots`;
+}
+
 export function trimTrailingPeriods(string) {
   return string.replace(/\.+$/, '');
 }

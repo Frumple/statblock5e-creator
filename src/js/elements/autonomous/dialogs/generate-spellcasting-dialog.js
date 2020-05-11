@@ -5,6 +5,7 @@ import SpellcasterTypes from '../../../data/spellcaster-types.js';
 import Spellcasting from '../../../models/spellcasting.js';
 
 import { focusAndSelectElement, inputValueAndTriggerEvent } from '../../../helpers/element-helpers.js';
+import { formatSpellSlotQuantity } from '../../../helpers/string-formatter.js';
 
 export default class GenerateSpellcastingDialog extends CustomDialog {
   static get elementName() { return 'generate-spellcasting-dialog'; }
@@ -70,10 +71,12 @@ export default class GenerateSpellcastingDialog extends CustomDialog {
 
   onInputSpellcasterAbility() {
     this.spellcastingModel.spellcasterAbility = this.spellcasterAbilitySelect.value;
+    this.update();
   }
 
   onInputSpellcasterLevel() {
-    this.spellcastingModel.spellcastingLevel = this.spellcasterLevelInput.valueAsInt;
+    this.spellcastingModel.spellcasterLevel = this.spellcasterLevelInput.valueAsInt;
+    this.update();
   }
 
   onClickResetButton() {
@@ -98,6 +101,32 @@ export default class GenerateSpellcastingDialog extends CustomDialog {
   }
 
   update() {
+    if (this.spellcastingModel.spellcasterType === 'innate') {
+      this.spellCategoryBoxes[0].heading.textContent = 'At-will';
+      this.spellCategoryBoxes[1].heading.textContent = '3/day';
+      this.spellCategoryBoxes[2].heading.textContent = '2/day';
+      this.spellCategoryBoxes[3].heading.textContent = '1/day';
 
+      for (let spellLevel = 4; spellLevel <= 9; spellLevel++) {
+        this.spellCategoryBoxes[spellLevel].heading.textContent = '';
+      }
+    } else {
+      this.spellCategoryBoxes[0].heading.textContent = 'Cantrips';
+
+      const spellSlots = SpellcasterTypes[this.spellcastingModel.spellcasterType].levels[this.spellcastingModel.spellcasterLevel].spellSlots;
+
+      for (let spellLevel = 1; spellLevel <= 9; spellLevel++) {
+        const heading = this.spellCategoryBoxes[spellLevel].heading;
+
+        if (spellLevel <= spellSlots.length) {
+          const slotQuantity = spellSlots[spellLevel - 1];
+          const formattedSlotQuantity = formatSpellSlotQuantity(slotQuantity);
+
+          heading.textContent = `Level ${spellLevel} (${formattedSlotQuantity})`;
+        } else {
+          heading.textContent = '';
+        }
+      }
+    }
   }
 }

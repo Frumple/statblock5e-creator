@@ -15,14 +15,16 @@ export default class SpellCategoryBox extends CustomAutonomousElement {
     super(SpellCategoryBox.templatePaths);
 
     if (isRunningInJsDom) {
-      this.container = null;
-      this.heading = null;
+      this.container = document.createElement('div');
+      this.heading = document.createElement('label');
       this.propertyList = new PropertyList(this);
     } else {
       this.container = this.shadowRoot.getElementById('container');
       this.heading = this.shadowRoot.getElementById('heading');
       this.propertyList = this.shadowRoot.getElementById('property-list');
     }
+
+    this.propertyList.singleItemName = 'spell';
   }
 
   connectedCallback() {
