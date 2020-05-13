@@ -63,6 +63,8 @@ class FakeCustomAutonomousElement {
 
     this.element = document.createElement(this.elementName);
 
+    this.classList = this.element.classList;
+
     this.dataset = new Map();
 
     // Create an in-memory fake shadow root and append the HTML templates to its body
@@ -104,6 +106,10 @@ class FakeCustomAutonomousElement {
   }
 
   // Since this element is fake, apply attribute operations on the internal element
+  hasAttribute(name) {
+    return this.element.hasAttribute(name);
+  }
+
   getAttribute(name) {
     return this.element.getAttribute(name);
   }

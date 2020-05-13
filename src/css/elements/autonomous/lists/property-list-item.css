@@ -2,7 +2,7 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 3px;
+  padding: 4px;
 }
 
 .property-list-item__label {

@@ -4,8 +4,13 @@
   align-items: center;
   border: 1px solid #aaaaaa;
   min-height: 122px;
+  width: 228px;
   padding: 5px;
   margin: 5px;
+}
+
+.spell-category__container_disabled {
+  background: #eeeeee;
 }
 
 .spell-category__heading {
@@ -14,5 +19,9 @@
 }
 
 .spell-category__property-list {
-  margin-top: 5px;
+  margin: 5px 5px 0 5px;
+}
+
+.spell-category__property-list_hidden {
+  display: none;
 }

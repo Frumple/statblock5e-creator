@@ -107,7 +107,13 @@ export default class GenerateSpellcastingDialog extends CustomDialog {
       this.spellCategoryBoxes[2].heading.textContent = '2/day';
       this.spellCategoryBoxes[3].heading.textContent = '1/day';
 
+      this.spellCategoryBoxes[0].disabled = false;
+      this.spellCategoryBoxes[1].disabled = false;
+      this.spellCategoryBoxes[2].disabled = false;
+      this.spellCategoryBoxes[3].disabled = false;
+
       for (let spellLevel = 4; spellLevel <= 9; spellLevel++) {
+        this.spellCategoryBoxes[spellLevel].disabled = true;
         this.spellCategoryBoxes[spellLevel].heading.textContent = '';
       }
     } else {
@@ -116,15 +122,17 @@ export default class GenerateSpellcastingDialog extends CustomDialog {
       const spellSlots = SpellcasterTypes[this.spellcastingModel.spellcasterType].levels[this.spellcastingModel.spellcasterLevel].spellSlots;
 
       for (let spellLevel = 1; spellLevel <= 9; spellLevel++) {
-        const heading = this.spellCategoryBoxes[spellLevel].heading;
+        const spellCategoryBox = this.spellCategoryBoxes[spellLevel];
 
         if (spellLevel <= spellSlots.length) {
           const slotQuantity = spellSlots[spellLevel - 1];
           const formattedSlotQuantity = formatSpellSlotQuantity(slotQuantity);
 
-          heading.textContent = `Level ${spellLevel} (${formattedSlotQuantity})`;
+          spellCategoryBox.disabled = false;
+          spellCategoryBox.heading.textContent = `Level ${spellLevel} (${formattedSlotQuantity})`;
         } else {
-          heading.textContent = '';
+          spellCategoryBox.disabled = true;
+          spellCategoryBox.heading.textContent = '';
         }
       }
     }

@@ -194,13 +194,26 @@ function verifyDialogControls(expectedModel, expectedPreviewText) {
   expect(generateSpellcastingDialog.spellcasterLevelInput.valueAsInt).toBe(expectedModel.spellcasterLevel);
 
   if (expectedModel.spellcasterType === 'innate') {
-    expect(generateSpellcastingDialog.spellCategoryBoxes[0].heading).toHaveTextContent('At-will');
-    expect(generateSpellcastingDialog.spellCategoryBoxes[1].heading).toHaveTextContent('3/day');
-    expect(generateSpellcastingDialog.spellCategoryBoxes[2].heading).toHaveTextContent('2/day');
-    expect(generateSpellcastingDialog.spellCategoryBoxes[3].heading).toHaveTextContent('1/day');
+    const atWillSpellCategoryBox = generateSpellcastingDialog.spellCategoryBoxes[0];
+    const threePerDaySpellCategoryBox = generateSpellcastingDialog.spellCategoryBoxes[1];
+    const twoPerDaySpellCategoryBox = generateSpellcastingDialog.spellCategoryBoxes[2];
+    const onePerDaySpellCategoryBox = generateSpellcastingDialog.spellCategoryBoxes[3];
+
+    expect(atWillSpellCategoryBox.disabled).toBe(false);
+    expect(threePerDaySpellCategoryBox.disabled).toBe(false);
+    expect(twoPerDaySpellCategoryBox.disabled).toBe(false);
+    expect(onePerDaySpellCategoryBox.disabled).toBe(false);
+
+    expect(atWillSpellCategoryBox.heading).toHaveTextContent('At-will');
+    expect(threePerDaySpellCategoryBox.heading).toHaveTextContent('3/day');
+    expect(twoPerDaySpellCategoryBox.heading).toHaveTextContent('2/day');
+    expect(onePerDaySpellCategoryBox.heading).toHaveTextContent('1/day');
 
     for (let spellLevel = 4; spellLevel <= 9; spellLevel++) {
-      expect(generateSpellcastingDialog.spellCategoryBoxes[spellLevel].heading).toHaveTextContent('');
+      const spellCategoryBox = generateSpellcastingDialog.spellCategoryBoxes[spellLevel];
+
+      expect(spellCategoryBox.disabled).toBe(true);
+      expect(spellCategoryBox.heading).toHaveTextContent('');
     }
   } else {
     expect(generateSpellcastingDialog.spellCategoryBoxes[0].heading).toHaveTextContent('Cantrips');
@@ -208,15 +221,17 @@ function verifyDialogControls(expectedModel, expectedPreviewText) {
     const expectedSpellSlots = SpellcasterTypes[expectedModel.spellcasterType].levels[expectedModel.spellcasterLevel].spellSlots;
 
     for (let spellLevel = 1; spellLevel <= 9; spellLevel++) {
-      const heading = generateSpellcastingDialog.spellCategoryBoxes[spellLevel].heading;
+      const spellCategoryBox = generateSpellcastingDialog.spellCategoryBoxes[spellLevel];
 
       if (spellLevel <= expectedSpellSlots.length) {
         const expectedSlotQuantity = expectedSpellSlots[spellLevel - 1];
         const formattedSlotQuantity = formatSpellSlotQuantity(expectedSlotQuantity);
 
-        expect(heading).toHaveTextContent(`Level ${spellLevel} (${formattedSlotQuantity})`);
+        expect(spellCategoryBox.disabled).toBe(false);
+        expect(spellCategoryBox.heading).toHaveTextContent(`Level ${spellLevel} (${formattedSlotQuantity})`);
       } else {
-        expect(heading).toHaveTextContent('');
+        expect(spellCategoryBox.disabled).toBe(true);
+        expect(spellCategoryBox.heading).toHaveTextContent('');
       }
     }
   }
