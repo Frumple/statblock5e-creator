@@ -6,7 +6,7 @@ import Spellcasting from '../../../models/spellcasting.js';
 
 import * as TestCustomElements from '../../../helpers/test/test-custom-elements.js';
 import { inputValueAndTriggerEvent } from '../../../helpers/element-helpers.js';
-import { formatSpellSlotQuantity } from '../../../helpers/string-formatter.js';
+import { formatIntegerWithOrdinalIndicator, formatSpellSlotQuantity } from '../../../helpers/string-formatter.js';
 
 import SpellcasterTypes from '../../../data/spellcaster-types.js';
 
@@ -42,7 +42,7 @@ describe('when the generate spellcasting dialog is opened', () => {
     specialTraitsSection.editElements.generateSpellcastingButton.click();
   });
 
-  it.skip('should initially have its model and controls set to their defaults, and focus on the spellcaster type field', () => {
+  it('should initially have its model and controls set to their defaults, and focus on the spellcaster type field', () => {
     verifyDialogResetToDefaults();
     expect(generateSpellcastingDialog.spellcasterTypeSelect).toHaveFocus();
   });
@@ -69,11 +69,11 @@ describe('when the generate spellcasting dialog is opened', () => {
     /* eslint-disable indent, no-unexpected-multiline */
     it.each
     `
-      description                   | level | abilityName       | abilityScore | proficiencyBonus | cantrips | level1Spells | level2Spells | level3Spells | level4Spells | level5Spells | level6Spells | level7Spells | level8Spells | level9Spells | expectedGeneratedText | expectedRenderedText
-      ${'Deep Gnome (Svirfneblin)'} | ${1}  | ${'intelligence'} | ${12}        | ${2}             | ${[]}    | ${[]}        | ${[]}        | ${[]}        | ${[]}        | ${[]}        | ${[]}        | ${[]}        | ${[]}        | ${[]}        | ${''}                 | ${''}
+      description                   | level | abilityName       | abilityScore | proficiencyBonus | atWillSpells | threePerDaySpells | twoPerDaySpells | onePerDaySpells | expectedGeneratedText | expectedRenderedText
+      ${'Deep Gnome (Svirfneblin)'} | ${1}  | ${'intelligence'} | ${12}        | ${2}             | ${[]}        | ${[]}             | ${[]}           | ${[]}           | ${''}                 | ${''}
     `
     ('$description',
-    ({level, abilityName, abilityScore, proficiencyBonus, cantrips, level1Spells, level2Spells, level3Spells, level4Spells, level5Spells, level6Spells, level7Spells, level8Spells, level9Spells, expectedGeneratedText, expectedRenderedText}) => {
+    ({level, abilityName, abilityScore, proficiencyBonus, atWillSpells, threePerDaySpells, twoPerDaySpells, onePerDaySpells, expectedGeneratedText, expectedRenderedText}) => {
       abilitiesModel.abilities[abilityName].score = abilityScore;
       challengeRatingModel.proficiencyBonus = proficiencyBonus;
 
@@ -92,7 +92,7 @@ describe('when the generate spellcasting dialog is opened', () => {
   });
 
   describe('and the dialog is submitted for a bard spellcaster, it should add a new spellcasting block under special traits', () => {
-    /* eslint-disable indent, no-unexpected-multiline */
+    /* eslint-disable indent, no-unexpected-multiline, no-unused-vars */
     it.each
     `
       description        | level | abilityScore | proficiencyBonus | cantrips | level1Spells | level2Spells | level3Spells | level4Spells | level5Spells | level6Spells | level7Spells | level8Spells | level9Spells | expectedGeneratedText | expectedRenderedText
@@ -129,13 +129,18 @@ describe('when the generate spellcasting dialog is opened', () => {
       spellcastingModel.spellcasterAbility = abilityName;
       spellcastingModel.spellcasterLevel = level;
 
+      spellcastingModel.spellCategories[0].spells = cantrips;
+      for (let spellLevel = 1; spellLevel <= 9; spellLevel++) {
+        spellcastingModel.spellCategories[spellLevel].spells = eval(`level${spellLevel}Spells`);
+      }
+
       setDialogControls(spellcastingModel);
 
       verifyDialogModel(spellcastingModel);
       verifyDialogControls(spellcastingModel, expectedRenderedText);
       saveDialogAndVerifySpecialTraitBlocks(expectedGeneratedText, expectedRenderedText);
     });
-    /* eslint-enable indent, no-unexpected-multiline */
+    /* eslint-enable indent, no-unexpected-multiline, no-unused-vars */
   });
 
   describe('and the dialog is submitted for a cleric spellcaster, it should add a new spellcasting block under special traits', () => {
@@ -186,6 +191,24 @@ function verifyDialogModel(expectedModel) {
   expect(spellcastingModel.spellcasterType).toBe(expectedModel.spellcasterType);
   expect(spellcastingModel.spellcasterAbility).toBe(expectedModel.spellcasterAbility);
   expect(spellcastingModel.spellcasterLevel).toBe(expectedModel.spellcasterLevel);
+
+  const expectedSpellSlots = expectedModel.spellcasterType === 'innate' ? [0,0,0] : SpellcasterTypes[expectedModel.spellcasterType].levels[expectedModel.spellcasterLevel].spellSlots;
+
+  for (let spellLevel = 0; spellLevel <= 9; spellLevel++) {
+    const spellCategory = spellcastingModel.spellCategories[spellLevel];
+    const expectedSpellCategory = expectedModel.spellCategories[spellLevel];
+
+    expectedSpellCategory.isEnabled = (spellLevel <= expectedSpellSlots.length);
+    expectedSpellCategory.level = spellLevel;
+
+    verifyDialogModelSpellCategory(spellCategory, expectedSpellCategory);
+  }
+}
+
+function verifyDialogModelSpellCategory(spellCategory, expectedSpellCategory) {
+  expect(spellCategory.isEnabled).toBe(expectedSpellCategory.isEnabled);
+  expect(spellCategory.level).toBe(expectedSpellCategory.level);
+  expect(spellCategory.spells).toStrictEqual(expectedSpellCategory.spells);
 }
 
 function verifyDialogControls(expectedModel, expectedPreviewText) {
@@ -194,41 +217,47 @@ function verifyDialogControls(expectedModel, expectedPreviewText) {
   expect(generateSpellcastingDialog.spellcasterLevelInput.valueAsInt).toBe(expectedModel.spellcasterLevel);
 
   if (expectedModel.spellcasterType === 'innate') {
-    const atWillSpellCategoryBox = generateSpellcastingDialog.spellCategoryBoxes[0];
-    const threePerDaySpellCategoryBox = generateSpellcastingDialog.spellCategoryBoxes[1];
-    const twoPerDaySpellCategoryBox = generateSpellcastingDialog.spellCategoryBoxes[2];
-    const onePerDaySpellCategoryBox = generateSpellcastingDialog.spellCategoryBoxes[3];
-
-    expect(atWillSpellCategoryBox.disabled).toBe(false);
-    expect(threePerDaySpellCategoryBox.disabled).toBe(false);
-    expect(twoPerDaySpellCategoryBox.disabled).toBe(false);
-    expect(onePerDaySpellCategoryBox.disabled).toBe(false);
-
-    expect(atWillSpellCategoryBox.heading).toHaveTextContent('At-will');
-    expect(threePerDaySpellCategoryBox.heading).toHaveTextContent('3/day');
-    expect(twoPerDaySpellCategoryBox.heading).toHaveTextContent('2/day');
-    expect(onePerDaySpellCategoryBox.heading).toHaveTextContent('1/day');
-
-    for (let spellLevel = 4; spellLevel <= 9; spellLevel++) {
+    for (let spellLevel = 0; spellLevel <= 9; spellLevel++) {
       const spellCategoryBox = generateSpellcastingDialog.spellCategoryBoxes[spellLevel];
 
-      expect(spellCategoryBox.disabled).toBe(true);
-      expect(spellCategoryBox.heading).toHaveTextContent('');
+      switch(spellLevel) {
+      case 0:
+        expect(spellCategoryBox.disabled).toBe(false);
+        expect(spellCategoryBox.heading).toHaveTextContent('At will');
+        break;
+      case 1:
+        expect(spellCategoryBox.disabled).toBe(false);
+        expect(spellCategoryBox.heading).toHaveTextContent('3/day');
+        break;
+      case 2:
+        expect(spellCategoryBox.disabled).toBe(false);
+        expect(spellCategoryBox.heading).toHaveTextContent('2/day');
+        break;
+      case 3:
+        expect(spellCategoryBox.disabled).toBe(false);
+        expect(spellCategoryBox.heading).toHaveTextContent('1/day');
+        break;
+      default:
+        expect(spellCategoryBox.disabled).toBe(true);
+        expect(spellCategoryBox.heading).toHaveTextContent('');
+      }
     }
   } else {
-    expect(generateSpellcastingDialog.spellCategoryBoxes[0].heading).toHaveTextContent('Cantrips');
-
     const expectedSpellSlots = SpellcasterTypes[expectedModel.spellcasterType].levels[expectedModel.spellcasterLevel].spellSlots;
 
-    for (let spellLevel = 1; spellLevel <= 9; spellLevel++) {
+    for (let spellLevel = 0; spellLevel <= 9; spellLevel++) {
       const spellCategoryBox = generateSpellcastingDialog.spellCategoryBoxes[spellLevel];
 
-      if (spellLevel <= expectedSpellSlots.length) {
+      if (spellLevel === 0) {
+        expect(spellCategoryBox.disabled).toBe(false);
+        expect(spellCategoryBox.heading).toHaveTextContent('Cantrips');
+      } else if (spellLevel <= expectedSpellSlots.length) {
         const expectedSlotQuantity = expectedSpellSlots[spellLevel - 1];
         const formattedSlotQuantity = formatSpellSlotQuantity(expectedSlotQuantity);
+        const formattedSpellLevel = formatIntegerWithOrdinalIndicator(spellLevel);
 
         expect(spellCategoryBox.disabled).toBe(false);
-        expect(spellCategoryBox.heading).toHaveTextContent(`Level ${spellLevel} (${formattedSlotQuantity})`);
+        expect(spellCategoryBox.heading).toHaveTextContent(`${formattedSpellLevel} level (${formattedSlotQuantity})`);
       } else {
         expect(spellCategoryBox.disabled).toBe(true);
         expect(spellCategoryBox.heading).toHaveTextContent('');
@@ -243,11 +272,13 @@ function verifyDialogResetToDefaults() {
 }
 
 function verifyDialogModelResetToDefaults() {
-  // TODO
+  verifyDialogModel(new Spellcasting());
 }
 
 function verifyDialogControlsResetToDefaults() {
-  // TODO
+  const expectedPreviewText = ''; // TODO
+
+  verifyDialogControls(new Spellcasting(), expectedPreviewText);
 }
 
 function saveDialogAndVerifySpecialTraitBlocks(expectedGeneratedText, expectedRenderedText) {

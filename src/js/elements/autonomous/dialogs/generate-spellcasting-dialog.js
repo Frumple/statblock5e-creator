@@ -101,40 +101,28 @@ export default class GenerateSpellcastingDialog extends CustomDialog {
   }
 
   update() {
-    if (this.spellcastingModel.spellcasterType === 'innate') {
-      this.spellCategoryBoxes[0].heading.textContent = 'At-will';
-      this.spellCategoryBoxes[1].heading.textContent = '3/day';
-      this.spellCategoryBoxes[2].heading.textContent = '2/day';
-      this.spellCategoryBoxes[3].heading.textContent = '1/day';
+    this.updateModel();
+    this.updateControls();
+  }
 
-      this.spellCategoryBoxes[0].disabled = false;
-      this.spellCategoryBoxes[1].disabled = false;
-      this.spellCategoryBoxes[2].disabled = false;
-      this.spellCategoryBoxes[3].disabled = false;
+  updateModel() {
+    const spellSlots = this.spellcastingModel.spellcasterType === 'innate' ? [0,0,0] : SpellcasterTypes[this.spellcastingModel.spellcasterType].levels[this.spellcastingModel.spellcasterLevel].spellSlots;
 
-      for (let spellLevel = 4; spellLevel <= 9; spellLevel++) {
-        this.spellCategoryBoxes[spellLevel].disabled = true;
-        this.spellCategoryBoxes[spellLevel].heading.textContent = '';
-      }
-    } else {
-      this.spellCategoryBoxes[0].heading.textContent = 'Cantrips';
+    for (let spellLevel = 0; spellLevel <= 9; spellLevel++) {
+      const spellCategory = this.spellcastingModel.spellCategories[spellLevel];
 
-      const spellSlots = SpellcasterTypes[this.spellcastingModel.spellcasterType].levels[this.spellcastingModel.spellcasterLevel].spellSlots;
+      spellCategory.isEnabled = (spellLevel <= spellSlots.length);
+      // TODO: Update spells
+    }
+  }
 
-      for (let spellLevel = 1; spellLevel <= 9; spellLevel++) {
-        const spellCategoryBox = this.spellCategoryBoxes[spellLevel];
+  updateControls() {
+    for (let spellLevel = 0; spellLevel <= 9; spellLevel++) {
+      const spellCategory = this.spellcastingModel.spellCategories[spellLevel];
+      const spellCategoryBox = this.spellCategoryBoxes[spellLevel];
 
-        if (spellLevel <= spellSlots.length) {
-          const slotQuantity = spellSlots[spellLevel - 1];
-          const formattedSlotQuantity = formatSpellSlotQuantity(slotQuantity);
-
-          spellCategoryBox.disabled = false;
-          spellCategoryBox.heading.textContent = `Level ${spellLevel} (${formattedSlotQuantity})`;
-        } else {
-          spellCategoryBox.disabled = true;
-          spellCategoryBox.heading.textContent = '';
-        }
-      }
+      spellCategoryBox.disabled = ! spellCategory.isEnabled;
+      spellCategoryBox.heading.textContent = spellCategory.title;
     }
   }
 }
