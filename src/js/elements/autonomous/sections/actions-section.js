@@ -37,12 +37,6 @@ export default class ActionsSection extends BlockListSection {
     this.addBlock(event.detail.name, event.detail.text);
     this.reparse();
   }
-
-  reparse() {
-    super.reparse();
-
-    this.editElements.generateAttackDialog.update();
-  }
 }
 
 class ActionsSectionShowElements extends BlockListShowElements {

@@ -44,24 +44,81 @@ describe('when the generate spellcasting dialog is opened', () => {
 
   it('should initially have its model and controls set to their defaults, and focus on the spellcaster type field', () => {
     verifyDialogResetToDefaults();
-    expect(generateSpellcastingDialog.spellcasterTypeSelect).toHaveFocus();
   });
 
   describe('and the dialog is filled out and the reset button is clicked', () => {
-    it.skip('should reset the dialog model and controls back to their defaults, and focus on the spellcaster type field', () => {
+    it('should reset the dialog model and controls back to their defaults, and focus on the spellcaster type field', () => {
+      const spellcastingModel = createDummySpellcastingModel();
 
+      setDialogControls(spellcastingModel);
+
+      generateSpellcastingDialog.resetButton.click();
+
+      verifyDialogResetToDefaults();
     });
   });
 
   describe('and the dialog is submitted and then opened again', () => {
-    it.skip('should reset the dialog model and controls back to their defaults, and focus on the spellcaster type field', () => {
+    it('should reset the dialog model and controls back to their defaults, and focus on the spellcaster type field', () => {
+      const spellcastingModel = createDummySpellcastingModel();
 
+      setDialogControls(spellcastingModel);
+
+      generateSpellcastingDialog.generateSpellcastingButton.click();
+      specialTraitsSection.editElements.generateSpellcastingButton.click();
+
+      verifyDialogResetToDefaults();
+    });
+  });
+
+  describe('and the dialog fields are populated and then the spellcaster type is changed', () => {
+    it('should clear all spells', () => {
+      const originalModel = createDummySpellcastingModel();
+
+      const modifiedModel = createDummySpellcastingModel();
+      modifiedModel.spellcasterType = 'cleric';
+      modifiedModel.spellcasterAbility = 'wisdom';
+      modifiedModel.clearAllSpells();
+
+      const expectedPreviewText = ''; // TODO
+
+      setDialogControls(originalModel);
+
+      inputValueAndTriggerEvent(generateSpellcastingDialog.spellcasterTypeSelect, modifiedModel.spellcasterType);
+
+      verifyDialogModel(modifiedModel);
+      verifyDialogControls(modifiedModel, expectedPreviewText);
+    });
+  });
+
+  describe('and the dialog fields are populated and then the spellcaster level is changed and changed back', () => {
+    it('should retain all spells', () => {
+      const originalModel = createDummySpellcastingModel();
+
+      const modifiedModel = createDummySpellcastingModel();
+      modifiedModel.spellcasterLevel = 9;
+
+      const expectedPreviewText = ''; // TODO
+
+      setDialogControls(originalModel);
+
+      inputValueAndTriggerEvent(generateSpellcastingDialog.spellcasterLevelInput, modifiedModel.spellcasterLevel);
+      inputValueAndTriggerEvent(generateSpellcastingDialog.spellcasterLevelInput, originalModel.spellcasterLevel);
+
+      verifyDialogModel(originalModel);
+      verifyDialogControls(originalModel, expectedPreviewText);
     });
   });
 
   describe('and the dialog is submitted with a blank spellcaster level', () => {
-    it.skip('should display an error', () => {
+    it('should display an error', () => {
+      inputValueAndTriggerEvent(generateSpellcastingDialog.spellcasterLevelInput, '');
 
+      generateSpellcastingDialog.generateSpellcastingButton.click();
+
+      expect(generateSpellcastingDialog).toHaveError(
+        generateSpellcastingDialog.spellcasterLevelInput,
+        'Spellcaster Level must be a valid number.');
     });
   });
 
@@ -81,6 +138,11 @@ describe('when the generate spellcasting dialog is opened', () => {
       spellcastingModel.spellcasterType = 'innate';
       spellcastingModel.spellcasterAbility = abilityName;
       spellcastingModel.spellcasterLevel = level;
+
+      spellcastingModel.spellCategories[0].spells = atWillSpells;
+      spellcastingModel.spellCategories[1].spells = threePerDaySpells;
+      spellcastingModel.spellCategories[2].spells = twoPerDaySpells;
+      spellcastingModel.spellCategories[3].spells = onePerDaySpells;
 
       setDialogControls(spellcastingModel, true);
 
@@ -172,7 +234,28 @@ describe('when the generate spellcasting dialog is opened', () => {
   });
 });
 
-function setDialogControls(spellcastingModel, setSpellcasterAbility) {
+function createDummySpellcastingModel() {
+  const spellcastingModel = new Spellcasting();
+
+  spellcastingModel.spellcasterType = 'wizard';
+  spellcastingModel.spellcasterAbility = 'intelligence';
+  spellcastingModel.spellcasterLevel = 18;
+
+  spellcastingModel.spellCategories[0].spells = ['fire bolt', 'light', 'mage hand', 'presdigitation', 'shocking grasp'];
+  spellcastingModel.spellCategories[1].spells = ['detect magic', 'identify', 'mage armor', 'magic missile'];
+  spellcastingModel.spellCategories[2].spells = ['detect thoughts', 'mirror image', 'misty step'];
+  spellcastingModel.spellCategories[3].spells = ['counterspell', 'fly', 'lightning bolt'];
+  spellcastingModel.spellCategories[4].spells = ['banishment', 'fire shield', 'stoneskin'];
+  spellcastingModel.spellCategories[5].spells = ['cone of cold', 'scrying', 'wall of force'];
+  spellcastingModel.spellCategories[6].spells = ['globe of invulnerability'];
+  spellcastingModel.spellCategories[7].spells = ['teleport'];
+  spellcastingModel.spellCategories[8].spells = ['mind blank'];
+  spellcastingModel.spellCategories[9].spells = ['time stop'];
+
+  return spellcastingModel;
+}
+
+function setDialogControls(spellcastingModel, setSpellcasterAbility = false) {
   inputValueAndTriggerEvent(generateSpellcastingDialog.spellcasterTypeSelect, spellcastingModel.spellcasterType);
 
   // When the Spellcaster Type is changed, the Spellcaster Ability is
@@ -183,6 +266,16 @@ function setDialogControls(spellcastingModel, setSpellcasterAbility) {
   }
 
   inputValueAndTriggerEvent(generateSpellcastingDialog.spellcasterLevelInput, spellcastingModel.spellcasterLevel);
+
+  for (let spellLevel = 0; spellLevel <= 9; spellLevel++) {
+    const propertyList = generateSpellcastingDialog.spellCategoryBoxes[spellLevel].propertyList;
+    const spells = spellcastingModel.spellCategories[spellLevel].spells;
+
+    for (const spell of spells) {
+      propertyList.input.value = spell;
+      propertyList.addButton.click();
+    }
+  }
 }
 
 function verifyDialogModel(expectedModel) {
@@ -192,15 +285,11 @@ function verifyDialogModel(expectedModel) {
   expect(spellcastingModel.spellcasterAbility).toBe(expectedModel.spellcasterAbility);
   expect(spellcastingModel.spellcasterLevel).toBe(expectedModel.spellcasterLevel);
 
-  const expectedSpellSlots = expectedModel.spellcasterType === 'innate' ? [0,0,0] : SpellcasterTypes[expectedModel.spellcasterType].levels[expectedModel.spellcasterLevel].spellSlots;
-
   for (let spellLevel = 0; spellLevel <= 9; spellLevel++) {
     const spellCategory = spellcastingModel.spellCategories[spellLevel];
     const expectedSpellCategory = expectedModel.spellCategories[spellLevel];
 
-    expectedSpellCategory.isEnabled = (spellLevel <= expectedSpellSlots.length);
     expectedSpellCategory.level = spellLevel;
-
     verifyDialogModelSpellCategory(spellCategory, expectedSpellCategory);
   }
 }
@@ -218,6 +307,7 @@ function verifyDialogControls(expectedModel, expectedPreviewText) {
 
   if (expectedModel.spellcasterType === 'innate') {
     for (let spellLevel = 0; spellLevel <= 9; spellLevel++) {
+      const expectedSpellCategory = expectedModel.spellCategories[spellLevel];
       const spellCategoryBox = generateSpellcastingDialog.spellCategoryBoxes[spellLevel];
 
       switch(spellLevel) {
@@ -241,11 +331,14 @@ function verifyDialogControls(expectedModel, expectedPreviewText) {
         expect(spellCategoryBox.disabled).toBe(true);
         expect(spellCategoryBox.heading).toHaveTextContent('');
       }
+
+      expect(spellCategoryBox.propertyList.itemsAsText).toStrictEqual(expectedSpellCategory.spells);
     }
   } else {
     const expectedSpellSlots = SpellcasterTypes[expectedModel.spellcasterType].levels[expectedModel.spellcasterLevel].spellSlots;
 
     for (let spellLevel = 0; spellLevel <= 9; spellLevel++) {
+      const expectedSpellCategory = expectedModel.spellCategories[spellLevel];
       const spellCategoryBox = generateSpellcastingDialog.spellCategoryBoxes[spellLevel];
 
       if (spellLevel === 0) {
@@ -262,6 +355,8 @@ function verifyDialogControls(expectedModel, expectedPreviewText) {
         expect(spellCategoryBox.disabled).toBe(true);
         expect(spellCategoryBox.heading).toHaveTextContent('');
       }
+
+      expect(spellCategoryBox.propertyList.itemsAsText).toStrictEqual(expectedSpellCategory.spells);
     }
   }
 }
@@ -269,6 +364,8 @@ function verifyDialogControls(expectedModel, expectedPreviewText) {
 function verifyDialogResetToDefaults() {
   verifyDialogModelResetToDefaults();
   verifyDialogControlsResetToDefaults();
+
+  expect(generateSpellcastingDialog.spellcasterTypeSelect).toHaveFocus();
 }
 
 function verifyDialogModelResetToDefaults() {

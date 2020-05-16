@@ -169,6 +169,7 @@ export default class GenerateAttackDialog extends CustomDialog {
 
   launch() {
     this.showModal();
+    this.update();
     focusAndSelectElement(this.weaponNameInput);
   }
 

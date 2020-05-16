@@ -37,12 +37,6 @@ export default class SpecialTraitsSection extends BlockListSection {
     this.addBlock(event.detail.name, event.detail.text);
     this.reparse();
   }
-
-  reparse() {
-    super.reparse();
-
-    this.editElements.generateSpellcastingDialog.update();
-  }
 }
 
 class SpecialTraitsSectionShowElements extends BlockListShowElements {

@@ -31,6 +31,13 @@ export default class PropertyListItem extends DragAndDropListItem {
 
   onClickRemoveButton() {
     this.remove();
+    this.list.dispatchPropertyListChangedEvent();
+  }
+
+  onDropItem(event) {
+    super.onDropItem(event);
+
+    this.list.dispatchPropertyListChangedEvent();
   }
 
   get text() {

@@ -84,6 +84,7 @@ export default class PropertyList extends DragAndDropList {
     }
 
     this.addItem(text);
+    this.dispatchPropertyListChangedEvent();
 
     this.input.value = '';
     this.input.select();
@@ -114,5 +115,13 @@ export default class PropertyList extends DragAndDropList {
 
   setDataList(itemTexts) {
     addOptionsToDataListElement(this.dataList, itemTexts);
+  }
+
+  dispatchPropertyListChangedEvent() {
+    const event = new CustomEvent('propertyListChanged', {
+      bubbles: true,
+      composed: true
+    });
+    this.dispatchEvent(event);
   }
 }

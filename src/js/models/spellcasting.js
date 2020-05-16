@@ -3,6 +3,11 @@ import { formatIntegerWithOrdinalIndicator, formatSpellSlotQuantity } from '../h
 
 export default class Spellcasting {
   constructor() {
+    this.spellCategories = [];
+    for (let spellLevel = 0; spellLevel <= 9; spellLevel++) {
+      this.spellCategories[spellLevel] = new SpellCategory(this, spellLevel);
+    }
+
     this.reset();
   }
 
@@ -11,24 +16,39 @@ export default class Spellcasting {
     this.spellcasterAbility = 'charisma';
     this.spellcasterLevel = 1;
 
-    this.spellCategories = [];
+    this.clearAllSpells();
+  }
+
+  clearAllSpells() {
     for (let spellLevel = 0; spellLevel <= 9; spellLevel++) {
-      this.spellCategories[spellLevel] = new SpellCategory(this, spellLevel);
+      this.spellCategories[spellLevel].reset();
     }
+  }
+
+  get spellSlotQuantities() {
+    if (this.spellcasterType === 'innate') {
+      return [0,0,0];
+    }
+
+    return SpellcasterTypes[this.spellcasterType].levels[this.spellcasterLevel].spellSlots;
   }
 }
 
 class SpellCategory {
   constructor(spellcastingModel, spellLevel) {
-    this.reset();
-
     this.spellcastingModel = spellcastingModel;
     this.level = spellLevel;
+    this.spells = [];
+
+    this.reset();
   }
 
   reset() {
-    this.isEnabled = false;
-    this.spells = [];
+    this.spells.splice(0);
+  }
+
+  get isEnabled() {
+    return (this.level <= this.spellcastingModel.spellSlotQuantities.length);
   }
 
   get name() {
@@ -51,8 +71,7 @@ class SpellCategory {
   }
 
   get spellSlotQuantity() {
-    const spellSlotQuantities = SpellcasterTypes[this.spellcastingModel.spellcasterType].levels[this.spellcastingModel.spellcasterLevel].spellSlots;
-    return spellSlotQuantities[this.level - 1];
+    return this.spellcastingModel.spellSlotQuantities[this.level - 1];
   }
 
   get title() {

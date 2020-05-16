@@ -1,11 +1,12 @@
 import CustomDialog from './custom-dialog.js';
+import SpellCategoryBox from '../spell-category-box.js';
 
 import SpellcasterTypes from '../../../data/spellcaster-types.js';
 
 import Spellcasting from '../../../models/spellcasting.js';
 
-import { focusAndSelectElement, inputValueAndTriggerEvent } from '../../../helpers/element-helpers.js';
-import { formatSpellSlotQuantity } from '../../../helpers/string-formatter.js';
+import { focusAndSelectElement } from '../../../helpers/element-helpers.js';
+import isRunningInJsDom from '../../../helpers/is-running-in-jsdom.js';
 
 export default class GenerateSpellcastingDialog extends CustomDialog {
   static get elementName() { return 'generate-spellcasting-dialog'; }
@@ -28,12 +29,20 @@ export default class GenerateSpellcastingDialog extends CustomDialog {
 
     this.spellCategoryBoxes = [];
 
-    const cantripsAtWillCategory = this.shadowRoot.getElementById('cantrips-at-will-spell-category-box');
-    this.spellCategoryBoxes.push(cantripsAtWillCategory);
+    if (isRunningInJsDom) {
+      for (let spellLevel = 0; spellLevel <= 9; spellLevel++) {
+        const spellCategoryBox = new SpellCategoryBox(this);
+        spellCategoryBox.connect();
+        this.spellCategoryBoxes.push(spellCategoryBox);
+      }
+    } else {
+      const cantripsAtWillCategoryBox = this.shadowRoot.getElementById('cantrips-at-will-spell-category-box');
+      this.spellCategoryBoxes.push(cantripsAtWillCategoryBox);
 
-    for (let spellLevel = 1; spellLevel <= 9; spellLevel++) {
-      const spellCategoryBox = this.shadowRoot.getElementById(`level-${spellLevel}-spell-category-box`);
-      this.spellCategoryBoxes.push(spellCategoryBox);
+      for (let spellLevel = 1; spellLevel <= 9; spellLevel++) {
+        const spellCategoryBox = this.shadowRoot.getElementById(`level-${spellLevel}-spell-category-box`);
+        this.spellCategoryBoxes.push(spellCategoryBox);
+      }
     }
 
     this.cancelButton = this.shadowRoot.getElementById('cancel-button');
@@ -49,6 +58,8 @@ export default class GenerateSpellcastingDialog extends CustomDialog {
         spellCategoryBox.propertyList.errorMessages = this.errorMessages;
       }
 
+      this.addEventListener('propertyListChanged', this.onPropertyListChanged.bind(this));
+
       this.spellcasterTypeSelect.addEventListener('input', this.onInputSpellcasterType.bind(this));
       this.spellcasterAbilitySelect.addEventListener('input', this.onInputSpellcasterAbility.bind(this));
       this.spellcasterLevelInput.addEventListener('input', this.onInputSpellcasterLevel.bind(this));
@@ -57,26 +68,33 @@ export default class GenerateSpellcastingDialog extends CustomDialog {
       this.resetButton.addEventListener('click', this.onClickResetButton.bind(this));
       this.generateSpellcastingButton.addEventListener('click', this.onClickGenerateSpellcastingButton.bind(this));
 
+      this.updateControls();
+
       this.isInitialized = true;
     }
+  }
+
+  onPropertyListChanged() {
+    this.updateModelSpells();
   }
 
   onInputSpellcasterType() {
     const spellcasterType = this.spellcasterTypeSelect.value;
     this.spellcastingModel.spellcasterType = spellcasterType;
+    this.spellcastingModel.spellcasterAbility = SpellcasterTypes[spellcasterType].ability;
+    this.spellcastingModel.clearAllSpells();
 
-    const spellcasterAbility = SpellcasterTypes[spellcasterType].ability;
-    inputValueAndTriggerEvent(this.spellcasterAbilitySelect, spellcasterAbility);
+    this.updateControls();
   }
 
   onInputSpellcasterAbility() {
     this.spellcastingModel.spellcasterAbility = this.spellcasterAbilitySelect.value;
-    this.update();
+    this.updateControls();
   }
 
   onInputSpellcasterLevel() {
     this.spellcastingModel.spellcasterLevel = this.spellcasterLevelInput.valueAsInt;
-    this.update();
+    this.updateControls();
   }
 
   onClickResetButton() {
@@ -84,7 +102,7 @@ export default class GenerateSpellcastingDialog extends CustomDialog {
   }
 
   onClickGenerateSpellcastingButton() {
-    this.generateSpellCasting();
+    this.generateSpellcasting();
   }
 
   launch() {
@@ -93,36 +111,50 @@ export default class GenerateSpellcastingDialog extends CustomDialog {
   }
 
   reset() {
+    this.spellcastingModel.reset();
+    this.updateControls();
+    focusAndSelectElement(this.spellcasterTypeSelect);
+  }
 
+  checkForErrors() {
+    this.spellcasterLevelInput.validate(this.errorMessages);
   }
 
   generateSpellcasting() {
+    this.errorMessages.clear();
+    this.checkForErrors();
+    if (this.errorMessages.any) {
+      this.errorMessages.focusOnFirstErrorField();
+      return;
+    }
 
+    // TODO: Fire generateSpellcasting event
+
+    this.closeModal();
+    this.reset();
   }
 
-  update() {
-    this.updateModel();
-    this.updateControls();
-  }
-
-  updateModel() {
-    const spellSlots = this.spellcastingModel.spellcasterType === 'innate' ? [0,0,0] : SpellcasterTypes[this.spellcastingModel.spellcasterType].levels[this.spellcastingModel.spellcasterLevel].spellSlots;
-
+  updateModelSpells() {
     for (let spellLevel = 0; spellLevel <= 9; spellLevel++) {
       const spellCategory = this.spellcastingModel.spellCategories[spellLevel];
+      const spellCategoryBox = this.spellCategoryBoxes[spellLevel];
 
-      spellCategory.isEnabled = (spellLevel <= spellSlots.length);
-      // TODO: Update spells
+      spellCategory.spells = spellCategoryBox.propertyList.itemsAsText;
     }
   }
 
   updateControls() {
+    this.spellcasterTypeSelect.value = this.spellcastingModel.spellcasterType;
+    this.spellcasterAbilitySelect.value = this.spellcastingModel.spellcasterAbility;
+    this.spellcasterLevelInput.value = this.spellcastingModel.spellcasterLevel;
+
     for (let spellLevel = 0; spellLevel <= 9; spellLevel++) {
       const spellCategory = this.spellcastingModel.spellCategories[spellLevel];
       const spellCategoryBox = this.spellCategoryBoxes[spellLevel];
 
       spellCategoryBox.disabled = ! spellCategory.isEnabled;
       spellCategoryBox.heading.textContent = spellCategory.title;
+      spellCategoryBox.propertyList.setItems(spellCategory.spells);
     }
   }
 }

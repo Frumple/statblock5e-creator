@@ -11,13 +11,14 @@ export default class SpellCategoryBox extends CustomAutonomousElement {
       'src/html/elements/autonomous/spell-category-box.html');
   }
 
-  constructor() {
-    super(SpellCategoryBox.templatePaths);
+  constructor(parent) {
+    super(SpellCategoryBox.templatePaths, parent);
 
     if (isRunningInJsDom) {
       this.container = document.createElement('div');
       this.heading = document.createElement('label');
       this.propertyList = new PropertyList(this);
+      this.propertyList.connect();
     } else {
       this.container = this.shadowRoot.getElementById('container');
       this.heading = this.shadowRoot.getElementById('heading');
