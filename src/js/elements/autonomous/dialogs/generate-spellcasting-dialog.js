@@ -45,6 +45,8 @@ export default class GenerateSpellcastingDialog extends CustomDialog {
       }
     }
 
+    this.previewTextElement = this.shadowRoot.getElementById('preview-text');
+
     this.cancelButton = this.shadowRoot.getElementById('cancel-button');
     this.resetButton = this.shadowRoot.getElementById('reset-button');
     this.generateSpellcastingButton = this.shadowRoot.getElementById('generate-spellcasting-button');
@@ -76,6 +78,7 @@ export default class GenerateSpellcastingDialog extends CustomDialog {
 
   onPropertyListChanged() {
     this.updateModelSpells();
+    this.updateControls();
   }
 
   onInputSpellcasterType() {
@@ -105,6 +108,10 @@ export default class GenerateSpellcastingDialog extends CustomDialog {
     this.generateSpellcasting();
   }
 
+  get previewText() {
+    return this.previewTextElement.innerHTMLSanitized;
+  }
+
   launch() {
     this.showModal();
     focusAndSelectElement(this.spellcasterTypeSelect);
@@ -128,7 +135,15 @@ export default class GenerateSpellcastingDialog extends CustomDialog {
       return;
     }
 
-    // TODO: Fire generateSpellcasting event
+    const generateSpellcastingEvent = new CustomEvent('generateSpellcasting', {
+      bubbles: true,
+      composed: true,
+      detail: {
+        name: this.spellcastingModel.blockName,
+        text: this.spellcastingModel.generatedText
+      }
+    });
+    this.dispatchEvent(generateSpellcastingEvent);
 
     this.closeModal();
     this.reset();
@@ -156,5 +171,8 @@ export default class GenerateSpellcastingDialog extends CustomDialog {
       spellCategoryBox.heading.textContent = spellCategory.title;
       spellCategoryBox.propertyList.setItems(spellCategory.spells);
     }
+
+    const generatedText = this.spellcastingModel.generatedText;
+    this.previewTextElement.innerHTMLSanitized = this.spellcastingModel.renderText(generatedText);
   }
 }

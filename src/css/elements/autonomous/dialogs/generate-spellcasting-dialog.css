@@ -72,6 +72,10 @@
   margin: 5px;
 }
 
+.generate-spellcasting-dialog__preview-text {
+  white-space: pre-wrap;
+}
+
 .generate-spellcasting-dialog__action-container {
   display: flex;
   flex-direction: row;

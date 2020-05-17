@@ -566,15 +566,15 @@ function verifyDialogControlsResetToDefaults() {
   verifyDialogControls(new Attack(), expectedGeneratedText, expectedRenderedText);
 }
 
-function verifyActionBlocks(name, expectedGeneratedText, expectedRenderedText) {
+function verifyActionBlocks(expectedBlockName, expectedGeneratedText, expectedRenderedText) {
   const editableBlock = actionsSection.editElements.editableBlockList.blocks[0];
-  expect(editableBlock.name).toBe(name);
+  expect(editableBlock.name).toBe(expectedBlockName);
   expect(editableBlock.text).toBe(expectedGeneratedText);
   expect(editableBlock.previewText).toBe(expectedRenderedText);
 
   actionsSection.editElements.submitForm();
 
   const displayBlock = actionsSection.showElements.displayBlockList.blocks[0];
-  expect(displayBlock.name).toBe(name);
+  expect(displayBlock.name).toBe(expectedBlockName);
   expect(displayBlock.text).toBe(expectedRenderedText);
 }
