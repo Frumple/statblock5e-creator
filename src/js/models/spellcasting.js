@@ -4,7 +4,7 @@ import CurrentContext from '../models/current-context.js';
 
 import { capitalizeFirstLetter, formatIntegerWithOrdinalIndicator, formatSpellSlotQuantity } from '../helpers/string-formatter.js';
 
-import { parse } from '../parsers/parser.js';
+import { parseAll } from '../parsers/parser.js';
 
 export default class Spellcasting {
   constructor() {
@@ -54,7 +54,7 @@ export default class Spellcasting {
       return '';
     }
 
-    const parserResults = parse(generatedText);
+    const parserResults = parseAll(generatedText);
 
     if (parserResults.nameParserResults.error) {
       return 'Error: Generated text has at least one invalid name expression.';

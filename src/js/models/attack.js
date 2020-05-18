@@ -1,4 +1,4 @@
-import * as Parser from '../parsers/parser.js';
+import { parseAll } from '../parsers/parser.js';
 
 export default class Attack {
   constructor(jsObject = null) {
@@ -191,19 +191,15 @@ export default class Attack {
       return '';
     }
 
-    const mathParserResults = Parser.parseMath(generatedText);
+    const parserResults = parseAll(generatedText, false);
 
-    if (mathParserResults.error) {
+    if (parserResults.mathParserResults.error) {
       return 'Error: Generated text has at least one invalid math expression.';
-    }
-
-    const markdownParserResults = Parser.parseMarkdown(mathParserResults.outputText);
-
-    if (markdownParserResults.error) {
+    } else if (parserResults.markdownParserResults.error) {
       return 'Error: Generated text has invalid markdown syntax.';
     }
 
-    return markdownParserResults.outputText;
+    return parserResults.text;
   }
 }
 

@@ -4,7 +4,7 @@ import MarkdownParser from './markdown-parser.js';
 
 import CurrentContext from '../models/current-context.js';
 
-export function parse(inputText, nameParsingEnabled = true, mathParsingEnabled = true, markdownParsingEnabled = true, parserOptions = {}) {
+export function parseAll(inputText, nameParsingEnabled = true, mathParsingEnabled = true, markdownParsingEnabled = true, parserOptions = {}) {
   let results = {
     text: inputText,
     nameParserResults: null,
