@@ -114,7 +114,7 @@ class SpellCategory {
   }
 
   get generatedText() {
-    if (! this.isEnabled) {
+    if (! this.isEnabled || this.spells.length === 0) {
       return '';
     }
 

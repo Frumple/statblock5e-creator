@@ -80,8 +80,8 @@ describe('when the generate spellcasting dialog is opened', () => {
       modifiedModel.spellcasterAbility = 'wisdom';
       modifiedModel.clearAllSpells();
 
-      const expectedGeneratedText = '[name] is a 18th-level spellcaster. Its spellcasting ability is Wisdom (spell save DC sdc[wis], atk[wis] to hit with spell attacks). [name] has the following cleric spells prepared:\n\nCantrips (at will): \n1st level (4 slots): \n2nd level (3 slots): \n3rd level (3 slots): \n4th level (3 slots): \n5th level (3 slots): \n6th level (1 slot): \n7th level (1 slot): \n8th level (1 slot): \n9th level (1 slot): ';
-      const expectedRenderedText = 'The commoner is a 18th-level spellcaster. Its spellcasting ability is Wisdom (spell save DC 10, +2 to hit with spell attacks). The commoner has the following cleric spells prepared:\n\nCantrips (at will): \n1st level (4 slots): \n2nd level (3 slots): \n3rd level (3 slots): \n4th level (3 slots): \n5th level (3 slots): \n6th level (1 slot): \n7th level (1 slot): \n8th level (1 slot): \n9th level (1 slot): ';
+      const expectedGeneratedText = '[name] is a 18th-level spellcaster. Its spellcasting ability is Wisdom (spell save DC sdc[wis], atk[wis] to hit with spell attacks). [name] has the following cleric spells prepared:\n\n';
+      const expectedRenderedText = 'The commoner is a 18th-level spellcaster. Its spellcasting ability is Wisdom (spell save DC 10, +2 to hit with spell attacks). The commoner has the following cleric spells prepared:\n\n';
 
       setDialogControls(originalModel);
 
@@ -381,13 +381,13 @@ function verifyDialogResetToDefaults() {
 }
 
 function verifyDialogModelResetToDefaults() {
-  const expectedGeneratedText = '[name] is a 1st-level spellcaster. Its spellcasting ability is Charisma (spell save DC sdc[cha], atk[cha] to hit with spell attacks). [name] has the following innate spells prepared:\n\nAt will: \n3/day each: \n2/day each: \n1/day each: ';
+  const expectedGeneratedText = '[name] is a 1st-level spellcaster. Its spellcasting ability is Charisma (spell save DC sdc[cha], atk[cha] to hit with spell attacks). [name] has the following innate spells prepared:\n\n';
 
   verifyDialogModel(new Spellcasting(), expectedGeneratedText);
 }
 
 function verifyDialogControlsResetToDefaults() {
-  const expectedRenderedText = 'The commoner is a 1st-level spellcaster. Its spellcasting ability is Charisma (spell save DC 10, +2 to hit with spell attacks). The commoner has the following innate spells prepared:\n\nAt will: \n3/day each: \n2/day each: \n1/day each: ';
+  const expectedRenderedText = 'The commoner is a 1st-level spellcaster. Its spellcasting ability is Charisma (spell save DC 10, +2 to hit with spell attacks). The commoner has the following innate spells prepared:\n\n';
 
   verifyDialogControls(new Spellcasting(), expectedRenderedText);
 }
