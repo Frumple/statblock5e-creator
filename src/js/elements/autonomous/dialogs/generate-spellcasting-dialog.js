@@ -45,6 +45,7 @@ export default class GenerateSpellcastingDialog extends CustomDialog {
       }
     }
 
+    this.previewNameElement = this.shadowRoot.getElementById('preview-name');
     this.previewTextElement = this.shadowRoot.getElementById('preview-text');
 
     this.cancelButton = this.shadowRoot.getElementById('cancel-button');
@@ -171,6 +172,8 @@ export default class GenerateSpellcastingDialog extends CustomDialog {
       spellCategoryBox.heading.textContent = spellCategory.title;
       spellCategoryBox.propertyList.setItems(spellCategory.spells);
     }
+
+    this.previewNameElement.textContent = (this.spellcastingModel.spellcasterType === 'innate') ? 'Innate Spellcasting' : 'Spellcasting';
 
     const generatedText = this.spellcastingModel.generatedText;
     this.previewTextElement.innerHTMLSanitized = this.spellcastingModel.renderText(generatedText);

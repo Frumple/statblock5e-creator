@@ -41,7 +41,7 @@
   resize: none;
 }
 
-.editable-block__preview {
+.editable-block__preview-container {
   grid-area: 3 / 1 / 4 / 4;
   margin: 0;
 }
@@ -51,18 +51,18 @@
   text-indent: -1em;
 }
 
-.editable-block__name-preview {
+.editable-block__preview-name {
   margin: 0;
   display: inline;
   font-weight: bold;
   font-style: italic;
 }
 
-.editable-block__name-preview_no-italic {
+.editable-block__preview-name_no-italic {
   font-style: normal;
 }
 
-.editable-block__text-preview {
+.editable-block__preview-text {
   display: inline;
   text-indent: 0;
   margin: 0;

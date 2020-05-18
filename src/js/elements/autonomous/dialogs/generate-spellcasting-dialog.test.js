@@ -344,6 +344,8 @@ function verifyDialogControls(expectedModel, expectedRenderedText) {
 
       expect(spellCategoryBox.propertyList.itemsAsText).toStrictEqual(expectedSpellCategory.spells);
     }
+
+    expect(generateSpellcastingDialog.previewNameElement.textContent).toBe('Innate Spellcasting');
   } else {
     const expectedSpellSlots = SpellcasterTypes[expectedModel.spellcasterType].levels[expectedModel.spellcasterLevel].spellSlots;
 
@@ -368,6 +370,8 @@ function verifyDialogControls(expectedModel, expectedRenderedText) {
 
       expect(spellCategoryBox.propertyList.itemsAsText).toStrictEqual(expectedSpellCategory.spells);
     }
+
+    expect(generateSpellcastingDialog.previewNameElement.textContent).toBe('Spellcasting');
   }
 
   expect(generateSpellcastingDialog.previewTextElement.innerHTMLSanitized).toBe(expectedRenderedText);
@@ -398,6 +402,7 @@ function verifySpecialTraitBlocks(expectedSpellcasterType, expectedGeneratedText
   const editableBlock = specialTraitsSection.editElements.editableBlockList.blocks[0];
   expect(editableBlock.name).toBe(blockName);
   expect(editableBlock.text).toBe(expectedGeneratedText);
+  expect(editableBlock.previewName).toBe(blockName);
   expect(editableBlock.previewText).toBe(expectedRenderedText);
 
   specialTraitsSection.editElements.submitForm();
