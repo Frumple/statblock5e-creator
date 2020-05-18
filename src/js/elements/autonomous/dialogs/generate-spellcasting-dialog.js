@@ -71,8 +71,6 @@ export default class GenerateSpellcastingDialog extends CustomDialog {
       this.resetButton.addEventListener('click', this.onClickResetButton.bind(this));
       this.generateSpellcastingButton.addEventListener('click', this.onClickGenerateSpellcastingButton.bind(this));
 
-      this.updateControls();
-
       this.isInitialized = true;
     }
   }
@@ -115,6 +113,7 @@ export default class GenerateSpellcastingDialog extends CustomDialog {
 
   launch() {
     this.showModal();
+    this.updateControls();
     focusAndSelectElement(this.spellcasterTypeSelect);
   }
 
