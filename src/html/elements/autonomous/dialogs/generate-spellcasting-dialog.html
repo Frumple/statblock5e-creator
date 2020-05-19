@@ -10,10 +10,12 @@
 
     <div class="generate-spellcasting-dialog__content">
       <div class="generate-spellcasting-dialog__main-container">
-        <div class="generate-spellcasting-dialog__heading-container">
+        <div class="generate-spellcasting-dialog__settings-container">
           <error-messages id="error-messages" class="generate-spellcasting-dialog__error-messages"></error-messages>
-          <div class="generate-spellcasting-dialog__settings-container">
-            <label class="generate-spellcasting-dialog__spellcaster-type-label generate-spellcasting-dialog__label" for="spellcaster-type-select">Spellcaster Type:</label>
+
+          <label class="generate-spellcasting-dialog__spellcaster-settings-header generate-spellcasting-dialog__label">Spellcaster Attributes</label>
+          <div class="generate-spellcasting-dialog__spellcaster-settings-container">
+            <label class="generate-spellcasting-dialog__spellcaster-type-label generate-spellcasting-dialog__label" for="spellcaster-type-select">Type:</label>
             <select id="spellcaster-type-select" class="generate-spellcasting-dialog__spellcaster-type-select section__select" name="spellcaster-type-select">
               <option value="innate">Innate</option>
               <option value="bard">Bard</option>
@@ -25,7 +27,7 @@
               <option value="warlock">Warlock</option>
               <option value="wizard">Wizard</option>
             </select>
-            <label class="generate-spellcasting-dialog__spellcaster-ability-label generate-spellcasting-dialog__label" for="spellcaster-ability-select">Spellcaster Ability:</label>
+            <label class="generate-spellcasting-dialog__spellcaster-ability-label generate-spellcasting-dialog__label" for="spellcaster-ability-select">Ability:</label>
             <select id="spellcaster-ability-select" class="generate-spellcasting-dialog__spellcaster-ability-select section__select" name="spellcaster-ability-select">
               <option value="strength">Strength</option>
               <option value="dexterity">Dexterity</option>
@@ -34,8 +36,18 @@
               <option value="wisdom">Wisdom</option>
               <option value="charisma" selected>Charisma</option>
             </select>
-            <label class="generate-spellcasting-dialog__spellcaster-level-label generate-spellcasting-dialog__label" for="spellcaster-level-input">Spellcaster Level:</label>
+            <label class="generate-spellcasting-dialog__spellcaster-level-label generate-spellcasting-dialog__label" for="spellcaster-level-input">Level:</label>
             <input id="spellcaster-level-input" class="generate-spellcasting-dialog__spellcaster-level-input section__number-input" is="number-input" type="number" name="spellcaster-level-input" pretty-name="Spellcaster Level" value="1" min="1" max="20" />
+          </div>
+
+          <label class="generate-spellcasting-dialog__component-settings-header generate-spellcasting-dialog__label">Component Requirements</label>
+          <div class="generate-spellcasting-dialog__component-settings-container">
+            <label class="generate-spellcasting-dialog__verbal-component-label generate-spellcasting-dialog__label" for="verbal-component-input">Verbal:</label>
+            <input id="verbal-component-input" class="generate-spellcasting-dialog__verbal-component-input" type="checkbox" checked />
+            <label class="generate-spellcasting-dialog__somatic-component-label generate-spellcasting-dialog__label" for="somatic-component-input">Somatic:</label>
+            <input id="somatic-component-input" class="generate-spellcasting-dialog__somatic-component-input" type="checkbox" checked />
+            <label class="generate-spellcasting-dialog__material-component-label generate-spellcasting-dialog__label" for="material-component-input">Material:</label>
+            <input id="material-component-input" class="generate-spellcasting-dialog__material-component-input" type="checkbox" checked />
           </div>
         </div>
 
@@ -71,7 +83,7 @@
         </spell-category-box>
 
         <div class="generate-spellcasting-dialog__preview-container">
-          <label class="generate-spellcasting-dialog__preview-title generate-spellcasting-dialog__label">Preview</label>
+          <label class="generate-spellcasting-dialog__preview-header generate-spellcasting-dialog__label">Preview</label>
           <div class="generate-spellcasting-dialog__preview-content">
             <h4 class="generate-spellcasting-dialog__preview-name"><span id="preview-name"></span>.</h4>
             <p id="preview-text" class="generate-spellcasting-dialog__preview-text" is="sanitized-paragraph"></p>
