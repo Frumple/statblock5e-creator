@@ -21,6 +21,10 @@ export default class Spellcasting {
     this.spellcasterAbility = 'charisma';
     this.spellcasterLevel = 1;
 
+    this.requiresVerbalComponents = true;
+    this.requiresSomaticComponents = true;
+    this.requiresMaterialComponents = true;
+
     this.clearAllSpells();
   }
 
@@ -46,7 +50,44 @@ export default class Spellcasting {
 
     const spells = this.spellCategories.map(category => category.generatedText).filter(text => text !== '').join('\n');
 
-    return `[name] is a ${level}-level spellcaster. Its spellcasting ability is ${ability} (spell save DC sdc[${abilityAbbreviation}], atk[${abilityAbbreviation}] to hit with spell attacks). [name] has the following ${type} spells prepared:\n\n${spells}`;
+    const components = this.componentsText;
+
+    if (this.spellcasterType === 'innate') {
+      const requirements = components ? `, requiring ${components}` : '';
+      return `[name]'s innate spellcasting ability is ${ability} (spell save DC sdc[${abilityAbbreviation}], atk[${abilityAbbreviation}] to hit with spell attacks). It can innately cast the following spells${requirements}:\n\n${spells}`;
+    }
+
+    const requirements = components ? ` It requires ${components} to cast its spells.` : '';
+    return `[name] is a ${level}-level spellcaster. Its spellcasting ability is ${ability} (spell save DC sdc[${abilityAbbreviation}], atk[${abilityAbbreviation}] to hit with spell attacks).${requirements} [name] has the following ${type} spells prepared:\n\n${spells}`;
+  }
+
+  get componentsText() {
+    const numberOfComponentsRequired = this.requiresVerbalComponents + this.requiresSomaticComponents + this.requiresMaterialComponents;
+
+    switch (numberOfComponentsRequired) {
+    case 0:
+      return 'no components';
+    case 1:
+      if (this.requiresVerbalComponents) {
+        return 'only verbal components';
+      } else if(this.requiresSomaticComponents) {
+        return 'only somatic components';
+      } else if(this.requiresMaterialComponents) {
+        return 'only material components';
+      }
+      return '';
+    case 2:
+      if (! this.requiresVerbalComponents) {
+        return 'no verbal components';
+      } else if(! this.requiresSomaticComponents) {
+        return 'no somatic components';
+      } else if(! this.requiresMaterialComponents) {
+        return 'no material components';
+      }
+      return '';
+    default:
+      return '';
+    }
   }
 
   renderText(generatedText) {

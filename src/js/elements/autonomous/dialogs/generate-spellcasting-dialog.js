@@ -27,6 +27,10 @@ export default class GenerateSpellcastingDialog extends CustomDialog {
     this.spellcasterAbilitySelect = this.shadowRoot.getElementById('spellcaster-ability-select');
     this.spellcasterLevelInput = this.shadowRoot.getElementById('spellcaster-level-input');
 
+    this.verbalComponentInput = this.shadowRoot.getElementById('verbal-component-input');
+    this.somaticComponentInput = this.shadowRoot.getElementById('somatic-component-input');
+    this.materialComponentInput = this.shadowRoot.getElementById('material-component-input');
+
     this.spellCategoryBoxes = [];
 
     if (isRunningInJsDom) {
@@ -67,6 +71,10 @@ export default class GenerateSpellcastingDialog extends CustomDialog {
       this.spellcasterAbilitySelect.addEventListener('input', this.onInputSpellcasterAbility.bind(this));
       this.spellcasterLevelInput.addEventListener('input', this.onInputSpellcasterLevel.bind(this));
 
+      this.verbalComponentInput.addEventListener('input', this.onInputVerbalComponent.bind(this));
+      this.somaticComponentInput.addEventListener('input', this.onInputSomaticComponent.bind(this));
+      this.materialComponentInput.addEventListener('input', this.onInputMaterialComponent.bind(this));
+
       this.cancelButton.addEventListener('click', this.onClickCloseButton.bind(this));
       this.resetButton.addEventListener('click', this.onClickResetButton.bind(this));
       this.generateSpellcastingButton.addEventListener('click', this.onClickGenerateSpellcastingButton.bind(this));
@@ -96,6 +104,21 @@ export default class GenerateSpellcastingDialog extends CustomDialog {
 
   onInputSpellcasterLevel() {
     this.spellcastingModel.spellcasterLevel = this.spellcasterLevelInput.valueAsInt;
+    this.updateControls();
+  }
+
+  onInputVerbalComponent() {
+    this.spellcastingModel.requiresVerbalComponents = this.verbalComponentInput.checked;
+    this.updateControls();
+  }
+
+  onInputSomaticComponent() {
+    this.spellcastingModel.requiresSomaticComponents = this.somaticComponentInput.checked;
+    this.updateControls();
+  }
+
+  onInputMaterialComponent() {
+    this.spellcastingModel.requiresMaterialComponents = this.materialComponentInput.checked;
     this.updateControls();
   }
 
@@ -162,6 +185,10 @@ export default class GenerateSpellcastingDialog extends CustomDialog {
     this.spellcasterTypeSelect.value = this.spellcastingModel.spellcasterType;
     this.spellcasterAbilitySelect.value = this.spellcastingModel.spellcasterAbility;
     this.spellcasterLevelInput.value = this.spellcastingModel.spellcasterLevel;
+
+    this.verbalComponentInput.checked = this.spellcastingModel.requiresVerbalComponents;
+    this.somaticComponentInput.checked = this.spellcastingModel.requiresSomaticComponents;
+    this.materialComponentInput.checked = this.spellcastingModel.requiresMaterialComponents;
 
     for (let spellLevel = 0; spellLevel <= 9; spellLevel++) {
       const spellCategory = this.spellcastingModel.spellCategories[spellLevel];
