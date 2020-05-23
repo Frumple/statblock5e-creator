@@ -85,7 +85,7 @@ export default class GenerateSpellcastingDialog extends CustomDialog {
 
   onPropertyListChanged() {
     this.updateModelSpells();
-    this.updateControls();
+    this.updatePreview();
   }
 
   onInputSpellcasterType() {
@@ -99,7 +99,7 @@ export default class GenerateSpellcastingDialog extends CustomDialog {
 
   onInputSpellcasterAbility() {
     this.spellcastingModel.spellcasterAbility = this.spellcasterAbilitySelect.value;
-    this.updateControls();
+    this.updatePreview();
   }
 
   onInputSpellcasterLevel() {
@@ -109,17 +109,17 @@ export default class GenerateSpellcastingDialog extends CustomDialog {
 
   onInputVerbalComponent() {
     this.spellcastingModel.requiresVerbalComponents = this.verbalComponentInput.checked;
-    this.updateControls();
+    this.updatePreview();
   }
 
   onInputSomaticComponent() {
     this.spellcastingModel.requiresSomaticComponents = this.somaticComponentInput.checked;
-    this.updateControls();
+    this.updatePreview();
   }
 
   onInputMaterialComponent() {
     this.spellcastingModel.requiresMaterialComponents = this.materialComponentInput.checked;
-    this.updateControls();
+    this.updatePreview();
   }
 
   onClickResetButton() {
@@ -199,6 +199,10 @@ export default class GenerateSpellcastingDialog extends CustomDialog {
       spellCategoryBox.propertyList.setItems(spellCategory.spells);
     }
 
+    this.updatePreview();
+  }
+
+  updatePreview() {
     this.previewNameElement.textContent = (this.spellcastingModel.spellcasterType === 'innate') ? 'Innate Spellcasting' : 'Spellcasting';
 
     const generatedText = this.spellcastingModel.generatedText;
