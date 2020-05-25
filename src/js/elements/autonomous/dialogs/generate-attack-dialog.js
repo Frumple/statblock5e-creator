@@ -2,7 +2,7 @@ import CustomDialog from './custom-dialog.js';
 import Attack from '../../../models/attack.js';
 import PredefinedWeapons from '../../../data/predefined-weapons.js';
 import DamageTypes from '../../../data/damage-types.js';
-import { focusAndSelectElement, addOptionsToDataListElement, addOptionsWithLabelsToDataListElement } from '../../../helpers/element-helpers.js';
+import { focusAndSelectElement, addOptionsToElement, addValueOnlyOptionsToElement } from '../../../helpers/element-helpers.js';
 
 export default class GenerateAttackDialog extends CustomDialog {
   static get elementName() { return 'generate-attack-dialog'; }
@@ -87,8 +87,8 @@ export default class GenerateAttackDialog extends CustomDialog {
       this.resetButton.addEventListener('click', this.onClickResetButton.bind(this));
       this.generateAttackButton.addEventListener('click', this.onClickGenerateAttackButton.bind(this));
 
-      addOptionsWithLabelsToDataListElement(this.predefinedWeaponsDataList, Object.values(PredefinedWeapons), 'name', 'description');
-      addOptionsToDataListElement(this.damageTypesDataList, DamageTypes);
+      addOptionsToElement(this.predefinedWeaponsDataList, Object.values(PredefinedWeapons), 'description', 'name');
+      addValueOnlyOptionsToElement(this.damageTypesDataList, DamageTypes);
 
       this.isInitialized = true;
 

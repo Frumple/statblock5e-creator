@@ -21,7 +21,7 @@ export default class LanguagesSection extends PropertyListSection {
     if (this.isConnected && ! this.isInitialized) {
       super.connectedCallback();
 
-      this.editElements.propertyList.setDataList(Languages);
+      this.editElements.propertyList.setDataListOptions(Languages.map(language => ({ text: language }) ));
 
       this.isInitialized = true;
     }

@@ -32,25 +32,19 @@ export function inputValueAndTriggerEvent(element, value) {
   element.dispatchEvent(new Event('input'));
 }
 
-export function addOptionsToSelectElement(selectElement, optionValues) {
-  for (const optionValue of optionValues) {
-    const option = new Option(optionValue, optionValue);
-    selectElement.add(option);
-  }
-}
-
-export function addOptionsToDataListElement(dataListElement, optionValues) {
-  for (const optionValue of optionValues) {
-    const option = new Option('', optionValue);
-    dataListElement.appendChild(option);
-  }
-}
-
-export function addOptionsWithLabelsToDataListElement(dataListElement, objects, valuePropertyName, labelPropertyName) {
+export function addOptionsToElement(element, objects, textPropertyName = 'text', valuePropertyName = 'value') {
   for (const obj of objects) {
-    const option = new Option(obj[labelPropertyName], obj[valuePropertyName]);
-    dataListElement.appendChild(option);
+    const option = new Option(obj[textPropertyName], obj[valuePropertyName]);
+    element.appendChild(option);
   }
+}
+
+export function addTextOnlyOptionsToElement(element, optionTexts) {
+  addOptionsToElement(element, optionTexts.map(text => ({ text: text }) ));
+}
+
+export function addValueOnlyOptionsToElement(element, optionValues) {
+  addOptionsToElement(element, optionValues.map(value => ({ value: value }) ));
 }
 
 export function getCheckedRadioButton(parentElement, radioGroupName) {

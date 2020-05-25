@@ -3,7 +3,7 @@ import PropertyListItem from './property-list-item.js';
 
 import isRunningInJsdom from '../../../helpers/is-running-in-jsdom.js';
 import { arrayStrictEqual } from '../../../helpers/array-helpers.js';
-import { addOptionsToDataListElement } from '../../../helpers/element-helpers.js';
+import { addOptionsToElement } from '../../../helpers/element-helpers.js';
 
 export default class PropertyList extends DragAndDropList {
   static get elementName() { return 'property-list'; }
@@ -117,8 +117,8 @@ export default class PropertyList extends DragAndDropList {
     }
   }
 
-  setDataList(itemTexts) {
-    addOptionsToDataListElement(this.dataList, itemTexts);
+  setDataListOptions(objects) {
+    addOptionsToElement(this.dataList, objects);
   }
 
   dispatchPropertyListChangedEvent() {

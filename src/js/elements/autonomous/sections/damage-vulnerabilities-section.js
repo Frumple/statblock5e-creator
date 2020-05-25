@@ -20,7 +20,7 @@ export default class DamageVulnerabilitiesSection extends PropertyListSection {
     if (this.isConnected && ! this.isInitialized) {
       super.connectedCallback();
 
-      this.editElements.propertyList.setDataList(DamageTypesForPropertyLists);
+      this.editElements.propertyList.setDataListOptions(DamageTypesForPropertyLists.map(damageType => ({ text: damageType }) ));
 
       this.isInitialized = true;
     }

@@ -6,7 +6,7 @@ import creatureTypes from '../../../data/creature-types.js';
 import creatureTags from '../../../data/creature-tags.js';
 import creatureAlignments from '../../../data/creature-alignments.js';
 
-import { addOptionsToSelectElement, addOptionsToDataListElement } from '../../../helpers/element-helpers.js';
+import { addTextOnlyOptionsToElement, addValueOnlyOptionsToElement } from '../../../helpers/element-helpers.js';
 
 export default class SubtitleSection extends Section {
   static get elementName() { return 'subtitle-section'; }
@@ -22,10 +22,10 @@ export default class SubtitleSection extends Section {
           SubtitleShowElements,
           SubtitleEditElements);
 
-    addOptionsToSelectElement(this.editElements.size, Object.keys(creatureSizesToHitDieSizes));
-    addOptionsToSelectElement(this.editElements.type, creatureTypes);
-    addOptionsToDataListElement(this.editElements.tagsDataList, creatureTags);
-    addOptionsToSelectElement(this.editElements.alignment, creatureAlignments);
+    addTextOnlyOptionsToElement(this.editElements.size, Object.keys(creatureSizesToHitDieSizes));
+    addTextOnlyOptionsToElement(this.editElements.type, creatureTypes);
+    addValueOnlyOptionsToElement(this.editElements.tagsDataList, creatureTags);
+    addTextOnlyOptionsToElement(this.editElements.alignment, creatureAlignments);
   }
 
   connectedCallback() {
