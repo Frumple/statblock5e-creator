@@ -2,10 +2,12 @@ import CustomDialog from './custom-dialog.js';
 import SpellCategoryBox from '../spell-category-box.js';
 
 import SpellcasterTypes from '../../../data/spellcaster-types.js';
+import Spells from '../../../data/spells.js';
 
 import Spellcasting from '../../../models/spellcasting.js';
 
 import { focusAndSelectElement } from '../../../helpers/element-helpers.js';
+import { getSpellDescription } from '../../../helpers/spell-helpers.js';
 import isRunningInJsDom from '../../../helpers/is-running-in-jsdom.js';
 
 export default class GenerateSpellcastingDialog extends CustomDialog {
@@ -93,6 +95,8 @@ export default class GenerateSpellcastingDialog extends CustomDialog {
     this.spellcastingModel.spellcasterType = spellcasterType;
     this.spellcastingModel.spellcasterAbility = SpellcasterTypes[spellcasterType].ability;
     this.spellcastingModel.clearAllSpells();
+
+    this.updateDataLists();
 
     this.updateControls();
   }
@@ -207,5 +211,20 @@ export default class GenerateSpellcastingDialog extends CustomDialog {
 
     const generatedText = this.spellcastingModel.generatedText;
     this.previewTextElement.innerHTMLSanitized = this.spellcastingModel.renderText(generatedText);
+  }
+
+  updateDataLists() {
+    for (let spellLevel = 0; spellLevel <= 9; spellLevel++) {
+      const spellCategoryBox = this.spellCategoryBoxes[spellLevel];
+      const spells = Spells.filter(spell => spell.level === spellLevel && spell.classes.includes(this.spellcastingModel.spellcasterType));
+      const dataListOptions = spells.map(spell => {
+        return {
+          text: getSpellDescription(spell),
+          value: spell.name
+        };
+      });
+
+      spellCategoryBox.propertyList.dataListOptions = dataListOptions;
+    }
   }
 }

@@ -20,7 +20,7 @@ export default class ConditionImmunitiesSection extends PropertyListSection {
     if (this.isConnected && ! this.isInitialized) {
       super.connectedCallback();
 
-      this.editElements.propertyList.setDataListOptions(Conditions.map(condition => ({ text: condition }) ));
+      this.editElements.propertyList.dataListOptions = Conditions.map(condition => ({ text: condition }) );
 
       this.isInitialized = true;
     }

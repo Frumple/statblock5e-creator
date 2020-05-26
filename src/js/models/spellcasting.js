@@ -159,7 +159,7 @@ class SpellCategory {
       return '';
     }
 
-    const spellsAsText = this.spells.map(spell => `*${spell}*`).join(', ');
+    const spellsAsText = this.spells.map(spell => `*${spell.toLowerCase()}*`).join(', ');
     return `${this.title}: ${spellsAsText}`;
   }
 }

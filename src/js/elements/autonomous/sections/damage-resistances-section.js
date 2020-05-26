@@ -20,7 +20,7 @@ export default class DamageResistancesSection extends PropertyListSection {
     if (this.isConnected && ! this.isInitialized) {
       super.connectedCallback();
 
-      this.editElements.propertyList.setDataListOptions(DamageTypesForPropertyLists.map(damageType => ({ text: damageType }) ));
+      this.editElements.propertyList.dataListOptions = DamageTypesForPropertyLists.map(damageType => ({ text: damageType }) );
 
       this.isInitialized = true;
     }

@@ -3751,12 +3751,6 @@ export default [
       items: 'a vellum depiction or a carved statuette in the likeness of the target, and a special component that varies according to the version of the spell you choose, worth at least 500 gp per Hit Die of the target'
     },
     classes: [
-      'bard',
-      'cleric',
-      'druid',
-      'paladin',
-      'ranger',
-      'sorcerer',
       'warlock',
       'wizard'
     ],

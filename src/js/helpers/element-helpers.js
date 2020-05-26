@@ -47,6 +47,12 @@ export function addValueOnlyOptionsToElement(element, optionValues) {
   addOptionsToElement(element, optionValues.map(value => ({ value: value }) ));
 }
 
+export function removeAllChildElements(element) {
+  while (element.firstChild) {
+    element.removeChild(element.firstChild);
+  }
+}
+
 export function getCheckedRadioButton(parentElement, radioGroupName) {
   return parentElement.shadowRoot.querySelector(`input[name="${radioGroupName}"]:checked`);
 }
