@@ -616,10 +616,10 @@ function verifyDialogControls(expectedModel, expectedRenderedText) {
       const expectedSpellCategory = expectedModel.spellCategories[spellLevel];
       const spellCategoryBox = generateSpellcastingDialog.spellCategoryBoxes[spellLevel];
 
-      if (spellLevel === 0) {
+      if (spellLevel === 0 && SpellcasterTypes[expectedModel.spellcasterType].hasCantrips) {
         expect(spellCategoryBox.disabled).toBe(false);
         expect(spellCategoryBox.heading.textContent).toBe('Cantrips (at will)');
-      } else if (spellLevel <= expectedSpellSlots.length) {
+      } else if (spellLevel > 0 && spellLevel <= expectedSpellSlots.length) {
         const expectedSlotQuantity = expectedSpellSlots[spellLevel - 1];
         const formattedSlotQuantity = formatSpellSlotQuantity(expectedSlotQuantity);
         const formattedSpellLevel = formatIntegerWithOrdinalIndicator(spellLevel);

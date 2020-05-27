@@ -39,7 +39,7 @@ export default class Spellcasting {
   }
 
   get spellSlotQuantities() {
-    return (this.spellcasterType === 'innate') ? [0,0,0] :SpellcasterTypes[this.spellcasterType].levels[this.spellcasterLevel].spellSlots;
+    return (this.spellcasterType === 'innate') ? [0,0,0] : SpellcasterTypes[this.spellcasterType].levels[this.spellcasterLevel].spellSlots;
   }
 
   get generatedText() {
@@ -123,6 +123,9 @@ class SpellCategory {
   }
 
   get isEnabled() {
+    if (this.level === 0) {
+      return SpellcasterTypes[this.spellcastingModel.spellcasterType].hasCantrips;
+    }
     return (this.level <= this.spellcastingModel.spellSlotQuantities.length);
   }
 

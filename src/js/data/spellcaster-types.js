@@ -1,9 +1,11 @@
 export default {
   innate: {
     ability: 'charisma',
+    hasCantrips: true
   },
   bard: {
     ability: 'charisma',
+    hasCantrips: true,
     levels: {
       '1': {
         spellSlots: [2]
@@ -69,6 +71,7 @@ export default {
   },
   cleric: {
     ability: 'wisdom',
+    hasCantrips: true,
     levels: {
       '1': {
         spellSlots: [2]
@@ -134,6 +137,7 @@ export default {
   },
   druid: {
     ability: 'wisdom',
+    hasCantrips: true,
     levels: {
       '1': {
         spellSlots: [2]
@@ -199,6 +203,7 @@ export default {
   },
   paladin: {
     ability: 'charisma',
+    hasCantrips: false,
     levels: {
       '1': {
         spellSlots: []
@@ -264,6 +269,7 @@ export default {
   },
   ranger: {
     ability: 'wisdom',
+    hasCantrips: false,
     levels: {
       '1': {
         spellSlots: []
@@ -329,6 +335,7 @@ export default {
   },
   sorcerer: {
     ability: 'charisma',
+    hasCantrips: true,
     levels: {
       '1': {
         spellSlots: [2]
@@ -394,6 +401,7 @@ export default {
   },
   warlock: {
     ability: 'charisma',
+    hasCantrips: true,
     levels: {
       '1': {
         spellSlots: [1]
@@ -459,6 +467,7 @@ export default {
   },
   wizard: {
     ability: 'intelligence',
+    hasCantrips: true,
     levels: {
       '1': {
         spellSlots: [2]
