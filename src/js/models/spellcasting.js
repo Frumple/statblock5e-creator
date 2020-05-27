@@ -134,6 +134,7 @@ class SpellCategory {
       return '';
     }
 
+    // Innate Spellcasting
     if (this.spellcastingModel.spellcasterType === 'innate') {
       switch(this.level) {
       case 0: return 'At will';
@@ -144,13 +145,21 @@ class SpellCategory {
       }
     }
 
+    // Cantrips
     if (this.level === 0) {
       return 'Cantrips (at will)';
     }
 
-    const spellLevelWithOrdinal = formatIntegerWithOrdinalIndicator(this.level);
+    const formattedSpellLevel = formatIntegerWithOrdinalIndicator(this.level);
+
+    // Warlock Mystic Arcanum Feature: Lavel 6 to 9 spells are available once per long rest
+    if (this.spellcastingModel.spellcasterType === 'warlock' && this.level >= 6) {
+      return `${formattedSpellLevel} level (${this.spellSlotQuantity}/long rest)`;
+    }
+
+    // Levelled Spells
     const formattedSlotQuantity = formatSpellSlotQuantity(this.spellSlotQuantity);
-    return `${spellLevelWithOrdinal} level (${formattedSlotQuantity})`;
+    return `${formattedSpellLevel} level (${formattedSlotQuantity})`;
   }
 
   get spellSlotQuantity() {

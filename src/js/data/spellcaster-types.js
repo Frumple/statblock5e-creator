@@ -434,34 +434,34 @@ export default {
         spellSlots: [0,0,0,0,2]
       },
       '11': {
-        spellSlots: [0,0,0,0,3]
+        spellSlots: [0,0,0,0,3,1]
       },
       '12': {
-        spellSlots: [0,0,0,0,3]
+        spellSlots: [0,0,0,0,3,1]
       },
       '13': {
-        spellSlots: [0,0,0,0,3]
+        spellSlots: [0,0,0,0,3,1,1]
       },
       '14': {
-        spellSlots: [0,0,0,0,3]
+        spellSlots: [0,0,0,0,3,1,1]
       },
       '15': {
-        spellSlots: [0,0,0,0,3]
+        spellSlots: [0,0,0,0,3,1,1,1]
       },
       '16': {
-        spellSlots: [0,0,0,0,3]
+        spellSlots: [0,0,0,0,3,1,1,1]
       },
       '17': {
-        spellSlots: [0,0,0,0,4]
+        spellSlots: [0,0,0,0,4,1,1,1,1]
       },
       '18': {
-        spellSlots: [0,0,0,0,4]
+        spellSlots: [0,0,0,0,4,1,1,1,1]
       },
       '19': {
-        spellSlots: [0,0,0,0,4]
+        spellSlots: [0,0,0,0,4,1,1,1,1]
       },
       '20': {
-        spellSlots: [0,0,0,0,4]
+        spellSlots: [0,0,0,0,4,1,1,1,1]
       }
     }
   },
