@@ -633,6 +633,7 @@ function verifyDialogControls(expectedModel, expectedRenderedText) {
   expect(generateSpellcastingDialog.somaticComponentInput.checked).toBe(expectedModel.requiresSomaticComponents);
   expect(generateSpellcastingDialog.materialComponentInput.checked).toBe(expectedModel.requiresMaterialComponents);
 
+  // Innate Spellcaster
   if (expectedModel.spellcasterType === 'innate') {
     for (let spellLevel = 0; spellLevel <= 9; spellLevel++) {
       const expectedSpellCategory = expectedModel.spellCategories[spellLevel];
@@ -664,6 +665,29 @@ function verifyDialogControls(expectedModel, expectedRenderedText) {
     }
 
     expect(generateSpellcastingDialog.previewNameElement.textContent).toBe('Innate Spellcasting');
+
+  // Generic Spellcaster
+  } else if (expectedModel.spellcasterType === 'generic') {
+    for (let spellLevel = 0; spellLevel <= 9; spellLevel++) {
+      const expectedSpellCategory = expectedModel.spellCategories[spellLevel];
+      const spellCategoryBox = generateSpellcastingDialog.spellCategoryBoxes[spellLevel];
+      const formattedSpellLevel = formatIntegerWithOrdinalIndicator(spellLevel);
+
+      expect(spellCategoryBox.disabled).toBe(false);
+
+      // Cantrips
+      if (spellLevel === 0) {
+        expect(spellCategoryBox.heading.textContent).toBe('Cantrips (at will)');
+
+      // Levelled Spells
+      } else {
+        expect(spellCategoryBox.heading.textContent).toBe(`${formattedSpellLevel} level`);
+      }
+
+      expect(spellCategoryBox.propertyList.itemsAsText).toStrictEqual(expectedSpellCategory.spells);
+    }
+
+  // Class-specific Spellcaster
   } else {
     const expectedSpellSlots = SpellcasterTypes[expectedModel.spellcasterType].levels[expectedModel.spellcasterLevel].spellSlots;
 
@@ -678,8 +702,6 @@ function verifyDialogControls(expectedModel, expectedRenderedText) {
 
       // Levelled Spells
       } else if (spellLevel > 0 && spellLevel <= expectedSpellSlots.length) {
-        const expectedSlotQuantity = expectedSpellSlots[spellLevel - 1];
-
         const formattedSpellLevel = formatIntegerWithOrdinalIndicator(spellLevel);
 
         expect(spellCategoryBox.disabled).toBe(false);
@@ -688,8 +710,9 @@ function verifyDialogControls(expectedModel, expectedRenderedText) {
 
         // Warlock Mystic Arcanum Feature: Lavel 6 to 9 spells are available once per long rest
         if (expectedModel.spellcasterType === 'warlock' && spellLevel >= 6) {
-          expectedHeading = `${formattedSpellLevel} level (${expectedSlotQuantity}/long rest)`;
+          expectedHeading = `${formattedSpellLevel} level (1/long rest)`;
         } else {
+          const expectedSlotQuantity = expectedSpellSlots[spellLevel - 1];
           const formattedSlotQuantity = formatSpellSlotQuantity(expectedSlotQuantity);
           expectedHeading = `${formattedSpellLevel} level (${formattedSlotQuantity})`;
         }
@@ -719,13 +742,13 @@ function verifyDialogResetToDefaults() {
 }
 
 function verifyDialogModelResetToDefaults() {
-  const expectedGeneratedText = '[name]\'s innate spellcasting ability is Charisma (spell save DC sdc[cha], atk[cha] to hit with spell attacks). It can innately cast the following spells:\n\n';
+  const expectedGeneratedText = '[name] is a 1st-level spellcaster. Its spellcasting ability is Charisma (spell save DC sdc[cha], atk[cha] to hit with spell attacks). [name] has the following spells prepared:\n\n';
 
   verifyDialogModel(new Spellcasting(), expectedGeneratedText);
 }
 
 function verifyDialogControlsResetToDefaults() {
-  const expectedRenderedText = 'The commoner\'s innate spellcasting ability is Charisma (spell save DC 10, +2 to hit with spell attacks). It can innately cast the following spells:\n\n';
+  const expectedRenderedText = 'The commoner is a 1st-level spellcaster. Its spellcasting ability is Charisma (spell save DC 10, +2 to hit with spell attacks). The commoner has the following spells prepared:\n\n';
 
   verifyDialogControls(new Spellcasting(), expectedRenderedText);
 }

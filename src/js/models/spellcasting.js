@@ -17,7 +17,7 @@ export default class Spellcasting {
   }
 
   reset() {
-    this.spellcasterType = 'innate';
+    this.spellcasterType = 'generic';
     this.spellcasterAbility = 'charisma';
     this.spellcasterLevel = 1;
 
@@ -167,7 +167,7 @@ class SpellCategory {
 
     // Warlock Mystic Arcanum Feature: Lavel 6 to 9 spells are available once per long rest
     if (this.spellcastingModel.spellcasterType === 'warlock' && this.level >= 6) {
-      return `${formattedSpellLevel} level (${this.spellSlotQuantity}/long rest)`;
+      return `${formattedSpellLevel} level (1/long rest)`;
     }
 
     // Class-specific Levelled Spells with Slots
