@@ -140,6 +140,7 @@ export default class GenerateSpellcastingDialog extends CustomDialog {
 
   launch() {
     this.showModal();
+    this.updateDataLists();
     this.updateControls();
     focusAndSelectElement(this.spellcasterTypeSelect);
   }
@@ -216,7 +217,18 @@ export default class GenerateSpellcastingDialog extends CustomDialog {
   updateDataLists() {
     for (let spellLevel = 0; spellLevel <= 9; spellLevel++) {
       const spellCategoryBox = this.spellCategoryBoxes[spellLevel];
-      const spells = Spells.filter(spell => spell.level === spellLevel && spell.classes.includes(this.spellcastingModel.spellcasterType));
+      const spellcasterType = this.spellcastingModel.spellcasterType;
+
+      let spells = Spells;
+
+      if (spellcasterType !== 'innate') {
+        spells = spells.filter(spell => spell.level === spellLevel);
+
+        if (spellcasterType !== 'generic') {
+          spells = spells.filter(spell => spell.classes.includes(spellcasterType));
+        }
+      }
+
       const dataListOptions = spells.map(spell => {
         return {
           text: getSpellDescription(spell),
