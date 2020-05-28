@@ -258,6 +258,10 @@ describe('when the generate spellcasting dialog is opened', () => {
     /* eslint-enable indent, no-unexpected-multiline */
   });
 
+  describe('and the dialog is submitted for a generic spellcaster, it should add a new spellcasting block under special traits', () => {
+    // TODO
+  });
+
   describe('and the dialog is submitted for a bard spellcaster, it should add a new spellcasting block under special traits', () => {
     /* eslint-disable indent, no-unexpected-multiline, no-unused-vars */
     it.each

@@ -39,11 +39,19 @@ export default class Spellcasting {
   }
 
   get spellSlotQuantities() {
-    return (this.spellcasterType === 'innate') ? [0,0,0] : SpellcasterTypes[this.spellcasterType].levels[this.spellcasterLevel].spellSlots;
+    if (this.spellcasterType === 'innate') {
+      return [0,0,0];
+    }
+
+    if (this.spellcasterType === 'generic') {
+      return [0,0,0,0,0,0,0,0,0];
+    }
+
+    return SpellcasterTypes[this.spellcasterType].levels[this.spellcasterLevel].spellSlots;
   }
 
   get generatedText() {
-    const type = this.spellcasterType;
+    const type = (this.spellcasterType === 'generic') ? '' : ` ${this.spellcasterType}`;
     const ability = capitalizeFirstLetter(this.spellcasterAbility);
     const abilityAbbreviation = CurrentContext.creature.abilities.abilities[this.spellcasterAbility].abbreviation;
     const level = formatIntegerWithOrdinalIndicator(this.spellcasterLevel);
@@ -58,7 +66,7 @@ export default class Spellcasting {
     }
 
     const requirements = components ? ` It requires ${components} to cast its spells.` : '';
-    return `[name] is a ${level}-level spellcaster. Its spellcasting ability is ${ability} (spell save DC sdc[${abilityAbbreviation}], atk[${abilityAbbreviation}] to hit with spell attacks).${requirements} [name] has the following ${type} spells prepared:\n\n${spells}`;
+    return `[name] is a ${level}-level spellcaster. Its spellcasting ability is ${ability} (spell save DC sdc[${abilityAbbreviation}], atk[${abilityAbbreviation}] to hit with spell attacks).${requirements} [name] has the following${type} spells prepared:\n\n${spells}`;
   }
 
   get componentsText() {
@@ -134,7 +142,7 @@ class SpellCategory {
       return '';
     }
 
-    // Innate Spellcasting
+    // Innate Spellcaster
     if (this.spellcastingModel.spellcasterType === 'innate') {
       switch(this.level) {
       case 0: return 'At will';
@@ -152,12 +160,17 @@ class SpellCategory {
 
     const formattedSpellLevel = formatIntegerWithOrdinalIndicator(this.level);
 
+    // Generic Levelled Spells without Slots
+    if (this.spellcastingModel.spellcasterType === 'generic') {
+      return `${formattedSpellLevel} level`;
+    }
+
     // Warlock Mystic Arcanum Feature: Lavel 6 to 9 spells are available once per long rest
     if (this.spellcastingModel.spellcasterType === 'warlock' && this.level >= 6) {
       return `${formattedSpellLevel} level (${this.spellSlotQuantity}/long rest)`;
     }
 
-    // Levelled Spells
+    // Class-specific Levelled Spells with Slots
     const formattedSlotQuantity = formatSpellSlotQuantity(this.spellSlotQuantity);
     return `${formattedSpellLevel} level (${formattedSlotQuantity})`;
   }

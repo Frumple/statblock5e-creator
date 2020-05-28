@@ -3,6 +3,10 @@ export default {
     ability: 'charisma',
     hasCantrips: true
   },
+  generic: {
+    ability: 'charisma',
+    hasCantrips: true
+  },
   bard: {
     ability: 'charisma',
     hasCantrips: true,
