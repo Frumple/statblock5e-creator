@@ -1,4 +1,5 @@
 import SpellcasterTypes from '../data/spellcaster-types.js';
+import Spells from '../data/spells.js';
 
 import CurrentContext from '../models/current-context.js';
 
@@ -177,6 +178,21 @@ class SpellCategory {
 
   get spellSlotQuantity() {
     return this.spellcastingModel.spellSlotQuantities[this.level - 1];
+  }
+
+  get availableSpells() {
+    const spellcasterType = this.spellcastingModel.spellcasterType;
+    let spells = Spells;
+
+    if (spellcasterType !== 'innate') {
+      spells = spells.filter(spell => spell.level === this.level);
+
+      if (spellcasterType !== 'generic') {
+        spells = spells.filter(spell => spell.classes.includes(spellcasterType));
+      }
+    }
+
+    return spells;
   }
 
   get generatedText() {

@@ -2,7 +2,6 @@ import CustomDialog from './custom-dialog.js';
 import SpellCategoryBox from '../spell-category-box.js';
 
 import SpellcasterTypes from '../../../data/spellcaster-types.js';
-import Spells from '../../../data/spells.js';
 
 import Spellcasting from '../../../models/spellcasting.js';
 
@@ -94,10 +93,15 @@ export default class GenerateSpellcastingDialog extends CustomDialog {
     const spellcasterType = this.spellcasterTypeSelect.value;
     this.spellcastingModel.spellcasterType = spellcasterType;
     this.spellcastingModel.spellcasterAbility = SpellcasterTypes[spellcasterType].ability;
+
+    this.spellcastingModel.requiresVerbalComponents = true;
+    this.spellcastingModel.requiresSomaticComponents = true;
+    // Special case: Material components are not required by default for innate spellcasters
+    this.spellcastingModel.requiresMaterialComponents = spellcasterType !== 'innate';
+
     this.spellcastingModel.clearAllSpells();
 
     this.updateDataLists();
-
     this.updateControls();
   }
 
@@ -216,18 +220,10 @@ export default class GenerateSpellcastingDialog extends CustomDialog {
 
   updateDataLists() {
     for (let spellLevel = 0; spellLevel <= 9; spellLevel++) {
+      const spellCategory = this.spellcastingModel.spellCategories[spellLevel];
       const spellCategoryBox = this.spellCategoryBoxes[spellLevel];
-      const spellcasterType = this.spellcastingModel.spellcasterType;
 
-      let spells = Spells;
-
-      if (spellcasterType !== 'innate') {
-        spells = spells.filter(spell => spell.level === spellLevel);
-
-        if (spellcasterType !== 'generic') {
-          spells = spells.filter(spell => spell.classes.includes(spellcasterType));
-        }
-      }
+      const spells = spellCategory.availableSpells;
 
       const dataListOptions = spells.map(spell => {
         return {

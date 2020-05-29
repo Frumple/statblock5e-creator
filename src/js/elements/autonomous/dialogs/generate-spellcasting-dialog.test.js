@@ -73,6 +73,44 @@ describe('when the generate spellcasting dialog is opened', () => {
   });
 
   describe('and the dialog fields are populated and then the spellcaster type is changed', () => {
+    it('should set all component requirements back to checked if the spellcaster type is not innate', () => {
+      const oldModel = createDummySpellcastingModel();
+      oldModel.requiresVerbalComponents = false;
+      oldModel.requiresSomaticComponents = false;
+      oldModel.requiresMaterialComponents = false;
+
+      setDialogControls(oldModel);
+
+      inputValueAndTriggerEvent(generateSpellcastingDialog.spellcasterTypeSelect, 'cleric');
+
+      expect(generateSpellcastingDialog.spellcastingModel.requiresVerbalComponents).toBe(true);
+      expect(generateSpellcastingDialog.spellcastingModel.requiresSomaticComponents).toBe(true);
+      expect(generateSpellcastingDialog.spellcastingModel.requiresMaterialComponents).toBe(true);
+
+      expect(generateSpellcastingDialog.verbalComponentInput.checked).toBe(true);
+      expect(generateSpellcastingDialog.somaticComponentInput.checked).toBe(true);
+      expect(generateSpellcastingDialog.materialComponentInput.checked).toBe(true);
+    });
+
+    it('should set material component requirements to unchecked if the spellcaster type is innate', () => {
+      const oldModel = createDummySpellcastingModel();
+      oldModel.requiresVerbalComponents = false;
+      oldModel.requiresSomaticComponents = false;
+      oldModel.requiresMaterialComponents = true;
+
+      setDialogControls(oldModel);
+
+      inputValueAndTriggerEvent(generateSpellcastingDialog.spellcasterTypeSelect, 'innate');
+
+      expect(generateSpellcastingDialog.spellcastingModel.requiresVerbalComponents).toBe(true);
+      expect(generateSpellcastingDialog.spellcastingModel.requiresSomaticComponents).toBe(true);
+      expect(generateSpellcastingDialog.spellcastingModel.requiresMaterialComponents).toBe(false);
+
+      expect(generateSpellcastingDialog.verbalComponentInput.checked).toBe(true);
+      expect(generateSpellcastingDialog.somaticComponentInput.checked).toBe(true);
+      expect(generateSpellcastingDialog.materialComponentInput.checked).toBe(false);
+    });
+
     it('should clear all spells', () => {
       const originalModel = createDummySpellcastingModel();
 
@@ -793,9 +831,15 @@ function setDialogControls(spellcastingModel, setSpellcasterAbility = false) {
 
   inputValueAndTriggerEvent(generateSpellcastingDialog.spellcasterLevelInput, spellcastingModel.spellcasterLevel);
 
-  if (! spellcastingModel.requiresVerbalComponents) generateSpellcastingDialog.verbalComponentInput.click();
-  if (! spellcastingModel.requiresSomaticComponents) generateSpellcastingDialog.somaticComponentInput.click();
-  if (! spellcastingModel.requiresMaterialComponents) generateSpellcastingDialog.materialComponentInput.click();
+  if (spellcastingModel.requiresVerbalComponents !== generateSpellcastingDialog.verbalComponentInput.checked) {
+    generateSpellcastingDialog.verbalComponentInput.click();
+  }
+  if (spellcastingModel.requiresSomaticComponents !== generateSpellcastingDialog.somaticComponentInput.checked) {
+    generateSpellcastingDialog.somaticComponentInput.click();
+  }
+  if (spellcastingModel.requiresMaterialComponents !== generateSpellcastingDialog.materialComponentInput.checked) {
+    generateSpellcastingDialog.materialComponentInput.click();
+  }
 
   for (let spellLevel = 0; spellLevel <= 9; spellLevel++) {
     const propertyList = generateSpellcastingDialog.spellCategoryBoxes[spellLevel].propertyList;
@@ -815,9 +859,9 @@ function verifyDialogModel(expectedModel, expectedGeneratedText) {
   expect(spellcastingModel.spellcasterAbility).toBe(expectedModel.spellcasterAbility);
   expect(spellcastingModel.spellcasterLevel).toBe(expectedModel.spellcasterLevel);
 
-  expect(spellcastingModel.requiresVerbalComponents).toBe(spellcastingModel.requiresVerbalComponents);
-  expect(spellcastingModel.requiresSomaticComponents).toBe(spellcastingModel.requiresSomaticComponents);
-  expect(spellcastingModel.requiresMaterialComponents).toBe(spellcastingModel.requiresMaterialComponents);
+  expect(spellcastingModel.requiresVerbalComponents).toBe(expectedModel.requiresVerbalComponents);
+  expect(spellcastingModel.requiresSomaticComponents).toBe(expectedModel.requiresSomaticComponents);
+  expect(spellcastingModel.requiresMaterialComponents).toBe(expectedModel.requiresMaterialComponents);
 
   for (let spellLevel = 0; spellLevel <= 9; spellLevel++) {
     const spellCategory = spellcastingModel.spellCategories[spellLevel];
