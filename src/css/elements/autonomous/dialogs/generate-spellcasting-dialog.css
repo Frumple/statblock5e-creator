@@ -23,6 +23,8 @@
   display: grid;
   grid-template-columns: 1fr 1fr;
   grid-template-rows: 0fr auto auto;
+  align-content: start;
+  width: 490px;
   margin: 5px;
 }
 
@@ -43,6 +45,7 @@
   grid-row-gap: 5px;
   grid-column-gap: 5px;
   align-items: center;
+  margin-top: 5px;
 }
 
 .generate-spellcasting-dialog__spellcaster-type-label {
@@ -77,6 +80,7 @@
   grid-row-gap: 5px;
   grid-column-gap: 5px;
   align-items: center;
+  margin-top: 5px;
 }
 
 .generate-spellcasting-dialog__verbal-component-label {
@@ -115,18 +119,22 @@
   flex-direction: column;
   justify-content: space-between;
   width: 400px;
-  padding: 5px;
   margin: 5px;
 }
 
 .generate-spellcasting-dialog__preview-container {
   display: flex;
   flex-direction: column;
+  border: 1px solid #aaaaaa;
+  padding: 5px;
+}
+
+.generate-spellcasting-dialog__preview-content {
+  margin-top: 1em;
 }
 
 .generate-spellcasting-dialog__preview-header {
   text-align: center;
-  margin-bottom: 1em;
 }
 
 .generate-spellcasting-dialog__preview-name {
@@ -150,11 +158,12 @@
 
 .generate-spellcasting-dialog__cantrip-count-label {
   text-align: center;
-  margin-bottom: 1em;
+  margin-top: 1em;
 }
 
 .generate-spellcasting-dialog__spell-count-label {
   text-align: center;
+  margin-top: 1em;
 }
 
 .generate-spellcasting-dialog__action-container {

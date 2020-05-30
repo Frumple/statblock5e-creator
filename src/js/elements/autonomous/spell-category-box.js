@@ -42,16 +42,13 @@ export default class SpellCategoryBox extends CustomAutonomousElement {
 
   set disabled(isDisabled) {
     const containerDisabledClass = 'spell-category__container_disabled';
-    const propertyListHiddenClass = 'spell-category__property-list_hidden';
 
     if (isDisabled) {
       this.setAttribute('disabled', '');
       this.container.classList.add(containerDisabledClass);
-      this.propertyList.classList.add(propertyListHiddenClass);
     } else {
       this.removeAttribute('disabled');
       this.container.classList.remove(containerDisabledClass);
-      this.propertyList.classList.remove(propertyListHiddenClass);
     }
   }
 }

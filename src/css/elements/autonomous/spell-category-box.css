@@ -3,13 +3,13 @@
   flex-direction: column;
   align-items: center;
   border: 1px solid #aaaaaa;
-  min-height: 126px;
   width: 228px;
   padding: 5px;
   margin: 5px;
 }
 
 .spell-category__container_disabled {
+  display: none;
   background: #eeeeee;
 }
 
@@ -20,8 +20,4 @@
 
 .spell-category__property-list {
   margin: 5px 5px 0 5px;
-}
-
-.spell-category__property-list_hidden {
-  display: none;
 }
