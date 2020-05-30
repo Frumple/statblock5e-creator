@@ -27,8 +27,8 @@ export default class ImportSrdDialog extends ImportDialog {
   }
 
   async onClickImportButton() {
-    const creatureName = this.creatureSelect.value;
-    const path = `examples/5e-srd/${creatureName}.json`;
+    const creatureSlug = this.creatureSelect.value;
+    const path = `examples/5e-srd/${creatureSlug}.json`;
     const text = await fetchFromFile(path);
     const json = JSON.parse(text);
 
@@ -41,7 +41,7 @@ export default class ImportSrdDialog extends ImportDialog {
 
     if (this.creatureSelect.options.length === 0) {
       this.creatureSelect.populate(
-        SrdCreatureList.map(creatureName => new Option(creatureName, creatureName)));
+        SrdCreatureList.map(creature => new Option(creature.name, creature.slug)));
     }
 
     this.setStatus('Choose a creature:');

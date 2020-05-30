@@ -57,14 +57,19 @@ describe('should import an SRD creature from the example JSON files', () => {
   /* eslint-disable indent, no-unexpected-multiline */
   it.each
   `
-    creatureName
-    ${'Adult Red Dragon'}
-    ${'Mage'}
-    ${'Swarm of Rats'}
+    creatureSlug
+    ${'adult-green-dragon'}
+    ${'deep-gnome-svirfneblin'}
+    ${'giant-rat-diseased'}
+    ${'half-red-dragon-veteran'}
+    ${'mage'}
+    ${'succubus-incubus'}
+    ${'swarm-of-rats'}
+    ${'will-o-wisp'}
   `
-  ('$creatureName',
-  async ({creatureName}) => {
-    const path = `examples/5e-srd/${creatureName}.json`;
+  ('$creatureSlug',
+  async ({creatureSlug}) => {
+    const path = `examples/5e-srd/${creatureSlug}.json`;
     const text = await fetchFromFile(path);
     const expectedJson = JSON.parse(text);
 
@@ -73,7 +78,7 @@ describe('should import an SRD creature from the example JSON files', () => {
     expect(importSrdDialog.statusText).toBe('Choose a creature:');
     expect(importSrdDialog.statusType).toBeNull();
 
-    inputValueAndTriggerEvent(importSrdDialog.creatureSelect, creatureName);
+    inputValueAndTriggerEvent(importSrdDialog.creatureSelect, creatureSlug);
     importSrdDialog.importButton.click();
 
     await waitForExpect(() => {
