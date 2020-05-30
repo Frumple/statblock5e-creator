@@ -83,11 +83,17 @@
           <span id="level-9-heading" slot="heading"></span>
         </spell-category-box>
 
-        <div class="generate-spellcasting-dialog__preview-container">
-          <label class="generate-spellcasting-dialog__preview-header generate-spellcasting-dialog__label">Preview</label>
-          <div class="generate-spellcasting-dialog__preview-content">
-            <h4 class="generate-spellcasting-dialog__preview-name"><span id="preview-name"></span>.</h4>
-            <p id="preview-text" class="generate-spellcasting-dialog__preview-text" is="sanitized-paragraph"></p>
+        <div class="generate-spellcasting-dialog__display-container">
+          <div class="generate-spellcasting-dialog__preview-container">
+            <label class="generate-spellcasting-dialog__preview-header generate-spellcasting-dialog__label">Preview</label>
+            <div class="generate-spellcasting-dialog__preview-content">
+              <h4 class="generate-spellcasting-dialog__preview-name"><span id="preview-name"></span>.</h4>
+              <p id="preview-text" class="generate-spellcasting-dialog__preview-text" is="sanitized-paragraph"></p>
+            </div>
+          </div>
+          <div class="generate-spellcasting-dialog__statistics_container">
+            <label id="cantrip-count-label" class="generate-spellcasting-dialog__cantrip-count-label generate-spellcasting-dialog__label"></label>
+            <label id="spell-count-label" class="generate-spellcasting-dialog__spell-count-label generate-spellcasting-dialog__label"></label>
           </div>
         </div>
       </div>

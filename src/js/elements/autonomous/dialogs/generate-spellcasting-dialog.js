@@ -53,6 +53,9 @@ export default class GenerateSpellcastingDialog extends CustomDialog {
     this.previewNameElement = this.shadowRoot.getElementById('preview-name');
     this.previewTextElement = this.shadowRoot.getElementById('preview-text');
 
+    this.cantripCountLabel = this.shadowRoot.getElementById('cantrip-count-label');
+    this.spellCountLabel = this.shadowRoot.getElementById('spell-count-label');
+
     this.cancelButton = this.shadowRoot.getElementById('cancel-button');
     this.resetButton = this.shadowRoot.getElementById('reset-button');
     this.generateSpellcastingButton = this.shadowRoot.getElementById('generate-spellcasting-button');
@@ -86,7 +89,7 @@ export default class GenerateSpellcastingDialog extends CustomDialog {
 
   onPropertyListChanged() {
     this.updateModelSpells();
-    this.updatePreview();
+    this.updateDisplay();
   }
 
   onInputSpellcasterType() {
@@ -107,7 +110,7 @@ export default class GenerateSpellcastingDialog extends CustomDialog {
 
   onInputSpellcasterAbility() {
     this.spellcastingModel.spellcasterAbility = this.spellcasterAbilitySelect.value;
-    this.updatePreview();
+    this.updateDisplay();
   }
 
   onInputSpellcasterLevel() {
@@ -117,17 +120,17 @@ export default class GenerateSpellcastingDialog extends CustomDialog {
 
   onInputVerbalComponent() {
     this.spellcastingModel.requiresVerbalComponents = this.verbalComponentInput.checked;
-    this.updatePreview();
+    this.updateDisplay();
   }
 
   onInputSomaticComponent() {
     this.spellcastingModel.requiresSomaticComponents = this.somaticComponentInput.checked;
-    this.updatePreview();
+    this.updateDisplay();
   }
 
   onInputMaterialComponent() {
     this.spellcastingModel.requiresMaterialComponents = this.materialComponentInput.checked;
-    this.updatePreview();
+    this.updateDisplay();
   }
 
   onClickResetButton() {
@@ -208,7 +211,12 @@ export default class GenerateSpellcastingDialog extends CustomDialog {
       spellCategoryBox.propertyList.setItems(spellCategory.spells);
     }
 
+    this.updateDisplay();
+  }
+
+  updateDisplay() {
     this.updatePreview();
+    this.updateStatistics();
   }
 
   updatePreview() {
@@ -216,6 +224,25 @@ export default class GenerateSpellcastingDialog extends CustomDialog {
 
     const generatedText = this.spellcastingModel.generatedText;
     this.previewTextElement.innerHTMLSanitized = this.spellcastingModel.renderText(generatedText);
+  }
+
+  updateStatistics() {
+    let cantripCountText = '';
+    let spellCountText = '';
+
+    if (this.spellcastingModel.spellcasterType === 'innate') {
+      cantripCountText = '';
+      spellCountText = `# of Spells: ${this.spellcastingModel.currentSpellCount}`;
+    } else if (this.spellcastingModel.spellcasterType === 'generic') {
+      cantripCountText = `# of Cantrips: ${this.spellcastingModel.currentCantripCount}`;
+      spellCountText = `# of Spells: ${this.spellcastingModel.currentSpellCount}`;
+    } else {
+      cantripCountText = `# of Known Cantrips: ${this.spellcastingModel.currentCantripCount} / ${this.spellcastingModel.knownCantripCount}`;
+      spellCountText = `# of Prepared Spells: ${this.spellcastingModel.currentSpellCount} / ${this.spellcastingModel.preparedSpellCount}`;
+    }
+
+    this.cantripCountLabel.textContent = cantripCountText;
+    this.spellCountLabel.textContent = spellCountText;
   }
 
   updateDataLists() {

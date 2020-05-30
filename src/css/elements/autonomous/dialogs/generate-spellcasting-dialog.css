@@ -109,13 +109,19 @@
 .generate-spellcasting-dialog__level-8-spell-category-box { grid-area: 4 / 2; }
 .generate-spellcasting-dialog__level-9-spell-category-box { grid-area: 4 / 3; }
 
-.generate-spellcasting-dialog__preview-container {
+.generate-spellcasting-dialog__display-container {
   grid-area: 1 / 4 / 5 / 5;
   display: flex;
   flex-direction: column;
+  justify-content: space-between;
   width: 400px;
   padding: 5px;
   margin: 5px;
+}
+
+.generate-spellcasting-dialog__preview-container {
+  display: flex;
+  flex-direction: column;
 }
 
 .generate-spellcasting-dialog__preview-header {
@@ -135,6 +141,20 @@
   text-indent: 0;
   margin: 0;
   white-space: pre-wrap;
+}
+
+.generate-spellcasting-dialog__statistics_container {
+  display: flex;
+  flex-direction: column;
+}
+
+.generate-spellcasting-dialog__cantrip-count-label {
+  text-align: center;
+  margin-bottom: 1em;
+}
+
+.generate-spellcasting-dialog__spell-count-label {
+  text-align: center;
 }
 
 .generate-spellcasting-dialog__action-container {

@@ -51,6 +51,59 @@ export default class Spellcasting {
     return SpellcasterTypes[this.spellcasterType].levels[this.spellcasterLevel].spellSlots;
   }
 
+  get currentCantripCount() {
+    if (this.spellcasterType === 'innate') {
+      return 0;
+    }
+
+    return this.spellCategories[0].spells.length;
+  }
+
+  get knownCantripCount() {
+    const spellcaster = SpellcasterTypes[this.spellcasterType];
+
+    if (this.spellcasterType === 'innate' ||
+        this.spellcasterType === 'generic' ||
+        ! spellcaster.hasCantrips) {
+      return 0;
+    }
+    return spellcaster.levels[this.spellcasterLevel].knownCantripCount;
+  }
+
+  get currentSpellCount() {
+    const minimumSpellLevel = (this.spellcasterType === 'innate') ? 0 : 1;
+    let spellCategories = this.spellCategories
+      .filter(category => (category.level >= minimumSpellLevel) && category.isEnabled);
+
+    // Do not include Warlock Mystic Arcanum spells that are levels 6 to 9 in the spell count
+    if (this.spellcasterType === 'warlock') {
+      spellCategories = spellCategories.filter(category => (category.level <= 5));
+    }
+
+    return spellCategories
+      .map(category => category.spells.length)
+      .reduce((accumulator, currentValue) => accumulator + currentValue, 0);
+  }
+
+  get preparedSpellCount() {
+    if (this.spellcasterType === 'innate' || this.spellcasterType === 'generic') {
+      return 0;
+    }
+
+    const spellcaster = SpellcasterTypes[this.spellcasterType];
+
+    switch(spellcaster.spellCountMethod) {
+    case 'fixed':
+      return spellcaster.levels[this.spellcasterLevel].fixedSpellCount;
+    case 'abilityModPlusLevel':
+      return CurrentContext.creature.abilities.abilities[this.spellcasterAbility].modifier + this.spellcasterLevel;
+    case 'abilityModPlusHalfLevel':
+      return Math.floor(CurrentContext.creature.abilities.abilities[this.spellcasterAbility].modifier + (this.spellcasterLevel / 2));
+    default:
+      return 0;
+    }
+  }
+
   get generatedText() {
     const type = (this.spellcasterType === 'generic') ? '' : ` ${this.spellcasterType}`;
     const ability = capitalizeFirstLetter(this.spellcasterAbility);
