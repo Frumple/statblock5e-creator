@@ -1,0 +1,249 @@
+{
+  "title": {
+    "fullName": "Earth Elemental",
+    "shortName": "elemental",
+    "isProperNoun": false
+  },
+  "subtitle": {
+    "size": "Large",
+    "type": "elemental",
+    "tags": "",
+    "alignment": "neutral",
+    "useCustomText": false,
+    "customText": ""
+  },
+  "armorClass": {
+    "armorClass": 17,
+    "armorType": "natural armor",
+    "hasShield": false,
+    "useCustomText": false,
+    "customText": ""
+  },
+  "hitPoints": {
+    "hitPoints": 126,
+    "useHitDie": true,
+    "hitDieQuantity": 12,
+    "hitDieSize": 10
+  },
+  "speed": {
+    "walk": 30,
+    "burrow": 30,
+    "climb": null,
+    "fly": null,
+    "hover": false,
+    "swim": null,
+    "useCustomText": false,
+    "customText": ""
+  },
+  "abilityScores": {
+    "strength": 20,
+    "dexterity": 8,
+    "constitution": 20,
+    "intelligence": 5,
+    "wisdom": 10,
+    "charisma": 5
+  },
+  "savingThrows": {
+    "strength": {
+      "isEnabled": false,
+      "override": null
+    },
+    "dexterity": {
+      "isEnabled": false,
+      "override": null
+    },
+    "constitution": {
+      "isEnabled": false,
+      "override": null
+    },
+    "intelligence": {
+      "isEnabled": false,
+      "override": null
+    },
+    "wisdom": {
+      "isEnabled": false,
+      "override": null
+    },
+    "charisma": {
+      "isEnabled": false,
+      "override": null
+    }
+  },
+  "skills": {
+    "acrobatics": {
+      "isEnabled": false,
+      "hasExpertise": false,
+      "override": null
+    },
+    "animalHandling": {
+      "isEnabled": false,
+      "hasExpertise": false,
+      "override": null
+    },
+    "arcana": {
+      "isEnabled": false,
+      "hasExpertise": false,
+      "override": null
+    },
+    "athletics": {
+      "isEnabled": false,
+      "hasExpertise": false,
+      "override": null
+    },
+    "deception": {
+      "isEnabled": false,
+      "hasExpertise": false,
+      "override": null
+    },
+    "history": {
+      "isEnabled": false,
+      "hasExpertise": false,
+      "override": null
+    },
+    "insight": {
+      "isEnabled": false,
+      "hasExpertise": false,
+      "override": null
+    },
+    "intimidation": {
+      "isEnabled": false,
+      "hasExpertise": false,
+      "override": null
+    },
+    "investigation": {
+      "isEnabled": false,
+      "hasExpertise": false,
+      "override": null
+    },
+    "medicine": {
+      "isEnabled": false,
+      "hasExpertise": false,
+      "override": null
+    },
+    "nature": {
+      "isEnabled": false,
+      "hasExpertise": false,
+      "override": null
+    },
+    "perception": {
+      "isEnabled": false,
+      "hasExpertise": false,
+      "override": null
+    },
+    "performance": {
+      "isEnabled": false,
+      "hasExpertise": false,
+      "override": null
+    },
+    "persuasion": {
+      "isEnabled": false,
+      "hasExpertise": false,
+      "override": null
+    },
+    "religion": {
+      "isEnabled": false,
+      "hasExpertise": false,
+      "override": null
+    },
+    "sleightOfHand": {
+      "isEnabled": false,
+      "hasExpertise": false,
+      "override": null
+    },
+    "stealth": {
+      "isEnabled": false,
+      "hasExpertise": false,
+      "override": null
+    },
+    "survival": {
+      "isEnabled": false,
+      "hasExpertise": false,
+      "override": null
+    }
+  },
+  "damageVulnerabilities": {
+    "items": [
+      "thunder"
+    ]
+  },
+  "damageResistances": {
+    "items": [
+      "bludgeoning, piercing, and slashing from nonmagical attacks"
+    ]
+  },
+  "damageImmunities": {
+    "items": [
+      "poison"
+    ]
+  },
+  "conditionImmunities": {
+    "items": [
+      "exhaustion",
+      "paralyzed",
+      "petrified",
+      "poisoned",
+      "unconscious"
+    ]
+  },
+  "senses": {
+    "blindsight": null,
+    "blindBeyondThisRadius": false,
+    "darkvision": 60,
+    "tremorsense": 60,
+    "truesight": null,
+    "useCustomText": false,
+    "customText": ""
+  },
+  "languages": {
+    "items": [
+      "Terran"
+    ],
+    "telepathy": null
+  },
+  "challengeRating": {
+    "challengeRating": "5",
+    "experiencePoints": 1800,
+    "proficiencyBonus": 3
+  },
+  "specialTraits": {
+    "blocks": [
+      {
+        "name": "Earth Glide",
+        "text": "[name] can burrow through nonmagical, unworked earth and stone. While doing so, [name] doesn't disturb the material it moves through."
+      },
+      {
+        "name": "Siege Monster",
+        "text": "[name] deals double damage to objects and structures."
+      }
+    ]
+  },
+  "actions": {
+    "blocks": [
+      {
+        "name": "Multiattack",
+        "text": "[name] makes two slam attacks."
+      },
+      {
+        "name": "Slam",
+        "text": "*Melee Weapon Attack:* atk[str] to hit, reach 10 ft., one target. *Hit:* dmg[2d8 + str] bludgeoning damage."
+      }
+    ]
+  },
+  "reactions": {
+    "blocks": []
+  },
+  "legendaryActions": {
+    "blocks": [],
+    "description": "[name] can take 3 legendary actions, choosing from the options below. Only one legendary action option can be used at a time and only at the end of another creature's turn. [name] regains spent legendary actions at the start of its turn."
+  },
+  "layout": {
+    "columns": 1,
+    "twoColumnMode": "auto",
+    "twoColumnHeight": 600
+  },
+  "meta": {
+    "version": "1.0.0",
+    "description": "Created using statblock5e-creator",
+    "url": "https://frumple.github.io/statblock5e-creator"
+  }
+}

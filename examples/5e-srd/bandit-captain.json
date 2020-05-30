@@ -1,0 +1,237 @@
+{
+  "title": {
+    "fullName": "Bandit Captain",
+    "shortName": "captain",
+    "isProperNoun": false
+  },
+  "subtitle": {
+    "size": "Medium",
+    "type": "humanoid",
+    "tags": "any race",
+    "alignment": "any alignment",
+    "useCustomText": true,
+    "customText": "Medium humanoid (any race), any non-lawful alignment"
+  },
+  "armorClass": {
+    "armorClass": 15,
+    "armorType": "studded leather",
+    "hasShield": false,
+    "useCustomText": false,
+    "customText": ""
+  },
+  "hitPoints": {
+    "hitPoints": 65,
+    "useHitDie": true,
+    "hitDieQuantity": 10,
+    "hitDieSize": 8
+  },
+  "speed": {
+    "walk": 30,
+    "burrow": null,
+    "climb": null,
+    "fly": null,
+    "hover": false,
+    "swim": null,
+    "useCustomText": false,
+    "customText": ""
+  },
+  "abilityScores": {
+    "strength": 15,
+    "dexterity": 16,
+    "constitution": 14,
+    "intelligence": 14,
+    "wisdom": 11,
+    "charisma": 14
+  },
+  "savingThrows": {
+    "strength": {
+      "isEnabled": true,
+      "override": null
+    },
+    "dexterity": {
+      "isEnabled": true,
+      "override": null
+    },
+    "constitution": {
+      "isEnabled": false,
+      "override": null
+    },
+    "intelligence": {
+      "isEnabled": false,
+      "override": null
+    },
+    "wisdom": {
+      "isEnabled": true,
+      "override": null
+    },
+    "charisma": {
+      "isEnabled": false,
+      "override": null
+    }
+  },
+  "skills": {
+    "acrobatics": {
+      "isEnabled": false,
+      "hasExpertise": false,
+      "override": null
+    },
+    "animalHandling": {
+      "isEnabled": false,
+      "hasExpertise": false,
+      "override": null
+    },
+    "arcana": {
+      "isEnabled": false,
+      "hasExpertise": false,
+      "override": null
+    },
+    "athletics": {
+      "isEnabled": true,
+      "hasExpertise": false,
+      "override": null
+    },
+    "deception": {
+      "isEnabled": true,
+      "hasExpertise": false,
+      "override": null
+    },
+    "history": {
+      "isEnabled": false,
+      "hasExpertise": false,
+      "override": null
+    },
+    "insight": {
+      "isEnabled": false,
+      "hasExpertise": false,
+      "override": null
+    },
+    "intimidation": {
+      "isEnabled": false,
+      "hasExpertise": false,
+      "override": null
+    },
+    "investigation": {
+      "isEnabled": false,
+      "hasExpertise": false,
+      "override": null
+    },
+    "medicine": {
+      "isEnabled": false,
+      "hasExpertise": false,
+      "override": null
+    },
+    "nature": {
+      "isEnabled": false,
+      "hasExpertise": false,
+      "override": null
+    },
+    "perception": {
+      "isEnabled": false,
+      "hasExpertise": false,
+      "override": null
+    },
+    "performance": {
+      "isEnabled": false,
+      "hasExpertise": false,
+      "override": null
+    },
+    "persuasion": {
+      "isEnabled": false,
+      "hasExpertise": false,
+      "override": null
+    },
+    "religion": {
+      "isEnabled": false,
+      "hasExpertise": false,
+      "override": null
+    },
+    "sleightOfHand": {
+      "isEnabled": false,
+      "hasExpertise": false,
+      "override": null
+    },
+    "stealth": {
+      "isEnabled": false,
+      "hasExpertise": false,
+      "override": null
+    },
+    "survival": {
+      "isEnabled": false,
+      "hasExpertise": false,
+      "override": null
+    }
+  },
+  "damageVulnerabilities": {
+    "items": []
+  },
+  "damageResistances": {
+    "items": []
+  },
+  "damageImmunities": {
+    "items": []
+  },
+  "conditionImmunities": {
+    "items": []
+  },
+  "senses": {
+    "blindsight": null,
+    "blindBeyondThisRadius": false,
+    "darkvision": null,
+    "tremorsense": null,
+    "truesight": null,
+    "useCustomText": false,
+    "customText": ""
+  },
+  "languages": {
+    "items": [
+      "any two languages"
+    ],
+    "telepathy": null
+  },
+  "challengeRating": {
+    "challengeRating": "2",
+    "experiencePoints": 450,
+    "proficiencyBonus": 2
+  },
+  "specialTraits": {
+    "blocks": []
+  },
+  "actions": {
+    "blocks": [
+      {
+        "name": "Multiattack",
+        "text": "[name] makes three melee attacks: two with its scimitar and one with its dagger. Or [name] makes two ranged attacks with its daggers."
+      },
+      {
+        "name": "Scimitar",
+        "text": "*Melee Weapon Attack:* atk[fin] to hit, reach 5 ft., one target. *Hit:* dmg[1d6 + fin] slashing damage."
+      },
+      {
+        "name": "Dagger",
+        "text": "*Melee or Ranged Weapon Attack:* atk[fin] to hit, reach 5 ft. or range 20/60 ft., one target. *Hit:* dmg[1d4 + fin] piercing damage."
+      }
+    ]
+  },
+  "reactions": {
+    "blocks": [
+      {
+        "name": "Parry",
+        "text": "[name] adds 2 to its AC against one melee attack that would hit it. To do so, [name] must see the attacker and be wielding a melee weapon."
+      }
+    ]
+  },
+  "legendaryActions": {
+    "blocks": [],
+    "description": "[name] can take 3 legendary actions, choosing from the options below. Only one legendary action option can be used at a time and only at the end of another creature's turn. [name] regains spent legendary actions at the start of its turn."
+  },
+  "layout": {
+    "columns": 1,
+    "twoColumnMode": "auto",
+    "twoColumnHeight": 600
+  },
+  "meta": {
+    "version": "1.0.0",
+    "description": "Created using statblock5e-creator",
+    "url": "https://frumple.github.io/statblock5e-creator"
+  }
+}

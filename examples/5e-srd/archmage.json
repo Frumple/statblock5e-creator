@@ -1,0 +1,236 @@
+{
+  "title": {
+    "fullName": "Archmage",
+    "shortName": "",
+    "isProperNoun": false
+  },
+  "subtitle": {
+    "size": "Medium",
+    "type": "humanoid",
+    "tags": "any race",
+    "alignment": "any alignment",
+    "useCustomText": false,
+    "customText": ""
+  },
+  "armorClass": {
+    "armorClass": 10,
+    "armorType": "",
+    "hasShield": false,
+    "useCustomText": true,
+    "customText": "12 (15 with *mage armor*)"
+  },
+  "hitPoints": {
+    "hitPoints": 99,
+    "useHitDie": true,
+    "hitDieQuantity": 18,
+    "hitDieSize": 8
+  },
+  "speed": {
+    "walk": 30,
+    "burrow": null,
+    "climb": null,
+    "fly": null,
+    "hover": false,
+    "swim": null,
+    "useCustomText": false,
+    "customText": ""
+  },
+  "abilityScores": {
+    "strength": 10,
+    "dexterity": 14,
+    "constitution": 12,
+    "intelligence": 20,
+    "wisdom": 15,
+    "charisma": 16
+  },
+  "savingThrows": {
+    "strength": {
+      "isEnabled": false,
+      "override": null
+    },
+    "dexterity": {
+      "isEnabled": false,
+      "override": null
+    },
+    "constitution": {
+      "isEnabled": false,
+      "override": null
+    },
+    "intelligence": {
+      "isEnabled": true,
+      "override": null
+    },
+    "wisdom": {
+      "isEnabled": true,
+      "override": null
+    },
+    "charisma": {
+      "isEnabled": false,
+      "override": null
+    }
+  },
+  "skills": {
+    "acrobatics": {
+      "isEnabled": false,
+      "hasExpertise": false,
+      "override": null
+    },
+    "animalHandling": {
+      "isEnabled": false,
+      "hasExpertise": false,
+      "override": null
+    },
+    "arcana": {
+      "isEnabled": true,
+      "hasExpertise": true,
+      "override": null
+    },
+    "athletics": {
+      "isEnabled": false,
+      "hasExpertise": false,
+      "override": null
+    },
+    "deception": {
+      "isEnabled": false,
+      "hasExpertise": false,
+      "override": null
+    },
+    "history": {
+      "isEnabled": true,
+      "hasExpertise": true,
+      "override": null
+    },
+    "insight": {
+      "isEnabled": false,
+      "hasExpertise": false,
+      "override": null
+    },
+    "intimidation": {
+      "isEnabled": false,
+      "hasExpertise": false,
+      "override": null
+    },
+    "investigation": {
+      "isEnabled": false,
+      "hasExpertise": false,
+      "override": null
+    },
+    "medicine": {
+      "isEnabled": false,
+      "hasExpertise": false,
+      "override": null
+    },
+    "nature": {
+      "isEnabled": false,
+      "hasExpertise": false,
+      "override": null
+    },
+    "perception": {
+      "isEnabled": false,
+      "hasExpertise": false,
+      "override": null
+    },
+    "performance": {
+      "isEnabled": false,
+      "hasExpertise": false,
+      "override": null
+    },
+    "persuasion": {
+      "isEnabled": false,
+      "hasExpertise": false,
+      "override": null
+    },
+    "religion": {
+      "isEnabled": false,
+      "hasExpertise": false,
+      "override": null
+    },
+    "sleightOfHand": {
+      "isEnabled": false,
+      "hasExpertise": false,
+      "override": null
+    },
+    "stealth": {
+      "isEnabled": false,
+      "hasExpertise": false,
+      "override": null
+    },
+    "survival": {
+      "isEnabled": false,
+      "hasExpertise": false,
+      "override": null
+    }
+  },
+  "damageVulnerabilities": {
+    "items": []
+  },
+  "damageResistances": {
+    "items": [
+      "damage from spells",
+      "non magical bludgeoning, piercing, and slashing (from stoneskin)"
+    ]
+  },
+  "damageImmunities": {
+    "items": []
+  },
+  "conditionImmunities": {
+    "items": []
+  },
+  "senses": {
+    "blindsight": null,
+    "blindBeyondThisRadius": false,
+    "darkvision": null,
+    "tremorsense": null,
+    "truesight": null,
+    "useCustomText": false,
+    "customText": ""
+  },
+  "languages": {
+    "items": [
+      "any six languages"
+    ],
+    "telepathy": null
+  },
+  "challengeRating": {
+    "challengeRating": "12",
+    "experiencePoints": 8400,
+    "proficiencyBonus": 4
+  },
+  "specialTraits": {
+    "blocks": [
+      {
+        "name": "Magic Resistance",
+        "text": "[name] has advantage on saving throws against spells and other magical effects."
+      },
+      {
+        "name": "Spellcasting",
+        "text": "[name] is an 18th-level spellcaster. Its spellcasting ability is Intelligence (spell save DC sdc[int], atk[int] to hit with spell attacks). [name] can cast disguise self and invisibility at will and has the following wizard spells prepared:\n\nCantrips (at will): *fire bolt*, *light*, *mage hand*, *prestidigitation*, *shocking grasp*\n1st level (4 slots): *detect magic*, *identify*, *mage armor*^, *magic missile*\n2nd level (3 slots): *detect thoughts*, *mirror image*, *misty step*\n3rd level (3 slots): *counterspell*, *fly*, *lightning bolt*\n4th level (3 slots): *banishment*, *fire shield*, *stoneskin*^\n5th level (3 slots): *cone of cold*, *scrying*, *wall of force*\n6th level (1 slot): *globe of invulnerability*\n7th level (1 slot): *teleport*\n8th level (1 slot): *mind blank*^\n9th level (1 slot): *time stop*\n^ [name] casts these spells on itself before combat."
+      }
+    ]
+  },
+  "actions": {
+    "blocks": [
+      {
+        "name": "Dagger",
+        "text": "*Melee or Ranged Weapon Attack:* atk[fin] to hit, reach 5 ft. or range 20/60 ft., one target. Hit: dmg[1d4 + fin] piercing damage."
+      }
+    ]
+  },
+  "reactions": {
+    "blocks": []
+  },
+  "legendaryActions": {
+    "blocks": [],
+    "description": "The aboleth can take 3 legendary actions, choosing from the options below. Only one legendary action option can be used at a time and only at the end of another creature's turn. The aboleth regains spent legendary actions at the start of its turn."
+  },
+  "layout": {
+    "columns": 1,
+    "twoColumnMode": "auto",
+    "twoColumnHeight": 600
+  },
+  "meta": {
+    "version": "1.0.0",
+    "description": "Created using statblock5e-creator",
+    "url": "https://frumple.github.io/statblock5e-creator"
+  }
+}

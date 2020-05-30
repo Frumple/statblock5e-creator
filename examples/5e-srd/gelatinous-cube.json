@@ -1,0 +1,242 @@
+{
+  "title": {
+    "fullName": "Gelatinous Cube",
+    "shortName": "cube",
+    "isProperNoun": false
+  },
+  "subtitle": {
+    "size": "Large",
+    "type": "ooze",
+    "tags": "",
+    "alignment": "unaligned",
+    "useCustomText": false,
+    "customText": ""
+  },
+  "armorClass": {
+    "armorClass": 6,
+    "armorType": "",
+    "hasShield": false,
+    "useCustomText": false,
+    "customText": ""
+  },
+  "hitPoints": {
+    "hitPoints": 84,
+    "useHitDie": true,
+    "hitDieQuantity": 8,
+    "hitDieSize": 10
+  },
+  "speed": {
+    "walk": 15,
+    "burrow": null,
+    "climb": null,
+    "fly": null,
+    "hover": false,
+    "swim": null,
+    "useCustomText": false,
+    "customText": ""
+  },
+  "abilityScores": {
+    "strength": 14,
+    "dexterity": 3,
+    "constitution": 20,
+    "intelligence": 1,
+    "wisdom": 6,
+    "charisma": 1
+  },
+  "savingThrows": {
+    "strength": {
+      "isEnabled": false,
+      "override": null
+    },
+    "dexterity": {
+      "isEnabled": false,
+      "override": null
+    },
+    "constitution": {
+      "isEnabled": false,
+      "override": null
+    },
+    "intelligence": {
+      "isEnabled": false,
+      "override": null
+    },
+    "wisdom": {
+      "isEnabled": false,
+      "override": null
+    },
+    "charisma": {
+      "isEnabled": false,
+      "override": null
+    }
+  },
+  "skills": {
+    "acrobatics": {
+      "isEnabled": false,
+      "hasExpertise": false,
+      "override": null
+    },
+    "animalHandling": {
+      "isEnabled": false,
+      "hasExpertise": false,
+      "override": null
+    },
+    "arcana": {
+      "isEnabled": false,
+      "hasExpertise": false,
+      "override": null
+    },
+    "athletics": {
+      "isEnabled": false,
+      "hasExpertise": false,
+      "override": null
+    },
+    "deception": {
+      "isEnabled": false,
+      "hasExpertise": false,
+      "override": null
+    },
+    "history": {
+      "isEnabled": false,
+      "hasExpertise": false,
+      "override": null
+    },
+    "insight": {
+      "isEnabled": false,
+      "hasExpertise": false,
+      "override": null
+    },
+    "intimidation": {
+      "isEnabled": false,
+      "hasExpertise": false,
+      "override": null
+    },
+    "investigation": {
+      "isEnabled": false,
+      "hasExpertise": false,
+      "override": null
+    },
+    "medicine": {
+      "isEnabled": false,
+      "hasExpertise": false,
+      "override": null
+    },
+    "nature": {
+      "isEnabled": false,
+      "hasExpertise": false,
+      "override": null
+    },
+    "perception": {
+      "isEnabled": false,
+      "hasExpertise": false,
+      "override": null
+    },
+    "performance": {
+      "isEnabled": false,
+      "hasExpertise": false,
+      "override": null
+    },
+    "persuasion": {
+      "isEnabled": false,
+      "hasExpertise": false,
+      "override": null
+    },
+    "religion": {
+      "isEnabled": false,
+      "hasExpertise": false,
+      "override": null
+    },
+    "sleightOfHand": {
+      "isEnabled": false,
+      "hasExpertise": false,
+      "override": null
+    },
+    "stealth": {
+      "isEnabled": false,
+      "hasExpertise": false,
+      "override": null
+    },
+    "survival": {
+      "isEnabled": false,
+      "hasExpertise": false,
+      "override": null
+    }
+  },
+  "damageVulnerabilities": {
+    "items": []
+  },
+  "damageResistances": {
+    "items": []
+  },
+  "damageImmunities": {
+    "items": []
+  },
+  "conditionImmunities": {
+    "items": [
+      "blinded",
+      "charmed",
+      "deafened",
+      "exhaustion",
+      "frightened",
+      "prone"
+    ]
+  },
+  "senses": {
+    "blindsight": 60,
+    "blindBeyondThisRadius": true,
+    "darkvision": null,
+    "tremorsense": null,
+    "truesight": null,
+    "useCustomText": false,
+    "customText": ""
+  },
+  "languages": {
+    "items": [],
+    "telepathy": null
+  },
+  "challengeRating": {
+    "challengeRating": "2",
+    "experiencePoints": 450,
+    "proficiencyBonus": 2
+  },
+  "specialTraits": {
+    "blocks": [
+      {
+        "name": "Ooze Cube",
+        "text": "[name] takes up its entire space. Other creatures can enter the space, but a creature that does so is subjected to [name]'s Engulf and has disadvantage on the saving throw.\n  Creatures inside [name] can be seen but have total cover.\n  A creature within 5 feet of [name] can take an action to pull a creature or object out of [name]. Doing so requires a successful DC 12 Strength check, and the creature making the attempt takes dmg[3d6] acid damage.\n  [name] can hold only one Large creature or up to four Medium or smaller creatures inside it at a time."
+      },
+      {
+        "name": "Transparent",
+        "text": "Even when [name] is in plain sight, it takes a successful DC 15 Wisdom (Perception) check to spot a cube that has neither moved nor attacked. A creature that tries to enter [name]'s space while unaware of [name] is surprised by [name]."
+      }
+    ]
+  },
+  "actions": {
+    "blocks": [
+      {
+        "name": "Pseudopod",
+        "text": "*Melee Weapon Attack:* atk[str] to hit, reach 5 ft., one creature. *Hit:* dmg[3d6] acid damage."
+      },
+      {
+        "name": "Engulf",
+        "text": "[name] moves up to its speed. While doing so, it can enter Large or smaller creatures' spaces. Whenever [name] enters a creature's space, the creature must make a DC 12 Dexterity saving throw.\n  On a successful save, the creature can choose to be pushed 5 feet back or to the side of [name]. A creature that chooses not to be pushed suffers the consequences of a failed saving throw.\n  On a failed save, [name] enters the creature's space, and the creature takes dmg[3d6] acid damage and is engulfed. The engulfed creature can't breathe, is restrained, and takes dmg[6d6] acid damage at the start of each of [name]'s turns. When [name] moves, the engulfed creature moves with it.\n  An engulfed creature can try to escape by taking an action to make a DC 12 Strength check. On a success, the creature escapes and enters a space of its choice within 5 feet of [name]."
+      }
+    ]
+  },
+  "reactions": {
+    "blocks": []
+  },
+  "legendaryActions": {
+    "blocks": [],
+    "description": "[name] can take 3 legendary actions, choosing from the options below. Only one legendary action option can be used at a time and only at the end of another creature's turn. [name] regains spent legendary actions at the start of its turn."
+  },
+  "layout": {
+    "columns": 1,
+    "twoColumnMode": "auto",
+    "twoColumnHeight": 600
+  },
+  "meta": {
+    "version": "1.0.0",
+    "description": "Created using statblock5e-creator",
+    "url": "https://frumple.github.io/statblock5e-creator"
+  }
+}

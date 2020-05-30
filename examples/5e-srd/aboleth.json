@@ -1,0 +1,262 @@
+{
+  "title": {
+    "fullName": "Aboleth",
+    "shortName": "",
+    "isProperNoun": false
+  },
+  "subtitle": {
+    "size": "Large",
+    "type": "aberration",
+    "tags": "",
+    "alignment": "lawful evil",
+    "useCustomText": false,
+    "customText": ""
+  },
+  "armorClass": {
+    "armorClass": 17,
+    "armorType": "natural armor",
+    "hasShield": false,
+    "useCustomText": false,
+    "customText": ""
+  },
+  "hitPoints": {
+    "hitPoints": 135,
+    "useHitDie": true,
+    "hitDieQuantity": 18,
+    "hitDieSize": 10
+  },
+  "speed": {
+    "walk": 10,
+    "burrow": null,
+    "climb": null,
+    "fly": null,
+    "hover": false,
+    "swim": 40,
+    "useCustomText": false,
+    "customText": ""
+  },
+  "abilityScores": {
+    "strength": 21,
+    "dexterity": 9,
+    "constitution": 15,
+    "intelligence": 18,
+    "wisdom": 15,
+    "charisma": 18
+  },
+  "savingThrows": {
+    "strength": {
+      "isEnabled": false,
+      "override": null
+    },
+    "dexterity": {
+      "isEnabled": false,
+      "override": null
+    },
+    "constitution": {
+      "isEnabled": true,
+      "override": null
+    },
+    "intelligence": {
+      "isEnabled": true,
+      "override": null
+    },
+    "wisdom": {
+      "isEnabled": true,
+      "override": null
+    },
+    "charisma": {
+      "isEnabled": false,
+      "override": null
+    }
+  },
+  "skills": {
+    "acrobatics": {
+      "isEnabled": false,
+      "hasExpertise": false,
+      "override": null
+    },
+    "animalHandling": {
+      "isEnabled": false,
+      "hasExpertise": false,
+      "override": null
+    },
+    "arcana": {
+      "isEnabled": false,
+      "hasExpertise": false,
+      "override": null
+    },
+    "athletics": {
+      "isEnabled": false,
+      "hasExpertise": false,
+      "override": null
+    },
+    "deception": {
+      "isEnabled": false,
+      "hasExpertise": false,
+      "override": null
+    },
+    "history": {
+      "isEnabled": true,
+      "hasExpertise": true,
+      "override": null
+    },
+    "insight": {
+      "isEnabled": false,
+      "hasExpertise": false,
+      "override": null
+    },
+    "intimidation": {
+      "isEnabled": false,
+      "hasExpertise": false,
+      "override": null
+    },
+    "investigation": {
+      "isEnabled": false,
+      "hasExpertise": false,
+      "override": null
+    },
+    "medicine": {
+      "isEnabled": false,
+      "hasExpertise": false,
+      "override": null
+    },
+    "nature": {
+      "isEnabled": false,
+      "hasExpertise": false,
+      "override": null
+    },
+    "perception": {
+      "isEnabled": true,
+      "hasExpertise": true,
+      "override": null
+    },
+    "performance": {
+      "isEnabled": false,
+      "hasExpertise": false,
+      "override": null
+    },
+    "persuasion": {
+      "isEnabled": false,
+      "hasExpertise": false,
+      "override": null
+    },
+    "religion": {
+      "isEnabled": false,
+      "hasExpertise": false,
+      "override": null
+    },
+    "sleightOfHand": {
+      "isEnabled": false,
+      "hasExpertise": false,
+      "override": null
+    },
+    "stealth": {
+      "isEnabled": false,
+      "hasExpertise": false,
+      "override": null
+    },
+    "survival": {
+      "isEnabled": false,
+      "hasExpertise": false,
+      "override": null
+    }
+  },
+  "damageVulnerabilities": {
+    "items": []
+  },
+  "damageResistances": {
+    "items": []
+  },
+  "damageImmunities": {
+    "items": []
+  },
+  "conditionImmunities": {
+    "items": []
+  },
+  "senses": {
+    "blindsight": null,
+    "blindBeyondThisRadius": false,
+    "darkvision": 120,
+    "tremorsense": null,
+    "truesight": null,
+    "useCustomText": false,
+    "customText": ""
+  },
+  "languages": {
+    "items": [
+      "Deep Speech"
+    ],
+    "telepathy": 120
+  },
+  "challengeRating": {
+    "challengeRating": "10",
+    "experiencePoints": 5900,
+    "proficiencyBonus": 4
+  },
+  "specialTraits": {
+    "blocks": [
+      {
+        "name": "Amphibious",
+        "text": "[name] can breathe air and water."
+      },
+      {
+        "name": "Mucous Cloud",
+        "text": "While underwater, [name] is surrounded by transformative mucus. A creature that touches [name] or that hits it with a melee attack while within 5 ft. of it must make a DC 14 Constitution saving throw. On a failure, the creature is diseased for 1d4 hours. The diseased creature can breathe only underwater."
+      },
+      {
+        "name": "Probing Telepathy",
+        "text": "If a creature communicates telepathically with [name], [name] learns the creature's greatest desires if [name] can see the creature."
+      }
+    ]
+  },
+  "actions": {
+    "blocks": [
+      {
+        "name": "Multiattack",
+        "text": "[name] makes three tentacle attacks."
+      },
+      {
+        "name": "Tentacle",
+        "text": "*Melee Weapon Attack:* atk[str] to hit, reach 10 ft., one target. *Hit:* dmg[2d6 + str] bludgeoning damage. If the target is a creature, it must succeed on a DC 14 Constitution saving throw or become diseased. The disease has no effect for 1 minute and can be removed by any magic that cures disease. After 1 minute, the diseased creature's skin becomes translucent and slimy, the creature can't regain hit points unless it is underwater, and the disease can be removed only by heal or another disease-curing spell of 6th level or higher. When the creature is outside a body of water, it takes dmg[1d12] acid damage every 10 minutes unless moisture is applied to the skin before 10 minutes have passed."
+      },
+      {
+        "name": "Tail",
+        "text": "*Melee Weapon Attack:* atk[str] to hit, reach 10 ft. one target. *Hit:* dmg[3d6 + str] bludgeoning damage."
+      },
+      {
+        "name": "Enslave (3/day)",
+        "text": "[name] targets one creature it can see within 30 ft. of it. The target must succeed on a DC 14 Wisdom saving throw or be magically charmed by [name] until [name] dies or until it is on a different plane of existence from the target. The charmed target is under [name]'s control and can't take reactions, and [name] and the target can communicate telepathically with each other over any distance.\n  Whenever the charmed target takes damage, the target can repeat the saving throw. On a success, the effect ends. No more than once every 24 hours, the target can also repeat the saving throw when it is at least 1 mile away from [name]."
+      }
+    ]
+  },
+  "reactions": {
+    "blocks": []
+  },
+  "legendaryActions": {
+    "blocks": [
+      {
+        "name": "Detect",
+        "text": "[name] makes a Wisdom (Perception) check."
+      },
+      {
+        "name": "Tail Swipe",
+        "text": "[name] makes one tail attack."
+      },
+      {
+        "name": "Psychic Drain (Costs 2 Actions)",
+        "text": "One creature charmed by [name] takes dmg[3d6] psychic damage, and [name] regains hit points equal to the damage the creature takes."
+      }
+    ],
+    "description": "[name] can take 3 legendary actions, choosing from the options below. Only one legendary action option can be used at a time and only at the end of another creature's turn. [name] regains spent legendary actions at the start of its turn."
+  },
+  "layout": {
+    "columns": 1,
+    "twoColumnMode": "auto",
+    "twoColumnHeight": 600
+  },
+  "meta": {
+    "version": "1.0.0",
+    "description": "Created using statblock5e-creator",
+    "url": "https://frumple.github.io/statblock5e-creator"
+  }
+}
