@@ -17,19 +17,19 @@ A web application for creating creature statblocks that are similar in appearanc
   - **[Markdown Emphasis][markdown-emphasis]** - Make text **bold** and/or *italic*.
   - **[Name Expressions][name-expressions]** - Inject the creature's name into the description where needed.
   - **[Math Expressions][math-expressions]** - Automatically calculate attack roll modifiers, average damage from damage rolls, and spell save DCs.
-- Easily create weapon attack actions using the **[Generate Attack Dialog][generate-attack-dialog]**.
+- **Generate Attack Dialog** - Easily create attack actions using one of the pre-defined D&D 5e weapons, or create your own custom attack.
+- **Generate Spellcasting Dialog** - Easily create spellcasting special trait blocks for innate, generic, and class-specific spellcasters.
 - Import a pre-made published statblocks using the following methods:
   - **Import from 5e SRD** - Load any creature from the official 5th Edition SRD using Statblock5e Creator's own example JSON files.
   - **Import from Open5e** -  Load any creature from the official 5th Edition SRD, or Tome of Beasts or Creature Codex from Kobold Press using the Open5e API (does not include Markdown Emphasis, Name Expressions, or Math Expressions).
 - Export your statblock into the following formats:
-  - **Export to JSON**, which can be re-imported back into Statblock5e Creator at a later time.
-  - **Export to HTML**, based on the original **[statblock5e][statblock5e]** template.
-  - **Export to Markdown**, which can be used in homebrew content tools such as **[Homebrewery][homebrewery]** and **[GM Binder][gmbinder]**.
+  - **Export to JSON** - Save your statblock and re-import it back into Statblock5e Creator at a later time.
+  - **Export to HTML** - Based on the original **[statblock5e][statblock5e]** template.
+  - **Export to Markdown** - For use in homebrew content tools such as **[Homebrewery][homebrewery]** and **[GM Binder][gmbinder]**.
 - Print your statblock.
 
 ## Future Improvements
 
-- Generate Spellcasting Dialog (currently disabled under Special Traits)
 - Buttons to toggle bold/italic text and add expressions to Special Trait/Action/Reaction/Legendary Action descriptions
 - Autofill common Special Traits and Actions
 - Export to [Improved Initiative][improved-initiative] (JSON format)
@@ -100,7 +100,6 @@ Statblock5e Creator is a not-for-profit personal project, and is not officially 
 [markdown-emphasis]: https://github.com/Frumple/statblock5e-creator/wiki/Markdown-Emphasis
 [name-expressions]: https://github.com/Frumple/statblock5e-creator/wiki/Name-Expressions
 [math-expressions]: https://github.com/Frumple/statblock5e-creator/wiki/Math-Expressions
-[generate-attack-dialog]: https://github.com/Frumple/statblock5e-creator/wiki/Generate-Attack-Dialog
 
 [jest]: https://jestjs.io
 [pegjs]: https://pegjs.org
