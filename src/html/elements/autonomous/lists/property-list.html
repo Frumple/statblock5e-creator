@@ -1,3 +1,16 @@
+<link href='src/css/vendor/material-icons.css' rel='stylesheet' type='text/css'>
+<link href='//fonts.googleapis.com/icon?family=Material+Icons' rel='stylesheet'>
+
+<link href='src/css/elements/default-button.css' rel='stylesheet' type='text/css'>
+<link href='src/css/elements/autonomous/sections/section.css' rel='stylesheet' type='text/css'>
 <link href='src/css/elements/autonomous/lists/property-list.css' rel='stylesheet' type='text/css'>
 
+<div class="property-list__input-container">
+  <input id="input" class="property-list__input section__text-input" type="text" list="datalist" />
+  <button id="add-button" class="property-list__add-button default-button" type="button"><i class="material-icons">add</i></button>
+</div>
+
 <slot></slot>
+
+<datalist id="datalist" is="property-datalist">
+</datalist>

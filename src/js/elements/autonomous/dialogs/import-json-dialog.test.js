@@ -8,15 +8,6 @@ jest.mock('../containers/stat-block.js');
 let statBlockEditor;
 let statBlockMenu;
 
-/* Notes about JSDOM limitations:
-
-   JSDOM does not support Blob.text(), which prevents us from testing file
-   reading. We could fallback to using FileReader in the implementation,
-   but then the test would not be able to easily detect the load event when
-   the FileReader is complete.
-   - GitHub issue: https://github.com/jsdom/jsdom/issues/2555
-*/
-
 beforeAll(async() => {
   await StatBlockEditor.define();
   await StatBlockMenu.define();
@@ -49,7 +40,14 @@ describe('should import JSON', () => {
       statBlockEditor.importJsonDialog.chooseFileButton.click();
       expect(fileInputClickEvent).not.toBeNull();
 
-      // See note at top about JSDOM not supporting Blob.text().
+      /* Notes about JSDOM limitations:
+
+        JSDOM does not support Blob.text(), which prevents us from testing file
+        reading. We could fallback to using FileReader in the implementation,
+        but then the test would not be able to easily detect the load event when
+        the FileReader is complete.
+        - GitHub issue: https://github.com/jsdom/jsdom/issues/2555
+      */
 
       /*
       const json = {

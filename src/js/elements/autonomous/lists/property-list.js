@@ -1,7 +1,9 @@
 import DragAndDropList from './drag-and-drop-list.js';
+import PropertyListItem from './property-list-item.js';
 
 import isRunningInJsdom from '../../../helpers/is-running-in-jsdom.js';
-import PropertyListItem from './property-list-item.js';
+import { arrayStrictEqual } from '../../../helpers/array-helpers.js';
+import { addOptionsToElement, removeAllChildElements } from '../../../helpers/element-helpers.js';
 
 export default class PropertyList extends DragAndDropList {
   static get elementName() { return 'property-list'; }
@@ -13,13 +15,36 @@ export default class PropertyList extends DragAndDropList {
 
   constructor(parent) {
     super(PropertyList.templatePaths, parent);
+
+    this.input = this.shadowRoot.getElementById('input');
+    this.addButton = this.shadowRoot.getElementById('add-button');
+    this.dataList = this.shadowRoot.getElementById('datalist');
+
+    this.errorMessages = null;
+    this.singleItemName = 'item';
   }
 
-  set items(itemTexts) {
-    this.clearItems();
-    for (const itemText of itemTexts) {
-      this.addItem(itemText);
+  connectedCallback() {
+    if (this.isConnected && ! this.isInitialized) {
+      super.connectedCallback();
+
+      this.input.addEventListener('keydown', this.onEnterKeyDownOnInputField.bind(this));
+      this.addButton.addEventListener('click', this.onClickAddButton.bind(this));
+
+      this.isInitialized = true;
     }
+  }
+
+  onEnterKeyDownOnInputField(keyEvent) {
+    if (keyEvent.key === 'Enter') {
+      keyEvent.preventDefault();
+
+      this.addItemFromInput();
+    }
+  }
+
+  onClickAddButton() {
+    this.addItemFromInput();
   }
 
   get items() {
@@ -27,21 +52,15 @@ export default class PropertyList extends DragAndDropList {
   }
 
   get itemsAsText() {
-    return this.items.map(element => element.text);
+    return this.items.map(item => item.text);
   }
 
   contains(itemText) {
     return this.itemsAsText.includes(itemText);
   }
 
-  addItem(itemText) {
-    const listItem = PropertyList.createListItem(this, itemText);
-
-    if (isRunningInJsdom) {
-      listItem.connect();
-    }
-
-    this.appendChild(listItem);
+  findItem(itemText) {
+    return this.items.filter(element => element.text === itemText)[0];
   }
 
   clearItems() {
@@ -50,16 +69,74 @@ export default class PropertyList extends DragAndDropList {
     }
   }
 
-  findItem(itemText) {
-    return this.items.filter(element => element.text === itemText)[0];
+  addItemFromInput() {
+    const text = this.input.value.trim();
+    this.input.value = text;
+
+    this.errorMessages.clear();
+    if (text === '') {
+      this.errorMessages.add(this.input, `Cannot add a blank ${this.singleItemName}.`);
+    } else if (this.contains(text)) {
+      this.errorMessages.add(this.input, `Cannot add a duplicate ${this.singleItemName}.`);
+    }
+    if (this.errorMessages.any) {
+      this.errorMessages.focusOnFirstErrorField();
+      return;
+    }
+
+    this.addItem(text);
+    this.dispatchPropertyListChangedEvent();
+
+    this.input.value = '';
+    this.input.select();
   }
 
-  static createListItem(list, text) {
-    const listItem = isRunningInJsdom ? new PropertyListItem(list) : document.createElement('property-list-item');
+  addItem(itemText) {
+    let listItem;
 
-    listItem.list = list;
-    listItem.text = text;
+    if (isRunningInJsdom) {
+      listItem = new PropertyListItem(this, itemText);
+      listItem.connect();
+    } else {
+      listItem = document.createElement('property-list-item');
+      listItem.list = this;
+      listItem.text = itemText;
+    }
 
-    return listItem;
+    this.appendChild(listItem);
+    this.dataList.setOptionEnabled(itemText, false);
+  }
+
+  setItems(itemTexts) {
+    // Don't clear and re-add items if there are no changes
+    if(! arrayStrictEqual(itemTexts, this.itemsAsText)) {
+      this.clearItems();
+      for (const itemText of itemTexts) {
+        this.addItem(itemText);
+      }
+    }
+  }
+
+  set dataListOptions(objects) {
+    removeAllChildElements(this.dataList);
+    addOptionsToElement(this.dataList, objects);
+  }
+
+  get dataListOptions() {
+    const optionElements = Array.from(this.dataList.children);
+    return optionElements.map(child => {
+      return {
+        text: child.textContent,
+        value: child.getAttribute('value')
+      };
+    });
+  }
+
+  dispatchPropertyListChangedEvent() {
+    const event = new CustomEvent('propertyListChanged', {
+      bubbles: true,
+      composed: true
+    });
+    this.dispatchEvent(event);
   }
 }

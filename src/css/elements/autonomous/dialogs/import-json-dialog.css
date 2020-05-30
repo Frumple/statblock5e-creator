@@ -1,3 +1,25 @@
 .import-json-dialog__file-input {
   display: none;
 }
+
+.import-json-dialog__file-upload-drop-zone {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  border: medium dashed #aaaaaa;
+  height: 417px;
+  margin: 0 1em 1em 1em;
+}
+
+.import-json-dialog__file-upload-drop-zone_drag-enter {
+  background: #90FF70;
+}
+
+.import-json-dialog__file-upload-drop-zone-label {
+  font-weight: bold;
+}
+
+.import-json-dialog__choose-file-button {
+  padding: 5px;
+}

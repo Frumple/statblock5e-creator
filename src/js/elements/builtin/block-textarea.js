@@ -2,7 +2,7 @@ import CustomBuiltinElementMixins from '../../helpers/custom-builtin-element-mix
 import isRunningInJsdom from '../../helpers/is-running-in-jsdom.js';
 import { copyObjectProperties } from '../../helpers/object-helpers.js';
 import { escapeHtml } from '../../helpers/string-formatter.js';
-import * as Parser from '../../parsers/parser.js';
+import { parseAll } from '../../parsers/parser.js';
 
 export default class BlockTextArea extends HTMLTextAreaElement {
   static async define() {
@@ -42,38 +42,22 @@ const BlockTextAreaMixin = {
   parse(errorMessages = null) {
     const escapedText = escapeHtml(this.value);
 
-    const nameParserResults = Parser.parseNames(escapedText);
+    const parserResults = parseAll(escapedText);
 
-    if (nameParserResults.error) {
-      if (errorMessages) {
+    if (errorMessages) {
+      if (parserResults.nameParserResults.error) {
         errorMessages.add(this, `${this.fieldName} has at least one invalid name expression.`);
-      }
-      return;
-    }
-
-    const mathParserResults = Parser.parseMath(nameParserResults.outputText);
-
-    if (errorMessages && mathParserResults.error) {
-      if (errorMessages) {
+      } else if (parserResults.mathParserResults.error) {
         errorMessages.add(this, `${this.fieldName} has at least one invalid math expression.`);
-      }
-      return;
-    }
-
-    const mathParserOutputText = mathParserResults.outputText;
-
-    this.markdownText = mathParserOutputText.replace(/\n/g, '  \n> ');
-
-    const markdownParserResults = Parser.parseMarkdown(mathParserOutputText);
-
-    if (markdownParserResults.error) {
-      if (errorMessages) {
+      } else if (parserResults.markdownParserResults.error) {
         errorMessages.add(this, `${this.fieldName} has invalid markdown syntax.`);
       }
-
-      this.htmlText = mathParserOutputText;
-    } else {
-      this.htmlText = markdownParserResults.outputText;
     }
+
+    if (! parserResults.mathParserResults.error) {
+      this.markdownText = parserResults.mathParserResults.outputText.replace(/\n/g, '  \n> ');
+    }
+
+    this.htmlText = parserResults.text;
   }
 };

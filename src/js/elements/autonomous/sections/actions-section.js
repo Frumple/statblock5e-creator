@@ -1,6 +1,6 @@
-import * as blockListSectionModule from './block-list-section.js';
+import { BlockListSection, BlockListShowElements, BlockListEditElements } from './block-list-section.js';
 
-export default class ActionsSection extends blockListSectionModule.BlockListSection {
+export default class ActionsSection extends BlockListSection {
   static get elementName() { return 'actions-section'; }
   static get templatePaths() {
     return super.templatePaths.set(
@@ -23,7 +23,7 @@ export default class ActionsSection extends blockListSectionModule.BlockListSect
 
       this.editElements.generateAttackButton.addEventListener('click', this.onClickGenerateAttackButton.bind(this));
 
-      this.addEventListener('generateAttack', this.onGenerateAttackEvent.bind(this));
+      this.addEventListener('generateAttack', this.onGenerateAttack.bind(this));
 
       this.isInitialized = true;
     }
@@ -33,25 +33,19 @@ export default class ActionsSection extends blockListSectionModule.BlockListSect
     this.editElements.generateAttackDialog.launch();
   }
 
-  onGenerateAttackEvent(event) {
+  onGenerateAttack(event) {
     this.addBlock(event.detail.name, event.detail.text);
     this.reparse();
   }
-
-  reparse() {
-    super.reparse();
-
-    this.editElements.generateAttackDialog.update();
-  }
 }
 
-class ActionsSectionShowElements extends blockListSectionModule.BlockListShowElements {
+class ActionsSectionShowElements extends BlockListShowElements {
   constructor(shadowRoot) {
     super(shadowRoot);
   }
 }
 
-class ActionsSectionEditElements extends blockListSectionModule.BlockListEditElements {
+class ActionsSectionEditElements extends BlockListEditElements {
   constructor(shadowRoot) {
     super(shadowRoot);
 

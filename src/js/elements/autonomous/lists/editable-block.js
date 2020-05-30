@@ -19,8 +19,8 @@ export default class EditableBlock extends DragAndDropListItem {
     this.nameInput = this.shadowRoot.getElementById('editable-block-name');
     this.textArea = this.shadowRoot.getElementById('editable-block-textarea');
     this.previewContainer = this.shadowRoot.getElementById('editable-block-preview-container');
-    this.namePreviewElement = this.shadowRoot.getElementById('editable-block-name-preview');
-    this.textPreviewElement = this.shadowRoot.getElementById('editable-block-text-preview');
+    this.previewNameElement = this.shadowRoot.getElementById('editable-block-preview-name');
+    this.previewTextElement = this.shadowRoot.getElementById('editable-block-preview-text');
     this.removeButton = this.shadowRoot.getElementById('editable-block-remove-button');
 
     this.dragImage = this.nameInput;
@@ -45,12 +45,12 @@ export default class EditableBlock extends DragAndDropListItem {
 
   onInputName() {
     this.nameInput.value = trimTrailingPeriods(this.nameInput.value);
-    this.namePreviewElement.textContent = this.nameInput.value;
+    this.previewNameElement.textContent = this.nameInput.value;
   }
 
   onInputText() {
     this.textArea.parse();
-    this.textPreviewElement.innerHTMLSanitized = this.textArea.htmlText;
+    this.previewTextElement.innerHTMLSanitized = this.textArea.htmlText;
   }
 
   onClickRemoveButton() {
@@ -63,7 +63,7 @@ export default class EditableBlock extends DragAndDropListItem {
 
     this.previewContainer.classList.add('editable-block__preview_hanging-indent');
     this.nameInput.classList.add('editable-block__name_no-italic');
-    this.namePreviewElement.classList.add('editable-block__name-preview_no-italic');
+    this.previewNameElement.classList.add('editable-block__preview-name_no-italic');
   }
 
   set name(name) {
@@ -91,19 +91,19 @@ export default class EditableBlock extends DragAndDropListItem {
   }
 
   set previewName(name) {
-    this.namePreviewElement.textContent = name;
+    this.previewNameElement.textContent = name;
   }
 
   get previewName() {
-    return this.namePreviewElement.textContent;
+    return this.previewNameElement.textContent;
   }
 
   set previewText(text) {
-    this.textPreviewElement.innerHTMLSanitized = text;
+    this.previewTextElement.innerHTMLSanitized = text;
   }
 
   get previewText() {
-    return this.textPreviewElement.innerHTMLSanitized;
+    return this.previewTextElement.innerHTMLSanitized;
   }
 
   validate(errorMessages) {

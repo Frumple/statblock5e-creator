@@ -66,6 +66,9 @@ export default class StatBlockEditor extends CustomAutonomousElement {
     if (this.isConnected && ! this.isInitialized) {
       super.connectedCallback();
 
+      this.addEventListener('dragover', this.onFileDragOver.bind(this));
+      this.addEventListener('drop', this.onFileDrop.bind(this));
+
       this.addEventListener('numberOfColumnsChanged', this.onNumberOfColumnsChanged.bind(this));
       this.addEventListener('twoColumnHeightChanged', this.onTwoColumnHeightChanged.bind(this));
       this.addEventListener('emptySectionsVisibilityChanged', this.onEmptySectionsVisibilityChanged.bind(this));
@@ -81,6 +84,15 @@ export default class StatBlockEditor extends CustomAutonomousElement {
 
       this.isInitialized = true;
     }
+  }
+
+  // Prevent the browser's default behaviour of opening the file when dragging or dropping the file over the editor.
+  onFileDragOver(event) {
+    event.preventDefault();
+  }
+
+  onFileDrop(event) {
+    event.preventDefault();
   }
 
   onNumberOfColumnsChanged(event) {

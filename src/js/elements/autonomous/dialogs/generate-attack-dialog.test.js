@@ -10,7 +10,7 @@ import Attack from '../../../models/attack.js';
 
 const abilitiesModel = CurrentContext.creature.abilities;
 const challengeRatingModel = CurrentContext.creature.challengeRating;
-const actions = CurrentContext.creature.actions;
+const actionsModel = CurrentContext.creature.actions;
 
 let actionsSection;
 let generateAttackDialog;
@@ -24,7 +24,7 @@ beforeAll(async() => {
 beforeEach(() => {
   abilitiesModel.reset();
   challengeRatingModel.reset();
-  actions.reset();
+  actionsModel.reset();
 
   actionsSection = new ActionsSection();
   TestCustomElements.initializeSection(actionsSection);
@@ -42,75 +42,25 @@ describe('when the generate attack dialog is opened', () => {
 
   it('should initially have its model and controls set to their defaults, and focus on the weapon name field', () => {
     verifyDialogResetToDefaults();
-    expect(generateAttackDialog.weaponNameInput).toHaveFocus();
   });
 
   describe('and the dialog is filled out and the reset button is clicked', () => {
     it('should reset the dialog model and controls back to their defaults, and focus on the weapon name field', () => {
-      const attackModel = new Attack();
-      const meleeCategory = attackModel.damageCategories['melee'];
-      meleeCategory.isEnabled = false;
-      meleeCategory.damageType = 'piercing';
-      meleeCategory.damageDieQuantity = 2;
-      meleeCategory.dmageDieSize = 6;
+      const attackModel = createDummyAttackModel();
 
-      const rangedCategory = attackModel.damageCategories['ranged'];
-      rangedCategory.isEnabled = true;
-      rangedCategory.damageType = 'piercing';
-      rangedCategory.damageDieQuantity = 1;
-      rangedCategory.dmageDieSize = 6;
-
-      const bonusCategory = attackModel.damageCategories['bonus'];
-      bonusCategory.isEnabled = true;
-      bonusCategory.damageType = 'cold';
-      bonusCategory.damageDieQuantity = 1;
-      bonusCategory.dmageDieSize = 4;
-
-      inputValueAndTriggerEvent(generateAttackDialog.weaponNameInput, 'Ice Javelin');
-      generateAttackDialog.finesseInput.click();
-
-      setDamageCategoryControls('melee', meleeCategory);
-      setDamageCategoryControls('ranged', rangedCategory);
-      setDamageCategoryControls('bonus', bonusCategory);
-
-      inputValueAndTriggerEvent(generateAttackDialog.reachInput, 10);
-      inputValueAndTriggerEvent(generateAttackDialog.normalRangeInput, 30);
-      inputValueAndTriggerEvent(generateAttackDialog.longRangeInput, 120);
+      setDialogControls(attackModel);
 
       generateAttackDialog.resetButton.click();
 
       verifyDialogResetToDefaults();
-      expect(generateAttackDialog.weaponNameInput).toHaveFocus();
     });
   });
 
   describe('and the dialog is submitted and then opened again', () => {
     it('should reset the dialog model and controls back to their defaults', () => {
-      const attackModel = new Attack();
-      const meleeCategory = attackModel.damageCategories['melee'];
-      meleeCategory.isEnabled = false;
-      meleeCategory.damageType = 'piercing';
-      meleeCategory.damageDieQuantity = 2;
-      meleeCategory.dmageDieSize = 6;
+      const attackModel = createDummyAttackModel();
 
-      const rangedCategory = attackModel.damageCategories['ranged'];
-      rangedCategory.isEnabled = true;
-      rangedCategory.damageType = 'piercing';
-      rangedCategory.damageDieQuantity = 1;
-      rangedCategory.dmageDieSize = 6;
-
-      const bonusCategory = attackModel.damageCategories['bonus'];
-      bonusCategory.isEnabled = true;
-      bonusCategory.damageType = 'cold';
-      bonusCategory.damageDieQuantity = 1;
-      bonusCategory.dmageDieSize = 4;
-
-      inputValueAndTriggerEvent(generateAttackDialog.weaponNameInput, 'Ice Javelin');
-      generateAttackDialog.finesseInput.click();
-
-      setDamageCategoryControls('melee', meleeCategory);
-      setDamageCategoryControls('ranged', rangedCategory);
-      setDamageCategoryControls('bonus', bonusCategory);
+      setDialogControls(attackModel);
 
       generateAttackDialog.generateAttackButton.click();
 
@@ -201,7 +151,10 @@ describe('when the generate attack dialog is opened', () => {
 
       verifyDialogModel(attackModel);
       verifyDialogControls(attackModel, generatedText, renderedText);
-      saveDialogAndVerifyActionBlocks(attackModel.name, generatedText, renderedText);
+
+      generateAttackDialog.generateAttackButton.click();
+
+      verifyActionBlocks(attackModel.name, generatedText, renderedText);
     });
     /* eslint-enable indent, no-unexpected-multiline */
   });
@@ -257,7 +210,10 @@ describe('when the generate attack dialog is opened', () => {
 
       verifyDialogModel(attackModel);
       verifyDialogControls(attackModel, generatedText, renderedText);
-      saveDialogAndVerifyActionBlocks(attackModel.name, generatedText, renderedText);
+
+      generateAttackDialog.generateAttackButton.click();
+
+      verifyActionBlocks(attackModel.name, generatedText, renderedText);
     });
     /* eslint-enable indent, no-unexpected-multiline */
   });
@@ -324,7 +280,10 @@ describe('when the generate attack dialog is opened', () => {
 
       verifyDialogModel(attackModel);
       verifyDialogControls(attackModel, generatedText, renderedText);
-      saveDialogAndVerifyActionBlocks(attackModel.name, generatedText, renderedText);
+
+      generateAttackDialog.generateAttackButton.click();
+
+      verifyActionBlocks(attackModel.name, generatedText, renderedText);
     });
     /* eslint-enable indent, no-unexpected-multiline */
   });
@@ -356,7 +315,10 @@ describe('when the generate attack dialog is opened', () => {
 
       verifyDialogModel(attackModel);
       verifyDialogControls(attackModel, generatedText, renderedText);
-      saveDialogAndVerifyActionBlocks(attackModel.name, generatedText, renderedText);
+
+      generateAttackDialog.generateAttackButton.click();
+
+      verifyActionBlocks(attackModel.name, generatedText, renderedText);
     });
     /* eslint-enable indent, no-unexpected-multiline */
   });
@@ -443,11 +405,43 @@ describe('when the generate attack dialog is opened', () => {
 
       verifyDialogModel(attackModel);
       verifyDialogControls(attackModel, generatedText, renderedText);
-      saveDialogAndVerifyActionBlocks(attackModel.name, generatedText, renderedText);
+
+      generateAttackDialog.generateAttackButton.click();
+
+      verifyActionBlocks(attackModel.name, generatedText, renderedText);
     });
     /* eslint-enable indent, no-unexpected-multiline */
   });
 });
+
+function createDummyAttackModel() {
+  const attackModel = new Attack();
+  attackModel.name = 'Ice Javelin';
+  attackModel.isFinesse = true;
+  attackModel.reach = 10;
+  attackModel.normalRange = 30;
+  attackModel.longRange = 120;
+
+  const meleeCategory = attackModel.damageCategories['melee'];
+  meleeCategory.isEnabled = false;
+  meleeCategory.damageType = 'piercing';
+  meleeCategory.damageDieQuantity = 2;
+  meleeCategory.dmageDieSize = 6;
+
+  const rangedCategory = attackModel.damageCategories['ranged'];
+  rangedCategory.isEnabled = true;
+  rangedCategory.damageType = 'piercing';
+  rangedCategory.damageDieQuantity = 1;
+  rangedCategory.dmageDieSize = 6;
+
+  const bonusCategory = attackModel.damageCategories['bonus'];
+  bonusCategory.isEnabled = true;
+  bonusCategory.damageType = 'cold';
+  bonusCategory.damageDieQuantity = 1;
+  bonusCategory.dmageDieSize = 4;
+
+  return attackModel;
+}
 
 function setDialogControls(attackModel) {
   inputValueAndTriggerEvent(generateAttackDialog.weaponNameInput, attackModel.name);
@@ -557,6 +551,8 @@ function verifyDamageCategoryControls(categoryKey, expectedCategoryModel) {
 function verifyDialogResetToDefaults() {
   verifyDialogModelResetToDefaults();
   verifyDialogControlsResetToDefaults();
+
+  expect(generateAttackDialog.weaponNameInput).toHaveFocus();
 }
 
 function verifyDialogModelResetToDefaults() {
@@ -570,17 +566,15 @@ function verifyDialogControlsResetToDefaults() {
   verifyDialogControls(new Attack(), expectedGeneratedText, expectedRenderedText);
 }
 
-function saveDialogAndVerifyActionBlocks(name, expectedGeneratedText, expectedRenderedText) {
-  generateAttackDialog.generateAttackButton.click();
-
+function verifyActionBlocks(expectedBlockName, expectedGeneratedText, expectedRenderedText) {
   const editableBlock = actionsSection.editElements.editableBlockList.blocks[0];
-  expect(editableBlock.name).toBe(name);
+  expect(editableBlock.name).toBe(expectedBlockName);
   expect(editableBlock.text).toBe(expectedGeneratedText);
   expect(editableBlock.previewText).toBe(expectedRenderedText);
 
   actionsSection.editElements.submitForm();
 
   const displayBlock = actionsSection.showElements.displayBlockList.blocks[0];
-  expect(displayBlock.name).toBe(name);
+  expect(displayBlock.name).toBe(expectedBlockName);
   expect(displayBlock.text).toBe(expectedRenderedText);
 }

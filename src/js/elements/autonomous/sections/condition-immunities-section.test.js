@@ -24,6 +24,7 @@ beforeEach(() => {
   conditionImmunitiesSection = new ConditionImmunitiesSection();
   TestCustomElements.initializeSection(conditionImmunitiesSection);
   conditionImmunitiesSection.connect();
+  conditionImmunitiesSection.editElements.propertyList.connect();
 
   sharedSpecs = new PropertyListSectionSpecs(conditionImmunitiesSection, conditionImmunitiesModel, headingName, open5eJsonKey);
 });
@@ -43,8 +44,8 @@ describe('when the show section is clicked', () => {
 
   it('should switch to edit mode and focus on the text field', () => {
     expect(conditionImmunitiesSection).toBeInMode('edit');
-    expect(conditionImmunitiesSection.editElements.input).toHaveFocus();
-    expect(conditionImmunitiesSection.editElements.input).toBeSelected();
+    expect(conditionImmunitiesSection.editElements.propertyList.input).toHaveFocus();
+    expect(conditionImmunitiesSection.editElements.propertyList.input).toBeSelected();
   });
 
   describe('and the input field is set, the add button is clicked, and the edit section is submitted', () => {

@@ -125,6 +125,7 @@ export default class StatBlock extends CustomAutonomousElement {
     this.headingStats.updateView();
     this.topStats.updateView();
     this.bottomStats.updateView();
+    this.reparseBlockSections();
   }
 
   reparseBlockSections() {

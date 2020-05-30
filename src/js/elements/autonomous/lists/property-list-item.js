@@ -8,13 +8,15 @@ export default class PropertyListItem extends DragAndDropListItem {
       'src/html/elements/autonomous/lists/property-list-item.html');
   }
 
-  constructor(parent) {
+  constructor(parent, text) {
     super(PropertyListItem.templatePaths, parent);
 
     this.label = this.shadowRoot.getElementById('property-list-item-label');
     this.removeButton = this.shadowRoot.getElementById('property-list-item-remove-button');
 
     this.dragImage = this.label;
+
+    this.text = text;
   }
 
   connectedCallback() {
@@ -29,6 +31,13 @@ export default class PropertyListItem extends DragAndDropListItem {
 
   onClickRemoveButton() {
     this.remove();
+    this.list.dispatchPropertyListChangedEvent();
+  }
+
+  onDropItem(event) {
+    super.onDropItem(event);
+
+    this.list.dispatchPropertyListChangedEvent();
   }
 
   get text() {
@@ -40,15 +49,7 @@ export default class PropertyListItem extends DragAndDropListItem {
   }
 
   remove() {
-    const removeEvent = new CustomEvent('propertyListItemRemoved', {
-      bubbles: true,
-      composed: true,
-      detail: {
-        itemText: this.text
-      }
-    });
-    this.dispatchEvent(removeEvent);
-
     this.list.removeChild(this);
+    this.list.dataList.setOptionEnabled(this.text, true);
   }
 }

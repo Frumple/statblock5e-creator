@@ -1,4 +1,6 @@
 import SpecialTraitsSection from './special-traits-section.js';
+import GenerateSpellcastingDialog from '../dialogs/generate-spellcasting-dialog.js';
+
 import CurrentContext from '../../../models/current-context.js';
 
 import * as TestCustomElements from '../../../helpers/test/test-custom-elements.js';
@@ -16,6 +18,7 @@ let sharedSpecs;
 beforeAll(async() => {
   await TestCustomElements.define();
   await SpecialTraitsSection.define();
+  await GenerateSpellcastingDialog.define();
 });
 
 beforeEach(() => {

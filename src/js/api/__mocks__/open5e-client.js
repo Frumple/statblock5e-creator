@@ -160,7 +160,7 @@ const creatureStub = {
       'stealth': 4
     },
     'damage_vulnerabilities': '',
-    'damage_resistances': 'necrotic; bludgeoning, piercing, and slashing from nonmagical weapons',
+    'damage_resistances': 'necrotic; bludgeoning, piercing, and slashing from nonmagical attacks',
     'damage_immunities': 'poison',
     'condition_immunities': 'charmed, exhaustion, frightened, poisoned',
     'senses': 'darkvision 60 ft., passive Perception 14',

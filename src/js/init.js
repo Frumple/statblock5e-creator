@@ -18,6 +18,7 @@ import LoadingScreen from './elements/autonomous/loading-screen.js';
 import PropertyBlock from './elements/autonomous/property-block.js';
 import PropertyLine from './elements/autonomous/property-line.js';
 import SectionDivider from './elements/autonomous/section-divider.js';
+import SpellCategoryBox from './elements/autonomous/spell-category-box.js';
 import TaperedRule from './elements/autonomous/tapered-rule.js';
 
 import ImportJsonDialog from './elements/autonomous/dialogs/import-json-dialog.js';
@@ -27,6 +28,7 @@ import ImportOpen5eDialog from './elements/autonomous/dialogs/import-open5e-dial
 import ResetDialog from './elements/autonomous/dialogs/reset-dialog.js';
 import ExportDialog from './elements/autonomous/dialogs/export-dialog.js';
 import GenerateAttackDialog from './elements/autonomous/dialogs/generate-attack-dialog.js';
+import GenerateSpellcastingDialog from './elements/autonomous/dialogs/generate-spellcasting-dialog.js';
 
 import HelpTooltip from './elements/autonomous/tooltips/help-tooltip.js';
 import CustomTextHelpTooltip from './elements/autonomous/tooltips/custom-text-help-tooltip.js';
@@ -117,6 +119,7 @@ async function defineElements() {
     PropertyBlock,
     PropertyLine,
     SectionDivider,
+    SpellCategoryBox,
     TaperedRule,
 
     ImportJsonDialog,
@@ -126,6 +129,7 @@ async function defineElements() {
     ResetDialog,
     ExportDialog,
     GenerateAttackDialog,
+    GenerateSpellcastingDialog,
 
     HelpTooltip,
     CustomTextHelpTooltip,

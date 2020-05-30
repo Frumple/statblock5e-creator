@@ -26,15 +26,7 @@ const PropertyDataListMixin = {
   },
 
   setOptionEnabled(optionText, isEnabled) {
-    let item = null;
-
-    // JSDOM's implementation of HTMLDataListElement lacks the 'options'
-    // property, so we have to find the matching option element manually.
-    if (isRunningInJsdom) {
-      item = this.findOption(optionText);
-    } else {
-      item = this.options.namedItem(optionText);
-    }
+    const item = this.findOption(optionText);
 
     if (item !== null) {
       if (isEnabled) {

@@ -1,0 +1,271 @@
+{
+  "title": {
+    "fullName": "Lich",
+    "shortName": "",
+    "isProperNoun": false
+  },
+  "subtitle": {
+    "size": "Medium",
+    "type": "humanoid",
+    "tags": "any race",
+    "alignment": "any alignment",
+    "useCustomText": true,
+    "customText": "Medium undead, any evil alignment"
+  },
+  "armorClass": {
+    "armorClass": 17,
+    "armorType": "natural armor",
+    "hasShield": false,
+    "useCustomText": false,
+    "customText": ""
+  },
+  "hitPoints": {
+    "hitPoints": 135,
+    "useHitDie": true,
+    "hitDieQuantity": 18,
+    "hitDieSize": 8
+  },
+  "speed": {
+    "walk": 30,
+    "burrow": null,
+    "climb": null,
+    "fly": null,
+    "hover": false,
+    "swim": null,
+    "useCustomText": false,
+    "customText": ""
+  },
+  "abilityScores": {
+    "strength": 11,
+    "dexterity": 16,
+    "constitution": 16,
+    "intelligence": 20,
+    "wisdom": 14,
+    "charisma": 16
+  },
+  "savingThrows": {
+    "strength": {
+      "isEnabled": false,
+      "override": null
+    },
+    "dexterity": {
+      "isEnabled": false,
+      "override": null
+    },
+    "constitution": {
+      "isEnabled": true,
+      "override": null
+    },
+    "intelligence": {
+      "isEnabled": true,
+      "override": null
+    },
+    "wisdom": {
+      "isEnabled": true,
+      "override": null
+    },
+    "charisma": {
+      "isEnabled": false,
+      "override": null
+    }
+  },
+  "skills": {
+    "acrobatics": {
+      "isEnabled": false,
+      "hasExpertise": false,
+      "override": null
+    },
+    "animalHandling": {
+      "isEnabled": false,
+      "hasExpertise": false,
+      "override": null
+    },
+    "arcana": {
+      "isEnabled": true,
+      "hasExpertise": false,
+      "override": 18
+    },
+    "athletics": {
+      "isEnabled": false,
+      "hasExpertise": false,
+      "override": null
+    },
+    "deception": {
+      "isEnabled": false,
+      "hasExpertise": false,
+      "override": null
+    },
+    "history": {
+      "isEnabled": true,
+      "hasExpertise": false,
+      "override": null
+    },
+    "insight": {
+      "isEnabled": true,
+      "hasExpertise": false,
+      "override": null
+    },
+    "intimidation": {
+      "isEnabled": false,
+      "hasExpertise": false,
+      "override": null
+    },
+    "investigation": {
+      "isEnabled": false,
+      "hasExpertise": false,
+      "override": null
+    },
+    "medicine": {
+      "isEnabled": false,
+      "hasExpertise": false,
+      "override": null
+    },
+    "nature": {
+      "isEnabled": false,
+      "hasExpertise": false,
+      "override": null
+    },
+    "perception": {
+      "isEnabled": true,
+      "hasExpertise": false,
+      "override": null
+    },
+    "performance": {
+      "isEnabled": false,
+      "hasExpertise": false,
+      "override": null
+    },
+    "persuasion": {
+      "isEnabled": false,
+      "hasExpertise": false,
+      "override": null
+    },
+    "religion": {
+      "isEnabled": false,
+      "hasExpertise": false,
+      "override": null
+    },
+    "sleightOfHand": {
+      "isEnabled": false,
+      "hasExpertise": false,
+      "override": null
+    },
+    "stealth": {
+      "isEnabled": false,
+      "hasExpertise": false,
+      "override": null
+    },
+    "survival": {
+      "isEnabled": false,
+      "hasExpertise": false,
+      "override": null
+    }
+  },
+  "damageVulnerabilities": {
+    "items": []
+  },
+  "damageResistances": {
+    "items": [
+      "cold",
+      "lightning",
+      "necrotic"
+    ]
+  },
+  "damageImmunities": {
+    "items": [
+      "poison",
+      "bludgeoning, piercing, and slashing from nonmagical attacks"
+    ]
+  },
+  "conditionImmunities": {
+    "items": [
+      "charmed",
+      "exhaustion",
+      "frightened",
+      "paralyzed",
+      "poisoned"
+    ]
+  },
+  "senses": {
+    "blindsight": null,
+    "blindBeyondThisRadius": false,
+    "darkvision": null,
+    "tremorsense": null,
+    "truesight": 120,
+    "useCustomText": false,
+    "customText": ""
+  },
+  "languages": {
+    "items": [
+      "Common plus up to five other languages"
+    ],
+    "telepathy": null
+  },
+  "challengeRating": {
+    "challengeRating": "21",
+    "experiencePoints": 33000,
+    "proficiencyBonus": 7
+  },
+  "specialTraits": {
+    "blocks": [
+      {
+        "name": "Legendary Resistance (3/Day)",
+        "text": "If [name] fails a saving throw, it can choose to succeed instead."
+      },
+      {
+        "name": "Rejuvenation",
+        "text": "If it has a phylactery, a destroyed lich gains a new body in 1d10 days, regaining all its hit points and becoming active again. The new body appears within 5 feet of the phylactery."
+      },
+      {
+        "name": "Spellcasting",
+        "text": "[name] is an 18th-level spellcaster. Its spellcasting ability is Intelligence (spell save DC sdc[int], atk[int] to hit with spell attacks). [name] has the following wizard spells prepared:\n\nCantrips (at will): *mage hand*, *prestidigitation*, *ray of frost*\n1st level (4 slots): *detect magic*, *magic missile*, *shield*, *thunderwave*\n2nd level (3 slots): *detect thoughts*, *invisibility*, *Melf's acid arrow*, *mirror image*\n3rd level (3 slots): *animate dead*, *counterspell*, *dispel magic*, *fireball*\n4th level (3 slots): *blight*, *dimension door*\n5th level (3 slots): *cloudkill*, *scrying*\n6th level (1 slot): *disintegrate*, *globe of invulnerability*\n7th level (1 slot): *finger of death*, *plane shift*\n8th level (1 slot): *dominate monster*, *power word stun*\n9th level (1 slot): *power word kill*"
+      },
+      {
+        "name": "Turn Resistance",
+        "text": "[name] has advantage on saving throws against any effect that turns undead."
+      }
+    ]
+  },
+  "actions": {
+    "blocks": [
+      {
+        "name": "Paralyzing Touch",
+        "text": "*Melee Spell Attack:* atk[int] to hit, reach 5 ft., one creature. *Hit:* dmg[3d6] cold damage. The target must succeed on a DC 18 Constitution saving throw or be paralyzed for 1 minute. The target can repeat the saving throw at the end of each of its turns, ending the effect on itself on a success."
+      }
+    ]
+  },
+  "reactions": {
+    "blocks": []
+  },
+  "legendaryActions": {
+    "blocks": [
+      {
+        "name": "Cantrip",
+        "text": "[name] casts a cantrip."
+      },
+      {
+        "name": "Paralyzing Touch (Costs 2 Actions)",
+        "text": "[name] uses its Paralyzing Touch."
+      },
+      {
+        "name": "Frightening Gaze (Costs 2 Actions)",
+        "text": "[name] fixes its gaze on one creature it can see within 10 feet of it. The target must succeed on a DC 18 Wisdom saving throw against this magic or become frightened for 1 minute. The frightened target can repeat the saving throw at the end of each of its turns, ending the effect on itself on a success. If a target's saving throw is successful or the effect ends for it, the target is immune to [name]'s gaze for the next 24 hours."
+      },
+      {
+        "name": "Disrupt Life (Costs 3 Actions)",
+        "text": "Each living creature within 20 feet of [name] must make a DC 18 Constitution saving throw against this magic, taking dmg[6d6] necrotic damage on a failed save, or half as much damage on a successful one."
+      }
+    ],
+    "description": "[name] can take 3 legendary actions, choosing from the options below. Only one legendary action option can be used at a time and only at the end of another creature's turn. [name] regains spent legendary actions at the start of its turn."
+  },
+  "layout": {
+    "columns": 1,
+    "twoColumnMode": "auto",
+    "twoColumnHeight": 600
+  },
+  "meta": {
+    "version": "1.0.0",
+    "description": "Created using statblock5e-creator",
+    "url": "https://frumple.github.io/statblock5e-creator"
+  }
+}

@@ -24,6 +24,7 @@ beforeEach(() => {
   damageVulnerabilitiesSection = new DamageVulnerabilitiesSection();
   TestCustomElements.initializeSection(damageVulnerabilitiesSection);
   damageVulnerabilitiesSection.connect();
+  damageVulnerabilitiesSection.editElements.propertyList.connect();
 
   sharedSpecs = new PropertyListSectionSpecs(damageVulnerabilitiesSection, damageVulnerabilitiesModel, headingName, open5eJsonKey);
 });
@@ -43,8 +44,8 @@ describe('when the show section is clicked', () => {
 
   it('should switch to edit mode and focus on the text field', () => {
     expect(damageVulnerabilitiesSection).toBeInMode('edit');
-    expect(damageVulnerabilitiesSection.editElements.input).toHaveFocus();
-    expect(damageVulnerabilitiesSection.editElements.input).toBeSelected();
+    expect(damageVulnerabilitiesSection.editElements.propertyList.input).toHaveFocus();
+    expect(damageVulnerabilitiesSection.editElements.propertyList.input).toBeSelected();
   });
 
   describe('and the input field is set, the add button is clicked, and the edit section is submitted', () => {

@@ -1,4 +1,5 @@
 import { PropertyListSection } from './property-list-section.js';
+import DamageTypesForPropertyLists from '../../../data/damage-types-for-property-lists.js';
 
 export default class DamageResistancesSection extends PropertyListSection {
   static get elementName() { return 'damage-resistances-section'; }
@@ -13,5 +14,15 @@ export default class DamageResistancesSection extends PropertyListSection {
           'damageResistances');
 
     this.empty = true;
+  }
+
+  connectedCallback() {
+    if (this.isConnected && ! this.isInitialized) {
+      super.connectedCallback();
+
+      this.editElements.propertyList.dataListOptions = DamageTypesForPropertyLists.map(damageType => ({ text: damageType }) );
+
+      this.isInitialized = true;
+    }
   }
 }

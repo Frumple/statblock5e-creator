@@ -26,6 +26,7 @@ beforeEach(() => {
   languagesSection = new LanguagesSection();
   TestCustomElements.initializeSection(languagesSection);
   languagesSection.connect();
+  languagesSection.editElements.propertyList.connect();
 
   sharedSpecs = new PropertyListSectionSpecs(languagesSection, languagesModel, headingName, open5eJsonKey);
 });
@@ -45,8 +46,8 @@ describe('when the show section is clicked', () => {
 
   it('should switch to edit mode and focus on the text field', () => {
     expect(languagesSection).toBeInMode('edit');
-    expect(languagesSection.editElements.input).toHaveFocus();
-    expect(languagesSection.editElements.input).toBeSelected();
+    expect(languagesSection.editElements.propertyList.input).toHaveFocus();
+    expect(languagesSection.editElements.propertyList.input).toBeSelected();
   });
 
   describe('and the default "Common" language is removed, allowing these specs to run starting with no languages', () => {
@@ -187,8 +188,8 @@ describe('when the show section is clicked', () => {
           const expectedText = expectedItems.join(', ');
 
           for (const item of initialItems) {
-            inputValueAndTriggerEvent(languagesSection.editElements.input, item);
-            languagesSection.editElements.addButton.click();
+            inputValueAndTriggerEvent(languagesSection.editElements.propertyList.input, item);
+            languagesSection.editElements.propertyList.addButton.click();
           }
 
           const item = languagesSection.editElements.propertyList.findItem(itemToDelete);
@@ -269,8 +270,8 @@ function reset() {
 
 function shouldAddItems(itemTexts, telepathy, expectedText) {
   for (const itemText of itemTexts) {
-    inputValueAndTriggerEvent(languagesSection.editElements.input, itemText);
-    languagesSection.editElements.addButton.click();
+    inputValueAndTriggerEvent(languagesSection.editElements.propertyList.input, itemText);
+    languagesSection.editElements.propertyList.addButton.click();
   }
   inputValueAndTriggerEvent(languagesSection.editElements.telepathy, telepathy);
 

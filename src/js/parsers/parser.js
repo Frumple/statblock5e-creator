@@ -4,6 +4,41 @@ import MarkdownParser from './markdown-parser.js';
 
 import CurrentContext from '../models/current-context.js';
 
+export function parseAll(inputText, nameParsingEnabled = true, mathParsingEnabled = true, markdownParsingEnabled = true, parserOptions = {}) {
+  let results = {
+    text: inputText,
+    nameParserResults: null,
+    mathParserResults: null,
+    markdownParserResults: null
+  };
+
+  if (nameParsingEnabled) {
+    results.nameParserResults = parseNames(results.text, parserOptions);
+    if (results.nameParserResults.error) {
+      return results;
+    }
+    results.text = results.nameParserResults.outputText;
+  }
+
+  if (mathParsingEnabled) {
+    results.mathParserResults = parseMath(results.text, parserOptions);
+    if (results.mathParserResults.error) {
+      return results;
+    }
+    results.text = results.mathParserResults.outputText;
+  }
+
+  if (markdownParsingEnabled) {
+    results.markdownParserResults = parseMarkdown(results.text, parserOptions);
+    if (results.markdownParserResults.error) {
+      return results;
+    }
+    results.text = results.markdownParserResults.outputText;
+  }
+
+  return results;
+}
+
 export function parseNames(inputText, parserOptions = {}) {
   parserOptions.creature = CurrentContext.creature.title.toParserOptions();
   return parseText(NameParser, inputText, parserOptions);

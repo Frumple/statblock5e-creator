@@ -1,7 +1,8 @@
 import CustomDialog from './custom-dialog.js';
 import Attack from '../../../models/attack.js';
 import PredefinedWeapons from '../../../data/predefined-weapons.js';
-import { focusAndSelectElement } from '../../../helpers/element-helpers.js';
+import DamageTypes from '../../../data/damage-types.js';
+import { focusAndSelectElement, addOptionsToElement, addValueOnlyOptionsToElement } from '../../../helpers/element-helpers.js';
 
 export default class GenerateAttackDialog extends CustomDialog {
   static get elementName() { return 'generate-attack-dialog'; }
@@ -21,7 +22,8 @@ export default class GenerateAttackDialog extends CustomDialog {
     this.weaponNameInput = this.shadowRoot.getElementById('weapon-name-input');
     this.finesseInput = this.shadowRoot.getElementById('finesse-input');
 
-    this.predefinedWeaponsDatalist = this.shadowRoot.getElementById('predefined-weapons');
+    this.predefinedWeaponsDataList = this.shadowRoot.getElementById('predefined-weapons');
+    this.damageTypesDataList = this.shadowRoot.getElementById('damage-types');
 
     this.damageCategoryInputs = {};
 
@@ -85,10 +87,8 @@ export default class GenerateAttackDialog extends CustomDialog {
       this.resetButton.addEventListener('click', this.onClickResetButton.bind(this));
       this.generateAttackButton.addEventListener('click', this.onClickGenerateAttackButton.bind(this));
 
-      for (const weapon of Object.values(PredefinedWeapons)) {
-        const option = new Option(weapon.description, weapon.name);
-        this.predefinedWeaponsDatalist.appendChild(option);
-      }
+      addOptionsToElement(this.predefinedWeaponsDataList, Object.values(PredefinedWeapons), 'description', 'name');
+      addValueOnlyOptionsToElement(this.damageTypesDataList, DamageTypes);
 
       this.isInitialized = true;
 
@@ -169,6 +169,7 @@ export default class GenerateAttackDialog extends CustomDialog {
 
   launch() {
     this.showModal();
+    this.update();
     focusAndSelectElement(this.weaponNameInput);
   }
 
