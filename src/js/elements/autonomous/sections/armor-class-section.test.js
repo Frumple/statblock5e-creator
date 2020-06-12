@@ -49,7 +49,7 @@ describe('when the show section is clicked', () => {
     });
 
     it('should disable the custom text field, enable all other fields, and focus on the armor class field', () => {
-      expect(armorClassSection).toHaveEditElementsEnabledOrDisabledBasedOnCheckbox(
+      expect(armorClassSection).toHaveElementsEnabledOrDisabledBasedOnCheckboxState(
         armorClassSection.editElements.useCustomText,
         ['customText'],
         ['armorClass', 'armorType', 'hasShield']
@@ -168,7 +168,7 @@ describe('when the show section is clicked', () => {
     });
 
     it('should enable the custom text field, disable all other fields, and focus on the custom text field', () => {
-      expect(armorClassSection).toHaveEditElementsEnabledOrDisabledBasedOnCheckbox(
+      expect(armorClassSection).toHaveElementsEnabledOrDisabledBasedOnCheckboxState(
         armorClassSection.editElements.useCustomText,
         ['customText'],
         ['armorClass', 'armorType', 'hasShield']
@@ -382,7 +382,7 @@ function verifyEditModeView({
   expect(armorClassSection.editElements.useCustomText.checked).toBe(useCustomText);
   expect(armorClassSection.editElements.customText).toHaveValue(customText);
 
-  expect(armorClassSection).toHaveEditElementsEnabledOrDisabledBasedOnCheckbox(
+  expect(armorClassSection).toHaveElementsEnabledOrDisabledBasedOnCheckboxState(
     armorClassSection.editElements.useCustomText,
     ['customText'],
     ['armorClass', 'armorType', 'hasShield']

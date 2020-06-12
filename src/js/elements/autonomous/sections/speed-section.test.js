@@ -50,7 +50,7 @@ describe('when the show section is clicked', () => {
     });
 
     it('should disable the custom text field, enable all other fields, and focus on the walk speed field', () => {
-      expect(speedSection).toHaveEditElementsEnabledOrDisabledBasedOnCheckbox(
+      expect(speedSection).toHaveElementsEnabledOrDisabledBasedOnCheckboxState(
         speedSection.editElements.useCustomText,
         ['customText'],
         ['walk', 'burrow', 'climb', 'fly', 'hover', 'swim']
@@ -184,7 +184,7 @@ describe('when the show section is clicked', () => {
     });
 
     it('should enable the custom text field, disable all other fields, and focus on the custom text field', () => {
-      expect(speedSection).toHaveEditElementsEnabledOrDisabledBasedOnCheckbox(
+      expect(speedSection).toHaveElementsEnabledOrDisabledBasedOnCheckboxState(
         speedSection.editElements.useCustomText,
         ['customText'],
         ['walk', 'burrow', 'climb', 'fly', 'hover', 'swim']
@@ -408,7 +408,7 @@ function verifyEditModeView({
   expect(speedSection.editElements.useCustomText.checked).toBe(useCustomText);
   expect(speedSection.editElements.customText).toHaveValue(customText);
 
-  expect(speedSection).toHaveEditElementsEnabledOrDisabledBasedOnCheckbox(
+  expect(speedSection).toHaveElementsEnabledOrDisabledBasedOnCheckboxState(
     speedSection.editElements.useCustomText,
     ['customText'],
     ['walk', 'burrow', 'climb', 'fly', 'hover', 'swim']

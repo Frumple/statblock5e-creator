@@ -14,7 +14,7 @@
     "@babel/polyfill": "^7.7.0",
     "@testing-library/jest-dom": "^4.2.4",
     "babel-plugin-transform-es2015-modules-commonjs": "^6.26.2",
-    "jest": "^24.9.0",
+    "jest": "^26.0.1",
     "pegjs": "^0.10.0",
     "wait-for-expect": "^3.0.2",
     "webpack": "^4.41.5",

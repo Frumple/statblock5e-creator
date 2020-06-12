@@ -55,7 +55,7 @@ describe('when the show section is clicked', () => {
     });
 
     it('should enable the custom text field, disable all other fields, and focus on the custom text field', () => {
-      expect(sensesSection).toHaveEditElementsEnabledOrDisabledBasedOnCheckbox(
+      expect(sensesSection).toHaveElementsEnabledOrDisabledBasedOnCheckboxState(
         sensesSection.editElements.useCustomText,
         ['customText'],
         ['blindsight', 'blindBeyondThisRadius', 'darkvision', 'tremorsense', 'truesight']
@@ -162,7 +162,7 @@ describe('when the show section is clicked', () => {
     });
 
     it('should disable the custom text field, enable all other fields, and focus on the blindsight field', () => {
-      expect(sensesSection).toHaveEditElementsEnabledOrDisabledBasedOnCheckbox(
+      expect(sensesSection).toHaveElementsEnabledOrDisabledBasedOnCheckboxState(
         sensesSection.editElements.useCustomText,
         ['customText'],
         ['blindsight', 'blindBeyondThisRadius', 'darkvision', 'tremorsense', 'truesight']
@@ -453,7 +453,7 @@ function verifyEditModeView({
   expect(sensesSection.editElements.useCustomText.checked).toBe(useCustomText);
   expect(sensesSection.editElements.customText).toHaveValue(customText);
 
-  expect(sensesSection).toHaveEditElementsEnabledOrDisabledBasedOnCheckbox(
+  expect(sensesSection).toHaveElementsEnabledOrDisabledBasedOnCheckboxState(
     sensesSection.editElements.useCustomText,
     ['customText'],
     ['blindsight', 'blindBeyondThisRadius', 'darkvision', 'tremorsense', 'truesight']
