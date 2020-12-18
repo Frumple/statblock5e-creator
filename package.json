@@ -5,7 +5,7 @@
   "main": "index.js",
   "dependencies": {
     "clipboard": "^2.0.4",
-    "dompurify": "^2.0.8",
+    "dompurify": "^2.0.17",
     "js-beautify": "^1.10.3"
   },
   "devDependencies": {
