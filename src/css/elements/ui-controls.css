@@ -1,0 +1,76 @@
+/* Button */
+
+.ui__button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background: #dddddd;
+  border: 1px outset #949494;
+  font-family: inherit;
+  font-size: inherit;
+  font-weight: bold;
+  padding: 0;
+  cursor: pointer;
+  transition: background 100ms ease-in-out;
+}
+
+.ui__button:hover {
+  background: #eeeeee;
+}
+
+.ui__button:active {
+  background: #90FF70;
+}
+
+/* Radio Button */
+
+.ui__radio-button-input {
+  display: none;
+  appearance: none;
+}
+
+.ui__radio-button-input:checked + label {
+  background: #90FF70;
+}
+
+.ui__radio-button-label {
+  user-select: none;
+}
+
+/* Text Input */
+
+.ui__text-input {
+  font-family: inherit;
+  font-size: inherit;
+  box-sizing: border-box;
+  height: 26px;
+}
+
+/* Number Input */
+
+.ui__number-input {
+  font-family: inherit;
+  font-size: inherit;
+  box-sizing: border-box;
+  height: 26px;
+}
+
+.ui__small-number-input {
+  width: 50px;
+}
+
+/* Select */
+
+.ui__select {
+  font-family: inherit;
+  font-size: inherit;
+  box-sizing: border-box;
+  height: 26px;
+}
+
+/* Text Area */
+
+.ui__textarea {
+  font-family: inherit;
+  font-size: inherit;
+}

@@ -20,29 +20,29 @@
           <p><em>Note: Changing the creature's <strong>size</strong> will also automatically change the creature's <strong>hit die size</strong>, located in the Hit Points section.</em></p>
         </help-tooltip>
       </div>
-      <select id="size-input" class="subtitle-edit-section__size-input subtitle-show-section__subtitle-text section__select">
+      <select id="size-input" class="subtitle-edit-section__size-input subtitle-show-section__subtitle-text ui__select">
       </select>
 
       <label id="type-label" class="subtitle-edit-section__type-label subtitle-edit-section__heading-label subtitle-edit-section__label" for="type-input">Type:</label>
-      <select id="type-input" class="subtitle-edit-section__type-input subtitle-show-section__subtitle-text section__select">
+      <select id="type-input" class="subtitle-edit-section__type-input subtitle-show-section__subtitle-text ui__select">
       </select>
 
       <label id="tags-label" class="subtitle-edit-section__tags-label subtitle-edit-section__heading-label subtitle-edit-section__label" for="tags-input">Tags:</label>
-      <input id="tags-input" class="subtitle-edit-section__tags-input subtitle-show-section__subtitle-text section__text-input" is="text-input" type="text" name="type" pretty-name="Creature Tags" list="tags-list" value="" />
+      <input id="tags-input" class="subtitle-edit-section__tags-input subtitle-show-section__subtitle-text ui__text-input" is="text-input" type="text" name="type" pretty-name="Creature Tags" list="tags-list" value="" />
       <datalist id="tags-list">
       </datalist>
 
       <label id="alignment-label" class="subtitle-edit-section__alignment-label subtitle-edit-section__heading-label subtitle-edit-section__label" for="alignment-input">Alignment:</label>
-      <select id="alignment-input" class="subtitle-edit-section__alignment-input subtitle-show-section__subtitle-text section__select">
+      <select id="alignment-input" class="subtitle-edit-section__alignment-input subtitle-show-section__subtitle-text ui__select">
       </select>
     </div>
     <div class="subtitle-edit-section__custom-container">
       <input id="use-custom-text-input" class="subtitle-edit-section__use-custom-text-input" is="enable-disable-elements-checkbox" type="checkbox" name="subtitle-use-custom" />
       <label id="use-custom-text-label" class="subtitle-edit-section__use-custom-text-label subtitle-edit-section__label" for="use-custom-text-input">Override with custom text:</label>
-      <input id="custom-text-input" class="subtitle-edit-section__custom-text-input section__text-input" is="text-input" type="text" name="subtitle-custom" pretty-name="Subtitle Custom Text" data-parsed required disabled />
+      <input id="custom-text-input" class="subtitle-edit-section__custom-text-input ui__text-input" is="text-input" type="text" name="subtitle-custom" pretty-name="Subtitle Custom Text" data-parsed required disabled />
     </div>
   </div>
   <div class="section__save-button-container">
-    <button id="save-button" class="default-button section__save-button"><i class="material-icons">done</i></button>
+    <button id="save-button" class="ui__button section__save-button"><i class="material-icons">done</i></button>
   </div>
 </form>

@@ -1,8 +1,7 @@
 <link href='src/css/vendor/material-icons.css' rel='stylesheet' type='text/css'>
 <link href='//fonts.googleapis.com/icon?family=Material+Icons' rel='stylesheet'>
 
-<link href='src/css/elements/default-button.css' rel='stylesheet' type='text/css'>
-<link href='src/css/elements/radio-button.css' rel='stylesheet' type='text/css'>
+<link href='src/css/elements/ui-controls.css' rel='stylesheet' type='text/css'>
 <link href='src/css/elements/autonomous/containers/stat-block-menu.css' rel='stylesheet' type='text/css'>
 
 <div class="stat-block-menu">
@@ -11,10 +10,10 @@
       <label class="stat-block-menu__label stat-block-menu__columns-label">Columns</label>
 
       <div class="stat-block-menu__radio-container">
-        <input id="one-column-radio" class="radio-button__input" type="radio" name="columns" value="1" checked />
-        <label id="one-column-label" for="one-column-radio" class="default-button radio-button__label stat-block-menu__radio-label"><i class="material-icons">looks_one</i></label>
-        <input id="two-column-radio" class="radio-button__input" type="radio" name="columns" value="2" />
-        <label id="two-column-label" for="two-column-radio" class="default-button radio-button__label stat-block-menu__radio-label"><i class="material-icons">looks_two</i></label>
+        <input id="one-column-radio" class="ui__radio-button-input" type="radio" name="columns" value="1" checked />
+        <label id="one-column-label" for="one-column-radio" class="ui__button ui__radio-button-label stat-block-menu__radio-label"><i class="material-icons">looks_one</i></label>
+        <input id="two-column-radio" class="ui__radio-button-input" type="radio" name="columns" value="2" />
+        <label id="two-column-label" for="two-column-radio" class="ui__button ui__radio-button-label stat-block-menu__radio-label"><i class="material-icons">looks_two</i></label>
       </div>
     </div>
 
@@ -22,10 +21,10 @@
       <label class="stat-block-menu__label stat-block-menu__empty-sections-label">Empty Sections</label>
 
       <div class="stat-block-menu__radio-container">
-        <input id="show-empty-sections-radio" class="radio-button__input" type="radio" name="empty-section-visibility" value="true" checked />
-        <label id="show-empty-sections-label" for="show-empty-sections-radio" class="default-button radio-button__label stat-block-menu__radio-label"><i class="material-icons">visibility</i></label>
-        <input id="hide-empty-sections-radio" class="radio-button__input" type="radio" name="empty-section-visibility" value="false" />
-        <label id="hide-empty-sections-label" for="hide-empty-sections-radio" class="default-button radio-button__label stat-block-menu__radio-label"><i class="material-icons">visibility_off</i></label>
+        <input id="show-empty-sections-radio" class="ui__radio-button-input" type="radio" name="empty-section-visibility" value="true" checked />
+        <label id="show-empty-sections-label" for="show-empty-sections-radio" class="ui__button ui__radio-button-label stat-block-menu__radio-label"><i class="material-icons">visibility</i></label>
+        <input id="hide-empty-sections-radio" class="ui__radio-button-input" type="radio" name="empty-section-visibility" value="false" />
+        <label id="hide-empty-sections-label" for="hide-empty-sections-radio" class="ui__button ui__radio-button-label stat-block-menu__radio-label"><i class="material-icons">visibility_off</i></label>
       </div>
     </div>
 
@@ -33,8 +32,8 @@
       <label class="stat-block-menu__label stat-block-menu__all-sections-label">All Sections</label>
 
       <div class="stat-block-menu__radio-container">
-        <button id="edit-all-sections-button" class="default-button stat-block-menu__all-sections-button"><i class="material-icons">edit</i></button>
-        <button id="save-all-sections-button" class="default-button stat-block-menu__all-sections-button"><i class="material-icons">done</i></button>
+        <button id="edit-all-sections-button" class="ui__button stat-block-menu__all-sections-button"><i class="material-icons">edit</i></button>
+        <button id="save-all-sections-button" class="ui__button stat-block-menu__all-sections-button"><i class="material-icons">done</i></button>
       </div>
     </div>
   </div>
