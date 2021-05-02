@@ -27,6 +27,8 @@ beforeEach(() => {
   statBlockEditor = new StatBlockEditor();
   document.body.appendChild(statBlockEditor);
 
+  // Mocking a custom element returns an empty HTMLElement for some unknown reason.
+  // The workaround is to inject a fake object and mock the relevant methods within.
   statBlockEditor.statBlock = {
     setColumns: () => {},
     setColumnHeight: () => {},
