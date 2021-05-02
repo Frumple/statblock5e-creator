@@ -14,7 +14,7 @@ import { ClipboardWrapper, startFileDownload } from '../../../helpers/export-hel
 jest.mock('../../../helpers/print-helpers.js');
 jest.mock('../../../helpers/export-helpers.js');
 
-const initialHeightSliderValue = 600;
+const sliderChangeAmount = 25;
 
 let statBlockEditor;
 let statBlockMenu;
@@ -28,10 +28,8 @@ let statBlock;
    calling the ClipboardWrapper with the appropriate parameters.
    - GitHub issue: https://github.com/jsdom/jsdom/issues/1568
 
-   JSDOM does not support the stepUp() or stepDown() methods, so when
-   interacting with the two-column manual height slider, we have to set its
-   value and dispatch a change event manually.
-   - This issue was fixed in JSDOM 16.0.0, need to update
+   The stepUp() and stepDown() methods in JSDOM do not fire input events.
+   The workaround is to call onInputSlider() manually afterwards.
 */
 
 beforeAll(async() => {
@@ -159,7 +157,7 @@ describe('should export JSON', () => {
       statBlockMenu.twoColumnButton.click();
       statBlockSidebar.manualHeightModeButton.click();
 
-      statBlockSidebar.manualHeightSlider.value = initialHeightSliderValue + 25;
+      statBlockSidebar.manualHeightSlider.stepUp(sliderChangeAmount);
       statBlockSidebar.onInputSlider();
 
       statBlockMenu.exportJsonButton.click();
@@ -227,7 +225,7 @@ describe('should export JSON', () => {
       statBlockMenu.twoColumnButton.click();
       statBlockSidebar.manualHeightModeButton.click();
 
-      statBlockSidebar.manualHeightSlider.value = initialHeightSliderValue + 25;
+      statBlockSidebar.manualHeightSlider.stepUp(sliderChangeAmount);
       statBlockSidebar.onInputSlider();
 
       statBlockMenu.exportJsonButton.click();
@@ -270,8 +268,7 @@ describe('HTML-based tests', () => {
       statBlockMenu.twoColumnButton.click();
       statBlockSidebar.manualHeightModeButton.click();
 
-
-      statBlockSidebar.manualHeightSlider.value = initialHeightSliderValue + 25;
+      statBlockSidebar.manualHeightSlider.stepUp(sliderChangeAmount);
       statBlockSidebar.onInputSlider();
 
       statBlockMenu.printButton.click();
@@ -315,7 +312,7 @@ describe('HTML-based tests', () => {
         statBlockMenu.twoColumnButton.click();
         statBlockSidebar.manualHeightModeButton.click();
 
-        statBlockSidebar.manualHeightSlider.value = initialHeightSliderValue + 25;
+        statBlockSidebar.manualHeightSlider.stepUp(sliderChangeAmount);
         statBlockSidebar.onInputSlider();
 
         statBlockMenu.exportHtmlButton.click();
@@ -368,7 +365,7 @@ describe('HTML-based tests', () => {
         statBlockMenu.twoColumnButton.click();
         statBlockSidebar.manualHeightModeButton.click();
 
-        statBlockSidebar.manualHeightSlider.value = initialHeightSliderValue + 25;
+        statBlockSidebar.manualHeightSlider.stepUp(sliderChangeAmount);
         statBlockSidebar.onInputSlider();
 
         statBlockMenu.exportHtmlButton.click();

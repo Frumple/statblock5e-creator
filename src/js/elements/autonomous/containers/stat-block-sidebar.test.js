@@ -2,10 +2,16 @@ import StatBlockSidebar from './stat-block-sidebar.js';
 import EventInterceptor from '../../../helpers/test/event-interceptor.js';
 
 const initialSliderValue = 600;
+const sliderChangeAmount = 25;
 const sidebarHiddenClass = 'stat-block-sidebar_hidden';
 const sliderContainerHiddenClass = 'stat-block-sidebar__slider-container_hidden';
 
 let statBlockSidebar;
+
+/* Notes about JSDOM limitations:
+   The stepUp() and stepDown() methods in JSDOM do not fire input events.
+   The workaround is to call onInputSlider() manually afterwards.
+*/
 
 beforeAll(async() => {
   await StatBlockSidebar.define();
@@ -61,27 +67,23 @@ it('should dispatch an event when the "Manual Two-Column Height" button is click
 it('should dispatch an event when the "Manual Two-Column Height" slider is decremented', () => {
   const eventInterceptor = new EventInterceptor(statBlockSidebar, 'twoColumnHeightChanged');
 
-  // JSDOM doesn't support the stepDown() method, set the value and dispatch the event manually
-  // statBlockSidebar.manualHeightSlider.stepDown(25);
-  statBlockSidebar.manualHeightSlider.value = initialSliderValue - 25;
+  statBlockSidebar.manualHeightSlider.stepDown(sliderChangeAmount);
   statBlockSidebar.onInputSlider();
 
   const event = eventInterceptor.popEvent();
   expect(event).not.toBeNull();
   expect(event.detail.mode).toBe('manual');
-  expect(event.detail.height).toBe(initialSliderValue - 25);
+  expect(event.detail.height).toBe(initialSliderValue - sliderChangeAmount);
 });
 
 it('should dispatch an event when the "Manual Two-Column Height" slider is incremented', () => {
   const eventInterceptor = new EventInterceptor(statBlockSidebar, 'twoColumnHeightChanged');
 
-  // JSDOM doesn't support the stepUp() method, set the value and dispatch the event manually
-  // statBlockSidebar.manualHeightSlider.stepUp(25);
-  statBlockSidebar.manualHeightSlider.value = initialSliderValue + 25;
+  statBlockSidebar.manualHeightSlider.stepUp(sliderChangeAmount);
   statBlockSidebar.onInputSlider();
 
   const event = eventInterceptor.popEvent();
   expect(event).not.toBeNull();
   expect(event.detail.mode).toBe('manual');
-  expect(event.detail.height).toBe(initialSliderValue + 25);
+  expect(event.detail.height).toBe(initialSliderValue + sliderChangeAmount);
 });
