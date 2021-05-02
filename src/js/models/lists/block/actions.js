@@ -10,6 +10,10 @@ export default class Actions extends BlockListModel {
   }
 
   reset() {
+
+    // For tests, start with no action blocks so it is easy for tests to populate the data they need.
+    // For production, start with the Club attack action as part of the Commoner statblock.
+
     if (isRunningInJsdom) {
       this.blocks = [];
     } else {

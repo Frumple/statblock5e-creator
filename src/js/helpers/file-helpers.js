@@ -1,6 +1,9 @@
 import isRunningInJsdom from './is-running-in-jsdom.js';
 
 export async function fetchFromFile(path) {
+
+  // fetch() isn't available in a Node environment, so use readFile() instead.
+
   if (isRunningInJsdom) {
     const fs = require('fs');
     const util = require('util');

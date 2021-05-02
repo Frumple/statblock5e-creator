@@ -1,8 +1,6 @@
 import DragAndDropList from './drag-and-drop-list.js';
-import EditableBlock from './editable-block.js';
 
 import { focusAndSelectElement } from '../../../helpers/element-helpers.js';
-import isRunningInJsdom from '../../../helpers/is-running-in-jsdom.js';
 
 export default class EditableBlockList extends DragAndDropList {
   static get elementName() { return 'editable-block-list'; }
@@ -45,7 +43,7 @@ export default class EditableBlockList extends DragAndDropList {
   }
 
   createBlock(name, text) {
-    const block = isRunningInJsdom ? new EditableBlock() : document.createElement('editable-block');
+    const block = document.createElement('editable-block');
 
     block.list = this;
     block.name = name;

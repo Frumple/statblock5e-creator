@@ -38,6 +38,8 @@ export default class CustomDialog extends CustomAutonomousElement {
     return this.dialog.getAttribute('open');
   }
 
+  // JSDOM doesn't support showModal() or close() methods on dialogs, so we have to manually set the "open" attribute instead.
+
   showModal() {
     if (isRunningInJsdom) {
       this.open = true;

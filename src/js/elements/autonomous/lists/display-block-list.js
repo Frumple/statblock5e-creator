@@ -1,8 +1,5 @@
 import CustomAutonomousElement from '../custom-autonomous-element.js';
 
-import isRunningInJsdom from '../../../helpers/is-running-in-jsdom.js';
-import DisplayBlock from './display-block.js';
-
 export default class DisplayBlockList extends CustomAutonomousElement {
   static get elementName() { return 'display-block-list'; }
   static get templatePaths() {
@@ -39,7 +36,7 @@ export default class DisplayBlockList extends CustomAutonomousElement {
   }
 
   static createBlock(name, text) {
-    const block = isRunningInJsdom ? new DisplayBlock() : document.createElement('display-block');
+    const block = document.createElement('display-block');
 
     block.name = name;
     block.text = text;
