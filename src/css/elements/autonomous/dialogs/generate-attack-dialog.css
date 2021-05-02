@@ -144,6 +144,10 @@
   font-weight: bold;
 }
 
+.generate-attack-dialog__generated-text {
+  font-family: monospace;
+}
+
 .generate-attack-dialog__rendered-text-label {
   font-weight: bold;
 }

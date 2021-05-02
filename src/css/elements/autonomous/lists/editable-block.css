@@ -38,6 +38,7 @@
 
 .editable-block__textarea {
   grid-area: 2 / 2 / 3 / 4;
+  font-family: monospace;
   resize: none;
 }
 

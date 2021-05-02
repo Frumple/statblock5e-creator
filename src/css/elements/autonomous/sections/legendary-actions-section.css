@@ -13,11 +13,12 @@
   display: none;
 }
 
-.legendary-actions-edit-ui__textarea-container {
+.legendary-actions-edit-textarea-container {
   margin-right: 5px;
 }
 
-.legendary-actions-edit-ui__textarea {
+.legendary-actions-edit-textarea {
   width: 100%;
+  font-family: monospace;
   resize: none;
 }
