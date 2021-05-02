@@ -14,7 +14,9 @@ export default function toHaveError(section, expectedFieldElement, expectedMessa
   }
 
   const theError = errors[expectedIndex];
-  // TODO: Re-enable checking elements for focus when the fix for the following JSDOM bug is available in Jest: https://github.com/jsdom/jsdom/issues/2472
+
+  // JSDOM 15.2.0 or higher can only focus elements that are added to the document body. It cannot focus on elements in a shadow root.
+  // TODO: Re-enable checking elements for focus when JSDOM allows us to focus on elements in a shadow root.
   // const focusedElement = theError.fieldElement.ownerDocument.activeElement;
 
   const hasMatchingFieldElement = (theError.fieldElement === expectedFieldElement);

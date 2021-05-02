@@ -4,7 +4,8 @@ import toHaveError from './matchers/to-have-error.js';
 import toHaveElementsEnabledOrDisabledBasedOnCheckboxState from './matchers/to-have-elements-enabled-or-disabled-based-on-checkbox-state.js';
 import { toShowPropertyLine, toExportPropertyLineToHtml, toExportPropertyLineToMarkdown, toBeHtmlPropertyBlock } from './matchers/property-line-matchers.js';
 
-// TODO: Remove this matcher when the fix for the following JSDOM bug is available in Jest: https://github.com/jsdom/jsdom/issues/2472
+// JSDOM 15.2.0 or higher can only focus elements that are added to the document body. It cannot focus on elements in a shadow root.
+// TODO: Remove this matcher when JSDOM allows us to focus on elements in a shadow root.
 // eslint-disable-next-line no-unused-vars
 const toHaveFocus = function(element) {
   return {
