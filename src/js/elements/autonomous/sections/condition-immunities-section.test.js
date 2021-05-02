@@ -22,9 +22,7 @@ beforeEach(() => {
   conditionImmunitiesModel.reset();
 
   conditionImmunitiesSection = new ConditionImmunitiesSection();
-  TestCustomElements.initializeSection(conditionImmunitiesSection);
-  conditionImmunitiesSection.connect();
-  conditionImmunitiesSection.editElements.propertyList.connect();
+  document.body.appendChild(conditionImmunitiesSection);
 
   sharedSpecs = new PropertyListSectionSpecs(conditionImmunitiesSection, conditionImmunitiesModel, headingName, open5eJsonKey);
 });

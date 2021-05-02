@@ -22,9 +22,7 @@ beforeEach(() => {
   damageImmunitiesModel.reset();
 
   damageImmunitiesSection = new DamageImmunitiesSection();
-  TestCustomElements.initializeSection(damageImmunitiesSection);
-  damageImmunitiesSection.connect();
-  damageImmunitiesSection.editElements.propertyList.connect();
+  document.body.appendChild(damageImmunitiesSection);
 
   sharedSpecs = new PropertyListSectionSpecs(damageImmunitiesSection, damageImmunitiesModel, headingName, open5eJsonKey);
 });

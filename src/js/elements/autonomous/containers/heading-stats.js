@@ -11,8 +11,8 @@ export default class HeadingStats extends DivisibleContainer {
   constructor() {
     super(HeadingStats.templatePaths);
 
-    this.sections.set('title', document.querySelector('title-section'));
-    this.sections.set('subtitle', document.querySelector('subtitle-section'));
+    this.sections.set('title', this.shadowRoot.querySelector('title-section'));
+    this.sections.set('subtitle', this.shadowRoot.querySelector('subtitle-section'));
   }
 
   edit() {

@@ -20,8 +20,7 @@ beforeEach(() => {
   challengeRatingModel.reset();
 
   challengeRatingSection = new ChallengeRatingSection();
-  TestCustomElements.initializeSection(challengeRatingSection);
-  challengeRatingSection.connect();
+  document.body.appendChild(challengeRatingSection);
 });
 
 it('show section should have default values', () => {

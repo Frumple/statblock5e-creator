@@ -1,19 +1,22 @@
-import CustomBuiltinInputElement from './custom-builtin-input-element.js';
 import { convertToInteger } from '../../helpers/number-helpers.js';
 
-export default class NumberInput extends CustomBuiltinInputElement {
-  static get elementName() { return 'number-input'; }
-  static get mixin() { return NumberInputMixin; }
+export default class NumberInput extends HTMLInputElement {
+  static async define() {
+    const elementName = 'number-input';
+    customElements.define(elementName, this, { extends: 'input' });
+  }
 
   constructor() {
     super();
   }
-}
 
-export let NumberInputMixin = {
-  initializeMixin() {
-    this.addEventListener('input', this.onInput);
-  },
+  connectedCallback() {
+    if (this.isConnected && ! this.isInitialized) {
+      this.addEventListener('input', this.onInput);
+
+      this.initialized = true;
+    }
+  }
 
   onInput() {
     if (this.value) {
@@ -28,7 +31,7 @@ export let NumberInputMixin = {
         this.value = value;
       }
     }
-  },
+  }
 
   validate(errorMessages) {
     if (this.valueAsInt === null) {
@@ -36,17 +39,17 @@ export let NumberInputMixin = {
       const fieldName = prettyName ? prettyName : this.name;
       errorMessages.add(this, `${fieldName} must be a valid number.`);
     }
-  },
+  }
 
   get valueAsInt() {
     return convertToInteger(this.value);
-  },
+  }
 
   get minAsInt() {
     return convertToInteger(this.min);
-  },
+  }
 
   get maxAsInt() {
     return convertToInteger(this.max);
   }
-};
+}

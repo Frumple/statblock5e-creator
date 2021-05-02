@@ -20,8 +20,7 @@ beforeEach(() => {
   abilitiesModel.reset();
 
   abilityScoresSection = new AbilityScoresSection();
-  TestCustomElements.initializeSection(abilityScoresSection);
-  abilityScoresSection.connect();
+  document.body.appendChild(abilityScoresSection);
 });
 
 it('show section should have default values', () => {

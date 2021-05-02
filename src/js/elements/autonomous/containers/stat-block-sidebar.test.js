@@ -13,7 +13,7 @@ beforeAll(async() => {
 
 beforeEach(() => {
   statBlockSidebar = new StatBlockSidebar();
-  statBlockSidebar.connect();
+  document.body.appendChild(statBlockSidebar);
 });
 
 it('should be visible when visible is set to true', () => {

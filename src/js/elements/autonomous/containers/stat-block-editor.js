@@ -1,19 +1,6 @@
 import CustomAutonomousElement from '../custom-autonomous-element.js';
 import * as HtmlExportDocumentFactory from '../../../helpers/html-export-document-factory.js';
 import printHtml from '../../../helpers/print-helpers.js';
-import IsRunningInJsdom from '../../../helpers/is-running-in-jsdom.js';
-
-import StatBlockMenu from './stat-block-menu.js';
-import StatBlockSidebar from './stat-block-sidebar.js';
-import StatBlock from './stat-block.js';
-
-import ResetDialog from '../dialogs/reset-dialog.js';
-
-import ImportJsonDialog from '../dialogs/import-json-dialog.js';
-import ImportSrdDialog from '../dialogs/import-srd-dialog.js';
-import ImportOpen5eDialog from '../dialogs/import-open5e-dialog.js';
-
-import ExportDialog from '../dialogs/export-dialog.js';
 
 import CurrentContext from '../../../models/current-context.js';
 import LocalStorageProxy from '../../../helpers/local-storage-proxy.js';
@@ -31,35 +18,19 @@ export default class StatBlockEditor extends CustomAutonomousElement {
   constructor() {
     super(StatBlockEditor.templatePaths);
 
-    if (IsRunningInJsdom) {
-      this.statBlockMenu = new StatBlockMenu(this);
-      this.statBlockSidebar = new StatBlockSidebar(this);
-      this.statBlock = new StatBlock(this);
+    this.statBlockMenu = this.shadowRoot.getElementById('stat-block-menu');
+    this.statBlockSidebar = this.shadowRoot.getElementById('stat-block-sidebar');
+    this.statBlock = this.shadowRoot.getElementById('stat-block');
 
-      this.resetDialog = new ResetDialog();
+    this.resetDialog = this.shadowRoot.getElementById('reset-dialog');
 
-      this.importJsonDialog = new ImportJsonDialog();
-      this.importSrdDialog = new ImportSrdDialog();
-      this.importOpen5eDialog = new ImportOpen5eDialog();
+    this.importJsonDialog = this.shadowRoot.getElementById('import-json-dialog');
+    this.importSrdDialog = this.shadowRoot.getElementById('import-srd-dialog');
+    this.importOpen5eDialog = this.shadowRoot.getElementById('import-open5e-dialog');
 
-      this.exportJsonDialog = new ExportDialog();
-      this.exportHtmlDialog = new ExportDialog();
-      this.exportMarkdownDialog = new ExportDialog();
-    } else {
-      this.statBlockMenu = document.querySelector('stat-block-menu');
-      this.statBlockSidebar = document.querySelector('stat-block-sidebar');
-      this.statBlock = document.querySelector('stat-block');
-
-      this.resetDialog = this.shadowRoot.getElementById('reset-dialog');
-
-      this.importJsonDialog = this.shadowRoot.getElementById('import-json-dialog');
-      this.importSrdDialog = this.shadowRoot.getElementById('import-srd-dialog');
-      this.importOpen5eDialog = this.shadowRoot.getElementById('import-open5e-dialog');
-
-      this.exportJsonDialog = this.shadowRoot.getElementById('export-json-dialog');
-      this.exportHtmlDialog = this.shadowRoot.getElementById('export-html-dialog');
-      this.exportMarkdownDialog = this.shadowRoot.getElementById('export-markdown-dialog');
-    }
+    this.exportJsonDialog = this.shadowRoot.getElementById('export-json-dialog');
+    this.exportHtmlDialog = this.shadowRoot.getElementById('export-html-dialog');
+    this.exportMarkdownDialog = this.shadowRoot.getElementById('export-markdown-dialog');
   }
 
   connectedCallback() {

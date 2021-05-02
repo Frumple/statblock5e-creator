@@ -1,5 +1,4 @@
 import DragAndDropListItem from './drag-and-drop-list-item.js';
-import CustomBuiltinElementMixins from '../../../helpers/custom-builtin-element-mixins.js';
 import BlockModel from '../../../models/lists/block/block-model.js';
 import LegendaryBlockModel from '../../../models/lists/block/legendary-block-model.js';
 
@@ -26,9 +25,6 @@ export default class EditableBlock extends DragAndDropListItem {
     this.dragImage = this.nameInput;
 
     this.isLegendaryActionBlock = false;
-
-    CustomBuiltinElementMixins.applyToElement(this.nameInput);
-    CustomBuiltinElementMixins.applyToElement(this.textArea);
   }
 
   connectedCallback() {

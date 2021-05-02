@@ -29,8 +29,7 @@ beforeEach(() => {
   legendaryActionsModel.reset();
 
   legendaryActionsSection = new LegendaryActionsSection();
-  TestCustomElements.initializeSection(legendaryActionsSection);
-  legendaryActionsSection.connect();
+  document.body.appendChild(legendaryActionsSection);
 
   sharedSpecs = new BlockListSectionSpecs(legendaryActionsSection, legendaryActionsModel, headingName, open5eJsonKey);
   sharedSpecs.htmlExportPropertyBlockTag = 'LEGENDARY-PROPERTY-BLOCK';

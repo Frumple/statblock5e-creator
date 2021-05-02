@@ -29,8 +29,7 @@ beforeEach(() => {
   skillsModel.reset();
 
   skillsSection = new SkillsSection();
-  TestCustomElements.initializeSection(skillsSection);
-  skillsSection.connect();
+  document.body.appendChild(skillsSection);
 });
 
 it('show section should have default values', () => {

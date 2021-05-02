@@ -1,25 +1,22 @@
-import CustomBuiltinInputElement from './custom-builtin-input-element.js';
 import { escapeHtml } from '../../helpers/string-formatter.js';
 import { parseMarkdown } from '../../parsers/parser.js';
 
-export default class TextInput extends CustomBuiltinInputElement {
-  static get elementName() { return 'text-input'; }
-  static get mixin() { return TextInputMixin; }
+export default class TextInput extends HTMLInputElement {
+  static async define() {
+    const elementName = 'text-input';
+    customElements.define(elementName, this, { extends: 'input' });
+  }
 
   constructor() {
     super();
-  }
-}
 
-export let TextInputMixin = {
-  initializeMixin() {
     this.htmlText = '';
-  },
+  }
 
   get fieldName() {
     const prettyName = this.getAttribute('pretty-name');
     return (prettyName ? prettyName : this.name);
-  },
+  }
 
   validate(errorMessages) {
     if (this.required && this.value === '') {
@@ -27,7 +24,7 @@ export let TextInputMixin = {
     } else if ('parsed' in this.dataset) {
       this.parse(errorMessages);
     }
-  },
+  }
 
   parse(errorMessages) {
     const escapedText = escapeHtml(this.value);
@@ -40,4 +37,4 @@ export let TextInputMixin = {
       this.htmlText = parserResults.outputText;
     }
   }
-};
+}

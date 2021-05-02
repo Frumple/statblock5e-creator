@@ -27,11 +27,9 @@ beforeEach(() => {
   actionsModel.reset();
 
   actionsSection = new ActionsSection();
-  TestCustomElements.initializeSection(actionsSection);
-  actionsSection.connect();
+  document.body.appendChild(actionsSection);
 
   generateAttackDialog = actionsSection.editElements.generateAttackDialog;
-  generateAttackDialog.connect();
 });
 
 describe('when the generate attack dialog is opened', () => {

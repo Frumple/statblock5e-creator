@@ -8,7 +8,7 @@ beforeAll(async() => {
 
 beforeEach(() => {
   errorMessages = new ErrorMessages();
-  errorMessages.connect();
+  document.body.appendChild(errorMessages);
 });
 
 it('should add a single error', () => {
@@ -24,28 +24,28 @@ it('should add a single error', () => {
   expect(errorMessages.errors[0].fieldElement).toBe(fieldElement);
   expect(errorMessages.errors[0].message).toBe(message);
 
-  expect(fieldElement).toHaveClass('section__error-highlight');  
+  expect(fieldElement).toHaveClass('section__error-highlight');
 
   const listItem = errorMessages.list.querySelector('li');
   expect(listItem).toHaveTextContent(message);
 });
 
 it('should add multiple errors', () => {
-  const fieldElements = [ 
-    document.createElement('input'), 
+  const fieldElements = [
     document.createElement('input'),
-    document.createElement('input') 
+    document.createElement('input'),
+    document.createElement('input')
   ];
-  const messages = [ 
-    'Cannot do the thing!', 
+  const messages = [
+    'Cannot do the thing!',
     'Cannot do the other thing!',
-    'Cannot do anything!' 
+    'Cannot do anything!'
   ];
 
   for (let i = 0; i <= 2; i++) {
     errorMessages.add(fieldElements[i], messages[i]);
   }
-  
+
   const listItems = Array.from(errorMessages.list.querySelectorAll('li'));
 
   expect(errorMessages.any).toBe(true);

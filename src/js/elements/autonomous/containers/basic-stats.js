@@ -11,9 +11,9 @@ export default class BasicStats extends DivisibleContainer {
   constructor() {
     super(BasicStats.templatePaths);
 
-    this.sections.set('armorClass', document.querySelector('armor-class-section'));
-    this.sections.set('hitPoints', document.querySelector('hit-points-section'));
-    this.sections.set('speed', document.querySelector('speed-section'));
+    this.sections.set('armorClass', this.shadowRoot.querySelector('armor-class-section'));
+    this.sections.set('hitPoints', this.shadowRoot.querySelector('hit-points-section'));
+    this.sections.set('speed', this.shadowRoot.querySelector('speed-section'));
   }
 
   updateHitPointsView() {

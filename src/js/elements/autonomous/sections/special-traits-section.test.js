@@ -1,5 +1,6 @@
 import SpecialTraitsSection from './special-traits-section.js';
 import GenerateSpellcastingDialog from '../dialogs/generate-spellcasting-dialog.js';
+import SpellCategoryBox from '../spell-category-box.js';
 
 import CurrentContext from '../../../models/current-context.js';
 
@@ -19,6 +20,7 @@ beforeAll(async() => {
   await TestCustomElements.define();
   await SpecialTraitsSection.define();
   await GenerateSpellcastingDialog.define();
+  await SpellCategoryBox.define();
 });
 
 beforeEach(() => {
@@ -26,8 +28,7 @@ beforeEach(() => {
   specialTraitsModel.reset();
 
   specialTraitsSection = new SpecialTraitsSection();
-  TestCustomElements.initializeSection(specialTraitsSection);
-  specialTraitsSection.connect();
+  document.body.appendChild(specialTraitsSection);
 
   sharedSpecs = new BlockListSectionSpecs(specialTraitsSection, specialTraitsModel, null, open5eJsonKey);
 });

@@ -27,8 +27,7 @@ beforeEach(() => {
   savingThrowsModel.reset();
 
   savingThrowsSection = new SavingThrowsSection();
-  TestCustomElements.initializeSection(savingThrowsSection);
-  savingThrowsSection.connect();
+  document.body.appendChild(savingThrowsSection);
 });
 
 it('show section should have default values', () => {

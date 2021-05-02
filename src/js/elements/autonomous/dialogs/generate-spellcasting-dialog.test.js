@@ -1,5 +1,6 @@
 import SpecialTraitsSection from '../sections/special-traits-section.js';
 import GenerateSpellcastingDialog from './generate-spellcasting-dialog.js';
+import SpellCategoryBox from '../spell-category-box.js';
 
 import CurrentContext from '../../../models/current-context.js';
 import Spellcasting from '../../../models/spellcasting.js';
@@ -22,6 +23,7 @@ beforeAll(async() => {
   await TestCustomElements.define();
   await SpecialTraitsSection.define();
   await GenerateSpellcastingDialog.define();
+  await SpellCategoryBox.define();
 });
 
 beforeEach(() => {
@@ -30,11 +32,9 @@ beforeEach(() => {
   specialTraitsModel.reset();
 
   specialTraitsSection = new SpecialTraitsSection();
-  TestCustomElements.initializeSection(specialTraitsSection);
-  specialTraitsSection.connect();
+  document.body.appendChild(specialTraitsSection);
 
   generateSpellcastingDialog = specialTraitsSection.editElements.generateSpellcastingDialog;
-  generateSpellcastingDialog.connect();
 });
 
 describe('when the generate spellcasting dialog is opened', () => {

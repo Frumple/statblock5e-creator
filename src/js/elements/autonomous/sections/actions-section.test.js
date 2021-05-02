@@ -31,8 +31,7 @@ beforeEach(() => {
   actionsModel.reset();
 
   actionsSection = new ActionsSection();
-  TestCustomElements.initializeSection(actionsSection);
-  actionsSection.connect();
+  document.body.appendChild(actionsSection);
 
   sharedSpecs = new BlockListSectionSpecs(actionsSection, actionsModel, headingName, open5eJsonKey);
 });

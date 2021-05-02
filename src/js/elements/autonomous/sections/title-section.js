@@ -24,6 +24,8 @@ export default class TitleSection extends Section {
       this.editElements.fullName.addEventListener('input', this.onInputCreatureName.bind(this));
       this.editElements.shortName.addEventListener('input', this.onInputShortName.bind(this));
       this.editElements.properNoun.addEventListener('input', this.onInputProperNoun.bind(this));
+
+      this.isInitialized = true;
     }
   }
 

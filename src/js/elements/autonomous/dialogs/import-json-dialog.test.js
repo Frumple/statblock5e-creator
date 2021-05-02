@@ -3,8 +3,6 @@ import StatBlockMenu from '../containers/stat-block-menu.js';
 
 import ImportJsonDialog from './import-json-dialog.js';
 
-jest.mock('../containers/stat-block.js');
-
 let statBlockEditor;
 let statBlockMenu;
 
@@ -15,20 +13,15 @@ beforeAll(async() => {
   await ImportJsonDialog.define();
 });
 
-
 beforeEach(() => {
   statBlockEditor = new StatBlockEditor();
-  statBlockMenu = statBlockEditor.statBlockMenu;
+  document.body.appendChild(statBlockEditor);
 
-  statBlockEditor.connect();
-  statBlockMenu.connect();
+  statBlockMenu = statBlockEditor.statBlockMenu;
+  statBlockEditor.statBlock = {};
 });
 
 describe('should import JSON', () => {
-  beforeEach(() => {
-    statBlockEditor.importJsonDialog.connect();
-  });
-
   describe('from file', () => {
     it('successfully', async () => {
       let fileInputClickEvent = null;

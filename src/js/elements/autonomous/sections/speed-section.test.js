@@ -21,8 +21,7 @@ beforeEach(() => {
   speedModel.reset();
 
   speedSection = new SpeedSection();
-  TestCustomElements.initializeSection(speedSection);
-  speedSection.connect();
+  document.body.appendChild(speedSection);
 });
 
 it('show section should have default values', () => {

@@ -19,8 +19,7 @@ beforeEach(() => {
   subtitleModel.reset();
 
   subtitleSection = new SubtitleSection();
-  TestCustomElements.initializeSection(subtitleSection);
-  subtitleSection.connect();
+  document.body.appendChild(subtitleSection);
 });
 
 it('show section should have default values', () => {

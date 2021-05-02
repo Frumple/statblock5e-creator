@@ -3,10 +3,6 @@ import StatBlockMenu from '../containers/stat-block-menu.js';
 import StatBlockSidebar from '../containers/stat-block-sidebar.js';
 import StatBlock from '../containers/stat-block.js';
 
-import HeadingStats from '../containers/heading-stats.js';
-import TopStats from '../containers/top-stats.js';
-import BottomStats from '../containers/bottom-stats.js';
-
 import ExportDialog from './export-dialog.js';
 
 import CurrentContext from '../../../models/current-context.js';
@@ -17,9 +13,6 @@ import { ClipboardWrapper, startFileDownload } from '../../../helpers/export-hel
 
 jest.mock('../../../helpers/print-helpers.js');
 jest.mock('../../../helpers/export-helpers.js');
-jest.mock('../containers/heading-stats.js');
-jest.mock('../containers/top-stats.js');
-jest.mock('../containers/bottom-stats.js');
 
 const initialHeightSliderValue = 600;
 
@@ -42,31 +35,6 @@ let statBlock;
 */
 
 beforeAll(async() => {
-  HeadingStats.mockImplementation(() => {
-    return {
-      setEmptyVisibility: () => {},
-      exportToJson: () => { return {}; },
-      exportToHtml: () => { return document.createElement('heading-stats'); },
-      exportToMarkdown: () => { return ''; }
-    };
-  });
-  TopStats.mockImplementation(() => {
-    return {
-      setEmptyVisibility: () => {},
-      exportToJson: () => { return {}; },
-      exportToHtml: () => { return document.createElement('top-stats'); },
-      exportToMarkdown: () => { return ''; }
-    };
-  });
-  BottomStats.mockImplementation(() => {
-    return {
-      setEmptyVisibility: () => {},
-      exportToJson: () => { return {}; },
-      exportToHtml: () => { return document.createElement('bottom-stats'); },
-      exportToMarkdown: () => { return ''; }
-    };
-  });
-
   HtmlExportDocumentFactory.init();
 
   await StatBlockEditor.define();
@@ -81,21 +49,36 @@ beforeEach(() => {
   printHtml.mockClear();
   ClipboardWrapper.mockClear();
   startFileDownload.mockClear();
-  HeadingStats.mockClear();
-  TopStats.mockClear();
-  BottomStats.mockClear();
 
   CurrentContext.layoutSettings.reset();
 
   statBlockEditor = new StatBlockEditor();
+  document.body.appendChild(statBlockEditor);
+
   statBlockMenu = statBlockEditor.statBlockMenu;
   statBlockSidebar = statBlockEditor.statBlockSidebar;
   statBlock = statBlockEditor.statBlock;
 
-  statBlockEditor.connect();
-  statBlockMenu.connect();
-  statBlockSidebar.connect();
-  statBlock.connect();
+  // Mocking a custom element returns an empty HTMLElement for some unknown reason.
+  // The workaround is to inject a fake object and mock the relevant methods within.
+  statBlock.headingStats = {
+    setEmptyVisibility: () => {},
+    exportToJson: () => { return {}; },
+    exportToHtml: () => { return document.createElement('heading-stats'); },
+    exportToMarkdown: () => { return ''; }
+  };
+  statBlock.topStats = {
+    setEmptyVisibility: () => {},
+    exportToJson: () => { return {}; },
+    exportToHtml: () => { return document.createElement('top-stats'); },
+    exportToMarkdown: () => { return ''; }
+  };
+  statBlock.bottomStats = {
+    setEmptyVisibility: () => {},
+    exportToJson: () => { return {}; },
+    exportToHtml: () => { return document.createElement('bottom-stats'); },
+    exportToMarkdown: () => { return ''; }
+  };
 });
 
 describe('should export JSON', () => {
@@ -127,10 +110,6 @@ describe('should export JSON', () => {
   const oneColumnTextMatcher = expect.stringContaining(oneColumnTextSnippet);
   const twoColumnAutoHeightTextMatcher = expect.stringContaining(twoColumnAutoHeightTextSnippet);
   const twoColumnManualHeightTextMatcher = expect.stringContaining(twoColumnManualHeightTextSnippet);
-
-  beforeEach(() => {
-    statBlockEditor.exportJsonDialog.connect();
-  });
 
   describe('to clipboard', () => {
     it('empty sections hidden', () => {
@@ -302,10 +281,6 @@ describe('HTML-based tests', () => {
   });
 
   describe('should export HTML', () => {
-    beforeEach(() => {
-      statBlockEditor.exportHtmlDialog.connect();
-    });
-
     describe('to clipboard', () => {
       it('one-column version', () => {
         statBlockMenu.oneColumnButton.click();
@@ -413,10 +388,6 @@ describe('HTML-based tests', () => {
 describe('should export markdown', () => {
   const oneColumnTextMatcher = expect.stringMatching(/^___\n.*/);
   const twoColumnAutoHeightTextMatcher = expect.stringMatching(/^___\n___\n.*/);
-
-  beforeEach(() => {
-    statBlockEditor.exportMarkdownDialog.connect();
-  });
 
   describe('to clipboard', () => {
     it('one-column version', () => {

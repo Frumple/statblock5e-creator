@@ -20,8 +20,7 @@ beforeEach(() => {
   armorClassModel.reset();
 
   armorClassSection = new ArmorClassSection();
-  TestCustomElements.initializeSection(armorClassSection);
-  armorClassSection.connect();
+  document.body.appendChild(armorClassSection);
 });
 
 it('show section should have default values', () => {

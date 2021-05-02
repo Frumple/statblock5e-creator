@@ -11,10 +11,12 @@ export default class BottomStats extends StatsContainer {
   constructor() {
     super(BottomStats.templatePaths);
 
-    this.sections.set('specialTraits', document.querySelector('special-traits-section'));
-    this.sections.set('actions', document.querySelector('actions-section'));
-    this.sections.set('reactions', document.querySelector('reactions-section'));
-    this.sections.set('legendaryActions', document.querySelector('legendary-actions-section'));
+    this.sections.set('specialTraits', this.shadowRoot.querySelector('special-traits-section'));
+    this.sections.set('actions', this.shadowRoot.querySelector('actions-section'));
+    this.sections.set('reactions', this.shadowRoot.querySelector('reactions-section'));
+    this.sections.set('legendaryActions', this.shadowRoot.querySelector('legendary-actions-section'));
+
+    // console.log(this.sections);
   }
 
   reparseAllSections() {

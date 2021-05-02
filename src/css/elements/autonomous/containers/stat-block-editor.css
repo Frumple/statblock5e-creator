@@ -8,14 +8,15 @@
   grid-template-rows: auto 1fr;
 }
 
-::slotted(stat-block-menu) {
+
+.stat-block-editor__stat-block-menu {
   grid-area: 1 / 1 / 2 / 3;
 }
 
-::slotted(stat-block-sidebar) {
+.stat-block-editor__stat-block-sidebar {
   grid-area: 2 / 1;
 }
 
-::slotted(stat-block) {
+.stat-block-editor__stat-block {
   grid-area: 2 / 2;
 }

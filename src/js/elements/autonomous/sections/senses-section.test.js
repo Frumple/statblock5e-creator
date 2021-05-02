@@ -27,8 +27,7 @@ beforeEach(() => {
   sensesModel.reset();
 
   sensesSection = new SensesSection();
-  TestCustomElements.initializeSection(sensesSection);
-  sensesSection.connect();
+  document.body.appendChild(sensesSection);
 });
 
 it('show section should have default values', () => {

@@ -9,7 +9,7 @@ beforeAll(async() => {
 
 beforeEach(() => {
   statBlockMenu = new StatBlockMenu();
-  statBlockMenu.connect();
+  document.body.appendChild(statBlockMenu);
 });
 
 it('should dispatch an event when the "One Column" button is clicked', () => {

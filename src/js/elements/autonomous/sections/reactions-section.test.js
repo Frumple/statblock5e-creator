@@ -24,8 +24,7 @@ beforeEach(() => {
   reactionsModel.reset();
 
   reactionsSection = new ReactionsSection();
-  TestCustomElements.initializeSection(reactionsSection);
-  reactionsSection.connect();
+  document.body.appendChild(reactionsSection);
 
   sharedSpecs = new BlockListSectionSpecs(reactionsSection, reactionsModel, headingName, open5eJsonKey);
 });

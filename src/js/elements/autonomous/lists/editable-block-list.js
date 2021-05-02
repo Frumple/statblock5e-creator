@@ -37,10 +37,6 @@ export default class EditableBlockList extends DragAndDropList {
       block.convertToLegendaryActionBlock();
     }
 
-    if (isRunningInJsdom) {
-      block.connect();
-    }
-
     this.appendChild(block);
 
     focusAndSelectElement(block.nameInput);
