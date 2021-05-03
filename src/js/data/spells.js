@@ -5611,7 +5611,7 @@ export default [
     description: ''
   },
   {
-    name: 'Sancutary',
+    name: 'Sanctuary',
     source: 'srd',
     level: 1,
     school: 'abjuration',
