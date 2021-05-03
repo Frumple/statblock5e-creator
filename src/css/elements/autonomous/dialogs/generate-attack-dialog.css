@@ -32,6 +32,10 @@
 }
 
 .generate-attack-dialog__finesse-help-tooltip {
+  /* BUG: For some unknown reason, tooltip text in dialogs cannot appear outside of the dialog, even if the stacking context is the root <html> element. */
+  /* Therefore, the finesse help tooltip has been hidden until a solution can be found. */
+  visibility: hidden;
+
   --help-tooltip-icon-color: black;
   --help-tooltip-width: 40em;
   margin-left: 5px;
