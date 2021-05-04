@@ -1,4 +1,8 @@
 import LegendaryActionsSection from './legendary-actions-section.js';
+import LegendaryActionDisplayBlockList from '../lists/legendary-action-display-block-list.js';
+import LegendaryActionDisplayBlock from '../lists/legendary-action-display-block.js';
+import LegendaryActionEditableBlockList from '../lists/legendary-action-editable-block-list.js';
+import LegendaryActionEditableBlock from '../lists/legendary-action-editable-block.js';
 
 import CurrentContext from '../../../models/current-context.js';
 
@@ -21,6 +25,11 @@ let sharedSpecs;
 beforeAll(async() => {
   await TestCustomElements.define();
   await LegendaryActionsSection.define();
+
+  await LegendaryActionDisplayBlockList.define();
+  await LegendaryActionDisplayBlock.define();
+  await LegendaryActionEditableBlockList.define();
+  await LegendaryActionEditableBlock.define();
 });
 
 beforeEach(() => {

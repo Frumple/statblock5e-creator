@@ -22,10 +22,6 @@ export default class LegendaryActionsSection extends BlockListSection {
     if (this.isConnected && ! this.isInitialized) {
       super.connectedCallback();
 
-      // TODO: Refactor legendary action behaviour into subclass instead
-      this.showElements.displayBlockList.isLegendaryActionList = true;
-      this.editElements.editableBlockList.isLegendaryActionList = true;
-
       this.isInitialized = true;
     }
   }

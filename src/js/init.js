@@ -37,6 +37,10 @@ import DisplayBlockList from './elements/autonomous/lists/display-block-list.js'
 import DisplayBlock from './elements/autonomous/lists/display-block.js';
 import EditableBlock from './elements/autonomous/lists/editable-block.js';
 import EditableBlockList from './elements/autonomous/lists/editable-block-list.js';
+import LegendaryActionDisplayBlockList from './elements/autonomous/lists/legendary-action-display-block-list.js';
+import LegendaryActionDisplayBlock from './elements/autonomous/lists/legendary-action-display-block.js';
+import LegendaryActionEditableBlockList from './elements/autonomous/lists/legendary-action-editable-block-list.js';
+import LegendaryActionEditableBlock from './elements/autonomous/lists/legendary-action-editable-block.js';
 import PropertyListItem from './elements/autonomous/lists/property-list-item.js';
 import PropertyList from './elements/autonomous/lists/property-list.js';
 
@@ -138,6 +142,10 @@ async function defineElements() {
     DisplayBlock,
     EditableBlock,
     EditableBlockList,
+    LegendaryActionDisplayBlockList,
+    LegendaryActionDisplayBlock,
+    LegendaryActionEditableBlockList,
+    LegendaryActionEditableBlock,
     PropertyListItem,
     PropertyList,
 

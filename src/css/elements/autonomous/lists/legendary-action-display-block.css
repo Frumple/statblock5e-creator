@@ -1,0 +1,33 @@
+:host {
+  margin-top: 0.3em;
+  margin-bottom: 0.9em;
+}
+
+.legendary-action-display-block {
+  display: block;
+  line-height: 1.5;
+
+  /* No vertical spacing for legendary action blocks. */
+  margin-top: 0;
+  margin-bottom: 0;
+
+  /* Hanging indent for legendary action blocks. */
+  padding-left: 1em;
+  text-indent: -1em;
+}
+
+.legendary-action-display-block__name {
+  margin: 0;
+  display: inline;
+  font-weight: bold;
+
+  /* Non-italic name for legendary action blocks. */
+  font-style: normal;
+}
+
+.legendary-action-display-block__text {
+  display: inline;
+  text-indent: 0;
+  margin: 0;
+  white-space: pre-wrap;
+}
