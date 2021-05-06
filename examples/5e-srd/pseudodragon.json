@@ -217,11 +217,11 @@
     "blocks": [
       {
         "name": "Bite",
-        "text": "*Melee Weapon Attack:* atk[dex] to hit, reach 5 ft., one target. *Hit:* dmg[1d4 + dex] piercing damage."
+        "text": "*Melee Weapon Attack:* ATK[DEX] to hit, reach 5 ft., one target. *Hit:* DMG[1d4 + DEX] piercing damage."
       },
       {
         "name": "Sting",
-        "text": "*Melee Weapon Attack:* atk[dex] to hit, reach 5 ft., one creature. *Hit:* dmg[1d4 + dex] piercing damage, and the target must succeed on a DC 11 Constitution saving throw or become poisoned for 1 hour. If the saving throw fails by 5 or more, the target falls unconscious for the same duration, or until it takes damage or another creature uses an action to shake it awake."
+        "text": "*Melee Weapon Attack:* ATK[DEX] to hit, reach 5 ft., one creature. *Hit:* DMG[1d4 + DEX] piercing damage, and the target must succeed on a DC 11 Constitution saving throw or become poisoned for 1 hour. If the saving throw fails by 5 or more, the target falls unconscious for the same duration, or until it takes damage or another creature uses an action to shake it awake."
       }
     ]
   },

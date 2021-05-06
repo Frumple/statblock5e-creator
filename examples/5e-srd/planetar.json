@@ -212,7 +212,7 @@
       },
       {
         "name": "Innate Spellcasting",
-        "text": "[name]'s spellcasting ability is Charisma (spell save DC sdc[cha]). [name] can innately cast the following spells, requiring no material components:\n\nAt will: *detect evil and good*, *invisibility* (self only)\n3/day each: *blade barrier*, *dispel evil and good*, *flame strike*, *raise dead*\n1/day each: *commune*, *control weather*, *insect plague*"
+        "text": "[name]'s spellcasting ability is Charisma (spell save DC SDC[CHA]). [name] can innately cast the following spells, requiring no material components:\n\nAt will: *detect evil and good*, *invisibility* (self only)\n3/day each: *blade barrier*, *dispel evil and good*, *flame strike*, *raise dead*\n1/day each: *commune*, *control weather*, *insect plague*"
       },
       {
         "name": "Magic Resistance",
@@ -228,11 +228,11 @@
       },
       {
         "name": "Greatsword",
-        "text": "*Melee Weapon Attack:* atk[str] to hit, reach 5 ft., one target. *Hit:* dmg[4d6 + str] slashing damage plus dmg[5d8] radiant damage."
+        "text": "*Melee Weapon Attack:* ATK[STR] to hit, reach 5 ft., one target. *Hit:* DMG[4d6 + STR] slashing damage plus DMG[5d8] radiant damage."
       },
       {
         "name": "Healing Touch (4/Day)",
-        "text": "[name] touches another creature. The target magically regains dmg[6d8 + 3] hit points and is freed from any curse, disease, poison, blindness, or deafness."
+        "text": "[name] touches another creature. The target magically regains DMG[6d8 + 3] hit points and is freed from any curse, disease, poison, blindness, or deafness."
       }
     ]
   },

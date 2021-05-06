@@ -216,7 +216,7 @@
       },
       {
         "name": "Innate Spellcasting",
-        "text": "[name]'s spell casting ability is Charisma (spell save DC sdc[cha]). It can innately cast the following spells, requiring no material components:\n\nAt will: *detect evil and good*, *invisibility* (self only)\n3/day each: *blade barrier*, *dispel evil and good*, *resurrection*\n1/day each: *commune*, *control weather*"
+        "text": "[name]'s spell casting ability is Charisma (spell save DC SDC[CHA]). It can innately cast the following spells, requiring no material components:\n\nAt will: *detect evil and good*, *invisibility* (self only)\n3/day each: *blade barrier*, *dispel evil and good*, *resurrection*\n1/day each: *commune*, *control weather*"
       },
       {
         "name": "Magic Resistance",
@@ -232,11 +232,11 @@
       },
       {
         "name": "Greatsword",
-        "text": "*Melee Weapon Attack:* atk[str] to hit, reach 5 ft., one target. *Hit:* dmg[4d6 + str] slashing damage plus dmg[6d8] radiant damage."
+        "text": "*Melee Weapon Attack:* ATK[STR] to hit, reach 5 ft., one target. *Hit:* DMG[4d6 + STR] slashing damage plus DMG[6d8] radiant damage."
       },
       {
         "name": "Slaying Longbow",
-        "text": "*Ranged Weapon Attack:* atk[dex] to hit, range 150/600 ft., one target. *Hit:* dmg[2d8 + dex] piercing damage plus dmg[6d8] radiant damage. If the target is a creature that has 190 hit points or fewer, it must succeed on a DC 15 Constitution saving throw or die."
+        "text": "*Ranged Weapon Attack:* ATK[DEX] to hit, range 150/600 ft., one target. *Hit:* DMG[2d8 + DEX] piercing damage plus DMG[6d8] radiant damage. If the target is a creature that has 190 hit points or fewer, it must succeed on a DC 15 Constitution saving throw or die."
       },
       {
         "name": "Flying Sword",
@@ -244,7 +244,7 @@
       },
       {
         "name": "Healing Touch (4/Day)",
-        "text": "[name] touches another creature. The target magically regains dmg[8d8 + 4] hit points and is freed from any curse, disease, poison, blindness, or deafness."
+        "text": "[name] touches another creature. The target magically regains DMG[8d8 + 4] hit points and is freed from any curse, disease, poison, blindness, or deafness."
       }
     ]
   },
@@ -259,7 +259,7 @@
       },
       {
         "name": "Searing Burst (Costs 2 Actions)",
-        "text": "[name] emits magical, divine energy. Each creature of its choice in a 10 -foot radius must make a DC 23 Dexterity saving throw, taking dmg[4d6] fire damage plus dmg[4d6] radiant damage on a failed save, or half as much damage on a successful one."
+        "text": "[name] emits magical, divine energy. Each creature of its choice in a 10 -foot radius must make a DC 23 Dexterity saving throw, taking DMG[4d6] fire damage plus DMG[4d6] radiant damage on a failed save, or half as much damage on a successful one."
       },
       {
         "name": "Blinding Gaze (Costs 3 Actions)",

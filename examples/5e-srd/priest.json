@@ -197,11 +197,11 @@
     "blocks": [
       {
         "name": "Divine Eminence",
-        "text": "As a bonus action, [name] can expend a spell slot to cause its melee weapon attacks to magically deal an extra dmg[3d6] radiant damage to a target on a hit. This benefit lasts until the end of the turn. If [name] expends a spell slot of 2nd level or higher, the extra damage increases by 1d6 for each level above 1st."
+        "text": "As a bonus action, [name] can expend a spell slot to cause its melee weapon attacks to magically deal an extra DMG[3d6] radiant damage to a target on a hit. This benefit lasts until the end of the turn. If [name] expends a spell slot of 2nd level or higher, the extra damage increases by 1d6 for each level above 1st."
       },
       {
         "name": "Spellcasting",
-        "text": "[name] is a 5th-level spellcaster. Its spellcasting ability is Wisdom (spell save DC sdc[wis], atk[wis] to hit with spell attacks). [name] has the following cleric spells prepared:\n\nCantrips (at will): *light*, *sacred flame*, *thaumaturgy*\n1st level (4 slots): *cure wounds*, *guiding bolt*, *sanctuary*\n2nd level (3 slots): *lesser restoration*, *spiritual weapon*\n3rd level (2 slots): *dispel magic*, *spirit guardians*"
+        "text": "[name] is a 5th-level spellcaster. Its spellcasting ability is Wisdom (spell save DC SDC[WIS], ATK[WIS] to hit with spell attacks). [name] has the following cleric spells prepared:\n\nCantrips (at will): *light*, *sacred flame*, *thaumaturgy*\n1st level (4 slots): *cure wounds*, *guiding bolt*, *sanctuary*\n2nd level (3 slots): *lesser restoration*, *spiritual weapon*\n3rd level (2 slots): *dispel magic*, *spirit guardians*"
       }
     ]
   },
@@ -209,7 +209,7 @@
     "blocks": [
       {
         "name": "Mace",
-        "text": "*Melee Weapon Attack:* atk[str] to hit, reach 5 ft., one target. *Hit:* dmg[1d6 + str] bludgeoning damage."
+        "text": "*Melee Weapon Attack:* ATK[STR] to hit, reach 5 ft., one target. *Hit:* DMG[1d6 + STR] bludgeoning damage."
       }
     ]
   },

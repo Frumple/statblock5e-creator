@@ -205,11 +205,11 @@
     "blocks": [
       {
         "name": "Gore",
-        "text": "*Melee Weapon Attack:* atk[str] to hit, reach 5 ft., one target. *Hit:* dmg[2d12 + str] piercing damage."
+        "text": "*Melee Weapon Attack:* ATK[STR] to hit, reach 5 ft., one target. *Hit:* DMG[2d12 + STR] piercing damage."
       },
       {
         "name": "Hooves",
-        "text": "*Melee Weapon Attack:* atk[str] to hit, reach 5 ft., one target. *Hit:* dmg[2d10 + str] bludgeoning damage."
+        "text": "*Melee Weapon Attack:* ATK[STR] to hit, reach 5 ft., one target. *Hit:* DMG[2d10 + STR] bludgeoning damage."
       },
       {
         "name": "Petrifying Breath (Recharge 5-6)",

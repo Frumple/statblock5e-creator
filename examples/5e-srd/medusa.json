@@ -209,15 +209,15 @@
       },
       {
         "name": "Snake Hair",
-        "text": "*Melee Weapon Attack:* atk[dex] to hit, reach 5 ft., one creature. *Hit:* dmg[1d4 + dex] piercing damage plus dmg[4d6] poison damage."
+        "text": "*Melee Weapon Attack:* ATK[DEX] to hit, reach 5 ft., one creature. *Hit:* DMG[1d4 + DEX] piercing damage plus DMG[4d6] poison damage."
       },
       {
         "name": "Shortsword",
-        "text": "*Melee Weapon Attack:* atk[dex] to hit, reach 5 ft., one target. *Hit:* dmg[1d6 + dex] piercing damage."
+        "text": "*Melee Weapon Attack:* ATK[DEX] to hit, reach 5 ft., one target. *Hit:* DMG[1d6 + DEX] piercing damage."
       },
       {
         "name": "Longbow",
-        "text": "*Ranged Weapon Attack:* atk[dex] to hit, range 150/600 ft., one target. *Hit:* dmg[1d8 + dex] piercing damage plus dmg[2d6] poison damage."
+        "text": "*Ranged Weapon Attack:* ATK[DEX] to hit, range 150/600 ft., one target. *Hit:* DMG[1d8 + DEX] piercing damage plus DMG[2d6] poison damage."
       }
     ]
   },

@@ -207,7 +207,7 @@
       },
       {
         "name": "Surprise Attack",
-        "text": "If [name] surprises a creature and hits it with an attack during the first round of combat, the target takes an extra dmg[3d6] damage from the attack."
+        "text": "If [name] surprises a creature and hits it with an attack during the first round of combat, the target takes an extra DMG[3d6] damage from the attack."
       }
     ]
   },
@@ -219,7 +219,7 @@
       },
       {
         "name": "Slam",
-        "text": "*Melee Weapon Attack:* atk[dex] to hit, reach 5 ft., one target. *Hit:* dmg[1d6 + dex] bludgeoning damage."
+        "text": "*Melee Weapon Attack:* ATK[DEX] to hit, reach 5 ft., one target. *Hit:* DMG[1d6 + DEX] bludgeoning damage."
       },
       {
         "name": "Read Thoughts",

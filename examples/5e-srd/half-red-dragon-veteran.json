@@ -207,19 +207,19 @@
       },
       {
         "name": "Longsword",
-        "text": "*Melee Weapon Attack:* atk[str - 1] to hit, reach 5 ft., one target. *Hit:* dmg[1d8 + str] slashing damage, or dmg[1d10 + str] slashing damage if used with two hands."
+        "text": "*Melee Weapon Attack:* ATK[STR - 1] to hit, reach 5 ft., one target. *Hit:* DMG[1d8 + STR] slashing damage, or DMG[1d10 + STR] slashing damage if used with two hands."
       },
       {
         "name": "Shortsword",
-        "text": "*Melee Weapon Attack:* atk[fin - 1] to hit, reach 5 ft., one target. *Hit:* dmg[1d6 + fin] piercing damage."
+        "text": "*Melee Weapon Attack:* ATK[FIN - 1] to hit, reach 5 ft., one target. *Hit:* DMG[1d6 + FIN] piercing damage."
       },
       {
         "name": "Heavy Crossbow",
-        "text": "*Ranged Weapon Attack:* atk[dex - 1] to hit, range 100/400 ft., one target. *Hit:* dmg[1d10 + dex] piercing damage."
+        "text": "*Ranged Weapon Attack:* ATK[DEX - 1] to hit, range 100/400 ft., one target. *Hit:* DMG[1d10 + DEX] piercing damage."
       },
       {
         "name": "Fire Breath (Recharge 5-6)",
-        "text": "[name] exhales fire in a 15-foot cone. Each creature in that area must make a DC 15 Dexterity saving throw, taking dmg[7d6] fire damage on a failed save, or half as much damage on a successful one."
+        "text": "[name] exhales fire in a 15-foot cone. Each creature in that area must make a DC 15 Dexterity saving throw, taking DMG[7d6] fire damage on a failed save, or half as much damage on a successful one."
       }
     ]
   },

@@ -207,11 +207,11 @@
     "blocks": [
       {
         "name": "Bite",
-        "text": "*Melee Weapon Attack:* atk[str] to hit, reach 5 ft., one target. *Hit:* dmg[1d6 + str] piercing damage, and the target is grappled (escape DC 11). Until this grapple ends, the target is restrained, and [name] can't bite another target."
+        "text": "*Melee Weapon Attack:* ATK[STR] to hit, reach 5 ft., one target. *Hit:* DMG[1d6 + STR] piercing damage, and the target is grappled (escape DC 11). Until this grapple ends, the target is restrained, and [name] can't bite another target."
       },
       {
         "name": "Swallow",
-        "text": "[name] makes one bite attack against a Small or smaller target it is grappling. If the attack hits, the target is swallowed, and the grapple ends. The swallowed target is blinded and restrained, it has total cover against attacks and other effects outside [name], and it takes dmg[2d4] acid damage at the start of each of [name]'s turns. [name] can have only one target swallowed at a time. If [name] dies, a swallowed creature is no longer restrained by it and can escape from the corpse using 5 ft. of movement, exiting prone."
+        "text": "[name] makes one bite attack against a Small or smaller target it is grappling. If the attack hits, the target is swallowed, and the grapple ends. The swallowed target is blinded and restrained, it has total cover against attacks and other effects outside [name], and it takes DMG[2d4] acid damage at the start of each of [name]'s turns. [name] can have only one target swallowed at a time. If [name] dies, a swallowed creature is no longer restrained by it and can escape from the corpse using 5 ft. of movement, exiting prone."
       }
     ]
   },

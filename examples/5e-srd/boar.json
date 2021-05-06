@@ -195,7 +195,7 @@
     "blocks": [
       {
         "name": "Charge",
-        "text": "If [name] moves at least 20 ft. straight toward a target and then hits it with a tusk attack on the same turn, the target takes an extra dmg[1d6] slashing damage. If the target is a creature, it must succeed on a DC 11 Strength saving throw or be knocked prone."
+        "text": "If [name] moves at least 20 ft. straight toward a target and then hits it with a tusk attack on the same turn, the target takes an extra DMG[1d6] slashing damage. If the target is a creature, it must succeed on a DC 11 Strength saving throw or be knocked prone."
       },
       {
         "name": "Relentless (Recharges after a Short or Long Rest)",
@@ -207,7 +207,7 @@
     "blocks": [
       {
         "name": "Tusk",
-        "text": "*Melee Weapon Attack:* atk[str] to hit, reach 5 ft., one target. *Hit:* dmg[1d6 + str] slashing damage."
+        "text": "*Melee Weapon Attack:* ATK[STR] to hit, reach 5 ft., one target. *Hit:* DMG[1d6 + STR] slashing damage."
       }
     ]
   },

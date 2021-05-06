@@ -202,7 +202,7 @@
       },
       {
         "name": "Innate Spellcasting",
-        "text": "[name]'s spellcasting ability is Charisma (spell save DC sdc[cha]). It can innately cast the following spells, requiring no material components:\n\nAt will: *dancing lights*\n1/day each: *darkness*, *faerie fire*"
+        "text": "[name]'s spellcasting ability is Charisma (spell save DC SDC[CHA]). It can innately cast the following spells, requiring no material components:\n\nAt will: *dancing lights*\n1/day each: *darkness*, *faerie fire*"
       },
       {
         "name": "Sunlight Sensitivity",
@@ -214,11 +214,11 @@
     "blocks": [
       {
         "name": "Shortsword",
-        "text": "*Melee Weapon Attack:* atk[fin] to hit, reach 5 ft., one target. *Hit:* dmg[1d6 + fin] piercing damage."
+        "text": "*Melee Weapon Attack:* ATK[FIN] to hit, reach 5 ft., one target. *Hit:* DMG[1d6 + FIN] piercing damage."
       },
       {
         "name": "Hand Crossbow",
-        "text": "*Ranged Weapon Attack:* atk[dex] to hit, range 30/120 ft., one target. *Hit:* dmg[1d6 + dex] piercing damage, and the target must succeed on a DC 13 Constitution saving throw or be poisoned for 1 hour. If the saving throw fails by 5 or more, the target is also unconscious while poisoned in this way. The target wakes up if it takes damage or if another creature takes an action to shake it awake."
+        "text": "*Ranged Weapon Attack:* ATK[DEX] to hit, range 30/120 ft., one target. *Hit:* DMG[1d6 + DEX] piercing damage, and the target must succeed on a DC 13 Constitution saving throw or be poisoned for 1 hour. If the saving throw fails by 5 or more, the target is also unconscious while poisoned in this way. The target wakes up if it takes damage or if another creature takes an action to shake it awake."
       }
     ]
   },

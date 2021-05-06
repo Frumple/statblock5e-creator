@@ -206,11 +206,11 @@
     "blocks": [
       {
         "name": "Greataxe",
-        "text": "*Melee Weapon Attack:* atk[str] to hit, reach 5 ft., one target. *Hit:* dmg[1d12 + str] slashing damage."
+        "text": "*Melee Weapon Attack:* ATK[STR] to hit, reach 5 ft., one target. *Hit:* DMG[1d12 + STR] slashing damage."
       },
       {
         "name": "Javelin",
-        "text": "*Melee or Ranged Weapon Attack:* atk[str] to hit, reach 5 ft. or range 30/120 ft., one target. *Hit:* dmg[1d6 + str] piercing damage."
+        "text": "*Melee or Ranged Weapon Attack:* ATK[STR] to hit, reach 5 ft. or range 30/120 ft., one target. *Hit:* DMG[1d6 + STR] piercing damage."
       }
     ]
   },

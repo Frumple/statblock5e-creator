@@ -213,11 +213,11 @@
       },
       {
         "name": "Spear",
-        "text": "*Melee or Ranged Weapon Attack:* atk[str] to hit, reach 5 ft. and range 20/60 ft., one target. *Hit:* dmg[2d6 + str] piercing damage, or dmg[2d8 + str] piercing damage if used with two hands to make a melee attack."
+        "text": "*Melee or Ranged Weapon Attack:* ATK[STR] to hit, reach 5 ft. and range 20/60 ft., one target. *Hit:* DMG[2d6 + STR] piercing damage, or DMG[2d8 + STR] piercing damage if used with two hands to make a melee attack."
       },
       {
         "name": "Shield Bash",
-        "text": "*Melee Weapon Attack:* atk[str] to hit, reach 5 ft., one creature. *Hit:* dmg[2d4 + str] bludgeoning damage. If the target is a Medium or smaller creature, it must succeed on a DC 15 Strength saving throw or be knocked prone."
+        "text": "*Melee Weapon Attack:* ATK[STR] to hit, reach 5 ft., one creature. *Hit:* DMG[2d4 + STR] bludgeoning damage. If the target is a Medium or smaller creature, it must succeed on a DC 15 Strength saving throw or be knocked prone."
       }
     ]
   },

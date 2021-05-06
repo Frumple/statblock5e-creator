@@ -212,19 +212,19 @@
       },
       {
         "name": "Bite",
-        "text": "*Melee Weapon Attack:* atk[str] to hit, reach 15 ft., one target. *Hit:* dmg[3d12 + str] piercing damage."
+        "text": "*Melee Weapon Attack:* ATK[STR] to hit, reach 15 ft., one target. *Hit:* DMG[3d12 + STR] piercing damage."
       },
       {
         "name": "Claw",
-        "text": "*Melee Weapon Attack:* atk[str] to hit, reach 10 ft., one target. *Hit:* dmg[2d8 + str] slashing damage."
+        "text": "*Melee Weapon Attack:* ATK[STR] to hit, reach 10 ft., one target. *Hit:* DMG[2d8 + STR] slashing damage."
       },
       {
         "name": "Tail",
-        "text": "*Melee Weapon Attack:* atk[str] to hit, reach 15 ft., one target. *Hit:* dmg[3d12 + str] bludgeoning damage. If the target is a creature, it must succeed on a DC 20 Strength saving throw or be pushed up to 10 feet away from [name] and knocked prone."
+        "text": "*Melee Weapon Attack:* ATK[STR] to hit, reach 15 ft., one target. *Hit:* DMG[3d12 + STR] bludgeoning damage. If the target is a creature, it must succeed on a DC 20 Strength saving throw or be pushed up to 10 feet away from [name] and knocked prone."
       },
       {
         "name": "Steam Breath (Recharge 5-6)",
-        "text": "[name] exhales scalding steam in a 60-foot cone. Each creature in that area must make a DC 18 Constitution saving throw, taking dmg[15d6] fire damage on a failed save, or half as much damage on a successful one. Being underwater doesn't grant resistance against this damage."
+        "text": "[name] exhales scalding steam in a 60-foot cone. Each creature in that area must make a DC 18 Constitution saving throw, taking DMG[15d6] fire damage on a failed save, or half as much damage on a successful one. Being underwater doesn't grant resistance against this damage."
       }
     ]
   },

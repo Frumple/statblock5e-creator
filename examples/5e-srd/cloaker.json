@@ -218,11 +218,11 @@
       },
       {
         "name": "Bite",
-        "text": "*Melee Weapon Attack:* atk[str] to hit, reach 5 ft., one creature. *Hit:* dmg[2d6 + str] piercing damage, and if the target is Large or smaller, [name] attaches to it. If [name] has advantage against the target, [name] attaches to the target's head, and the target is blinded and unable to breathe while [name] is attached. While attached, [name] can make this attack only against the target and has advantage on the attack roll. [name] can detach itself by spending 5 feet of its movement. A creature, including the target, can take its action to detach [name] by succeeding on a DC 16 Strength check."
+        "text": "*Melee Weapon Attack:* ATK[STR] to hit, reach 5 ft., one creature. *Hit:* DMG[2d6 + STR] piercing damage, and if the target is Large or smaller, [name] attaches to it. If [name] has advantage against the target, [name] attaches to the target's head, and the target is blinded and unable to breathe while [name] is attached. While attached, [name] can make this attack only against the target and has advantage on the attack roll. [name] can detach itself by spending 5 feet of its movement. A creature, including the target, can take its action to detach [name] by succeeding on a DC 16 Strength check."
       },
       {
         "name": "Tail",
-        "text": "*Melee Weapon Attack:* atk[str] to hit, reach 10 ft., one creature. *Hit:* dmg[1d8 + str] slashing damage."
+        "text": "*Melee Weapon Attack:* ATK[STR] to hit, reach 10 ft., one creature. *Hit:* DMG[1d8 + STR] slashing damage."
       },
       {
         "name": "Moan",

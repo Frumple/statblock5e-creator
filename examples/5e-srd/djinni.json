@@ -204,7 +204,7 @@
       },
       {
         "name": "Innate Spellcasting",
-        "text": "[name]'s innate spellcasting ability is Charisma (spell save DC sdc[cha], atk[cha] to hit with spell attacks). It can innately cast the following spells, requiring no material components:\n\nAt will: *detect evil and good*, *detect magic*, *thunderwave*\n3/day each: *create food and water* (can create wine instead of water), *tongues*, *wind walk*\n1/day each: *conjure elemental* (air elemental only), *creation*, *gaseous form*, *invisibility*, *major image*, *plane shift*"
+        "text": "[name]'s innate spellcasting ability is Charisma (spell save DC SDC[CHA], ATK[CHA] to hit with spell attacks). It can innately cast the following spells, requiring no material components:\n\nAt will: *detect evil and good*, *detect magic*, *thunderwave*\n3/day each: *create food and water* (can create wine instead of water), *tongues*, *wind walk*\n1/day each: *conjure elemental* (air elemental only), *creation*, *gaseous form*, *invisibility*, *major image*, *plane shift*"
       },
       {
         "name": "Variant: Genie Powers",
@@ -220,7 +220,7 @@
       },
       {
         "name": "Scimitar",
-        "text": "*Melee Weapon Attack:* atk[str] to hit, reach 5 ft., one target. *Hit:* dmg[2d6 + str] slashing damage plus dmg[1d6] lightning or thunder damage (djinni's choice)."
+        "text": "*Melee Weapon Attack:* ATK[STR] to hit, reach 5 ft., one target. *Hit:* DMG[2d6 + STR] slashing damage plus DMG[1d6] lightning or thunder damage (djinni's choice)."
       },
       {
         "name": "Create Whirlwind",

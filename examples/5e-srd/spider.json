@@ -211,7 +211,7 @@
     "blocks": [
       {
         "name": "Bite",
-        "text": "*Melee Weapon Attack:* atk[dex] to hit, reach 5 ft., one creature. *Hit:* 1 piercing damage, and the target must succeed on a DC 9 Constitution saving throw or take dmg[1d4] poison damage."
+        "text": "*Melee Weapon Attack:* ATK[DEX] to hit, reach 5 ft., one creature. *Hit:* 1 piercing damage, and the target must succeed on a DC 9 Constitution saving throw or take DMG[1d4] poison damage."
       }
     ]
   },

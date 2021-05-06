@@ -206,7 +206,7 @@
     "blocks": [
       {
         "name": "Death Burst",
-        "text": "When [name] dies, it explodes in a burst of jagged ice. Each creature within 5 ft. of it must make a DC 10 Dexterity saving throw, taking dmg[1d8] slashing damage on a failed save, or half as much damage on a successful one."
+        "text": "When [name] dies, it explodes in a burst of jagged ice. Each creature within 5 ft. of it must make a DC 10 Dexterity saving throw, taking DMG[1d8] slashing damage on a failed save, or half as much damage on a successful one."
       },
       {
         "name": "False Appearance",
@@ -222,11 +222,11 @@
     "blocks": [
       {
         "name": "Claws",
-        "text": "*Melee Weapon Attack:* atk[dex] to hit, reach 5 ft., one creature. *Hit:* dmg[1d4 + dex] slashing damage plus dmg[1d4] cold damage."
+        "text": "*Melee Weapon Attack:* ATK[DEX] to hit, reach 5 ft., one creature. *Hit:* DMG[1d4 + DEX] slashing damage plus DMG[1d4] cold damage."
       },
       {
         "name": "Frost Breath (Recharge 6)",
-        "text": "[name] exhales a 15-foot cone of cold air. Each creature in that area must succeed on a DC 10 Dexterity saving throw, taking dmg[2d4] cold damage on a failed save, or half as much damage on a successful one."
+        "text": "[name] exhales a 15-foot cone of cold air. Each creature in that area must succeed on a DC 10 Dexterity saving throw, taking DMG[2d4] cold damage on a failed save, or half as much damage on a successful one."
       },
       {
         "name": "Variant: Summon Mephits (1/Day)",

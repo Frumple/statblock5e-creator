@@ -207,11 +207,11 @@
     "blocks": [
       {
         "name": "Shortsword",
-        "text": "*Melee Weapon Attack:* atk[fin] to hit, reach 5 ft., one target. *Hit:* dmg[1d6 + fin] piercing damage."
+        "text": "*Melee Weapon Attack:* ATK[FIN] to hit, reach 5 ft., one target. *Hit:* DMG[1d6 + FIN] piercing damage."
       },
       {
         "name": "Shortbow",
-        "text": "*Ranged Weapon Attack:* atk[dex] to hit, range 80/320 ft., one target. *Hit:* dmg[1d6 + dex] piercing damage."
+        "text": "*Ranged Weapon Attack:* ATK[DEX] to hit, range 80/320 ft., one target. *Hit:* DMG[1d6 + DEX] piercing damage."
       }
     ]
   },

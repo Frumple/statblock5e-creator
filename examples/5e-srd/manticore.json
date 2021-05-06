@@ -207,15 +207,15 @@
       },
       {
         "name": "Bite",
-        "text": "*Melee Weapon Attack:* atk[str] to hit, reach 5 ft., one target. *Hit:* dmg[1d8 + str] piercing damage."
+        "text": "*Melee Weapon Attack:* ATK[STR] to hit, reach 5 ft., one target. *Hit:* DMG[1d8 + STR] piercing damage."
       },
       {
         "name": "Claw",
-        "text": "*Melee Weapon Attack:* atk[str] to hit, reach 5 ft., one target. *Hit:* dmg[1d6 + str] slashing damage."
+        "text": "*Melee Weapon Attack:* ATK[STR] to hit, reach 5 ft., one target. *Hit:* DMG[1d6 + STR] slashing damage."
       },
       {
         "name": "Tail Spike",
-        "text": "*Ranged Weapon Attack:* atk[dex] to hit, range 100/200 ft., one target. *Hit:* dmg[1d8 + dex] piercing damage."
+        "text": "*Ranged Weapon Attack:* ATK[DEX] to hit, range 100/200 ft., one target. *Hit:* DMG[1d8 + DEX] piercing damage."
       }
     ]
   },

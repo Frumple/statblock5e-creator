@@ -217,7 +217,7 @@
       },
       {
         "name": "Innate Spellcasting",
-        "text": "[name]'s spellcasting ability is Charisma (spell save DC sdc[cha]). [name] can innately cast the following spells, requiring no material components:\n\nAt will: *detect magic*, *fireball*\n3/day each: *hold monster*, *wall of fire*"
+        "text": "[name]'s spellcasting ability is Charisma (spell save DC SDC[CHA]). [name] can innately cast the following spells, requiring no material components:\n\nAt will: *detect magic*, *fireball*\n3/day each: *hold monster*, *wall of fire*"
       }
     ]
   },
@@ -229,19 +229,19 @@
       },
       {
         "name": "Bite",
-        "text": "*Melee Weapon Attack:* atk[str] to hit, reach 5 ft., one target. *Hit:* dmg[4d6 + str] piercing damage. The target must succeed on a DC 21 Constitution saving throw or become poisoned. While poisoned in this way, the target can't regain hit points, and it takes dmg[6d6] poison damage at the start of each of its turns. The poisoned target can repeat the saving throw at the end of each of its turns, ending the effect on itself on a success."
+        "text": "*Melee Weapon Attack:* ATK[STR] to hit, reach 5 ft., one target. *Hit:* DMG[4d6 + STR] piercing damage. The target must succeed on a DC 21 Constitution saving throw or become poisoned. While poisoned in this way, the target can't regain hit points, and it takes DMG[6d6] poison damage at the start of each of its turns. The poisoned target can repeat the saving throw at the end of each of its turns, ending the effect on itself on a success."
       },
       {
         "name": "Claw",
-        "text": "*Melee Weapon Attack:* atk[str] to hit, reach 10 ft., one target. *Hit:* dmg[2d8 + str] slashing damage."
+        "text": "*Melee Weapon Attack:* ATK[STR] to hit, reach 10 ft., one target. *Hit:* DMG[2d8 + STR] slashing damage."
       },
       {
         "name": "Mace",
-        "text": "*Melee Weapon Attack:* atk[str] to hit, reach 10 ft., one target. *Hit:* dmg[2d6 + str] bludgeoning damage plus dmg[6d6] fire damage."
+        "text": "*Melee Weapon Attack:* ATK[STR] to hit, reach 10 ft., one target. *Hit:* DMG[2d6 + STR] bludgeoning damage plus DMG[6d6] fire damage."
       },
       {
         "name": "Tail",
-        "text": "*Melee Weapon Attack:* atk[str] to hit, reach 10ft., one target. *Hit:* dmg[3d10 + str] bludgeoning damage."
+        "text": "*Melee Weapon Attack:* ATK[STR] to hit, reach 10ft., one target. *Hit:* DMG[3d10 + STR] bludgeoning damage."
       }
     ]
   },

@@ -202,7 +202,7 @@
       },
       {
         "name": "Innate Spellcasting",
-        "text": "[name]'s innate spellcasting ability is Wisdom (spell save DC sdc[wis]). [name] can innately cast the following spells, requiring no material components:\n\nAt will: *dancing lights*\n1/day each: *darkness*, *faerie fire*"
+        "text": "[name]'s innate spellcasting ability is Wisdom (spell save DC SDC[WIS]). [name] can innately cast the following spells, requiring no material components:\n\nAt will: *dancing lights*\n1/day each: *darkness*, *faerie fire*"
       },
       {
         "name": "Spider Climb",
@@ -226,15 +226,15 @@
       },
       {
         "name": "Bite",
-        "text": "*Melee Weapon Attack:* atk[str] to hit, reach 5 ft., one creature. *Hit:* dmg[1d4] piercing damage plus dmg[2d8] poison damage."
+        "text": "*Melee Weapon Attack:* ATK[STR] to hit, reach 5 ft., one creature. *Hit:* DMG[1d4] piercing damage plus DMG[2d8] poison damage."
       },
       {
         "name": "Longsword",
-        "text": "*Melee Weapon Attack:* atk[str] to hit, reach 5 ft., one target. *Hit:* dmg[1d8 + str] slashing damage, or dmg[1d10 + str] slashing damage if used with two hands."
+        "text": "*Melee Weapon Attack:* ATK[STR] to hit, reach 5 ft., one target. *Hit:* DMG[1d8 + STR] slashing damage, or DMG[1d10 + STR] slashing damage if used with two hands."
       },
       {
         "name": "Longbow",
-        "text": "*Ranged Weapon Attack:* atk[dex] to hit, range 150/600 ft., one target. *Hit:* dmg[1d8 + dex] piercing damage plus dmg[1d8] poison damage."
+        "text": "*Ranged Weapon Attack:* ATK[DEX] to hit, range 150/600 ft., one target. *Hit:* DMG[1d8 + DEX] piercing damage plus DMG[1d8] poison damage."
       }
     ]
   },

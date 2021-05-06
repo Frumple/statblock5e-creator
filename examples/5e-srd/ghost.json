@@ -221,7 +221,7 @@
       },
       {
         "name": "Incorporeal Movement",
-        "text": "[name] can move through other creatures and objects as if they were difficult terrain. It takes dmg[1d10] force damage if it ends its turn inside an object."
+        "text": "[name] can move through other creatures and objects as if they were difficult terrain. It takes DMG[1d10] force damage if it ends its turn inside an object."
       }
     ]
   },
@@ -229,7 +229,7 @@
     "blocks": [
       {
         "name": "Withering Touch",
-        "text": "*Melee Weapon Attack:* atk[cha] to hit, reach 5 ft., one target. *Hit:* dmg[4d6 + cha] necrotic damage."
+        "text": "*Melee Weapon Attack:* ATK[CHA] to hit, reach 5 ft., one target. *Hit:* DMG[4d6 + CHA] necrotic damage."
       },
       {
         "name": "Etherealness",

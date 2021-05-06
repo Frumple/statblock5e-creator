@@ -209,11 +209,11 @@
       },
       {
         "name": "Greatclub",
-        "text": "*Melee Weapon Attack:* atk[str] to hit, reach 15 ft., one target. *Hit:* dmg[3d8 + str] bludgeoning damage."
+        "text": "*Melee Weapon Attack:* ATK[STR] to hit, reach 15 ft., one target. *Hit:* DMG[3d8 + STR] bludgeoning damage."
       },
       {
         "name": "Rock",
-        "text": "*Ranged Weapon Attack:* atk[str] to hit, range 60/240 ft., one target. *Hit:* dmg[4d10 + str] bludgeoning damage. If the target is a creature, it must succeed on a DC 17 Strength saving throw or be knocked prone."
+        "text": "*Ranged Weapon Attack:* ATK[STR] to hit, range 60/240 ft., one target. *Hit:* DMG[4d10 + STR] bludgeoning damage. If the target is a creature, it must succeed on a DC 17 Strength saving throw or be knocked prone."
       }
     ]
   },

@@ -209,11 +209,11 @@
     "blocks": [
       {
         "name": "Bite",
-        "text": "*Melee Weapon Attack:* atk[str] to hit, reach 5 ft., one target. *Hit:* dmg[1d10 + str] piercing damage plus dmg[1d6] poison damage."
+        "text": "*Melee Weapon Attack:* ATK[STR] to hit, reach 5 ft., one target. *Hit:* DMG[1d10 + STR] piercing damage plus DMG[1d6] poison damage."
       },
       {
         "name": "Poison Breath (Recharge 5-6)",
-        "text": "[name] exhales poisonous gas in a 15-foot cone. Each creature in that area must make a DC 11 Constitution saving throw, taking dmg[6d6] poison damage on a failed save, or half as much damage on a successful one."
+        "text": "[name] exhales poisonous gas in a 15-foot cone. Each creature in that area must make a DC 11 Constitution saving throw, taking DMG[6d6] poison damage on a failed save, or half as much damage on a successful one."
       }
     ]
   },

@@ -95,13 +95,13 @@ export default class Attack {
 
   generatedTextParserAbilityModifier(isMeleeEnabled, isRangedEnabled) {
     if (this.isFinesse) {
-      return 'fin';
+      return 'FIN';
     }
 
     if (isMeleeEnabled) {
-      return 'str';
+      return 'STR';
     } else if (isRangedEnabled) {
-      return 'dex';
+      return 'DEX';
     }
 
     return '';
@@ -120,7 +120,7 @@ export default class Attack {
   }
 
   generatedTextToHit(parserAbilityModifier) {
-    return `atk[${parserAbilityModifier}] to hit`;
+    return `ATK[${parserAbilityModifier}] to hit`;
   }
 
   generatedTextReachOrRange(isMeleeEnabled, isRangedEnabled) {
@@ -251,9 +251,9 @@ class DamageCategory {
     }
 
     if (parserAbilityModifier) {
-      return `dmg[${this.damageDieQuantity}d${this.damageDieSize} + ${parserAbilityModifier}]${damageType} damage`;
+      return `DMG[${this.damageDieQuantity}d${this.damageDieSize} + ${parserAbilityModifier}]${damageType} damage`;
     }
-    return `dmg[${this.damageDieQuantity}d${this.damageDieSize}]${damageType} damage`;
+    return `DMG[${this.damageDieQuantity}d${this.damageDieSize}]${damageType} damage`;
   }
 
   hasSameValuesWith(otherDamageCategory) {

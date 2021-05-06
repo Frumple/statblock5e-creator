@@ -207,7 +207,7 @@
       },
       {
         "name": "Innate Spellcasting",
-        "text": "[name]'s innate spellcasting ability is Intelligence (spell save DC sdc[int]). It can innately cast the following spells, requiring no material components:\n\nAt will: *nondetection* (self only)\n1/day each: *blindness/deafness*, *blur*, *disguise self*"
+        "text": "[name]'s innate spellcasting ability is Intelligence (spell save DC SDC[INT]). It can innately cast the following spells, requiring no material components:\n\nAt will: *nondetection* (self only)\n1/day each: *blindness/deafness*, *blur*, *disguise self*"
       }
     ]
   },
@@ -215,11 +215,11 @@
     "blocks": [
       {
         "name": "War Pick",
-        "text": "*Melee Weapon Attack:* atk[str] to hit, reach 5 ft., one target. *Hit:* dmg[1d8 + str] piercing damage."
+        "text": "*Melee Weapon Attack:* ATK[STR] to hit, reach 5 ft., one target. *Hit:* DMG[1d8 + STR] piercing damage."
       },
       {
         "name": "Poisoned Dart",
-        "text": "*Ranged Weapon Attack:* atk[dex] to hit, range 30/120 ft., one creature. *Hit:* dmg[1d4 + dex] piercing damage, and the target must succeed on a DC 12 Constitution saving throw or be poisoned for 1 minute. The target can repeat the saving throw at the end of each of its turns, ending the effect on itself on a success."
+        "text": "*Ranged Weapon Attack:* ATK[DEX] to hit, range 30/120 ft., one creature. *Hit:* DMG[1d4 + DEX] piercing damage, and the target must succeed on a DC 12 Constitution saving throw or be poisoned for 1 minute. The target can repeat the saving throw at the end of each of its turns, ending the effect on itself on a success."
       }
     ]
   },

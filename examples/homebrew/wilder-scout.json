@@ -198,7 +198,7 @@
     "blocks": [
       {
         "name": "Spellcasting",
-        "text": "[name] is a 5th-level spellcaster. Its spellcasting ability is Wisdom (spell save DC sdc[wis], atk[wis] to hit with spell attacks). [name] has the following ranger spells prepared:\n\n1st level (4 slots): *ensnaring strike*, *fog cloud*, *jump*, *longstrider*\n2nd level (2 slots): *locate object*, *pass without trace*"
+        "text": "[name] is a 5th-level spellcaster. Its spellcasting ability is Wisdom (spell save DC SDC[WIS], ATK[WIS] to hit with spell attacks). [name] has the following ranger spells prepared:\n\n1st level (4 slots): *ensnaring strike*, *fog cloud*, *jump*, *longstrider*\n2nd level (2 slots): *locate object*, *pass without trace*"
       }
     ]
   },
@@ -210,11 +210,11 @@
       },
       {
         "name": "Shortsword",
-        "text": "*Melee Weapon Attack:* atk[fin] to hit, reach 5 ft., one target. *Hit:* dmg[1d6 + fin] piercing damage."
+        "text": "*Melee Weapon Attack:* ATK[FIN] to hit, reach 5 ft., one target. *Hit:* DMG[1d6 + FIN] piercing damage."
       },
       {
         "name": "Longbow",
-        "text": "*Ranged Weapon Attack:* atk[dex] to hit, range 150/600 ft., one target. *Hit:* dmg[1d8 + dex] piercing damage."
+        "text": "*Ranged Weapon Attack:* ATK[DEX] to hit, range 150/600 ft., one target. *Hit:* DMG[1d8 + DEX] piercing damage."
       }
     ]
   },

@@ -226,11 +226,11 @@
       },
       {
         "name": "Longsword",
-        "text": "*Melee Weapon Attack:* atk[str] to hit, reach 5 ft., one target. *Hit:* dmg[2d8 + str] slashing damage."
+        "text": "*Melee Weapon Attack:* ATK[STR] to hit, reach 5 ft., one target. *Hit:* DMG[2d8 + STR] slashing damage."
       },
       {
         "name": "Tail",
-        "text": "*Melee Weapon Attack:* atk[str] to hit, reach 10 ft., one creature. *Hit:* dmg[2d10 + str] bludgeoning damage. If the target is Medium or smaller, it is grappled (escape DC 19). Until this grapple ends, the target is restrained, [name] can automatically hit the target with its tail, and [name] can't make tail attacks against other targets."
+        "text": "*Melee Weapon Attack:* ATK[STR] to hit, reach 10 ft., one creature. *Hit:* DMG[2d10 + STR] bludgeoning damage. If the target is Medium or smaller, it is grappled (escape DC 19). Until this grapple ends, the target is restrained, [name] can automatically hit the target with its tail, and [name] can't make tail attacks against other targets."
       },
       {
         "name": "Teleport",

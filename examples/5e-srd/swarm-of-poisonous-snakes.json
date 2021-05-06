@@ -216,7 +216,7 @@
     "blocks": [
       {
         "name": "Bites",
-        "text": "*Melee Weapon Attack:* atk[str] to hit, reach 0 ft., one creature in [name]'s space. *Hit:* dmg[2d6] piercing damage, or dmg[1d6] piercing damage if [name] has half of its hit points or fewer. The target must make a DC 10 Constitution saving throw, taking dmg[4d6] poison damage on a failed save, or half as much damage on a successful one."
+        "text": "*Melee Weapon Attack:* ATK[STR] to hit, reach 0 ft., one creature in [name]'s space. *Hit:* DMG[2d6] piercing damage, or DMG[1d6] piercing damage if [name] has half of its hit points or fewer. The target must make a DC 10 Constitution saving throw, taking DMG[4d6] poison damage on a failed save, or half as much damage on a successful one."
       }
     ]
   },

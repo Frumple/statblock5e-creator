@@ -210,11 +210,11 @@
     "blocks": [
       {
         "name": "Dagger",
-        "text": "*Melee Weapon Attack:* atk[fin] to hit, reach 5 ft., one target. *Hit:* dmg[1d4 + fin] piercing damage."
+        "text": "*Melee Weapon Attack:* ATK[FIN] to hit, reach 5 ft., one target. *Hit:* DMG[1d4 + FIN] piercing damage."
       },
       {
         "name": "Sling",
-        "text": "*Ranged Weapon Attack:* atk[dex] to hit, range 30/120 ft., one target. *Hit:* dmg[1d4 + dex] bludgeoning damage."
+        "text": "*Ranged Weapon Attack:* ATK[DEX] to hit, range 30/120 ft., one target. *Hit:* DMG[1d4 + DEX] bludgeoning damage."
       }
     ]
   },

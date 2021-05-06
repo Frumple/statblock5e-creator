@@ -217,11 +217,11 @@
     "blocks": [
       {
         "name": "Bite",
-        "text": "*Melee Weapon Attack:* mod[str] to hit, reach 5 ft., one creature. *Hit:* dmg[2d8 + str] piercing damage."
+        "text": "*Melee Weapon Attack:* MOD[STR] to hit, reach 5 ft., one creature. *Hit:* DMG[2d8 + STR] piercing damage."
       },
       {
         "name": "Claws",
-        "text": "*Melee Weapon Attack:* atk[str] to hit, reach 5 ft., one target. *Hit:* dmg[2d6 + str] slashing damage. If the target is a creature other than an undead, it must succeed on a DC 10 Constitution saving throw or be paralyzed for 1 minute. The target can repeat the saving throw at the end of each of its turns, ending the effect on itself on a success."
+        "text": "*Melee Weapon Attack:* ATK[STR] to hit, reach 5 ft., one target. *Hit:* DMG[2d6 + STR] slashing damage. If the target is a creature other than an undead, it must succeed on a DC 10 Constitution saving throw or be paralyzed for 1 minute. The target can repeat the saving throw at the end of each of its turns, ending the effect on itself on a success."
       }
     ]
   },

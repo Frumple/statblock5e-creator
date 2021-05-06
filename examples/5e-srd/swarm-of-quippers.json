@@ -224,7 +224,7 @@
     "blocks": [
       {
         "name": "Bites",
-        "text": "*Melee Weapon Attack:* atk[dex] to hit, reach 0 ft., one creature in [name]'s space. *Hit:* dmg[4d6] piercing damage, or dmg[2d6] piercing damage if [name] has half of its hit points or fewer."
+        "text": "*Melee Weapon Attack:* ATK[DEX] to hit, reach 0 ft., one creature in [name]'s space. *Hit:* DMG[4d6] piercing damage, or DMG[2d6] piercing damage if [name] has half of its hit points or fewer."
       }
     ]
   },

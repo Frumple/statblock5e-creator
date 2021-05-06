@@ -217,7 +217,7 @@
     "blocks": [
       {
         "name": "Claw (Fiend Form Only)",
-        "text": "*Melee Weapon Attack:* atk[dex] to hit, reach 5 ft., one target. *Hit:* dmg[1d6 + dex] slashing damage."
+        "text": "*Melee Weapon Attack:* ATK[DEX] to hit, reach 5 ft., one target. *Hit:* DMG[1d6 + DEX] slashing damage."
       },
       {
         "name": "Charm",
@@ -225,7 +225,7 @@
       },
       {
         "name": "Draining Kiss",
-        "text": "[name] kisses a creature charmed by it or a willing creature. The target must make a DC 15 Constitution saving throw against this magic, taking dmg[5d10 + 5] psychic damage on a failed save, or half as much damage on a successful one. The target's hit point maximum is reduced by an amount equal to the damage taken. This reduction lasts until the target finishes a long rest. The target dies if this effect reduces its hit point maximum to 0."
+        "text": "[name] kisses a creature charmed by it or a willing creature. The target must make a DC 15 Constitution saving throw against this magic, taking DMG[5d10 + 5] psychic damage on a failed save, or half as much damage on a successful one. The target's hit point maximum is reduced by an amount equal to the damage taken. This reduction lasts until the target finishes a long rest. The target dies if this effect reduces its hit point maximum to 0."
       },
       {
         "name": "Etherealness",

@@ -203,7 +203,7 @@
     "blocks": [
       {
         "name": "Talons",
-        "text": "*Melee Weapon Attack:* atk[dex] to hit, reach 5 ft., one target. *Hit:* 1 slashing damage."
+        "text": "*Melee Weapon Attack:* ATK[DEX] to hit, reach 5 ft., one target. *Hit:* 1 slashing damage."
       }
     ]
   },

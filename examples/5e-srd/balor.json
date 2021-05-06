@@ -206,11 +206,11 @@
     "blocks": [
       {
         "name": "Death Throes",
-        "text": "When [name] dies, it explodes, and each creature within 30 feet of it must make a DC 20 Dexterity saving throw, taking dmg[20d6] fire damage on a failed save, or half as much damage on a successful one. The explosion ignites flammable objects in that area that aren't being worn or carried, and it destroys [name]'s weapons."
+        "text": "When [name] dies, it explodes, and each creature within 30 feet of it must make a DC 20 Dexterity saving throw, taking DMG[20d6] fire damage on a failed save, or half as much damage on a successful one. The explosion ignites flammable objects in that area that aren't being worn or carried, and it destroys [name]'s weapons."
       },
       {
         "name": "Fire Aura",
-        "text": "At the start of each of [name]'s turns, each creature within 5 feet of it takes dmg[3d6] fire damage, and flammable objects in the aura that aren't being worn or carried ignite. A creature that touches [name] or hits it with a melee attack while within 5 feet of it takes dmg[3d6] fire damage."
+        "text": "At the start of each of [name]'s turns, each creature within 5 feet of it takes DMG[3d6] fire damage, and flammable objects in the aura that aren't being worn or carried ignite. A creature that touches [name] or hits it with a melee attack while within 5 feet of it takes DMG[3d6] fire damage."
       },
       {
         "name": "Magic Resistance",
@@ -230,11 +230,11 @@
       },
       {
         "name": "Longsword",
-        "text": "*Melee Weapon Attack:* atk[str] to hit, reach 10 ft., one target. *Hit:* dmg[3d8 + str] slashing damage plus dmg[3d8] lightning damage. If [name] scores a critical hit, it rolls damage dice three times, instead of twice."
+        "text": "*Melee Weapon Attack:* ATK[STR] to hit, reach 10 ft., one target. *Hit:* DMG[3d8 + STR] slashing damage plus DMG[3d8] lightning damage. If [name] scores a critical hit, it rolls damage dice three times, instead of twice."
       },
       {
         "name": "Whip",
-        "text": "*Melee Weapon Attack:* atk[fin] to hit, reach 30 ft., one target. *Hit:* dmg[2d6 + fin] slashing damage plus dmg[3d6] fire damage, and the target must succeed on a DC 20 Strength saving throw or be pulled up to 25 feet toward [name]."
+        "text": "*Melee Weapon Attack:* ATK[FIN] to hit, reach 30 ft., one target. *Hit:* DMG[2d6 + FIN] slashing damage plus DMG[3d6] fire damage, and the target must succeed on a DC 20 Strength saving throw or be pulled up to 25 feet toward [name]."
       },
       {
         "name": "Teleport",

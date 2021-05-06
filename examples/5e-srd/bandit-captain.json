@@ -204,11 +204,11 @@
       },
       {
         "name": "Scimitar",
-        "text": "*Melee Weapon Attack:* atk[fin] to hit, reach 5 ft., one target. *Hit:* dmg[1d6 + fin] slashing damage."
+        "text": "*Melee Weapon Attack:* ATK[FIN] to hit, reach 5 ft., one target. *Hit:* DMG[1d6 + FIN] slashing damage."
       },
       {
         "name": "Dagger",
-        "text": "*Melee or Ranged Weapon Attack:* atk[fin] to hit, reach 5 ft. or range 20/60 ft., one target. *Hit:* dmg[1d4 + fin] piercing damage."
+        "text": "*Melee or Ranged Weapon Attack:* ATK[FIN] to hit, reach 5 ft. or range 20/60 ft., one target. *Hit:* DMG[1d4 + FIN] piercing damage."
       }
     ]
   },

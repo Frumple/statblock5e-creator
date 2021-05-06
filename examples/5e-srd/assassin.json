@@ -207,7 +207,7 @@
       },
       {
         "name": "Sneak Attack (1/Turn)",
-        "text": "[name] deals an extra dmg[4d6] damage when it hits a target with a weapon attack and has advantage on the attack roll, or when the target is within 5 ft. of an ally of [name] that isn't incapacitated and [name] doesn't have disadvantage on the attack roll."
+        "text": "[name] deals an extra DMG[4d6] damage when it hits a target with a weapon attack and has advantage on the attack roll, or when the target is within 5 ft. of an ally of [name] that isn't incapacitated and [name] doesn't have disadvantage on the attack roll."
       }
     ]
   },
@@ -219,11 +219,11 @@
       },
       {
         "name": "Shortsword",
-        "text": "*Melee Weapon Attack:* atk[fin] to hit, reach 5 ft., one target. *Hit:* dmg[1d6 + fin] piercing damage, and the target must make a DC 15 Constitution saving throw, taking dmg[7d6] poison damage on a failed save, or half as much damage on a successful one."
+        "text": "*Melee Weapon Attack:* ATK[FIN] to hit, reach 5 ft., one target. *Hit:* DMG[1d6 + FIN] piercing damage, and the target must make a DC 15 Constitution saving throw, taking DMG[7d6] poison damage on a failed save, or half as much damage on a successful one."
       },
       {
         "name": "Light Crossbow",
-        "text": "*Ranged Weapon Attack:* atk[dex] to hit, range 80/320 ft., one target. *Hit:* dmg[1d8 + dex] piercing damage, and the target must make a DC 15 Constitution saving throw, taking dmg[7d6] poison damage on a failed save, or half as much damage on a successful one."
+        "text": "*Ranged Weapon Attack:* ATK[DEX] to hit, range 80/320 ft., one target. *Hit:* DMG[1d8 + DEX] piercing damage, and the target must make a DC 15 Constitution saving throw, taking DMG[7d6] poison damage on a failed save, or half as much damage on a successful one."
       }
     ]
   },

@@ -212,15 +212,15 @@
       },
       {
         "name": "Bite",
-        "text": "*Melee Weapon Attack:* atk[str] to hit, reach 10 ft., one target. *Hit:* dmg[2d10 + str] piercing damage plus dmg[1d8] acid damage."
+        "text": "*Melee Weapon Attack:* ATK[STR] to hit, reach 10 ft., one target. *Hit:* DMG[2d10 + STR] piercing damage plus DMG[1d8] acid damage."
       },
       {
         "name": "Claw",
-        "text": "*Melee Weapon Attack:* atk[str] to hit, reach 5 ft., one target. *Hit:* dmg[2d6 + str] slashing damage."
+        "text": "*Melee Weapon Attack:* ATK[STR] to hit, reach 5 ft., one target. *Hit:* DMG[2d6 + STR] slashing damage."
       },
       {
         "name": "Acid Breath (Recharge 5-6)",
-        "text": "[name] exhales acid in a 30-foot line that is 5 feet wide. Each creature in that line must make a DC 14 Dexterity saving throw, taking dmg[11d8] acid damage on a failed save, or half as much damage on a successful one."
+        "text": "[name] exhales acid in a 30-foot line that is 5 feet wide. Each creature in that line must make a DC 14 Dexterity saving throw, taking DMG[11d8] acid damage on a failed save, or half as much damage on a successful one."
       }
     ]
   },

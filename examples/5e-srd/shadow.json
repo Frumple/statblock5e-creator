@@ -232,7 +232,7 @@
     "blocks": [
       {
         "name": "Strength Drain",
-        "text": "*Melee Weapon Attack:* atk[dex] to hit, reach 5 ft., one creature. *Hit:* dmg[2d6 + dex] necrotic damage, and the target's Strength score is reduced by 1d4. The target dies if this reduces its Strength to 0. Otherwise, the reduction lasts until the target finishes a short or long rest.\n  If a non-evil humanoid dies from this attack, a new shadow rises from the corpse 1d4 hours later."
+        "text": "*Melee Weapon Attack:* ATK[DEX] to hit, reach 5 ft., one creature. *Hit:* DMG[2d6 + DEX] necrotic damage, and the target's Strength score is reduced by 1d4. The target dies if this reduces its Strength to 0. Otherwise, the reduction lasts until the target finishes a short or long rest.\n  If a non-evil humanoid dies from this attack, a new shadow rises from the corpse 1d4 hours later."
       }
     ]
   },

@@ -225,11 +225,11 @@
       },
       {
         "name": "Beard",
-        "text": "*Melee Weapon Attack:* atk[dex + 1] to hit, reach 5 ft., one creature. *Hit:* dmg[1d8 + dex] piercing damage, and the target must succeed on a DC 12 Constitution saving throw or be poisoned for 1 minute. While poisoned in this way, the target can't regain hit points. The target can repeat the saving throw at the end of each of its turns, ending the effect on itself on a success."
+        "text": "*Melee Weapon Attack:* ATK[DEX + 1] to hit, reach 5 ft., one creature. *Hit:* DMG[1d8 + DEX] piercing damage, and the target must succeed on a DC 12 Constitution saving throw or be poisoned for 1 minute. While poisoned in this way, the target can't regain hit points. The target can repeat the saving throw at the end of each of its turns, ending the effect on itself on a success."
       },
       {
         "name": "Glaive",
-        "text": "*Melee Weapon Attack:* atk[str] to hit, reach 10 ft., one target. *Hit:* dmg[1d10 + str] slashing damage. If the target is a creature other than an undead or a construct, it must succeed on a DC 12 Constitution saving throw or lose dmg[1d10] hit points at the start of each of its turns due to an infernal wound. Each time [name] hits the wounded target with this attack, the damage dealt by the wound increases by dmg[1d10]. Any creature can take an action to stanch the wound with a successful DC 12 Wisdom (Medicine) check. The wound also closes if the target receives magical healing."
+        "text": "*Melee Weapon Attack:* ATK[STR] to hit, reach 10 ft., one target. *Hit:* DMG[1d10 + STR] slashing damage. If the target is a creature other than an undead or a construct, it must succeed on a DC 12 Constitution saving throw or lose DMG[1d10] hit points at the start of each of its turns due to an infernal wound. Each time [name] hits the wounded target with this attack, the damage dealt by the wound increases by DMG[1d10]. Any creature can take an action to stanch the wound with a successful DC 12 Wisdom (Medicine) check. The wound also closes if the target receives magical healing."
       }
     ]
   },

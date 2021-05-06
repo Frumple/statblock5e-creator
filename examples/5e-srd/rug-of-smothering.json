@@ -222,7 +222,7 @@
     "blocks": [
       {
         "name": "Smother",
-        "text": "*Melee Weapon Attack:* atk[str] to hit, reach 5 ft., one Medium or smaller creature. *Hit:* The creature is grappled (escape DC 13). Until this grapple ends, the target is restrained, blinded, and at risk of suffocating, and [name] can't smother another target. In addition, at the start of each of the target's turns, the target takes dmg[2d6 + str] bludgeoning damage."
+        "text": "*Melee Weapon Attack:* ATK[STR] to hit, reach 5 ft., one Medium or smaller creature. *Hit:* The creature is grappled (escape DC 13). Until this grapple ends, the target is restrained, blinded, and at risk of suffocating, and [name] can't smother another target. In addition, at the start of each of the target's turns, the target takes DMG[2d6 + STR] bludgeoning damage."
       }
     ]
   },

@@ -221,15 +221,15 @@
       },
       {
         "name": "Fork",
-        "text": "*Melee Weapon Attack:* atk[str] to hit, reach 10 ft., one target. *Hit:* dmg[2d8 + str] piercing damage."
+        "text": "*Melee Weapon Attack:* ATK[STR] to hit, reach 10 ft., one target. *Hit:* DMG[2d8 + STR] piercing damage."
       },
       {
         "name": "Tail",
-        "text": "*Melee Weapon Attack:* atk[str] to hit, reach 10 ft., one target. *Hit:* dmg[1d8 + str] piercing damage. If the target is a creature other than an undead or a construct, it must succeed on a DC 17 Constitution saving throw or lose dmg[3d6] hit points at the start of each of its turns due to an infernal wound. Each time [name] hits the wounded target with this attack, the damage dealt by the wound increases by dmg[3d6]. Any creature can take an action to stanch the wound with a successful DC 12 Wisdom (Medicine) check. The wound also closes if the target receives magical healing."
+        "text": "*Melee Weapon Attack:* ATK[STR] to hit, reach 10 ft., one target. *Hit:* DMG[1d8 + STR] piercing damage. If the target is a creature other than an undead or a construct, it must succeed on a DC 17 Constitution saving throw or lose DMG[3d6] hit points at the start of each of its turns due to an infernal wound. Each time [name] hits the wounded target with this attack, the damage dealt by the wound increases by DMG[3d6]. Any creature can take an action to stanch the wound with a successful DC 12 Wisdom (Medicine) check. The wound also closes if the target receives magical healing."
       },
       {
         "name": "Hurl Flame",
-        "text": "*Ranged Spell Attack:* atk[dex] to hit, range 150 ft., one target. *Hit:* dmg[4d6] fire damage. If the target is a flammable object that isn't being worn or carried, it also catches fire."
+        "text": "*Ranged Spell Attack:* ATK[DEX] to hit, range 150 ft., one target. *Hit:* DMG[4d6] fire damage. If the target is a flammable object that isn't being worn or carried, it also catches fire."
       }
     ]
   },

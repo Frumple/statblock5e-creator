@@ -205,7 +205,7 @@
     "blocks": [
       {
         "name": "Barbed Hide",
-        "text": "At the start of each of its turns, the [fullname] deals dmg[1d10] piercing damage to any creature grappling it."
+        "text": "At the start of each of its turns, the [fullname] deals DMG[1d10] piercing damage to any creature grappling it."
       },
       {
         "name": "Devil's Sight",
@@ -225,15 +225,15 @@
       },
       {
         "name": "Claw",
-        "text": "*Melee Weapon Attack:* atk[str] to hit, reach 5 ft., one target. *Hit:* dmg[1d6 + str] piercing damage."
+        "text": "*Melee Weapon Attack:* ATK[STR] to hit, reach 5 ft., one target. *Hit:* DMG[1d6 + STR] piercing damage."
       },
       {
         "name": "Tail",
-        "text": "*Melee Weapon Attack:* atk[str] to hit, reach 5 ft., one target. *Hit:* dmg[2d6 + str] piercing damage."
+        "text": "*Melee Weapon Attack:* ATK[STR] to hit, reach 5 ft., one target. *Hit:* DMG[2d6 + STR] piercing damage."
       },
       {
         "name": "Hurl Flame",
-        "text": "*Ranged Spell Attack:* atk[dex - 1] to hit, range 150 ft., one target. *Hit:* dmg[3d6] fire damage. If the target is a flammable object that isn't being worn or carried, it also catches fire."
+        "text": "*Ranged Spell Attack:* ATK[DEX - 1] to hit, range 150 ft., one target. *Hit:* DMG[3d6] fire damage. If the target is a flammable object that isn't being worn or carried, it also catches fire."
       }
     ]
   },

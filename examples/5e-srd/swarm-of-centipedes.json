@@ -216,7 +216,7 @@
     "blocks": [
       {
         "name": "Bites",
-        "text": "*Melee Weapon Attack:* atk[dex] to hit, reach 0 ft., one target in [name]'s space. *Hit:* dmg[4d4] piercing damage, or dmg[2d4] piercing damage if [name] has half of its hit points or fewer.\n  A creature reduced to 0 hit points by a swarm of centipedes is stable but poisoned for 1 hour, even after regaining hit points, and paralyzed while poisoned in this way."
+        "text": "*Melee Weapon Attack:* ATK[DEX] to hit, reach 0 ft., one target in [name]'s space. *Hit:* DMG[4d4] piercing damage, or DMG[2d4] piercing damage if [name] has half of its hit points or fewer.\n  A creature reduced to 0 hit points by a swarm of centipedes is stable but poisoned for 1 hour, even after regaining hit points, and paralyzed while poisoned in this way."
       }
     ]
   },

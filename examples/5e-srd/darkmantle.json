@@ -207,7 +207,7 @@
     "blocks": [
       {
         "name": "Crush",
-        "text": "*Melee Weapon Attack:* atk[str] to hit, reach 5 ft., one creature. *Hit:* dmg[1d6 + str] bludgeoning damage, and [name] attaches to the target. If the target is Medium or smaller and [name] has advantage on the attack roll, it attaches by engulfing the target's head, and the target is also blinded and unable to breathe while [name] is attached in this way.\n  While attached to the target, [name] can attack no other creature except the target but has advantage on its attack rolls. [name]'s speed also becomes 0, it can't benefit from any bonus to its speed, and it moves with the target.\n  A creature can detach [name] by making a successful DC 13 Strength check as an action. On its turn, [name] can detach itself from the target by using 5 feet of movement."
+        "text": "*Melee Weapon Attack:* ATK[STR] to hit, reach 5 ft., one creature. *Hit:* DMG[1d6 + STR] bludgeoning damage, and [name] attaches to the target. If the target is Medium or smaller and [name] has advantage on the attack roll, it attaches by engulfing the target's head, and the target is also blinded and unable to breathe while [name] is attached in this way.\n  While attached to the target, [name] can attack no other creature except the target but has advantage on its attack rolls. [name]'s speed also becomes 0, it can't benefit from any bonus to its speed, and it moves with the target.\n  A creature can detach [name] by making a successful DC 13 Strength check as an action. On its turn, [name] can detach itself from the target by using 5 feet of movement."
       },
       {
         "name": "Darkness Aura (1/day)",

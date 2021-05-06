@@ -223,7 +223,7 @@
     "blocks": [
       {
         "name": "Claw (Bite in Beast Form)",
-        "text": "*Melee Weapon Attack:* +4 to hit, reach 5 ft., one target. *Hit:* dmg[1d4 + 3] piercing damage, and the target must succeed on a DC 10 Constitution saving throw or take dmg[2d4] poison damage and become poisoned for 1 minute. The target can repeat the saving throw at the end of each of its turns, ending the effect on itself on a success."
+        "text": "*Melee Weapon Attack:* +4 to hit, reach 5 ft., one target. *Hit:* DMG[1d4 + 3] piercing damage, and the target must succeed on a DC 10 Constitution saving throw or take DMG[2d4] poison damage and become poisoned for 1 minute. The target can repeat the saving throw at the end of each of its turns, ending the effect on itself on a success."
       },
       {
         "name": "Scare (1/day)",

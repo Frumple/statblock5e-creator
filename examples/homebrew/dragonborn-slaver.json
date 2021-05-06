@@ -202,7 +202,7 @@
       },
       {
         "name": "Breath Weapon",
-        "text": "[name] exhales a breath in a 15 ft. cone, or a 6 ft. by 30 ft. line, that deals damage corresponding to [name]'s draconic ancestry. Each creature within the cone must make a DC 13 Dexterity or Constitution saving throw, taking dmg[2d6] damage on a failed save, or half as much damage on a successful one."
+        "text": "[name] exhales a breath in a 15 ft. cone, or a 6 ft. by 30 ft. line, that deals damage corresponding to [name]'s draconic ancestry. Each creature within the cone must make a DC 13 Dexterity or Constitution saving throw, taking DMG[2d6] damage on a failed save, or half as much damage on a successful one."
       }
     ]
   },
@@ -214,7 +214,7 @@
       },
       {
         "name": "Whip",
-        "text": "*Melee Weapon Attack:* atk[fin] to hit, reach 10 ft., one target. *Hit:* dmg[1d4 + fin] slashing damage."
+        "text": "*Melee Weapon Attack:* ATK[FIN] to hit, reach 10 ft., one target. *Hit:* DMG[1d4 + FIN] slashing damage."
       },
       {
         "name": "Net",

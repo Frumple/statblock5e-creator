@@ -203,11 +203,11 @@
     "blocks": [
       {
         "name": "Heated Body",
-        "text": "A creature that touches [name] or hits it with a melee attack while within 5 ft. of it takes dmg[2d6] fire damage."
+        "text": "A creature that touches [name] or hits it with a melee attack while within 5 ft. of it takes DMG[2d6] fire damage."
       },
       {
         "name": "Heated Weapons",
-        "text": "Any metal melee weapon [name] wields deals an extra dmg[1d6] fire damage on a hit (included in the attack)."
+        "text": "Any metal melee weapon [name] wields deals an extra DMG[1d6] fire damage on a hit (included in the attack)."
       }
     ]
   },
@@ -219,11 +219,11 @@
       },
       {
         "name": "Spear",
-        "text": "*Melee or Ranged Weapon Attack:* atk[str] to hit, reach 5 ft. or range 20 ft./60 ft., one target. *Hit:* dmg[2d6 + str] piercing damage, or dmg[2d8 + str] piercing damage if used with two hands to make a melee attack, plus dmg[1d6] fire damage."
+        "text": "*Melee or Ranged Weapon Attack:* ATK[STR] to hit, reach 5 ft. or range 20 ft./60 ft., one target. *Hit:* DMG[2d6 + STR] piercing damage, or DMG[2d8 + STR] piercing damage if used with two hands to make a melee attack, plus DMG[1d6] fire damage."
       },
       {
         "name": "Tail",
-        "text": "*Melee Weapon Attack:* atk[str] to hit, reach 10 ft., one target. *Hit:* dmg[2d6 + str] bludgeoning damage plus dmg[2d6] fire damage, and the target is grappled (escape DC 14). Until this grapple ends, the target is restrained, [name] can automatically hit the target with its tail, and [name] can't make tail attacks against other targets."
+        "text": "*Melee Weapon Attack:* ATK[STR] to hit, reach 10 ft., one target. *Hit:* DMG[2d6 + STR] bludgeoning damage plus DMG[2d6] fire damage, and the target is grappled (escape DC 14). Until this grapple ends, the target is restrained, [name] can automatically hit the target with its tail, and [name] can't make tail attacks against other targets."
       }
     ]
   },

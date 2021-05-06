@@ -213,7 +213,7 @@
       },
       {
         "name": "Spellcasting",
-        "text": "[name] is a 9th-level spellcaster. Its spellcasting ability is Intelligence (spell save DC sdc[int], atk[int] to hit with spell attacks). It requires no material components to cast its spells. [name] has the following wizard spells prepared:\n\nCantrips (at will): *mage hand*, *minor illusion*, *prestidigitation*\n1st level (4 slots): *detect magic*, *identify*, *shield*\n2nd level (3 slots): *darkness*, *locate object*, *suggestion*\n3rd level (3 slots): *dispel magic*, *remove curse*, *tongues*\n4th level (3 slots): *banishment*, *greater invisibility*\n5th level (1 slot): *legend lore*"
+        "text": "[name] is a 9th-level spellcaster. Its spellcasting ability is Intelligence (spell save DC SDC[INT], ATK[INT] to hit with spell attacks). It requires no material components to cast its spells. [name] has the following wizard spells prepared:\n\nCantrips (at will): *mage hand*, *minor illusion*, *prestidigitation*\n1st level (4 slots): *detect magic*, *identify*, *shield*\n2nd level (3 slots): *darkness*, *locate object*, *suggestion*\n3rd level (3 slots): *dispel magic*, *remove curse*, *tongues*\n4th level (3 slots): *banishment*, *greater invisibility*\n5th level (1 slot): *legend lore*"
       }
     ]
   },
@@ -225,7 +225,7 @@
       },
       {
         "name": "Claw",
-        "text": "*Melee Weapon Attack:* atk[str] to hit, reach 5 ft., one target. *Hit:* dmg[2d8 + str] slashing damage."
+        "text": "*Melee Weapon Attack:* ATK[STR] to hit, reach 5 ft., one target. *Hit:* DMG[2d8 + STR] slashing damage."
       }
     ]
   },

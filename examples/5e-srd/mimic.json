@@ -219,11 +219,11 @@
     "blocks": [
       {
         "name": "Pseudopod",
-        "text": "*Melee Weapon Attack:* atk[str] to hit, reach 5 ft., one target. *Hit:* dmg[1d8 + str] bludgeoning damage. If [name] is in object form, the target is subjected to its Adhesive trait."
+        "text": "*Melee Weapon Attack:* ATK[STR] to hit, reach 5 ft., one target. *Hit:* DMG[1d8 + STR] bludgeoning damage. If [name] is in object form, the target is subjected to its Adhesive trait."
       },
       {
         "name": "Bite",
-        "text": "*Melee Weapon Attack:* atk[str] to hit, reach 5 ft., one target. *Hit:* dmg[1d8 + str] piercing damage plus dmg[1d8] acid damage."
+        "text": "*Melee Weapon Attack:* ATK[STR] to hit, reach 5 ft., one target. *Hit:* DMG[1d8 + STR] piercing damage plus DMG[1d8] acid damage."
       }
     ]
   },

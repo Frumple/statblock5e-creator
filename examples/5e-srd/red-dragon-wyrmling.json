@@ -202,11 +202,11 @@
     "blocks": [
       {
         "name": "Bite",
-        "text": "*Melee Weapon Attack:* atk[str] to hit, reach 5 ft., one target. *Hit:* dmg[1d10 + str] piercing damage plus dmg[1d6] fire damage."
+        "text": "*Melee Weapon Attack:* ATK[STR] to hit, reach 5 ft., one target. *Hit:* DMG[1d10 + STR] piercing damage plus DMG[1d6] fire damage."
       },
       {
         "name": "Fire Breath (Recharge 5-6)",
-        "text": "[name] exhales fire in a 15-foot cone. Each creature in that area must make a DC l3 Dexterity saving throw, taking dmg[7d6] fire damage on a failed save, or half as much damage on a successful one."
+        "text": "[name] exhales fire in a 15-foot cone. Each creature in that area must make a DC l3 Dexterity saving throw, taking DMG[7d6] fire damage on a failed save, or half as much damage on a successful one."
       }
     ]
   },

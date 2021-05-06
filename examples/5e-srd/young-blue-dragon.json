@@ -207,15 +207,15 @@
       },
       {
         "name": "Bite",
-        "text": "*Melee Weapon Attack:* atk[str] to hit, reach 10 ft., one target. *Hit:* dmg[2d10 + str] piercing damage plus dmg[1d10] lightning damage."
+        "text": "*Melee Weapon Attack:* ATK[STR] to hit, reach 10 ft., one target. *Hit:* DMG[2d10 + STR] piercing damage plus DMG[1d10] lightning damage."
       },
       {
         "name": "Claw",
-        "text": "*Melee Weapon Attack:* atk[str] to hit, reach 5 ft., one target. *Hit:* dmg[2d6 + str] slashing damage."
+        "text": "*Melee Weapon Attack:* ATK[STR] to hit, reach 5 ft., one target. *Hit:* DMG[2d6 + STR] slashing damage."
       },
       {
         "name": "Lightning Breath (Recharge 5-6)",
-        "text": "[name] exhales lightning in an 60-foot line that is 5 feet wide. Each creature in that line must make a DC 16 Dexterity saving throw, taking dmg[10d10] lightning damage on a failed save, or half as much damage on a successful one."
+        "text": "[name] exhales lightning in an 60-foot line that is 5 feet wide. Each creature in that line must make a DC 16 Dexterity saving throw, taking DMG[10d10] lightning damage on a failed save, or half as much damage on a successful one."
       }
     ]
   },

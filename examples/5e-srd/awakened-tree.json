@@ -210,7 +210,7 @@
     "blocks": [
       {
         "name": "Slam",
-        "text": "*Melee Weapon Attack:* atk[str] to hit, reach 10 ft., one target. *Hit:* dmg[3d6 + str] bludgeoning damage."
+        "text": "*Melee Weapon Attack:* ATK[STR] to hit, reach 10 ft., one target. *Hit:* DMG[3d6 + STR] bludgeoning damage."
       }
     ]
   },

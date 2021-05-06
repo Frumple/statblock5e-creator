@@ -216,7 +216,7 @@
     "blocks": [
       {
         "name": "Incorporeal Movement",
-        "text": "[name] can move through other creatures and objects as if they were difficult terrain. It takes dmg[1d10] force damage if it ends its turn inside an object."
+        "text": "[name] can move through other creatures and objects as if they were difficult terrain. It takes DMG[1d10] force damage if it ends its turn inside an object."
       },
       {
         "name": "Sunlight Sensitivity",
@@ -228,7 +228,7 @@
     "blocks": [
       {
         "name": "Life Drain",
-        "text": "*Melee Weapon Attack:* atk[dex] to hit, reach 5 ft., one creature. *Hit:* dmg[4d8 + dex] necrotic damage. The target must succeed on a DC 14 Constitution saving throw or its hit point maximum is reduced by an amount equal to the damage taken. This reduction lasts until the target finishes a long rest. The target dies if this effect reduces its hit point maximum to 0."
+        "text": "*Melee Weapon Attack:* ATK[DEX] to hit, reach 5 ft., one creature. *Hit:* DMG[4d8 + DEX] necrotic damage. The target must succeed on a DC 14 Constitution saving throw or its hit point maximum is reduced by an amount equal to the damage taken. This reduction lasts until the target finishes a long rest. The target dies if this effect reduces its hit point maximum to 0."
       },
       {
         "name": "Create Specter",

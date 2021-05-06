@@ -203,11 +203,11 @@
     "blocks": [
       {
         "name": "Gore",
-        "text": "*Melee Weapon Attack:* atk[str] to hit, reach 10 ft., one target. *Hit:* dmg[4d8 + str] piercing damage."
+        "text": "*Melee Weapon Attack:* ATK[STR] to hit, reach 10 ft., one target. *Hit:* DMG[4d8 + STR] piercing damage."
       },
       {
         "name": "Stomp",
-        "text": "*Melee Weapon Attack:* atk[str] to hit, reach 5 ft., one prone creature. *Hit:* dmg[4d10 + str] bludgeoning damage."
+        "text": "*Melee Weapon Attack:* ATK[STR] to hit, reach 5 ft., one prone creature. *Hit:* DMG[4d10 + STR] bludgeoning damage."
       }
     ]
   },

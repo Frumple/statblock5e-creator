@@ -139,7 +139,7 @@ describe('when the show section is clicked', () => {
     it('should add a single block', () => {
       const block = {
         name: 'Disrupt Life (Costs 3 Actions)',
-        text: 'Each living creature within 20 feet of [name] must make a DC 18 Constitution saving throw against this magic, taking dmg[6d6] necrotic damage on a failed save, or half as much damage on a successful one.',
+        text: 'Each living creature within 20 feet of [name] must make a DC 18 Constitution saving throw against this magic, taking DMG[6d6] necrotic damage on a failed save, or half as much damage on a successful one.',
         markdownText: 'Each living creature within 20 feet of the lich must make a DC 18 Constitution saving throw against this magic, taking 21 (6d6) necrotic damage on a failed save, or half as much damage on a successful one.',
         htmlText: 'Each living creature within 20 feet of the lich must make a DC 18 Constitution saving throw against this magic, taking 21 (6d6) necrotic damage on a failed save, or half as much damage on a successful one.'
       };
@@ -193,7 +193,7 @@ describe('when the show section is clicked', () => {
         },
         {
           name: 'Wing Attack (Costs 2 Actions)',
-          text: '[name] beats its wings. Each creature within 10 feet of the dragon must succeed on a DC 22 Dexterity saving throw or take dmg[2d6 + str] bludgeoning damage and be knocked prone. [name] can then fly up to half its flying speed.',
+          text: '[name] beats its wings. Each creature within 10 feet of the dragon must succeed on a DC 22 Dexterity saving throw or take DMG[2d6 + STR] bludgeoning damage and be knocked prone. [name] can then fly up to half its flying speed.',
           markdownText: 'The dragon beats its wings. Each creature within 10 feet of the dragon must succeed on a DC 22 Dexterity saving throw or take 15 (2d6 + 8) bludgeoning damage and be knocked prone. The dragon can then fly up to half its flying speed.',
           htmlText: 'The dragon beats its wings. Each creature within 10 feet of the dragon must succeed on a DC 22 Dexterity saving throw or take 15 (2d6 + 8) bludgeoning damage and be knocked prone. The dragon can then fly up to half its flying speed.'
         }
@@ -237,7 +237,7 @@ describe('when the show section is clicked', () => {
         },
         {
           name: 'Wing Attack (Costs 2 Actions)',
-          text: '[name] beats its wings. Each creature within 10 feet of the dragon must succeed on a DC 22 Dexterity saving throw or take dmg[2d6 + str] bludgeoning damage and be knocked prone. [name] can then fly up to half its flying speed.',
+          text: '[name] beats its wings. Each creature within 10 feet of the dragon must succeed on a DC 22 Dexterity saving throw or take DMG[2d6 + STR] bludgeoning damage and be knocked prone. [name] can then fly up to half its flying speed.',
           markdownText: 'The dragon beats its wings. Each creature within 10 feet of the dragon must succeed on a DC 22 Dexterity saving throw or take 15 (2d6 + 8) bludgeoning damage and be knocked prone. The dragon can then fly up to half its flying speed.',
           htmlText: 'The dragon beats its wings. Each creature within 10 feet of the dragon must succeed on a DC 22 Dexterity saving throw or take 15 (2d6 + 8) bludgeoning damage and be knocked prone. The dragon can then fly up to half its flying speed.'
         }
@@ -252,7 +252,7 @@ describe('when the show section is clicked', () => {
     describe('should reparse the block text', () => {
       const block = {
         name: 'Wing Attack (Costs 2 Actions)',
-        text: '[name] beats its wings. Each creature within 10 feet of [name] must succeed on a DC 22 Dexterity saving throw or take dmg[2d6 + str] bludgeoning damage and be knocked prone. [name] can then fly up to half its flying speed.',
+        text: '[name] beats its wings. Each creature within 10 feet of [name] must succeed on a DC 22 Dexterity saving throw or take DMG[2d6 + STR] bludgeoning damage and be knocked prone. [name] can then fly up to half its flying speed.',
         markdownText: null,
         htmlText: null
       };

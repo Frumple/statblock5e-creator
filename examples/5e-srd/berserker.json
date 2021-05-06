@@ -205,7 +205,7 @@
     "blocks": [
       {
         "name": "Greataxe",
-        "text": "*Melee Weapon Attack:* atk[str] to hit, reach 5 ft., one target. *Hit:* dmg[1d12 + str] slashing damage."
+        "text": "*Melee Weapon Attack:* ATK[STR] to hit, reach 5 ft., one target. *Hit:* DMG[1d12 + STR] slashing damage."
       }
     ]
   },

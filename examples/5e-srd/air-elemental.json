@@ -224,11 +224,11 @@
       },
       {
         "name": "Slam",
-        "text": "*Melee Weapon Attack:* atk[dex] to hit, reach 5 ft., one target. *Hit:* dmg[2d8 + dex] bludgeoning damage."
+        "text": "*Melee Weapon Attack:* ATK[DEX] to hit, reach 5 ft., one target. *Hit:* DMG[2d8 + DEX] bludgeoning damage."
       },
       {
         "name": "Whirlwind (Recharge 4-6)",
-        "text": "Each creature in [name]'s space must make a DC 13 Strength saving throw. On a failure, a target takes dmg[3d8 + str] bludgeoning damage and is flung up 20 feet away from [name] in a random direction and knocked prone. If a thrown target strikes an object, such as a wall or floor, the target takes dmg[1d6] bludgeoning damage for every 10 feet it was thrown. If the target is thrown at another creature, that creature must succeed on a DC 13 Dexterity saving throw or take the same damage and be knocked prone.\n  If the saving throw is successful, the target takes half the bludgeoning damage and isn't flung away or knocked prone."
+        "text": "Each creature in [name]'s space must make a DC 13 Strength saving throw. On a failure, a target takes DMG[3d8 + STR] bludgeoning damage and is flung up 20 feet away from [name] in a random direction and knocked prone. If a thrown target strikes an object, such as a wall or floor, the target takes DMG[1d6] bludgeoning damage for every 10 feet it was thrown. If the target is thrown at another creature, that creature must succeed on a DC 13 Dexterity saving throw or take the same damage and be knocked prone.\n  If the saving throw is successful, the target takes half the bludgeoning damage and isn't flung away or knocked prone."
       }
     ]
   },

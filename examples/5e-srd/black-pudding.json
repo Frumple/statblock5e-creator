@@ -211,7 +211,7 @@
       },
       {
         "name": "Corrosive Form",
-        "text": "A creature that touches [name] or hits it with a melee attack while within 5 feet of it takes dmg[1d8] acid damage. Any nonmagical weapon made of metal or wood that hits [name] corrodes. After dealing damage, the weapon takes a permanent and cumulative -1 penalty to damage rolls. If its penalty drops to -5, the weapon is destroyed. Nonmagical ammunition made of metal or wood that hits [name] is destroyed after dealing damage. [name] can eat through 2-inch-thick, nonmagical wood or metal in 1 round."
+        "text": "A creature that touches [name] or hits it with a melee attack while within 5 feet of it takes DMG[1d8] acid damage. Any nonmagical weapon made of metal or wood that hits [name] corrodes. After dealing damage, the weapon takes a permanent and cumulative -1 penalty to damage rolls. If its penalty drops to -5, the weapon is destroyed. Nonmagical ammunition made of metal or wood that hits [name] is destroyed after dealing damage. [name] can eat through 2-inch-thick, nonmagical wood or metal in 1 round."
       },
       {
         "name": "Spider Climb",
@@ -223,7 +223,7 @@
     "blocks": [
       {
         "name": "Pseudopod",
-        "text": "*Melee Weapon Attack:* atk[str] to hit, reach 5 ft., one target. *Hit:* dmg[1d6 + str] bludgeoning damage plus dmg[4d8] acid damage. In addition, nonmagical armor worn by the target is partly dissolved and takes a permanent and cumulative -1 penalty to the AC it offers. The armor is destroyed if the penalty reduces its AC to 10."
+        "text": "*Melee Weapon Attack:* ATK[STR] to hit, reach 5 ft., one target. *Hit:* DMG[1d6 + STR] bludgeoning damage plus DMG[4d8] acid damage. In addition, nonmagical armor worn by the target is partly dissolved and takes a permanent and cumulative -1 penalty to the AC it offers. The armor is destroyed if the penalty reduces its AC to 10."
       }
     ]
   },

@@ -198,7 +198,7 @@
     "blocks": [
       {
         "name": "Charge",
-        "text": "If [name] moves at least 30 ft. straight toward a target and then hits it with a pike attack on the same turn, the target takes an extra dmg[3d6] piercing damage."
+        "text": "If [name] moves at least 30 ft. straight toward a target and then hits it with a pike attack on the same turn, the target takes an extra DMG[3d6] piercing damage."
       }
     ]
   },
@@ -210,15 +210,15 @@
       },
       {
         "name": "Pike",
-        "text": "*Melee Weapon Attack:* atk[str] to hit, reach 10 ft., one target. *Hit:* dmg[1d10 + str] piercing damage."
+        "text": "*Melee Weapon Attack:* ATK[STR] to hit, reach 10 ft., one target. *Hit:* DMG[1d10 + STR] piercing damage."
       },
       {
         "name": "Hooves",
-        "text": "*Melee Weapon Attack:* atk[str] to hit, reach 5 ft., one target. *Hit:* dmg[2d6 + str] bludgeoning damage."
+        "text": "*Melee Weapon Attack:* ATK[STR] to hit, reach 5 ft., one target. *Hit:* DMG[2d6 + STR] bludgeoning damage."
       },
       {
         "name": "Longbow",
-        "text": "*Ranged Weapon Attack:* atk[dex] to hit, range 150/600 ft., one target. *Hit:* dmg[1d8 + dex] piercing damage."
+        "text": "*Ranged Weapon Attack:* ATK[DEX] to hit, range 150/600 ft., one target. *Hit:* DMG[1d8 + DEX] piercing damage."
       }
     ]
   },

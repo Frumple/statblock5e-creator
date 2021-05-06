@@ -217,11 +217,11 @@
       },
       {
         "name": "Tentacle",
-        "text": "*Melee Weapon Attack:* atk[str] to hit, reach 10 ft., one target. *Hit:* dmg[2d6 + str] bludgeoning damage. If the target is a creature, it must succeed on a DC 14 Constitution saving throw or become diseased. The disease has no effect for 1 minute and can be removed by any magic that cures disease. After 1 minute, the diseased creature's skin becomes translucent and slimy, the creature can't regain hit points unless it is underwater, and the disease can be removed only by heal or another disease-curing spell of 6th level or higher. When the creature is outside a body of water, it takes dmg[1d12] acid damage every 10 minutes unless moisture is applied to the skin before 10 minutes have passed."
+        "text": "*Melee Weapon Attack:* ATK[STR] to hit, reach 10 ft., one target. *Hit:* DMG[2d6 + STR] bludgeoning damage. If the target is a creature, it must succeed on a DC 14 Constitution saving throw or become diseased. The disease has no effect for 1 minute and can be removed by any magic that cures disease. After 1 minute, the diseased creature's skin becomes translucent and slimy, the creature can't regain hit points unless it is underwater, and the disease can be removed only by heal or another disease-curing spell of 6th level or higher. When the creature is outside a body of water, it takes DMG[1d12] acid damage every 10 minutes unless moisture is applied to the skin before 10 minutes have passed."
       },
       {
         "name": "Tail",
-        "text": "*Melee Weapon Attack:* atk[str] to hit, reach 10 ft. one target. *Hit:* dmg[3d6 + str] bludgeoning damage."
+        "text": "*Melee Weapon Attack:* ATK[STR] to hit, reach 10 ft. one target. *Hit:* DMG[3d6 + STR] bludgeoning damage."
       },
       {
         "name": "Enslave (3/day)",
@@ -244,7 +244,7 @@
       },
       {
         "name": "Psychic Drain (Costs 2 Actions)",
-        "text": "One creature charmed by [name] takes dmg[3d6] psychic damage, and [name] regains hit points equal to the damage the creature takes."
+        "text": "One creature charmed by [name] takes DMG[3d6] psychic damage, and [name] regains hit points equal to the damage the creature takes."
       }
     ],
     "description": "[name] can take 3 legendary actions, choosing from the options below. Only one legendary action option can be used at a time and only at the end of another creature's turn. [name] regains spent legendary actions at the start of its turn."

@@ -205,7 +205,7 @@
     "blocks": [
       {
         "name": "Hellish Weapons",
-        "text": "[name]'s weapon attacks are magical and deal an extra dmg[3d8] poison damage on a hit (included in the attacks)."
+        "text": "[name]'s weapon attacks are magical and deal an extra DMG[3d8] poison damage on a hit (included in the attacks)."
       },
       {
         "name": "Magic Resistance",
@@ -221,11 +221,11 @@
       },
       {
         "name": "Longsword",
-        "text": "*Melee Weapon Attack:* atk[str] to hit, reach 5 ft., one target. *Hit:* dmg[1d8 + str] slashing damage, or dmg[1d10 + str] slashing damage if used with two hands, plus dmg[3d8] poison damage."
+        "text": "*Melee Weapon Attack:* ATK[STR] to hit, reach 5 ft., one target. *Hit:* DMG[1d8 + STR] slashing damage, or DMG[1d10 + STR] slashing damage if used with two hands, plus DMG[3d8] poison damage."
       },
       {
         "name": "Longbow",
-        "text": "*Ranged Weapon Attack:* atk[dex] to hit, range 150/600 ft., one target. *Hit:* dmg[1d8 + dex] piercing damage plus dmg[3d8] poison damage, and the target must succeed on a DC 14 Constitution saving throw or be poisoned. The poison lasts until it is removed by the lesser restoration spell or similar magic."
+        "text": "*Ranged Weapon Attack:* ATK[DEX] to hit, range 150/600 ft., one target. *Hit:* DMG[1d8 + DEX] piercing damage plus DMG[3d8] poison damage, and the target must succeed on a DC 14 Constitution saving throw or be poisoned. The poison lasts until it is removed by the lesser restoration spell or similar magic."
       },
       {
         "name": "Variant: Rope of Entanglement",

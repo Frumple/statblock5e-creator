@@ -212,15 +212,15 @@
       },
       {
         "name": "Bite",
-        "text": "*Melee Weapon Attack:* atk[str] to hit, reach 10 ft., one target. *Hit:* dmg[2d10 + str] piercing damage plus dmg[1d8] cold damage."
+        "text": "*Melee Weapon Attack:* ATK[STR] to hit, reach 10 ft., one target. *Hit:* DMG[2d10 + STR] piercing damage plus DMG[1d8] cold damage."
       },
       {
         "name": "Claw",
-        "text": "*Melee Weapon Attack:* atk[str] to hit, reach 5 ft., one target. *Hit:* dmg[2d6 + str] slashing damage."
+        "text": "*Melee Weapon Attack:* ATK[STR] to hit, reach 5 ft., one target. *Hit:* DMG[2d6 + STR] slashing damage."
       },
       {
         "name": "Cold Breath (Recharge 5-6)",
-        "text": "[name] exhales an icy blast in a 30-foot cone. Each creature in that area must make a DC 15 Constitution saving throw, taking dmg[10d8] cold damage on a failed save, or half as much damage on a successful one."
+        "text": "[name] exhales an icy blast in a 30-foot cone. Each creature in that area must make a DC 15 Constitution saving throw, taking DMG[10d8] cold damage on a failed save, or half as much damage on a successful one."
       }
     ]
   },

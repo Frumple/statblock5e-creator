@@ -211,7 +211,7 @@
     "blocks": [
       {
         "name": "Hooves",
-        "text": "*Melee Weapon Attack:* atk[str] to hit, reach 5 ft., one target. *Hit:* dmg[2d8 + str] bludgeoning damage plus dmg[2d6] fire damage."
+        "text": "*Melee Weapon Attack:* ATK[STR] to hit, reach 5 ft., one target. *Hit:* DMG[2d8 + STR] bludgeoning damage plus DMG[2d6] fire damage."
       },
       {
         "name": "Ethereal Stride",

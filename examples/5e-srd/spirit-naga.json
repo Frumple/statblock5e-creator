@@ -207,7 +207,7 @@
       },
       {
         "name": "Spellcasting",
-        "text": "[name] is a 10th-level spellcaster. Its spellcasting ability is Intelligence (spell save DC sdc[int], atk[int] to hit with spell attacks), and it needs only verbal components to cast its spells. It has the following wizard spells prepared:\n\nCantrips (at will): *mage hand*, *minor illusion*, *ray of frost*\n1st level (4 slots): *charm person*, *detect magic*, *sleep*\n2nd level (3 slots): *detect thoughts*, *hold person*\n3rd level (3 slots): *lightning bolt*, *water breathing*\n4th level (3 slots): *blight*, *dimension door*\n5th level (2 slots): *dominate person*"
+        "text": "[name] is a 10th-level spellcaster. Its spellcasting ability is Intelligence (spell save DC SDC[INT], ATK[INT] to hit with spell attacks), and it needs only verbal components to cast its spells. It has the following wizard spells prepared:\n\nCantrips (at will): *mage hand*, *minor illusion*, *ray of frost*\n1st level (4 slots): *charm person*, *detect magic*, *sleep*\n2nd level (3 slots): *detect thoughts*, *hold person*\n3rd level (3 slots): *lightning bolt*, *water breathing*\n4th level (3 slots): *blight*, *dimension door*\n5th level (2 slots): *dominate person*"
       }
     ]
   },
@@ -215,7 +215,7 @@
     "blocks": [
       {
         "name": "Bite",
-        "text": "*Melee Weapon Attack:* atk[str] to hit, reach 10 ft., one creature. *Hit:* dmg[1d6 + str] piercing damage, and the target must make a DC 13 Constitution saving throw, taking dmg[7d8] poison damage on a failed save, or half as much damage on a successful one."
+        "text": "*Melee Weapon Attack:* ATK[STR] to hit, reach 10 ft., one creature. *Hit:* DMG[1d6 + STR] piercing damage, and the target must make a DC 13 Constitution saving throw, taking DMG[7d8] poison damage on a failed save, or half as much damage on a successful one."
       }
     ]
   },

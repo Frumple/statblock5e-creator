@@ -195,7 +195,7 @@
     "blocks": [
       {
         "name": "Charge",
-        "text": "If [name] moves at least 20 ft. straight toward a target and then hits it with a ram attack on the same turn, the target takes an extra dmg[2d6] bludgeoning damage. If the target is a creature, it must succeed on a DC 11 Strength saving throw or be knocked prone."
+        "text": "If [name] moves at least 20 ft. straight toward a target and then hits it with a ram attack on the same turn, the target takes an extra DMG[2d6] bludgeoning damage. If the target is a creature, it must succeed on a DC 11 Strength saving throw or be knocked prone."
       },
       {
         "name": "Water Breathing",
@@ -207,7 +207,7 @@
     "blocks": [
       {
         "name": "Ram",
-        "text": "*Melee Weapon Attack:* atk[str] to hit, reach 5 ft., one target. *Hit:* dmg[1d6 + str] bludgeoning damage."
+        "text": "*Melee Weapon Attack:* ATK[STR] to hit, reach 5 ft., one target. *Hit:* DMG[1d6 + STR] bludgeoning damage."
       }
     ]
   },

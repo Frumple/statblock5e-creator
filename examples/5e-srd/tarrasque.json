@@ -228,19 +228,19 @@
       },
       {
         "name": "Bite",
-        "text": "*Melee Weapon Attack:* atk[str] to hit, reach 10 ft., one target. *Hit:* dmg[4d12 + str] piercing damage. If the target is a creature, it is grappled (escape DC 20). Until this grapple ends, the target is restrained, and [name] can't bite another target."
+        "text": "*Melee Weapon Attack:* ATK[STR] to hit, reach 10 ft., one target. *Hit:* DMG[4d12 + STR] piercing damage. If the target is a creature, it is grappled (escape DC 20). Until this grapple ends, the target is restrained, and [name] can't bite another target."
       },
       {
         "name": "Claw",
-        "text": "*Melee Weapon Attack:* atk[str] to hit, reach 15 ft., one target. *Hit:* dmg[4d8 + str] slashing damage."
+        "text": "*Melee Weapon Attack:* ATK[STR] to hit, reach 15 ft., one target. *Hit:* DMG[4d8 + STR] slashing damage."
       },
       {
         "name": "Horns",
-        "text": "*Melee Weapon Attack:* atk[str] to hit, reach 10 ft., one target. *Hit:* dmg[4d10 + str] piercing damage."
+        "text": "*Melee Weapon Attack:* ATK[STR] to hit, reach 10 ft., one target. *Hit:* DMG[4d10 + STR] piercing damage."
       },
       {
         "name": "Tail",
-        "text": "*Melee Weapon Attack:* atk[str] to hit, reach 20 ft., one target. *Hit:* dmg[4d6 + str] bludgeoning damage. If the target is a creature, it must succeed on a DC 20 Strength saving throw or be knocked prone."
+        "text": "*Melee Weapon Attack:* ATK[STR] to hit, reach 20 ft., one target. *Hit:* DMG[4d6 + STR] bludgeoning damage. If the target is a creature, it must succeed on a DC 20 Strength saving throw or be knocked prone."
       },
       {
         "name": "Frightful Presence",
@@ -248,7 +248,7 @@
       },
       {
         "name": "Swallow",
-        "text": "[name] makes one bite attack against a Large or smaller creature it is grappling. If the attack hits, the target takes the bite's damage, the target is swallowed, and the grapple ends. While swallowed, the creature is blinded and restrained, it has total cover against attacks and other effects outside [name], and it takes dmg[16d6] acid damage at the start of each of [name]'s turns.\n  If [name] takes 60 damage or more on a single turn from a creature inside it, [name] must succeed on a DC 20 Constitution saving throw at the end of that turn or regurgitate all swallowed creatures, which fall prone in a space within 10 feet of [name]. If [name] dies, a swallowed creature is no longer restrained by it and can escape from the corpse by using 30 feet of movement, exiting prone."
+        "text": "[name] makes one bite attack against a Large or smaller creature it is grappling. If the attack hits, the target takes the bite's damage, the target is swallowed, and the grapple ends. While swallowed, the creature is blinded and restrained, it has total cover against attacks and other effects outside [name], and it takes DMG[16d6] acid damage at the start of each of [name]'s turns.\n  If [name] takes 60 damage or more on a single turn from a creature inside it, [name] must succeed on a DC 20 Constitution saving throw at the end of that turn or regurgitate all swallowed creatures, which fall prone in a space within 10 feet of [name]. If [name] dies, a swallowed creature is no longer restrained by it and can escape from the corpse by using 30 feet of movement, exiting prone."
       }
     ]
   },

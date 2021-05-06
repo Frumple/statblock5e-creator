@@ -201,11 +201,11 @@
     "blocks": [
       {
         "name": "Greatclub",
-        "text": "*Melee Weapon Attack:* atk[str] to hit, reach 5 ft., one target. *Hit:* dmg[2d8 + str] bludgeoning damage."
+        "text": "*Melee Weapon Attack:* ATK[STR] to hit, reach 5 ft., one target. *Hit:* DMG[2d8 + STR] bludgeoning damage."
       },
       {
         "name": "Javelin",
-        "text": "*Melee or Ranged Weapon Attack:* atk[str] to hit, reach 5 ft. or range 30/120 ft., one target. *Hit:* dmg[2d6 + str] piercing damage."
+        "text": "*Melee or Ranged Weapon Attack:* ATK[STR] to hit, reach 5 ft. or range 30/120 ft., one target. *Hit:* DMG[2d6 + STR] piercing damage."
       }
     ]
   },

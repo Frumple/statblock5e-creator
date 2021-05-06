@@ -219,7 +219,7 @@
     "blocks": [
       {
         "name": "Pseudopod",
-        "text": "Melee Weapon Attack: atk[str] to hit, reach 5 ft., one target. Hit: dmg[2d6 + str] bludgeoning damage plus dmg[1d6] acid damage."
+        "text": "Melee Weapon Attack: ATK[STR] to hit, reach 5 ft., one target. Hit: DMG[2d6 + STR] bludgeoning damage plus DMG[1d6] acid damage."
       }
     ]
   },

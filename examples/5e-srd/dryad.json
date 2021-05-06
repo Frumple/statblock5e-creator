@@ -198,7 +198,7 @@
     "blocks": [
       {
         "name": "Innate Spellcasting",
-        "text": "[name]'s innate spellcasting ability is Charisma (spell save DC sdc[cha]). [name] can innately cast the following spells, requiring no material components:\n\nAt will: *druidcraft*\n3/day each: *entangle*, *goodberry*\n1/day each: *barkskin*, *pass without trace*, *shillelagh*"
+        "text": "[name]'s innate spellcasting ability is Charisma (spell save DC SDC[CHA]). [name] can innately cast the following spells, requiring no material components:\n\nAt will: *druidcraft*\n3/day each: *entangle*, *goodberry*\n1/day each: *barkskin*, *pass without trace*, *shillelagh*"
       },
       {
         "name": "Magic Resistance",
@@ -218,7 +218,7 @@
     "blocks": [
       {
         "name": "Club",
-        "text": "*Melee Weapon Attack:* atk[str] to hit (atk[cha] to hit with shillelagh), reach 5 ft., one target. Hit: dmg[1d4] bludgeoning damage, or dmg[1d8 + cha] bludgeoning damage with shillelagh."
+        "text": "*Melee Weapon Attack:* ATK[STR] to hit (ATK[CHA] to hit with shillelagh), reach 5 ft., one target. Hit: DMG[1d4] bludgeoning damage, or DMG[1d8 + CHA] bludgeoning damage with shillelagh."
       },
       {
         "name": "Fey Charm",

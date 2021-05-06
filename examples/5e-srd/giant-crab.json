@@ -203,7 +203,7 @@
     "blocks": [
       {
         "name": "Claw",
-        "text": "*Melee Weapon Attack:* atk[str] to hit, reach 5 ft., one target. *Hit:* dmg[1d6 + str] bludgeoning damage, and the target is grappled (escape DC 11). [name] has two claws, each of which can grapple only one target."
+        "text": "*Melee Weapon Attack:* ATK[STR] to hit, reach 5 ft., one target. *Hit:* DMG[1d6 + STR] bludgeoning damage, and the target is grappled (escape DC 11). [name] has two claws, each of which can grapple only one target."
       }
     ]
   },

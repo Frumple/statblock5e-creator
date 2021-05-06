@@ -221,11 +221,11 @@
       },
       {
         "name": "Slam",
-        "text": "*Melee Weapon Attack:* atk[str] to hit, reach 5 ft., one target. *Hit:* dmg[3d6 + str] bludgeoning damage."
+        "text": "*Melee Weapon Attack:* ATK[STR] to hit, reach 5 ft., one target. *Hit:* DMG[3d6 + STR] bludgeoning damage."
       },
       {
         "name": "Rock",
-        "text": "*Ranged Weapon Attack:* atk[str] to hit, range 60/180 ft., one target. *Hit:* dmg[4d10 + str] bludgeoning damage."
+        "text": "*Ranged Weapon Attack:* ATK[STR] to hit, range 60/180 ft., one target. *Hit:* DMG[4d10 + STR] bludgeoning damage."
       },
       {
         "name": "Animate Trees (1/Day)",

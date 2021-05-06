@@ -203,7 +203,7 @@
       },
       {
         "name": "Charge (Boar or Hybrid Form Only)",
-        "text": "If [name] moves at least 15 feet straight toward a target and then hits it with its tusks on the same turn, the target takes an extra dmg[2d6] slashing damage. If the target is a creature, it must succeed on a DC 13 Strength saving throw or be knocked prone."
+        "text": "If [name] moves at least 15 feet straight toward a target and then hits it with its tusks on the same turn, the target takes an extra DMG[2d6] slashing damage. If the target is a creature, it must succeed on a DC 13 Strength saving throw or be knocked prone."
       },
       {
         "name": "Relentless (Recharges after a Short or Long Rest)",
@@ -219,11 +219,11 @@
       },
       {
         "name": "Maul (Humanoid or Hybrid Form Only)",
-        "text": "*Melee Weapon Attack:* atk[str] to hit, reach 5 ft., one target. *Hit:* dmg[2d6 + str] bludgeoning damage."
+        "text": "*Melee Weapon Attack:* ATK[STR] to hit, reach 5 ft., one target. *Hit:* DMG[2d6 + STR] bludgeoning damage."
       },
       {
         "name": "Tusks (Boar or Hybrid Form Only)",
-        "text": "*Melee Weapon Attack:* atk[str] to hit, reach 5 ft., one target. *Hit:* dmg[2d6 + str] slashing damage. If the target is a humanoid, it must succeed on a DC 12 Constitution saving throw or be cursed with wereboar lycanthropy."
+        "text": "*Melee Weapon Attack:* ATK[STR] to hit, reach 5 ft., one target. *Hit:* DMG[2d6 + STR] slashing damage. If the target is a humanoid, it must succeed on a DC 12 Constitution saving throw or be cursed with wereboar lycanthropy."
       }
     ]
   },

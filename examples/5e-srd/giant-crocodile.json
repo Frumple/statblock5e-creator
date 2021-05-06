@@ -207,11 +207,11 @@
       },
       {
         "name": "Bite",
-        "text": "*Melee Weapon Attack:* atk[str] to hit, reach 5 ft., one target. *Hit:* dmg[3d10 + str] piercing damage, and the target is grappled (escape DC 16). Until this grapple ends, the target is restrained, and [name] can't bite another target."
+        "text": "*Melee Weapon Attack:* ATK[STR] to hit, reach 5 ft., one target. *Hit:* DMG[3d10 + STR] piercing damage, and the target is grappled (escape DC 16). Until this grapple ends, the target is restrained, and [name] can't bite another target."
       },
       {
         "name": "Tail",
-        "text": "*Melee Weapon Attack:* atk[str] to hit, reach 10 ft., one target not grappled by [name]. *Hit:* dmg[2d8 + str] bludgeoning damage. If the target is a creature, it must succeed on a DC 16 Strength saving throw or be knocked prone."
+        "text": "*Melee Weapon Attack:* ATK[STR] to hit, reach 10 ft., one target not grappled by [name]. *Hit:* DMG[2d8 + STR] bludgeoning damage. If the target is a creature, it must succeed on a DC 16 Strength saving throw or be knocked prone."
       }
     ]
   },

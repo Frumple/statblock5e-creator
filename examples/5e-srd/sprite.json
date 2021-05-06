@@ -206,7 +206,7 @@
       },
       {
         "name": "Shortbow",
-        "text": "*Ranged Weapon Attack:* atk[dex] to hit, range 40/160 ft., one target. *Hit:* 1 piercing damage, and the target must succeed on a DC 10 Constitution saving throw or become poisoned for 1 minute. If its saving throw result is 5 or lower, the poisoned target falls unconscious for the same duration, or until it takes damage or another creature takes an action to shake it awake."
+        "text": "*Ranged Weapon Attack:* ATK[DEX] to hit, range 40/160 ft., one target. *Hit:* 1 piercing damage, and the target must succeed on a DC 10 Constitution saving throw or become poisoned for 1 minute. If its saving throw result is 5 or lower, the poisoned target falls unconscious for the same duration, or until it takes damage or another creature takes an action to shake it awake."
       },
       {
         "name": "Heart Sight",

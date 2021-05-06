@@ -228,7 +228,7 @@
       },
       {
         "name": "Slam",
-        "text": "*Melee Weapon Attack:* atk[str] to hit, reach 5 ft., one target. *Hit:* dmg[3d8 + str] bludgeoning damage."
+        "text": "*Melee Weapon Attack:* ATK[STR] to hit, reach 5 ft., one target. *Hit:* DMG[3d8 + STR] bludgeoning damage."
       },
       {
         "name": "Slow (Recharge 5-6)",

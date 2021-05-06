@@ -211,7 +211,7 @@
     "blocks": [
       {
         "name": "Tentacles",
-        "text": "*Melee Weapon Attack:* atk[dex] to hit, reach 5 ft., one target. *Hit:* 1 bludgeoning damage, and the target is grappled (escape DC 10). Until this grapple ends, [name] can't use its tentacles on another target."
+        "text": "*Melee Weapon Attack:* ATK[DEX] to hit, reach 5 ft., one target. *Hit:* 1 bludgeoning damage, and the target is grappled (escape DC 10). Until this grapple ends, [name] can't use its tentacles on another target."
       },
       {
         "name": "Ink Cloud (Recharges after a Short or Long Rest)",

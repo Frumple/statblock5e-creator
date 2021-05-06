@@ -195,7 +195,7 @@
     "blocks": [
       {
         "name": "Charge",
-        "text": "If [name] moves at least 20 ft. straight toward a target and then hits it with a gore attack on the same turn, the target takes an extra dmg[2d8] bludgeoning damage. If the target is a creature, it must succeed on a DC 15 Strength saving throw or be knocked prone."
+        "text": "If [name] moves at least 20 ft. straight toward a target and then hits it with a gore attack on the same turn, the target takes an extra DMG[2d8] bludgeoning damage. If the target is a creature, it must succeed on a DC 15 Strength saving throw or be knocked prone."
       }
     ]
   },
@@ -203,7 +203,7 @@
     "blocks": [
       {
         "name": "Gore",
-        "text": "*Melee Weapon Attack:* atk[str] to hit, reach 5 ft., one target. *Hit:* dmg[2d8 + str] bludgeoning damage."
+        "text": "*Melee Weapon Attack:* ATK[STR] to hit, reach 5 ft., one target. *Hit:* DMG[2d8 + STR] bludgeoning damage."
       }
     ]
   },

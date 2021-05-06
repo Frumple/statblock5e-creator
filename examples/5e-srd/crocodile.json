@@ -203,7 +203,7 @@
     "blocks": [
       {
         "name": "Bite",
-        "text": "*Melee Weapon Attack:* atk[str] to hit, reach 5 ft., one creature. *Hit:* dmg[1d10 + str] piercing damage, and the target is grappled (escape DC 12). Until this grapple ends, the target is restrained, and [name] can't bite another target."
+        "text": "*Melee Weapon Attack:* ATK[STR] to hit, reach 5 ft., one creature. *Hit:* DMG[1d10 + STR] piercing damage, and the target is grappled (escape DC 12). Until this grapple ends, the target is restrained, and [name] can't bite another target."
       }
     ]
   },

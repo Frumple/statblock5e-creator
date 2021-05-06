@@ -69,9 +69,9 @@ Run all the tests with:
 
 Parsers can be generated from their respective grammars with:
 
-    npm generate-markdown-parser
-    npm generate-math-parser
-    npm generate-name-parser
+    npm run-script generate-markdown-parser
+    npm run-script generate-math-parser
+    npm run-script generate-name-parser
 
 ## Dependencies
 

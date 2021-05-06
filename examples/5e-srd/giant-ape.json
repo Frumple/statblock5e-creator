@@ -202,11 +202,11 @@
       },
       {
         "name": "Fist",
-        "text": "*Melee Weapon Attack:* atk[str] to hit, reach 10 ft., one target. *Hit:* dmg[3d10 + str] bludgeoning damage."
+        "text": "*Melee Weapon Attack:* ATK[STR] to hit, reach 10 ft., one target. *Hit:* DMG[3d10 + STR] bludgeoning damage."
       },
       {
         "name": "Rock",
-        "text": "*Ranged Weapon Attack:* atk[str] to hit, range 50/100 ft., one target. *Hit:* dmg[7d6 + str] bludgeoning damage."
+        "text": "*Ranged Weapon Attack:* ATK[STR] to hit, range 50/100 ft., one target. *Hit:* DMG[7d6 + STR] bludgeoning damage."
       }
     ]
   },

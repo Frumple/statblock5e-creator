@@ -209,11 +209,11 @@
       },
       {
         "name": "Mace",
-        "text": "*Melee Weapon Attack:* atk[str] to hit, reach 5 ft., one creature. *Hit:* dmg[1d6 + str] bludgeoning damage."
+        "text": "*Melee Weapon Attack:* ATK[STR] to hit, reach 5 ft., one creature. *Hit:* DMG[1d6 + STR] bludgeoning damage."
       },
       {
         "name": "Heavy Crossbow",
-        "text": "*Ranged Weapon Attack:* atk[dex] to hit, range 100/400 ft., one target. *Hit:* dmg[1d10 + dex] piercing damage."
+        "text": "*Ranged Weapon Attack:* ATK[DEX] to hit, range 100/400 ft., one target. *Hit:* DMG[1d10 + DEX] piercing damage."
       }
     ]
   },

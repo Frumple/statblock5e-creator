@@ -197,7 +197,7 @@
     "blocks": [
       {
         "name": "Spellcasting",
-        "text": "[name] is a 9th-level spellcaster. Its spellcasting ability is Intelligence (spell save DC sdc[int], atk[int] to hit with spell attacks). [name] has the following wizard spells prepared:\n\nCantrips (at will): *fire bolt*, *light*, *mage hand*, *prestidigitation*\n1st level (4 slots): *detect magic*, *mage armor*, *magic missile*, *shield*\n2nd level (3 slots): *misty step*, *suggestion*\n3rd level (3 slots): *counterspell*, *fireball*, *fly*\n4th level (3 slots): *greater invisibility*, *ice storm*\n5th level (1 slot): *cone of cold*"
+        "text": "[name] is a 9th-level spellcaster. Its spellcasting ability is Intelligence (spell save DC SDC[INT], ATK[INT] to hit with spell attacks). [name] has the following wizard spells prepared:\n\nCantrips (at will): *fire bolt*, *light*, *mage hand*, *prestidigitation*\n1st level (4 slots): *detect magic*, *mage armor*, *magic missile*, *shield*\n2nd level (3 slots): *misty step*, *suggestion*\n3rd level (3 slots): *counterspell*, *fireball*, *fly*\n4th level (3 slots): *greater invisibility*, *ice storm*\n5th level (1 slot): *cone of cold*"
       }
     ]
   },
@@ -205,7 +205,7 @@
     "blocks": [
       {
         "name": "Dagger",
-        "text": "*Melee or Ranged Weapon Attack:* atk[fin] to hit, reach 5 ft. or range 20/60 ft., one target. *Hit:* dmg[1d4 + fin] piercing damage."
+        "text": "*Melee or Ranged Weapon Attack:* ATK[FIN] to hit, reach 5 ft. or range 20/60 ft., one target. *Hit:* DMG[1d4 + FIN] piercing damage."
       }
     ]
   },

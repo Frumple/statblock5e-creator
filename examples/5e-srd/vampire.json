@@ -232,11 +232,11 @@
       },
       {
         "name": "Unarmed Strike (Vampire Form Only)",
-        "text": "*Melee Weapon Attack:* atk[str] to hit, reach 5 ft., one creature. *Hit:* dmg[1d8 + str] bludgeoning damage. Instead of dealing damage, [name] can grapple the target (escape DC 18)."
+        "text": "*Melee Weapon Attack:* ATK[STR] to hit, reach 5 ft., one creature. *Hit:* DMG[1d8 + STR] bludgeoning damage. Instead of dealing damage, [name] can grapple the target (escape DC 18)."
       },
       {
         "name": "Bite (Bat or Vampire Form Only)",
-        "text": "*Melee Weapon Attack:* atk[str] to hit, reach 5 ft., one willing creature, or a creature that is grappled by [name], incapacitated, or restrained. *Hit:* dmg[1d6 + str] piercing damage plus dmg[3d6] necrotic damage. The target's hit point maximum is reduced by an amount equal to the necrotic damage taken, and [name] regains hit points equal to that amount. The reduction lasts until the target finishes a long rest. The target dies if this effect reduces its hit point maximum to 0. A humanoid slain in this way and then buried in the ground rises the following night as a vampire spawn under [name]'s control."
+        "text": "*Melee Weapon Attack:* ATK[STR] to hit, reach 5 ft., one willing creature, or a creature that is grappled by [name], incapacitated, or restrained. *Hit:* DMG[1d6 + STR] piercing damage plus DMG[3d6] necrotic damage. The target's hit point maximum is reduced by an amount equal to the necrotic damage taken, and [name] regains hit points equal to that amount. The reduction lasts until the target finishes a long rest. The target dies if this effect reduces its hit point maximum to 0. A humanoid slain in this way and then buried in the ground rises the following night as a vampire spawn under [name]'s control."
       },
       {
         "name": "Charm",

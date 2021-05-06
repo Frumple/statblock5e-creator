@@ -207,11 +207,11 @@
       },
       {
         "name": "Beak",
-        "text": "*Melee Weapon Attack:* atk[str] to hit, reach 10 ft., one target. *Hit:* dmg[4d8 + str] piercing damage."
+        "text": "*Melee Weapon Attack:* ATK[STR] to hit, reach 10 ft., one target. *Hit:* DMG[4d8 + STR] piercing damage."
       },
       {
         "name": "Talons",
-        "text": "*Melee Weapon Attack:* atk[str] to hit, reach 5 ft., one target. *Hit:* dmg[4d6 + str] slashing damage, and the target is grappled (escape DC 19). Until this grapple ends, the target is restrained, and [name] can't use its talons on another target."
+        "text": "*Melee Weapon Attack:* ATK[STR] to hit, reach 5 ft., one target. *Hit:* DMG[4d6 + STR] slashing damage, and the target is grappled (escape DC 19). Until this grapple ends, the target is restrained, and [name] can't use its talons on another target."
       }
     ]
   },

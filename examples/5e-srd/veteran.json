@@ -204,15 +204,15 @@
       },
       {
         "name": "Longsword",
-        "text": "*Melee Weapon Attack:* atk[str] to hit, reach 5 ft., one target. *Hit:* dmg[1d8 + str] slashing damage, or dmg[1d10 + str] slashing damage if used with two hands."
+        "text": "*Melee Weapon Attack:* ATK[STR] to hit, reach 5 ft., one target. *Hit:* DMG[1d8 + STR] slashing damage, or DMG[1d10 + STR] slashing damage if used with two hands."
       },
       {
         "name": "Shortsword",
-        "text": "*Melee Weapon Attack:* atk[fin] to hit, reach 5 ft., one target. *Hit:* dmg[d6 + fin] piercing damage."
+        "text": "*Melee Weapon Attack:* ATK[FIN] to hit, reach 5 ft., one target. *Hit:* DMG[d6 + FIN] piercing damage."
       },
       {
         "name": "Heavy Crossbow",
-        "text": "*Ranged Weapon Attack:* atk[dex] to hit, range 100/400 ft., one target. *Hit:* dmg[1d10 + dex] piercing damage."
+        "text": "*Ranged Weapon Attack:* ATK[DEX] to hit, range 100/400 ft., one target. *Hit:* DMG[1d10 + DEX] piercing damage."
       }
     ]
   },

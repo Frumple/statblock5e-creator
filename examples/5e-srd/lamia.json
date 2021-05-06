@@ -198,7 +198,7 @@
     "blocks": [
       {
         "name": "Innate Spellcasting",
-        "text": "[name]'s innate spellcasting ability is Charisma (spell save DC sdc[cha]). It can innately cast the following spells, requiring no material components.\n\nAt will: *disguise self* (any humanoid form), *major image*\n3/day each: *charm person*, *mirror image*, *scrying*, *suggestion*\n1/day: *geas*"
+        "text": "[name]'s innate spellcasting ability is Charisma (spell save DC SDC[CHA]). It can innately cast the following spells, requiring no material components.\n\nAt will: *disguise self* (any humanoid form), *major image*\n3/day each: *charm person*, *mirror image*, *scrying*, *suggestion*\n1/day: *geas*"
       }
     ]
   },
@@ -210,15 +210,15 @@
       },
       {
         "name": "Claws",
-        "text": "*Melee Weapon Attack:* atk[str] to hit, reach 5 ft., one target. *Hit:* dmg[2d10 + str] slashing damage."
+        "text": "*Melee Weapon Attack:* ATK[STR] to hit, reach 5 ft., one target. *Hit:* DMG[2d10 + STR] slashing damage."
       },
       {
         "name": "Dagger",
-        "text": "*Melee Weapon Attack:* atk[fin] to hit, reach 5 ft., one target. *Hit:* dmg[1d4 + fin] piercing damage."
+        "text": "*Melee Weapon Attack:* ATK[FIN] to hit, reach 5 ft., one target. *Hit:* DMG[1d4 + FIN] piercing damage."
       },
       {
         "name": "Intoxicating Touch",
-        "text": "*Melee Spell Attack:* atk[str] to hit, reach 5 ft., one creature. *Hit:* The target is magically cursed for 1 hour. Until the curse ends, the target has disadvantage on Wisdom saving throws and all ability checks."
+        "text": "*Melee Spell Attack:* ATK[STR] to hit, reach 5 ft., one creature. *Hit:* The target is magically cursed for 1 hour. Until the curse ends, the target has disadvantage on Wisdom saving throws and all ability checks."
       }
     ]
   },

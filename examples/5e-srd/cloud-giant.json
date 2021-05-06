@@ -214,11 +214,11 @@
       },
       {
         "name": "Morningstar",
-        "text": "*Melee Weapon Attack:* atk[str] to hit, reach 10 ft., one target. *Hit:* dmg[3d8 + str] piercing damage."
+        "text": "*Melee Weapon Attack:* ATK[STR] to hit, reach 10 ft., one target. *Hit:* DMG[3d8 + STR] piercing damage."
       },
       {
         "name": "Rock",
-        "text": "*Ranged Weapon Attack:* atk[str] to hit, range 60/240 ft., one target. *Hit:* dmg[4d10 + str] bludgeoning damage."
+        "text": "*Ranged Weapon Attack:* ATK[STR] to hit, range 60/240 ft., one target. *Hit:* DMG[4d10 + STR] bludgeoning damage."
       }
     ]
   },

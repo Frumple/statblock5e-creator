@@ -212,15 +212,15 @@
       },
       {
         "name": "Bite",
-        "text": "*Melee Weapon Attack:* atk[str] to hit, reach 10 ft., one target. *Hit:* dmg[2d10 + str] piercing damage."
+        "text": "*Melee Weapon Attack:* ATK[STR] to hit, reach 10 ft., one target. *Hit:* DMG[2d10 + STR] piercing damage."
       },
       {
         "name": "Claw",
-        "text": "*Melee Weapon Attack:* atk[str] to hit, reach 5 ft., one target. *Hit:* dmg[2d6 + str] slashing damage."
+        "text": "*Melee Weapon Attack:* ATK[STR] to hit, reach 5 ft., one target. *Hit:* DMG[2d6 + STR] slashing damage."
       },
       {
         "name": "Tail",
-        "text": "*Melee Weapon Attack:* atk[str] to hit, reach 15 ft., one target. *Hit:* dmg[2d8 + str] bludgeoning damage."
+        "text": "*Melee Weapon Attack:* ATK[STR] to hit, reach 15 ft., one target. *Hit:* DMG[2d8 + STR] bludgeoning damage."
       },
       {
         "name": "Frightful Presence",
@@ -228,7 +228,7 @@
       },
       {
         "name": "Breath Weapons (Recharge 5-6)",
-        "text": "[name] uses one of the following breath weapons.\n\n**Fire Breath.** [name] exhales fire in an 60-foot line that is 5 feet wide. Each creature in that line must make a DC 18 Dexterity saving throw, taking dmg[13d6] fire damage on a failed save, or half as much damage on a successful one.\n**Sleep Breath.** [name] exhales sleep gas in a 60-foot cone. Each creature in that area must succeed on a DC 18 Constitution saving throw or fall unconscious for 10 minutes. This effect ends for a creature if the creature takes damage or someone uses an action to wake it."
+        "text": "[name] uses one of the following breath weapons.\n\n**Fire Breath.** [name] exhales fire in an 60-foot line that is 5 feet wide. Each creature in that line must make a DC 18 Dexterity saving throw, taking DMG[13d6] fire damage on a failed save, or half as much damage on a successful one.\n**Sleep Breath.** [name] exhales sleep gas in a 60-foot cone. Each creature in that area must succeed on a DC 18 Constitution saving throw or fall unconscious for 10 minutes. This effect ends for a creature if the creature takes damage or someone uses an action to wake it."
       }
     ]
   },
@@ -247,7 +247,7 @@
       },
       {
         "name": "Wing Attack (Costs 2 Actions)",
-        "text": "[name] beats its wings. Each creature within 10 ft. of [name] must succeed on a DC 19 Dexterity saving throw or take dmg[2d6 + str] bludgeoning damage and be knocked prone. [name] can then fly up to half its flying speed."
+        "text": "[name] beats its wings. Each creature within 10 ft. of [name] must succeed on a DC 19 Dexterity saving throw or take DMG[2d6 + STR] bludgeoning damage and be knocked prone. [name] can then fly up to half its flying speed."
       }
     ],
     "description": "[name] can take 3 legendary actions, choosing from the options below. Only one legendary action option can be used at a time and only at the end of another creature's turn. [name] regains spent legendary actions at the start of its turn."

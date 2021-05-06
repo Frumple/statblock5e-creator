@@ -206,7 +206,7 @@
     "blocks": [
       {
         "name": "Innate Spellcasting",
-        "text": "[name]'s innate spellcasting ability is Charisma (spell save DC sdc[cha], atk[cha] to hit with spell attacks). She can innately cast the following spells, requiring no material components:\n\nAt will: *detect magic*, *magic missile*\n2/day each: *plane shift* (self only), *ray of enfeeblement*, *sleep*"
+        "text": "[name]'s innate spellcasting ability is Charisma (spell save DC SDC[CHA], ATK[CHA] to hit with spell attacks). She can innately cast the following spells, requiring no material components:\n\nAt will: *detect magic*, *magic missile*\n2/day each: *plane shift* (self only), *ray of enfeeblement*, *sleep*"
       },
       {
         "name": "Magic Resistance",
@@ -234,7 +234,7 @@
     "blocks": [
       {
         "name": "Claws (Hag Form Only)",
-        "text": "*Melee Weapon Attack:* atk[str] to hit, reach 5 ft., one target. *Hit*: dmg[2d8 + str] slashing damage."
+        "text": "*Melee Weapon Attack:* ATK[STR] to hit, reach 5 ft., one target. *Hit*: DMG[2d8 + STR] slashing damage."
       },
       {
         "name": "Change Shape",
@@ -246,7 +246,7 @@
       },
       {
         "name": "Nightmare Haunting (1/Day)",
-        "text": "While on the Ethereal Plane, [name] magically touches a sleeping humanoid on the Material Plane. A protection from evil and good spell cast on the target prevents this contact, as does a magic circle. As long as the contact persists, the target has dreadful visions. If these visions last for at least 1 hour, the target gains no benefit from its rest, and its hit point maximum is reduced by dmg[1d10]. If this effect reduces the target's hit point maximum to 0, the target dies, and if the target was evil, its soul is trapped in [name]'s soul bag. The reduction to the target's hit point maximum lasts until removed by the greater restoration spell or similar magic."
+        "text": "While on the Ethereal Plane, [name] magically touches a sleeping humanoid on the Material Plane. A protection from evil and good spell cast on the target prevents this contact, as does a magic circle. As long as the contact persists, the target has dreadful visions. If these visions last for at least 1 hour, the target gains no benefit from its rest, and its hit point maximum is reduced by DMG[1d10]. If this effect reduces the target's hit point maximum to 0, the target dies, and if the target was evil, its soul is trapped in [name]'s soul bag. The reduction to the target's hit point maximum lasts until removed by the greater restoration spell or similar magic."
       }
     ]
   },

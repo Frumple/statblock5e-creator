@@ -205,7 +205,7 @@
     "blocks": [
       {
         "name": "Spear",
-        "text": "*Melee or Ranged Weapon Attack:* atk[str] to hit, reach 5 ft. or range 20/60 ft., one target. *Hit:* dmg[1d6 + str] piercing damage, or dmg[1d8 + str] piercing damage if used with two hands to make a melee attack."
+        "text": "*Melee or Ranged Weapon Attack:* ATK[STR] to hit, reach 5 ft. or range 20/60 ft., one target. *Hit:* DMG[1d6 + STR] piercing damage, or DMG[1d8 + STR] piercing damage if used with two hands to make a melee attack."
       }
     ]
   },

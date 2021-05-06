@@ -226,7 +226,7 @@
     "blocks": [
       {
         "name": "Sting (Bite in Beast Form)",
-        "text": "*Melee Weapon Attack:* atk[dex] to hit, reach 5 ft., one target. *Hit:* dmg[1d4 + dex] piercing damage, and the target must make on a DC 11 Constitution saving throw, taking dmg[3d6] poison damage on a failed save, or half as much damage on a successful one."
+        "text": "*Melee Weapon Attack:* ATK[DEX] to hit, reach 5 ft., one target. *Hit:* DMG[1d4 + DEX] piercing damage, and the target must make on a DC 11 Constitution saving throw, taking DMG[3d6] poison damage on a failed save, or half as much damage on a successful one."
       },
       {
         "name": "Invisibility",
