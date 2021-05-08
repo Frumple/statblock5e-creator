@@ -8,6 +8,7 @@ import SanitizedParagraph from '../../elements/builtin/sanitized-paragraph.js';
 import TextInput from '../../elements/builtin/text-input.js';
 
 import ErrorMessages from '../../elements/autonomous/error-messages.js';
+import SlideToggle from '../../elements/autonomous/slide-toggle.js';
 import PropertyList from '../../elements/autonomous/lists/property-list.js';
 import PropertyListItem from '../../elements/autonomous/lists/property-list-item.js';
 import DisplayBlockList from '../../elements/autonomous/lists/display-block-list.js';
@@ -27,6 +28,7 @@ export async function define() {
     TextInput,
 
     ErrorMessages,
+    SlideToggle,
     PropertyList,
     PropertyListItem,
     DisplayBlockList,

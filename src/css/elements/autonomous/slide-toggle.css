@@ -1,0 +1,67 @@
+:host {
+  width: 100%;
+  height: 100%;
+}
+
+.slide-toggle {
+  width: 100%;
+  height: 100%;
+}
+
+.slide-toggle__checkbox {
+  display: none;
+}
+
+.slide-toggle__checkbox:checked + .slide-toggle__label > .slide-toggle__control:before {
+  left: 50%;
+  content: attr(data-checked-text)
+}
+
+.slide-toggle__checkbox:checked + .slide-toggle__label > .slide-toggle__control:after {
+  left: 0;
+  content: attr(data-unchecked-text)
+}
+
+.slide-toggle__label {
+  width: 100%;
+  height: 100%;
+}
+
+.slide-toggle__control {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  background: #888888;
+  color: white;
+  cursor: pointer;
+  border-radius: 3px;
+  transition: all 0.5s ease;
+}
+
+.slide-toggle__control:before,
+.slide-toggle__control:after {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  position: absolute;
+  top: 3px;
+  font-weight: bold;
+  border-radius: 2px;
+  height: calc(100% - 6px);
+  width: calc(50% - 3px);
+  transition: all 0.3s ease;
+}
+
+.slide-toggle__control:before {
+  background: #90FF70;
+  color: black;
+  left: 3px;
+  z-index: 1;
+  content: attr(data-unchecked-text);
+}
+
+.slide-toggle__control:after {
+  right: 0;
+  content: attr(data-checked-text);
+}

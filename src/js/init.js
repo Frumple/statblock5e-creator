@@ -18,6 +18,7 @@ import LoadingScreen from './elements/autonomous/loading-screen.js';
 import PropertyBlock from './elements/autonomous/property-block.js';
 import PropertyLine from './elements/autonomous/property-line.js';
 import SectionDivider from './elements/autonomous/section-divider.js';
+import SlideToggle from './elements/autonomous/slide-toggle.js';
 import SpellCategoryBox from './elements/autonomous/spell-category-box.js';
 import TaperedRule from './elements/autonomous/tapered-rule.js';
 
@@ -123,6 +124,7 @@ async function defineElements() {
     PropertyBlock,
     PropertyLine,
     SectionDivider,
+    SlideToggle,
     SpellCategoryBox,
     TaperedRule,
 
