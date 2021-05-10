@@ -14,8 +14,9 @@ export default class StatBlockSidebar extends CustomAutonomousElement {
     super(StatBlockSidebar.templatePaths, parent);
 
     this.sidebar = this.shadowRoot.getElementById('stat-block-sidebar');
-    this.autoHeightModeButton = this.shadowRoot.getElementById('auto-height-mode-label');
-    this.manualHeightModeButton = this.shadowRoot.getElementById('manual-height-mode-label');
+
+    this.heightModeToggle = this.shadowRoot.getElementById('height-mode-toggle');
+
     this.manualHeightSliderContainer = this.shadowRoot.getElementById('slider-container');
     this.manualHeightSlider = this.shadowRoot.getElementById('slider');
   }
@@ -24,22 +25,16 @@ export default class StatBlockSidebar extends CustomAutonomousElement {
     if (this.isConnected && ! this.isInitialized) {
       super.connectedCallback();
 
-      this.autoHeightModeButton.addEventListener('click', this.onClickAutoHeightModeButton.bind(this));
-      this.manualHeightModeButton.addEventListener('click', this.onClickManualHeightModeButton.bind(this));
+      this.heightModeToggle.addEventListener('input', this.onInputHeightModeToggle.bind(this));
       this.manualHeightSlider.addEventListener('input', this.onInputSlider.bind(this));
 
       this.isInitialized = true;
     }
   }
 
-  onClickAutoHeightModeButton() {
-    this.heightMode = 'auto';
-    this.dispatchHeightChangedEvent('auto');
-  }
-
-  onClickManualHeightModeButton() {
-    this.heightMode = 'manual';
-    this.dispatchHeightChangedEvent('manual');
+  onInputHeightModeToggle() {
+    this.heightMode = this.heightModeToggle.checked ? 'manual' : 'auto';
+    this.dispatchHeightChangedEvent(this.heightMode);
   }
 
   onInputSlider() {
@@ -97,9 +92,11 @@ export default class StatBlockSidebar extends CustomAutonomousElement {
     this.manualHeightSlider.value = layoutSettings.twoColumnHeight;
 
     if (layoutSettings.twoColumnMode === 'auto') {
-      this.autoHeightModeButton.click();
+      this.heightModeToggle.checked = false;
     } else if (layoutSettings.twoColumnMode === 'manual') {
-      this.manualHeightModeButton.click();
+      this.heightModeToggle.checked = true;
     }
+
+    this.onInputHeightModeToggle();
   }
 }

@@ -120,7 +120,6 @@ describe('should export JSON', () => {
 
     it('two-column version with automatic height', () => {
       statBlockMenu.columnsToggle.click();
-      statBlockSidebar.autoHeightModeButton.click();
 
       statBlockMenu.exportJsonButton.click();
 
@@ -135,7 +134,7 @@ describe('should export JSON', () => {
 
     it('two-column version with manual height', () => {
       statBlockMenu.columnsToggle.click();
-      statBlockSidebar.manualHeightModeButton.click();
+      statBlockSidebar.heightModeToggle.click();
 
       statBlockSidebar.manualHeightSlider.stepUp(sliderChangeAmount);
       statBlockSidebar.onInputSlider();
@@ -170,7 +169,6 @@ describe('should export JSON', () => {
 
     it('two-column version with automatic height', () => {
       statBlockMenu.columnsToggle.click();
-      statBlockSidebar.autoHeightModeButton.click();
 
       statBlockMenu.exportJsonButton.click();
 
@@ -186,7 +184,7 @@ describe('should export JSON', () => {
 
     it('two-column version with manual height', () => {
       statBlockMenu.columnsToggle.click();
-      statBlockSidebar.manualHeightModeButton.click();
+      statBlockSidebar.heightModeToggle.click();
 
       statBlockSidebar.manualHeightSlider.stepUp(sliderChangeAmount);
       statBlockSidebar.onInputSlider();
@@ -218,7 +216,6 @@ describe('HTML-based tests', () => {
 
     it('two-column version with automatic height', () => {
       statBlockMenu.columnsToggle.click();
-      statBlockSidebar.autoHeightModeButton.click();
 
       statBlockMenu.printButton.click();
 
@@ -227,7 +224,7 @@ describe('HTML-based tests', () => {
 
     it('two-column version with manual height', () => {
       statBlockMenu.columnsToggle.click();
-      statBlockSidebar.manualHeightModeButton.click();
+      statBlockSidebar.heightModeToggle.click();
 
       statBlockSidebar.manualHeightSlider.stepUp(sliderChangeAmount);
       statBlockSidebar.onInputSlider();
@@ -254,7 +251,6 @@ describe('HTML-based tests', () => {
 
       it('two-column version with automatic height', () => {
         statBlockMenu.columnsToggle.click();
-        statBlockSidebar.autoHeightModeButton.click();
 
         statBlockMenu.exportHtmlButton.click();
 
@@ -269,7 +265,7 @@ describe('HTML-based tests', () => {
 
       it('two-column version with manual height', () => {
         statBlockMenu.columnsToggle.click();
-        statBlockSidebar.manualHeightModeButton.click();
+        statBlockSidebar.heightModeToggle.click();
 
         statBlockSidebar.manualHeightSlider.stepUp(sliderChangeAmount);
         statBlockSidebar.onInputSlider();
@@ -304,7 +300,6 @@ describe('HTML-based tests', () => {
 
       it('two-column version with automatic height', () => {
         statBlockMenu.columnsToggle.click();
-        statBlockSidebar.autoHeightModeButton.click();
 
         statBlockMenu.exportHtmlButton.click();
 
@@ -320,7 +315,7 @@ describe('HTML-based tests', () => {
 
       it('two-column version with manual height', () => {
         statBlockMenu.columnsToggle.click();
-        statBlockSidebar.manualHeightModeButton.click();
+        statBlockSidebar.heightModeToggle.click();
 
         statBlockSidebar.manualHeightSlider.stepUp(sliderChangeAmount);
         statBlockSidebar.onInputSlider();
@@ -358,7 +353,6 @@ describe('should export markdown', () => {
 
     it('two-column version', () => {
       statBlockMenu.columnsToggle.click();
-      statBlockSidebar.autoHeightModeButton.click();
 
       statBlockMenu.exportMarkdownButton.click();
 
@@ -391,7 +385,6 @@ describe('should export markdown', () => {
 
     it('two-column version', () => {
       statBlockMenu.columnsToggle.click();
-      statBlockSidebar.autoHeightModeButton.click();
 
       statBlockMenu.exportMarkdownButton.click();
 

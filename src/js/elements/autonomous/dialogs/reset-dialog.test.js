@@ -6,7 +6,6 @@ import ResetDialog from './reset-dialog.js';
 
 import CurrentContext from '../../../models/current-context.js';
 
-import { getCheckedRadioButton } from '../../../helpers/element-helpers.js';
 import * as TestCustomElements from '../../../helpers/test/test-custom-elements.js';
 
 import waitForExpect from 'wait-for-expect';
@@ -57,15 +56,10 @@ it('should reset the statblock and persist empty section visibility if it is set
     expect(resetDialog.dialog.open).toBe(false);
   });
 
-  const twoColumns = statBlockMenu.columnsToggle.checked;
-  const emptySectionsVisibility = statBlockMenu.emptySectionsToggle.checked;
-  const heightMode = getCheckedRadioButton(statBlockSidebar, 'height-mode').value;
-  const manualHeight = statBlockSidebar.manualHeightSlider.value;
-
-  expect(twoColumns).toBe(false);
-  expect(emptySectionsVisibility).toBe(true);
-  expect(heightMode).toBe('auto');
-  expect(manualHeight).toBe('600');
+  expect(statBlockMenu.columnsToggle.checked).toBe(false);
+  expect(statBlockMenu.emptySectionsToggle.checked).toBe(true);
+  expect(statBlockSidebar.heightModeToggle.checked).toBe(false);
+  expect(statBlockSidebar.manualHeightSlider).toHaveValue('600');
 
   expect(statBlock.updateView).toHaveBeenCalled();
 });
@@ -80,15 +74,10 @@ it('should reset the statblock and persist empty section visibility if it is set
     expect(resetDialog.dialog.open).toBe(false);
   });
 
-  const twoColumns = statBlockMenu.columnsToggle.checked;
-  const emptySectionsVisibility = statBlockMenu.emptySectionsToggle.checked;
-  const heightMode = getCheckedRadioButton(statBlockSidebar, 'height-mode').value;
-  const manualHeight = statBlockSidebar.manualHeightSlider.value;
-
-  expect(twoColumns).toBe(false);
-  expect(emptySectionsVisibility).toBe(false);
-  expect(heightMode).toBe('auto');
-  expect(manualHeight).toBe('600');
+  expect(statBlockMenu.columnsToggle.checked).toBe(false);
+  expect(statBlockMenu.emptySectionsToggle.checked).toBe(false);
+  expect(statBlockSidebar.heightModeToggle.checked).toBe(false);
+  expect(statBlockSidebar.manualHeightSlider).toHaveValue('600');
 
   expect(statBlock.updateView).toHaveBeenCalled();
 });
@@ -103,15 +92,10 @@ it('should reset the statblock to one column if initially set to two columns', a
     expect(resetDialog.dialog.open).toBe(false);
   });
 
-  const twoColumns = statBlockMenu.columnsToggle.checked;
-  const emptySectionsVisibility = statBlockMenu.emptySectionsToggle.checked;
-  const heightMode = getCheckedRadioButton(statBlockSidebar, 'height-mode').value;
-  const manualHeight = statBlockSidebar.manualHeightSlider.value;
-
-  expect(twoColumns).toBe(false);
-  expect(emptySectionsVisibility).toBe(true);
-  expect(heightMode).toBe('auto');
-  expect(manualHeight).toBe('600');
+  expect(statBlockMenu.columnsToggle.checked).toBe(false);
+  expect(statBlockMenu.emptySectionsToggle.checked).toBe(true);
+  expect(statBlockSidebar.heightModeToggle.checked).toBe(false);
+  expect(statBlockSidebar.manualHeightSlider).toHaveValue('600');
 
   expect(statBlock.updateView).toHaveBeenCalled();
 });

@@ -5,12 +5,7 @@
   <div class="stat-block-sidebar__top-container">
     <label class="stat-block-sidebar__label">Two-Column Height</label>
 
-    <div class="stat-block-sidebar__height-mode-radio-group">
-      <input id="auto-height-mode-radio" class="ui__radio-button-input" type="radio" name="height-mode" value="auto" checked />
-      <label id="auto-height-mode-label" for="auto-height-mode-radio" class="ui__button ui__radio-button-label stat-block-sidebar__radio-label">Auto</label>
-      <input id="manual-height-mode-radio" class="ui__radio-button-input" type="radio" name="height-mode" value="manual" />
-      <label id="manual-height-mode-label" for="manual-height-mode-radio" class="ui__button ui__radio-button-label stat-block-sidebar__radio-label">Manual</label>
-    </div>
+    <slide-toggle id="height-mode-toggle" class="stat-block-sidebar__height-mode-toggle" data-unchecked-text="Auto" data-checked-text="Manual" data-orientation="vertical"></slide-toggle>
   </div>
 
   <div id="slider-container" class="stat-block-sidebar__slider-container stat-block-sidebar__slider-container_hidden">

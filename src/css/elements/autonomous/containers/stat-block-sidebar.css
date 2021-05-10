@@ -1,7 +1,7 @@
 .stat-block-sidebar {
   display: flex;
   flex-direction: column;
-  background: #808080;
+  background: #606060;
   width: 60px;
   min-height: 100%;
   margin: 0;
@@ -24,9 +24,14 @@
 
 .stat-block-sidebar__top-container {
   display: flex;
+  flex: 0 1 auto;
   flex-direction: column;
   justify-content: flex-end;
   height: 210px;
+}
+
+.stat-block-sidebar__height-mode-toggle {
+  height: 42px;
 }
 
 .stat-block-sidebar__label {
@@ -35,17 +40,7 @@
   margin-bottom: 5px;
 }
 
-.stat-block-sidebar__height-mode-radio-group {
-  display: flex;
-  flex-direction: column;
-  text-align: center;
-}
-
-.stat-block-sidebar__radio-label {
-  width: 100%;
-}
-
-.stat-block-sidebar__slider-container {  
+.stat-block-sidebar__slider-container {
   width: 60px;
   height: 860px;
   margin-top: 20px;
@@ -63,4 +58,3 @@
   transform-origin: top left;
   transform: rotate(90deg) translatey(-60px);
 }
-

@@ -22,6 +22,9 @@ export default class SlideToggle extends CustomAutonomousElement {
       this.control.dataset.uncheckedText = this.dataset.uncheckedText ? this.dataset.uncheckedText : 'Off';
       this.control.dataset.checkedText = this.dataset.checkedText ? this.dataset.checkedText : 'On';
 
+      const orientationClass = this.dataset.orientation === 'vertical' ? 'slide-toggle__vertical-control' : 'slide-toggle__horizontal-control';
+      this.control.classList.add(orientationClass);
+
       this.checked = this.hasAttribute('checked');
 
       this.isInitialized = true;

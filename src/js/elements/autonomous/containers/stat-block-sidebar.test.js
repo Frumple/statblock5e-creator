@@ -1,4 +1,6 @@
 import StatBlockSidebar from './stat-block-sidebar.js';
+
+import * as TestCustomElements from '../../../helpers/test/test-custom-elements.js';
 import EventInterceptor from '../../../helpers/test/event-interceptor.js';
 
 const initialSliderValue = 600;
@@ -14,6 +16,7 @@ let statBlockSidebar;
 */
 
 beforeAll(async() => {
+  await TestCustomElements.define();
   await StatBlockSidebar.define();
 });
 
@@ -36,32 +39,28 @@ it('should be hidden when visible is set to false', () => {
   expect(statBlockSidebar.sidebar).toHaveClass(sidebarHiddenClass);
 });
 
-it('should dispatch an event when the "Auto Two-Column Height" button is clicked, and the slider should not be visible', () => {
+it('should dispatch events when the "Height Mode" toggle is checked and unchecked', () => {
   const eventInterceptor = new EventInterceptor(statBlockSidebar, 'twoColumnHeightChanged');
 
-  statBlockSidebar.autoHeightModeButton.click();
+  statBlockSidebar.heightModeToggle.click();
 
-  const event = eventInterceptor.popEvent();
-  expect(event).not.toBeNull();
-  expect(event.detail.mode).toBe('auto');
-  expect(event.detail.height).toBe(initialSliderValue);
-
-  expect(statBlockSidebar.heightMode).toBe('auto');
-  expect(statBlockSidebar.manualHeightSliderContainer).toHaveClass(sliderContainerHiddenClass);
-});
-
-it('should dispatch an event when the "Manual Two-Column Height" button is clicked, and the slider should be visible', () => {
-  const eventInterceptor = new EventInterceptor(statBlockSidebar, 'twoColumnHeightChanged');
-
-  statBlockSidebar.manualHeightModeButton.click();
-
-  const event = eventInterceptor.popEvent();
-  expect(event).not.toBeNull();
-  expect(event.detail.mode).toBe('manual');
-  expect(event.detail.height).toBe(initialSliderValue);
+  const checkedEvent = eventInterceptor.popEvent();
+  expect(checkedEvent).not.toBeNull();
+  expect(checkedEvent.detail.mode).toBe('manual');
+  expect(checkedEvent.detail.height).toBe(initialSliderValue);
 
   expect(statBlockSidebar.heightMode).toBe('manual');
   expect(statBlockSidebar.manualHeightSliderContainer).not.toHaveClass(sliderContainerHiddenClass);
+
+  statBlockSidebar.heightModeToggle.click();
+
+  const uncheckedEvent = eventInterceptor.popEvent();
+  expect(uncheckedEvent).not.toBeNull();
+  expect(uncheckedEvent.detail.mode).toBe('auto');
+  expect(uncheckedEvent.detail.height).toBe(initialSliderValue);
+
+  expect(statBlockSidebar.heightMode).toBe('auto');
+  expect(statBlockSidebar.manualHeightSliderContainer).toHaveClass(sliderContainerHiddenClass);
 });
 
 it('should dispatch an event when the "Manual Two-Column Height" slider is decremented', () => {
