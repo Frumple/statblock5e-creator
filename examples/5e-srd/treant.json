@@ -205,11 +205,11 @@
     "blocks": [
       {
         "name": "False Appearance",
-        "text": "While [name] remains motionless, it is indistinguishable from a normal tree."
+        "text": "While [NAME] remains motionless, it is indistinguishable from a normal tree."
       },
       {
         "name": "Siege Monster",
-        "text": "[name] deals double damage to objects and structures."
+        "text": "[NAME] deals double damage to objects and structures."
       }
     ]
   },
@@ -217,7 +217,7 @@
     "blocks": [
       {
         "name": "Multiattack",
-        "text": "[name] makes two slam attacks."
+        "text": "[NAME] makes two slam attacks."
       },
       {
         "name": "Slam",
@@ -229,7 +229,7 @@
       },
       {
         "name": "Animate Trees (1/Day)",
-        "text": "[name] magically animates one or two trees it can see within 60 feet of it. These trees have the same statistics as a treant, except they have Intelligence and Charisma scores of 1, they can't speak, and they have only the Slam action option. An animated tree acts as an ally of [name]. The tree remains animate for 1 day or until it dies; until [name] dies or is more than 120 feet from the tree; or until [name] takes a bonus action to turn it back into an inanimate tree. The tree then takes root if possible."
+        "text": "[NAME] magically animates one or two trees it can see within 60 feet of it. These trees have the same statistics as a treant, except they have Intelligence and Charisma scores of 1, they can't speak, and they have only the Slam action option. An animated tree acts as an ally of [NAME]. The tree remains animate for 1 day or until it dies; until [NAME] dies or is more than 120 feet from the tree; or until [NAME] takes a bonus action to turn it back into an inanimate tree. The tree then takes root if possible."
       }
     ]
   },
@@ -238,7 +238,7 @@
   },
   "legendaryActions": {
     "blocks": [],
-    "description": "[name] can take 3 legendary actions, choosing from the options below. Only one legendary action option can be used at a time and only at the end of another creature's turn. [name] regains spent legendary actions at the start of its turn."
+    "description": "[NAME] can take 3 legendary actions, choosing from the options below. Only one legendary action option can be used at a time and only at the end of another creature's turn. [NAME] regains spent legendary actions at the start of its turn."
   },
   "layout": {
     "columns": 1,

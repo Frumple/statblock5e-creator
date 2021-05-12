@@ -195,19 +195,19 @@
     "blocks": [
       {
         "name": "Hold Breath",
-        "text": "[name] can hold its breath for 1 hour."
+        "text": "[NAME] can hold its breath for 1 hour."
       },
       {
         "name": "Multiple Heads",
-        "text": "[name] has five heads. While it has more than one head, [name] has advantage on saving throws against being blinded, charmed, deafened, frightened, stunned, and knocked unconscious.\n  Whenever [name] takes 25 or more damage in a single turn, one of its heads dies. If all its heads die, [name] dies.\n  At the end of its turn, it grows two heads for each of its heads that died since its last turn, unless it has taken fire damage since its last turn. [name] regains 10 hit points for each head regrown in this way."
+        "text": "[NAME] has five heads. While it has more than one head, [NAME] has advantage on saving throws against being blinded, charmed, deafened, frightened, stunned, and knocked unconscious.\n  Whenever [NAME] takes 25 or more damage in a single turn, one of its heads dies. If all its heads die, [NAME] dies.\n  At the end of its turn, it grows two heads for each of its heads that died since its last turn, unless it has taken fire damage since its last turn. [NAME] regains 10 hit points for each head regrown in this way."
       },
       {
         "name": "Reactive Heads",
-        "text": "For each head [name] has beyond one, it gets an extra reaction that can be used only for opportunity attacks."
+        "text": "For each head [NAME] has beyond one, it gets an extra reaction that can be used only for opportunity attacks."
       },
       {
         "name": "Wakeful",
-        "text": "While [name] sleeps, at least one of its heads is awake."
+        "text": "While [NAME] sleeps, at least one of its heads is awake."
       }
     ]
   },
@@ -215,7 +215,7 @@
     "blocks": [
       {
         "name": "Multiattack",
-        "text": "[name] makes as many bite attacks as it has heads."
+        "text": "[NAME] makes as many bite attacks as it has heads."
       },
       {
         "name": "Bite",
@@ -228,7 +228,7 @@
   },
   "legendaryActions": {
     "blocks": [],
-    "description": "[name] can take 3 legendary actions, choosing from the options below. Only one legendary action option can be used at a time and only at the end of another creature's turn. [name] regains spent legendary actions at the start of its turn."
+    "description": "[NAME] can take 3 legendary actions, choosing from the options below. Only one legendary action option can be used at a time and only at the end of another creature's turn. [NAME] regains spent legendary actions at the start of its turn."
   },
   "layout": {
     "columns": 1,

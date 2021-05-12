@@ -212,7 +212,7 @@
     "blocks": [
       {
         "name": "Air Form",
-        "text": "[name] can enter a hostile creature's space and stop there. It can move through a space as narrow as 1 inch wide without squeezing."
+        "text": "[NAME] can enter a hostile creature's space and stop there. It can move through a space as narrow as 1 inch wide without squeezing."
       }
     ]
   },
@@ -220,7 +220,7 @@
     "blocks": [
       {
         "name": "Multiattack",
-        "text": "[name] makes two slam attacks."
+        "text": "[NAME] makes two slam attacks."
       },
       {
         "name": "Slam",
@@ -228,7 +228,7 @@
       },
       {
         "name": "Whirlwind (Recharge 4-6)",
-        "text": "Each creature in [name]'s space must make a DC 13 Strength saving throw. On a failure, a target takes DMG[3d8 + STR] bludgeoning damage and is flung up 20 feet away from [name] in a random direction and knocked prone. If a thrown target strikes an object, such as a wall or floor, the target takes DMG[1d6] bludgeoning damage for every 10 feet it was thrown. If the target is thrown at another creature, that creature must succeed on a DC 13 Dexterity saving throw or take the same damage and be knocked prone.\n  If the saving throw is successful, the target takes half the bludgeoning damage and isn't flung away or knocked prone."
+        "text": "Each creature in [NAME]'s space must make a DC 13 Strength saving throw. On a failure, a target takes DMG[3d8 + STR] bludgeoning damage and is flung up 20 feet away from [NAME] in a random direction and knocked prone. If a thrown target strikes an object, such as a wall or floor, the target takes DMG[1d6] bludgeoning damage for every 10 feet it was thrown. If the target is thrown at another creature, that creature must succeed on a DC 13 Dexterity saving throw or take the same damage and be knocked prone.\n  If the saving throw is successful, the target takes half the bludgeoning damage and isn't flung away or knocked prone."
       }
     ]
   },
@@ -237,7 +237,7 @@
   },
   "legendaryActions": {
     "blocks": [],
-    "description": "[name] can take 3 legendary actions, choosing from the options below. Only one legendary action option can be used at a time and only at the end of another creature's turn. [name] regains spent legendary actions at the start of its turn."
+    "description": "[NAME] can take 3 legendary actions, choosing from the options below. Only one legendary action option can be used at a time and only at the end of another creature's turn. [NAME] regains spent legendary actions at the start of its turn."
   },
   "layout": {
     "columns": 1,

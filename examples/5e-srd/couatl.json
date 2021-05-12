@@ -202,15 +202,15 @@
     "blocks": [
       {
         "name": "Innate Spellcasting",
-        "text": "[name]'s spellcasting ability is Charisma (spell save DC SDC[CHA]). It can innately cast the following spells, requiring only verbal components:\n\nAt will: *detect evil and good*, *detect magic*, *detect thoughts*\n3/day each: *bless*, *create food and water*, *cure wounds*, *lesser restoration*, *protection from poison*, *sanctuary*, *shield*\n1/day each: *dream*, *greater restoration*, *scrying*"
+        "text": "[NAME]'s spellcasting ability is Charisma (spell save DC SDC[CHA]). It can innately cast the following spells, requiring only verbal components:\n\nAt will: *detect evil and good*, *detect magic*, *detect thoughts*\n3/day each: *bless*, *create food and water*, *cure wounds*, *lesser restoration*, *protection from poison*, *sanctuary*, *shield*\n1/day each: *dream*, *greater restoration*, *scrying*"
       },
       {
         "name": "Magic Weapons",
-        "text": "[name]'s weapon attacks are magical."
+        "text": "[NAME]'s weapon attacks are magical."
       },
       {
         "name": "Shielded Mind",
-        "text": "[name] is immune to scrying and to any effect that would sense its emotions, read its thoughts, or detect its location."
+        "text": "[NAME] is immune to scrying and to any effect that would sense its emotions, read its thoughts, or detect its location."
       }
     ]
   },
@@ -222,11 +222,11 @@
       },
       {
         "name": "Constrict",
-        "text": "*Melee Weapon Attack:* ATK[STR + 1] to hit, reach 10 ft., one Medium or smaller creature. *Hit:* DMG[2d6 + STR] bludgeoning damage, and the target is grappled (escape DC 15). Until this grapple ends, the target is restrained, and [name] can't constrict another target."
+        "text": "*Melee Weapon Attack:* ATK[STR + 1] to hit, reach 10 ft., one Medium or smaller creature. *Hit:* DMG[2d6 + STR] bludgeoning damage, and the target is grappled (escape DC 15). Until this grapple ends, the target is restrained, and [NAME] can't constrict another target."
       },
       {
         "name": "Change Shape",
-        "text": "[name] magically polymorphs into a humanoid or beast that has a challenge rating equal to or less than its own, or back into its true form. It reverts to its true form if it dies. Any equipment it is wearing or carrying is absorbed or borne by the new form ([name]'s choice).\n  In a new form, [name] retains its game statistics and ability to speak, but its AC, movement modes, Strength, Dexterity, and other actions are replaced by those of the new form, and it gains any statistics and capabilities (except class features, legendary actions, and lair actions) that the new form has but that it lacks. If the new form has a bite attack, [name] can use its bite in that form."
+        "text": "[NAME] magically polymorphs into a humanoid or beast that has a challenge rating equal to or less than its own, or back into its true form. It reverts to its true form if it dies. Any equipment it is wearing or carrying is absorbed or borne by the new form ([NAME]'s choice).\n  In a new form, [NAME] retains its game statistics and ability to speak, but its AC, movement modes, Strength, Dexterity, and other actions are replaced by those of the new form, and it gains any statistics and capabilities (except class features, legendary actions, and lair actions) that the new form has but that it lacks. If the new form has a bite attack, [NAME] can use its bite in that form."
       }
     ]
   },
@@ -235,7 +235,7 @@
   },
   "legendaryActions": {
     "blocks": [],
-    "description": "[name] can take 3 legendary actions, choosing from the options below. Only one legendary action option can be used at a time and only at the end of another creature's turn. [name] regains spent legendary actions at the start of its turn."
+    "description": "[NAME] can take 3 legendary actions, choosing from the options below. Only one legendary action option can be used at a time and only at the end of another creature's turn. [NAME] regains spent legendary actions at the start of its turn."
   },
   "layout": {
     "columns": 1,

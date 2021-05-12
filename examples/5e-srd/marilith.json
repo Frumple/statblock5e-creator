@@ -206,15 +206,15 @@
     "blocks": [
       {
         "name": "Magic Resistance",
-        "text": "[name] has advantage on saving throws against spells and other magical effects."
+        "text": "[NAME] has advantage on saving throws against spells and other magical effects."
       },
       {
         "name": "Magic Weapons",
-        "text": "[name]'s weapon attacks are magical."
+        "text": "[NAME]'s weapon attacks are magical."
       },
       {
         "name": "Reactive",
-        "text": "[name] can take one reaction on every turn in combat."
+        "text": "[NAME] can take one reaction on every turn in combat."
       }
     ]
   },
@@ -222,7 +222,7 @@
     "blocks": [
       {
         "name": "Multiattack",
-        "text": "[name] can make seven attacks: six with its longswords and one with its tail."
+        "text": "[NAME] can make seven attacks: six with its longswords and one with its tail."
       },
       {
         "name": "Longsword",
@@ -230,11 +230,11 @@
       },
       {
         "name": "Tail",
-        "text": "*Melee Weapon Attack:* ATK[STR] to hit, reach 10 ft., one creature. *Hit:* DMG[2d10 + STR] bludgeoning damage. If the target is Medium or smaller, it is grappled (escape DC 19). Until this grapple ends, the target is restrained, [name] can automatically hit the target with its tail, and [name] can't make tail attacks against other targets."
+        "text": "*Melee Weapon Attack:* ATK[STR] to hit, reach 10 ft., one creature. *Hit:* DMG[2d10 + STR] bludgeoning damage. If the target is Medium or smaller, it is grappled (escape DC 19). Until this grapple ends, the target is restrained, [NAME] can automatically hit the target with its tail, and [NAME] can't make tail attacks against other targets."
       },
       {
         "name": "Teleport",
-        "text": "[name] magically teleports, along with any equipment it is wearing or carrying, up to 120 feet to an unoccupied space it can see."
+        "text": "[NAME] magically teleports, along with any equipment it is wearing or carrying, up to 120 feet to an unoccupied space it can see."
       },
       {
         "name": "Variant: Summon Demon (1/Day)",
@@ -246,13 +246,13 @@
     "blocks": [
       {
         "name": "Parry",
-        "text": "[name] adds 5 to its AC against one melee attack that would hit it. To do so, [name] must see the attacker and be wielding a melee weapon."
+        "text": "[NAME] adds 5 to its AC against one melee attack that would hit it. To do so, [NAME] must see the attacker and be wielding a melee weapon."
       }
     ]
   },
   "legendaryActions": {
     "blocks": [],
-    "description": "[name] can take 3 legendary actions, choosing from the options below. Only one legendary action option can be used at a time and only at the end of another creature's turn. [name] regains spent legendary actions at the start of its turn."
+    "description": "[NAME] can take 3 legendary actions, choosing from the options below. Only one legendary action option can be used at a time and only at the end of another creature's turn. [NAME] regains spent legendary actions at the start of its turn."
   },
   "layout": {
     "columns": 1,

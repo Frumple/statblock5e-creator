@@ -198,7 +198,7 @@
     "blocks": [
       {
         "name": "Aggressive",
-        "text": "As a bonus action, [name] can move up to its speed toward a hostile creature that it can see."
+        "text": "As a bonus action, [NAME] can move up to its speed toward a hostile creature that it can see."
       }
     ]
   },
@@ -219,7 +219,7 @@
   },
   "legendaryActions": {
     "blocks": [],
-    "description": "[name] can take 3 legendary actions, choosing from the options below. Only one legendary action option can be used at a time and only at the end of another creature's turn. [name] regains spent legendary actions at the start of its turn."
+    "description": "[NAME] can take 3 legendary actions, choosing from the options below. Only one legendary action option can be used at a time and only at the end of another creature's turn. [NAME] regains spent legendary actions at the start of its turn."
   },
   "layout": {
     "columns": 1,

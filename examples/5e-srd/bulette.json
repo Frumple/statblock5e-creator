@@ -195,7 +195,7 @@
     "blocks": [
       {
         "name": "Standing Leap",
-        "text": "[name]'s long jump is up to 30 ft. and its high jump is up to 15 ft., with or without a running start."
+        "text": "[NAME]'s long jump is up to 30 ft. and its high jump is up to 15 ft., with or without a running start."
       }
     ]
   },
@@ -207,7 +207,7 @@
       },
       {
         "name": "Deadly Leap",
-        "text": "If [name] jumps at least 15 ft. as part of its movement, it can then use this action to land on its ft. in a space that contains one or more other creatures. Each of those creatures must succeed on a DC 16 Strength or Dexterity saving throw (target's choice) or be knocked prone and take DMG[3d6 + STR] bludgeoning damage plus DMG[3d6 + STR] slashing damage. On a successful save, the creature takes only half the damage, isn't knocked prone, and is pushed 5 ft. out of [name]'s space into an unoccupied space of the creature's choice. If no unoccupied space is within range, the creature instead falls prone in [name]'s space."
+        "text": "If [NAME] jumps at least 15 ft. as part of its movement, it can then use this action to land on its ft. in a space that contains one or more other creatures. Each of those creatures must succeed on a DC 16 Strength or Dexterity saving throw (target's choice) or be knocked prone and take DMG[3d6 + STR] bludgeoning damage plus DMG[3d6 + STR] slashing damage. On a successful save, the creature takes only half the damage, isn't knocked prone, and is pushed 5 ft. out of [NAME]'s space into an unoccupied space of the creature's choice. If no unoccupied space is within range, the creature instead falls prone in [NAME]'s space."
       }
     ]
   },
@@ -216,7 +216,7 @@
   },
   "legendaryActions": {
     "blocks": [],
-    "description": "[name] can take 3 legendary actions, choosing from the options below. Only one legendary action option can be used at a time and only at the end of another creature's turn. [name] regains spent legendary actions at the start of its turn."
+    "description": "[NAME] can take 3 legendary actions, choosing from the options below. Only one legendary action option can be used at a time and only at the end of another creature's turn. [NAME] regains spent legendary actions at the start of its turn."
   },
   "layout": {
     "columns": 1,

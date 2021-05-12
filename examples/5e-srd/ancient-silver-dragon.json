@@ -200,7 +200,7 @@
     "blocks": [
       {
         "name": "Legendary Resistance (3/Day)",
-        "text": "If [name] fails a saving throw, it can choose to succeed instead."
+        "text": "If [NAME] fails a saving throw, it can choose to succeed instead."
       }
     ]
   },
@@ -208,7 +208,7 @@
     "blocks": [
       {
         "name": "Multiattack",
-        "text": "[name] can use its Frightful Presence. It then makes three attacks: one with its bite and two with its claws."
+        "text": "[NAME] can use its Frightful Presence. It then makes three attacks: one with its bite and two with its claws."
       },
       {
         "name": "Bite",
@@ -224,15 +224,15 @@
       },
       {
         "name": "Frightful Presence",
-        "text": "Each creature of [name]'s choice that is within 120 feet of [name] and aware of it must succeed on a DC 21 Wisdom saving throw or become frightened for 1 minute. A creature can repeat the saving throw at the end of each of its turns, ending the effect on itself on a success. If a creature's saving throw is successful or the effect ends for it, the creature is immune to [name]'s Frightful Presence for the next 24 hours."
+        "text": "Each creature of [NAME]'s choice that is within 120 feet of [NAME] and aware of it must succeed on a DC 21 Wisdom saving throw or become frightened for 1 minute. A creature can repeat the saving throw at the end of each of its turns, ending the effect on itself on a success. If a creature's saving throw is successful or the effect ends for it, the creature is immune to [NAME]'s Frightful Presence for the next 24 hours."
       },
       {
         "name": "Breath Weapons (Recharge 5-6)",
-        "text": "[name] uses one of the following breath weapons.\n\n**Cold Breath.** [name] exhales an icy blast in a 90-foot cone. Each creature in that area must make a DC 24 Constitution saving throw, taking DMG[15d8] cold damage on a failed save, or half as much damage on a successful one.\n**Paralyzing Breath.** [name] exhales paralyzing gas in a 90- foot cone. Each creature in that area must succeed on a DC 24 Constitution saving throw or be paralyzed for 1 minute. A creature can repeat the saving throw at the end of each of its turns, ending the effect on itself on a success."
+        "text": "[NAME] uses one of the following breath weapons.\n\n**Cold Breath.** [NAME] exhales an icy blast in a 90-foot cone. Each creature in that area must make a DC 24 Constitution saving throw, taking DMG[15d8] cold damage on a failed save, or half as much damage on a successful one.\n**Paralyzing Breath.** [NAME] exhales paralyzing gas in a 90- foot cone. Each creature in that area must succeed on a DC 24 Constitution saving throw or be paralyzed for 1 minute. A creature can repeat the saving throw at the end of each of its turns, ending the effect on itself on a success."
       },
       {
         "name": "Change Shape",
-        "text": "[name] magically polymorphs into a humanoid or beast that has a challenge rating no higher than its own, or back into its true form. It reverts to its true form if it dies. Any equipment it is wearing or carrying is absorbed or borne by the new form ([name]'s choice).\n  In a new form, [name] retains its alignment, hit points, Hit Dice, ability to speak, proficiencies, Legendary Resistance, lair actions, and Intelligence, Wisdom, and Charisma scores, as well as this action. Its statistics and capabilities are otherwise replaced by those of the new form, except any class features or legendary actions of that form."
+        "text": "[NAME] magically polymorphs into a humanoid or beast that has a challenge rating no higher than its own, or back into its true form. It reverts to its true form if it dies. Any equipment it is wearing or carrying is absorbed or borne by the new form ([NAME]'s choice).\n  In a new form, [NAME] retains its alignment, hit points, Hit Dice, ability to speak, proficiencies, Legendary Resistance, lair actions, and Intelligence, Wisdom, and Charisma scores, as well as this action. Its statistics and capabilities are otherwise replaced by those of the new form, except any class features or legendary actions of that form."
       }
     ]
   },
@@ -243,18 +243,18 @@
     "blocks": [
       {
         "name": "Detect",
-        "text": "[name] makes a Wisdom (Perception) check."
+        "text": "[NAME] makes a Wisdom (Perception) check."
       },
       {
         "name": "Tail Attack",
-        "text": "[name] makes a tail attack."
+        "text": "[NAME] makes a tail attack."
       },
       {
         "name": "Wing Attack (Costs 2 Actions)",
-        "text": "[name] beats its wings. Each creature within 15 ft. of [name] must succeed on a DC 25 Dexterity saving throw or take DMG[2d6 + STR] bludgeoning damage and be knocked prone. [name] can then fly up to half its flying speed."
+        "text": "[NAME] beats its wings. Each creature within 15 ft. of [NAME] must succeed on a DC 25 Dexterity saving throw or take DMG[2d6 + STR] bludgeoning damage and be knocked prone. [NAME] can then fly up to half its flying speed."
       }
     ],
-    "description": "[name] can take 3 legendary actions, choosing from the options below. Only one legendary action option can be used at a time and only at the end of another creature's turn. [name] regains spent legendary actions at the start of its turn."
+    "description": "[NAME] can take 3 legendary actions, choosing from the options below. Only one legendary action option can be used at a time and only at the end of another creature's turn. [NAME] regains spent legendary actions at the start of its turn."
   },
   "layout": {
     "columns": 1,

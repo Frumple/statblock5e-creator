@@ -210,7 +210,7 @@
     "blocks": [
       {
         "name": "Multiattack",
-        "text": "[name] can use its Dreadful Glare and makes one attack with its rotting fist."
+        "text": "[NAME] can use its Dreadful Glare and makes one attack with its rotting fist."
       },
       {
         "name": "Rotting Fist",
@@ -218,7 +218,7 @@
       },
       {
         "name": "Dreadful Glare",
-        "text": "[name] targets one creature it can see within 60 ft. of it. If the target can see [name], it must succeed on a DC 11 Wisdom saving throw against this magic or become frightened until the end of [name]'s next turn. If the target fails the saving throw by 5 or more, it is also paralyzed for the same duration. A target that succeeds on the saving throw is immune to the Dreadful Glare of all mummies (but not mummy lords) for the next 24 hours."
+        "text": "[NAME] targets one creature it can see within 60 ft. of it. If the target can see [NAME], it must succeed on a DC 11 Wisdom saving throw against this magic or become frightened until the end of [NAME]'s next turn. If the target fails the saving throw by 5 or more, it is also paralyzed for the same duration. A target that succeeds on the saving throw is immune to the Dreadful Glare of all mummies (but not mummy lords) for the next 24 hours."
       }
     ]
   },
@@ -227,7 +227,7 @@
   },
   "legendaryActions": {
     "blocks": [],
-    "description": "[name] can take 3 legendary actions, choosing from the options below. Only one legendary action option can be used at a time and only at the end of another creature's turn. [name] regains spent legendary actions at the start of its turn."
+    "description": "[NAME] can take 3 legendary actions, choosing from the options below. Only one legendary action option can be used at a time and only at the end of another creature's turn. [NAME] regains spent legendary actions at the start of its turn."
   },
   "layout": {
     "columns": 1,

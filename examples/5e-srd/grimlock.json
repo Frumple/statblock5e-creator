@@ -199,15 +199,15 @@
     "blocks": [
       {
         "name": "Blind Senses",
-        "text": "[name] can't use its blindsight while deafened and unable to smell."
+        "text": "[NAME] can't use its blindsight while deafened and unable to smell."
       },
       {
         "name": "Keen Hearing and Smell",
-        "text": "[name] has advantage on Wisdom (Perception) checks that rely on hearing or smell."
+        "text": "[NAME] has advantage on Wisdom (Perception) checks that rely on hearing or smell."
       },
       {
         "name": "Stone Camouflage",
-        "text": "[name] has advantage on Dexterity (Stealth) checks made to hide in rocky terrain."
+        "text": "[NAME] has advantage on Dexterity (Stealth) checks made to hide in rocky terrain."
       }
     ]
   },
@@ -224,7 +224,7 @@
   },
   "legendaryActions": {
     "blocks": [],
-    "description": "[name] can take 3 legendary actions, choosing from the options below. Only one legendary action option can be used at a time and only at the end of another creature's turn. [name] regains spent legendary actions at the start of its turn."
+    "description": "[NAME] can take 3 legendary actions, choosing from the options below. Only one legendary action option can be used at a time and only at the end of another creature's turn. [NAME] regains spent legendary actions at the start of its turn."
   },
   "layout": {
     "columns": 1,

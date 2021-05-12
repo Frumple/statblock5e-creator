@@ -195,7 +195,7 @@
     "blocks": [
       {
         "name": "Keen Sight",
-        "text": "[name] has advantage on Wisdom (Perception) checks that rely on sight."
+        "text": "[NAME] has advantage on Wisdom (Perception) checks that rely on sight."
       }
     ]
   },
@@ -203,7 +203,7 @@
     "blocks": [
       {
         "name": "Multiattack",
-        "text": "[name] makes two attacks: one with its beak and one with its talons."
+        "text": "[NAME] makes two attacks: one with its beak and one with its talons."
       },
       {
         "name": "Beak",
@@ -211,7 +211,7 @@
       },
       {
         "name": "Talons",
-        "text": "*Melee Weapon Attack:* ATK[STR] to hit, reach 5 ft., one target. *Hit:* DMG[4d6 + STR] slashing damage, and the target is grappled (escape DC 19). Until this grapple ends, the target is restrained, and [name] can't use its talons on another target."
+        "text": "*Melee Weapon Attack:* ATK[STR] to hit, reach 5 ft., one target. *Hit:* DMG[4d6 + STR] slashing damage, and the target is grappled (escape DC 19). Until this grapple ends, the target is restrained, and [NAME] can't use its talons on another target."
       }
     ]
   },
@@ -220,7 +220,7 @@
   },
   "legendaryActions": {
     "blocks": [],
-    "description": "[name] can take 3 legendary actions, choosing from the options below. Only one legendary action option can be used at a time and only at the end of another creature's turn. [name] regains spent legendary actions at the start of its turn."
+    "description": "[NAME] can take 3 legendary actions, choosing from the options below. Only one legendary action option can be used at a time and only at the end of another creature's turn. [NAME] regains spent legendary actions at the start of its turn."
   },
   "layout": {
     "columns": 1,

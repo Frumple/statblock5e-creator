@@ -205,15 +205,15 @@
     "blocks": [
       {
         "name": "Barbed Hide",
-        "text": "At the start of each of its turns, the [fullname] deals DMG[1d10] piercing damage to any creature grappling it."
+        "text": "At the start of each of its turns, the [FULLNAME] deals DMG[1d10] piercing damage to any creature grappling it."
       },
       {
         "name": "Devil's Sight",
-        "text": "Magical darkness doesn't impede [name]'s darkvision."
+        "text": "Magical darkness doesn't impede [NAME]'s darkvision."
       },
       {
         "name": "Magic Resistance",
-        "text": "[name] has advantage on saving throws against spells and other magical effects."
+        "text": "[NAME] has advantage on saving throws against spells and other magical effects."
       }
     ]
   },
@@ -221,7 +221,7 @@
     "blocks": [
       {
         "name": "Multiattack",
-        "text": "[name] makes three melee attacks: one with its tail and two with its claws. Alternatively, it can use Hurl Flame twice."
+        "text": "[NAME] makes three melee attacks: one with its tail and two with its claws. Alternatively, it can use Hurl Flame twice."
       },
       {
         "name": "Claw",
@@ -242,7 +242,7 @@
   },
   "legendaryActions": {
     "blocks": [],
-    "description": "[name] can take 3 legendary actions, choosing from the options below. Only one legendary action option can be used at a time and only at the end of another creature's turn. [name] regains spent legendary actions at the start of its turn."
+    "description": "[NAME] can take 3 legendary actions, choosing from the options below. Only one legendary action option can be used at a time and only at the end of another creature's turn. [NAME] regains spent legendary actions at the start of its turn."
   },
   "layout": {
     "columns": 1,

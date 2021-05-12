@@ -199,15 +199,15 @@
     "blocks": [
       {
         "name": "Shapechanger",
-        "text": "[name] can use its action to polymorph into a Small or Medium humanoid it has seen, or back into its true form. Its statistics, other than its size, are the same in each form. Any equipment it is wearing or carrying isn’t transformed. It reverts to its true form if it dies."
+        "text": "[NAME] can use its action to polymorph into a Small or Medium humanoid it has seen, or back into its true form. Its statistics, other than its size, are the same in each form. Any equipment it is wearing or carrying isn’t transformed. It reverts to its true form if it dies."
       },
       {
         "name": "Ambusher",
-        "text": "In the first round of a combat, [name] has advantage on attack rolls against any creature it surprised."
+        "text": "In the first round of a combat, [NAME] has advantage on attack rolls against any creature it surprised."
       },
       {
         "name": "Surprise Attack",
-        "text": "If [name] surprises a creature and hits it with an attack during the first round of combat, the target takes an extra DMG[3d6] damage from the attack."
+        "text": "If [NAME] surprises a creature and hits it with an attack during the first round of combat, the target takes an extra DMG[3d6] damage from the attack."
       }
     ]
   },
@@ -215,7 +215,7 @@
     "blocks": [
       {
         "name": "Multiattack",
-        "text": "[name] makes two melee attacks."
+        "text": "[NAME] makes two melee attacks."
       },
       {
         "name": "Slam",
@@ -223,7 +223,7 @@
       },
       {
         "name": "Read Thoughts",
-        "text": "[name] magically reads the surface thoughts of one creature within 60 feet of it. The effect can penetrate barriers, but 3 feet of wood or dirt, 2 feet of stone, 2 inches of metal, or a thin sheet of lead blocks it. While the target is in range, [name] can continue reading its thoughts, as long as [name]’s concentration isn’t broken (as if concentrating on a spell). While reading the target’s mind, [name] has advantage on Wisdom (Insight) and Charisma (Deception, Intimidation, and Persuasion) checks against the target."
+        "text": "[NAME] magically reads the surface thoughts of one creature within 60 feet of it. The effect can penetrate barriers, but 3 feet of wood or dirt, 2 feet of stone, 2 inches of metal, or a thin sheet of lead blocks it. While the target is in range, [NAME] can continue reading its thoughts, as long as [NAME]’s concentration isn’t broken (as if concentrating on a spell). While reading the target’s mind, [NAME] has advantage on Wisdom (Insight) and Charisma (Deception, Intimidation, and Persuasion) checks against the target."
       }
     ]
   },
@@ -232,7 +232,7 @@
   },
   "legendaryActions": {
     "blocks": [],
-    "description": "[name] can take 3 legendary actions, choosing from the options below. Only one legendary action option can be used at a time and only at the end of another creature's turn. [name] regains spent legendary actions at the start of its turn."
+    "description": "[NAME] can take 3 legendary actions, choosing from the options below. Only one legendary action option can be used at a time and only at the end of another creature's turn. [NAME] regains spent legendary actions at the start of its turn."
   },
   "layout": {
     "columns": 1,

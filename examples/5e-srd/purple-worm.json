@@ -195,7 +195,7 @@
     "blocks": [
       {
         "name": "Tunneler",
-        "text": "[name] can burrow through solid rock at half its burrow speed and leaves a 10-foot-diameter tunnel in its wake."
+        "text": "[NAME] can burrow through solid rock at half its burrow speed and leaves a 10-foot-diameter tunnel in its wake."
       }
     ]
   },
@@ -203,11 +203,11 @@
     "blocks": [
       {
         "name": "Multiattack",
-        "text": "[name] makes two attacks: one with its bite and one with its stinger."
+        "text": "[NAME] makes two attacks: one with its bite and one with its stinger."
       },
       {
         "name": "Bite",
-        "text": "*Melee Weapon Attack:* MOD[STR] to hit, reach 10 ft., one target. *Hit:* DMG[3d8 + STR] piercing damage. If the target is a Large or smaller creature, it must succeed on a DC 19 Dexterity saving throw or be swallowed by [name]. A swallowed creature is blinded and restrained, it has total cover against attacks and other effects outside [name], and it takes DMG[6d6] acid damage at the start of each of [name]'s turns.\n  If [name] takes 30 damage or more on a single turn from a creature inside it, [name] must succeed on a DC 21 Constitution saving throw at the end of that turn or regurgitate all swallowed creatures, which fall prone in a space within 10 feet of [name]. If [name] dies, a swallowed creature is no longer restrained by it and can escape from the corpse by using 20 feet of movement, exiting prone."
+        "text": "*Melee Weapon Attack:* MOD[STR] to hit, reach 10 ft., one target. *Hit:* DMG[3d8 + STR] piercing damage. If the target is a Large or smaller creature, it must succeed on a DC 19 Dexterity saving throw or be swallowed by [NAME]. A swallowed creature is blinded and restrained, it has total cover against attacks and other effects outside [NAME], and it takes DMG[6d6] acid damage at the start of each of [NAME]'s turns.\n  If [NAME] takes 30 damage or more on a single turn from a creature inside it, [NAME] must succeed on a DC 21 Constitution saving throw at the end of that turn or regurgitate all swallowed creatures, which fall prone in a space within 10 feet of [NAME]. If [NAME] dies, a swallowed creature is no longer restrained by it and can escape from the corpse by using 20 feet of movement, exiting prone."
       },
       {
         "name": "Tail Stinger",
@@ -220,7 +220,7 @@
   },
   "legendaryActions": {
     "blocks": [],
-    "description": "[name] can take 3 legendary actions, choosing from the options below. Only one legendary action option can be used at a time and only at the end of another creature's turn. [name] regains spent legendary actions at the start of its turn."
+    "description": "[NAME] can take 3 legendary actions, choosing from the options below. Only one legendary action option can be used at a time and only at the end of another creature's turn. [NAME] regains spent legendary actions at the start of its turn."
   },
   "layout": {
     "columns": 1,

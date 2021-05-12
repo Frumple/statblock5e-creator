@@ -197,11 +197,11 @@
     "blocks": [
       {
         "name": "Keen Smell",
-        "text": "[name] has advantage on Wisdom (Perception) checks that rely on smell."
+        "text": "[NAME] has advantage on Wisdom (Perception) checks that rely on smell."
       },
       {
         "name": "Regeneration",
-        "text": "[name] regains 10 hit points at the start of its turn. If [name] takes acid or fire damage, this trait doesn’t function at the start of [name]’s next turn. [name] dies only if it starts its turn with 0 hit points and doesn’t regenerate."
+        "text": "[NAME] regains 10 hit points at the start of its turn. If [NAME] takes acid or fire damage, this trait doesn’t function at the start of [NAME]’s next turn. [NAME] dies only if it starts its turn with 0 hit points and doesn’t regenerate."
       }
     ]
   },
@@ -209,7 +209,7 @@
     "blocks": [
       {
         "name": "Multiattack",
-        "text": "[name] makes three attacks: one with its bite and two with its claws."
+        "text": "[NAME] makes three attacks: one with its bite and two with its claws."
       },
       {
         "name": "Bite",
@@ -226,7 +226,7 @@
   },
   "legendaryActions": {
     "blocks": [],
-    "description": "[name] can take 3 legendary actions, choosing from the options below. Only one legendary action option can be used at a time and only at the end of another creature's turn. [name] regains spent legendary actions at the start of its turn."
+    "description": "[NAME] can take 3 legendary actions, choosing from the options below. Only one legendary action option can be used at a time and only at the end of another creature's turn. [NAME] regains spent legendary actions at the start of its turn."
   },
   "layout": {
     "columns": 1,

@@ -199,7 +199,7 @@
     "blocks": [
       {
         "name": "False Appearance",
-        "text": "While [name] remains motionless, it is indistinguishable from an ordinary fungus."
+        "text": "While [NAME] remains motionless, it is indistinguishable from an ordinary fungus."
       }
     ]
   },
@@ -207,7 +207,7 @@
     "blocks": [
       {
         "name": "Shriek",
-        "text": "When bright light or a creature is within 30 feet of [name], it emits a shriek audible within 300 feet of it. [name] continues to shriek until the disturbance moves out of range and for 1d4 of [name]'s turns afterward"
+        "text": "When bright light or a creature is within 30 feet of [NAME], it emits a shriek audible within 300 feet of it. [NAME] continues to shriek until the disturbance moves out of range and for 1d4 of [NAME]'s turns afterward"
       }
     ]
   },
@@ -216,7 +216,7 @@
   },
   "legendaryActions": {
     "blocks": [],
-    "description": "[name] can take 3 legendary actions, choosing from the options below. Only one legendary action option can be used at a time and only at the end of another creature's turn. [name] regains spent legendary actions at the start of its turn."
+    "description": "[NAME] can take 3 legendary actions, choosing from the options below. Only one legendary action option can be used at a time and only at the end of another creature's turn. [NAME] regains spent legendary actions at the start of its turn."
   },
   "layout": {
     "columns": 1,

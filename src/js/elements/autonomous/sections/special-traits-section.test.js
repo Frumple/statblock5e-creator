@@ -60,7 +60,7 @@ describe('when the show section is clicked', () => {
     it('should add a single block', () => {
       const block = {
         name: 'Antimagic Susceptibility',
-        text: '[name] is incapacitated while in the area of an _antimagic field_. If targeted by *dispel magic*, [name] must succeed on a Constitution saving throw against the caster\'s spell save DC or fall unconscious for 1 minute.',
+        text: '[NAME] is incapacitated while in the area of an _antimagic field_. If targeted by *dispel magic*, [NAME] must succeed on a Constitution saving throw against the caster\'s spell save DC or fall unconscious for 1 minute.',
         markdownText: 'The armor is incapacitated while in the area of an _antimagic field_. If targeted by *dispel magic*, the armor must succeed on a Constitution saving throw against the caster\'s spell save DC or fall unconscious for 1 minute.',
         htmlText: 'The armor is incapacitated while in the area of an <em>antimagic field</em>. If targeted by <em>dispel magic</em>, the armor must succeed on a Constitution saving throw against the caster\'s spell save DC or fall unconscious for 1 minute.'
       };
@@ -74,7 +74,7 @@ describe('when the show section is clicked', () => {
     it('should add a single block with multiline text', () => {
       const block = {
         name: 'Multiple Heads',
-        text: '[name] has five heads. While it has more than one head, [name] has advantage on saving throws against being blinded, charmed, deafened, frightened, stunned, and knocked unconscious.\n  Whenever [name] takes 25 or more damage in a single turn, one of its heads dies. If all its heads die, [name] dies.\n  At the end of its turn, it grows two heads for each of its heads that died since its last turn, unless it has taken fire damage since its last turn. [name] regains 10 hit points for each head regrown in this way.',
+        text: '[NAME] has five heads. While it has more than one head, [NAME] has advantage on saving throws against being blinded, charmed, deafened, frightened, stunned, and knocked unconscious.\n  Whenever [NAME] takes 25 or more damage in a single turn, one of its heads dies. If all its heads die, [NAME] dies.\n  At the end of its turn, it grows two heads for each of its heads that died since its last turn, unless it has taken fire damage since its last turn. [NAME] regains 10 hit points for each head regrown in this way.',
         markdownText: 'The hydra has five heads. While it has more than one head, the hydra has advantage on saving throws against being blinded, charmed, deafened, frightened, stunned, and knocked unconscious.  \n>   Whenever the hydra takes 25 or more damage in a single turn, one of its heads dies. If all its heads die, the hydra dies.  \n>   At the end of its turn, it grows two heads for each of its heads that died since its last turn, unless it has taken fire damage since its last turn. The hydra regains 10 hit points for each head regrown in this way.',
         htmlText: 'The hydra has five heads. While it has more than one head, the hydra has advantage on saving throws against being blinded, charmed, deafened, frightened, stunned, and knocked unconscious.\n  Whenever the hydra takes 25 or more damage in a single turn, one of its heads dies. If all its heads die, the hydra dies.\n  At the end of its turn, it grows two heads for each of its heads that died since its last turn, unless it has taken fire damage since its last turn. The hydra regains 10 hit points for each head regrown in this way.'
       };
@@ -87,7 +87,7 @@ describe('when the show section is clicked', () => {
     it('should add a single block with html escaped', () => {
       const block = {
         name: 'Antimagic Susceptibility',
-        text: '[name] is incapacitated while in the area of an <em>antimagic field</em>. If targeted by <em>dispel magic</em>, [name] must succeed on a Constitution saving throw against the caster\'s spell save DC or fall unconscious for 1 minute.',
+        text: '[NAME] is incapacitated while in the area of an <em>antimagic field</em>. If targeted by <em>dispel magic</em>, [NAME] must succeed on a Constitution saving throw against the caster\'s spell save DC or fall unconscious for 1 minute.',
         markdownText: 'The armor is incapacitated while in the area of an &lt;em&gt;antimagic field&lt;/em&gt;. If targeted by &lt;em&gt;dispel magic&lt;/em&gt;, the armor must succeed on a Constitution saving throw against the caster\'s spell save DC or fall unconscious for 1 minute.',
         htmlText: 'The armor is incapacitated while in the area of an &lt;em&gt;antimagic field&lt;/em&gt;. If targeted by &lt;em&gt;dispel magic&lt;/em&gt;, the armor must succeed on a Constitution saving throw against the caster\'s spell save DC or fall unconscious for 1 minute.'
       };
@@ -102,19 +102,19 @@ describe('when the show section is clicked', () => {
       const blocks = [
         {
           name: 'Keen Hearing and Smell',
-          text: '[name] has advantage on Wisdom (Perception) checks that rely on hearing or smell.',
+          text: '[NAME] has advantage on Wisdom (Perception) checks that rely on hearing or smell.',
           markdownText: 'The wolf has advantage on Wisdom (Perception) checks that rely on hearing or smell.',
           htmlText: 'The wolf has advantage on Wisdom (Perception) checks that rely on hearing or smell.'
         },
         {
           name: 'Pack Tactics',
-          text: '[name] has advantage on an attack roll against a creature if at least one of the creature\'s allies is within 5 feet of the creature and the ally isn\'t incapacitated.',
+          text: '[NAME] has advantage on an attack roll against a creature if at least one of the creature\'s allies is within 5 feet of the creature and the ally isn\'t incapacitated.',
           markdownText: 'The wolf has advantage on an attack roll against a creature if at least one of the creature\'s allies is within 5 feet of the creature and the ally isn\'t incapacitated.',
           htmlText: 'The wolf has advantage on an attack roll against a creature if at least one of the creature\'s allies is within 5 feet of the creature and the ally isn\'t incapacitated.'
         },
         {
           name: 'Snow Camouflage',
-          text: '[name] has advantage on Dexterity (Stealth) checks made to hide in snowy terrain.',
+          text: '[NAME] has advantage on Dexterity (Stealth) checks made to hide in snowy terrain.',
           markdownText: 'The wolf has advantage on Dexterity (Stealth) checks made to hide in snowy terrain.',
           htmlText: 'The wolf has advantage on Dexterity (Stealth) checks made to hide in snowy terrain.'
         }
@@ -129,7 +129,7 @@ describe('when the show section is clicked', () => {
     it('should add a single block, then remove it', () => {
       const block = {
         name: 'Spider Climb',
-        text: '[name] can climb difficult surfaces, including upside down on ceilings, without needing to make an ability check.',
+        text: '[NAME] can climb difficult surfaces, including upside down on ceilings, without needing to make an ability check.',
         markdownText: 'The jelly can climb difficult surfaces, including upside down on ceilings, without needing to make an ability check.',
         htmlText: 'The jelly can climb difficult surfaces, including upside down on ceilings, without needing to make an ability check.'
       };
@@ -144,19 +144,19 @@ describe('when the show section is clicked', () => {
       const blocks = [
         {
           name: 'Shapechanger',
-          text: '[name] can use its action to polymorph into a Small or Medium humanoid it has seen, or back into its true form. Its statistics, other than its size, are the same in each form. Any equipment it is wearing or carrying isn\'t transformed. It reverts to its true form if it dies.',
+          text: '[NAME] can use its action to polymorph into a Small or Medium humanoid it has seen, or back into its true form. Its statistics, other than its size, are the same in each form. Any equipment it is wearing or carrying isn\'t transformed. It reverts to its true form if it dies.',
           markdownText: 'The doppelganger can use its action to polymorph into a Small or Medium humanoid it has seen, or back into its true form. Its statistics, other than its size, are the same in each form. Any equipment it is wearing or carrying isn\'t transformed. It reverts to its true form if it dies.',
           htmlText: 'The doppelganger can use its action to polymorph into a Small or Medium humanoid it has seen, or back into its true form. Its statistics, other than its size, are the same in each form. Any equipment it is wearing or carrying isn\'t transformed. It reverts to its true form if it dies.'
         },
         {
           name: 'Ambusher',
-          text: '[name] has advantage on attack rolls against any creature it has surprised.',
+          text: '[NAME] has advantage on attack rolls against any creature it has surprised.',
           markdownText: 'The doppelganger has advantage on attack rolls against any creature it has surprised.',
           htmlText: 'The doppelganger has advantage on attack rolls against any creature it has surprised.'
         },
         {
           name: 'Surprise Attack',
-          text: 'If [name] surprises a creature and hits it with an attack during the first round of combat, the target takes an extra 10 (3d6) damage from the attack.',
+          text: 'If [NAME] surprises a creature and hits it with an attack during the first round of combat, the target takes an extra 10 (3d6) damage from the attack.',
           markdownText: 'If the doppelganger surprises a creature and hits it with an attack during the first round of combat, the target takes an extra 10 (3d6) damage from the attack.',
           htmlText: 'If the doppelganger surprises a creature and hits it with an attack during the first round of combat, the target takes an extra 10 (3d6) damage from the attack.'
         }
@@ -170,7 +170,7 @@ describe('when the show section is clicked', () => {
     describe('should reparse the block text', () => {
       const block = {
         name: 'Pack Tactics',
-        text: '[name] has advantage on an attack roll against a creature if at least one of [name]\'s allies is within 5 feet of the creature an ally isn\'t incapacitated.'
+        text: '[NAME] has advantage on an attack roll against a creature if at least one of [NAME]\'s allies is within 5 feet of the creature an ally isn\'t incapacitated.'
       };
 
       const oldNames = {
@@ -315,7 +315,7 @@ describe('when the section is empty and not visible', () => {
       const blocksToImport = [
         {
           name: 'Legendary Resistance (3/Day)',
-          text: 'If [name] fails a saving throw, it can choose to succeed instead.',
+          text: 'If [NAME] fails a saving throw, it can choose to succeed instead.',
           htmlText: 'If the dragon fails a saving throw, it can choose to succeed instead.'
         }
       ];

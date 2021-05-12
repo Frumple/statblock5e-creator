@@ -198,11 +198,11 @@
     "blocks": [
       {
         "name": "Draconic Ancestry",
-        "text": "[name] has resistance to a specific type of damage depending on its ancestry."
+        "text": "[NAME] has resistance to a specific type of damage depending on its ancestry."
       },
       {
         "name": "Breath Weapon",
-        "text": "[name] exhales a breath in a 15 ft. cone, or a 6 ft. by 30 ft. line, that deals damage corresponding to [name]'s draconic ancestry. Each creature within the cone must make a DC 13 Dexterity or Constitution saving throw, taking DMG[2d6] damage on a failed save, or half as much damage on a successful one."
+        "text": "[NAME] exhales a breath in a 15 ft. cone, or a 6 ft. by 30 ft. line, that deals damage corresponding to [NAME]'s draconic ancestry. Each creature within the cone must make a DC 13 Dexterity or Constitution saving throw, taking DMG[2d6] damage on a failed save, or half as much damage on a successful one."
       }
     ]
   },
@@ -210,7 +210,7 @@
     "blocks": [
       {
         "name": "Multiattack",
-        "text": "[name] makes two weapon melee attacks or two ranged attacks."
+        "text": "[NAME] makes two weapon melee attacks or two ranged attacks."
       },
       {
         "name": "Whip",
@@ -218,7 +218,7 @@
       },
       {
         "name": "Net",
-        "text": "*Special Weapon Attack:* +5 to hit, range 5 ft./15 ft., one target. *Hit:* A Large or smaller creature is restrained until it is freed. A net has no effect on creature that are formless, or creatures that are Huge or larger. A creature can use its action to make a DC 10 Strength check to free itself or another creature within its reach on a success. Dealing 5 slashing damage to the net (AC 10) also frees the creature without harming it, ending the effect and destroying the net. [name] can make only one attack with the net regardless of the number of attacks it can normally take."
+        "text": "*Special Weapon Attack:* +5 to hit, range 5 ft./15 ft., one target. *Hit:* A Large or smaller creature is restrained until it is freed. A net has no effect on creature that are formless, or creatures that are Huge or larger. A creature can use its action to make a DC 10 Strength check to free itself or another creature within its reach on a success. Dealing 5 slashing damage to the net (AC 10) also frees the creature without harming it, ending the effect and destroying the net. [NAME] can make only one attack with the net regardless of the number of attacks it can normally take."
       }
     ]
   },
@@ -227,7 +227,7 @@
   },
   "legendaryActions": {
     "blocks": [],
-    "description": "[name] can take 3 legendary actions, choosing from the options below. Only one legendary action option can be used at a time and only at the end of another creature's turn. [name] regains spent legendary actions at the start of its turn."
+    "description": "[NAME] can take 3 legendary actions, choosing from the options below. Only one legendary action option can be used at a time and only at the end of another creature's turn. [NAME] regains spent legendary actions at the start of its turn."
   },
   "layout": {
     "columns": 1,

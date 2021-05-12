@@ -76,7 +76,7 @@ describe('when the show section is clicked', () => {
     it('should add a single block with multiline text', () => {
       const block = {
         name: 'Breath Weapons (Recharge 5-6)',
-        text: '[name] uses one of the following breath weapons.\n**Fire Breath.** [name] exhales fire in an 60-foot line that is 5 feet wide. Each creature in that line must make a DC 18 Dexterity saving throw, taking DMG[13d6] fire damage on a failed save, or half as much damage on a successful one.\n**Sleep Breath.** [name] exhales sleep gas in a 60-foot cone. Each creature in that area must succeed on a DC 18 Constitution saving throw or fall unconscious for 10 minutes. This effect ends for a creature if the creature takes damage or someone uses an action to wake it.',
+        text: '[NAME] uses one of the following breath weapons.\n**Fire Breath.** [NAME] exhales fire in an 60-foot line that is 5 feet wide. Each creature in that line must make a DC 18 Dexterity saving throw, taking DMG[13d6] fire damage on a failed save, or half as much damage on a successful one.\n**Sleep Breath.** [NAME] exhales sleep gas in a 60-foot cone. Each creature in that area must succeed on a DC 18 Constitution saving throw or fall unconscious for 10 minutes. This effect ends for a creature if the creature takes damage or someone uses an action to wake it.',
         markdownText: 'The dragon uses one of the following breath weapons.  \n> **Fire Breath.** The dragon exhales fire in an 60-foot line that is 5 feet wide. Each creature in that line must make a DC 18 Dexterity saving throw, taking 45 (13d6) fire damage on a failed save, or half as much damage on a successful one.  \n> **Sleep Breath.** The dragon exhales sleep gas in a 60-foot cone. Each creature in that area must succeed on a DC 18 Constitution saving throw or fall unconscious for 10 minutes. This effect ends for a creature if the creature takes damage or someone uses an action to wake it.',
         htmlText: 'The dragon uses one of the following breath weapons.\n<strong>Fire Breath.</strong> The dragon exhales fire in an 60-foot line that is 5 feet wide. Each creature in that line must make a DC 18 Dexterity saving throw, taking 45 (13d6) fire damage on a failed save, or half as much damage on a successful one.\n<strong>Sleep Breath.</strong> The dragon exhales sleep gas in a 60-foot cone. Each creature in that area must succeed on a DC 18 Constitution saving throw or fall unconscious for 10 minutes. This effect ends for a creature if the creature takes damage or someone uses an action to wake it.'
       };
@@ -107,7 +107,7 @@ describe('when the show section is clicked', () => {
       const blocks = [
         {
           name: 'Multiattack',
-          text: '[name] makes two melee attacks or two ranged attacks.',
+          text: '[NAME] makes two melee attacks or two ranged attacks.',
           markdownText: 'The scout makes two melee attacks or two ranged attacks.',
           htmlText: 'The scout makes two melee attacks or two ranged attacks.'
         },
@@ -144,7 +144,7 @@ describe('when the show section is clicked', () => {
       const blocks = [
         {
           name: 'Multiattack',
-          text: '[name] makes two melee attacks.',
+          text: '[NAME] makes two melee attacks.',
           markdownText: 'The knight makes two melee attacks.',
           htmlText: 'The knight makes two melee attacks.'
         },
@@ -170,7 +170,7 @@ describe('when the show section is clicked', () => {
     describe('should reparse the block text', () => {
       const block = {
         name: 'Teleport (Recharge 4-6)',
-        text: '[name] magically teleports, along with any equipment it is wearing or carrying, up to 40 feet to an unoccupied space it can see. Before or after teleporting, [name] can make one bite attack.',
+        text: '[NAME] magically teleports, along with any equipment it is wearing or carrying, up to 40 feet to an unoccupied space it can see. Before or after teleporting, [NAME] can make one bite attack.',
         markdownText: null,
         htmlText: null
       };
@@ -294,7 +294,7 @@ describe('when the section is empty and not visible', () => {
       const blocksToImport = [
         {
           name: 'Weird Insight',
-          text: '[name] targets one creature it can see within 30 feet of it. The target must contest its Charisma (Deception) check against [name]’s Wisdom (Insight) check. If [name] wins, it magically learns one fact or secret about the target. The target automatically wins if it is immune to being charmed.',
+          text: '[NAME] targets one creature it can see within 30 feet of it. The target must contest its Charisma (Deception) check against [NAME]’s Wisdom (Insight) check. If [NAME] wins, it magically learns one fact or secret about the target. The target automatically wins if it is immune to being charmed.',
           htmlText: 'The nothic targets one creature it can see within 30 feet of it. The target must contest its Charisma (Deception) check against the nothic’s Wisdom (Insight) check. If the nothic wins, it magically learns one fact or secret about the target. The target automatically wins if it is immune to being charmed.'
         }
       ];

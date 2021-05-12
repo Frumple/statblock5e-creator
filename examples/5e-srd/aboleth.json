@@ -197,15 +197,15 @@
     "blocks": [
       {
         "name": "Amphibious",
-        "text": "[name] can breathe air and water."
+        "text": "[NAME] can breathe air and water."
       },
       {
         "name": "Mucous Cloud",
-        "text": "While underwater, [name] is surrounded by transformative mucus. A creature that touches [name] or that hits it with a melee attack while within 5 ft. of it must make a DC 14 Constitution saving throw. On a failure, the creature is diseased for 1d4 hours. The diseased creature can breathe only underwater."
+        "text": "While underwater, [NAME] is surrounded by transformative mucus. A creature that touches [NAME] or that hits it with a melee attack while within 5 ft. of it must make a DC 14 Constitution saving throw. On a failure, the creature is diseased for 1d4 hours. The diseased creature can breathe only underwater."
       },
       {
         "name": "Probing Telepathy",
-        "text": "If a creature communicates telepathically with [name], [name] learns the creature's greatest desires if [name] can see the creature."
+        "text": "If a creature communicates telepathically with [NAME], [NAME] learns the creature's greatest desires if [NAME] can see the creature."
       }
     ]
   },
@@ -213,7 +213,7 @@
     "blocks": [
       {
         "name": "Multiattack",
-        "text": "[name] makes three tentacle attacks."
+        "text": "[NAME] makes three tentacle attacks."
       },
       {
         "name": "Tentacle",
@@ -225,7 +225,7 @@
       },
       {
         "name": "Enslave (3/day)",
-        "text": "[name] targets one creature it can see within 30 ft. of it. The target must succeed on a DC 14 Wisdom saving throw or be magically charmed by [name] until [name] dies or until it is on a different plane of existence from the target. The charmed target is under [name]'s control and can't take reactions, and [name] and the target can communicate telepathically with each other over any distance.\n  Whenever the charmed target takes damage, the target can repeat the saving throw. On a success, the effect ends. No more than once every 24 hours, the target can also repeat the saving throw when it is at least 1 mile away from [name]."
+        "text": "[NAME] targets one creature it can see within 30 ft. of it. The target must succeed on a DC 14 Wisdom saving throw or be magically charmed by [NAME] until [NAME] dies or until it is on a different plane of existence from the target. The charmed target is under [NAME]'s control and can't take reactions, and [NAME] and the target can communicate telepathically with each other over any distance.\n  Whenever the charmed target takes damage, the target can repeat the saving throw. On a success, the effect ends. No more than once every 24 hours, the target can also repeat the saving throw when it is at least 1 mile away from [NAME]."
       }
     ]
   },
@@ -236,18 +236,18 @@
     "blocks": [
       {
         "name": "Detect",
-        "text": "[name] makes a Wisdom (Perception) check."
+        "text": "[NAME] makes a Wisdom (Perception) check."
       },
       {
         "name": "Tail Swipe",
-        "text": "[name] makes one tail attack."
+        "text": "[NAME] makes one tail attack."
       },
       {
         "name": "Psychic Drain (Costs 2 Actions)",
-        "text": "One creature charmed by [name] takes DMG[3d6] psychic damage, and [name] regains hit points equal to the damage the creature takes."
+        "text": "One creature charmed by [NAME] takes DMG[3d6] psychic damage, and [NAME] regains hit points equal to the damage the creature takes."
       }
     ],
-    "description": "[name] can take 3 legendary actions, choosing from the options below. Only one legendary action option can be used at a time and only at the end of another creature's turn. [name] regains spent legendary actions at the start of its turn."
+    "description": "[NAME] can take 3 legendary actions, choosing from the options below. Only one legendary action option can be used at a time and only at the end of another creature's turn. [NAME] regains spent legendary actions at the start of its turn."
   },
   "layout": {
     "columns": 1,

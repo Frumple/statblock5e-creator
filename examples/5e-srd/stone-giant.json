@@ -197,7 +197,7 @@
     "blocks": [
       {
         "name": "Stone Camouflage",
-        "text": "[name] has advantage on Dexterity (Stealth) checks made to hide in rocky terrain."
+        "text": "[NAME] has advantage on Dexterity (Stealth) checks made to hide in rocky terrain."
       }
     ]
   },
@@ -205,7 +205,7 @@
     "blocks": [
       {
         "name": "Multiattack",
-        "text": "[name] makes two greatclub attacks."
+        "text": "[NAME] makes two greatclub attacks."
       },
       {
         "name": "Greatclub",
@@ -221,13 +221,13 @@
     "blocks": [
       {
         "name": "Rock Catching",
-        "text": "If a rock or similar object is hurled at [name], [name] can, with a successful DC 10 Dexterity saving throw, catch the missile and take no bludgeoning damage from it."
+        "text": "If a rock or similar object is hurled at [NAME], [NAME] can, with a successful DC 10 Dexterity saving throw, catch the missile and take no bludgeoning damage from it."
       }
     ]
   },
   "legendaryActions": {
     "blocks": [],
-    "description": "[name] can take 3 legendary actions, choosing from the options below. Only one legendary action option can be used at a time and only at the end of another creature's turn. [name] regains spent legendary actions at the start of its turn."
+    "description": "[NAME] can take 3 legendary actions, choosing from the options below. Only one legendary action option can be used at a time and only at the end of another creature's turn. [NAME] regains spent legendary actions at the start of its turn."
   },
   "layout": {
     "columns": 1,

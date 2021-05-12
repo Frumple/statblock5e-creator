@@ -68,7 +68,7 @@ describe('when the show section is clicked', () => {
   });
 
   describe('and the description is changed and the edit section is submitted', () => {
-    const description = '[name] can take 5 legendary actions, choosing from one of the options below. Only one legendary action option can be used at a time and only at the end of another creature\'s turn. [name] regains spent legendary actions at the start of its turn.';
+    const description = '[NAME] can take 5 legendary actions, choosing from one of the options below. Only one legendary action option can be used at a time and only at the end of another creature\'s turn. [NAME] regains spent legendary actions at the start of its turn.';
     const markdownDescription = 'The dragon can take 5 legendary actions, choosing from one of the options below. Only one legendary action option can be used at a time and only at the end of another creature\'s turn. The dragon regains spent legendary actions at the start of its turn.';
     const htmlDescription = markdownDescription;
 
@@ -139,7 +139,7 @@ describe('when the show section is clicked', () => {
     it('should add a single block', () => {
       const block = {
         name: 'Disrupt Life (Costs 3 Actions)',
-        text: 'Each living creature within 20 feet of [name] must make a DC 18 Constitution saving throw against this magic, taking DMG[6d6] necrotic damage on a failed save, or half as much damage on a successful one.',
+        text: 'Each living creature within 20 feet of [NAME] must make a DC 18 Constitution saving throw against this magic, taking DMG[6d6] necrotic damage on a failed save, or half as much damage on a successful one.',
         markdownText: 'Each living creature within 20 feet of the lich must make a DC 18 Constitution saving throw against this magic, taking 21 (6d6) necrotic damage on a failed save, or half as much damage on a successful one.',
         htmlText: 'Each living creature within 20 feet of the lich must make a DC 18 Constitution saving throw against this magic, taking 21 (6d6) necrotic damage on a failed save, or half as much damage on a successful one.'
       };
@@ -152,7 +152,7 @@ describe('when the show section is clicked', () => {
     it('should add a single block with multiline text', () => {
       const block = {
         name: 'Multiline Legendary Action',
-        text: '**Line 1**. [name] is here.\n  **Line 2**. [name] is there.\n    **Line 3**. [name] is everywhere.',
+        text: '**Line 1**. [NAME] is here.\n  **Line 2**. [NAME] is there.\n    **Line 3**. [NAME] is everywhere.',
         markdownText: '**Line 1**. The dummy is here.  \n>   **Line 2**. The dummy is there.  \n>     **Line 3**. The dummy is everywhere.',
         htmlText: '<strong>Line 1</strong>. The dummy is here.\n  <strong>Line 2</strong>. The dummy is there.\n    <strong>Line 3</strong>. The dummy is everywhere.'
       };
@@ -165,7 +165,7 @@ describe('when the show section is clicked', () => {
     it('should add a single block with html escaped', () => {
       const block = {
         name: 'Escaped Legendary Action',
-        text: '<strong>Line 1</strong>. [name] is here.',
+        text: '<strong>Line 1</strong>. [NAME] is here.',
         markdownText: '&lt;strong&gt;Line 1&lt;/strong&gt;. The dummy is here.',
         htmlText: '&lt;strong&gt;Line 1&lt;/strong&gt;. The dummy is here.'
       };
@@ -181,19 +181,19 @@ describe('when the show section is clicked', () => {
       const blocks = [
         {
           name: 'Detect',
-          text: '[name] makes a Wisdom (Perception) check.',
+          text: '[NAME] makes a Wisdom (Perception) check.',
           markdownText: 'The dragon makes a Wisdom (Perception) check.',
           htmlText: 'The dragon makes a Wisdom (Perception) check.'
         },
         {
           name: 'Tail Attack',
-          text: '[name] makes a tail attack.',
+          text: '[NAME] makes a tail attack.',
           markdownText: 'The dragon makes a tail attack.',
           htmlText: 'The dragon makes a tail attack.'
         },
         {
           name: 'Wing Attack (Costs 2 Actions)',
-          text: '[name] beats its wings. Each creature within 10 feet of the dragon must succeed on a DC 22 Dexterity saving throw or take DMG[2d6 + STR] bludgeoning damage and be knocked prone. [name] can then fly up to half its flying speed.',
+          text: '[NAME] beats its wings. Each creature within 10 feet of the dragon must succeed on a DC 22 Dexterity saving throw or take DMG[2d6 + STR] bludgeoning damage and be knocked prone. [NAME] can then fly up to half its flying speed.',
           markdownText: 'The dragon beats its wings. Each creature within 10 feet of the dragon must succeed on a DC 22 Dexterity saving throw or take 15 (2d6 + 8) bludgeoning damage and be knocked prone. The dragon can then fly up to half its flying speed.',
           htmlText: 'The dragon beats its wings. Each creature within 10 feet of the dragon must succeed on a DC 22 Dexterity saving throw or take 15 (2d6 + 8) bludgeoning damage and be knocked prone. The dragon can then fly up to half its flying speed.'
         }
@@ -208,7 +208,7 @@ describe('when the show section is clicked', () => {
     it('should add a single block, then remove it', () => {
       const block = {
         name: 'Detect',
-        text: '[name] makes a Wisdom (Perception) check.',
+        text: '[NAME] makes a Wisdom (Perception) check.',
         markdownText: 'The dragon makes a Wisdom (Perception) check.',
         htmlText: 'The dragon makes a Wisdom (Perception) check.'
       };
@@ -225,19 +225,19 @@ describe('when the show section is clicked', () => {
       const blocks = [
         {
           name: 'Detect',
-          text: '[name] makes a Wisdom (Perception) check.',
+          text: '[NAME] makes a Wisdom (Perception) check.',
           markdownText: 'The dragon makes a Wisdom (Perception) check.',
           htmlText: 'The dragon makes a Wisdom (Perception) check.'
         },
         {
           name: 'Tail Attack',
-          text: '[name] makes a tail attack.',
+          text: '[NAME] makes a tail attack.',
           markdownText: 'The dragon makes a tail attack.',
           htmlText: 'The dragon makes a tail attack.'
         },
         {
           name: 'Wing Attack (Costs 2 Actions)',
-          text: '[name] beats its wings. Each creature within 10 feet of the dragon must succeed on a DC 22 Dexterity saving throw or take DMG[2d6 + STR] bludgeoning damage and be knocked prone. [name] can then fly up to half its flying speed.',
+          text: '[NAME] beats its wings. Each creature within 10 feet of the dragon must succeed on a DC 22 Dexterity saving throw or take DMG[2d6 + STR] bludgeoning damage and be knocked prone. [NAME] can then fly up to half its flying speed.',
           markdownText: 'The dragon beats its wings. Each creature within 10 feet of the dragon must succeed on a DC 22 Dexterity saving throw or take 15 (2d6 + 8) bludgeoning damage and be knocked prone. The dragon can then fly up to half its flying speed.',
           htmlText: 'The dragon beats its wings. Each creature within 10 feet of the dragon must succeed on a DC 22 Dexterity saving throw or take 15 (2d6 + 8) bludgeoning damage and be knocked prone. The dragon can then fly up to half its flying speed.'
         }
@@ -252,7 +252,7 @@ describe('when the show section is clicked', () => {
     describe('should reparse the block text', () => {
       const block = {
         name: 'Wing Attack (Costs 2 Actions)',
-        text: '[name] beats its wings. Each creature within 10 feet of [name] must succeed on a DC 22 Dexterity saving throw or take DMG[2d6 + STR] bludgeoning damage and be knocked prone. [name] can then fly up to half its flying speed.',
+        text: '[NAME] beats its wings. Each creature within 10 feet of [NAME] must succeed on a DC 22 Dexterity saving throw or take DMG[2d6 + STR] bludgeoning damage and be knocked prone. [NAME] can then fly up to half its flying speed.',
         markdownText: null,
         htmlText: null
       };
@@ -339,7 +339,7 @@ describe('when import from Open5e', () => {
   it('should import no blocks, and the description should be kept to the default and should not be visible', () => {
     const inputtedDescription = '';
 
-    const description = '[name] can take 3 legendary actions, choosing from the options below. Only one legendary action option can be used at a time and only at the end of another creature\'s turn. [name] regains spent legendary actions at the start of its turn.';
+    const description = '[NAME] can take 3 legendary actions, choosing from the options below. Only one legendary action option can be used at a time and only at the end of another creature\'s turn. [NAME] regains spent legendary actions at the start of its turn.';
     const markdownDescription = 'The commoner can take 3 legendary actions, choosing from the options below. Only one legendary action option can be used at a time and only at the end of another creature\'s turn. The commoner regains spent legendary actions at the start of its turn.';
     const htmlDescription = markdownDescription;
 
@@ -416,7 +416,7 @@ describe('when the section is empty and not visible', () => {
       const blocksToImport = [
         {
           name: 'Detect',
-          text: '[name] makes a Wisdom (Perception) check.',
+          text: '[NAME] makes a Wisdom (Perception) check.',
           htmlText: 'The dragon makes a Wisdom (Perception) check.'
         }
       ];

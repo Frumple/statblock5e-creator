@@ -207,15 +207,15 @@
     "blocks": [
       {
         "name": "Shapechanger",
-        "text": "[name] can use its action to polymorph into a beast form that resembles a bat (speed 10 ft. fly 40 ft.), a centipede (40 ft., climb 40 ft.), or a toad (40 ft., swim 40 ft.), or back into its true form. Its statistics are the same in each form, except for the speed changes noted. Any equipment it is wearing or carrying isn't transformed . It reverts to its true form if it dies."
+        "text": "[NAME] can use its action to polymorph into a beast form that resembles a bat (speed 10 ft. fly 40 ft.), a centipede (40 ft., climb 40 ft.), or a toad (40 ft., swim 40 ft.), or back into its true form. Its statistics are the same in each form, except for the speed changes noted. Any equipment it is wearing or carrying isn't transformed . It reverts to its true form if it dies."
       },
       {
         "name": "Magic Resistance",
-        "text": "[name] has advantage on saving throws against spells and other magical effects."
+        "text": "[NAME] has advantage on saving throws against spells and other magical effects."
       },
       {
         "name": "Variant: Familiar",
-        "text": "[name] can serve another creature as a familiar, forming a telepathic bond with its willing master. While the two are bonded, the master can sense what [name] senses as long as they are within 1 mile of each other. While [name] is within 10 feet of its master, the master shares [name]'s Magic Resistance trait. At any time and for any reason, [name] can end its service as a familiar, ending the telepathic bond."
+        "text": "[NAME] can serve another creature as a familiar, forming a telepathic bond with its willing master. While the two are bonded, the master can sense what [NAME] senses as long as they are within 1 mile of each other. While [NAME] is within 10 feet of its master, the master shares [NAME]'s Magic Resistance trait. At any time and for any reason, [NAME] can end its service as a familiar, ending the telepathic bond."
       }
     ]
   },
@@ -227,11 +227,11 @@
       },
       {
         "name": "Scare (1/day)",
-        "text": "One creature of [name]'s choice within 20 ft. of it must succeed on a DC 10 Wisdom saving throw or be frightened for 1 minute. The target can repeat the saving throw at the end of each of its turns, with disadvantage if [name] is within line of sight, ending the effect on itself on a success."
+        "text": "One creature of [NAME]'s choice within 20 ft. of it must succeed on a DC 10 Wisdom saving throw or be frightened for 1 minute. The target can repeat the saving throw at the end of each of its turns, with disadvantage if [NAME] is within line of sight, ending the effect on itself on a success."
       },
       {
         "name": "Invisibility",
-        "text": "[name] magically turns invisible until it attacks or uses Scare, or until its concentration ends (as if concentrating on a spell). Any equipment [name] wears or carries is invisible with it."
+        "text": "[NAME] magically turns invisible until it attacks or uses Scare, or until its concentration ends (as if concentrating on a spell). Any equipment [NAME] wears or carries is invisible with it."
       }
     ]
   },
@@ -240,7 +240,7 @@
   },
   "legendaryActions": {
     "blocks": [],
-    "description": "[name] can take 3 legendary actions, choosing from the options below. Only one legendary action option can be used at a time and only at the end of another creature's turn. [name] regains spent legendary actions at the start of its turn."
+    "description": "[NAME] can take 3 legendary actions, choosing from the options below. Only one legendary action option can be used at a time and only at the end of another creature's turn. [NAME] regains spent legendary actions at the start of its turn."
   },
   "layout": {
     "columns": 1,

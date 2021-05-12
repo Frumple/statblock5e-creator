@@ -199,15 +199,15 @@
     "blocks": [
       {
         "name": "Assassinate",
-        "text": "During its first turn, [name] has advantage on attack rolls against any creature that hasn't taken a turn. Any hit [name] scores against a surprised creature is a critical hit."
+        "text": "During its first turn, [NAME] has advantage on attack rolls against any creature that hasn't taken a turn. Any hit [NAME] scores against a surprised creature is a critical hit."
       },
       {
         "name": "Evasion",
-        "text": "If [name] is subjected to an effect that allows it to make a Dexterity saving throw to take only half damage, [name] instead takes no damage if it succeeds on the saving throw, and only half damage if it fails."
+        "text": "If [NAME] is subjected to an effect that allows it to make a Dexterity saving throw to take only half damage, [NAME] instead takes no damage if it succeeds on the saving throw, and only half damage if it fails."
       },
       {
         "name": "Sneak Attack (1/Turn)",
-        "text": "[name] deals an extra DMG[4d6] damage when it hits a target with a weapon attack and has advantage on the attack roll, or when the target is within 5 ft. of an ally of [name] that isn't incapacitated and [name] doesn't have disadvantage on the attack roll."
+        "text": "[NAME] deals an extra DMG[4d6] damage when it hits a target with a weapon attack and has advantage on the attack roll, or when the target is within 5 ft. of an ally of [NAME] that isn't incapacitated and [NAME] doesn't have disadvantage on the attack roll."
       }
     ]
   },
@@ -215,7 +215,7 @@
     "blocks": [
       {
         "name": "Multiattack",
-        "text": "[name] makes two shortsword attacks."
+        "text": "[NAME] makes two shortsword attacks."
       },
       {
         "name": "Shortsword",

@@ -198,15 +198,15 @@
     "blocks": [
       {
         "name": "Innate Spellcasting",
-        "text": "[name]'s innate spellcasting ability is Charisma (spell save DC SDC[CHA]). [name] can innately cast the following spells, requiring no material components:\n\nAt will: *darkness*, *invisibility*\n1/day each: *charm person*, *cone of cold*, *gaseous form*, *sleep*"
+        "text": "[NAME]'s innate spellcasting ability is Charisma (spell save DC SDC[CHA]). [NAME] can innately cast the following spells, requiring no material components:\n\nAt will: *darkness*, *invisibility*\n1/day each: *charm person*, *cone of cold*, *gaseous form*, *sleep*"
       },
       {
         "name": "Magic Weapons",
-        "text": "[name]'s weapon attacks are magical."
+        "text": "[NAME]'s weapon attacks are magical."
       },
       {
         "name": "Regeneration",
-        "text": "[name] regains 10 hit points at the start of its turn if it has at least 1 hit point."
+        "text": "[NAME] regains 10 hit points at the start of its turn if it has at least 1 hit point."
       }
     ]
   },
@@ -214,7 +214,7 @@
     "blocks": [
       {
         "name": "Multiattack",
-        "text": "[name] makes two attacks, either with its claws or its glaive."
+        "text": "[NAME] makes two attacks, either with its claws or its glaive."
       },
       {
         "name": "Claw (Oni Form Only)",
@@ -226,7 +226,7 @@
       },
       {
         "name": "Change Shape",
-        "text": "[name] magically polymorphs into a Small or Medium humanoid, into a Large giant, or back into its true form. Other than its size, its statistics are the same in each form. The only equipment that is transformed is its glaive, which shrinks so that it can be wielded in humanoid form. If [name] dies, it reverts to its true form, and its glaive reverts to its normal size."
+        "text": "[NAME] magically polymorphs into a Small or Medium humanoid, into a Large giant, or back into its true form. Other than its size, its statistics are the same in each form. The only equipment that is transformed is its glaive, which shrinks so that it can be wielded in humanoid form. If [NAME] dies, it reverts to its true form, and its glaive reverts to its normal size."
       }
     ]
   },
@@ -235,7 +235,7 @@
   },
   "legendaryActions": {
     "blocks": [],
-    "description": "[name] can take 3 legendary actions, choosing from the options below. Only one legendary action option can be used at a time and only at the end of another creature's turn. [name] regains spent legendary actions at the start of its turn."
+    "description": "[NAME] can take 3 legendary actions, choosing from the options below. Only one legendary action option can be used at a time and only at the end of another creature's turn. [NAME] regains spent legendary actions at the start of its turn."
   },
   "layout": {
     "columns": 1,

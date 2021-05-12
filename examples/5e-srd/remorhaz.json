@@ -198,7 +198,7 @@
     "blocks": [
       {
         "name": "Heated Body",
-        "text": "A creature that touches [name] or hits it with a melee attack while within 5 feet of it takes DMG[3d6] fire damage."
+        "text": "A creature that touches [NAME] or hits it with a melee attack while within 5 feet of it takes DMG[3d6] fire damage."
       }
     ]
   },
@@ -206,11 +206,11 @@
     "blocks": [
       {
         "name": "Bite",
-        "text": "*Melee Weapon Attack:* ATK[STR] to hit, reach 10 ft., one target. *Hit:* DMG[6d10 + STR] piercing damage plus DMG[3d6] fire damage. If the target is a creature, it is grappled (escape DC 17). Until this grapple ends, the target is restrained, and [name] can't bite another target."
+        "text": "*Melee Weapon Attack:* ATK[STR] to hit, reach 10 ft., one target. *Hit:* DMG[6d10 + STR] piercing damage plus DMG[3d6] fire damage. If the target is a creature, it is grappled (escape DC 17). Until this grapple ends, the target is restrained, and [NAME] can't bite another target."
       },
       {
         "name": "Swallow",
-        "text": "[name] makes one bite attack against a Medium or smaller creature it is grappling. If the attack hits, that creature takes the bite's damage and is swallowed, and the grapple ends. While swallowed, the creature is blinded and restrained, it has total cover against attacks and other effects outside [name], and it takes DMG[6d6] acid damage at the start of each of [name]'s turns.\n  If [name] takes 30 damage or more on a single turn from a creature inside it, [name] must succeed on a DC 15 Constitution saving throw at the end of that turn or regurgitate all swallowed creatures, which fall prone in a space within 10 feet oft he remorhaz. If [name] dies, a swallowed creature is no longer restrained by it and can escape from the corpse using 15 feet of movement, exiting prone."
+        "text": "[NAME] makes one bite attack against a Medium or smaller creature it is grappling. If the attack hits, that creature takes the bite's damage and is swallowed, and the grapple ends. While swallowed, the creature is blinded and restrained, it has total cover against attacks and other effects outside [NAME], and it takes DMG[6d6] acid damage at the start of each of [NAME]'s turns.\n  If [NAME] takes 30 damage or more on a single turn from a creature inside it, [NAME] must succeed on a DC 15 Constitution saving throw at the end of that turn or regurgitate all swallowed creatures, which fall prone in a space within 10 feet oft he remorhaz. If [NAME] dies, a swallowed creature is no longer restrained by it and can escape from the corpse using 15 feet of movement, exiting prone."
       }
     ]
   },
@@ -219,7 +219,7 @@
   },
   "legendaryActions": {
     "blocks": [],
-    "description": "[name] can take 3 legendary actions, choosing from the options below. Only one legendary action option can be used at a time and only at the end of another creature's turn. [name] regains spent legendary actions at the start of its turn."
+    "description": "[NAME] can take 3 legendary actions, choosing from the options below. Only one legendary action option can be used at a time and only at the end of another creature's turn. [NAME] regains spent legendary actions at the start of its turn."
   },
   "layout": {
     "columns": 1,

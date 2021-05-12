@@ -207,15 +207,15 @@
     "blocks": [
       {
         "name": "Amorphous",
-        "text": "[name] can move through a space as narrow as 1 inch wide without squeezing."
+        "text": "[NAME] can move through a space as narrow as 1 inch wide without squeezing."
       },
       {
         "name": "Corrosive Form",
-        "text": "A creature that touches [name] or hits it with a melee attack while within 5 feet of it takes DMG[1d8] acid damage. Any nonmagical weapon made of metal or wood that hits [name] corrodes. After dealing damage, the weapon takes a permanent and cumulative -1 penalty to damage rolls. If its penalty drops to -5, the weapon is destroyed. Nonmagical ammunition made of metal or wood that hits [name] is destroyed after dealing damage. [name] can eat through 2-inch-thick, nonmagical wood or metal in 1 round."
+        "text": "A creature that touches [NAME] or hits it with a melee attack while within 5 feet of it takes DMG[1d8] acid damage. Any nonmagical weapon made of metal or wood that hits [NAME] corrodes. After dealing damage, the weapon takes a permanent and cumulative -1 penalty to damage rolls. If its penalty drops to -5, the weapon is destroyed. Nonmagical ammunition made of metal or wood that hits [NAME] is destroyed after dealing damage. [NAME] can eat through 2-inch-thick, nonmagical wood or metal in 1 round."
       },
       {
         "name": "Spider Climb",
-        "text": "[name] can climb difficult surfaces, including upside down on ceilings, without needing to make an ability check."
+        "text": "[NAME] can climb difficult surfaces, including upside down on ceilings, without needing to make an ability check."
       }
     ]
   },
@@ -237,7 +237,7 @@
   },
   "legendaryActions": {
     "blocks": [],
-    "description": "[name] can take 3 legendary actions, choosing from the options below. Only one legendary action option can be used at a time and only at the end of another creature's turn. [name] regains spent legendary actions at the start of its turn."
+    "description": "[NAME] can take 3 legendary actions, choosing from the options below. Only one legendary action option can be used at a time and only at the end of another creature's turn. [NAME] regains spent legendary actions at the start of its turn."
   },
   "layout": {
     "columns": 1,

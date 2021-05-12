@@ -206,19 +206,19 @@
     "blocks": [
       {
         "name": "Death Throes",
-        "text": "When [name] dies, it explodes, and each creature within 30 feet of it must make a DC 20 Dexterity saving throw, taking DMG[20d6] fire damage on a failed save, or half as much damage on a successful one. The explosion ignites flammable objects in that area that aren't being worn or carried, and it destroys [name]'s weapons."
+        "text": "When [NAME] dies, it explodes, and each creature within 30 feet of it must make a DC 20 Dexterity saving throw, taking DMG[20d6] fire damage on a failed save, or half as much damage on a successful one. The explosion ignites flammable objects in that area that aren't being worn or carried, and it destroys [NAME]'s weapons."
       },
       {
         "name": "Fire Aura",
-        "text": "At the start of each of [name]'s turns, each creature within 5 feet of it takes DMG[3d6] fire damage, and flammable objects in the aura that aren't being worn or carried ignite. A creature that touches [name] or hits it with a melee attack while within 5 feet of it takes DMG[3d6] fire damage."
+        "text": "At the start of each of [NAME]'s turns, each creature within 5 feet of it takes DMG[3d6] fire damage, and flammable objects in the aura that aren't being worn or carried ignite. A creature that touches [NAME] or hits it with a melee attack while within 5 feet of it takes DMG[3d6] fire damage."
       },
       {
         "name": "Magic Resistance",
-        "text": "[name] has advantage on saving throws against spells and other magical effects."
+        "text": "[NAME] has advantage on saving throws against spells and other magical effects."
       },
       {
         "name": "Magic Weapons",
-        "text": "[name]'s weapon attacks are magical."
+        "text": "[NAME]'s weapon attacks are magical."
       }
     ]
   },
@@ -226,19 +226,19 @@
     "blocks": [
       {
         "name": "Multiattack",
-        "text": "[name] makes two attacks: one with its longsword and one with its whip."
+        "text": "[NAME] makes two attacks: one with its longsword and one with its whip."
       },
       {
         "name": "Longsword",
-        "text": "*Melee Weapon Attack:* ATK[STR] to hit, reach 10 ft., one target. *Hit:* DMG[3d8 + STR] slashing damage plus DMG[3d8] lightning damage. If [name] scores a critical hit, it rolls damage dice three times, instead of twice."
+        "text": "*Melee Weapon Attack:* ATK[STR] to hit, reach 10 ft., one target. *Hit:* DMG[3d8 + STR] slashing damage plus DMG[3d8] lightning damage. If [NAME] scores a critical hit, it rolls damage dice three times, instead of twice."
       },
       {
         "name": "Whip",
-        "text": "*Melee Weapon Attack:* ATK[FIN] to hit, reach 30 ft., one target. *Hit:* DMG[2d6 + FIN] slashing damage plus DMG[3d6] fire damage, and the target must succeed on a DC 20 Strength saving throw or be pulled up to 25 feet toward [name]."
+        "text": "*Melee Weapon Attack:* ATK[FIN] to hit, reach 30 ft., one target. *Hit:* DMG[2d6 + FIN] slashing damage plus DMG[3d6] fire damage, and the target must succeed on a DC 20 Strength saving throw or be pulled up to 25 feet toward [NAME]."
       },
       {
         "name": "Teleport",
-        "text": "[name] magically teleports, along with any equipment it is wearing or carrying, up to 120 feet to an unoccupied space it can see."
+        "text": "[NAME] magically teleports, along with any equipment it is wearing or carrying, up to 120 feet to an unoccupied space it can see."
       },
       {
         "name": "Variant: Summon Demon (1/Day)",
@@ -251,7 +251,7 @@
   },
   "legendaryActions": {
     "blocks": [],
-    "description": "[name] can take 3 legendary actions, choosing from the options below. Only one legendary action option can be used at a time and only at the end of another creature's turn. [name] regains spent legendary actions at the start of its turn."
+    "description": "[NAME] can take 3 legendary actions, choosing from the options below. Only one legendary action option can be used at a time and only at the end of another creature's turn. [NAME] regains spent legendary actions at the start of its turn."
   },
   "layout": {
     "columns": 1,

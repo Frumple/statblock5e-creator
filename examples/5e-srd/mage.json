@@ -197,7 +197,7 @@
     "blocks": [
       {
         "name": "Spellcasting",
-        "text": "[name] is a 9th-level spellcaster. Its spellcasting ability is Intelligence (spell save DC SDC[INT], ATK[INT] to hit with spell attacks). [name] has the following wizard spells prepared:\n\nCantrips (at will): *fire bolt*, *light*, *mage hand*, *prestidigitation*\n1st level (4 slots): *detect magic*, *mage armor*, *magic missile*, *shield*\n2nd level (3 slots): *misty step*, *suggestion*\n3rd level (3 slots): *counterspell*, *fireball*, *fly*\n4th level (3 slots): *greater invisibility*, *ice storm*\n5th level (1 slot): *cone of cold*"
+        "text": "[NAME] is a 9th-level spellcaster. Its spellcasting ability is Intelligence (spell save DC SDC[INT], ATK[INT] to hit with spell attacks). [NAME] has the following wizard spells prepared:\n\nCantrips (at will): *fire bolt*, *light*, *mage hand*, *prestidigitation*\n1st level (4 slots): *detect magic*, *mage armor*, *magic missile*, *shield*\n2nd level (3 slots): *misty step*, *suggestion*\n3rd level (3 slots): *counterspell*, *fireball*, *fly*\n4th level (3 slots): *greater invisibility*, *ice storm*\n5th level (1 slot): *cone of cold*"
       }
     ]
   },
@@ -214,7 +214,7 @@
   },
   "legendaryActions": {
     "blocks": [],
-    "description": "[name] can take 3 legendary actions, choosing from the options below. Only one legendary action option can be used at a time and only at the end of another creature's turn. [name] regains spent legendary actions at the start of its turn."
+    "description": "[NAME] can take 3 legendary actions, choosing from the options below. Only one legendary action option can be used at a time and only at the end of another creature's turn. [NAME] regains spent legendary actions at the start of its turn."
   },
   "layout": {
     "columns": 1,

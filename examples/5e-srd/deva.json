@@ -204,15 +204,15 @@
     "blocks": [
       {
         "name": "Angelic Weapons",
-        "text": "[name]'s weapon attacks are magical. When [name] hits with any weapon, the weapon deals an extra 4d8 radiant damage (included in the attack)."
+        "text": "[NAME]'s weapon attacks are magical. When [NAME] hits with any weapon, the weapon deals an extra 4d8 radiant damage (included in the attack)."
       },
       {
         "name": "Innate Spellcasting",
-        "text": "[name]'s spellcasting ability is Charisma (spell save DC SDC[CHA]). [name] can innately cast the following spells, requiring only verbal components:\n\nAt will: *detect evil and good*\n1/day each: *commune*, *raise dead*"
+        "text": "[NAME]'s spellcasting ability is Charisma (spell save DC SDC[CHA]). [NAME] can innately cast the following spells, requiring only verbal components:\n\nAt will: *detect evil and good*\n1/day each: *commune*, *raise dead*"
       },
       {
         "name": "Magic Resistance",
-        "text": "[name] has advantage on saving throws against spells and other magical effects."
+        "text": "[NAME] has advantage on saving throws against spells and other magical effects."
       }
     ]
   },
@@ -220,7 +220,7 @@
     "blocks": [
       {
         "name": "Multiattack",
-        "text": "[name] makes two melee attacks."
+        "text": "[NAME] makes two melee attacks."
       },
       {
         "name": "Mace",
@@ -228,11 +228,11 @@
       },
       {
         "name": "Healing Touch (3/Day)",
-        "text": "[name] touches another creature. The target magically regains DMG[4d8 + 2] hit points and is freed from any curse, disease, poison, blindness, or deafness."
+        "text": "[NAME] touches another creature. The target magically regains DMG[4d8 + 2] hit points and is freed from any curse, disease, poison, blindness, or deafness."
       },
       {
         "name": "Change Shape",
-        "text": "[name] magically polymorphs into a humanoid or beast that has a challenge rating equal to or less than its own, or back into its true form. It reverts to its true form if it dies. Any equipment it is wearing or carrying is absorbed or borne by the new form ([name]'s choice).\n  In a new form, [name] retains its game statistics and ability to speak, but its AC, movement modes, Strength, Dexterity, and special senses are replaced by those of the new form, and it gains any statistics and capabilities (except class features, legendary actions, and lair actions) that the new form has but that it lacks."
+        "text": "[NAME] magically polymorphs into a humanoid or beast that has a challenge rating equal to or less than its own, or back into its true form. It reverts to its true form if it dies. Any equipment it is wearing or carrying is absorbed or borne by the new form ([NAME]'s choice).\n  In a new form, [NAME] retains its game statistics and ability to speak, but its AC, movement modes, Strength, Dexterity, and special senses are replaced by those of the new form, and it gains any statistics and capabilities (except class features, legendary actions, and lair actions) that the new form has but that it lacks."
       }
     ]
   },
@@ -241,7 +241,7 @@
   },
   "legendaryActions": {
     "blocks": [],
-    "description": "[name] can take 3 legendary actions, choosing from the options below. Only one legendary action option can be used at a time and only at the end of another creature's turn. [name] regains spent legendary actions at the start of its turn."
+    "description": "[NAME] can take 3 legendary actions, choosing from the options below. Only one legendary action option can be used at a time and only at the end of another creature's turn. [NAME] regains spent legendary actions at the start of its turn."
   },
   "layout": {
     "columns": 1,

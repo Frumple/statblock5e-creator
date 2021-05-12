@@ -203,7 +203,7 @@
     "blocks": [
       {
         "name": "Multiattack",
-        "text": "[name] makes three attacks: one with its bite and two with its claws."
+        "text": "[NAME] makes three attacks: one with its bite and two with its claws."
       },
       {
         "name": "Bite",
@@ -215,7 +215,7 @@
       },
       {
         "name": "Lightning Breath (Recharge 5-6)",
-        "text": "[name] exhales lightning in an 60-foot line that is 5 feet wide. Each creature in that line must make a DC 16 Dexterity saving throw, taking DMG[10d10] lightning damage on a failed save, or half as much damage on a successful one."
+        "text": "[NAME] exhales lightning in an 60-foot line that is 5 feet wide. Each creature in that line must make a DC 16 Dexterity saving throw, taking DMG[10d10] lightning damage on a failed save, or half as much damage on a successful one."
       }
     ]
   },
@@ -224,7 +224,7 @@
   },
   "legendaryActions": {
     "blocks": [],
-    "description": "[name] can take 3 legendary actions, choosing from the options below. Only one legendary action option can be used at a time and only at the end of another creature's turn. [name] regains spent legendary actions at the start of its turn."
+    "description": "[NAME] can take 3 legendary actions, choosing from the options below. Only one legendary action option can be used at a time and only at the end of another creature's turn. [NAME] regains spent legendary actions at the start of its turn."
   },
   "layout": {
     "columns": 1,

@@ -42,16 +42,16 @@ NameExpression
   = open:OpeningRoundBracketOptional expression:(Name / FullName) close:ClosingRoundBracketOptional { return `${open}${expression}${close}`; }
 
 BeginningName
-  = '[name]' { return capitalizeFirstLetter(options.creature.name); }
+  = ('[NAME]' / '[name]') { return capitalizeFirstLetter(options.creature.name); }
 
 BeginningFullName
-  = '[fullname]' { return capitalizeFirstLetter(options.creature.fullName); }
+  = ('[FULLNAME]' / '[fullname]') { return capitalizeFirstLetter(options.creature.fullName); }
 
 Name
-  = '[name]' { return options.creature.name; }
+  = ('[NAME]' / '[name]') { return options.creature.name; }
 
 FullName
-  = '[fullname]' { return options.creature.fullName; }
+  = ('[FULLNAME]' / '[fullname]') { return options.creature.fullName; }
 
 Text
   = $(NormalChar+)

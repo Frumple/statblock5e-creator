@@ -203,11 +203,11 @@
     "blocks": [
       {
         "name": "Heated Body",
-        "text": "A creature that touches [name] or hits it with a melee attack while within 5 ft. of it takes DMG[2d6] fire damage."
+        "text": "A creature that touches [NAME] or hits it with a melee attack while within 5 ft. of it takes DMG[2d6] fire damage."
       },
       {
         "name": "Heated Weapons",
-        "text": "Any metal melee weapon [name] wields deals an extra DMG[1d6] fire damage on a hit (included in the attack)."
+        "text": "Any metal melee weapon [NAME] wields deals an extra DMG[1d6] fire damage on a hit (included in the attack)."
       }
     ]
   },
@@ -215,7 +215,7 @@
     "blocks": [
       {
         "name": "Multiattack",
-        "text": "[name] makes two attacks: one with its spear and one with its tail."
+        "text": "[NAME] makes two attacks: one with its spear and one with its tail."
       },
       {
         "name": "Spear",
@@ -223,7 +223,7 @@
       },
       {
         "name": "Tail",
-        "text": "*Melee Weapon Attack:* ATK[STR] to hit, reach 10 ft., one target. *Hit:* DMG[2d6 + STR] bludgeoning damage plus DMG[2d6] fire damage, and the target is grappled (escape DC 14). Until this grapple ends, the target is restrained, [name] can automatically hit the target with its tail, and [name] can't make tail attacks against other targets."
+        "text": "*Melee Weapon Attack:* ATK[STR] to hit, reach 10 ft., one target. *Hit:* DMG[2d6 + STR] bludgeoning damage plus DMG[2d6] fire damage, and the target is grappled (escape DC 14). Until this grapple ends, the target is restrained, [NAME] can automatically hit the target with its tail, and [NAME] can't make tail attacks against other targets."
       }
     ]
   },
@@ -232,7 +232,7 @@
   },
   "legendaryActions": {
     "blocks": [],
-    "description": "[name] can take 3 legendary actions, choosing from the options below. Only one legendary action option can be used at a time and only at the end of another creature's turn. [name] regains spent legendary actions at the start of its turn."
+    "description": "[NAME] can take 3 legendary actions, choosing from the options below. Only one legendary action option can be used at a time and only at the end of another creature's turn. [NAME] regains spent legendary actions at the start of its turn."
   },
   "layout": {
     "columns": 1,

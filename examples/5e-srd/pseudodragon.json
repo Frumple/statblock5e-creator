@@ -197,19 +197,19 @@
     "blocks": [
       {
         "name": "Keen Senses",
-        "text": "[name] has advantage on Wisdom (Perception) checks that rely on sight, hearing, or smell."
+        "text": "[NAME] has advantage on Wisdom (Perception) checks that rely on sight, hearing, or smell."
       },
       {
         "name": "Magic Resistance",
-        "text": "[name] has advantage on saving throws against spells and other magical effects."
+        "text": "[NAME] has advantage on saving throws against spells and other magical effects."
       },
       {
         "name": "Limited Telepathy",
-        "text": "[name] can magically communicate simple ideas, emotions, and images telepathically with any creature within 100 ft. of it that can understand a language."
+        "text": "[NAME] can magically communicate simple ideas, emotions, and images telepathically with any creature within 100 ft. of it that can understand a language."
       },
       {
         "name": "Variant: Familiar",
-        "text": "[name] can serve another creature as a familiar, forming a magic, telepathic bond with that willing companion. While the two are bonded, the companion can sense what [name] senses as long as they are within 1 mile of each other. While [name] is within 10 feet of its companion, the companion shares [name]'s Magic Resistance trait. At any time and for any reason, [name] can end its service as a familiar, ending the telepathic bond."
+        "text": "[NAME] can serve another creature as a familiar, forming a magic, telepathic bond with that willing companion. While the two are bonded, the companion can sense what [NAME] senses as long as they are within 1 mile of each other. While [NAME] is within 10 feet of its companion, the companion shares [NAME]'s Magic Resistance trait. At any time and for any reason, [NAME] can end its service as a familiar, ending the telepathic bond."
       }
     ]
   },
@@ -230,7 +230,7 @@
   },
   "legendaryActions": {
     "blocks": [],
-    "description": "[name] can take 3 legendary actions, choosing from the options below. Only one legendary action option can be used at a time and only at the end of another creature's turn. [name] regains spent legendary actions at the start of its turn."
+    "description": "[NAME] can take 3 legendary actions, choosing from the options below. Only one legendary action option can be used at a time and only at the end of another creature's turn. [NAME] regains spent legendary actions at the start of its turn."
   },
   "layout": {
     "columns": 1,

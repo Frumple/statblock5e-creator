@@ -203,7 +203,7 @@
     "blocks": [
       {
         "name": "Multiattack",
-        "text": "[name] makes two longsword attacks. If it has a shortsword drawn, it can also make a shortsword attack."
+        "text": "[NAME] makes two longsword attacks. If it has a shortsword drawn, it can also make a shortsword attack."
       },
       {
         "name": "Longsword",
@@ -219,7 +219,7 @@
       },
       {
         "name": "Fire Breath (Recharge 5-6)",
-        "text": "[name] exhales fire in a 15-foot cone. Each creature in that area must make a DC 15 Dexterity saving throw, taking DMG[7d6] fire damage on a failed save, or half as much damage on a successful one."
+        "text": "[NAME] exhales fire in a 15-foot cone. Each creature in that area must make a DC 15 Dexterity saving throw, taking DMG[7d6] fire damage on a failed save, or half as much damage on a successful one."
       }
     ]
   },
@@ -228,7 +228,7 @@
   },
   "legendaryActions": {
     "blocks": [],
-    "description": "[name] can take 3 legendary actions, choosing from the options below. Only one legendary action option can be used at a time and only at the end of another creature's turn. [name] regains spent legendary actions at the start of its turn."
+    "description": "[NAME] can take 3 legendary actions, choosing from the options below. Only one legendary action option can be used at a time and only at the end of another creature's turn. [NAME] regains spent legendary actions at the start of its turn."
   },
   "layout": {
     "columns": 1,

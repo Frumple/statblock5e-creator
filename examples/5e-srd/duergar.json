@@ -200,11 +200,11 @@
     "blocks": [
       {
         "name": "Duergar Resilience",
-        "text": "[name] has advantage on saving throws against poison, spells, and illusions, as well as to resist being charmed or paralyzed."
+        "text": "[NAME] has advantage on saving throws against poison, spells, and illusions, as well as to resist being charmed or paralyzed."
       },
       {
         "name": "Sunlight Sensitivity",
-        "text": "While in sunlight, [name] has disadvantage on attack rolls, as well as on Wisdom (Perception) checks that rely on sight."
+        "text": "While in sunlight, [NAME] has disadvantage on attack rolls, as well as on Wisdom (Perception) checks that rely on sight."
       }
     ]
   },
@@ -212,7 +212,7 @@
     "blocks": [
       {
         "name": "Enlarge (Recharges after a Short or Long Rest)",
-        "text": "For 1 minute, [name] magically increases in size, along with anything it is wearing or carrying. While enlarged, [name] is Large, doubles its damage dice on Strength-based weapon attacks (included in the attacks), and makes Strength checks and Strength saving throws with advantage. If [name] lacks the room to become Large, it attains the maximum size possible in the space available."
+        "text": "For 1 minute, [NAME] magically increases in size, along with anything it is wearing or carrying. While enlarged, [NAME] is Large, doubles its damage dice on Strength-based weapon attacks (included in the attacks), and makes Strength checks and Strength saving throws with advantage. If [NAME] lacks the room to become Large, it attains the maximum size possible in the space available."
       },
       {
         "name": "War Pick",
@@ -224,7 +224,7 @@
       },
       {
         "name": "Invisibility (Recharges after a Short or Long Rest)",
-        "text": "[name] magically turns invisible until it attacks, casts a spell, or uses its Enlarge, or until its concentration is broken, up to 1 hour (as if concentrating on a spell). Any equipment [name] wears or carries is invisible with it."
+        "text": "[NAME] magically turns invisible until it attacks, casts a spell, or uses its Enlarge, or until its concentration is broken, up to 1 hour (as if concentrating on a spell). Any equipment [NAME] wears or carries is invisible with it."
       }
     ]
   },
@@ -233,7 +233,7 @@
   },
   "legendaryActions": {
     "blocks": [],
-    "description": "[name] can take 3 legendary actions, choosing from the options below. Only one legendary action option can be used at a time and only at the end of another creature's turn. [name] regains spent legendary actions at the start of its turn."
+    "description": "[NAME] can take 3 legendary actions, choosing from the options below. Only one legendary action option can be used at a time and only at the end of another creature's turn. [NAME] regains spent legendary actions at the start of its turn."
   },
   "layout": {
     "columns": 1,

@@ -202,7 +202,7 @@
     "blocks": [
       {
         "name": "Sunlight Sensitivity",
-        "text": "While in sunlight, [name] has disadvantage on attack rolls, as well as on Wisdom (Perception) checks that rely on sight."
+        "text": "While in sunlight, [NAME] has disadvantage on attack rolls, as well as on Wisdom (Perception) checks that rely on sight."
       }
     ]
   },
@@ -210,11 +210,11 @@
     "blocks": [
       {
         "name": "Multiattack",
-        "text": "[name] makes two longsword attacks or two longbow attacks. It can use its Life Drain in place of one longsword attack."
+        "text": "[NAME] makes two longsword attacks or two longbow attacks. It can use its Life Drain in place of one longsword attack."
       },
       {
         "name": "Life Drain",
-        "text": "*Melee Weapon Attack:* ATK[STR] to hit, reach 5 ft., one creature. *Hit:* DMG[1d6 + STR] necrotic damage. The target must succeed on a DC 13 Constitution saving throw or its hit point maximum is reduced by an amount equal to the damage taken. This reduction lasts until the target finishes a long rest. The target dies if this effect reduces its hit point maximum to 0.\n  A humanoid slain by this attack rises 24 hours later as a zombie under [name]'s control, unless the humanoid is restored to life or its body is destroyed. [name] can have no more than twelve zombies under its control at one time."
+        "text": "*Melee Weapon Attack:* ATK[STR] to hit, reach 5 ft., one creature. *Hit:* DMG[1d6 + STR] necrotic damage. The target must succeed on a DC 13 Constitution saving throw or its hit point maximum is reduced by an amount equal to the damage taken. This reduction lasts until the target finishes a long rest. The target dies if this effect reduces its hit point maximum to 0.\n  A humanoid slain by this attack rises 24 hours later as a zombie under [NAME]'s control, unless the humanoid is restored to life or its body is destroyed. [NAME] can have no more than twelve zombies under its control at one time."
       },
       {
         "name": "Longsword",
@@ -231,7 +231,7 @@
   },
   "legendaryActions": {
     "blocks": [],
-    "description": "[name] can take 3 legendary actions, choosing from the options below. Only one legendary action option can be used at a time and only at the end of another creature's turn. [name] regains spent legendary actions at the start of its turn."
+    "description": "[NAME] can take 3 legendary actions, choosing from the options below. Only one legendary action option can be used at a time and only at the end of another creature's turn. [NAME] regains spent legendary actions at the start of its turn."
   },
   "layout": {
     "columns": 1,

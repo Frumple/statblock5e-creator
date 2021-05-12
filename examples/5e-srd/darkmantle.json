@@ -195,11 +195,11 @@
     "blocks": [
       {
         "name": "Echolocation",
-        "text": "[name] can't use its blindsight while deafened."
+        "text": "[NAME] can't use its blindsight while deafened."
       },
       {
         "name": "False Appearance",
-        "text": "While [name] remains motionless, it is indistinguishable from a cave formation such as a stalactite or stalagmite."
+        "text": "While [NAME] remains motionless, it is indistinguishable from a cave formation such as a stalactite or stalagmite."
       }
     ]
   },
@@ -207,11 +207,11 @@
     "blocks": [
       {
         "name": "Crush",
-        "text": "*Melee Weapon Attack:* ATK[STR] to hit, reach 5 ft., one creature. *Hit:* DMG[1d6 + STR] bludgeoning damage, and [name] attaches to the target. If the target is Medium or smaller and [name] has advantage on the attack roll, it attaches by engulfing the target's head, and the target is also blinded and unable to breathe while [name] is attached in this way.\n  While attached to the target, [name] can attack no other creature except the target but has advantage on its attack rolls. [name]'s speed also becomes 0, it can't benefit from any bonus to its speed, and it moves with the target.\n  A creature can detach [name] by making a successful DC 13 Strength check as an action. On its turn, [name] can detach itself from the target by using 5 feet of movement."
+        "text": "*Melee Weapon Attack:* ATK[STR] to hit, reach 5 ft., one creature. *Hit:* DMG[1d6 + STR] bludgeoning damage, and [NAME] attaches to the target. If the target is Medium or smaller and [NAME] has advantage on the attack roll, it attaches by engulfing the target's head, and the target is also blinded and unable to breathe while [NAME] is attached in this way.\n  While attached to the target, [NAME] can attack no other creature except the target but has advantage on its attack rolls. [NAME]'s speed also becomes 0, it can't benefit from any bonus to its speed, and it moves with the target.\n  A creature can detach [NAME] by making a successful DC 13 Strength check as an action. On its turn, [NAME] can detach itself from the target by using 5 feet of movement."
       },
       {
         "name": "Darkness Aura (1/day)",
-        "text": "A 15-foot radius of magical darkness extends out from [name], moves with it, and spreads around corners. The darkness lasts as long as [name] maintains concentration, up to 10 minutes (as if concentrating on a spell). Darkvision can't penetrate this darkness, and no natural light can illuminate it. If any of the darkness overlaps with an area of light created by a spell of 2nd level or lower, the spell creating the light is dispelled."
+        "text": "A 15-foot radius of magical darkness extends out from [NAME], moves with it, and spreads around corners. The darkness lasts as long as [NAME] maintains concentration, up to 10 minutes (as if concentrating on a spell). Darkvision can't penetrate this darkness, and no natural light can illuminate it. If any of the darkness overlaps with an area of light created by a spell of 2nd level or lower, the spell creating the light is dispelled."
       }
     ]
   },
@@ -220,7 +220,7 @@
   },
   "legendaryActions": {
     "blocks": [],
-    "description": "[name] can take 3 legendary actions, choosing from the options below. Only one legendary action option can be used at a time and only at the end of another creature's turn. [name] regains spent legendary actions at the start of its turn."
+    "description": "[NAME] can take 3 legendary actions, choosing from the options below. Only one legendary action option can be used at a time and only at the end of another creature's turn. [NAME] regains spent legendary actions at the start of its turn."
   },
   "layout": {
     "columns": 1,

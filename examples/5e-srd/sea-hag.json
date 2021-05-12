@@ -199,23 +199,23 @@
     "blocks": [
       {
         "name": "Amphibious",
-        "text": "[name] can breathe air and water."
+        "text": "[NAME] can breathe air and water."
       },
       {
         "name": "Horrific Appearance",
-        "text": "Any humanoid that starts its turn within 30 feet of [name] and can see [name]'s true form must make a DC 11 Wisdom saving throw. On a failed save, the creature is frightened for 1 minute. A creature can repeat the saving throw at the end of each of its turns, with disadvantage if [name] is within line of sight, ending the effect on itself on a success. If a creature's saving throw is successful or the effect ends for it, the creature is immune to [name]'s Horrific Appearance for the next 24 hours.\n  Unless the target is surprised or the revelation of [name]'s true form is sudden, the target can avert its eyes and avoid making the initial saving throw. Until the start of its next turn, a creature that averts its eyes has disadvantage on attack rolls against [name]."
+        "text": "Any humanoid that starts its turn within 30 feet of [NAME] and can see [NAME]'s true form must make a DC 11 Wisdom saving throw. On a failed save, the creature is frightened for 1 minute. A creature can repeat the saving throw at the end of each of its turns, with disadvantage if [NAME] is within line of sight, ending the effect on itself on a success. If a creature's saving throw is successful or the effect ends for it, the creature is immune to [NAME]'s Horrific Appearance for the next 24 hours.\n  Unless the target is surprised or the revelation of [NAME]'s true form is sudden, the target can avert its eyes and avoid making the initial saving throw. Until the start of its next turn, a creature that averts its eyes has disadvantage on attack rolls against [NAME]."
       },
       {
         "name": "Hag Coven",
-        "text": "When hags must work together, they form covens, in spite of their selfish natures. A coven is made up of hags of any type, all of whom are equals within the group. However, each of [name]s continues to desire more personal power.\n  A coven consists of three hags so that any arguments between two hags can be settled by the third. If more than three hags ever come together, as might happen if two covens come into conflict, the result is usually chaos."
+        "text": "When hags must work together, they form covens, in spite of their selfish natures. A coven is made up of hags of any type, all of whom are equals within the group. However, each of [NAME]s continues to desire more personal power.\n  A coven consists of three hags so that any arguments between two hags can be settled by the third. If more than three hags ever come together, as might happen if two covens come into conflict, the result is usually chaos."
       },
       {
         "name": "Shared Spellcasting (Coven Only)",
-        "text": "While all three members of a hag coven are within 30 feet of one another, they can each cast the following spells from the wizard's spell list but must share the spell slots among themselves:\n\n1st level (4 slots): *identify*, *ray of sickness*\n2nd level (3 slots): *hold person*, *locate object*\n3rd level (3 slots): *bestow curse*, *counterspell*, *lightning bolt*\n4th level (3 slots): *phantasmal killer*, *polymorph*\n5th level (2 slots): *contact other plane*, *scrying*\n6th level (1 slot): *eye bite*\n\nFor casting these spells, each hag is a 12th-level spellcaster that uses Intelligence as her spellcasting ability. The spell save DC is 12 + [name]'s Intelligence modifier, and the spell attack bonus is 4 + [name]'s Intelligence modifier."
+        "text": "While all three members of a hag coven are within 30 feet of one another, they can each cast the following spells from the wizard's spell list but must share the spell slots among themselves:\n\n1st level (4 slots): *identify*, *ray of sickness*\n2nd level (3 slots): *hold person*, *locate object*\n3rd level (3 slots): *bestow curse*, *counterspell*, *lightning bolt*\n4th level (3 slots): *phantasmal killer*, *polymorph*\n5th level (2 slots): *contact other plane*, *scrying*\n6th level (1 slot): *eye bite*\n\nFor casting these spells, each hag is a 12th-level spellcaster that uses Intelligence as her spellcasting ability. The spell save DC is 12 + [NAME]'s Intelligence modifier, and the spell attack bonus is 4 + [NAME]'s Intelligence modifier."
       },
       {
         "name": "Hag Eye (Coven Only)",
-        "text": "A hag coven can craft a magic item called a hag eye, which is made from a real eye coated in varnish and often fitted to a pendant or other wearable item. [name] eye is usually entrusted to a minion for safekeeping and transport. A hag in the coven can take an action to see what [name] eye sees if [name] eye is on the same plane of existence. A hag eye has AC 10, 1 hit point, and darkvision with a radius of 60 feet. If it is destroyed, each coven member takes 3d10 psychic damage and is blinded for 24 hours.\n  A hag coven can have only one hag eye at a time, and creating a new one requires all three members of the coven to perform a ritual. The ritual takes 1 hour, and [name]s can't perform it while blinded. During the ritual, if [name]s take any action other than performing the ritual, they must start over."
+        "text": "A hag coven can craft a magic item called a hag eye, which is made from a real eye coated in varnish and often fitted to a pendant or other wearable item. [NAME] eye is usually entrusted to a minion for safekeeping and transport. A hag in the coven can take an action to see what [NAME] eye sees if [NAME] eye is on the same plane of existence. A hag eye has AC 10, 1 hit point, and darkvision with a radius of 60 feet. If it is destroyed, each coven member takes 3d10 psychic damage and is blinded for 24 hours.\n  A hag coven can have only one hag eye at a time, and creating a new one requires all three members of the coven to perform a ritual. The ritual takes 1 hour, and [NAME]s can't perform it while blinded. During the ritual, if [NAME]s take any action other than performing the ritual, they must start over."
       }
     ]
   },
@@ -227,11 +227,11 @@
       },
       {
         "name": "Death Glare",
-        "text": "[name] targets one frightened creature she can see within 30 ft. of her. If the target can see [name], it must succeed on a DC 11 Wisdom saving throw against this magic or drop to 0 hit points."
+        "text": "[NAME] targets one frightened creature she can see within 30 ft. of her. If the target can see [NAME], it must succeed on a DC 11 Wisdom saving throw against this magic or drop to 0 hit points."
       },
       {
         "name": "Illusory Appearance",
-        "text": "[name] covers herself and anything she is wearing or carrying with a magical illusion that makes her look like an ugly creature of her general size and humanoid shape. The effect ends if [name] takes a bonus action to end it or if she dies.\n  The changes wrought by this effect fail to hold up to physical inspection. For example, [name] could appear to have no claws, but someone touching her hand might feel the claws. Otherwise, a creature must take an action to visually inspect the illusion and succeed on a DC 16 Intelligence (Investigation) check to discern that [name] is disguised."
+        "text": "[NAME] covers herself and anything she is wearing or carrying with a magical illusion that makes her look like an ugly creature of her general size and humanoid shape. The effect ends if [NAME] takes a bonus action to end it or if she dies.\n  The changes wrought by this effect fail to hold up to physical inspection. For example, [NAME] could appear to have no claws, but someone touching her hand might feel the claws. Otherwise, a creature must take an action to visually inspect the illusion and succeed on a DC 16 Intelligence (Investigation) check to discern that [NAME] is disguised."
       }
     ]
   },
@@ -240,7 +240,7 @@
   },
   "legendaryActions": {
     "blocks": [],
-    "description": "[name] can take 3 legendary actions, choosing from the options below. Only one legendary action option can be used at a time and only at the end of another creature's turn. [name] regains spent legendary actions at the start of its turn."
+    "description": "[NAME] can take 3 legendary actions, choosing from the options below. Only one legendary action option can be used at a time and only at the end of another creature's turn. [NAME] regains spent legendary actions at the start of its turn."
   },
   "layout": {
     "columns": 1,

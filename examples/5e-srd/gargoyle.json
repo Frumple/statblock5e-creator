@@ -205,7 +205,7 @@
     "blocks": [
       {
         "name": "False Appearance",
-        "text": "While [name] remains motion less, it is indistinguishable from an inanimate statue."
+        "text": "While [NAME] remains motion less, it is indistinguishable from an inanimate statue."
       }
     ]
   },
@@ -213,7 +213,7 @@
     "blocks": [
       {
         "name": "Multiattack",
-        "text": "[name] makes two attacks: one with its bite and one with its claws."
+        "text": "[NAME] makes two attacks: one with its bite and one with its claws."
       },
       {
         "name": "Bite",
@@ -230,7 +230,7 @@
   },
   "legendaryActions": {
     "blocks": [],
-    "description": "[name] can take 3 legendary actions, choosing from the options below. Only one legendary action option can be used at a time and only at the end of another creature's turn. [name] regains spent legendary actions at the start of its turn."
+    "description": "[NAME] can take 3 legendary actions, choosing from the options below. Only one legendary action option can be used at a time and only at the end of another creature's turn. [NAME] regains spent legendary actions at the start of its turn."
   },
   "layout": {
     "columns": 1,

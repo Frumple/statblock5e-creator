@@ -206,15 +206,15 @@
     "blocks": [
       {
         "name": "Antimagic Susceptibility",
-        "text": "[name] is incapacitated while in the area of an antimagic field. If targeted by dispel magic, [name] must succeed on a Constitution saving throw against the caster's spell save DC or fall unconscious for 1 minute."
+        "text": "[NAME] is incapacitated while in the area of an antimagic field. If targeted by dispel magic, [NAME] must succeed on a Constitution saving throw against the caster's spell save DC or fall unconscious for 1 minute."
       },
       {
         "name": "Damage Transfer",
-        "text": "While it is grappling a creature, [name] takes only half the damage dealt to it, and the creature grappled by [name] takes the other half."
+        "text": "While it is grappling a creature, [NAME] takes only half the damage dealt to it, and the creature grappled by [NAME] takes the other half."
       },
       {
         "name": "False Appearance",
-        "text": "While [name] remains motionless, it is indistinguishable from a normal rug."
+        "text": "While [NAME] remains motionless, it is indistinguishable from a normal rug."
       }
     ]
   },
@@ -222,7 +222,7 @@
     "blocks": [
       {
         "name": "Smother",
-        "text": "*Melee Weapon Attack:* ATK[STR] to hit, reach 5 ft., one Medium or smaller creature. *Hit:* The creature is grappled (escape DC 13). Until this grapple ends, the target is restrained, blinded, and at risk of suffocating, and [name] can't smother another target. In addition, at the start of each of the target's turns, the target takes DMG[2d6 + STR] bludgeoning damage."
+        "text": "*Melee Weapon Attack:* ATK[STR] to hit, reach 5 ft., one Medium or smaller creature. *Hit:* The creature is grappled (escape DC 13). Until this grapple ends, the target is restrained, blinded, and at risk of suffocating, and [NAME] can't smother another target. In addition, at the start of each of the target's turns, the target takes DMG[2d6 + STR] bludgeoning damage."
       }
     ]
   },
@@ -231,7 +231,7 @@
   },
   "legendaryActions": {
     "blocks": [],
-    "description": "[name] can take 3 legendary actions, choosing from the options below. Only one legendary action option can be used at a time and only at the end of another creature's turn. [name] regains spent legendary actions at the start of its turn."
+    "description": "[NAME] can take 3 legendary actions, choosing from the options below. Only one legendary action option can be used at a time and only at the end of another creature's turn. [NAME] regains spent legendary actions at the start of its turn."
   },
   "layout": {
     "columns": 1,

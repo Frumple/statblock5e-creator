@@ -198,15 +198,15 @@
     "blocks": [
       {
         "name": "Damage Transfer",
-        "text": "While attached to a creature, [name] takes only half the damage dealt to it (rounded down), and that creature takes the other half."
+        "text": "While attached to a creature, [NAME] takes only half the damage dealt to it (rounded down), and that creature takes the other half."
       },
       {
         "name": "False Appearance",
-        "text": "While [name] remains motionless without its underside exposed, it is indistinguishable from a dark leather cloak."
+        "text": "While [NAME] remains motionless without its underside exposed, it is indistinguishable from a dark leather cloak."
       },
       {
         "name": "Light Sensitivity",
-        "text": "While in bright light, [name] has disadvantage on attack rolls and Wisdom (Perception) checks that rely on sight."
+        "text": "While in bright light, [NAME] has disadvantage on attack rolls and Wisdom (Perception) checks that rely on sight."
       }
     ]
   },
@@ -214,11 +214,11 @@
     "blocks": [
       {
         "name": "Multiattack",
-        "text": "[name] makes two attacks: one with its bite and one with its tail."
+        "text": "[NAME] makes two attacks: one with its bite and one with its tail."
       },
       {
         "name": "Bite",
-        "text": "*Melee Weapon Attack:* ATK[STR] to hit, reach 5 ft., one creature. *Hit:* DMG[2d6 + STR] piercing damage, and if the target is Large or smaller, [name] attaches to it. If [name] has advantage against the target, [name] attaches to the target's head, and the target is blinded and unable to breathe while [name] is attached. While attached, [name] can make this attack only against the target and has advantage on the attack roll. [name] can detach itself by spending 5 feet of its movement. A creature, including the target, can take its action to detach [name] by succeeding on a DC 16 Strength check."
+        "text": "*Melee Weapon Attack:* ATK[STR] to hit, reach 5 ft., one creature. *Hit:* DMG[2d6 + STR] piercing damage, and if the target is Large or smaller, [NAME] attaches to it. If [NAME] has advantage against the target, [NAME] attaches to the target's head, and the target is blinded and unable to breathe while [NAME] is attached. While attached, [NAME] can make this attack only against the target and has advantage on the attack roll. [NAME] can detach itself by spending 5 feet of its movement. A creature, including the target, can take its action to detach [NAME] by succeeding on a DC 16 Strength check."
       },
       {
         "name": "Tail",
@@ -226,11 +226,11 @@
       },
       {
         "name": "Moan",
-        "text": "Each creature within 60 feet of [name] that can hear its moan and that isn't an aberration must succeed on a DC 13 Wisdom saving throw or become frightened until the end of [name]'s next turn. If a creature's saving throw is successful, the creature is immune to [name]'s moan for the next 24 hours."
+        "text": "Each creature within 60 feet of [NAME] that can hear its moan and that isn't an aberration must succeed on a DC 13 Wisdom saving throw or become frightened until the end of [NAME]'s next turn. If a creature's saving throw is successful, the creature is immune to [NAME]'s moan for the next 24 hours."
       },
       {
         "name": "Phantasms (Recharges after a Short or Long Rest)",
-        "text": "[name] magically creates three illusory duplicates of itself if it isn't in bright light. The duplicates move with it and mimic its actions, shifting position so as to make it impossible to track which cloaker is the real one. If [name] is ever in an area of bright light, the duplicates disappear.\n  Whenever any creature targets [name] with an attack or a harmful spell while a duplicate remains, that creature rolls randomly to determine whether it targets [name] or one of the duplicates. A creature is unaffected by this magical effect if it can't see or if it relies on senses other than sight.\n  A duplicate has [name]'s AC and uses its saving throws. If an attack hits a duplicate, or if a duplicate fails a saving throw against an effect that deals damage, the duplicate disappears."
+        "text": "[NAME] magically creates three illusory duplicates of itself if it isn't in bright light. The duplicates move with it and mimic its actions, shifting position so as to make it impossible to track which cloaker is the real one. If [NAME] is ever in an area of bright light, the duplicates disappear.\n  Whenever any creature targets [NAME] with an attack or a harmful spell while a duplicate remains, that creature rolls randomly to determine whether it targets [NAME] or one of the duplicates. A creature is unaffected by this magical effect if it can't see or if it relies on senses other than sight.\n  A duplicate has [NAME]'s AC and uses its saving throws. If an attack hits a duplicate, or if a duplicate fails a saving throw against an effect that deals damage, the duplicate disappears."
       }
     ]
   },
@@ -239,7 +239,7 @@
   },
   "legendaryActions": {
     "blocks": [],
-    "description": "[name] can take 3 legendary actions, choosing from the options below. Only one legendary action option can be used at a time and only at the end of another creature's turn. [name] regains spent legendary actions at the start of its turn."
+    "description": "[NAME] can take 3 legendary actions, choosing from the options below. Only one legendary action option can be used at a time and only at the end of another creature's turn. [NAME] regains spent legendary actions at the start of its turn."
   },
   "layout": {
     "columns": 1,

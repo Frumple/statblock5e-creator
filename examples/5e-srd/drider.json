@@ -198,23 +198,23 @@
     "blocks": [
       {
         "name": "Fey Ancestry",
-        "text": "[name] has advantage on saving throws against being charmed, and magic can't put [name] to sleep."
+        "text": "[NAME] has advantage on saving throws against being charmed, and magic can't put [NAME] to sleep."
       },
       {
         "name": "Innate Spellcasting",
-        "text": "[name]'s innate spellcasting ability is Wisdom (spell save DC SDC[WIS]). [name] can innately cast the following spells, requiring no material components:\n\nAt will: *dancing lights*\n1/day each: *darkness*, *faerie fire*"
+        "text": "[NAME]'s innate spellcasting ability is Wisdom (spell save DC SDC[WIS]). [NAME] can innately cast the following spells, requiring no material components:\n\nAt will: *dancing lights*\n1/day each: *darkness*, *faerie fire*"
       },
       {
         "name": "Spider Climb",
-        "text": "[name] can climb difficult surfaces, including upside down on ceilings, without needing to make an ability check."
+        "text": "[NAME] can climb difficult surfaces, including upside down on ceilings, without needing to make an ability check."
       },
       {
         "name": "Sunlight Sensitivity",
-        "text": "While in sunlight, [name] has disadvantage on attack rolls, as well as on Wisdom (Perception) checks that rely on sight."
+        "text": "While in sunlight, [NAME] has disadvantage on attack rolls, as well as on Wisdom (Perception) checks that rely on sight."
       },
       {
         "name": "Web Walker",
-        "text": "[name] ignores movement restrictions caused by webbing."
+        "text": "[NAME] ignores movement restrictions caused by webbing."
       }
     ]
   },
@@ -222,7 +222,7 @@
     "blocks": [
       {
         "name": "Multiattack",
-        "text": "[name] makes three attacks, either with its longsword or its longbow. It can replace one of those attacks with a bite attack."
+        "text": "[NAME] makes three attacks, either with its longsword or its longbow. It can replace one of those attacks with a bite attack."
       },
       {
         "name": "Bite",
@@ -243,7 +243,7 @@
   },
   "legendaryActions": {
     "blocks": [],
-    "description": "[name] can take 3 legendary actions, choosing from the options below. Only one legendary action option can be used at a time and only at the end of another creature's turn. [name] regains spent legendary actions at the start of its turn."
+    "description": "[NAME] can take 3 legendary actions, choosing from the options below. Only one legendary action option can be used at a time and only at the end of another creature's turn. [NAME] regains spent legendary actions at the start of its turn."
   },
   "layout": {
     "columns": 1,

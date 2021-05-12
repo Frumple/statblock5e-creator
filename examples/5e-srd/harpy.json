@@ -200,7 +200,7 @@
     "blocks": [
       {
         "name": "Multiattack",
-        "text": "[name] makes two attacks: one with its claws and one with its club."
+        "text": "[NAME] makes two attacks: one with its claws and one with its club."
       },
       {
         "name": "Claws",
@@ -212,7 +212,7 @@
       },
       {
         "name": "Luring Song",
-        "text": "[name] sings a magical melody. Every humanoid and giant within 300 ft. of [name] that can hear the song must succeed on a DC 11 Wisdom saving throw or be charmed until the song ends. [name] must take a bonus action on its subsequent turns to continue singing. It can stop singing at any time. The song ends if [name] is incapacitated.\n  While charmed by [name], a target is incapacitated and ignores the songs of other harpies. If the charmed target is more than 5 ft. away from [name], the must move on its turn toward [name] by the most direct route. It doesn't avoid opportunity attacks, but before moving into damaging terrain, such as lava or a pit, and whenever it takes damage from a source other than [name], a target can repeat the saving throw. A creature can also repeat the saving throw at the end of each of its turns. If a creature's saving throw is successful, the effect ends on it.\n  A target that successfully saves is immune to this harpy's song for the next 24 hours."
+        "text": "[NAME] sings a magical melody. Every humanoid and giant within 300 ft. of [NAME] that can hear the song must succeed on a DC 11 Wisdom saving throw or be charmed until the song ends. [NAME] must take a bonus action on its subsequent turns to continue singing. It can stop singing at any time. The song ends if [NAME] is incapacitated.\n  While charmed by [NAME], a target is incapacitated and ignores the songs of other harpies. If the charmed target is more than 5 ft. away from [NAME], the must move on its turn toward [NAME] by the most direct route. It doesn't avoid opportunity attacks, but before moving into damaging terrain, such as lava or a pit, and whenever it takes damage from a source other than [NAME], a target can repeat the saving throw. A creature can also repeat the saving throw at the end of each of its turns. If a creature's saving throw is successful, the effect ends on it.\n  A target that successfully saves is immune to this harpy's song for the next 24 hours."
       }
     ]
   },
@@ -221,7 +221,7 @@
   },
   "legendaryActions": {
     "blocks": [],
-    "description": "[name] can take 3 legendary actions, choosing from the options below. Only one legendary action option can be used at a time and only at the end of another creature's turn. [name] regains spent legendary actions at the start of its turn."
+    "description": "[NAME] can take 3 legendary actions, choosing from the options below. Only one legendary action option can be used at a time and only at the end of another creature's turn. [NAME] regains spent legendary actions at the start of its turn."
   },
   "layout": {
     "columns": 1,

@@ -198,11 +198,11 @@
     "blocks": [
       {
         "name": "Claw",
-        "text": "*Melee Weapon Attack:* ATK[STR] to hit, reach 5 ft., one target. *Hit:* DMG[1d8 + STR] bludgeoning damage, and the target is grappled (escape DC 12). [name] has two claws, each of which can grapple only one target."
+        "text": "*Melee Weapon Attack:* ATK[STR] to hit, reach 5 ft., one target. *Hit:* DMG[1d8 + STR] bludgeoning damage, and the target is grappled (escape DC 12). [NAME] has two claws, each of which can grapple only one target."
       },
       {
         "name": "Multiattack",
-        "text": "[name] makes three attacks: two with its claws and one with its sting."
+        "text": "[NAME] makes three attacks: two with its claws and one with its sting."
       },
       {
         "name": "Sting",
@@ -215,7 +215,7 @@
   },
   "legendaryActions": {
     "blocks": [],
-    "description": "[name] can take 3 legendary actions, choosing from the options below. Only one legendary action option can be used at a time and only at the end of another creature's turn. [name] regains spent legendary actions at the start of its turn."
+    "description": "[NAME] can take 3 legendary actions, choosing from the options below. Only one legendary action option can be used at a time and only at the end of another creature's turn. [NAME] regains spent legendary actions at the start of its turn."
   },
   "layout": {
     "columns": 1,

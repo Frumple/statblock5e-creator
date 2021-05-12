@@ -202,11 +202,11 @@
     "blocks": [
       {
         "name": "Limited Magic Immunity",
-        "text": "[name] can't be affected or detected by spells of 6th level or lower unless it wishes to be. It has advantage on saving throws against all other spells and magical effects."
+        "text": "[NAME] can't be affected or detected by spells of 6th level or lower unless it wishes to be. It has advantage on saving throws against all other spells and magical effects."
       },
       {
         "name": "Innate Spellcasting",
-        "text": "[name]'s innate spellcasting ability is Charisma (spell save DC SDC[CHA], ATK[CHA] to hit with spell attacks). [name] can innately cast the following spells, requiring no material components:\n\nAt will: *detect thoughts*, *disguise self*, *mage hand*, *minor illusion*\n3/day each: *charm person*, *detect magic*, *invisibility*, *major image*, *suggestion*\n1/day each: *dominate person*, *fly*, *plane shift*, *true seeing*"
+        "text": "[NAME]'s innate spellcasting ability is Charisma (spell save DC SDC[CHA], ATK[CHA] to hit with spell attacks). [NAME] can innately cast the following spells, requiring no material components:\n\nAt will: *detect thoughts*, *disguise self*, *mage hand*, *minor illusion*\n3/day each: *charm person*, *detect magic*, *invisibility*, *major image*, *suggestion*\n1/day each: *dominate person*, *fly*, *plane shift*, *true seeing*"
       }
     ]
   },
@@ -214,7 +214,7 @@
     "blocks": [
       {
         "name": "Multiattack",
-        "text": "[name] makes two claw attacks."
+        "text": "[NAME] makes two claw attacks."
       },
       {
         "name": "Claw",
@@ -227,7 +227,7 @@
   },
   "legendaryActions": {
     "blocks": [],
-    "description": "[name] can take 3 legendary actions, choosing from the options below. Only one legendary action option can be used at a time and only at the end of another creature's turn. [name] regains spent legendary actions at the start of its turn."
+    "description": "[NAME] can take 3 legendary actions, choosing from the options below. Only one legendary action option can be used at a time and only at the end of another creature's turn. [NAME] regains spent legendary actions at the start of its turn."
   },
   "layout": {
     "columns": 1,

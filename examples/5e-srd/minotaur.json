@@ -197,15 +197,15 @@
     "blocks": [
       {
         "name": "Charge",
-        "text": "If [name] moves at least 10 ft. straight toward a target and then hits it with a gore attack on the same turn, the target takes an extra DMG[2d8] piercing damage. If the target is a creature, it must succeed on a DC 14 Strength saving throw or be pushed up to 10 ft. away and knocked prone."
+        "text": "If [NAME] moves at least 10 ft. straight toward a target and then hits it with a gore attack on the same turn, the target takes an extra DMG[2d8] piercing damage. If the target is a creature, it must succeed on a DC 14 Strength saving throw or be pushed up to 10 ft. away and knocked prone."
       },
       {
         "name": "Labyrinthine Recall",
-        "text": "[name] can perfectly recall any path it has traveled."
+        "text": "[NAME] can perfectly recall any path it has traveled."
       },
       {
         "name": "Reckless",
-        "text": "At the start of its turn, [name] can gain advantage on all melee weapon attack rolls it makes during that turn, but attack rolls against it have advantage until the start of its next turn."
+        "text": "At the start of its turn, [NAME] can gain advantage on all melee weapon attack rolls it makes during that turn, but attack rolls against it have advantage until the start of its next turn."
       }
     ]
   },
@@ -226,7 +226,7 @@
   },
   "legendaryActions": {
     "blocks": [],
-    "description": "[name] can take 3 legendary actions, choosing from the options below. Only one legendary action option can be used at a time and only at the end of another creature's turn. [name] regains spent legendary actions at the start of its turn."
+    "description": "[NAME] can take 3 legendary actions, choosing from the options below. Only one legendary action option can be used at a time and only at the end of another creature's turn. [NAME] regains spent legendary actions at the start of its turn."
   },
   "layout": {
     "columns": 1,
