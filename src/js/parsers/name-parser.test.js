@@ -27,21 +27,56 @@ it('should preserve newline characters', () => {
   expect(parserResults.error).toBeNull();
 });
 
+it('should parse standalone periods and text' , () => {
+  const inputText =
+    '.\n' +
+    '  .\n' +
+    'asdf\n' +
+    '  asdf';
+
+  const parserResults = parseNames(inputText);
+
+  expect(parserResults).not.toBeNull();
+  expect(parserResults.inputText).toBe(inputText);
+  expect(parserResults.outputText).toBe(inputText);
+  expect(parserResults.error).toBeNull();
+});
+
 describe('should parse valid name expressions', () => {
   const inputText =
-    '[name] begins on a new line. [name] begins on a new sentence, but [name] does not. **Header.** [name] begins after a header. ([name] is surrounded by brackets with [name])\n' +
-    '  [name] begins on an indented line.\n' +
-    '[fullname] begins on a new line. [fullname] begins on a new sentence, but [fullname] does not. **Header.** [fullname] begins after a header. ([fullname] is surrounded by brackets with [fullname])\n' +
-    '  [fullname] begins on an indented line.';
+    '[name] begins on a new line, but [name] does not. [name] begins on a new sentence, but [name] does not.\n' +
+    '  [name] begins on an indented line, but [name] does not.\n' +
+    '([name] has an opening bracket. ([name] has an opening bracket.\n' +
+    '[name]) has a closing bracket. [name]) has a closing bracket.\n' +
+    '([name]) has both brackets. ([name]) has both brackets.\n' +
+    'Name expressions begin as sentences if there is markdown between the last period and expression. **Header.** [name] begins after a header. __Header.__ [name] begins after a header.\n' +
+    'Name expressions do not begin as sentences there is no whitespace between the last period and expression.[name] does not begin as a sentence.\n' +
+    '[fullname] begins on a new line, but [fullname] does not. [fullname] begins on a new sentence, but [fullname] does not.\n' +
+    '  [fullname] begins on an indented line, but [fullname] does not.\n' +
+    '([fullname] has an opening bracket. ([fullname] has an opening bracket.\n' +
+    '[fullname]) has a closing bracket. [fullname]) has a closing bracket.\n' +
+    '([fullname]) has both brackets. ([fullname]) has both brackets.\n' +
+    'Name expressions begin as sentences if there is markdown between the last period and expression. **Header.** [fullname] begins after a header. __Header.__ [fullname] begins after a header.\n' +
+    'Name expressions do not begin as sentences there is no whitespace between the last period and expression.[fullname] does not begin as a sentence.';
 
   it('when only the full name is defined', () => {
     title.fullName = 'Hook Horror';
 
     const expectedOutputText =
-      'The hook horror begins on a new line. The hook horror begins on a new sentence, but the hook horror does not. **Header.** The hook horror begins after a header. (The hook horror is surrounded by brackets with the hook horror)\n' +
-      '  The hook horror begins on an indented line.\n' +
-      'The hook horror begins on a new line. The hook horror begins on a new sentence, but the hook horror does not. **Header.** The hook horror begins after a header. (The hook horror is surrounded by brackets with the hook horror)\n' +
-      '  The hook horror begins on an indented line.';
+      'The hook horror begins on a new line, but the hook horror does not. The hook horror begins on a new sentence, but the hook horror does not.\n' +
+      '  The hook horror begins on an indented line, but the hook horror does not.\n' +
+      '(The hook horror has an opening bracket. (The hook horror has an opening bracket.\n' +
+      'The hook horror) has a closing bracket. The hook horror) has a closing bracket.\n' +
+      '(The hook horror) has both brackets. (The hook horror) has both brackets.\n' +
+      'Name expressions begin as sentences if there is markdown between the last period and expression. **Header.** The hook horror begins after a header. __Header.__ The hook horror begins after a header.\n' +
+      'Name expressions do not begin as sentences there is no whitespace between the last period and expression.the hook horror does not begin as a sentence.\n' +
+      'The hook horror begins on a new line, but the hook horror does not. The hook horror begins on a new sentence, but the hook horror does not.\n' +
+      '  The hook horror begins on an indented line, but the hook horror does not.\n' +
+      '(The hook horror has an opening bracket. (The hook horror has an opening bracket.\n' +
+      'The hook horror) has a closing bracket. The hook horror) has a closing bracket.\n' +
+      '(The hook horror) has both brackets. (The hook horror) has both brackets.\n' +
+      'Name expressions begin as sentences if there is markdown between the last period and expression. **Header.** The hook horror begins after a header. __Header.__ The hook horror begins after a header.\n' +
+      'Name expressions do not begin as sentences there is no whitespace between the last period and expression.the hook horror does not begin as a sentence.';
 
     parseAndVerifyNameExpressions(expectedOutputText);
   });
@@ -51,10 +86,20 @@ describe('should parse valid name expressions', () => {
     title.shortName = 'dragon';
 
     const expectedOutputText =
-      'The dragon begins on a new line. The dragon begins on a new sentence, but the dragon does not. **Header.** The dragon begins after a header. (The dragon is surrounded by brackets with the dragon)\n' +
-      '  The dragon begins on an indented line.\n' +
-      'The ancient red dragon begins on a new line. The ancient red dragon begins on a new sentence, but the ancient red dragon does not. **Header.** The ancient red dragon begins after a header. (The ancient red dragon is surrounded by brackets with the ancient red dragon)\n' +
-      '  The ancient red dragon begins on an indented line.';
+      'The dragon begins on a new line, but the dragon does not. The dragon begins on a new sentence, but the dragon does not.\n' +
+      '  The dragon begins on an indented line, but the dragon does not.\n' +
+      '(The dragon has an opening bracket. (The dragon has an opening bracket.\n' +
+      'The dragon) has a closing bracket. The dragon) has a closing bracket.\n' +
+      '(The dragon) has both brackets. (The dragon) has both brackets.\n' +
+      'Name expressions begin as sentences if there is markdown between the last period and expression. **Header.** The dragon begins after a header. __Header.__ The dragon begins after a header.\n' +
+      'Name expressions do not begin as sentences there is no whitespace between the last period and expression.the dragon does not begin as a sentence.\n' +
+      'The ancient red dragon begins on a new line, but the ancient red dragon does not. The ancient red dragon begins on a new sentence, but the ancient red dragon does not.\n' +
+      '  The ancient red dragon begins on an indented line, but the ancient red dragon does not.\n' +
+      '(The ancient red dragon has an opening bracket. (The ancient red dragon has an opening bracket.\n' +
+      'The ancient red dragon) has a closing bracket. The ancient red dragon) has a closing bracket.\n' +
+      '(The ancient red dragon) has both brackets. (The ancient red dragon) has both brackets.\n' +
+      'Name expressions begin as sentences if there is markdown between the last period and expression. **Header.** The ancient red dragon begins after a header. __Header.__ The ancient red dragon begins after a header.\n' +
+      'Name expressions do not begin as sentences there is no whitespace between the last period and expression.the ancient red dragon does not begin as a sentence.';
 
     parseAndVerifyNameExpressions(expectedOutputText);
   });
@@ -64,10 +109,20 @@ describe('should parse valid name expressions', () => {
     title.isProperNoun = true;
 
     const expectedOutputText =
-      'Tiamat begins on a new line. Tiamat begins on a new sentence, but Tiamat does not. **Header.** Tiamat begins after a header. (Tiamat is surrounded by brackets with Tiamat)\n' +
-      '  Tiamat begins on an indented line.\n' +
-      'Tiamat begins on a new line. Tiamat begins on a new sentence, but Tiamat does not. **Header.** Tiamat begins after a header. (Tiamat is surrounded by brackets with Tiamat)\n' +
-      '  Tiamat begins on an indented line.';
+      'Tiamat begins on a new line, but Tiamat does not. Tiamat begins on a new sentence, but Tiamat does not.\n' +
+      '  Tiamat begins on an indented line, but Tiamat does not.\n' +
+      '(Tiamat has an opening bracket. (Tiamat has an opening bracket.\n' +
+      'Tiamat) has a closing bracket. Tiamat) has a closing bracket.\n' +
+      '(Tiamat) has both brackets. (Tiamat) has both brackets.\n' +
+      'Name expressions begin as sentences if there is markdown between the last period and expression. **Header.** Tiamat begins after a header. __Header.__ Tiamat begins after a header.\n' +
+      'Name expressions do not begin as sentences there is no whitespace between the last period and expression.Tiamat does not begin as a sentence.\n' +
+      'Tiamat begins on a new line, but Tiamat does not. Tiamat begins on a new sentence, but Tiamat does not.\n' +
+      '  Tiamat begins on an indented line, but Tiamat does not.\n' +
+      '(Tiamat has an opening bracket. (Tiamat has an opening bracket.\n' +
+      'Tiamat) has a closing bracket. Tiamat) has a closing bracket.\n' +
+      '(Tiamat) has both brackets. (Tiamat) has both brackets.\n' +
+      'Name expressions begin as sentences if there is markdown between the last period and expression. **Header.** Tiamat begins after a header. __Header.__ Tiamat begins after a header.\n' +
+      'Name expressions do not begin as sentences there is no whitespace between the last period and expression.Tiamat does not begin as a sentence.';
 
     parseAndVerifyNameExpressions(expectedOutputText);
   });
@@ -78,10 +133,20 @@ describe('should parse valid name expressions', () => {
     title.isProperNoun = true;
 
     const expectedOutputText =
-      'Lady Kima begins on a new line. Lady Kima begins on a new sentence, but Lady Kima does not. **Header.** Lady Kima begins after a header. (Lady Kima is surrounded by brackets with Lady Kima)\n' +
-      '  Lady Kima begins on an indented line.\n' +
-      'Lady Kima of Vord begins on a new line. Lady Kima of Vord begins on a new sentence, but Lady Kima of Vord does not. **Header.** Lady Kima of Vord begins after a header. (Lady Kima of Vord is surrounded by brackets with Lady Kima of Vord)\n' +
-      '  Lady Kima of Vord begins on an indented line.';
+      'Lady Kima begins on a new line, but Lady Kima does not. Lady Kima begins on a new sentence, but Lady Kima does not.\n' +
+      '  Lady Kima begins on an indented line, but Lady Kima does not.\n' +
+      '(Lady Kima has an opening bracket. (Lady Kima has an opening bracket.\n' +
+      'Lady Kima) has a closing bracket. Lady Kima) has a closing bracket.\n' +
+      '(Lady Kima) has both brackets. (Lady Kima) has both brackets.\n' +
+      'Name expressions begin as sentences if there is markdown between the last period and expression. **Header.** Lady Kima begins after a header. __Header.__ Lady Kima begins after a header.\n' +
+      'Name expressions do not begin as sentences there is no whitespace between the last period and expression.Lady Kima does not begin as a sentence.\n' +
+      'Lady Kima of Vord begins on a new line, but Lady Kima of Vord does not. Lady Kima of Vord begins on a new sentence, but Lady Kima of Vord does not.\n' +
+      '  Lady Kima of Vord begins on an indented line, but Lady Kima of Vord does not.\n' +
+      '(Lady Kima of Vord has an opening bracket. (Lady Kima of Vord has an opening bracket.\n' +
+      'Lady Kima of Vord) has a closing bracket. Lady Kima of Vord) has a closing bracket.\n' +
+      '(Lady Kima of Vord) has both brackets. (Lady Kima of Vord) has both brackets.\n' +
+      'Name expressions begin as sentences if there is markdown between the last period and expression. **Header.** Lady Kima of Vord begins after a header. __Header.__ Lady Kima of Vord begins after a header.\n' +
+      'Name expressions do not begin as sentences there is no whitespace between the last period and expression.Lady Kima of Vord does not begin as a sentence.';
 
     parseAndVerifyNameExpressions(expectedOutputText);
   });
@@ -101,7 +166,7 @@ describe('should parse invalid name expressions unchanged', () => {
   it.each
   `
     description                       | inputText
-    ${'Unknown name expression'}      | ${'[blimey]'}
+    ${'Unknown name expression'}      | ${'[nam]'}
     ${'Unclosed name expression'}     | ${'[name'}
     ${'Unclosed fullname expression'} | ${'[fullname'}
   `
