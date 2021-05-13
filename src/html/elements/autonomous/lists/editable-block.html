@@ -9,6 +9,38 @@
   <input id="editable-block-name" class="editable-block__name ui__text-input" is="text-input" type="text" tabindex="1" required></input>
   <button id="editable-block-remove-button" class="ui__button editable-block__remove-button" tabindex="3"><i class="material-icons">delete</i></button>
   <div id="editable-block-sidebar" class="editable-block__sidebar">
+    <expression-menu class="editable-block__expression-menu">
+      <span slot="name">NAME</span>
+      <button id="name-button">[NAME]</button>
+      <button id="fullname-button">[FULLNAME]</button>
+    </expression-menu>
+    <expression-menu class="editable-block__expression-menu">
+      <span slot="name">MOD</span>
+      <button id="mod-str-button">MOD[STR]</button>
+      <button id="mod-dex-button">MOD[DEX]</button>
+      <button id="mod-con-button">MOD[CON]</button>
+      <button id="mod-int-button">MOD[INT]</button>
+      <button id="mod-wis-button">MOD[WIS]</button>
+      <button id="mod-cha-button">MOD[CHA]</button>
+    </expression-menu>
+    <expression-menu class="editable-block__expression-menu">
+      <span slot="name">ATK</span>
+      <button id="atk-str-button">ATK[STR]</button>
+      <button id="atk-dex-button">ATK[DEX]</button>
+      <button id="atk-fin-button">ATK[FIN]</button>
+    </expression-menu>
+    <expression-menu class="editable-block__expression-menu">
+      <span slot="name">DMG</span>
+      <button id="dmg-str-button">DMG[d6 + STR]</button>
+      <button id="dmg-dex-button">DMG[d6 + DEX]</button>
+      <button id="dmg-fin-button">DMG[d6 + FIN]</button>
+    </expression-menu>
+    <expression-menu class="editable-block__expression-menu">
+      <span slot="name">SDC</span>
+      <button id="dmg-str-button">SDC[INT]</button>
+      <button id="dmg-dex-button">SDC[WIS]</button>
+      <button id="dmg-fin-button">SDC[CHA]</button>
+    </expression-menu>
   </div>
   <textarea id="editable-block-textarea" class="editable-block__textarea ui__textarea" is="block-textarea" cols="30" rows="6" tabindex="2" required></textarea>
   <div id="editable-block-preview-container" class="editable-block__preview-container">

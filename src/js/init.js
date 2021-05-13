@@ -13,6 +13,7 @@ import TextInput from './elements/builtin/text-input.js';
 
 import DropDownMenu from './elements/autonomous/drop-down-menu.js';
 import ErrorMessages from './elements/autonomous/error-messages.js';
+import ExpressionMenu from './elements/autonomous/expression-menu.js';
 import GettingStartedHelpBox from './elements/autonomous/getting-started-help-box.js';
 import LoadingScreen from './elements/autonomous/loading-screen.js';
 import PropertyBlock from './elements/autonomous/property-block.js';
@@ -119,6 +120,7 @@ async function defineElements() {
 
     DropDownMenu,
     ErrorMessages,
+    ExpressionMenu,
     GettingStartedHelpBox,
     LoadingScreen,
     PropertyBlock,
