@@ -31,9 +31,10 @@ InlineCommon
   = Text
   / Whitespace
   / PeriodChar
+  / OpeningSquareBracketChar
 
 SentenceBeginningNameExpression
-  = period:PeriodChar markdown:MarkdownOptional whitespace:Whitespace expression:BeginningNameExpression { return `${period}${markdown}${whitespace}${expression}`; }
+  = period:PeriodChar markdown:MarkdownOptional whitespace:WhitespaceOptional expression:BeginningNameExpression { return `${period}${markdown}${whitespace}${expression}`; }
 
 BeginningNameExpression
   = open:OpeningRoundBracketOptional expression:(BeginningName / BeginningFullName) close:ClosingRoundBracketOptional { return `${open}${expression}${close}`; }
@@ -75,7 +76,10 @@ EndOfLine
   = NewLineChar / End
 
 NormalChar
-  = !( PeriodChar / SpaceChar / NewLineChar ) .
+  = !( PeriodChar / SpaceChar / OpeningSquareBracketChar / NewLineChar ) .
+
+OpeningSquareBracketChar
+  = '[';
 
 OpeningRoundBracketChar
   = '(';
