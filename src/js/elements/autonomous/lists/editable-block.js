@@ -1,4 +1,5 @@
 import DragAndDropListItem from './drag-and-drop-list-item.js';
+
 import BlockModel from '../../../models/lists/block/block-model.js';
 
 import { trimTrailingPeriods } from '../../../helpers/string-formatter.js';
@@ -21,27 +22,37 @@ export default class EditableBlock extends DragAndDropListItem {
     this.previewTextElement = this.shadowRoot.getElementById('editable-block-preview-text');
     this.removeButton = this.shadowRoot.getElementById('editable-block-remove-button');
 
-    this.nameButton = this.shadowRoot.getElementById('name-button');
-    this.fullnameButton = this.shadowRoot.getElementById('fullname-button');
+    this.nameExpressionButtons = {
+      'NAME' : this.shadowRoot.getElementById('name-button'),
+      'FULLNAME' : this.shadowRoot.getElementById('fullname-button')
+    };
 
-    this.modStrButton = this.shadowRoot.getElementById('mod-str-button');
-    this.modDexButton = this.shadowRoot.getElementById('mod-dex-button');
-    this.modConButton = this.shadowRoot.getElementById('mod-con-button');
-    this.modIntButton = this.shadowRoot.getElementById('mod-int-button');
-    this.modWisButton = this.shadowRoot.getElementById('mod-wis-button');
-    this.modChaButton = this.shadowRoot.getElementById('mod-cha-button');
+    this.modExpressionButtons = {
+      'STR' : this.shadowRoot.getElementById('mod-str-button'),
+      'DEX' : this.shadowRoot.getElementById('mod-dex-button'),
+      'CON' : this.shadowRoot.getElementById('mod-con-button'),
+      'INT' : this.shadowRoot.getElementById('mod-int-button'),
+      'WIS' : this.shadowRoot.getElementById('mod-wis-button'),
+      'CHA' : this.shadowRoot.getElementById('mod-cha-button')
+    };
 
-    this.atkStrButton = this.shadowRoot.getElementById('atk-str-button');
-    this.atkDexButton = this.shadowRoot.getElementById('atk-dex-button');
-    this.atkFinButton = this.shadowRoot.getElementById('atk-fin-button');
+    this.atkExpressionButtons = {
+      'STR' : this.shadowRoot.getElementById('atk-str-button'),
+      'DEX' : this.shadowRoot.getElementById('atk-dex-button'),
+      'FIN' : this.shadowRoot.getElementById('atk-fin-button')
+    };
 
-    this.dmgStrButton = this.shadowRoot.getElementById('dmg-str-button');
-    this.dmgDexButton = this.shadowRoot.getElementById('dmg-dex-button');
-    this.dmgFinButton = this.shadowRoot.getElementById('dmg-fin-button');
+    this.dmgExpressionButtons = {
+      'STR' : this.shadowRoot.getElementById('dmg-str-button'),
+      'DEX' : this.shadowRoot.getElementById('dmg-dex-button'),
+      'FIN' : this.shadowRoot.getElementById('dmg-fin-button')
+    };
 
-    this.sdcIntButton = this.shadowRoot.getElementById('sdc-int-button');
-    this.sdcWisButton = this.shadowRoot.getElementById('sdc-wis-button');
-    this.sdcChaButton = this.shadowRoot.getElementById('sdc-cha-button');
+    this.sdcExpressionButtons = {
+      'INT' : this.shadowRoot.getElementById('sdc-int-button'),
+      'WIS' : this.shadowRoot.getElementById('sdc-wis-button'),
+      'CHA' : this.shadowRoot.getElementById('sdc-cha-button')
+    };
 
     this.dragImage = this.nameInput;
 
@@ -56,27 +67,25 @@ export default class EditableBlock extends DragAndDropListItem {
       this.textArea.addEventListener('input', this.onInputText.bind(this));
       this.removeButton.addEventListener('click', this.onClickRemoveButton.bind(this));
 
-      this.nameButton.addEventListener('click', this.onClickNameButton.bind(this));
-      this.fullnameButton.addEventListener('click', this.onClickFullnameButton.bind(this));
+      for(const [variable, button] of Object.entries(this.nameExpressionButtons)) {
+        button.addEventListener('click', this.onClickNameExpressionButton.bind(this, variable));
+      }
 
-      this.modStrButton.addEventListener('click', this.onClickModButton.bind(this, 'STR'));
-      this.modDexButton.addEventListener('click', this.onClickModButton.bind(this, 'DEX'));
-      this.modConButton.addEventListener('click', this.onClickModButton.bind(this, 'CON'));
-      this.modIntButton.addEventListener('click', this.onClickModButton.bind(this, 'INT'));
-      this.modWisButton.addEventListener('click', this.onClickModButton.bind(this, 'WIS'));
-      this.modChaButton.addEventListener('click', this.onClickModButton.bind(this, 'CHA'));
+      for(const [variable, button] of Object.entries(this.modExpressionButtons)) {
+        button.addEventListener('click', this.onClickModExpressionButton.bind(this, variable));
+      }
 
-      this.atkStrButton.addEventListener('click', this.onClickAtkButton.bind(this, 'STR'));
-      this.atkDexButton.addEventListener('click', this.onClickAtkButton.bind(this, 'DEX'));
-      this.atkFinButton.addEventListener('click', this.onClickAtkButton.bind(this, 'FIN'));
+      for(const [variable, button] of Object.entries(this.atkExpressionButtons)) {
+        button.addEventListener('click', this.onClickAtkExpressionButton.bind(this, variable));
+      }
 
-      this.dmgStrButton.addEventListener('click', this.onClickDmgButton.bind(this, 'STR'));
-      this.dmgDexButton.addEventListener('click', this.onClickDmgButton.bind(this, 'DEX'));
-      this.dmgFinButton.addEventListener('click', this.onClickDmgButton.bind(this, 'FIN'));
+      for(const [variable, button] of Object.entries(this.dmgExpressionButtons)) {
+        button.addEventListener('click', this.onClickDmgExpressionButton.bind(this, variable));
+      }
 
-      this.sdcIntButton.addEventListener('click', this.onClickSdcButton.bind(this, 'INT'));
-      this.sdcWisButton.addEventListener('click', this.onClickSdcButton.bind(this, 'WIS'));
-      this.sdcChaButton.addEventListener('click', this.onClickSdcButton.bind(this, 'CHA'));
+      for(const [variable, button] of Object.entries(this.sdcExpressionButtons)) {
+        button.addEventListener('click', this.onClickSdcExpressionButton.bind(this, variable));
+      }
 
       this.isInitialized = true;
     }
@@ -96,28 +105,24 @@ export default class EditableBlock extends DragAndDropListItem {
     this.remove();
   }
 
-  onClickNameButton() {
-    this.addExpressionToText('[NAME]');
+  onClickNameExpressionButton(variable) {
+    this.addExpressionToText(`[${variable}]`);
   }
 
-  onClickFullnameButton() {
-    this.addExpressionToText('[FULLNAME]');
+  onClickModExpressionButton(variable) {
+    this.addExpressionToText(`MOD[${variable}]`);
   }
 
-  onClickModButton(abilityVariable) {
-    this.addExpressionToText(`MOD[${abilityVariable}]`);
+  onClickAtkExpressionButton(variable) {
+    this.addExpressionToText(`ATK[${variable}]`);
   }
 
-  onClickAtkButton(abilityVariable) {
-    this.addExpressionToText(`ATK[${abilityVariable}]`);
+  onClickDmgExpressionButton(variable) {
+    this.addExpressionToText(`DMG[d6 + ${variable}]`);
   }
 
-  onClickDmgButton(abilityVariable) {
-    this.addExpressionToText(`DMG[d6 + ${abilityVariable}]`);
-  }
-
-  onClickSdcButton(abilityVariable) {
-    this.addExpressionToText(`SDC[${abilityVariable}]`);
+  onClickSdcExpressionButton(variable) {
+    this.addExpressionToText(`SDC[${variable}]`);
   }
 
   addExpressionToText(expression) {
@@ -126,6 +131,8 @@ export default class EditableBlock extends DragAndDropListItem {
 
     this.textArea.setRangeText(expression, selectionStart, selectionEnd, 'end');
     this.textArea.focus();
+
+    this.onInputText();
   }
 
   set name(name) {
