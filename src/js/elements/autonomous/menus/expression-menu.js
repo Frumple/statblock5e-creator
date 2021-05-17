@@ -1,11 +1,11 @@
-import CustomAutonomousElement from './custom-autonomous-element.js';
+import CustomAutonomousElement from '../custom-autonomous-element.js';
 
 export default class ExpressionMenu extends CustomAutonomousElement {
   static get elementName() { return 'expression-menu'; }
   static get templatePaths() {
     return super.templatePaths.set(
       'expression-menu',
-      'src/html/elements/autonomous/expression-menu.html');
+      'src/html/elements/autonomous/menus/expression-menu.html');
   }
 
   constructor() {
