@@ -14,26 +14,39 @@
   transition: background 100ms ease-in-out;
 }
 
-.ui__button:hover {
+.ui__button:enabled:hover {
   background: #eeeeee;
 }
 
-.ui__button:active {
+.ui__button:enabled:active {
   background: #90FF70;
 }
 
-/* Radio Button */
+/* Toggle Button (Checkbox or Radio Button that looks like a Button) */
 
-.ui__radio-button-input {
+.ui__toggle-button-input {
   display: none;
   appearance: none;
 }
 
-.ui__radio-button-input:checked + label {
+.ui__toggle-button-input:disabled + .ui__toggle-button-label {
+  color: rgba(16, 16, 16, 0.3);
+}
+
+.ui__toggle-button-input:enabled + .ui__toggle-button-label:hover {
+  background: #eeeeee;
+}
+
+.ui__toggle-button-input:enabled + .ui__toggle-button-label:active {
   background: #90FF70;
 }
 
-.ui__radio-button-label {
+.ui__toggle-button-input:checked + .ui__toggle-button-label,
+.ui__toggle-button-input:checked + .ui__toggle-button-label:hover {
+  background: #90FF70;
+}
+
+.ui__toggle-button-label {
   user-select: none;
 }
 

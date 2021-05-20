@@ -6,8 +6,16 @@
 
 <div id="drag-and-drop-list-item-container" class="drag-and-drop-list-item__container editable-block__container">
   <i id="drag-and-drop-list-item-drag-handle" class="drag-and-drop-list-item__drag-handle material-icons">drag_handle</i>
-  <input id="editable-block-name" class="editable-block__name ui__text-input" is="text-input" type="text" tabindex="1" required></input>
-  <button id="editable-block-remove-button" class="ui__button editable-block__remove-button" tabindex="3"><i class="material-icons">delete</i></button>
+  <div class="editable-block__top-container">
+    <input id="editable-block-name" class="editable-block__name ui__text-input" is="text-input" type="text" required></input>
+    <div class="editable-block__button-separator"></div>
+    <input id="editable-block-bold-checkbox" class="ui__toggle-button-input" type="checkbox" disabled />
+    <label id="editable-block-bold-label" for="editable-block-bold-checkbox" class="ui__button ui__toggle-button-label editable-block__bold-button"><i class="drop-down-menu__icon material-icons">format_bold</i></label>
+    <input id="editable-block-italic-checkbox" class="ui__toggle-button-input" type="checkbox" disabled />
+    <label id="editable-block-italic-label" for="editable-block-italic-checkbox" class="ui__button ui__toggle-button-label editable-block__italic-button"><i class="drop-down-menu__icon material-icons">format_italic</i></label>
+    <div class="editable-block__button-separator"></div>
+    <button id="editable-block-remove-button" class="ui__button editable-block__remove-button"><i class="material-icons">delete</i></button>
+  </div>
   <div id="editable-block-sidebar" class="editable-block__sidebar">
     <expression-menu class="editable-block__expression-menu">
       <span slot="name">NAME</span>
@@ -42,7 +50,7 @@
       <button id="sdc-cha-button">SDC[CHA]</button>
     </expression-menu>
   </div>
-  <textarea id="editable-block-textarea" class="editable-block__textarea ui__textarea" is="block-textarea" cols="30" rows="6" tabindex="2" required></textarea>
+  <textarea id="editable-block-textarea" class="editable-block__textarea ui__textarea" is="block-textarea" cols="30" rows="6" required></textarea>
   <div id="editable-block-preview-container" class="editable-block__preview-container">
     <h4 class="editable-block__preview-name"><span id="editable-block-preview-name"></span>.</h4>
     <p id="editable-block-preview-text" class="editable-block__preview-text" is="sanitized-paragraph"></p>

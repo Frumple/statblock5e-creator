@@ -1,6 +1,6 @@
 .editable-block__container {
   display: grid;
-  grid-template-columns: 24px auto 50px;
+  grid-template-columns: 24px auto;
   grid-template-rows: auto auto auto;
   grid-column-gap: 5px;
   grid-row-gap: 5px;
@@ -13,20 +13,27 @@
   grid-area: 1 / 1;
 }
 
-.editable-block__name {
+.editable-block__top-container {
   grid-area: 1 / 2;
   width: 100%;
+  display: flex;
+  justify-content: flex-end;
+  gap: 5px;
+}
+
+.editable-block__name {
   font-weight: bold;
   font-style: italic;
+  width: 100%;
 }
 
 .editable-block__name_no-italic {
   font-style: normal;
 }
 
-.editable-block__remove-button {
-  grid-area: 1 / 3;
-  padding: 0 10px;
+.editable-block__button-separator {
+  border-left: 1px solid gray;
+  margin: 0 5px;
 }
 
 .editable-block__sidebar {
@@ -45,13 +52,13 @@
 }
 
 .editable-block__textarea {
-  grid-area: 2 / 2 / 3 / 4;
+  grid-area: 2 / 2;
   font-family: monospace;
   resize: none;
 }
 
 .editable-block__preview-container {
-  grid-area: 3 / 1 / 4 / 4;
+  grid-area: 3 / 1 / 4 / 3;
   margin: 0;
 }
 
