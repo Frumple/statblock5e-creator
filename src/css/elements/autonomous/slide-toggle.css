@@ -28,6 +28,10 @@
   transition: all 0.5s ease;
 }
 
+.slide-toggle__control:hover {
+  background: #999999;
+}
+
 .slide-toggle__control:before,
 .slide-toggle__control:after {
   display: flex;
