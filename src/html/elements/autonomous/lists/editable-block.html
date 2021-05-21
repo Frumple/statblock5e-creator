@@ -5,7 +5,7 @@
 <link href='src/css/elements/autonomous/lists/editable-block.css' rel='stylesheet' type='text/css'>
 
 <div id="drag-and-drop-list-item-container" class="drag-and-drop-list-item__container editable-block__container">
-  <i id="drag-and-drop-list-item-drag-handle" class="drag-and-drop-list-item__drag-handle material-icons">drag_handle</i>
+  <i id="drag-and-drop-list-item-drag-handle" class="drag-and-drop-list-item__drag-handle editable-block__drag-handle material-icons">drag_handle</i>
   <div class="editable-block__top-container">
     <input id="editable-block-name" class="editable-block__name ui__text-input" is="text-input" type="text" required></input>
     <div class="editable-block__button-separator"></div>
@@ -50,7 +50,7 @@
       <button id="sdc-cha-button">SDC[CHA]</button>
     </expression-menu>
   </div>
-  <textarea id="editable-block-textarea" class="editable-block__textarea ui__textarea" is="block-textarea" cols="30" rows="6" required></textarea>
+  <textarea id="editable-block-textarea" class="editable-block__textarea ui__textarea" is="block-textarea" cols="30" rows="8" required></textarea>
   <div id="editable-block-preview-container" class="editable-block__preview-container">
     <h4 class="editable-block__preview-name"><span id="editable-block-preview-name"></span>.</h4>
     <p id="editable-block-preview-text" class="editable-block__preview-text" is="sanitized-paragraph"></p>
