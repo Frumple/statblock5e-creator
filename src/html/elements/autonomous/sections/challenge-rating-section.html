@@ -16,7 +16,16 @@
 
 <form id="edit-section" class="section section_hidden" novalidate>
   <div class="challenge-rating-edit-section section__content">
-    <label id="challenge-rating-label" class="challenge-rating-edit-section__challenge-rating-label section__heading-label" for="challenge-rating-input">Challenge Rating:</label>
+    <div class="challenge-rating-edit-section__challenge-rating-label-container">
+      <label id="challenge-rating-label" class="challenge-rating-edit-section__challenge-rating-label section__heading-label" for="challenge-rating-input">Challenge Rating:</label>
+      <help-tooltip class="challenge-rating-edit-section__challenge-rating-help-tooltip">
+        <p>The creature's <strong>challenge rating</strong> indicates how much of a threat the creature is.</p>
+        <br />
+        <p><em>Note: Changing the challenge rating will also automatically change the <strong>experience points</strong> and <strong>proficiency bonus</strong> to their corresponding values.</em></p>
+        <br />
+        <cite>For more details, see page 8 and 9 of the D&D 5th Edition Monster Manual.</cite>
+      </help-tooltip>
+    </div>
     <select id="challenge-rating-input" class="challenge-rating-edit-section__challenge-rating-input ui__select" is="number-select" name="challenge-rating" pretty-name="Challenge Rating">
       <option value="0">0</option>
       <option value="1/8">1/8</option>
@@ -54,13 +63,7 @@
       <option value="30">30</option>
     </select>
 
-    <help-tooltip class="challenge-rating-edit-section__challenge-rating-help-tooltip">
-      <p>The creature's <strong>challenge rating</strong> indicates how much of a threat the creature is.</p>
-      <br />
-      <p><em>Note: Changing the challenge rating will also automatically change the <strong>experience points</strong> and <strong>proficiency bonus</strong> to their corresponding values.</em></p>
-      <br />
-      <cite>For more details, see page 8 and 9 of the D&D 5th Edition Monster Manual.</cite>
-    </help-tooltip>
+    <div class="challenge-rating-edit-section__arrow"><i class="material-icons">arrow_forward</i></div>
 
     <label id="experience-points-label" class="challenge-rating-edit-section__experience-points-label" for="experience-points-input">Experience Points:</label>
     <input id="experience-points-input" class="challenge-rating-edit-section__experience-points-input ui__number-input" is="number-input" type="number" name="experience-points" pretty-name="Experience Points" min="0" max="999999" value="" required />

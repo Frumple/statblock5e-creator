@@ -1,41 +1,41 @@
 .challenge-rating-edit-section {
   display: grid;
-  grid-template-columns: auto auto auto auto;
+  grid-template-columns: auto 50px auto auto 70px;
   grid-template-rows: auto auto;
   grid-row-gap: 5px;
   align-items: center;
 }
 
-.challenge-rating-edit-section__challenge-rating-label {
-  grid-area: 1 / 1;
+.challenge-rating-edit-section__challenge-rating-label-container {
+  grid-area: 1 / 1 / 3 / 2;
 }
 
 .challenge-rating-edit-section__challenge-rating-input {
-  grid-area: 1 / 2;
-  width: 50px;
+  grid-area: 1 / 2 / 3 / 3;
+}
+
+.challenge-rating-edit-section__arrow {
+  grid-area: 1 / 3 / 3 / 4;
+  text-align: center;
 }
 
 .challenge-rating-edit-section__experience-points-label {
-  grid-area: 1 / 3;
+  grid-area: 1 / 4;
 }
 
 .challenge-rating-edit-section__experience-points-input {
-  grid-area: 1 / 4;
-  width: 70px;
+  grid-area: 1 / 5;
 }
 
 .challenge-rating-edit-section__proficiency-bonus-label {
-  grid-area: 2 / 3;
+  grid-area: 2 / 4;
 }
 
 .challenge-rating-edit-section__proficiency-bonus-input {
-  grid-area: 2 / 4;
-  width: 70px;
+  grid-area: 2 / 5;
 }
 
 .challenge-rating-edit-section__challenge-rating-help-tooltip {
-  grid-area: 2 / 1;
-  justify-self: start;
   --help-tooltip-icon-color: #7A200D;
   --help-tooltip-width: 40em;
 }
