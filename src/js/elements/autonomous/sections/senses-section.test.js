@@ -280,11 +280,11 @@ describe('should calculate the passive perception based on the following conditi
   it.each
   `
     description                                       | wisdomScore | proficiencyBonus | perceptionEnabled | perceptionExpertise | perceptionOverride | expectedPassivePerception
-    ${'perception disabled, not expert, no override'} | ${10}       | ${2}             | ${false}          | ${false}            | ${''}              | ${10}
-    ${'perception enabled, not expert, no override'}  | ${10}       | ${2}             | ${true}           | ${false}            | ${''}              | ${12}
-    ${'perception enabled, expert, no override'}      | ${10}       | ${2}             | ${true}           | ${true}             | ${''}              | ${14}
-    ${'perception enabled, not expert, override'}     | ${10}       | ${2}             | ${true}           | ${false}            | ${7}               | ${17}
-    ${'perception enabled, expert, override'}         | ${10}       | ${2}             | ${true}           | ${true}             | ${8}               | ${18}
+    ${'perception disabled, not expert, no override'} | ${12}       | ${2}             | ${false}          | ${false}            | ${''}              | ${11}
+    ${'perception enabled, not expert, no override'}  | ${12}       | ${2}             | ${true}           | ${false}            | ${''}              | ${13}
+    ${'perception enabled, expert, no override'}      | ${12}       | ${2}             | ${true}           | ${true}             | ${''}              | ${15}
+    ${'perception enabled, not expert, override'}     | ${12}       | ${2}             | ${true}           | ${false}            | ${7}               | ${17}
+    ${'perception enabled, expert, override'}         | ${12}       | ${2}             | ${true}           | ${true}             | ${8}               | ${18}
     ${'- wisdom score and - proficiency bonus'}       | ${3}        | ${-1}            | ${true}           | ${false}            | ${''}              | ${5}
     ${'- wisdom score and 0 proficiency bonus'}       | ${3}        | ${0}             | ${true}           | ${false}            | ${''}              | ${6}
     ${'- wisdom score and + proficiency bonus'}       | ${3}        | ${3}             | ${true}           | ${false}            | ${''}              | ${9}

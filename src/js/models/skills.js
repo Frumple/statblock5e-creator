@@ -109,7 +109,7 @@ class Skill {
 
     if (this.isEnabled) {
       if (this.override !== null) {
-        return passiveScore + this.override;
+        return 10 + this.override;
       }
 
       passiveScore += this.challengeRatingModel.proficiencyBonus;
