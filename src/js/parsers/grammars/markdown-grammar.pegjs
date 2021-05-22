@@ -13,7 +13,8 @@ NormalLine
   = inline:Inline+ end:EndOfLine { return `${inline.join('')}${end ? end : ''}`; }
 
 Inline
-  = Markup
+  = EscapedMarkdownChar
+  / Markup
   / Text
   / Whitespace
 
@@ -26,10 +27,10 @@ Strong
   / StrongUnderscore
 
 TwoAsteriskOpen
-  = '**'
+  = !EscapedMarkdownChar '**'
 
 TwoAsteriskClose
-  = '**'
+  = !EscapedMarkdownChar '**'
 
 StrongAsterisk
   = TwoAsteriskOpen
@@ -38,10 +39,10 @@ StrongAsterisk
     { return `<strong>${inline.join('')}</strong>`; }
 
 TwoUnderlineOpen
-  = '__'
+  = !EscapedMarkdownChar '__'
 
 TwoUnderlineClose
-  = '__'
+  = !EscapedMarkdownChar '__'
 
 StrongUnderscore
   = TwoUnderlineOpen
@@ -54,10 +55,10 @@ Emphasis
   / EmphasisUnderscore
 
 OneAsteriskOpen
-  = '*'
+  = !EscapedMarkdownChar '*'
 
 OneAsteriskClose
-  = !StrongAsterisk '*'
+  = !StrongAsterisk !EscapedMarkdownChar '*'
 
 EmphasisAsterisk
   = OneAsteriskOpen
@@ -66,10 +67,10 @@ EmphasisAsterisk
     { return `<em>${inline.join('')}</em>`; }
 
 OneUnderlineOpen
-  = '_'
+  = !EscapedMarkdownChar '_'
 
 OneUnderlineClose
-  = !StrongUnderscore '_'
+  = !StrongUnderscore !EscapedMarkdownChar '_'
 
 EmphasisUnderscore
   = OneUnderlineOpen
@@ -87,10 +88,13 @@ EndOfLine
   = NewLineChar / End
 
 NormalChar
-  = !( SpecialChar / SpaceChar / NewLineChar ) .
+  = !( MarkdownChar / EscapedMarkdownChar / SpaceChar / NewLineChar ) .
 
-SpecialChar
+MarkdownChar
   = '*' / '_'
+
+EscapedMarkdownChar
+  = '\\' char:MarkdownChar { return char; }
 
 NewLineChar
   = '\n' / $('\r' '\n'?)
