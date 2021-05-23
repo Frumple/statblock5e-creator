@@ -11,17 +11,17 @@ A web application for creating creature statblocks that are similar in appearanc
 ## Features
 
 - **One-column** or **Two-column** formats. Two-column statblock heights can also be adjusted manually.
-- Hit points can be automatically calculated from hit die and constitution, or using your own custom value.
-- Saving throws and skills can be automatically calculated from ability modifiers and proficiency bonus, or using your own custom modifiers.
-- Descriptions for Special Traits, Actions, Reactions, and Legendary Actions can be enhanced using the following expressions:
+- Calculate hit points using hit die and constitution, or using your own custom value.
+- Calculate saving throws and skills using ability modifiers and proficiency bonus, or using your own custom modifiers.
+- Enhance Special Traits, Actions, Reactions, and Legendary Actions with special expressions:
   - **[Markdown Emphasis][markdown-emphasis]** - Make text **bold** and/or *italic*.
   - **[Name Expressions][name-expressions]** - Inject the creature's name into the description where needed.
   - **[Math Expressions][math-expressions]** - Automatically calculate attack roll modifiers, average damage from damage rolls, and spell save DCs.
 - **Generate Attack Dialog** - Easily create attack actions using one of the pre-defined D&D 5e weapons, or create your own custom attack.
 - **Generate Spellcasting Dialog** - Easily create spellcasting special trait blocks for innate, generic, and class-specific spellcasters.
-- Import a pre-made published statblocks using the following methods:
-  - **Import from 5e SRD** - Load any creature from the official 5th Edition SRD using Statblock5e Creator's own example JSON files.
-  - **Import from Open5e** -  Load any creature from the official 5th Edition SRD, or Tome of Beasts or Creature Codex from Kobold Press using the Open5e API (does not include Markdown Emphasis, Name Expressions, or Math Expressions).
+- Import pre-made published statblocks from the following sources:
+  - **Import from 5e SRD** - Load any creature from the official 5th Edition SRD using Statblock5e Creator's own JSON file format.
+  - **Import from Open5e** - Load any creature from the official 5th Edition SRD, or Tome of Beasts or Creature Codex from Kobold Press using the Open5e API (does not include Markdown Emphasis, Name Expressions, or Math Expressions).
 - Export your statblock into the following formats:
   - **Export to JSON** - Save your statblock and re-import it back into Statblock5e Creator at a later time.
   - **Export to HTML** - Based on the original **[statblock5e][statblock5e]** template.
@@ -30,11 +30,10 @@ A web application for creating creature statblocks that are similar in appearanc
 
 ## Future Improvements
 
-- Buttons to toggle bold/italic text and add expressions to Special Trait/Action/Reaction/Legendary Action descriptions
+- Export as Image
 - Autofill common Special Traits and Actions
 - Export to [Improved Initiative][improved-initiative] (JSON format)
 - Support for additional browsers (Firefox, Safari, etc.), and mobile devices
-- Export as Image
 - Additional printing options, including printing 2 one-column statblocks side-by-side
 
 ## How to Use
