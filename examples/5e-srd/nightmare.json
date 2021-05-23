@@ -199,11 +199,11 @@
     "blocks": [
       {
         "name": "Confer Fire Resistance",
-        "text": "[name] can grant resistance to fire damage to anyone riding it."
+        "text": "[NAME] can grant resistance to fire damage to anyone riding it."
       },
       {
         "name": "Illumination",
-        "text": "[name] sheds bright light in a 10-foot radius and dim light for an additional 10 feet."
+        "text": "[NAME] sheds bright light in a 10-foot radius and dim light for an additional 10 feet."
       }
     ]
   },
@@ -211,11 +211,11 @@
     "blocks": [
       {
         "name": "Hooves",
-        "text": "*Melee Weapon Attack:* atk[str] to hit, reach 5 ft., one target. *Hit:* dmg[2d8 + str] bludgeoning damage plus dmg[2d6] fire damage."
+        "text": "*Melee Weapon Attack:* ATK[STR] to hit, reach 5 ft., one target. *Hit:* DMG[2d8 + STR] bludgeoning damage plus DMG[2d6] fire damage."
       },
       {
         "name": "Ethereal Stride",
-        "text": "[name] and up to three willing creatures within 5 feet of it magically enter the Ethereal Plane from the Material Plane, or vice versa."
+        "text": "[NAME] and up to three willing creatures within 5 feet of it magically enter the Ethereal Plane from the Material Plane, or vice versa."
       }
     ]
   },
@@ -224,7 +224,7 @@
   },
   "legendaryActions": {
     "blocks": [],
-    "description": "[name] can take 3 legendary actions, choosing from the options below. Only one legendary action option can be used at a time and only at the end of another creature's turn. [name] regains spent legendary actions at the start of its turn."
+    "description": "[NAME] can take 3 legendary actions, choosing from the options below. Only one legendary action option can be used at a time and only at the end of another creature's turn. [NAME] regains spent legendary actions at the start of its turn."
   },
   "layout": {
     "columns": 1,

@@ -4,7 +4,7 @@ export default class DivisibleContainer extends StatsContainer {
   constructor(templatePaths) {
     super(templatePaths);
 
-    this.dividers = this.querySelectorAll('section-divider');
+    this.dividers = this.shadowRoot.querySelectorAll('section-divider');
 
     this.addEventListener('sectionModeChanged', () => {
       this.updateSectionDividers();

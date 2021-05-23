@@ -206,19 +206,19 @@
     "blocks": [
       {
         "name": "Shapechanger",
-        "text": "[name] can use its action to polymorph into a beast form that resembles a rat (speed 20 ft.), a raven (20 ft., fly 60 ft.), or a spider (20 ft., climb 20 ft.), or back into its true form. Its statistics are the same in each form, except for the speed changes noted. Any equipment it is wearing or carrying isn't transformed. It reverts to its true form if it dies."
+        "text": "[NAME] can use its action to polymorph into a beast form that resembles a rat (speed 20 ft.), a raven (20 ft., fly 60 ft.), or a spider (20 ft., climb 20 ft.), or back into its true form. Its statistics are the same in each form, except for the speed changes noted. Any equipment it is wearing or carrying isn't transformed. It reverts to its true form if it dies."
       },
       {
         "name": "Devil's Sight",
-        "text": "Magical darkness doesn't impede [name]'s darkvision."
+        "text": "Magical darkness doesn't impede [NAME]'s darkvision."
       },
       {
         "name": "Magic Resistance",
-        "text": "[name] has advantage on saving throws against spells and other magical effects."
+        "text": "[NAME] has advantage on saving throws against spells and other magical effects."
       },
       {
         "name": "Variant: Familiar",
-        "text": "[name] can serve another creature as a familiar, forming a telepathic bond with its willing master. While the two are bonded, the master can sense what [name] senses as long as they are within 1 mile of each other. While [name] is within 10 feet of its master, the master shares [name]'s Magic Resistance trait. At any time and for any reason, [name] can end its service as a familiar, ending the telepathic bond."
+        "text": "[NAME] can serve another creature as a familiar, forming a telepathic bond with its willing master. While the two are bonded, the master can sense what [NAME] senses as long as they are within 1 mile of each other. While [NAME] is within 10 feet of its master, the master shares [NAME]'s Magic Resistance trait. At any time and for any reason, [NAME] can end its service as a familiar, ending the telepathic bond."
       }
     ]
   },
@@ -226,11 +226,11 @@
     "blocks": [
       {
         "name": "Sting (Bite in Beast Form)",
-        "text": "*Melee Weapon Attack:* atk[dex] to hit, reach 5 ft., one target. *Hit:* dmg[1d4 + dex] piercing damage, and the target must make on a DC 11 Constitution saving throw, taking dmg[3d6] poison damage on a failed save, or half as much damage on a successful one."
+        "text": "*Melee Weapon Attack:* ATK[DEX] to hit, reach 5 ft., one target. *Hit:* DMG[1d4 + DEX] piercing damage, and the target must make on a DC 11 Constitution saving throw, taking DMG[3d6] poison damage on a failed save, or half as much damage on a successful one."
       },
       {
         "name": "Invisibility",
-        "text": "[name] magically turns invisible until it attacks, or until its concentration ends (as if concentrating on a spell). Any equipment [name] wears or carries is invisible with it."
+        "text": "[NAME] magically turns invisible until it attacks, or until its concentration ends (as if concentrating on a spell). Any equipment [NAME] wears or carries is invisible with it."
       }
     ]
   },
@@ -239,7 +239,7 @@
   },
   "legendaryActions": {
     "blocks": [],
-    "description": "[name] can take 3 legendary actions, choosing from the options below. Only one legendary action option can be used at a time and only at the end of another creature's turn. [name] regains spent legendary actions at the start of its turn."
+    "description": "[NAME] can take 3 legendary actions, choosing from the options below. Only one legendary action option can be used at a time and only at the end of another creature's turn. [NAME] regains spent legendary actions at the start of its turn."
   },
   "layout": {
     "columns": 1,

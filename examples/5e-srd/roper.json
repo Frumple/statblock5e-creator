@@ -195,15 +195,15 @@
     "blocks": [
       {
         "name": "False Appearance",
-        "text": "While [name] remains motionless, it is indistinguishable from a normal cave formation, such as a stalagmite."
+        "text": "While [NAME] remains motionless, it is indistinguishable from a normal cave formation, such as a stalagmite."
       },
       {
         "name": "Grasping Tendrils",
-        "text": "[name] can have up to six tendrils at a time. Each tendril can be attacked (AC 20; 10 hit points; immunity to poison and psychic damage). Destroying a tendril deals no damage to [name], which can extrude a replacement tendril on its next turn. A tendril can also be broken if a creature takes an action and succeeds on a DC 15 Strength check against it."
+        "text": "[NAME] can have up to six tendrils at a time. Each tendril can be attacked (AC 20; 10 hit points; immunity to poison and psychic damage). Destroying a tendril deals no damage to [NAME], which can extrude a replacement tendril on its next turn. A tendril can also be broken if a creature takes an action and succeeds on a DC 15 Strength check against it."
       },
       {
         "name": "Spider Climb",
-        "text": "[name] can climb difficult surfaces, including upside down on ceilings, without needing to make an ability check."
+        "text": "[NAME] can climb difficult surfaces, including upside down on ceilings, without needing to make an ability check."
       }
     ]
   },
@@ -211,19 +211,19 @@
     "blocks": [
       {
         "name": "Multiattack",
-        "text": "[name] makes four attacks with its tendrils, uses Reel, and makes one attack with its bite."
+        "text": "[NAME] makes four attacks with its tendrils, uses Reel, and makes one attack with its bite."
       },
       {
         "name": "Bite",
-        "text": "*Melee Weapon Attack:* atk[str] to hit, reach 5 ft., one target. *Hit:* dmg[4d8 + str] piercing damage."
+        "text": "*Melee Weapon Attack:* ATK[STR] to hit, reach 5 ft., one target. *Hit:* DMG[4d8 + STR] piercing damage."
       },
       {
         "name": "Tendril",
-        "text": "*Melee Weapon Attack:* atk[str] to hit, reach 50 ft., one creature. *Hit:* The target is grappled (escape DC 15). Until the grapple ends, the target is restrained and has disadvantage on Strength checks and Strength saving throws, and [name] can't use the same tendril on another target."
+        "text": "*Melee Weapon Attack:* ATK[STR] to hit, reach 50 ft., one creature. *Hit:* The target is grappled (escape DC 15). Until the grapple ends, the target is restrained and has disadvantage on Strength checks and Strength saving throws, and [NAME] can't use the same tendril on another target."
       },
       {
         "name": "Reel",
-        "text": "[name] pulls each creature grappled by it up to 25 ft. straight toward it."
+        "text": "[NAME] pulls each creature grappled by it up to 25 ft. straight toward it."
       }
     ]
   },
@@ -232,7 +232,7 @@
   },
   "legendaryActions": {
     "blocks": [],
-    "description": "[name] can take 3 legendary actions, choosing from the options below. Only one legendary action option can be used at a time and only at the end of another creature's turn. [name] regains spent legendary actions at the start of its turn."
+    "description": "[NAME] can take 3 legendary actions, choosing from the options below. Only one legendary action option can be used at a time and only at the end of another creature's turn. [NAME] regains spent legendary actions at the start of its turn."
   },
   "layout": {
     "columns": 1,

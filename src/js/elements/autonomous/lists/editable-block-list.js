@@ -1,8 +1,6 @@
 import DragAndDropList from './drag-and-drop-list.js';
-import EditableBlock from './editable-block.js';
 
 import { focusAndSelectElement } from '../../../helpers/element-helpers.js';
-import isRunningInJsdom from '../../../helpers/is-running-in-jsdom.js';
 
 export default class EditableBlockList extends DragAndDropList {
   static get elementName() { return 'editable-block-list'; }
@@ -12,11 +10,15 @@ export default class EditableBlockList extends DragAndDropList {
       'src/html/elements/autonomous/lists/editable-block-list.html');
   }
 
-  constructor() {
-    super(EditableBlockList.templatePaths);
+  constructor(templatePaths) {
+    super(templatePaths ? templatePaths : EditableBlockList.templatePaths);
 
     this.singleName = null;
     this.isLegendaryActionList = false;
+  }
+
+  get blockElementTag() {
+    return 'editable-block';
   }
 
   get blocks() {
@@ -30,26 +32,7 @@ export default class EditableBlockList extends DragAndDropList {
   }
 
   addBlock(name = '', text = '') {
-    const block = this.createBlock(name, text);
-
-    // TODO: Refactor legendary action behaviour into subclass instead
-    if (this.isLegendaryActionList) {
-      block.convertToLegendaryActionBlock();
-    }
-
-    if (isRunningInJsdom) {
-      block.connect();
-    }
-
-    this.appendChild(block);
-
-    focusAndSelectElement(block.nameInput);
-
-    return block;
-  }
-
-  createBlock(name, text) {
-    const block = isRunningInJsdom ? new EditableBlock() : document.createElement('editable-block');
+    const block = document.createElement(this.blockElementTag);
 
     block.list = this;
     block.name = name;
@@ -57,6 +40,10 @@ export default class EditableBlockList extends DragAndDropList {
 
     block.nameInput.setAttribute('pretty-name', `${this.singleName} Name`);
     block.textArea.setAttribute('pretty-name', `${this.singleName} Text`);
+
+    this.appendChild(block);
+
+    focusAndSelectElement(block.nameInput);
 
     return block;
   }

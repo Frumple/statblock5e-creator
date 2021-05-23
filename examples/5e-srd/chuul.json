@@ -201,11 +201,11 @@
     "blocks": [
       {
         "name": "Amphibious",
-        "text": "[name] can breathe air and water."
+        "text": "[NAME] can breathe air and water."
       },
       {
         "name": "Sense Magic",
-        "text": "[name] senses magic within 120 feet of it at will. This trait otherwise works like the detect magic spell but isn't itself magical."
+        "text": "[NAME] senses magic within 120 feet of it at will. This trait otherwise works like the detect magic spell but isn't itself magical."
       }
     ]
   },
@@ -213,15 +213,15 @@
     "blocks": [
       {
         "name": "Multiattack",
-        "text": "[name] makes two pincer attacks. If [name] is grappling a creature, [name] can also use its tentacles once."
+        "text": "[NAME] makes two pincer attacks. If [NAME] is grappling a creature, [NAME] can also use its tentacles once."
       },
       {
         "name": "Pincer",
-        "text": "*Melee Weapon Attack:* atk[str] to hit, reach 10 ft., one target. *Hit:* dmg[2d6 + str] bludgeoning damage. The target is grappled (escape DC 14) if it is a Large or smaller creature and [name] doesn't have two other creatures grappled."
+        "text": "*Melee Weapon Attack:* ATK[STR] to hit, reach 10 ft., one target. *Hit:* DMG[2d6 + STR] bludgeoning damage. The target is grappled (escape DC 14) if it is a Large or smaller creature and [NAME] doesn't have two other creatures grappled."
       },
       {
         "name": "Tentacles",
-        "text": "One creature grappled by [name] must succeed on a DC 13 Constitution saving throw or be poisoned for 1 minute. Until this poison ends, the target is paralyzed. The target can repeat the saving throw at the end of each of its turns, ending the effect on itself on a success."
+        "text": "One creature grappled by [NAME] must succeed on a DC 13 Constitution saving throw or be poisoned for 1 minute. Until this poison ends, the target is paralyzed. The target can repeat the saving throw at the end of each of its turns, ending the effect on itself on a success."
       }
     ]
   },
@@ -230,7 +230,7 @@
   },
   "legendaryActions": {
     "blocks": [],
-    "description": "[name] can take 3 legendary actions, choosing from the options below. Only one legendary action option can be used at a time and only at the end of another creature's turn. [name] regains spent legendary actions at the start of its turn."
+    "description": "[NAME] can take 3 legendary actions, choosing from the options below. Only one legendary action option can be used at a time and only at the end of another creature's turn. [NAME] regains spent legendary actions at the start of its turn."
   },
   "layout": {
     "columns": 1,

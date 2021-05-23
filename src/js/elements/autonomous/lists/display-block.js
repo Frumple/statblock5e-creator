@@ -8,19 +8,11 @@ export default class DisplayBlock extends CustomAutonomousElement {
       'src/html/elements/autonomous/lists/display-block.html');
   }
 
-  constructor() {
-    super(DisplayBlock.templatePaths);
+  constructor(templatePaths) {
+    super(templatePaths ? templatePaths : DisplayBlock.templatePaths);
 
-    this.blockElement = this.shadowRoot.getElementById('display-block');
     this.nameElement = this.shadowRoot.getElementById('display-block-name');
     this.textElement = this.shadowRoot.getElementById('display-block-text');
-  }
-
-  // TODO: Refactor legendary action behaviour into subclass instead
-  applyLegendaryActionStyles() {
-    this.blockElement.classList.add('display-block_no-spacing');
-    this.blockElement.classList.add('display-block_hanging-indent');
-    this.nameElement.classList.add('display-block__name_no-italic');
   }
 
   get name() {

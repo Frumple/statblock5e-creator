@@ -1,8 +1,5 @@
 import CustomAutonomousElement from './custom-autonomous-element.js';
 
-import isRunningInJsDom from '../../helpers/is-running-in-jsdom.js';
-import PropertyList from './lists/property-list.js';
-
 export default class SpellCategoryBox extends CustomAutonomousElement {
   static get elementName() { return 'spell-category-box'; }
   static get templatePaths() {
@@ -14,16 +11,9 @@ export default class SpellCategoryBox extends CustomAutonomousElement {
   constructor(parent) {
     super(SpellCategoryBox.templatePaths, parent);
 
-    if (isRunningInJsDom) {
-      this.container = document.createElement('div');
-      this.heading = document.createElement('label');
-      this.propertyList = new PropertyList(this);
-      this.propertyList.connect();
-    } else {
-      this.container = this.shadowRoot.getElementById('container');
-      this.heading = this.shadowRoot.getElementById('heading');
-      this.propertyList = this.shadowRoot.getElementById('property-list');
-    }
+    this.container = this.shadowRoot.getElementById('container');
+    this.heading = this.shadowRoot.getElementById('heading');
+    this.propertyList = this.shadowRoot.getElementById('property-list');
 
     this.propertyList.singleItemName = 'spell';
   }

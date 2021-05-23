@@ -209,23 +209,23 @@
     "blocks": [
       {
         "name": "Acid Absorption",
-        "text": "Whenever [name] is subjected to acid damage, it takes no damage and instead regains a number of hit points equal to the acid damage dealt."
+        "text": "Whenever [NAME] is subjected to acid damage, it takes no damage and instead regains a number of hit points equal to the acid damage dealt."
       },
       {
         "name": "Berserk",
-        "text": "Whenever [name] starts its turn with 60 hit points or fewer, roll a d6. On a 6, [name] goes berserk. On each of its turns while berserk, [name] attacks the nearest creature it can see. If no creature is near enough to move to and attack, [name] attacks an object, with preference for an object smaller than itself. Once [name] goes berserk, it continues to do so until it is destroyed or regains all its hit points."
+        "text": "Whenever [NAME] starts its turn with 60 hit points or fewer, roll a d6. On a 6, [NAME] goes berserk. On each of its turns while berserk, [NAME] attacks the nearest creature it can see. If no creature is near enough to move to and attack, [NAME] attacks an object, with preference for an object smaller than itself. Once [NAME] goes berserk, it continues to do so until it is destroyed or regains all its hit points."
       },
       {
         "name": "Immutable Form",
-        "text": "[name] is immune to any spell or effect that would alter its form."
+        "text": "[NAME] is immune to any spell or effect that would alter its form."
       },
       {
         "name": "Magic Resistance",
-        "text": "[name] has advantage on saving throws against spells and other magical effects."
+        "text": "[NAME] has advantage on saving throws against spells and other magical effects."
       },
       {
         "name": "Magic Weapons",
-        "text": "[name]'s weapon attacks are magical."
+        "text": "[NAME]'s weapon attacks are magical."
       }
     ]
   },
@@ -233,15 +233,15 @@
     "blocks": [
       {
         "name": "Multiattack",
-        "text": "[name] makes two slam attacks."
+        "text": "[NAME] makes two slam attacks."
       },
       {
         "name": "Slam",
-        "text": "*Melee Weapon Attack:* atk[str] to hit, reach 5 ft., one target. *Hit:* dmg[2d10 + str] bludgeoning damage. If the target is a creature, it must succeed on a DC 15 Constitution saving throw or have its hit point maximum reduced by an amount equal to the damage taken. The target dies if this attack reduces its hit point maximum to 0. The reduction lasts until removed by the greater restoration spell or other magic."
+        "text": "*Melee Weapon Attack:* ATK[STR] to hit, reach 5 ft., one target. *Hit:* DMG[2d10 + STR] bludgeoning damage. If the target is a creature, it must succeed on a DC 15 Constitution saving throw or have its hit point maximum reduced by an amount equal to the damage taken. The target dies if this attack reduces its hit point maximum to 0. The reduction lasts until removed by the greater restoration spell or other magic."
       },
       {
         "name": "Haste (Recharge 5-6)",
-        "text": "Until the end of its next turn, [name] magically gains a +2 bonus to its AC, has advantage on Dexterity saving throws, and can use its slam attack as a bonus action."
+        "text": "Until the end of its next turn, [NAME] magically gains a +2 bonus to its AC, has advantage on Dexterity saving throws, and can use its slam attack as a bonus action."
       }
     ]
   },
@@ -250,7 +250,7 @@
   },
   "legendaryActions": {
     "blocks": [],
-    "description": "[name] can take 3 legendary actions, choosing from the options below. Only one legendary action option can be used at a time and only at the end of another creature's turn. [name] regains spent legendary actions at the start of its turn."
+    "description": "[NAME] can take 3 legendary actions, choosing from the options below. Only one legendary action option can be used at a time and only at the end of another creature's turn. [NAME] regains spent legendary actions at the start of its turn."
   },
   "layout": {
     "columns": 1,

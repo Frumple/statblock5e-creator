@@ -211,15 +211,15 @@
     "blocks": [
       {
         "name": "Fire Form",
-        "text": "[name] can move through a space as narrow as 1 inch wide without squeezing. A creature that touches [name] or hits it with a melee attack while within 5 ft. of it takes dmg[1d10] fire damage. In addition, [name] can enter a hostile creature's space and stop there. The first time it enters a creature's space on a turn, that creature takes dmg[1d10] fire damage and catches fire; until someone takes an action to douse the fire, the creature takes dmg[1d10] fire damage at the start of each of its turns."
+        "text": "[NAME] can move through a space as narrow as 1 inch wide without squeezing. A creature that touches [NAME] or hits it with a melee attack while within 5 ft. of it takes DMG[1d10] fire damage. In addition, [NAME] can enter a hostile creature's space and stop there. The first time it enters a creature's space on a turn, that creature takes DMG[1d10] fire damage and catches fire; until someone takes an action to douse the fire, the creature takes DMG[1d10] fire damage at the start of each of its turns."
       },
       {
         "name": "Illumination",
-        "text": "[name] sheds bright light in a 30-foot radius and dim light in an additional 30 ft.."
+        "text": "[NAME] sheds bright light in a 30-foot radius and dim light in an additional 30 ft.."
       },
       {
         "name": "Water Susceptibility",
-        "text": "For every 5 ft. [name] moves in water, or for every gallon of water splashed on it, it takes 1 cold damage."
+        "text": "For every 5 ft. [NAME] moves in water, or for every gallon of water splashed on it, it takes 1 cold damage."
       }
     ]
   },
@@ -227,11 +227,11 @@
     "blocks": [
       {
         "name": "Multiattack",
-        "text": "[name] makes two touch attacks."
+        "text": "[NAME] makes two touch attacks."
       },
       {
         "name": "Touch",
-        "text": "*Melee Weapon Attack:* atk[dex] to hit, reach 5 ft., one target. *Hit:* dmg[2d6 + dex] fire damage. If the target is a creature or a flammable object, it ignites. Until a creature takes an action to douse the fire, the target takes dmg[1d10] fire damage at the start of each of its turns."
+        "text": "*Melee Weapon Attack:* ATK[DEX] to hit, reach 5 ft., one target. *Hit:* DMG[2d6 + DEX] fire damage. If the target is a creature or a flammable object, it ignites. Until a creature takes an action to douse the fire, the target takes DMG[1d10] fire damage at the start of each of its turns."
       }
     ]
   },
@@ -240,7 +240,7 @@
   },
   "legendaryActions": {
     "blocks": [],
-    "description": "[name] can take 3 legendary actions, choosing from the options below. Only one legendary action option can be used at a time and only at the end of another creature's turn. [name] regains spent legendary actions at the start of its turn."
+    "description": "[NAME] can take 3 legendary actions, choosing from the options below. Only one legendary action option can be used at a time and only at the end of another creature's turn. [NAME] regains spent legendary actions at the start of its turn."
   },
   "layout": {
     "columns": 1,

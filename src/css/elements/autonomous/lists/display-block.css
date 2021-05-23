@@ -10,25 +10,11 @@
   display: block;
 }
 
-.display-block_no-spacing {
-  margin-top: 0;
-  margin-bottom: 0;
-}
-
-.display-block_hanging-indent {
-  padding-left: 1em;
-  text-indent: -1em;
-}
-
 .display-block__name {
   margin: 0;
   display: inline;
   font-weight: bold;
   font-style: italic;
-}
-
-.display-block__name_no-italic {
-  font-style: normal;
 }
 
 .display-block__text {

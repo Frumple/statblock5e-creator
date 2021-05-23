@@ -198,7 +198,7 @@
     "blocks": [
       {
         "name": "Amphibious",
-        "text": "[name] can breathe air and water."
+        "text": "[NAME] can breathe air and water."
       }
     ]
   },
@@ -206,19 +206,19 @@
     "blocks": [
       {
         "name": "Multiattack",
-        "text": "[name] makes two attacks: one with its bite and one with its claws or harpoon."
+        "text": "[NAME] makes two attacks: one with its bite and one with its claws or harpoon."
       },
       {
         "name": "Bite",
-        "text": "*Melee Weapon Attack:* atk[str] to hit, reach 5 ft., one target. *Hit:* dmg[1d8 + str] piercing damage."
+        "text": "*Melee Weapon Attack:* ATK[STR] to hit, reach 5 ft., one target. *Hit:* DMG[1d8 + STR] piercing damage."
       },
       {
         "name": "Claws",
-        "text": "*Melee Weapon Attack:* atk[str] to hit, reach 5 ft., one target. *Hit:* dmg[2d4 + str] slashing damage."
+        "text": "*Melee Weapon Attack:* ATK[STR] to hit, reach 5 ft., one target. *Hit:* DMG[2d4 + STR] slashing damage."
       },
       {
         "name": "Harpoon",
-        "text": "*Melee or Ranged Weapon Attack:* atk[str] to hit, reach 5 ft. or range 20/60 ft., one target. *Hit:* dmg[2d6 + str] piercing damage. If the target is a Huge or smaller creature, it must succeed on a Strength contest against [name] or be pulled up to 20 feet toward [name]."
+        "text": "*Melee or Ranged Weapon Attack:* ATK[STR] to hit, reach 5 ft. or range 20/60 ft., one target. *Hit:* DMG[2d6 + STR] piercing damage. If the target is a Huge or smaller creature, it must succeed on a Strength contest against [NAME] or be pulled up to 20 feet toward [NAME]."
       }
     ]
   },
@@ -227,7 +227,7 @@
   },
   "legendaryActions": {
     "blocks": [],
-    "description": "[name] can take 3 legendary actions, choosing from the options below. Only one legendary action option can be used at a time and only at the end of another creature's turn. [name] regains spent legendary actions at the start of its turn."
+    "description": "[NAME] can take 3 legendary actions, choosing from the options below. Only one legendary action option can be used at a time and only at the end of another creature's turn. [NAME] regains spent legendary actions at the start of its turn."
   },
   "layout": {
     "columns": 1,

@@ -19,8 +19,7 @@ beforeEach(() => {
   titleModel.reset();
 
   titleSection = new TitleSection();
-  TestCustomElements.initializeSection(titleSection);
-  titleSection.connect();
+  document.body.appendChild(titleSection);
 });
 
 it('show section should have default values', () => {

@@ -11,13 +11,13 @@ import PropertyDataList from './elements/builtin/property-datalist.js';
 import SanitizedParagraph from './elements/builtin/sanitized-paragraph.js';
 import TextInput from './elements/builtin/text-input.js';
 
-import DropDownMenu from './elements/autonomous/drop-down-menu.js';
 import ErrorMessages from './elements/autonomous/error-messages.js';
 import GettingStartedHelpBox from './elements/autonomous/getting-started-help-box.js';
 import LoadingScreen from './elements/autonomous/loading-screen.js';
 import PropertyBlock from './elements/autonomous/property-block.js';
 import PropertyLine from './elements/autonomous/property-line.js';
 import SectionDivider from './elements/autonomous/section-divider.js';
+import SlideToggle from './elements/autonomous/slide-toggle.js';
 import SpellCategoryBox from './elements/autonomous/spell-category-box.js';
 import TaperedRule from './elements/autonomous/tapered-rule.js';
 
@@ -30,6 +30,9 @@ import ExportDialog from './elements/autonomous/dialogs/export-dialog.js';
 import GenerateAttackDialog from './elements/autonomous/dialogs/generate-attack-dialog.js';
 import GenerateSpellcastingDialog from './elements/autonomous/dialogs/generate-spellcasting-dialog.js';
 
+import DropDownMenu from './elements/autonomous/menus/drop-down-menu.js';
+import ExpressionMenu from './elements/autonomous/menus/expression-menu.js';
+
 import HelpTooltip from './elements/autonomous/tooltips/help-tooltip.js';
 import CustomTextHelpTooltip from './elements/autonomous/tooltips/custom-text-help-tooltip.js';
 
@@ -37,6 +40,10 @@ import DisplayBlockList from './elements/autonomous/lists/display-block-list.js'
 import DisplayBlock from './elements/autonomous/lists/display-block.js';
 import EditableBlock from './elements/autonomous/lists/editable-block.js';
 import EditableBlockList from './elements/autonomous/lists/editable-block-list.js';
+import LegendaryActionDisplayBlockList from './elements/autonomous/lists/legendary-action-display-block-list.js';
+import LegendaryActionDisplayBlock from './elements/autonomous/lists/legendary-action-display-block.js';
+import LegendaryActionEditableBlockList from './elements/autonomous/lists/legendary-action-editable-block-list.js';
+import LegendaryActionEditableBlock from './elements/autonomous/lists/legendary-action-editable-block.js';
 import PropertyListItem from './elements/autonomous/lists/property-list-item.js';
 import PropertyList from './elements/autonomous/lists/property-list.js';
 
@@ -114,11 +121,13 @@ async function defineElements() {
 
     DropDownMenu,
     ErrorMessages,
+    ExpressionMenu,
     GettingStartedHelpBox,
     LoadingScreen,
     PropertyBlock,
     PropertyLine,
     SectionDivider,
+    SlideToggle,
     SpellCategoryBox,
     TaperedRule,
 
@@ -138,6 +147,10 @@ async function defineElements() {
     DisplayBlock,
     EditableBlock,
     EditableBlockList,
+    LegendaryActionDisplayBlockList,
+    LegendaryActionDisplayBlock,
+    LegendaryActionEditableBlockList,
+    LegendaryActionEditableBlock,
     PropertyListItem,
     PropertyList,
 

@@ -197,7 +197,7 @@
     "blocks": [
       {
         "name": "Limited Telepathy",
-        "text": "[name] can magically transmit simple messages and images to any creature within 120 ft. of it that can understand a language. This form of telepathy doesn't allow the receiving creature to telepathically respond."
+        "text": "[NAME] can magically transmit simple messages and images to any creature within 120 ft. of it that can understand a language. This form of telepathy doesn't allow the receiving creature to telepathically respond."
       }
     ]
   },
@@ -205,19 +205,19 @@
     "blocks": [
       {
         "name": "Multiattack",
-        "text": "[name] makes three attacks: one with its bite and two with its tentacles."
+        "text": "[NAME] makes three attacks: one with its bite and two with its tentacles."
       },
       {
         "name": "Bite",
-        "text": "*Melee Weapon Attack:* atk[str] to hit, reach 5 ft., one target. *Hit:* dmg[2d8 + str] piercing damage. If the target is a creature, it must succeed on a DC 15 Constitution saving throw against disease or become poisoned until the disease is cured. Every 24 hours that elapse, the target must repeat the saving throw, reducing its hit point maximum by dmg[1d10] on a failure. The disease is cured on a success. The target dies if the disease reduces its hit point maximum to 0. This reduction to the target's hit point maximum lasts until the disease is cured."
+        "text": "*Melee Weapon Attack:* ATK[STR] to hit, reach 5 ft., one target. *Hit:* DMG[2d8 + STR] piercing damage. If the target is a creature, it must succeed on a DC 15 Constitution saving throw against disease or become poisoned until the disease is cured. Every 24 hours that elapse, the target must repeat the saving throw, reducing its hit point maximum by DMG[1d10] on a failure. The disease is cured on a success. The target dies if the disease reduces its hit point maximum to 0. This reduction to the target's hit point maximum lasts until the disease is cured."
       },
       {
         "name": "Tentacle",
-        "text": "*Melee Weapon Attack:* atk[str] to hit, reach 10 ft., one target. *Hit:* dmg[1d8 + str] bludgeoning damage plus dmg[1d8] piercing damage. If the target is Medium or smaller, it is grappled (escape DC 13) and restrained until the grapple ends. [name] has two tentacles, each of which can grapple one target."
+        "text": "*Melee Weapon Attack:* ATK[STR] to hit, reach 10 ft., one target. *Hit:* DMG[1d8 + STR] bludgeoning damage plus DMG[1d8] piercing damage. If the target is Medium or smaller, it is grappled (escape DC 13) and restrained until the grapple ends. [NAME] has two tentacles, each of which can grapple one target."
       },
       {
         "name": "Tentacle Slam",
-        "text": "[name] slams creatures grappled by it into each other or a solid surface. Each creature must succeed on a DC 14 Constitution saving throw or take dmg[2d6 + str] bludgeoning damage and be stunned until the end of [name]'s next turn. On a successful save, the target takes half the bludgeoning damage and isn't stunned."
+        "text": "[NAME] slams creatures grappled by it into each other or a solid surface. Each creature must succeed on a DC 14 Constitution saving throw or take DMG[2d6 + STR] bludgeoning damage and be stunned until the end of [NAME]'s next turn. On a successful save, the target takes half the bludgeoning damage and isn't stunned."
       }
     ]
   },
@@ -226,7 +226,7 @@
   },
   "legendaryActions": {
     "blocks": [],
-    "description": "[name] can take 3 legendary actions, choosing from the options below. Only one legendary action option can be used at a time and only at the end of another creature's turn. [name] regains spent legendary actions at the start of its turn."
+    "description": "[NAME] can take 3 legendary actions, choosing from the options below. Only one legendary action option can be used at a time and only at the end of another creature's turn. [NAME] regains spent legendary actions at the start of its turn."
   },
   "layout": {
     "columns": 1,

@@ -24,8 +24,7 @@ beforeEach(() => {
   reactionsModel.reset();
 
   reactionsSection = new ReactionsSection();
-  TestCustomElements.initializeSection(reactionsSection);
-  reactionsSection.connect();
+  document.body.appendChild(reactionsSection);
 
   sharedSpecs = new BlockListSectionSpecs(reactionsSection, reactionsModel, headingName, open5eJsonKey);
 });
@@ -57,7 +56,7 @@ describe('when the show section is clicked', () => {
     it('should add a single block', () => {
       const block = {
         name: 'Parry',
-        text: '[name] adds 2 to its AC against one melee attack that would hit it. To do so, [name] must see the attacker and be wielding a melee weapon.',
+        text: '[NAME] adds 2 to its AC against one melee attack that would hit it. To do so, [NAME] must see the attacker and be wielding a melee weapon.',
         markdownText: 'The knight adds 2 to its AC against one melee attack that would hit it. To do so, the knight must see the attacker and be wielding a melee weapon.',
         htmlText: 'The knight adds 2 to its AC against one melee attack that would hit it. To do so, the knight must see the attacker and be wielding a melee weapon.'
       };
@@ -70,7 +69,7 @@ describe('when the show section is clicked', () => {
     it('should add a single block with multiline text', () => {
       const block = {
         name: 'Multiline Reaction',
-        text: '**Line 1**. [name] is here.\n  **Line 2**. [name] is there.\n    **Line 3**. [name] is everywhere.',
+        text: '**Line 1**. [NAME] is here.\n  **Line 2**. [NAME] is there.\n    **Line 3**. [NAME] is everywhere.',
         markdownText: '**Line 1**. The dummy is here.  \n>   **Line 2**. The dummy is there.  \n>     **Line 3**. The dummy is everywhere.',
         htmlText: '<strong>Line 1</strong>. The dummy is here.\n  <strong>Line 2</strong>. The dummy is there.\n    <strong>Line 3</strong>. The dummy is everywhere.'
       };
@@ -83,7 +82,7 @@ describe('when the show section is clicked', () => {
     it('should add a single block with html escaped', () => {
       const block = {
         name: 'Escaped Reaction',
-        text: '<strong>Line 1</strong>. [name] is here.',
+        text: '<strong>Line 1</strong>. [NAME] is here.',
         markdownText: '&lt;strong&gt;Line 1&lt;/strong&gt;. The dummy is here.',
         htmlText: '&lt;strong&gt;Line 1&lt;/strong&gt;. The dummy is here.'
       };
@@ -143,7 +142,7 @@ describe('when the show section is clicked', () => {
     describe('should reparse the block text', () => {
       const block = {
         name: 'Spell Reflection',
-        text: 'If [name] makes a successful saving throw against a spell, or a spell attack misses it, [name] can choose another creature (including the spellcaster) it can see within 30 feet of it. The spell targets the chosen creature instead of [name]. If the spell forced a saving throw, the chosen creature makes its own save. If the spell was an attack, the attack roll is rerolled against the chosen creature.',
+        text: 'If [NAME] makes a successful saving throw against a spell, or a spell attack misses it, [NAME] can choose another creature (including the spellcaster) it can see within 30 feet of it. The spell targets the chosen creature instead of [NAME]. If the spell forced a saving throw, the chosen creature makes its own save. If the spell was an attack, the attack roll is rerolled against the chosen creature.',
         markdownText: null,
         htmlText: null
       };
@@ -268,7 +267,7 @@ describe('when the section is empty and not visible', () => {
       const blocksToImport = [
         {
           name: 'Parry',
-          text: '[name] adds 2 to its AC against one melee attack that would hit it. To do so, [name] must see the attacker and be wielding a melee weapon.',
+          text: '[NAME] adds 2 to its AC against one melee attack that would hit it. To do so, [NAME] must see the attacker and be wielding a melee weapon.',
           htmlText: 'The knight adds 2 to its AC against one melee attack that would hit it. To do so, the knight must see the attacker and be wielding a melee weapon.'
         }
       ];

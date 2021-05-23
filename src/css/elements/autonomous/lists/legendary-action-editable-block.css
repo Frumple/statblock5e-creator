@@ -1,0 +1,15 @@
+.legendary-action-editable-block__name {
+  /* Non-italic name for legendary action blocks. */
+  font-style: normal;
+}
+
+.legendary-action-editable-block__preview-container {
+  /* Hanging indent for legendary action blocks. */
+  padding-left: 1em;
+  text-indent: -1em;
+}
+
+.legendary-action-editable-block__preview-name {
+  /* Non-italic name for legendary action blocks. */
+  font-style: normal;
+}

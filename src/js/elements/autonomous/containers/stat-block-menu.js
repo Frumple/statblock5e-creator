@@ -12,11 +12,8 @@ export default class StatBlockMenu extends CustomAutonomousElement {
   constructor(parent = null) {
     super(StatBlockMenu.templatePaths, parent);
 
-    this.oneColumnButton = this.shadowRoot.getElementById('one-column-label');
-    this.twoColumnButton = this.shadowRoot.getElementById('two-column-label');
-
-    this.showEmptySectionsButton = this.shadowRoot.getElementById('show-empty-sections-label');
-    this.hideEmptySectionsButton = this.shadowRoot.getElementById('hide-empty-sections-label');
+    this.columnsToggle = this.shadowRoot.getElementById('columns-toggle');
+    this.emptySectionsToggle = this.shadowRoot.getElementById('empty-sections-toggle');
 
     this.editAllSectionsButton = this.shadowRoot.getElementById('edit-all-sections-button');
     this.saveAllSectionsButton = this.shadowRoot.getElementById('save-all-sections-button');
@@ -44,11 +41,8 @@ export default class StatBlockMenu extends CustomAutonomousElement {
     if (this.isConnected && ! this.isInitialized) {
       super.connectedCallback();
 
-      this.oneColumnButton.addEventListener('click', this.onClickOneColumnButton.bind(this));
-      this.twoColumnButton.addEventListener('click', this.onClickTwoColumnButton.bind(this));
-
-      this.showEmptySectionsButton.addEventListener('click', this.onClickShowEmptySectionsButton.bind(this));
-      this.hideEmptySectionsButton.addEventListener('click', this.onClickHideEmptySectionsButton.bind(this));
+      this.columnsToggle.addEventListener('input', this.onInputColumnsToggle.bind(this));
+      this.emptySectionsToggle.addEventListener('input', this.onInputEmptySectionsToggle.bind(this));
 
       this.editAllSectionsButton.addEventListener('click', this.onClickEditAllSectionsButton.bind(this));
       this.saveAllSectionsButton.addEventListener('click', this.onClickSaveAllSectionsButton.bind(this));
@@ -77,20 +71,14 @@ export default class StatBlockMenu extends CustomAutonomousElement {
     }
   }
 
-  onClickOneColumnButton() {
-    this.dispatchMenuEvent('numberOfColumnsChanged', { columns: 1 });
+  onInputColumnsToggle() {
+    const numberOfColumns = this.columnsToggle.checked ? 2 : 1;
+    this.dispatchMenuEvent('numberOfColumnsChanged', { columns: numberOfColumns });
   }
 
-  onClickTwoColumnButton() {
-    this.dispatchMenuEvent('numberOfColumnsChanged', { columns: 2 });
-  }
-
-  onClickShowEmptySectionsButton() {
-    this.dispatchMenuEvent('emptySectionsVisibilityChanged', { visibility: true });
-  }
-
-  onClickHideEmptySectionsButton() {
-    this.dispatchMenuEvent('emptySectionsVisibilityChanged', { visibility: false });
+  onInputEmptySectionsToggle() {
+    const showEmptySections = this.emptySectionsToggle.checked;
+    this.dispatchMenuEvent('emptySectionsVisibilityChanged', { visibility: showEmptySections });
   }
 
   onClickEditAllSectionsButton() {
@@ -162,19 +150,23 @@ export default class StatBlockMenu extends CustomAutonomousElement {
     const layoutSettings = CurrentContext.layoutSettings;
 
     if (layoutSettings.columns === 1) {
-      this.oneColumnButton.click();
+      this.columnsToggle.checked = false;
     } else if (layoutSettings.columns === 2) {
-      this.twoColumnButton.click();
+      this.columnsToggle.checked = true;
     }
+
+    this.onInputColumnsToggle();
   }
 
   updateEmptySectionControls() {
     const localSettings = CurrentContext.localSettings;
 
     if (localSettings.emptySectionsVisibility) {
-      this.showEmptySectionsButton.click();
+      this.emptySectionsToggle.checked = true;
     } else {
-      this.hideEmptySectionsButton.click();
+      this.emptySectionsToggle.checked = false;
     }
+
+    this.onInputEmptySectionsToggle();
   }
 }

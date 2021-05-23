@@ -1,22 +1,25 @@
-import CustomBuiltinInputElement from './custom-builtin-input-element.js';
 import { focusAndSelectElement } from '../../helpers/element-helpers.js';
 
-export default class EnableDisableElementsCheckbox extends CustomBuiltinInputElement {
-  static get elementName() { return 'enable-disable-elements-checkbox'; }
-  static get mixin() { return EnableDisableElementsCheckboxMixin; }
+export default class EnableDisableElementsCheckbox extends HTMLInputElement {
+  static async define() {
+    const elementName = 'enable-disable-elements-checkbox';
+    customElements.define(elementName, this, { extends: 'input' });
+  }
 
   constructor() {
     super();
+
+    this.enabledElements = [];
+    this.disabledElements = [];
   }
-}
 
-export let EnableDisableElementsCheckboxMixin = {
-  enabledElements: [],
-  disabledElements: [],
+  connectedCallback() {
+    if (this.isConnected && ! this.isInitialized) {
+      this.addEventListener('input', this.onInputCheckbox.bind(this));
 
-  initializeMixin() {
-    this.addEventListener('input', this.onInputCheckbox.bind(this));
-  },
+      this.initialized = true;
+    }
+  }
 
   onInputCheckbox() {
     const elementsToEnable = this.checked ? this.enabledElements : this.disabledElements;
@@ -31,13 +34,13 @@ export let EnableDisableElementsCheckboxMixin = {
     for (const element of elementsToDisable) {
       element.setAttribute('disabled', '');
     }
-  },
+  }
 
   enableElementsWhenChecked(...elements) {
     this.enabledElements = this.enabledElements.concat(elements);
-  },
+  }
 
   disableElementsWhenChecked(...elements) {
     this.disabledElements = this.disabledElements.concat(elements);
   }
-};
+}

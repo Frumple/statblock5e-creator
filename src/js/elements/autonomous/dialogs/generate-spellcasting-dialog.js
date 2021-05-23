@@ -1,5 +1,4 @@
 import CustomDialog from './custom-dialog.js';
-import SpellCategoryBox from '../spell-category-box.js';
 
 import SpellcasterTypes from '../../../data/spellcaster-types.js';
 
@@ -7,7 +6,6 @@ import Spellcasting from '../../../models/spellcasting.js';
 
 import { focusAndSelectElement } from '../../../helpers/element-helpers.js';
 import { getSpellDescription } from '../../../helpers/spell-helpers.js';
-import isRunningInJsDom from '../../../helpers/is-running-in-jsdom.js';
 
 export default class GenerateSpellcastingDialog extends CustomDialog {
   static get elementName() { return 'generate-spellcasting-dialog'; }
@@ -34,20 +32,12 @@ export default class GenerateSpellcastingDialog extends CustomDialog {
 
     this.spellCategoryBoxes = [];
 
-    if (isRunningInJsDom) {
-      for (let spellLevel = 0; spellLevel <= 9; spellLevel++) {
-        const spellCategoryBox = new SpellCategoryBox(this);
-        spellCategoryBox.connect();
-        this.spellCategoryBoxes.push(spellCategoryBox);
-      }
-    } else {
-      const cantripsAtWillCategoryBox = this.shadowRoot.getElementById('cantrips-at-will-spell-category-box');
-      this.spellCategoryBoxes.push(cantripsAtWillCategoryBox);
+    const cantripsAtWillCategoryBox = this.shadowRoot.getElementById('cantrips-at-will-spell-category-box');
+    this.spellCategoryBoxes.push(cantripsAtWillCategoryBox);
 
-      for (let spellLevel = 1; spellLevel <= 9; spellLevel++) {
-        const spellCategoryBox = this.shadowRoot.getElementById(`level-${spellLevel}-spell-category-box`);
-        this.spellCategoryBoxes.push(spellCategoryBox);
-      }
+    for (let spellLevel = 1; spellLevel <= 9; spellLevel++) {
+      const spellCategoryBox = this.shadowRoot.getElementById(`level-${spellLevel}-spell-category-box`);
+      this.spellCategoryBoxes.push(spellCategoryBox);
     }
 
     this.previewNameElement = this.shadowRoot.getElementById('preview-name');

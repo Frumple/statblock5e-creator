@@ -195,7 +195,7 @@
     "blocks": [
       {
         "name": "Tail Spike Regrowth",
-        "text": "[name] has twenty-four tail spikes. Used spikes regrow when [name] finishes a long rest."
+        "text": "[NAME] has twenty-four tail spikes. Used spikes regrow when [NAME] finishes a long rest."
       }
     ]
   },
@@ -203,19 +203,19 @@
     "blocks": [
       {
         "name": "Multiattack",
-        "text": "[name] makes three attacks: one with its bite and two with its claws or three with its tail spikes."
+        "text": "[NAME] makes three attacks: one with its bite and two with its claws or three with its tail spikes."
       },
       {
         "name": "Bite",
-        "text": "*Melee Weapon Attack:* atk[str] to hit, reach 5 ft., one target. *Hit:* dmg[1d8 + str] piercing damage."
+        "text": "*Melee Weapon Attack:* ATK[STR] to hit, reach 5 ft., one target. *Hit:* DMG[1d8 + STR] piercing damage."
       },
       {
         "name": "Claw",
-        "text": "*Melee Weapon Attack:* atk[str] to hit, reach 5 ft., one target. *Hit:* dmg[1d6 + str] slashing damage."
+        "text": "*Melee Weapon Attack:* ATK[STR] to hit, reach 5 ft., one target. *Hit:* DMG[1d6 + STR] slashing damage."
       },
       {
         "name": "Tail Spike",
-        "text": "*Ranged Weapon Attack:* atk[dex] to hit, range 100/200 ft., one target. *Hit:* dmg[1d8 + dex] piercing damage."
+        "text": "*Ranged Weapon Attack:* ATK[DEX] to hit, range 100/200 ft., one target. *Hit:* DMG[1d8 + DEX] piercing damage."
       }
     ]
   },
@@ -224,7 +224,7 @@
   },
   "legendaryActions": {
     "blocks": [],
-    "description": "[name] can take 3 legendary actions, choosing from the options below. Only one legendary action option can be used at a time and only at the end of another creature's turn. [name] regains spent legendary actions at the start of its turn."
+    "description": "[NAME] can take 3 legendary actions, choosing from the options below. Only one legendary action option can be used at a time and only at the end of another creature's turn. [NAME] regains spent legendary actions at the start of its turn."
   },
   "layout": {
     "columns": 1,

@@ -25,16 +25,13 @@
   margin-right: 2px;
 }
 
-.stat-block-menu__radio-container {
+.stat-block-menu__control-subcontainer {
   flex: 1 1 auto;
   display: flex;
   flex-direction: row;
-  align-items: center;
-  height: 100%;
-}
-
-.stat-block-menu__radio-label {
-  flex: 1 1 auto;
+  justify-content: center;
+  align-items: stretch;
+  height: 24px;
 }
 
 .stat-block-menu__dropdowns {
@@ -58,4 +55,6 @@
 .stat-block-menu__all-sections-button {
   flex: 1 1 auto;
   width: 100%;
+  display: inline-flex;
+  justify-content: space-evenly;
 }

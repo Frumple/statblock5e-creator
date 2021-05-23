@@ -195,15 +195,15 @@
     "blocks": [
       {
         "name": "Spider Climb",
-        "text": "[name] can climb difficult surfaces, including upside down on ceilings, without needing to make an ability check."
+        "text": "[NAME] can climb difficult surfaces, including upside down on ceilings, without needing to make an ability check."
       },
       {
         "name": "Web Sense",
-        "text": "While in contact with a web, [name] knows the exact location of any other creature in contact with the same web."
+        "text": "While in contact with a web, [NAME] knows the exact location of any other creature in contact with the same web."
       },
       {
         "name": "Web Walker",
-        "text": "[name] ignores movement restrictions caused by webbing."
+        "text": "[NAME] ignores movement restrictions caused by webbing."
       }
     ]
   },
@@ -211,7 +211,7 @@
     "blocks": [
       {
         "name": "Bite",
-        "text": "*Melee Weapon Attack:* atk[str] to hit, reach 5 ft., one creature. *Hit:* dmg[1d6 + str] piercing damage, and the target must make a DC 11 Constitution saving throw, taking dmg[2d6] poison damage on a failed save, or half as much damage on a successful one. If the poison damage reduces the target to 0 hit points, the target is stable but poisoned for 1 hour, even after regaining hit points, and is paralyzed while poisoned in this way."
+        "text": "*Melee Weapon Attack:* ATK[STR] to hit, reach 5 ft., one creature. *Hit:* DMG[1d6 + STR] piercing damage, and the target must make a DC 11 Constitution saving throw, taking DMG[2d6] poison damage on a failed save, or half as much damage on a successful one. If the poison damage reduces the target to 0 hit points, the target is stable but poisoned for 1 hour, even after regaining hit points, and is paralyzed while poisoned in this way."
       }
     ]
   },
@@ -220,7 +220,7 @@
   },
   "legendaryActions": {
     "blocks": [],
-    "description": "[name] can take 3 legendary actions, choosing from the options below. Only one legendary action option can be used at a time and only at the end of another creature's turn. [name] regains spent legendary actions at the start of its turn."
+    "description": "[NAME] can take 3 legendary actions, choosing from the options below. Only one legendary action option can be used at a time and only at the end of another creature's turn. [NAME] regains spent legendary actions at the start of its turn."
   },
   "layout": {
     "columns": 1,

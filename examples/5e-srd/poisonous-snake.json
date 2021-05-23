@@ -198,7 +198,7 @@
     "blocks": [
       {
         "name": "Bite",
-        "text": "*Melee Weapon Attack:* atk[dex] to hit, reach 5 ft., one target. *Hit:* 1 piercing damage, and the target must make a DC 10 Constitution saving throw, taking dmg[2d4] poison damage on a failed save, or half as much damage on a successful one."
+        "text": "*Melee Weapon Attack:* ATK[DEX] to hit, reach 5 ft., one target. *Hit:* 1 piercing damage, and the target must make a DC 10 Constitution saving throw, taking DMG[2d4] poison damage on a failed save, or half as much damage on a successful one."
       }
     ]
   },
@@ -207,7 +207,7 @@
   },
   "legendaryActions": {
     "blocks": [],
-    "description": "[name] can take 3 legendary actions, choosing from the options below. Only one legendary action option can be used at a time and only at the end of another creature's turn. [name] regains spent legendary actions at the start of its turn."
+    "description": "[NAME] can take 3 legendary actions, choosing from the options below. Only one legendary action option can be used at a time and only at the end of another creature's turn. [NAME] regains spent legendary actions at the start of its turn."
   },
   "layout": {
     "columns": 1,

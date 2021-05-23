@@ -217,11 +217,11 @@
     "blocks": [
       {
         "name": "Ethereal Sight",
-        "text": "[name] can see 60 ft. into the Ethereal Plane when it is on the Material Plane, and vice versa."
+        "text": "[NAME] can see 60 ft. into the Ethereal Plane when it is on the Material Plane, and vice versa."
       },
       {
         "name": "Incorporeal Movement",
-        "text": "[name] can move through other creatures and objects as if they were difficult terrain. It takes dmg[1d10] force damage if it ends its turn inside an object."
+        "text": "[NAME] can move through other creatures and objects as if they were difficult terrain. It takes DMG[1d10] force damage if it ends its turn inside an object."
       }
     ]
   },
@@ -229,19 +229,19 @@
     "blocks": [
       {
         "name": "Withering Touch",
-        "text": "*Melee Weapon Attack:* atk[cha] to hit, reach 5 ft., one target. *Hit:* dmg[4d6 + cha] necrotic damage."
+        "text": "*Melee Weapon Attack:* ATK[CHA] to hit, reach 5 ft., one target. *Hit:* DMG[4d6 + CHA] necrotic damage."
       },
       {
         "name": "Etherealness",
-        "text": "[name] enters the Ethereal Plane from the Material Plane, or vice versa. It is visible on the Material Plane while it is in the Border Ethereal, and vice versa, yet it can't affect or be affected by anything on the other plane."
+        "text": "[NAME] enters the Ethereal Plane from the Material Plane, or vice versa. It is visible on the Material Plane while it is in the Border Ethereal, and vice versa, yet it can't affect or be affected by anything on the other plane."
       },
       {
         "name": "Horrifying Visage",
-        "text": "Each non-undead creature within 60 ft. of [name] that can see it must succeed on a DC 13 Wisdom saving throw or be frightened for 1 minute. If the save fails by 5 or more, the target also ages 1d4 x 10 years. A frightened target can repeat the saving throw at the end of each of its turns, ending the frightened condition on itself on a success. If a target's saving throw is successful or the effect ends for it, the target is immune to this ghost's Horrifying Visage for the next 24 hours. The aging effect can be reversed with a greater restoration spell, but only within 24 hours of it occurring."
+        "text": "Each non-undead creature within 60 ft. of [NAME] that can see it must succeed on a DC 13 Wisdom saving throw or be frightened for 1 minute. If the save fails by 5 or more, the target also ages 1d4 x 10 years. A frightened target can repeat the saving throw at the end of each of its turns, ending the frightened condition on itself on a success. If a target's saving throw is successful or the effect ends for it, the target is immune to this ghost's Horrifying Visage for the next 24 hours. The aging effect can be reversed with a greater restoration spell, but only within 24 hours of it occurring."
       },
       {
         "name": "Possession (Recharge 6)",
-        "text": "One humanoid that [name] can see within 5 ft. of it must succeed on a DC 13 Charisma saving throw or be possessed by [name]; [name] then disappears, and the target is incapacitated and loses control of its body. [name] now controls the body but doesn't deprive the target of awareness. [name] can't be targeted by any attack, spell, or other effect, except ones that turn undead, and it retains its alignment, Intelligence, Wisdom, Charisma, and immunity to being charmed and frightened. It otherwise uses the possessed target's statistics, but doesn't gain access to the target's knowledge, class features, or proficiencies.\n  The possession lasts until the body drops to 0 hit points, [name] ends it as a bonus action, or [name] is turned or forced out by an effect like the dispel evil and good spell. When the possession ends, [name] reappears in an unoccupied space within 5 ft. of the body. The target is immune to this ghost's Possession for 24 hours after succeeding on the saving throw or after the possession ends."
+        "text": "One humanoid that [NAME] can see within 5 ft. of it must succeed on a DC 13 Charisma saving throw or be possessed by [NAME]; [NAME] then disappears, and the target is incapacitated and loses control of its body. [NAME] now controls the body but doesn't deprive the target of awareness. [NAME] can't be targeted by any attack, spell, or other effect, except ones that turn undead, and it retains its alignment, Intelligence, Wisdom, Charisma, and immunity to being charmed and frightened. It otherwise uses the possessed target's statistics, but doesn't gain access to the target's knowledge, class features, or proficiencies.\n  The possession lasts until the body drops to 0 hit points, [NAME] ends it as a bonus action, or [NAME] is turned or forced out by an effect like the dispel evil and good spell. When the possession ends, [NAME] reappears in an unoccupied space within 5 ft. of the body. The target is immune to this ghost's Possession for 24 hours after succeeding on the saving throw or after the possession ends."
       }
     ]
   },
@@ -250,7 +250,7 @@
   },
   "legendaryActions": {
     "blocks": [],
-    "description": "[name] can take 3 legendary actions, choosing from the options below. Only one legendary action option can be used at a time and only at the end of another creature's turn. [name] regains spent legendary actions at the start of its turn."
+    "description": "[NAME] can take 3 legendary actions, choosing from the options below. Only one legendary action option can be used at a time and only at the end of another creature's turn. [NAME] regains spent legendary actions at the start of its turn."
   },
   "layout": {
     "columns": 1,

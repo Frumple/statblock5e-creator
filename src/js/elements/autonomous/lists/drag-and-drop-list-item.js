@@ -43,8 +43,8 @@ export default class DragAndDropListItem extends CustomAutonomousElement {
     if (this.list.draggedItem !== null) {
       event.dataTransfer.dropEffect = 'move';
 
-      let rect = event.target.getBoundingClientRect();
-      let midpointY = rect.y + (rect.height / 2);
+      const rect = event.target.getBoundingClientRect();
+      const midpointY = rect.y + (rect.height / 2);
 
       if (event.clientY < midpointY) {
         this.dragoverRegion = 'top';

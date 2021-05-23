@@ -208,15 +208,15 @@
     "blocks": [
       {
         "name": "Echolocation",
-        "text": "[name] can't use its blindsight while deafened."
+        "text": "[NAME] can't use its blindsight while deafened."
       },
       {
         "name": "Keen Hearing",
-        "text": "[name] has advantage on Wisdom (Perception) checks that rely on hearing."
+        "text": "[NAME] has advantage on Wisdom (Perception) checks that rely on hearing."
       },
       {
         "name": "Swarm",
-        "text": "[name] can occupy another creature's space and vice versa, and [name] can move through any opening large enough for a Tiny bat. [name] can't regain hit points or gain temporary hit points."
+        "text": "[NAME] can occupy another creature's space and vice versa, and [NAME] can move through any opening large enough for a Tiny bat. [NAME] can't regain hit points or gain temporary hit points."
       }
     ]
   },
@@ -224,7 +224,7 @@
     "blocks": [
       {
         "name": "Bites",
-        "text": "*Melee Weapon Attack:* atk[dex] to hit, reach 0 ft., one creature in [name]'s space. *Hit:* dmg[2d4] piercing damage, or dmg[1d4] piercing damage if [name] has half of its hit points or fewer."
+        "text": "*Melee Weapon Attack:* ATK[DEX] to hit, reach 0 ft., one creature in [NAME]'s space. *Hit:* DMG[2d4] piercing damage, or DMG[1d4] piercing damage if [NAME] has half of its hit points or fewer."
       }
     ]
   },
@@ -233,7 +233,7 @@
   },
   "legendaryActions": {
     "blocks": [],
-    "description": "[name] can take 3 legendary actions, choosing from the options below. Only one legendary action option can be used at a time and only at the end of another creature's turn. [name] regains spent legendary actions at the start of its turn."
+    "description": "[NAME] can take 3 legendary actions, choosing from the options below. Only one legendary action option can be used at a time and only at the end of another creature's turn. [NAME] regains spent legendary actions at the start of its turn."
   },
   "layout": {
     "columns": 1,

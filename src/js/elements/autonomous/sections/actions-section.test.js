@@ -31,8 +31,7 @@ beforeEach(() => {
   actionsModel.reset();
 
   actionsSection = new ActionsSection();
-  TestCustomElements.initializeSection(actionsSection);
-  actionsSection.connect();
+  document.body.appendChild(actionsSection);
 
   sharedSpecs = new BlockListSectionSpecs(actionsSection, actionsModel, headingName, open5eJsonKey);
 });
@@ -67,7 +66,7 @@ describe('when the show section is clicked', () => {
 
       const block = {
         name: 'Greatsword',
-        text: '*Melee Weapon Attack:* atk[str] to hit, reach 5 ft., one target. *Hit:* dmg[2d6 + str] slashing damage.',
+        text: '*Melee Weapon Attack:* ATK[STR] to hit, reach 5 ft., one target. *Hit:* DMG[2d6 + STR] slashing damage.',
         markdownText: '*Melee Weapon Attack:* +5 to hit, reach 5 ft., one target. *Hit:* 10 (2d6 + 3) slashing damage.',
         htmlText: '<em>Melee Weapon Attack:</em> +5 to hit, reach 5 ft., one target. <em>Hit:</em> 10 (2d6 + 3) slashing damage.'
       };
@@ -77,7 +76,7 @@ describe('when the show section is clicked', () => {
     it('should add a single block with multiline text', () => {
       const block = {
         name: 'Breath Weapons (Recharge 5-6)',
-        text: '[name] uses one of the following breath weapons.\n**Fire Breath.** [name] exhales fire in an 60-foot line that is 5 feet wide. Each creature in that line must make a DC 18 Dexterity saving throw, taking dmg[13d6] fire damage on a failed save, or half as much damage on a successful one.\n**Sleep Breath.** [name] exhales sleep gas in a 60-foot cone. Each creature in that area must succeed on a DC 18 Constitution saving throw or fall unconscious for 10 minutes. This effect ends for a creature if the creature takes damage or someone uses an action to wake it.',
+        text: '[NAME] uses one of the following breath weapons.\n**Fire Breath.** [NAME] exhales fire in an 60-foot line that is 5 feet wide. Each creature in that line must make a DC 18 Dexterity saving throw, taking DMG[13d6] fire damage on a failed save, or half as much damage on a successful one.\n**Sleep Breath.** [NAME] exhales sleep gas in a 60-foot cone. Each creature in that area must succeed on a DC 18 Constitution saving throw or fall unconscious for 10 minutes. This effect ends for a creature if the creature takes damage or someone uses an action to wake it.',
         markdownText: 'The dragon uses one of the following breath weapons.  \n> **Fire Breath.** The dragon exhales fire in an 60-foot line that is 5 feet wide. Each creature in that line must make a DC 18 Dexterity saving throw, taking 45 (13d6) fire damage on a failed save, or half as much damage on a successful one.  \n> **Sleep Breath.** The dragon exhales sleep gas in a 60-foot cone. Each creature in that area must succeed on a DC 18 Constitution saving throw or fall unconscious for 10 minutes. This effect ends for a creature if the creature takes damage or someone uses an action to wake it.',
         htmlText: 'The dragon uses one of the following breath weapons.\n<strong>Fire Breath.</strong> The dragon exhales fire in an 60-foot line that is 5 feet wide. Each creature in that line must make a DC 18 Dexterity saving throw, taking 45 (13d6) fire damage on a failed save, or half as much damage on a successful one.\n<strong>Sleep Breath.</strong> The dragon exhales sleep gas in a 60-foot cone. Each creature in that area must succeed on a DC 18 Constitution saving throw or fall unconscious for 10 minutes. This effect ends for a creature if the creature takes damage or someone uses an action to wake it.'
       };
@@ -94,7 +93,7 @@ describe('when the show section is clicked', () => {
 
       const block = {
         name: 'Greatsword',
-        text: '<em>Melee Weapon Attack:</em> atk[str] to hit, reach 5 ft., one target. <em>Hit:</em> dmg[2d6 + str] slashing damage.',
+        text: '<em>Melee Weapon Attack:</em> ATK[STR] to hit, reach 5 ft., one target. <em>Hit:</em> DMG[2d6 + STR] slashing damage.',
         markdownText: '&lt;em&gt;Melee Weapon Attack:&lt;/em&gt; +5 to hit, reach 5 ft., one target. &lt;em&gt;Hit:&lt;/em&gt; 10 (2d6 + 3) slashing damage.',
         htmlText: '&lt;em&gt;Melee Weapon Attack:&lt;/em&gt; +5 to hit, reach 5 ft., one target. &lt;em&gt;Hit:&lt;/em&gt; 10 (2d6 + 3) slashing damage.'
       };
@@ -108,19 +107,19 @@ describe('when the show section is clicked', () => {
       const blocks = [
         {
           name: 'Multiattack',
-          text: '[name] makes two melee attacks or two ranged attacks.',
+          text: '[NAME] makes two melee attacks or two ranged attacks.',
           markdownText: 'The scout makes two melee attacks or two ranged attacks.',
           htmlText: 'The scout makes two melee attacks or two ranged attacks.'
         },
         {
           name: 'Shortsword',
-          text: '*Melee Weapon Attack:* atk[dex] to hit, reach 5 ft., one target. *Hit:* dmg[1d6 + dex] piercing damage.',
+          text: '*Melee Weapon Attack:* ATK[DEX] to hit, reach 5 ft., one target. *Hit:* DMG[1d6 + DEX] piercing damage.',
           markdownText: '*Melee Weapon Attack:* +4 to hit, reach 5 ft., one target. *Hit:* 5 (1d6 + 2) piercing damage.',
           htmlText: '<em>Melee Weapon Attack:</em> +4 to hit, reach 5 ft., one target. <em>Hit:</em> 5 (1d6 + 2) piercing damage.'
         },
         {
           name: 'Longbow',
-          text: '*Ranged Weapon Attack:* atk[dex] to hit, ranged 150/600 ft., one target. *Hit:* dmg[1d8 + dex] piercing damage.',
+          text: '*Ranged Weapon Attack:* ATK[DEX] to hit, ranged 150/600 ft., one target. *Hit:* DMG[1d8 + DEX] piercing damage.',
           markdownText: '*Ranged Weapon Attack:* +4 to hit, ranged 150/600 ft., one target. *Hit:* 6 (1d8 + 2) piercing damage.',
           htmlText: '<em>Ranged Weapon Attack:</em> +4 to hit, ranged 150/600 ft., one target. <em>Hit:</em> 6 (1d8 + 2) piercing damage.'
         }
@@ -145,19 +144,19 @@ describe('when the show section is clicked', () => {
       const blocks = [
         {
           name: 'Multiattack',
-          text: '[name] makes two melee attacks.',
+          text: '[NAME] makes two melee attacks.',
           markdownText: 'The knight makes two melee attacks.',
           htmlText: 'The knight makes two melee attacks.'
         },
         {
           name: 'Greatsword',
-          text: '<em>Melee Weapon Attack:</em> atk[str] to hit, reach 5 ft., one target. <em>Hit:</em> dmg[2d6 + str] slashing damage.',
+          text: '<em>Melee Weapon Attack:</em> ATK[STR] to hit, reach 5 ft., one target. <em>Hit:</em> DMG[2d6 + STR] slashing damage.',
           markdownText: '&lt;em&gt;Melee Weapon Attack:&lt;/em&gt; +5 to hit, reach 5 ft., one target. &lt;em&gt;Hit:&lt;/em&gt; 10 (2d6 + 3) slashing damage.',
           htmlText: '&lt;em&gt;Melee Weapon Attack:&lt;/em&gt; +5 to hit, reach 5 ft., one target. &lt;em&gt;Hit:&lt;/em&gt; 10 (2d6 + 3) slashing damage.'
         },
         {
           name: 'Heavy Crossbow',
-          text: '*Ranged Weapon Attack:* atk[dex] to hit, range 100/400 ft., one target. *Hit:* dmg[1d10 + dex] piercing damage.',
+          text: '*Ranged Weapon Attack:* ATK[DEX] to hit, range 100/400 ft., one target. *Hit:* DMG[1d10 + DEX] piercing damage.',
           markdownText: '*Ranged Weapon Attack:* +2 to hit, range 100/400 ft., one target. *Hit:* 5 (1d10) piercing damage.',
           htmlText: '<em>Ranged Weapon Attack:</em> +2 to hit, range 100/400 ft., one target. <em>Hit:</em> 5 (1d10) piercing damage.'
         }
@@ -171,7 +170,7 @@ describe('when the show section is clicked', () => {
     describe('should reparse the block text', () => {
       const block = {
         name: 'Teleport (Recharge 4-6)',
-        text: '[name] magically teleports, along with any equipment it is wearing or carrying, up to 40 feet to an unoccupied space it can see. Before or after teleporting, [name] can make one bite attack.',
+        text: '[NAME] magically teleports, along with any equipment it is wearing or carrying, up to 40 feet to an unoccupied space it can see. Before or after teleporting, [NAME] can make one bite attack.',
         markdownText: null,
         htmlText: null
       };
@@ -261,7 +260,7 @@ describe('when import from Open5e', () => {
   it('should import single block with multiline text', () => {
     const block = {
       name: 'Breath Weapons (Recharge 5-6)',
-      text: 'The dragon uses one of the following breath weapons.\n**Fire Breath.** The dragon exhales fire in an 60-foot line that is 5 feet wide. Each creature in that line must make a DC 18 Dexterity saving throw, taking dmg[13d6] fire damage on a failed save, or half as much damage on a successful one.\n**Sleep Breath.** The dragon exhales sleep gas in a 60-foot cone. Each creature in that area must succeed on a DC 18 Constitution saving throw or fall unconscious for 10 minutes. This effect ends for a creature if the creature takes damage or someone uses an action to wake it.',
+      text: 'The dragon uses one of the following breath weapons.\n**Fire Breath.** The dragon exhales fire in an 60-foot line that is 5 feet wide. Each creature in that line must make a DC 18 Dexterity saving throw, taking DMG[13d6] fire damage on a failed save, or half as much damage on a successful one.\n**Sleep Breath.** The dragon exhales sleep gas in a 60-foot cone. Each creature in that area must succeed on a DC 18 Constitution saving throw or fall unconscious for 10 minutes. This effect ends for a creature if the creature takes damage or someone uses an action to wake it.',
       markdownText: 'The dragon uses one of the following breath weapons.  \n> **Fire Breath.** The dragon exhales fire in an 60-foot line that is 5 feet wide. Each creature in that line must make a DC 18 Dexterity saving throw, taking 45 (13d6) fire damage on a failed save, or half as much damage on a successful one.  \n> **Sleep Breath.** The dragon exhales sleep gas in a 60-foot cone. Each creature in that area must succeed on a DC 18 Constitution saving throw or fall unconscious for 10 minutes. This effect ends for a creature if the creature takes damage or someone uses an action to wake it.',
       htmlText: 'The dragon uses one of the following breath weapons.\n<strong>Fire Breath.</strong> The dragon exhales fire in an 60-foot line that is 5 feet wide. Each creature in that line must make a DC 18 Dexterity saving throw, taking 45 (13d6) fire damage on a failed save, or half as much damage on a successful one.\n<strong>Sleep Breath.</strong> The dragon exhales sleep gas in a 60-foot cone. Each creature in that area must succeed on a DC 18 Constitution saving throw or fall unconscious for 10 minutes. This effect ends for a creature if the creature takes damage or someone uses an action to wake it.'
     };
@@ -295,7 +294,7 @@ describe('when the section is empty and not visible', () => {
       const blocksToImport = [
         {
           name: 'Weird Insight',
-          text: '[name] targets one creature it can see within 30 feet of it. The target must contest its Charisma (Deception) check against [name]’s Wisdom (Insight) check. If [name] wins, it magically learns one fact or secret about the target. The target automatically wins if it is immune to being charmed.',
+          text: '[NAME] targets one creature it can see within 30 feet of it. The target must contest its Charisma (Deception) check against [NAME]’s Wisdom (Insight) check. If [NAME] wins, it magically learns one fact or secret about the target. The target automatically wins if it is immune to being charmed.',
           htmlText: 'The nothic targets one creature it can see within 30 feet of it. The target must contest its Charisma (Deception) check against the nothic’s Wisdom (Insight) check. If the nothic wins, it magically learns one fact or secret about the target. The target automatically wins if it is immune to being charmed.'
         }
       ];

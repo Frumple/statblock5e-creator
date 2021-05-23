@@ -195,11 +195,11 @@
     "blocks": [
       {
         "name": "Charge",
-        "text": "If [name] moves at least 20 ft. straight toward a target and then hits it with a ram attack on the same turn, the target takes an extra dmg[2d4] bludgeoning damage. If the target is a creature, it must succeed on a DC 13 Strength saving throw or be knocked prone."
+        "text": "If [NAME] moves at least 20 ft. straight toward a target and then hits it with a ram attack on the same turn, the target takes an extra DMG[2d4] bludgeoning damage. If the target is a creature, it must succeed on a DC 13 Strength saving throw or be knocked prone."
       },
       {
         "name": "Sure-Footed",
-        "text": "[name] has advantage on Strength and Dexterity saving throws made against effects that would knock it prone."
+        "text": "[NAME] has advantage on Strength and Dexterity saving throws made against effects that would knock it prone."
       }
     ]
   },
@@ -207,7 +207,7 @@
     "blocks": [
       {
         "name": "Ram",
-        "text": "*Melee Weapon Attack:* atk[str] to hit, reach 5 ft., one target. *Hit:* dmg[2d4 + str] bludgeoning damage."
+        "text": "*Melee Weapon Attack:* ATK[STR] to hit, reach 5 ft., one target. *Hit:* DMG[2d4 + STR] bludgeoning damage."
       }
     ]
   },
@@ -216,7 +216,7 @@
   },
   "legendaryActions": {
     "blocks": [],
-    "description": "[name] can take 3 legendary actions, choosing from the options below. Only one legendary action option can be used at a time and only at the end of another creature's turn. [name] regains spent legendary actions at the start of its turn."
+    "description": "[NAME] can take 3 legendary actions, choosing from the options below. Only one legendary action option can be used at a time and only at the end of another creature's turn. [NAME] regains spent legendary actions at the start of its turn."
   },
   "layout": {
     "columns": 1,

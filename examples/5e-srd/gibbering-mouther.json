@@ -197,11 +197,11 @@
     "blocks": [
       {
         "name": "Aberrant Ground",
-        "text": "The ground in a 10-foot radius around [name] is doughlike difficult terrain. Each creature that starts its turn in that area must succeed on a DC 10 Strength saving throw or have its speed reduced to 0 until the start of its next turn."
+        "text": "The ground in a 10-foot radius around [NAME] is doughlike difficult terrain. Each creature that starts its turn in that area must succeed on a DC 10 Strength saving throw or have its speed reduced to 0 until the start of its next turn."
       },
       {
         "name": "Gibbering",
-        "text": "[name] babbles incoherently while it can see any creature and isn't incapacitated. Each creature that starts its turn within 20 feet of [name] and can hear the gibbering must succeed on a DC 10 Wisdom saving throw. On a failure, the creature can't take reactions until the start of its next turn and rolls a d8 to determine what it does during its turn. On a 1 to 4, the creature does nothing. On a 5 or 6, the creature takes no action or bonus action and uses all its movement to move in a randomly determined direction. On a 7 or 8, the creature makes a melee attack against a randomly determined creature within its reach or does nothing if it can't make such an attack."
+        "text": "[NAME] babbles incoherently while it can see any creature and isn't incapacitated. Each creature that starts its turn within 20 feet of [NAME] and can hear the gibbering must succeed on a DC 10 Wisdom saving throw. On a failure, the creature can't take reactions until the start of its next turn and rolls a d8 to determine what it does during its turn. On a 1 to 4, the creature does nothing. On a 5 or 6, the creature takes no action or bonus action and uses all its movement to move in a randomly determined direction. On a 7 or 8, the creature makes a melee attack against a randomly determined creature within its reach or does nothing if it can't make such an attack."
       }
     ]
   },
@@ -209,15 +209,15 @@
     "blocks": [
       {
         "name": "Multiattack",
-        "text": "[fullname] makes one bite attack and, if it can, uses its Blinding Spittle."
+        "text": "[FULLNAME] makes one bite attack and, if it can, uses its Blinding Spittle."
       },
       {
         "name": "Bites",
-        "text": "*Melee Weapon Attack:* atk[str] to hit, reach 5 ft., one creature. *Hit:* dmg[5d6 + str] piercing damage. If the target is Medium or smaller, it must succeed on a DC 10 Strength saving throw or be knocked prone. If the target is killed by this damage, it is absorbed into [name]."
+        "text": "*Melee Weapon Attack:* ATK[STR] to hit, reach 5 ft., one creature. *Hit:* DMG[5d6 + STR] piercing damage. If the target is Medium or smaller, it must succeed on a DC 10 Strength saving throw or be knocked prone. If the target is killed by this damage, it is absorbed into [NAME]."
       },
       {
         "name": "Blinding Spittle (Recharge 5-6)",
-        "text": "[name] spits a chemical glob at a point it can see within 15 feet of it. The glob explodes in a blinding flash of light on impact. Each creature within 5 feet of the flash must succeed on a DC 13 Dexterity saving throw or be blinded until the end of [name]'s next turn."
+        "text": "[NAME] spits a chemical glob at a point it can see within 15 feet of it. The glob explodes in a blinding flash of light on impact. Each creature within 5 feet of the flash must succeed on a DC 13 Dexterity saving throw or be blinded until the end of [NAME]'s next turn."
       }
     ]
   },
@@ -226,7 +226,7 @@
   },
   "legendaryActions": {
     "blocks": [],
-    "description": "[name] can take 3 legendary actions, choosing from the options below. Only one legendary action option can be used at a time and only at the end of another creature's turn. [name] regains spent legendary actions at the start of its turn."
+    "description": "[NAME] can take 3 legendary actions, choosing from the options below. Only one legendary action option can be used at a time and only at the end of another creature's turn. [NAME] regains spent legendary actions at the start of its turn."
   },
   "layout": {
     "columns": 1,

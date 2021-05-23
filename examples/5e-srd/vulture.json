@@ -195,11 +195,11 @@
     "blocks": [
       {
         "name": "Keen Sight and Smell",
-        "text": "[name] has advantage on Wisdom (Perception) checks that rely on sight or smell."
+        "text": "[NAME] has advantage on Wisdom (Perception) checks that rely on sight or smell."
       },
       {
         "name": "Pack Tactics",
-        "text": "[name] has advantage on an attack roll against a creature if at least one of [name]'s allies is within 5 ft. of the creature and the ally isn't incapacitated."
+        "text": "[NAME] has advantage on an attack roll against a creature if at least one of [NAME]'s allies is within 5 ft. of the creature and the ally isn't incapacitated."
       }
     ]
   },
@@ -207,7 +207,7 @@
     "blocks": [
       {
         "name": "Beak",
-        "text": "*Melee Weapon Attack:* atk[dex] to hit, reach 5 ft., one target. *Hit:* dmg[1d4 + dex] piercing damage."
+        "text": "*Melee Weapon Attack:* ATK[DEX] to hit, reach 5 ft., one target. *Hit:* DMG[1d4 + DEX] piercing damage."
       }
     ]
   },
@@ -216,7 +216,7 @@
   },
   "legendaryActions": {
     "blocks": [],
-    "description": "[name] can take 3 legendary actions, choosing from the options below. Only one legendary action option can be used at a time and only at the end of another creature's turn. [name] regains spent legendary actions at the start of its turn."
+    "description": "[NAME] can take 3 legendary actions, choosing from the options below. Only one legendary action option can be used at a time and only at the end of another creature's turn. [NAME] regains spent legendary actions at the start of its turn."
   },
   "layout": {
     "columns": 1,

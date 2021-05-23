@@ -199,7 +199,7 @@
     "blocks": [
       {
         "name": "Amphibious",
-        "text": "[name] can breathe air and water."
+        "text": "[NAME] can breathe air and water."
       }
     ]
   },
@@ -207,11 +207,11 @@
     "blocks": [
       {
         "name": "Bite",
-        "text": "*Melee Weapon Attack:* atk[str] to hit, reach 5 ft., one target. *Hit:* dmg[1d10 + str] piercing damage plus dmg[1d4] acid damage."
+        "text": "*Melee Weapon Attack:* ATK[STR] to hit, reach 5 ft., one target. *Hit:* DMG[1d10 + STR] piercing damage plus DMG[1d4] acid damage."
       },
       {
         "name": "Acid Breath (Recharge 5-6)",
-        "text": "[name] exhales acid in a 15-foot line that is 5 feet wide. Each creature in that line must make a DC 11 Dexterity saving throw, taking dmg[5d8] acid damage on a failed save, or half as much damage on a successful one."
+        "text": "[NAME] exhales acid in a 15-foot line that is 5 feet wide. Each creature in that line must make a DC 11 Dexterity saving throw, taking DMG[5d8] acid damage on a failed save, or half as much damage on a successful one."
       }
     ]
   },
@@ -220,7 +220,7 @@
   },
   "legendaryActions": {
     "blocks": [],
-    "description": "[name] can take 3 legendary actions, choosing from the options below. Only one legendary action option can be used at a time and only at the end of another creature's turn. [name] regains spent legendary actions at the start of its turn."
+    "description": "[NAME] can take 3 legendary actions, choosing from the options below. Only one legendary action option can be used at a time and only at the end of another creature's turn. [NAME] regains spent legendary actions at the start of its turn."
   },
   "layout": {
     "columns": 1,

@@ -1,0 +1,89 @@
+/* Button */
+
+.ui__button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background: #dddddd;
+  border: 1px outset #949494;
+  font-family: inherit;
+  font-size: inherit;
+  font-weight: bold;
+  padding: 0;
+  cursor: pointer;
+  transition: background 100ms ease-in-out;
+}
+
+.ui__button:enabled:hover {
+  background: #eeeeee;
+}
+
+.ui__button:enabled:active {
+  background: #90FF70;
+}
+
+/* Toggle Button (Checkbox or Radio Button that looks like a Button) */
+
+.ui__toggle-button-input {
+  display: none;
+  appearance: none;
+}
+
+.ui__toggle-button-input:disabled + .ui__toggle-button-label {
+  color: rgba(16, 16, 16, 0.3);
+}
+
+.ui__toggle-button-input:enabled + .ui__toggle-button-label:hover {
+  background: #eeeeee;
+}
+
+.ui__toggle-button-input:enabled + .ui__toggle-button-label:active {
+  background: #90FF70;
+}
+
+.ui__toggle-button-input:checked + .ui__toggle-button-label,
+.ui__toggle-button-input:checked + .ui__toggle-button-label:hover {
+  background: #90FF70;
+}
+
+.ui__toggle-button-label {
+  user-select: none;
+}
+
+/* Text Input */
+
+.ui__text-input {
+  font-family: inherit;
+  font-size: inherit;
+  box-sizing: border-box;
+  height: 26px;
+}
+
+/* Number Input */
+
+.ui__number-input {
+  font-family: inherit;
+  font-size: inherit;
+  box-sizing: border-box;
+  height: 26px;
+}
+
+.ui__small-number-input {
+  width: 50px;
+}
+
+/* Select */
+
+.ui__select {
+  font-family: inherit;
+  font-size: inherit;
+  box-sizing: border-box;
+  height: 26px;
+}
+
+/* Text Area */
+
+.ui__textarea {
+  font-family: inherit;
+  font-size: inherit;
+}

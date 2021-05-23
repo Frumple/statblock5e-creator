@@ -11,15 +11,15 @@ export default class AdvancedStats extends DivisibleContainer {
   constructor() {
     super(AdvancedStats.templatePaths);
 
-    const savingThrowsSection = document.querySelector('saving-throws-section');
-    const skillsSection = document.querySelector('skills-section');
-    const damageVulnerabilitiesSection = document.querySelector('damage-vulnerabilities-section');
-    const damageResistancesSection = document.querySelector('damage-resistances-section');
-    const damageImmunitiesSection = document.querySelector('damage-immunities-section');
-    const conditionImmunitiesSection = document.querySelector('condition-immunities-section');
-    const sensesSection = document.querySelector('senses-section');
-    const languagesSection = document.querySelector('languages-section');
-    const challengeRatingSection =  document.querySelector('challenge-rating-section');
+    const savingThrowsSection = this.shadowRoot.querySelector('saving-throws-section');
+    const skillsSection = this.shadowRoot.querySelector('skills-section');
+    const damageVulnerabilitiesSection = this.shadowRoot.querySelector('damage-vulnerabilities-section');
+    const damageResistancesSection = this.shadowRoot.querySelector('damage-resistances-section');
+    const damageImmunitiesSection = this.shadowRoot.querySelector('damage-immunities-section');
+    const conditionImmunitiesSection = this.shadowRoot.querySelector('condition-immunities-section');
+    const sensesSection = this.shadowRoot.querySelector('senses-section');
+    const languagesSection = this.shadowRoot.querySelector('languages-section');
+    const challengeRatingSection =  this.shadowRoot.querySelector('challenge-rating-section');
 
     this.sections.set('savingThrows', savingThrowsSection);
     this.sections.set('skills', skillsSection);

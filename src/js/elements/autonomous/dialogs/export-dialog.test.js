@@ -3,10 +3,6 @@ import StatBlockMenu from '../containers/stat-block-menu.js';
 import StatBlockSidebar from '../containers/stat-block-sidebar.js';
 import StatBlock from '../containers/stat-block.js';
 
-import HeadingStats from '../containers/heading-stats.js';
-import TopStats from '../containers/top-stats.js';
-import BottomStats from '../containers/bottom-stats.js';
-
 import ExportDialog from './export-dialog.js';
 
 import CurrentContext from '../../../models/current-context.js';
@@ -15,13 +11,12 @@ import * as HtmlExportDocumentFactory from '../../../helpers/html-export-documen
 import printHtml from '../../../helpers/print-helpers.js';
 import { ClipboardWrapper, startFileDownload } from '../../../helpers/export-helpers.js';
 
+import * as TestCustomElements from '../../../helpers/test/test-custom-elements.js';
+
 jest.mock('../../../helpers/print-helpers.js');
 jest.mock('../../../helpers/export-helpers.js');
-jest.mock('../containers/heading-stats.js');
-jest.mock('../containers/top-stats.js');
-jest.mock('../containers/bottom-stats.js');
 
-const initialHeightSliderValue = 600;
+const sliderChangeAmount = 25;
 
 let statBlockEditor;
 let statBlockMenu;
@@ -35,40 +30,14 @@ let statBlock;
    calling the ClipboardWrapper with the appropriate parameters.
    - GitHub issue: https://github.com/jsdom/jsdom/issues/1568
 
-   JSDOM does not support the stepUp() or stepDown() methods, so when
-   interacting with the two-column manual height slider, we have to set its
-   value and dispatch a change event manually.
-   - This issue was fixed in JSDOM 16.0.0, need to update
+   The stepUp() and stepDown() methods in JSDOM do not fire input events.
+   The workaround is to call onInputSlider() manually afterwards.
 */
 
 beforeAll(async() => {
-  HeadingStats.mockImplementation(() => {
-    return {
-      setEmptyVisibility: () => {},
-      exportToJson: () => { return {}; },
-      exportToHtml: () => { return document.createElement('heading-stats'); },
-      exportToMarkdown: () => { return ''; }
-    };
-  });
-  TopStats.mockImplementation(() => {
-    return {
-      setEmptyVisibility: () => {},
-      exportToJson: () => { return {}; },
-      exportToHtml: () => { return document.createElement('top-stats'); },
-      exportToMarkdown: () => { return ''; }
-    };
-  });
-  BottomStats.mockImplementation(() => {
-    return {
-      setEmptyVisibility: () => {},
-      exportToJson: () => { return {}; },
-      exportToHtml: () => { return document.createElement('bottom-stats'); },
-      exportToMarkdown: () => { return ''; }
-    };
-  });
-
   HtmlExportDocumentFactory.init();
 
+  await TestCustomElements.define();
   await StatBlockEditor.define();
   await StatBlockMenu.define();
   await StatBlockSidebar.define();
@@ -81,30 +50,39 @@ beforeEach(() => {
   printHtml.mockClear();
   ClipboardWrapper.mockClear();
   startFileDownload.mockClear();
-  HeadingStats.mockClear();
-  TopStats.mockClear();
-  BottomStats.mockClear();
 
-  CurrentContext.layoutSettings.reset();
+  CurrentContext.reset();
 
   statBlockEditor = new StatBlockEditor();
+  document.body.appendChild(statBlockEditor);
+
   statBlockMenu = statBlockEditor.statBlockMenu;
   statBlockSidebar = statBlockEditor.statBlockSidebar;
   statBlock = statBlockEditor.statBlock;
 
-  statBlockEditor.connect();
-  statBlockMenu.connect();
-  statBlockSidebar.connect();
-  statBlock.connect();
+  // Mocking a custom element returns an empty HTMLElement for some unknown reason.
+  // The workaround is to inject a fake object and mock the relevant methods within.
+  statBlock.headingStats = {
+    setEmptyVisibility: () => {},
+    exportToJson: () => { return {}; },
+    exportToHtml: () => { return document.createElement('heading-stats'); },
+    exportToMarkdown: () => { return ''; }
+  };
+  statBlock.topStats = {
+    setEmptyVisibility: () => {},
+    exportToJson: () => { return {}; },
+    exportToHtml: () => { return document.createElement('top-stats'); },
+    exportToMarkdown: () => { return ''; }
+  };
+  statBlock.bottomStats = {
+    setEmptyVisibility: () => {},
+    exportToJson: () => { return {}; },
+    exportToHtml: () => { return document.createElement('bottom-stats'); },
+    exportToMarkdown: () => { return ''; }
+  };
 });
 
 describe('should export JSON', () => {
-  const emptySectionsHiddenTextSnippet = `"layout": {
-    "columns": 1,
-    "twoColumnMode": "auto",
-    "twoColumnHeight": 600
-  }`;
-
   const oneColumnTextSnippet = `"layout": {
     "columns": 1,
     "twoColumnMode": "auto",
@@ -123,33 +101,12 @@ describe('should export JSON', () => {
     "twoColumnHeight": 625
   }`;
 
-  const emptySectionsHiddenTextMatcher = expect.stringContaining(emptySectionsHiddenTextSnippet);
   const oneColumnTextMatcher = expect.stringContaining(oneColumnTextSnippet);
   const twoColumnAutoHeightTextMatcher = expect.stringContaining(twoColumnAutoHeightTextSnippet);
   const twoColumnManualHeightTextMatcher = expect.stringContaining(twoColumnManualHeightTextSnippet);
 
-  beforeEach(() => {
-    statBlockEditor.exportJsonDialog.connect();
-  });
-
   describe('to clipboard', () => {
-    it('empty sections hidden', () => {
-      statBlockMenu.hideEmptySectionsButton.click();
-
-      statBlockMenu.exportJsonButton.click();
-
-      statBlockEditor.exportJsonDialog.copyToClipboardButton.click();
-
-      expect(ClipboardWrapper).toHaveBeenCalledWith(
-        emptySectionsHiddenTextMatcher,
-        statBlockEditor.exportJsonDialog.dialog,
-        statBlockEditor.exportJsonDialog.copyToClipboardButton,
-      );
-    });
-
     it('one-column version', () => {
-      statBlockMenu.oneColumnButton.click();
-
       statBlockMenu.exportJsonButton.click();
 
       statBlockEditor.exportJsonDialog.copyToClipboardButton.click();
@@ -162,8 +119,7 @@ describe('should export JSON', () => {
     });
 
     it('two-column version with automatic height', () => {
-      statBlockMenu.twoColumnButton.click();
-      statBlockSidebar.autoHeightModeButton.click();
+      statBlockMenu.columnsToggle.click();
 
       statBlockMenu.exportJsonButton.click();
 
@@ -177,10 +133,10 @@ describe('should export JSON', () => {
     });
 
     it('two-column version with manual height', () => {
-      statBlockMenu.twoColumnButton.click();
-      statBlockSidebar.manualHeightModeButton.click();
+      statBlockMenu.columnsToggle.click();
+      statBlockSidebar.heightModeToggle.click();
 
-      statBlockSidebar.manualHeightSlider.value = initialHeightSliderValue + 25;
+      statBlockSidebar.manualHeightSlider.stepUp(sliderChangeAmount);
       statBlockSidebar.onInputSlider();
 
       statBlockMenu.exportJsonButton.click();
@@ -198,24 +154,7 @@ describe('should export JSON', () => {
     const expectedContentType = 'application/json';
     const expectedFileName = 'Commoner.json';
 
-    it('empty sections hiddenn', () => {
-      statBlockMenu.hideEmptySectionsButton.click();
-
-      statBlockMenu.exportJsonButton.click();
-
-      statBlockEditor.exportJsonDialog.downloadAsFileButton.click();
-
-      expect(startFileDownload).toHaveBeenCalledWith(
-        emptySectionsHiddenTextMatcher,
-        expectedContentType,
-        expectedFileName);
-
-      expectFileDownloadStatus(statBlockEditor.exportJsonDialog);
-    });
-
     it('one-column version', () => {
-      statBlockMenu.oneColumnButton.click();
-
       statBlockMenu.exportJsonButton.click();
 
       statBlockEditor.exportJsonDialog.downloadAsFileButton.click();
@@ -229,8 +168,7 @@ describe('should export JSON', () => {
     });
 
     it('two-column version with automatic height', () => {
-      statBlockMenu.twoColumnButton.click();
-      statBlockSidebar.autoHeightModeButton.click();
+      statBlockMenu.columnsToggle.click();
 
       statBlockMenu.exportJsonButton.click();
 
@@ -245,10 +183,10 @@ describe('should export JSON', () => {
     });
 
     it('two-column version with manual height', () => {
-      statBlockMenu.twoColumnButton.click();
-      statBlockSidebar.manualHeightModeButton.click();
+      statBlockMenu.columnsToggle.click();
+      statBlockSidebar.heightModeToggle.click();
 
-      statBlockSidebar.manualHeightSlider.value = initialHeightSliderValue + 25;
+      statBlockSidebar.manualHeightSlider.stepUp(sliderChangeAmount);
       statBlockSidebar.onInputSlider();
 
       statBlockMenu.exportJsonButton.click();
@@ -271,16 +209,13 @@ describe('HTML-based tests', () => {
 
   describe('should print', () => {
     it('one-column version', () => {
-      statBlockMenu.oneColumnButton.click();
-
       statBlockMenu.printButton.click();
 
       expect(printHtml).toHaveBeenCalledWith(oneColumnTextMatcher);
     });
 
     it('two-column version with automatic height', () => {
-      statBlockMenu.twoColumnButton.click();
-      statBlockSidebar.autoHeightModeButton.click();
+      statBlockMenu.columnsToggle.click();
 
       statBlockMenu.printButton.click();
 
@@ -288,11 +223,10 @@ describe('HTML-based tests', () => {
     });
 
     it('two-column version with manual height', () => {
-      statBlockMenu.twoColumnButton.click();
-      statBlockSidebar.manualHeightModeButton.click();
+      statBlockMenu.columnsToggle.click();
+      statBlockSidebar.heightModeToggle.click();
 
-
-      statBlockSidebar.manualHeightSlider.value = initialHeightSliderValue + 25;
+      statBlockSidebar.manualHeightSlider.stepUp(sliderChangeAmount);
       statBlockSidebar.onInputSlider();
 
       statBlockMenu.printButton.click();
@@ -302,14 +236,8 @@ describe('HTML-based tests', () => {
   });
 
   describe('should export HTML', () => {
-    beforeEach(() => {
-      statBlockEditor.exportHtmlDialog.connect();
-    });
-
     describe('to clipboard', () => {
       it('one-column version', () => {
-        statBlockMenu.oneColumnButton.click();
-
         statBlockMenu.exportHtmlButton.click();
 
         statBlockEditor.exportHtmlDialog.copyToClipboardButton.click();
@@ -322,8 +250,7 @@ describe('HTML-based tests', () => {
       });
 
       it('two-column version with automatic height', () => {
-        statBlockMenu.twoColumnButton.click();
-        statBlockSidebar.autoHeightModeButton.click();
+        statBlockMenu.columnsToggle.click();
 
         statBlockMenu.exportHtmlButton.click();
 
@@ -337,10 +264,10 @@ describe('HTML-based tests', () => {
       });
 
       it('two-column version with manual height', () => {
-        statBlockMenu.twoColumnButton.click();
-        statBlockSidebar.manualHeightModeButton.click();
+        statBlockMenu.columnsToggle.click();
+        statBlockSidebar.heightModeToggle.click();
 
-        statBlockSidebar.manualHeightSlider.value = initialHeightSliderValue + 25;
+        statBlockSidebar.manualHeightSlider.stepUp(sliderChangeAmount);
         statBlockSidebar.onInputSlider();
 
         statBlockMenu.exportHtmlButton.click();
@@ -359,8 +286,6 @@ describe('HTML-based tests', () => {
       const expectedFileName = 'Commoner.html';
 
       it('one-column version', () => {
-        statBlockMenu.oneColumnButton.click();
-
         statBlockMenu.exportHtmlButton.click();
 
         statBlockEditor.exportHtmlDialog.downloadAsFileButton.click();
@@ -374,8 +299,7 @@ describe('HTML-based tests', () => {
       });
 
       it('two-column version with automatic height', () => {
-        statBlockMenu.twoColumnButton.click();
-        statBlockSidebar.autoHeightModeButton.click();
+        statBlockMenu.columnsToggle.click();
 
         statBlockMenu.exportHtmlButton.click();
 
@@ -390,10 +314,10 @@ describe('HTML-based tests', () => {
       });
 
       it('two-column version with manual height', () => {
-        statBlockMenu.twoColumnButton.click();
-        statBlockSidebar.manualHeightModeButton.click();
+        statBlockMenu.columnsToggle.click();
+        statBlockSidebar.heightModeToggle.click();
 
-        statBlockSidebar.manualHeightSlider.value = initialHeightSliderValue + 25;
+        statBlockSidebar.manualHeightSlider.stepUp(sliderChangeAmount);
         statBlockSidebar.onInputSlider();
 
         statBlockMenu.exportHtmlButton.click();
@@ -414,14 +338,8 @@ describe('should export markdown', () => {
   const oneColumnTextMatcher = expect.stringMatching(/^___\n.*/);
   const twoColumnAutoHeightTextMatcher = expect.stringMatching(/^___\n___\n.*/);
 
-  beforeEach(() => {
-    statBlockEditor.exportMarkdownDialog.connect();
-  });
-
   describe('to clipboard', () => {
     it('one-column version', () => {
-      statBlockMenu.oneColumnButton.click();
-
       statBlockMenu.exportMarkdownButton.click();
 
       statBlockEditor.exportMarkdownDialog.copyToClipboardButton.click();
@@ -434,8 +352,7 @@ describe('should export markdown', () => {
     });
 
     it('two-column version', () => {
-      statBlockMenu.twoColumnButton.click();
-      statBlockSidebar.autoHeightModeButton.click();
+      statBlockMenu.columnsToggle.click();
 
       statBlockMenu.exportMarkdownButton.click();
 
@@ -454,8 +371,6 @@ describe('should export markdown', () => {
     const expectedFileName = 'Commoner.md';
 
     it('one-column version', () => {
-      statBlockMenu.oneColumnButton.click();
-
       statBlockMenu.exportMarkdownButton.click();
 
       statBlockEditor.exportMarkdownDialog.downloadAsFileButton.click();
@@ -469,8 +384,7 @@ describe('should export markdown', () => {
     });
 
     it('two-column version', () => {
-      statBlockMenu.twoColumnButton.click();
-      statBlockSidebar.autoHeightModeButton.click();
+      statBlockMenu.columnsToggle.click();
 
       statBlockMenu.exportMarkdownButton.click();
 

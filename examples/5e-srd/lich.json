@@ -210,7 +210,7 @@
     "blocks": [
       {
         "name": "Legendary Resistance (3/Day)",
-        "text": "If [name] fails a saving throw, it can choose to succeed instead."
+        "text": "If [NAME] fails a saving throw, it can choose to succeed instead."
       },
       {
         "name": "Rejuvenation",
@@ -218,11 +218,11 @@
       },
       {
         "name": "Spellcasting",
-        "text": "[name] is an 18th-level spellcaster. Its spellcasting ability is Intelligence (spell save DC sdc[int], atk[int] to hit with spell attacks). [name] has the following wizard spells prepared:\n\nCantrips (at will): *mage hand*, *prestidigitation*, *ray of frost*\n1st level (4 slots): *detect magic*, *magic missile*, *shield*, *thunderwave*\n2nd level (3 slots): *detect thoughts*, *invisibility*, *Melf's acid arrow*, *mirror image*\n3rd level (3 slots): *animate dead*, *counterspell*, *dispel magic*, *fireball*\n4th level (3 slots): *blight*, *dimension door*\n5th level (3 slots): *cloudkill*, *scrying*\n6th level (1 slot): *disintegrate*, *globe of invulnerability*\n7th level (1 slot): *finger of death*, *plane shift*\n8th level (1 slot): *dominate monster*, *power word stun*\n9th level (1 slot): *power word kill*"
+        "text": "[NAME] is an 18th-level spellcaster. Its spellcasting ability is Intelligence (spell save DC SDC[INT], ATK[INT] to hit with spell attacks). [NAME] has the following wizard spells prepared:\n\nCantrips (at will): *mage hand*, *prestidigitation*, *ray of frost*\n1st level (4 slots): *detect magic*, *magic missile*, *shield*, *thunderwave*\n2nd level (3 slots): *detect thoughts*, *invisibility*, *Melf's acid arrow*, *mirror image*\n3rd level (3 slots): *animate dead*, *counterspell*, *dispel magic*, *fireball*\n4th level (3 slots): *blight*, *dimension door*\n5th level (3 slots): *cloudkill*, *scrying*\n6th level (1 slot): *disintegrate*, *globe of invulnerability*\n7th level (1 slot): *finger of death*, *plane shift*\n8th level (1 slot): *dominate monster*, *power word stun*\n9th level (1 slot): *power word kill*"
       },
       {
         "name": "Turn Resistance",
-        "text": "[name] has advantage on saving throws against any effect that turns undead."
+        "text": "[NAME] has advantage on saving throws against any effect that turns undead."
       }
     ]
   },
@@ -230,7 +230,7 @@
     "blocks": [
       {
         "name": "Paralyzing Touch",
-        "text": "*Melee Spell Attack:* atk[int] to hit, reach 5 ft., one creature. *Hit:* dmg[3d6] cold damage. The target must succeed on a DC 18 Constitution saving throw or be paralyzed for 1 minute. The target can repeat the saving throw at the end of each of its turns, ending the effect on itself on a success."
+        "text": "*Melee Spell Attack:* ATK[INT] to hit, reach 5 ft., one creature. *Hit:* DMG[3d6] cold damage. The target must succeed on a DC 18 Constitution saving throw or be paralyzed for 1 minute. The target can repeat the saving throw at the end of each of its turns, ending the effect on itself on a success."
       }
     ]
   },
@@ -241,22 +241,22 @@
     "blocks": [
       {
         "name": "Cantrip",
-        "text": "[name] casts a cantrip."
+        "text": "[NAME] casts a cantrip."
       },
       {
         "name": "Paralyzing Touch (Costs 2 Actions)",
-        "text": "[name] uses its Paralyzing Touch."
+        "text": "[NAME] uses its Paralyzing Touch."
       },
       {
         "name": "Frightening Gaze (Costs 2 Actions)",
-        "text": "[name] fixes its gaze on one creature it can see within 10 feet of it. The target must succeed on a DC 18 Wisdom saving throw against this magic or become frightened for 1 minute. The frightened target can repeat the saving throw at the end of each of its turns, ending the effect on itself on a success. If a target's saving throw is successful or the effect ends for it, the target is immune to [name]'s gaze for the next 24 hours."
+        "text": "[NAME] fixes its gaze on one creature it can see within 10 feet of it. The target must succeed on a DC 18 Wisdom saving throw against this magic or become frightened for 1 minute. The frightened target can repeat the saving throw at the end of each of its turns, ending the effect on itself on a success. If a target's saving throw is successful or the effect ends for it, the target is immune to [NAME]'s gaze for the next 24 hours."
       },
       {
         "name": "Disrupt Life (Costs 3 Actions)",
-        "text": "Each living creature within 20 feet of [name] must make a DC 18 Constitution saving throw against this magic, taking dmg[6d6] necrotic damage on a failed save, or half as much damage on a successful one."
+        "text": "Each living creature within 20 feet of [NAME] must make a DC 18 Constitution saving throw against this magic, taking DMG[6d6] necrotic damage on a failed save, or half as much damage on a successful one."
       }
     ],
-    "description": "[name] can take 3 legendary actions, choosing from the options below. Only one legendary action option can be used at a time and only at the end of another creature's turn. [name] regains spent legendary actions at the start of its turn."
+    "description": "[NAME] can take 3 legendary actions, choosing from the options below. Only one legendary action option can be used at a time and only at the end of another creature's turn. [NAME] regains spent legendary actions at the start of its turn."
   },
   "layout": {
     "columns": 1,

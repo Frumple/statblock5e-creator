@@ -1,9 +1,5 @@
 import CustomAutonomousElement from '../custom-autonomous-element.js';
 import CurrentContext from '../../../models/current-context.js';
-import isRunningInJsdom from '../../../helpers/is-running-in-jsdom.js';
-import HeadingStats from '../containers/heading-stats.js';
-import TopStats from '../containers/top-stats.js';
-import BottomStats from '../containers/bottom-stats.js';
 
 export default class StatBlock extends CustomAutonomousElement {
   static get elementName() { return 'stat-block'; }
@@ -16,15 +12,9 @@ export default class StatBlock extends CustomAutonomousElement {
   constructor(parent = null) {
     super(StatBlock.templatePaths, parent);
 
-    if (isRunningInJsdom) {
-      this.headingStats = new HeadingStats();
-      this.topStats = new TopStats();
-      this.bottomStats = new BottomStats();
-    } else {
-      this.headingStats = document.querySelector('heading-stats');
-      this.topStats = document.querySelector('top-stats');
-      this.bottomStats = document.querySelector('bottom-stats');
-    }
+    this.headingStats = this.shadowRoot.querySelector('heading-stats');
+    this.topStats = this.shadowRoot.querySelector('top-stats');
+    this.bottomStats = this.shadowRoot.querySelector('bottom-stats');
 
     this.gettingStartedHelpBox = this.shadowRoot.getElementById('getting-started-help-box');
   }
@@ -51,7 +41,7 @@ export default class StatBlock extends CustomAutonomousElement {
     this.topStats.updateHitPointsView();
   }
 
-  onAbilityScoreChanged() {
+  onAbilityScoreChanged(event) {
     const abilityName = event.detail.abilityName;
 
     if (abilityName === 'constitution') {
@@ -74,7 +64,7 @@ export default class StatBlock extends CustomAutonomousElement {
     this.reparseBlockSections();
   }
 
-  onSkillChanged() {
+  onSkillChanged(event) {
     const skillName = event.detail.skillName;
 
     if (skillName === 'perception') {

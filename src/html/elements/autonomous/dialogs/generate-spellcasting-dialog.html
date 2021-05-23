@@ -1,5 +1,4 @@
 <link href='src/css/elements/autonomous/dialogs/generate-spellcasting-dialog.css' rel='stylesheet' type='text/css'>
-<link href='src/css/elements/autonomous/sections/section.css' rel='stylesheet' type='text/css'>
 
 <dialog id="dialog" class="generate-spellcasting-dialog custom-dialog">
   <form method="dialog" novalidate>
@@ -16,7 +15,7 @@
           <label class="generate-spellcasting-dialog__spellcaster-settings-header generate-spellcasting-dialog__label">Spellcaster Attributes</label>
           <div class="generate-spellcasting-dialog__spellcaster-settings-container">
             <label class="generate-spellcasting-dialog__spellcaster-type-label generate-spellcasting-dialog__label" for="spellcaster-type-select">Type:</label>
-            <select id="spellcaster-type-select" class="generate-spellcasting-dialog__spellcaster-type-select section__select" name="spellcaster-type-select">
+            <select id="spellcaster-type-select" class="generate-spellcasting-dialog__spellcaster-type-select ui__select" name="spellcaster-type-select">
               <option value="innate">Innate</option>
               <option value="generic">Generic</option>
               <option value="bard">Bard</option>
@@ -29,7 +28,7 @@
               <option value="wizard">Wizard</option>
             </select>
             <label class="generate-spellcasting-dialog__spellcaster-ability-label generate-spellcasting-dialog__label" for="spellcaster-ability-select">Ability:</label>
-            <select id="spellcaster-ability-select" class="generate-spellcasting-dialog__spellcaster-ability-select section__select" name="spellcaster-ability-select">
+            <select id="spellcaster-ability-select" class="generate-spellcasting-dialog__spellcaster-ability-select ui__select" name="spellcaster-ability-select">
               <option value="strength">Strength</option>
               <option value="dexterity">Dexterity</option>
               <option value="constitution">Constitution</option>
@@ -38,7 +37,7 @@
               <option value="charisma" selected>Charisma</option>
             </select>
             <label class="generate-spellcasting-dialog__spellcaster-level-label generate-spellcasting-dialog__label" for="spellcaster-level-input">Level:</label>
-            <input id="spellcaster-level-input" class="generate-spellcasting-dialog__spellcaster-level-input section__number-input" is="number-input" type="number" name="spellcaster-level-input" pretty-name="Spellcaster Level" value="1" min="1" max="20" />
+            <input id="spellcaster-level-input" class="generate-spellcasting-dialog__spellcaster-level-input ui__number-input" is="number-input" type="number" name="spellcaster-level-input" pretty-name="Spellcaster Level" value="1" min="1" max="20" />
           </div>
 
           <label class="generate-spellcasting-dialog__component-settings-header generate-spellcasting-dialog__label">Component Requirements</label>
@@ -99,9 +98,9 @@
       </div>
 
       <div class="generate-spellcasting-dialog__action-container">
-        <button id="cancel-button" class="default-button generate-spellcasting-dialog__action-button" type="button">Cancel</button>
-        <button id="reset-button" class="default-button generate-spellcasting-dialog__action-button" type="button">Reset</button>
-        <button id="generate-spellcasting-button" class="default-button generate-spellcasting-dialog__action-button" type="button">Generate Spellcasting</button>
+        <button id="cancel-button" class="ui__button generate-spellcasting-dialog__action-button" type="button">Cancel</button>
+        <button id="reset-button" class="ui__button generate-spellcasting-dialog__action-button" type="button">Reset</button>
+        <button id="generate-spellcasting-button" class="ui__button generate-spellcasting-dialog__action-button" type="button">Generate Spellcasting</button>
       </div>
     </div>
   </form>

@@ -205,15 +205,15 @@
     "blocks": [
       {
         "name": "Death Burst",
-        "text": "When [name] dies, it explodes in a burst of lava. Each creature within 5 ft. of it must make a DC 11 Dexterity saving throw, taking dmg[2d6] fire damage on a failed save, or half as much damage on a successful one."
+        "text": "When [NAME] dies, it explodes in a burst of lava. Each creature within 5 ft. of it must make a DC 11 Dexterity saving throw, taking DMG[2d6] fire damage on a failed save, or half as much damage on a successful one."
       },
       {
         "name": "False Appearance",
-        "text": "While [name] remains motionless, it is indistinguishable from an ordinary mound of magma."
+        "text": "While [NAME] remains motionless, it is indistinguishable from an ordinary mound of magma."
       },
       {
         "name": "Innate Spellcasting (1/Day)",
-        "text": "[name] can innately cast _heat metal_ (spell save DC 10), requiring no material components. Its innate spellcasting ability is Charisma."
+        "text": "[NAME] can innately cast _heat metal_ (spell save DC 10), requiring no material components. Its innate spellcasting ability is Charisma."
       }
     ]
   },
@@ -221,15 +221,15 @@
     "blocks": [
       {
         "name": "Claws",
-        "text": "*Melee Weapon Attack:* atk[dex] to hit, reach 5 ft ., one creature. *Hit:* dmg[1d4 + dex] slashing damage plus dmg[1d4] fire damage."
+        "text": "*Melee Weapon Attack:* ATK[DEX] to hit, reach 5 ft ., one creature. *Hit:* DMG[1d4 + DEX] slashing damage plus DMG[1d4] fire damage."
       },
       {
         "name": "Fire Breath (Recharge 6)",
-        "text": "[name] exhales a 15-foot cone of fire. Each creature in that area must make a DC 11 Dexterity saving throw, taking dmg[2d6] fire damage on a failed save, or half as much damage on a successful one."
+        "text": "[NAME] exhales a 15-foot cone of fire. Each creature in that area must make a DC 11 Dexterity saving throw, taking DMG[2d6] fire damage on a failed save, or half as much damage on a successful one."
       },
       {
         "name": "Variant: Summon Mephits (1/Day)",
-        "text": "[name] has a 25 percent chance of summoning 1d4 mephits of its kind. A summoned mephit appears in an unoccupied space within 60 feet of its summoner, acts as an ally of its summoner, and can't summon other mephits. It remains for 1 minute, until it or its summoner dies, or until its summoner dismisses it as an action."
+        "text": "[NAME] has a 25 percent chance of summoning 1d4 mephits of its kind. A summoned mephit appears in an unoccupied space within 60 feet of its summoner, acts as an ally of its summoner, and can't summon other mephits. It remains for 1 minute, until it or its summoner dies, or until its summoner dismisses it as an action."
       }
     ]
   },
@@ -238,7 +238,7 @@
   },
   "legendaryActions": {
     "blocks": [],
-    "description": "[name] can take 3 legendary actions, choosing from the options below. Only one legendary action option can be used at a time and only at the end of another creature's turn. [name] regains spent legendary actions at the start of its turn."
+    "description": "[NAME] can take 3 legendary actions, choosing from the options below. Only one legendary action option can be used at a time and only at the end of another creature's turn. [NAME] regains spent legendary actions at the start of its turn."
   },
   "layout": {
     "columns": 1,

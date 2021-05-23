@@ -19,7 +19,7 @@
     <label id="senses-label" class="senses-edit-section__senses-label section__heading-label">Senses:</label>
 
     <label id="blindsight-label" class="senses-edit-section__blindsight-label" for="blindsight-input">blindsight</label>
-    <input id="blindsight-input" class="senses-edit-section__blindsight-input section__number-input section__small-number-input" is="number-input" type="number" name="blindsight" pretty-name="Blindsight" value="" min="0" max="999" step="5" />
+    <input id="blindsight-input" class="senses-edit-section__blindsight-input ui__number-input ui__small-number-input" is="number-input" type="number" name="blindsight" pretty-name="Blindsight" value="" min="0" max="999" step="5" />
     <label class="senses-edit-section__blindsight-unit">ft.</label>
     <div class="senses-edit-section__blind-beyond-this-radius-container">
       <input id="blind-beyond-this-radius-input" class="speed-edit-section__blind-beyond-this-radius-input" type="checkbox" name="senses-blind-beyond-this-radius" />
@@ -27,25 +27,30 @@
     </div>
 
     <label id="darkvision-label" class="senses-edit-section__darkvision-label" for="darkvision-input">darkvision</label>
-    <input id="darkvision-input" class="senses-edit-section__darkvision-input section__number-input section__small-number-input" is="number-input" type="number" name="darkvision" pretty-name="Darkvision" value="" min="0" max="999" step="5" />
+    <input id="darkvision-input" class="senses-edit-section__darkvision-input ui__number-input ui__small-number-input" is="number-input" type="number" name="darkvision" pretty-name="Darkvision" value="" min="0" max="999" step="5" />
     <label class="senses-edit-section__darkvision-unit">ft.</label>
 
     <label id="tremorsense-label" class="senses-edit-section__tremorsense-label" for="tremorsense-input">tremorsense</label>
-    <input id="tremorsense-input" class="senses-edit-section__tremorsense-input section__number-input section__small-number-input" is="number-input" type="number" name="tremorsense" pretty-name="Tremorsense" value="" min="0" max="999" step="5" />
+    <input id="tremorsense-input" class="senses-edit-section__tremorsense-input ui__number-input ui__small-number-input" is="number-input" type="number" name="tremorsense" pretty-name="Tremorsense" value="" min="0" max="999" step="5" />
     <label class="senses-edit-section__tremorsense-unit">ft.</label>
 
     <label id="truesight-label" class="senses-edit-section__truesight-label" for="truesight-input">truesight</label>
-    <input id="truesight-input" class="senses-edit-section__truesight-input section__number-input section__small-number-input" is="number-input" type="number" name="truesight" pretty-name="Truesight" value="" min="0" max="999" step="5" />
+    <input id="truesight-input" class="senses-edit-section__truesight-input ui__number-input ui__small-number-input" is="number-input" type="number" name="truesight" pretty-name="Truesight" value="" min="0" max="999" step="5" />
     <label class="senses-edit-section__truesight-unit">ft.</label>
 
     <label id="passive-perception-label" class="senses-edit-section__passive-perception-label">passive Perception</label>
     <label id="passive-perception-value" class="senses-edit-section__passive-perception-value"></label>
     <help-tooltip class="senses-edit-section__passive-perception-help-tooltip">
       <p>A creature's <strong>passive perception</strong> is calculated using the following formula:</p>
-      <blockquote><strong>Passive Perception = 10 + WIS Modifier [ + Proficiency Bonus if proficient in Perception ]</strong></blockquote>
       <br />
-      <p>If you specify an <strong>override</strong> value for Perception in the Skill Proficiencies section, the passive perception is instead:</p>
+      <p>If the creature is proficient in the Perception skill:</p>
+      <blockquote><strong>Passive Perception = 10 + WIS Modifier + Proficiency Bonus</strong></blockquote>
+      <br />
+      <p>If you specify an <strong>override</strong> value for Perception in the Skill Proficiencies section:</p>
       <blockquote><strong>Passive Perception = 10 + Perception Override</strong></blockquote>
+      <br />
+      <p>Otherwise:</p>
+      <blockquote><strong>Passive Perception = 10 + WIS Modifier</strong></blockquote>
       <br />
       <cite>For more details, see <a href="https://open5e.com/gameplay-mechanics/ability-scores#passivechecks" target="_blank">Passive Checks</a> on Open5e, or on page 175 of the D&D 5th Edition Player's Handbook.</cite>
     </help-tooltip>
@@ -53,9 +58,9 @@
     <input id="use-custom-text-input" class="senses-edit-section__use-custom-text-input" is="enable-disable-elements-checkbox" type="checkbox" name="senses-use-custom" />
     <label id="use-custom-text-label" class="senses-edit-section__use-custom-text-label" for="use-custom-text-input">Override with custom text:</label>
     <custom-text-help-tooltip class="senses-edit-section__custom-text-help-tooltip"></custom-text-help-tooltip>
-    <input id="custom-text-input" class="senses-edit-section__custom-text-input section__text-input" is="text-input" type="text" name="senses-custom" pretty-name="Senses Custom Text" data-parsed required disabled />
+    <input id="custom-text-input" class="senses-edit-section__custom-text-input ui__text-input" is="text-input" type="text" name="senses-custom" pretty-name="Senses Custom Text" data-parsed required disabled />
   </div>
   <div class="section__save-button-container">
-    <button id="save-button" class="default-button section__save-button"><i class="material-icons">done</i></button>
+    <button id="save-button" class="ui__button section__save-button"><i class="material-icons">done</i></button>
   </div>
 </form>

@@ -204,15 +204,15 @@
     "blocks": [
       {
         "name": "Inscrutable",
-        "text": "[name] is immune to any effect that would sense its emotions or read its thoughts, as well as any divination spell that it refuses. Wisdom (Insight) checks made to ascertain [name]'s intentions or sincerity have disadvantage."
+        "text": "[NAME] is immune to any effect that would sense its emotions or read its thoughts, as well as any divination spell that it refuses. Wisdom (Insight) checks made to ascertain [NAME]'s intentions or sincerity have disadvantage."
       },
       {
         "name": "Magic Weapons",
-        "text": "[name]'s weapon attacks are magical."
+        "text": "[NAME]'s weapon attacks are magical."
       },
       {
         "name": "Spellcasting",
-        "text": "[name] is a 12th-level spellcaster. Its spellcasting ability is Wisdom (spell save DC sdc[wis], atk[wis] to hit with spell attacks). It requires no material components to cast its spells. [name] has the following cleric spells prepared:\n\nCantrips (at will): *sacred flame*, *spare the dying*, *thaumaturgy*\n1st level (4 slots): *command*, *detect evil and good*, *detect magic*\n2nd level (3 slots): *lesser restoration*, *zone of truth*\n3rd level (3 slots): *dispel magic*, *tongues*\n4th level (3 slots): *banishment*, *freedom of movement*\n5th level (2 slots): *flame strike*, *greater restoration*\n6th level (1 slot): *heroes' feast*"
+        "text": "[NAME] is a 12th-level spellcaster. Its spellcasting ability is Wisdom (spell save DC SDC[WIS], ATK[WIS] to hit with spell attacks). It requires no material components to cast its spells. [NAME] has the following cleric spells prepared:\n\nCantrips (at will): *sacred flame*, *spare the dying*, *thaumaturgy*\n1st level (4 slots): *command*, *detect evil and good*, *detect magic*\n2nd level (3 slots): *lesser restoration*, *zone of truth*\n3rd level (3 slots): *dispel magic*, *tongues*\n4th level (3 slots): *banishment*, *freedom of movement*\n5th level (2 slots): *flame strike*, *greater restoration*\n6th level (1 slot): *heroes' feast*"
       }
     ]
   },
@@ -220,15 +220,15 @@
     "blocks": [
       {
         "name": "Multiattack",
-        "text": "[name] makes two claw attacks."
+        "text": "[NAME] makes two claw attacks."
       },
       {
         "name": "Claw",
-        "text": "*Melee Weapon Attack:* atk[str] to hit, reach 5 ft., one target. *Hit:* dmg[2d10 + str] slashing damage."
+        "text": "*Melee Weapon Attack:* ATK[STR] to hit, reach 5 ft., one target. *Hit:* DMG[2d10 + STR] slashing damage."
       },
       {
         "name": "Roar (3/Day)",
-        "text": "[name] emits a magical roar. Each time it roars before finishing a long rest, the roar is louder and the effect is different, as detailed below. Each creature within 500 feet of [name] and able to hear the roar must make a saving throw.\n\n**First Roar.** Each creature that fails a DC 18 Wisdom saving throw is frightened for 1 minute. A frightened creature can repeat the saving throw at the end of each of its turns, ending the effect on itself on a success.\n**Second Roar.** Each creature that fails a DC 18 Wisdom saving throw is deafened and frightened for 1 minute. A frightened creature is paralyzed and can repeat the saving throw at the end of each of its turns, ending the effect on itself on a success.\n**Third Roar.** Each creature makes a DC 18 Constitution saving throw. On a failed save, a creature takes dmg[8d10] thunder damage and is knocked prone. On a successful save, the creature takes half as much damage and isn't knocked prone."
+        "text": "[NAME] emits a magical roar. Each time it roars before finishing a long rest, the roar is louder and the effect is different, as detailed below. Each creature within 500 feet of [NAME] and able to hear the roar must make a saving throw.\n\n**First Roar.** Each creature that fails a DC 18 Wisdom saving throw is frightened for 1 minute. A frightened creature can repeat the saving throw at the end of each of its turns, ending the effect on itself on a success.\n**Second Roar.** Each creature that fails a DC 18 Wisdom saving throw is deafened and frightened for 1 minute. A frightened creature is paralyzed and can repeat the saving throw at the end of each of its turns, ending the effect on itself on a success.\n**Third Roar.** Each creature makes a DC 18 Constitution saving throw. On a failed save, a creature takes DMG[8d10] thunder damage and is knocked prone. On a successful save, the creature takes half as much damage and isn't knocked prone."
       }
     ]
   },
@@ -239,18 +239,18 @@
     "blocks": [
       {
         "name": "Claw Attack",
-        "text": "[name] makes one claw attack."
+        "text": "[NAME] makes one claw attack."
       },
       {
         "name": "Teleport (Costs 2 Actions)",
-        "text": "[name] magically teleports, along with any equipment it is wearing or carrying, up to 120 feet to an unoccupied space it can see."
+        "text": "[NAME] magically teleports, along with any equipment it is wearing or carrying, up to 120 feet to an unoccupied space it can see."
       },
       {
         "name": "Cast a Spell (Costs 3 Actions)",
-        "text": "[name] casts a spell from its list of prepared spells, using a spell slot as normal."
+        "text": "[NAME] casts a spell from its list of prepared spells, using a spell slot as normal."
       }
     ],
-    "description": "[name] can take 3 legendary actions, choosing from the options below. Only one legendary action option can be used at a time and only at the end of another creature's turn. [name] regains spent legendary actions at the start of its turn."
+    "description": "[NAME] can take 3 legendary actions, choosing from the options below. Only one legendary action option can be used at a time and only at the end of another creature's turn. [NAME] regains spent legendary actions at the start of its turn."
   },
   "layout": {
     "columns": 1,

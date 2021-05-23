@@ -24,9 +24,7 @@ beforeEach(() => {
   languagesModel.reset();
 
   languagesSection = new LanguagesSection();
-  TestCustomElements.initializeSection(languagesSection);
-  languagesSection.connect();
-  languagesSection.editElements.propertyList.connect();
+  document.body.appendChild(languagesSection);
 
   sharedSpecs = new PropertyListSectionSpecs(languagesSection, languagesModel, headingName, open5eJsonKey);
 });

@@ -204,19 +204,19 @@
     "blocks": [
       {
         "name": "Legendary Resistance (3/Day)",
-        "text": "If [name] fails a saving throw, it can choose to succeed instead."
+        "text": "If [NAME] fails a saving throw, it can choose to succeed instead."
       },
       {
         "name": "Magic Resistance",
-        "text": "[name] has advantage on saving throws against spells and other magical effects."
+        "text": "[NAME] has advantage on saving throws against spells and other magical effects."
       },
       {
         "name": "Reflective Carapace",
-        "text": "Any time [name] is targeted by a magic missile spell, a line spell, or a spell that requires a ranged attack roll, roll a d6. On a 1 to 5, [name] is unaffected. On a 6, [name] is unaffected, and the effect is reflected back at the caster as though it originated from [name], turning the caster into the target."
+        "text": "Any time [NAME] is targeted by a magic missile spell, a line spell, or a spell that requires a ranged attack roll, roll a d6. On a 1 to 5, [NAME] is unaffected. On a 6, [NAME] is unaffected, and the effect is reflected back at the caster as though it originated from [NAME], turning the caster into the target."
       },
       {
         "name": "Siege Monster",
-        "text": "[name] deals double damage to objects and structures."
+        "text": "[NAME] deals double damage to objects and structures."
       }
     ]
   },
@@ -224,31 +224,31 @@
     "blocks": [
       {
         "name": "Multiattack",
-        "text": "[name] can use its Frightful Presence. It then makes five attacks: one with its bite, two with its claws, one with its horns, and one with its tail. It can use its Swallow instead of its bite."
+        "text": "[NAME] can use its Frightful Presence. It then makes five attacks: one with its bite, two with its claws, one with its horns, and one with its tail. It can use its Swallow instead of its bite."
       },
       {
         "name": "Bite",
-        "text": "*Melee Weapon Attack:* atk[str] to hit, reach 10 ft., one target. *Hit:* dmg[4d12 + str] piercing damage. If the target is a creature, it is grappled (escape DC 20). Until this grapple ends, the target is restrained, and [name] can't bite another target."
+        "text": "*Melee Weapon Attack:* ATK[STR] to hit, reach 10 ft., one target. *Hit:* DMG[4d12 + STR] piercing damage. If the target is a creature, it is grappled (escape DC 20). Until this grapple ends, the target is restrained, and [NAME] can't bite another target."
       },
       {
         "name": "Claw",
-        "text": "*Melee Weapon Attack:* atk[str] to hit, reach 15 ft., one target. *Hit:* dmg[4d8 + str] slashing damage."
+        "text": "*Melee Weapon Attack:* ATK[STR] to hit, reach 15 ft., one target. *Hit:* DMG[4d8 + STR] slashing damage."
       },
       {
         "name": "Horns",
-        "text": "*Melee Weapon Attack:* atk[str] to hit, reach 10 ft., one target. *Hit:* dmg[4d10 + str] piercing damage."
+        "text": "*Melee Weapon Attack:* ATK[STR] to hit, reach 10 ft., one target. *Hit:* DMG[4d10 + STR] piercing damage."
       },
       {
         "name": "Tail",
-        "text": "*Melee Weapon Attack:* atk[str] to hit, reach 20 ft., one target. *Hit:* dmg[4d6 + str] bludgeoning damage. If the target is a creature, it must succeed on a DC 20 Strength saving throw or be knocked prone."
+        "text": "*Melee Weapon Attack:* ATK[STR] to hit, reach 20 ft., one target. *Hit:* DMG[4d6 + STR] bludgeoning damage. If the target is a creature, it must succeed on a DC 20 Strength saving throw or be knocked prone."
       },
       {
         "name": "Frightful Presence",
-        "text": "Each creature of [name]'s choice within 120 feet of it and aware of it must succeed on a DC 17 Wisdom saving throw or become frightened for 1 minute. A creature can repeat the saving throw at the end of each of its turns, with disadvantage if [name] is within line of sight, ending the effect on itself on a success. If a creature's saving throw is successful or the effect ends for it, the creature is immune to [name]'s Frightful Presence for the next 24 hours."
+        "text": "Each creature of [NAME]'s choice within 120 feet of it and aware of it must succeed on a DC 17 Wisdom saving throw or become frightened for 1 minute. A creature can repeat the saving throw at the end of each of its turns, with disadvantage if [NAME] is within line of sight, ending the effect on itself on a success. If a creature's saving throw is successful or the effect ends for it, the creature is immune to [NAME]'s Frightful Presence for the next 24 hours."
       },
       {
         "name": "Swallow",
-        "text": "[name] makes one bite attack against a Large or smaller creature it is grappling. If the attack hits, the target takes the bite's damage, the target is swallowed, and the grapple ends. While swallowed, the creature is blinded and restrained, it has total cover against attacks and other effects outside [name], and it takes dmg[16d6] acid damage at the start of each of [name]'s turns.\n  If [name] takes 60 damage or more on a single turn from a creature inside it, [name] must succeed on a DC 20 Constitution saving throw at the end of that turn or regurgitate all swallowed creatures, which fall prone in a space within 10 feet of [name]. If [name] dies, a swallowed creature is no longer restrained by it and can escape from the corpse by using 30 feet of movement, exiting prone."
+        "text": "[NAME] makes one bite attack against a Large or smaller creature it is grappling. If the attack hits, the target takes the bite's damage, the target is swallowed, and the grapple ends. While swallowed, the creature is blinded and restrained, it has total cover against attacks and other effects outside [NAME], and it takes DMG[16d6] acid damage at the start of each of [NAME]'s turns.\n  If [NAME] takes 60 damage or more on a single turn from a creature inside it, [NAME] must succeed on a DC 20 Constitution saving throw at the end of that turn or regurgitate all swallowed creatures, which fall prone in a space within 10 feet of [NAME]. If [NAME] dies, a swallowed creature is no longer restrained by it and can escape from the corpse by using 30 feet of movement, exiting prone."
       }
     ]
   },
@@ -259,18 +259,18 @@
     "blocks": [
       {
         "name": "Attack",
-        "text": "[name] makes one claw attack or tail attack."
+        "text": "[NAME] makes one claw attack or tail attack."
       },
       {
         "name": "Move",
-        "text": "[name] moves up to half its speed."
+        "text": "[NAME] moves up to half its speed."
       },
       {
         "name": "Chomp (Costs 2 Actions)",
-        "text": "[name] makes one bite attack or uses its Swallow."
+        "text": "[NAME] makes one bite attack or uses its Swallow."
       }
     ],
-    "description": "[name] can take 3 legendary actions, choosing from the options below. Only one legendary action option can be used at a time and only at the end of another creature's turn. [name] regains spent legendary actions at the start of its turn."
+    "description": "[NAME] can take 3 legendary actions, choosing from the options below. Only one legendary action option can be used at a time and only at the end of another creature's turn. [NAME] regains spent legendary actions at the start of its turn."
   },
   "layout": {
     "columns": 1,

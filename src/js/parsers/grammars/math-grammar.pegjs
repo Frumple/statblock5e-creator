@@ -85,13 +85,13 @@ Expression
   / MathExpression
 
 SpellSaveDCExpression
-  = 'sdc' '[' SpaceChar* head:AbilityModifier tail:(SpaceChar* Operator SpaceChar* Operand)* SpaceChar* ']' {
+  = ('SDC' / 'sdc') '[' SpaceChar* head:AbilityModifier tail:(SpaceChar* Operator SpaceChar* Operand)* SpaceChar* ']' {
     const tailModifier = totalSubsequentOperands(tail);
     return 8 + head + options.proficiencyBonus + tailModifier;
   }
 
 DamageExpression
-  = 'dmg' '[' SpaceChar* head:DiceOperand tail:(SpaceChar* Operator SpaceChar* Operand)* SpaceChar* ']' {
+  = ('DMG' / 'dmg') '[' SpaceChar* head:DiceOperand tail:(SpaceChar* Operator SpaceChar* Operand)* SpaceChar* ']' {
     const modifier = totalSubsequentOperands(tail);
     const formattedModifier = formatDamageExpressionModifier(modifier);
 
@@ -104,14 +104,14 @@ DamageExpression
   }
 
 AttackExpression
-  = 'atk' '[' SpaceChar* head:AbilityModifierIncludingFinesse tail:(SpaceChar* Operator SpaceChar* Operand)* SpaceChar* ']' {
+  = ('ATK' / 'atk') '[' SpaceChar* head:AbilityModifierIncludingFinesse tail:(SpaceChar* Operator SpaceChar* Operand)* SpaceChar* ']' {
     const tailModifier = totalSubsequentOperands(tail);
     const modifier = head + options.proficiencyBonus + tailModifier;
     return formatModifierExpression(modifier);
   }
 
 ModifierExpression
-  = 'mod' value:MathExpressionCommon { return formatModifierExpression(value); }
+  = ('MOD' / 'mod') value:MathExpressionCommon { return formatModifierExpression(value); }
 
 MathExpression
   = value:MathExpressionCommon { return formatMathExpression(value); }
@@ -149,18 +149,18 @@ Operand
 
 AbilityModifierIncludingFinesse
   = AbilityModifier
-  / 'fin' { return (options.abilities.strength.modifier >= options.abilities.dexterity.modifier) ? options.abilities.strength.modifier : options.abilities.dexterity.modifier}
+  / ('FIN' / 'fin') { return (options.abilities.strength.modifier >= options.abilities.dexterity.modifier) ? options.abilities.strength.modifier : options.abilities.dexterity.modifier}
 
 AbilityModifier
-  = 'str' { return options.abilities.strength.modifier; }
-  / 'dex' { return options.abilities.dexterity.modifier; }
-  / 'con' { return options.abilities.constitution.modifier; }
-  / 'int' { return options.abilities.intelligence.modifier; }
-  / 'wis' { return options.abilities.wisdom.modifier; }
-  / 'cha' { return options.abilities.charisma.modifier; }
+  = ('STR' / 'str') { return options.abilities.strength.modifier; }
+  / ('DEX' / 'dex') { return options.abilities.dexterity.modifier; }
+  / ('CON' / 'con') { return options.abilities.constitution.modifier; }
+  / ('INT' / 'int') { return options.abilities.intelligence.modifier; }
+  / ('WIS' / 'wis') { return options.abilities.wisdom.modifier; }
+  / ('CHA' / 'cha') { return options.abilities.charisma.modifier; }
 
 ProficiencyBonus
-  = 'prof' { return options.proficiencyBonus; }
+  = ('PROF' / 'prof') { return options.proficiencyBonus; }
 
 Integer
   = '-'? [0-9]+ { return parseInt(text(), 10); }

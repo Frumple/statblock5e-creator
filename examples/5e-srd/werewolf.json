@@ -199,11 +199,11 @@
     "blocks": [
       {
         "name": "Shapechanger",
-        "text": "[name] can use its action to polymorph into a wolf-humanoid hybrid or into a wolf, or back into its true form, which is humanoid. Its statistics, other than its AC, are the same in each form. Any equipment it is wearing or carrying isn't transformed. It reverts to its true form if it dies."
+        "text": "[NAME] can use its action to polymorph into a wolf-humanoid hybrid or into a wolf, or back into its true form, which is humanoid. Its statistics, other than its AC, are the same in each form. Any equipment it is wearing or carrying isn't transformed. It reverts to its true form if it dies."
       },
       {
         "name": "Keen Hearing and Smell",
-        "text": "[name] has advantage on Wisdom (Perception) checks that rely on hearing or smell."
+        "text": "[NAME] has advantage on Wisdom (Perception) checks that rely on hearing or smell."
       }
     ]
   },
@@ -211,19 +211,19 @@
     "blocks": [
       {
         "name": "Multiattack (Humanoid or Hybrid Form Only)",
-        "text": "[name] makes two attacks: one with its bite and one with its claws or spear."
+        "text": "[NAME] makes two attacks: one with its bite and one with its claws or spear."
       },
       {
         "name": "Bite (Wolf or Hybrid Form Only)",
-        "text": "*Melee Weapon Attack:* atk[str] to hit, reach 5 ft., one target. *Hit:* dmg[1d8 + str] piercing damage. If the target is a humanoid, it must succeed on a DC 12 Constitution saving throw or be cursed with werewolf lycanthropy."
+        "text": "*Melee Weapon Attack:* ATK[STR] to hit, reach 5 ft., one target. *Hit:* DMG[1d8 + STR] piercing damage. If the target is a humanoid, it must succeed on a DC 12 Constitution saving throw or be cursed with werewolf lycanthropy."
       },
       {
         "name": "Claws (Hybrid Form Only)",
-        "text": "*Melee Weapon Attack:* atk[str] to hit, reach 5 ft., one creature. *Hit:* dmg[2d4 + str] slashing damage."
+        "text": "*Melee Weapon Attack:* ATK[STR] to hit, reach 5 ft., one creature. *Hit:* DMG[2d4 + STR] slashing damage."
       },
       {
         "name": "Spear (Humanoid Form Only)",
-        "text": "*Melee or Ranged Weapon Attack:* atk[str] to hit, reach 5 ft. or range 20/60 ft., one creature.* Hit:* dmg[1d6 + str] piercing damage, or dmg[1d8 + str] piercing damage if used with two hands to make a melee attack."
+        "text": "*Melee or Ranged Weapon Attack:* ATK[STR] to hit, reach 5 ft. or range 20/60 ft., one creature.* Hit:* DMG[1d6 + STR] piercing damage, or DMG[1d8 + STR] piercing damage if used with two hands to make a melee attack."
       }
     ]
   },
@@ -232,7 +232,7 @@
   },
   "legendaryActions": {
     "blocks": [],
-    "description": "[name] can take 3 legendary actions, choosing from the options below. Only one legendary action option can be used at a time and only at the end of another creature's turn. [name] regains spent legendary actions at the start of its turn."
+    "description": "[NAME] can take 3 legendary actions, choosing from the options below. Only one legendary action option can be used at a time and only at the end of another creature's turn. [NAME] regains spent legendary actions at the start of its turn."
   },
   "layout": {
     "columns": 1,

@@ -17,7 +17,7 @@
 <form id="edit-section" class="section section_hidden" novalidate>
   <div class="hit-points-edit-section section__content">
     <label id="hit-points-label" class="hit-points-edit-section__hit-points-label section__heading-label" for="hit-points-input">Hit Points:</label>
-    <input id="hit-points-input" class="hit-points-edit-section__hit-points-input section__number-input section__small-number-input" is="number-input" type="number" name="hit-points" pretty-name="Hit Points" value="" min="0" max="999999" disabled required />
+    <input id="hit-points-input" class="hit-points-edit-section__hit-points-input ui__number-input ui__small-number-input" is="number-input" type="number" name="hit-points" pretty-name="Hit Points" value="" min="0" max="999999" disabled required />
     <input id="use-hit-die-input" class="hit-points-edit-section__use-hit-die-input" is="enable-disable-elements-checkbox" type="checkbox" name="use-hit-die" checked />
     <label id="use-hit-die-label" class="hit-points-edit-section__use-hit-die-label" for="use-hit-die-input">Calculate using Hit Die:</label>
     <help-tooltip class="hit-points-edit-section__help-tooltip">
@@ -76,8 +76,8 @@
       <label id="hit-die-size-label" class="hit-points-edit-section__hit-die-size-label" for="hit-die-size-input">Hit Die Size:</label>
       <label id="constitution-hit-points-label" class="hit-points-edit-section__constitution-hit-points-label">CON HP:</label>
       <label id="hit-die-leading-text-label" class="hit-points-edit-section__hit_die-leading-text-label">(</label>
-      <input id="hit-die-quantity-input" class="hit-points-edit-section__hit-die-quantity-input section__number-input section__small-number-input" is="number-input" type="number" name="hit-die-quantity" pretty-name="Hit Die Quantity" value="" min="1" max="999" required />
-      <select id="hit-die-size-input" class="hit-points-edit-section__hit-die-size-input section__select" is="number-select" name="hit-die-size">
+      <input id="hit-die-quantity-input" class="hit-points-edit-section__hit-die-quantity-input ui__number-input ui__small-number-input" is="number-input" type="number" name="hit-die-quantity" pretty-name="Hit Die Quantity" value="" min="1" max="999" required />
+      <select id="hit-die-size-input" class="hit-points-edit-section__hit-die-size-input ui__select" is="number-select" name="hit-die-size">
         <option value="4">d4</option>
         <option value="6">d6</option>
         <option value="8">d8</option>
@@ -90,6 +90,6 @@
     </div>
   </div>
   <div class="section__save-button-container">
-    <button id="save-button" class="default-button section__save-button"><i class="material-icons">done</i></button>
+    <button id="save-button" class="ui__button section__save-button"><i class="material-icons">done</i></button>
   </div>
 </form>

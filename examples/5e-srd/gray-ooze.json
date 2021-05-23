@@ -206,15 +206,15 @@
     "blocks": [
       {
         "name": "Amorphous",
-        "text": "[name] can move through a space as narrow as 1 inch wide without squeezing."
+        "text": "[NAME] can move through a space as narrow as 1 inch wide without squeezing."
       },
       {
         "name": "Corrode Metal",
-        "text": "Any nonmagical weapon made of metal that hits [name] corrodes. After dealing damage, the weapon takes a permanent and cumulative -1 penalty to damage rolls. If its penalty drops to -5, the weapon is destroyed. Nonmagical ammunition made of metal that hits [name] is destroyed after dealing damage.\n  [name] can eat through 2-inch-thick, nonmagical metal in 1 round."
+        "text": "Any nonmagical weapon made of metal that hits [NAME] corrodes. After dealing damage, the weapon takes a permanent and cumulative -1 penalty to damage rolls. If its penalty drops to -5, the weapon is destroyed. Nonmagical ammunition made of metal that hits [NAME] is destroyed after dealing damage.\n  [NAME] can eat through 2-inch-thick, nonmagical metal in 1 round."
       },
       {
         "name": "False Appearance",
-        "text": "While [name] remains motionless, it is indistinguishable from an oily pool or wet rock."
+        "text": "While [NAME] remains motionless, it is indistinguishable from an oily pool or wet rock."
       }
     ]
   },
@@ -222,7 +222,7 @@
     "blocks": [
       {
         "name": "Pseudopod",
-        "text": "*Melee Weapon Attack:* atk[str] to hit, reach 5 ft., one target. *Hit:* dmg[1d6 + str] bludgeoning damage plus dmg[2d6] acid damage, and if the target is wearing nonmagical metal armor, its armor is partly corroded and takes a permanent and cumulative -1 penalty to the AC it offers. The armor is destroyed if the penalty reduces its AC to 10."
+        "text": "*Melee Weapon Attack:* ATK[STR] to hit, reach 5 ft., one target. *Hit:* DMG[1d6 + STR] bludgeoning damage plus DMG[2d6] acid damage, and if the target is wearing nonmagical metal armor, its armor is partly corroded and takes a permanent and cumulative -1 penalty to the AC it offers. The armor is destroyed if the penalty reduces its AC to 10."
       }
     ]
   },
@@ -231,7 +231,7 @@
   },
   "legendaryActions": {
     "blocks": [],
-    "description": "[name] can take 3 legendary actions, choosing from the options below. Only one legendary action option can be used at a time and only at the end of another creature's turn. [name] regains spent legendary actions at the start of its turn."
+    "description": "[NAME] can take 3 legendary actions, choosing from the options below. Only one legendary action option can be used at a time and only at the end of another creature's turn. [NAME] regains spent legendary actions at the start of its turn."
   },
   "layout": {
     "columns": 1,

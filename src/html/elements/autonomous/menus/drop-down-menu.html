@@ -1,0 +1,14 @@
+<link href='src/css/vendor/material-icons.css' rel='stylesheet' type='text/css'>
+<link href='//fonts.googleapis.com/icon?family=Material+Icons' rel='stylesheet'>
+
+<link href='src/css/elements/autonomous/menus/drop-down-menu.css' rel='stylesheet' type='text/css'>
+
+<div class="drop-down-menu">
+  <div class="drop-down-menu__icon-container">
+    <label class="drop-down-menu__label"><slot name="name"></slot></label>
+    <i class="drop-down-menu__icon material-icons"><slot name="icon-name"></slot></i>
+  </div>
+  <div class="drop-down-menu__items">
+    <slot></slot>
+  </div>
+</div>

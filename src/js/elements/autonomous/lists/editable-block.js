@@ -1,9 +1,9 @@
 import DragAndDropListItem from './drag-and-drop-list-item.js';
-import CustomBuiltinElementMixins from '../../../helpers/custom-builtin-element-mixins.js';
+
 import BlockModel from '../../../models/lists/block/block-model.js';
-import LegendaryBlockModel from '../../../models/lists/block/legendary-block-model.js';
 
 import { trimTrailingPeriods } from '../../../helpers/string-formatter.js';
+import { isSelectedTextWithinMarkdown, toggleBoldInSelectedText, toggleItalicInSelectedText } from '../../../helpers/markdown-helpers.js';
 
 export default class EditableBlock extends DragAndDropListItem {
   static get elementName() { return 'editable-block'; }
@@ -13,33 +13,171 @@ export default class EditableBlock extends DragAndDropListItem {
       'src/html/elements/autonomous/lists/editable-block.html');
   }
 
-  constructor() {
-    super(EditableBlock.templatePaths);
+  constructor(templatePaths) {
+    super(templatePaths ? templatePaths : EditableBlock.templatePaths);
+
+    this.mouseOnBoldOrItalicLabel = false;
 
     this.nameInput = this.shadowRoot.getElementById('editable-block-name');
+    this.boldCheckbox = this.shadowRoot.getElementById('editable-block-bold-checkbox');
+    this.italicCheckbox = this.shadowRoot.getElementById('editable-block-italic-checkbox');
+
+    this.boldLabel = this.shadowRoot.getElementById('editable-block-bold-label');
+    this.italicLabel = this.shadowRoot.getElementById('editable-block-italic-label');
+
+    this.removeButton = this.shadowRoot.getElementById('editable-block-remove-button');
+
     this.textArea = this.shadowRoot.getElementById('editable-block-textarea');
+
     this.previewContainer = this.shadowRoot.getElementById('editable-block-preview-container');
     this.previewNameElement = this.shadowRoot.getElementById('editable-block-preview-name');
     this.previewTextElement = this.shadowRoot.getElementById('editable-block-preview-text');
-    this.removeButton = this.shadowRoot.getElementById('editable-block-remove-button');
+
+    this.nameExpressionButtons = {
+      'NAME' : this.shadowRoot.getElementById('name-button'),
+      'FULLNAME' : this.shadowRoot.getElementById('fullname-button')
+    };
+
+    this.modExpressionButtons = {
+      'STR' : this.shadowRoot.getElementById('mod-str-button'),
+      'DEX' : this.shadowRoot.getElementById('mod-dex-button'),
+      'CON' : this.shadowRoot.getElementById('mod-con-button'),
+      'INT' : this.shadowRoot.getElementById('mod-int-button'),
+      'WIS' : this.shadowRoot.getElementById('mod-wis-button'),
+      'CHA' : this.shadowRoot.getElementById('mod-cha-button')
+    };
+
+    this.atkExpressionButtons = {
+      'STR' : this.shadowRoot.getElementById('atk-str-button'),
+      'DEX' : this.shadowRoot.getElementById('atk-dex-button'),
+      'FIN' : this.shadowRoot.getElementById('atk-fin-button')
+    };
+
+    this.dmgExpressionButtons = {
+      'STR' : this.shadowRoot.getElementById('dmg-str-button'),
+      'DEX' : this.shadowRoot.getElementById('dmg-dex-button'),
+      'FIN' : this.shadowRoot.getElementById('dmg-fin-button')
+    };
+
+    this.sdcExpressionButtons = {
+      'INT' : this.shadowRoot.getElementById('sdc-int-button'),
+      'WIS' : this.shadowRoot.getElementById('sdc-wis-button'),
+      'CHA' : this.shadowRoot.getElementById('sdc-cha-button')
+    };
 
     this.dragImage = this.nameInput;
 
     this.isLegendaryActionBlock = false;
-
-    CustomBuiltinElementMixins.applyToElement(this.nameInput);
-    CustomBuiltinElementMixins.applyToElement(this.textArea);
   }
 
   connectedCallback() {
     if (this.isConnected && ! this.isInitialized) {
       super.connectedCallback();
 
+      this.nameInput.addEventListener('dragstart', this.preventDragAndDrop.bind(this));
+      this.textArea.addEventListener('dragstart', this.preventDragAndDrop.bind(this));
+
+      this.textArea.addEventListener('select', this.onSelectText.bind(this));
+      this.textArea.addEventListener('click', this.onClickOrKeyDownText.bind(this));
+      this.textArea.addEventListener('keydown', this.onClickOrKeyDownText.bind(this));
+      this.textArea.addEventListener('blur', this.onBlurText.bind(this));
+
       this.nameInput.addEventListener('input', this.onInputName.bind(this));
       this.textArea.addEventListener('input', this.onInputText.bind(this));
+
+      this.boldCheckbox.addEventListener('change', this.onChangeBoldCheckbox.bind(this));
+      this.italicCheckbox.addEventListener('change', this.onChangeItalicCheckbox.bind(this));
+
+      this.boldLabel.addEventListener('mouseenter', this.onMouseEnterBoldOrItalicLabel.bind(this));
+      this.italicLabel.addEventListener('mouseenter', this.onMouseEnterBoldOrItalicLabel.bind(this));
+      this.boldLabel.addEventListener('mouseleave', this.onMouseLeaveBoldOrItalicLabel.bind(this));
+      this.italicLabel.addEventListener('mouseleave', this.onMouseLeaveBoldOrItalicLabel.bind(this));
+
       this.removeButton.addEventListener('click', this.onClickRemoveButton.bind(this));
 
+      for(const [variable, button] of Object.entries(this.nameExpressionButtons)) {
+        button.addEventListener('click', this.onClickNameExpressionButton.bind(this, variable));
+      }
+
+      for(const [variable, button] of Object.entries(this.modExpressionButtons)) {
+        button.addEventListener('click', this.onClickModExpressionButton.bind(this, variable));
+      }
+
+      for(const [variable, button] of Object.entries(this.atkExpressionButtons)) {
+        button.addEventListener('click', this.onClickAtkExpressionButton.bind(this, variable));
+      }
+
+      for(const [variable, button] of Object.entries(this.dmgExpressionButtons)) {
+        button.addEventListener('click', this.onClickDmgExpressionButton.bind(this, variable));
+      }
+
+      for(const [variable, button] of Object.entries(this.sdcExpressionButtons)) {
+        button.addEventListener('click', this.onClickSdcExpressionButton.bind(this, variable));
+      }
+
       this.isInitialized = true;
+    }
+  }
+
+  // Don't initiate drag and drop of the whole editable block when dragging selected text in the block name or text area.
+  preventDragAndDrop(event) {
+    event.preventDefault();
+  }
+
+  onMouseEnterBoldOrItalicLabel() {
+    this.mouseOnBoldOrItalicLabel = true;
+  }
+
+  onMouseLeaveBoldOrItalicLabel() {
+    this.mouseOnBoldOrItalicLabel = false;
+  }
+
+  onSelectText() {
+    const selectionStart = this.textArea.selectionStart;
+    const selectionEnd = this.textArea.selectionEnd;
+
+    if(selectionStart !== selectionEnd) {
+      this.boldCheckbox.disabled = false;
+      this.italicCheckbox.disabled = false;
+
+      const markdownState = isSelectedTextWithinMarkdown(this.text, selectionStart, selectionEnd);
+      if(markdownState.includes('bold')) {
+        this.boldCheckbox.checked = true;
+      }
+      if(markdownState.includes('italic')) {
+        this.italicCheckbox.checked = true;
+      }
+    }
+  }
+
+  // There is no "deselect" event, so the best we can do is listen for mouse click or keyboard keydown events
+  // and check if we are still selecting some text.
+  async onClickOrKeyDownText() {
+    // Wait a brief moment for Chrome to update the text area's selectionStart/selectionEnd locations.
+    await new Promise(resolve => setTimeout(resolve, 100));
+
+    if(this.textArea.selectionStart === this.textArea.selectionEnd) {
+      this.boldCheckbox.checked = false;
+      this.italicCheckbox.checked = false;
+
+      this.boldCheckbox.disabled = true;
+      this.italicCheckbox.disabled = true;
+    }
+  }
+
+  onBlurText(event) {
+    // If the mouse is not over the bold or italic buttons,
+    // OR we tabbed out of the text area,
+    // uncheck and disable the bold and italic buttons.
+    // Otherwise, do nothing so that the bold or italic buttons can be clicked.
+    if(! this.mouseOnBoldOrItalicLabel || event.relatedTarget !== null) {
+      window.getSelection().removeAllRanges();
+
+      this.boldCheckbox.checked = false;
+      this.italicCheckbox.checked = false;
+
+      this.boldCheckbox.disabled = true;
+      this.italicCheckbox.disabled = true;
     }
   }
 
@@ -53,17 +191,64 @@ export default class EditableBlock extends DragAndDropListItem {
     this.previewTextElement.innerHTMLSanitized = this.textArea.htmlText;
   }
 
+  onChangeBoldCheckbox() {
+    const selectionStart = this.textArea.selectionStart;
+    const selectionEnd = this.textArea.selectionEnd;
+
+    const result = toggleBoldInSelectedText(this.text, selectionStart, selectionEnd);
+    this.text = result.newText;
+
+    this.textArea.focus();
+    this.textArea.setSelectionRange(result.newSelectionStart, result.newSelectionEnd);
+
+    this.onInputText();
+  }
+
+  onChangeItalicCheckbox() {
+    const selectionStart = this.textArea.selectionStart;
+    const selectionEnd = this.textArea.selectionEnd;
+
+    const result = toggleItalicInSelectedText(this.text, selectionStart, selectionEnd);
+    this.text = result.newText;
+
+    this.textArea.focus();
+    this.textArea.setSelectionRange(result.newSelectionStart, result.newSelectionEnd);
+
+    this.onInputText();
+  }
+
   onClickRemoveButton() {
     this.remove();
   }
 
-  // TODO: Refactor legendary action behaviour into subclass instead
-  convertToLegendaryActionBlock() {
-    this.isLegendaryActionBlock = true;
+  onClickNameExpressionButton(variable) {
+    this.addExpressionToText(`[${variable}]`);
+  }
 
-    this.previewContainer.classList.add('editable-block__preview_hanging-indent');
-    this.nameInput.classList.add('editable-block__name_no-italic');
-    this.previewNameElement.classList.add('editable-block__preview-name_no-italic');
+  onClickModExpressionButton(variable) {
+    this.addExpressionToText(`MOD[${variable}]`);
+  }
+
+  onClickAtkExpressionButton(variable) {
+    this.addExpressionToText(`ATK[${variable}]`);
+  }
+
+  onClickDmgExpressionButton(variable) {
+    this.addExpressionToText(`DMG[d6 + ${variable}]`);
+  }
+
+  onClickSdcExpressionButton(variable) {
+    this.addExpressionToText(`SDC[${variable}]`);
+  }
+
+  addExpressionToText(expression) {
+    const selectionStart = this.textArea.selectionStart;
+    const selectionEnd = this.textArea.selectionEnd;
+
+    this.textArea.setRangeText(expression, selectionStart, selectionEnd, 'end');
+    this.textArea.focus();
+
+    this.onInputText();
   }
 
   set name(name) {
@@ -120,10 +305,7 @@ export default class EditableBlock extends DragAndDropListItem {
   }
 
   toModel() {
-    // TODO: Refactor legendary action behaviour into subclass instead
-    const blockModel = this.isLegendaryActionBlock ? LegendaryBlockModel : BlockModel;
-
-    return new blockModel(
+    return new BlockModel(
       this.name,
       this.text,
       this.markdownText,

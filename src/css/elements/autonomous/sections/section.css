@@ -51,36 +51,6 @@
   font-weight: bold;
 }
 
-.section__text-input {
-  font-family: inherit;
-  font-size: inherit;
-  box-sizing: border-box;
-  height: 26px;
-}
-
-.section__number-input {
-  font-family: inherit;
-  font-size: inherit;
-  box-sizing: border-box;
-  height: 26px;
-}
-
-.section__small-number-input {
-  width: 50px;
-}
-
-.section__select {
-  font-family: inherit;
-  font-size: inherit;
-  box-sizing: border-box;
-  height: 26px;
-}
-
-.section__textarea {
-  font-family: inherit;
-  font-size: inherit;
-}
-
 .section__save-button-container {
   display: flex;
   flex-direction: column;

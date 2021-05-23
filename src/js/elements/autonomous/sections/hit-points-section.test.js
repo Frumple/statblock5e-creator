@@ -23,8 +23,7 @@ beforeEach(() => {
   hitPointsModel.reset();
 
   hitPointsSection = new HitPointsSection();
-  TestCustomElements.initializeSection(hitPointsSection);
-  hitPointsSection.connect();
+  document.body.appendChild(hitPointsSection);
 });
 
 it('show section should have default values', () => {

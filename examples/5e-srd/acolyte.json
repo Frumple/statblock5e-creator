@@ -197,7 +197,7 @@
     "blocks": [
       {
         "name": "Spellcasting",
-        "text": "[name] is a 1st-level spellcaster. Its spellcasting ability is Wisdom (spell save DC sdc[wis], atk[wis] to hit with spell attacks). [name] has following cleric spells prepared:\n\nCantrips (at will): *light*, *sacred flame*, *thaumaturgy*\n1st level (3 slots): *bless*, *cure wounds*, *sanctuary*"
+        "text": "[NAME] is a 1st-level spellcaster. Its spellcasting ability is Wisdom (spell save DC SDC[WIS], ATK[WIS] to hit with spell attacks). [NAME] has following cleric spells prepared:\n\nCantrips (at will): *light*, *sacred flame*, *thaumaturgy*\n1st level (3 slots): *bless*, *cure wounds*, *sanctuary*"
       }
     ]
   },
@@ -205,7 +205,7 @@
     "blocks": [
       {
         "name": "Club",
-        "text": "*Melee Weapon Attack:* atk[str] to hit, reach 5 ft., one target. *Hit:* dmg[1d4] bludgeoning damage."
+        "text": "*Melee Weapon Attack:* ATK[STR] to hit, reach 5 ft., one target. *Hit:* DMG[1d4] bludgeoning damage."
       }
     ]
   },

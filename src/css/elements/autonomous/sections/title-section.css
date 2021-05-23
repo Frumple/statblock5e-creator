@@ -37,7 +37,7 @@
 
 .title-edit-section__short-name-help-tooltip {
   --help-tooltip-icon-color: #7A200D;
-  --help-tooltip-width: 30em;
+  --help-tooltip-width: 35em;
   margin-left: 5px;
 }
 
@@ -53,7 +53,7 @@
 
 .title-edit-section__short-name-help-tooltip-table-container table {
   background: white;
-  border: 1px solid #aaaaaa;
+  border: 2px solid #aaaaaa;
 }
 
 .title-edit-section__short-name-help-tooltip-table-container th {

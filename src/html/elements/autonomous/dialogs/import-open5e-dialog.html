@@ -1,4 +1,3 @@
-<link href='src/css/elements/radio-button.css' rel='stylesheet' type='text/css'>
 <link href='src/css/elements/autonomous/dialogs/import-open5e-dialog.css' rel='stylesheet' type='text/css'>
 
 <dialog id="dialog" class="custom-dialog">
@@ -14,17 +13,17 @@
         <label id="status-label" class="option-dialog__status-label">Choose a sourcebook:</label>
       </div>
       <div class="import-open5e-dialog__source-container">
-        <input id="srd-radio" class="radio-button__input" type="radio" name="source" value="wotc-srd" />
-        <label id="srd-label" for="srd-radio" class="default-button radio-button__label import-open5e-dialog__source-label">5th Edition SRD</label>
-        <input id="tob-radio" class="radio-button__input" type="radio" name="source" value="tob" />
-        <label id="tob-label" for="tob-radio" class="default-button radio-button__label import-open5e-dialog__source-label">Tome of Beasts</label>
-        <input id="cc-radio" class="radio-button__input" type="radio" name="source" value="cc" />
-        <label id="cc-label" for="cc-radio" class="default-button radio-button__label import-open5e-dialog__source-label">Creature Codex</label>
+        <input id="srd-radio" class="ui__toggle-button-input" type="radio" name="source" value="wotc-srd" />
+        <label id="srd-label" for="srd-radio" class="ui__button ui__toggle-button-label import-open5e-dialog__source-label">5th Edition SRD</label>
+        <input id="tob-radio" class="ui__toggle-button-input" type="radio" name="source" value="tob" />
+        <label id="tob-label" for="tob-radio" class="ui__button ui__toggle-button-label import-open5e-dialog__source-label">Tome of Beasts</label>
+        <input id="cc-radio" class="ui__toggle-button-input" type="radio" name="source" value="cc" />
+        <label id="cc-label" for="cc-radio" class="ui__button ui__toggle-button-label import-open5e-dialog__source-label">Creature Codex</label>
       </div>
       <select id="creature-select" class="import-open5e-dialog__creature-select" is="dynamic-select" disabled></select>
       <div class="option-dialog__actions">
-        <button id="import-button" class="default-button option-dialog__action-button" type="button">Import</button>
-        <button id="cancel-button" class="default-button option-dialog__action-button" type="button">Cancel</button>
+        <button id="import-button" class="ui__button option-dialog__action-button" type="button">Import</button>
+        <button id="cancel-button" class="ui__button option-dialog__action-button" type="button">Cancel</button>
       </div>
     </div>
   </form>

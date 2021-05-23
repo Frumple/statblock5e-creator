@@ -199,11 +199,11 @@
     "blocks": [
       {
         "name": "Elemental Demise",
-        "text": "If [name] dies, its body disintegrates in a flash of fire and puff of smoke, leaving behind only equipment the djinni was wearing or carrying."
+        "text": "If [NAME] dies, its body disintegrates in a flash of fire and puff of smoke, leaving behind only equipment the djinni was wearing or carrying."
       },
       {
         "name": "Innate Spellcasting",
-        "text": "[name]'s innate spell casting ability is Charisma (spell save DC sdc[cha], atk[cha] to hit with spell attacks). It can innately cast the following spells, requiring no material components:\n\nAt will: *detect magic*\n3/day: *enlarge/reduce*, *tongues*\n1/day each: *conjure elemental* (fire elemental only), *gaseous form*, *invisibility*, *major image*, *plane shift*, *wall of fire*"
+        "text": "[NAME]'s innate spell casting ability is Charisma (spell save DC SDC[CHA], ATK[CHA] to hit with spell attacks). It can innately cast the following spells, requiring no material components:\n\nAt will: *detect magic*\n3/day: *enlarge/reduce*, *tongues*\n1/day each: *conjure elemental* (fire elemental only), *gaseous form*, *invisibility*, *major image*, *plane shift*, *wall of fire*"
       },
       {
         "name": "Variant: Genie Powers",
@@ -215,15 +215,15 @@
     "blocks": [
       {
         "name": "Multiattack",
-        "text": "[name] makes two scimitar attacks or uses its Hurl Flame twice."
+        "text": "[NAME] makes two scimitar attacks or uses its Hurl Flame twice."
       },
       {
         "name": "Scimitar",
-        "text": "*Melee Weapon Attack:* atk[str] to hit, reach 5 ft., one target. *Hit:* dmg[2d6 + str] slashing damage plus dmg[2d6] fire damage."
+        "text": "*Melee Weapon Attack:* ATK[STR] to hit, reach 5 ft., one target. *Hit:* DMG[2d6 + STR] slashing damage plus DMG[2d6] fire damage."
       },
       {
         "name": "Hurl Flame",
-        "text": "*Ranged Spell Attack:* atk[cha] to hit, range 120 ft., one target. *Hit:* dmg[5d6] fire damage."
+        "text": "*Ranged Spell Attack:* ATK[CHA] to hit, range 120 ft., one target. *Hit:* DMG[5d6] fire damage."
       }
     ]
   },
@@ -232,7 +232,7 @@
   },
   "legendaryActions": {
     "blocks": [],
-    "description": "[name] can take 3 legendary actions, choosing from the options below. Only one legendary action option can be used at a time and only at the end of another creature's turn. [name] regains spent legendary actions at the start of its turn."
+    "description": "[NAME] can take 3 legendary actions, choosing from the options below. Only one legendary action option can be used at a time and only at the end of another creature's turn. [NAME] regains spent legendary actions at the start of its turn."
   },
   "layout": {
     "columns": 1,

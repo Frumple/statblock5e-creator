@@ -202,15 +202,15 @@
     "blocks": [
       {
         "name": "Heated Body",
-        "text": "A creature that touches [name] or hits it with a melee attack while within 5 ft. of it takes dmg[1d10] fire damage."
+        "text": "A creature that touches [NAME] or hits it with a melee attack while within 5 ft. of it takes DMG[1d10] fire damage."
       },
       {
         "name": "Heated Weapons",
-        "text": "When [name] hits with a metal melee weapon, it deals an extra dmg[1d6] fire damage (included in the attack)."
+        "text": "When [NAME] hits with a metal melee weapon, it deals an extra DMG[1d6] fire damage (included in the attack)."
       },
       {
         "name": "Illumination",
-        "text": "[name] sheds bright light in a 10-foot radius and dim light for an additional 10 ft.."
+        "text": "[NAME] sheds bright light in a 10-foot radius and dim light for an additional 10 ft.."
       }
     ]
   },
@@ -218,7 +218,7 @@
     "blocks": [
       {
         "name": "Warhammer",
-        "text": "*Melee Weapon Attack:* atk[str] to hit, reach 5 ft., one target. *Hit:* dmg[1d8 + str] bludgeoning damage, or dmg[1d10 + str] bludgeoning damage if used with two hands to make a melee attack, plus dmg[1d6] fire damage."
+        "text": "*Melee Weapon Attack:* ATK[STR] to hit, reach 5 ft., one target. *Hit:* DMG[1d8 + STR] bludgeoning damage, or DMG[1d10 + STR] bludgeoning damage if used with two hands to make a melee attack, plus DMG[1d6] fire damage."
       }
     ]
   },
@@ -227,7 +227,7 @@
   },
   "legendaryActions": {
     "blocks": [],
-    "description": "[name] can take 3 legendary actions, choosing from the options below. Only one legendary action option can be used at a time and only at the end of another creature's turn. [name] regains spent legendary actions at the start of its turn."
+    "description": "[NAME] can take 3 legendary actions, choosing from the options below. Only one legendary action option can be used at a time and only at the end of another creature's turn. [NAME] regains spent legendary actions at the start of its turn."
   },
   "layout": {
     "columns": 1,

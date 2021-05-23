@@ -18,11 +18,11 @@
   <div class="armor-class-edit-section section__content">
     <div class="armor-class-edit-section__armor-class-container">
       <label id="armor-class-label" class="armor-class-edit-section__armor-class-label section__heading-label" for="armor-class-input">Armor Class:</label>
-      <input id="armor-class-input" class="armor-class-edit-section__armor-class-input section__number-input section__small-number-input" is="number-input" type="number" name="armor-class" pretty-name="Armor Class" value="" min="0" max="999" required />
+      <input id="armor-class-input" class="armor-class-edit-section__armor-class-input ui__number-input ui__small-number-input" is="number-input" type="number" name="armor-class" pretty-name="Armor Class" value="" min="0" max="999" required />
     </div>
     <div class="armor-class-edit-section__armor-type-container">
       <label id="armor-type-label" class="armor-class-edit-section__armor-type-label" for="armor-type-input">Armor Type:</label>
-      <input id="armor-type-input" class="armor-class-edit-section__armor-type-input section__text-input" is="text-input" type="text" name="armor-type" list="armor-type-list" />
+      <input id="armor-type-input" class="armor-class-edit-section__armor-type-input ui__text-input" is="text-input" type="text" name="armor-type" list="armor-type-list" />
       <datalist id="armor-type-list">
         <option value="armor scraps" />
         <option value="breastplate" />
@@ -49,10 +49,10 @@
       <input id="use-custom-text-input" class="armor-class-edit-section__use-custom-text-input" is="enable-disable-elements-checkbox" type="checkbox" name="armor-class-use-custom" />
       <label id="use-custom-text-label" class="armor-class-edit-section__use-custom-text-label" for="use-custom-text-input">Override with custom text:</label>
       <custom-text-help-tooltip class="armor-class-edit-section__custom-text-help-tooltip"></custom-text-help-tooltip>
-      <input id="custom-text-input" class="armor-class-edit-section__custom-text-input section__text-input" is="text-input" type="text" name="armor-class-custom" pretty-name="Armor Class Custom Text" data-parsed required disabled />
+      <input id="custom-text-input" class="armor-class-edit-section__custom-text-input ui__text-input" is="text-input" type="text" name="armor-class-custom" pretty-name="Armor Class Custom Text" data-parsed required disabled />
     </div>
   </div>
   <div class="section__save-button-container">
-    <button id="save-button" class="default-button section__save-button"><i class="material-icons">done</i></button>
+    <button id="save-button" class="ui__button section__save-button"><i class="material-icons">done</i></button>
   </div>
 </form>

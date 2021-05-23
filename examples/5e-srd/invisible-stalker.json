@@ -211,11 +211,11 @@
     "blocks": [
       {
         "name": "Invisibility",
-        "text": "[name] is invisible."
+        "text": "[NAME] is invisible."
       },
       {
         "name": "Faultless Tracker",
-        "text": "[name] is given a quarry by its summoner. [name] knows the direction and distance to its quarry as long as the two of them are on the same plane of existence. [name] also knows the location of its summoner."
+        "text": "[NAME] is given a quarry by its summoner. [NAME] knows the direction and distance to its quarry as long as the two of them are on the same plane of existence. [NAME] also knows the location of its summoner."
       }
     ]
   },
@@ -223,11 +223,11 @@
     "blocks": [
       {
         "name": "Multiattack",
-        "text": "[name] makes two slam attacks."
+        "text": "[NAME] makes two slam attacks."
       },
       {
         "name": "Slam",
-        "text": "*Melee Weapon Attack:* atk[str] to hit, reach 5 ft., one target. *Hit:* dmg[2d6 + str] bludgeoning damage."
+        "text": "*Melee Weapon Attack:* ATK[STR] to hit, reach 5 ft., one target. *Hit:* DMG[2d6 + STR] bludgeoning damage."
       }
     ]
   },
@@ -236,7 +236,7 @@
   },
   "legendaryActions": {
     "blocks": [],
-    "description": "[name] can take 3 legendary actions, choosing from the options below. Only one legendary action option can be used at a time and only at the end of another creature's turn. [name] regains spent legendary actions at the start of its turn."
+    "description": "[NAME] can take 3 legendary actions, choosing from the options below. Only one legendary action option can be used at a time and only at the end of another creature's turn. [NAME] regains spent legendary actions at the start of its turn."
   },
   "layout": {
     "columns": 1,

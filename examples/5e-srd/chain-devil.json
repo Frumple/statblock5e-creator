@@ -205,11 +205,11 @@
     "blocks": [
       {
         "name": "Devil's Sight",
-        "text": "Magical darkness doesn't impede [name]'s darkvision."
+        "text": "Magical darkness doesn't impede [NAME]'s darkvision."
       },
       {
         "name": "Magic Resistance",
-        "text": "[name] has advantage on saving throws against spells and other magical effects."
+        "text": "[NAME] has advantage on saving throws against spells and other magical effects."
       }
     ]
   },
@@ -217,15 +217,15 @@
     "blocks": [
       {
         "name": "Multiattack",
-        "text": "[name] makes two attacks with its chains."
+        "text": "[NAME] makes two attacks with its chains."
       },
       {
         "name": "Chain",
-        "text": "*Melee Weapon Attack:* atk[str] to hit, reach 10 ft., one target. *Hit:* dmg[2d6 + str] slashing damage. The target is grappled (escape DC 14) if [name] isn't already grappling a creature. Until this grapple ends, the target is restrained and takes dmg[2d6] piercing damage at the start of each of its turns."
+        "text": "*Melee Weapon Attack:* ATK[STR] to hit, reach 10 ft., one target. *Hit:* DMG[2d6 + STR] slashing damage. The target is grappled (escape DC 14) if [NAME] isn't already grappling a creature. Until this grapple ends, the target is restrained and takes DMG[2d6] piercing damage at the start of each of its turns."
       },
       {
         "name": "Animate Chains (Recharges after a Short or Long Rest)",
-        "text": "Up to four chains [name] can see within 60 feet of it magically sprout razor-edged barbs and animate under [name]'s control, provided that the chains aren't being worn or carried.\n  Each animated chain is an object with AC 20, 20 hit points, resistance to piercing damage, and immunity to psychic and thunder damage. When [name] uses Multiattack on its turn, it can use each animated chain to make one additional chain attack. An animated chain can grapple one creature of its own but can't make attacks while grappling. An animated chain reverts to its inanimate state if reduced to 0 hit points or if [name] is incapacitated or dies."
+        "text": "Up to four chains [NAME] can see within 60 feet of it magically sprout razor-edged barbs and animate under [NAME]'s control, provided that the chains aren't being worn or carried.\n  Each animated chain is an object with AC 20, 20 hit points, resistance to piercing damage, and immunity to psychic and thunder damage. When [NAME] uses Multiattack on its turn, it can use each animated chain to make one additional chain attack. An animated chain can grapple one creature of its own but can't make attacks while grappling. An animated chain reverts to its inanimate state if reduced to 0 hit points or if [NAME] is incapacitated or dies."
       }
     ]
   },
@@ -233,13 +233,13 @@
     "blocks": [
       {
         "name": "Unnerving Mask",
-        "text": "When a creature [name] can see starts its turn within 30 feet of [name], [name] can create the illusion that it looks like one of the creature's departed loved ones or bitter enemies. If the creature can see [name], it must succeed on a DC 14 Wisdom saving throw or be frightened until the end of its turn."
+        "text": "When a creature [NAME] can see starts its turn within 30 feet of [NAME], [NAME] can create the illusion that it looks like one of the creature's departed loved ones or bitter enemies. If the creature can see [NAME], it must succeed on a DC 14 Wisdom saving throw or be frightened until the end of its turn."
       }
     ]
   },
   "legendaryActions": {
     "blocks": [],
-    "description": "[name] can take 3 legendary actions, choosing from the options below. Only one legendary action option can be used at a time and only at the end of another creature's turn. [name] regains spent legendary actions at the start of its turn."
+    "description": "[NAME] can take 3 legendary actions, choosing from the options below. Only one legendary action option can be used at a time and only at the end of another creature's turn. [NAME] regains spent legendary actions at the start of its turn."
   },
   "layout": {
     "columns": 1,

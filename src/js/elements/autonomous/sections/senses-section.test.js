@@ -27,8 +27,7 @@ beforeEach(() => {
   sensesModel.reset();
 
   sensesSection = new SensesSection();
-  TestCustomElements.initializeSection(sensesSection);
-  sensesSection.connect();
+  document.body.appendChild(sensesSection);
 });
 
 it('show section should have default values', () => {
@@ -55,7 +54,7 @@ describe('when the show section is clicked', () => {
     });
 
     it('should enable the custom text field, disable all other fields, and focus on the custom text field', () => {
-      expect(sensesSection).toHaveEditElementsEnabledOrDisabledBasedOnCheckbox(
+      expect(sensesSection).toHaveElementsEnabledOrDisabledBasedOnCheckboxState(
         sensesSection.editElements.useCustomText,
         ['customText'],
         ['blindsight', 'blindBeyondThisRadius', 'darkvision', 'tremorsense', 'truesight']
@@ -162,7 +161,7 @@ describe('when the show section is clicked', () => {
     });
 
     it('should disable the custom text field, enable all other fields, and focus on the blindsight field', () => {
-      expect(sensesSection).toHaveEditElementsEnabledOrDisabledBasedOnCheckbox(
+      expect(sensesSection).toHaveElementsEnabledOrDisabledBasedOnCheckboxState(
         sensesSection.editElements.useCustomText,
         ['customText'],
         ['blindsight', 'blindBeyondThisRadius', 'darkvision', 'tremorsense', 'truesight']
@@ -281,11 +280,11 @@ describe('should calculate the passive perception based on the following conditi
   it.each
   `
     description                                       | wisdomScore | proficiencyBonus | perceptionEnabled | perceptionExpertise | perceptionOverride | expectedPassivePerception
-    ${'perception disabled, not expert, no override'} | ${10}       | ${2}             | ${false}          | ${false}            | ${''}              | ${10}
-    ${'perception enabled, not expert, no override'}  | ${10}       | ${2}             | ${true}           | ${false}            | ${''}              | ${12}
-    ${'perception enabled, expert, no override'}      | ${10}       | ${2}             | ${true}           | ${true}             | ${''}              | ${14}
-    ${'perception enabled, not expert, override'}     | ${10}       | ${2}             | ${true}           | ${false}            | ${7}               | ${17}
-    ${'perception enabled, expert, override'}         | ${10}       | ${2}             | ${true}           | ${true}             | ${8}               | ${18}
+    ${'perception disabled, not expert, no override'} | ${12}       | ${2}             | ${false}          | ${false}            | ${''}              | ${11}
+    ${'perception enabled, not expert, no override'}  | ${12}       | ${2}             | ${true}           | ${false}            | ${''}              | ${13}
+    ${'perception enabled, expert, no override'}      | ${12}       | ${2}             | ${true}           | ${true}             | ${''}              | ${15}
+    ${'perception enabled, not expert, override'}     | ${12}       | ${2}             | ${true}           | ${false}            | ${7}               | ${17}
+    ${'perception enabled, expert, override'}         | ${12}       | ${2}             | ${true}           | ${true}             | ${8}               | ${18}
     ${'- wisdom score and - proficiency bonus'}       | ${3}        | ${-1}            | ${true}           | ${false}            | ${''}              | ${5}
     ${'- wisdom score and 0 proficiency bonus'}       | ${3}        | ${0}             | ${true}           | ${false}            | ${''}              | ${6}
     ${'- wisdom score and + proficiency bonus'}       | ${3}        | ${3}             | ${true}           | ${false}            | ${''}              | ${9}
@@ -453,7 +452,7 @@ function verifyEditModeView({
   expect(sensesSection.editElements.useCustomText.checked).toBe(useCustomText);
   expect(sensesSection.editElements.customText).toHaveValue(customText);
 
-  expect(sensesSection).toHaveEditElementsEnabledOrDisabledBasedOnCheckbox(
+  expect(sensesSection).toHaveElementsEnabledOrDisabledBasedOnCheckboxState(
     sensesSection.editElements.useCustomText,
     ['customText'],
     ['blindsight', 'blindBeyondThisRadius', 'darkvision', 'tremorsense', 'truesight']

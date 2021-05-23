@@ -15,7 +15,7 @@
   display: none;
   background: #ffffaa;
   color: black;
-  border: 1px solid black;
+  border: 2px solid black;
   white-space: normal;
   width: var(--help-tooltip-width);
   padding: 5px;
@@ -43,7 +43,7 @@
 ::slotted(blockquote) {
   display: inline-block;
   background: white;
-  border: 1px solid #aaaaaa;
+  border: 2px solid #aaaaaa;
   font-family: monospace;
   white-space: pre-wrap;
   margin: 0.5em 0 0.5em 1em;

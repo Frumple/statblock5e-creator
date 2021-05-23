@@ -217,11 +217,11 @@
     "blocks": [
       {
         "name": "Incorporeal Movement",
-        "text": "[name] can move through other creatures and objects as if they were difficult terrain. It takes dmg[1d10] force damage if it ends its turn inside an object."
+        "text": "[NAME] can move through other creatures and objects as if they were difficult terrain. It takes DMG[1d10] force damage if it ends its turn inside an object."
       },
       {
         "name": "Sunlight Sensitivity",
-        "text": "While in sunlight, [name] has disadvantage on attack rolls, as well as on Wisdom (Perception) checks that rely on sight."
+        "text": "While in sunlight, [NAME] has disadvantage on attack rolls, as well as on Wisdom (Perception) checks that rely on sight."
       }
     ]
   },
@@ -229,7 +229,7 @@
     "blocks": [
       {
         "name": "Life Drain",
-        "text": "*Melee Spell Attack:* atk[dex] to hit, reach 5 ft., one creature. *Hit:* dmg[3d6] necrotic damage. The target must succeed on a DC 10 Constitution saving throw or its hit point maximum is reduced by an amount equal to the damage taken. This reduction lasts until the creature finishes a long rest. The target dies if this effect reduces its hit point maximum to 0."
+        "text": "*Melee Spell Attack:* ATK[DEX] to hit, reach 5 ft., one creature. *Hit:* DMG[3d6] necrotic damage. The target must succeed on a DC 10 Constitution saving throw or its hit point maximum is reduced by an amount equal to the damage taken. This reduction lasts until the creature finishes a long rest. The target dies if this effect reduces its hit point maximum to 0."
       }
     ]
   },
@@ -238,7 +238,7 @@
   },
   "legendaryActions": {
     "blocks": [],
-    "description": "[name] can take 3 legendary actions, choosing from the options below. Only one legendary action option can be used at a time and only at the end of another creature's turn. [name] regains spent legendary actions at the start of its turn."
+    "description": "[NAME] can take 3 legendary actions, choosing from the options below. Only one legendary action option can be used at a time and only at the end of another creature's turn. [NAME] regains spent legendary actions at the start of its turn."
   },
   "layout": {
     "columns": 1,

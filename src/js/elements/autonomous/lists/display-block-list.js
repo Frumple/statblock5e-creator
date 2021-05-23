@@ -1,8 +1,5 @@
 import CustomAutonomousElement from '../custom-autonomous-element.js';
 
-import isRunningInJsdom from '../../../helpers/is-running-in-jsdom.js';
-import DisplayBlock from './display-block.js';
-
 export default class DisplayBlockList extends CustomAutonomousElement {
   static get elementName() { return 'display-block-list'; }
   static get templatePaths() {
@@ -11,10 +8,12 @@ export default class DisplayBlockList extends CustomAutonomousElement {
       'src/html/elements/autonomous/lists/display-block-list.html');
   }
 
-  constructor() {
-    super(DisplayBlockList.templatePaths);
+  constructor(templatePaths) {
+    super(templatePaths ? templatePaths : DisplayBlockList.templatePaths);
+  }
 
-    this.isLegendaryActionList = false;
+  get blockElementTag() {
+    return 'display-block';
   }
 
   get blocks() {
@@ -28,22 +27,11 @@ export default class DisplayBlockList extends CustomAutonomousElement {
   }
 
   addBlock(name, text) {
-    const block = DisplayBlockList.createBlock(name, text);
-
-    // TODO: Refactor legendary action behaviour into subclass instead
-    if (this.isLegendaryActionList) {
-      block.applyLegendaryActionStyles();
-    }
-
-    this.appendChild(block);
-  }
-
-  static createBlock(name, text) {
-    const block = isRunningInJsdom ? new DisplayBlock() : document.createElement('display-block');
+    const block = document.createElement(this.blockElementTag);
 
     block.name = name;
     block.text = text;
 
-    return block;
+    this.appendChild(block);
   }
 }

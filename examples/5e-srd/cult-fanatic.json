@@ -197,11 +197,11 @@
     "blocks": [
       {
         "name": "Dark Devotion",
-        "text": "[name] has advantage on saving throws against being charmed or frightened."
+        "text": "[NAME] has advantage on saving throws against being charmed or frightened."
       },
       {
         "name": "Spellcasting",
-        "text": "[name] is a 4th-level spellcaster. Its spell casting ability is Wisdom (spell save DC sdc[wis], atk[wis] to hit with spell attacks). [name] has the following cleric spells prepared:\n\nCantrips (at will): *light*, *sacred flame*, *thaumaturgy*\n1st level (4 slots): *command*, *inflict wounds*, *shield of faith*\n2nd level (3 slots): *hold person*, *spiritual weapon*"
+        "text": "[NAME] is a 4th-level spellcaster. Its spell casting ability is Wisdom (spell save DC SDC[WIS], ATK[WIS] to hit with spell attacks). [NAME] has the following cleric spells prepared:\n\nCantrips (at will): *light*, *sacred flame*, *thaumaturgy*\n1st level (4 slots): *command*, *inflict wounds*, *shield of faith*\n2nd level (3 slots): *hold person*, *spiritual weapon*"
       }
     ]
   },
@@ -209,11 +209,11 @@
     "blocks": [
       {
         "name": "Multiattack",
-        "text": "[name] makes two melee attacks."
+        "text": "[NAME] makes two melee attacks."
       },
       {
         "name": "Dagger",
-        "text": "*Melee or Ranged Weapon Attack:* atk[fin] to hit, reach 5 ft. or range 20/60 ft., one creature. *Hit:* dmg[1d4 + fin] piercing damage."
+        "text": "*Melee or Ranged Weapon Attack:* ATK[FIN] to hit, reach 5 ft. or range 20/60 ft., one creature. *Hit:* DMG[1d4 + FIN] piercing damage."
       }
     ]
   },
@@ -222,7 +222,7 @@
   },
   "legendaryActions": {
     "blocks": [],
-    "description": "[name] can take 3 legendary actions, choosing from the options below. Only one legendary action option can be used at a time and only at the end of another creature's turn. [name] regains spent legendary actions at the start of its turn."
+    "description": "[NAME] can take 3 legendary actions, choosing from the options below. Only one legendary action option can be used at a time and only at the end of another creature's turn. [NAME] regains spent legendary actions at the start of its turn."
   },
   "layout": {
     "columns": 1,

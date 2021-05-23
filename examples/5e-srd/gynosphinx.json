@@ -205,15 +205,15 @@
     "blocks": [
       {
         "name": "Inscrutable",
-        "text": "[name] is immune to any effect that would sense its emotions or read its thoughts, as well as any divination spell that it refuses. Wisdom (Insight) checks made to ascertain [name]'s intentions or sincerity have disadvantage."
+        "text": "[NAME] is immune to any effect that would sense its emotions or read its thoughts, as well as any divination spell that it refuses. Wisdom (Insight) checks made to ascertain [NAME]'s intentions or sincerity have disadvantage."
       },
       {
         "name": "Magic Weapons",
-        "text": "[name]'s weapon attacks are magical."
+        "text": "[NAME]'s weapon attacks are magical."
       },
       {
         "name": "Spellcasting",
-        "text": "[name] is a 9th-level spellcaster. Its spellcasting ability is Intelligence (spell save DC sdc[int], atk[int] to hit with spell attacks). It requires no material components to cast its spells. [name] has the following wizard spells prepared:\n\nCantrips (at will): *mage hand*, *minor illusion*, *prestidigitation*\n1st level (4 slots): *detect magic*, *identify*, *shield*\n2nd level (3 slots): *darkness*, *locate object*, *suggestion*\n3rd level (3 slots): *dispel magic*, *remove curse*, *tongues*\n4th level (3 slots): *banishment*, *greater invisibility*\n5th level (1 slot): *legend lore*"
+        "text": "[NAME] is a 9th-level spellcaster. Its spellcasting ability is Intelligence (spell save DC SDC[INT], ATK[INT] to hit with spell attacks). It requires no material components to cast its spells. [NAME] has the following wizard spells prepared:\n\nCantrips (at will): *mage hand*, *minor illusion*, *prestidigitation*\n1st level (4 slots): *detect magic*, *identify*, *shield*\n2nd level (3 slots): *darkness*, *locate object*, *suggestion*\n3rd level (3 slots): *dispel magic*, *remove curse*, *tongues*\n4th level (3 slots): *banishment*, *greater invisibility*\n5th level (1 slot): *legend lore*"
       }
     ]
   },
@@ -221,11 +221,11 @@
     "blocks": [
       {
         "name": "Multiattack",
-        "text": "[name] makes two claw attacks."
+        "text": "[NAME] makes two claw attacks."
       },
       {
         "name": "Claw",
-        "text": "*Melee Weapon Attack:* atk[str] to hit, reach 5 ft., one target. *Hit:* dmg[2d8 + str] slashing damage."
+        "text": "*Melee Weapon Attack:* ATK[STR] to hit, reach 5 ft., one target. *Hit:* DMG[2d8 + STR] slashing damage."
       }
     ]
   },
@@ -236,18 +236,18 @@
     "blocks": [
       {
         "name": "Claw Attack",
-        "text": "[name] makes one claw attack."
+        "text": "[NAME] makes one claw attack."
       },
       {
         "name": "Teleport (Costs 2 Actions)",
-        "text": "[name] magically teleports, along with any equipment it is wearing or carrying, up to 120 feet to an unoccupied space it can see."
+        "text": "[NAME] magically teleports, along with any equipment it is wearing or carrying, up to 120 feet to an unoccupied space it can see."
       },
       {
         "name": "Cast a Spell (Costs 3 Actions)",
-        "text": "[name] casts a spell from its list of prepared spells, using a spell slot as normal."
+        "text": "[NAME] casts a spell from its list of prepared spells, using a spell slot as normal."
       }
     ],
-    "description": "[name] can take 3 legendary actions, choosing from the options below. Only one legendary action option can be used at a time and only at the end of another creature's turn. [name] regains spent legendary actions at the start of its turn."
+    "description": "[NAME] can take 3 legendary actions, choosing from the options below. Only one legendary action option can be used at a time and only at the end of another creature's turn. [NAME] regains spent legendary actions at the start of its turn."
   },
   "layout": {
     "columns": 1,

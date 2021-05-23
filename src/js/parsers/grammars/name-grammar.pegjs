@@ -31,9 +31,10 @@ InlineCommon
   = Text
   / Whitespace
   / PeriodChar
+  / OpeningSquareBracketChar
 
 SentenceBeginningNameExpression
-  = period:PeriodChar markdown:MarkdownOptional whitespace:Whitespace expression:BeginningNameExpression { return `${period}${markdown}${whitespace}${expression}`; }
+  = period:PeriodChar markdown:MarkdownOptional whitespace:WhitespaceOptional expression:BeginningNameExpression { return `${period}${markdown}${whitespace}${expression}`; }
 
 BeginningNameExpression
   = open:OpeningRoundBracketOptional expression:(BeginningName / BeginningFullName) close:ClosingRoundBracketOptional { return `${open}${expression}${close}`; }
@@ -42,16 +43,16 @@ NameExpression
   = open:OpeningRoundBracketOptional expression:(Name / FullName) close:ClosingRoundBracketOptional { return `${open}${expression}${close}`; }
 
 BeginningName
-  = '[name]' { return capitalizeFirstLetter(options.creature.name); }
+  = ('[NAME]' / '[name]') { return capitalizeFirstLetter(options.creature.name); }
 
 BeginningFullName
-  = '[fullname]' { return capitalizeFirstLetter(options.creature.fullName); }
+  = ('[FULLNAME]' / '[fullname]') { return capitalizeFirstLetter(options.creature.fullName); }
 
 Name
-  = '[name]' { return options.creature.name; }
+  = ('[NAME]' / '[name]') { return options.creature.name; }
 
 FullName
-  = '[fullname]' { return options.creature.fullName; }
+  = ('[FULLNAME]' / '[fullname]') { return options.creature.fullName; }
 
 Text
   = $(NormalChar+)
@@ -75,7 +76,10 @@ EndOfLine
   = NewLineChar / End
 
 NormalChar
-  = !( PeriodChar / SpaceChar / NewLineChar ) .
+  = !( PeriodChar / SpaceChar / OpeningSquareBracketChar / NewLineChar ) .
+
+OpeningSquareBracketChar
+  = '[';
 
 OpeningRoundBracketChar
   = '(';

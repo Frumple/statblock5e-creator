@@ -206,11 +206,11 @@
     "blocks": [
       {
         "name": "Innate Spellcasting",
-        "text": "[name]'s spellcasting ability is Intelligence (spell save DC sdc[int]). [name] can innately cast the following spells, requiring no material components:\nAt will: *darkness*, *detect magic*, *dispel magic*\n1/day each: *confusion*, *fly*, *power word stun*"
+        "text": "[NAME]'s spellcasting ability is Intelligence (spell save DC SDC[INT]). [NAME] can innately cast the following spells, requiring no material components:\nAt will: *darkness*, *detect magic*, *dispel magic*\n1/day each: *confusion*, *fly*, *power word stun*"
       },
       {
         "name": "Magic Resistance",
-        "text": "[name] has advantage on saving throws against spells and other magical effects."
+        "text": "[NAME] has advantage on saving throws against spells and other magical effects."
       }
     ]
   },
@@ -218,15 +218,15 @@
     "blocks": [
       {
         "name": "Multiattack",
-        "text": "[name] makes four attacks: two with its pincers and two with its fists. Alternatively, it makes two attacks with its pincers and casts one spell."
+        "text": "[NAME] makes four attacks: two with its pincers and two with its fists. Alternatively, it makes two attacks with its pincers and casts one spell."
       },
       {
         "name": "Pincer",
-        "text": "*Melee Weapon Attack:* atk[str] to hit, reach 10 ft., one target. *Hit:* dmg[2d10 + str] bludgeoning damage. If the target is a Medium or smaller creature, it is grappled (escape DC 15). [name] has two pincers, each of which can grapple only one target."
+        "text": "*Melee Weapon Attack:* ATK[STR] to hit, reach 10 ft., one target. *Hit:* DMG[2d10 + STR] bludgeoning damage. If the target is a Medium or smaller creature, it is grappled (escape DC 15). [NAME] has two pincers, each of which can grapple only one target."
       },
       {
         "name": "Fist",
-        "text": "*Melee Weapon Attack:* atk[str] to hit, reach 5 ft., one target. *Hit:* dmg[2d4 + 2] bludgeoning damage."
+        "text": "*Melee Weapon Attack:* ATK[STR] to hit, reach 5 ft., one target. *Hit:* DMG[2d4 + 2] bludgeoning damage."
       },
       {
         "name": "Variant: Summon Demon (1/Day)",
@@ -239,7 +239,7 @@
   },
   "legendaryActions": {
     "blocks": [],
-    "description": "[name] can take 3 legendary actions, choosing from the options below. Only one legendary action option can be used at a time and only at the end of another creature's turn. [name] regains spent legendary actions at the start of its turn."
+    "description": "[NAME] can take 3 legendary actions, choosing from the options below. Only one legendary action option can be used at a time and only at the end of another creature's turn. [NAME] regains spent legendary actions at the start of its turn."
   },
   "layout": {
     "columns": 1,

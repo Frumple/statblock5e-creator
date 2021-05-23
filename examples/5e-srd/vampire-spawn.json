@@ -200,15 +200,15 @@
     "blocks": [
       {
         "name": "Regeneration",
-        "text": "[name] regains 10 hit points at the start of its turn if it has at least 1 hit point and isn't in sunlight or running water. If [name] takes radiant damage or damage from holy water, this trait doesn't function at the start of [name]'s next turn."
+        "text": "[NAME] regains 10 hit points at the start of its turn if it has at least 1 hit point and isn't in sunlight or running water. If [NAME] takes radiant damage or damage from holy water, this trait doesn't function at the start of [NAME]'s next turn."
       },
       {
         "name": "Spider Climb",
-        "text": "[name] can climb difficult surfaces, including upside down on ceilings, without needing to make an ability check."
+        "text": "[NAME] can climb difficult surfaces, including upside down on ceilings, without needing to make an ability check."
       },
       {
         "name": "Vampire Weaknesses",
-        "text": "[name] has the following flaws:\n  *Forbiddance.* [name] can't enter a residence without an invitation from one of the occupants.\n  *Harmed by Running Water.* [name] takes 20 acid damage when it ends its turn in running water.\n  *Stake to the Heart.* [name] is destroyed if a piercing weapon made of wood is driven into its heart while it is incapacitated in its resting place.\n  *Sunlight Hypersensitivity.* [name] takes 20 radiant damage when it starts its turn in sunlight. While in sunlight, it has disadvantage on attack rolls and ability checks."
+        "text": "[NAME] has the following flaws:\n  *Forbiddance.* [NAME] can't enter a residence without an invitation from one of the occupants.\n  *Harmed by Running Water.* [NAME] takes 20 acid damage when it ends its turn in running water.\n  *Stake to the Heart.* [NAME] is destroyed if a piercing weapon made of wood is driven into its heart while it is incapacitated in its resting place.\n  *Sunlight Hypersensitivity.* [NAME] takes 20 radiant damage when it starts its turn in sunlight. While in sunlight, it has disadvantage on attack rolls and ability checks."
       }
     ]
   },
@@ -216,15 +216,15 @@
     "blocks": [
       {
         "name": "Multiattack",
-        "text": "[name] makes two attacks, only one of which can be a bite attack."
+        "text": "[NAME] makes two attacks, only one of which can be a bite attack."
       },
       {
         "name": "Claws",
-        "text": "*Melee Weapon Attack:* atk[str] to hit, reach 5 ft., one creature. *Hit:* dmg[2d4 + str] slashing damage. Instead of dealing damage, [name] can grapple the target (escape DC 13)."
+        "text": "*Melee Weapon Attack:* ATK[STR] to hit, reach 5 ft., one creature. *Hit:* DMG[2d4 + STR] slashing damage. Instead of dealing damage, [NAME] can grapple the target (escape DC 13)."
       },
       {
         "name": "Bite",
-        "text": "*Melee Weapon Attack:* atk[str] to hit, reach 5 ft., one willing creature, or a creature that is grappled by [name], incapacitated, or restrained. *Hit:* dmg[1d6 + str] piercing damage plus dmg[2d6] necrotic damage. The target's hit point maximum is reduced by an amount equal to the necrotic damage taken, and [name] regains hit points equal to that amount. The reduction lasts until the target finishes a long rest. The target dies if this effect reduces its hit point maximum to 0."
+        "text": "*Melee Weapon Attack:* ATK[STR] to hit, reach 5 ft., one willing creature, or a creature that is grappled by [NAME], incapacitated, or restrained. *Hit:* DMG[1d6 + STR] piercing damage plus DMG[2d6] necrotic damage. The target's hit point maximum is reduced by an amount equal to the necrotic damage taken, and [NAME] regains hit points equal to that amount. The reduction lasts until the target finishes a long rest. The target dies if this effect reduces its hit point maximum to 0."
       }
     ]
   },
@@ -233,7 +233,7 @@
   },
   "legendaryActions": {
     "blocks": [],
-    "description": "[name] can take 3 legendary actions, choosing from the options below. Only one legendary action option can be used at a time and only at the end of another creature's turn. [name] regains spent legendary actions at the start of its turn."
+    "description": "[NAME] can take 3 legendary actions, choosing from the options below. Only one legendary action option can be used at a time and only at the end of another creature's turn. [NAME] regains spent legendary actions at the start of its turn."
   },
   "layout": {
     "columns": 1,

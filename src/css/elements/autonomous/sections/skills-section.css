@@ -19,7 +19,7 @@
   grid-area: 1 / 3;
   align-self: center;
   --help-tooltip-icon-color: #7A200D;
-  --help-tooltip-width: 50em;
+  --help-tooltip-width: 40em;
 }
 .skills-edit-section__expert-label { grid-area: 1 / 4; }
 .skills-edit-section__override-label { grid-area: 1 / 5; }

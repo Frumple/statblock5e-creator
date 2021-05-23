@@ -200,15 +200,15 @@
     "blocks": [
       {
         "name": "Multiattack",
-        "text": "[name] makes two greatclub attacks."
+        "text": "[NAME] makes two greatclub attacks."
       },
       {
         "name": "Greatclub",
-        "text": "*Melee Weapon Attack:* atk[str] to hit, reach 10 ft., one target. *Hit:* dmg[3d8 + str] bludgeoning damage."
+        "text": "*Melee Weapon Attack:* ATK[STR] to hit, reach 10 ft., one target. *Hit:* DMG[3d8 + STR] bludgeoning damage."
       },
       {
         "name": "Rock",
-        "text": "*Ranged Weapon Attack:* atk[str] to hit, range 60/240 ft., one target. *Hit:* dmg[3d10 + str] bludgeoning damage."
+        "text": "*Ranged Weapon Attack:* ATK[STR] to hit, range 60/240 ft., one target. *Hit:* DMG[3d10 + STR] bludgeoning damage."
       }
     ]
   },
@@ -217,7 +217,7 @@
   },
   "legendaryActions": {
     "blocks": [],
-    "description": "[name] can take 3 legendary actions, choosing from the options below. Only one legendary action option can be used at a time and only at the end of another creature's turn. [name] regains spent legendary actions at the start of its turn."
+    "description": "[NAME] can take 3 legendary actions, choosing from the options below. Only one legendary action option can be used at a time and only at the end of another creature's turn. [NAME] regains spent legendary actions at the start of its turn."
   },
   "layout": {
     "columns": 1,

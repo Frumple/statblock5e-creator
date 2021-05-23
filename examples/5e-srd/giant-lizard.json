@@ -195,11 +195,11 @@
     "blocks": [
       {
         "name": "Variant: Hold Breath",
-        "text": "[name] can hold its breath for 15 minutes. (A lizard that has this trait also has a swimming speed of 30 feet.)"
+        "text": "[NAME] can hold its breath for 15 minutes. (A lizard that has this trait also has a swimming speed of 30 feet.)"
       },
       {
         "name": "Variant: Spider Climb",
-        "text": "[name] can climb difficult surfaces, including upside down on ceilings, without needing to make an ability check."
+        "text": "[NAME] can climb difficult surfaces, including upside down on ceilings, without needing to make an ability check."
       }
     ]
   },
@@ -207,7 +207,7 @@
     "blocks": [
       {
         "name": "Bite",
-        "text": "*Melee Weapon Attack:* atk[str] to hit, reach 5 ft., one target. *Hit:* dmg[1d8 + str] piercing damage."
+        "text": "*Melee Weapon Attack:* ATK[STR] to hit, reach 5 ft., one target. *Hit:* DMG[1d8 + STR] piercing damage."
       }
     ]
   },
@@ -216,7 +216,7 @@
   },
   "legendaryActions": {
     "blocks": [],
-    "description": "[name] can take 3 legendary actions, choosing from the options below. Only one legendary action option can be used at a time and only at the end of another creature's turn. [name] regains spent legendary actions at the start of its turn."
+    "description": "[NAME] can take 3 legendary actions, choosing from the options below. Only one legendary action option can be used at a time and only at the end of another creature's turn. [NAME] regains spent legendary actions at the start of its turn."
   },
   "layout": {
     "columns": 1,

@@ -1,7 +1,5 @@
 import DragAndDropList from './drag-and-drop-list.js';
-import PropertyListItem from './property-list-item.js';
 
-import isRunningInJsdom from '../../../helpers/is-running-in-jsdom.js';
 import { arrayStrictEqual } from '../../../helpers/array-helpers.js';
 import { addOptionsToElement, removeAllChildElements } from '../../../helpers/element-helpers.js';
 
@@ -92,16 +90,9 @@ export default class PropertyList extends DragAndDropList {
   }
 
   addItem(itemText) {
-    let listItem;
-
-    if (isRunningInJsdom) {
-      listItem = new PropertyListItem(this, itemText);
-      listItem.connect();
-    } else {
-      listItem = document.createElement('property-list-item');
-      listItem.list = this;
-      listItem.text = itemText;
-    }
+    const listItem = document.createElement('property-list-item');
+    listItem.list = this;
+    listItem.text = itemText;
 
     this.appendChild(listItem);
     this.dataList.setOptionEnabled(itemText, false);

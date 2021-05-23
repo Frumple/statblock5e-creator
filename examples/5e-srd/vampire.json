@@ -200,27 +200,27 @@
     "blocks": [
       {
         "name": "Shapechanger",
-        "text": "If [name] isn't in sun light or running water, it can use its action to polymorph into a Tiny bat or a Medium cloud of mist, or back into its true form.\n  While in bat form, [name] can't speak, its walking speed is 5 feet, and it has a flying speed of 30 feet. Its statistics, other than its size and speed, are unchanged. Anything it is wearing transforms with it, but nothing it is carrying does. It reverts to its true form if it dies.\n  While in mist form, [name] can't take any actions, speak, or manipulate objects. It is weightless, has a flying speed of 20 feet, can hover, and can enter a hostile creature's space and stop there. In addition, if air can pass through a space, the mist can do so without squeezing, and it can't pass through water. It has advantage on Strength, Dexterity, and Constitution saving throws, and it is immune to all nonmagical damage, except the damage it takes from sunlight."
+        "text": "If [NAME] isn't in sun light or running water, it can use its action to polymorph into a Tiny bat or a Medium cloud of mist, or back into its true form.\n  While in bat form, [NAME] can't speak, its walking speed is 5 feet, and it has a flying speed of 30 feet. Its statistics, other than its size and speed, are unchanged. Anything it is wearing transforms with it, but nothing it is carrying does. It reverts to its true form if it dies.\n  While in mist form, [NAME] can't take any actions, speak, or manipulate objects. It is weightless, has a flying speed of 20 feet, can hover, and can enter a hostile creature's space and stop there. In addition, if air can pass through a space, the mist can do so without squeezing, and it can't pass through water. It has advantage on Strength, Dexterity, and Constitution saving throws, and it is immune to all nonmagical damage, except the damage it takes from sunlight."
       },
       {
         "name": "Legendary Resistance (3/Day)",
-        "text": "If [name] fails a saving throw, it can choose to succeed instead."
+        "text": "If [NAME] fails a saving throw, it can choose to succeed instead."
       },
       {
         "name": "Misty Escape",
-        "text": "When it drops to 0 hit points outside its resting place, [name] transforms into a cloud of mist (as in the Shapechanger trait) instead of falling unconscious, provided that it isn't in sunlight or running water. If it can't transform, it is destroyed.\n  While it has 0 hit points in mist form, it can't revert to its vampire form, and it must reach its resting place within 2 hours or be destroyed. Once in its resting place, it reverts to its vampire form. It is then paralyzed until it regains at least 1 hit point. After spending 1 hour in its resting place with 0 hit points, it regains 1 hit point."
+        "text": "When it drops to 0 hit points outside its resting place, [NAME] transforms into a cloud of mist (as in the Shapechanger trait) instead of falling unconscious, provided that it isn't in sunlight or running water. If it can't transform, it is destroyed.\n  While it has 0 hit points in mist form, it can't revert to its vampire form, and it must reach its resting place within 2 hours or be destroyed. Once in its resting place, it reverts to its vampire form. It is then paralyzed until it regains at least 1 hit point. After spending 1 hour in its resting place with 0 hit points, it regains 1 hit point."
       },
       {
         "name": "Regeneration",
-        "text": "[name] regains 20 hit points at the start of its turn if it has at least 1 hit point and isn't in sunlight or running water. If [name] takes radiant damage or damage from holy water, this trait doesn't function at the start of [name]'s next turn."
+        "text": "[NAME] regains 20 hit points at the start of its turn if it has at least 1 hit point and isn't in sunlight or running water. If [NAME] takes radiant damage or damage from holy water, this trait doesn't function at the start of [NAME]'s next turn."
       },
       {
         "name": "Spider Climb",
-        "text": "[name] can climb difficult surfaces, including upside down on ceilings, without needing to make an ability check."
+        "text": "[NAME] can climb difficult surfaces, including upside down on ceilings, without needing to make an ability check."
       },
       {
         "name": "Vampire Weaknesses",
-        "text": "[name] has the following flaws:\n  *Forbiddance.* [name] can't enter a residence without an invitation from one of the occupants.\n  *Harmed by Running Water.* [name] takes 20 acid damage if it ends its turn in running water.\n  *Stake to the Heart.* If a piercing weapon made of wood is driven into [name]'s heart while [name] is incapacitated in its resting place, [name] is paralyzed until the stake is removed.\n  *Sunlight Hypersensitivity.* [name] takes 20 radiant damage when it starts its turn in sunlight. While in sunlight, it has disadvantage on attack rolls and ability checks."
+        "text": "[NAME] has the following flaws:\n  *Forbiddance.* [NAME] can't enter a residence without an invitation from one of the occupants.\n  *Harmed by Running Water.* [NAME] takes 20 acid damage if it ends its turn in running water.\n  *Stake to the Heart.* If a piercing weapon made of wood is driven into [NAME]'s heart while [NAME] is incapacitated in its resting place, [NAME] is paralyzed until the stake is removed.\n  *Sunlight Hypersensitivity.* [NAME] takes 20 radiant damage when it starts its turn in sunlight. While in sunlight, it has disadvantage on attack rolls and ability checks."
       }
     ]
   },
@@ -228,23 +228,23 @@
     "blocks": [
       {
         "name": "Multiattack (Vampire Form Only)",
-        "text": "[name] makes two attacks, only one of which can be a bite attack."
+        "text": "[NAME] makes two attacks, only one of which can be a bite attack."
       },
       {
         "name": "Unarmed Strike (Vampire Form Only)",
-        "text": "*Melee Weapon Attack:* atk[str] to hit, reach 5 ft., one creature. *Hit:* dmg[1d8 + str] bludgeoning damage. Instead of dealing damage, [name] can grapple the target (escape DC 18)."
+        "text": "*Melee Weapon Attack:* ATK[STR] to hit, reach 5 ft., one creature. *Hit:* DMG[1d8 + STR] bludgeoning damage. Instead of dealing damage, [NAME] can grapple the target (escape DC 18)."
       },
       {
         "name": "Bite (Bat or Vampire Form Only)",
-        "text": "*Melee Weapon Attack:* atk[str] to hit, reach 5 ft., one willing creature, or a creature that is grappled by [name], incapacitated, or restrained. *Hit:* dmg[1d6 + str] piercing damage plus dmg[3d6] necrotic damage. The target's hit point maximum is reduced by an amount equal to the necrotic damage taken, and [name] regains hit points equal to that amount. The reduction lasts until the target finishes a long rest. The target dies if this effect reduces its hit point maximum to 0. A humanoid slain in this way and then buried in the ground rises the following night as a vampire spawn under [name]'s control."
+        "text": "*Melee Weapon Attack:* ATK[STR] to hit, reach 5 ft., one willing creature, or a creature that is grappled by [NAME], incapacitated, or restrained. *Hit:* DMG[1d6 + STR] piercing damage plus DMG[3d6] necrotic damage. The target's hit point maximum is reduced by an amount equal to the necrotic damage taken, and [NAME] regains hit points equal to that amount. The reduction lasts until the target finishes a long rest. The target dies if this effect reduces its hit point maximum to 0. A humanoid slain in this way and then buried in the ground rises the following night as a vampire spawn under [NAME]'s control."
       },
       {
         "name": "Charm",
-        "text": "[name] targets one humanoid it can see within 30 ft. of it. If the target can see [name], the target must succeed on a DC 17 Wisdom saving throw against this magic or be charmed by [name]. The charmed target regards [name] as a trusted friend to be heeded and protected. Although the target isn't under [name]'s control, it takes [name]'s requests or actions in the most favorable way it can, and it is a willing target for [name]'s bite attack.\n  Each time [name] or [name]'s companions do anything harmful to the target, it can repeat the saving throw, ending the effect on itself on a success. Otherwise, the effect lasts 24 hours or until [name] is destroyed, is on a different plane of existence than the target, or takes a bonus action to end the effect."
+        "text": "[NAME] targets one humanoid it can see within 30 ft. of it. If the target can see [NAME], the target must succeed on a DC 17 Wisdom saving throw against this magic or be charmed by [NAME]. The charmed target regards [NAME] as a trusted friend to be heeded and protected. Although the target isn't under [NAME]'s control, it takes [NAME]'s requests or actions in the most favorable way it can, and it is a willing target for [NAME]'s bite attack.\n  Each time [NAME] or [NAME]'s companions do anything harmful to the target, it can repeat the saving throw, ending the effect on itself on a success. Otherwise, the effect lasts 24 hours or until [NAME] is destroyed, is on a different plane of existence than the target, or takes a bonus action to end the effect."
       },
       {
         "name": "Children of the Night (1/Day)",
-        "text": "[name] magically calls 2d4 swarms of bats or rats, provided that the sun isn't up. While outdoors, [name] can call 3d6 wolves instead. The called creatures arrive in 1d4 rounds, acting as allies of [name] and obeying its spoken commands. The beasts remain for 1 hour, until [name] dies, or until [name] dismisses them as a bonus action."
+        "text": "[NAME] magically calls 2d4 swarms of bats or rats, provided that the sun isn't up. While outdoors, [NAME] can call 3d6 wolves instead. The called creatures arrive in 1d4 rounds, acting as allies of [NAME] and obeying its spoken commands. The beasts remain for 1 hour, until [NAME] dies, or until [NAME] dismisses them as a bonus action."
       }
     ]
   },
@@ -255,18 +255,18 @@
     "blocks": [
       {
         "name": "Move",
-        "text": "[name] moves up to its speed without provoking opportunity attacks."
+        "text": "[NAME] moves up to its speed without provoking opportunity attacks."
       },
       {
         "name": "Unarmed Strike",
-        "text": "[name] makes one unarmed strike."
+        "text": "[NAME] makes one unarmed strike."
       },
       {
         "name": "Bite (Costs 2 Actions)",
-        "text": "[name] makes one bite attack."
+        "text": "[NAME] makes one bite attack."
       }
     ],
-    "description": "[name] can take 3 legendary actions, choosing from the options below. Only one legendary action option can be used at a time and only at the end of another creature's turn. [name] regains spent legendary actions at the start of its turn."
+    "description": "[NAME] can take 3 legendary actions, choosing from the options below. Only one legendary action option can be used at a time and only at the end of another creature's turn. [NAME] regains spent legendary actions at the start of its turn."
   },
   "layout": {
     "columns": 1,

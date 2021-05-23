@@ -19,8 +19,7 @@ beforeEach(() => {
   subtitleModel.reset();
 
   subtitleSection = new SubtitleSection();
-  TestCustomElements.initializeSection(subtitleSection);
-  subtitleSection.connect();
+  document.body.appendChild(subtitleSection);
 });
 
 it('show section should have default values', () => {
@@ -48,7 +47,7 @@ describe('when the show section is clicked', () => {
     });
 
     it('should disable the custom text field, enable all other fields, and focus on the size field', () => {
-      expect(subtitleSection).toHaveEditElementsEnabledOrDisabledBasedOnCheckbox(
+      expect(subtitleSection).toHaveElementsEnabledOrDisabledBasedOnCheckboxState(
         subtitleSection.editElements.useCustomText,
         ['customText'],
         ['size', 'type', 'tags', 'alignment']
@@ -149,7 +148,7 @@ describe('when the show section is clicked', () => {
     });
 
     it('should enable the custom text field, disable all other fields, and focus on the custom text field', () => {
-      expect(subtitleSection).toHaveEditElementsEnabledOrDisabledBasedOnCheckbox(
+      expect(subtitleSection).toHaveElementsEnabledOrDisabledBasedOnCheckboxState(
         subtitleSection.editElements.useCustomText,
         ['customText'],
         ['size', 'type', 'tags', 'alignment']
@@ -343,7 +342,7 @@ function verifyEditModeView({
   expect(subtitleSection.editElements.useCustomText.checked).toBe(useCustomText);
   expect(subtitleSection.editElements.customText).toHaveValue(customText);
 
-  expect(subtitleSection).toHaveEditElementsEnabledOrDisabledBasedOnCheckbox(
+  expect(subtitleSection).toHaveElementsEnabledOrDisabledBasedOnCheckboxState(
     subtitleSection.editElements.useCustomText,
     ['customText'],
     ['size', 'type', 'tags', 'alignment']

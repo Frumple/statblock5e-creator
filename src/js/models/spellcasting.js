@@ -107,7 +107,7 @@ export default class Spellcasting {
   get generatedText() {
     const type = (this.spellcasterType === 'generic') ? '' : ` ${this.spellcasterType}`;
     const ability = capitalizeFirstLetter(this.spellcasterAbility);
-    const abilityAbbreviation = CurrentContext.creature.abilities.abilities[this.spellcasterAbility].abbreviation;
+    const abilityAbbreviation = CurrentContext.creature.abilities.abilities[this.spellcasterAbility].abbreviation.toUpperCase();
     const level = formatIntegerWithOrdinalIndicator(this.spellcasterLevel);
 
     const spells = this.spellCategories.map(category => category.generatedText).filter(text => text !== '').join('\n');
@@ -116,11 +116,11 @@ export default class Spellcasting {
 
     if (this.spellcasterType === 'innate') {
       const requirements = components ? `, requiring ${components}` : '';
-      return `[name]'s innate spellcasting ability is ${ability} (spell save DC sdc[${abilityAbbreviation}], atk[${abilityAbbreviation}] to hit with spell attacks). It can innately cast the following spells${requirements}:\n\n${spells}`;
+      return `[NAME]'s innate spellcasting ability is ${ability} (spell save DC SDC[${abilityAbbreviation}], ATK[${abilityAbbreviation}] to hit with spell attacks). It can innately cast the following spells${requirements}:\n\n${spells}`;
     }
 
     const requirements = components ? ` It requires ${components} to cast its spells.` : '';
-    return `[name] is a ${level}-level spellcaster. Its spellcasting ability is ${ability} (spell save DC sdc[${abilityAbbreviation}], atk[${abilityAbbreviation}] to hit with spell attacks).${requirements} [name] has the following${type} spells prepared:\n\n${spells}`;
+    return `[NAME] is a ${level}-level spellcaster. Its spellcasting ability is ${ability} (spell save DC SDC[${abilityAbbreviation}], ATK[${abilityAbbreviation}] to hit with spell attacks).${requirements} [NAME] has the following${type} spells prepared:\n\n${spells}`;
   }
 
   get componentsText() {

@@ -204,7 +204,7 @@
     "blocks": [
       {
         "name": "Lightning Absorption",
-        "text": "Whenever [name] is subjected to lightning damage, it takes no damage and regains a number of hit points equal to the lightning damage dealt."
+        "text": "Whenever [NAME] is subjected to lightning damage, it takes no damage and regains a number of hit points equal to the lightning damage dealt."
       }
     ]
   },
@@ -212,15 +212,15 @@
     "blocks": [
       {
         "name": "Multiattack",
-        "text": "[name] makes two slam attacks. If both attacks hit a Medium or smaller target, the target is grappled (escape DC 14), and [name] uses its Engulf on it."
+        "text": "[NAME] makes two slam attacks. If both attacks hit a Medium or smaller target, the target is grappled (escape DC 14), and [NAME] uses its Engulf on it."
       },
       {
         "name": "Slam",
-        "text": "*Melee Weapon Attack:* atk[str] to hit, reach 5 ft., one target. *Hit:* dmg[2d8 + str] bludgeoning damage."
+        "text": "*Melee Weapon Attack:* ATK[STR] to hit, reach 5 ft., one target. *Hit:* DMG[2d8 + STR] bludgeoning damage."
       },
       {
         "name": "Engulf",
-        "text": "[name] engulfs a Medium or smaller creature grappled by it. The engulfed target is blinded, restrained, and unable to breathe, and it must succeed on a DC 14 Constitution saving throw at the start of each of the mound's turns or take dmg[2d8 + str] bludgeoning damage. If the mound moves, the engulfed target moves with it. The mound can have only one creature engulfed at a time."
+        "text": "[NAME] engulfs a Medium or smaller creature grappled by it. The engulfed target is blinded, restrained, and unable to breathe, and it must succeed on a DC 14 Constitution saving throw at the start of each of the mound's turns or take DMG[2d8 + STR] bludgeoning damage. If the mound moves, the engulfed target moves with it. The mound can have only one creature engulfed at a time."
       }
     ]
   },
@@ -229,7 +229,7 @@
   },
   "legendaryActions": {
     "blocks": [],
-    "description": "[name] can take 3 legendary actions, choosing from the options below. Only one legendary action option can be used at a time and only at the end of another creature's turn. [name] regains spent legendary actions at the start of its turn."
+    "description": "[NAME] can take 3 legendary actions, choosing from the options below. Only one legendary action option can be used at a time and only at the end of another creature's turn. [NAME] regains spent legendary actions at the start of its turn."
   },
   "layout": {
     "columns": 1,

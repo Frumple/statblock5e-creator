@@ -198,7 +198,7 @@
     "blocks": [
       {
         "name": "Spellcasting",
-        "text": "[name] is a 4th-level spellcaster. Her spellcasting ability is Wisdom (spell save DC sdc[wis], atk[wis] to hit with spell attacks). [name] has the following cleric spells prepared:\n\nCantrip (at will): *guidance*, *sacred flame*, *thaumaturgy*\n1st level (4 slots): *detect magic*, *sanctuary*, *shield of faith*\n2nd level (3 slots): *hold person*, *spiritual weapon*"
+        "text": "[NAME] is a 4th-level spellcaster. Her spellcasting ability is Wisdom (spell save DC SDC[WIS], ATK[WIS] to hit with spell attacks). [NAME] has the following cleric spells prepared:\n\nCantrip (at will): *guidance*, *sacred flame*, *thaumaturgy*\n1st level (4 slots): *detect magic*, *sanctuary*, *shield of faith*\n2nd level (3 slots): *hold person*, *spiritual weapon*"
       }
     ]
   },
@@ -206,11 +206,11 @@
     "blocks": [
       {
         "name": "Multiattack",
-        "text": "[name] makes two melee attacks."
+        "text": "[NAME] makes two melee attacks."
       },
       {
         "name": "Trident",
-        "text": "*Melee or Ranged Weapon Attack:* atk[str] to hit, reach 5 ft. or range 20/60 ft., one target. *Hit:* dmg[1d6 + str] piercing damage, or dmg[1d8 + str] piercing damage if used with two hands to make a melee attack."
+        "text": "*Melee or Ranged Weapon Attack:* ATK[STR] to hit, reach 5 ft. or range 20/60 ft., one target. *Hit:* DMG[1d6 + STR] piercing damage, or DMG[1d8 + STR] piercing damage if used with two hands to make a melee attack."
       }
     ]
   },
@@ -219,7 +219,7 @@
   },
   "legendaryActions": {
     "blocks": [],
-    "description": "[name] can take 3 legendary actions, choosing from the options below. Only one legendary action option can be used at a time and only at the end of another creature's turn. [name] regains spent legendary actions at the start of its turn."
+    "description": "[NAME] can take 3 legendary actions, choosing from the options below. Only one legendary action option can be used at a time and only at the end of another creature's turn. [NAME] regains spent legendary actions at the start of its turn."
   },
   "layout": {
     "columns": 1,

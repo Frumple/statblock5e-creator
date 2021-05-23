@@ -198,7 +198,7 @@
     "blocks": [
       {
         "name": "Keen Hearing and Smell",
-        "text": "[name] has advantage on Wisdom (Perception) checks that rely on hearing or smell."
+        "text": "[NAME] has advantage on Wisdom (Perception) checks that rely on hearing or smell."
       }
     ]
   },
@@ -206,7 +206,7 @@
     "blocks": [
       {
         "name": "Bite",
-        "text": "*Melee Weapon Attack:* atk[str] to hit, reach 5 ft., one target. *Hit:* dmg[2d6 + str] piercing damage. If the target is a creature, it must succeed on a DC 13 Strength saving throw or be knocked prone."
+        "text": "*Melee Weapon Attack:* ATK[STR] to hit, reach 5 ft., one target. *Hit:* DMG[2d6 + STR] piercing damage. If the target is a creature, it must succeed on a DC 13 Strength saving throw or be knocked prone."
       }
     ]
   },
@@ -215,7 +215,7 @@
   },
   "legendaryActions": {
     "blocks": [],
-    "description": "[name] can take 3 legendary actions, choosing from the options below. Only one legendary action option can be used at a time and only at the end of another creature's turn. [name] regains spent legendary actions at the start of its turn."
+    "description": "[NAME] can take 3 legendary actions, choosing from the options below. Only one legendary action option can be used at a time and only at the end of another creature's turn. [NAME] regains spent legendary actions at the start of its turn."
   },
   "layout": {
     "columns": 1,

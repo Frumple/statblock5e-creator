@@ -205,11 +205,11 @@
     "blocks": [
       {
         "name": "Hellish Weapons",
-        "text": "[name]'s weapon attacks are magical and deal an extra dmg[3d8] poison damage on a hit (included in the attacks)."
+        "text": "[NAME]'s weapon attacks are magical and deal an extra DMG[3d8] poison damage on a hit (included in the attacks)."
       },
       {
         "name": "Magic Resistance",
-        "text": "[name] has advantage on saving throws against spells and other magical effects."
+        "text": "[NAME] has advantage on saving throws against spells and other magical effects."
       }
     ]
   },
@@ -217,19 +217,19 @@
     "blocks": [
       {
         "name": "Multiattack",
-        "text": "[name] makes three attacks."
+        "text": "[NAME] makes three attacks."
       },
       {
         "name": "Longsword",
-        "text": "*Melee Weapon Attack:* atk[str] to hit, reach 5 ft., one target. *Hit:* dmg[1d8 + str] slashing damage, or dmg[1d10 + str] slashing damage if used with two hands, plus dmg[3d8] poison damage."
+        "text": "*Melee Weapon Attack:* ATK[STR] to hit, reach 5 ft., one target. *Hit:* DMG[1d8 + STR] slashing damage, or DMG[1d10 + STR] slashing damage if used with two hands, plus DMG[3d8] poison damage."
       },
       {
         "name": "Longbow",
-        "text": "*Ranged Weapon Attack:* atk[dex] to hit, range 150/600 ft., one target. *Hit:* dmg[1d8 + dex] piercing damage plus dmg[3d8] poison damage, and the target must succeed on a DC 14 Constitution saving throw or be poisoned. The poison lasts until it is removed by the lesser restoration spell or similar magic."
+        "text": "*Ranged Weapon Attack:* ATK[DEX] to hit, range 150/600 ft., one target. *Hit:* DMG[1d8 + DEX] piercing damage plus DMG[3d8] poison damage, and the target must succeed on a DC 14 Constitution saving throw or be poisoned. The poison lasts until it is removed by the lesser restoration spell or similar magic."
       },
       {
         "name": "Variant: Rope of Entanglement",
-        "text": "Some erinyes carry a rope of entanglement (detailed in the Dungeon Master's Guide). When such an erinyes uses its Multiattack, [name] can use the rope in place of two of the attacks."
+        "text": "Some erinyes carry a rope of entanglement (detailed in the Dungeon Master's Guide). When such an erinyes uses its Multiattack, [NAME] can use the rope in place of two of the attacks."
       }
     ]
   },
@@ -237,13 +237,13 @@
     "blocks": [
       {
         "name": "Parry",
-        "text": "[name] adds 4 to its AC against one melee attack that would hit it. To do so, [name] must see the attacker and be wielding a melee weapon."
+        "text": "[NAME] adds 4 to its AC against one melee attack that would hit it. To do so, [NAME] must see the attacker and be wielding a melee weapon."
       }
     ]
   },
   "legendaryActions": {
     "blocks": [],
-    "description": "[name] can take 3 legendary actions, choosing from the options below. Only one legendary action option can be used at a time and only at the end of another creature's turn. [name] regains spent legendary actions at the start of its turn."
+    "description": "[NAME] can take 3 legendary actions, choosing from the options below. Only one legendary action option can be used at a time and only at the end of another creature's turn. [NAME] regains spent legendary actions at the start of its turn."
   },
   "layout": {
     "columns": 1,

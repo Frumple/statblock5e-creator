@@ -205,11 +205,11 @@
     "blocks": [
       {
         "name": "Devil's Sight",
-        "text": "Magical darkness doesn't impede [name]'s darkvision."
+        "text": "Magical darkness doesn't impede [NAME]'s darkvision."
       },
       {
         "name": "Magic Resistance",
-        "text": "[name] has advantage on saving throws against spells and other magical effects."
+        "text": "[NAME] has advantage on saving throws against spells and other magical effects."
       }
     ]
   },
@@ -217,19 +217,19 @@
     "blocks": [
       {
         "name": "Multiattack",
-        "text": "[name] makes three melee attacks: two with its fork and one with its tail. It can use Hurl Flame in place of any melee attack."
+        "text": "[NAME] makes three melee attacks: two with its fork and one with its tail. It can use Hurl Flame in place of any melee attack."
       },
       {
         "name": "Fork",
-        "text": "*Melee Weapon Attack:* atk[str] to hit, reach 10 ft., one target. *Hit:* dmg[2d8 + str] piercing damage."
+        "text": "*Melee Weapon Attack:* ATK[STR] to hit, reach 10 ft., one target. *Hit:* DMG[2d8 + STR] piercing damage."
       },
       {
         "name": "Tail",
-        "text": "*Melee Weapon Attack:* atk[str] to hit, reach 10 ft., one target. *Hit:* dmg[1d8 + str] piercing damage. If the target is a creature other than an undead or a construct, it must succeed on a DC 17 Constitution saving throw or lose dmg[3d6] hit points at the start of each of its turns due to an infernal wound. Each time [name] hits the wounded target with this attack, the damage dealt by the wound increases by dmg[3d6]. Any creature can take an action to stanch the wound with a successful DC 12 Wisdom (Medicine) check. The wound also closes if the target receives magical healing."
+        "text": "*Melee Weapon Attack:* ATK[STR] to hit, reach 10 ft., one target. *Hit:* DMG[1d8 + STR] piercing damage. If the target is a creature other than an undead or a construct, it must succeed on a DC 17 Constitution saving throw or lose DMG[3d6] hit points at the start of each of its turns due to an infernal wound. Each time [NAME] hits the wounded target with this attack, the damage dealt by the wound increases by DMG[3d6]. Any creature can take an action to stanch the wound with a successful DC 12 Wisdom (Medicine) check. The wound also closes if the target receives magical healing."
       },
       {
         "name": "Hurl Flame",
-        "text": "*Ranged Spell Attack:* atk[dex] to hit, range 150 ft., one target. *Hit:* dmg[4d6] fire damage. If the target is a flammable object that isn't being worn or carried, it also catches fire."
+        "text": "*Ranged Spell Attack:* ATK[DEX] to hit, range 150 ft., one target. *Hit:* DMG[4d6] fire damage. If the target is a flammable object that isn't being worn or carried, it also catches fire."
       }
     ]
   },
@@ -238,7 +238,7 @@
   },
   "legendaryActions": {
     "blocks": [],
-    "description": "[name] can take 3 legendary actions, choosing from the options below. Only one legendary action option can be used at a time and only at the end of another creature's turn. [name] regains spent legendary actions at the start of its turn."
+    "description": "[NAME] can take 3 legendary actions, choosing from the options below. Only one legendary action option can be used at a time and only at the end of another creature's turn. [NAME] regains spent legendary actions at the start of its turn."
   },
   "layout": {
     "columns": 1,

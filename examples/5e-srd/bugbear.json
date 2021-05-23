@@ -198,11 +198,11 @@
     "blocks": [
       {
         "name": "Brute",
-        "text": "A melee weapon deals one extra die of its damage when [name] hits with it (included in the attack)."
+        "text": "A melee weapon deals one extra die of its damage when [NAME] hits with it (included in the attack)."
       },
       {
         "name": "Surprise Attack",
-        "text": "If [name] surprises a creature and hits it with an attack during the first round of combat, the target takes an extra dmg[2d6] damage from the attack."
+        "text": "If [NAME] surprises a creature and hits it with an attack during the first round of combat, the target takes an extra DMG[2d6] damage from the attack."
       }
     ]
   },
@@ -210,11 +210,11 @@
     "blocks": [
       {
         "name": "Morningstar",
-        "text": "*Melee Weapon Attack:* atk[str] to hit, reach 5 ft., one target. *Hit:* dmg[2d8 + str] piercing damage."
+        "text": "*Melee Weapon Attack:* ATK[STR] to hit, reach 5 ft., one target. *Hit:* DMG[2d8 + STR] piercing damage."
       },
       {
         "name": "Javelin",
-        "text": "*Melee or Ranged Weapon Attack:* atk[str] to hit, reach 5 ft. or range 30/120 ft., one target. *Hit:* dmg[2d6 + str] piercing damage in melee or dmg[1d6 + str] piercing damage at range."
+        "text": "*Melee or Ranged Weapon Attack:* ATK[STR] to hit, reach 5 ft. or range 30/120 ft., one target. *Hit:* DMG[2d6 + STR] piercing damage in melee or DMG[1d6 + STR] piercing damage at range."
       }
     ]
   },
@@ -223,7 +223,7 @@
   },
   "legendaryActions": {
     "blocks": [],
-    "description": "[name] can take 3 legendary actions, choosing from the options below. Only one legendary action option can be used at a time and only at the end of another creature's turn. [name] regains spent legendary actions at the start of its turn."
+    "description": "[NAME] can take 3 legendary actions, choosing from the options below. Only one legendary action option can be used at a time and only at the end of another creature's turn. [NAME] regains spent legendary actions at the start of its turn."
   },
   "layout": {
     "columns": 1,

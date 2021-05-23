@@ -11,9 +11,9 @@ export default class TopStats extends StatsContainer {
   constructor() {
     super(TopStats.templatePaths);
 
-    this.sections.set('basicStats', document.querySelector('basic-stats'));
-    this.sections.set('abilityScores', document.querySelector('ability-scores-section'));
-    this.sections.set('advancedStats', document.querySelector('advanced-stats'));
+    this.sections.set('basicStats', this.shadowRoot.querySelector('basic-stats'));
+    this.sections.set('abilityScores', this.shadowRoot.querySelector('ability-scores-section'));
+    this.sections.set('advancedStats', this.shadowRoot.querySelector('advanced-stats'));
   }
 
   updateHitPointsView() {

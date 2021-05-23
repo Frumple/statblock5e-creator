@@ -16,7 +16,7 @@ export default class LegendaryActions extends BlockListModel {
   }
 
   resetDescription() {
-    this.description = '[name] can take 3 legendary actions, choosing from the options below. Only one legendary action option can be used at a time and only at the end of another creature\'s turn. [name] regains spent legendary actions at the start of its turn.';
+    this.description = '[NAME] can take 3 legendary actions, choosing from the options below. Only one legendary action option can be used at a time and only at the end of another creature\'s turn. [NAME] regains spent legendary actions at the start of its turn.';
     this.markdownDescription = '';
     this.htmlDescription = '';
   }

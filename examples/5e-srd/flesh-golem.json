@@ -208,27 +208,27 @@
     "blocks": [
       {
         "name": "Berserk",
-        "text": "Whenever [name] starts its turn with 40 hit points or fewer, roll a d6. On a 6, [name] goes berserk. On each of its turns while berserk, [name] attacks the nearest creature it can see. If no creature is near enough to move to and attack, [name] attacks an object, with preference for an object smaller than itself. Once [name] goes berserk, it continues to do so until it is destroyed or regains all its hit points.\n  [name]'s creator, if within 60 feet of the berserk golem, can try to calm it by speaking firmly and persuasively. [name] must be able to hear its creator, who must take an action to make a DC 15 Charisma (Persuasion) check. If the check succeeds, [name] ceases being berserk. If it takes damage while still at 40 hit points or fewer, [name] might go berserk again."
+        "text": "Whenever [NAME] starts its turn with 40 hit points or fewer, roll a d6. On a 6, [NAME] goes berserk. On each of its turns while berserk, [NAME] attacks the nearest creature it can see. If no creature is near enough to move to and attack, [NAME] attacks an object, with preference for an object smaller than itself. Once [NAME] goes berserk, it continues to do so until it is destroyed or regains all its hit points.\n  [NAME]'s creator, if within 60 feet of the berserk golem, can try to calm it by speaking firmly and persuasively. [NAME] must be able to hear its creator, who must take an action to make a DC 15 Charisma (Persuasion) check. If the check succeeds, [NAME] ceases being berserk. If it takes damage while still at 40 hit points or fewer, [NAME] might go berserk again."
       },
       {
         "name": "Aversion of Fire",
-        "text": "If [name] takes fire damage, it has disadvantage on attack rolls and ability checks until the end of its next turn."
+        "text": "If [NAME] takes fire damage, it has disadvantage on attack rolls and ability checks until the end of its next turn."
       },
       {
         "name": "Immutable Form",
-        "text": "[name] is immune to any spell or effect that would alter its form."
+        "text": "[NAME] is immune to any spell or effect that would alter its form."
       },
       {
         "name": "Lightning Absorption",
-        "text": "Whenever [name] is subjected to lightning damage, it takes no damage and instead regains a number of hit points equal to the lightning damage dealt."
+        "text": "Whenever [NAME] is subjected to lightning damage, it takes no damage and instead regains a number of hit points equal to the lightning damage dealt."
       },
       {
         "name": "Magic Resistance",
-        "text": "[name] has advantage on saving throws against spells and other magical effects."
+        "text": "[NAME] has advantage on saving throws against spells and other magical effects."
       },
       {
         "name": "Magic Weapons",
-        "text": "[name]'s weapon attacks are magical."
+        "text": "[NAME]'s weapon attacks are magical."
       }
     ]
   },
@@ -236,11 +236,11 @@
     "blocks": [
       {
         "name": "Multiattack",
-        "text": "[name] makes two slam attacks."
+        "text": "[NAME] makes two slam attacks."
       },
       {
         "name": "Slam",
-        "text": "*Melee Weapon Attack:* atk[str] to hit, reach 5 ft., one target. *Hit:* dmg[2d8 + str] bludgeoning damage."
+        "text": "*Melee Weapon Attack:* ATK[STR] to hit, reach 5 ft., one target. *Hit:* DMG[2d8 + STR] bludgeoning damage."
       }
     ]
   },
@@ -249,7 +249,7 @@
   },
   "legendaryActions": {
     "blocks": [],
-    "description": "[name] can take 3 legendary actions, choosing from the options below. Only one legendary action option can be used at a time and only at the end of another creature's turn. [name] regains spent legendary actions at the start of its turn."
+    "description": "[NAME] can take 3 legendary actions, choosing from the options below. Only one legendary action option can be used at a time and only at the end of another creature's turn. [NAME] regains spent legendary actions at the start of its turn."
   },
   "layout": {
     "columns": 1,

@@ -209,15 +209,15 @@
     "blocks": [
       {
         "name": "Magic Resistance",
-        "text": "[fullname] has advantage on saving throws against spells and other magical effects."
+        "text": "[FULLNAME] has advantage on saving throws against spells and other magical effects."
       },
       {
         "name": "Rejuvenation",
-        "text": "A destroyed mummy lord gains a new body in 24 hours if its heart is intact, regaining all its hit points and becoming active again. The new body appears within 5 feet of [fullname]'s heart."
+        "text": "A destroyed mummy lord gains a new body in 24 hours if its heart is intact, regaining all its hit points and becoming active again. The new body appears within 5 feet of [FULLNAME]'s heart."
       },
       {
         "name": "Spellcasting",
-        "text": "[fullname] is a 10th-level spellcaster. Its spellcasting ability is Wisdom (spell save DC sdc[wis], atk[wis] to hit with spell attacks). [fullname] has the following cleric spells prepared:\n\nCantrips (at will): *sacred flame*, *thaumaturgy*\n1st level (4 slots): *command*, *guiding bolt*, *shield of faith*\n2nd level (3 slots): *hold person*, *silence*, *spiritual weapon*\n3rd level (3 slots): *animate dead*, *dispel magic*\n4th level (3 slots): *divination*, *guardian of faith*\n5th level (2 slots): *contagion*, *insect plague*\n6th level (1 slot): *harm*"
+        "text": "[FULLNAME] is a 10th-level spellcaster. Its spellcasting ability is Wisdom (spell save DC SDC[WIS], ATK[WIS] to hit with spell attacks). [FULLNAME] has the following cleric spells prepared:\n\nCantrips (at will): *sacred flame*, *thaumaturgy*\n1st level (4 slots): *command*, *guiding bolt*, *shield of faith*\n2nd level (3 slots): *hold person*, *silence*, *spiritual weapon*\n3rd level (3 slots): *animate dead*, *dispel magic*\n4th level (3 slots): *divination*, *guardian of faith*\n5th level (2 slots): *contagion*, *insect plague*\n6th level (1 slot): *harm*"
       }
     ]
   },
@@ -225,15 +225,15 @@
     "blocks": [
       {
         "name": "Multiattack",
-        "text": "[name] can use its Dreadful Glare and makes one attack with its rotting fist."
+        "text": "[NAME] can use its Dreadful Glare and makes one attack with its rotting fist."
       },
       {
         "name": "Rotting Fist",
-        "text": "*Melee Weapon Attack:* atk[str] to hit, reach 5 ft., one target. *Hit:* dmg[3d6 + str] bludgeoning damage plus dmg[6d6] necrotic damage. If the target is a creature, it must succeed on a DC 16 Constitution saving throw or be cursed with mummy rot. The cursed target can't regain hit points, and its hit point maximum decreases by dmg[3d6] for every 24 hours that elapse. If the curse reduces the target's hit point maximum to 0, the target dies, and its body turns to dust. The curse lasts until removed by the remove curse spell or other magic."
+        "text": "*Melee Weapon Attack:* ATK[STR] to hit, reach 5 ft., one target. *Hit:* DMG[3d6 + STR] bludgeoning damage plus DMG[6d6] necrotic damage. If the target is a creature, it must succeed on a DC 16 Constitution saving throw or be cursed with mummy rot. The cursed target can't regain hit points, and its hit point maximum decreases by DMG[3d6] for every 24 hours that elapse. If the curse reduces the target's hit point maximum to 0, the target dies, and its body turns to dust. The curse lasts until removed by the remove curse spell or other magic."
       },
       {
         "name": "Dreadful Glare",
-        "text": "[fullname] targets one creature it can see within 60 feet of it. If the target can see [fullname], it must succeed on a DC 16 Wisdom saving throw against this magic or become frightened until the end of the mummy's next turn. If the target fails the saving throw by 5 or more, it is also paralyzed for the same duration. A target that succeeds on the saving throw is immune to the Dreadful Glare of all mummies and mummy lords for the next 24 hours."
+        "text": "[FULLNAME] targets one creature it can see within 60 feet of it. If the target can see [FULLNAME], it must succeed on a DC 16 Wisdom saving throw against this magic or become frightened until the end of the mummy's next turn. If the target fails the saving throw by 5 or more, it is also paralyzed for the same duration. A target that succeeds on the saving throw is immune to the Dreadful Glare of all mummies and mummy lords for the next 24 hours."
       }
     ]
   },
@@ -244,26 +244,26 @@
     "blocks": [
       {
         "name": "Attack",
-        "text": "[fullname] makes one attack with its rotting fist or uses its Dreadful Glare."
+        "text": "[FULLNAME] makes one attack with its rotting fist or uses its Dreadful Glare."
       },
       {
         "name": "Blinding Dust",
-        "text": "Blinding dust and sand swirls magically around [fullname]. Each creature within 5 feet of [fullname] must succeed on a DC 16 Constitution saving throw or be blinded until the end of the creature's next turn."
+        "text": "Blinding dust and sand swirls magically around [FULLNAME]. Each creature within 5 feet of [FULLNAME] must succeed on a DC 16 Constitution saving throw or be blinded until the end of the creature's next turn."
       },
       {
         "name": "Blasphemous Word (Costs 2 Actions)",
-        "text": "[fullname] utters a blasphemous word. Each non-undead creature within 10 feet of [fullname] that can hear the magical utterance must succeed on a DC 16 Constitution saving throw or be stunned until the end of [fullname]'s next turn."
+        "text": "[FULLNAME] utters a blasphemous word. Each non-undead creature within 10 feet of [FULLNAME] that can hear the magical utterance must succeed on a DC 16 Constitution saving throw or be stunned until the end of [FULLNAME]'s next turn."
       },
       {
         "name": "Channel Negative Energy (Costs 2 Actions)",
-        "text": "[fullname] magically unleashes negative energy. Creatures within 60 feet of [fullname], including ones behind barriers and around corners, can't regain hit points until the end of [fullname]'s next turn."
+        "text": "[FULLNAME] magically unleashes negative energy. Creatures within 60 feet of [FULLNAME], including ones behind barriers and around corners, can't regain hit points until the end of [FULLNAME]'s next turn."
       },
       {
         "name": "Whirlwind of Sand (Costs 2 Actions)",
-        "text": "[fullname] magically transforms into a whirlwind of sand, moves up to 60 feet, and reverts to its normal form. While in whirlwind form, [fullname] is immune to all damage, and it can't be grappled, petrified, knocked prone, restrained, or stunned. Equipment worn or carried by [fullname] remain in its possession."
+        "text": "[FULLNAME] magically transforms into a whirlwind of sand, moves up to 60 feet, and reverts to its normal form. While in whirlwind form, [FULLNAME] is immune to all damage, and it can't be grappled, petrified, knocked prone, restrained, or stunned. Equipment worn or carried by [FULLNAME] remain in its possession."
       }
     ],
-    "description": "[fullname] can take 3 legendary actions, choosing from the options below. Only one legendary action option can be used at a time and only at the end of another creature's turn. [fullname] regains spent legendary actions at the start of its turn."
+    "description": "[FULLNAME] can take 3 legendary actions, choosing from the options below. Only one legendary action option can be used at a time and only at the end of another creature's turn. [FULLNAME] regains spent legendary actions at the start of its turn."
   },
   "layout": {
     "columns": 1,

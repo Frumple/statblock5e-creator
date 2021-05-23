@@ -197,7 +197,7 @@
     "blocks": [
       {
         "name": "Spellcasting",
-        "text": "[name] is a 4th-level spellcaster. Its spellcasting ability is Wisdom (spell save DC sdc[wis], atk[wis] to hit with spell attacks). It has the following druid spells prepared:\n\nCantrips (at will): *druidcraft*, *produce flame*, *shillelagh*\n1st level (4 slots): *entangle*, *longstrider*, *speak with animals*, *thunderwave*\n2nd level (3 slots): *animal messenger*, *barkskin*"
+        "text": "[NAME] is a 4th-level spellcaster. Its spellcasting ability is Wisdom (spell save DC SDC[WIS], ATK[WIS] to hit with spell attacks). It has the following druid spells prepared:\n\nCantrips (at will): *druidcraft*, *produce flame*, *shillelagh*\n1st level (4 slots): *entangle*, *longstrider*, *speak with animals*, *thunderwave*\n2nd level (3 slots): *animal messenger*, *barkskin*"
       }
     ]
   },
@@ -205,7 +205,7 @@
     "blocks": [
       {
         "name": "Quarterstaff",
-        "text": "*Melee Weapon Attack:* atk[str] to hit (atk[wis] to hit with shillelagh), reach 5 ft., one target. *Hit:* dmg[1d6 + str] bludgeoning damage, dmg[1d8 + str] bludgeoning damage if wielded with two hands, or dmg[1d8 + wis] bludgeoning damage with shillelagh."
+        "text": "*Melee Weapon Attack:* ATK[STR] to hit (ATK[WIS] to hit with shillelagh), reach 5 ft., one target. *Hit:* DMG[1d6 + STR] bludgeoning damage, DMG[1d8 + STR] bludgeoning damage if wielded with two hands, or DMG[1d8 + WIS] bludgeoning damage with shillelagh."
       }
     ]
   },
@@ -214,7 +214,7 @@
   },
   "legendaryActions": {
     "blocks": [],
-    "description": "[name] can take 3 legendary actions, choosing from the options below. Only one legendary action option can be used at a time and only at the end of another creature's turn. [name] regains spent legendary actions at the start of its turn."
+    "description": "[NAME] can take 3 legendary actions, choosing from the options below. Only one legendary action option can be used at a time and only at the end of another creature's turn. [NAME] regains spent legendary actions at the start of its turn."
   },
   "layout": {
     "columns": 1,

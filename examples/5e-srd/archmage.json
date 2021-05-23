@@ -200,11 +200,11 @@
     "blocks": [
       {
         "name": "Magic Resistance",
-        "text": "[name] has advantage on saving throws against spells and other magical effects."
+        "text": "[NAME] has advantage on saving throws against spells and other magical effects."
       },
       {
         "name": "Spellcasting",
-        "text": "[name] is an 18th-level spellcaster. Its spellcasting ability is Intelligence (spell save DC sdc[int], atk[int] to hit with spell attacks). [name] can cast disguise self and invisibility at will and has the following wizard spells prepared:\n\nCantrips (at will): *fire bolt*, *light*, *mage hand*, *prestidigitation*, *shocking grasp*\n1st level (4 slots): *detect magic*, *identify*, *mage armor*^, *magic missile*\n2nd level (3 slots): *detect thoughts*, *mirror image*, *misty step*\n3rd level (3 slots): *counterspell*, *fly*, *lightning bolt*\n4th level (3 slots): *banishment*, *fire shield*, *stoneskin*^\n5th level (3 slots): *cone of cold*, *scrying*, *wall of force*\n6th level (1 slot): *globe of invulnerability*\n7th level (1 slot): *teleport*\n8th level (1 slot): *mind blank*^\n9th level (1 slot): *time stop*\n^ [name] casts these spells on itself before combat."
+        "text": "[NAME] is an 18th-level spellcaster. Its spellcasting ability is Intelligence (spell save DC SDC[INT], ATK[INT] to hit with spell attacks). [NAME] can cast disguise self and invisibility at will and has the following wizard spells prepared:\n\nCantrips (at will): *fire bolt*, *light*, *mage hand*, *prestidigitation*, *shocking grasp*\n1st level (4 slots): *detect magic*, *identify*, *mage armor*\\*, *magic missile*\n2nd level (3 slots): *detect thoughts*, *mirror image*, *misty step*\n3rd level (3 slots): *counterspell*, *fly*, *lightning bolt*\n4th level (3 slots): *banishment*, *fire shield*, *stoneskin*\\*\n5th level (3 slots): *cone of cold*, *scrying*, *wall of force*\n6th level (1 slot): *globe of invulnerability*\n7th level (1 slot): *teleport*\n8th level (1 slot): *mind blank*\\*\n9th level (1 slot): *time stop*\n\\* [NAME] casts these spells on itself before combat."
       }
     ]
   },
@@ -212,7 +212,7 @@
     "blocks": [
       {
         "name": "Dagger",
-        "text": "*Melee or Ranged Weapon Attack:* atk[fin] to hit, reach 5 ft. or range 20/60 ft., one target. Hit: dmg[1d4 + fin] piercing damage."
+        "text": "*Melee or Ranged Weapon Attack:* ATK[FIN] to hit, reach 5 ft. or range 20/60 ft., one target. Hit: DMG[1d4 + FIN] piercing damage."
       }
     ]
   },

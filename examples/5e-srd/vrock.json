@@ -206,7 +206,7 @@
     "blocks": [
       {
         "name": "Magic Resistance",
-        "text": "[name] has advantage on saving throws against spells and other magical effects."
+        "text": "[NAME] has advantage on saving throws against spells and other magical effects."
       }
     ]
   },
@@ -214,23 +214,23 @@
     "blocks": [
       {
         "name": "Multiattack",
-        "text": "[name] makes two attacks: one with its beak and one with its talons."
+        "text": "[NAME] makes two attacks: one with its beak and one with its talons."
       },
       {
         "name": "Beak",
-        "text": "*Melee Weapon Attack:* atk[str] to hit, reach 5 ft., one target. *Hit:* dmg[2d6 + str] piercing damage."
+        "text": "*Melee Weapon Attack:* ATK[STR] to hit, reach 5 ft., one target. *Hit:* DMG[2d6 + STR] piercing damage."
       },
       {
         "name": "Talons",
-        "text": "*Melee Weapon Attack:* atk[str] to hit, reach 5 ft., one target. *Hit:* dmg[2d10 + str] slashing damage."
+        "text": "*Melee Weapon Attack:* ATK[STR] to hit, reach 5 ft., one target. *Hit:* DMG[2d10 + STR] slashing damage."
       },
       {
         "name": "Spores (Recharge 6)",
-        "text": "A 15-foot-radius cloud of toxic spores extends out from [name]. The spores spread around corners. Each creature in that area must succeed on a DC 14 Constitution saving throw or become poisoned. While poisoned in this way, a target takes dmg[1d10] poison damage at the start of each of its turns. A target can repeat the saving throw at the end of each of its turns, ending the effect on itself on a success. Emptying a vial of holy water on the target also ends the effect on it."
+        "text": "A 15-foot-radius cloud of toxic spores extends out from [NAME]. The spores spread around corners. Each creature in that area must succeed on a DC 14 Constitution saving throw or become poisoned. While poisoned in this way, a target takes DMG[1d10] poison damage at the start of each of its turns. A target can repeat the saving throw at the end of each of its turns, ending the effect on itself on a success. Emptying a vial of holy water on the target also ends the effect on it."
       },
       {
         "name": "Stunning Screech (1/Day)",
-        "text": "[name] emits a horrific screech. Each creature within 20 feet of it that can hear it and that isn't a demon must succeed on a DC 14 Constitution saving throw or be stunned until the end of [name]'s next turn."
+        "text": "[NAME] emits a horrific screech. Each creature within 20 feet of it that can hear it and that isn't a demon must succeed on a DC 14 Constitution saving throw or be stunned until the end of [NAME]'s next turn."
       },
       {
         "name": "Variant: Summon Demon (1/Day)",
@@ -243,7 +243,7 @@
   },
   "legendaryActions": {
     "blocks": [],
-    "description": "[name] can take 3 legendary actions, choosing from the options below. Only one legendary action option can be used at a time and only at the end of another creature's turn. [name] regains spent legendary actions at the start of its turn."
+    "description": "[NAME] can take 3 legendary actions, choosing from the options below. Only one legendary action option can be used at a time and only at the end of another creature's turn. [NAME] regains spent legendary actions at the start of its turn."
   },
   "layout": {
     "columns": 1,

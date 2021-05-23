@@ -198,7 +198,7 @@
     "blocks": [
       {
         "name": "Aggressive",
-        "text": "As a bonus action, [name] can move up to its speed toward a hostile creature that it can see."
+        "text": "As a bonus action, [NAME] can move up to its speed toward a hostile creature that it can see."
       }
     ]
   },
@@ -206,11 +206,11 @@
     "blocks": [
       {
         "name": "Greataxe",
-        "text": "*Melee Weapon Attack:* atk[str] to hit, reach 5 ft., one target. *Hit:* dmg[1d12 + str] slashing damage."
+        "text": "*Melee Weapon Attack:* ATK[STR] to hit, reach 5 ft., one target. *Hit:* DMG[1d12 + STR] slashing damage."
       },
       {
         "name": "Javelin",
-        "text": "*Melee or Ranged Weapon Attack:* atk[str] to hit, reach 5 ft. or range 30/120 ft., one target. *Hit:* dmg[1d6 + str] piercing damage."
+        "text": "*Melee or Ranged Weapon Attack:* ATK[STR] to hit, reach 5 ft. or range 30/120 ft., one target. *Hit:* DMG[1d6 + STR] piercing damage."
       }
     ]
   },
@@ -219,7 +219,7 @@
   },
   "legendaryActions": {
     "blocks": [],
-    "description": "[name] can take 3 legendary actions, choosing from the options below. Only one legendary action option can be used at a time and only at the end of another creature's turn. [name] regains spent legendary actions at the start of its turn."
+    "description": "[NAME] can take 3 legendary actions, choosing from the options below. Only one legendary action option can be used at a time and only at the end of another creature's turn. [NAME] regains spent legendary actions at the start of its turn."
   },
   "layout": {
     "columns": 1,

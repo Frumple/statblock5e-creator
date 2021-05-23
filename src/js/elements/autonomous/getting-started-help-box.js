@@ -36,11 +36,7 @@ export default class GettingStartedHelpBox extends CustomAutonomousElement {
   }
 
   set visible(isVisible) {
-    if(isVisible) {
-      this.container.classList.remove(hiddenClass);
-    } else {
-      this.container.classList.add(hiddenClass);
-    }
+    isVisible ? this.container.classList.remove(hiddenClass) : this.container.classList.add(hiddenClass);
   }
 
   get visible() {

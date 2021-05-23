@@ -22,9 +22,7 @@ beforeEach(() => {
   damageVulnerabilitiesModel.reset();
 
   damageVulnerabilitiesSection = new DamageVulnerabilitiesSection();
-  TestCustomElements.initializeSection(damageVulnerabilitiesSection);
-  damageVulnerabilitiesSection.connect();
-  damageVulnerabilitiesSection.editElements.propertyList.connect();
+  document.body.appendChild(damageVulnerabilitiesSection);
 
   sharedSpecs = new PropertyListSectionSpecs(damageVulnerabilitiesSection, damageVulnerabilitiesModel, headingName, open5eJsonKey);
 });
