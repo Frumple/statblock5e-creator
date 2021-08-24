@@ -1,4 +1,4 @@
-const merge = require('webpack-merge');
+const { merge } = require('webpack-merge');
 const common = require('./webpack.common.js');
 
 // eslint-disable-next-line no-unused-vars
@@ -6,7 +6,7 @@ const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPl
 
 module.exports = merge(common, {
   mode: 'production',
-  devtool: '',
+  devtool: false,
   plugins: [
     // Uncomment to enable bundle size analysis
     // new BundleAnalyzerPlugin(),
